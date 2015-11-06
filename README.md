@@ -2,51 +2,43 @@
 
 ## Objectives
 
-1. Build an CLI
+1. Build a CLI
 2. Create a domain model with multiple relating and collaborating objects.
 
 ## Overview
 
-The goal of this project is to build a version of Tic Tac Toe with 0, 1, and 2 player modes.
+The goal of this project is to build a version of Tic Tac Toe with 0, 1, and 2 player modes. What is the point of Tic Tac Toe with zero players? Let me explain more.
 
-A 0 player game has two computer players playing against each other with no interaction from the user.
+  - A 0 player game has two computer players playing against each other with no interaction from the user.
+  - A 1 player game has a human playing against a computer.
+  - A 2 player game has two human players.
 
-A 1 player game has a human playing against a computer.
-
-A 2 player game has two human players.
-
-You'll be implementing Tic Tac Toe using multiple objects that relate and collaborate, including separate classes for Human players and Computer players.
-
-You will also have to program some sort of artificial intelligence or logic for the computer player to make a move.
-
-You will also build a CLI to execute your program and start the game.
+You'll be implementing Tic Tac Toe using multiple objects that relate and collaborate, including separate classes for Human players and Computer players. The computer player class will have some sort of artificial intelligence or logic to make move decisions. Finally, you'll wrap all of this up in a Command Line Interface.
 
 ## Group Project Instructions
 
 *Instructions for how to work on a Group Project with Learn*
 
-*Advice on how to work together*
+### Some Hints on Working Together 
 
-Pair - Pair the entire time working linearly together
-Pass - 1 person does 1 requirement and then the next person does the next one
-Parallel - work on different parts at the same time by agreeing on interfaces and stubs and meeting in the middle
-- one person does board and player human
-- one person does game expecting a working board and player with stubs?
-- one person does computer player
-- join on ai
+Working on a software project with another person is not something to be taken lightly. While you are a fantastic coder solo, software development is a collaborative activity. Just like anything else, there is skill in collaborating on code. In the end, collaborating with another person boils down to three different styles:
 
-Switch around, start with pairing, then do pass, then try parallel.
+  - Pair - Pair the entire time working linearly together
+  - Pass - 1 person does 1 requirement and then the next person does the next one
+  - Parallel - work on different parts at the same time by agreeing on interfaces and stubs and meeting in the middle
+    - Person A does board and player human
+    - Person B does game expecting a working board and player with stubs?
+    - Person A person does computer player
+    - Work together on the AI (It's hard)
 
-*Work together, don't just solve the entire thing yourself, you have to learn to work with other people of all skill levels. Treat your partners the way you want to be treated when you join a team.*
-
-*CoC: Be nice to each other, any harassment will not be tolerated*
+Remember! The goal at The Flatiron School is not to do, it is to *learn*. Make sure you have worked in all three styles of collaboration. We want you to learn how the different styles works, and make sure that together you and your partner understand every part of the code.
 
 ## Requirements
 
-[] Passing domain model tests.
-[] 0, 1 or 2 player Tic Tac Toe.
-[] Command Line Interface
-[] Computer AI
+  - Passing Unit Tests
+  - 0, 1 or 2 player Tic Tac Toe.
+  - Command Line Interface
+  - Computer AI
 
 ## Instructions
 
@@ -117,8 +109,8 @@ Define a class `Player::Human` that inherits from `Player`. The human player mus
 
 The `Game` class is the main model of the application and represents a singular instance of a Tic Tac Toe session.
 
-A game has one `Board` through it's `board` property.
-A game has two `Player`s stored in a `player_1` and `player_2` property.
+  * A game has one `Board` through it's `board` property.
+  * A game has two `Player`s stored in a `player_1` and `player_2` property.
 
 `Board` and `Player` do not directly relate to the `Game` but do collaborate with each other through arguments.
 
@@ -136,7 +128,7 @@ end
 
 Returns a valid move for the first move but after that your program will go into an infinite loop because the computer will constantly try to occupy the `"1"` position in the board even though it is already occupied. So don't do that.
 
-Think about the levels of intelligence you can build into this method. On one level, you can have the computer just pick random numbers from 1-9. You can teach it some basic strategy like moving into the middle cell if it is unoccupied in the board. Or always going for open corners. Or trying to look at the board and figure out if the opponent is about to win and block them. Or looking at the board and determinging that the computer can win and returning the position that will complete a triplet. Use whatever logic you want.
+Think about the levels of intelligence you can build into this method. Start with the simplest level of intelligence, and get more and more complicated. Each step of the way you should have a working computer player though.
 
 Remember, Tic Tac Toe when played perfectly is unwinnable. You should strive to build computer logic that when the computer plays, the game is unwinnable. There's even an algorithm called Min/Max that ensures this logic.
 
@@ -144,14 +136,14 @@ Remember, Tic Tac Toe when played perfectly is unwinnable. You should strive to 
 
 The requirements of your CLI are as follows, free for you to implement however you see fit as we provide no tests against the CLI.
 
-[] Greet the user with a message.
-[] Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-[] Ask the user for who should go first and be "X".
-[] Use the input to correctly initialize a `Game` with the appropriate player types and token values.
-[] When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
+  * Greet the user with a message.
+  * Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+  * Ask the user for who should go first and be "X".
+  * Use the input to correctly initialize a `Game` with the appropriate player types and token values.
+  * When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
 
 You can implement this logic within the `bin/tictactoe` directly or encapsulate it within `Game` via a method like `#start` and simply evoke that method in the CLI. There is no wrong way to implement code that works.
 
 If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the amount of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should be unable to win ever, like in the case of thermonuclear war.
 
-The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code. 
+The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
