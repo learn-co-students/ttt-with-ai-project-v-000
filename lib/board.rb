@@ -34,4 +34,19 @@ class Board
     @cells.select{|x| x != " "}.length
   end
 
+  def taken?(pos)
+    @cells[pos.to_i - 1] == " " ? false : true
+  end
+
+  def valid_move?(pos)
+    !taken?(pos) && 0 < pos.to_i && pos.to_i < 10
+  end
+
+  def update(pos, player)
+    if valid_move?(pos)
+      @cells[pos.to_i - 1] = player.token
+    end 
+  end
+
+
 end
