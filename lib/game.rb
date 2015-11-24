@@ -52,8 +52,8 @@ class Game
   end
 
   def turn 
-    plyr_move = current_player.move(board) 
-    board.valid_move?(plyr_move) ? board.update(plyr_move, current_player) : turn
+    player_move = current_player.move(board) 
+    board.valid_move?(player_move) ? board.update(player_move, current_player) : turn
   end
 
   def play
