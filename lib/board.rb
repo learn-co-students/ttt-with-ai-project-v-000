@@ -20,4 +20,18 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+  def position(pos)
+#    puts "Please select a position (1-9)\n"
+#    pos = gets.rstrip
+    @cells[pos.to_i - 1]
+  end
+
+  def full?
+    @cells.all?{|x| x != " "}
+  end
+
+  def turn_count
+    @cells.select{|x| x != " "}.length
+  end
+
 end
