@@ -13,7 +13,6 @@ class Board
 
   def display
     dash = "-" * 11
-
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} }"
     puts dash
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} }"
