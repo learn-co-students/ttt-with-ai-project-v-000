@@ -29,6 +29,7 @@ class Game
 
   def won? 
     WIN_COMBINATIONS.detect do |win_array|
+############ Code smell ##### Try to insert PROC###########
       win_array.all?{|num| self.board.cells[num] == "X"} || win_array.all?{|num| self.board.cells[num] == "O"}
     end
   end
@@ -38,7 +39,19 @@ class Game
   end
 
   def winner
-    
+    if draw?
+      nil
+############ Code smell ##### Try to insert PROC###########
+    elsif WIN_COMBINATIONS.detect{|win_array| win_array.all?{|num| self.board.cells[num] == "X"}}
+      "X"
+    elsif WIN_COMBINATIONS.detect{|win_array| win_array.all?{|num| self.board.cells[num] == "O"}}
+      "O"
+    end
+  end
+
+  def turn
+    spot = current_player.move(current_player.token)
+    !self.board.valid_move?(spot) ? turn : self.board.update(spot, current_player)
   end
 end
 
