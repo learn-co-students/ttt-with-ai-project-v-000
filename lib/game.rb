@@ -1,7 +1,7 @@
 require 'pry'
 
 class Game
-  attr_accessor :board, :player_1, :player_2, :token
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -24,7 +24,7 @@ class Game
   end
 
   def over?
-    self.board.full? ? true : false
+    won? || draw?
   end
 
   def won? 
@@ -35,7 +35,7 @@ class Game
   end
 
   def draw?
-   !won? && over?
+   !won? && self.board.full?
   end
 
   def winner
@@ -50,8 +50,20 @@ class Game
   end
 
   def turn
-    spot = current_player.move(current_player.token)
-    !self.board.valid_move?(spot) ? turn : self.board.update(spot, current_player)
+    spot = current_player.move(@board)
+    !board.valid_move?(spot) ? turn : board.update(spot, current_player)
   end
+
+  def play
+    until over?
+      turn
+    end
+    if won? 
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
+  end
+
 end
 

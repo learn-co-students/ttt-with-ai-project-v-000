@@ -9,7 +9,7 @@ end
 
 class Human < Player
 
-  def move(token)
+  def move(board)
     puts "please select a space:\n"
     gets.rstrip
   end
