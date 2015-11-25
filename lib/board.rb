@@ -21,8 +21,6 @@ class Board
   end
 
   def position(pos)
-#    puts "Please select a position (1-9)\n"
-#    pos = gets.rstrip
     @cells[pos.to_i - 1]
   end
 
