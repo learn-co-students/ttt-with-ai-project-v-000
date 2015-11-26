@@ -32,8 +32,8 @@ class Board
     @cells.select{|x| x != " "}.length
   end
 
-  def taken?(pos)
-    @cells[pos.to_i - 1] == " " ? false : true
+  def taken?(pos_str)
+    @cells[pos_str.to_i - 1] == " " ? false : true
   end
 
   def valid_move?(pos)
