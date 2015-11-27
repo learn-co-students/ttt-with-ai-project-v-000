@@ -47,7 +47,7 @@ class TicTacToeCLI
   end
 
   def play_again?
-    puts "\nEnter 'y' if you'd like to play another game of Tic Tac Toe."
+    puts "\nEnter 'y' if you would like to play another game of Tic Tac Toe."
     answer = gets.strip.downcase
   end
 end

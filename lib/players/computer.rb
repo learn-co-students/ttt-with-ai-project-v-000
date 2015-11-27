@@ -8,6 +8,7 @@ class Player::Computer < Player
   end
 
   def move(board)
+    return "5" if !board.taken?(5)
     best_option(board)
   end
 
