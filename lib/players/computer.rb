@@ -19,7 +19,7 @@ class Player::Computer < Player
     Game::WIN_COMBINATIONS.detect do |combo|
       (board.cells[combo[0]] == token && board.cells[combo[1]] == token && !board.taken?(combo[2]+1)) || 
       (board.cells[combo[0]] == token && board.cells[combo[2]] == token && !board.taken?(combo[1]+1)) || 
-      (board.cells[combo[1]] == token && board.cells[combo[2]] == token) && !board.taken?(combo[0]+1)
+      (board.cells[combo[1]] == token && board.cells[combo[2]] == token && !board.taken?(combo[0]+1))
     end
   end
 
