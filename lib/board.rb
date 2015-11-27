@@ -13,11 +13,12 @@ class Board
 
   def display
     dash = "-" * 11
-    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} }"
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts dash
-    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} }"
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts dash
-    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} }"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts
   end
 
   def position(input)
@@ -25,23 +26,22 @@ class Board
   end
 
   def full?
-    cells.all? { |cell| cell != " "  }
+    cells.all?{ |cell| cell != " " }
   end
 
   def turn_count
-    cells.count { |cell| cell != " " }
+    cells.count{ |cell| cell != " " }
   end
 
-  def taken?(position)
-    cells[position.to_i-1] != " "
+  def taken?(pos)
+    cells[pos.to_i-1] != " "
   end
 
-  def valid_move?(input)
-    numbers = (0..8)
-    !taken?(input) && numbers.include?(input.to_i-1)
+  def valid_move?(pos)
+    pos.to_i.between?(1,9) && !taken?(pos)
   end
 
-  def update(input, player)
-    cells[input.to_i-1] = player.token
+  def update(pos, player)
+    cells[pos.to_i-1] = player.token
   end
 end
