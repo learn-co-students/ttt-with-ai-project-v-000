@@ -23,11 +23,11 @@ class Game
     end
 
     def current_player
-      turn_counter = board.cells.count{|a| a != " "}
-      if turn_counter % 2 == 0
-        return @player_1
+
+      if board.cells.count{|a| a != " "} % 2 == 0
+        @player_1
       else
-        return @player_2 
+        @player_2 
       end
     end
 
@@ -36,18 +36,24 @@ class Game
     end
 
     def won?
-      cb = board.cells
+      #haven't figured out how to make #[] work yet
+      #getting issues with @winner equating to false even when not nil
       WIN_COMBINATIONS.each do |a|
-        if (cb[a[0]] != " ") && (cb[a[0]] == cb[a[1]] && cb[a[0]] == cb[a[2]])
-          @winner = cb[a[0]]
+        if (board.cells[a[0]] != " ") && 
+            (board.cells[a[0]] == board.cells[a[1]] && 
+            board.cells[a[0]] == board.cells[a[2]])
+
+          @winner = board.cells[a[0]]
           return true
         end
       end
       return false
+      #binding.pry
+      #@winner
     end
 
     def draw?
-      board.cells.count{|a| a != " "} == 9 && won? == false
+      board.full?
     end
 
     def winner
@@ -58,26 +64,13 @@ class Game
     def turn
       board.display
       spot = current_player.move(board)
-      if valid_move?(spot)
-        board.cells[spot.to_i - 1] = current_player.token
+      if board.valid_move?(spot)
+        board.update(spot, self.current_player)
       else
         puts "invalid entry"
         turn
       end
 
-    end
-
-    def valid_move?(spot)
-      spot = spot.to_i - 1
-      if position_taken?(spot) == false && spot.between?(0,8) == true
-        true
-      else
-        false
-      end
-    end
-
-    def position_taken?(spot)
-      !(board.cells[spot].nil? || board.cells[spot] == " ")
     end
 
     def play

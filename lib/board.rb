@@ -3,8 +3,12 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9, " ")
+    reset!
   end
+
+  #def [](index)
+  #  self.cells[index]
+  #end
 
   def reset!
     @cells = Array.new(9, " ")
@@ -27,22 +31,15 @@ class Board
   end
 
   def turn_count
-    turns = cells.delete_if{|a| a == " "}
-    turns.count
+    cells.count{|c| c != " "}
   end
 
   def taken?(spot)
-    index = spot.to_i - 1
-    cells[index] != " "
+    cells[spot.to_i - 1] != " "
   end
 
   def valid_move?(spot)
-    ok = ["1","2","3","4","5","6","7","8","9"]
-    if ok.include?(spot) && (taken?(spot) == false)
-      return true
-    else
-      false
-    end
+    spot.to_i.between?(1,9) && !taken?(spot)
   end
 
   def update(spot, player)
