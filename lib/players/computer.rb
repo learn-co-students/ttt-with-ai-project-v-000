@@ -1,5 +1,3 @@
-require 'pry'
-
 class Player::Computer < Player
   attr_accessor 
 
