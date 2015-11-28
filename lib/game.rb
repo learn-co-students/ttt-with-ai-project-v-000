@@ -34,7 +34,7 @@ class Game
         board.cells[combo[0]] != " "
 
         @winner_token = board.cells[combo[0]]
-        return true 
+        return true
       end
     end
     false
