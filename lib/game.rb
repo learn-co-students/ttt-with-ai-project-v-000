@@ -1,7 +1,5 @@
-require 'pry'
-
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :count_1, :count_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -47,7 +45,8 @@ class Game
   end
 
   def winner
-    won? ? @winner_token : nil
+    won?
+    @winner_token
   end
 
   def turn 
@@ -67,5 +66,14 @@ class Game
     end
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
+  end
+
+  def wargames
+    until over?
+      turn
+      board.display
+    end
+    @count_1 = 0
+    @count_2 = 0
   end
 end

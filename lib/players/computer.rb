@@ -1,5 +1,3 @@
-require 'pry'
-
 class Player::Computer < Player
   attr_accessor 
 
@@ -26,17 +24,17 @@ class Player::Computer < Player
 
   def one_move_win(board)
     if !one_away(board, self.token).nil?
-      one_away(board, self.token).flatten.find{ |pos| board.cells[pos] == " " }.to_i+1
+      one_away(board, self.token).find{ |pos| board.cells[pos] == " " }.to_i+1
     end
   end
 
   def block_move(board)
     if !one_away(board, opponent_token).nil?
-      one_away(board, opponent_token).flatten.find{ |pos| board.cells[pos] == " " }.to_i+1
+      one_away(board, opponent_token).find{ |pos| board.cells[pos] == " " }.to_i+1
     end
   end
 
   def strategic_move(board)
-    [1,3,7,9,2,4,6,8].detect{ |pos| board.valid_move?(pos) }
+    [1,3,7,9,2,4,6,8].detect{ |pos| board.taken?(pos) }
   end
 end
