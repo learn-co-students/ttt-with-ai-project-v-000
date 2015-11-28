@@ -35,6 +35,6 @@ class Player::Computer < Player
   end
 
   def strategic_move(board)
-    [1,3,7,9,2,4,6,8].detect{ |pos| board.taken?(pos) }
+    [1,3,7,9,2,4,6,8].detect{ |pos| !board.taken?(pos) }
   end
 end
