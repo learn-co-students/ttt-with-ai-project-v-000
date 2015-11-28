@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2, :count_1, :count_2
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -15,8 +15,7 @@ class Game
   def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
     @player_1 = player_1 
     @player_2 = player_2 
-    @board = board 
-    @winner_token = nil
+    @board = board
   end
 
   def current_player 
@@ -28,16 +27,11 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combo|
-      if (board.cells[combo[0]] == board.cells[combo[1]] && 
-        board.cells[combo[1]] == board.cells[combo[2]]) && 
-        board.cells[combo[0]] != " "
-
-        @winner_token = board.cells[combo[0]]
-        return true
-      end
+    WIN_COMBINATIONS.find do |combo|
+      (board.cells[combo[0]] == board.cells[combo[1]] && 
+      board.cells[combo[1]] == board.cells[combo[2]]) && 
+      board.cells[combo[0]] != " "
     end
-    false
   end
 
   def draw?
@@ -45,8 +39,9 @@ class Game
   end
 
   def winner
-    won?
-    @winner_token
+    if win_combo = won? 
+      board.cells[win_combo.first] 
+    end
   end
 
   def turn 
@@ -64,16 +59,8 @@ class Game
       turn
       board.display
     end
+
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
-  end
-
-  def wargames
-    until over?
-      turn
-      board.display
-    end
-    @count_1 = 0
-    @count_2 = 0
   end
 end
