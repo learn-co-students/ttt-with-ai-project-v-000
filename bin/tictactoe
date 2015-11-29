@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
-
+require 'pry'
 system 'clear'
 puts "Welcome to Tic Tac Toe!"
 puts ""
@@ -22,7 +22,18 @@ loop do
   if answer == 0
     game = Game.new(Computer.new('X'), Computer.new('O'))
   elsif answer == 1
-    game = Game.new(Human.new('X'), Computer.new('O'))
+    begin
+      puts "Do you want to go first or second?(1, 2)?"
+      one_or_two = gets.chomp
+    end until ["1","2"].include?(one_or_two)
+    begin
+      x_or_o = ['X','O']
+      puts "Do you want to be X or O?"
+      answer = gets.chomp.upcase
+    end until x_or_o.include?(answer)
+      x_or_o.delete(answer)
+      game = Game.new(Human.new(answer), Computer.new(x_or_o[0])) if one_or_two == "1"
+      game = Game.new(Computer.new(x_or_o[0]), Human.new(answer)) if one_or_two == "2"
   else
     game = Game.new
   end
