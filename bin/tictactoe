@@ -23,13 +23,14 @@ loop do
     game = Game.new(Computer.new('X'), Computer.new('O'))
   elsif answer == 1
     begin
-      puts "Do you want to go first or second?(1, 2)?"
+      puts "Do you want to go first or second[1,2]?"
       one_or_two = gets.chomp
     end until ["1","2"].include?(one_or_two)
     begin
       x_or_o = ['X','O']
       puts "Do you want to be X or O?"
       answer = gets.chomp.upcase
+      system 'clear'
     end until x_or_o.include?(answer)
       x_or_o.delete(answer)
       game = Game.new(Human.new(answer), Computer.new(x_or_o[0])) if one_or_two == "1"
