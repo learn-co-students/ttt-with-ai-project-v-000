@@ -2,7 +2,7 @@ require 'pry'
 
 class Game
 
-  attr_accessor :player_1, :player_2, :board
+  attr_accessor :player_1, :player_2, :board, :winner
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -36,8 +36,9 @@ class Game
     end
 
     def won?
-      #haven't figured out how to make #[] work yet
-      #getting issues with @winner equating to false even when not nil
+      # haven't figured out how to make #[] work yet
+      # winner returning token resolves as false, could reassign to winning player object, but
+      # that needs many other follow up fixes in related methods, worth?
       WIN_COMBINATIONS.each do |a|
         if (board.cells[a[0]] != " ") && 
             (board.cells[a[0]] == board.cells[a[1]] && 

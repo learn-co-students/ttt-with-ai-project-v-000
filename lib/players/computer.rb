@@ -76,7 +76,7 @@ class Computer < Player
   def create_match_point
     update_offense
     if @offense.size > 0
-      @offense = @offense[0].select!{|a| @board.valid_move?(a) == true}
+      @offense = @offense[0].select!{|a| @board.valid_move?(a + 1) == true}
       @offense[0] + 1
     end
   end
@@ -103,7 +103,6 @@ class Computer < Player
   end
 
   def basic_priority_move
-    #add checker to do either 1 or 9 based on opp play
     if @board.valid_move?("5")
       "5"
     elsif @board.valid_move?("1")
@@ -114,31 +113,11 @@ class Computer < Player
   def player2_strat
     if @board.turn_count < 3
       p1_went = @cells.index("X") + 1
-      case p1_went
-      when 1
-        9
-      when 9
-        1
-      when 3
-        7
-      when 7 
-        3
-      when 2
-        1
-      when 4
-        1
-      when 6
-        9
-      when 8
-        9
-      else 
-        1
-      end
+      strategy = {1 => 9, 9 => 1, 3 => 7, 7 => 3, 2 => 1, 4 => 1, 6 => 9, 8 => 9, 5 => 1}
+      strategy[p1_went]
     end
   end
 
-  # above and below very hardcoded, 
-  # but simpler than logic only because of small scope of game possibilities
   def default_move
     possible_moves = ["5","1","3","7","9","2","4","6","8"]
     spot = possible_moves.detect{|a| @board.valid_move?(a) == true}
