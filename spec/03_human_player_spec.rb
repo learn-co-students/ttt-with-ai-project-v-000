@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 describe 'Player::Human' do
   it 'inherits from Player' do
     expect(Player::Human.ancestors).to include(Player)
