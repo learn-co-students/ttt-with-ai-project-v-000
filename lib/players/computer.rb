@@ -37,8 +37,8 @@ class Player::Computer < Player
     valid_moves(board)
     score_options(board)
     input = @moves[0]
-    input = @scores.find_index(10)-1 if @scores.find_index(10) != nil
     input = @scores.find_index(-10)-1 if @scores.find_index(-10) != nil
+    input = @scores.find_index(10)-1 if @scores.find_index(10) != nil
     input.to_s
   end
 end
