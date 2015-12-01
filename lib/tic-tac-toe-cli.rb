@@ -18,7 +18,7 @@ class TicTacToeCLI
 
   def first_move
     input = ''
-    until ['y', 'yes', 'n', 'no'].include?(input)
+    until ['y', 'n'].include?(input)
       puts "Would you like to go first? ('y' or 'n')"
       input = gets.strip.downcase
     end
