@@ -79,11 +79,9 @@ class Game
     this_move = current_player.move(board)
     # initializing player_1/player_2 to be Player::Human lets .move be called
     if @board.valid_move?(this_move)
-      #@board.display
       puts "\n\n\n"
       puts "Turn count is: #{@board.turn_count + 1}"
       @board.update(this_move, current_player)
-      # board.update(this_move, self.current_player)
       @board.display
     else
       turn
