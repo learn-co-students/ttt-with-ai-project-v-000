@@ -51,55 +51,32 @@ class Game
     nil
   end 
 
-  
-    def turn
-      board.display
-      spot = current_player.move(board)
-      if board.valid_move?(spot)
-        board.update(spot, self.current_player)
+
+
+  def turn 
+      player_input = current_player.move(board)
+      if board.valid_move?(player_input)
+        board.update(player_input, current_player)
       else
-        puts "invalid entry"
         turn
-      end
+    end 
+  end
 
+  def play
+
+    while !over?
+      turn
     end
+    board.display
 
-  # def turn 
-  #     player_input = current_player.move(board)
-  #     if board.valid_move?(player_input)
-  #       board.update(player_input, current_player)
-  #     else
-  #       turn
-  #   end 
-  # end
-
-  # def play
-
-  #   while !over?
-  #     turn
-  #   end
-  #   board.display
-
-  #   if won?
-  #     puts "Congratulations #{winner}!"
-  #   elsif draw?
-  #     puts "Cats Game!"
-  #   end   
-  #   board.display
-  # end
-    def play
-      while over? != true
-        turn
-      end
-      if won?
-        board.display
-        puts "Congratulations #{@winner}!"
-      elsif draw?
-        board.display
-       puts "Cats Game!"
-      end
-    end
-
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end   
+    board.display
+  end
+    
 
 
 
