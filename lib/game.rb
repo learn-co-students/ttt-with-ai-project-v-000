@@ -64,10 +64,11 @@ class Game
 
   def play
 
-    while !over?
+    until won? || draw?
       turn
+      board.display
     end
-    board.display
+    
 
     if won?
       puts "Congratulations #{winner}!"

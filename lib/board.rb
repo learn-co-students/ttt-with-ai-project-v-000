@@ -60,4 +60,6 @@ class Board
     cells[pos.to_i-1] = player.token
   end 
 
-end 
+end
+
+ 
