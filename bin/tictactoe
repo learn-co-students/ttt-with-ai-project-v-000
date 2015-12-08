@@ -14,12 +14,18 @@ case input
   when 1
     puts 'Player, what should your token be? (Must be one character.)'
     human_token = gets.strip
+    puts 'And what should the computer opponent\'s token be? (Must also be one character.)'
+    computer_token = gets.strip
     puts 'Would you like to take the first move against the computer? (Y/n)'
     if gets.strip.upcase == 'N'
-      Game.new(Player::Computer.new('X'), Player::Human.new(token)).play
+      Game.new(Player::Computer.new(computer_token), Player::Human.new(human_token)).play
     else
-      Game.new(Player::Human.new(human_token), Player::Computer.new('X'))
+      Game.new(Player::Human.new(human_token), Player::Computer.new(computer_token)).play
     end
   when 2
-
+    puts 'Player 1, what should your token be? (Must be one character.)'
+    player_1_token = gets.strip
+    puts 'Player 2, what should your token be? (Must also be one character.)'
+    player_2_token = gets.strip
+    Game.new(Player::Human.new(player_1_token), Player::Human.new(player_2_token)).play
 end

@@ -59,13 +59,13 @@ class Board
     self.cells[position.to_i - 1] = player.token
   end
 
-  def self.hypo_update(position, board)
+  def self.create_and_update(position, board)
     hypo = Board.new
     hypo.cells = board.cells.collect { |cell| cell.dup }
+    hypo.token_1 = board.token_1.dup
+    hypo.token_2 = board.token_2.dup
     int_position = position.to_i - 1
-    int_position % 2 == 0 ? hypo.cells[int_position] = board.token_1 : hypo.cells[int_position] = board.token_2
-    hypo.token_1 = board.token_1
-    hypo.token_2 = board.token_2
+    int_position % 2 == 0 ? hypo.cells[int_position] = hypo.token_1 : hypo.cells[int_position] = hypo.token_2
     hypo
   end
 end

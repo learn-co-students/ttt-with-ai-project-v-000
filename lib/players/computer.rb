@@ -69,7 +69,7 @@ class Player::Computer < Player
     moves = []
     # Fill the scores array.
     ('1'..'9').reject { |i| board.taken?(i) }.each do |choice|
-      move_scenario = Board.hypo_update(choice, board)
+      move_scenario = Board.create_and_update(choice, board)
       scores << minimax(move_scenario, depth)
       moves << choice
     end
