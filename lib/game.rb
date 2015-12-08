@@ -14,9 +14,7 @@ class Game
 
   def initialize(player_1 = Player::Human.new('X'), player_2 = Player::Human.new('O'), board = Board.new)
     self.player_1 = player_1
-    self.player_1.parity = :even
     self.player_2 = player_2
-    self.player_2.parity = :odd
     self.board = board
     self.board.token_1 = self.player_1.token
     self.board.token_2 = self.player_2.token
