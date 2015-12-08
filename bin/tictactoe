@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts 'Hello, user!'
+puts 'Would you like to play a 0-, 1-, or 2-player game?'
+puts 'Use number only to select (e.g. 0, 1, 2).'
+
+input = gets.strip.to_i
+
+case input
+  when 0
+    Game.new(Player::Computer.new('X'), Player::Computer.new('O')).play
+  when 1
+    puts 'Player, what should your token be? (Must be one character.)'
+    human_token = gets.strip
+    puts 'Would you like to take the first move against the computer? (Y/n)'
+    if gets.strip.upcase == 'N'
+      Game.new(Player::Computer.new('X'), Player::Human.new(token)).play
+    else
+      Game.new(Player::Human.new(human_token), Player::Computer.new('X'))
+    end
+  when 2
+
+end

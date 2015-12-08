@@ -12,12 +12,14 @@ class Game
     [0,4,8]
   ]
 
-  def initialize(player_1 = Player::Human.new('X'), 
-    player_2 = Player::Human.new('O'), 
-    board = Board.new)
+  def initialize(player_1 = Player::Human.new('X'), player_2 = Player::Human.new('O'), board = Board.new)
     self.player_1 = player_1
+    self.player_1.parity = :even
     self.player_2 = player_2
+    self.player_2.parity = :odd
     self.board = board
+    self.board.token_1 = self.player_1.token
+    self.board.token_2 = self.player_2.token
   end
 
   def current_player
@@ -56,18 +58,18 @@ class Game
   end
 
   def turn
-    if self.board.turn_count == 0
-      puts '#{self.current_player.token} goes first.'
+    if board.turn_count == 0
+      puts self.player_1.token + ' goes first.'
+      puts 'Here is the board:'
+      self.board.display
     end
-    puts 'Here is the current board:'
-    self.board.display
-    puts '#{self.current_player.token}, please enter your move:'
     input = self.current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.update(input, self.current_player)
       puts 'Here is the new board:'
       self.board.display
     else
+      puts 'That input was not valid. The turn will repeat.'
       self.turn
     end
   end
@@ -83,14 +85,10 @@ class Game
       elsif token == 'O'
         puts 'Congratulations O!'
       else
-        puts 'Congratulations #{self.winner}!'
+        puts 'Congratulations ' + self.winner + '!'
       end
     else
       puts 'Cats Game!'
     end
-  end
-
-  def start
-
   end
 end
