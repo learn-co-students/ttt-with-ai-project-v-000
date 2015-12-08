@@ -91,6 +91,6 @@ class Game
   end
 
   def start
-    
+
   end
 end
