@@ -63,23 +63,17 @@ class Game
   end
 
   def play
-
     until won? || draw?
       turn
       board.display
     end
     
-
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cats Game!"
     end   
     board.display
-  end
-    
-
-
-
+  end   
 
 end 
