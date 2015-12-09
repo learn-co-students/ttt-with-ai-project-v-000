@@ -77,14 +77,8 @@ class Game
       self.turn
     end
     if self.won?
-      token = self.winner
-      if token == 'X'
-        puts 'Congratulations X!'
-      elsif token == 'O'
-        puts 'Congratulations O!'
-      else
-        puts 'Congratulations ' + self.winner + '!'
-      end
+      puts 'Congratulations ' + self.winner + '!'
+      return self.winner
     else
       puts 'Cats Game!'
     end

@@ -29,3 +29,22 @@ case input
     player_2_token = gets.strip
     Game.new(Player::Human.new(player_1_token), Player::Human.new(player_2_token)).play
 end
+
+puts 'Would you like the computer to play a random opponent 100 times and report the number of losses? (Y/n)'
+if gets.strip.upcase == 'N'
+else
+  puts 'Even though X customarily goes first, in the following games the computer'
+  puts 'will be X even when it does not take the first turn. This is for'
+  puts 'demonstration purposes, so that the random opponent is always O.'
+  losses = 0
+  i = 0
+  100.times do
+    if i % 2 == 0
+      losses += 1 if Game.new(Player::Computer.new('X'), Player::Random.new('O')).play == 'O'
+    else
+      losses += 1 if Game.new(Player::Random.new('O'), Player::Computer.new('X')).play == 'O'
+    end
+    i += 1
+  end
+  puts 'The computer played a random opponent 100 times and lost ' + losses.to_s + ' times. Goodbye!'
+end
