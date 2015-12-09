@@ -2,7 +2,7 @@ class Player::Computer < Player
   attr_accessor :intelligent_move
 
   def move(board)
-    return '5' unless board.taken?('5')
+    return '5' if board.turn_count == 0
     self.minimax(board, 1)
     self.intelligent_move
   end
