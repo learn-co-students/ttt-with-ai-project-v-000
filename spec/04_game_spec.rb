@@ -40,7 +40,7 @@ describe 'Game' do
     end
   end
 
-  describe 'initialize' do
+  describe '#initialize' do
     it 'accepts 2 players and a board' do
       board = Board.new
       player_1 = Player.new("X")
@@ -137,7 +137,7 @@ describe 'Game' do
     end
   end
 
-  describe 'winner' do
+  describe '#winner' do
     it 'returns X when X won' do
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
@@ -160,7 +160,7 @@ describe 'Game' do
     end
   end
 
-  describe 'turn' do
+  describe '#turn' do
     it 'makes valid moves' do
       game = Game.new
       allow($stdout).to receive(:puts)
@@ -192,7 +192,7 @@ describe 'Game' do
     end
   end
 
-  describe 'play' do
+  describe '#play' do
     it 'asks for players input on a turn of the game' do
       game = Game.new
       allow($stdout).to receive(:puts)
@@ -333,8 +333,5 @@ describe 'Game' do
 
       game.play
     end
-  end
-
-  describe 'start' do
   end
 end

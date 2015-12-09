@@ -2,16 +2,17 @@ class Player::Computer < Player
   attr_accessor :intelligent_move
 
   def move(board)
+    return '5' unless board.taken?('5')
     self.minimax(board, 1)
     self.intelligent_move
   end
 
   def score(board, depth)
     if self.won?(board)
-      if board.cells[self.won?(board)[0]] == board.token_1
-        10 - depth
+      if board.cells[self.won?(board)[0]] == self.token
+        return 10 - depth
       else
-        depth - 10
+        return depth - 10
       end
     else
       0
@@ -19,10 +20,10 @@ class Player::Computer < Player
   end
 
   def current_player?(board)
-    if board.token_1 == self.token
-      board.turn_count % 2 == 0
+    if board.turn_count % 2 == 0
+      self.token == board.token_1
     else
-      board.turn_count % 2 == 1
+      self.token == board.token_2
     end
   end
 
@@ -76,11 +77,11 @@ class Player::Computer < Player
     # Do the min/max calculation.
     if self.current_player?(board)
       max_score_index = scores.each_with_index.max[1]
-      self.intelligent_move = moves[max_score_index] if depth == 2
+      self.intelligent_move = moves[max_score_index]
       return scores[max_score_index]
     else
       min_score_index = scores.each_with_index.min[1]
-      self.intelligent_move = moves[min_score_index] if depth == 2
+      self.intelligent_move = moves[min_score_index]
       return scores[min_score_index]
     end
   end

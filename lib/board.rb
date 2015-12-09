@@ -65,7 +65,7 @@ class Board
     hypo.token_1 = board.token_1.dup
     hypo.token_2 = board.token_2.dup
     int_position = position.to_i - 1
-    int_position % 2 == 0 ? hypo.cells[int_position] = hypo.token_1 : hypo.cells[int_position] = hypo.token_2
+    hypo.turn_count % 2 == 0 ? hypo.cells[int_position] = hypo.token_1 : hypo.cells[int_position] = hypo.token_2
     hypo
   end
 end
