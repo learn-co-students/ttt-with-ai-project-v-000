@@ -8,7 +8,7 @@ class Player::Computer < Player
 
   def score(board, depth)
     if self.won?(board)
-      if board.cells[self.won?(board)[0]] == self.token
+      if board.cells[self.won?(board)[0]] == board.token_1
         10 - depth
       else
         depth - 10
