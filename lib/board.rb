@@ -52,5 +52,31 @@ def valid_move?(players_pick) #Ensures that moves are between 1-9 and not taken
   (1..9).include?(players_pick.to_i) && !taken?(players_pick)  
 end
 
+#def self.new_state(position, board)
+  #new_state = Board.new
+  #new_state.cells = board.cells
+  #new_state.cells[position.to_i - 1] = game.current_player.token
+  #new_state
+#end
+
+def available_moves
+  open_cells = []
+  self.cells.each_with_index do |cell, index|
+    if cell == " "
+      open_cells << index + 1
+    end
+  end
+  open_cells
+
+end
+
+
+def current_player
+    if turn_count.even?
+      player_1
+    else
+      player_2
+    end
+  end
 
 end #<--Ends Board 

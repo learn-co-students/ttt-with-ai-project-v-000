@@ -1,6 +1,8 @@
+require_relative './game_status.rb'
 class Game
-  attr_accessor :player_1, :player_2, :board
+  attr_accessor :player_1, :player_2 #:board
 
+  include GameStatus
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -16,7 +18,10 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-
+    player_1.board = self.board
+    player_2.board = self.board
+    player_1.game = self
+    player_2.game = self
   end
 #---------------------------------------------------#
  
@@ -28,28 +33,28 @@ class Game
     end
   end
 
-  def won?
-    WIN_COMBINATIONS.each do |combo|
-      if (board.cells[combo[0]] != " ") && (board.cells[combo[0]] == board.cells[combo[1]]) && (board.cells[combo[1]] == board.cells[combo[2]])
-        @winner = board.cells[combo[0]]
-        return true
-      end
+  # def won?
+  #   WIN_COMBINATIONS.each do |combo|
+  #     if (board.cells[combo[0]] != " ") && (board.cells[combo[0]] == board.cells[combo[1]]) && (board.cells[combo[1]] == board.cells[combo[2]])
+  #       @winner = board.cells[combo[0]]
+  #       return true
+  #     end
 
-    end
-    if @winner = nil
-      return false
-    end
-  end
+  #   end
+  #   if @winner == nil
+  #     return false
+  #   end
+  # end
 
-  def draw?
-        if won? == nil && board.full? == true
-            return true
-        end
-    end
+  # def draw?
+  #       if !won?  && board.full? == true
+  #           return true
+  #       end
+  #   end
 
-  def over?
-    won? || draw?
-  end
+  # def over?
+  #   won? || draw?
+  # end
 
   def winner
     won?
