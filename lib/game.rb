@@ -14,17 +14,15 @@ class Game
     [2,4,6]
     ]
 
-  def initialize(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
+  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    player_1.board = self.board
-    player_2.board = self.board
-    player_1.game = self
-    player_2.game = self
+    self.board.token_1 = self.player_1.token
+    self.board.token_2 = self.player_2.token
   end
 #---------------------------------------------------#
- 
+
   def current_player
     if board.turn_count.even?
       player_1
@@ -79,6 +77,7 @@ class Game
   end
 
   def turn
+    system 'clear'
     board.display
     pick = current_player.move(board)
     if board.valid_move?(pick)
@@ -88,15 +87,4 @@ class Game
       turn
     end
   end
-
-
-
-
-
-
-
-
-
-
-
 end #Ends Game class

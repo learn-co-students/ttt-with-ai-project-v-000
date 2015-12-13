@@ -3,7 +3,7 @@ module GameStatus
   def board
     @board
   end
-  
+
   def board=(board)
     @board = board
   end
@@ -25,7 +25,7 @@ WIN_COMBINATIONS = [
 
 def won?
     WIN_COMBINATIONS.each do |combo|
-      if (board.cells[combo[0]] != " ") && (board.cells[combo[0]] == board.cells[combo[1]]) && (board.cells[combo[1]] == board.cells[combo[2]])
+      if (@board.cells[combo[0]] != " ") && (@board.cells[combo[0]] == @board.cells[combo[1]]) && (@board.cells[combo[1]] == @board.cells[combo[2]])
         @winner = board.cells[combo[0]]
         return true
       end

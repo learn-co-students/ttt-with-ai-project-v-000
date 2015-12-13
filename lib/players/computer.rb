@@ -1,70 +1,84 @@
+require "pry"
 require_relative '../player.rb'
-require 'pry'
-class Computer < Player
 
-  attr_reader :best_move
-def move(board)
+class Player::Computer < Player
 
-  minimax(board, self)
-  best_move
-  #board.cells.each_with_index do |cell, index|
-    #if cell == " "
-      #return (index + 1).to_s
-    #end
-  #end
+  attr_accessor :best_move, :token
 
-end 
+  def move(board)
+    # return '5' unless board.taken?('5')
+    minimax(board, 1)
+    best_move
+  end
 
+  def score(board, depth)
+    if self.won?(board)
+      if board.cells[self.won?(board)[0]] == self.token
+        return 10 - depth
+      else
+        return depth - 10
+      end
+    else
+      return 0
+    end
+  end
 
-def score(game)
-  if game.won? && game.winner == self.token
-    return 10 - depth
-  elsif game.won? && game.winner != self.token
-    return depth - 10 
-  else 
-    return 0
+  def current_player?(board)
+    board.turn_count.even? ? self.token == board.token_1 : self.token == board.token_2
+  end
+
+  WIN_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [2,4,6],
+    [0,4,8]
+  ]
+
+  def won?(board)
+    WIN_COMBINATIONS.each do |line|
+      return line if line.all? { |position| board.cells[position] == "X" }
+      return line if line.all? { |position| board.cells[position] == "O" }
+    end
+    false
+  end
+
+  def draw?(board)
+    board.full? && !self.won?(board)
+  end
+
+  def over?(board)
+    self.draw?(board) || self.won?(board)
+  end
+
+  def minimax(board, depth)
+    return score(board, depth) if self.over?(board)
+
+    depth += 1
+    scores = [] # an array of scores
+    moves = []  # an array of moves
+
+    # Populate the scores array, recursing as needed
+    ('1'..'9').reject { |i| board.taken?(i) }.each do |move|
+      possible_move = Board.create_and_update(move, board)
+      scores << minimax(possible_move, depth)
+      moves << move
+    end
+
+    # Do the min or the max calculation
+    if self.current_player?(board)
+      # This is the max calculation
+      max_score_index = scores.each_with_index.max[1]
+      self.best_move = moves[max_score_index]
+      return scores[max_score_index]
+    else
+      # This is the min calculation
+      min_score_index = scores.each_with_index.min[1]
+      self.best_move = moves[min_score_index]
+      return scores[min_score_index]
+    end
   end
 end
-
-
-
-def switch(token)
-  token == "X" ? "O" : "X"
-end
-
-
-def minimax(board, current_player)
-  
-   return score(game) if over?
-
-   scores = {}
-   self.depth += 1
-   binding.pry
-    board.available_moves.each do |move|
-     potential_board = board.dup
-     
-     potential_board.update(move, self)
-
-     scores[move] = minimax(potential_board, current_player)
-
-   end
-     @best_move, best_score = best_score(current_player, scores)
-     best_score
- end
-
-
-def game_over 
-
-end
-
-
-def best_score(token, scores)
-  if token = @token
-    scores.max_by {|_k, v| v}
-  else
-    scores.min_by {|_k, v| v}
-  end
-end
-
-
-end #ends Computer
