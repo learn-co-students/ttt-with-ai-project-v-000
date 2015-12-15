@@ -61,23 +61,44 @@ class Game
 
 #---------------------------------------------------#
 
-  def start
+  def self.start
+    puts 'Hello, Human!'
+    puts 'Welcome to Tic Tac Toe!'
+    puts 'How many humans will be playing today?'
+    puts '1? 2? Or would you like to watch the computers battle it out?'
 
+    number_of_humans = gets.strip.to_i
+
+    case number_of_humans
+    when 1
+      Game.new(Player::Human.new('X'), Player::Computer.new('O')).play
+
+    when 2
+      Game.new(Player::Human.new('X'), Player::Human.new('O')).play
+
+    when 0
+      Game.new(Player::Computer.new('X'), Player::Computer.new('O')).play
+    end
   end
 
   def play
     while !over?
-    turn
-  end
+      turn
+    end
+    
     if draw?
       puts "Cats Game!"
     else
-    puts "Congratulations #{@winner}!"
+      puts "Congratulations #{@winner}!"
     end
+
+    end_game
+
+
+
   end
 
   def turn
-    system 'clear'
     board.display
     pick = current_player.move(board)
     if board.valid_move?(pick)
@@ -87,4 +108,17 @@ class Game
       turn
     end
   end
+
+  def end_game
+    puts "Would you like to play again?(y/n)"
+
+    user_answer = gets.chomp
+
+    if user_answer == "y"
+      Game.start
+    else
+      puts "Thanks for playing. Goodbye."
+    end
+  end
+
 end #Ends Game class

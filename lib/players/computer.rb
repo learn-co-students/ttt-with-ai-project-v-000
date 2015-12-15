@@ -6,8 +6,12 @@ class Player::Computer < Player
   attr_accessor :best_move, :token
 
   def move(board)
-    minimax(board, 1)
-    best_move
+    if !board.taken?('5')
+      '5'
+    else
+      minimax(board, 1)
+      best_move
+    end
   end
 
   def score(board, depth)

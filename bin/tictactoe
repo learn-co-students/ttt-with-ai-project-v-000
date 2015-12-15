@@ -2,20 +2,22 @@
 
 require_relative '../config/environment'
 
-puts 'Hello, Human!'
-puts 'Welcome to Tic Tac Toe!'
-puts 'How many humans will be playing today?'
-puts '1? 2? Or would you like to watch the computers battle it out?'
+# puts 'Hello, Human!'
+# puts 'Welcome to Tic Tac Toe!'
+# puts 'How many humans will be playing today?'
+# puts '1? 2? Or would you like to watch the computers battle it out?'
 
-number_of_humans = gets.strip.to_i
+# number_of_humans = gets.strip.to_i
 
-case number_of_humans
-  when 1
-    Game.new(Player::Human.new('X'), Player::Computer.new('O')).play
+# case number_of_humans
+#   when 1
+#     Game.new(Player::Human.new('X'), Player::Computer.new('O')).play
 
-  when 2
-    Game.new(Player::Human.new('X'), Player::Human.new('O')).play
+#   when 2
+#     Game.new(Player::Human.new('X'), Player::Human.new('O')).play
 
-  when 0
-    Game.new(Player::Computer.new('X'), Player::Computer.new('O')).play
-  end
+#   when 0
+#     Game.new(Player::Computer.new('X'), Player::Computer.new('O')).play
+# end
+
+Game.start
