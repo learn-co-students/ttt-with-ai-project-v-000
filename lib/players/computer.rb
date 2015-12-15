@@ -52,7 +52,13 @@ class Player::Computer < Player
       moves << current_move
       board.undo(current_move)
     end
-    current_token == @token ? index = scores.each_with_index.max[1] : index = scores.each_with_index.min[1]
+
+    if current_token == @token
+      possible_indexes = (0..scores.length-1).select{|i| scores[i] == scores.max}
+    else
+      possible_indexes = (0..scores.length-1).select{|i| scores[i] == scores.min}
+    end
+    index = possible_indexes.sample
     @optimal_move = moves[index]
     scores[index]
   end
