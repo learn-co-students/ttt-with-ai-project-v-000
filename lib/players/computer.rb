@@ -20,7 +20,7 @@ class Player::Computer < Player
   def move(board)
     return "5" if board.turn_count == 0
     child_board = board.dup
-    minmax(@token,child_board) 
+    minmax(child_board) 
     @optimal_move.to_s
   end
 
@@ -37,25 +37,23 @@ class Player::Computer < Player
     end
   end
 
-  def minmax(current_token,board,depth = 0) 
+  def minmax(board,depth = 0) 
     return score(board,depth) if won?(board) || draw?(board)
     scores = []
     moves = []
     depth += 1
+    board.turn_count % 2 == 0 ? current_token = "X" : current_token = "O"
 
     available_moves = valid_moves(board)
     
     available_moves.each do |current_move|
       board.cells[current_move-1] = current_token
-      board.turn_count % 2 == 0 ? current_token = "O" : current_token = "X"
-      scores << minmax(current_token,board,depth)
+      scores << minmax(board,depth)
       moves << current_move
       board.undo(current_move)
     end
     current_token == @token ? index = scores.each_with_index.max[1] : index = scores.each_with_index.min[1]
-    #scores.max.abs > scores.min.abs ? index = scores.each_with_index.max[1] : index = scores.each_with_index.min[1]
     @optimal_move = moves[index]
-    binding.pry if depth == 1
     scores[index]
   end
 
