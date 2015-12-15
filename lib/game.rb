@@ -67,18 +67,67 @@ class Game
     puts 'How many humans will be playing today?'
     puts '1? 2? Or would you like to watch the computers battle it out?'
 
-    number_of_humans = gets.strip.to_i
+    number_of_humans = gets.strip
 
     case number_of_humans
-    when 1
-      Game.new(Player::Human.new('X'), Player::Computer.new('O')).play
 
-    when 2
-      Game.new(Player::Human.new('X'), Player::Human.new('O')).play
+    when '1'
+      puts 'Would you like to go first?'
+      go_first = gets.chomp
 
-    when 0
+      puts "Puts would you like to be 'X' or 'O'?"
+
+      human_token = gets.chomp.upcase
+
+      if human_token == "X"
+          computer_token = "O"
+      else
+          computer_token = "X"
+      end
+
+      if go_first == "yes"
+        Game.new(Player::Human.new(human_token), Player::Computer.new(computer_token)).play
+      else
+        Game.new(Player::Computer.new(computer_token), Player::Human.new(human_token)).play
+      end
+
+    when '2'
+
+      puts 'Player 1 would you like to be X or O?'
+
+      player_1_token = gets.chomp.upcase
+
+      if player_1_token == "X"
+        player_2_token = "O"
+      else
+        player_2_token = "X"
+      end
+
+      Game.new(Player::Human.new(player_1_token), Player::Human.new(player_2_token)).play
+
+    when '0'
       Game.new(Player::Computer.new('X'), Player::Computer.new('O')).play
+
+    when 'wargames'
+      100.times do
+        Game.new(Player::Computer.new('X'), Player::Computer.new('O')).wargames
+      end
     end
+  end
+
+  def wargames
+    puts "This is wargames"
+
+
+    victories = 0
+
+    while !over?
+      turn
+    end
+
+    victories += 1 if won?
+
+    puts victories
   end
 
   def play
@@ -93,9 +142,6 @@ class Game
     end
 
     end_game
-
-
-
   end
 
   def turn
