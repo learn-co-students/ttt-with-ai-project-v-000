@@ -2,70 +2,70 @@ require_relative '../player.rb'
 require 'pry'
 
 class Player::Computer < Player
-  attr_accessor :scores
+  attr_accessor :optimal_move
 
   def initialize(token)
     @token = token
-    @scores = Array.new(9,0)
   end
   
   def valid_moves(board)
     moves = []
+    
     for i in 1..9 do 
-      if board.valid_move?(i.to_s)
-        moves << i 
-      else
-        @scores[i-1] = nil
-      end
+      moves << i if board.valid_move?(i.to_s)
     end
     moves
   end
 
-  def score_options(board,current_token,initial_moves,depth=0)
-    if board.full?
-      return nil
-    else
-      initial_moves.each do |move|
-        minmax(board,current_token,depth,move,initial_moves.dup)
-      end
-    end 
-  end
-
   def move(board)
-    @scores = Array.new(9,0)
+    return "5" if board.turn_count == 0
     child_board = board.dup
-    initial_moves = valid_moves(child_board)
-    if initial_moves.include?(5)
-      input = 5
-    else
-      score_options(child_board,@token,initial_moves)
-      if @scores.compact.max > @scores.compact.min
-        input = @scores.find_index{|element| element == @scores.compact.max} + 1
-      else
-        input = @scores.find_index{|element| element == @scores.compact.min} + 1
-      end
-    end
-    input.to_s
+    minmax(@token,child_board) 
+    @optimal_move.to_s
   end
 
-  def minmax(board,current_token,depth,move,available_moves)
-    board.cells[move-1] = current_token
-    options = Game::WIN_COMBINATIONS.find_all{|combo| combo.include?(move-1)}
-    options.each do |element|
-      if board.cells[element[0]] == board.cells[element[1]] && board.cells[element[0]] == board.cells[element[2]]
-        board.cells[move-1] = " "
-        if current_token == @token  
-          @scores[move-1] = (10-depth) if (10-depth) > @scores[move-1] 
-        else 
-         @scores[move-1] = (depth-10) if (depth-10).abs > @scores[move-1].abs
-        end
-        return @scores[move-1]
+  def score(board,depth)
+    board.turn_count % 2 == 0 ? current_token = "O" : current_token = "X"
+    if won?(board)
+      if current_token == @token
+        return 10 - depth 
       else
-        current_token == @token ? current_token = "O" : current_token = "X"
-        available_moves.delete(move)
-        score_options(board,current_token,available_moves,depth+1)
-        board.cells[move-1] = " "
+        return depth - 10
       end
+    else
+      return 0
     end
+  end
+
+  def minmax(current_token,board,depth = 0) 
+    return score(board,depth) if won?(board) || draw?(board)
+    scores = []
+    moves = []
+    depth += 1
+
+    available_moves = valid_moves(board)
+    
+    available_moves.each do |current_move|
+      board.cells[current_move-1] = current_token
+      board.turn_count % 2 == 0 ? current_token = "O" : current_token = "X"
+      scores << minmax(current_token,board,depth)
+      moves << current_move
+      board.undo(current_move)
+    end
+    current_token == @token ? index = scores.each_with_index.max[1] : index = scores.each_with_index.min[1]
+    #scores.max.abs > scores.min.abs ? index = scores.each_with_index.max[1] : index = scores.each_with_index.min[1]
+    @optimal_move = moves[index]
+    binding.pry if depth == 1
+    scores[index]
+  end
+
+  def won?(board)
+    Game::WIN_COMBINATIONS.any? do |combo|
+       board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[0]] != " "
+    end
+  end
+
+  def draw?(board)
+    !won?(board) && board.full?
   end
 end
