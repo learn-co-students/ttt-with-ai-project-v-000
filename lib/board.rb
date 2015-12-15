@@ -22,7 +22,7 @@ class Board
     self.cells[players_pick.to_i-1]
   end
 
-  def update(players_pick, player)     #represents updating the board when a player makes a move
+  def update(players_pick, player) #represents updating the board when a player makes a move
 
     self.cells[players_pick.to_i-1] = player.token
   end
