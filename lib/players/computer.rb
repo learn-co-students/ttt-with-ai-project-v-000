@@ -6,7 +6,6 @@ class Player::Computer < Player
   attr_accessor :best_move, :token
 
   def move(board)
-    # return '5' unless board.taken?('5')
     minimax(board, 1)
     best_move
   end
