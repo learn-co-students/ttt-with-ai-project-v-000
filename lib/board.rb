@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 require 'pry'
 
 class Board
 
-  attr_accessor :cells, :token
+  attr_accessor :cells
   
   def initialize
     reset!
@@ -47,6 +46,4 @@ class Board
   end  
 
 end  
-=======
-"test"
->>>>>>> ed4e1a418a26ece07bc2b62547835753222800cb
+
