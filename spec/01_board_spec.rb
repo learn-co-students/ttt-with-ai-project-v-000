@@ -3,7 +3,9 @@ require 'spec_helper'
 describe "Board" do
   let(:board){Board.new}
 
-  describe '#cells' do
+  describe '=begin
+#cells=end
+' do
     it 'has an attribute to store the cells of the board' do
       expect(board).to respond_to(:cells)
       expect(board).to respond_to(:cells=)
