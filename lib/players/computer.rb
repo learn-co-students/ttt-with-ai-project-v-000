@@ -11,8 +11,19 @@ class Computer < Player
   [6,4,2]   # Diagonal Row
   ]
 
-  def move(board)
+  def opponent_token
+    token == "X" ? "O" : "X"
+  end
 
+  def move(board)
+    if winnable(board)
+      (winnable(board) + 1).to_s
+    elsif block(board)
+      (block(board) + 1).to_s
+    else
+      (highest_score(board) + 1).to_s
+    end
+  end  
 
     # look for available spaces methdd
     # check for spaces with 
@@ -34,17 +45,61 @@ class Computer < Player
     # Opposite corner: If the opponent is in the corner, the player plays the opposite corner.
     # Empty corner: The player plays in a corner square.
     # Empty side: The player plays in a middle square on any of the 4 sides.
-
-
-  end 
-
-  def winnable?
-    WIN_COMBINATIONS.detect {|combo| combo.count(game.current_player.token) == 2 }.select {|cell| cell == ""}
+  
+  def winnable(board)
+    valid_win = WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == token} }
+    if valid_win == 2
+      valid_win.detect {|n| board.cells[n] == " "} 
+    end 
   end
 
-  def block?
-    WIN_COMBINATIONS.detect {|combo| combo.count(game.other_player.token) == 2 }.select {|cell| cell == ""}
-  end 
+  def block(board)
+    valid_block = WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == opponent_token} } 
+    if valid_block == 2
+      valid_block.detect {|n| board.cells[n] == " "}
+    end
+  end
 
+  def highest_score(board)
+    scores = {}
+    board.cells.each_with_index do |cell, index|
+      scores[index] = 0
+
+      WIN_COMBINATIONS.each do |combo|
+        if combo.include?(index) && no_opponent_marker?(board,combo) && !board.taken?(index + 1)
+          scores[index] += 1
+        end
+      end
+
+      WIN_COMBINATIONS.each do |combo|
+        if combo.include?(index) && my_marker_none?(board,combo) && !board.taken?(index + 1)
+          scores[index] += (2 * num_of_opponents_markers(board,combo))
+        end
+      end
+
+      WIN_COMBINATIONS.each do |combo|
+        if combo.include?(index) && no_opponent_marker?(board,combo) && !board.taken?(index + 1)
+          scores[index] += (3 * num_of_my_markers(board,combo))
+        end
+      end
+    end
+    scores.max_by{|k,v| v}[0]
+  end
+
+  def no_opponent_marker?(board, combo)
+    combo.none? {|n| board.cells[n] == opponent_token}
+  end
+
+  def my_marker_none?(board, combo)
+    combo.none? {|n| board.cells[n] == token}
+  end
+
+  def num_of_opponents_markers(board, combo)
+    combo.count {|n| board.cells[n] == opponent_token}
+  end
+
+  def num_of_my_markers(board, combo)
+    combo.count {|n| board.cells[n] == token}
+  end
 
 end  
