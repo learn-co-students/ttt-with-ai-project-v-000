@@ -1,3 +1,18 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+      
+  Start.new
+
+  puts "Do you want to play again? Enter Y or N"
+
+  again = gets.strip.downcase
+
+  until again == "n"
+    Start.new
+    puts "Do you want to play again? Enter Y or N"
+    again = gets.strip.downcase
+  end
+  
+  puts "Have a nice day!"
