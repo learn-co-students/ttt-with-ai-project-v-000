@@ -1,3 +1,5 @@
+require 'pry'
+
 class Human < Player
 
   def move(board)

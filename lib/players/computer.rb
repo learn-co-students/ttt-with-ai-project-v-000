@@ -1,3 +1,5 @@
+require 'pry'
+
 class Computer < Player
 
   WIN_COMBINATIONS = [
@@ -20,8 +22,10 @@ class Computer < Player
       (winnable(board) + 1).to_s
     elsif block(board)
       (block(board) + 1).to_s
-    else
+    elsif highest_score(board)
       (highest_score(board) + 1).to_s
+    else  
+      (cell_not_taken(board) + 1).to_s
     end
   end  
 
@@ -47,15 +51,15 @@ class Computer < Player
     # Empty side: The player plays in a middle square on any of the 4 sides.
   
   def winnable(board)
-    valid_win = WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == token} }
-    if valid_win == 2
+    valid_win = WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == token} == 2 }
+    if valid_win
       valid_win.detect {|n| board.cells[n] == " "} 
     end 
   end
 
   def block(board)
-    valid_block = WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == opponent_token} } 
-    if valid_block == 2
+    valid_block = WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == opponent_token} == 2} 
+    if valid_block
       valid_block.detect {|n| board.cells[n] == " "}
     end
   end
@@ -83,7 +87,12 @@ class Computer < Player
         end
       end
     end
-    scores.max_by{|k,v| v}[0]
+    !board.taken?(scores.max_by{|k,v| v}[0] + 1) ? scores.max_by{|k,v| v}[0] : nil
+  end
+
+  def cell_not_taken(board)
+    board.cells.index {|cell| cell == " "}
+    
   end
 
   def no_opponent_marker?(board, combo)
