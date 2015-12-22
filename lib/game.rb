@@ -64,6 +64,7 @@ class Game
     if self.board.valid_move?(input)
       self.board.update(input, self.current_player)
       self.board.display
+      sleep(1)
     else
       puts "That move was invalid"
       self.turn
