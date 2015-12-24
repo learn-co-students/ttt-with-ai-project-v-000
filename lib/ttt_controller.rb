@@ -1,7 +1,7 @@
 class TTTController
 
   def initialize
-    TTTCli.new.call
+    TTTCli.new
   end
 
 end
