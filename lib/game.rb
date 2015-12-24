@@ -46,6 +46,8 @@ class Game
   end
 
   def turn
+    puts "\e[H\e[2J"
+    board.display
     @move = current_player.move(current_player.token)
     if board.valid_move?(@move)
       board.update(@move, current_player)
@@ -59,8 +61,19 @@ class Game
     until over?
       turn
     end
+    puts "\e[H\e[2J" 
+    board.display
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
+    puts "Play again?"
+      a = gets.strip.downcase
+      if a == "y"
+        puts "YASSS"
+        TTTController.new
+      else
+        puts "So long, schmuck."
+      end
+        
   end
     
 
