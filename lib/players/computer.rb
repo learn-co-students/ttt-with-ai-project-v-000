@@ -1,8 +1,8 @@
 
 class Computer < Player
 
-  def initialize 
-
+  def move
+    computer_move = (1..9).detect{|i| valid_move?(i)}
   end
 
 end

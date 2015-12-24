@@ -35,7 +35,9 @@ class Board
   end
 
   def update(move, player)
+    # binding.pry
     @cells[move.to_i - 1] = player.token
+    @cells
   end
 
   def turn_count
