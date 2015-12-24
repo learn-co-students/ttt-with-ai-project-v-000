@@ -30,12 +30,10 @@ class Board
   end
 
   def valid_move?(move)
-    # binding.pry
     (1..9).include?(move.to_i) && !taken?(move)
   end
 
   def update(move, player)
-    # binding.pry
     @cells[move.to_i - 1] = player.token
     @cells
   end

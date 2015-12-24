@@ -19,7 +19,6 @@ class Game
     @player_2 = player_2
     @board = board
     @turn_count = 0
-   # binding.pry
   end
   
 
@@ -32,14 +31,10 @@ class Game
   end
 
   def won?
-    # binding.pry
     @winning_array = WIN_COMBINATIONS.detect{|a| 
       a.all?{|p| board.cells[p] == "X" } || a.all?{|p| board.cells[p] == "O" }
       } 
-      # binding.pry
     @winning_array ? true : false
-    # winner if true
-
   end
 
   def draw?
@@ -47,22 +42,17 @@ class Game
   end
 
   def winner
-    # binding.pry
     won? ? board.cells[@winning_array[0]] : nil
-
   end
 
   def turn
     @move = current_player.move(current_player.token)
     if board.valid_move?(@move)
       board.update(@move, current_player)
-      # self.play
     else
       "invalid"
       turn
     end
-
-
   end
 
   def play
@@ -71,7 +61,6 @@ class Game
     end
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
-      
   end
     
 
