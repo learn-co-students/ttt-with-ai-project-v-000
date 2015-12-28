@@ -1,3 +1,65 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts " "
+puts " "
+puts "||||||||  ||||||   ||||||    ||||||||    |||        ||||||    ||||||||   |||||    |||||||||"
+puts "   ||       ||    |||           ||      || ||      |||           ||     ||   ||   ||       "
+puts "   ||       ||   |||            ||     ||   ||    |||            ||    ||     ||  ||       "
+puts "   ||       ||   ||             ||    |||||||||   ||             ||    ||     ||  |||||||||"
+puts "   ||       ||   |||            ||   ||       ||  |||            ||    ||     ||  ||       "
+puts "   ||       ||    |||           ||  ||         ||  |||           ||     ||   ||   ||       "
+puts "   ||     ||||||   ||||||       || ||           ||  ||||||       ||      |||||    |||||||||"
+puts " "
+puts " "                 
+puts "                                      1 | 2 | 3 "
+puts "                                     -----------"
+puts "                                      4 | 5 | 6 "
+puts "                                     -----------"
+puts "                                      7 | 8 | 9 "
+puts " "
+puts " "
+
+def call
+  puts " How many players? (1, 2, or 0 = Watch me fight myself)"
+  input = gets.strip
+
+  if input == "1"
+    puts "Player 1 is X and the Cpu is O"
+    game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+    board = Board.new
+    game.play
+    again?
+  elsif input == "2"
+    puts "Player 1 is X and Player 2 is O"
+    game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+    board = Board.new
+    game.play
+    again?
+  elsif input == "0"
+    game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+    board = Board.new
+    game.play
+    again?
+  else
+    puts "That is an invalid amount of players"
+    again?
+  end
+end
+
+
+def again?
+  puts "Would you like to play again? (Y/N)"
+  input = gets.strip.upcase
+  if input == "Y" 
+    call
+  elsif input == "N" 
+    exit
+  else 
+    puts 'That s not a valid choice!!'
+    again?
+  end
+end
+
+call
