@@ -17,4 +17,73 @@ describe 'Player::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+
+  describe '#won?' do
+    it 'returns false for a draw' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+
+      expect(computer.won?(board)).to be_falsey
+    end
+
+    it 'returns true for a win' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+
+      expect(computer.won?(board)).to be_truthy
+    end
+  end
+
+  describe '#draw?' do
+    it 'returns true for a draw' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+
+      expect(computer.draw?(board)).to be_truthy
+    end
+
+    it 'returns false for a won game' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+
+      expect(computer.draw?(board)).to be_falsey
+    end
+
+    it 'returns false for an in-progress game' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
+
+      expect(computer.draw?(board)).to be_falsey
+    end
+  end
+
+  describe '#over?' do
+    it 'returns true for a draw' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+
+      expect(computer.over?(board)).to be_truthy
+    end
+
+    it 'returns true for a won game' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+
+      expect(computer.over?(board)).to be_truthy
+    end
+
+    it 'returns false for an in-progress game' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
+
+      expect(computer.over?(board)).to be_falsey
+    end
+  end
 end
