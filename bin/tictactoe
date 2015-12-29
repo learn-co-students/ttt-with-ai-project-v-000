@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+require_all '../lib'
+require_all '../lib/players'
+
+p "Welcome to the Tic-Tac-Toe game. How many people are playing today? (0 - 2)"
+no_players = gets.strip.to_i
+
+if no_players == 1
+
+  p "Would you like to go first? (y/n)"
+  ans = gets.strip.downcase
+  
+  if ans == "y" || ans == "yes"
+    Game.new(Human.new("X"), Player::Computer.new("O")).play
+  
+  else
+    Game.new(Player::Computer.new("X"), Human.new("O")).play
+  
+  end
+
+elsif no_players == 2
+  Game.new(Human.new("X"), Human.new("O")).play
+
+else
+  p "You've selected an AI only game."
+  Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+
+end
+
