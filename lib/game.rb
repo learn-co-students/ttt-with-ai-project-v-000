@@ -79,7 +79,7 @@ WIN_COMBINATIONS = [
     @board.display
   end
   
-  def play
+  def play #plays the game until its over or won or draw
     while !self.over? && !self.won? && !self.draw? do
           self.turn
     end

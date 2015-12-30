@@ -9,8 +9,10 @@ num = gets.strip.to_i
     choice = gets.strip.upcase
     if choice == "Y"
       new_game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
-    else
+    elsif choice == "N"
       new_game = Game.new(Player::Computer.new("X"), Player::Human.new("O"))
+    else
+      puts "invalid choice"
     end
   elsif num==0
     puts "Watch me play!"
