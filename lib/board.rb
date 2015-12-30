@@ -15,7 +15,9 @@ class Board
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "    
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} " 
+    puts ""
+    puts ""
   end
 
   def position(cell_number)  #given a cell number the method returns the value at that cell
@@ -31,13 +33,7 @@ class Board
   end
   
   def turn_count #counts the number of turns by counting the number of positions occupied on the board
-    count=0
-    @cells.each do |cell|
-      if cell != " "
-        count +=1
-      end
-    end
-    return count      
+    return self.cells.count {|cell| cell == "X" || cell == "O"}  
   end
 
   def taken?(cell_position) # given the cell number, checks if that position is occupied or not
