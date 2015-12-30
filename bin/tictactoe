@@ -1,3 +1,96 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+  
+  puts "                (         )                     (  "                                                 
+  puts "    (        )\\ )   ( /(      (      (       )\\ )  "                                             
+  puts "    )\\ )    (()/(   )\\())   ( )\\     )\\     (()/(  "                                              
+  puts "  (()/(     /(_)) ((_)\    )((_) ((((_)(    /(_))  "                                             
+  puts "   /(_))_  (_))     ((_)  ((_)_   )\\ _ )\\  (_))    "                                            
+  puts "  (_)) __| | |     / _ \\   | _ )  (_)_\\(_) | |     "                                            
+  puts "    | (_ | | |__  | (_) |  | _ \\   / _ \\   | |__   "                                            
+  puts "     \\___| |____|  \\___/   |___/  /_/ \\_\\  |____|  "                                            
+  puts ""
+  puts "               )           *         )       )                   (                      (    "      
+  puts "   *   )   ( /(         (  `     ( /(    ( /(             (     )\\ )           (       )\\ )  " 
+  puts "  ` )  /(   )\\())  (     )\\))(    )\\())   )\\())     (      )\\   (()/(   (       )\\     (()/( "   
+  puts "   ( )(_)) ((_)\\   )\\   ((_)()\\  ((_)\\   ((_)\\      )\\   (((_)   /(_))  )\\   ((((_)(    /(_))" 
+  puts "  (_(_())   _((_) ((_)  (_()((_)   ((_)   _((_)  _ ((_)  )\\___  (_))   ((_)   )\\ _ )\\  (_))  "  
+  puts "  |_   _|  | || | | __| |  \\/  |  / _ \\  | \\| | | | | | ((/ __| | |    | __|  (_)_\\(_) | _ \\ "   
+  puts "    | |    | __ | | _|  | |\\/| | | (_) | | .` | | |_| |  | (__  | |__  | _|    / _ \\   |   / "   
+  puts "    |_|    |_||_| |___| |_|  |_|  \\___/  |_|\\_|  \\___/    \\___| |____| |___|  /_/ \\_\\  |_|_\\ "  
+  puts "            (                                                                 )              "  
+  puts "    *   )   )\\ )     (            *   )     (         (            *   )   ( /(              "   
+  puts "  ` )  /(  (()/(     )\\         ` )  /(     )\\        )\\         ` )  /(   )\\())   (         "  
+  puts "  ( )(_))  /(_))  (((_)   ___   ( )(_)) ((((_)(    (((_)   ___   ( )(_)) ((_)\\    )\\         "  
+  puts "  (_(_())  (_))    )\\___  |___| (_(_())   )\\ _ )\\   )\\___  |___| (_(_())    ((_)  ((_)       "   
+  puts "  |_   _|  |_ _|  ((/ __|       |_   _|   (_)_\\(_) ((/ __|       |_   _|   / _ \\  | __|      "   
+  puts "    | |     | |    | (__          | |      / _ \\    | (__          | |    | (_) | | _|       "   
+  puts "    |_|    |___|    \\___|         |_|     /_/ \\_\\    \\___|         |_|     \\___/  |___|      "  
+                                                                                       
+
+    
+
+puts "Greetings Professor? Would you like to play a game?"
+
+
+
+while true
+  response = gets.chomp.downcase
+  if response == "y" || response.include?("yes")
+    puts "Right now I am learning Tic Tac Toe. Will that be alright?"
+      response = gets.chomp.downcase
+      if response == "y" || response.include?("yes")
+        puts "Excellent. How many players? 0, 1, 2, or 'wargame'?"
+          response = gets.chomp.downcase
+            if response == "0"
+              game = Game.new(Computer.new("X"), Computer.new("O"))
+              game.play
+              break
+            elsif response == "1"
+              rand = (1..2).to_a.sample
+                if rand == 1
+                  puts "You will go first"
+                  game = Game.new(Human.new("X"), Computer.new("O"))
+                  game.play
+                  puts "Goodbye Professor"
+                  break
+                elsif rand == 2
+                  puts "I will go first"
+                  game = Game.new(Computer.new("X"), Human.new("O"))
+                  game.play
+                  puts "Goodbye Professor"
+                  break
+                end
+            elsif response == "2"
+              game = Game.new
+              game.play
+              puts "Goodbye Professor"
+              break
+            elsif response == "wargame"
+                100.times do
+                  game = Game.new(Computer.new("X"), Computer.new("O"))
+                  game.play
+                end
+                puts "Strange game. Out of the 100 games I played only there were only #{Game.all.count} winners and #{100 - Game.all.count} draws."
+                puts "#{Game.all}"
+                puts "Don't you think I should learn something more sensible? Global_ThermoNuclear_War perhaps?"
+                break
+            else
+              puts "That is not a valid choice."
+            end
+      else
+        puts "That is too bad. I don't know any other games."
+        puts "Would you like to play a game?"
+      end
+  elsif response == "n" || response.include?("no")
+    puts "That is too bad. Goodbye Professor."
+    break
+  else
+    puts "That is not a valid choice."
+  end
+
+
+end
+
+
