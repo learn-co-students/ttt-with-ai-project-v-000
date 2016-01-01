@@ -15,12 +15,6 @@ class Game
       @player_2=player_2
    end
   
-   def initialize (player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new) #initializes with two human players and a new game board instance 
-      @player_1=player_1
-      @player_2=player_2
-      @board=board
-   end
-   
    def current_player #determines the current player using turn count from the Board class
       if board.turn_count%2==0
          return player_1
@@ -79,11 +73,14 @@ class Game
    def turn 
       player=current_player #sets the player using the current_player method
       response=player.move(board) #uses the move method from the Human class
-      if !board.valid_move?(response) #uses the valid_move? method from the board class
-         turn
+      until board.valid_move?(response)==true #uses the valid_move? method from the board class
+         puts "invalid input, please follow the rules!"
+         response=player.move(board)
       end
-      board.update(response, player) #updates the board using the board class
-      player=current_player #updates the current player
+      if board.valid_move?(response)==true
+         board.update(response, player) #updates the board using the board class
+         player=current_player #updates the current player
+      end
    end
    
    def play #the play method
@@ -108,7 +105,27 @@ class Game
      end
    end
    
+   #def initialize (player_1=Human.new("X", "player 1"), player_2=Human.new("O", "player 2"), board=Board.new) #initializes with two human players and a new game board instance 
+     # @player_1=player_1
+     # @player_2=player_2
+      #@board=board
+  # end
    
-  
- 
+   def start
+      puts "Hello, How many players are there this wonderful day?"
+      num_of_players=gets.chomp.to_i
+      if num_of_players==2
+         @player_1=Human.new("X", "player 1")
+         @player_2=Human.new("O", "player 2")
+         @board=Board.new
+      end
+      play
+      puts "Would you like to play again?"
+      play_again_response=gets.chomp.downcase
+      if play_again_response=="yes"
+         start
+      else
+         puts "Auf Wiedersehen"
+      end
+   end
 end
