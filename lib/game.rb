@@ -81,13 +81,13 @@ class Game
   end
 
   def turn
-    board.display
     move = current_player.move(current_player.token, board)
     
     if board.valid_move?(move)
       board.update(move, current_player)
     else
       puts "That is not a valid move"
+      board.display
       turn
     end
 
@@ -97,6 +97,7 @@ class Game
 
     while !won? && !draw? 
       puts "It's #{current_player.name}'s turn"
+      board.display
       turn
     end
 

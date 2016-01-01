@@ -31,7 +31,7 @@ require_relative '../config/environment'
 
     
 
-puts "Greetings Professor? Would you like to play a game?"
+puts "Greetings Professor. Would you like to play a game?"
 
 
 
