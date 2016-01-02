@@ -1,3 +1,94 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+ def call 
+puts "**************** Welcome to Tic Tac Toe*****************"
+puts ""
+puts "This is the way that the board is set up"
+puts " 1 | 2 | 3    "
+puts "----------- "
+puts " 4 | 5 | 6    "
+puts "----------- "
+puts " 7 | 8 | 9    "
+puts ""
+puts "When entering in your move, make sure that you know where you are moving to."
+puts ""
+puts ""
+puts "-----------------Let's Get Started!----------------------"
+puts ""
+puts ""
+puts "How many Human Players?(0-2)"
+puts ''
+puts "Enter 'exit' to stop playing"
+answer = gets.strip
+ if answer == "exit"
+    puts "Thanks for playing!"
+    exit
+  end 
+
+while answer.to_i >= 0 && answer.to_i <=2
+case answer.to_i
+  
+  when 2
+    player_1 = Player::Human.new('X')
+    player_2 = Player::Human.new('O')
+    game = Game.new(player_1, player_2)
+    board = Board.new
+    board.display
+    game.play
+    again?
+  
+when 1
+    player_1 = Player::Human.new('X')
+    player_2 = Player::Computer.new('O')
+    game = Game.new(player_1, player_2)
+    board = Board.new
+    board.display
+    game.play
+   again?
+
+when 0
+    player_1 = Player::Computer.new('X')
+    player_2 = Player::Computer.new('O')
+    game = Game.new(player_1, player_2)
+    board = Board.new
+    board.display
+    game.play
+    again?
+  end 
+  end 
+end 
+
+
+def again?
+  puts "Would you like to start another game? Enter (Y/N)"
+  answer = gets.strip.upcase 
+  if answer == "Y"  
+    call
+  elsif answer == "N"
+    exit
+  else
+    puts "That input was not valid"
+    again?
+  end 
+
+end 
+
+call 
+
+
+
+
+
+# player_1= Player::Human.new("X")
+# player_2= Player::Computer.new("O")
+
+# game = Game.new(player_1, player_2)
+
+# board = Board.new
+
+# board.display
+
+
+game.play
