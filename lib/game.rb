@@ -1,13 +1,15 @@
+require 'pry'
 class Game
-   attr_reader :board, :player_1, :player_2
+   attr_reader :board, :player_1, :player_2, :total_ties
+   
    
    WIN_COMBINATIONS=[[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[1,4,7],[0,3,6],[2,5,8]] #defines all of the possible combinations to win
    
-   def board=(board) #defines the board for a game, but is currenlty using the Board class, I think this is wrong
-      @board=[] #i would like to define with a new board class, but that results in an @cells with 9 " " spots and not []
+   def board=(board) 
+      @board=[] 
    end
   
-   def player_1=(player_1) #player_1 and player_2 both are defined, but are not yet descripted
+   def player_1=(player_1) 
       @player_1=player_1
    end
    
@@ -26,8 +28,6 @@ class Game
    def over? #checks if there are any openings on the board
       if !board.full?
          return false
-      elsif won?
-         return true #uses the won method to add to the over method
       else
          return true
       end
@@ -61,10 +61,10 @@ class Game
      WIN_COMBINATIONS.each do |win_combo| #uses the main part of the won? method but a different return value
       if board.cells[win_combo[0]]=="X" &&  board.cells[win_combo[1]]=="X" &&  board.cells[win_combo[2]]=="X" 
          puts "Congratulations X!" 
-         return "X"
+         return "Player 1"
       elsif board.cells[win_combo[0]]=="O" &&  board.cells[win_combo[1]]=="O" &&  board.cells[win_combo[2]]=="O"
          puts "Congratulations O!" 
-         return "O"
+         return "Player 2"
       end
                         end
       return nil #return nil if neither X or O have won
@@ -85,47 +85,72 @@ class Game
    
    def play #the play method
      until over? #checks with an until loop for if the game is over
-      if won?    #checks if the game has been won or is a draw before the turn
-         return winner
-      elsif draw?
-         return draw?
-      end
       turn #is the players turn
       board.display
-      if won?   #again checks if the game has been won or is a draw
-         return winner
-      elsif draw?
-         return draw?
-      end
      end
      if won? #is a catch for if the until loop says the game is over before entering the loop, these will declare the winner or a draw   
          return winner
-     elsif draw?
-         return draw?
+     elsif draw? 
+         @total_ties+=1
      end
    end
    
-   #def initialize (player_1=Human.new("X", "player 1"), player_2=Human.new("O", "player 2"), board=Board.new) #initializes with two human players and a new game board instance 
-     # @player_1=player_1
-     # @player_2=player_2
-      #@board=board
-  # end
+   def initialize 
+      @total_ties=0 #initializes the instance variable to keep track of the ties for each Game instance for WARGAMES
+   end
    
-   def start
-      puts "Hello, How many players are there this wonderful day?"
-      num_of_players=gets.chomp.to_i
-      if num_of_players==2
-         @player_1=Human.new("X", "player 1")
-         @player_2=Human.new("O", "player 2")
-         @board=Board.new
+   def wargames
+         @player_1=Computer.new("X", "USA") #initializes a new game each game
+         @player_2=Computer.new("O", "USSR")
+         play_times=0 #keeps track of the amount of times play has been called
+         @total_ties=0
+         until play_times==100 #a loop forcing play to be called 100 times
+            @board=Board.new 
+            play
+            play_times+=1 #counts the number of games played
+         end
+         if total_ties!=100 #if any of the games had a winner, it is nuclear death
+            puts "Out of #{play_times} games, there have been #{@total_ties} draws!"
+            abort("NUCLEAR DEATH! LONG LIVE THE COCKROACHES!")
+         else
+            puts "Out of #{play_times} games, there have been #{@total_ties} draws!"
+            abort("The Cold War Will Continue") #if all games ended in a tie, then the cold war will continue
+         end 
+   end
+   
+   def start #this method controls the actual game
+      puts "Hello, How many human players are there this wonderous day?" #welcome message
+      num_of_players=gets.chomp #response
+      until num_of_players=="0" || num_of_players=="1" || num_of_players=="2"||num_of_players=="WARGAMES" #allowable responses
+         puts "Improper Entry, Please Follow The RULES!" #messages for correction
+         puts "2 players max!"
+         num_of_players=gets.chomp #able to re-enter a number of players
       end
-      play
-      puts "Would you like to play again?"
+      if num_of_players=="2" #for two human players, initializes the game
+         @player_1=Human.new("X", "Pizzeria Uno")
+         @player_2=Human.new("O", "2 Fast 2 Furious")
+         @board=Board.new
+         board.display
+      elsif num_of_players=="1" #for one human player and one computer player, initializes the game
+         @player_1=Human.new("X", "Homo-sapien")
+         @player_2=Computer.new("O", "Wall-E")
+         @board=Board.new
+         puts "prepare for DEFEAT!"
+         board.display
+      elsif num_of_players=="0" #for computer vs computer game, initializes the game
+         @player_1=Computer.new("X", "R2D2")
+         @player_2=Computer.new("O", "C3PO")
+         @board=Board.new
+      elsif num_of_players=="WARGAMES" #for special Wargames mode, 
+         wargames
+      end
+      play #the normal play call for games not done with WARGAMES
+      puts "Would you like to play again?" #asking to play again
       play_again_response=gets.chomp.downcase
       if play_again_response=="yes"
-         start
+         start #restarting the program if you would like to play again
       else
-         puts "Auf Wiedersehen"
+         puts "Auf Wiedersehen" #an exit message if you would not like to play again
       end
    end
 end

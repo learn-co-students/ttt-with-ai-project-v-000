@@ -53,11 +53,10 @@ class Board
         return false #is the catch for invalid input
     end
     
-    !taken?(input) #reverse the response of taken to determine if it is a valid move
+    !taken?(input) #determines if the input is not taken
    end
    
    def update(input, player) #updates the @cells to the token of the player
       @cells[input.to_i-1]=player.token
    end
-     
 end
