@@ -1,6 +1,5 @@
 
-class Computer < Player
-  attr_accessor :move
+class Player::Computer < Player
   attr_reader :token
 
   def move(board)

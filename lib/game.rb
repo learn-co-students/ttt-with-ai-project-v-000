@@ -14,7 +14,7 @@ class Game
   ]
 
 
-  def initialize(player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new)
+  def initialize(player_1=Player::Human.new("X"), player_2=Player::Human.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -66,8 +66,8 @@ class Game
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
     puts "Play again?"
-      a = gets.strip.downcase
-      if a == "y"
+      answer = gets
+      if answer == "y"
         puts "YASSS"
         TTTController.new
       else
