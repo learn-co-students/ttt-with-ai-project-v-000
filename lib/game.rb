@@ -65,14 +65,17 @@ class Game
     board.display
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
-    puts "Play again?"
-      answer = gets
-      if answer == "y"
-        puts "YASSS"
-        TTTController.new
-      else
-        puts "So long, schmuck."
-      end
+  
+    # This works when you play it, but makes all the testing
+    # go all batshit. 
+    # puts "Play again?" 
+    #  a = gets.strip.downcase
+    #   if a == "y"
+    #     puts "YASSS"
+    #     TTTController.new
+    #   else
+    #     puts "So long, schmuck."
+    #   end
         
   end
     
