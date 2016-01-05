@@ -19,6 +19,7 @@ class Game
     @player_2 = player_2
     @board = board
     @turn_count = 0
+
   end
   
 
@@ -48,12 +49,19 @@ class Game
   def turn
     puts "\e[H\e[2J"
     board.display
-    @move = current_player.move(current_player.token)
-    if board.valid_move?(@move)
-      board.update(@move, current_player)
+    if current_player.is_a?(Player::Human) 
+      @move = current_player.move(current_player.token) 
+      if board.valid_move?(@move) 
+        board.update(@move, current_player)
+      else
+        puts "NOPE. Try again, dumbass."
+        sleep 1
+        turn
+      end
     else
-      "invalid"
-      turn
+      @move = current_player.move(board)
+      board.update(@move, current_player)
+      sleep 1
     end
   end
 
@@ -68,14 +76,15 @@ class Game
   
     # This works when you play it, but makes all the testing
     # go all batshit. 
-    # puts "Play again?" 
-    #  a = gets.strip.downcase
-    #   if a == "y"
-    #     puts "YASSS"
-    #     TTTController.new
-    #   else
-    #     puts "So long, schmuck."
-    #   end
+    puts "Play again?" 
+     a = gets.strip.downcase
+      if a == "y"
+        puts "YASSS"
+        TTTController.new
+      else
+        puts "\e[H\e[2J"
+        puts "\n\nSo long, schmuck.\n\n"
+      end
         
   end
     

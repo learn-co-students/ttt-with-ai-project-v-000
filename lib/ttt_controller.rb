@@ -13,15 +13,18 @@ class TTTController
     case action
     when "1"
       puts "One player game"
-      Game.new(player_1=Human.new("X"), player_2=Computer.new("O")).play
+      Game.new(player_1=Player::Human.new("X"), player_2=Player::Computer.new("O")).play
     when "2"
       puts "Two-player game"
       Game.new.play
     when "wargames"
       puts "\e[H\e[2J"
       puts "Matthew Broderick is married to a horse.\n\n\n\n"
+      sleep 3
+      Game.new(player_1=Player::Computer.new("X"), player_2=Player::Computer.new("O")).play
     when "q"
-      puts "So long, schmuck."
+      puts "\e[H\e[2J"
+      puts "\n\nSo long, schmuck.\n\n"
 
     end
   end
