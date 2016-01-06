@@ -77,15 +77,13 @@ class Game
     # This works when you play it, but makes all the testing
     # go all batshit. 
     puts "Play again?" 
-     a = gets.strip.downcase
+      a = gets.strip.downcase
       if a == "y"
-        puts "YASSS"
         TTTController.new
       else
         puts "\e[H\e[2J"
         puts "\n\nSo long, schmuck.\n\n"
-      end
-        
+      end  
   end
     
 

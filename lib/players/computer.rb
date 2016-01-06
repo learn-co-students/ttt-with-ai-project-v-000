@@ -7,7 +7,7 @@ class Player::Computer < Player
   # end
 
   def move(board)
-    computer_move = (1..9).sort_by{rand}.detect{|i| board.valid_move?(i)}.to_s
+    (1..9).sort_by{rand}.detect{|i| board.valid_move?(i)}.to_s
   end
 
 

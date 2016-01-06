@@ -20,7 +20,7 @@ class TTTController
     when "wargames"
       puts "\e[H\e[2J"
       puts "Matthew Broderick is married to a horse.\n\n\n\n"
-      sleep 3
+      sleep 1
       Game.new(player_1=Player::Computer.new("X"), player_2=Player::Computer.new("O")).play
     when "q"
       puts "\e[H\e[2J"
