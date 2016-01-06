@@ -2,10 +2,6 @@ require 'pry'
 
 class Player::Computer < Player
 
-  #CORNER = [1,3,7,9]
-  #SIDE = [2,4,6,8]
-  #MIDDLE = [5]
-
   def win(position,board)
     win = Game::WIN_COMBINATIONS.any? do |combo|
       combo.all? do |x| 
@@ -40,6 +36,7 @@ class Player::Computer < Player
     fork.count(true) == 2 && board.valid_move?(position) ? position : nil
   end
 
+  #block_fork needs work
   def block_fork(position,board)
     block_fork = Game::WIN_COMBINATIONS.map do |combo|
       setup = combo.map do |x| 
