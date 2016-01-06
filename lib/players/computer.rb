@@ -2,6 +2,18 @@ require 'pry'
 
 class Player::Computer < Player
 
+  def move(board) 
+    move = 0
+    move =  side(board) if side(board) != nil
+    move =  corner(board) if corner(board) != nil
+    move =  center(board) if center(board) != nil
+    1.upto(9) {|i| move =  fork(i,board) if fork(i,board) != nil}
+    1.upto(9) {|i| move =  block(i,board) if block(i,board) != nil}
+    1.upto(9) {|i| move = win(i,board) if win(i,board) != nil}
+    puts "Computer Moves to position #{move}"
+    move.to_s  
+  end
+
   def win(position,board)
     win = Game::WIN_COMBINATIONS.any? do |combo|
       combo.all? do |x| 
@@ -67,17 +79,6 @@ class Player::Computer < Player
     sides.find {|side| board.valid_move?(side)} 
   end
 
-  def move(board) 
-    move = 0
-    move =  side(board) if side(board) != nil
-    move =  corner(board) if corner(board) != nil
-    move =  center(board) if center(board) != nil
-    1.upto(9) {|i| move =  fork(i,board) if fork(i,board) != nil}
-    1.upto(9) {|i| move =  block(i,board) if block(i,board) != nil}
-    1.upto(9) {|i| move = win(i,board) if win(i,board) != nil}
-    puts "Computer Moves to position #{move}"
-    move.to_s  
-  end
 
   def opponent_token
     token == "X" ? "O" : "X"
