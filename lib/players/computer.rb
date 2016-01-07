@@ -6,7 +6,7 @@ class Player::Computer < Player
   def initialize(token)
 		@token = token
     @type = :cpu
-    puts "CPU #{@token} Difficulty level?(0-3) ## 0: Candy from a baby ## 1: Easy ## 2: Intermediate ## 3: Impossible"
+    puts "CPU #{@token} Difficulty level?(0-4) ## 0: Candy from a baby ## 1: Easy ## 2: Intermediate ## 3: Impossible ## 4: HAHAHAHA"
     @difficulty=gets.chomp.strip.to_i
 	end
 
@@ -35,6 +35,8 @@ class Player::Computer < Player
     move_optimality_arr=[]
     #raise 'stop here'
     possible_moves_board_array.each{|board| move_optimality_arr << ai(board, depth, false) }
+    #puts move_optimality_arr.to_s
+
     best_option = index_of_max(move_optimality_arr)
     possible_moves[best_option]
   end
