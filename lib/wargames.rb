@@ -1,4 +1,6 @@
 class Wargames < Game
+  attr_accessor :games_played, :wins, :cat_counter, :wins_possible
+
 
   CORNERS = [1, 3, 7, 9]
 
@@ -7,21 +9,23 @@ class Wargames < Game
     @player_2 = player_2
     @board = board
     @turn_count = 0
-
+    @games_played = 0  
+    @cat_counter = 0 
+    possible_wins
   end
 
 
   def ai_move(board)
 
-    # if board.turn_count == 0
+    if board.turn_count == 0
     # binding.pry
-    #   @move = current_player.move(board)
-    if center_open? 
+      @move = current_player.move(board)
+    elsif center_open? 
       # binding.pry
       @move = "5"
     elsif danger_zone? 
       # binding.pry
-      @move = block
+      @move = block_win
     # elsif win_now?
       # binding.pry
     #   @move = @winner
@@ -32,41 +36,42 @@ class Wargames < Game
     
   end
 
-
-  def win_now?
-    @poss_winner = @dz_array.collect{|i| 
-      @board.cells[i] == current_player.token}
-    @poss_winner.size == 2 ? winner : false
-
-  end
-
-  def winner
+  def win_move
     @dz_array.select{|i| @board.cells[i] == " "}
   end
 
 
   def danger_zone?
-    @dz_array = WIN_COMBINATIONS.detect{|a| 
-      a.select{|i| @board.cells[i] !=" "}.size==2
-    }
+    # binding.pry
+    @dz_array = @possible_wins.detect{|a| 
+      a.select{|i| @board.cells[i] !=" "}.size==2}
     if @dz_array == nil
       return false
-    else
+
+    else 
       case @dz_array.select{|i| @board.cells[i] == current_player.token}.size
       when 2
-        win_now? 
+        # binding.pry
+        win_move 
       when 1 
-        WIN_COMBINATIONS.delete(@dz_array)
-        return false
+        @possible_wins.delete(@dz_array)
+        danger_zone?
       when 0
+        @possible_wins.delete(@dz_array)
         return true
       end
     end
     
-
   end
 
-  def block
+  
+  def possible_wins
+    @possible_wins = WIN_COMBINATIONS.select{|a|
+      a.select{|i| @board.cells[i] == " "}.size >= 2}
+  end
+    
+
+  def block_win
     @dz_array.detect{|i| @board.cells[i] == " "} + 1
   end
 
@@ -79,25 +84,61 @@ class Wargames < Game
     @board.cells[4] == " "
   end
 
+ 
+
+  def scoreboard
+    puts "Games: #{games_played}"
+    puts "WINS: \n---------\n"
+    # puts "X: #{player_1.wins}, O: #{player_2.wins}"
+    puts "CAT: #{cat_counter}\n\n"
+  end
+
+  def endgame
+    board.reset!
+    possible_wins
+    scoreboard
+    # sleep 1
+  end
+
+  def wins=(player)
+    win_counter = player.wins + 1
+    binding.pry
+  end
 
   def turn
     puts "\e[H\e[2J"
+    # puts "POSSIBLE WINS: #{@possible_wins.size}"
     @board.display
     ai_move(@board)
     @board.update(@move, current_player)
-    won?
-    sleep 1
+    # won?
+    # sleep 1
   end
 
   def play
-    until over? 
-      turn
+    until @games_played == 100
+      until over? 
+        turn
+      end
+      puts "\e[H\e[2J" 
+      board.display
+      @games_played += 1 
+      if won?
+        # binding.pry
+        wins=(current_player)
+        puts "Congratulations #{winner}!" 
+        endgame
+      elsif draw?
+        @cat_counter += 1
+        puts "Cats game!"
+        endgame
+  # binding.pry
+        # play
+      end
+      play
     end
-    puts "\e[H\e[2J" 
-    board.display
-    puts "Congratulations #{winner}!" if won?
-    puts "Cats Game!" if draw?
-   
+    # scoreboard
+
   end
 
 end
