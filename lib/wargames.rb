@@ -129,6 +129,7 @@ class Wargames < Game
         # binding.pry
         puts "Congratulations #{winner}!" 
         endgame
+        
       elsif draw?
         @cat_counter += 1
         puts "Cats game!"
