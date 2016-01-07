@@ -88,30 +88,29 @@ class Wargames < Game
 
   def scoreboard
     puts "Games: #{games_played}"
-    puts "WINS: \n---------\n"
-    # puts "X: #{player_1.wins}, O: #{player_2.wins}"
+    puts "WINS: "
+    puts "X: #{player_1.wins}, O: #{player_2.wins} \n---------\n"
     puts "CAT: #{cat_counter}\n\n"
+    # binding.pry
   end
 
   def endgame
     board.reset!
     possible_wins
     scoreboard
+    # [player_1, player_2].each{|p| p.wins = 0}
     # sleep 1
   end
 
-  def wins=(player)
-    win_counter = player.wins + 1
-    binding.pry
-  end
+
 
   def turn
-    puts "\e[H\e[2J"
+    # puts "\e[H\e[2J"
     # puts "POSSIBLE WINS: #{@possible_wins.size}"
     @board.display
     ai_move(@board)
     @board.update(@move, current_player)
-    # won?
+    won?
     # sleep 1
   end
 
@@ -120,12 +119,14 @@ class Wargames < Game
       until over? 
         turn
       end
-      puts "\e[H\e[2J" 
+      # puts "\e[H\e[2J" 
       board.display
       @games_played += 1 
       if won?
         # binding.pry
-        wins=(current_player)
+        [player_2, player_1].detect{|p| p.token == winner}.wins += 1
+        # current_player.wins += 1
+        # binding.pry
         puts "Congratulations #{winner}!" 
         endgame
       elsif draw?
@@ -135,8 +136,10 @@ class Wargames < Game
   # binding.pry
         # play
       end
+      # binding.pry
       play
     end
+    # puts "\e[H\e[2J"
     # scoreboard
 
   end
