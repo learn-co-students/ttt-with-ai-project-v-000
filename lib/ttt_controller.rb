@@ -18,10 +18,11 @@ class TTTController
       puts "Two-player game"
       Game.new.play
     when "wargames"
-      puts "\e[H\e[2J"
-      puts "Matthew Broderick is married to a horse.\n\n\n\n"
-      sleep 1
-      Game.new(player_1=Player::Computer.new("X"), player_2=Player::Computer.new("O")).play
+      Wargames.new.play
+      # puts "\e[H\e[2J"
+      # puts "Matthew Broderick is married to a horse.\n\n\n\n"
+      # sleep 1
+      # Game.new(player_1=Player::Computer.new("X"), player_2=Player::Computer.new("O")).play
     when "q"
       puts "\e[H\e[2J"
       puts "\n\nSo long, schmuck.\n\n"
