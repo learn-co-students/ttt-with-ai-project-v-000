@@ -72,7 +72,7 @@ class Wargames < Game
 
      
   def corner
-    CORNERS.detect{|i| @board.cells[i-1] == " "}
+    CORNERS.sort_by{rand}.detect{|i| @board.cells[i-1] == " "}
   end
 
   def center_open?
@@ -86,7 +86,7 @@ class Wargames < Game
     ai_move(@board)
     @board.update(@move, current_player)
     won?
-    # sleep 1
+    sleep 1
   end
 
   def play
