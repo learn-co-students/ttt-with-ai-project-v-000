@@ -81,6 +81,26 @@ class Game
     puts "Play again!"
   end
 
+  def human_vs_computer
+    response = ""
+      until response == 'human' || response == 'computer'
+      puts "Who goes first? 'Human' or 'Computer'?"
+      response = gets.strip.downcase          
+        case response 
+        when "human"  
+          game = Game.new(Human.new("X"), Computer.new("O"), board = Board.new)
+          puts "You will be 'X'."
+        when "computer"
+          game = Game.new(Computer.new("X"), Human.new("O"), board = Board.new)
+          puts "The computer will be 'X'."
+        else
+          puts "Please choose 'human' or 'computer'."
+        end
+      end
+      game.play
+      play_again?
+  end
+
   def start
     input = nil
     while input != 4
@@ -97,10 +117,7 @@ class Game
           game.play
           play_again?
         when 2
-          game = Game.new(Human.new("X"), Computer.new("O"), board = Board.new)
-          puts "Player 1 will be 'X'."
-          game.play
-          play_again?
+          human_vs_computer
         when 3
           game = Game.new(Human.new("X"), Human.new("O"), board = Board.new)
           puts "Player 1 will be 'X'."
