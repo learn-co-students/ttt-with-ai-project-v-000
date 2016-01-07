@@ -3,10 +3,10 @@ require 'pry'
 class Player::Computer < Player
   #not the best 
   def move(board)
-    move = 0
-    move =  side(board) unless side(board).nil?
-    move =  corner(board) unless corner(board).nil?
-    move =  center(board) unless center(board).nil?
+    move = side(board) unless side(board).nil?
+    move = corner(board) unless corner(board).nil?
+    move = center(board) unless center(board).nil?
+    move = block_fork(board) unless block_fork(board).nil?
     1.upto(9) { |i| move =  fork(i, board) unless fork(i, board).nil? }
     1.upto(9) { |i| move =  block(i, board) unless block(i, board).nil? }
     1.upto(9) { |i| move = win(i, board) unless win(i, board).nil? }
@@ -48,21 +48,17 @@ class Player::Computer < Player
     fork.count(true) == 2 && board.valid_move?(position) ? position : nil
   end
 
-  #block_fork needs work 
-  def block_fork(position, board)
-    block_fork = Game::WIN_COMBINATIONS.map do |combo|
-      setup = combo.map do |x|
-        if board.cells[x] == opponent_token || x == position - 1
-          true
-        elsif board.cells[x] == " "
-          " "
-        else
-          token
-        end
-      end
-      setup.count(true) == 2 && setup.count(" ") == 1 ? true : false
+  #block_fork hard coded needs work 
+  def block_fork(board)
+    if board.cells[0] == opponent_token && board.cells[8] == opponent_token
+      return 2
     end
-    block_fork.count(true) == 2 && board.valid_move?(position) ? position : nil
+    if board.cells[2] == opponent_token && board.cells[6] == opponent_token
+      return 2
+    end
+    if board.cells[5] == opponent_token && board.cells[7] == opponent_token
+      return 3
+    end
   end
 
   def center(board)
