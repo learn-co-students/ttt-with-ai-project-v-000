@@ -3,7 +3,7 @@ require 'pry'
 class Player::Computer < Player
   #not the best 
   def move(board)
-    move = side(board) unless side(board).nil?
+    move = side(board)
     move = corner(board) unless corner(board).nil?
     move = center(board) unless center(board).nil?
     move = block_fork(board) unless block_fork(board).nil?
