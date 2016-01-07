@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-puts("1 or 2 Player mode? (1/2)")
+puts("0, 1 or 2 Player mode? (0/1/2)")
 mode = gets.chomp.strip
 if mode=="2"
   game=Game.new
