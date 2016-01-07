@@ -1,7 +1,3 @@
-require 'pry'
-require_relative "./players/human.rb"
-require_relative "./board.rb"
-
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -56,10 +52,14 @@ class Game
   end
 
   def turn
+    puts " "
+    puts "It's your turn, Player '#{current_player.token}':"
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
     else
+      puts "That is not a valid move. Choose again."
       turn
     end
   end
@@ -73,6 +73,45 @@ class Game
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cats Game!"
+    end
+  end
+
+  def play_again?
+    puts " "
+    puts "Play again!"
+  end
+
+  def start
+    input = nil
+    while input != 4
+      puts "How would you like to play? Please select a number:"
+      puts "1. computer vs. computer"
+      puts "2. human vs. computer"
+      puts "3. human vs. human"
+      puts " "
+      puts "4. quit"
+      input = gets.strip.to_i
+      case input
+        when 1
+          game = Game.new(Computer.new("X"), Computer.new("O"), board = Board.new)
+          game.play
+          play_again?
+        when 2
+          game = Game.new(Human.new("X"), Computer.new("O"), board = Board.new)
+          puts "Player 1 will be 'X'."
+          game.play
+          play_again?
+        when 3
+          game = Game.new(Human.new("X"), Human.new("O"), board = Board.new)
+          puts "Player 1 will be 'X'."
+          puts "Player 2 will be 'O'."
+          game.play
+          play_again?
+        when 4
+          puts "Thanks for playing!"
+        else
+          puts "That's an invalid choice."
+      end
     end
   end
 end
