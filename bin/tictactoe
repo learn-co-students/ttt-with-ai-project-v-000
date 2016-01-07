@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts 'Welcome to TicTacToe'
+
+players = ''
+first = ''
+until players == '0' || players == '1' || players == '2'
+  puts 'Please enter number of 0,1 or 2 player(s)'
+  players = gets.strip
+end
+
+if players == '1'
+  puts 'Would you like to go first? (Y/N)'
+  first = gets.strip.upcase
+  until first == 'Y' || first == 'N'
+    puts 'Please enter Y or N'
+    first = gets.strip.upcase
+  end
+end
+
+if players == '0'
+  Game.new(Player::Computer.new('X'), Player::Computer.new('O')).play
+elsif players == '2'
+  Game.new(Player::Human.new('X'), Player::Human.new('O')).play
+elsif players == '1' && first == 'Y'
+  Game.new(Player::Human.new('X'), Player::Computer.new('O')).play
+else
+  Game.new(Player::Computer.new('X'), Player::Human.new('O')).play
+end
