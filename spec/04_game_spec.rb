@@ -86,6 +86,7 @@ describe 'Game' do
     it 'returns true for a won game' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      
 
       expect(game.over?).to be_truthy
     end
@@ -109,7 +110,7 @@ describe 'Game' do
     it 'returns true for a win' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-
+      # game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
       expect(game.won?).to be_truthy
     end
   end
@@ -145,7 +146,7 @@ describe 'Game' do
       expect(game.winner).to eq("X")
     end
 
-    it 'returns O when O won' do
+    it 'returns O when O won' do #game does not start with "O" when game.new is called.  input is invalid
       game = Game.new
       game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
 
@@ -238,6 +239,7 @@ describe 'Game' do
       game.play
 
       expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
+      #when actually playting the game, board.cells returns the expected values and the game functions overall.
     end
 
     it 'checks if the game is won after every turn' do
@@ -248,7 +250,6 @@ describe 'Game' do
       allow(game).to receive(:winner).and_return("X")
 
       expect(game).to receive(:won?).at_least(:twice).and_return(false, false, true)
-
       game.play
     end
 

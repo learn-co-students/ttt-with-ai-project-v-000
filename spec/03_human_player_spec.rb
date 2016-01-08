@@ -7,12 +7,13 @@ describe 'Player::Human' do
 
   describe '#move' do
     it 'asks the user for input and returns it' do
-      human = Player::Human.new("X")
+      # human = Game.new.player_1 #modified    me changing this didn't fix it
+      human = Player::Human.new("X") #original
       allow($stdout).to receive(:puts)
 
-      expect(human).to receive(:gets).and_return("1")
+      expect(human).to receive(:gets).and_return("1") 
 
-      expect(human.move([])).to eq("1")
+      expect(human.move([])).to eq("1") #why is it passing in an empty array
     end
   end
 end

@@ -1,3 +1,9 @@
+# require_relative "./player.rb"
+# require_relative "./players/human.rb"
+# require_relative "./players/computer.rb"
+# require_relative "./game.rb"
+require 'pry'
+
 class Board
 	attr_accessor :cells
 	def initialize
@@ -20,10 +26,12 @@ class Board
 		cells[user_input_string.chomp.to_i - 1] # user is entering 1-9.  posiitons are 0-8
 	end
 
-	def update(position_arg, player_object) 
-	#update board when player makes a move
-		#need a player object to complete method
-		#call token on player
+	def update(position_arg, player_object)
+		if valid_move?(position_arg)  #added to try and fix human#move spec
+			cells[position_arg.chomp.to_i - 1] = player_object.token
+		else
+			nil
+		end
 	end
 
 	def full?
@@ -34,7 +42,8 @@ class Board
 		end
 	end
 
-	def turn_count
+	def turn_count #ahh crap. i think this doesn't actually change anything.  that is why i thought i had an error.
+		#well back to the drawing board
 		count = 0
 		cells.each do |cell|
 			unless cell.strip.empty?
