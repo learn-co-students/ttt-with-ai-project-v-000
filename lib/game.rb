@@ -23,8 +23,7 @@ class Game
     	self.board = board
     end
 
-    def current_player #this seems broken
-    	#lets make it not rely on other methods
+    def current_player
     	x_count = board.cells.select {|place| place == "X"}.count
     	o_count = board.cells.select {|place| place == "O"}.count
 
@@ -67,10 +66,10 @@ class Game
     		combo << self.board.cells[combination[1]]
     		combo << self.board.cells[combination[2]]
 
-    		if combo.all? {|f| f == 'X'}
+    		if combo.all? {|letter| letter == 'X'}
     			won = true
     			break
-    		elsif combo.all? {|f| f =='O'}
+    		elsif combo.all? {|letter| letter =='O'}
     			won = true
     			break    			
     		end
@@ -88,50 +87,48 @@ class Game
     end
 
     def winner #refactor
- 		won = nil
+ 		winner = nil
     	WIN_COMBINATIONS.each do |combination|
     		combo = []
     		combo << self.board.cells[combination[0]]
     		combo << self.board.cells[combination[1]]
     		combo << self.board.cells[combination[2]]
 
-    		if combo.all? {|f| f == 'X'}
-    			won = "X"
+    		if combo.all? {|letter| letter == 'X'}
+    			winner = "X"
     			break
-    		elsif combo.all? {|f| f =='O'}
-    			won = 'O'
+    		elsif combo.all? {|letter| letter =='O'}
+    			winner = 'O'
     			break    			
     		end
     	end
-    	won   		
+    	winner   		
     end
 
     def turn
-    	turny_2_count = 0
-    	y = nil
-    	while y == nil && turny_2_count < 5
+    	update = nil
+        invalid_input_count = 0
+    	while update == nil && invalid_input_count < 5
     		puts "Please enter 1-9 to make a move"
-    		a = current_player.move(board) #can't just call input from here.
-    		y = board.update(a, current_player)
-			turny_2_count += 1
+    		position = current_player.move(board) 
+    		update = board.update(position, current_player)
+			invalid_input_count += 1
 	    end
 	    draw?
 	    board.display
     end
 
     def play
-    	turny_count = 0
-	    	while !over? && !won? && turny_count < 15 
-	   # 		draw? #this really shouldn't be here, but is only required for test
-	    		turny_count += 1
-	    		turn
-	    	end
-	    	#over might not be doing what is expected because of weird test input
-	    	if won? 
-	    			puts "Congratulations #{winner}!"
-	    		elsif draw?
-	    			puts "Cats Game!"	    			
-	    	end
+    	turn_count = 0
+    	while !over? && !won? && turn_count < 15 
+    		turn_count += 1
+    		turn
+    	end
+    	if won? 
+    		puts "Congratulations #{winner}!"
+    	elsif draw?
+    		puts "Cats Game!"	    			
+    	end
     end
 
     def self.wargames
@@ -142,13 +139,8 @@ class Game
     			@@win_count += 1
     		end
     	end
-
     	puts "a strange game, the only winning move is not to play. How about a nice game of chess win count: #{@@win_count}"
     end
 
 end
-
-# a = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O")) #using O as the computer player, O played and then didn't make a move
-
-# a.play
 
