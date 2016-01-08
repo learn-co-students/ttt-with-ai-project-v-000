@@ -15,7 +15,7 @@ class Wargames < Game
   end
 
   def play
-    until @games_played == 100
+    until @games_played == 10
       until over? 
         turn
       end
@@ -30,26 +30,29 @@ class Wargames < Game
 
   def turn
     @board.display
-    ai_move(@board)
+    @move = ai_move(@board)
     @board.update(@move, current_player)
+    sleep 1
   end
 
   def endgame(result)
-    board.display
+    # board.display
     case result
       when "won"
         [player_2, player_1].detect{|p| p.token == winner}.wins += 1
         # current_player.wins += 1
         # binding.pry
+        scoreboard
         puts "Congratulations #{winner}!"
         
       when "draw"
         @cat_counter += 1
+        scoreboard
         puts "Cats game!"
         
       end
-    scoreboard
-    # sleep 1
+    
+    sleep 1
     board.reset!
     possible_wins
   end
@@ -58,10 +61,10 @@ class Wargames < Game
 
     if board.turn_count == 0
     # binding.pry
-      @move = current_player.move(board)
+      current_player.move(board)
     elsif center_open? 
       # binding.pry
-      @move = "5"
+      5
     else
       danger_zone? || strategery(current_player)
     end
@@ -78,13 +81,13 @@ class Wargames < Game
       case @dz_array.select{|i| @board.cells[i] == current_player.token}.size
       when 2
         # binding.pry
-        @move = win_move 
+        win_move 
       when 1 
         @possible_wins.delete(@dz_array)
         danger_zone?
       when 0
         @possible_wins.delete(@dz_array)
-        @move = block_win
+        block_win
       end
     end
   end
@@ -97,7 +100,7 @@ class Wargames < Game
     if schwifty.empty?
       corner(CORNERS) || player.move(board)
     else
-      corner(schwifty.sort_by{rand}.collect{|a| a & CORNERS}.flatten) || schwifty.select{|a| a.select{|i| @board.cells[i] == " "}}
+      corner(schwifty.collect{|a| a & CORNERS}.flatten) || schwifty.flatten.detect{|i| @board.cells[i] = " "} + 1
       # binding.pry
     end
 # binding.pry
@@ -121,8 +124,9 @@ class Wargames < Game
 
   def corner(moves)
     moves.empty? ? false : @corner = moves.sort_by{rand}.detect{|i| @board.cells[i] == " "}
-    @corner == nil ? false : @corner + 1
-     
+# binding.pry
+    @corner == nil ? false : @corner += 1
+    @corner     
   end
 
   def center_open?
