@@ -48,10 +48,17 @@ class Game
     end
 
     def over?
-		board.full? || won?    		
+		board.full? || won?
     end
 
     def won? #refactor?
+        # winner = false
+        # win_combinations = WIN_COMBINATIONS
+        # cells=@board.cells
+        # winner = win_combinations.detect do |combos|
+        #   cells[combos[0]]==cells[combos[1]] && cells[combos[1]]==cells[combos[2]] && cells[combos[1]]!=" "
+        # end
+        # winner
     	won = false
 
     	WIN_COMBINATIONS.each do |combination|
@@ -69,13 +76,11 @@ class Game
     		end
     	end
     	won
-
-
     end
 
 
     def draw?
-    	if won? == false && over? == true
+    	if won? == false && board.full? == true
     		true
     	else
     		false
@@ -110,13 +115,14 @@ class Game
     		y = board.update(a, current_player)
 			turny_2_count += 1
 	    end
+	    draw?
 	    board.display
     end
 
     def play
     	turny_count = 0
 	    	while !over? && !won? && turny_count < 15 
-	    		draw? #this really shouldn't be here, but is only required for test
+	   # 		draw? #this really shouldn't be here, but is only required for test
 	    		turny_count += 1
 	    		turn
 	    	end
