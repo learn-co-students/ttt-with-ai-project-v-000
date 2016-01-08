@@ -1,3 +1,77 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+def human_vs_computer #inpuse have to be in uppercase
+	puts "would you like to be first...yes or no"
+	order = gets.chomp.downcase
+	puts "Would you like to be X or O"
+	p1_character = gets.chomp.upcase
+
+	if p1_character == "X"
+		p2_character = "O"
+	else
+		p2_character = "X"
+	end
+	if order == "yes"
+		player_1 = Human.new(p1_character)
+		player_2 = Computer.new(p2_character)
+	else
+		player_2 = Human.new(p1_character)
+		player_1 = Computer.new(p2_character)
+	end
+
+	game = Game.new(player_1, player_2)
+	game.play
+end
+
+def computer_vs_computer
+	puts "what charcter would you like to go first... X or O, or Matthew Broderick?"
+	p1_character = gets.chomp.upcase
+	if p1_character == "X"
+		p2_character = "O"
+	elsif p1_character == "O"
+		p2_character = "X"
+	else
+        w = "war"
+	end
+	if w == "war"
+		Game.wargames
+	else
+		player_1 = Computer.new(p1_character)
+		player_2 = Computer.new(p2_character)
+		game = Game.new(player_1, player_2)
+		game.play
+	end
+end
+
+def human_vs_human
+	puts "what charcter would you like to go first... X or O"
+	p1_character = gets.chomp.upcase
+	if p1_character == "X"
+		p2_character = "O"
+	else
+		p2_character = "X"
+	end
+	player_1 = Human.new(p1_character)
+	player_2 = Human.new(p2_character)
+	game = Game.new(player_1, player_2)
+	game.play
+end
+
+
+puts "Welcome!"
+puts "Press 1 if you would like to play against the computer"
+puts "2 if you are playing with a human or superintelligent being friend"
+puts "or 0 if you would like to watch me play myself"
+
+game_type = gets.chomp
+
+
+
+if game_type == "1"
+	human_vs_computer
+elsif game_type == "0"
+	computer_vs_computer
+else
+	human_vs_human
+end

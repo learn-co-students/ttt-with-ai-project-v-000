@@ -2,6 +2,7 @@ require_relative "../config/environment.rb"
 
 RSpec.configure do |config|
   config.order = :default
+  # config.fail_fast = true
 end
 
 RSpec::Matchers.define :include_array do |expected|

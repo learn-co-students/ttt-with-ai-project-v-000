@@ -86,6 +86,7 @@ describe 'Game' do
     it 'returns true for a won game' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      
 
       expect(game.over?).to be_truthy
     end
@@ -109,7 +110,7 @@ describe 'Game' do
     it 'returns true for a win' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-
+      # game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
       expect(game.won?).to be_truthy
     end
   end
@@ -145,7 +146,7 @@ describe 'Game' do
       expect(game.winner).to eq("X")
     end
 
-    it 'returns O when O won' do
+    it 'returns O when O won' do #game does not start with "O" when game.new is called.  input is invalid
       game = Game.new
       game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
 
@@ -230,13 +231,13 @@ describe 'Game' do
       game = Game.new
 
       allow($stdout).to receive(:puts)
-      allow(game.player_1).to receive(:gets).and_return("1", "2")
+      allow(game.player_1).to receive(:gets).and_return("1", "2") #original tests
       allow(game.player_2).to receive(:gets).and_return("4")
 
-      allow(game).to receive(:over?).and_return(false, false, false, true)
+      allow(game).to receive(:over?).and_return(false, false, false, true) #original tests
+      
 
       game.play
-
       expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
 
@@ -248,8 +249,8 @@ describe 'Game' do
       allow(game).to receive(:winner).and_return("X")
 
       expect(game).to receive(:won?).at_least(:twice).and_return(false, false, true)
-
       game.play
+      
     end
 
     it 'checks if the game is draw after every turn' do
@@ -332,6 +333,8 @@ describe 'Game' do
       expect($stdout).to receive(:puts).with("Congratulations X!")
 
       game.play
+      
+
     end
   end
 
