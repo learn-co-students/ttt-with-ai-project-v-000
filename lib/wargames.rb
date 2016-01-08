@@ -19,38 +19,39 @@ class Wargames < Game
       until over? 
         turn
       end
-      board.display
-      @games_played += 1 
-      if won?
-        # binding.pry
-        [player_2, player_1].detect{|p| p.token == winner}.wins += 1
-        # current_player.wins += 1
-        # binding.pry
-        puts "Congratulations #{winner}!" 
-        endgame
-        
-      elsif draw?
-        @cat_counter += 1
-        puts "Cats game!"
-        endgame
-  # binding.pry
-        # play
-      end
-      # binding.pry
+      @games_played += 1
+      endgame("won") if won?
+      endgame("draw") if draw?
       play
     end
-    # puts "\e[H\e[2J"
-    # scoreboard
+    puts "\e[H\e[2J"
+    scoreboard
   end
 
   def turn
-    # puts "\e[H\e[2J"
-    # puts "POSSIBLE WINS: #{@possible_wins.size}"
     @board.display
     ai_move(@board)
     @board.update(@move, current_player)
-    won?
+  end
+
+  def endgame(result)
+    board.display
+    case result
+      when "won"
+        [player_2, player_1].detect{|p| p.token == winner}.wins += 1
+        # current_player.wins += 1
+        # binding.pry
+        puts "Congratulations #{winner}!"
+        
+      when "draw"
+        @cat_counter += 1
+        puts "Cats game!"
+        
+      end
+    scoreboard
     # sleep 1
+    board.reset!
+    possible_wins
   end
 
   def ai_move(board)
@@ -61,18 +62,8 @@ class Wargames < Game
     elsif center_open? 
       # binding.pry
       @move = "5"
-    elsif danger_zone? 
-      # binding.pry
-      @move = block_win
-    # elsif win_now?
-      # binding.pry
-    #   @move = @winner
     else
-      @move = strategery(current_player) 
-      
-    # else
-    #   # binding.pry
-    #   @move = corner || current_player.move(board)
+      danger_zone? || strategery(current_player)
     end
     
   end
@@ -87,13 +78,13 @@ class Wargames < Game
       case @dz_array.select{|i| @board.cells[i] == current_player.token}.size
       when 2
         # binding.pry
-        win_move 
+        @move = win_move 
       when 1 
         @possible_wins.delete(@dz_array)
         danger_zone?
       when 0
         @possible_wins.delete(@dz_array)
-        return true
+        @move = block_win
       end
     end
   end
@@ -102,11 +93,12 @@ class Wargames < Game
     # binding.pry
     schwifty = @possible_wins.select{|a| 
       a.detect{|i| @board.cells[i] == player.token}}
-binding.pry
+# binding.pry
     if schwifty.empty?
       corner(CORNERS) || player.move(board)
     else
-      corner(schwifty.detect{|a| a & CORNERS}) || schwifty.detect{|a| a.detect{|i| @board.cells[i] == " "}}
+      corner(schwifty.sort_by{rand}.collect{|a| a & CORNERS}.flatten) || schwifty.select{|a| a.select{|i| @board.cells[i] == " "}}
+      # binding.pry
     end
 # binding.pry
   end
@@ -127,9 +119,10 @@ binding.pry
     @dz_array.detect{|i| @board.cells[i] == " "} + 1
   end
 
-     
   def corner(moves)
-    moves.sort_by{rand}.detect{|i| @board.cells[i] == " "} + 1
+    moves.empty? ? false : @corner = moves.sort_by{rand}.detect{|i| @board.cells[i] == " "}
+    @corner == nil ? false : @corner + 1
+     
   end
 
   def center_open?
@@ -144,21 +137,4 @@ binding.pry
     # binding.pry
   end
 
-  def endgame
-    board.reset!
-    possible_wins
-    scoreboard
-    # [player_1, player_2].each{|p| p.wins = 0}
-    # sleep 1
-  end
-
-
-
-
-
-
-
 end
-
-### TEST BOARDS ###
-#["X", " ", "X", " ", " ", " ", "X", " ", "X"]
