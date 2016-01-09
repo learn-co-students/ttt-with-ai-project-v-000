@@ -1,7 +1,3 @@
-require 'pry'
-require_relative '../game.rb'
-require_relative '../player.rb'
-require_relative '../board.rb'
 class Computer < Player
   attr_accessor :board
 

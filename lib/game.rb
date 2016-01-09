@@ -103,6 +103,7 @@ class Game
     end
     game.play
     play_again?
+    @@draws = 0
   end
 
   def wargame
@@ -128,6 +129,7 @@ class Game
           game = Game.new(Computer.new("X"), Computer.new("O"), board = Board.new)
           game.play
           play_again?
+          @@draws = 0
         when 2
           human_vs_computer
         when 3
@@ -136,6 +138,7 @@ class Game
           puts "Player 2 will be 'O'."
           game.play
           play_again?
+          @@draws = 0
         when 5
           puts "Thanks for playing!"
         when 4
@@ -144,6 +147,7 @@ class Game
           number.times { wargame }
           puts "**Games played: #{number} ** Games drawn: #{@@draws} ** Games won: #{number-@@draws} **"
           puts " "
+          @@draws = 0
         else
           puts "That's an invalid choice."
       end
