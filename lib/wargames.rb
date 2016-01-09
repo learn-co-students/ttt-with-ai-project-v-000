@@ -15,7 +15,7 @@ class Wargames < Game
   end
 
   def play
-    until @games_played == 10
+    until @games_played == 100
       until over? 
         turn
       end
@@ -31,9 +31,102 @@ class Wargames < Game
   def turn
     @board.display
     @move = ai_move(@board)
-    @board.update(@move, current_player)
-    sleep 1
+    @board.ai_update(@move, current_player)
+    # sleep 1
+    
   end
+
+  def ai_move(board)
+
+    if board.turn_count == 0
+    # binding.pry
+      current_player.move(board).to_i - 1
+    elsif center_open? 
+      # binding.pry
+      4
+    else
+      danger_zone? || strategery(current_player)
+    end
+    
+  end
+
+  def danger_zone?
+    # binding.pry
+    @dz_array = @wins_available.detect{|a| 
+      a.select{|i| @board.cells[i] !=" "}.size==2}
+    if @dz_array == nil
+      return false
+    else 
+      case @dz_array.select{|i| @board.cells[i] == current_player.token}.size
+      when 2
+        # binding.pry
+        win_move 
+      when 1 
+        @wins_available.delete(@dz_array)
+        danger_zone?
+      when 0
+        @wins_available.delete(@dz_array)
+        block_win
+      end
+    end
+  end
+
+  def strategery(player)
+    # get_schwifty
+    if @wins_available.empty? 
+      if corner_open?
+        corner(CORNERS) 
+      else
+        player.move(board).to_i - 1
+      end
+    # elsif schwifty.collect{|a| a & CORNERS}.flatten.empty? || !corner_open?
+    #   schwifty.flatten.detect{|i| @board.cells[i] = " "}
+    else
+      get_schwifty(player)
+    end
+# binding.pry
+  end
+
+  def get_schwifty(player)
+    @schwifty = @wins_available.select{|a| 
+      a.detect{|i| @board.cells[i] == player.token}}.flatten.uniq
+    if @schwifty.empty? 
+      player.move(board).to_i - 1
+    elsif (@schwifty & CORNERS).empty?
+      @schwifty.sort_by{rand}.detect{|i| @board.cells[i] == " "}
+    else
+      corner(@schwifty & CORNERS)
+    end
+  end
+
+  def possible_wins
+    @wins_available = WIN_COMBINATIONS.select{|a|
+      a.select{|i| @board.cells[i] == " "}.size >= 2}
+  end
+  
+  def win_move
+    # binding.pry
+    @dz_array.detect{|i| @board.cells[i] == " "} 
+  end
+
+  def block_win
+    @dz_array.detect{|i| @board.cells[i] == " "} 
+  end
+
+  def corner_open?
+    CORNERS.detect{|i| @board.cells[i] == " "}
+  end
+
+  def corner(moves)
+    moves.sort_by{rand}.detect{|i| @board.cells[i] == " "}
+# binding.pry
+  end
+
+  def center_open?
+    @board.cells[4] == " "
+  end
+
+  
 
   def endgame(result)
     # board.display
@@ -52,85 +145,9 @@ class Wargames < Game
         
       end
     
-    sleep 1
+    # sleep 1
     board.reset!
     possible_wins
-  end
-
-  def ai_move(board)
-
-    if board.turn_count == 0
-    # binding.pry
-      current_player.move(board)
-    elsif center_open? 
-      # binding.pry
-      5
-    else
-      danger_zone? || strategery(current_player)
-    end
-    
-  end
-
-  def danger_zone?
-    # binding.pry
-    @dz_array = @possible_wins.detect{|a| 
-      a.select{|i| @board.cells[i] !=" "}.size==2}
-    if @dz_array == nil
-      return false
-    else 
-      case @dz_array.select{|i| @board.cells[i] == current_player.token}.size
-      when 2
-        # binding.pry
-        win_move 
-      when 1 
-        @possible_wins.delete(@dz_array)
-        danger_zone?
-      when 0
-        @possible_wins.delete(@dz_array)
-        block_win
-      end
-    end
-  end
-
-  def strategery(player)
-    # binding.pry
-    schwifty = @possible_wins.select{|a| 
-      a.detect{|i| @board.cells[i] == player.token}}
-# binding.pry
-    if schwifty.empty?
-      corner(CORNERS) || player.move(board)
-    else
-      corner(schwifty.collect{|a| a & CORNERS}.flatten) || schwifty.flatten.detect{|i| @board.cells[i] = " "} + 1
-      # binding.pry
-    end
-# binding.pry
-  end
-
-  def win_move
-    # binding.pry
-    @dz_array.detect{|i| @board.cells[i] == " "} + 1
-  end
-
-  
-  def possible_wins
-    @possible_wins = WIN_COMBINATIONS.select{|a|
-      a.select{|i| @board.cells[i] == " "}.size >= 2}
-  end
-    
-
-  def block_win
-    @dz_array.detect{|i| @board.cells[i] == " "} + 1
-  end
-
-  def corner(moves)
-    moves.empty? ? false : @corner = moves.sort_by{rand}.detect{|i| @board.cells[i] == " "}
-# binding.pry
-    @corner == nil ? false : @corner += 1
-    @corner     
-  end
-
-  def center_open?
-    @board.cells[4] == " "
   end
 
  def scoreboard

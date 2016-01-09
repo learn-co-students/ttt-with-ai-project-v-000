@@ -31,11 +31,16 @@ class Board
   end
 
   def valid_move?(move)
-    (1..9).include?(move.to_i) && !taken?(move)
+    (1..9).include?(move.to_i-1) && !taken?(move)
   end
 
   def update(move, player)
     @cells[move.to_i - 1] = player.token
+    @cells
+  end
+
+  def ai_update(move, player)
+    @cells[move] = player.token
     @cells
   end
 
