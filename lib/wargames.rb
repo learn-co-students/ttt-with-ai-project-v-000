@@ -15,7 +15,7 @@ class Wargames < Game
   end
 
   def play
-    until @games_played == 100
+    until @games_played == 5
       until over? 
         turn
       end
@@ -31,6 +31,7 @@ class Wargames < Game
   def turn
     @board.display
     @move = ai_move(@board)
+# binding.pry
     @board.ai_update(@move, current_player)
     # sleep 1
     
@@ -46,6 +47,7 @@ class Wargames < Game
       4
     else
       danger_zone? || strategery(current_player)
+# binding.pry
     end
     
   end
@@ -63,9 +65,11 @@ class Wargames < Game
         win_move 
       when 1 
         @wins_available.delete(@dz_array)
+        # binding.pry
         danger_zone?
       when 0
         @wins_available.delete(@dz_array)
+        # binding.pry
         block_win
       end
     end
@@ -73,12 +77,11 @@ class Wargames < Game
 
   def strategery(player)
     # get_schwifty
-    if @wins_available.empty? 
-      if corner_open?
-        corner(CORNERS) 
-      else
-        player.move(board).to_i - 1
-      end
+    if @wins_available.empty? && corner_open?
+      corner(CORNERS) 
+      # else
+      #   player.move(board).to_i - 1
+      # end
     # elsif schwifty.collect{|a| a & CORNERS}.flatten.empty? || !corner_open?
     #   schwifty.flatten.detect{|i| @board.cells[i] = " "}
     else
@@ -90,8 +93,21 @@ class Wargames < Game
   def get_schwifty(player)
     @schwifty = @wins_available.select{|a| 
       a.detect{|i| @board.cells[i] == player.token}}.flatten.uniq
+    @unschwifty = @wins_available.select{|a| 
+        a.detect{|i| @board.cells[i] != player.token && " "}}.flatten.uniq
     if @schwifty.empty? 
-      player.move(board).to_i - 1
+      if corner_open?
+        corner(CORNERS)
+      elsif !@unschwifty.empty?
+  # binding.pry
+        @unschwifty.detect{|i| @board.cells[i] == " "}
+  # binding.pry
+      else
+        player.move(board).to_i - 1
+      end
+
+  # binding.pry
+      # player.move(board).to_i - 1 ###THIS LIKELY LOSES THE GAME
     elsif (@schwifty & CORNERS).empty?
       @schwifty.sort_by{rand}.detect{|i| @board.cells[i] == " "}
     else
@@ -114,7 +130,8 @@ class Wargames < Game
   end
 
   def corner_open?
-    CORNERS.detect{|i| @board.cells[i] == " "}
+    CORNERS.collect{|i| @board.cells[i] == " "}.empty? ? false : true 
+# binding.pry
   end
 
   def corner(moves)
