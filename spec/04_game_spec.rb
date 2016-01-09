@@ -17,8 +17,8 @@ describe 'Game' do
   describe '#board' do
     it 'provides access to the board' do
       game = Game.new
-      game.board = []
-      expect(game.board).to eq([])
+      game.cells = []
+      expect(game.cells).to eq([])
     end
   end
 
@@ -50,7 +50,7 @@ describe 'Game' do
 
       expect(game.player_1).to eq(player_1)
       expect(game.player_2).to eq(player_2)
-      expect(game.board).to eq(board)
+      expect(game.cells).to eq(board)
     end
 
     it 'defaults to two human players, X and O, with am empty board' do
@@ -62,14 +62,14 @@ describe 'Game' do
       expect(game.player_2).to be_a(Player::Human)
       expect(game.player_2.token).to eq("O")
 
-      expect(game.board.cells).to match_array(Array.new(9, " "))
+      expect(game.cells.cells).to match_array(Array.new(9, " "))
     end
   end
 
   describe '#current_player' do
     it 'returns the correct player, X, for the third move' do
       game = Game.new
-      game.board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
+      game.cells.cells = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
 
       expect(game.current_player.token).to eq("X")
     end
@@ -78,21 +78,21 @@ describe 'Game' do
   describe '#over?' do
     it 'returns true for a draw' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(game.over?).to be_truthy
     end
 
     it 'returns true for a won game' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
       expect(game.over?).to be_truthy
     end
 
     it 'returns false for an in-progress game' do
       game = Game.new
-      game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
+      game.cells.cells = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
 
       expect(game.over?).to be_falsey
     end
@@ -101,14 +101,14 @@ describe 'Game' do
   describe '#won?' do
     it 'returns false for a draw' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(game.won?).to be_falsey
     end
 
     it 'returns true for a win' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
       expect(game.won?).to be_truthy
     end
@@ -117,21 +117,21 @@ describe 'Game' do
   describe '#draw?' do
     it 'returns true for a draw' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(game.draw?).to be_truthy
     end
 
     it 'returns false for a won game' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
       expect(game.draw?).to be_falsey
     end
 
     it 'returns false for an in-progress game' do
       game = Game.new
-      game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
+      game.cells.cells = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
 
       expect(game.draw?).to be_falsey
     end
@@ -140,21 +140,21 @@ describe 'Game' do
   describe 'winner' do
     it 'returns X when X won' do
       game = Game.new
-      game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
+      game.cells.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
 
       expect(game.winner).to eq("X")
     end
 
     it 'returns O when O won' do
       game = Game.new
-      game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
+      game.cells.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
 
       expect(game.winner).to eq("O")
     end
 
     it 'returns nil when no winner' do
       game = Game.new
-      game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
+      game.cells.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
 
       expect(game.winner).to be_nil
     end
@@ -223,7 +223,7 @@ describe 'Game' do
 
       game.play
 
-      expect(game.board.cells).to eq(["X", " ", " ", " ", " ", " ", " ", " ", " "])
+      expect(game.cells.cells).to eq(["X", " ", " ", " ", " ", " ", " ", " ", " "])
     end
 
     it 'plays the first few turns of the game' do
@@ -237,7 +237,7 @@ describe 'Game' do
 
       game.play
 
-      expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
+      expect(game.cells.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
 
     it 'checks if the game is won after every turn' do
@@ -265,7 +265,7 @@ describe 'Game' do
 
     it 'stops playing if someone has won' do
       game = Game.new
-      game.board.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
+      game.cells.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
 
       allow($stdout).to receive(:puts)
 
@@ -276,7 +276,7 @@ describe 'Game' do
 
     it 'congratulates the winner X' do
       game = Game.new
-      game.board.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
+      game.cells.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
       allow($stdout).to receive(:puts)
 
       expect($stdout).to receive(:puts).with("Congratulations X!")
@@ -286,7 +286,7 @@ describe 'Game' do
 
     it 'congratulates the winner O' do
       game = Game.new
-      game.board.cells = [" ", " ", " ", " ", " ", " ", "O", "O", "O"]
+      game.cells.cells = [" ", " ", " ", " ", " ", " ", "O", "O", "O"]
 
       allow($stdout).to receive(:puts)
 
@@ -297,7 +297,7 @@ describe 'Game' do
 
     it 'stops playing in a draw' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       allow($stdout).to receive(:puts)
 
@@ -308,7 +308,7 @@ describe 'Game' do
 
     it 'prints "Cats Game!" on a draw' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      game.cells.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       allow($stdout).to receive(:puts)
 
