@@ -41,13 +41,16 @@ class Board
     cells[location.to_i-1] != " " && cells[location.to_i-1] != ""
   end
 
+  # def position_taken?(board, location)
+  #   !(board[location].nil? || board[location] == " ")
+  # end
+
   def valid_move?(position)
     position.to_i.between?(1,9) && !taken?(position)
   end
 
-  def update(location, player = 'X')
-    cells[location.to_i-1] = 'X'
-    # TODO: this ain't right yo
+  def update(location, player)
+    cells[location.to_i-1] = player.token
   end
 
 end
