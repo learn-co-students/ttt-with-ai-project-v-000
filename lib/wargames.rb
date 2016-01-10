@@ -15,7 +15,7 @@ class Wargames < Game
   end
 
   def play
-    until @games_played == 5
+    until @games_played == 10000
       until over? 
         turn
       end
@@ -32,16 +32,17 @@ class Wargames < Game
   def turn
     @board.display
     @move = ai_move(@board)
+# binding.pry
     @board.ai_update(@move, current_player)
     # sleep 1
     
   end
 
   def ai_move(board) ##FIRST MOVE IS RANDOM, SECOND IS CENTER OR, IF THAT'S FILLED, A CORNER
-    if board.turn_count == 0
-# binding.pry
-      current_player.move(board).to_i - 1
-    # elsif center_open? 
+  if board.turn_count == 0
+# # binding.pry
+    current_player.move(board).to_i - 1
+    # if center_open? 
   
     #   4
     else
@@ -52,34 +53,35 @@ class Wargames < Game
 
   def danger_zone? ## LOOKS THROUGH WINNING ARRAYS FOR ANY WITH TWO SPOTS MARKED
                    ## --IF AN IMMEDIATE WIN IS AVAILABLE, TAKES THAT
-                   ## --IF OPPONENT WIN IMMINENT, TAKES THAT
+                   ## --IF OPPONENT WIN IMMINENT, BLOCKS THAT
                    ## --IF NEITHER OF THOSE THINGS, DELETES THAT ARRAY, LOOKS FOR ANOTHER
-                   ## --IF THERE ARE NO POTENTIAL WINNERS WITH TWO SPOTS MARKET, HANDS OFF TO
+                   ## --IF THERE ARE NO POTENTIAL WINNERS WITH TWO SPOTS MARKED, HANDS OFF TO
                    ##   #STRATEGERY
 
   # binding.pry 
-    @check = @wins_available.select{|a| 
-      a.select{|i| @board.cells[i] !=" "}.size==2} ##<--ARRAY FROM W_C CONSTANT W/2 SPOTS FILLED
+## W_C ARRAYS W/2 SPOTS TAKEN  
+    @check = @win_combinations.select{|a| a.select{|i| @board.cells[i] !=" "}.size==2} 
     if @check.empty?
       return false
     else 
+
       @dz_array = @check.detect{|a| a.select{|i| @board.cells[i] == current_player.token}}
       case @dz_array.select{|i| @board.cells[i] == current_player.token}.size
       when 2
-  binding.pry  
-        win_move 
+  # binding.pry  
+        win_block 
       when 0   ##<--CHECKS FOR OPPONENT WIN IMMINENT
-  binding.pry       
-        @wins_available.delete(@dz_array)
+  # binding.pry       
+        @win_combinations.delete(@dz_array)
     
-        block_win
+        win_block
       when 1 
-binding.pry  
-        @wins_available.delete(@dz_array) ##<--NOBODY CAN WIN THAT WAY, DELETE IT, LOOK FOR ANOTHER
+# binding.pry  
+        @win_combinations.delete(@dz_array) ##<--NOBODY CAN WIN THAT WAY, DELETE IT, LOOK FOR ANOTHER
     
         danger_zone?
       end
-  binding.pry
+  # binding.pry
     end
   end
 
@@ -100,7 +102,7 @@ binding.pry
 
                          ##   # get_schwifty
   # binding.pry
-    if @wins_available.empty? ##<--NOBODY CAN WIN THIS GAME
+    if @win_combinations.empty? ##<--NOBODY CAN WIN THIS GAME
       if corner_open?
 
         corner(CORNERS) ##<--ULT UNNECESSARY, BUT HERE TO MAKE SURE THE REST WORKS
@@ -119,68 +121,98 @@ binding.pry
   end
 
   def get_schwifty(player)  
-    @poss_danger = @wins_available.select{|a| 
-      a.none?{|i| @board.cells[i] == player.token}} ##<--W_C ARRAY W/O CURR_PLAY TOKEN
-                                                   ## --COULD BE ENTIRELY EMPTY, THOUGH
-    @opp_wins = @poss_danger.select{|a| 
-        a.select{|i| @board.cells[i] == " "}.size==2} ##<--IN CASE NEED IT LATER; COULD BE EMPTY
-   
+    @poss_danger = @win_combinations.select{|a| a.none?{|i| @board.cells[i] == player.token}} ##<--WINS OUT THERE: OTHER GUY'S OR EMPTY WIN_ARRAYS
+                                                   
+    @opp_wins = @poss_danger.select{|a| a.select{|i| @board.cells[i] == " "}.size==2} ##<--ARRAYS OTHER GUY COULD STILL WIN (CALLED ON FILTERED W_C)
+    
+    @my_wins = @win_combinations.select{|a| a.any?{|i| @board.cells[i] == player.token}} ##<--ARRAYS I COULD WIN (CALED ONLY ON FILTERED W_C)
+
+    @contested_spaces = @opp_wins.flatten & @my_wins.flatten ##<--SELF-EXPLANATORY
 # binding.pry
-    if @poss_danger.empty? ##<--IF ANYBODY WINS, IT WON'T BE THE OTHER GUY
-      @good_moves = @wins_available.select{|a| a.select{|i| @board.cells[i] == " "}.size==2}
-      if @good_moves.size > 0 ##<--CHECK TO SEE IF OTHER WINS_AVAIL ARRAYS ARE OPEN OR OURS
-        if center_open ##<--CENTER IS VALUABLE
-          4
-        elsif corner_open?
-          corner(@good_moves.flatten & CORNERS)
-        else
-          @good_moves.detect{|i| @board.cells[i] = " "} ##<--NO WINNING CORNERS OPEN, JUST PICK ONE POT WINNER
-        end
-      else ##<--WINS_AVAIL INCLUDES AT LEAST ONE EMPTY ARRAY
-        if center_open? ##<--THIS PROB NEEDS TO BE ABSTRACTED OUT
-          4
-        elsif corner_open?
-          corner(@wins_available.flatten & CORNERS)
-        else
-          @wins_available.flatten.sort_by{rand}
-        end
+## D_Z SHOULD HAVE FILTERED OUT EVERY ARRAY W/MORE THAN 1 SPOT TAKEN, MEANS NO WINS LEFT
+    if @win_combinations.empty? 
+      if center_open?
+        4
+      elsif corner_open?
+        corner(CORNERS)
+      else
+        current_player.move(board).to_i - 1
       end
-
-          
-
-    elsif @opp_wins.size > 0 ##<--OTHER GUY HAS WINS AVAILABLE, LET'S CHECK THAT
-        if corner_open? 
-          corner(@opp_wins.flatten & CORNERS)
-        else 
-          @opp_wins.flatten.sort_by{rand}.detect{|i| @board.cells[i]==" "}  
+## THERE ARE WINS OUT THERE. CHECK IF I'M THE ONLY ONE W/CLAIM
+    elsif @poss_danger.empty? 
+      if center_open? 
+        4
+  ## ONLY W_C OUT THERE MUST INCLUDE ME (SOME EXTRA CKS HERE, NEEDS TRIMMING)      
+      elsif @my_wins.size > 0 ##<--CHECKS FIRST CASE, PRIORITIZES CORNERS (ELSE TAKE RANDO EDGE)
+        if (@my_wins.flatten & CORNERS).size > 0 && corner_open?
+          corner(@my_wins.flatten & CORNERS)
+        else
+          @my_wins.flatten.sort_by{rand}.detect{|i| @board.cells[i] == " "}
         end
-    else  ##<--THERE ARE WINS OUT THERE, BUT NOT THE OTHER GUY'S, SO LET'S PICK ONE
+      else ##<--3rd CASE (NO W_C AVAIL, JUST PLAYING OUT THE STRING)
+        current_player.move(board).to_i - 1 
+      end
+## EITHER THE OPPONENT HAS CLAIMED SOMETHING OR THERE'S AN EMPTY W_C
+    elsif @opp_wins.empty?  ##<--MEANS THERE ARE WIDE OPEN W_C ARRAYS
+      if @my_wins.size > 0 ##<--THERE ARE WINS, BUT OPP HASN'T CLAIMED ANY. HAVE I?
+                           ##<--FOR NOW, NORMAL ROUTINE (CENTER, CORNER, RANDO)
+                           ##   NEXT STEP WOULD BE TO CHOOSE ONE THAT LEAVES A WIN OPEN EVEN AFTER INEVITABLE BLOCK
+        if center_open?
+          4
+        elsif (@my_wins.flatten & CORNERS).size > 0 && corner_open?
+          corner(@my_wins.flatten & CORNERS)
+        else
+          @my_wins.flatten.sort_by{rand}.detect{|i| @board.cells[i] == " "}
+        end
+      else
         if center_open?
           4
         elsif corner_open?
-          corner(@poss_danger.flatten & CORNERS)
+          corner(CORNERS)
         else
-          @poss_danger.flatten.sort_by{rand}.detect{|i| @board.cells[i] == " "}
+          current_player.move(board).to_i - 1
         end
-      
+      end
+## OPPONEN HAS CLAIMED A POTENTIAL WIN. TRY TO BLOCK (& STAKE MY OWN CLAIM IF POSS)
+    else 
+      if @contested_spaces.empty? ##--FIRST LOOK FOR A BLOCK THAT FALLS INTO ONE OF MY POT WINS(TRIGGER D_Z)
+        if center_open?
+          4
+        elsif (@opp_wins.flatten & CORNERS).size > 0 && corner_open?
+          corner(@opp_wins.flatten & CORNERS)
+        else
+          @opp_wins.flatten.sort_by{rand}.detect{|i| @board.cells[i] == " "}
+        end
+      else ##<--THERE'S A MOVE THAT BLOCKS HIM & ADDS TO A W_C ARRAY I'VE CLAIMED. CHOOSE ONE
+        @contested_spaces.detect{|i| @board.cells[i] == " "} ## MAYBE RANDOMIZE LATER
+
+
+         ##   --FAILING THAT, LOOK FOR A CORNER BLOCK
+         ##   --FAILING THAT, PICK A RANDO BLOCK
+      end
+    end  
+
+
+        
+
+
     
-  # binding.pry  
-    end
   end
 
   def possible_wins ## CREATES COPY OF WIN_COMBINATIONS, IS RUN ONLY ONCE PER GAME, AFTER BOARD RESET
-    @wins_available = WIN_COMBINATIONS.select{|a|
+    @win_combinations = WIN_COMBINATIONS.select{|a|
       a.select{|i| @board.cells[i] == " "}.size >= 2}
   end
   
-  def win_move
-
+  def win_block
+# binding.pry
     @dz_array.detect{|i| @board.cells[i] == " "} 
   end
 
-  def block_win
-    @dz_array.detect{|i| @board.cells[i] == " "} 
-  end
+#   def block_win
+# binding.pry
+#     @dz_array.detect{|i| @board.cells[i] == " "} 
+#   end
 
   def corner_open?
     CORNERS.select{|i| @board.cells[i] == " "}.empty? ? false : true 
