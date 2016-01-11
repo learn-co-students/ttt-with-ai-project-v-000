@@ -26,11 +26,9 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   pry
   require_all
   rspec
-
-BUNDLED WITH
-   1.10.6
