@@ -1,12 +1,14 @@
+require 'pry'
+
 class Board
-	attr_reader :cells
+	attr_accessor :cells
 
 	def initialize
 		@cells = Array.new(9, " ")
 	end
 
 	def reset!
-		@cells.collect!{|cell| cell = " "}
+		@cells = Array.new(9, " ")
 	end
 
 	def display
@@ -22,7 +24,7 @@ class Board
 	end
 
 	def update(input, player)
-		@cell[input.to_i - 1] = player.token if valid_move?(input) && !full? 
+		@cells[input.to_i - 1] = player.token if valid_move?(input) && !full? 
 	end
 
 	def full?
@@ -30,9 +32,7 @@ class Board
 	end
 
 	def turn_count
-		count = 0
-		@cells.each{|cell| count += 1 if cell == "X" or cell == "O" }
-		count
+		@cells.count{|cell| cell == "X" || cell == "O" }
 	end
 
 	def taken?(input)
@@ -40,6 +40,6 @@ class Board
 	end
 
 	def valid_move?(input)
-		taken?(input) == false ? true : false
+		input.to_i.between?(1,9) && taken?(input) == false ? true : false
 	end
 end

@@ -4,7 +4,7 @@ class Player::Human < Player
 		user_input = gets.strip
 
 		# get valid_move? from board.rb
-		until valid_move?(user_input)
+		until board.valid_move?(user_input)
 			puts "Please enter a valid position (1-9): "
 			user_input = gets.strip
 		end

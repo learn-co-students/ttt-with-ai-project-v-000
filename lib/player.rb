@@ -5,7 +5,7 @@ class Player
 		@token = token
 	end
 
-	def move(position)
+	def move(board)
 		
 	end
 end
