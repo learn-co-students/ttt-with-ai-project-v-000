@@ -57,11 +57,12 @@ class Game
         puts "NOPE. Try again, dumbass."
         sleep 1
         turn
+        # @move = current_player.move(current_player.token)
       end
     else
       @move = current_player.move(board)
       board.update(@move, current_player)
-      sleep 1
+      # sleep 1
     end
   end
 

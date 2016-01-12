@@ -31,7 +31,7 @@ class Board
   end
 
   def valid_move?(move)
-    (1..9).include?(move.to_i-1) && !taken?(move)
+    (1..9).include?(move.to_i) && !taken?(move)
   end
 
   def update(move, player)

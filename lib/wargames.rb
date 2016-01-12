@@ -15,7 +15,7 @@ class Wargames < Game
   end
 
   def play
-    until @games_played == 10000
+    until @games_played == 100
       until over? 
         turn
       end
