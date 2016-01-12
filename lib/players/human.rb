@@ -3,8 +3,7 @@ class Player::Human < Player
 		puts "Where do you want to move? "
 		user_input = gets.strip
 
-		# get valid_move? from board.rb
-		until board.valid_move?(user_input)
+		until user_input.to_i.between?(1, 9)
 			puts "Please enter a valid position (1-9): "
 			user_input = gets.strip
 		end
