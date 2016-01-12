@@ -2,17 +2,21 @@ class Computer < Player
   attr_accessor :board
 
   def move(board)
-    ( !board.taken?("5") ? 5 : possible_move(board) + 1)
+    ( !board.taken?("5") ? "5" : possible_move(board) + 1)
   end
 
   def possible_move(board)
-    win_or_block(board) || corner_move(board) || random_move(board) 
+    win_or_block(board) || corner_move(board) || edge_move(board) 
   end
 
   def corner_move(board)
     corners = [0,2,6,8]
     corners.shuffle.detect { |spot| !board.taken?(spot+1) }
   end
+
+  def edge_move(board)
+    [1,3,5,7].shuffle.detect { |spot| !board.taken?(spot+1) }
+  end  
 
   def open_spot(board, token)  #returns winning combination that must be blocked or won
     Game::WIN_COMBINATIONS.detect do |spot|
@@ -34,10 +38,6 @@ class Computer < Player
     elsif open_spot(board, self.opp_token)
       open_spot(board, self.opp_token).detect { |index| !board.taken?(index+1) }
     end 
-  end
-
-  def random_move(board)
-    [0,1,2,3,4,5,6,7,8].shuffle.detect { |spot| !board.taken?(spot+1) }
   end
 
 end
