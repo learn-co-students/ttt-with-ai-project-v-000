@@ -1,3 +1,51 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/players/human.rb'
+
+
+puts "Welcome to Tic Tac Toe!"
+num_players = "4"
+until num_players == "1" || num_players == "2" || num_players == "0"
+
+puts "How many players?"
+num_players = gets.chomp
+
+if num_players == "2"
+	
+	puts "Player 1. Give me your name, please"
+	player1_name = gets.chomp
+	player_1 = Human.new("X")
+	player_1.name= player1_name
+	puts "Player 2. Give me your name, please"
+	player2_name = gets.chomp
+	player_2 = Human.new("O")
+	player_2.name = player2_name
+
+	
+	
+	game = Game.new(player_1,player_2)
+	game.play
+	
+	
+elsif num_players == "1"
+	
+	puts "Player 1 - X - Give me your name, please"
+	player1_name = gets.chomp
+	player_1 = Human.new("X")
+	computer = Computer.new("O")
+	
+	game = Game.new(player_1,computer)
+	game.play
+
+elsif num_players == "0"
+	computer1 = Computer.new("X")
+	computer2 = Computer.new("O")
+	game = Game.new(computer1, computer2)
+	game.play
+else
+	puts "Invalid number of players"
+end
+
+end
+

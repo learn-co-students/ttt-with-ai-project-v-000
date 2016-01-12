@@ -2,7 +2,7 @@ require_relative 'board.rb'
 require_relative 'players/human.rb'
 require_relative 'players/computer.rb'
 #require_relative 'player.rb'
-
+require 'pry'
 
 class Game
 	attr_accessor :board, :player_1, :player_2, :turn_res
@@ -53,16 +53,25 @@ class Game
 	def turn
 		self.turn_res = "10"
 		until self.board.valid_move?(self.turn_res)
+		puts "#{self.current_player.name}:"
+		self.board.display
 		self.turn_res = self.current_player.move(self.board.cells)
-		puts "Invalid move. Try again"
+		puts "Invalid move. Try again" if !self.board.valid_move?(self.turn_res)
 		end
 		self.board.update(self.turn_res,self.current_player)
 	end
 	
 	def play
 		while !self.over?
-		self.turn
+		if self.current_player.class == Human
+			self.turn
+		else
+			self.board.display
+			self.turn_res = self.current_player.move(self.board)
+			self.board.update(self.turn_res,self.current_player)
 		end
+		end
+		self.board.display
 		puts "Congratulations #{self.winner}!" if self.won?
 		puts "Cats Game!" if self.draw?
 	end
