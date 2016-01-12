@@ -1,23 +1,26 @@
 require_relative 'board.rb'
 require_relative 'player.rb'
+require_relative 'players/human.rb'
+require 'pry'
 
 class Game
 	attr_accessor :board, :player_1, :player_2
 
-	WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
+	WIN_COMBINATIONS = [
+		[0,1,2], 
+		[3,4,5], 
+		[6,7,8], 
+		[0,3,6], 
+		[1,4,7], 
+		[2,5,8], 
+		[0,4,8], 
+		[6,4,2]
+	]
 
-	def initialize(num_of_players)
-		@board = Board.new
-		if num_of_players == "0"
-			@player_1 = Player::Computer.new("X")
-			@player_2 = Player::Computer.new("O")
-		elsif num_of_players == "1"
-			@player_1 = Player::Human.new("X")
-			@player_2 = Player::Computer.new("O")
-		elsif num_of_players == "2"
-			@player_1 = Player::Human.new("X")
-			@player_2 = Player::Human.new("O")
-		end
+	def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+		@board = board
+		@player_1 = player_1
+		@player_2 = player_2
 	end
 
 	def current_player
@@ -36,9 +39,7 @@ class Game
 		# If the matches include a win_combination, that combination is returned, otherwise false is returned.
 
 		WIN_COMBINATIONS.each { |win_combination|
-		  if win_combination.all?{|i| x_indexes.include?(i)} == true
-		    return win_combination
-		  elsif win_combination.all? {|i| o_indexes.include?(i)} == true
+		  if win_combination.all?{|i| x_indexes.include?(i)} || win_combination.all? {|i| o_indexes.include?(i)}
 		    return win_combination
 		  end
 		}
@@ -47,20 +48,42 @@ class Game
 		return false
 	end
 
+	def over?
+		board.full? || won?
+	end
+
+	def draw?
+		!won? && board.full?
+	end
+
 	def winner
-		
-	end
-
-	def start
-
-	end
-
-	def play
-		
+		if won?
+			return board.cells[won?[0]]
+		end
 	end
 
 	def turn
+		@board.update(current_player.move(@board), current_player)
+	end
+
+	def play
+
+		until over?
+			puts "#{current_player.token}'s turn."
+			@board.display
+			turn
+			break if won? || draw?
+		end
+
+		puts "Congratulations #{winner}!" if won?
+		puts "Cats Game!" if draw?
 		
 	end
 
 end
+
+
+
+
+
+
