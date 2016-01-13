@@ -13,13 +13,13 @@ class Player::Computer < Player
     ]
 
   def move(board)
-=begin
+
     #1. Make winning move
     location = make_winning_move(board)
 
     #2. Block winning move
     location = block_winning_move(board) if location.nil?
-=end
+
     #3. Center
     location = choose_center(board) if location.nil?
 
@@ -36,26 +36,32 @@ class Player::Computer < Player
   end
 
   def make_winning_move(board)
-    detect_winning_move(board, self.token)
-=begin
+    #detect_winning_move(board, self.token)
+
     winning_combo = []
     i = 0
 
+    #if two of the three spaces for the winning combo matches, then you're one away from winning
     WIN_COMBINATIONS.each do |combo|
       if winning_combo.empty?
         i += 1 if board.cells[combo[0]] == self.token
         i += 1 if board.cells[combo[1]] == self.token
         i += 1 if board.cells[combo[2]] == self.token
-        winning_combo = combo if i == 2 #if two of the three spaces for the winning combo matches, then you're one away from winning
+        if i == 2 && winning_combo.detect { |combo_num| !board.taken?(combo_num + 1) } #make sure there's one space open, not O-O-X or X-X-O
+          winning_combo = combo
+        else
+          i = 0
+        end
       end
     end
 
     if !winning_combo.empty?
-      winning_combo.detect { |combo_num| !board.taken?(combo_num) }
+      final = winning_combo.detect { |combo_num| !board.taken?(combo_num + 1) } #+1 to adjust for user input offset
+      final + 1 #to adjust for user input offset
     else
       nil
     end
-=end
+
   end
 
   def block_winning_move(board)
@@ -64,25 +70,8 @@ class Player::Computer < Player
   end
 
   def detect_winning_move(board, token_to_test)
-    winning_combo = []
-    i = 0
-=begin
-    WIN_COMBINATIONS.each do |combo|
-      if winning_combo.empty?
-        i += 1 if board.cells[combo[0]] == token_to_test
-        i += 1 if board.cells[combo[1]] == token_to_test
-        i += 1 if board.cells[combo[2]] == token_to_test
-        i == 2 ? winning_combo = combo : i = 0 #if two of the three spaces for the winning combo matches, then you're one away from winning
-      end
-    end
 
-    if !winning_combo.empty?
-      #binding.pry
-      winning_combo.detect { |combo_num| !board.taken?(combo_num + 1) } #+1 to adjust for user input offset
-    else
-      nil
-    end
-=end
+
   end
 
   def choose_center(board)
