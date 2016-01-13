@@ -1,17 +1,4 @@
 class Player::Computer < Player
-  WIN_COMBINATIONS = [
-    [0,1,2], # Top row
-    [3,4,5],  # Middle row
-    [6,7,8],
-
-    [0,3,6], #verticals
-    [1,4,7],
-    [2,5,8],
-
-    [0,4,8], #diagonals
-    [6,4,2]
-    ]
-
   def move(board)
     #1. Make winning move
     location = make_winning_move(board)
@@ -48,7 +35,7 @@ class Player::Computer < Player
     i = 0
 
     #if two of the three spaces for the winning combo matches, then you're one away from winning
-    WIN_COMBINATIONS.each do |combo|
+    Game::WIN_COMBINATIONS.each do |combo|
       if winning_combo.empty?
         i += 1 if board.cells[combo[0]] == token_to_test
         i += 1 if board.cells[combo[1]] == token_to_test
@@ -86,23 +73,10 @@ class Player::Computer < Player
   end
 
   def choose_empty_corner(board)
-    if !board.taken?(1)
-      1
-    elsif !board.taken?(3)
-      3
-    elsif !board.taken?(7)
-      7
-    elsif !board.taken?(9)
-      9
-    end
+    [1,3,7,9].shuffle.detect { |corner| !board.taken?(corner) }
   end
 
   def make_random_move(board)
-    num = 0
-    loop do
-      num = rand(1...10) #random number 1-9
-      break if !board.taken?(num)
-    end
-    num
+    [*1..9].shuffle.detect{ |num| !board.taken?(num) } # * splat operator expands range into array , so it becomes [1,2,3, etc..]
   end
 end
