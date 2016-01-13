@@ -4,6 +4,7 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
 
+
 def start_game
   puts "How many users to play the game?"
   puts "1 player"
