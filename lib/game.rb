@@ -62,8 +62,10 @@ class Game
 			break if won? || draw?
 		end
 
-		puts "", "Congratulations #{winner}!" if won?
-		puts "", "Cats Game!" if draw?
+		puts
+		puts "Congratulations #{winner}!" if won?
+		puts "Cats Game!" if draw?
+		puts
 		@board.display
 		puts
 	end
