@@ -20,7 +20,8 @@ class Computer < Player
     if @best_move == nil
       random_spot
     end
-    @best_move.to_s #not sure why needs to return as a string for testfinishe
+    @best_move += 1 #not sure why needs to return as a string for test
+    @best_move.to_s
   end
 
   def check_for_win
@@ -30,13 +31,13 @@ class Computer < Player
       temp_array.push(board_state.cells[combo[0]])
       temp_array.push(board_state.cells[combo[1]])
       temp_array.push(board_state.cells[combo[2]])
-      if temp_array[0] == temp_array[1] && temp_array[2] == ' '
+      if temp_array[0] != ' ' && temp_array[0] == temp_array[1] && temp_array[2] == ' '
         @best_move = combo[2]
         break
-      elsif temp_array[1] == temp_array[2] && temp_array[0] == ' '
+      elsif temp_array[1] != ' ' && temp_array[1]== temp_array[2] && temp_array[0] == ' '
         @best_move = combo[0]
         break
-      elsif temp_array[0] == temp_array[2] && temp_array[1] == ' '
+      elsif temp_array[0] != ' ' && temp_array[0] == temp_array[2] && temp_array[1] == ' '
         @best_move = combo[1]
         break
       end
@@ -44,16 +45,18 @@ class Computer < Player
   end
 
   def random_spot
-    temp_board = @board_state
+    temp_board = @board_state.cells
     array_empty_spaces = []
-    temp_board.each do |space|
-      if space == " "
-        array_empty_spaces.push(temp_board.index(space))
+      x = 1
+      temp_board.each do |space|
+        if space == " "
+          array_empty_spaces.push(x)
+        end
+        x+=1
       end
-      temp_board.shift
-    end
-    array_empty_spaces.sample
+    @best_move = array_empty_spaces.sample
   end
+
 
   #plan is to take game states, see if you have 2 spots in any and make the next move
   #see if opponent has two spots in any, and block

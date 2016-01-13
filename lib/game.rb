@@ -71,11 +71,16 @@ class Game
 
   def turn
     spot = current_player.move(@board)
-    !@board.valid_move?(spot) ? turn : @board.update(spot, current_player)
+    if @board.valid_move?(spot) then
+      @board.update(spot, current_player)
+    else
+      turn
+    end
   end
 
   def play
     until over?
+      @board.display
       turn
     end
     if draw?
