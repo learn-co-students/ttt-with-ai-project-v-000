@@ -13,7 +13,6 @@ class Player::Computer < Player
     ]
 
   def move(board)
-
     #1. Make winning move
     location = make_winning_move(board)
 
@@ -36,18 +35,25 @@ class Player::Computer < Player
   end
 
   def make_winning_move(board)
-    #detect_winning_move(board, self.token)
+    detect_winning_move(board, self.token)
+  end
 
+  def block_winning_move(board)
+    self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+    detect_winning_move(board, opponent_token)
+  end
+
+  def detect_winning_move(board, token_to_test)
     winning_combo = []
     i = 0
 
     #if two of the three spaces for the winning combo matches, then you're one away from winning
     WIN_COMBINATIONS.each do |combo|
       if winning_combo.empty?
-        i += 1 if board.cells[combo[0]] == self.token
-        i += 1 if board.cells[combo[1]] == self.token
-        i += 1 if board.cells[combo[2]] == self.token
-        if i == 2 && winning_combo.detect { |combo_num| !board.taken?(combo_num + 1) } #make sure there's one space open, not O-O-X or X-X-O
+        i += 1 if board.cells[combo[0]] == token_to_test
+        i += 1 if board.cells[combo[1]] == token_to_test
+        i += 1 if board.cells[combo[2]] == token_to_test
+        if i == 2 && combo.any? { |combo_num| !board.taken?(combo_num + 1) } #make sure there's one space open, not O-O-X or X-X-O
           winning_combo = combo
         else
           i = 0
@@ -61,17 +67,6 @@ class Player::Computer < Player
     else
       nil
     end
-
-  end
-
-  def block_winning_move(board)
-    self.token == "X" ? opponent_token = "O" : opponent_token = "X"
-    detect_winning_move(board, opponent_token)
-  end
-
-  def detect_winning_move(board, token_to_test)
-
-
   end
 
   def choose_center(board)
