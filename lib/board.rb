@@ -6,7 +6,7 @@ attr_accessor :cells
   end
 
   def reset!
-    @cells = Array.new(9, " ")
+    @cells = Array.new(9, " ")                                                                                            
   end
 
   def cells
@@ -42,7 +42,7 @@ attr_accessor :cells
   end
 
   def valid_move?(position)
-    taken?(position.to_i) == false && position.to_i.between?(1,9) ? true : false
+    !taken?(position.to_i) && position.to_i.between?(1,9) ? true : false
   end
 
   def update(position, player)
