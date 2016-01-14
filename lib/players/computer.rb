@@ -24,13 +24,13 @@ class Player::Computer < Player
  
   def win(board)
     if !stop_win(board, self.token).nil?
-      stop_win(board, self.token).find { |pos| board.cells[pos] == " " }.to_i+1
+      stop_win(board, self.token).find {|pos| board.cells[pos] == " "}.to_i+1
     end
   end 
 
   def block_move(board)
     if !stop_win(board, opponent).nil?
-      stop_win(board, opponent).find {|pos| board.cells[pos] == " "}.to_i + 1
+      stop_win(board, opponent).find {|pos| board.cells[pos] == " "}.to_i+1
     end
   end 
 
