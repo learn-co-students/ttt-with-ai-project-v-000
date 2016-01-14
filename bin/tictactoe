@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+again = "Y"
+while again == "Y"  
+  Game.new.start
+  puts "Would you like to play again? (Y/N)"
+  again = gets.strip.upcase
+end

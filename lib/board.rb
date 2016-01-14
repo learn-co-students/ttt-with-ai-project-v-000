@@ -14,7 +14,6 @@ attr_accessor :cells
   end
 
   def display
-    puts " " 
     puts " "
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
@@ -22,15 +21,14 @@ attr_accessor :cells
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
     puts " "
-    puts " "
   end
 
-  def position(position)
-    @cells[position.to_i-1]
+  def position(pos)
+    @cells[pos.to_i-1]
   end
 
-  def taken?(position)
-    position(position) == "X" || position(position) == "O" ? true : false
+  def taken?(pos)
+    position(pos) == "X" || position(pos) == "O" ? true : false
   end
 
   def full?
@@ -41,11 +39,11 @@ attr_accessor :cells
     @cells.count {|e| e == "X" || e == "O"}
   end
 
-  def valid_move?(position)
-    !taken?(position.to_i) && position.to_i.between?(1,9) ? true : false
+  def valid_move?(pos)
+    !taken?(pos.to_i) && pos.to_i.between?(1,9) ? true : false
   end
 
-  def update(position, player)
-    @cells[position.to_i-1] = player.token
+  def update(pos, player)
+    @cells[pos.to_i-1] = player.token
   end
 end
