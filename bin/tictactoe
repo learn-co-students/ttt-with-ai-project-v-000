@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def game_loop
+  puts "Tic-Tac-Toe: THE GAME"
+  loop do
+    puts "What type of game would you like to play? 0 for AI vs. AI, 1 for you vs. AI, 2 for you vs. another player."
+    puts "Type exit to end the game."
+    input = gets.strip
+
+    if input == "0"
+      game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+      game.play
+    elsif input == "1"
+      game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+      game.play
+    elsif input == "2"
+      game = Game.new(Player::Human.new("X"), Player::Human.new("O"))
+      game.play
+    elsif input.downcase != "exit"
+      puts "Invalid input. Try again."
+      game_loop
+    else
+      puts "Goodbye."
+      break
+    end
+  end
+
+end
+
+game_loop
