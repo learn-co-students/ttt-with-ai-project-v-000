@@ -36,7 +36,7 @@ class Board
 	end
 
 	def valid_move?(input)
-		!self.taken?(input) && (1..9).include?(input.to_i) ? true:false
+		!self.taken?(input.to_i) && (1..9).include?(input.to_i) ? true:false
 	end
 
 	def update(cell, player)
