@@ -52,10 +52,11 @@ class Game
 	end
 
 	def turn
-		puts "#{self.current_player} please enter your move:"
+		puts "#{self.current_player.token} please enter your move:"
 		input = self.current_player.move(self.board)
 		self.turn if !self.board.valid_move?(input)
 		self.board.update(input, self.current_player)
+		self.board.display
 	end
 
 	def play
