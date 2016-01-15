@@ -2,10 +2,10 @@ class Board
   attr_accessor :cells, :token
   def initialize(amount=9,cell=" ")
     @cells = []
+    @token = "X"
     amount.times do |i|
       @cells << cell
     end
-    @token = "X"
   end
 
   def reset!
@@ -36,7 +36,8 @@ class Board
     @cells.each do |cell|
       count += 1 unless cell == " "
     end
-    @token = "O" if count % 2 == 0
+    # @token = "O" if count % 2 == 0
+    # bindind.pry
     return count
   end
 

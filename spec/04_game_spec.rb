@@ -73,6 +73,13 @@ describe 'Game' do
 
       expect(game.current_player.token).to eq("X")
     end
+
+    it 'returns the correct player, O, for the second move' do
+      game = Game.new
+      game.board.cells = ["O", " ", " ", " ", " ", " ", " ", " ", " "]
+
+      expect(game.current_player.token).to eq("O")
+    end
   end
 
   describe '#over?' do
