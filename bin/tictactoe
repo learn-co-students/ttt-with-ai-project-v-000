@@ -1,3 +1,78 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+puts "       Welcome to Tic Tac Toe"
+puts "How many human players do you want to play?"
+puts "          Enter 0, 1, 2"
+puts "or wargame for 100 games of computer vs computer."
+puts "          or exit to Exit."
+
+option = gets.chomp
+while option != "exit"
+  # while ( (options <= 0) && (options > 3) )
+  #   options = gets.chomp.to_i + 1
+  # end
+  if (option.downcase == "wargame")
+    comp_1 = Computer.new("X")
+    comp_2 = Computer.new("O")
+    game = Game.new(comp_1,comp_2)
+    wins_1 = 0
+    wins_2 = 0
+    100.times do |i|
+      temp = game.play
+      if temp == "X"
+        wins_1 += 1
+      elsif temp == "O"
+        wins_2 += 1
+      end 
+    end
+    puts "         WARGAME OVER!"
+    puts "      ___________________"
+    puts "Computer 1           Computer 2"
+    puts " WINS:#{wins_1}                WINS:#{wins_2}"
+  elsif ((option.to_i + 1) == 1)
+    comp_1 = Computer.new("X")
+    comp_2 = Computer.new("O")
+    game = Game.new(comp_1,comp_2)
+  elsif ((option.to_i + 1) == 2)      
+    human = Human.new("X")
+    computer = Computer.new("O")
+    game = Game.new(human,computer)
+  elsif ((option.to_i + 1) == 3)
+    human_1 = Human.new("X")
+    human_2 = Human.new("O")
+    game = Game.new(human_1,human_2)
+  end
+
+  game.play
+
+  puts "        "
+  puts "How many human players do you want to play?"
+  puts "            Enter 0, 1 ,2"
+  puts "of wargame for 100 games of computer vs computer"
+  puts "           or exit to Exit."
+
+  option = gets.chomp
+end
+
+def wargame
+  comp_1 = Computer.new("X")
+  comp_2 = Computer.new("O")
+  game = Game.new(comp_1,comp_2)
+  binding.pry
+  wins = 0
+  100.times do |i|
+    temp = game.play
+    if temp == "X"
+      wins_1 += 1
+    elsif temp == "O"
+      wins_2 += 2
+    end 
+  end
+  puts "         WARGAME OVER!"
+  puts "         _____________"
+  puts "Computer 1           Computer 2"
+  puts "WINS:#{wins_1}       WINS:#{wins_2}"
+
+end
