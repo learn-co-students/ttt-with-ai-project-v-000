@@ -42,7 +42,7 @@ class Board
   end
 
   def taken?(input)
-    if (position(input) == "X" || position(input) == "O")
+    if (position(input.to_i) == "X" || position(input.to_i) == "O")
       return true
     else 
       return false
@@ -58,7 +58,7 @@ class Board
   end
 
   def update(pos,player)
-    @cells[pos.to_i - 1] = @token
+    @cells[pos.to_i - 1] = player.token
   end
 
 end

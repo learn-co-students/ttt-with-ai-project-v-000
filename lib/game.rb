@@ -32,7 +32,7 @@ class Game
   end
 
   def over?
-    if @board.full?
+    if draw? || @board.full? || won? 
       return true
     else 
       return false
@@ -46,6 +46,7 @@ class Game
       position_3 = @board.cells[combo[2]]
 
       if(position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O")
+        puts "Congratulations #{position_1}!"
         return combo
       end
     end
@@ -56,6 +57,7 @@ class Game
     if !@board.full? || won?
       return false
     else
+      puts "Cats Game!"
       return true
     end
   end
@@ -70,9 +72,9 @@ class Game
 
   def turn
     @current_player = current_player
-    input = current_player.move(nil)
+    input = current_player.move(@board.cells)
     if (board.valid_move?(input))
-      @board.update(@current_player.token,input)
+      @board.update(input,@current_player)
       # binding.pry
     else
       turn
@@ -80,9 +82,12 @@ class Game
   end
 
   def play
-    turn
-    if !self.over?
-      self.turn
+    while !over?
+      @board.display
+      turn
+    end
+    if won?
+      return @current_player
     end
   end
 end
