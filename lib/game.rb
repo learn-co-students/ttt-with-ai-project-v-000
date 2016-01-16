@@ -15,8 +15,8 @@ class Game
   ]
 
   def initialize(*args)
-    @player_1 = args[0] || Human.new("X")
-    @player_2 = args[1] || Human.new("O")
+    @player_1 = args[0] || Player::Human.new("X")
+    @player_2 = args[1] || Player::Human.new("O")
     @board = args[2] || Board.new
   end
 
@@ -52,25 +52,23 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
     move = current_player.move(@board)
     @board.valid_move?(move) ? @board.update(move, current_player) : turn
+    sleep(1)
   end
 
   def play
     until over?
+      @board.display
+      puts "Please enter 1-9:"
       turn
-
-      if won?
-        puts "Congratulations #{winner}!"
-      elsif draw?
-        puts "Cats Game!"
-      end
     end
 
     if won?
+      @board.display
       puts "Congratulations #{winner}!"
     elsif draw?
+      @board.display
       puts "Cats Game!"
     end
   end

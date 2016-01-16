@@ -30,7 +30,7 @@ class Board
   end
 
   def full?
-    empty_cell_count >= 9 ? true : false
+    @cells.any? { |cell| cell == " "} ? false : true
   end
 
   def taken?(index)
@@ -42,11 +42,11 @@ class Board
   end
 
   def empty_cell_count
-    @cells.select { |cell| cell != " "}.length 
+    10 - turn_count
   end
 
   def turn_count
-    empty_cell_count
+    @cells.select { |cell| cell != " " }.length
   end
 
   def update(index, player)
