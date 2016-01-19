@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+again = ' '
+until again == 'n'
+
+puts "Welcome to tic tac toe! How many players wish to play?"
+num_players = gets.strip.to_i
+
+if num_players == 0
+
+  Game.new(Player::Computer.new('X'),Player::Computer.new('O'),Board.new).play 
+
+elsif num_players == 1
+
+  puts "Who do you want to go first and be X, you or the computer? type (you/computer)"
+  first = '' 
+   until first == 'you' || first == 'computer'
+   first = gets.strip 
+    if first == 'you'
+      Game.new(Player::Human.new('X'),Player::Computer.new('O'),Board.new).play 
+    elsif first == 'computer'
+      Game.new(Player::Computer.new('X'),Player::Human.new('O'),Board.new).play
+    end
+      puts 'Try again'
+   end
+elsif num_players == 2
+     
+  puts "Who do you want to go first and be X, player 1 or player 2? type either (1/2)"
+  first = gets.strip
+  #if num_players == "1"
+    Game.new(Player::Human.new('X'),Player::Human.new('O'),Board.new).play
+  ## loop game instead of 9 times
+  ## what happens when their spot is already taken?
+end 
+
+puts "Do you want to play again? ( y / n )"
+again = gets.chomp 
+
+end 
