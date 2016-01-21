@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Board" do
   let(:board){Board.new}
@@ -45,6 +46,8 @@ describe "Board" do
       expect(output).to include(" X | O | O ")
       expect(output).to include("-----------")
       expect(output).to include(" X | O | O ")
+
+      # binding.pry
 
 
       board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]

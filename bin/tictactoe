@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative 'lib/game.rb'
+require_relative 'lib/players/computer.rb'
+require_relative 'lib/players/human.rb'
+
+game = Game.new
+game.play
+
+game = Game.new(Computer.new("X"), Computer.new("O"))
+game.play
+game = Game.new(Human.new("X"), Computer.new("O"))
+game.play
