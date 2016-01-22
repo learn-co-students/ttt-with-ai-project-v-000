@@ -50,23 +50,8 @@ class Game
   end
 
   def winner
-    x_count = 0
-    o_count = 0
     if won?
-      board.cells.each do |cell|
-        if cell=="X"
-          x_count += 1
-        end
-        if cell=="O"
-          o_count += 1
-        end
-      end
-      if x_count > o_count
-        return "X"
-      end
-      if o_count > x_count
-        return "O"
-      end
+      board.cells[won?[0]]
     end
   end
 
@@ -117,6 +102,5 @@ class Game
       puts "Congratulations #{winner}!"
     end
   end
-
 
 end

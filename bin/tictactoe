@@ -1,14 +1,42 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-require_relative 'lib/game.rb'
-require_relative 'lib/players/computer.rb'
-require_relative 'lib/players/human.rb'
+require_relative '../lib/game.rb'
+require_relative '../lib/players/computer.rb'
+require_relative '../lib/players/human.rb'
 
-game = Game.new
-game.play
+puts "Greetings! Welcome to Tic Tac Toe. "
 
-game = Game.new(Computer.new("X"), Computer.new("O"))
-game.play
-game = Game.new(Human.new("X"), Computer.new("O"))
-game.play
+continue_play = true
+
+while continue_play do
+
+  puts "How many players?"
+  player_number = gets.chomp
+
+    if player_number.to_i == 2
+      game = Game.new
+      game.play
+    elsif player_number.to_i == 1
+      puts "Would you like to start first? Y/N"
+      if gets.chomp!="Y"
+        game = Game.new(Computer.new("X"), Human.new("O"))
+        game.play
+      else
+        game = Game.new(Human.new("X"), Computer.new("O"))
+        game.play
+      end
+    elsif player_number.to_i == 0
+      game = Game.new(Computer.new("X"), Computer.new("O"))
+      game.play
+    else
+      puts "please enter 0, 1 or 2."
+    end
+
+    puts "Would you like to play another game? Y/N"
+    answer = gets.chomp
+    if answer != "Y"
+      continue_play = false
+    end
+
+end
