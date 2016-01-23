@@ -24,7 +24,6 @@ describe 'Player::Computer' do
       two_in_a_row = ["X", "X", " ", "O", " ", " ", "O", " ", " "]
       board.cells = two_in_a_row
       computer_move = computer.move(board)
-      binding.pry
       expect(computer_move).to eq "3"
     end
   end
