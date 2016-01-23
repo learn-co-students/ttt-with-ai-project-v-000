@@ -1,4 +1,4 @@
-class Game
+class Game 
 
   attr_accessor :board, :player_1, :player_2
 
@@ -24,7 +24,60 @@ class Game
   end
 
   def current_player
-    
+    board.turn_count.even? ? player_1 : player_2
   end
 
+  def over?
+    (board.full? || won?) || won?
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+     combo.all? {|position| board.cells[position] == "X"} || combo.all? {|position| board.cells[position] == "O"}
+    end
+  end
+
+  def draw?
+    board.full? && !won?
+  end
+
+  def winner
+    WIN_COMBINATIONS.detect do |combo|
+      if combo.all? {|position| board.cells[position] == "X"}  
+        return "X"
+      elsif combo.all? {|position| board.cells[position] == "O"} 
+        return "O"
+      else
+      end
+    end
+  end
+  
+    def turn 
+      input = current_player.move(board)
+      if board.valid_move?(input)
+        board.update(input, current_player)
+      else
+        turn
+    end 
+  end
+
+  def play
+    until won? || draw?
+      turn
+      board.display
+    end
+      if won? 
+        puts "Congratulations #{winner}!"
+      else 
+        puts "Cats Game!"
+      end
+      board.display
+  end
 end
+
+
+
+
+
+
+
