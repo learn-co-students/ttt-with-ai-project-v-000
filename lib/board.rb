@@ -52,15 +52,9 @@ class Board
     end
   end
 
-  def update(input, character = "X")
-    @cells[input.to_i] == Player::Human
-
+  def update(position, player)
+    @cells[position.to_i - 1] = player.token
   end
-
-
-
-
-
 
 end 
 

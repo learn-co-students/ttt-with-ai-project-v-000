@@ -6,7 +6,7 @@ class Player
     @token = token
   end
  
- 
+
 
 
 
