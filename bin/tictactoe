@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Hello and Welcome to Tic Tac Toe!\n"
+
+def goes_first
+  puts "Do you want to go first (y/n)?"
+  input = gets.chomp.downcase
+end
+
+def play_game
+ puts "How many players (0-2)?"
+ number_players = gets.chomp
+ # this won't work if someone types in something other than 0, 1, or 2
+  
+  if number_players == "0"
+    game = Game.new(player_1=Player::Computer.new("X"), player_2=Player::Computer.new("O"))
+  elsif number_players == "1"
+    if goes_first == "y"
+      game = Game.new(player_1=Player::Human.new("X"), player_2=Player::Computer.new("O"))
+    else
+      game = Game.new(player_1=Player::Computer.new("X"), player_2=Player::Human.new("O"))
+    end
+   elsif number_players == "2"
+      game = Game.new(player_1=Player::Human.new("X"), player_2=Player::Human.new("O"))
+   end
+   game.play
+   play_again
+end
+
+ def play_again
+    puts "Would you like to play again? y/n"
+    input = gets.chomp.downcase
+
+    if input == "y"
+      play_game
+    elsif input == "n"
+      puts "Thanks for playing! Goodbye."
+    end
+  end
+
+ play_game
+

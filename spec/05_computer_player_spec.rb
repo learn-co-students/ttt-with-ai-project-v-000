@@ -17,4 +17,25 @@ describe 'Player::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+
+  context 'winning the game' do
+    describe 'winning_move' do
+      it 'returns the index of the move that will win the game' do
+        computer = Player::Computer.new("X")
+        board = Board.new
+        board.cells = ["X", "X", " ", " ", " ", " ", " ", " ", " "]
+
+        expect(computer.winning_move(board, computer.token)).to eq("3")
+      end
+    end
+
+    # describe "move" do
+    #   it '' do        
+    #     computer = Player::Computer.new("X")
+    #     board = Board.new
+    #     board.cells = ["X", "X", " ", " ", " ", " ", " ", " ", " "]
+
+    #     expect(computer.move(board)).to 
+    #   end
+  end
 end
