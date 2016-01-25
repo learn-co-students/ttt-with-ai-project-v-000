@@ -1,6 +1,6 @@
 class Player::Human < Player
 
-  def move(location, character = "X")
+  def move(location = "")
     location = gets.chomp
     location
   end

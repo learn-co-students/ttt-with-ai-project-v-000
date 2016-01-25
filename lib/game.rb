@@ -1,5 +1,7 @@
+require 'pry'
+
 class Game 
-  attr_accessor :player_1, :player_2
+  attr_accessor :player_1, :player_2, :board
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -11,19 +13,25 @@ class Game
     [0,4,8],
     [2,4,6]
   ]
+# def player_1
+# @player_1 = player_1 ||= "X"
+# end
+    # @player_2 = player_2 ||= "O"
+    # @board = board
 
-  def initialize(player_1 = Player.new("X"), player_2 = Player.new("O")) #need to define class Player first
+
+  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+    @board = board
     @player_1 = player_1
     @player_2 = player_2
-    # @board = board || Array.new(9, " ")
   end
 
-  def board
-    Board.display    
-  end
+  # def board
+  #   @board    
+  # end
 
   def current_player
-    Board.turn_count % 2 == 0 ? "X" : "O"
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
@@ -35,46 +43,80 @@ class Game
   end
 
   def draw?
-    full? && !won? ? true : false
+    board.full? && !won? ? true : false
   end
 
   def winner 
-    WIN_COMBINATIONS.each do |x, y|
-      y.detect do 
-        if y[0] == "X" && y[1] == "X" && y[2] == "X"
-          return "X wins!"
-        elsif y[0] == "O" && y[1] == "O" && y[2] == "O"
-          return "O wins!"
+    WIN_COMBINATIONS.detect do |y|
+      
+        if @board.cells[y[0]] == "X" && @board.cells[y[1]] == "X" && @board.cells[y[2]] == "X"
+          return "X"
+        elsif @board.cells[y[0]] == "O" && @board.cells[y[1]] == "O" && @board.cells[y[2]] == "O"
+          return "O"
         else
           nil
         end
       end
-    end
+    
   end
 
   def turn
-    until won? || draw?
-      input = gets.chomp   # -1  ?
-      Board.position(input)
-      current_player
-    end
+      puts "Please select 1-9"
+      input = current_player.move(board)
+     
+
+      if board.valid_move?(input)  
+        board.update(input, current_player)
+      else 
+        turn 
+      end
+    board.display
   end
 
   def play 
-    turn 
-
-    if winner
-      winner
-    else
-      "Cats Game!"
+    until over?
+      turn 
+    end
+    
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
     end
   end
 
 
+  def start
 
+    puts "Welcome to TicTacToe!"
 
+    puts "Would you like to play a 0, 1, or 2 player game?"
 
+    input = gets.chomp
 
+    if input == "0"
+      game = Game.new(player_1=Player::Computer.new("X"), player_2=Player::Computer.new("O"))
+    elsif input == "1"
+      game = Game.new(player_1=Player::Human.new("X"), player_2=Player::Computer.new("O"))
+    elsif input == "2"
+      game = Game.new(player_1=Player::Human.new("X"), player_2=Player::Human.new("O"))
+    end
+    game.play 
+    play_again
+  end
+
+  def play_again
+    puts "Would you like to play again? y/n"
+    input = gets.chomp.downcase
+
+    if input == "y"
+      start
+    elsif input == "n"
+      board.reset!
+    else
+      play_again
+    end
+  end
 
 
 end #end class Game
