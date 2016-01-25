@@ -28,7 +28,7 @@ class Game
   end
 
   def over?
-    (board.full? || won?) || won?
+    draw?  || won?
   end
 
   def won?
@@ -61,18 +61,17 @@ class Game
     end 
   end
 
-  def play
-    until won? || draw?
+ def play
+   until over? 
       turn
-      board.display
     end
-      if won? 
-        puts "Congratulations #{winner}!"
-      else 
-        puts "Cats Game!"
-      end
-      board.display
+    if draw? 
+     puts "Cats Game!"
+    elsif won? 
+      puts "Congratulations #{winner}!"
+    end
   end
+
 end
 
 
