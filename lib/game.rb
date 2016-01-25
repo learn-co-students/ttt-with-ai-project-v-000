@@ -13,11 +13,7 @@ class Game
     [0,4,8],
     [2,4,6]
   ]
-# def player_1
-# @player_1 = player_1 ||= "X"
-# end
-    # @player_2 = player_2 ||= "O"
-    # @board = board
+
 
 
   def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
@@ -26,9 +22,6 @@ class Game
     @player_2 = player_2
   end
 
-  # def board
-  #   @board    
-  # end
 
   def current_player
     board.turn_count % 2 == 0 ? player_1 : player_2
