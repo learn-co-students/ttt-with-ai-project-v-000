@@ -6,5 +6,58 @@ require_relative '../lib/players/computer.rb'
 require_relative '../lib/players/human.rb'
 require_relative '../lib/board.rb'
 
+
+puts "Welcome to Tic-Tac-Toe!"
+
+sleep 1
+
+puts "Will you be playing against someone else? Or against this ostritch?"
+sleep 1
+puts "                                  (oo)
+                                    V
+                                    ||
+                                    ||
+                                    ||,-v-,_
+                                    ||) |   /
+                                _,''   '-,-<
+                               / :       /  ) 
+                              ( :       (   /,
+                               )_;       ) __)
+                                  ),_ ,   |
+                                  |  / )  |
+                                  | /   ) |
+                                  ()     ()
+                                  //     ||
+                                 //      ||
+                                //       ||
+                  -- '' -'-'  ,//        /)   -- '' -'-'   "
+sleep 1
+puts "Against someone else it is!"
+sleep 1
+puts "Player 1 is X and Player 2 is O!"
+sleep 1
+puts "Please select a grid number corresponding to the chart"
+
+puts " 1 | 2 | 3 "
+puts "-----------" 
+puts " 4 | 5 | 6 "
+puts "-----------"
+puts " 7 | 8 | 9 "
+sleep 1
+
 game = Game.new
 game.play
+
+puts "Would you like to play again?"
+input = gets.strip
+
+if input == "yes"
+
+  game = Game.new
+  game.play
+
+elsif input == "no"
+  puts "See you next time!"
+else puts "See you next time!"
+end
+
