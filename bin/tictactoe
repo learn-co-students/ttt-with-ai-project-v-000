@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "\t X O X O X O X O X O X O X O X O X O X O X"
+puts "\t\t Welcome to Tic Tac Toe!"
+puts "\t X O X O X O X O X O X O X O X O X O X O X"
+
+to_play = "y"
+while to_play == "y" do
+  humans = ""
+  while humans.match(/[0-2]/) == nil do
+    print "\nHow many human players would you like? 0/1/2 "
+    humans = gets.chomp[0]
+    #break unless humans.match(/[0-2]/) == nil
+  end
+
+  case humans
+  when "0"
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+  when "1"
+    print "X Goes first. Should the human be X or O? "
+    human = gets.chomp.upcase
+    if human == "X"
+      game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+    elsif human == "O"
+      game = Game.new(Player::Computer.new("X"), Player::Human.new("O"))
+    end
+  when "2"
+    game = Game.new #Game.new(Player::Human.new("X"), Player::Human.new("O"))
+  else
+    puts "Invalid choice"
+  end
+
+  game.play
+
+  print "Would you like to play again? y/N "
+  to_play = gets.chomp.downcase
+end
