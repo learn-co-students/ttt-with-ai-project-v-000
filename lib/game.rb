@@ -66,5 +66,40 @@ class Game
   def start
     # the main method to play one or more rounds
     # with 0, 1, or 2 human players
+    to_play = "y"
+    while to_play == "y" do
+      @board.reset!
+      humans = ""
+      while humans.match(/[0-2]/) == nil do
+        print "\nHow many human players would you like? 0/1/2 "
+        humans = gets.chomp[0]
+      end
+
+      case humans
+      when "0"
+        @player_1 = Player::Computer.new("X")
+        @player_2 = Player::Computer.new("O")
+      when "1"
+        print "X Goes first. Should the human be X or O? "
+        human = gets.chomp.upcase
+        if human == "X"
+          @player_1 = Player::Human.new("X")
+          @player_2 = Player::Computer.new("O")
+        elsif human == "O"
+          @player_1 = Player::Computer.new("X")
+          @player_2 = Player::Human.new("O")
+        end
+      when "2"
+        @player_1 = Player::Human.new("X")
+        @player_2 = Player::Human.new("O")
+      else
+        puts "Invalid choice"
+      end
+
+      play
+
+      print "Would you like to play again? y/N "
+      to_play = gets.chomp.downcase
+    end
   end
 end
