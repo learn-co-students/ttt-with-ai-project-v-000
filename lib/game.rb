@@ -18,7 +18,7 @@ class Game
   end
 
   def over?
-    @board.full? || winner != nil
+    draw? || won?
   end
 
   def winner
@@ -36,31 +36,35 @@ class Game
   end
 
   def draw?
-    return true if @board.full? && winner == nil
+    return true if @board.full? && won? == false
     false
   end
 
   def turn
     input = ""
     until @board.valid_move?(input) do
+      puts "#{current_player.token}, where would you like to move?"
       input = current_player.move(@board)
     end
     @board.update(input, current_player)
   end
 
   def play
-    9.times do
+    # play one round
+    until over? do
+      @board.display
       turn
-      break if over?
     end
-    # binding.pry
+    @board.display
     if draw?
-      print "Cats Game!"
+      puts "Cats Game!"
     elsif won?
-      puts "Congratulations #{winner.token}!"
+      puts "Congratulations #{winner}!"
     end
   end
-end
 
-#game = Game.new
-#game.play
+  def start
+    # the main method to play one or more rounds
+    # with 0, 1, or 2 human players
+  end
+end
