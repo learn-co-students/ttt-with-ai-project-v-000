@@ -1,4 +1,4 @@
-class Player::Human <Player
+class Player::Human < Player
   attr_accessor :board
 
   def move(board)

@@ -28,7 +28,7 @@ class Game
   end
 
   def over?
-    draw?  || won?
+    draw? || won?
   end
 
   def won?
@@ -41,34 +41,29 @@ class Game
     board.full? && !won?
   end
 
+  
   def winner
-    WIN_COMBINATIONS.detect do |combo|
-      if combo.all? {|position| board.cells[position] == "X"}  
-        return "X"
-      elsif combo.all? {|position| board.cells[position] == "O"} 
-        return "O"
-      else
-      end
-    end
+   if won?
+     board.cells[won?.first]
+   end
   end
   
-    def turn 
+  def turn 
       puts "#{current_player} it's your turn!"
-      sleep 1
       input = current_player.move(board)
       if board.valid_move?(input)
         board.update(input, current_player)
       else
-        turn
+        self.turn
     end 
   end
 
  def play
    until over? 
       turn
-    end
+   end
     if draw? 
-     puts "Cats Game!"
+      puts "Cats Game!"
     elsif won? 
       puts "Congratulations #{winner}!"
     end
