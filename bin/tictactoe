@@ -11,9 +11,8 @@ require_relative '../lib/board.rb'
     def player_options
 
       puts "Welcome to OsTrItCh-TAC-TOE!"
-      sleep 0
  
-     puts <<-OSTRICH
+      puts <<-OSTRICH
                                       (oo)
                                           ||
                                           ||
@@ -31,17 +30,18 @@ require_relative '../lib/board.rb'
                                         //     ||
                                        //      ||
                                       //       ||
-                        -- '' -'-'  ,//        /)   -- '' -'-' 
+                        -- '' -'-'  ,//        /)   -- '' -'- 
 
       OSTRICH
 
       puts <<-GAME
-      
+
       Would you like to: 
       1) Watch two advanced ostrich computers play 100 WARGAMES TO THE DEATH! 
       2) Play vs an ostritch computer
       3) Play against a friend nearby? 
-      Type in 'wargames' or a number to continue:
+      Type in wargames or a number to continue:
+
       GAME
 
       input = gets.chomp.strip
@@ -61,7 +61,7 @@ require_relative '../lib/board.rb'
 
       sleep 3
         
-        if input ==  "wargames" || input == "1"
+        if input == "wargames" || input == "1"
           computer_against_computer
           
         elsif input == "2"
@@ -97,21 +97,21 @@ require_relative '../lib/board.rb'
       Enter 1 for Easy or 2 for Hard:
       OPTIONS
 
-      difficulty = gets.strip
-      puts "Who wants to go first and be player 'X', you or the Ostrich?" 
+      difficulty = gets.chomp
+      puts "Who wants to go first and be player X, you or the Ostrich?" 
       puts "Enter 1 for Human or 2 for Ostrich:"
-      order = gets.strip
+      order = gets.chomp
       
       if difficulty == "1" && order == "2"
         game = Game.new(player_1 = Player::Computer_easy.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
         game.play
-​      elsif difficulty == "2" && order == "2"
+      elsif difficulty == "2" && order == "2"
         game = Game.new(player_1 = Player::Computer_hard.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
         game.play
-​      elsif difficulty == "1" && order == "1"
+      elsif difficulty == "1" && order == "1"
         game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer_easy.new("O"), board = Board.new)
         game.play
-​      else 
+      else
         game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer_hard.new("O"), board = Board.new)
         game.play
       end
