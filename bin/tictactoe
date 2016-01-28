@@ -5,14 +5,17 @@ require_relative '../lib/players/computer.rb'
 require_relative '../lib/players/human.rb'
 require_relative '../lib/board.rb'
 
+
 ## Methods for CLI ##
 
     def player_options
 
       puts "Welcome to OsTrItCh-TAC-TOE!"
       sleep 0
-      puts "                                  (oo)
-                                          V
+ 
+     puts <<-OSTRICH
+                                      (oo)
+                                          ||
                                           ||
                                           ||
                                           ||,-v-,_
@@ -28,31 +31,43 @@ require_relative '../lib/board.rb'
                                         //     ||
                                        //      ||
                                       //       ||
-                        -- '' -'-'  ,//        /)   -- '' -'-'   "
+                        -- '' -'-'  ,//        /)   -- '' -'-' 
 
-      puts "Would you like to 1. Watch two advanced ostrich computers play 100 WARGAMES TO THE DEATH, 2. player vs. against an ostritch computer, or 3. play against a friend nearby? Type in 'wargames' or a number to continue."
-        input = gets 
-      puts "Player 1 is X and Player 2 is O!"
+      OSTRICH
 
+      puts <<-GAME
+      
+      Would you like to: 
+      1) Watch two advanced ostrich computers play 100 WARGAMES TO THE DEATH! 
+      2) Play vs an ostritch computer
+      3) Play against a friend nearby? 
+      Type in 'wargames' or a number to continue:
+      GAME
+
+      input = gets.chomp.strip
       sleep 1
 
-      puts "Before you begin please remember while playing to select a grid number corresponding to the chart"
+      puts <<-GRID 
 
-      puts " 1 | 2 | 3 "
-      puts "-----------" 
-      puts " 4 | 5 | 6 "
-      puts "-----------"
-      puts " 7 | 8 | 9 "
+      Before you begin please remember while playing to select a grid number corresponding to the chart
+
+       1 | 2 | 3 
+      ----------- 
+       4 | 5 | 6 
+      -----------
+       7 | 8 | 9 
+
+      GRID
 
       sleep 3
-        input = input.chomp.strip.downcase
+        
         if input ==  "wargames" || input == "1"
-            computer_against_computer
+          computer_against_computer
           
-        elsif input.chomp.strip == "2"
+        elsif input == "2"
           player_against_ostrich
         
-        elsif input.chomp.strip == "3"
+        elsif input == "3"
           player_against_player
         end
     end
@@ -71,25 +86,40 @@ require_relative '../lib/board.rb'
           count+=1
         end
       end
-      puts "Out of 100 games, there was a draw #{draws} times."
+      puts "Out of 100 games, there was a draw #{draws} times. Artificial Intelligence will never rule humans!"
     end
 
-    def player_against_ostrich
-      puts "At what difficulty, would you like to play? 1. Easy or 2. Hard?"
-      input = gets
-      puts "Ostrich V. Player 2!"
-      if input.chomp.strip == "1"
-        game = Game.new(computer = Player::Computer_easy.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+     def player_against_ostrich
+
+      puts <<-OPTIONS
+      Ostrich vs Human!
+      At what difficulty would you like to play? 
+      Enter 1 for Easy or 2 for Hard:
+      OPTIONS
+
+      difficulty = gets.strip
+      puts "Who wants to go first and be player 'X', you or the Ostrich?" 
+      puts "Enter 1 for Human or 2 for Ostrich:"
+      order = gets.strip
+      
+      if difficulty == "1" && order == "2"
+        game = Game.new(player_1 = Player::Computer_easy.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
         game.play
-      elsif input.chomp.strip == "2"
-        game = Game.new(computer = Player::Computer_hard.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+​      elsif difficulty == "2" && order == "2"
+        game = Game.new(player_1 = Player::Computer_hard.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+        game.play
+​      elsif difficulty == "1" && order == "1"
+        game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer_easy.new("O"), board = Board.new)
+        game.play
+​      else 
+        game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer_hard.new("O"), board = Board.new)
         game.play
       end
     end
 
     def player_against_player
       puts "Mono E Mono!"
-      puts "Player 1 V. Player 2!"
+      puts "Player 1 vs Player 2!"
       game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
       game.play
     end
@@ -99,12 +129,12 @@ require_relative '../lib/board.rb'
         player_options
         puts "Would you like to play again?"
         input = gets.strip.downcase
-        if input != "yes"
+        if input != "yes" || input != "y"
            break
          end
       end
       puts "See you next time!"
     end
-    
-## Beginning of CLI ##
+
+## Begin CLI ##
   play_tic
