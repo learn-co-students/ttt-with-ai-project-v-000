@@ -51,6 +51,7 @@ class Game
   def turn 
       puts "#{current_player} it's your turn!"
       input = current_player.move(board)
+      sleep 1
       if board.valid_move?(input)
         board.update(input, current_player)
       else
