@@ -1,3 +1,137 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+
+
+## Methods for CLI ##
+
+    def player_options
+
+      puts "Welcome to OsTrItCh-TAC-TOE!"
+ 
+      puts <<-OSTRICH
+                                      (oo)
+                                          ||
+                                          ||
+                                          ||
+                                          ||,-v-,_
+                                          ||) |   /
+                                      _,''   '-,-<
+                                     / :       /  ) 
+                                    ( :       (   /,
+                                     )_;       ) __)
+                                        ),_ ,   |
+                                        |  / )  |
+                                        | /   ) |
+                                        ()     ()
+                                        //     ||
+                                       //      ||
+                                      //       ||
+                        -- '' -'-'  ,//        /)   -- '' -'- 
+
+      OSTRICH
+
+      puts <<-GAME
+
+      Would you like to: 
+      1) Watch two advanced ostrich computers play 100 WARGAMES TO THE DEATH! 
+      2) Play vs an ostritch computer
+      3) Play against a friend nearby? 
+      Type in wargames or a number to continue:
+
+      GAME
+
+      input = gets.chomp.strip
+      sleep 1
+
+      puts <<-GRID 
+
+      Before you begin please remember while playing to select a grid number corresponding to the chart
+
+       1 | 2 | 3 
+      ----------- 
+       4 | 5 | 6 
+      -----------
+       7 | 8 | 9 
+
+      GRID
+
+      sleep 3
+        
+        if input == "wargames" || input == "1"
+          computer_against_computer
+          
+        elsif input == "2"
+          player_against_ostrich
+        
+        elsif input == "3"
+          player_against_player
+        end
+    end
+  
+    ## Player and Difficulty Settings Methods ##
+
+    def computer_against_computer
+      count = 0
+      draws = 0
+      while count < 100
+      puts "Ostrich Battle Royale!"
+      game = Game.new(player_1 = Player::Computer_hard.new("X"), player_2 = Player::Computer_hard.new("O"), board = Board.new)
+      game.play
+        if game.draw?
+          draws+=1
+          count+=1
+        end
+      end
+      puts "Out of 100 games, there was a draw #{draws} times. Artificial Intelligence will never rule humans!"
+    end
+
+     def player_against_ostrich
+
+      puts <<-OPTIONS
+      Ostrich vs Human!
+      At what difficulty would you like to play? 
+      Enter 1 for Easy or 2 for Hard:
+      OPTIONS
+
+      difficulty = gets.chomp
+      puts "Who wants to go first and be player X, you or the Ostrich?" 
+      puts "Enter 1 for Human or 2 for Ostrich:"
+      order = gets.chomp
+      
+      if difficulty == "1" && order == "2"
+        game = Game.new(player_1 = Player::Computer_easy.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+        game.play
+      elsif difficulty == "2" && order == "2"
+        game = Game.new(player_1 = Player::Computer_hard.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+        game.play
+      elsif difficulty == "1" && order == "1"
+        game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer_easy.new("O"), board = Board.new)
+        game.play
+      else
+        game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer_hard.new("O"), board = Board.new)
+        game.play
+      end
+    end
+
+    def player_against_player
+      puts "Mono E Mono!"
+      puts "Player 1 vs Player 2!"
+      game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+      game.play
+    end
+
+ def play_tic
+       loop do
+        player_options
+        puts "Would you like to play again?"
+        input = gets.strip.downcase
+        if input != "yes" || input != "y"
+           break
+         end
+      end
+      puts "See you next time!"
+    end
+
+## Begin CLI ##
+  play_tic
