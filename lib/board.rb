@@ -2,11 +2,9 @@ require 'pry'
 class Board
 	attr_accessor :cells, :edges, :corners, :center
 
- 
-
 	def initialize
 		@cells = Array.new(9," ")
-		@edges = [@cells[1],@cells[3],@cell[5],cells[7]]
+		@edges = [@cells[1],@cells[3],@cells[5],@cells[7]]
 		@corners= [0,2,6,8]
 		@center= [4]
 		
