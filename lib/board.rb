@@ -2,14 +2,14 @@ require 'pry'
 class Board
 	attr_accessor :cells, :edges, :corners, :center
 
- 
+
 
 	def initialize
 		@cells = Array.new(9," ")
 		@edges = [@cells[1],@cells[3],@cell[5],cells[7]]
 		@corners= [0,2,6,8]
 		@center= [4]
-		
+
 	end
 
 	def reset!
@@ -50,7 +50,7 @@ class Board
 		if valid_move?(position)
 			@cells.each_with_index do |cell, i|
 				if i == position.to_i - 1
-					
+
 					@cells[i] = player.token
 				end
 			end
