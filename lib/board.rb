@@ -1,5 +1,6 @@
 require 'pry'
 class Board
+  "test"
 	attr_accessor :cells, :edges, :corners, :center
 
 	def initialize
