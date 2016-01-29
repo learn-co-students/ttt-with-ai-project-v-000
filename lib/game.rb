@@ -1,6 +1,6 @@
 class Game
 
-  "test"
+  "test if this works we are good!"
 
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
