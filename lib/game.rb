@@ -1,4 +1,3 @@
-require 'pry'
 class Game
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
   attr_accessor :player_1, :player_2, :board
@@ -43,6 +42,7 @@ class Game
 
   def turn
     loop do
+      puts "It's player #{current_player.token}'s move"
       move = current_player.move(board)
       if @board.valid_move?(move)
         @board.update(move, current_player)
@@ -53,11 +53,10 @@ class Game
   end
 
   def play
-    until self.over? do
-      turn
-    end
+    turn until self.over?
     puts "Congratulations #{@winner}!" if @winner
     puts "Cats Game!" if draw?
+    @board.display
   end
 
 end

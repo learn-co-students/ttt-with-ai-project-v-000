@@ -1,3 +1,28 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/game.rb'
+
+puts "Welcome to Tic-Tac-Toe!  Please make a selection:"
+puts "1. 0 player game (2 computers)"
+puts "2. 1 player game (play against the computer)"
+puts "3. 2 player game (play against a friend)"
+
+input = gets.chomp
+
+
+case input
+when '1'
+  game = Game.new(player_1 = Computer.new('X'), player_2 = Computer.new('O'))
+  game.play
+when '2'
+  player_1 = Human.new('X')
+  player_2 = Computer.new('O')
+  game = Game.new(player_1, player_2)
+  game.play
+when '3'
+  game = Game.new
+  game.play
+else
+  puts "Incorrect input."
+end
