@@ -2,6 +2,7 @@ require 'pry'
 class Game
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
   attr_accessor :player_1, :player_2, :board
+  attr_reader :winner
 
   def initialize(player_1 = Human.new('X'), player_2 = Human.new('O'), board = Board.new)
     @player_1 = player_1
@@ -20,8 +21,11 @@ class Game
   def won?
     WIN_COMBINATIONS.each do |combination| 
       if @board.get_cells(combination).uniq.length == 1
-        @winner = @board.cells[combination[0]] 
-        return true
+        token = @board.cells[combination[0]]
+        if (token == "X") || (token == "O")
+          @winner = token
+          return true
+        end
       end
     end
     false
@@ -49,7 +53,11 @@ class Game
   end
 
   def play
-    self.turn
+    until self.over? do
+      turn
+    end
+    puts "Congratulations #{@winner}!" if @winner
+    puts "Cats Game!" if draw?
   end
 
 end
