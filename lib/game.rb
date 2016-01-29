@@ -1,8 +1,5 @@
 class Game
 
-  "test if this works we are good!"
-  "second test"
-
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
     [0,1,2],
