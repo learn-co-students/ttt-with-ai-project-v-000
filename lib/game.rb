@@ -1,6 +1,7 @@
+require 'pry'
 class Game
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :last_turn
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -16,7 +17,22 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+
   end
+
+  def ai_battle
+    @player_1 = Player::Computer.new("X")
+    @player_2 = Player::Computer.new("O")
+  end
+
+  def man_vs_machine
+
+   # if place_holder = 1
+     # @player_2 = Player::Computer.new("O")
+   # end
+
+  end
+
 
   def over?
     won? || draw?
@@ -43,7 +59,9 @@ class Game
       @board.update(current_move, player)
       puts "#{player.token} moved #{current_move}"
       @board.display
+      @last_turn = current_move
       puts "\n\n"
+     
     end
   end
 
@@ -70,3 +88,6 @@ class Game
     @board.full? && !won?
   end
 end
+
+
+
