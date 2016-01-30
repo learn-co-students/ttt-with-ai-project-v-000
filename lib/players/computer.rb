@@ -10,37 +10,35 @@ class Computer < Player
     sleep(1)
     @valid_moves = []
 
-    #self.token == "X" ? opponent_token = "O" : opponent_token = "X" 
-    potential_win_combinations = get_potential_win_combinations(board)
-    potential_defeat_combinations = get_potential_defeat_combinations(board)
-    critical_win_combinations = get_critical_win_combinations(potential_win_combinations, board)
-    critical_defeat_combinations = get_critical_defeat_combinations(potential_defeat_combinations, board)
-    #critical_win_combinations = get_critical_combinations(self.token, potential_win_combinations, board)
-    #critical_defeat_combinations = get_critical_combinations(opponent_token, potential_defeat_combinations, board)
+    self.token == "X" ? opponent_token = "O" : opponent_token = "X" 
+    potential_wins = get_potential_wins(board)
+    potential_defeats = get_potential_defeats(board)
+    critical_wins = get_critical_combinations(self.token, potential_wins, board)
+    critical_defeats = get_critical_combinations(opponent_token, potential_defeats, board)
 
-    if critical_win_combinations.any?
-      combination = critical_win_combinations.sample
+    if critical_wins.any?
+      combination = critical_wins.sample
       WIN_COMBINATIONS[combination].each do |element| 
         return (element + 1) if board.cells[element]== " "
       end
     end 
 
-    if critical_defeat_combinations.any?
-      combination = critical_defeat_combinations.sample
+    if critical_defeats.any?
+      combination = critical_defeats.sample
       WIN_COMBINATIONS[combination].each do |element| 
         return (element + 1) if board.cells[element]== " "
       end
     end 
 
-    if potential_win_combinations.any?
-      combination = potential_win_combinations.sample
+    if potential_wins.any?
+      combination = potential_wins.sample
       WIN_COMBINATIONS[combination].each do |element| 
         return (element + 1) if board.cells[element]== " "
       end
     end
 
-    if potential_defeat_combinations.any?
-      combination = potential_defeat_combinations.sample
+    if potential_defeats.any?
+      combination = potential_defeats.sample
       WIN_COMBINATIONS[combination].each do |element| 
         return (element + 1) if board.cells[element]== " "
       end
@@ -53,7 +51,7 @@ class Computer < Player
     @valid_moves.sample
   end
 
-  def get_potential_win_combinations(board)
+  def get_potential_wins(board)
     self.token == "X" ? opponent_token = "O" : opponent_token = "X" 
     win_combinations = []
     WIN_COMBINATIONS.each_with_index do |combo, index|
@@ -64,7 +62,7 @@ class Computer < Player
     win_combinations
   end
 
-  def get_potential_defeat_combinations(board)
+  def get_potential_defeats(board)
     self.token == "X" ? opponent_token = "O" : opponent_token = "X" 
     defeat_combinations = []
     WIN_COMBINATIONS.each_with_index do |combo, index|
@@ -75,31 +73,12 @@ class Computer < Player
     defeat_combinations
   end
 
-  def get_critical_win_combinations(potentials, board)
-    critical_combinations = []
-    potentials.each do |potential, index|
-      cells = board.get_cells(WIN_COMBINATIONS[potential]) 
-      critical_combinations << potential if cells.count(self.token) == 2 
-    end
-    critical_combinations
-  end
-
-  def get_critical_defeat_combinations(potentials, board)
-    self.token == "X" ? opponent_token = "O" : opponent_token = "X" 
-    critical_combinations = []
-    potentials.each do |potential, index|
-      cells = board.get_cells(WIN_COMBINATIONS[potential]) 
-      critical_combinations << potential if cells.count(opponent_token) == 2 
-    end
-    critical_combinations
-  end
-
- # def get_critical_combinations(token, potentials, board)
- #   critical_combinations = []
- #   potentials.each do |potential, index|
- #     cells = board.get_cells(WIN_COMBINATIONS[potential]) 
- #     critical_combinations << potential if cells.count(token) == 2 
- #   end
- #   critical_combinations
- # end
+ def get_critical_combinations(token, potentials, board)
+   critical_combinations = []
+   potentials.each do |potential, index|
+     cells = board.get_cells(WIN_COMBINATIONS[potential]) 
+     critical_combinations << potential if cells.count(token) == 2 
+   end
+   critical_combinations
+ end
 end
