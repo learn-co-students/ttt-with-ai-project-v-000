@@ -18,13 +18,13 @@ class Game
    @player_2 = player_2
   end
 
-  def ai_fight
+  def ai_vs_ai
     @player_1 = Player::Computer.new("X")
     @player_2 = Player::Computer.new("O")
   end
 
-  def against_ai
-    if place_holder == 1
+  def ai_vs_human(choice) ## -->
+    if  choice == 1
       @player_2 = Player::Computer.new("O")
     
     end
@@ -87,7 +87,7 @@ class Game
       end
     end
   end
-  
+
   def won?
    WIN_COMBINATIONS.detect do |combo|
      @board.cells[combo[0]] == @board.cells[combo[1]] &&

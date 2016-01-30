@@ -2,45 +2,88 @@ require 'pry'
 
 
 class Computer < Player
+	attr_accessor :current_move_count,:edge_strategy
 
-	attr_accessor :current_move_count
 
 	def move(board)
-		current_move_count = 0
-				
-  		#if Player.token("X") # --> If player 1
-		move = board.center[0].to_s
-		#	@current_move_count =+ 1
-		#end
 
-		#if player.current_move_count == 1
-			#@
+		if self.token =="X"
+			@current_move_count = 0
+			if @current_move_count == 0
+				move = board.center[0]
+					@current_move_count += 1
+					elsif @current_move_count == 1
+						if last_turn_edge
+							@current_move_count += 1
+							@edge_strategy = true
+							move = move_corner_on_other_side
 
-
-
-
-
-
-
-
-
-		
-		#if player.token("O") # --> If player 2
-			
-
-
-
-
-
-
-
-
-
-		#end
-		
+						elsif last_turn_corner
+							@current_move_count += 1
+							move = move_to_diagonal_corner
+						end
+					elsif @current_move_count >= 2 && @edge_strategy
+						move = move_block_win
+					else @current_move_count >= 2
+						move = move_block_win
+				end
+			end
+			move.to_s
+		end
 	end
 
+
+	## Helper Methods
+
+
+def last_turn_edge
+	board.edges.detect {|edge| edges == game.last_turn }
 end
+
+def move_corner_on_other_side
+	if last_turn_edge == 1 || last_turn_edge == 3
+		move = board.corners[8]
+	elsif last_turn_edge == 5 || last_turn_edge == 7
+		move = board.corners[1]
+	end
+end
+
+def move_to_diagonal_corner
+	if last_turn_corner? ==	[0]
+		move = board.corders[8]
+	end
+
+	if last_turn_corner? == [2]
+		move = board.corders[6]
+	end
+
+	if last_turn_corner? == [6]
+		move = board.corders[2]
+	end
+
+	if last_turn_corner? == [8]
+		move = board.corders[0]
+	end
+end
+
+def move_block_win
+	game.can_win? if game.can_win?
+end
+
+def move_corner
+	@corners.detect {|corner| board_obj.valid_move?(board_obj.cells[corner]) }
+end
+
+def move_edges
+	edge = @edges.detect {|edge| board_obj.valid_move?(board_obj.cells[edge]) }
+end
+
+def last_turn_corner?
+	@corners.detect {|corner| corner == other_player_last_turn? }
+end
+
+
+
 
 
 =begin
@@ -48,11 +91,9 @@ end
 		 Determines if it gets to go first or not.
 			A. If first
 				1.  Turn-1 == @current_move_count
-					board.
 					i Pick Center
 		
 					a.  Turn 2- @current_move_count
-						board
 
 						i If other player picked an edge piece Last turn
 
@@ -102,28 +143,8 @@ end
 									move corner
 										Move 3 and 4 move_block win
 								
-
-
-
-
-	Varibles to set
-	@edges = [1,3,5,7]
-	@corners= [0,2,6,8]
-	@center= [4]
-	@current_move_count = 0
-	@went_first = 0
-
-	New methods to create-
-
-		def oth_player_last_turn
-			if self == first_player
-			(second_player.move(move)) - 1
-			else
-				(first_player.move(move)) - 1
-		end
-		
-		def went_first
-		end
+	####	NEED TO BUILD CAN PLAYER WIN?
+		and MOVE BLOCK WIN
 
 		def oppon_started_edge_strat
 			a. Pick one of 2 corners opposite of other
@@ -140,8 +161,6 @@ end
 										***GAME OVER*** Win
 		end
 
-		
-		
 		player
 		def current_move_count # tells self what move it's on
 			move_count = board_obj.cells.select {|cell| cell == self.token}
@@ -155,12 +174,10 @@ end
 			if the same returns that token
 		end
 		
-		def oth_last_turn_corner?
-			@corners.detect {|corner| corner == other_player_last_turn? }
-		end
+	
 
-		def oth_last_turn_edge?
-			@edges.detect {|edge| edges == other_player_last_turn? }
+		def last_turn_edge?
+			@edges.detect {|edge| edges == game.last_turn }
 		end
 
 		
@@ -173,17 +190,9 @@ end
 
 		move_opposite_corner
 
-		def move_corner
-			@corners.detect {|corner|  board_obj.valid_move?(board_obj.cells[corner]) }
-			#call board update computer plater version
-		end
+		
 
-		def move_edges
-			edge = @edges.detect {|edge| board_obj.valid_move?(board_obj.cells[edge]) }
-			
-			#call board update computer plater version
-	
-		end
+		
 
 
 	def 0_player_game
@@ -195,3 +204,4 @@ end
 	end
 
 =end
+
