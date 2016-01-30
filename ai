@@ -7,6 +7,7 @@
 					i Pick Center
 		
 					a.  Turn 2- @current_move_count
+						board
 
 						i If other player picked an edge piece Last turn
 
