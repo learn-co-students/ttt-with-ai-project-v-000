@@ -7,6 +7,30 @@ class Computer < Player
 
 	def move(board)
 
+=begin
+I think to refine the code a little bit we should get rid of the if self.token
+I know we planned out to use it originally, but I think instead we should start
+structure the code as follows. Kep in mind that I am just trying to show strucure
+because I am not positive I understand your code. For example I don't see your
+game.can_win method.
+
+@currrent_move_count = 0
+if @current_move_count  >= 2 $$ game.can_win?
+	move = move_block_win
+elsif @current_move_count ==0 $$ board.center[0] = ""
+	move = board.center[0]
+elsif @current_move_count == 0
+	take corner (not entering value until I go over with you)
+elsif @current_move_count == 1 ... so on and so forth. I didn't want to fill out
+the code because I am not quite sure thai I won't mess up your algo.
+
+
+
+
+
+
+=end
+
 		if self.token =="X"
 			@current_move_count = 0
 			if @current_move_count == 0
@@ -92,7 +116,7 @@ end
 			A. If first
 				1.  Turn-1 == @current_move_count
 					i Pick Center
-		
+
 					a.  Turn 2- @current_move_count
 
 						i If other player picked an edge piece Last turn
@@ -101,7 +125,7 @@ end
 								(move 3,4,5 etc) == oppon_started_edge_strat
 
 						ii. If other player picked corner last turn
-								a. Place your token on diagonally opposite 
+								a. Place your token on diagonally opposite
 								corner.
 							 i. Turn 3 @current_move_count
 									i. If player picked edge position last turn
@@ -113,13 +137,13 @@ end
 												move_block_win
 												#***GAME OVER***
 									ii. If player picked corner position
-										move_block_win until game over 
+										move_block_win until game over
 										#*** tie
 			B. If 2nd(second_player -> object)
 				1. Move-1
 					a. If oth_last_turn_corner
 						self.position = center.
-						i. Move-2 
+						i. Move-2
 							a. if oth_last_turn_corner
 								move_edge
 								ii. Move- 3
@@ -130,7 +154,7 @@ end
 							a. if oth_last_turn_edge
 								(move 3,4,5 etc) == oppon_started_edge_strat
 
-						i.Move-3 
+						i.Move-3
 						i.Move 4
 
 					b. If   oth_last_turn == center[0]
@@ -142,7 +166,7 @@ end
 								b. if oth_last_turn_corner
 									move corner
 										Move 3 and 4 move_block win
-								
+
 	####	NEED TO BUILD CAN PLAYER WIN?
 		and MOVE BLOCK WIN
 
@@ -173,14 +197,14 @@ end
 			checks if all tokens are the same i.e all X's or all O's
 			if the same returns that token
 		end
-		
-	
+
+
 
 		def last_turn_edge?
 			@edges.detect {|edge| edges == game.last_turn }
 		end
 
-		
+
 		def move_block_win
 			if can_player_win? ==self.token
 				fill wining position with self.token
@@ -190,9 +214,9 @@ end
 
 		move_opposite_corner
 
-		
 
-		
+
+
 
 
 	def 0_player_game
@@ -204,4 +228,3 @@ end
 	end
 
 =end
-

@@ -26,7 +26,8 @@ class Game
   def ai_vs_human(choice) ## -->
     if  choice == 1
       @player_2 = Player::Computer.new("O")
-    
+    else
+      @player_1 = Player::Computer.new("X")
     end
   end
 
