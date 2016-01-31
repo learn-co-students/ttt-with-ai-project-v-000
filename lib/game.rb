@@ -89,7 +89,7 @@ class Game
     end
   end
 
-  def wargames
+  def self.wargames
     results = {x_wins: 0, o_wins: 0, ties: 0}
     100.times do
       game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
@@ -107,7 +107,7 @@ class Game
     puts "#{results[:o_wins]} wins for O"
   end
 
-  def get_human_count
+  def self.get_human_count
     print "How many human players do you want to play with? Enter 0, 1, or 2: "
     humans = gets.chomp
     if humans == "0"
@@ -122,7 +122,7 @@ class Game
     end
   end
 
-  def human_or_computer_first
+  def self.human_or_computer_first
     print "Who should go first? Enter human or computer: "
     response = gets.chomp
     if response == "human"
