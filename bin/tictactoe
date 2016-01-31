@@ -2,10 +2,6 @@
 
 require_relative '../config/environment'
 
-def help
-  puts "1. 0 Player (Com vs Com)\n2. 1 Player (Human vs Com)\n3. 2 Players (Human vs Human)\nType 'exit' to quit\n\n"
-end
-
 puts "**** Welcome to Tic Tac Toe! ****\n\n"
 help
 
@@ -18,13 +14,13 @@ loop do
   when "2"
     puts "Human vs Com"
   when "3"
-    puts "Human vs Human"
+    two_players
   when "help"
     help
   when "exit"
     break
   else
-    puts "Invalid! type 'help' for help\n\n"
+    puts "Invalid! type 'help' for help.\n\n"
   end
 
 end

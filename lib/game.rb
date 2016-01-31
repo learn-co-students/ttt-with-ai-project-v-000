@@ -44,6 +44,7 @@ class Game
     cell = current_player.move(board)
 
     until board.valid_move?(cell)
+      puts "Wrong move buddy!"
       turn
       return
     end
@@ -52,6 +53,8 @@ class Game
   end
 
   def play
+    board.display
+
     until over?
       turn
     end

@@ -39,6 +39,7 @@ class Board
 
   def update(cell, player)
     cells[cell.to_i-1] = player.token
+    display
   end
 
 end
