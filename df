@@ -1,0 +1,21 @@
+
+[1mFrom:[0m /home/nitrous/code/labs/ttt-with-ai-project-v-000/lib/players/computer.rb @ line 96 Computer#almost?:
+
+     [1;34m95[0m: [32mdef[0m [1;34malmost?[0m(board)
+ =>  [1;34m96[0m:   binding.pry
+     [1;34m97[0m:  [1;34;4mGame[0m::[1;34;4mWIN_COMBINATIONS[0m.detect [32mdo[0m |win_combo|
+     [1;34m98[0m:     (
+     [1;34m99[0m:       (board.cells[win_combo[[1;34m0[0m]] == [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m && board.cells[win_combo[[1;34m1[0m]] == [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m) &&
+    [1;34m100[0m:       !board.taken?(win_combo[[1;34m2[0m]+[1;34m1[0m)
+    [1;34m101[0m:     ) ||
+    [1;34m102[0m:     (
+    [1;34m103[0m:       (board.cells[win_combo[[1;34m1[0m]] == [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m && board.cells[win_combo[[1;34m2[0m]] == [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m) &&
+    [1;34m104[0m:       !board.taken?(win_combo[[1;34m0[0m]+[1;34m1[0m)
+    [1;34m105[0m:     ) ||
+    [1;34m106[0m:     (
+    [1;34m107[0m:       (board.cells[win_combo[[1;34m0[0m]] == [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m && board.cells[win_combo[[1;34m2[0m]] == [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m) &&
+    [1;34m108[0m:       !board.taken?(win_combo[[1;34m1[0m]+[1;34m1[0m)
+    [1;34m109[0m:     )
+    [1;34m110[0m:   [32mend[0m
+    [1;34m111[0m: [32mend[0m
+

@@ -10,7 +10,7 @@ describe 'Player::Computer' do
       computer = Player::Computer.new("X")
       board = Board.new
       
-      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9", 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
       computer_move = computer.move(board)
 
