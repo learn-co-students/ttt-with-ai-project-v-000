@@ -1,7 +1,17 @@
 # cli helper
 
 def help
-  puts "1: 0 Player (Com vs Com).\n2: 1 Player (Human vs Com).\n3: 2 Players (Human vs Human).\nhelp: to display this menu.\nexit: to quit.\n\n"
+  puts "1: 0 Player (Com vs Com).\n2: 1 Player (Human vs Com).\n3: 2 Players (Human vs Human).\nhelp: to display this menu.\nexit: to quit.\n"
+end
+
+
+def zero_player
+  puts "---- Com X vs Com O ----\n\n"
+
+  player_1 = Computer.new("X")
+  player_2 = Computer.new("O")
+
+  Game.new(player_1, player_2).play
 end
 
 # Game between a Human and Computer
@@ -12,9 +22,11 @@ def one_player
   player_1, player_2 = nil
 
   if ["y", "yes"].include?(input.downcase)
+    puts "---- Human X vs Com O ----\n\n"
     player_1 = Human.new("X")
     player_2 = Computer.new("O")
   elsif ["n", "no"].include?(input.downcase)
+    puts "---- Com X vs Human O ----\n\n"
     player_1 = Computer.new("X")
     player_2 = Human.new("O")
   else
@@ -27,6 +39,8 @@ end
 
 # Game between two Humans
 def two_players
+  puts "---- Human X vs Human O ----\n\n"
+
   player_1 = Human.new("X")
   player_2 = Human.new("O")
 

@@ -6,11 +6,11 @@ puts "**** Welcome to Tic Tac Toe! ****\n\n"
 help
 
 loop do
-  puts "What mode do you want to play?"
+  puts "\nWhat mode do you want to play?"
 
   case gets.strip
   when "1"
-    puts "Com vs Com"
+    zero_player
   when "2"
     one_player
   when "3"
@@ -22,5 +22,4 @@ loop do
   else
     puts "Invalid! type 'help' for help.\n\n"
   end
-
 end
