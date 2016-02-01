@@ -1,7 +1,7 @@
 # cli helper
 
 def help
-  puts "1: 0 Player (Com vs Com).\n2: 1 Player (Human vs Com).\n3: 2 Players (Human vs Human).\nhelp: to display this menu.\nexit: to quit.\n"
+  puts "1: 0 Player mode (Com vs Com).\n2: 1 Player mode (Human vs Com).\n3: 2 Players mode (Human vs Human).\nhelp: to display this menu.\nexit: to quit.\n"
 end
 
 
@@ -16,7 +16,7 @@ end
 
 # Game between a Human and Computer
 def one_player
-  puts "Would you like to go first? (y/n)"
+  print "You won't beat me, but you can try :P\nWould you like to go first? (y/n): "
   input = gets.strip
 
   player_1, player_2 = nil
