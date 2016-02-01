@@ -31,7 +31,7 @@ the code because I am not quite sure thai I won't mess up your algo.
 
 =end
 
-		if self.token =="X"
+		
 			@current_move_count = 0
 			if @current_move_count == 0
 				move = board.center[0]
