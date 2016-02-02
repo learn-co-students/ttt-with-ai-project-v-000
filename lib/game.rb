@@ -55,12 +55,11 @@ class Game
      puts "Turn: #{@board.turn_count+1}\n"
      @board.display
      @board.update(current_move, player)
-     binding.pry
-     board.last_turn = current_move
      puts "#{player.token} moved #{current_move}"
      @board.display
      puts "\n\n"
    end
+   @board.last_turn = current_move
   end
 
   def play

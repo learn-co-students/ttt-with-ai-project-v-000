@@ -1,6 +1,6 @@
 require 'pry'
 class Board
-  "test"
+  
 	attr_accessor :cells, :edges, :corners, :center, :last_turn
 
 	def initialize

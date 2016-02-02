@@ -30,23 +30,22 @@ the code because I am not quite sure thai I won't mess up your algo.
 =end
 
 		@board = board
-		@current_move_count = 0
+		@current_move_count = 0 if !@current_move_count
 		
 		if @current_move_count == 0 && board.valid_move?(board.center[0])
 
 			move = board.center[0]
 		elsif @current_move_count == 0
-			move = move_corner
+			move = self.move_corner
 
-		#elsif @current_move_count  >= 2 $$ game.can_win?
-		else 
-			if last_turn_center?
-			elsif last_turn_edge?
-			elsif last_turn_corner?
+		elsif @current_move_count  >= 2 game.can_win?
+		else
+			if last_turn_corner?
+				move_to_diagonal_corner
+				#binding.pry
 			end
-
 		end
-		@current_move_count +=1
+		@current_move_count += 1
 		move = move.to_s
 
 	end
@@ -89,19 +88,15 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def move_to_diagonal_corner
-		if last_turn_corner? ==	[0]
-			move = @board.corners[8]
-		end
-
-		if last_turn_corner? == [2]
-			move = @board.corners[6]
-		end
-
-		if last_turn_corner? == [6]
+		#binding.pry
+		
+		if last_turn_corner? == 1
+			move = @board.corners[3]
+		elsif last_turn_corner? == 3
 			move = @board.corners[2]
-		end
-
-		if last_turn_corner? == [8]
+		elsif last_turn_corner? == 7
+			move = @board.corners[1]
+		elsif last_turn_corner? == 9
 			move = @board.corners[0]
 		end
 	end
@@ -127,9 +122,10 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def last_turn_corner?
-		binding.pry
-		
-		@board.corners.detect {|corner| corner == @board.last_turn }
+		@board.corners.detect do |corner|
+			
+		 corner == @board.last_turn.to_i
+		end
 	end
 
 end
