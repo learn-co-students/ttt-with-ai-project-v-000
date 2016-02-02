@@ -1,12 +1,12 @@
 require 'pry'
 class Board
   "test"
-	attr_accessor :cells, :edges, :corners, :center
+	attr_accessor :cells, :edges, :corners, :center, :last_turn
 
 	def initialize
 		@cells = Array.new(9," ")
-		@edges = [@cells[1],@cells[3],@cells[5],@cells[7]]
-		@corners= [0,2,6,8]
+		@edges = [2,4,6,8]
+		@corners= [1,3,7,9]
 		@center= [5]
 
 	end

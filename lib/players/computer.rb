@@ -4,7 +4,7 @@ require 'pry'
 class Computer < Player
 	attr_accessor :current_move_count,:edge_strategy, :board
 
-	
+
 
 	def move(board)
 
@@ -38,8 +38,17 @@ the code because I am not quite sure thai I won't mess up your algo.
 		elsif @current_move_count == 0
 			move = move_corner
 
+		#elsif @current_move_count  >= 2 $$ game.can_win?
+		else 
+			if last_turn_center?
+			elsif last_turn_edge?
+			elsif last_turn_corner?
+			end
+
 		end
+		@current_move_count +=1
 		move = move.to_s
+
 	end
 =begin
 				@current_move_count += 1
@@ -67,7 +76,7 @@ the code because I am not quite sure thai I won't mess up your algo.
 	## Helper Methods
 
 
-	def last_turn_edge
+	def last_turn_edge?
 		@board.edges.detect {|edge| edges == game.last_turn }
 	end
 
@@ -102,12 +111,15 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def move_corner
-		
 		@board.corners.detect do |corner| 
-			binding.pry
-		@board.valid_move?(@board.cells[corner])
-		
+		@board.valid_move?(corner)
 		end 
+	end
+
+	def last_turn_center?
+		last_turn = game.last_turn.to_i
+		@board.taken(last_turn)
+		
 	end
 
 	def move_edges
@@ -115,7 +127,9 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def last_turn_corner?
-		@corners.detect {|corner| corner == other_player_last_turn? }
+		binding.pry
+		
+		@board.corners.detect {|corner| corner == @board.last_turn }
 	end
 
 end

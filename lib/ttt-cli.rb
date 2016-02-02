@@ -4,6 +4,7 @@ class TttCli
 
 	def initialize
 		@game = Game.new
+
 	end
 
 	def play_game
