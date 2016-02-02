@@ -24,7 +24,7 @@ class Game
   end
 
   def ai_vs_human(choice) ## -->
-    if  choice == 1
+    if  choice == "X"
       @player_2 = Player::Computer.new("O")
     else
       @player_1 = Player::Computer.new("X")
@@ -47,6 +47,7 @@ class Game
 
   def turn
    player = current_player
+   puts "Where you like to move? Enter (1-9)"
    current_move = player.move(@board)
    if !@board.valid_move?(current_move)
      turn
