@@ -105,7 +105,7 @@ the code because I am not quite sure thai I won't mess up your algo.
 		
 		@board.corners.detect do |corner| 
 			binding.pry
-		@board.valid_move?(@board.cells[corner])
+		@board.valid_move?(corner)
 		
 		end 
 	end
