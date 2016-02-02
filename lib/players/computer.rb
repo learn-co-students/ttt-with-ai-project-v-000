@@ -102,12 +102,12 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def move_corner
-		binding.pry
+		
 		@board.corners.detect do |corner| 
-
-			@board.valid_move?(@board.cells[corner])
 			binding.pry
-			end 
+		@board.valid_move?(@board.cells[corner])
+		
+		end 
 	end
 
 	def move_edges
