@@ -2,6 +2,7 @@ require 'pry'
 
 
 class Computer < Player
+
 	attr_accessor :current_move_count,:edge_strategy, :board
 
 
@@ -31,14 +32,14 @@ the code because I am not quite sure thai I won't mess up your algo.
 
 		@board = board
 		@current_move_count = 0 if !@current_move_count
-		
+
 		if @current_move_count == 0 && board.valid_move?(board.center[0])
 
 			move = board.center[0]
 		elsif @current_move_count == 0
 			move = self.move_corner
 
-		elsif @current_move_count  >= 2 game.can_win?
+		elsif @current_move_count  >= 2 && @game.can_win?
 		else
 			if last_turn_corner?
 				move_to_diagonal_corner
@@ -89,7 +90,7 @@ the code because I am not quite sure thai I won't mess up your algo.
 
 	def move_to_diagonal_corner
 		#binding.pry
-		
+
 		if last_turn_corner? == 1
 			move = @board.corners[3]
 		elsif last_turn_corner? == 3
@@ -106,15 +107,15 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def move_corner
-		@board.corners.detect do |corner| 
+		@board.corners.detect do |corner|
 		@board.valid_move?(corner)
-		end 
+		end
 	end
 
 	def last_turn_center?
 		last_turn = game.last_turn.to_i
 		@board.taken(last_turn)
-		
+
 	end
 
 	def move_edges
@@ -123,7 +124,7 @@ the code because I am not quite sure thai I won't mess up your algo.
 
 	def last_turn_corner?
 		@board.corners.detect do |corner|
-			
+
 		 corner == @board.last_turn.to_i
 		end
 	end

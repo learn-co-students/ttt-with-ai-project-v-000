@@ -1,6 +1,7 @@
 require 'pry'
 class Board
-  
+
+
 	attr_accessor :cells, :edges, :corners, :center, :last_turn
 
 	def initialize
@@ -55,4 +56,5 @@ class Board
 			end
 		end
 	end
+
 end
