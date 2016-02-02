@@ -2,6 +2,7 @@ require 'pry'
 
 
 class Computer < Player
+
 	attr_accessor :current_move_count,:edge_strategy, :board
 
 
@@ -32,14 +33,14 @@ But the values within that method all show correctly. Still working it.
 
 		@board = board
 		@current_move_count = 0 if !@current_move_count
-		
+
 		if @current_move_count == 0 && board.valid_move?(board.center[0])
 
 			move = board.center[0]
 		elsif @current_move_count == 0
 			move = self.move_corner
+@current_move_count  >= 2 && @game.can_win?
 
-		#elsif @current_move_count  >= 2 game.can_win?
 		else
 			if last_turn_corner?
 				#move_to_diagonal_corner
@@ -90,7 +91,7 @@ But the values within that method all show correctly. Still working it.
 
 	def move_to_diagonal_corner
 		#binding.pry
-		
+
 		if last_turn_corner? == 1
 			move = @board.corners[3]
 		elsif last_turn_corner? == 3
@@ -107,15 +108,15 @@ But the values within that method all show correctly. Still working it.
 	end
 
 	def move_corner
-		@board.corners.detect do |corner| 
+		@board.corners.detect do |corner|
 		@board.valid_move?(corner)
-		end 
+		end
 	end
 
 	def last_turn_center?
 		last_turn = game.last_turn.to_i
 		@board.taken(last_turn)
-		
+
 	end
 
 	def move_edges
@@ -124,7 +125,7 @@ But the values within that method all show correctly. Still working it.
 
 	def last_turn_corner?
 		@board.corners.detect do |corner|
-			
+
 		 corner == @board.last_turn.to_i
 		end
 	end

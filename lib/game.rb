@@ -47,6 +47,8 @@ class Game
 
   def turn
    player = current_player
+   #setting @game in Player class to equal this game
+   player.game(self)
    puts "Where you like to move? Enter (1-9)"
    current_move = player.move(@board)
    if !@board.valid_move?(current_move)
@@ -59,7 +61,7 @@ class Game
      @board.display
      puts "\n\n"
    end
-   @board.last_turn = current_move
+   @last_turn = current_move
   end
 
   def play
@@ -76,13 +78,13 @@ class Game
   def can_win?
     WIN_COMBINATIONS.detect do |combo|
       if @board.cells[combo[0]] == @board.cells[combo[1]]
-        if board.valid_move(combo[2])
+        if board.valid_move?(combo[2])
           return combo[2]
         elsif @board.cells[combo[1]] == @board.cells[combo[2]]
-          if board.valid_move(combo[0])
+          if board.valid_move?(combo[0])
             return combo[0]
           elsif @board.cells[combo[0]] == @board.cells[combo[2]]
-            board.valid_move(combo[1])
+            board.valid_move?(combo[1])
             return combo[1]
           end
         end
