@@ -126,6 +126,7 @@ But the values within that method all show correctly. Still working it.
 		@board.corners.detect do |corner|
 
 		 corner == @board.last_turn.to_i
+		 binding.pry
 		end
 	end
 
