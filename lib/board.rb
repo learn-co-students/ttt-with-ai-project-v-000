@@ -41,6 +41,7 @@ class Board
 
 	def taken?(position)
 		position(position) == "X" || position(position) == "O"
+	
 	end
 
 	def valid_move?(move)

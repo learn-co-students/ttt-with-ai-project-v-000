@@ -24,7 +24,7 @@ class Game
   end
 
   def ai_vs_human(choice) ## -->
-    if  choice == "X"
+    if  choice == "X" || choice == "x"
       @player_2 = Player::Computer.new("O")
     else
       @player_1 = Player::Computer.new("X")
@@ -76,22 +76,28 @@ class Game
   end
 
   def can_win?
-      WIN_COMBINATIONS.detect do |combo|
-        if @board.cells[combo[0]] == @board.cells[combo[1]] ||
-        @board.cells[combo[1]] == @board.cells[combo[2]] ||
-         @board.cells[combo[0]] == @board.cells[combo[2]] &&
-        @board.taken?(combo[0]+1) || @board.taken?(combo[1]+1)
-          if @board.cells[combo[0]] == " "
-            @board.cells[combo[0]]
-          elsif @board.cells[combo[1]] == " "
-            @board.cells[combo[1]]
-          else
-            @board.cells[combo[2]]
-          end
+    can_win = nil
+    WIN_COMBINATIONS.each do |combo|
 
+      if @board.taken?(combo[0]+1) && @board.taken?(combo[1]+1)
+        if @board.cells[combo[0]] == @board.cells[combo[1]]
+          can_win= combo[2]+1 if @board.valid_move?((combo[2]+1).to_s)
+        end
+      elsif @board.taken?(combo[1]+1) && @board.taken?(combo[2]+1)
+        if @board.cells[combo[1]] == @board.cells[combo[2]]
+          can_win= combo[0]+1 if @board.valid_move?((combo[0]+1).to_s)
+        end
+      elsif @board.taken?(combo[0]+1) && @board.taken?(combo[2]+1)
+        if @board.cells[combo[0]] == @board.cells[combo[2]]
+         can_win= combo[1]+1 if @board.valid_move?((combo[1]+1).to_s)
         end
       end
+
+    end
+    can_win
+
   end
+
 
   def won?
    WIN_COMBINATIONS.detect do |combo|
