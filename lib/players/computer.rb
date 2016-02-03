@@ -48,7 +48,7 @@ But the values within that method all show correctly. Still working it.
 		else
 			if last_turn_corner? && @board.valid_move?(move_to_diagonal_corner)
 					move = move_to_diagonal_corner	
-			elsif	last_turn_corner? && @board.valid_move?(corner)
+			elsif	last_turn_corner? && @board.valid_move?(move_corner)
 				move= move_corner
 			elsif move_corner
 					move = move_corner				
@@ -122,7 +122,6 @@ But the values within that method all show correctly. Still working it.
 
 	def move_corner
 		@board.corners.detect do |corner|
-			binding.pry
 		@board.valid_move?(corner)
 		end
 	end
