@@ -1,3 +1,54 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def play_ttt
+  puts "Welcome to Tic Tac Toe!"
+  puts "How many human players would you like? (0-2) or (q)uit"
+  player_input = gets.chomp
+
+  game = Game.new
+  
+  if player_input.downcase == "q"
+    puts "goodbye!"
+    return
+
+  # have computers play
+  elsif player_input.to_i == 0
+    game.player_1 = Player::Computer.new("X")
+    game.player_2 = Player::Computer.new("O")
+    game.play()
+
+  # one computer player
+  elsif player_input.to_i == 1
+    puts "Who should go first (H)uman or (C)omputer?"
+    input = gets.chomp
+
+    case input.downcase
+    when "h"
+      game.player_2 = Player::Computer.new("O")
+    when "c"
+      game.player_1 = Player::Computer.new("X")
+    else
+      puts "invalid input"
+      play_ttt()
+    end
+    game.play()
+
+  # two human players
+  elsif player_input.to_i == 2
+    puts "Who should go first (X or O)?"
+    first_player = gets.chomp.upcase
+    second_player = first_player == "X" ? "O" : "X"
+
+    game.player_1 = Player::Human.new(first_player)
+    game.player_2 = Player::Human.new(second_player)
+    game.play()
+
+  else
+    puts "invalid number of players"
+    play_ttt()
+  end
+end
+
+play_ttt()
