@@ -42,10 +42,12 @@ But the values within that method all show correctly. Still working it.
 		elsif @current_move_count  >= 2 && @game.can_win?
 		else
 
-			if last_turn_corner?
-				move_to_diagonal_corner
+			if last_turn_corner? 
+				move = move_to_diagonal_corner
+				
+
 			else
-											binding.pry
+											
 			end
 		end
 		@current_move_count += 1
@@ -91,11 +93,12 @@ But the values within that method all show correctly. Still working it.
 	end
 
 	def move_to_diagonal_corner
-		#binding.pry
+		
 
 		if last_turn_corner? == 1
 			move = @board.corners[3]
 		elsif last_turn_corner? == 3
+			binding.pry
 			move = @board.corners[2]
 		elsif last_turn_corner? == 7
 			move = @board.corners[1]
@@ -125,10 +128,11 @@ But the values within that method all show correctly. Still working it.
 	end
 
 	def last_turn_corner?
-		@board.corners.detect do |corner|
+		self.board.corners.detect do |corner|
 
-		 corner == @board.last_turn.to_i
-		 binding.pry
+		 corner == @game.last_turn.to_i
+		
+		
 		end
 	end
 
