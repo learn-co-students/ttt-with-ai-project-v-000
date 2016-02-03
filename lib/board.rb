@@ -2,7 +2,7 @@ require 'pry'
 class Board
 
 
-	attr_accessor :cells, :edges, :corners, :center, :last_turn
+	attr_accessor :cells, :edges, :corners, :center
 
 	def initialize
 		@cells = Array.new(9," ")
