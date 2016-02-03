@@ -18,24 +18,18 @@ class Computer < Player
 			move = self.move_corner
 		elsif @current_move_count  >= 1 && @game.can_win?
 			if @board.cells[@game.can_win?] == self.token
-				binding.pry
 				move = move_block_win
-			else
-				binding.pry
+			else	
 				move = move_block_win
 			end
 		else
 			if last_turn_corner? && @board.valid_move?(move_to_diagonal_corner)
-
 					move = move_to_diagonal_corner	
 			elsif	last_turn_corner? && @board.valid_move?(move_corner)
-			
 				move= move_corner
 			elsif move_corner && @board.valid_move?(move_corner)
-
-					move = move_corner				
+				move = move_corner				
 			else
-				binding.pry
 				move = move_edges
 			end
 		end
@@ -43,30 +37,10 @@ class Computer < Player
 		move = move.to_s
 
 	end
-=begin
-				@current_move_count += 1
-				elsif @current_move_count == 1
-					if last_turn_edge
-						@current_move_count += 1
-						@edge_strategy = true
-						move = move_corner_on_other_side
-
-					elsif last_turn_corner
-						@current_move_count += 1
-						move = move_to_diagonal_corner
-					end
-				elsif @current_move_count >= 2 && @edge_strategy
-					move = move_block_win
-				else @current_move_count >= 2
-					move = move_block_win
-			end
-			move.to_s
-		end
-=end
 
 
 
-	## Helper Methods
+
 
 	def empty_space
 		@board.cells.each_with_index do |cell, i| 
