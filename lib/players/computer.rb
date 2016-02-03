@@ -39,12 +39,12 @@ But the values within that method all show correctly. Still working it.
 			move = board.center[0]
 		elsif @current_move_count == 0
 			move = self.move_corner
-		elsif @current_move_count  >= 2 && @game.can_win?
+		elsif @current_move_count  >= 1 && @game.can_win?
+			move = @game.can_win?
 		else
 
 			if last_turn_corner?
 				move = move_to_diagonal_corner
-
 
 			else
 
@@ -52,7 +52,6 @@ But the values within that method all show correctly. Still working it.
 		end
 		@current_move_count += 1
 		move = move.to_s
-
 	end
 =begin
 				@current_move_count += 1

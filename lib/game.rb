@@ -76,20 +76,21 @@ class Game
   end
 
   def can_win?
-    WIN_COMBINATIONS.detect do |combo|
-      if @board.cells[combo[0]] == @board.cells[combo[1]]
-        if board.valid_move?(combo[2])
-          combo[2]
-        elsif @board.cells[combo[1]] == @board.cells[combo[2]]
-          if board.valid_move?(combo[0])
-            combo[0]
-          elsif @board.cells[combo[0]] == @board.cells[combo[2]]
-            board.valid_move?(combo[1])
-            combo[1]
+      WIN_COMBINATIONS.detect do |combo|
+        if @board.cells[combo[0]] == @board.cells[combo[1]] ||
+        @board.cells[combo[1]] == @board.cells[combo[2]] ||
+         @board.cells[combo[0]] == @board.cells[combo[2]] &&
+        @board.taken?(combo[0]+1) || @board.taken?(combo[1]+1)
+          if @board.cells[combo[0]] == " "
+            @board.cells[combo[0]]
+          elsif @board.cells[combo[1]] == " "
+            @board.cells[combo[1]]
+          else
+            @board.cells[combo[2]]
           end
+
         end
       end
-    end
   end
 
   def won?
