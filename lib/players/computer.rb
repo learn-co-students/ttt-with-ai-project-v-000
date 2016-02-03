@@ -40,12 +40,12 @@ But the values within that method all show correctly. Still working it.
 		elsif @current_move_count == 0
 			move = self.move_corner
 		elsif @current_move_count  >= 1 && @game.can_win?
+			
 			move = move_block_win
 		else
 			if last_turn_corner? && @board.valid_move?(move_to_diagonal_corner)
 					move = move_to_diagonal_corner		
 			elsif move_corner
-				
 					move = move_corner				
 			elsif move_edges
 				move = move_edges
