@@ -41,18 +41,24 @@ But the values within that method all show correctly. Still working it.
 			move = self.move_corner
 		elsif @current_move_count  >= 1 && @game.can_win?
 			if @board.cells[@game.can_win?] == self.token
+				binding.pry
 				move = move_block_win
 			else
+				binding.pry
 				move = move_block_win
 			end
 		else
 			if last_turn_corner? && @board.valid_move?(move_to_diagonal_corner)
+
 					move = move_to_diagonal_corner	
 			elsif	last_turn_corner? && @board.valid_move?(move_corner)
+			
 				move= move_corner
-			elsif move_corner
+			elsif move_corner && @board.valid_move?(move_corner)
+
 					move = move_corner				
-			elsif move_edges
+			else
+				binding.pry
 				move = move_edges
 			end
 		end
@@ -133,7 +139,7 @@ But the values within that method all show correctly. Still working it.
 	end
 
 	def move_edges
-		edge = @board.edges.detect {|edge| board.valid_move?(@board.cells[edge]) }
+		edge = @board.edges.detect {|edge| board.valid_move?(edge) }
 	end
 
 	def last_turn_corner?
