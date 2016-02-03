@@ -79,13 +79,13 @@ class Game
     WIN_COMBINATIONS.detect do |combo|
       if @board.cells[combo[0]] == @board.cells[combo[1]]
         if board.valid_move?(combo[2])
-          return combo[2]
+          combo[2]
         elsif @board.cells[combo[1]] == @board.cells[combo[2]]
           if board.valid_move?(combo[0])
-            return combo[0]
+            combo[0]
           elsif @board.cells[combo[0]] == @board.cells[combo[2]]
             board.valid_move?(combo[1])
-            return combo[1]
+            combo[1]
           end
         end
       end

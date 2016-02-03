@@ -41,9 +41,11 @@ the code because I am not quite sure thai I won't mess up your algo.
 
 		elsif @current_move_count  >= 2 && @game.can_win?
 		else
+
 			if last_turn_corner?
 				move_to_diagonal_corner
-				#binding.pry
+			else
+											binding.pry
 			end
 		end
 		@current_move_count += 1
