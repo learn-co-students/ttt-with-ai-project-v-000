@@ -79,23 +79,22 @@ class Game
     can_win = nil
     WIN_COMBINATIONS.each do |combo|
 
-      
       if @board.taken?(combo[0]+1) && @board.taken?(combo[1]+1)
         if @board.cells[combo[0]] == @board.cells[combo[1]]
-          return can_win= combo[2]+1 if @board.valid_move?((combo[2]+1).to_s)
+          can_win= combo[2]+1 if @board.valid_move?((combo[2]+1).to_s)
         end
       elsif @board.taken?(combo[1]+1) && @board.taken?(combo[2]+1)
         if @board.cells[combo[1]] == @board.cells[combo[2]]
-          return can_win= combo[0]+1 if @board.valid_move?((combo[0]+1).to_s)
+          can_win= combo[0]+1 if @board.valid_move?((combo[0]+1).to_s)
         end
       elsif @board.taken?(combo[0]+1) && @board.taken?(combo[2]+1)
         if @board.cells[combo[0]] == @board.cells[combo[2]]
-         return can_win= combo[1]+1 if @board.valid_move?((combo[1]+1).to_s)
+         can_win= combo[1]+1 if @board.valid_move?((combo[1]+1).to_s)
         end
       end
 
     end
-    
+    can_win
 
   end
  
