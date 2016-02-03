@@ -39,15 +39,16 @@ But the values within that method all show correctly. Still working it.
 			move = board.center[0]
 		elsif @current_move_count == 0
 			move = self.move_corner
-		elsif @current_move_count  >= 2 && @game.can_win?
+		elsif @current_move_count  >= 1 && @game.can_win?
+			move = move_block_win
 		else
-
-			if last_turn_corner? 
-				move = move_to_diagonal_corner
+			if last_turn_corner? && @board.valid_move?(move_to_diagonal_corner)
+					move = move_to_diagonal_corner		
+			elsif move_corner
 				
-
-			else
-											
+					move = move_corner				
+			elsif move_edges
+				move = move_edges
 			end
 		end
 		@current_move_count += 1
@@ -79,9 +80,14 @@ But the values within that method all show correctly. Still working it.
 
 	## Helper Methods
 
+	def empty_space
+		@board.cells.each_with_index do |cell, i| 
+			return (i + 1)if cell == " "
+		end
+	end
 
 	def last_turn_edge?
-		@board.edges.detect {|edge| edges == game.last_turn }
+		@board.edges.detect {|edge| edge == game.last_turn }
 	end
 
 	def move_corner_on_other_side
@@ -94,11 +100,10 @@ But the values within that method all show correctly. Still working it.
 
 	def move_to_diagonal_corner
 		
-
 		if last_turn_corner? == 1
 			move = @board.corners[3]
 		elsif last_turn_corner? == 3
-			binding.pry
+			
 			move = @board.corners[2]
 		elsif last_turn_corner? == 7
 			move = @board.corners[1]
@@ -108,7 +113,7 @@ But the values within that method all show correctly. Still working it.
 	end
 
 	def move_block_win
-		game.can_win? if game.can_win?
+		@game.can_win?
 	end
 
 	def move_corner
