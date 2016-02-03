@@ -26,7 +26,8 @@ elsif @current_move_count == 0
 elsif @current_move_count == 1 ... so on and so forth. I didn't want to fill out
 the code because I am not quite sure thai I won't mess up your algo.
 
-
+#notes 2,1--> everything should working including last_turn_corner. Move diagonal corner keeps causing infinite loops.
+But the values within that method all show correctly. Still working it.
 
 =end
 
@@ -38,14 +39,15 @@ the code because I am not quite sure thai I won't mess up your algo.
 			move = board.center[0]
 		elsif @current_move_count == 0
 			move = self.move_corner
-
 		elsif @current_move_count  >= 2 && @game.can_win?
 		else
 
-			if last_turn_corner?
-				move_to_diagonal_corner
+			if last_turn_corner? 
+				move = move_to_diagonal_corner
+				
+
 			else
-											binding.pry
+											
 			end
 		end
 		@current_move_count += 1
@@ -91,11 +93,12 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def move_to_diagonal_corner
-		#binding.pry
+		
 
 		if last_turn_corner? == 1
 			move = @board.corners[3]
 		elsif last_turn_corner? == 3
+			binding.pry
 			move = @board.corners[2]
 		elsif last_turn_corner? == 7
 			move = @board.corners[1]
@@ -125,9 +128,11 @@ the code because I am not quite sure thai I won't mess up your algo.
 	end
 
 	def last_turn_corner?
-		@board.corners.detect do |corner|
+		self.board.corners.detect do |corner|
 
-		 corner == @board.last_turn.to_i
+		 corner == @game.last_turn.to_i
+		
+		
 		end
 	end
 

@@ -61,7 +61,7 @@ class Game
      @board.display
      puts "\n\n"
    end
-   @last_turn = current_move
+    self.last_turn = current_move
   end
 
   def play
