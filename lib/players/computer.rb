@@ -41,9 +41,11 @@ But the values within that method all show correctly. Still working it.
 			move = self.move_corner
 		elsif @current_move_count  >= 2 && @game.can_win?
 		else
+
 			if last_turn_corner?
 				move_to_diagonal_corner
-				#binding.pry
+			else
+											binding.pry
 			end
 		end
 		@current_move_count += 1
