@@ -36,7 +36,6 @@ class Game
 	def allsame?(array, token)
 		if array.all? {|i| board.cells[i] == token}
 			@the_winner = token
-			puts "True"
 			true
 		else
 			@the_winner = nil
@@ -50,6 +49,19 @@ class Game
 	
 	def winner
 		won? ? the_winner : nil
+	end
+	
+	def turn
+		input = current_player.move(board)
+		board.valid_move?(input)? board.update(input, current_player) : turn
+	end
+	
+	def play
+		while !over?
+			puts "#{current_player.token}'s turn"
+			turn
+		end
+		draw? ? (puts "Cats Game!") : (puts "Congratulations #{winner}!")
 	end
 	
 end
