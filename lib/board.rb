@@ -13,11 +13,13 @@ class Board
 	def display
 		row = "-----------"
 		i = 0
+		puts "\n"
 		3.times do
 			puts " #{cells[i]} | #{cells[i+1]} | #{cells[i+2]} "
-			puts row if i < 9
+			puts row if i < 6
 			i +=3
 		end
+		puts "\n"
 	end
 	
 	def position(user_index)

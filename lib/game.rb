@@ -10,6 +10,8 @@ class Game
 											[0,4,8],
 											[6,4,2]
 											]
+	DIVIDER = "===================\n"									
+											
 	attr_accessor :player_1, :player_2, :board
 	attr_reader :the_winner
 	
@@ -24,6 +26,7 @@ class Game
 	end
 	
 	def over?
+		#binding.pry
 		won? ? true : draw?
 	end
 	
@@ -53,15 +56,31 @@ class Game
 	
 	def turn
 		input = current_player.move(board)
-		board.valid_move?(input)? board.update(input, current_player) : turn
+		if board.valid_move?(input) 
+			board.update(input, current_player)
+		else
+			puts "\nInvalid move. Enter an open position from 1-9."
+			display_turn
+			turn
+		end
 	end
 	
 	def play
 		while !over?
-			puts "#{current_player.token}'s turn"
+			display_turn
 			turn
 		end
+		puts "\n" + DIVIDER
 		draw? ? (puts "Cats Game!") : (puts "Congratulations #{winner}!")
+		puts DIVIDER
+		board.display
+	end
+	
+	def display_turn
+		puts "\n" + DIVIDER
+		puts "  #{current_player.token}'s turn"
+		puts DIVIDER
+		board.display
 	end
 	
 end
