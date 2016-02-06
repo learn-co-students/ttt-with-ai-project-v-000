@@ -15,7 +15,7 @@ def play
 	play_again?
 end
 
-#had to move play_again logic here because in game.rb it gave rspec errors becuase it asked for input
+#had to move play_again logic here because in game.rb it gave rspec errors because it asked for input
 def play_again?
 	puts "Would you like to play again? y/n"
 	input = gets.strip
