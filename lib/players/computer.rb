@@ -14,11 +14,15 @@ class Computer < Player
 	EDGES = [2, 4, 6, 8]
 	CORNERS  = [1, 3, 7, 9]
 	
-	#attr_accessor :board
-	attr_reader :first_move
+	attr_reader :first_move, :sleep_time
+	
+	def set_sleep_time(n=0)
+		@sleep_time = n
+	end
 	
 	def move(board)
-		#@board = board
+		@sleep_time = 0.75 if sleep_time.nil?
+		sleep(sleep_time)
 		board.turn_count.even? ? offensive_move(board).to_s : defensive_move(board).to_s
 	end
 	
@@ -64,7 +68,8 @@ class Computer < Player
 			#must have one open space and 2 of either token (XX or OO)
 			if temp.reject {|x| x == " " }.length == 2 && temp.count(self.token) != 1
 				move = combo[temp.index(" ")] + 1 #1 to offset index and player_index
-				break if temp.count(self.token) == 2 #found a winner! otherwise we keep going as this move found two of opponents spots and we want to see if we can win now or block
+				break if temp.count(self.token) == 2 #found a winner! otherwise we keep going as this move found two of our
+																						 #opponent's spots and we want to see if we can find a winning patter further in the array
 			end
 		end
 		move
@@ -76,10 +81,11 @@ class Computer < Player
 	
 	# tries to get a corner or edge otherwise nabs an empty space
 	def choose_valid_space(first_choice, board)
-		if choose_valid(first_choice, board).nil?
+		choice = choose_valid(first_choice, board)
+		if choice.nil?
 			first_choice == EDGES ? choose_valid(CORNERS, board) : choose_valid(EDGES, board)
 		else
-			choose_valid(first_choice, board)
+			choice
 		end
 	end
 	
@@ -90,6 +96,7 @@ class Computer < Player
 				break
 			end
 		end
+		nil
 	end
 	
 	def corner_picked?(board)
