@@ -45,7 +45,7 @@ class Computer < Player
 	
 	def defensive_move(board)
 		
-		if board.turn_count < 2 && corner_picked?(board)
+		if board.turn_count < 2 && !board.taken?(CENTER)
 			@first_move = CENTER
 			CENTER
 			

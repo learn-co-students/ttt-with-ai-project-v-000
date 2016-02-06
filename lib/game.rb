@@ -13,12 +13,13 @@ class Game
 	DIVIDER = "===================\n"									
 											
 	attr_accessor :player_1, :player_2, :board, :war_mode, :war_stats
-	attr_reader :the_winner
+	attr_reader :the_winner, :complete
 	
 	def initialize(player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new)
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
+		@complete = false
 		@war_mode = false
 		@war_stats = {
 			:num_games => 0,
@@ -34,6 +35,10 @@ class Game
 	
 	def over?
 		won? ? true : draw?
+	end
+	
+	def completed?
+		war_mode ? @complete : over?
 	end
 	
 	def won?
@@ -137,7 +142,7 @@ class Game
 	
 	def end_normal
 		display_summary
-		play_again?
+		#play_again?
 	end
 	
 	def display_summary
@@ -160,13 +165,14 @@ class Game
 			self.board = Board.new 
 			play
 		else
+			@complete = true
 			puts "\n" + DIVIDER
 			puts "Wargames completed! "
 			puts "X wins: #{war_stats[:x_wins]}"
 			puts "O wins: #{war_stats[:o_wins]}"
 			puts "Draws: #{war_stats[:draws]}"
 			puts DIVIDER
-			play_again?
+			#play_again?
 		end
 	end
 	
@@ -174,6 +180,7 @@ class Game
 		@player_1 = Human.new("X")
 		@player_2 = Human.new("O")
 		@board = Board.new
+		@complete = false
 		@war_mode = false
 		@war_stats = {
 			:num_games => 0,
