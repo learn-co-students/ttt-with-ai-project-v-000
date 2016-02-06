@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+def play
+	g = Game.new
+	g.start
+	
+	while !g.completed?
+		nil
+	end
+	
+	play_again?
+end
+
+#had to move play_again logic here because in game.rb it gave rspec errors because it asked for input
+def play_again?
+	puts "Would you like to play again? y/n"
+	input = gets.strip
+	case input
+	when 'y'
+		play
+	when 'n'
+		exit
+	else
+		puts "\nPlease enter 'y' or 'n'"
+		play_again?
+	end
+end
+
+play
