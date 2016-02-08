@@ -53,7 +53,8 @@ class Game
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
-      puts "Cats Game!\n
+      puts "Cats Game!"
+      puts"
       /\\___/\\
      ( o   o )
      (  =^=  )
