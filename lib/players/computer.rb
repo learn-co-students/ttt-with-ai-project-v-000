@@ -1,24 +1,22 @@
 class Player::Computer < Player
 
   def move(board)
-    puts "Computer player #{token} moved"
+    puts "Computer player #{token}'s move..."
+    # if center empty move center
     if !board.taken?("5")
       "5"
     else
-      (win(board) || defense(board) || corners(board) || random) +1
+      ( win(board) || defense(board) || corners(board) || random ) +1
     end
   end
 
-  # def board_move(board)
-  #    win(board) || defense(board) || corners(board || random
-  # end
-
   def corners(board)
-    [0,2,6,8].detect{ |i| !board.taken?(i + 1)} 
+    # find all empty corners, pick random one
+    [0,2,6,8].find_all{ |i| !board.taken?(i + 1)}.sample
   end
       
   def win_combo(board, token)
-    # detects and returns first combo array that has 2 token matches in a combo
+    # detects and returns first combo array that has 2 token matches in the combo
     Game::WIN_COMBINATIONS.detect do |combo|
       (
         (board.cells[combo[0]] == token && board.cells[combo[1]] == token) &&
@@ -39,8 +37,8 @@ class Player::Computer < Player
     def win(board)
       winning_combo = win_combo(board, self.token)
       if winning_combo 
-        puts "found a combo win #{winning_combo}"
-        winning_combo.detect {|i| !board.taken?(i + 1)} 
+        puts "went for win #{winning_combo}"
+        winning_combo.find {|i| !board.taken?(i + 1)} 
       end
     end
 
@@ -48,9 +46,8 @@ class Player::Computer < Player
     def defense(board)
       defense_move = win_combo(board, self.other_token)
       if defense_move 
-        puts "prevent a combo win #{defense_move}"
-        defense_move.detect { |i| !board.taken?(i + 1)}
-
+        puts "prevented a win #{defense_move}"
+        defense_move.find { |i| !board.taken?(i + 1)}
       end
     end
 
@@ -58,8 +55,6 @@ class Player::Computer < Player
       self.token == "X" ? "O" : "X"
     end
 
-
-    # random number 1-9, returns string
     def random
       (0..8).to_a.sample
     end

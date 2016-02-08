@@ -9,7 +9,7 @@ player1 = ""
 player2 = ""
 
   def ending_game
-    puts "Ending game.\n
+    puts "Ending game...\n
    _.-._
   | | | |_
   | | | | |
@@ -23,17 +23,17 @@ _ |  '-._ |
     exit
   end
 
-  until player1 == "c" || player1 == "p"
+  until player1.downcase == "c" || player1.downcase == "p"
     puts "Choose player 1. Type 'p' for person and 'c' for computer and 'q' to quit."
     player1 = gets.strip
-    if player1 == "q"
+    if player1.downcase == "q" || player1.downcase == "quit"
       ending_game
     end
   end
-  until player2 == "c" || player2 == "p"
+  until player2.downcase == "c" || player2.downcase == "p"
     puts "Choose player 2. Type 'p' for person and 'c' for computer and 'q' to quit."
     player2 = gets.strip
-     if player2 == "q"
+     if player2.downcase == "q" || player2.downcase == "quit"
       ending_game
     end
   end
@@ -60,11 +60,9 @@ _ |  '-._ |
       end
     end
 
-    
-
     def play_again?
       play_again = ""
-      puts "Would you like to play again?"
+      puts "Continue playing tic-tac-toe? (y/n)"
       play_again = gets.strip
       if play_again.downcase == "n" || play_again.downcase == "no"
         ending_game
@@ -73,8 +71,7 @@ _ |  '-._ |
         until game.won? || game.draw?
           game_play
         end
-      end
-      
+      end  
     end
 
     play_again?

@@ -53,7 +53,13 @@ class Game
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
-      puts "Cats Game!"
+      puts "Cats Game!\n
+      /\\___/\\
+     ( o   o )
+     (  =^=  )
+     (        )
+     (         )
+     (          )))))))))))\n"
     end
   end
 
@@ -68,13 +74,12 @@ class Game
     this_move = current_player.move(@board)
 
     if !@board.valid_move?(this_move) 
-      puts "Invalid move. Try again."
+      puts "Move was invalid. Try again."
       turn
 
     else
       puts "Turn: #{@board.turn_count+1}\n"
-      puts "#{current_player.token} moved #{this_move}"
-      
+      puts "#{current_player.token} moved #{this_move}"    
       @board.update(this_move, current_player)
       @board.display
       puts "\n\n"
