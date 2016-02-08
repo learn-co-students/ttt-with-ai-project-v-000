@@ -1,4 +1,4 @@
-class Human < Player
+class Player::Human < Player
   def move(board)
     # takes in a board argument and allows a human player to enter a move via the CLI 
     puts "What's your move player #{token}?"

@@ -5,7 +5,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @board.display
   end
 
 
@@ -73,10 +72,10 @@ class Game
       turn
 
     else
-      puts "#{current_player.token} moved #{this_move}"
       puts "Turn: #{@board.turn_count+1}\n"
-      @board.update(this_move, current_player)
+      puts "#{current_player.token} moved #{this_move}"
       
+      @board.update(this_move, current_player)
       @board.display
       puts "\n\n"
     end

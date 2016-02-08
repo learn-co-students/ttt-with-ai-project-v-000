@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells, :player, :game
+  attr_accessor :cells
   
   def initialize  
     reset!
@@ -11,41 +11,45 @@ class Board
 
   # Displays current instance of board variable
   def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-  end
-
-  def position(input)
-    position = input.to_i-1
-    @cells[position]
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
   def update(input, player)
     position = input.to_i-1
-    @cells[position] = player.token
+    cells[position] = player.token
   end
 
  # Finally, a board can return values based on its state such as
   def full?
-    @cells.all?{|i| i == "X" || i == "O"}
+    cells.all?{ |i| i == "X" || i == "O"}
   end
 
   def turn_count
     #turn_count based on how many positions in the cells array are filled.
-    @cells.count{ |v| v == "X" || v == "O" }
+    cells.count{ |i| i == "X" || i == "O" }
   end
 
-  def taken?(position)
-    position = position.to_i-1
-    #taken? will return true or false for an individual position. 
-    if @cells[position] == "X" || @cells[position] == "O" 
-     true 
-    elsif @cells[position] == " " || @cells[position] = "" || @cells[position] = "  "
-      false
-    end
+  # def taken?(position)
+  #   position = position.to_i-1
+  #   #taken? will return true or false for an individual position. 
+  #   if @cells[position] == "X" || @cells[position] == "O" 
+  #    true 
+  #   elsif @cells[position] == " " || @cells[position] = "" || @cells[position] = "  "
+  #     false
+  #   end
+  # end
+
+  def position(input)
+    cells[input.to_i-1]
+  end
+
+    def taken?(input)
+    !(position(input)  == " " || position(input) == "" || position(input) == "  ")
+     
   end
 
   def valid_move?(input) 
