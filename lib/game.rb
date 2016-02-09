@@ -36,7 +36,7 @@ class Game
   end
 
   def over?
-    self.draw? ||  self.won?
+    self.draw? ||  self.won? 
   end
 
       
@@ -60,14 +60,15 @@ def winner
 end
 
 def turn
-  input = self.current_player.move(self.board)
-  #binding.pry
-  if self.board.valid_move?(input)
-    board.update(input,self.current_player)
-  else
-    self.turn
+  if !self.won?
+    input = self.current_player.move(self.board)
+    if self.board.valid_move?(input)
+      board.update(input,self.current_player)
+    else
+      self.turn
+    end
+    self.board.display
   end
-  self.board.display
   #board.cells
 end
 =begin
@@ -86,8 +87,9 @@ end
 
 
   def play
-    until self.over? 
+    while !self.over? #&& !self.won?
      self.turn
+
     end
     if won?
       puts "Congratulations #{self.winner}!"
