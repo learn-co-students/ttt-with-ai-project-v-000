@@ -1,5 +1,5 @@
 require 'pry'
-
+#require 'board.rb'
 
 class Game
 
@@ -15,9 +15,11 @@ class Game
   ]
 
   attr_accessor :board, :player_1, :player_2
+
+
  
 
-  def initialize(player_1=Human.new("X"),player_2=Human.new("O"),board =Board.new)
+  def initialize(player_1=Human.new("X"),player_2 = Human.new("O"),board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -39,28 +41,79 @@ class Game
 
       
   def draw?
-    !(self.won?) && self.board.full?
+   self.board.full? && self.won? == nil
     #binding.pry
   end    
- 
 
-  def won?
+
+def won?
     WIN_COMBINATIONS.detect do |line|
       line.all?{|i| self.board.cells[i] == "X" } || line.all?{|i| self.board.cells[i] == "O"}
-  end
-
-
-  def winner
-    if won?
-      line = won?
-      self.board.cells[line[0]]
     end
   end
 
-  def turn
-    puts ""
+def winner
+  if won?
+    line = won?
+    self.board.cells[line[0]]
+  end
+end
+
+def turn
+  input = self.current_player.move(self.board)
+  #binding.pry
+  if self.board.valid_move?(input)
+    board.update(input,self.current_player)
+  else
+    self.turn
+  end
+  self.board.display
+  #board.cells
+end
+=begin
+  input = nil
+  until self.board.valid_move?(input)
+    puts "Please choose a valid spot"
+    input= self.current_player.move(self.board.cells)
+    break if self.board.valid_move?(input) #why does this not wor without a break?
+      self.board.update(input,self.current_player)
+      self.board.display
+      binding.pry
+  end
+end
+=end
+
+
+
+  def play
+    until self.over? 
+     self.turn
+    end
+    if won?
+      puts "Congratulations #{self.winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end 
   end
 
 
+
 end  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
