@@ -1,4 +1,4 @@
-require 'pry'
+#require 'pry'
 #require 'board.rb'
 
 class Game
@@ -27,7 +27,7 @@ class Game
 
   def current_player
     counter = self.board.turn_count
-    if counter %2 == 0
+    if counter % 2 == 0
       player_1
     else
       player_2
@@ -36,7 +36,11 @@ class Game
 
   def previous_player
     counter = self.board.turn_count
+<<<<<<< HEAD
     if counter %2 == 0
+=======
+    if counter % 2 == 0
+>>>>>>> 0674f85407e5f9e7544e3f070f725d93f0df983a
       player_2
     else
       player_1
@@ -44,7 +48,7 @@ class Game
   end
 
   def over?
-    self.draw? ||  self.won?
+    self.draw? ||  self.won? 
   end
 
       
