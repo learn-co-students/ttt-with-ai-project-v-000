@@ -22,18 +22,14 @@ class Board
 
   def position(input)
     position = self.cells[input.to_i-1]
-    #binding.pry
   end
 
   def full?
-   self.cells.none?{|x| x == " "} 
-   #   !(cells.include?(" "))
+    !(self.cells.include?(" "))
   end
 
-  def turn_count #(refactor)
-    empty_cells = cells.select {|cell| cell == " "}
-    turns_completed = (9 - empty_cells.length)
-    #turn_count = 9 - (cells.count(" ")) #refactored
+  def turn_count 
+    turn_count = 9 - (self.cells.count(" "))
   end
 
   def taken?(input)

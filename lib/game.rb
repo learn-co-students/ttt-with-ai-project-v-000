@@ -50,7 +50,6 @@ class Game
       
   def draw?
    self.board.full? && self.won? == nil
-    #binding.pry
   end    
 
 
@@ -81,7 +80,7 @@ class Game
     puts "_" * 45
     puts "\n"
   end
-  
+
 
   def play
     while !self.over? 
@@ -117,7 +116,7 @@ class Game
           exit 0
         else
           puts "You didn't enter 'human' or 'computer,' so the computer will go first!" 
-          game = Game.new(player_1=Computer.new("X"),player_2=Human.new("O"))
+          game = Game.new(player_1 = Computer.new("X"),player_2 = Human.new("O"))
         end  
     elsif game_type == "2"
       game = Game.new
