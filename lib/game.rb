@@ -34,13 +34,11 @@ class Game
     end
   end
 
+
   def previous_player
     counter = self.board.turn_count
-<<<<<<< HEAD
-    if counter %2 == 0
-=======
+  
     if counter % 2 == 0
->>>>>>> 0674f85407e5f9e7544e3f070f725d93f0df983a
       player_2
     else
       player_1
