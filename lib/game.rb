@@ -1,4 +1,4 @@
-require 'pry'
+#require 'pry'
 #require 'board.rb'
 
 class Game
@@ -27,16 +27,24 @@ class Game
 
   def current_player
     counter = self.board.turn_count
-    if counter %2 == 0
+    if counter % 2 == 0
       player_1
     else
       player_2
     end
-    #binding.pry
+  end
+
+  def previous_player
+    counter = self.board.turn_count
+    if counter % 2 == 0
+      player_2
+    else
+      player_1
+    end
   end
 
   def over?
-    self.draw? ||  self.won?
+    self.draw? ||  self.won? 
   end
 
       
@@ -61,39 +69,25 @@ end
 
 def turn
   input = self.current_player.move(self.board)
-  #binding.pry
   if self.board.valid_move?(input)
     board.update(input,self.current_player)
   else
     self.turn
   end
   self.board.display
-  #board.cells
+  puts "#{self.previous_player.token} has moved to cell #{input}."
 end
-=begin
-  input = nil
-  until self.board.valid_move?(input)
-    puts "Please choose a valid spot"
-    input= self.current_player.move(self.board.cells)
-    break if self.board.valid_move?(input) #why does this not wor without a break?
-      self.board.update(input,self.current_player)
-      self.board.display
-      binding.pry
-  end
-end
-=end
-
 
 
   def play
-    until self.over? 
+    while !self.over? 
      self.turn
     end
-    if won?
+    if won? 
       puts "Congratulations #{self.winner}!"
     elsif draw?
       puts "Cats Game!"
-    end 
+    end
   end
 
 
