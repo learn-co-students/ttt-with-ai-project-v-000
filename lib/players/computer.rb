@@ -2,8 +2,6 @@
 
 class Computer < Player
 
-  attr_accessor :board
-
 
   def opp_token
     if self.token == "X"
@@ -13,10 +11,10 @@ class Computer < Player
     end
   end
 
-#board = ["X", "X", " ", "O", "X", " ", " ", " ", "O"]
+board = ["X", "X", " ", "O", "X", " ", " ", " ", "O"]
 
   def move(board)
-     input = (self.winning_move(board) || self.blocking_move(board) || "5" || "1"  )
+     input = (self.winning_move(board) || self.blocking_move(board) || "5"   )
     if board.valid_move?(input)
       input     
     else
@@ -40,23 +38,25 @@ class Computer < Player
 
 
   def winning_move(board)
-    entries = WIN_COMBINATIONS.collect {|combo| combo.collect {|i| board[i]} }  
+    entries = WIN_COMBINATIONS.collect {|combo| combo.collect {|i| board.cells[i]} }  
     target = entries.detect {|line| (line.count(self.token) == 2) && line.include?(" ")} 
-      if target != nil
-        input = (target.index(" ") + 1).to_s
-      else
-        false  
-      end  
-  end
+    winning_line = entries.index(target)
+    if target != nil
+      input = (WIN_COMBINATIONS[winning_line][target.index(" ")] + 1).to_s
+    else
+      false  
+    end 
+  end 
 
   def blocking_move(board)
-    entries = WIN_COMBINATIONS.collect {|combo| combo.collect {|i| board[i]} }  
+    entries = WIN_COMBINATIONS.collect {|combo| combo.collect {|i| board.cells[i]} }  
     target = entries.detect {|line| (line.count(self.opp_token) == 2) && line.include?(" ")}
-      if target != nil
-        input = (target.index(" ") + 1).to_s
-      else
-        false  
-      end  
+    winning_line = entries.index(target)
+    if target != nil
+      input = (WIN_COMBINATIONS[winning_line][target.index(" ")] + 1).to_s
+    else
+      false  
+    end 
   end
 
 end
@@ -66,4 +66,3 @@ end
 
 #computer = Computer.new("X")
 
-#computer.win_or_block(board)
