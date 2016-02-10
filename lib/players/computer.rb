@@ -13,7 +13,7 @@ class Computer < Player
     end
   end
 
-board = ["X", "X", " ", "O", "X", " ", " ", " ", "O"]
+#board = ["X", "X", " ", "O", "X", " ", " ", " ", "O"]
 
   def move(board)
      input = (self.winning_move(board) || self.blocking_move(board) || "5" || "1"  )
