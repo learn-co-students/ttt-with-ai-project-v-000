@@ -59,10 +59,6 @@ class Game
         line.all?{|i| self.board.cells[i] == "X" } || line.all?{|i| self.board.cells[i] == "O"}
       end
     end
-<<<<<<< HEAD
-=======
-end
->>>>>>> 9e873e92960184f01ed4f5d383c952c550c6a5e8
 
   def winner
     if won?
@@ -70,12 +66,13 @@ end
       self.board.cells[line[0]]
     end
   end
-<<<<<<< HEAD
 
   def turn
     input = self.current_player.move(self.board)
     if self.board.valid_move?(input)
       board.update(input,self.current_player)
+    elsif input == "exit"
+      exit 0      
     else
       self.turn
     end
@@ -83,20 +80,8 @@ end
     puts "#{self.previous_player.token} has moved to cell #{input}."
     puts "_" * 45
     puts "\n"
-=======
-end
-
-def turn
-  input = self.current_player.move(self.board)
-  if self.board.valid_move?(input)
-    board.update(input,self.current_player)
-  elsif input == "exit" 
-    exit 0 
-  else
-    self.turn
->>>>>>> 9e873e92960184f01ed4f5d383c952c550c6a5e8
   end
-
+  
 
   def play
     while !self.over? 
@@ -138,27 +123,8 @@ def turn
       game = Game.new
     elsif game_type == "exit"
       exit 0
-    end
+    end  
 
-<<<<<<< HEAD
-end  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
     puts " 1 | 2 | 3 "
     puts "-" * 11
     puts " 4 | 5 | 6 "
@@ -173,8 +139,6 @@ end
 
     puts "Would you like to play again?"
     input = gets.strip
->>>>>>> 9e873e92960184f01ed4f5d383c952c550c6a5e8
-
     if input == "yes" || input == "y"
      Game.start
      else
