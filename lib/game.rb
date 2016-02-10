@@ -76,6 +76,8 @@ def turn
   end
   self.board.display
   puts "#{self.previous_player.token} has moved to cell #{input}."
+  puts "_" * 45
+  puts "\n"
 end
 
 
