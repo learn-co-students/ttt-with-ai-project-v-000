@@ -2,7 +2,6 @@
 
 class Computer < Player
 
-
   def opp_token
     if self.token == "X"
       "O"
@@ -18,9 +17,6 @@ class Computer < Player
   def sides
     sides = ["2", "4", "6", "8"]
   end
-
-
-  #board = ["X", "X", " ", "O", "X", " ", " ", " ", "O"]
 
   def move(board)
     if board.valid_move?("5")
@@ -40,7 +36,6 @@ class Computer < Player
     end
   end
 
-
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -51,8 +46,6 @@ class Computer < Player
     [0,4,8],
     [2,4,6]
   ]
-
-
 
   def winning_move(board)
     entries = WIN_COMBINATIONS.collect {|combo| combo.collect {|i| board.cells[i]} }  
@@ -77,9 +70,3 @@ class Computer < Player
   end
 
 end
-
-
-
-
-#computer = Computer.new("X")
-
