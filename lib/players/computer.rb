@@ -2,10 +2,6 @@
 
 class Computer < Player
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0674f85407e5f9e7544e3f070f725d93f0df983a
   def opp_token
     if self.token == "X"
       "O"
@@ -21,12 +17,6 @@ class Computer < Player
   def sides
     sides = ["2", "4", "6", "8"]
   end
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 0674f85407e5f9e7544e3f070f725d93f0df983a
-  #board = ["X", "X", " ", "O", "X", " ", " ", " ", "O"]
 
   def move(board)
     if board.valid_move?("5")
@@ -46,7 +36,6 @@ class Computer < Player
     end
   end
 
-
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -58,11 +47,6 @@ class Computer < Player
     [2,4,6]
   ]
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 0674f85407e5f9e7544e3f070f725d93f0df983a
   def winning_move(board)
     entries = WIN_COMBINATIONS.collect {|combo| combo.collect {|i| board.cells[i]} }  
     target = entries.detect {|line| (line.count(self.token) == 2) && line.include?(" ")} 
@@ -86,13 +70,3 @@ class Computer < Player
   end
 
 end
-
-
-
-
-<<<<<<< HEAD
-#computer = Computer.new("X")
-=======
-#computer = Computer.new("X")
-
->>>>>>> 0674f85407e5f9e7544e3f070f725d93f0df983a
