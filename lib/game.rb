@@ -15,11 +15,9 @@ class Game
   ]
 
   attr_accessor :board, :player_1, :player_2
-
-
  
 
-  def initialize(player_1=Human.new("X"),player_2 = Human.new("O"),board = Board.new)
+  def initialize(player_1 = Human.new("X"),player_2 = Human.new("O"),board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -54,31 +52,31 @@ class Game
   end    
 
 
-def won?
-    WIN_COMBINATIONS.detect do |line|
-      line.all?{|i| self.board.cells[i] == "X" } || line.all?{|i| self.board.cells[i] == "O"}
+  def won?
+      WIN_COMBINATIONS.detect do |line|
+        line.all?{|i| self.board.cells[i] == "X" } || line.all?{|i| self.board.cells[i] == "O"}
+      end
+    end
+
+  def winner
+    if won?
+      line = won?
+      self.board.cells[line[0]]
     end
   end
 
-def winner
-  if won?
-    line = won?
-    self.board.cells[line[0]]
+  def turn
+    input = self.current_player.move(self.board)
+    if self.board.valid_move?(input)
+      board.update(input,self.current_player)
+    else
+      self.turn
+    end
+    self.board.display
+    puts "#{self.previous_player.token} has moved to cell #{input}."
+    puts "_" * 45
+    puts "\n"
   end
-end
-
-def turn
-  input = self.current_player.move(self.board)
-  if self.board.valid_move?(input)
-    board.update(input,self.current_player)
-  else
-    self.turn
-  end
-  self.board.display
-  puts "#{self.previous_player.token} has moved to cell #{input}."
-  puts "_" * 45
-  puts "\n"
-end
 
 
   def play
@@ -91,7 +89,6 @@ end
       puts "Cats Game!"
     end
   end
-
 
 
 end  
