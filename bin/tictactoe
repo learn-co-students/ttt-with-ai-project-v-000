@@ -1,3 +1,56 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def play_ttt
+  puts "Let's play Tic-Tac-Toe! How many players?"
+  number_players = gets.chomp.to_s
+  puts "Which user should go first and be 'X'? Player 1 or Player 2? Please enter '1' or '2'"
+  starting_player = gets.chomp.to_s
+  if number_players == "2" && starting_player == "1"
+    player_1=Player::Human.new("X")
+    player_2=Player::Human.new("O")
+  elsif number_players == "2" && starting_player == "2"
+    player_2=Player::Human.new("X")
+    player_1=Player::Human.new("O")
+  elsif number_players == "1" && starting_player == "1"
+    player_1=Player::Human.new("X")
+    player_2=Player::Computer.new("O")
+  elsif number_players == "1" && starting_player == "2"
+    player_2=Player::Human.new("X")
+    player_1=Player::Computer.new("O")
+  elsif number_players == "0" && starting_player == "1"
+    player_1=Player::Computer.new("X")
+    player_2=Player::Computer.new("O")
+  else
+    player_2=Player::Computer.new("X")
+    player_1=Player::Computer.new("O")
+  end
+  game = Game.new(player_1, player_2, board = Board.new)
+  game.play
+  end_game
+end
+
+def end_game
+  play_again = ""
+  until play_again == "Y" || play_again == "N" do
+    puts "Wanna play again? Y or N?"
+    play_again = gets.chomp.upcase
+    if play_again == "Y"
+      play_ttt
+    elsif play_again == "N"
+      puts "Okay, see you next time."
+    else
+      puts "Sorry I didn't catch that. Please try again."
+    end
+  end
+end
+
+play_ttt
+
+
+
+
+
+
+
