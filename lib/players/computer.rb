@@ -1,6 +1,6 @@
 require 'pry'
 
-class Computer < Player
+class Player::Computer < Player
 
   def opponent_token
     token == "X" ? "O" : "X"

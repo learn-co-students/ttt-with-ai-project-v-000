@@ -27,6 +27,7 @@ def play_ttt
     player_1=Player::Computer.new("O")
   end
   game = Game.new(player_1, player_2, board = Board.new)
+  game.board.display
   game.play
   end_game
 end
