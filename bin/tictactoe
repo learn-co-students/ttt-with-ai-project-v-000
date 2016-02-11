@@ -17,6 +17,7 @@ if num_players == "0"
 elsif num_players == "1"
   puts "You will play against the computer! Who do you want to go first and be X? Enter Human or Computer."
   first_player = gets.strip
+
   if first_player == "Human"
     player_1 = Human.new("X")
     player_2 = Computer.new("O")

@@ -24,7 +24,6 @@ class Computer < Player
     cell_array[position.to_i - 1] == " " ? false : true
   end
 
-
   def move(board)
 
     if self.token == "X"
