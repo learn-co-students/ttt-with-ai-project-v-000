@@ -70,9 +70,11 @@ class Game
     end
   end
 
+
   def play
     until over?
       turn
+      board.display
     end
     if winner == player_1.token
       puts 'Congratulations X!'
@@ -85,13 +87,25 @@ class Game
 
   def start
     puts "Hello, welcome to Tic Tac Toe!"
-    puts "Please select an amount of human players."
-    
+    puts "Please select an amount of human players 0, 1 or 2."
+    while (input = gets.chomp) != 'exit'
+      case input.downcase
+      when '0'
+        tokens = ['X','O']
+        self.player_1 = Player::Computer.new(tokens.shuffle!.pop)
+        self.player_2 = Player::Computer.new(tokens.pop)
+        #binding.pry
+        play
+        # players play until the game is over and
+        # it says who won or if its a draw
+      when '1'
+        # ask who will go first player_1 can be x or o
+        # 1 player game plays against one computer
+        # plays until the game is over and
+        # it says who won or if it's a draw
+        #
+      when '2'
+      end
+    end
   end
-
-
-
-
-
-
 end
