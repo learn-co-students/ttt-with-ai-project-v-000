@@ -2,8 +2,7 @@ require 'pry'
 
 class Computer < Player
   def move(board)
-    valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    valid_moves[rand(1..9)]
-    #binding.pry
+    valid_moves = ["5", "1", "9", "3", "4", "6", "7", "2", "8"]
+    valid_moves.detect { |move| board.valid_move?(move) }
   end
 end
