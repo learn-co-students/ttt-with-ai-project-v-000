@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "Please enter 0, 1 or 2 for number of human players."
+input = gets.chomp.to_i
+Game.new.player_count(input)
