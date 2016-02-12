@@ -73,13 +73,14 @@ class Game
 
   def play
     until over?
+      puts "Choose a position 1-9:"
       turn
       board.display
     end
     if winner == player_1.token
-      puts 'Congratulations X!'
+      puts "Congratulations #{player_1.token}!"
     elsif winner == player_2.token
-      puts 'Congratulations O!'
+      puts "Congratulations #{player_2.token}!"
     elsif draw?
       puts "Cats Game!"
     end
@@ -96,15 +97,35 @@ class Game
         self.player_2 = Player::Computer.new(tokens.pop)
         #binding.pry
         play
-        # players play until the game is over and
-        # it says who won or if its a draw
+        puts "Play again? (y/n)"
+        board.reset!
+        reset_input = gets.chomp.downcase
+        redo if reset_input == "y"
+        break if reset_input == "n"
       when '1'
-        # ask who will go first player_1 can be x or o
-        # 1 player game plays against one computer
-        # plays until the game is over and
-        # it says who won or if it's a draw
-        #
+        puts "Choose your token. X or O? Choose wisely"
+        #has to force user to select "X" or "O"
+        player_1.token = gets.chomp.upcase
+        comp_token = (self.player_1.token == 'O') ? 'X' : 'O'
+        self.player_2 = Player::Computer.new(comp_token)
+        play
+        puts "Play again? (y/n)"
+        board.reset!
+        reset_input = gets.chomp.downcase
+        redo if reset_input == "y"
+        break if reset_input == "n"
       when '2'
+         puts "Choose your token. X or O? Choose wisely"
+        #has to force user to select "X" or "O"
+        player_1.token = gets.chomp.upcase
+        comp_token = (self.player_1.token == 'O') ? 'X' : 'O'
+        player_2.token = (comp_token)
+        play
+        puts "Play again? (y/n)"
+        board.reset!
+        reset_input = gets.chomp.downcase
+        redo if reset_input == "y"
+        break if reset_input == "n"
       end
     end
   end
