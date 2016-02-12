@@ -12,7 +12,7 @@ class Game
                       [0,4,8],
                       [6,4,2]]
 
-  def initialize(player_1=Human.new('X'), player_2=Human.new('O'), board=Board.new)
+  def initialize(player_1 = Human.new('X'), player_2 = Human.new('O'), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -23,7 +23,7 @@ class Game
   end
 
   def over?
-    board.full?
+    draw? || won?
   end
 
   def won?
@@ -33,7 +33,7 @@ class Game
   end
 
   def draw?
-    over? && !won? 
+    board.full? && !won? 
   end
 
   def winner
@@ -45,10 +45,18 @@ class Game
   end
 
   def turn
-    puts "Please select a position 1-9:"
-    input = gets.chomp
+    input = current_player.move(board)
     if board.valid_move?(input)
-      board.turn
+      board.update(input, current_player)
+    else
+      turn
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
   end
 
 end
