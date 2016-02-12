@@ -82,4 +82,16 @@ class Game
       puts "Cats Game!"
     end
   end
+
+  def start
+    puts "Hello, welcome to Tic Tac Toe!"
+    puts "Please select an amount of human players."
+    
+  end
+
+
+
+
+
+
 end
