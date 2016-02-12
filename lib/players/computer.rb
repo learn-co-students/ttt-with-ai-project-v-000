@@ -1,6 +1,6 @@
 class Computer < Player
 
-  attr_accessor :token, :my_spaces, :defense_combination, :opponent_token, :opponent_spaces
+  attr_accessor :token, :my_spaces, :opponent_token, :opponent_spaces
 
   WIN_COMBINATIONS = [
       [1,2,3],
@@ -21,31 +21,38 @@ class Computer < Player
       @opponent_token = "X"
     end
     @my_spaces = []
-    @defense_combination = []
   end
 
   def move(board)
     #--------FIRST TURN--------#
     if board.turn_count == 0 || board.turn_count == 1 #if this is the first time the computer has moved
+    puts "First turn.."
       move = [1,3,5,7,9].sample #selects either the corners or the center to play
       while board.taken?(move)
         move = [1,3,5,7,9].sample
       end
-      self.my_spaces << move #adds the move to an array of spaces occupied by the computer
-      return move.to_s
+        #sends move index back to game.turn
+      puts move.to_s
+        return move.to_s
     end
     #--------SECOND TURN--------#
     if board.turn_count == 2
+      puts "Second turn..."
       #Chooses spaces that are adjacent to first move
-      case self.my_spaces[0]
+      get_my_spaces(board)
+      last_move = 0
+      #finds the space played in the first turn
+      self.my_spaces.each do |space|
+        last_move = space if space != " "
+      end
+      case last_move
         when 1
           move = [2,4].sample
           #checks if position is already taken
           while board.taken?(move)
             move = [2,4].sample
           end
-          self.my_spaces << move
-          #sends move index back to game.turn
+        puts move.to_s
           return move.to_s
         when 3
           move = [2,6].sample
@@ -53,40 +60,37 @@ class Computer < Player
           while board.taken?(move)
              move = [2,6].sample
           end
-          self.my_spaces << move
-          #sends move index back to game.turn
-          return move.to_s
+        puts move.to_s
+        return move.to_s
         when 5
           move = [2,4,6,8].sample
           #checks if position is already taken
           while board.taken?(move)
             move = [2,4,6,8].sample
           end
-          self.my_spaces << move
-          #sends move index back to game.turn
-          return move.to_s
+        puts move.to_s
+        return move.to_s
         when 7
           move = [4,8].sample
           #checks if position is already taken
           while board.taken?(move)
             move = [4,8].sample
           end
-          self.my_spaces << move
-          #sends move index back to game.turn
-          return move.to_s
+        puts move.to_s
+        return move.to_s
         when 9
           move = [6,8].sample
           #checks if position is already taken
           while board.taken?(move)
             move = [6,8].sample
           end
-          self.my_spaces << move
-          #sends move index back to game.turn
-          return move.to_s
+        puts move.to_s
+        return move.to_s
       end
     end
     #--------ALL OTHER TURNS--------#
     if board.turn_count >= 3
+      puts "All other turns..."
       where_to_play?(board)
     end
   end
@@ -94,6 +98,9 @@ class Computer < Player
 
 
   def where_to_play?(board)
+    puts "WHERE TO PLAY..."
+      get_opponent_spaces(board)
+      get_my_spaces(board)
     #----------------------TESTS IF IT HAS AN OPENING TO WIN------------------------
     puts "Testing for win opening..."
     puts "I occupy: #{self.my_spaces}"
@@ -104,9 +111,10 @@ class Computer < Player
           puts "Testing individual space: #{space}"
           if !(board.taken?(space))
             puts "Found open space: #{space}"
-            self.my_spaces << space
-            puts "Added #{space} to self.my_spaces"
-            return space.to_s
+            if board.valid_move?(space)
+              puts space.to_s
+              return space.to_s
+            end
           end
         end
       end
@@ -114,18 +122,19 @@ class Computer < Player
     #----------------------TESTS IF IT NEEDS TO DEFEND------------------------
     #Collects spaces occupied by opponent
     puts "No win openings, testing if I need to defend..."
-    self.opponent_spaces = board.cells.each_index.select {|index| board.position(index) == self.opponent_token}
+    #@opponent_spaces is 1-9, since update.board subracts 1
+    puts "Opponent occupies: #{self.opponent_spaces}"
     WIN_COMBINATIONS.each do |win_combination|
       puts "Testing against: #{win_combination}"
-      puts "Opponent occupies: #{self.opponent_spaces}"
       if (win_combination & self.opponent_spaces).length == 2
         win_combination.each do |space|
           puts "Testing individual space: #{space}"
           if !(board.taken?(space))
             puts "Found open space: #{space}"
-            self.my_spaces << space
-            puts "Added #{space} to self.my_spaces"
-            return space.to_s
+            if board.valid_move?(space)
+              puts space.to_s
+              return space.to_s
+            end
           end
         end
       end
@@ -133,9 +142,31 @@ class Computer < Player
     #----------------------OTHERWISE JUST PLAYS RANDOMLY------------------------
     puts "No chance to win, nowhere to defend, playing random spot..."
     space = [1,2,3,4,5,6,7,8,9].sample
-    self.my_spaces << space
-    puts "Added #{space} to self.my_spaces"
-    return space.to_s
+      puts space.to_s
+      return space.to_s
+  end
+
+
+  def get_opponent_spaces (board)
+    puts "Collecting opponent spaces..."
+    self.opponent_spaces = board.cells.each_index.collect do |index|
+      if board.cells[index] == self.opponent_token
+        index+1
+      else
+        " "
+      end
+    end
+  end
+
+  def get_my_spaces(board)
+    puts "Collecting my spaces..."
+    self.my_spaces = board.cells.each_index.collect do |index|
+      if board.cells[index] == self.token
+        index+1
+      else
+        " "
+      end
+    end
   end
 
 

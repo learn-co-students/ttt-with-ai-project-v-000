@@ -73,15 +73,16 @@ class Game
 
   def turn
     input = self.current_player.move(self.board)
-    until self.board.valid_move?(input)
-      puts "Please enter a valid move (1-9): "
-      input = self.current_player.move(self.board)
-    end
+   # until self.board.valid_move?(input)
+   #   puts "Please enter a valid move (1-9): "
+   #   input = self.current_player.move(self.board)
+   # end
     self.board.update(input, self.current_player)
   end
 
   def play
     until over?
+      puts "#{current_player.token}'s turn:"
       self.board.display
       turn
     end
@@ -91,6 +92,12 @@ class Game
     end
     if draw?
       puts "Cats Game!"
+    end
+    puts "Play again? (y/n)"
+    play_again = gets.strip.downcase
+    if play_again == "y"
+      self.board.reset!
+      play
     end
   end
 

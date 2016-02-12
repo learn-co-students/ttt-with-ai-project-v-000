@@ -25,8 +25,8 @@ player1 = nil
 player2 = nil
 
 if number_of_players == 0
-  player1 = Computer.new
-  player2 = Computer.new
+  player1 = Computer.new("X")
+  player2 = Computer.new("O")
 elsif number_of_players == 1
   if first_player == 1
     player1 = Human.new("X")

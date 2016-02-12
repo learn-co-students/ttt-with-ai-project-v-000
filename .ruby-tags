@@ -5832,6 +5832,8 @@ get_method	.bundle/gems/pry-0.10.3/lib/pry/method/weird_method_locator.rb	/^    
 get_method	/home/nitrous/code/tic-tac-toe-with-ai/ttt-with-ai-project-v-000/.bundle/gems/pry-0.10.3/lib/pry/method/weird_method_locator.rb	/^      def get_method$/;"	f	class:Pry.Method
 get_method_or_raise	.bundle/gems/pry-0.10.3/lib/pry/helpers/command_helpers.rb	/^      def get_method_or_raise(name, target, opts={}, omit_help=false)$/;"	f	class:Pry.Helpers.CommandHelpers
 get_method_or_raise	/home/nitrous/code/tic-tac-toe-with-ai/ttt-with-ai-project-v-000/.bundle/gems/pry-0.10.3/lib/pry/helpers/command_helpers.rb	/^      def get_method_or_raise(name, target, opts={}, omit_help=false)$/;"	f	class:Pry.Helpers.CommandHelpers
+get_my_spaces	lib/players/computer.rb	/^  def get_my_spaces(board)$/;"	f	class:Computer
+get_opponent_spaces	lib/players/computer.rb	/^  def get_opponent_spaces (board)$/;"	f	class:Computer
 get_output	.bundle/gems/coderay-1.1.0/lib/coderay/encoder.rb	/^      def get_output options$/;"	f	class:CodeRay.Encoders
 get_output	/home/nitrous/code/tic-tac-toe-with-ai/ttt-with-ai-project-v-000/.bundle/gems/coderay-1.1.0/lib/coderay/encoder.rb	/^      def get_output options$/;"	f	class:CodeRay.Encoders
 get_scanner_options	.bundle/gems/coderay-1.1.0/lib/coderay.rb	/^    def get_scanner_options options$/;"	f	class:CodeRay
@@ -8008,7 +8010,7 @@ pick_encoding	.bundle/gems/rspec-support-3.3.0/lib/rspec/support/encoded_string.
 pick_encoding	.bundle/gems/rspec-support-3.3.0/lib/rspec/support/encoded_string.rb	/^        def self.pick_encoding(source_a, source_b)$/;"	F	class:RSpec.Support.EncodedString
 pick_encoding	/home/nitrous/code/tic-tac-toe-with-ai/ttt-with-ai-project-v-000/.bundle/gems/rspec-support-3.3.0/lib/rspec/support/encoded_string.rb	/^        def self.pick_encoding(_source_a, _source_b)$/;"	F	class:RSpec.Support.EncodedString
 pick_encoding	/home/nitrous/code/tic-tac-toe-with-ai/ttt-with-ai-project-v-000/.bundle/gems/rspec-support-3.3.0/lib/rspec/support/encoded_string.rb	/^        def self.pick_encoding(source_a, source_b)$/;"	F	class:RSpec.Support.EncodedString
-play	lib/game.rb	/^  def play$/;"	f
+play	lib/game.rb	/^  def play$/;"	f	class:Game
 play_onto	.bundle/gems/rspec-core-3.3.2/lib/rspec/core/configuration.rb	/^        def play_onto(reporter)$/;"	f	class:RSpec.Core.Configuration.DeprecationReporterBuffer
 play_onto	/home/nitrous/code/tic-tac-toe-with-ai/ttt-with-ai-project-v-000/.bundle/gems/rspec-core-3.3.2/lib/rspec/core/configuration.rb	/^        def play_onto(reporter)$/;"	f	class:RSpec.Core.Configuration.DeprecationReporterBuffer
 playback!	.bundle/gems/rspec-mocks-3.3.2/lib/rspec/mocks/any_instance/chain.rb	/^        def playback!(instance)$/;"	f	class:RSpec.Mocks.AnyInstance.Chain
