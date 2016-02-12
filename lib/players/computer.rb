@@ -23,14 +23,14 @@ class Player::Computer < Player
   def winning_move(board)
    can_win_combo = Game::WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == token} == 2 }
     if can_win_combo
-      can_win_combo.detect {|empty_cell| board.cells[empty_cell] == " "}
+      can_win_combo.detect {|cell| board.cells[cell] == " "}
     end
   end
 
   def block_opponent_win(board)
     opponent_win_combo = Game::WIN_COMBINATIONS.detect {|combo| combo.count{|n| board.cells[n] == opponent_token} == 2 }
     if opponent_win_combo
-      opponent_win_combo.detect {|empty_cell| board.cells[empty_cell] == " "}
+      opponent_win_combo.detect {|cell| board.cells[cell] == " "}
     end
   end
 
