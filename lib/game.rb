@@ -74,5 +74,12 @@ class Game
     until over?
       turn
     end
+    if winner == player_1.token
+      puts 'Congratulations X!'
+    elsif winner == player_2.token
+      puts 'Congratulations O!'
+    elsif draw?
+      puts "Cats Game!"
+    end
   end
 end
