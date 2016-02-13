@@ -1,3 +1,34 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def call 
+  puts "How many players? (1, 2, or 0 = [yourself])"
+  input = gets.strip
+  
+  if input == "1"
+  
+  elsif input == "2"
+  
+  elsif input == "0"
+  
+  else
+  
+  end
+end
+
+def again?
+  puts "Want to play again?(Yn)"
+  input = gets.strip.upcase
+  if input == "Y"
+    call
+  elsif input == "N"
+    exit
+  else
+    puts "A Valid Choice !!"
+    again?
+  end
+end
+
+call
