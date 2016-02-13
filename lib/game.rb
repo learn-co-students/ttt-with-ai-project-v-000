@@ -16,6 +16,7 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    @reset_input
   end
 
   def current_player
@@ -66,10 +67,10 @@ class Game
     if board.valid_move?(input)
       board.update(input, current_player)
     else
+      puts 'Invalid move please select a valid position.'
       turn
     end
   end
-
 
   def play
     until over?
@@ -84,6 +85,9 @@ class Game
     elsif draw?
       puts "Cats Game!"
     end
+    puts "Play again? (y/n)"
+    board.reset!
+    reset_input = gets.chomp.downcase
   end
 
   def start
@@ -92,41 +96,46 @@ class Game
     while (input = gets.chomp) != 'exit'
       case input.downcase
       when '0'
-        tokens = ['X','O']
-        self.player_1 = Player::Computer.new(tokens.shuffle!.pop)
-        self.player_2 = Player::Computer.new(tokens.pop)
-        #binding.pry
+        create_two_computers
         play
-        puts "Play again? (y/n)"
-        board.reset!
-        reset_input = gets.chomp.downcase
         redo if reset_input == "y"
         break if reset_input == "n"
       when '1'
-        puts "Choose your token. X or O? Choose wisely"
-        #has to force user to select "X" or "O"
-        player_1.token = gets.chomp.upcase
+        player_1.token = get_token_choice
         comp_token = (self.player_1.token == 'O') ? 'X' : 'O'
-        self.player_2 = Player::Computer.new(comp_token)
+        self.player_2 = Computer.new(comp_token)
         play
-        puts "Play again? (y/n)"
-        board.reset!
-        reset_input = gets.chomp.downcase
         redo if reset_input == "y"
         break if reset_input == "n"
       when '2'
-         puts "Choose your token. X or O? Choose wisely"
-        #has to force user to select "X" or "O"
-        player_1.token = gets.chomp.upcase
+        player_1.token = get_token_choice 
         comp_token = (self.player_1.token == 'O') ? 'X' : 'O'
         player_2.token = (comp_token)
         play
-        puts "Play again? (y/n)"
-        board.reset!
-        reset_input = gets.chomp.downcase
         redo if reset_input == "y"
         break if reset_input == "n"
+      else
+        
       end
     end
+  end
+
+  def get_token_choice
+    puts "Choose your token. X or O? Choose wisely"
+    input = gets.chomp.upcase
+    if input == 'X'
+      'X'
+    elsif input == 'O'
+      'O'
+    else
+      puts 'Not the right token, sorry'
+      choose_your_token
+    end
+  end
+
+  def create_two_computers
+        tokens = ['X','O']
+        self.player_1 = Computer.new(tokens.shuffle!.pop)
+        self.player_2 = Computer.new(tokens.pop)
   end
 end
