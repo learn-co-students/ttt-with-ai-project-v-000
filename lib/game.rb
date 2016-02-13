@@ -29,25 +29,17 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |win_combination|
-      win_index_1 = win_combination[0]
-      win_index_2 = win_combination[1]
-      win_index_3 = win_combination[2]
-
-      # load the value of board at specified index
-      position_1 = board.cells[win_index_1]
-      position_2 = board.cells[win_index_2]
-      position_3 = board.cells[win_index_3]
-
-      if position_1 == 'X' && position_2 == 'X' && position_3 == 'X'
+      position = { one: board.cells[win_combination[0]],
+                   two:  board.cells[win_combination[1]],
+                   three:  board.cells[win_combination[2]]}
+ 
+      if position[:one] == 'X' && position[:two] == 'X' && position[:three] == 'X'
         return win_combination
-      elsif position_1 == 'O' && position_2 == 'O' && position_3 == 'O'
+      elsif position[:one] == 'O' && position[:two] == 'O' && position[:three] == 'O'
         return win_combination
       end
     end
     false
-    #WIN_COMBINATIONS.detect do |combo|
-    #  board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]]
-    #end
   end
 
   def draw?
@@ -86,36 +78,35 @@ class Game
       puts "Cats Game!"
     end
     puts "Play again? (y/n)"
-    board.reset!
-    reset_input = gets.chomp.downcase
   end
 
   def start
     puts "Hello, welcome to Tic Tac Toe!"
     puts "Please select an amount of human players 0, 1 or 2."
-    while (input = gets.chomp) != 'exit'
+    loop do
+      input = gets.chomp
       case input.downcase
       when '0'
         create_two_computers
         play
-        redo if reset_input == "y"
-        break if reset_input == "n"
+        restart_game
+        break
       when '1'
         player_1.token = get_token_choice
         comp_token = (self.player_1.token == 'O') ? 'X' : 'O'
         self.player_2 = Computer.new(comp_token)
         play
-        redo if reset_input == "y"
-        break if reset_input == "n"
+        restart_game
+        break
       when '2'
         player_1.token = get_token_choice 
         comp_token = (self.player_1.token == 'O') ? 'X' : 'O'
         player_2.token = (comp_token)
         play
-        redo if reset_input == "y"
-        break if reset_input == "n"
+        restart_game
+        break
       else
-        
+        puts "Hm, it might be tricky playing with that many people."
       end
     end
   end
@@ -134,8 +125,23 @@ class Game
   end
 
   def create_two_computers
-        tokens = ['X','O']
-        self.player_1 = Computer.new(tokens.shuffle!.pop)
-        self.player_2 = Computer.new(tokens.pop)
+    tokens = ['X','O']
+    self.player_1 = Computer.new(tokens.shuffle!.pop)
+    self.player_2 = Computer.new(tokens.pop)
   end
+
+  def restart_game
+    reset_input = gets.chomp.downcase
+    if reset_input == "y"
+      board.reset!
+      play
+      restart_game
+    elsif reset_input == "n"
+      puts "See you later."
+    else
+      puts "What? try that again"
+      restart_game
+    end
+  end
+
 end
