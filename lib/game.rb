@@ -58,7 +58,11 @@ class Game
     if !@board.valid_move?(current_move)
       turn
     else
+      if current_player.class.to_s == "Player::Computer"
+        puts "Computer Player #{current_player.token} Moved!"
+      end
       @board.update(current_move, current_player)
+      @board.display
     end
   end
 

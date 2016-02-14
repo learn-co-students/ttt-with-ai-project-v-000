@@ -1,3 +1,35 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+num_players = -1
+first =""
+status =""
+puts "Welcome to Tic-Tac-Toe!"
+while status != "exit"
+  # binding.pry
+  print "How many Human players? (0, 1, or 2): "
+  while ![0,1,2].include?(num_players)
+    num_players = gets.to_i
+  end
+  if num_players == 0
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+  elsif num_players == 1
+    print "Who should go first and be \"X\"?  (P)layer or (C)omputer: "
+    while !["P","C"].include?(first)
+      first = gets.chomp.upcase
+    end
+    if first == "P"
+      game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+    elsif first == "C"
+      game = Game.new(Player::Computer.new("X"), Player::Human.new("O"))
+    end
+  elsif num_players == 2
+    game = Game.new(Player::Human.new("X"), Player::Human.new("O"))
+  end
+  game.play
+  num_players = -1
+  first=""
+  print "(P)lay Again or Exit?: "
+  status = gets.chomp!
+end
