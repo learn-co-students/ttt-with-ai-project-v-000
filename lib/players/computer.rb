@@ -26,7 +26,6 @@ class Computer < Player
   def move(board)
     #--------FIRST TURN--------#
     if board.turn_count == 0 || board.turn_count == 1 #if this is the first time the computer has moved
-    puts "First turn.."
       move = [1,3,5,7,9].sample #selects either the corners or the center to play
       while board.taken?(move)
         move = [1,3,5,7,9].sample
@@ -37,7 +36,6 @@ class Computer < Player
     end
     #--------SECOND TURN--------#
     if board.turn_count == 2
-      puts "Second turn..."
       #Chooses spaces that are adjacent to first move
       get_my_spaces(board)
       last_move = 0
@@ -90,7 +88,6 @@ class Computer < Player
     end
     #--------ALL OTHER TURNS--------#
     if board.turn_count >= 3
-      puts "All other turns..."
       where_to_play?(board)
     end
   end
@@ -103,12 +100,9 @@ class Computer < Player
       get_my_spaces(board)
     #----------------------TESTS IF IT HAS AN OPENING TO WIN------------------------
     puts "Testing for win opening..."
-    puts "I occupy: #{self.my_spaces}"
     WIN_COMBINATIONS.each do |win_combination|
-      puts "Testing against: #{win_combination}"
       if (win_combination & self.my_spaces).length == 2
         win_combination.each do |space|
-          puts "Testing individual space: #{space}"
           if !(board.taken?(space))
             puts "Found open space: #{space}"
             if board.valid_move?(space)
@@ -123,12 +117,9 @@ class Computer < Player
     #Collects spaces occupied by opponent
     puts "No win openings, testing if I need to defend..."
     #@opponent_spaces is 1-9, since update.board subracts 1
-    puts "Opponent occupies: #{self.opponent_spaces}"
     WIN_COMBINATIONS.each do |win_combination|
-      puts "Testing against: #{win_combination}"
       if (win_combination & self.opponent_spaces).length == 2
         win_combination.each do |space|
-          puts "Testing individual space: #{space}"
           if !(board.taken?(space))
             puts "Found open space: #{space}"
             if board.valid_move?(space)
@@ -139,12 +130,38 @@ class Computer < Player
         end
       end
     end
-    #----------------------OTHERWISE JUST PLAYS RANDOMLY------------------------
-    puts "No chance to win, nowhere to defend, playing random spot..."
-    space = [1,2,3,4,5,6,7,8,9].sample
-      puts space.to_s
+    #----------------------OTHERWISE PLAYS STRATEGIC SPOT------------------------
+    puts "No chance to win, nowhere to defend, playing strategic spot..."
+    WIN_COMBINATIONS.each do |win_combination|
+      puts "Testing against: #{win_combination}"
+      if (win_combination & self.my_spaces).length == 1 && (win_combination & self.opponent_spaces).length == 0
+        #prefers center space, if available
+        if win_combination.include?(5) && !(board.taken?(5))
+          return 5
+        else
+          win_combination.each do |space|
+          puts "Testing individual space: #{space}"
+          if !(board.taken?(space))
+            puts "Found open space: #{space}"
+            if board.valid_move?(space)
+              return space.to_s
+            end
+          end
+        end
+      end
+      else
+      #If there are no strategic moves available, just play randomly
+      space = [1,2,3,4,5,6,7,8,9].sample
+      while !(board.valid_move?(space))
+        space = [1,2,3,4,5,6,7,8,9].sample
+      end
       return space.to_s
+      end
+    end
   end
+
+
+
 
 
   def get_opponent_spaces (board)
