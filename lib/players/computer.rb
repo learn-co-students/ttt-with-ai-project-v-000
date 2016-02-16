@@ -55,7 +55,7 @@ class Computer < Player
         when 3
           @computer_skill_move = 3
         when 4
-          @computer_skill_move = 1 +rand(9)
+          @computer_skill_move = 9
         when 5
           @computer_skill_move = 3
         when 6
@@ -63,12 +63,19 @@ class Computer < Player
         when 7
           @computer_skill_move = 7
         when 8
-          @computer_skill_move = 2
+          @computer_skill_move = 3
         end
-      when 5, 3
-      @computer_skill_move = 1 +rand(9)
+      when 5
+        if opp_pieces.include?(1) && opp_pieces.include?(8)
+          @computer_skill_move = 7
+        elsif opp_pieces.include?(8) && opp_pieces.include?(3)
+          @computer_skill_move = 3
+        else @computer_skill_move = 1 +rand(9)
+        end
+      when 3
+        @computer_skill_move = 1 +rand(9)
       when 1
-      @computer_skill_move = open_arr[0]+1
+        @computer_skill_move = open_arr[0]+1
       else
       return
     end
@@ -170,8 +177,10 @@ class Computer < Player
       @computer_skill_move = 3
     when ([6,7] - opp_pieces).empty? && open_arr.include?(8)
       @computer_skill_move = 9
-    when ([7,8] -opp_pieces).empty? && open_arr.include?(6)
+    when ([7,8] - opp_pieces).empty? && open_arr.include?(6)
       @computer_skill_move = 7
+    when ([6,8] - opp_pieces).empty? && open_arr.include?(7)
+      @computer_skill_move = 8
     end
   end
 
@@ -220,8 +229,10 @@ class Computer < Player
       @computer_skill_move = 3
     when ([6,7] - my_pieces).empty? && open_arr.include?(8)
       @computer_skill_move = 9
-    when ([7,8] -my_pieces).empty? && open_arr.include?(6)
+    when ([7,8] - my_pieces).empty? && open_arr.include?(6)
       @computer_skill_move = 7
+    when ([6,8] - my_pieces).empty? && open_arr.include?(7)
+      @computer_skill_move = 8
     end
   end
 
