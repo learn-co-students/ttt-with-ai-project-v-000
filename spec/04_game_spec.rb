@@ -141,7 +141,7 @@ describe 'Game' do
     it 'returns X when X won' do
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
-
+     
       expect(game.winner).to eq("X")
     end
 
