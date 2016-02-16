@@ -83,9 +83,31 @@ class Computer < Player
         elsif opp_pieces[0] == 5 || opp_pieces[0] == 7
           @computer_skill_move = 9
         else
+          @computer_skill_move = 3
+        end
+      when 6
+        if my_pieces.include?(4)
+          if opp_pieces.include?(7)
+            @computer_skill_move = 4
+          else
+          @computer_skill_move = 2
+        end
+        elsif my_pieces.include?(0) || my_pieces.include?(8)
+          @computer_skill_move = 5
+        elsif my_pieces.include?(2) && opp_pieces.include?(6)
           @computer_skill_move = 1
         end
-      when 6, 4, 2
+      when 4
+        if my_pieces.include?(3) && my_pieces.include?(4) && opp_pieces.include?(5) && opp_pieces.include?(7)
+          @computer_skill_move = 3
+        elsif my_pieces.include?(3) && my_pieces.include?(4) && opp_pieces.include?(5) && opp_pieces.include?(6)
+          @computer_skill_move = 2
+        elsif my_pieces.include?(1) && my_pieces.include?(4) && opp_pieces.include?(5) && opp_pieces.include?(7)
+          @computer_skill_move = 7
+        else
+          @computer_skill_move = 1 +rand(9)
+        end
+        when 2
         @computer_skill_move = 1 +rand(9)
       else
         return
@@ -100,7 +122,7 @@ class Computer < Player
   def computer_master_move(board)
     analyze_move(board)
     puts "I am #{self.token}"
-    puts "MASTER COMPUTER MOVE"
+    puts "MASTER COMPUTER MOVE TO #{computer_skill_move.to_s}"
     computer_skill_move.to_s
   end
 
