@@ -7,7 +7,7 @@ class Board
    end
 
    def reset!
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    @cells = Array.new(9," ")
    end
 
    def display
@@ -42,7 +42,7 @@ class Board
    end
 
    def valid_move?(pos)
-    pos.to_i.between?(1,9) && taken?(pos) == false
+    pos.to_i.between?(1,9) && !taken?(pos)
    end
 
 
