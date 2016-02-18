@@ -1,5 +1,5 @@
 require_relative 'board.rb'
-require_relative 'human.rb'
+require_relative 'players/human.rb'
 class Game
   WIN_COMBINATIONS=[[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8],[0,4,8], [2,4,6]]
   attr_accessor :board, :player_1, :player_2
@@ -15,10 +15,10 @@ class Game
   end
 
   def current_player
-    if (board.turn_count % 2) == 0
-      player_1
+    if (@board.turn_count % 2) == 0
+      @player_1
     else
-      player_2
+      @player_2
     end
   end
   
@@ -29,8 +29,8 @@ class Game
   def won?
     won=false
     WIN_COMBINATIONS.each do |arr|
-        if board.cells[arr[0]] == "X" && board.cells[arr[1]] == "X" && board.cells[arr[2]] == "X" ||
-            board.cells[arr[0]] == "O" && board.cells[arr[1]] == "O" && board.cells[arr[2]] == "O"
+        if @board.cells[arr[0]] == "X" && @board.cells[arr[1]] == "X" && @board.cells[arr[2]] == "X" ||
+            @board.cells[arr[0]] == "O" && @board.cells[arr[1]] == "O" && @board.cells[arr[2]] == "O"
           won = true # return the win_combination indexes that won.
         end
     end
@@ -50,19 +50,19 @@ class Game
   end
 
   def over?
-    draw? || won?
+    self.draw? || self.won?
   end
 
   def winner
     winning_array=nil
      WIN_COMBINATIONS.each do |arr|
-        if board.cells[arr[0]] == "X" && board.cells[arr[1]] == "X" && board.cells[arr[2]] == "X" ||
-            board.cells[arr[0]] == "O" && board.cells[arr[1]] == "O" && board.cells[arr[2]] == "O"
+        if @board.cells[arr[0]] == "X" && @board.cells[arr[1]] == "X" && @board.cells[arr[2]] == "X" ||
+            @board.cells[arr[0]] == "O" && @board.cells[arr[1]] == "O" && @board.cells[arr[2]] == "O"
             winning_array=arr # return the win_combination indexes that won.
         end
     end
     if winning_array !=nil
-      board.cells[winning_array[0]]
+      @board.cells[winning_array[0]]
     end
   end
 
@@ -71,12 +71,11 @@ def turn
   
   move=player.move(board)
 
-  while !board.valid_move?(move)
+  if !@board.valid_move?(move)
     move=player.move(board)
   end
   
-  board.update(move,player)
-  
+  @board.update(move,player)
     
 end#end turn method
 
@@ -92,11 +91,12 @@ end#end turn method
 end #end class
 
 
-# game=Game.new
-# game.turn
-# game.turn
-# game.turn
-# game.turn
+game=Game.new
+game.turn
+game.turn
+game.turn
+game.turn
+
 
 
 
