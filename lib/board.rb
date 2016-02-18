@@ -1,3 +1,4 @@
+require "pry"
 class Board
   attr_accessor :cells
 
@@ -38,8 +39,7 @@ class Board
   end
 
   def update(position_number, player)
-    self.position(position_number) = player.token
+    # self.position(position_number) = player.token 
+    # why does this work when I type out the position method, but not now?
   end
-
-
 end
