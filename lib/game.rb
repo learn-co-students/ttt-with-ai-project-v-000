@@ -15,21 +15,6 @@ class Game
                        [6,4,2]  #right diagonal
                    ]
 
-  def board
-  	@board 
-  	#provides access to the board
-  end
-
-  def player_1
-  	@player_1
-  	#provides access to player_1
-  end
-
-  def player_2
-  	@player_2
-  	#provides access to player_2
-  end
-
   def initialize(player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new)
   	@player_1 = player_1
     @player_2 = player_2
@@ -41,7 +26,7 @@ class Game
   def current_player
   	#returns the correct player for the third move
     #so if board has 4 spots filled, it is the 5th turn
-    if @board.turn_count % 2 == 0 then 
+    if board.turn_count % 2 == 0 then 
       current_player = @player_1
     else
       current_player = @player_2
@@ -53,14 +38,15 @@ class Game
   end
 
   def won?
-    Game::WIN_COMBINATIONS.any? {|win_combination| #returns true or false
-      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
-      @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-      @board.taken?(win_combination[0])}
+    #Game::WIN_COMBINATIONS.any? {|win_combination| #returns true or false
+     # @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
+      #@board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
+      #@board.taken?(win_combination[0])}
+      winner_array ? true : false
   end
 
   def draw?
-    !won? && @board.full?
+    !won? && board.full?
   end
 
   def winner_array #returns array of winning cells
@@ -71,18 +57,18 @@ class Game
   end
 
   def winner 
-    if winning_combo = winner_array
-     @winner = @board.cells[winner_array.last] 
+     if winner_array
+     @winner = board.cells[winner_array.first] 
     end
   end
 
   def turn
     input = self.current_player.move
-    if !@board.valid_move?(input)
-      puts "not valid"
+    if !board.valid_move?(input)
+      puts "invalid"
       turn
     end
-    @board.update(input, current_player)
+    board.update(input, current_player)
     current_player
   end
   	#makes valid moves,asks for input again after a failed validation
@@ -91,11 +77,12 @@ class Game
   def play
     while !over?
       turn
+      board.display
     end
     if draw? 
-      puts "Cats Game!"
+      puts "Cats Game!" 
     elsif won?
-      puts "Congratulations #{@winner}!"
+      puts "Congratulations #{@winner}!" 
     end
   end
       
