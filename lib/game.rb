@@ -2,7 +2,7 @@ require 'pry'
 
 class Game
 
-	attr_accessor  :board, :player_1, :player_2, :cells, :token
+	attr_accessor  :board, :player_1, :player_2, :cells, :token, :position
 
 	#defines a constant WIN_COMBINATIONS with arrays for each win combination
 	WIN_COMBINATIONS = [ [3,4,5], #top row
@@ -42,9 +42,9 @@ class Game
   	#returns the correct player for the third move
     #so if board has 4 spots filled, it is the 5th turn
     if @board.turn_count % 2 == 0 then 
-      player_1
+      current_player = @player_1
     else
-      player_2
+      current_player = @player_2
     end
   end
 
@@ -67,30 +67,38 @@ class Game
     Game::WIN_COMBINATIONS.detect {|win_combination|
       @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
       @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-      @board.taken?(win_combination[0])}   
+      @board.taken?(win_combination[0])} 
   end
 
-  def winner
+  def winner 
     if winning_combo = winner_array
-      @winner = @board.cells[winning_combo.first]
-  end
-
+     @winner = @board.cells[winner_array.last] 
+    end
   end
 
   def turn
-    puts "Please enter 1-9:"
-    input = gets.chomp
-    binding.pry
-    if @board.cells.valid_move?(input) != true
-      puts "invalid"
+    input = self.current_player.move
+    if !@board.valid_move?(input)
+      puts "not valid"
+      turn
     end
-    @board.cells.update(input, @current_player)
+    @board.update(input, current_player)
+    current_player
   end
-  	#makes valid moves
-  	#asks for input again after a failed validation
+  	#makes valid moves,asks for input again after a failed validation
   	#changes to player 2 after the first turn
 
   def play
+    while !over?
+      turn
+    end
+    if draw? 
+      puts "Cats Game!"
+    elsif won?
+      puts "Congratulations #{winner}!"
+    end
+  end
+      
   	#asks for players input on a turn of the game
   	#checks if the game is over after every turn
   	#plays the first turn of the game
@@ -102,8 +110,7 @@ class Game
   	#stops playing in a draw
   	#prints "Cats Game!" on a draw
   	#plays through an entire game
-  end
-
+  
   def start
   end
 

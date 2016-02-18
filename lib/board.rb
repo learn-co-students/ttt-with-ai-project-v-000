@@ -1,6 +1,6 @@
 class Board
 
-	attr_accessor :cells, :token
+	attr_accessor :cells, :token, :position
 
 	#has an attribute to store the cells of the board
 	def cells
@@ -8,15 +8,14 @@ class Board
 	end
 
 	#can reset the state of the cells in the board
-   #sets the cells of the board to a 9 element array of " "
+  #sets the cells of the board to a 9 element array of " "
 	def reset!
-		@cells.clear
 		@cells = Array.new(9, " ")
 	end
 
 	#sets the cells of the board to a 9 element array of " "
-	def initialize(cells = nil)
-		@cells = Array.new(9, " ")
+	def initialize(cells=nil)
+		reset!
 	end
 
 	# prints the board
@@ -29,8 +28,10 @@ class Board
   end
 
   #takes in user input and returns the value of the board cell 
-  def position(position)
-    @cells[position.to_i - 1]
+  def position(input)
+  	array_index = input.to_i - 1
+  	@cells[array_index]
+    #@cells[input.to_i - 1]
   end
 
 	#returns true for a full board
@@ -38,26 +39,31 @@ class Board
   	@cells.all?{|token| token == "X" || token == "O"}
 	end
 
-  def turn_count
-    #returns the amount of turns based on cell value
+	#returns the amount of turns based on cell value
+  def turn_count  
 		@cells.count {|c| c != " "}
 	end
 
-	def taken?(position)
-		#position=position.to_i - 1
-		(@cells[position.to_i - 1] == "X" || @cells[position.to_i - 1] == "O") ? true : false
+	def taken?(input)
+		(position(input) == "X" || position(input) == "O") ? true : false
+		#(@cells[input.to_i - 1] == "X" || @cells[input.to_i - 1] == "O") ? true : false
 		#returns true if the position is X or O
 		#returns false if the position is empty or blank
 	end
 
-	def valid_move?(position)
-		position.to_i.between?(1, 9) && !taken?(position)
+	def valid_move?(input)
+		input.to_i.between?(1, 9) && !taken?(input)
 		#returns true for user input between 1-9 that is not taken
 	end
 
-	def update(position, player)
-		@cells[position.to_i - 1] = player.token
+	def update(input, player)
+		#binding.pry
+		#position(input) = player.token
+		@cells[input.to_i - 1] = player.token
 		#updates the cells in the board with the player token according to the input
 	end
+
+	
+
 
 end
