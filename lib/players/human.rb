@@ -1,0 +1,4 @@
+class Human < Player
+
+
+end
