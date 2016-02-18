@@ -67,12 +67,17 @@ class Game
   end
 
 def turn
-    player=current_player
-    
-    if !board.valid_move?(player.move(board))
-      player.move(board)
-    end
+  player=self.current_player
+  
+  move=player.move(board)
 
+  while !board.valid_move?(move)
+    move=player.move(board)
+  end
+  
+  board.update(move,player)
+  
+    
 end#end turn method
 
 
@@ -87,9 +92,17 @@ end#end turn method
 end #end class
 
 
-# game = Game.new
-#       game.board.cells = ["X", "O", "X", "O", "X", " ", "O", "X", "O"]
+# game=Game.new
+# game.turn
+# game.turn
+# game.turn
+# game.turn
 
-# puts game.turn
+
+
+
+
+
+
 
 

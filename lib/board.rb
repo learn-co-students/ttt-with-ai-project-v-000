@@ -19,7 +19,7 @@ class Board
   end
 
   def position(p)
-   cells[p.to_i-1]
+   p.to_i-1
   end
 
   def full?
@@ -50,20 +50,15 @@ class Board
   def valid_move?(move)
     move=move.to_i
     move-=1
-    if move>=0
-      if cells[move]=="X" || cells[move]=="O"
-        false
-      else
-       true
-      end
-    else
-     return false
-    end
+    if move>=0 && move <=9
+    !taken?(move)
+   else
+    false
+   end
   end  
 
-  def update(position, player)
-   move=position.to_i
-   move-=1
+  def update(p, player)
+   move=position(p)
    cells[move] = player.token
    cells[move]
   end
