@@ -1,6 +1,6 @@
 class Board
 
-	attr_accessor :cells, :token, :position
+	attr_accessor :cells
 
 	#has an attribute to store the cells of the board
 	def cells

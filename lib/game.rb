@@ -2,7 +2,7 @@ require 'pry'
 
 class Game
 
-	attr_accessor  :board, :player_1, :player_2, :cells, :token, :position
+	attr_accessor  :board, :player_1, :player_2
 
 	#defines a constant WIN_COMBINATIONS with arrays for each win combination
 	WIN_COMBINATIONS = [ [3,4,5], #top row
@@ -95,7 +95,7 @@ class Game
     if draw? 
       puts "Cats Game!"
     elsif won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{@winner}!"
     end
   end
       
