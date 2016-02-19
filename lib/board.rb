@@ -3,7 +3,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    self.reset!
+    reset!
   end
 
   def reset!
@@ -11,35 +11,37 @@ class Board
   end
 
   def display
-    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
-    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
   def position(number)
-    self.cells[number.to_i - 1]
+    number = number.to_i - 1 if number.class == String
+    cells[number]
   end
 
   def full?
-    self.cells.none? { |cell| cell == " "}
+    cells.none? { |cell| cell == " "}
   end
 
   def turn_count
-    self.cells.count { |cell| cell != " " }
+    cells.count { |cell| cell != " " }
   end
 
   def taken?(position_number)
-    self.position(position_number) != " "
+    position(position_number) != " "
   end
 
   def valid_move?(position_number)
-    position_number.to_i.between?(1,9) && !self.taken?(position_number)
+    position_number.to_i.between?(1,9) && !taken?(position_number)
   end
 
   def update(position_number, player)
-    # self.position(position_number) = player.token 
-    # why does this work when I type out the position method, but not now?
+    cells[position_number.to_i - 1] = player.token 
+    # position(position_number) = player.token 
+    # why does this work when I type out the contents of the position method, but not when I use the method itself?
   end
 end
