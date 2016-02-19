@@ -47,12 +47,12 @@ class Game
   end
 
   def turn
-    board.display
     input = ""
     until board.valid_move?(input) do
       input = current_player.move(board)
     end
     board.update(input, current_player)
+    board.display
   end
 
   def play
