@@ -5,8 +5,8 @@ class Game
 	attr_accessor  :board, :player_1, :player_2
 
 	#defines a constant WIN_COMBINATIONS with arrays for each win combination
-	WIN_COMBINATIONS = [ [3,4,5], #top row
-                     	 [0,1,2], #middle row
+	WIN_COMBINATIONS = [ [0,1,2], #top row
+                     	 [3,4,5], #middle row
                        [6,7,8], #bottom row
                        [0,3,6], #left column
                        [1,4,7], #center column
@@ -42,7 +42,12 @@ class Game
      # @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
       #@board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
       #@board.taken?(win_combination[0])}
-      winner_array ? true : false
+      if winner_array != nil then
+          true
+      else
+          false
+        end
+      #winner ? true : false
   end
 
   def draw?
@@ -51,14 +56,14 @@ class Game
 
   def winner_array #returns array of winning cells
     Game::WIN_COMBINATIONS.detect {|win_combination|
-      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
-      @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-      @board.taken?(win_combination[0])} 
+      (board.cells[win_combination[0]] == board.cells[win_combination[1]]) &&
+      (board.cells[win_combination[1]] == board.cells[win_combination[2]]) &&
+      board.taken?(win_combination[0])} 
   end
 
   def winner 
-     if winner_array
-     @winner = board.cells[winner_array.first] 
+    if winner_array
+      @winner = board.cells[winner_array.first] 
     end
   end
 
@@ -82,7 +87,8 @@ class Game
     if draw? 
       puts "Cats Game!" 
     elsif won?
-      puts "Congratulations #{@winner}!" 
+      #binding.pry
+      puts "Congratulations #{winner}!" 
     end
   end
       
@@ -99,6 +105,9 @@ class Game
   	#plays through an entire game
   
   def start
+    puts "Welcome to Tic Tac Toe"
+    puts "How many players for this game: 0, 1, 2?"
+    puts 'Who will go first and be "X"?'
   end
 
 

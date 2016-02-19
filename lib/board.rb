@@ -24,21 +24,22 @@ class Board
 
   #takes in user input and returns the value of the board cell 
   def position(input)
-    @cells[input.to_i - 1]
+    cells[input.to_i - 1]
   end
 
 	#returns true for a full board
 	def full?
-  	@cells.all?{|token| token == "X" || token == "O"}
+  	cells.all?{|token| token == "X" || token == "O"}
 	end
 
 	#returns the amount of turns based on cell value
   def turn_count  
-		@cells.count {|c| c != " "}
+		cells.count {|c| c != " "}
 	end
 
 	def taken?(input)
-		(position(input) == "X" || position(input) == "O") ? true : false
+		#(position(input) == "X" || position(input) == "O") ? true : false
+			cells[input.to_i - 1] == "X" || cells[input.to_i - 1] == "O" ? true : false
 		#returns true if the position is X or O
 		#returns false if the position is empty or blank
 	end
@@ -49,7 +50,7 @@ class Board
 	end
 
 	def update(input, player)
-		@cells[input.to_i - 1] = player.token
+		cells[input.to_i - 1] = player.token
 		#updates the cells in the board with the player token according to the input
 	end
 
