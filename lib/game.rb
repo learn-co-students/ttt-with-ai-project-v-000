@@ -38,32 +38,25 @@ class Game
   end
 
   def won?
-    #Game::WIN_COMBINATIONS.any? {|win_combination| #returns true or false
-     # @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
-      #@board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-      #@board.taken?(win_combination[0])}
-      if winner_array != nil then
-          true
-      else
-          false
-        end
-      #winner ? true : false
+    Game::WIN_COMBINATIONS.any? {|win_combination| #returns true or false
+      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
+      @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
+      @board.taken?(win_combination[0])}
   end
 
   def draw?
     !won? && board.full?
   end
 
-  def winner_array #returns array of winning cells
-    Game::WIN_COMBINATIONS.detect {|win_combination|
-      (board.cells[win_combination[0]] == board.cells[win_combination[1]]) &&
-      (board.cells[win_combination[1]] == board.cells[win_combination[2]]) &&
-      board.taken?(win_combination[0])} 
-  end
-
   def winner 
-    if winner_array
-      @winner = board.cells[winner_array.first] 
+    if won?
+      winner_array = Game::WIN_COMBINATIONS.select {|win_combination|
+        (board.cells[win_combination[0]] == board.cells[win_combination[1]]) &&
+        (board.cells[win_combination[1]] == board.cells[win_combination[2]]) &&
+        board.taken?(win_combination[0])} 
+      
+        winner_array
+        @winner = board.cells[winner_array.first.first]
     end
   end
 
@@ -80,15 +73,16 @@ class Game
   	#changes to player 2 after the first turn
 
   def play
-    while !over?
+    until over?
       turn
-      board.display
+      #board.display
     end
     if draw? 
       puts "Cats Game!" 
     elsif won?
-      #binding.pry
-      puts "Congratulations #{winner}!" 
+      binding.pry
+      board.display
+      puts "Congratulations #{self.winner}!"
     end
   end
       
