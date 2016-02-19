@@ -1,4 +1,4 @@
-class Computer < Player
+class Player::Computer < Player
 
 	def move(*board)
 		#asks the computer for input and return it

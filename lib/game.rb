@@ -15,10 +15,10 @@ class Game
                        [6,4,2]  #right diagonal
                    ]
 
-  def initialize(player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new)
-  	@player_1 = player_1
-    @player_2 = player_2
-    @board = board
+  def initialize(player_1=Player::Human.new("X"), player_2=Player::Human.new("O"), board=Board.new)
+  	self.player_1 = player_1
+    self.player_2 = player_2
+    self.board = board
   	#accepts two players and a board
   	#defaults to two human players, X and O, with an empty board
   end
@@ -27,9 +27,9 @@ class Game
   	#returns the correct player for the third move
     #so if board has 4 spots filled, it is the 5th turn
     if board.turn_count % 2 == 0 then 
-      current_player = @player_1
+      current_player = self.player_1
     else
-      current_player = @player_2
+      current_player = self.player_2
     end
   end
 
@@ -45,7 +45,7 @@ class Game
   end
 
   def draw?
-    !won? && board.full?
+    !won? && self.board.full?
   end
 
   def winner 
@@ -56,7 +56,11 @@ class Game
         board.taken?(win_combination[0])} 
       
         winner_array
-        @winner = board.cells[winner_array.first.first]
+        #puts "Congratulations #{board.cells[winner_array.first.first]}!"
+        @game_winner = board.cells[winner_array.first.first]
+        #binding.pry
+        @game_winner
+
     end
   end
 
@@ -73,16 +77,13 @@ class Game
   	#changes to player 2 after the first turn
 
   def play
-    until over?
+    while !over?
       turn
-      #board.display
     end
-    if draw? 
-      puts "Cats Game!" 
-    elsif won?
-      binding.pry
-      board.display
-      puts "Congratulations #{self.winner}!"
+    if won?
+      puts "Congratulations #{winner}!"  
+    elsif draw?
+      puts "Cats Game!"      
     end
   end
       

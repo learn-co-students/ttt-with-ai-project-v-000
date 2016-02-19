@@ -1,4 +1,4 @@
-class Human < Player
+class Player::Human < Player
 
 	def move(*board)
 		#asks the user for input and return it
