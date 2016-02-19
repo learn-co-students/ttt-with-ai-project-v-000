@@ -7,7 +7,7 @@ class Board
   end
 
   def reset!
-    self.cells = Array.new(9, " ")
+    self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def display
@@ -43,5 +43,6 @@ class Board
     cells[position_number.to_i - 1] = player.token 
     # position(position_number) = player.token 
     # why does this work when I type out the contents of the position method, but not when I use the method itself?
+    # because the method I'm calling is technically []= , the = is part of it, I can't just call half the method
   end
 end
