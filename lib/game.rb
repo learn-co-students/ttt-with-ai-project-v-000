@@ -14,38 +14,42 @@ WIN_COMBINATIONS = [
 ]
 	#defines all the win combos to win the game.
 
-	def initialize
-		@player_1 = player_1
-		@player_2 = player_2
-		@board = board
-		board = []
-	end
+  def initialize(player_1 = Human.new('X'), player_2 = Human.new('O'), board = Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
+  end
 
 	def current_player
-		#returns current player
-
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
 	end
 
 	def over?
-		#returns true for a draw, for a won game
-		#returns false for a game in progress
+		(@board.full? || won? || draw?) ? true : false
 	end
 
-	def won?
-		#returns false for a game in progress
-		#returns true for a won game
-	end
+  def won?
+    WIN_COMBINATIONS.each do |combination|
+      if @board.get_cells(combination).uniq.length == 1
+        token = @board.cells[combination[0]]
+        if (token == "X") || (token == "O")
+          @winner = token
+          return true
+        end
+      end
+    end
+    false
+  end
 
-	def draw?
-		#returns true for a draw
-		#returns false for a game in progress, or a win
+  def draw?
+    return true if @board.full? && (self.won? == false)
+    false
+  end
 
-	end
-
-	def self.winner
-		#returns X or O for each winner
-		#and returns nil for a draw
-	end
+  def winner
+    self.won?
+    @winner == " " ? nil : @winner
+  end
 
 	def self.turn
 		#makes valid moves, asks for input for non-valid moves and changes to player 2 after first move

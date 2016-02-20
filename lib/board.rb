@@ -66,4 +66,8 @@ class Board
 		#true if it is on the board and is not #TAKEN
 		position.to_i.between?(1,9) && !taken?(position)
 	end
+
+  def get_cells(array)
+    array.map{ |x| x = @cells[x] }
+  end
 end
