@@ -19,6 +19,23 @@ WIN_COMBINATIONS = [
     @board = board
   end
 
+  # def turn
+  #   
+  #   if current_player.class == Player::Computer
+  #     move = self.current_player.minimax(@board, self)
+  #   else
+  #     move = self.current_player.move(@board)
+  #   end
+  #   
+  #   if @board.valid_move?(move)
+  #     move
+  #   else
+  #     turn
+  #   end
+  #   @board.update(move, self.current_player)
+  #   @board.display
+  # end
+
 def turn
   puts "Please enter 1-9:"
   move = self.current_player.move(@board)
