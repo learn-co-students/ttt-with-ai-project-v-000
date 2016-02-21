@@ -3,9 +3,9 @@
 require_relative '../config/environment'
 
 
-# 1. Greet the player
-# 2. Do you want to play with 0,1,2 players?
-# 3. Who will go first and be X?
+# 1. Greet the player CHECK
+# 2. Do you want to play with 0,1,2 players? CHECK
+# 3. Who will go first and be X? Hmmm?
 # 4. With this input, start a new game (Game.new)
 # 5. Play through the game
 # 6. When the game is over, ask them if they want to play again. Then restart or exit the game. 
@@ -23,16 +23,15 @@ puts "First, how many players will be playing?"
 puts "Enter zero for Computer vs. Computer."
 puts "Enter one for Computer vs. Human."
 puts "Enter two players to play with a human friend!"
-
 response = gets.strip
-case response
-	when "zero" || "0"
-		game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new)
-	when "one" || "1"
-		game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
-	when "two" || "2"
-		game = Game.new
-	end
+		case response
+		when "zero"
+			game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new)
+		when "one"
+			game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
+		when "two"
+			game = Game.new(Player::Human.new("X"), Player::Human.new("O"), Board.new)
+		end
 until game.won? || game.draw?
 	game.play
 end
@@ -48,7 +47,7 @@ if answer.downcase == "yes" || answer.downcase == "y"
 		when "one"
 			game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
 		when "two"
-			game = Game.new
+			game = Game.new(Player::Human.new("X"), Player::Human.new("O"), Board.new)
 		end
 		until game.won?
 		game.play

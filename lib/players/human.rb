@@ -1,4 +1,4 @@
-class Human < Player
+class Player::Human < Player
 
 	def move(board)
 		position = gets.strip
