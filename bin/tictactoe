@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#  ./bin/tictactoe
+
+  def choose_players
+    puts "     How many soon-to-be-enthralled players do we have today?"
+    puts "     Please enter 1 (for 1-player), 2 (for 2-players) or 0 (for computer-only mode)"
+      players = gets.strip
+      if players == "0"
+        puts "Robots are being built. Computer-only mode coming soon."
+        elsif players == "1"
+          who_goes_first?
+        elsif players == "2"
+          Game.new.play
+          else
+            puts "Invalid entry. Please only enter 1 (for 1-player), 2 (for 2-players) or 0 (for computer-only mode)"
+            end
+      puts players
+  end
+
+
+    def who_goes_first?
+      puts "     Who would you like to go first?"
+      puts "     Type M if you would like to go first, or type C if you would like the computer to play first"
+      first = gets.chomp.downcase
+        if first == "m"
+          player1 = Human.new("X")
+          player2 = Computer.new("O")
+          game = Game.new(player1, player2)
+          game.play
+        elsif first == "c"
+          puts "AI selected"
+        else
+          puts " "
+          puts "     Invalid entry. Please only enter M or C"
+          who_goes_first?
+      end
+    end
+
+
+
+
+puts " "
+puts "     *****Welcome to Tic Tac Toe!*****"
+puts "     The GREATEST and most ENJOYALBE game of all-time!"
+puts " "
+choose_players
+
+
+# game = Game.new
+# game.play

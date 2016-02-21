@@ -18,6 +18,10 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    puts "     OK, let's play some Tic Tac Toe!"
+    puts "     Player 1 is X and Player 2 is O. Player 1 goes first."
+    puts "     Choose a number 1 - 9 (left to right, top to bottom)"
+    puts " "
   end
 
   def turn_count
@@ -80,11 +84,14 @@ end
 
    def turn
       board.display
+      puts " "
+      puts "     It is #{current_player}'s turn"
       position = current_player.move(board)
       if valid_move?(position)
         board.cells[position.to_i - 1] = current_player.token
       else
-        puts "invalid entry"
+        puts "     ***Invalid Entry***"
+        puts "     Please choose a number 1 - 9 (left to right, top to bottom)"
         turn
       end
     end
@@ -101,7 +108,6 @@ end
       puts "Congratulations #{winner}!"
     end
   end
-
 
 
 end
