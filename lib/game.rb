@@ -39,8 +39,7 @@ class Game
   end
 
   def draw?
-    return true if @board.full? && (self.won? == false)
-    false
+    @board.full? && !won?
   end
 
   def winner
@@ -68,5 +67,5 @@ class Game
     elsif draw?
     puts "Cats Game!"
     end
-    end
+  end
 end
