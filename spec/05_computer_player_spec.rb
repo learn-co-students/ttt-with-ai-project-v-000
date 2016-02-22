@@ -16,5 +16,21 @@ describe 'Player::Computer' do
 
       expect(valid_moves).to include(computer_move)
     end
+
+    # my test
+    it 'moves strategically when the center is occupied' do
+      computer = Player::Computer.new("O")
+      board = Board.new
+
+      board.cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
+
+      valid_moves = ["1", "3", "7", "9"]
+
+      computer_move = computer.move(board)
+
+      expect(valid_moves).to include(computer_move)
+    end
+
+
   end
 end

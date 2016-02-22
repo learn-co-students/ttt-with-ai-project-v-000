@@ -2,6 +2,20 @@ require "pry"
 class Board
   attr_accessor :cells
 
+  WIN_COMBINATIONS = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [6, 4, 2]
+  ]
+
+  CORNERS = [0, 2, 6, 8]
+  OUTER_MIDDLES = [1, 3, 5, 7]
+
   def initialize
     reset!
   end
@@ -41,9 +55,21 @@ class Board
   end
 
   def update(position_number, player)
-    cells[position_number.to_i - 1] = player.token 
-    # position(position_number) = player.token 
-    # why does this work when I type out the contents of the position method, but not when I use the method itself?
-    # because the method I'm calling is technically []= , the = is part of it, I can't just call half the method
+    position_number = position_number.to_i - 1 if position_number.class == String
+    cells[position_number] = player.token
+  end
+
+  def almost_won # should return the combo that's almost won
+    WIN_COMBINATIONS.detect do |combo|
+      (position(combo[0]) != " " && position(combo[0]) == position(combo[1]) && position(combo[2]) == " ") || (position(combo[1]) != " " && position(combo[1]) == position(combo[2]) && position(combo[0]) == " ") || (position(combo[0]) != " " && position(combo[0]) == position(combo[2]) && position(combo[1]) == " ")
+    end
+  end
+
+  def corners
+    CORNERS
+  end
+
+  def outer_middles
+    OUTER_MIDDLES
   end
 end
