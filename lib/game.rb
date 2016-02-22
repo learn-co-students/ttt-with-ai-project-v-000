@@ -85,7 +85,8 @@ end
    def turn
       board.display
       puts " "
-      puts "     It is #{current_player}'s turn"
+      puts "     It is #{current_player.token}'s turn"
+      puts " "
       position = current_player.move(board)
       if valid_move?(position)
         board.cells[position.to_i - 1] = current_player.token
@@ -106,6 +107,9 @@ end
         puts "Cats Game!"
     else
       puts "Congratulations #{winner}!"
+      puts "   Congratulations #{winner}!"
+      puts "      Congratulations #{winner}!"
+      board.display
     end
   end
 

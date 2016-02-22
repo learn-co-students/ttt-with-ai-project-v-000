@@ -9,7 +9,10 @@ require_relative '../config/environment'
     puts "     Please enter 1 (for 1-player), 2 (for 2-players) or 0 (for computer-only mode)"
       players = gets.strip
       if players == "0"
-        puts "Robots are being built. Computer-only mode coming soon."
+          player1 = Computer.new("X")
+          player2 = Computer.new("O")
+          game = Game.new(player1, player2)
+          game.play
         elsif players == "1"
           who_goes_first?
         elsif players == "2"
@@ -17,7 +20,7 @@ require_relative '../config/environment'
           else
             puts "Invalid entry. Please only enter 1 (for 1-player), 2 (for 2-players) or 0 (for computer-only mode)"
             end
-      puts players
+      play_again?
   end
 
 
@@ -34,12 +37,27 @@ require_relative '../config/environment'
           puts "AI selected"
         else
           puts " "
-          puts "     Invalid entry. Please only enter M or C"
+          puts "     Invalid entry. Please only enter M or C."
           who_goes_first?
       end
     end
 
-
+  def play_again?
+    puts " "
+    puts "     Would you like to play again?"
+    puts "     Type Y if you would like to continue, or N if you would like to stop"
+    desire = gets.strip.downcase
+      if desire == "y"
+        choose_players
+      elsif desire == "n"
+        puts " "
+        puts "     Thanks for playing. Drive safely and see you next time!"
+      else
+        puts " "
+        puts "     Invalid entry. Please only enter Y or N."
+          play_again?
+      end
+  end
 
 
 puts " "
