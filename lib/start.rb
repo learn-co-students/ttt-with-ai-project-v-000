@@ -7,6 +7,7 @@ def tictactoe
 	puts "-----------"
 	puts " 7 | 8 | 9 "
 loop do
+	puts "New Game! Say exit to quit."
 	puts "How many players will be playing?"
 	puts "Enter zero for Computer vs. Computer."
 	puts "Enter one for Computer vs. Human."

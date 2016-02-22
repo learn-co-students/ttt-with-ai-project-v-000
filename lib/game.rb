@@ -64,8 +64,10 @@ class Game
     turn until self.over?
     if won?
     puts "Congratulations #{@winner}!"
+    board.display
     elsif draw?
     puts "Cats Game!"
+    board.display
     end
   end
 end
