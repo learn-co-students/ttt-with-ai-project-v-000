@@ -18,7 +18,13 @@ loop do
 		when "zero", "0"
 			game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new)
 		when "one", "1"
-			game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
+			puts "And who should go first, Human or Computer?"
+			first_player = gets.strip.downcase
+			if first_player == "computer"
+				game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
+			elsif first_player == "human"
+				game = Game.new(Player::Human.new("X"), Player::Computer.new("O"), Board.new)
+			end
 		when "two", "2"
 			game = Game.new(Player::Human.new("X"), Player::Human.new("O"), Board.new)
 		when response != "exit"
