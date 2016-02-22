@@ -19,7 +19,7 @@ You'll be implementing Tic Tac Toe using multiple objects that relate and collab
 
 *Instructions for how to work on a Group Project with Learn*
 
-### Some Hints on Working Together 
+### Some Hints on Working Together
 
 Working on a software project with another person is not something to be taken lightly. While you are a fantastic coder solo, software development is a collaborative activity. Just like anything else, there is skill in collaborating on code. In the end, collaborating with another person boils down to three different styles:
 
