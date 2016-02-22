@@ -12,6 +12,7 @@ loop do
 	puts "Enter zero for Computer vs. Computer."
 	puts "Enter one for Computer vs. Human."
 	puts "Enter two players to play with a human friend!"
+	puts "Enter WARGAMES for 100 battles of Computer vs. Computer!"
 	response = gets.strip.downcase
 
 		case response
@@ -23,7 +24,7 @@ loop do
 			if first_player == "computer"
 				game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
 			elsif first_player == "human"
-				game = Game.new(Player::Human.new("X"), Player::Computer.new("O"), Board.new)
+				game = Game.new(Player::Human.new("X"), Player::Computergit .new("O"), Board.new)
 			end
 		when "two", "2"
 			game = Game.new(Player::Human.new("X"), Player::Human.new("O"), Board.new)
@@ -58,8 +59,8 @@ def wargames
 	elsif game.draw?
 		ties += 1
 	end
-	break
+		break
 	end
-puts "After 100 games of war, X won #{x_wins} times, O won #{o_wins} times and there were #{ties} ties."
-end
+	puts "After 100 games of war, X won #{x_wins} times, O won #{o_wins} times and there were #{ties} ties."
+	end
 end
