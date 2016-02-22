@@ -32,8 +32,11 @@ class Board
 
   #returns boolean if board is full or not
   def full?
-    return false if @cells.include?(" ")
-    else true
+    if @cells.include?(" ")
+      false
+    else
+      true
+    end
   end
 
   #returns how many turns have been taken.
@@ -43,8 +46,11 @@ class Board
 
   #returns boolean if position on the board is taken.
   def taken?(position)
-    return false if @cells[position.to_i-1] == " "
-    else true
+    if @cells[position.to_i-1] == " "
+      false
+    else
+      true
+    end
   end
 
   #returns boolean if move is a valid move e.g. if the array index is " ", and not an X or O.
