@@ -2,13 +2,10 @@
 
 require_relative '../config/environment'
 
-
-# 1. Greet the player CHECK
-# 2. Do you want to play with 0,1,2 players? CHECK
+# ## TO DO ## #
 # 3. Who will go first and be X? Hmmm?
 # 4. With this input, start a new game (Game.new)
 # 5. Play through the game
-# 6. When the game is over, ask them if they want to play again. Then restart or exit the game. 
 
 # 7. wargames option too?
 
