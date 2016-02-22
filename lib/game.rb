@@ -23,8 +23,8 @@ class Game
     end
 
   def over?
-    (@board.full? || won? || draw?) ? true : false
-    end
+      (@board.full? || won? || draw?) ? true : false
+  end
 
   def won?
     WIN_COMBINATIONS.each do |combination|
