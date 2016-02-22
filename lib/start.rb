@@ -30,6 +30,8 @@ loop do
 		when response != "exit"
 			puts "Hmmm... I don't understand. Enter 0, 1 or 2."
 			tictactoe
+		when "wargames"
+			wargames
 		else
 			puts "Thanks for playing!"
 			break
@@ -38,4 +40,26 @@ loop do
 	game.play
 	end
 	end
+end
+
+def wargames
+	x_wins = 0
+	o_wins = 0
+	ties = 0
+	100.times do
+	game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new)
+	until game.won? || game.draw?
+		game.play
+
+	if game.won? && game.winner == "X"
+		x_wins += 1
+	elsif game.won? && game.winner == "O"
+		o_wins += 1
+	elsif game.draw?
+		ties += 1
+	end
+	break
+	end
+puts "After 100 games of war, X won #{x_wins} times, O won #{o_wins} times and there were #{ties} ties."
+end
 end

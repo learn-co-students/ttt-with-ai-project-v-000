@@ -10,3 +10,4 @@ require_relative '../config/environment'
 # 7. wargames option too?
 
 tictactoe
+#this is located in start.rb if you want to edit it. =)
