@@ -12,46 +12,4 @@ require_relative '../config/environment'
 
 # 7. wargames option too?
 
-puts "This Tic-Tac-Toe game works by entering a number for spaces 1-9."
-puts "So our board looks like this:"
-puts " 1 | 2 | 3 "
-puts "-----------"
-puts " 4 | 5 | 6 "
-puts "-----------"
-puts " 7 | 8 | 9 "
-puts "First, how many players will be playing?"
-puts "Enter zero for Computer vs. Computer."
-puts "Enter one for Computer vs. Human."
-puts "Enter two players to play with a human friend!"
-response = gets.strip
-		case response
-		when "zero"
-			game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new)
-		when "one"
-			game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
-		when "two"
-			game = Game.new(Player::Human.new("X"), Player::Human.new("O"), Board.new)
-		end
-until game.won? || game.draw?
-	game.play
-end
-
-puts "Would you like to play again?"
-answer = gets.strip
-if answer.downcase == "yes" || answer.downcase == "y"
-	puts "Awesome. Zero, one or two human players?"
-	response = gets.strip
-		case response
-		when "zero"
-			game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new)
-		when "one"
-			game = Game.new(Player::Computer.new("X"), Player::Human.new("O"), Board.new)
-		when "two"
-			game = Game.new(Player::Human.new("X"), Player::Human.new("O"), Board.new)
-		end
-		until game.won?
-		game.play
-		end
-elsif answer.downcase == "no" || answer.downcase == "n"
-	puts "Okey dokes. Thanks for playing!"
-end
+tictactoe
