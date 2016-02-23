@@ -61,6 +61,11 @@ def wargames
       end
       break
     end
+    if x_wins > o_wins
+    	puts "X HAS WON THE WAR!"
+    elsif o_wins > x_wins
+    	puts "O HAS WON THE WAR!"
+    end
     puts "After 100 games of war, X won #{x_wins} times, O won #{o_wins} times and there were #{ties} ties."
   end
 end
