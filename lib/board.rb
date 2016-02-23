@@ -1,4 +1,4 @@
-class Board
+ class Board
 
 	attr_accessor :cells
 

@@ -41,11 +41,11 @@ class Game
     Game::WIN_COMBINATIONS.any? {|win_combination| #returns true or false
       @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
       @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-      @board.taken?(win_combination[0])}
+      @board.taken?(win_combination[0] + 1)}
   end
 
   def draw?
-    !won? && self.board.full?
+    !won? && board.full?
   end
 
   def winner 
@@ -53,25 +53,23 @@ class Game
       winner_array = Game::WIN_COMBINATIONS.select {|win_combination|
         (board.cells[win_combination[0]] == board.cells[win_combination[1]]) &&
         (board.cells[win_combination[1]] == board.cells[win_combination[2]]) &&
-        board.taken?(win_combination[0])} 
-      
+        board.taken?(win_combination[0] + 1)} 
         winner_array
-        #puts "Congratulations #{board.cells[winner_array.first.first]}!"
-        @game_winner = board.cells[winner_array.first.first]
-        #binding.pry
-        @game_winner
-
+        board.cells[winner_array.first.first]      
     end
   end
 
   def turn
-    input = self.current_player.move
+    input = current_player.move
+    puts "#{current_player}"
+    #binding.pry
     if !board.valid_move?(input)
       puts "invalid"
       turn
     end
     board.update(input, current_player)
     current_player
+  
   end
   	#makes valid moves,asks for input again after a failed validation
   	#changes to player 2 after the first turn
@@ -79,6 +77,7 @@ class Game
   def play
     while !over?
       turn
+      board.display
     end
     if won?
       puts "Congratulations #{winner}!"  
@@ -87,23 +86,5 @@ class Game
     end
   end
       
-  	#asks for players input on a turn of the game
-  	#checks if the game is over after every turn
-  	#plays the first turn of the game
-  	#plays the first few turns of the game
-  	#checks if the game is won after every turn
-  	#stops playing if someone has won
-  	#congratulates the winner X
-  	#congratulates the winner O
-  	#stops playing in a draw
-  	#prints "Cats Game!" on a draw
-  	#plays through an entire game
-  
-  def start
-    puts "Welcome to Tic Tac Toe"
-    puts "How many players for this game: 0, 1, 2?"
-    puts 'Who will go first and be "X"?'
-  end
-
-
+  	
 end
