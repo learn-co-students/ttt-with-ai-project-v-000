@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to tic-tac-toe! Will this be a 0, 1, or 2 player game?"
+players = gets.chomp
+  until players == "0" || players == "1" || players == "2"
+    puts "Not a valid entry. Will this be a 0,1, or 2 player game?"
+    players = gets.strip
+  end
+if players == "0" then game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"), board = Board.new)
+elsif players == "1" then game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"), board = Board.new)
+else 
+
+  game = Game.new
+end
+
+game.play
+
+
