@@ -1,51 +1,55 @@
 class Player::Computer < Player
     
     def move(board)
-        return find_winning_cell(board, "O") if find_winning_cell(board, "O") != nil
-        return find_winning_cell(board, "X") if find_winning_cell(board, "X") != nil
-        return random_move(board)
-    end
-      
-      def find_winning_cell(board, mark)
-        return find_cell(board, mark) if find_cell(board, mark) != nil
-        return nil
-      end
-    
-    def random_move(board)
-      while(true)
-        trial_number = rand(9) + 1
-        if board.cells[trial_number-1] == nil
-          return trial_number
-        end
-      end
-    end
-    
-    def find_cell(board, mark)
-        Game::WIN_COMBINATIONS.each do |array|
-          define_permutation(array[0], array[1], array[2]).each do |item|
-            return item[2] if it_finds_a_winning_triple(board, mark, item[0], item[1], item[2])
+      case board.turn_count
+        when 0 #X
+          return '5'
+        when 1 #O
+          if board.valid_move?('5')
+            return '5'
+          else
+            return "#{[1,3,7,9].sample}"
+          end
+        when 2 #X
+          if board.cells[0] == @token then return '9'
+          elsif board.cells[2] == @token then return '7'
+          elsif board.cells[6] == @token then return '3'
+          else
+              return '1'
+          end
+        when 3 #O
+          if board.cells[8] == @token || board.cells[0] == @token then return "#{[3,7].sample}"
+          else
+            return "#{[1,9].sample}"
+          end
+        when 4 #X
+          if board.cells[0] == @token && board.cells[2] == @token then return "2"
+          elsif board.cells[2] == @token && board.cells[8] == @token then return "6"
+          elsif board.cells[8] == @token && board.cells[6] == @token then return "8"
+          else
+              return "4"
+          end
+        when 5 #O
+          if board.cells[4] == "X" && board.cells[7] == "X" then return "2"
+          elsif board.cells[1] == "X" && board.cells[4] == "X" then return "8"
+          elsif board.cells[4] == "X" && board.cells[5] == "X" then return "3"
+          else
+            return "5"
+          end
+        when 6, 7, 8  #X, #O, #X
+          Game::WIN_COMBINATIONS.each do |array|
+            array.each do |item| 
+              if !board.taken?(item) && item != @token then return "#{item}"
+              end
+            end
           end
         end
-        return nil
-    end
-      
-      def define_permutation(cell_one, cell_two, cell_three)
-        return [cell_one, cell_two, cell_three].permutation.to_a
-      end
-
-    def it_finds_a_winning_triple(board, mark, filled_spot_one, filled_spot_two, potential_move)
-      if board.cells[filled_spot_one-1] == mark && board.cells[filled_spot_two-1] == mark && spot_is_empty?(board, potential_move-1)
-        return true
-      else
-        return false
-      end
-    end
-    
-    def spot_is_empty?(board, position)
-      ["X", "O"].each do |mark|
-        return false if board.cells[position] == mark
-      end
-      return true
     end
 end
+        
+      
+          
+        
+        
+  
     

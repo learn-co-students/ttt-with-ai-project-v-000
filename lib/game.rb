@@ -51,12 +51,14 @@ class Game
         player = current_player
         player.display
         current_move = player.move(@board)
-        until @board.valid_move?(current_move)
+        if !@board.valid_move?(current_move)
           turn
-        end
+        else
         @board.update(current_move, player)
         board.display
+        end
     end
+  
     
     def play
         until over?
@@ -69,5 +71,7 @@ class Game
         end
     end
 end
+
+
 
     

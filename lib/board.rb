@@ -38,11 +38,7 @@ class Board
     end
     
     def valid_move?(number)
-        begin
-            (1..9).any? {|item| item == number.to_i} && !taken?(number) 
-        rescue 
-            false
-        end
+        (1..9).any? {|item| item == number.to_i} && !taken?(number) 
     end
     
     def update(number, player)
