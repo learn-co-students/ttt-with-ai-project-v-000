@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner
 
     WIN_COMBINATIONS = [[0,1,2],
                         [3,4,5],
@@ -13,6 +13,7 @@ class Game
     @board = board || Board.new()
     @player_1 = player_1 || Player.new("X")
     @player_2 = player_1 || Player.new("X")
+    @winner = nil
   end
 
   def current_player
@@ -31,8 +32,11 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |triplet|
-      result = triplet.all?{|s| @board[s]=="X"} || tripllet.all?{|s| @board[s]=="O"}
-      if result
+      if triplet.all?{|s| @board[s]=="O"}
+        @winner = "X"
+        return true
+      elsif triplet.all?{|s| @board[s]=="O"}
+        @winner = "O"
         return true
       end
     end
@@ -40,9 +44,10 @@ class Game
   end
 
   def draw?
-  end
-
-  def winner
+    if won? || @board.all?{|s| s=="X" || s=="O"}
+      return false
+    end
+    return true
   end
 
   def turn
