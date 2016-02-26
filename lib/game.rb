@@ -44,7 +44,7 @@ class Game
   end
 
   def winner
-    self.won?
+    won?
     return @winner
   end
 
@@ -67,6 +67,14 @@ class Game
   end
 
   def play
+    until over?
+      turn
+    end
+    if draw?
+      puts "Cats Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
   end
 
 end
