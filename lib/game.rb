@@ -57,9 +57,9 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    #answer = gets.strip
+    answer = current_player.move(current_player.token)
     if @board.valid_move?(answer)
-      @board.update(answer, @board.current_player)
+      @board.update(answer, current_player)
       @board.display
     else
       turn
