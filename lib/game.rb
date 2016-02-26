@@ -14,6 +14,7 @@ class Game
     @player_1 = player_1 || Player::Human.new("X")
     @player_2 = player_2 || Player::Human.new("O")
     @winner = nil
+    @board.display
   end
 
   def current_player
