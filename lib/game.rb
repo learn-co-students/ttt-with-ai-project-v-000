@@ -11,8 +11,8 @@ class Game
                         [6,4,2]]
   def initialize(player_1=nil, player_2=nil, board=nil)
     @board = board || Board.new()
-    @player_1 = player_1 || Player::Human.new("X")
-    @player_2 = player_2 || Player::Human.new("O")
+    @player_1 = player_1 || Human.new("X")
+    @player_2 = player_2 || Human.new("O")
     @winner = nil
     @board.display
   end
