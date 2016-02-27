@@ -76,6 +76,25 @@ class Game
     else
       puts "Congratulations #{winner}!"
     end
+    exit
   end
 
+  def exit
+    farewell = ["Goodbye!", "Thanks for playing!", "Come back soon!", "It's okay if you didn't win, at least you had fun!"]
+    puts "Would you like to play again? (y/n)"
+    input = gets.strip
+    if input == 'y'
+      self.board.reset!
+      play
+    elsif input == 'n'
+      abort(farewell.sample)
+    else
+      exit
+    end
+  end
+
+  def game_type
+
 end
+
+ 
