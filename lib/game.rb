@@ -56,11 +56,17 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
+    if current_player.is_a?(Human)
+      puts "Please enter 1-9:"
+    end
     answer = current_player.move(current_player.token)
     if @board.valid_move?(answer)
       @board.update(answer, current_player)
       @board.display
+      puts "\n"
+      if current_player.is_a?(Computer)
+        puts "Computer's move: "
+      end
     else
       turn
     end
@@ -91,16 +97,14 @@ class Game
     if input == 'y'
       @board.reset!
       play
-    elsif input == 'n'
+      exit
+    else
       farewell = ["Goodbye!", "Thanks for playing!", "Come back soon!", "It's okay if you didn't win, at least you had fun!"]
       abort(farewell.sample)
-    else
-      exit
     end
   end
 
   def game_type
-
-end
+  end
 
 end

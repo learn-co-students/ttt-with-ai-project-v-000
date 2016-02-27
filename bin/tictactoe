@@ -13,9 +13,13 @@ puts "Select number of human players: (0-2)"
     puts "Who will go first? \n Choose 1 for Computer \n Choose 2 for Human"
     first_player = gets.strip
     if first_player == "1"
-      Game.new(Computer.new("X")).play
+      g = Game.new(Computer.new("X"))
+      g.play
+      g.exit
     elsif first_player == "2"
-      Game.new(Human.new("X"), Computer.new("O")).play
+      g = Game.new(Human.new("X"), Computer.new("O"))
+      g.play
+      g.exit
     end    
   elsif input == "0"
     g = Game.new(Computer.new("X"), Computer.new("O"))
