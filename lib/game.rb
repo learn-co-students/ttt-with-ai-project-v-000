@@ -121,6 +121,7 @@ class Game
         g.exit
       else
         puts "Try choosing from the options next time."
+        exit
       end
     elsif input == "n"
       farewell = ["Goodbye!", "Thanks for playing!", "Hope you had fun!" "Come back soon!", "It's okay if you didn't win, at least you had fun!"]
