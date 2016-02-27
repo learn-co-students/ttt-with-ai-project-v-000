@@ -76,7 +76,6 @@ class Game
     else
       puts "Congratulations #{winner}!"
     end
-    exit
   end
 
   def exit
