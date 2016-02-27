@@ -14,7 +14,6 @@ class Game
     @player_1 = player_1 || Human.new("X")
     @player_2 = player_2 || Human.new("O")
     @winner = nil
-    @board.display
   end
 
   def current_player
@@ -68,6 +67,7 @@ class Game
   end
 
   def play
+    @board.display
     until over?
       turn
     end
