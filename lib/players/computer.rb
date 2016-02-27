@@ -15,7 +15,7 @@ class Computer < Player
       puts "Choose difficulty level:"
       puts "1. Normal"
       puts "2. Hard"
-      puts "3. Impossible"
+      #puts "3. Impossible"
       input = gets.strip.to_i
       if input.is_a?(Integer) && input.between?(1,3)
         @level = input
@@ -50,7 +50,7 @@ class Computer < Player
     @wc.each do |triplet|
       #if there are 2 "good-guy" marks and an empty space: WIN, man, WIN!
       if triplet.count{|s| board.cells[s]==@token }==2 && triplet.none?{|s| board.cells[s]==@opponents_token }
-        puts "we're in it to win it!"
+        #puts "we're in it to win it!"
         #this will return a 1-element array
         hotspot = triplet.select{|s| board.cells[s]==" "}
         return hotspot.first + 1
@@ -60,7 +60,7 @@ class Computer < Player
     #go through each win combination looking for a block
     @wc.each do |triplet|
       if triplet.count{|s| board.cells[s]==@opponents_token }==2 && triplet.none?{|s| board.cells[s]==@token }
-        puts "we're in to block!"
+        #puts "we're in to block!"
         #this will return a 1-element array
         hotspot = triplet.select{|s| board.cells[s]==" "}
         return hotspot.first + 1
