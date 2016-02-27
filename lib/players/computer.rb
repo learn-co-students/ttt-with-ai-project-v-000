@@ -20,8 +20,8 @@ class Computer < Player
       if input.is_a?(Integer) && input.between?(1,3)
         @level = input
       else
-        puts "Didn't quite catch that.  Impossible it is."
-        @level = 3
+        puts "Didn't quite catch that."
+        Game.new.exit
       end
     end
   end
