@@ -59,7 +59,7 @@ class Game
     if current_player.is_a?(Human)
       puts "Please enter 1-9:"
     end
-    answer = current_player.move(current_player.token)
+    answer = current_player.move(current_player.token, @board)
     if @board.valid_move?(answer)
       @board.update(answer, current_player)
       @board.display
