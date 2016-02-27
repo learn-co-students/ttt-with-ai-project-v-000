@@ -3,10 +3,12 @@
 require_relative '../config/environment'
 puts "Welcome to Tic Tac!"
 puts "Select number of human players: (0-2)"
-  input = STDIN.noecho(&:gets).strip
+  input = gets.strip
   if input == "2"
     puts "First player make your move!"
-    Game.new.play
+    g = Game.new
+    g.play
+    g.exit
   elsif input == "1"
     puts "Who will go first? \n Choose 1 for Computer \n Choose 2 for Human"
     first_player = gets.strip
@@ -16,7 +18,11 @@ puts "Select number of human players: (0-2)"
       Game.new(Human.new("X"), Computer.new("O")).play
     end    
   elsif input == "0"
-    Game.new(Computer.new("X"), Computer.new("O")).play
+    g = Game.new(Computer.new("X"), Computer.new("O"))
+    g.play
+    g.exit
+  else
+    puts "Try choosing from the options next time."
   end
 
 #### Sends input in integers ####

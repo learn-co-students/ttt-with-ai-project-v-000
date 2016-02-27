@@ -67,10 +67,17 @@ class Game
   end
 
   def play
-    @board.display
+    #don't print out a board if the computer plays first vs human
+    if @board.turn_count==0 && current_player.is_a?(Computer)
+      #nothing happens
+    else
+      @board.display
+    end
+    #play the game until it's over
     until over?
       turn
     end
+    #state the ending
     if draw?
       puts "Cats Game!"
     else
