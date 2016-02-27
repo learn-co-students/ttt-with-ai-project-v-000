@@ -84,13 +84,6 @@ class Game
     puts "Would you like to play again? (y/n)"
     input = gets.strip
     if input == 'y'
-<<<<<<< Updated upstream
-      self.board.reset!
-      play
-    elsif input == 'n'
-      abort(farewell.sample)
-    else
-=======
       @board.reset!
       puts "Select number of human players: (0-2)"
       input = gets.strip
@@ -123,16 +116,9 @@ class Game
       abort(farewell.sample)
     else
       puts "Try choosing from the options next time."
->>>>>>> Stashed changes
       exit
     end
   end
-
-<<<<<<< Updated upstream
-  def game_type
-
-=======
->>>>>>> Stashed changes
 end
 
  
