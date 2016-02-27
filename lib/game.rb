@@ -14,7 +14,6 @@ class Game
     @player_1 = player_1 || Human.new("X")
     @player_2 = player_2 || Human.new("O")
     @winner = nil
-    @board.display
   end
 
   def current_player
@@ -57,68 +56,55 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    answer = current_player.move(current_player.token)
+    if current_player.is_a?(Human)
+      puts "Please enter 1-9:"
+    end
+    answer = current_player.move(current_player.token, @board)
     if @board.valid_move?(answer)
       @board.update(answer, current_player)
       @board.display
+      puts "\n"
+      if current_player.is_a?(Computer)
+        puts "Computer's move: "
+      end
     else
       turn
     end
   end
 
   def play
+    #don't print out a board if the computer plays first vs human
+    if @board.turn_count==0 && current_player.is_a?(Computer)
+      #nothing happens
+    else
+      @board.display
+    end
+    #play the game until it's over
     until over?
       turn
     end
+    #state the ending
     if draw?
       puts "Cats Game!"
     else
       puts "Congratulations #{winner}!"
     end
-    exit
   end
 
   def exit
-    farewell = ["Goodbye!", "Thanks for playing!", "Come back soon!", "It's okay if you didn't win, at least you had fun!"]
     puts "Would you like to play again? (y/n)"
     input = gets.strip
     if input == 'y'
       @board.reset!
-      puts "Select number of human players: (0-2)"
-      input = gets.strip
-      if input == "2"
-        puts "First player make your move!"
-        g = Game.new
-        g.play
-        g.exit
-      elsif input == "1"
-        puts "Who will go first? \n Choose 1 for Computer \n Choose 2 for Human"
-        first_player = gets.strip
-        if first_player == "1"
-          g = Game.new(Computer.new("X", true))
-          g.play
-          g.exit
-        elsif first_player == "2"
-          g = Game.new(Human.new("X"), Computer.new("O", true))
-          g.play
-          g.exit
-        end    
-      elsif input == "0"
-        g = Game.new(Computer.new("X", true), Computer.new("O", true))
-        g.play
-        g.exit
-      end
       play
       exit
-    elsif input == 'n'
-      farewell = ["Goodbye!", "See you later!", "Thanks for playing!", "Come back soon!", "Hope you had fun!", "It's okay if you didn't win, at least you had fun!"]
-      abort(farewell.sample)
     else
-      puts "Try choosing from the options next time."
-      exit
+      farewell = ["Goodbye!", "Thanks for playing!", "Come back soon!", "It's okay if you didn't win, at least you had fun!"]
+      abort(farewell.sample)
     end
   end
-end
 
- 
+  def game_type
+  end
+
+end

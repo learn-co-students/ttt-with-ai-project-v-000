@@ -20,7 +20,7 @@ class Board
   def position(num)
     "#{cells[num.to_i-1]}"
   end
-  
+
   def full?
     self.cells.all? {|cell| cell == "X" || cell == "O"} ? true : false
   end
