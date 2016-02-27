@@ -1,6 +1,4 @@
 class Game
-  attr_accessor :board, :player_1, :player_2, :winner
-
     WIN_COMBINATIONS = [[0,1,2],
                         [3,4,5],
                         [6,7,8],
@@ -76,6 +74,25 @@ class Game
     else
       puts "Congratulations #{winner}!"
     end
+    exit
   end
+
+  def exit
+    puts "Would you like to play again? (y/n)"
+    input = gets.strip
+    if input == 'y'
+      @board.reset!
+      play
+    elsif input == 'n'
+      farewell = ["Goodbye!", "Thanks for playing!", "Come back soon!", "It's okay if you didn't win, at least you had fun!"]
+      abort(farewell.sample)
+    else
+      exit
+    end
+  end
+
+  def game_type
+
+end
 
 end
