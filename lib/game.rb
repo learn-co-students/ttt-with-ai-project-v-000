@@ -84,17 +84,55 @@ class Game
     puts "Would you like to play again? (y/n)"
     input = gets.strip
     if input == 'y'
+<<<<<<< Updated upstream
       self.board.reset!
       play
     elsif input == 'n'
       abort(farewell.sample)
     else
+=======
+      @board.reset!
+      puts "Select number of human players: (0-2)"
+      input = gets.strip
+      if input == "2"
+        puts "First player make your move!"
+        g = Game.new
+        g.play
+        g.exit
+      elsif input == "1"
+        puts "Who will go first? \n Choose 1 for Computer \n Choose 2 for Human"
+        first_player = gets.strip
+        if first_player == "1"
+          g = Game.new(Computer.new("X", true))
+          g.play
+          g.exit
+        elsif first_player == "2"
+          g = Game.new(Human.new("X"), Computer.new("O", true))
+          g.play
+          g.exit
+        end    
+      elsif input == "0"
+        g = Game.new(Computer.new("X", true), Computer.new("O", true))
+        g.play
+        g.exit
+      end
+      play
+      exit
+    elsif input == 'n'
+      farewell = ["Goodbye!", "See you later!", "Thanks for playing!", "Come back soon!", "Hope you had fun!", "It's okay if you didn't win, at least you had fun!"]
+      abort(farewell.sample)
+    else
+      puts "Try choosing from the options next time."
+>>>>>>> Stashed changes
       exit
     end
   end
 
+<<<<<<< Updated upstream
   def game_type
 
+=======
+>>>>>>> Stashed changes
 end
 
  
