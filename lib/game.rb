@@ -1,6 +1,7 @@
+require "./fixtures/bender.rb"
 class Game
   attr_accessor :board, :player_1, :player_2
-
+  include Bender
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -12,69 +13,73 @@ class Game
     [6,4,2]
   ]
 
-  def initialize(player_1 = "X", player_2 = "O", board = [])
-    p1 = Player::Human.new(player_1) if player_1 == "X"
-    p1 = player_1 if player_1.class == Player
-    p2 = Player::Human.new(player_2) if player_2 == "O"
-    p2 = player_2 if player_2.class == Player
-    self.player_1 = p1
-    self.player_2 = p2
-    @board = board
+  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+    self.player_1 = player_1
+    self.player_2 = player_2
+    self.board = board
   end
 
-
-
   ###### state #####
-
-  def cuttent_player
-    self.board.cells % 2 == 0 ? @player_1 : @player_2
+  def current_player
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      position(combo[0]) == position(combo[1]) &&
-      position(combo[1]) == position(combo[2]) &&
-      position_taken?(combo[0])
-    end
+      board.position(combo[0] + 1) == board.position(combo[1] + 1) &&
+      board.position(combo[1] + 1) == board.position(combo[2] + 1) &&
+      board.taken?(combo[0] + 1) ### this +1 stuff seems wrong but
+    end                          ### I tried the below and it didn't work...
   end
+  # def won?
+  #   WIN_COMBINATIONS.detect do |combo|
+  #     board.position(combo[1]) == board.position(combo[2]) &&
+  #     board.position(combo[2]) == board.position(combo[3]) &&
+  #     board.taken?(combo[1])
+  #   end
+  # end
 
   def winner
-    if winning_combo = won?
-      @winner = position(winning_combo.first)
+    if combo = won?
+      winner = board.position(combo.first + 1)
     end
+    winner
   end
 
   def draw?
-    !won? && @board.all?{|token| token == "X" || token == "O"}
+    !won? && board.cells.all?{|token| token == "X" || token == "O"}
   end
 
+  def over?
+    won? || draw?
+  end
   #### manage ####
-
-  def start
-
-  end
-
   def play
     while !over?
       turn
     end
-    if won?
-      puts "Congratulations #{winner}!"
+    if won?  ################ put bender when a comp wins
+          if player_1.class == Player::Computer && player_1.token == winner
+            bender_ender
+          elsif player_2.class == Player::Computer && player_2.token == winner
+            bender_ender
+          else
+            puts "Congratulations #{winner}!"
+            bender_ender
+          end
     elsif draw?
       puts "Cats Game!"
     end
   end
 
   def turn
-    display_board
-    puts "Please enter 1-9:"
-    input = gets.strip
-    if !valid_move?(input)
+    board.display
+    input = current_player.move(board)
+    if !board.valid_move?(input)
+      puts "Not A Valid Move"
       turn
+    else
+    board.update(input, current_player)
     end
-    move(input, current_player)
-    display_board
   end
-
-
 end

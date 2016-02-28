@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :turn_count
 
 
   def reset!
@@ -7,27 +7,27 @@ class Board
   end
 
   def initialize
-    self.cells = Array.new(9, " ")
+    reset!
   end
 
   def display
-    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
-    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
   def position(location)
-    self.cells[location.to_i - 1]
+    cells[location.to_i - 1]
   end
 
   def full?
-    self.cells.all?{|token| token == "X" || token == 'O'}
+    cells.all?{|token| token == "X" || token == 'O'}
   end
 
   def turn_count
-    self.cells.count{|token| token == "X" || token == "O"}
+    cells.count{|token| token == "X" || token == "O"}
   end
 
   def taken?(location)
@@ -38,7 +38,8 @@ class Board
     input.to_i.between?(1,9) && !taken?(input.to_i)
   end
 
-  def update(input, player)
-    self.cells[input.to_i - 1] = player.token
+  def update(location, current_player)
+    cells[location.to_i - 1] = current_player.token
+    #tried several versions using position() method / got syntax error, unexpected '=', expecting keyword_end (SyntaxError)
   end
 end
