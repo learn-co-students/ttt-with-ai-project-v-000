@@ -12,7 +12,7 @@ class Game
     [6,4,2]
   ]
 
-  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+  def initialize( player_1 = Player::Human.new("X") , player_2 = Player::Human.new("O"), board = Board.new)#,   player_2 = Player::Computer.new("O")
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -44,9 +44,14 @@ class Game
 
   def turn
     player = current_player
+    player.class == Player::Human ? (puts "Your move") : (puts "Player #{player.token}'s move")
+
     current_move = player.move(board)
+    
+
 
     !board.valid_move?(current_move) ? turn : board.update(current_move,player)
+    puts "moved to position #{current_move}"
 
     board.display
   end
