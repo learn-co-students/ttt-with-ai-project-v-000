@@ -1,3 +1,78 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts 'Welcome to Tic-Tac-Slow w/ AI forthcoming'
+
+
+
+
+
+
+def choose_mode
+  valid_modes = [0, 1, 2, 3]
+  game_mode = nil
+  mode_selected = false
+  while mode_selected == false
+    puts "What type of game would you like to play??\n 0 player - AI vs AI\n 1 player - Human vs AI\n 2 player - Human vs Human\n 3 - Wargames\n"
+    requested_mode = gets.strip.to_i
+    if valid_modes.include? requested_mode
+      game_mode = requested_mode.to_i
+      mode_selected = true
+    else
+      puts "The mode you chose '#{requested_mode}' was invalid . Please try again\n"
+    end
+  end
+
+  case game_mode
+    when 0
+      puts "You chose 0 player - AI vs AI"
+    when 1
+      puts "You chose 1 player - Human vs AI"
+    when 2
+      puts "You chose 2 player - Human vs Human"
+  end
+
+  return game_mode
+end
+
+def round
+  mode = choose_mode
+  if mode == 0
+    game = Game.new(Computer.new("X"), Computer.new("O"),  Board.new)
+    game.play
+  elsif mode == 1
+    puts "Do you want to be X or O?"
+    token = gets.strip
+    if token == 'X'
+      game = Game.new(Human.new("X"), Computer.new("O"),  Board.new)
+    else
+      game = Game.new(Computer.new("X"), Human.new("O"),  Board.new)
+    end
+    game.play
+  elsif mode == 2
+    game = Game.new(Human.new("X"), Human.new("O"),  Board.new)
+    game.play
+  elsif mode == 3
+    x_wins = 0
+    o_wins = 0
+    d_wins = 0
+    100.times {
+      game = Game.new(Computer.new("X"), Computer.new("O"),  Board.new)
+      win = game.play
+      if win == "X"
+        x_wins += 1
+      elsif win == 'O'
+        o_wins += 1
+      elsif win == "D"
+        d_wins += 1
+      end
+      puts "Win totals: X won #{x_wins} times \t O won #{o_wins} times\t Game was a draw #{d_wins} times"
+    }
+    #stub
+  end
+end
+
+
+
+round

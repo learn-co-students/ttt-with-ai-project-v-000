@@ -63,6 +63,7 @@ class Game
       turn
     else
       @board.update(current_move, player)
+      @board.display
     end
   end
 
@@ -72,8 +73,10 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
+      return "#{winner}"
     elsif draw?
       puts "Cats Game!"
+      return "D"
     end
   end
 end
