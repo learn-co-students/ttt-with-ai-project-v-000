@@ -18,5 +18,26 @@ class Game
     @board = board
   end
 
+  def current_player
+    if @board.turn_count.even? 
+      player_1
+    else
+      player_2
+    end
+  end
+
+  def over?
+    if WIN_COMBINATIONS.any?
+      true
+    elsif WIN_COMBINATIONS.none? && @board.full?
+      true
+    elsif @board.full? == false
+      false
+    end
+  end
+
+
+
 
 end
+
