@@ -19,22 +19,26 @@ class Game
   end
 
   def current_player
-    if @board.turn_count.even? 
-      player_1
-    else
-      player_2
-    end
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
-    if WIN_COMBINATIONS.any?
-      true
-    elsif WIN_COMBINATIONS.none? && @board.full?
-      true
-    elsif @board.full? == false
-      false
+    won? || draw?
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      combo.all? do |cell|
+        board.position(cell) == player_1.token || cell == player_2.token
+        require 'pry'; binding.pry
+      end
     end
   end
+
+  def draw?
+    !won? && board.full?
+  end
+
 
 
 
