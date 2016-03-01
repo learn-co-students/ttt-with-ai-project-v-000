@@ -2,18 +2,12 @@ require 'pry'
 
 class Board
 
-  # attr_accessor :move
-  attr_writer :cells
+  attr_accessor :cells
 
   def initialize
     # resets the cells of the board to a 9 element array of ' '
     @cells = []
     reset!
-  end
-
-  def cells
-    # returns the cells of the board
-    @cells
   end
 
   def reset!
@@ -23,42 +17,46 @@ class Board
 
   def display
     # prints the board
-      puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
-      puts "-----------"
-      puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
-      puts "-----------"
-      puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts "-----------"
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts "-----------"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(user_input)
-    # takes in user input and returns the value of the board cell
-    cells[user_input.to_i-1]
+  def position(input)
+    # takes user input and returns the value of the board cell
+    cells[input.to_i-1]
+  end
+
+  def cells_filled?
+    # returns an array of the tokens that have been played
+    cells.find_all {|cell| cell == 'X' || cell == 'O'}
+  end
+
+  def turn_count
+    # returns the number of turns taken based on filled cells
+    cells_filled?.size
   end
 
   def full?
     # returns true for a full board, false for an in-progress game
-    cells.all? {|position| position == 'X' || position == 'O'}
+    turn_count == cells.size
   end
 
-  def turn_count
-    # returns the number of turns taken based on cell value
-    cells.count {|position| position == 'X' || position == 'O'}
-  end
-
-  def taken?(position)
+  def taken?(input)
     # returns true if the position is X or O
-    cells[position.to_i-1] == 'X' || cells[position.to_i-1] == 'O'
+    position(input) == 'X' || position(input) == 'O'
   end
 
-  def valid_move?(user_input)
+  def valid_move?(input)
     # returns true for user input between 1-9 that is not taken
-    user_input.to_i.between?(1,9) && !taken?(user_input)
+    input.to_i.between?(1,cells.size) && !taken?(input)
   end
 
-  def update(position, player)
-    # updates the cells with the player token according to the input
-    cells[position.to_i-1] = player
+  def update(input, player_object)
+    # takes position and player object, updates board with player_object.token
+    cells[input.to_i-1] = player_object.token
   end
-
 
 end
