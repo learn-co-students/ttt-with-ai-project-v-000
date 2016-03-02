@@ -1,9 +1,9 @@
-require 'pry'
-
-class Human < Player
+class Human < Player # inherits from Player
 
   def move(board)
-    puts 'Please enter the number of the position you\'d like to play'
-    return gets.strip
+    # asks the user for input and returns it
+    puts "Please enter a move from 1 to 9:"
+    input = gets.strip
   end
+
 end
