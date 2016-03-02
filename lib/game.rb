@@ -28,13 +28,17 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      combo.all? { |position| board.cells[position] == player_1.token }
-      combo.all? { |position| board.cells[position] == player_1.token }
+      combo.all? { |position| board.cells[position] == player_1.token } ||
+      combo.all? { |position| board.cells[position] == player_2.token }
     end
   end
 
   def draw?
     !won? && board.full?
+  end
+
+  def winner
+
   end
 
 
