@@ -28,10 +28,8 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      combo.all? do |cell|
-        board.position(cell) == player_1.token || cell == player_2.token
-        require 'pry'; binding.pry
-      end
+      combo.all? { |position| board.cells[position] == player_1.token } ||
+      combo.all? { |position| board.cells[position] == player_2.token }
     end
   end
 
@@ -39,9 +37,12 @@ class Game
     !won? && board.full?
   end
 
+  def winner
+
+  end
+
 
 
 
 
 end
-
