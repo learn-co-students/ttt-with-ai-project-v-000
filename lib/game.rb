@@ -38,8 +38,28 @@ class Game
   end
 
   def winner
+    board.cells[won?.first] if won?
+  end
+
+  def turn
+    player = current_player
+    current_move = player.move(board)
+
+    if board.valid_move?(current_move)
+      board.update(current_move, player)
+    else
+      turn
+    end
 
   end
+
+  def play
+    turn while !over?
+    puts "Congratulations #{winner}!" if won?
+    puts "Cats Game!" if draw?
+  end
+
+
 
 
 
