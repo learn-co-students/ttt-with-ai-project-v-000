@@ -29,6 +29,7 @@ case game_type
     Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
 
   when "1"
+    # ask who plays first and verify user input is within range
     until first_player.match(/[1|2]/)
       puts "Who goes first? Enter the number of your choice:\n1. you\n2. the computer"
       first_player = gets.strip # first_player is still a string here
@@ -37,6 +38,7 @@ case game_type
     Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
 
   when "2"
+    # ask who plays first and verify user input is within range
     until first_player.match(/[1|2]/)
       puts "Who goes first? Enter the number of your choice:\n1. you\n2. your opponent"
       first_player = gets.strip # first_player is still a string here
