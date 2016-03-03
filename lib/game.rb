@@ -82,6 +82,7 @@ class Game
     #     Game.new
     #   end
     # end
+
     puts "How many players?"
     puts ""
     puts "0. Computer vs Itself"
@@ -109,6 +110,17 @@ class Game
       game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
     end
     game.play
+
+
+    if game.over?
+      puts "Would you like to play again? (Yn)"
+      option = gets.strip
+      if option == "y".downcase
+        self.start
+      elsif option == "n".downcase
+        puts "So Long and Thanks for All the Fish!"
+      end
+    end
   end
 
 
