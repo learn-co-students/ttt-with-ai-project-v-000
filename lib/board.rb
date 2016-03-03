@@ -27,21 +27,20 @@ class Board
     cells.all? {|cell| cell != " "}
   end
 
-  def turn_count 
+  def turn_count
     cells.count {|cell| cell != " "}
   end
 
   def taken?(input)
-    self.position(input) != " " 
+    self.position(input) != " "
   end
- 
+
   def valid_move?(input)
-    !self.taken?(input) && input.to_i.between?(1, 9) 
+    !self.taken?(input) && input.to_i.between?(1, 9)
   end
-    
+
   def update(input, player)
     cells[input.to_i-1] = player.token
   end
 
 end
-

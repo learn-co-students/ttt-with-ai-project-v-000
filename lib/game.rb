@@ -47,6 +47,9 @@ class Game
 
     if board.valid_move?(current_move)
       board.update(current_move, player)
+      system("clear")
+      board.display
+      sleep 0.5
     else
       turn
     end
@@ -59,28 +62,54 @@ class Game
     puts "Cats Game!" if draw?
   end
 
-  def start
+  def self.start
 
-    input = ""
-    #require 'pry'; binding.pry
-    while input != "exit"
-      case input 
-      when 0 
-        input = gets.strip
-        game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
-        # game.play
-      when 1 
-        puts "Who goes first, you or the computer?"
-        first = gets.strip
-        if first == "me"
-          Game.new(player_2 = Player::Computer.new("O"))
-        elsif first == "computer"
-          Game.new(player_1 = Player::Computer.new("X"))
-        end
-      when 2
-        Game.new
+    # input = ""
+    # #require 'pry'; binding.pry
+    # while input != "exit"
+    #   case input
+    #   when "0"
+    #     Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+    #   when "1"
+    #     puts "Who goes first, you or the computer?"
+    #     first_player = gets.strip
+    #     if first_player == "me"
+    #       Game.new(player_2 = Player::Computer.new("O"))
+    #     elsif first == "computer"
+    #       Game.new(player_1 = Player::Computer.new("X"))
+    #     end
+    #   when "2"
+    #     Game.new
+    #   end
+    # end
+    puts "How many players?"
+    puts ""
+    puts "0. Computer vs Itself"
+    puts "1. One Player vs Computer"
+    puts "2. Two players"
+
+    input = gets.strip
+    if input == "0"
+      game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+    elsif input == "1"
+      puts "Would you like to go first? (Yn)"
+      answer = gets.strip
+      if answer == "y".downcase
+        game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+      elsif answer == "n".downcase
+        game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
       end
+    elsif input == "2"
+      puts "Player One, please enter you name"
+      player_1 = gets.strip
+      puts "Welcome #{player_1}!"
+      puts "Player Two plase enter your name"
+      player_2 = gets.strip
+      puts "Welcome #{player_2} !"
+      game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
     end
-     
+    game.play
   end
+
+
 end
