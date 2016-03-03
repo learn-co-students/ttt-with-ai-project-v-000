@@ -1,3 +1,47 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+game_type = ''
+first_player = ''
+
+# Greet the user with a message
+puts "Greetings from TicTacToe.\n"
+
+
+# prompt the user for game type until user enters valid response
+until game_type.match(/[0|1|2]/)
+  puts "Enter the number for the type of game you'd like:\n0 - Computer plays against itself\n1 - You play against the computer\n2 - You play against another person"
+  game_type = gets.strip # game_type is still a string here
+end
+
+
+# let the user know their response was received
+print "\nYou selected a #{game_type}-player game. "
+
+
+case game_type
+
+  when "0"
+    # if user selected 0, let them know the computer plays itself
+    puts "The computer will play against itself."
+    # initialize Game something like this if they choose 0?
+    Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
+
+  when "1"
+    until first_player.match(/[1|2]/)
+      puts "Who goes first? Enter the number of your choice:\n1. you\n2. the computer"
+      first_player = gets.strip # first_player is still a string here
+    end
+    # initialize Game something like this if they choose 1 and the opponent to go first?
+    Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
+
+  when "2"
+    until first_player.match(/[1|2]/)
+      puts "Who goes first? Enter the number of your choice:\n1. you\n2. your opponent"
+      first_player = gets.strip # first_player is still a string here
+    end
+    # initialize Game something like this if they choose 2?
+    Game.new(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
+
+end
