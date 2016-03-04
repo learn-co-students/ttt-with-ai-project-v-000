@@ -92,7 +92,7 @@ class Game
     if input == "0"
       game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
     elsif input == "1"
-      puts "Would you like to go first? (Yn)"
+      puts "Would you like to go first? (Y/N)"
       answer = gets.strip
       if answer == "y".downcase
         game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
@@ -100,10 +100,10 @@ class Game
         game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
       end
     elsif input == "2"
-      puts "Player One, please enter you name"
+      puts "Player One, please enter your name"
       player_1 = gets.strip
       puts "Welcome #{player_1}!"
-      puts "Player Two plase enter your name"
+      puts "Player Two please enter your name"
       player_2 = gets.strip
       puts "Welcome #{player_2} !"
       game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
