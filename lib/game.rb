@@ -89,29 +89,54 @@ class Game
         self.board.display
         if won?
           puts "Congratulations #{winner}!"
+          play_again
         elsif draw?
-          puts "Cats Game!"   
+          puts "Cats Game!" 
+          play_again  
         else
           turn
           play
         end
     end
 
+    def play_again
+      puts "Would you like to play again Yes or No"
+      input =gets.chomp.upcase
+        if input == "YES"
+          Game.new_game
+        elsif input == "NO"
+          puts "Goodbye!"
+        else
+          play_again
+        end
+
+    end
+
     def self.new_game
       game = self.new
-      puts "How many players?"
+      puts "How many players 0,1 or 2?"
       players = gets.chomp
+
       if players.to_i == 0 
           game.player_1 = Computer.new("X")
-           game.player_2 = Computer.new("O")
+          game.player_2 = Computer.new("O")
           game.play 
       elsif players.to_i == 1
-          game.player_2 = Computer.new("O")
-          game.play
+          puts "Would You like to first and be X or go second and be O ?"
+          puts "Please select your token X or O"
+          input = gets.chomp.upcase
+          if input == "X"
+            game.player_2 = Computer.new("O")
+            game.play
+          elsif input == "O"
+            game.player_1 = Computer.new("X")
+            game.play
+          else
+            self.new_game
+          end  
       elsif players.to_i == 2
         game.play
-      else
-        puts "Enter valid number of player from 0-2 "
+      else  
         self.new_game
       end  
         
