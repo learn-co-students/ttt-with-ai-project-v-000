@@ -101,7 +101,6 @@ class Game
       puts "Cats Game!" # prints "Cats Game!" on a draw
     end
 
-    repeat?
   end
 
 
@@ -127,11 +126,18 @@ class Game
       type = gets.strip
     end
 
+    set_up_game(type)
+  end
+
+
+
+  def set_up_game(type)
+
     # This first_player is just a placeholder variable for now.
     # Using it as a way to store the player's selection for who plays first when a 1 or 2 player game is selected
     # initializing it to an empty string so we don't get an error from the until statements below
-    first_player = ''
 
+    first_player = ''
     case type
       when "2"
         # ask who plays first and verify user input is within range
@@ -141,7 +147,6 @@ class Game
           # TODO implement logic
         end
         game = Game.new(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
-
       when "1"
         until first_player.match(/[1|2]/)
           # ask who plays first and verify user input is within range
@@ -150,30 +155,12 @@ class Game
           # TODO implement logic
         end
         game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
-
       when "0"
         game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
         puts "You selected 0, so the computer will play against itself"
     end
+
     game
   end
 
-  def repeat?
-   input = ''
-   # ask the user if they want to play again
-   until input.match(/[1|2]/)
-      puts "Would you like to play again? Enter your selection:"
-      puts ">> 1 << Yes"
-      puts ">> 2 << No"
-      input = gets.strip
-      if input == "1"
-        # if user selects yes, start a new game
-        # TODO reload the bin/tictactoe - how???
-        puts "#{__callee__} method - we need to figure out how to reload the bin/tictactoe file, right???"
-      else
-        puts "Thanks for playing. Come back soon!"
-      end
-  end
-
-end
 end
