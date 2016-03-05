@@ -4,7 +4,6 @@ class Board
 
   def initialize
     # resets the cells of the board to a 9 element array of ' '
-    @cells = []
     reset!
   end
 
@@ -50,6 +49,17 @@ class Board
   def valid_move?(input)
     # returns true for user input between 1-9 that is not taken
     input.to_i.between?(1,cells.size) && !taken?(input)
+  end
+  
+  def available_moves
+    # returns an array of the available moves in terms the user can understand (1-9)
+    available = []
+    cells.each_with_index do |open, idx|
+      if open != "X" && open != "O"
+      available << idx+1
+      end
+    end
+    available
   end
 
   def update(input, player_object)
