@@ -47,7 +47,7 @@ class Game
 
     if board.valid_move?(current_move)
       board.update(current_move, player)
-      system("clear")
+      # system("clear")
       board.display
       sleep 0.5
     else
@@ -64,24 +64,7 @@ class Game
 
   def self.start
 
-    # input = ""
-    # #require 'pry'; binding.pry
-    # while input != "exit"
-    #   case input
-    #   when "0"
-    #     Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
-    #   when "1"
-    #     puts "Who goes first, you or the computer?"
-    #     first_player = gets.strip
-    #     if first_player == "me"
-    #       Game.new(player_2 = Player::Computer.new("O"))
-    #     elsif first == "computer"
-    #       Game.new(player_1 = Player::Computer.new("X"))
-    #     end
-    #   when "2"
-    #     Game.new
-    #   end
-    # end
+
     puts "How many players?"
     puts ""
     puts "0. Computer vs Itself"
