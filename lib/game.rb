@@ -100,6 +100,8 @@ class Game
     elsif draw?
       puts "Cats Game!" # prints "Cats Game!" on a draw
     end
+
+    repeat?
   end
 
 
@@ -157,8 +159,21 @@ class Game
   end
 
   def repeat?
-    # TODO
+   input = ''
+   # ask the user if they want to play again
+   until input.match(/[1|2]/)
+      puts "Would you like to play again? Enter your selection:"
+      puts ">> 1 << Yes"
+      puts ">> 2 << No"
+      input = gets.strip
+      if input == "1"
+        # if user selects yes, start a new game
+        # TODO reload the bin/tictactoe - how???
+        puts "#{__callee__} method - we need to figure out how to reload the bin/tictactoe file, right???"
+      else
+        puts "Thanks for playing. Come back soon!"
+      end
   end
 
-
+end
 end
