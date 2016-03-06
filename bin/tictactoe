@@ -1,3 +1,62 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# class TicTacToeCLI
+
+  def initialize
+    call
+  end
+
+  def call
+    puts "Welcome to TicTacToe!"
+    puts "Please enter number of players 0,1 or 2:"
+    num_players = gets.to_s.strip
+    puts "You have chosen #{choice} player(s)."
+ 
+    if num_players == "0"
+      puts "Ok, so you want to let the computer do it all?...ok then."
+      game = Game.new(Computer.new("X"), Computer.new("O"))
+      game.board.display
+      game.play
+      puts "Play again? y/n"
+      replay_choice = gets.strip.upcase
+      new_game(replay_choice)
+    
+    elsif num_players == "1"
+      puts "Ok, so you play against the Computer \n
+            who goes first?, enter '0' = computer, or '1' = yourself"
+        first_player = gets.to_s.strip
+      if first_player == "0"
+        game = Game.new(Computer.new("X"), Human.new("O"))
+      elsif first_player == "1"
+        game = Game.new(Human.new("X"), Computer.new("O"))
+      game.board.display
+      game.play
+      puts "Play again? y/n"
+      replay_choice = gets.strip.upcase
+      new_game(replay_choice)   
+  
+  elsif num_players == "2"
+    puts "Ok, 2 players, first player to enter, will be 'X' token."
+      game = Game.new(Human.new("X"), Human.new("O"))
+      game.board.display
+      game.play
+      puts "Play again? y/n"
+      replay_choice = gets.strip.upcase
+      new_game(replay_choice) 
+        
+      end
+    end
+  end
+
+  def new_game(replay_choice)
+    if replay_choice == "Y"
+      puts "Please insert $1 to play again, baby needs new shoes."
+      call
+    else
+      puts "Thank you for playing."
+    end
+  end
+
+# end

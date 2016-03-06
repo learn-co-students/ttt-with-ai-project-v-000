@@ -1,10 +1,57 @@
 ##########################################
 ##########################################
-##########################################
-##########################################
-##########################################
-##########################################
+Last login: Sun Mar  6 09:57:16 on ttys001
+/Users/BradSmith/Development/code/ttt-with-ai-project-v-000/bin/tictactoe ; exit;
+[10:45:19] ~
+// ♥ /Users/BradSmith/Development/code/ttt-with-ai-project-v-000/bin/tictactoe ; exit;
+/Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:163:in `rescue in root': Could not locate Gemfile or .bundle/ directory (Bundler::GemfileNotFound)
+  from /Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:159:in `root'
+  from /Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:71:in `bundle_path'
+  from /Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:401:in `configure_gem_home_and_path'
+  from /Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:57:in `configure'
+  from /Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:118:in `definition'
+  from /Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:88:in `setup'
+  from /Users/BradSmith/.rvm/gems/ruby-2.2.3/gems/bundler-1.11.2/lib/bundler.rb:99:in `require'
+  from /Users/BradSmith/Development/code/ttt-with-ai-project-v-000/config/environment.rb:2:in `<top (required)>'
+  from /Users/BradSmith/Development/code/ttt-with-ai-project-v-000/bin/tictactoe:3:in `require_relative'
+  from /Users/BradSmith/Development/code/ttt-with-ai-project-v-000/bin/tictactoe:3:in `<main>'
+logout
 
+[Process completed]
+
+
+
+
+
+##########################################
+#########   THE WALL   solution!!  #################
+  def turn
+   
+    choice = current_player.move(board)
+    if board.valid_move?(choice)
+      board.update(choice, current_player)
+    else
+      turn
+    end
+  end 
+##########################################
+    def play
+      while !over? && !won? && !draw?
+        turn
+      end
+      if draw?
+        puts "Cats Game!"
+      elsif won?
+          puts "Congratulations #{winner}!"
+      else
+      end
+    end
+end
+##########################################
+##########################################
+lsof -wni tcp:3000
+
+kill -9 PID
 
 
 ##########################################
