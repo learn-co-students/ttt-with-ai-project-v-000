@@ -47,7 +47,7 @@ class Game
 
     if board.valid_move?(current_move)
       board.update(current_move, player)
-      # system("clear")
+      system("clear")
       board.display
       sleep 0.5
     else
