@@ -64,25 +64,6 @@ class Game
 
   def self.start
 
-    # input = ""
-    # #require 'pry'; binding.pry
-    # while input != "exit"
-    #   case input
-    #   when "0"
-    #     Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
-    #   when "1"
-    #     puts "Who goes first, you or the computer?"
-    #     first_player = gets.strip
-    #     if first_player == "me"
-    #       Game.new(player_2 = Player::Computer.new("O"))
-    #     elsif first == "computer"
-    #       Game.new(player_1 = Player::Computer.new("X"))
-    #     end
-    #   when "2"
-    #     Game.new
-    #   end
-    # end
-
     puts "How many players?"
     puts ""
     puts "0. Computer vs Itself"
@@ -90,9 +71,30 @@ class Game
     puts "2. Two players"
 
     input = gets.strip
-    if input == "0"
+    # if input == "0"
+    #   game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+    # elsif input == "1"
+    #   puts "Would you like to go first? (Yn)"
+    #   answer = gets.strip
+    #   if answer == "y".downcase
+    #     game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+    #   elsif answer == "n".downcase
+    #     game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
+    #   end
+    # elsif input == "2"
+    #   puts "Player One, please enter you name"
+    #   player_1 = gets.strip
+    #   puts "Welcome #{player_1}!"
+    #   puts "Player Two plase enter your name"
+    #   player_2 = gets.strip
+    #   puts "Welcome #{player_2}!"
+    #   game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+    # end
+
+    case input
+    when "0"
       game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
-    elsif input == "1"
+    when "1"
       puts "Would you like to go first? (Yn)"
       answer = gets.strip
       if answer == "y".downcase
@@ -100,13 +102,15 @@ class Game
       elsif answer == "n".downcase
         game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
       end
-    elsif input == "2"
+    when "2"
       puts "Player One, please enter you name"
-      player_1 = gets.strip
-      puts "Welcome #{player_1}!"
+      player_01 = gets.strip
+      puts "Welcome #{player_01}!"
+      puts "You are player X"
       puts "Player Two plase enter your name"
-      player_2 = gets.strip
-      puts "Welcome #{player_2} !"
+      player_02 = gets.strip
+      puts "Welcome #{player_02}!"
+      puts "You are player O"
       game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
     end
     game.play
@@ -122,6 +126,30 @@ class Game
       end
     end
   end
+
+  # def computer_mode
+  #   game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+  # end
+  #
+  # def computer_vs_human
+  #   puts "Would you like to go first? (Yn)"
+  #   answer = gets.strip
+  #   if answer == "y".downcase
+  #     game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+  #   elsif answer == "n".downcase
+  #     game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
+  #   end
+  # end
+  #
+  # def human_mode
+  #   puts "Player One, please enter you name"
+  #   player_1 = gets.strip
+  #   puts "Welcome #{player_1}!"
+  #   puts "Player Two plase enter your name"
+  #   player_2 = gets.strip
+  #   puts "Welcome #{player_2}!"
+  #   game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+  # end
 
 
 end
