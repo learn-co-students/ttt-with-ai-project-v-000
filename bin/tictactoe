@@ -2,33 +2,9 @@
 require 'pry'
 require_relative '../config/environment'
 
-# Greet the user with a message
-puts
-puts "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"
-puts "  ● WELCOME TO TIC TAC TOE ●"
-puts "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"
-
-def create_game
-# Prompt the user for what kind of game they want to play, 0,1, or 2 player
-game = Game.new.game_type
-  until game.over?
-    game.play
-  end
-end
-
-create_game
-
-input = ''
-# ask the user if they want to play again
-until input.match(/[1|2]/)
-  puts "Would you like to play again? Enter your selection:"
-  puts ">> 1 << Yes"
-  puts ">> 2 << No"
-  input = gets.strip
-  if input == "1"
-    # if user selects yes, start a new game
-    create_game
-  else
-    puts "Thanks for playing. Come back soon!"
-  end
+answer = "y"
+until answer == "n"
+  game = Game.new.game_type
+  game.start
+  answer = game.repeat?
 end

@@ -66,7 +66,6 @@ class Game
 
   # makes valid moves
   def turn
-    puts "Player #{current_player.token} it's your turn."
     input = current_player.move(board)
 
     # asks for input again after a failed validation
@@ -77,9 +76,7 @@ class Game
     end
     # changes to player 2 after the first turn
     board.update(input, current_player)
-    puts # TODO - ask about this
     board.display
-    puts # TODO - ask about this
   end
 
   # plays through an entire game
@@ -87,7 +84,6 @@ class Game
     until over?
       board.turn_count #=> asks for players input on a turn of the game
       # checks if the game is over after every turn
-      # plays the first turn of the game
       # plays the first few turns of the game
       turn
       current_player
@@ -108,59 +104,78 @@ class Game
   #                     CLI OPTIONS
   ###############################################################
 
-  # Gives the player the option of selecting a game type
-  def game_type
-    puts
-    puts "❉ Game Types ❉"
+  # Greet the user with a message
+  def greeting
+
+    puts "\n★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"
+    puts "  ● WELCOME TO TIC TAC TOE ●"
+    puts "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"
+
+    puts "\n❉ Game Types ❉"
     puts "--------------------------------------------"
     puts ">> 1 << One Player Game"
     puts ">> 2 << Two Players Game"
     puts ">> 0 << The computer will play against itself"
     puts "--------------------------------------------"
-    puts
-    puts "Please select a Game type"
-    type = gets.strip
+  end
+
+
+  # Gives the player the option of selecting a game type
+  def game_type
+    greeting
+    type = ""
 
     until type.match(/[0|1|2]/)
       puts "Please select a valid Game type"
       type = gets.strip
     end
 
-    set_up_game(type)
+
+  case type
+    when "2"
+      game = Game.new(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
+    when "1"
+      # ask who plays first and verify user input
+      first_player = "h"
+      puts "Who should go first?\nEnter c for computer or h for human"
+      first_player = gets.strip.downcase
+
+      until first_player.match(/[c|h]/)
+        puts "Please select a valid player (c for computer or h for human)"
+        first_player = gets.strip.downcase
+      end
+
+      if first_player == "c"
+        player1 = Computer.new("O")
+        player2 = Human.new("X")
+      elsif first_player == "h"
+        player1 = Human.new("X")
+        player2 = Computer.new("O")
+      end
+      game = Game.new(player_1 = player1, player_2 = player2, board = Board.new)
+    when "0"
+      game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
   end
+  game
+end
 
-
-
-  def set_up_game(type)
-
-    # This first_player is just a placeholder variable for now.
-    # Using it as a way to store the player's selection for who plays first when a 1 or 2 player game is selected
-    # initializing it to an empty string so we don't get an error from the until statements below
-
-    first_player = ''
-    case type
-      when "2"
-        # ask who plays first and verify user input is within range
-        until first_player.match(/[1|2]/)
-          puts "Who goes first? Enter the number of your choice:\n1. you\n2. your opponent"
-          first_player = gets.strip # first_player is still a string here
-          # TODO implement logic
-        end
-        game = Game.new(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
-      when "1"
-        until first_player.match(/[1|2]/)
-          # ask who plays first and verify user input is within range
-          puts "Who goes first? Enter the number of your choice:\n1. you\n2. the computer"
-          first_player = gets.strip # first_player is still a string here
-          # TODO implement logic
-        end
-        game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
-      when "0"
-        game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
-        puts "You selected 0, so the computer will play against itself"
-    end
-
-    game
+# Starts the game
+def start
+  until over?
+    play
   end
+end
+
+# Returns an answer of "y" or "n" to repeating the game
+def repeat?
+  answer = ""
+
+  until answer.match(/[y|n]/)
+    puts "\nWould you like to play again? (y/n)"
+    answer = gets.strip.downcase
+    puts "★ Thanks for playing. Come back soon! ★" if answer == "n"
+  end
+  answer
+end
 
 end
