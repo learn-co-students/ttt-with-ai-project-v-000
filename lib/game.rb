@@ -39,8 +39,8 @@ class Game
   # returns false for a draw
   # returns true for a win
     WIN_COMBINATIONS.any? do |win_array|
-     board.cells[win_array[0]] == "X" && board.cells[win_array[1]] == "X" && board.cells[win_array[2]] == "X" || 
-     board.cells[win_array[0]] == "O" && board.cells[win_array[1]] == "O" && board.cells[win_array[2]] == "O"
+      board.cells[win_array[0]] == "X" && board.cells[win_array[1]] == "X" && board.cells[win_array[2]] == "X" ||
+      board.cells[win_array[0]] == "O" && board.cells[win_array[1]] == "O" && board.cells[win_array[2]] == "O"
     end
   end
 
@@ -55,11 +55,11 @@ class Game
     # checks to see if game was won
     if won?
       winning_array = WIN_COMBINATIONS.detect do |win_array|
-        board.cells[win_array[0]] == "X" && board.cells[win_array[1]] == "X" && board.cells[win_array[2]] == "X" || 
+        board.cells[win_array[0]] == "X" && board.cells[win_array[1]] == "X" && board.cells[win_array[2]] == "X" ||
         board.cells[win_array[0]] == "O" && board.cells[win_array[1]] == "O" && board.cells[win_array[2]] == "O"
       end
       # returns nil if no winner or returns token of winner
-      winning_array.nil? ? nil : board.cells[winning_array[0]]
+      board.cells[winning_array[0]]
     end
   end
 
@@ -89,7 +89,7 @@ class Game
     # checks if the game is won after every turn
     if won?
       puts "Congratulations #{winner}!"
-      # checks if the game is draw after every turn
+    # checks if the game is draw after every turn
     elsif draw?
       puts "Cats Game!" # prints "Cats Game!" on a draw
     end
@@ -143,8 +143,8 @@ class Game
         end
 
         if first_player == "c"
-          player1 = Computer.new("O")
-          player2 = Human.new("X")
+          player1 = Computer.new("X")
+          player2 = Human.new("O")
         elsif first_player == "h"
           player1 = Human.new("X")
           player2 = Computer.new("O")
