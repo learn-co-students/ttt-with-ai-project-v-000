@@ -9,5 +9,4 @@ class Player
     @token.freeze
   end
 
-
 end
