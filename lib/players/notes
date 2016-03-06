@@ -1,28 +1,5 @@
 notes
 
-#from rocketneck's slack post
-
-def two_in_a_row(board, t = self.token)
-    m = false
-    m = 3 if board[0] == t && board[1] == t && board[2] == " "
-    m = 6 if board[3] == t && board[4] == t && board[5] == " "
-    m = 9 if board[6] == t && board[7] == t && board[8] == " "
-    m = 1 if board[1] == t && board[2] == t && board[0] == " "
-    m = 4 if board[4] == t && board[5] == t && board[3] == " "
-    m = 7 if board[7] == t && board[8] == t && board[6] == " "
-    m = 7 if board[0] == t && board[3] == t && board[6] == " "
-    m = 8 if board[1] == t && board[4] == t && board[7] == " "
-    m = 9 if board[2] == t && board[5] == t && board[8] == " "
-    m = 1 if board[6] == t && board[3] == t && board[0] == " "
-    m = 2 if board[4] == t && board[7] == t && board[1] == " "
-    m = 3 if board[8] == t && board[5] == t && board[2] == " "
-    m = 3 if board[6] == t && board[4] == t && board[2] == " "
-    m = 7 if board[4] == t && board[2] == t && board[6] == " "
-    m = 1 if board[0] == t && board[4] == t && board[8] == " "
-    m = 9 if board[4] == t && board[0] == t && board[8] == " "
-    m
-  end
-
   def update(input, player)
     cells[input.to_i-1] = player.token
   end
@@ -51,5 +28,68 @@ end
 #     end
 #   when "2"
 #     Game.new
+#   end
+# end
+
+# if two of the elements in a win combo array are same as token
+  # then always choose the third element of that array
+  #token => "O"
+  #board.position(2) => " "
+  # if board.turn_count > 4 (you can view board.turn_count in pry)
+
+
+# if computer chooses "5", his options to win are narrowed to
+# 5-1=4 so [3,4,5], [1,4,7], 0,4,8], [6,4,2]
+# so if computer(X) is player_1 and has chosen "5", its next move should be to first check if there
+# are two of player_2's tokens in a row anywhere on the board (this is defense)
+# and then to choose a position that will continue a possible WIN_COMBINATIONS
+# WIN_COMBINATIONS is not accessible in this class as far as I can tell
+
+# elsif board.taken?(1) && board.taken?(2) && !board.taken?(3)
+#   "3"
+# elsif @combos.each do |combo|
+#   board.cells[combo].sort
+  # if combo.count{|s| board.cells|s| = @token} == 2
+  #   best_move = combo.select{|s| board.cells[s] == " "}
+  #   return best_move.first + 1
+# else
+#   [*("1".."9")].sample
+
+# WIN_COMBINATIONS.detect do |combo|
+#   combo.each do |position|
+      # board.cells[position].sort  #sort combos so we are getting positions to be uniform array element indexes
+      # if board.cells[position[0]] == player_2.token && board.cells[position[1]] == player_2.token
+      #   then computer has to choose [position[2]]
+    #   end
+  # end
+# end
+
+
+# all of the computer's moves have to counter attack the other player so
+# the computer's moves rely on where the other player goes -if the move is a threat
+# as well as where the computer already has a postion
+
+# WIN_COMBINATIONS = [
+#   [0,1,2],
+#   [3,4,5],
+#   [6,7,8],
+#   [0,3,6],
+#   [1,4,7],
+#   [2,5,8],
+#   [0,4,8],
+#   [6,4,2]
+# ]
+
+# if !board.taken?(5)
+#   "5"
+# elsif !board.taken?(1)
+#   "1"
+# else
+#   combos.each do |combo|
+#   #   # if board.cells[combo[0]] == token && board.cells[combo[1]] == token
+#   require "pry" ; binding.pry
+#   #   #
+#   # board.cells[combo[2]]
+#   #   # end
 #   end
 # end
