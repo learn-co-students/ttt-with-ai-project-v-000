@@ -56,8 +56,11 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[6,4,2],[0,4
     choice = current_player.move(board)
     if board.valid_move?(choice)
       board.update(choice, current_player)
+      board.display
     else
       turn
+      puts ""
+      puts ""
     end
   end 
 
@@ -66,9 +69,13 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[6,4,2],[0,4
       turn
     end
     if draw?
+      puts "*****************"
       puts "Cats Game!"
+      puts "*****************"
     elsif won?
-        puts "Congratulations #{winner}!"
+      puts "*****************"
+      puts "Congratulations #{winner}!"
+      puts "*****************"
     else
     end
   end
