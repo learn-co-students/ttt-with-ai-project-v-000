@@ -45,6 +45,7 @@ class Game
 #this returns the winning array via #detect
 #but if this returns the winning array, doesn't it not return true/false? it would either return the winning array or nil, so how is it passing the test?
   def won?
+    
     WIN_COMBINATIONS.detect do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
       @board.cells[combo[1]] == @board.cells[combo[2]] &&
@@ -71,30 +72,31 @@ class Game
     @board.cells[won?.first] if won? != nil
   end
 
-  def start
-
-  end
-
   def play
     until over?
       puts "Hey playa playa! It's #{current_player.token}'s turn. Please enter 1-9:"
-      turn
       board.display
+      turn
     end
     if won?
       puts "Congratulations #{winner}!"
+      board.display
     else draw?
       puts "Cats Game!"
+      board.display
       end
   end
 
   def turn
-    position = current_player.move
+    position = current_player.move(board)
     if board.valid_move?(position)
       board.update(position, current_player)
-    else
-      puts "That spot does not exist or is taken."
-      position = current_player.move
+    else #i can definitely refactor this else - but when i tried to use #turn here instead of repeating my code, got an rspec warning: "stack level too deep". even tried switching the order of the statements.
+      puts "Waiiiiiit a minute! That spot does not exist or is already taken!"
+      sleep(0.5)
+      puts "Please enter a different spot."
+      board.display
+      position = current_player.move(board)
       board.update(position, current_player) if board.valid_move?(position)
     end
   end
