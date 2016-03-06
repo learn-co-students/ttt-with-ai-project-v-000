@@ -91,7 +91,7 @@ class Game
     position = current_player.move(board)
     if board.valid_move?(position)
       board.update(position, current_player)
-    else #i can definitely refactor this else - but when i tried to use #turn here instead of repeating my code, got an rspec warning: "stack level too deep". even tried switching the order of the statements.
+    else #i can definitely refactor this else - but when i tried to use #turn here instead of repeating my code, got an rspec warning: "stack level too deep". also tried switching the order of the statements.
       puts "Waiiiiiit a minute! That spot does not exist or is already taken!"
       sleep(0.5)
       puts "Please enter a different spot."

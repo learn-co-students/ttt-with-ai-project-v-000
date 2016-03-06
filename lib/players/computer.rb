@@ -1,6 +1,4 @@
 class Player::Computer < Player
-  #@opponent_token = @token
-
   def move(board)
   # method goals:
   # to make conditional statements based on different cases
