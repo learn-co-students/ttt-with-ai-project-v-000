@@ -88,7 +88,7 @@ class Game
       puts "Welcome #{player_1}!"
       puts "Player Two please enter your name"
       player_2 = gets.strip
-      puts "Welcome #{player_2} !"
+      puts "Welcome #{player_2}!"
       game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
     end
     game.play
