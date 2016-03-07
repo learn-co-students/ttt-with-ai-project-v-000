@@ -50,15 +50,18 @@ class Board
     # returns true for user input between 1-9 that is not taken
     input.to_i.between?(1,cells.size) && !taken?(input)
   end
-  
-  def available_moves
-    # returns an array of the available moves in terms the user can understand (1-9)
+
+  def available_moves_for_computer
+    # returns an array of possible moves in terms the computer can understand (0-8)
     available = []
-    cells.each_with_index do |open, idx|
-      if open != "X" && open != "O"
-      available << idx+1
-      end
-    end
+    cells.each_with_index { |cell, idx| available << idx if cell == " "}
+    available
+  end
+
+  def available_moves
+    # returns an array of possible moves in terms the user can understand (1-9)
+    available = []
+    available_moves_for_computer.each { |move| available << (move+1).to_s }
     available
   end
 

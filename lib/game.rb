@@ -34,10 +34,9 @@ class Game
     won? || board.full? || draw?
   end
 
-  
-  def won?
   # returns false for a draw
   # returns true for a win
+  def won?
     WIN_COMBINATIONS.any? do |win_array|
       board.cells[win_array[0]] == "X" && board.cells[win_array[1]] == "X" && board.cells[win_array[2]] == "X" ||
       board.cells[win_array[0]] == "O" && board.cells[win_array[1]] == "O" && board.cells[win_array[2]] == "O"
@@ -50,7 +49,7 @@ class Game
     !won? && board.full?
   end
 
-  
+  # returns token of winner
   def winner
     # checks to see if game was won
     if won?
@@ -58,7 +57,6 @@ class Game
         board.cells[win_array[0]] == "X" && board.cells[win_array[1]] == "X" && board.cells[win_array[2]] == "X" ||
         board.cells[win_array[0]] == "O" && board.cells[win_array[1]] == "O" && board.cells[win_array[2]] == "O"
       end
-      # returns nil if no winner or returns token of winner
       board.cells[winning_array[0]]
     end
   end
@@ -66,6 +64,7 @@ class Game
   # makes valid moves
   def turn
     input = current_player.move(board)
+    #binding.pry
 
     # asks for input again after a failed validation
     while !board.valid_move?(input)
