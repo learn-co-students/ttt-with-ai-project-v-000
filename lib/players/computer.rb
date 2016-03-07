@@ -1,12 +1,12 @@
 require_relative '../player.rb'
-require 'pry'
+
 
 class Player::Computer < Player
 
+  def move(board)
+    
+    position = rand(1..9).to_s
+    board.valid_move?(position) ? position : move(board)
 
-def move(board)
-  "1"
-end
-
-
+  end
 end
