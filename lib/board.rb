@@ -18,7 +18,7 @@ class Board
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} \n"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} \n\n"
   end
 
   def position(input)
@@ -59,7 +59,7 @@ class Board
   end
 
   def available_moves
-    # returns an array of possible moves in terms the user can understand (1-9)
+    # returns an array of possible moves in terms the user can understand ("1"-"9")
     available = []
     available_moves_for_computer.each { |move| available << (move+1).to_s }
     available
