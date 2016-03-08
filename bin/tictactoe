@@ -1,3 +1,63 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def greeting
+  puts "Welcome to Tic Tac Toe!"
+  puts "How many players?  0 - 1 - 2  "
+  num_player = gets.strip
+end
+
+def make_game(num)
+  if num=="2"
+    game=Game.new()
+    game.play
+  end
+
+  if num=="1"
+    game=Game.new(Computer.new("X"))
+    game.play
+  end
+
+  if num=="0"
+    game=Game.new(Computer.new("X"), Computer.new("O"))
+
+    game.play
+  end
+  num
+end
+
+def play_again?
+  puts "Would you like to play again: Y - N"
+  answer=gets.strip.upcase
+  
+
+  if answer == "Y"
+    
+    make_game(greeting)
+    return answer
+  
+  # elsif num==0
+  #   puts "Goodbye"
+  #   return nil
+
+
+  else
+    puts "Goodbye"
+    return nil
+  end
+end
+
+
+make_game(greeting)
+answer=play_again?
+
+while answer=="Y"
+  answer=play_again?
+end
+
+
+
+
+
+
