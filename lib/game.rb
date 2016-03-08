@@ -67,7 +67,6 @@ class Game
     if !@board.valid_move?(current_move)
       turn
     else
-      puts "invalid"
       @board.update(current_move, player)
     end
   end
