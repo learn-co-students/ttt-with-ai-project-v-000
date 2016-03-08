@@ -84,14 +84,15 @@ class Player::Computer < Player
   def block_move
     #this would be the blocking move
     #this method needs to return a position (1..9) NOT an index (0..2) or the cell value ("X" || "O" || " ")
-
+    @block = nil # this is a flag or switch that will set equal to the winning position so i don't have to use the return keyword in #each
+    
     @potential_loss_array.each_with_index do |position, i|
       #puts "i want to know what i is: #{i}"
       #puts "i want to know what position is: #{position}"
       #puts "i want to know what i is: #{i}" #i want to find what the position index is at each iteration
-      return @combo_actual_position[i]+1 if position == " "
-
+       @block = @combo_actual_position[i]+1 if position == " "
     end
+    @block
   end
 
 def potential_win?(board)
@@ -130,13 +131,14 @@ def potential_win?(board)
   def win_move
       #this would be the winning move
       #this method needs to return a position (1..9) NOT an index (0..2) or the cell value ("X" || "O" || " ")
-
+    @win = nil # this is a flag or switch that will set equal to the winning position so i don't have to use the return keyword in #each
     @potential_win_array.each_with_index do |position, i|
       #puts "i want to know what i is: #{i}"
       #puts "i want to know what position is: #{position}"
       #puts "i want to know what i is: #{i}" #i want to find what the position index is at each iteration
-      return @combo_actual_position[i]+1 if position == " "
+      @win = @combo_actual_position[i]+1 if position == " "
     end
+    @win
   end
 
 end
