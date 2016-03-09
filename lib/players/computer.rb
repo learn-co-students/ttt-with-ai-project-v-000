@@ -85,6 +85,7 @@ class Computer < Player # inherits from Player
     # something to check our set_winners arrays against
     # this generates every possible two-in-a-row pattern for the current token
     # any winning_row, winning_col, or winning_diag would follow this pattern
+    # in the future I could see something similar being used for a blocking move
     # [["X", "X", " "], ["X", " ", "X"], [" ", "X", "X"]]
     [token, token, ' '].permutation.to_a.uniq
   end
