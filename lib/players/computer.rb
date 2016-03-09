@@ -1,2 +1,2 @@
-class Computer < Player
+class Player::Computer < Player
 end
