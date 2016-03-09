@@ -7,6 +7,7 @@ class Computer < Player
 
 end
 =begin
+Didn't mean to submit this already. Working on minimax solution 
 WIN_COMBINATIONS = [
   [0,1,2],#row
   [3,4,5],
