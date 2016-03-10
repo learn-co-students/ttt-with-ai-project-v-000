@@ -47,9 +47,8 @@ class Game
 
     if board.valid_move?(current_move)
       board.update(current_move, player)
-      system("clear")
       board.display
-      sleep 0.5
+      puts "Player #{player.opponents_token}, It's your turn\n" unless won?
     else
       turn
     end
@@ -61,38 +60,5 @@ class Game
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
   end
-
-  def self.start
-
-
-    puts "How many players?"
-    puts ""
-    puts "0. Computer vs Itself"
-    puts "1. One Player vs Computer"
-    puts "2. Two players"
-
-    input = gets.strip
-    if input == "0"
-      game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
-    elsif input == "1"
-      puts "Would you like to go first? (Y/N)"
-      answer = gets.strip
-      if answer == "y".downcase
-        game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
-      elsif answer == "n".downcase
-        game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
-      end
-    elsif input == "2"
-      puts "Player One, please enter your name"
-      player_1 = gets.strip
-      puts "Welcome #{player_1}!"
-      puts "Player Two please enter your name"
-      player_2 = gets.strip
-      puts "Welcome #{player_2}!"
-      game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
-    end
-    game.play
-  end
-
 
 end

@@ -4,27 +4,24 @@ class Player::Computer < Player
   def initialize(token)
     @token = token
     @combos = Game::WIN_COMBINATIONS
-    if @token == "X"
-      @opponents_token = "O"
-    else
-      @opponents_token = "X"
-    end
+    @opponents_token = "O" if @token == "X"
+    @opponents_token = "X" if @token == "O"
   end
 
   def move(board)
-    move_index = nil
-    # take_middle(board) # either return 4 if its the first or second turn or return nil
 
-    if take_middle(board)
-      move_index = take_middle(board)
-    elsif win(board)
-      move_index = win(board)
-    elsif block(board)
-      move_index = block(board)
-    elsif corner(board)
-      move_index = corner(board)
+    move_index =
+    case
+    when take_middle(board)
+      take_middle(board)
+    when win(board)
+      win(board)
+    when block(board)
+      block(board)
+    when corner(board)
+      corner(board)
     else
-      move_index = random(board)
+      random(board)
     end
 
     "#{move_index+1}"
@@ -32,12 +29,7 @@ class Player::Computer < Player
   end
 
   def take_middle(board)
-    middle_position = nil
-    if board.turn_count < 4
-      if !board.taken?(5)
-        middle_position = 4
-      end
-    end
+    4 if board.turn_count < 4 && !board.taken?(5)
   end
 
   def win(board)
@@ -63,8 +55,6 @@ class Player::Computer < Player
     block_position = nil
 
     combos.each do |combo|
-      # combo = [0,1,2], [3,4,5]
-      # if I find a position worth blocking, set it to block_position
       position_1 = board.cells[combo[0]]
       position_2 = board.cells[combo[1]]
       position_3 = board.cells[combo[2]]
@@ -81,17 +71,18 @@ class Player::Computer < Player
   end
 
   def corner(board)
-    corner_position = nil
-    if !board.taken?(1)
-      corner_position = 0
-    elsif !board.taken?(3)
-      corner_position = 2
-    elsif !board.taken?(7)
-      corner_position = 6
-    elsif !board.taken?(9)
-      corner_position = 8
+    corner_position =
+    case
+    when !board.taken?(1)
+      0
+    when !board.taken?(3)
+      2
+    when !board.taken?(7)
+      6
+    when !board.taken?(9)
+      8
     end
-    corner_position
+
   end
 
   def random(board)
@@ -99,4 +90,4 @@ class Player::Computer < Player
   end
 
 
-end # class end
+end
