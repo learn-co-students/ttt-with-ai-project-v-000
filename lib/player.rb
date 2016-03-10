@@ -1,8 +1,8 @@
 class Player
-  attr_reader :token, :opponents_token
+  attr_reader :token
   def initialize(token)
     @token = token
-    @opponents_token = "O" if @token == "X"
-    @opponents_token = "X" if @token == "O"
   end
 end
+
+

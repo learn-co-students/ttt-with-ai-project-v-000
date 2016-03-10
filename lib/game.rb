@@ -47,8 +47,9 @@ class Game
 
     if board.valid_move?(current_move)
       board.update(current_move, player)
+      system("clear")
       board.display
-      puts "Player #{player.opponents_token}, It's your turn\n" unless won?
+      sleep 0.5
     else
       turn
     end
@@ -60,5 +61,95 @@ class Game
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
   end
+
+  def self.start
+
+    puts "How many players?"
+    puts ""
+    puts "0. Computer vs Itself"
+    puts "1. One Player vs Computer"
+    puts "2. Two players"
+
+    input = gets.strip
+    # if input == "0"
+    #   game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+    # elsif input == "1"
+    #   puts "Would you like to go first? (Yn)"
+    #   answer = gets.strip
+    #   if answer == "y".downcase
+    #     game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+    #   elsif answer == "n".downcase
+    #     game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
+    #   end
+    # elsif input == "2"
+    #   puts "Player One, please enter you name"
+    #   player_1 = gets.strip
+    #   puts "Welcome #{player_1}!"
+    #   puts "Player Two plase enter your name"
+    #   player_2 = gets.strip
+    #   puts "Welcome #{player_2}!"
+    #   game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+    # end
+
+    case input
+    when "0"
+      game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+    when "1"
+      puts "Would you like to go first? (Yn)"
+      answer = gets.strip
+      if answer == "y".downcase
+        game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+      elsif answer == "n".downcase
+        game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
+      end
+    when "2"
+      puts "Player One, please enter you name"
+      player_01 = gets.strip
+      puts "Welcome #{player_01}!"
+      puts "You are player X"
+      puts "Player Two plase enter your name"
+      player_02 = gets.strip
+      puts "Welcome #{player_02}!"
+      puts "You are player O"
+      game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+    end
+    game.play
+
+
+    if game.over?
+      puts "Would you like to play again? (Yn)"
+      option = gets.strip
+      if option == "y".downcase
+        self.start
+      elsif option == "n".downcase
+        puts "So Long and Thanks for All the Fish!"
+      end
+    end
+  end
+
+  # def computer_mode
+  #   game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+  # end
+  #
+  # def computer_vs_human
+  #   puts "Would you like to go first? (Yn)"
+  #   answer = gets.strip
+  #   if answer == "y".downcase
+  #     game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+  #   elsif answer == "n".downcase
+  #     game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
+  #   end
+  # end
+  #
+  # def human_mode
+  #   puts "Player One, please enter you name"
+  #   player_1 = gets.strip
+  #   puts "Welcome #{player_1}!"
+  #   puts "Player Two plase enter your name"
+  #   player_2 = gets.strip
+  #   puts "Welcome #{player_2}!"
+  #   game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+  # end
+
 
 end
