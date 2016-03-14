@@ -30,7 +30,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do|win_combination|
-     !@board.cells[win_combination[0]].nil? && @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]]
+     @board.taken?(@board.cells[win_combination[0]]) && @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]]
   end
   end
 
@@ -50,7 +50,7 @@ end
 
   def winner
     winning_array=won?
-
+    #binding.pry
     if @board.cells[winning_array[0]] == "X"
        @board.cells[winning_array[0]]
        elsif @board.cells[winning_array[0]] == "O"
@@ -81,6 +81,7 @@ end
 
      end
      if won?
+       #binding.pry
        puts "Congratulations #{winner}!"
      else draw?
        puts "Cats Game!"
