@@ -19,11 +19,8 @@ class Game
   def current_player
     board.turn_count.even? ? player_1 : player_2
   end
-  def previous_player
-    board.turn_count.even? ? player_2 : player_1
-  end
   def over?
-    board.full? || won?
+    draw? || won?
   end
   def won?
     #if any win combination has the same player token for all positions
@@ -33,7 +30,7 @@ class Game
     end
   end
   def draw?
-    over? && !won?
+    @board.full? && !won?
   end
   def winner
     @board.cells[won?[0]] if won?
@@ -44,10 +41,9 @@ class Game
     board.valid_move?(move) == true ? board.update(move,current_player) : turn
   end
   def play
-    while !over? || !draw? || !won?
+    while !over? 
       turn
     end
-
   end
 
 end
