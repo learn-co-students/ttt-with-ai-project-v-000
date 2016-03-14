@@ -1,4 +1,4 @@
-require_all "lib"
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -41,9 +41,11 @@ class Game
     board.valid_move?(move) == true ? board.update(move,current_player) : turn
   end
   def play
-    while !over? 
+    while !over?
       turn
     end
+    puts "Congratulations #{winner}!" if won?
+    puts "Cats Game!" if draw?
   end
 
 end
