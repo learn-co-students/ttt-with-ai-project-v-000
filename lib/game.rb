@@ -30,7 +30,8 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do|win_combination|
-     @board.taken?(win_combination[0]) && @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]]
+
+      @board.taken?(win_combination[0]+1) && @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[1]] == @board.cells[win_combination[2]]
   end
   end
 
@@ -45,20 +46,16 @@ end
   end
 
   def over?
-   won? || full? || draw?
+   won? || draw?
   end
 
-  def winner
-    winning_array=won?
-    #binding.pry
-    if @board.cells[winning_array[0]] == "X"
-       @board.cells[winning_array[0]]
-       elsif @board.cells[winning_array[0]] == "O"
-       @board.cells[winning_array[0]]
-       else
-       nil
-    end
-end
+
+   def winner
+     if winning_combo = won?
+       @winner = @board.cells[winning_combo[0]]
+     end
+   end
+
 
  def turn
     player = current_player
@@ -76,11 +73,10 @@ end
   def play
     #binding.pry
      while !over?
-
        turn
+    end
 
-     end
-     if won?
+    if won?
        #binding.pry
        puts "Congratulations #{winner}!"
      else draw?

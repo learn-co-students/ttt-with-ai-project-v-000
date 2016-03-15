@@ -1,5 +1,5 @@
 require 'pry'
-class Human < Player
+class Player::Human < Player
 
   def move(board)
      puts "Enter input:"
