@@ -72,10 +72,8 @@ end
 
 def turn
   board.display
-
- puts "It's #{current_player.token}'s turn."
-
  select=current_player.move(self.board)
+
  if board.valid_move?(select)
     board.update(select,current_player)
   
@@ -91,8 +89,10 @@ def play
     turn
      end
    if won?
+    board.display
     puts "Congratulations #{winner}!"
   else
+    board.display
     puts "Cats Game!"
 end
 
