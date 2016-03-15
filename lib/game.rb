@@ -36,7 +36,6 @@ class Game
     @board.cells[won?[0]] if won?
   end
   def turn
-    puts "Please enter a valid move:"
     move = current_player.move(board)
     board.valid_move?(move) == true ? board.update(move,current_player) : turn
   end
@@ -44,8 +43,9 @@ class Game
     while !over?
       turn
     end
-    puts "Congratulations #{winner}!" if won?
-    puts "Cats Game!" if draw?
+    puts "\nCongratulations #{winner}!" if won?
+    puts "\nCats Game!" if draw?
+    winner
   end
 
 end

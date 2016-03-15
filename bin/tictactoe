@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to the always fun Tic-Tac-Toe:"
+continue = "y"
+while continue.downcase == "y"
+  puts "How many human players? Or type 'wargame' for a computer battle(0-2, wargame):"
+  @num_players = gets.chomp.downcase
+  case @num_players
+    when "0"
+      game = Game.new(Player::Computer.new("X"),Player::Computer.new("O"))
+      game.play
+    when "1"
+      game = Game.new(Player::Human.new("X"),Player::Computer.new("O"))
+      game.play
+    when "2"
+      game = Game.new
+      game.play
+    when "wargame"
+      wins = (1..100).count {|i| game = Game.new(Player::Computer.new("X"),Player::Computer.new("O")) ; game.play}
+      puts "\nComputer won #{wins} games out of 100!"
+    else
+      puts "You have entered an invalid selection."
+  end
+
+  puts "\nWould you like to play again? (y/n):"
+  continue = gets.chomp.downcase
+end
+
+
+
