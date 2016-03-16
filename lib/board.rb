@@ -39,6 +39,7 @@ class Board
 
   def update(pos, user)
     @cells[pos.to_i-1] = user.token
+    display
   end
 
 end
