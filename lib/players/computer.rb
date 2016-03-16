@@ -1,7 +1,7 @@
-class Computer < Player
+class Player::Computer < Player
 
-  def move
-    "1"
+  def move(board)
+    return board
   end
 
 

@@ -2,5 +2,3 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe Terminator"
-puts "How many people will be playing?"

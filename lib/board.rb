@@ -3,7 +3,7 @@ require 'pry'
 
 class Board
 
-  attr_accessor :cells, :token
+  attr_accessor :cells, :token, :move, :player
 
  
 
@@ -60,9 +60,9 @@ class Board
 
 
       if valid_move?(input)
-        @cells[move].replace(player.token)
+        @cells[move]=player.token
       end
-      
+
       return @cells
      
     end
