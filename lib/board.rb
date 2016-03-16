@@ -1,11 +1,6 @@
 class Board
 
-  # Responsible for 
-  # - move logic 
-  # - positions available
-  # - keeping track of who has played last (who's turn it is now)
-
-  attr_accessor :cells
+ attr_accessor :cells
 
   def initialize
     @cells = Array.new(9, " ")
