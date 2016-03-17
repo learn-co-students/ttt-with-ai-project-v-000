@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+answer = "y"
+until answer == "n"
+  game = Game.new.game_type
+  game.start
+  answer = game.repeat?
+end
