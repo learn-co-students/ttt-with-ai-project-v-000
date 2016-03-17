@@ -1,0 +1,6 @@
+class Computer < Player
+  def move(board=nil)
+    [1,2,3,4,5,6,7,8,9].sample.to_s
+  end
+
+end
