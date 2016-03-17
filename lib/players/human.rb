@@ -4,11 +4,12 @@ class Player::Human < Player
   attr_reader :token
 
   def move(board)
+    
     token = self.token
 
 
     puts "What is your move Player #{token}?"
-    move = gets.chomp
+    move = gets.strip
     return move
 
   end

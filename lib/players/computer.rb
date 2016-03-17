@@ -1,7 +1,8 @@
 class Player::Computer < Player
 
   def move(board)
-    return board
+    x = rand.(9)
+    x
   end
 
 

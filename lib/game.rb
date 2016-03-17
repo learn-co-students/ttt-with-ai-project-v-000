@@ -27,14 +27,17 @@ class Game
       @player_2 = player_2
       @player_2.board = @board
     end
+
   end
 
 
   def current_player
-    if @board.turn_count / 2 != 0
-      @player_1
+    if @board.turn_count == 0
+      return @player_1
+    elsif @board.turn_count % 2 != 0
+      return @player_2
     else
-      @player_2
+      return @player_1
     end
   end
 
@@ -95,25 +98,43 @@ class Game
 
 
   def turn
-    player = current_player
-    
-    if player.class == Player::Human
 
-      move = player.move(@board.cells)
-      if !@board.valid_move?(move)
-        puts "Sorry that move wasn't valid. Try again."
-        turn
-      else
-        @board.update(move,self)
-        return @board.cells
-      end
+    puts @board.display
 
-    elsif player.class == Player::Computer
-      player.move(@board)
+    valid = false
+    while valid == false
+
+        player = current_player
+        position = player.move(@board)
+        
+        if @board.valid_move?(position) == true
+          
+          @board.update(position,player)
+          valid = true
+        elsif @board.valid_move?(position) == false
+          puts "Sorry that move wasn't valid. Try again."
+        end
     end
-      
 
   end
+
+  def play
+    while !won? && !draw?
+      turn
+    end
+
+    if draw?
+      puts "Cats Game!"
+    elsif won? && winner == "X"
+      puts "Congratulations X!"
+    elsif won? && winner == "O"
+      puts "Congratulations O!"
+    end
+
+
+  end
+      
+  
 
 
 

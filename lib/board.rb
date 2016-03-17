@@ -18,9 +18,11 @@ class Board
     end
 
     def display
-      puts " ------------------------------------------ "
+      puts " ----------- "
       puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+      puts " ----------- "
       puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+      puts " -----------"
       puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
     end
 
@@ -34,10 +36,16 @@ class Board
       true if !@cells.detect {|x| x == " "}
     end
 
+
+
     def turn_count
-      count = @cells.count(" ")
-      count = (count - 9) * -1
-      count
+      counter = 0
+      @cells.each do |x|
+        if x == "X" || x == "O"
+          counter +=1
+        end
+      end
+      return counter
     end
 
     def taken?(input)
