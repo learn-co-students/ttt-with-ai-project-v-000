@@ -7,29 +7,39 @@ class GameCLI
   end
 
   def call
-    puts "Please select the number of human players (0, 1 or 2)"
-    valid_players?(gets.chomp.to_i)
+    puts "Please select the number of human players or type exit to quit now."
+    
+    input = gets.chomp
+    
+    if input.downcase == 'exit'
+      exit
+    end
+
+    valid_players?(input.to_i) ? create_players(input.to_i) : invalid_players
     Game.new(@player_one, @player_two).play
+    play_again?
+  end
+
+  def play_again?
+    puts "Play again? y/n"
+    gets.chomp.downcase == "y" ? call : exit
   end
 
   def valid_players?(players)
-    if players.between?(0, 2)
-      create_players(players)
-    else
-      puts "Sorry, this game only allows 0 to 2 human players!\n\n"
-      call
-    end
+    players.between?(0, 2) ? true : false
+  end
+
+  def invalid_players
+    puts "Sorry, this game only allows 0 to 2 human players!"
+    call
   end
 
   def create_players(players)
     case players
-    when 2
-      @player_one = Human.new('X')
-      @player_two = Human.new('O')
     when 1
       @player_one = Human.new('X')
       @player_two = Computer.new('O')
-    else
+    when 0
       @player_one = Computer.new('X')
       @player_two = Computer.new('O')
     end

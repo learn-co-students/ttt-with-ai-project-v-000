@@ -31,7 +31,7 @@ describe "GameCLI" do
       expect(gamecli).to receive(:gets).and_return("5", "4", "0")
 
       output = capture_puts {run_file("./bin/tictactoe")}
-      
+
       expect(output).to include('Sorry, this game only allows 0 to 2 human players!')
       expect(output).to include('Sorry, this game only allows 0 to 2 human players!')
     end
@@ -44,6 +44,9 @@ describe "GameCLI" do
       output = capture_puts {run_file("./bin/tictactoe")}
 
       expect(output).to include('please choose a move')
+    end
+
+    it 'should ask players to play again once a game is finished' do
     end
   end
 end
