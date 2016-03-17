@@ -19,12 +19,6 @@ class Game
     board ? @board = board : @board = Board.new
   end
 
-  def start
-    puts "Welcome to Tic Tac Toe!"
-    puts @board.display
-    play
-  end
-
   def play
     until over?
       turn
@@ -35,6 +29,7 @@ class Game
   end
 
   def turn
+    puts "#{current_player.token}, please choose a move? [1 to 9]"
     input = current_player.move
     if @board.valid_move?(input) 
       @board.update(input, current_player)
@@ -42,6 +37,9 @@ class Game
       puts "Sorry, that's not a valid move! Try again."
       turn
     end
+  end
+
+  def players
   end
 
   def current_player
