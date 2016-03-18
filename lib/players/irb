@@ -1,3 +1,148 @@
+ class Player::Computer < Player
+
+  attr_accessor :board, :cells
+  attr_reader :token
+
+  WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
+
+  def move(board)
+    
+    token = self.token
+
+    corners = [0,2,6,8]
+
+
+    puts "What is your move Player #{token}?"
+    turn = board.turn_count
+
+    
+    if turn == 1
+      if board.cells[4] == "X"
+        move = "1"
+        return move
+      else
+        move = "5"
+        return move
+      end
+    elsif turn == 3
+      if board.cells[4] == "O"
+        corners.each do |x|
+
+          
+          if board.cells[x] == " "
+            move = x.to_s
+            return move
+          end
+        end
+      end
+      #elsif board.cells[4] == "X"
+
+    else
+      move = rand(9).to_s
+      return move
+    end
+
+  end
+
+
+
+
+
+ def board_combos
+    Computer::WIN_COMBINATIONS.each do |combo|
+      combo.collect do |x|
+        board[x]
+      end
+    end
+  end
+  def combo_index
+
+    hud.each do |combo|
+      if combo.count("O") == 2 && combo.include?(" ")
+        return hud.index(combo)
+      end
+    end
+  end
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Player
+
+
+  attr_accessor  :board, :cells
+  attr_reader :token
+
+  def initialize(token)
+    @token = token
+
+end
+
+end
+
+class Player::Human < Player
+
+  attr_accessor :board, :cells
+  attr_reader :token
+
+  def move(board)
+    
+    token = self.token
+
+
+    puts "What is your move Player #{token}?"
+    move = gets.strip
+    return move
+
+  end
+
+
+end
+
 
 
 class Game
@@ -67,7 +212,7 @@ class Game
       return nil
     elsif @board.cells.count("X") > @board.cells.count("O")
       return "X"
-    elsif @board.cells.count("O") == @board.cells.count("X")
+    elsif @board.cells.count("O") > @board.cells.count("X")
       return "O"
     else 
       return nil
@@ -103,7 +248,7 @@ class Game
 
     valid = false
     while valid == false
-      
+      binding.pry
 
         player = current_player
         position = player.move(@board)
@@ -147,8 +292,6 @@ class Game
   end
 
   def play
-    
-
     while !over?
       turn
     end
@@ -169,3 +312,83 @@ class Game
 end
 
 
+
+
+class Board
+
+  attr_accessor :cells, :token, :move, :player
+
+ 
+
+    def initialize
+      @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    end
+
+
+
+    def reset!
+      @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    end
+
+    def display
+      puts " ----------- "
+      puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+      puts " ----------- "
+      puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+      puts " -----------"
+      puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    end   
+
+    def position(input)
+      move = input.to_i
+      move -= 1
+      @cells[move]
+    end
+
+    def full?
+      true if !@cells.detect {|x| x == " "}
+    end
+
+
+
+    def turn_count
+      counter = 0
+      @cells.each do |x|
+        if x == "X" || x == "O"
+          counter +=1
+        end
+      end
+      return counter
+    end
+
+    def taken?(input)
+      position(input) != " " ? true : false
+    end
+
+    def valid_move?(input)
+
+      valid_numbers = ["1","2","3","4","5","6","7","8","9"]
+      if taken?(input) == false && valid_numbers.include?(input)
+        true
+      else
+        false
+      end
+    end
+
+    def update(input, player)
+      move = input.to_i
+      move -= 1
+
+
+      if valid_move?(input)
+        @cells[move]=player.token
+      end
+
+      return @cells
+     
+    end
+
+
+
+
+end

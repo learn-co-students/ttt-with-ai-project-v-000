@@ -4,6 +4,8 @@ require_relative '../config/environment'
 
 
 puts "Welome to TicTactoe!"
-hud = Game.new.play
+Game.new.start
+
+
 
 
