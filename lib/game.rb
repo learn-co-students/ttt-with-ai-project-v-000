@@ -131,7 +131,13 @@ class Game
     elsif input == "WARGAMES" || input == "0"
       @player_1 = Player::Computer.new("X")
       @player_2 = Player::Computer.new("O")
-      play
+      100.times do
+        play
+        puts "---|-------------------|---"
+        puts "---|Master of the House|---"
+        puts "---|-------------------|---"
+        sleep(0.5)
+      end
     else
       puts "Sorry wrong entry. Try again."
       start
