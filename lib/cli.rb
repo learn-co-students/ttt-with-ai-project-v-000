@@ -12,10 +12,9 @@ class CLI
     puts "Please select the number of human players or type exit."
     input = gets.strip.downcase
 
-    case input
-    when "exit"
+    if input == "exit"
       goodbye
-    when valid_players?(input)
+    elsif valid_players?(input)
       create_players(input)
     else
       puts "Sorry, that's not a valid number of human players!\n\n"
@@ -30,7 +29,7 @@ class CLI
 
   def play_again?
     puts "Play again? y/n"
-    gets.chomp.downcase == "y" ? call : exit
+    gets.strip.downcase == "y" ? call : goodbye
   end
 
   def valid_players?(players)
