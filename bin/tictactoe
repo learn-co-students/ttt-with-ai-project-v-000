@@ -2,4 +2,4 @@
 
 require_relative '../config/environment'
 
-GameCLI.new.call
+CLI.new.call
