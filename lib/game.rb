@@ -63,14 +63,14 @@ class Game
   end
 
   def winner
-    if draw?
+    if !won?
       return nil
     elsif @board.cells.count("X") > @board.cells.count("O")
       return "X"
-    elsif @board.cells.count("O") == @board.cells.count("X")
+    elsif @board.cells.count("O") >= @board.cells.count("X")
       return "O"
-    else 
-      return nil
+
+
     end
   end
   
