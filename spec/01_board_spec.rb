@@ -95,15 +95,15 @@ describe "Board" do
     it 'returns true if the position is X or O' do
       board.cells = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
 
-      expect(board.taken?("1")).to be(true)
-      expect(board.taken?("9")).to be(true)
+      expect(board.taken?(0)).to be(true)
+      expect(board.taken?(8)).to be(true)
     end
 
     it 'returns false if the position is empty or blank' do
       board.cells = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
 
-      expect(board.taken?("2")).to be(false)
-      expect(board.taken?("7")).to be(false)
+      expect(board.taken?(1)).to be(false)
+      expect(board.taken?(6)).to be(false)
     end
   end
 

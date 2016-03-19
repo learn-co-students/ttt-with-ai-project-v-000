@@ -1,9 +1,11 @@
 class Board
 
- attr_accessor :cells
+ attr_accessor :cells, :moves
+ attr_reader :current_player
 
-  def initialize
-    @cells = Array.new(9, " ")
+  def initialize(cells = Array.new(9, " "))
+    @cells = cells
+    @moves = []
   end
 
   def update(input, player)
@@ -30,12 +32,16 @@ class Board
     @cells.select {|c| c != " "}.size
   end
 
+  def current_player
+    turn_count % 2 == 0 ? 'X' : 'O'
+  end
+
   def taken?(input)
-    @cells[input.to_i - 1] != " "
+    @cells[input] != " "
   end
 
   def valid_move?(input)
-    input.to_i.between?(1, 9) && !full? && !taken?(input.to_i)
+    input.to_i.between?(1, 9) && !full? && !taken?(input.to_i - 1)
   end
 
   def reset!

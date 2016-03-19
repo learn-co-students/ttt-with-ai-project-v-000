@@ -1,6 +1,6 @@
 class Game
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :moves
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -17,6 +17,7 @@ class Game
     player_1 ? @player_1 = player_1 : @player_1 = Human.new("X")
     player_2 ? @player_2 = player_2 : @player_2 = Human.new("O")
     board ? @board = board : @board = Board.new
+    @moves = []
   end
 
   def play
