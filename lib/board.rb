@@ -22,7 +22,7 @@ class Board
   end
 
   def full?
-    !cells.include?(" ")
+    cells.all? {|token| token != " "}
   end
 
   def turn_count

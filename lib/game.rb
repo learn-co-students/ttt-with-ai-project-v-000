@@ -1,6 +1,3 @@
-require "pry"
-require_relative "../config/environment.rb"
-
 class Game
 
   attr_accessor :board, :player_1, :player_2, :winner
@@ -33,7 +30,7 @@ class Game
   end
 
   def over?
-    self.board.full?
+    draw? || won?
   end
 
   def has_combo(player)
@@ -47,7 +44,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    self.board.full? && !won?
   end
 
   def winner
@@ -58,38 +55,21 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    # input = gets.strip
     move = current_player.move
-    if board.valid_move?(move)
-      board.update(move,current_player)
-      # binding.pry
-    else
+    if !board.valid_move?(move)
       turn
     end
-    # board.update(move, current_player)
-    # current_player.move(input)
+    board.update(move,current_player)
   end
 
   def play
-    if over?
-    else
+    while !over?
       turn
     end
-    # while !over?
-    #   binding.pry
-    #   turn
-    # end
-    # over?
-    # until over?
-    #   play
-    # end
-  #   if won?
-  #     puts "Congratulations #{self.winner}!"
-  #   else
-  #     puts "Cats Game!"
-  #   end
+    if won?
+      puts "Congratulations #{self.winner}!"
+    else
+      puts "Cats Game!"
+    end
   end
-  
-  
 end
-
