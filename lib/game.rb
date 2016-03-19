@@ -54,12 +54,14 @@ class Game
   end
 
   def turn
+    board.display
     puts "Please enter 1-9:"
-    move = current_player.move
+    move = current_player.move(board)
     if !board.valid_move?(move)
       turn
     end
     board.update(move,current_player)
+    board.display
   end
 
   def play
@@ -72,4 +74,6 @@ class Game
       puts "Cats Game!"
     end
   end
+
+  # def start
 end

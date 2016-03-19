@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def set_up
+  puts "How many players?"
+  players = gets.strip.to_i
+  if players == 0
+    game = Game.new(Computer.new("X"), Computer.new("O"))
+    game.play
+  elsif players == 1
+    puts "What is your token?"
+    token1 = gets.strip
+    puts "What is the computer's token?"
+    token2 = gets.strip
+    puts "Good luck!"
+    game = Game.new(Human.new(token1), Computer.new(token2))
+    game.play
+  elsif players == 2
+    puts "What is Player 1's token?"
+    token1 = gets.strip
+    puts "What is Player 2's token?"
+    token2 = gets.strip
+    puts "Good luck!"
+    game = Game.new(Human.new(token1), Human.new(token2))
+    game.play
+  else
+    puts "Not a valid entry."
+    set_up
+  end
+end
+
+def play
+  puts "Welcome to TicTacToe!"
+  set_up
+  puts "Would you like to play again? (Y/N)"
+  answer = gets.strip
+  if answer == "Y"
+    play
+  else
+    puts "Goodbye"
+  end
+end
+
+play
