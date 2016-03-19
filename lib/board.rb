@@ -1,7 +1,6 @@
 class Board
 
  attr_accessor :cells, :moves
- attr_reader :current_player
 
   def initialize(cells = Array.new(9, " "))
     @cells = cells
