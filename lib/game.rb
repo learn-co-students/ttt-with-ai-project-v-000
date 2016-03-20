@@ -88,15 +88,18 @@ class Game
   def self.one_player_game
     puts "Choose your weapon: X or O. If choose X, you can go first."
         user_input = gets.strip
-          until user_input == "X" || user_input == "O" || user_input == "x" || user_input == "o"
-            puts "X or O, silly! Please choose again!"
-            user_input = gets.strip
-          end
+        until user_input == "exit"
           if user_input == "X" || user_input == "x"
             self.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new).play
           elsif user_input == "O" || user_input == "o"
             self.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new).play
+          elsif user_input == "exit"
+            goodbye
+          else
+            puts "X or O, silly! Please choose again!"
+            user_input = gets.strip
           end
+        end
   end
 
   def self.two_player_game
@@ -114,14 +117,13 @@ class Game
   end
 
   def self.run
-    user_input = ""
-    while user_input != "exit" 
-      puts "Hey hey! Let's play Tic Tac Toe like it's 1995!"
-      puts "What's your name(s)?"
-      user_input = gets.strip
-      puts "Hi #{user_input}! How many players are we having?"
-      puts "0 | 1 | 2 ------------------------ exit"
-      user_input = gets.strip
+    puts "Hey hey! Let's play Tic Tac Toe like it's 1995!"
+    puts "What's your name(s)?"
+    user_input = gets.strip
+    puts "Hi #{user_input}! How many players are we having?"
+    puts "0 | 1 | 2 ------------------------ exit"
+    user_input = gets.strip
+    until user_input == "exit" 
 
       if user_input == "0"
         zero_player_game
