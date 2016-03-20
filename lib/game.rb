@@ -47,13 +47,15 @@ class Game
   end
 
   def turn
+    #had to make designate this new variable bc without it current_player.token was returning the opposite token.
+    current = current_player
     current_move = current_player.move(@board)
     if @board.valid_move?(current_move)
       @board.update(current_move, current_player)
       @board.display
-      puts " "
-      puts "Player #{current_player.token} made a move."
-      puts " "
+      puts ""
+      puts "Player #{current.token} made a move."
+      puts ""
     else 
       turn
     end
@@ -66,12 +68,22 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
+      puts ""
     elsif draw?
-      puts " "
       puts "Cats Game!"
       puts " "
     end
   end
 
+  def numbered_board
+    puts "Numbers 1-9 refer to a position on the board."
+    puts ""
+    puts " 1 | 2 | 3 "
+    puts "-----------"
+    puts " 4 | 5 | 6 "
+    puts "-----------"
+    puts " 7 | 8 | 9 "
+    puts ""
+end
   
 end

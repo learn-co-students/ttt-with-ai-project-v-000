@@ -5,8 +5,10 @@ require_relative '../config/environment'
 puts "Let's play Tic Tac Toe!"
 
 input = ""
-while input
-puts "Pick a number to choose a player mode: 0 (AI vs AI), 1 (player vs AI), 2 (player vs player)"
+while input != "n"
+puts "Pick a number to choose a player mode:"
+puts "| 0 (AI vs AI) | 1 (player vs AI) | 2 (player vs player) |"
+
 input = gets.strip.to_i
 
 case input
@@ -14,12 +16,12 @@ when 0
   player_1 = Player::Computer.new("X")
   player_2 = Player::Computer.new("O")
 when 1
-  puts "Who should go first? (me or you)"
+  puts "Who should go first? (type 'human' or 'AI')"
   pick = gets.strip
-  if pick == "me"
+  if pick == "human"
     player_1 = Player::Human.new("X")
     player_2 = Player::Computer.new("O")
-  else
+  elsif pick == "AI" || pick == "ai"
     player_1 = Player::Computer.new("X")
     player_2 = Player::Human.new("O")
   end
@@ -29,7 +31,10 @@ when 2
 end
 
 game = Game.new(player_1, player_2)
-game.board.display
+game.numbered_board
 game.play
 
+puts "Play again? (type 'y' or 'n')"
+input = gets.strip
 end
+puts "Goodbye!"
