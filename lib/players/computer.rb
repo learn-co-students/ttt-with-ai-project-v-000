@@ -29,13 +29,9 @@ class Player::Computer < Player
   #detects two in a row on the board
   def combo_detected(board, token)
     Game::WIN_COMBINATIONS.find do |combo|
-      num1 = board.cells[combo[0]]
-      num2 = board.cells[combo[1]]
-      num3 = board.cells[combo[2]]
-
-      (num1 == token && num1 == num2 && num3 == " ") ||
-      (num1 == token && num1 == num3 && num2 == " ") ||
-      (num2 == token && num2 == num3 && num1 == " ")
+      (board.cells[combo[0]] == token && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " ") ||
+      (board.cells[combo[0]] == token && board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " ") ||
+      (board.cells[combo[1]] == token && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " ") 
     end
   end
 
