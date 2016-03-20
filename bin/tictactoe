@@ -1,7 +1,7 @@
 # !/usr/bin/env ruby
 
 require_relative '../config/environment'
-
+puts ""
 puts "Let's play Tic Tac Toe!"
 puts ""
 input = ""
