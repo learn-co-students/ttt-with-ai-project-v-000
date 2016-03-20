@@ -13,33 +13,41 @@ class Game
     [6,4,2]
   ]
   
-  def initialize(player_1 = nil, player_2 = nil, board = nil)
+  def initialize(player_1 = nil, player_2 = nil, board)
     player_1 ? @player_1 = player_1 : @player_1 = Human.new("X")
     player_2 ? @player_2 = player_2 : @player_2 = Human.new("O")
-    board ? @board = board : @board = Board.new
+    @board = board
   end
 
-  def play
-    until over?
-      turn
-      puts @board.display
-    end
+  # def play
+  #   until over?
+  #     turn
+  #     puts @board.display
+  #   end
 
-    puts winner ? "Congratulations #{winner}!" : "Cats Game!"
-  end
+  #   puts winner ? "Congratulations #{winner}!" : "Cats Game!"
+  # end
 
   def turn
-    puts "#{current_player.token}, please choose a move? [1 to 9]"
-    input = current_player.move
-    if @board.valid_move?(input) 
-      @board.update(input, current_player)
-    else
-      puts "Sorry, that's not a valid move! Try again."
-      turn
+    # New code, 'play' above is removed.
+    #
+    if over?
+      puts winner ? "Congratulations #{winner}!" : "Cats game!"
+      return
     end
-  end
+    
+    @board = current_player.move(@board)
+    @board.display
+    turn
 
-  def players
+    # puts "#{current_player.token}, please choose a move? [1 to 9]"
+    # input = current_player.move
+    # if @board.valid_move?(input)
+    #   @board.update(input, current_player)
+    # else
+    #   puts "Sorry, that's not a valid move! Try again."
+    #   turn
+    # end
   end
 
   def current_player

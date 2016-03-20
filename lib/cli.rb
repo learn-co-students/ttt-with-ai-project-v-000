@@ -4,7 +4,8 @@ class CLI
   def call
     puts "Welcome to Tic tac toe!\n\n"
     get_players
-    Game.new(@player_one, @player_two).play
+    board = GameTree.new.generate
+    Game.new(@player_one, @player_two, board).turn
     play_again?
   end
 
