@@ -39,7 +39,8 @@ class Board
 		end
 	  count
 	end
-
+    
+    #position is a num from 1-9 (not the board index)
 	def taken?(position)
 		self.cells[position.to_i-1] == "X" || self.cells[position.to_i-1] == "O"
 	end

@@ -1,16 +1,17 @@
 class Game
 
   attr_accessor :board, :player_1, :player_2
-  attr_reader
-  attr_writer
 
   WIN_COMBINATIONS = [
+    #horizontal combos
     [0,1,2], 
     [3,4,5],
     [6,7,8], 
+    #verical combos
     [0,3,6], 
     [1,4,7], 
     [2,5,8],
+    #diagonal combos
     [2,4,6],
     [0,4,8]
 ]
@@ -22,7 +23,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+    board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def over?
@@ -42,18 +43,13 @@ class Game
   end
 
   def winner
-    win_token = won?
-
-    if won?
-      @board.cells[win_token[0]]
-    else 
-      nil
-    end
+    won? ? @board.cells[won?[0]] : nil
   end
 
   def turn
     current_move = current_player.move(@board)
     if @board.valid_move?(current_move)
+      puts "Player #{current_player.token} made a move."
       @board.update(current_move, current_player)
       @board.display
     else 
