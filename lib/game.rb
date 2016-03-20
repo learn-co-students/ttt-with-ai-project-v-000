@@ -57,15 +57,20 @@ class Game
 
 
   def turn
-    user_input = self.current_player.move(@board)
-    if @board.valid_move?(user_input)
-      @board.update(user_input, current_player)
+    make_move = current_player.move(@board)
+    if !@board.valid_move?(make_move) 
+      puts "Invalid move, silly!"
+      turn
     else
-      puts "Invalid move! Silly!"
-      self.turn
+      player = current_player
+      @board.update(make_move, current_player)
+      puts " "
+      puts "- - - - - - - - - - - - - "
+      puts "Player #{player.token} make move at #{make_move.to_s}!"
+      @board.display
+      puts "- - - - - - - - - - - - - "
+      puts " "
     end
-    @board.display
-    puts "Booya!"
   end
 
   def play
@@ -88,18 +93,15 @@ class Game
   def self.one_player_game
     puts "Choose your weapon: X or O. If choose X, you can go first."
         user_input = gets.strip
-        until user_input == "exit"
+          until user_input == "X" || user_input == "O" || user_input == "x" || user_input == "o"
+            puts "X or O, silly! Please choose again!"
+            user_input = gets.strip
+          end
           if user_input == "X" || user_input == "x"
             self.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new).play
           elsif user_input == "O" || user_input == "o"
             self.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new).play
-          elsif user_input == "exit"
-            goodbye
-          else
-            puts "X or O, silly! Please choose again!"
-            user_input = gets.strip
           end
-        end
   end
 
   def self.two_player_game

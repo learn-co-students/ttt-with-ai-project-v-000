@@ -11,8 +11,22 @@ class Computer < Player
   [6,4,2]]
 
   def move(board)
-    win_it(board) || block_it(board) || most_strategic(board) || random_move(board)
+    best_move(board).to_s
   end
+
+  def best_move(board)
+    available_move = []
+    board.cells.each_with_index do |cell, idx|
+      if cell == " "
+        available_move << idx
+      end
+    end
+    if available_move.size > 6
+     most_strategic(board) || super_defense(board) || random_move(board)
+    else
+    win_it(board) || block_it(board) || most_strategic(board) || random_move(board)
+    end
+  end 
 
   def random_move(board)
     #return a random among the available move
@@ -54,8 +68,20 @@ class Computer < Player
     end 
   end
 
+  def super_defense(board)
+    if board.cells[0] == self.nemesis && board.cells[8] == " "
+      9
+    elsif board.cells[8] == self.nemesis && board.cells[0] == " "
+      1
+    elsif board.cells[2] == self.nemesis && board.cells[6] == " "
+      7
+    elsif board.cells[6] == self.nemesis && board.cells[2] == " "
+      3 
+    end 
+  end
+
   def most_strategic(board)
-    [1,3,7,9,5].find {|i| !board.taken?(i)}
+    [5,1,3,7,9].find {|i| !board.taken?(i)}
   end
 
 end 
