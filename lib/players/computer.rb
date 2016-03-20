@@ -1,30 +1,30 @@
 require 'pry'
 class Player::Computer < Player
 
-	def move(board)
+  def move(board)
     if !board.taken?("5")
       "5"
     else
       win!(board) || block!(board) || corner(board) || whatever
     end
- 	end
+  end
 
   #make a move in the corners or the center
-	def corner(board)
-		[1,3,7,9].find {|index| !board.taken?(index)}
-	end
+  def corner(board)
+    [1,3,7,9].find {|index| !board.taken?(index)}
+  end
 
-	def opp_token
-	  if token == "X"
-	  	"O" # == opp_token
-	  else
-	  	"X" # == opp_token if token == "O"
-	  end
-	end
+  def opp_token
+    if token == "X"
+      "O" # == opp_token
+    else
+      "X" # == opp_token if token == "O"
+    end
+  end
 
-	def whatever
-	  [1,2,3,4,5,6,7,8,9].sample
-	end
+  def whatever
+    [1,2,3,4,5,6,7,8,9].sample
+  end
 
   #detects two in a row on the board
   def combo_detected(board, token)
