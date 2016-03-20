@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
 puts "Let's play Tic Tac Toe!"
-
+puts ""
 input = ""
 while input != "n"
 puts "Pick a number to choose a player mode:"
