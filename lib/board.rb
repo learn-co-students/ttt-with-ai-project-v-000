@@ -9,7 +9,7 @@ class Board
   end
 
   def update(input, player)
-    @cells[input.to_i - 1] = player.token if valid_move?(input) 
+    @cells[input.to_i - 1] = player.token if valid_move?(input)
   end
 
   def display
@@ -18,6 +18,7 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts "\n=============\n"
   end
 
   def position(input)
