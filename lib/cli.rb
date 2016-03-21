@@ -10,28 +10,34 @@ class CLI
   end
 
   def get_players
-    puts "Please select the number of human players or type exit."
     input = gets.strip.downcase
-
     if input == "exit"
       goodbye
     elsif valid_players?(input)
       create_players(input)
+      puts "\nLoading...\n\n"
     else
-      puts "Sorry, that's not a valid number of human players!\n\n"
+      puts "I don't understand you. Try again or type exit to quit."
       get_players
     end
   end
 
   def welcome
-    puts "\n=============\n\n"
-    puts "Welcome to Tic tac toe!"
-    puts "\n=============\n\n"
+    puts ""
+    puts "           TIC TAC TOE"
+    puts ""
+    puts "          Choose a game:     "
+    puts ""
+    puts "> Enter 2 for two players."
+    puts "> Enter 1 to play the computer."
+    puts "> Enter 0 to let the computer play itself."
+    puts "> Enter `exit` to quit now."
+    puts ""
   end
 
   def goodbye
     puts "Goodbye!"
-    exit
+    exit 0
   end
 
   def play_again?
