@@ -19,63 +19,79 @@ class Game
 
 
   def current_player
-    if board.turn_count % 2 == 0
-      player_1
+    if @board.turn_count % 2 == 0
+      @player_1
     else
-      player_2
+      @player_2
     end
   end
 
   def over?
-    self.draw? || self.won?
+    draw? || won?
   end
 
   def won?
     WIN_COMBINATIONS.any? do |combi|
-      board.cells[combi[0]] == "X" && board.cells[combi[1]] == "X" && board.cells[combi[2]] == "X" ||
-      board.cells[combi[0]] == "O" && board.cells[combi[1]] == "O" && board.cells[combi[2]] == "O"
+      @board.cells[combi[0]] == "X" && @board.cells[combi[1]] == "X" && @board.cells[combi[2]] == "X" ||
+      @board.cells[combi[0]] == "O" && @board.cells[combi[1]] == "O" && @board.cells[combi[2]] == "O"
     end
   end
 
 
   def draw?
-    !(self.won?) && board.full?
+    !won? && @board.full?
   end
 
   def winner
     winner = nil
-    if self.won?
+    if won?
       WIN_COMBINATIONS.any? do |combi|
-        if board.cells[combi[0]] == "X" && board.cells[combi[1]] == "X" && board.cells[combi[2]] == "X"
+        if @board.cells[combi[0]] == "X" && @board.cells[combi[1]] == "X" && @board.cells[combi[2]] == "X"
           winner = "X"
-        elsif board.cells[combi[0]] == "O" && board.cells[combi[1]] == "O" && board.cells[combi[2]] == "O"
+        elsif @board.cells[combi[0]] == "O" && @board.cells[combi[1]] == "O" && @board.cells[combi[2]] == "O"
           winner = "O"
         end
       end
     end
     winner
   end
+=begin - this is from the solution branch, 
+wont work properly for ours since our other code is a little different, 
+but something to take note of
 
-
+  def turn
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+    end
+  end
+=end
   def turn  # <= this isn't passing
-
     ans = self.current_player.move
-    unless board.valid_move?(ans)
+    unless @board.valid_move?(ans)
       "invalid"
       ans = self.current_player.move
     else
-      board.update(ans, self.current_player)
-      self.play
+      @board.update(ans, self.current_player)
+      play
     end
   end
 
   def play
-    unless self.over?
-      self.turn
+    unless over?
+      turn
     end
-    if self.draw?
+    if draw?
       puts "Cats Game!"
-    elsif self.won?
+    elsif won?
       puts "Congratulations #{winner}!"
     end
   end
