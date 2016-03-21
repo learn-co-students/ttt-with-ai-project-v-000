@@ -26,3 +26,10 @@ GameState...
 
 MOVE IT INTO THE PLAYER MOVE METHOD
   -> Move method returns the new @board object.
+
+Ok the ranking thing needs to be rewritten, so that it can see the player... right now it assumes it is X, so when it is O it behaves badly.
+
+SO thoughts -> 
+
+#intermediate_rank
+if current_layer

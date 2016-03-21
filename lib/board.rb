@@ -1,6 +1,7 @@
 class Board
 
  attr_accessor :cells, :moves
+ attr_reader :rank
 
   def initialize(cells = Array.new(9, " "))
     @cells = cells
@@ -45,5 +46,51 @@ class Board
 
   def reset!
     @cells = Array.new(9, " ")
+  end
+
+  # This needs refactoring
+
+  def rank(ai_token)
+    @rank ||= final_state_rank(ai_token) || intermediate_state_rank(ai_token)
+  end
+
+  def final_state_rank(ai_token)
+    if over?
+      return 0 if draw?
+      winner == ai_token ? 1 : -1
+    end
+  end
+
+  def final_state?
+    winner || draw?
+  end
+
+  def intermediate_state_rank(ai_token)
+    # recursion, baby
+    ranks = @moves.collect {|board| board.rank(ai_token)}
+    if current_player == ai_token
+      ranks.max
+    else
+      ranks.min
+    end
+  end
+
+  def over?
+    draw? || won?
+  end
+
+  def draw?
+    full? && !won?
+  end
+
+  def won?
+    Game::WIN_COMBINATIONS.detect do |combo|
+      arr = combo.map {|c| @cells[c]}.sort
+      !arr.include?(" ") && arr.first == arr.last
+    end
+  end
+
+  def winner
+   won? ? @cells[won?[0]] : nil
   end
 end

@@ -17,4 +17,7 @@ describe 'Player::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+
+  describe '#intermediate_rank' do
+  end
 end
