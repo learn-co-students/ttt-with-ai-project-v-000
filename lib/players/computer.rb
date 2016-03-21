@@ -12,19 +12,16 @@ class Computer < Player
   ]
   
 
-      def move(board)
+    def move(board)
       @place = 0
-      @count = 0
     WIN_COMBINATIONS.each do |wincombo|
       array = [ board.cells[wincombo[0]] ,  board.cells[wincombo[1]], board.cells[wincombo[2]] ]
 
       if array.include?(" ") && array.count("X") == 2 
-       		@place += wincombo[array.index(" ")]
-       		@place += @count + 1
+       		@place += wincombo[array.index(" ")] + 1
          break
       elsif array.include?(" ") && array.count("O") == 2 
-      	    @place += wincombo[array.index(" ")]
-       		@place += @count + 1
+      	  @place += wincombo[array.index(" ")] + 1
        		break
       end
 
@@ -33,6 +30,7 @@ class Computer < Player
         @place = rand(1..9)
 
       end
-      @place
+      @place.to_s
     end
+
 end

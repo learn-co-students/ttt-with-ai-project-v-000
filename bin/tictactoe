@@ -2,5 +2,4 @@
 
 require_relative '../config/environment'
 require_relative '../lib/game.rb'
-puts "Welcome To Tictactoe"
 Game.new_game

@@ -11,27 +11,13 @@ class Game
     [0,4,8],
     [6,4,2],
   ]
+    def initialize(player_1=Human.new("X"),player_2=Human.new("O"),board=Board.new)
+	    @player_1 = player_1
+	    @player_2 = player_2
+	    @board = board
+    end
 
-  def initialize(player_1=Human.new("X"),player_2=Human.new("O"),board=Board.new)
-    @player_1 = player_1
-    @player_2 = player_2
-    @board = board
-  end
 
-
-  def board
-    @board
-  end
-
-  def player_1
-    @player_1
-  end
-
-  def player_2
-    @player_2
-  end
-
-  # Counts tokens to calculate whose turn
   def current_player
     if @board.turn_count % 2 == 0
       @player_1
@@ -40,14 +26,16 @@ class Game
     end
   end
 
+
   def over?
-    @board.full?
+    if @board.full? || won? || draw?
+    	true
   end
+end
 
-  def won?
 
+ def won?
   @winner = nil
-
         WIN_COMBINATIONS.each do |wincombo|
           if wincombo.all? {|position| @board.cells[position] == "X"}
             @winner = "X"
@@ -62,21 +50,22 @@ class Game
         end
   end
 
-  def draw?
-    if self.over? && self.won? == false
-      true
-    end
-  end
-
-  #Counts number of each token & uses won? method to find winner
   def winner
     if won?
       @winner
     end
   end
 
-    # Uses player move method to get move and update if valid else repeat turn method
+  def draw?
+    if @board.full? && self.won? == false
+      true
+     else
+     	false
+    end
+  end
+
     def turn
+    self.board.display
      move = current_player.move(@board) 
      if @board.valid_move?(move)
        @board.update(move,current_player)
@@ -86,33 +75,21 @@ class Game
     end
 
     def play
-        self.board.display
-        if won?
+       until over?
+  	      turn
+       end
+         if won?
+           self.board.display
           puts "Congratulations #{winner}!"
           play_again
         elsif draw?
+        	 self.board.display
           puts "Cats Game!" 
           play_again  
-        else
-          turn
-          play
         end
     end
 
-    def play_again
-      puts "Would you like to play again Yes or No"
-      input =gets.chomp.upcase
-        if input == "YES"
-          Game.new_game
-        elsif input == "NO"
-          puts "Goodbye!"
-        else
-          play_again
-        end
-
-    end
-
-    def self.new_game
+      def self.new_game
       game = self.new
       puts "How many players 0,1 or 2?"
       players = gets.chomp
@@ -139,19 +116,19 @@ class Game
       else  
         self.new_game
       end  
-        
+     end
+
+     def play_again
+      puts "Would you like to play again Y/N"
+      input =gets.chomp.upcase
+        if input == "Y"
+          Game.new_game
+        elsif input == "N"
+          puts "Goodbye!"
+        else
+          play_again
+        end
     end
 
 
-
-
-
-  
-
-
-end
-
-
-
-
-
+ end
