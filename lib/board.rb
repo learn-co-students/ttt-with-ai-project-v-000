@@ -90,10 +90,6 @@ class Board
     end
   end
 
-  # def final_state?
-  #   winner || draw?
-  # end
-
   def intermediate_state_rank
     ranks = @moves.collect {|board| board.rank}
     current_player == 'X' ? ranks.max : ranks.min
