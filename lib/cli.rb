@@ -2,10 +2,10 @@ class CLI
   attr_reader :player_one, :player_two, :board
 
   def call
-    puts "Welcome to Tic tac toe!\n\n"
+    welcome
     get_players
     @board ||= GameTree.new.generate
-    Game.new(@player_one, @player_two, @board).turn
+    Game.new(player_one: @player_one, player_two: @player_two, board: @board).turn
     play_again?
   end
 
@@ -21,6 +21,12 @@ class CLI
       puts "Sorry, that's not a valid number of human players!\n\n"
       get_players
     end
+  end
+
+  def welcome
+    puts "\n=============\n\n"
+    puts "Welcome to Tic tac toe!"
+    puts "\n=============\n\n"
   end
 
   def goodbye

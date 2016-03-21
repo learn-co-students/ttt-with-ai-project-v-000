@@ -1,10 +1,10 @@
 class Game
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_one, :player_two
 
-  def initialize(player_1 = nil, player_2 = nil, board)
-    player_1 ? @player_1 = player_1 : @player_1 = Human.new("X")
-    player_2 ? @player_2 = player_2 : @player_2 = Human.new("O")
+  def initialize(player_one:, player_two:, board:)
+    @player_one = player_one
+    @player_two = player_two
     @board = board
   end
 
@@ -19,6 +19,6 @@ class Game
   end
 
   def current_player
-    @board.current_player == @player_1.token ? @player_1 : @player_2
+    @board.current_player == @player_one.token ? @player_one : @player_two
   end
 end
