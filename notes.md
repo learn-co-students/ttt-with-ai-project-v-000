@@ -33,3 +33,10 @@ SO thoughts ->
 
 #intermediate_rank
 if current_layer
+
+
+
+
+WHAT IF
+
+We generate a tree ASSUMING the AI is "X" and its RANK... and then inverting the rank if necessary depending on which AI is going?

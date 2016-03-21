@@ -1,11 +1,11 @@
 class CLI
-  attr_reader :player_one, :player_two
+  attr_reader :player_one, :player_two, :board
 
   def call
     puts "Welcome to Tic tac toe!\n\n"
     get_players
-    board = GameTree.new.generate
-    Game.new(@player_one, @player_two, board).turn
+    @board ||= GameTree.new.generate
+    Game.new(@player_one, @player_two, @board).turn
     play_again?
   end
 
@@ -39,6 +39,9 @@ class CLI
 
   def create_players(players)
     case players
+    when "2"
+      @player_one = Human.new('X')
+      @player_two = Human.new('O')
     when "1"
       @player_one = Human.new('X')
       @player_two = Computer.new('O')

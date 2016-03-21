@@ -50,14 +50,14 @@ class Board
 
   # This needs refactoring
 
-  def rank(ai_token)
-    @rank ||= final_state_rank(ai_token) || intermediate_state_rank(ai_token)
+  def rank
+    @rank ||= final_state_rank || intermediate_state_rank
   end
 
-  def final_state_rank(ai_token)
+  def final_state_rank
     if over?
       return 0 if draw?
-      winner == ai_token ? 1 : -1
+      winner == 'X' ? 1 : -1
     end
   end
 
@@ -65,10 +65,10 @@ class Board
     winner || draw?
   end
 
-  def intermediate_state_rank(ai_token)
+  def intermediate_state_rank
     # recursion, baby
-    ranks = @moves.collect {|board| board.rank(ai_token)}
-    if current_player == ai_token
+    ranks = @moves.collect {|board| board.rank}
+    if current_player == 'X'
       ranks.max
     else
       ranks.min
