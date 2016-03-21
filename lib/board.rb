@@ -49,33 +49,6 @@ class Board
     @cells = Array.new(9, " ")
   end
 
-  # This needs refactoring
-
-  def rank
-    @rank ||= final_state_rank || intermediate_state_rank
-  end
-
-  def final_state_rank
-    if over?
-      return 0 if draw?
-      winner == 'X' ? 1 : -1
-    end
-  end
-
-  def final_state?
-    winner || draw?
-  end
-
-  def intermediate_state_rank
-    # recursion, baby
-    ranks = @moves.collect {|board| board.rank}
-    if current_player == 'X'
-      ranks.max
-    else
-      ranks.min
-    end
-  end
-
   def over?
     draw? || won?
   end
@@ -93,5 +66,25 @@ class Board
 
   def winner
    won? ? @cells[won?[0]] : nil
+  end
+
+  def rank
+    @rank ||= final_state_rank || intermediate_state_rank
+  end
+
+  def final_state_rank
+    if over?
+      return 0 if draw?
+      winner == 'X' ? 1 : -1
+    end
+  end
+
+  # def final_state?
+  #   winner || draw?
+  # end
+
+  def intermediate_state_rank
+    ranks = @moves.collect {|board| board.rank}
+    current_player == 'X' ? ranks.max : ranks.min
   end
 end
