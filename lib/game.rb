@@ -19,11 +19,7 @@ class Game
 
 
   def current_player
-    if @board.turn_count % 2 == 0
-      @player_1
-    else
-      @player_2
-    end
+    board.turn_count % 2 == 0 ? self.player_1 : self.player_2
   end
 
   def over?
@@ -31,57 +27,29 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.any? do |combi|
-      @board.cells[combi[0]] == "X" && @board.cells[combi[1]] == "X" && @board.cells[combi[2]] == "X" ||
-      @board.cells[combi[0]] == "O" && @board.cells[combi[1]] == "O" && @board.cells[combi[2]] == "O"
+    combo_found = nil
+    combo_found = WIN_COMBINATIONS.find do |combo|
+      combo.all?{|space| board.cells[space] == "X"} || combo.all?{|space| board.cells[space] == "O"}
     end
+    combo_found
   end
 
 
   def draw?
-    !won? && @board.full?
+    !won? && board.full?
   end
 
   def winner
-    winner = nil
-    if won?
-      WIN_COMBINATIONS.any? do |combi|
-        if @board.cells[combi[0]] == "X" && @board.cells[combi[1]] == "X" && @board.cells[combi[2]] == "X"
-          winner = "X"
-        elsif @board.cells[combi[0]] == "O" && @board.cells[combi[1]] == "O" && @board.cells[combi[2]] == "O"
-          winner = "O"
-        end
-      end
-    end
-    winner
+    won? ? board.cells[won?[0]] : nil
   end
-=begin - this is from the solution branch, 
-wont work properly for ours since our other code is a little different, 
-but something to take note of
 
-  def turn
-    player = current_player
-    current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
-      turn
-    else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts "\n\n"
-    end
-  end
-=end
   def turn  # <= this isn't passing
-    ans = self.current_player.move
-    unless @board.valid_move?(ans)
-      "invalid"
-      ans = self.current_player.move
+    input = current_player.move(board).to_i
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
     else
-      @board.update(ans, self.current_player)
-      play
+      self.turn
     end
   end
 

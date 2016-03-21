@@ -26,8 +26,6 @@ class Board
     @cells.count{|token| token == "X" || token == "O"}
   end
 
-  input = [input.to_i-1]
-
   def valid_move?(input)
     input.to_i.between?(1,9) && !taken?(input)
   end
@@ -37,11 +35,7 @@ class Board
   end
 
   def taken?(input)
-    if (@cells[input.to_i-1] == "X" || @cells[input.to_i-1] == "O")
-      return true
-    else
-      return false
-    end
+    position(input) == "X" || position(input) == "O"
   end
 
   def update(input, user)
