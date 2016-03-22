@@ -19,47 +19,64 @@ class Game
 
 
   def current_player
-    board.turn_count % 2 == 0 ? self.player_1 : self.player_2
+    if board.turn_count % 2 == 0
+      player_1
+    else
+      player_2
+    end
   end
 
   def over?
-    draw? || won?
+    self.draw? || self.won?
   end
 
   def won?
-    combo_found = nil
-    combo_found = WIN_COMBINATIONS.find do |combo|
-      combo.all?{|space| board.cells[space] == "X"} || combo.all?{|space| board.cells[space] == "O"}
+    WIN_COMBINATIONS.any? do |combi|
+      board.cells[combi[0]] == "X" && board.cells[combi[1]] == "X" && board.cells[combi[2]] == "X" ||
+      board.cells[combi[0]] == "O" && board.cells[combi[1]] == "O" && board.cells[combi[2]] == "O"
     end
-    combo_found
   end
 
 
   def draw?
-    !won? && board.full?
+    !(self.won?) && board.full?
   end
 
   def winner
-    won? ? board.cells[won?[0]] : nil
+    winner = nil
+    if self.won?
+      WIN_COMBINATIONS.any? do |combi|
+        if board.cells[combi[0]] == "X" && board.cells[combi[1]] == "X" && board.cells[combi[2]] == "X"
+          winner = "X"
+        elsif board.cells[combi[0]] == "O" && board.cells[combi[1]] == "O" && board.cells[combi[2]] == "O"
+          winner = "O"
+        end
+      end
+    end
+    winner
   end
 
-  def turn  # <= this isn't passing
-    input = current_player.move(board).to_i
-    if board.valid_move?(input)
-      board.update(input, current_player)
-      board.display
-    else
-      self.turn
+
+  def turn
+    first = self.current_player
+    action = self.current_player.move
+    until board.valid_move?(action)
+      "invalid"
+      action = self.current_player.move
     end
+    board.update(action, self.current_player)
+    second = self.current_player
+    #turn == "X" ? "O" : "X"
   end
+
 
   def play
-    unless over?
-      turn
+    until self.over?
+      self.turn
     end
-    if draw?
+    if self.draw?
       puts "Cats Game!"
-    elsif won?
+    elsif self.won?
       puts "Congratulations #{winner}!"
     end
   end
