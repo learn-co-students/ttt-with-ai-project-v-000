@@ -17,9 +17,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
   end
-  def winner
-  end
-
   def turn_count
     self.board.cells.count{|token| token == "X" || token == "O"}
   end
@@ -41,41 +38,28 @@ class Game
     end
   end
   def full?
-    self.board.cells.all? do |cell|
-      cell == "X" || cell == "O"
-    end
+    self.board.cells.all? {|cell| cell == "X" || cell == "O"}
   end
-
   def draw?
-    won? == nil && full? == true ? true : false
+    won?.nil? && full?
   end
-
   def over?
-    draw? == true || won? != nil ? true : false
+    draw? || won? 
   end
   def winner
-    if won? != nil
-      won?.each do |win_num|
-        return self.board.cells[win_num][0]
-      end
-    end
+    won?.each {|num| return self.board.cells[num][0]} unless won?.nil? 
   end
-
   def turn
     move = current_player.move(@board)
     board.valid_move?(move) ? board.update(move, current_player) : turn
     current_player
   end
-
   def play
-    until over?
-      turn
-    end
-    if draw? == true
-      puts "Cats Game!"
-    else
-      puts "Congratulations #{winner}!"
-    end
+    turn until over?
+    puts "Cats Game!" if draw?
+    puts "Congratulations #{winner}!" unless draw?
   end
-
+  def self.run
+    puts "Welcome to Tic Tac Toe!!!!"
+  end
 end

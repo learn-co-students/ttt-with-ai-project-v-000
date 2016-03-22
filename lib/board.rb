@@ -23,7 +23,6 @@ class Board
   def position(board)
     @cells[board.to_i - 1]
   end
-
   def full?
     @cells.all? {|cell| cell == "X" || cell == "O"}
   end
@@ -31,8 +30,7 @@ class Board
     @cells.count{|token| token == "X" || token == "O"}
   end
   def taken?(position)
-    position = position.to_i - 1
-    !(@cells[position].nil? || @cells[position] == " ")
+    !(@cells[position.to_i - 1].nil? || @cells[position.to_i - 1] == " ")
   end
   def valid_move?(position)
     return if (position.to_i - 1 < 0)
