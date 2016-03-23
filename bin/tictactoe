@@ -2,6 +2,7 @@
 
 require_relative '../config/environment'
 
+<<<<<<< HEAD
 # puts "Welcome to Tic Tac Toe!"
 # game = Game.new
 # until game.won?
@@ -45,10 +46,42 @@ elsif type == "2"
   puts "Ok, 'X' goes first!"
   game = Game.new(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
   until game.won?
+=======
+puts "Welcome to Tic Tac Toe!"
+input = ""
+
+while input != "exit"
+  puts "How many humans will be playing? [0,1,2]: "
+  player_num = gets.strip.to_i
+
+  if player_num.to_i == 0
+    player1 = Player::Computer.new("X")
+    player2 = Player::Computer.new("O")
+  elsif player_num.to_i == 1
+    puts "Who is going first? You or the computer? [me][you]"
+    first = gets.strip
+    if first == "me"
+      player1 = Player::Human.new("X")
+      player2 = Player::Computer.new("O")
+    else
+      player1 = Player::Computer.new("X")
+      player2 = Player::Human.new("O")      
+    end
+  elsif player_num.to_i == 2
+      player1 = Player::Human.new("X")
+      player2 = Player::Human.new("O")
+  end
+
+  game = Game.new(player1, player2)
+>>>>>>> 1aa9885c38bf10cb9e48fbaa5706474c7633f387
   game.play
+
+  puts "Would you like to play again or exit? [play again][exit]"
+  input = gets.strip
 end
 end
 
+<<<<<<< HEAD
 play_again = ""
 until play_again.downcase == "n" || play_again.downcase == "no"
  puts "Would you like to play again?"
@@ -59,3 +92,6 @@ until play_again.downcase == "n" || play_again.downcase == "no"
    game.play
  end
 end
+=======
+
+>>>>>>> 1aa9885c38bf10cb9e48fbaa5706474c7633f387

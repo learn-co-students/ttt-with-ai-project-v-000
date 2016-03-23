@@ -9,7 +9,21 @@ class Computer < Player
     else
       self.opp_token = "X"
     end
-    self.valid_moves.sample
+    if board.cells[4] == !(taken?)
+      self.valid_move[5]
+    elsif corners(board) == !(taken?)
+      
+    else
+       self.valid_move.sample
+    end
+  end
+
+  #def comp_move(board)
+  #  corners(board) || win_computer(board) || block(board) || random
+  #end
+
+  def corners(board)
+    (board.cells[0] || board.cells[2] || board.cells[6] || board.cells[8]).sample
   end
 
 
