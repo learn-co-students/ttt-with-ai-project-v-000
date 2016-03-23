@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   WIN_COMBINATIONS = [
     [0,1,2], # Top row
@@ -31,4 +32,43 @@ class Game
   def over?
     won? || draw?
   end
+
+  def winner
+    if won? != nil
+      if self.board.cells[won?.first] == self.player_1.token
+        self.player_1.token
+      elsif self.board.cells[won?.first] == self.player_2.token
+        self.player_2.token
+      else
+        nil
+      end
+    end
+  end
+
+
+  def turn
+    player = current_player
+    move = player.move(@board)
+    if !@board.valid_move?(move)
+      turn
+    else
+      @board.display
+      @board.update(move, player)
+      puts "Updating Board: #{player.token} completed move at #{move}."
+      @board.display
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
+  end
+
 end

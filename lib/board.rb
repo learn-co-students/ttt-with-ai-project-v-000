@@ -32,7 +32,7 @@ class Board
     9-select_if_empty.length  
   end
   def taken?(position_number)
-    self.position(position_number) == " " ? (false) : (true)
+    self.position(position_number) == " " ? false : true
   end
   def valid_move?(move)
     move.to_i.between?(1, 9) && self.taken?(move) == false
