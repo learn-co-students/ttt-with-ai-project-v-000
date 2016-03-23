@@ -60,17 +60,15 @@ class Game
 
 
   def turn
-    first = self.current_player
-    action = self.current_player.move
-    #binding.pry
-    until board.valid_move?(action)
-      "invalid"
-      action = self.current_player.move
+    sleep(1)
+    input = current_player.move(board).to_i
+    # binding.pry
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      self.turn
     end
-    board.update(action, self.current_player)
-    board.display
-    second = self.current_player
-    #turn == "X" ? "O" : "X"
   end
 
 
