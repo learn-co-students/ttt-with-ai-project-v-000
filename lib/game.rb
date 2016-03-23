@@ -23,38 +23,33 @@ class Game
     WIN_COMBINATIONS.detect do |win_combination|
       @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
       @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-      self.board.taken?(win_combination[0])
+      @board.taken?(win_combination[0]+1)
     end
   end
   def draw?
     self.board.full? && !self.won? ? true : false
   end
+
   def over?
     won? || draw?
   end
 
   def winner
-    if won? != nil
-      if self.board.cells[won?.first] == self.player_1.token
-        self.player_1.token
-      elsif self.board.cells[won?.first] == self.player_2.token
-        self.player_2.token
-      else
-        nil
-      end
+    if winning_list = won?
+      @board.cells[winning_list.first]
+    else
     end
   end
 
-
   def turn
     player = current_player
-    move = player.move(@board)
-    if !@board.valid_move?(move)
+    this_move = player.move(@board)
+    if !@board.valid_move?(this_move)
       turn
     else
       @board.display
-      @board.update(move, player)
-      puts "Updating Board: #{player.token} completed move at #{move}."
+      @board.update(this_move, player)
+      puts "Updating Board: #{player.token} completed move at #{this_move}."
       @board.display
     end
   end
