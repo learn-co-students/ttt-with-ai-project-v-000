@@ -2,51 +2,6 @@
 
 require_relative '../config/environment'
 
-<<<<<<< HEAD
-# puts "Welcome to Tic Tac Toe!"
-# game = Game.new
-# until game.won?
-#   game.play
-# end
-
-# play_again = ""
-# until play_again.downcase == "n" || play_again.downcase == "no"
-#   puts "Would you like to play again?"
-#   play_again = gets.strip
-#   play_again.downcase == "y" || play_again.downcase == "yes"
-#   game = Game.new
-#   until game.won?
-#     game.play
-#   end
-# end
-
-puts "Welcome to TicTacToe!"
-puts "Would you like to play 0, 1, or 2 players?"
-type = gets.chomp
-if type == "0"
-  game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
-  until game.won?
-  game.play
-end
-elsif type == "1"
-  puts "Would you like to be 'X' or 'O'?"
-  pawn = gets.downcase.chomp
-  if pawn == "x"
-    game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
-    until game.won?
-    game.play
-   end  
-  elsif pawn == "o"
-    game = Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
-    until game.won?
-    game.play
-  end
-end
-elsif type == "2"
-  puts "Ok, 'X' goes first!"
-  game = Game.new(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
-  until game.won?
-=======
 puts "Welcome to Tic Tac Toe!"
 input = ""
 
@@ -73,25 +28,8 @@ while input != "exit"
   end
 
   game = Game.new(player1, player2)
->>>>>>> 1aa9885c38bf10cb9e48fbaa5706474c7633f387
   game.play
 
   puts "Would you like to play again or exit? [play again][exit]"
   input = gets.strip
 end
-end
-
-<<<<<<< HEAD
-play_again = ""
-until play_again.downcase == "n" || play_again.downcase == "no"
- puts "Would you like to play again?"
- play_again = gets.strip
- play_again.downcase == "y" || play_again.downcase == "yes"
- game = Game.new
- until game.won?
-   game.play
- end
-end
-=======
-
->>>>>>> 1aa9885c38bf10cb9e48fbaa5706474c7633f387
