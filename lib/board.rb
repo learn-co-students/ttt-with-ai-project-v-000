@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
 
   attr_accessor :cells
@@ -39,6 +41,7 @@ class Board
   end
 
   def update(input, user)
+     #binding.pry
     @cells[input.to_i-1] = user.token
   end
 

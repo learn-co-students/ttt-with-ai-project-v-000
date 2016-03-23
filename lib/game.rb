@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2, :input
 
@@ -60,17 +62,20 @@ class Game
   def turn
     first = self.current_player
     action = self.current_player.move
+    #binding.pry
     until board.valid_move?(action)
       "invalid"
       action = self.current_player.move
     end
     board.update(action, self.current_player)
+    board.display
     second = self.current_player
     #turn == "X" ? "O" : "X"
   end
 
 
   def play
+    board.display
     until self.over?
       self.turn
     end
