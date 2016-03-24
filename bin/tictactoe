@@ -2,23 +2,4 @@
 
 require_relative '../config/environment'
 
-prompt = ">"
-greeting
-print prompt
-game_type = gets.strip.to_i
-while game_type < 0 || game_type > 2
-  puts "Invalid input. Please re-enter a choice from above."
-  print prompt
-  game_type = gets.strip.to_i
-end
-if game_type == 1
-  puts "Game type has been set as 1-Player."
-elsif game_type == 2
-  puts "Game type has been set as 2-Player."
-elsif game_type == 0
-  puts "Game type has been set as 0 (Two computer players)."
-end
-
-
-game = Game.new
-game.play
+start

@@ -43,14 +43,20 @@ class Game
 
   def turn
     player = current_player
+    puts "\r\n"
+    puts "Player #{player.token}:"
     this_move = player.move(@board)
     if !@board.valid_move?(this_move)
       turn
     else
+      puts "\r\n"
+      puts "Current Board:"
       @board.display
+      puts "\r\n"
       @board.update(this_move, player)
       puts "Updating Board: #{player.token} completed move at #{this_move}."
       @board.display
+      puts "\r\n"
     end
   end
 
