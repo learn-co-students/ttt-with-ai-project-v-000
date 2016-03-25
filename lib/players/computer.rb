@@ -34,8 +34,8 @@ class Player::Computer < Player
       end
     end
     
-    if board.turn_count == 1
-      @priority_moves.unshift(@first_moves.sample)
+    if board.turn_count <= 1
+      @priority_moves.unshift(@first_moves.shuffle.sample)
     end
 
     @next_move = @priority_moves.detect do |item|
