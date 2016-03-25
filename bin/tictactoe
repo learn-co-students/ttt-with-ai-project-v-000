@@ -1,3 +1,19 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe. Please enter the number of players from 0 to 2."
+player_count = gets.chomp
+
+case player_count
+when "0"
+  Game.new(Computer.new("X"), Computer.new("O")).play
+when "1"
+  puts "Enter 1 to go first, or 2 for the computer to go first."
+  starter = gets.chomp
+  starter == "2" ? Game.new(Computer.new("X"), Human.new("O")).play : Game.new(Human.new("X"), Computer.new("O")).play
+when "2"
+  Game.new(Human.new("X"), Human.new("O")).play
+else
+  "Invalid number of players. Shutting down..."
+end
