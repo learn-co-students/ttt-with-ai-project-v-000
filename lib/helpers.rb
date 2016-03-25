@@ -66,6 +66,8 @@ def start
     puts "Game type has been set as 0 (Two computer players)."
     game = Game.new(player1 = Player::Computer.new(player_1_token), player2 = Player::Computer.new(player_2_token), board = Board.new) 
   end
+  puts "\r\n"
+  game.board.display
   game.play
   puts "Play Again? (Y/N)"
   print prompt

@@ -1,6 +1,7 @@
 class Player::Computer < Player
   attr_reader :token
   def initialize(token)
+    @first_moves = [5,1,3,7,9]
     @priority_moves = [5,1,3,7,9,2,4,6,8]
     @next_move = nil
     @token = token
@@ -34,7 +35,7 @@ class Player::Computer < Player
     end
     
     if board.turn_count == 1
-      @priority_moves.unshift(@priority_moves.sample)
+      @priority_moves.unshift(@first_moves.sample)
     end
 
     @next_move = @priority_moves.detect do |item|
