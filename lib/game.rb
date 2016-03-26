@@ -103,4 +103,86 @@ class Game
     end
   end
 
+  def self.run
+    puts "Shall we play a game?"
+    puts "Who is playing?"
+    puts "Head to Head, Please Enter 2"
+    puts "One Player, Please Enter 1"
+    puts "Watch Me Play, Please Enter 0"
+    puts "To Quit, Enter exit"
+    user_input = gets.strip
+    until user_input == "exit"
+
+      if user_input == "0"
+        zero_player_game
+        continue
+        user_input = gets.strip
+
+      elsif user_input == "1"
+        one_player_game
+        continue
+        user_input = gets.strip
+
+      elsif user_input == "2"
+        two_player_game
+        continue
+        user_input = gets.strip
+
+      elsif user_input == "exit"
+        goodbye
+
+      elsif user_input == "wargames"
+        counter = 0
+        100.times do
+          counter += 1
+          puts "Game #{counter}"
+          zero_player_game
+          sleep(12.0/24.0)
+
+
+        end
+        continue
+        user_input = gets.strip
+
+
+
+      else
+        puts "Hmm.  Something is amiss.  Please try again."
+        user_input = gets.strip
+      end
+    end
+  end
+
+  def self.zero_player_game
+    self.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new).play
+  end
+
+  def self.one_player_game
+    puts "Choose your weapon: X or O. If choose X, you can go first."
+        user_input = gets.strip
+          until user_input == "X" || user_input == "O" || user_input == "x" || user_input == "o"
+            puts "X or O only, please!"
+            user_input = gets.strip
+          end
+          if user_input == "X" || user_input == "x"
+            self.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new).play
+          elsif user_input == "O" || user_input == "o"
+            self.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new).play
+          end
+  end
+
+  def self.two_player_game
+    puts "X will be the first to play. You two can take turn from here. Have fun!"
+    self.new(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new).play
+  end
+
+  def self.continue
+    puts "Play again?  Please enter number of players or exit."
+    puts "0 | 1 | 2 ------------------------ exit"
+  end
+
+  def self.goodbye
+    puts "Goodbye, Joshua."
+  end
+
 end

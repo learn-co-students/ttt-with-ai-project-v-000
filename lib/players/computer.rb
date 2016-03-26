@@ -1,19 +1,9 @@
-require 'pry'
+
+
 
 class Computer < Player
 
-  # def move(board)
-  #   binding.pry
-
-  #   input = rand(0..9)
-  #   if board.valid_move?(input)
-  #     input.to_s
-  #   end
-
-
-  # end
-
-  def move(board)
+   def move(board)
     #if turn_count is < 4
     if board.taken?("5") == false
         input = "5"
@@ -26,10 +16,34 @@ class Computer < Player
       elsif board.taken?("9") == false
         input = "9"
       else ["2", "4", "6", "8"].sample
-        #else iterate through using win_combos
+
     end
   end
 
-  #iterate through board and make an array of oppenets postions.  if 2 of 3 win combos exist, block
+  # def move(board)
+  #   minmax(board, token)
+  # end
+
+  # def available_positions(board)
+  #   available = []
+  #   board.cells.each do |cell|
+  #     if cell = " "
+  #       available<< cell
+  #     end
+  #   end
+  # end
+  # def place_piece()
+
+  # def score(board, depth)
+  #   if game.won?(player_1)
+  #       return 10 - depth
+  #   elsif game.won?(player_2)
+  #       return depth - 10
+  #   else
+  #       return 0
+  #   end
+  # end
+
+
 
 end
