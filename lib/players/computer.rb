@@ -21,7 +21,7 @@ class Computer < Player
         board.cells[x] = " "
       end
     end
-    ["5", "1", "9", "3", "7", "2", "4", "6", "8"].each { |n| return n if board.valid_move?(n) }
+    ["5", "1", "3", "7", "9", "2", "4", "6", "8"].each { |n| return n if board.valid_move?(n) }
   end
 
 end
