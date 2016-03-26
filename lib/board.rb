@@ -41,6 +41,7 @@ class Board
     !taken?(pos) && pos.to_i.between?(1,9)
   end
 
+
   def update(pos, player)
     self.cells[pos.to_i-1] = player.token if valid_move?(pos)
   end
