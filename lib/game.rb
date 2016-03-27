@@ -12,6 +12,8 @@ class Game
     [2,4,6]  #Top Right -> Bottom Left
   ]
 
+  @win_count = [0,0]
+
   def initialize(player_1 = Human.new("X"), player_2 = Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -52,7 +54,7 @@ class Game
   end
 
   def turn
-    sleep(1)
+    #sleep(1)
     move = current_player.move(board).to_i
     if board.valid_move?(move)
       board.update(move, current_player)
@@ -74,5 +76,4 @@ class Game
     end
   end
       
-
 end
