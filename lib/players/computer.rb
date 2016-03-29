@@ -1,7 +1,7 @@
 class Computer < Player
 
   def move(board)
-    rand(9).to_s
+    rand(board.cells.length).to_s
   end
 
 end

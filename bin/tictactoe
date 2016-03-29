@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
 
 puts "Hello! Welcome to Tic-Tac-Toe!" 
@@ -8,7 +8,6 @@ input = ""
 
 while input != "exit"
   puts "Would you like to play a game with 0, 1, or 2 human players?"
-  puts "Optional: wargames"
   num_players = gets.strip
   case num_players
   when "0"
@@ -33,22 +32,6 @@ while input != "exit"
     player_2 = Human.new("O")
     game = Game.new(player_1, player_2)
     game.play
-  when "wargames"
-    player_1 = Computer.new("X")
-    player_2 = Computer.new("O")
-    game = Game.new(player_1, player_2)
-    i = 0
-    while i < 100 
-      game.play
-      if game.winner == "X"
-        Game.win_count[0] = Game.win_count[0] + 1
-      elsif game.winner == "O"
-        Game.win_count[1] = Game.win_count[1] + 1
-      end
-      i++
-    end
-    puts "X: #{Game.win_count[0]}"
-    puts "O: #{Game.win_count[1]}"
   end
 
   puts "Would you like to play another game or exit?"
