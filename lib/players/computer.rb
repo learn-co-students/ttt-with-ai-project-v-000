@@ -13,48 +13,27 @@ class Computer < Player
 
   def move(board)
     positions = (1..9).to_a
-    valid = []
+    valid_moves = []
     positions.each do |num|
-      valid << num.to_s if board.valid_move?(num.to_s)
+      valid_moves << num.to_s if board.valid_move?(num.to_s)
     end
-    # valid.sample
-    ai(board, valid)
+    ai(board, valid_moves)
   end
 
   def ai(board, array)
     if board.all_empty?
       first_move
+    elsif board.valid_move?("5")
+      return ("5")
     else
-      # array.sample
-      attack(board, array)
+      array.sample
+      # attack(board, array)
     end
   end
 
   def first_move
     position = ["1", "3", "5", "7", "9"]
     position.sample
-  end
-
-  def attack(board, array)
-    WIN_COMBINATIONS.each do |combo|
-      if board.cells[combo[0]] == self.token &&
-         board.cells[combo[1]] == self.token &&
-         board.cells[combo[2]] == " "
-           board.cells[combo[2]] = self.token
-
-      elsif board.cells[combo[0]] == self.token &&
-            board.cells[combo[2]] == self.token &&
-            board.cells[combo[1]] == " "
-              board.cells[combo[1]] = self.token
-
-      elsif board.cells[combo[1]] == self.token &&
-            board.cells[combo[2]] == self.token &&
-            board.cells[combo[0]] == " "
-              board.cells[combo[0]] = self.token
-      else
-        array.sample
-      end
-    end
   end
 
 end
