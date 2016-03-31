@@ -37,11 +37,11 @@ class Board
 
   def update(num, player)
       cells[(num.to_i-1)] = player.token
-
   end
 
   def reset!
     self.cells.clear
     self.cells=(Array.new(9, " "))
   end
+  #binding.pry
 end

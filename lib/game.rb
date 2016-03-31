@@ -43,16 +43,27 @@ class Game
   end
 
   def turn
-    #current_player.move(input)
-    input = gets
-    until @board.valid_move?(input)
-      puts "That's not a valid move! Try Again"
-      current_player.move(input)
-      input = gets
+    #binding.pry
+    current_move = self.current_player.move(@board)
+    until self.board.valid_move?(current_move)
+      current_move = self.current_player.move(@board)
     end
-    #player = current_player
-    @board.update(input, current_player)
-    @board.display
+    self.board.update(current_move, current_player)
+    self.board.display
+
+  end
+
+  def play
+    binding.pry
+        self.board.display
+     until over?
+       turn
+     end
+     if won?
+       puts "Congratulations #{winner}!"
+     else
+       puts "Cats Game!"
+     end
 
   end
 
@@ -66,7 +77,4 @@ WIN_COMBINATIONS= [
  [0,4,8],
  [2,4,6]
 ]
-
-binding.pry
 end
-#binding.pry
