@@ -15,7 +15,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |combination|
-      if @board.taken?(combination[0])
+      if @board.cells[combination[0]] != " "
         if @board.cells[combination[0]] == @board.cells[combination[1]] && @board.cells[combination[1]]== @board.cells[combination[2]]
            return combination
         end
@@ -44,8 +44,10 @@ class Game
 
   def turn
     #binding.pry
+    #puts "Your move #{current_player.token}"
     current_move = self.current_player.move(@board)
     until self.board.valid_move?(current_move)
+      puts "Hey make a valid move #{current_player.token}"
       current_move = self.current_player.move(@board)
     end
     self.board.update(current_move, current_player)
@@ -54,7 +56,6 @@ class Game
   end
 
   def play
-    binding.pry
         self.board.display
      until over?
        turn
@@ -64,6 +65,7 @@ class Game
      else
        puts "Cats Game!"
      end
+
 
   end
 
