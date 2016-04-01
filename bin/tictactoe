@@ -18,10 +18,10 @@ until play_again == "stop" || play_again =="Stop"
   if num_player == "2"
     game = Game.new
   elsif num_player == "1"
-    game = Game.new(Player::Human, Player::Computer)
+    game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
   else num_player == "0"
     puts "MACHINE MADNESS!"
-    game = Game.new(Player::Computer, Player::Computer)
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
   end
 
   game.play
