@@ -23,7 +23,10 @@ class Board
   end
 
   def position(position)
-    position = position.to_i - 1
+    if position.is_a?(String)
+      position = position.to_i - 1 
+    end 
+    
     self.cells[position]
   end
 
@@ -35,21 +38,12 @@ class Board
     count = self.cells.count{|cell| cell == "X" || cell == "O"}
   end
 
-  def taken?(position)
-    position.to_i - 1
-    if self.cells[position] == "X" || self.cells[position] == "O"
-      true
-    else
-      false
-    end
+   def taken?(input)
+    !(position(input) == " " || position(input) == "")
   end
 
-  def valid_move?(position)
-    if position.to_i.between?(1,9) && !taken?(position)
-      true
-    else
-      false
-    end
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
   def update(cell, player)

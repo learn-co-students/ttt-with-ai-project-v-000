@@ -11,7 +11,7 @@ class Game
 
   def turn
     player = current_player
-    current_move = player.move(self.board)
+    current_move = player.move(@board)
     
     if !board.valid_move?(current_move)
       turn
@@ -22,6 +22,10 @@ class Game
       puts "#{player.token} moved #{current_move}"
       self.board.display
     end
+  end
+
+  def current_player
+    self.board.turn_count % 2 == 0 ? self.player_1 : self.player_2
   end
 
   def play

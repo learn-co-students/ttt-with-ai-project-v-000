@@ -8,9 +8,9 @@ describe 'Player::Computer' do
   describe '#move' do
     it 'returns a valid position for the computer to move' do
       computer = Player::Computer.new("X")
-      board = Board.new(["O", "O", " ", "X", " ", " ", "X", " ", " "])
+      board = Board.new(["X", "X", " ", " ", " ", "O", " ", " ", ""])
       
-      valid_moves = "3"
+      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
       computer_move = computer.move(board)
 
