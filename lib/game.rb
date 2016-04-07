@@ -36,14 +36,22 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    input = gets.strip
-
-    unless board.cells.valid_move?(input)
+    input = self.current_player.move(@board)
+    unless self.board.valid_move?(input)
       puts "Invalid Entry"
-      display
-      input = gets.strip
+      input = self.current_player.move(@board)
     end
-    board.cells.update(input, current_player)
+    self.board.update(input, current_player)
   end
 
+  def play
+    until over?
+      turn
+    end
+    if draw?
+      puts "Cats Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
+  end
 end

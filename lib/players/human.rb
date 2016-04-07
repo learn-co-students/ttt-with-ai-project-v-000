@@ -1,8 +1,7 @@
 Human = Class.new(Player)
 
 class Human
-  def move(cell)
-    puts "Which spot you want to take?"
+  def move(board)
     input = gets.strip
   end
 end
