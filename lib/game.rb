@@ -42,9 +42,11 @@ class Game
       input = self.current_player.move(@board)
     end
     self.board.update(input, current_player)
+    self.board.display
   end
 
   def play
+    self.board.display
     until over?
       turn
     end
