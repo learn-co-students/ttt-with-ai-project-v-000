@@ -3,50 +3,48 @@
 require_relative '../config/environment'
 player_choice = nil
 until player_choice == "n"
+  puts "\n"
+  puts "Welcome to the Tic Tac Toe Game!!!"
+  puts "\n"
+  puts "-----------------------------------------"
+  puts "Please choose one from the options below:"
+  puts "-----------------------------------------"
+  puts ""
+  puts "- press 0 for a Computer vs Computer game"
+  puts ""
+  puts "- press 1 for a Human vs Computer game"
+  puts ""
+  puts "- press 2 for a Human vs Human game"
+  puts "\n"
 
-puts "\n"
-puts "Welcome to the Tic Tac Toe Game!!!"
-puts "\n"
-puts "-----------------------------------------"
-puts "Please choose one from the options below:"
-puts "-----------------------------------------"
-puts ""
-puts "- press 0 for a Computer vs Computer game"
-puts ""
-puts "- press 1 for a Human vs Computer game"
-puts ""
-puts "- press 2 for a Human vs Human game"
-puts "\n"
-
-input = gets.strip.to_i
-
-until input == 0 || input == 1 || input == 2
-  puts "Try again!"
   input = gets.strip.to_i
-end
 
-case input
+  until input == 0 || input == 1 || input == 2
+    puts "Try again!"
+    input = gets.strip.to_i
+  end
 
-when 0
-  game = Game.new(Computer.new("X"), Computer.new("O"))
-when 1
-  game = Game.new(Human.new("X"), Computer.new("O"))
-when 2
-  game = Game.new
-end
+  case input
 
-game.play
+  when 0
+    game = Game.new(Computer.new("X"), Computer.new("O"))
+  when 1
+    game = Game.new(Human.new("X"), Computer.new("O"))
+  when 2
+    game = Game.new
+  end
 
-puts "Would you like to play again?(Y/n)"
-player_choice = gets.strip.downcase
+  game.play
 
-puts "Lesgoooo!!!" if player_choice == "y"
+  puts "Would you like to play again?(Y/n)"
+  player_choice = gets.strip.downcase
 
-puts "See you next time!!!\n" if player_choice == "n"
+  puts "Lesgoooo!!!" if player_choice == "y"
 
-until player_choice == "y" || player_choice == "n"
-  puts "Invalid Entry, try again!\n"
-  player_choice = gets.strip
-end
+  puts "See you next time!!!\n" if player_choice == "n"
 
+  until player_choice == "y" || player_choice == "n"
+    puts "Invalid Entry, try again!\n"
+    player_choice = gets.strip
+  end
 end
