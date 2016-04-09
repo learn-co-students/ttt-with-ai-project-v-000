@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
-
 
 def tic_tac_toe
 
@@ -10,7 +8,7 @@ def tic_tac_toe
     puts "Would you like to play a 0, 1, or 2 person game?"
     game_type = gets.chomp
 
-    case game_type  #need to account for bad input for game_type
+    case game_type
     when "0"
       player_1 = Computer.new("X")
       player_2 = Computer.new("O")
@@ -27,13 +25,12 @@ def tic_tac_toe
     end
 
     game = Game.new(player_1, player_2)
-    game.play 
+    game.play
 
     puts "would you like to play again?  (y/n)"
     again = gets.chomp
     return nil if again == "n"
   end
-
 end
 
 tic_tac_toe

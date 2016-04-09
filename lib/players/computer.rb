@@ -18,7 +18,7 @@ class Computer < Player
 end
 
 
-# pseudo algorithm
+# pseudo algorithm for better AI
 
 # Every move should start by looking for 2 in a row of your opponent and blocking.
 #
@@ -27,5 +27,4 @@ end
 #         if you can't do either of those, you can't win that strategy, so go another
 #         random place on the board (perhaps the same row or column as your opponent).
 # move 3: look for two in a row of your own kind and try to go in the third spot.
-#         Maybe this is done by iterating through the whole board and looking at rows/columns
 # move 4:

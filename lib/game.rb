@@ -94,7 +94,6 @@ class Game
       self.board.update(position_requested, self.current_player)
     else
       puts "invalid move, try again."
-      # self.current_player.move(self.board)
     end
   end
 
@@ -120,10 +119,6 @@ class Game
       self.turn # Important! This is where a "turn" is taken.
     end
     return nil
-  end
-
-  #  empty spec for #start
-  def start
   end
 
 end

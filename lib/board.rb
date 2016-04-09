@@ -3,7 +3,6 @@ class Board
   attr_accessor :cells
 
   def initialize
-    # @cells = []
     self.reset!
   end
 
@@ -19,22 +18,6 @@ class Board
     puts horiz_line
     puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
   end
-
-  # def display_capture
-  #   horiz_line = "-----------"
-  #   output = ""
-  #   output << " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
-  #   output << "\n"
-  #   output << horiz_line
-  #   output << "\n"
-  #   output << " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
-  #   output << "\n"
-  #   output << horiz_line
-  #   output << "\n"
-  #   output << " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
-  #   output << "\n"
-  #   output
-  # end
 
   def position(position)
     index = position.to_i - 1
