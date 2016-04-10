@@ -1,3 +1,60 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def play_again?
+  puts "Do you want to play again? (y/n)"
+  choice = gets.chomp.downcase
+  if choice == "n"
+    exit
+  end
+end
+
+puts "Let's play a game of Tic Tac Toe... "
+puts "\n"
+puts "Please select how many human players: (0-2) "
+input = gets.chomp
+case input
+when "0"
+  while true
+    Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"), board = Board.new).play
+    play_again?
+  end
+when "1"
+  puts "Player 1.. Please choose to be X or O... "
+  token = gets.chomp.downcase
+  if token == "x"
+    while true
+      Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"), board = Board.new).play
+      play_again?
+    end
+  elsif token == "o"
+    while true
+      Game.new(player_1 = Player::Human.new("O"), player_2 = Player::Computer.new("X"), board = Board.new).play
+      play_again?
+    end
+  else
+    puts "Not a valid player token.. Must select X or O... "
+    exit
+  end
+when "2"
+  puts "Player 1.. Please choose to be X or O... "
+  token = gets.chomp.downcase
+  if token == "x"
+    while true
+      Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new).play
+      play_again?
+    end
+  elsif token == "o"
+    while true
+      Game.new(player_1 = Player::Human.new("O"), player_2 = Player::Human.new("X"), board = Board.new).play
+      play_again?
+    end
+  else
+    puts "Not a valid player token.. Must select X or O... "
+    exit
+  end
+else
+  puts "Not a valid number of human players."
+  exit
+end
