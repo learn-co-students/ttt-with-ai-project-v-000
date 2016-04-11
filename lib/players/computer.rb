@@ -1,6 +1,8 @@
-class Computer < Player
+class Player::Computer < Player
   def move(board=nil)
-    [1,2,3,4,5,6,7,8,9].sample.to_s
+    puts "Computer Player #{self.token} played:"
+    board.display
+    sleep(1)
+    (rand 1..9).to_s
   end
-
 end
