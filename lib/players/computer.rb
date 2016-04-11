@@ -1,22 +1,6 @@
 require 'pry'
 class Computer < Player
 
-  # attr_reader :player_turn_count
-
-  # def initialize(token)
-  #   # super # inherit the token instance variable and attr_accessor form Player class
-  #   @token = token
-  #   @player_turn_count = 0
-  # end
-
-  # def player_turn_count=(count)
-  #   @player_turn_count = count
-  # end
-  #
-  # def increment_turn_count
-  #   self.player_turn_count += 1
-  # end
-
   WIN_COMBINATIONS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -35,25 +19,14 @@ class Computer < Player
 
   def move(board)
     while true
-      if board.turn_count < 3
-        # if this is the player's first move, make a random move
-        # can try to to a weighted random move with higher probability of moving
-        # to the center or a corner first.
-        return random_move(board)  # why did this not work without the return word?
-      elsif board.turn_count < 9
-        puts "now it's in the < 9 part *********"
-        next_move = ai_move(board)
-        return next_move
-      else
-      end
+      puts "******* next move *********"
+      next_move = ai_move(board)
+      return next_move if board.valid_move?(next_move)
     end
   end # end #move
 
-  # generates a random number as a string, "x", such that 1 < x <= 9
   def random_move(board)
-    desired_move = (rand(9) + 1).to_s
-    puts "random_move just returned a move to #{desired_move}"
-    return desired_move if board.valid_move?(desired_move) # Need to look into what happens if it's not a valid move?... probably returns nil to game#turn
+    board.valid_moves.sample
   end
 
   # Checks for two in a row, given a board and a token, and returns the array index
@@ -62,7 +35,6 @@ class Computer < Player
     WIN_COMBINATIONS.each do |combination| #iterate over WIN_COMBINATIONS
       # check if any of the winning combinations are occupied by the player_token
       if board.cells[combination[0]] == player_token || board.cells[combination[1]] == player_token || board.cells[combination[2]] == player_token
-
         if board.cells[combination[0]] == board.cells[combination[1]] && !board.taken?(combination[2], "array perspective")
           return combination[2]
         elsif board.cells[combination[0]] == board.cells[combination[2]] && !board.taken?(combination[1], "array perspective")
@@ -78,19 +50,23 @@ class Computer < Player
   # See if there are any available moves in the same row or column as an already placed token?
   # If so, return one (or both?) of those moves
   def same_row_or_column(board, player_token = self.token)
+    next_move = 99
     # if player_token is in a WIN_COMBINATIONS space, look for player_token in the other two spaces.
     WIN_COMBINATIONS.each do |combination| #iterate over WIN_COMBINATIONS
-
       if board.cells[combination[0]] == player_token
         if !board.taken?(combination[1], "array perspective") && !board.taken?(combination[2], "array perspective")
-          rand >= 0.5 ?  nil :  nil
+          rand >= 0.5 ?  next_move = combination[1] :  next_move = combination[2]
         end
       elsif board.cells[combination[1]] == player_token
-
+        if !board.taken?(combination[0], "array perspective") && !board.taken?(combination[2], "array perspective")
+          rand >= 0.5 ?  next_move = combination[0] :  next_move = combination[2]
+        end
       elsif board.cells[combination[2]] == player_token
-
-
+        if !board.taken?(combination[0], "array perspective") && !board.taken?(combination[1], "array perspective")
+          rand >= 0.5 ?  next_move = combination[0] :  next_move = combination[1]
+        end
       end
+      return next_move + 1 if next_move < 10
     end
     nil
   end
@@ -102,18 +78,17 @@ class Computer < Player
     return block_opponent(board) if block_opponent(board)
     # If a token is in a possible win combination, move your next token into
     # that same combination.
-    #return same_row_or_column(board) if same_row_or_column(board)
+    return same_row_or_column(board) if same_row_or_column(board)
     # Move any random place on the board.
     return random_move(board)
   end
 
   # return a blocking move (player perspective) if opponent has two in a row, otherwise return nil
-  def block_opponent(board)  # this will be similar logic to where to move for a win on self.token
+  def block_opponent(board)
     # check for opponent's two_in_a_row?
     if two_in_a_row?(board, opponent_token)
       # move into the third spot to block
-      # binding.pry
-      return two_in_a_row?(board, opponent_token) + 1
+      return two_in_a_row?(board, opponent_token) + 1 # +1 to put into player perspective
     end
     nil
   end
@@ -122,30 +97,8 @@ class Computer < Player
   def attempt_win(board)
     # check for self token 2 in a row?
     if two_in_a_row?(board, self.token) != nil
-      # binding.pry
-      return two_in_a_row?(board, self.token) + 1# ***** might need (+ 1) *****# move into the spot
+      return two_in_a_row?(board, self.token) + 1 # +1 to put into player perspective
     end
     nil
   end
-
 end
-
-
-# pseudo algorithm for better AI
-
-# Every move should start by looking for 2 in a row of your opponent and blocking.
-#
-# move 1: go anywhere
-# move 2: try to go in either the same column or same row as your first move (randomly)
-#         if you can't do either of those, you can't win that strategy, so go another
-#         random place on the board (perhaps the same row or column as your opponent).
-# move 3: look for two in a row of your own kind and try to go in the third spot.
-# move 4:
-
-
-#### working random number AI ####
-# while true
-#   desired_move = (rand(9) + 1).to_s
-#   return desired_move if board.valid_move?(desired_move)
-# end
-#### end working random number AI ####
