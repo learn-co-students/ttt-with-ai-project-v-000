@@ -19,6 +19,7 @@ class Board
     puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
   end
 
+  # Accepts position as a player-perspective string (1-9)
   def position(position)
     index = position.to_i - 1
     self.cells[index]
@@ -45,8 +46,13 @@ class Board
   end
 
   # Accepts a player-perspective position as a string (1-9).  Casts it .to_i internally
-  def taken?(position)
-    current = self.cells[position.to_i - 1]
+  # optionally, can be called with perspective = "array perspective"
+  def taken?(position, perspective = "player perspective")
+    if perspective == "array perspective"
+      current = self.cells[position]
+    elsif perspective == "player perspective"
+      current = self.cells[position.to_i - 1]
+    end
     return true if current != " " && current != ""
     return false
   end

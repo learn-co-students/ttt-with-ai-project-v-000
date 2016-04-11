@@ -13,9 +13,22 @@ def tic_tac_toe
       player_1 = Computer.new("X")
       player_2 = Computer.new("O")
     when "1"
-      player_1 = Human.new("X")
-      player_2 = Computer.new("O")
+      puts "Who should go first? Press \"h\" for the human, \"c\" for the computer."
+      token = gets.chomp  # need check for bad input.
+      if token == "c"
+        player_1 = Computer.new("X")
+        player_2 = Human.new("O")
+        puts "Player 1 is the Computer and has a token of 'X'."
+        puts "Player 2 is the Human and has a token of 'O'."
+      else
+        puts "You entered 'h' (or perhaps something besides 'c')..."
+        player_1 = Human.new("X")
+        player_2 = Computer.new("O")
+        puts "Player 1 is the Human and has a token of 'X'."
+        puts "Player 2 is the Computer and has a token of 'O'."
+      end
     when "2"
+      puts "Whoever wants to be 'X' is player 1 and should go first."
       player_1 = Human.new("X")
       player_2 = Human.new("O")
     else

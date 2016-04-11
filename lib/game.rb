@@ -92,6 +92,7 @@ class Game
     position_requested = self.current_player.move(self.board)
     if self.board.valid_move?(position_requested)
       self.board.update(position_requested, self.current_player)
+      # self.current_player.increment_turn_count  # increment_turn_count on player!!!
     else
       puts "invalid move, try again."
     end
