@@ -20,4 +20,42 @@ class Board
   def position(position)
     cells[position.to_i - 1]
   end
+
+  def full?
+    if cells.include?(" ")
+      false
+    else
+      true
+    end
+  end
+
+  def turn_count
+    turn_counter = 0
+    cells.each do |cell|
+      if cell != " "
+        turn_counter+= 1
+      end
+    end
+    turn_counter
+  end
+
+  def taken?(position)
+    if position(position) != " "
+      true
+    else
+      false
+    end
+  end
+
+  def valid_move?(position)
+    if position.to_i.between?(1,9) && !taken?(position)
+      true
+    else
+      false
+    end
+  end
+
+  def update(position, character)
+    cells[position.to_i - 1] = character.token
+  end
 end
