@@ -63,5 +63,6 @@ class Game
     turn until over?
     puts "Cats Game!" if draw?
     puts "Congratulations #{winner}!" unless draw?
+    puts "Would you like to play again?"
   end
 end
