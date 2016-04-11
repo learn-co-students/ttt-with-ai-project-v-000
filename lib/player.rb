@@ -4,4 +4,10 @@ class Player
     @token= token
   end
 
+  class Human < Player
+    def move(argument)
+      input = gets.strip
+      input
+    end
+  end
 end
