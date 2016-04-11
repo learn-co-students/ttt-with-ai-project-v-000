@@ -53,6 +53,7 @@ class Game
     move = current_player.move(@board)
     board.valid_move?(move) ? board.update(move, current_player) : turn
     current_player
+    board.display
   end
   def play
     turn until over?
@@ -63,6 +64,16 @@ class Game
     turn until over?
     puts "Cats Game!" if draw?
     puts "Congratulations #{winner}!" unless draw?
-    puts "Would you like to play again?"
+    puts "Would you like to play again? Yes or No"
+    input = gets.chomp.downcase
+    case input
+    when "yes", "y"
+      return
+    when "no", "n"
+      puts "Thank you for playing. Goodbye."
+      exit
+    else
+      return      
+    end
   end
 end

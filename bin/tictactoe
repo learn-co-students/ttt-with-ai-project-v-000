@@ -20,7 +20,6 @@ end
 module Promptable
   def prompt(message)
     print message
-    # print ":> "
     gets.chomp
   end
 end
