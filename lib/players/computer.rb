@@ -79,8 +79,28 @@ class Computer < Player
     # If a token is in a possible win combination, move your next token into
     # that same combination.
     return same_row_or_column(board) if same_row_or_column(board)
+    # Make a move to a corner
+    random_num = rand
+    # move to the middle if available and if random_num is over the 20% threshold
+    return middle_move(board) if !board.taken?(5) && random_num >= 0.2
+    # move to a corner if available and if random_num is over the 20% threshold
+    return corner_weighted(board) if avail_corners(board) != [] && random_num >= 0.2
     # Move any random place on the board.
     return random_move(board)
+  end
+
+  def avail_corners(board)
+    [1, 3, 7, 9].select do |position|
+      !board.taken?(position)
+    end
+  end
+
+  def corner_weighted(board)
+    avail_corners(board).sample
+  end
+
+  def middle_move(board)
+    5
   end
 
   # return a blocking move (player perspective) if opponent has two in a row, otherwise return nil

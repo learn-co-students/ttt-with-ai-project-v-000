@@ -110,7 +110,8 @@ class Game
         if self.won?
           #congrats
           puts "Congratulations #{self.winner}!"
-          return nil
+          return self.winner # return the token of the winner
+          # return nil
         else
           # it was a draw
           puts "Cats Game!"
@@ -119,7 +120,7 @@ class Game
       end
       self.turn # Important! This is where a "turn" is taken.
     end
-    return nil
+    return nil  # might be unnecessary
   end
 
 end
