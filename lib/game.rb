@@ -15,7 +15,7 @@ class Game
   end
 
   def over?
-    board.full?
+    board.full? || won?
   end
 
   def won?
@@ -44,11 +44,16 @@ class Game
 
   def turn
     current_player.move(board)
+    board.display
   end
 
   def play
-    # binding.pry
-    turn until won? || over? dif
+    turn until over?
+    if won?
+      puts "Congratulations!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
 
 end
