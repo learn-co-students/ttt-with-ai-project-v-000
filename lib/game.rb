@@ -15,7 +15,7 @@ class Game
   end
 
   def over?
-    board.full? || won?
+    draw? || won?
   end
 
   def won?
@@ -29,7 +29,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
   end
 
   def winner
@@ -44,15 +44,14 @@ class Game
 
   def turn
     current_player.move(board)
-    board.display
   end
 
   def play
     turn until over?
     if won?
-      puts "Congratulations!"
+      puts "Congratulations #{current_player.token}!"
     elsif draw?
-      puts "Cat's Game!"
+      puts "Cats Game!"
     end
   end
 
