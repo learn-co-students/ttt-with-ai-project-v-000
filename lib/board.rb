@@ -2,8 +2,8 @@ require 'pry'
 class Board
 
 
-  attr_accessor :cells
-  attr_reader :token
+  attr_accessor :cells, :token
+  #attr_reader :token
   def initialize
     reset!
   end

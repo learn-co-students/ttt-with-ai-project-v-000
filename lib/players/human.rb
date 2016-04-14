@@ -7,9 +7,7 @@ class Human < Player
     @board = board
     puts "What would you like to enter"
     answer = gets.chomp
-  answer
-
-
+    answer
   end
 
 end

@@ -1,12 +1,14 @@
 require 'pry'
+#require 'lib/layer.rb'
 
-class Game 
-    attr_accessor :board, :player_1, :player_2, :cells
+class Game
+    attr_accessor :board, :player_1, :player_2, :cells, :token, :player
 
     def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"),board = Board.new)
       @board = board
       @player_1 = player_1
       @player_2 = player_2
+      @player = player
     end
 
      WIN_COMBINATIONS = [
@@ -30,10 +32,18 @@ class Game
 #     end
 #   end
 
+   def turn_count
+    self.board.cells.count { |position| position != " " }
+  end
+
   def current_player
+    self.token = turn_count.even? ? "X" : "O"
+  end
+
+  def over?
+    !self.board.cells.include?(" ")
   end
 
 end
-
-
-binding.pry
+# game = Game.new
+ 
