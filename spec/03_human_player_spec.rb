@@ -12,7 +12,7 @@ describe 'Player::Human' do
 
       expect(human).to receive(:gets).and_return("1")
 
-      expect(human.move([])).to eq("1")
+      expect(human.move).to eq("1")
     end
   end
 end
