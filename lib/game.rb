@@ -28,7 +28,7 @@ class Game
   def valid_move?(position)
     position = position.to_i - 1 
   
-  if   !position.between?(0, 8)  
+  if   !position.between?(0, 8) && self.taken?(position)
    false
   elsif self.board.cells[position] == " "
     true
@@ -38,14 +38,15 @@ class Game
 end
   
   def turn
-   puts  "please enter 1-9"
-   position = gets.strip
-    if valid_move?(position)
-     move(*board)
-    else
-    turn
-    end
-   board
+   input = current_player.move(board).to_i
+  
+   if @board.valid_move?(input) 
+       @board.update(input, current_player)
+        @board.display
+   
+     else
+      self.turn
+   end 
   end
 
   def turn_count
@@ -61,6 +62,7 @@ end
     player_2
 
    end
+  
   end
   
   def full?
