@@ -2,10 +2,12 @@ class Game
 	attr_accessor :board, :player_1, :player_2
 	WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
+
 	def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
 		@board = board
 		@player_1 = player_1
 		@player_2 = player_2
+		
 	end
 
 	def current_player
@@ -53,7 +55,11 @@ class Game
 	end
 
 	def turn
-		puts "#{current_player}, please make your move."
+	if current_player == player_1
+		puts "Player X, please make your move."
+	else
+		puts "Player O, please make your move."
+	end
 		position = self.current_player.move(self.board)
 		if board.valid_move?(position) == true
 			self.board.update(position, current_player)
@@ -83,6 +89,6 @@ class Game
 		else
 			puts "Congratulations O!"
 		end
-
 	end
+
 end

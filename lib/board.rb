@@ -1,7 +1,8 @@
 class Board
-	attr_accessor :cells
+	attr_accessor :cells, :turns_taken
 	def initialize
 		@cells = Array.new(9, " ")
+		@turns_taken = []
 	end
 
 	def reset!
@@ -45,6 +46,7 @@ class Board
 
 	def update(position, player)
 		self.cells[position.to_i - 1] = player.token
+		self.turns_taken << position
 	end
 
 end
