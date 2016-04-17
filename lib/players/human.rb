@@ -1,7 +1,7 @@
-class Human < Player
+class Player::Human < Player
   
-  def move(input)
-    input = gets.chomp
+  def move(board)
+    gets.chomp
   end
   
 end

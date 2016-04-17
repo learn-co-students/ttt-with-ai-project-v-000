@@ -27,6 +27,7 @@ class Board
     !self.cells.include?(" ")
   end
 
+  # Elapsed turns (NOT the number of the current turn!)
   def turn_count
      9 - self.cells.count {|c| c == " "}
   end
