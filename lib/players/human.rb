@@ -1,6 +1,6 @@
 class Player::Human < Player
      
-     def move(*board)
+     def move(board)
       puts "Hi what's your move"
       move = gets.chomp
      end

@@ -20,22 +20,26 @@ class Game
   end
   
 
-  def move(*board)
-      puts "Hi what's your move"
-      move = gets.chomp
-     end
-  
-  def valid_move?(position)
+ def valid_move?(position)
     position = position.to_i - 1 
   
-  if   !position.between?(0, 8) && self.taken?(position)
+  if   !position.between?(0, 8)  
    false
-  elsif self.board.cells[position] == " "
+  elsif @board[position] == " "
     true
  
   
   end 
 end
+  
+  
+  
+
+  def current_player
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+  end
+  
+  
   
   def turn
    input = current_player.move(board).to_i
@@ -46,68 +50,51 @@ end
    
      else
       self.turn
+     
    end 
   end
 
-  def turn_count
-    self.board.cells.count {|token| token == " X " || token == " O "}
-  
-  end
-
-  def current_player
-  self.turn_count % 2 == 0
-   if self.turn_count.even?
-     player_1
-   else
-    player_2
-
-   end
-  
-  end
   
   def full?
-    self.board.cells.all? do |board| 
-      if board == " " 
-        false
-      else
-        true
-      end
-    end
+  @board.cells.all? {|cell| cell == "X" || cell == "O"}
   end
-
-  
-  def won?
-  
-  WIN_COMBINATIONS.detect do |win_combination|
-    self.board.cells[win_combination[0]] == self.board.cells[win_combination[1]] && self.board.cells[win_combination[1]] == self.board.cells[win_combination[2]]
-   end
-  end
+   
   
   def draw?
-   if full? && !won?
-   true
-  else 
-    false
+   full? && !won?
+    
   end
- end 
 
  def over?
-   if  draw? || won? 
-    true
-    else
-     false
-   end
- end
+  won? || draw?
+    
+   
+  end
+   
+   def won?
+     WIN_COMBINATIONS.detect do |win_combination|
   
-
+       win_index_1 = win_combination[0]
+        win_index_2 = win_combination[1]
+        win_index_3 = win_combination[2]
+  
+        position_1 = self.board.cells[win_index_1]
+        position_2 = self.board.cells[win_index_2]
+        position_3 = self.board.cells[win_index_3]
+  
+        position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 =="O"
+      end
+    end
   def winner
-    if won?
-      WIN_COMBINATIONS.detect do |win_combination|
-        if self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X"
-          return  "X"
+  if won?
+  WIN_COMBINATIONS.detect do |win_combination|
+
+if @board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] == "X" && @board.cells[win_combination[2]] == "X"
+  return "X"
  elsif
-  self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
-      return  "O"
+  @board.cells[win_combination[0]] == "O" && @board.cells[win_combination[1]] == "O" && @board.cells[win_combination[2]] == "O"
+  return "O"
+    
     else
       nil
     
@@ -115,5 +102,21 @@ end
   end
   end
   end
+ 
+   
+   def play
+  
+   until over?
+   turn
+   end
+
+  if winner == "X"
+    puts "Congratulations X!"
+ elsif winner == "O"
+    puts "Congratulations O!"
+  else 
+    puts "Cats Game!"
+  end
+end
 
 end
