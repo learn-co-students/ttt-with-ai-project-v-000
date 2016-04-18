@@ -1,7 +1,5 @@
 class Player::Computer < Player
-
   def move(board)
-    "1"
+    rand(1..9).to_s
   end
-
 end
