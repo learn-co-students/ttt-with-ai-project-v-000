@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXO"
+puts "Tic Tac Toe!"
+puts "Three in a row"
+puts "What kind of game do you want to play?"
+puts "HAL - Human versus Machine"
+puts "Adam - Human versus Human"
+puts "Deepblue - Machine versus Machine"
+puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXO"
+
+while true
+  response = gets.chomp.downcase
+    if response == "deepblue"
+      game = Game.new(Computer.new("X"), Computer.new("O"))
+      game.play
+      break
+    elsif response == "hal"
+      puts "You first or me?"
+      first = gets.chomp.downcase
+        if first == "me"
+          puts "You go first"
+          game = Game.new(Human.new("X"), Computer.new("O"))
+          game.play
+          puts "Game over"
+          break
+        elsif first == "you"
+          puts "I will go first"
+          game = Game.new(Computer.new("X"), Human.new("O"))
+          game.play
+          puts "Game over"
+          break
+        else puts "Please enter 'you' or 'me'"
+        end
+    elsif response == "adam"
+      game = Game.new
+      game.play
+      puts "Goodbye"
+      break
+  else
+    puts "Please enter a valid choice."
+  end
+end
