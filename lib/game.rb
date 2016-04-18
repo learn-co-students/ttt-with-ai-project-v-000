@@ -86,6 +86,7 @@ end
       end
     end
   def winner
+    
   if won?
   WIN_COMBINATIONS.detect do |win_combination|
 
@@ -116,7 +117,11 @@ if @board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] =
     puts "Congratulations O!"
   else 
     puts "Cats Game!"
+   end
   end
-end
-
+ 
+ 
+  
+   
+ 
 end

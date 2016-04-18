@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+ 
+  puts "Hello, welcome to tic-tac-toe on CLI. Hope you have fun."
+  puts "Which game would you like to play?"
+  puts "0 : Computer player vs Computer player"
+  puts "1 : Human player vs Computer player"
+  puts "2 : Human player vs Human player"
+  input = gets.chomp
+  if input == 0 
+    player_1 = Player::Computer.new("X")
+    player_2 = Player::Computer.new("O")
+  elsif input == 1
+    player_1 = Player::Human.new("X")
+    player_2 = Player::Human.new("O")
+  else input == 2
+    player_1 = Player::Human.new("X")
+    player_2 = Player::Human.new("O")
+  end
+   game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+   game.play
+   if game.over?
+    puts "Hey, would you like to play again?"
+    puts "Yes or No"
+    response = gets.chomp
+    if "Y"
+      game.play
+    else "N"
+      puts "Bye"
+    end
+  end
+  Game.new(player_1, player_2).play
