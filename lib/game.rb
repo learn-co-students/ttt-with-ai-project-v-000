@@ -16,7 +16,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    
   end
   
 
@@ -27,8 +26,6 @@ class Game
    false
   elsif @board[position] == " "
     true
- 
-  
   end 
 end
   
@@ -47,11 +44,9 @@ end
    if @board.valid_move?(input) 
        @board.update(input, current_player)
         @board.display
-   
-     else
+   else
       self.turn
-     
-   end 
+    end 
   end
 
   
@@ -62,52 +57,44 @@ end
   
   def draw?
    full? && !won?
-    
   end
 
  def over?
   won? || draw?
-    
+ end
    
-  end
-   
-   def won?
-     WIN_COMBINATIONS.detect do |win_combination|
+def won?
+  WIN_COMBINATIONS.detect do |win_combination|
   
-       win_index_1 = win_combination[0]
-        win_index_2 = win_combination[1]
-        win_index_3 = win_combination[2]
+    win_index_1 = win_combination[0]
+    win_index_2 = win_combination[1]
+    win_index_3 = win_combination[2]
   
-        position_1 = self.board.cells[win_index_1]
-        position_2 = self.board.cells[win_index_2]
-        position_3 = self.board.cells[win_index_3]
+    position_1 = self.board.cells[win_index_1]
+    position_2 = self.board.cells[win_index_2]
+    position_3 = self.board.cells[win_index_3]
   
-        position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 =="O"
-      end
+    position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 =="O"
     end
-  def winner
-    
+end
+def winner
   if won?
   WIN_COMBINATIONS.detect do |win_combination|
-
-if @board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] == "X" && @board.cells[win_combination[2]] == "X"
+  if @board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] == "X" && @board.cells[win_combination[2]] == "X"
   return "X"
- elsif
+  elsif
   @board.cells[win_combination[0]] == "O" && @board.cells[win_combination[1]] == "O" && @board.cells[win_combination[2]] == "O"
   return "O"
-    
-    else
+  else
       nil
-    
     end
   end
-  end
-  end
+ end
+end
  
    
    def play
-  
-   until over?
+    until over?
    turn
    end
 
@@ -119,9 +106,4 @@ if @board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] =
     puts "Cats Game!"
    end
   end
- 
- 
-  
-   
- 
 end

@@ -35,7 +35,6 @@ class Board
 
   def turn_count
     @cells.count {|cell| cell != " "}
-
   end
 
   def taken?(position)
@@ -46,7 +45,6 @@ class Board
       false
     else
       true
-    
     end
   end
 
@@ -57,10 +55,9 @@ class Board
    false
   elsif @cells[position] == " "
     true
- 
-  
   end 
 end
+   
    def update(position, player)
    position = position.to_i - 1
    @cells[position] = player.token
