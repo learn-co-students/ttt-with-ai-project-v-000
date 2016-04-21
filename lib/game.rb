@@ -66,5 +66,27 @@ class Game
       puts "Cats Game!"
     end
   end
+end
 
+def new_game
+  puts "Would you like to play a game of Tic Tac Toe? (Y/N)"
+  input = gets.strip
+  if input == "Y"
+    puts "How many players? (0, 1, 2)"
+      input = gets.strip
+      if input == "0"
+        Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+      elsif input == "1"
+        Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+      elsif input == "2"
+        Game.new(Player::Human.new("X"), Player::Human.new("O"))
+      else
+        puts "Sorry, invalid input."
+      end
+  elsif input == "N"
+    puts "Thank you and have a nice day!"
+  else
+    puts "Invalid input. Please re-enter."
+    new_game
+  end
 end

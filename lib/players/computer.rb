@@ -1,6 +1,6 @@
 class Player
   class Computer < Player
-    def move(board)
+    def move
       if board.turn_count == 0
         "5"
       elsif board.turn_count == 1
