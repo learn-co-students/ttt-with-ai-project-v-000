@@ -23,7 +23,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? player_1 : player_2
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
@@ -36,9 +36,9 @@ class Game
     win_index_2 = win_combo[1]
     win_index_3 = win_combo[2]
 
-    position_1 = @board.cells[win_index_1]
-    position_2 = @board.cells[win_index_2]
-    position_3 = @board.cells[win_index_3]
+    position_1 = board.cells[win_index_1]
+    position_2 = board.cells[win_index_2]
+    position_3 = board.cells[win_index_3]
 
     if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
       return win_combo
@@ -48,16 +48,35 @@ class Game
 end
 
   def draw?
-    @board.full? && !won?
+    board.full? && !won?
   end
 
   def winner
-    !won? ? nil : @board.cells[won?.first]
+    !won? ? nil : board.cells[won?.first]
   end
 
   def turn
+    puts "Please enter 1-9 player #{current_player}"
+    position = current_player.move(board)
+    if board.valid_move?(position)
+      board.update(position, current_player)
+      board.display
+    else
+      turn
+    end
   end
 
   def play
+    while board.turn_count < 9 && !over?
+      turn
+    end
+    if over?
+      case draw?
+      when true
+        puts "Cats Game!"
+      when false
+        puts "Congratulations #{winner}!"
+      end
+    end
   end
 end
