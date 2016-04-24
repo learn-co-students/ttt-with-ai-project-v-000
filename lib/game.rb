@@ -72,10 +72,21 @@ end
     if over?
       case draw?
       when true
-        puts "Cats Game!"
+        puts "\033[1;40;31mCat's Game!\033[0m"
       when false
-        puts "Congratulations #{winner}! You won in #{board.turn_count} turns!"
+        puts "\033[1;40;36mCongratulations #{winner}! You won in #{board.turn_count} turns!\033[0m"
       end
+      play_again?
+    end
+  end
+
+  def play_again?
+    puts "Would you like to play again?"
+    input = gets.strip.downcase
+    if input == "yes"
+      system "ruby bin/tictactoe"
+    else
+      puts "Goodbye!"
     end
   end
 end
