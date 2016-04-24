@@ -4,4 +4,5 @@ class Player::Human < Player
     puts "Where would you like to move? (1-9)"
     input = gets.strip
   end
+
 end
