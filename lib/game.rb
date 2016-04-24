@@ -56,7 +56,6 @@ end
   end
 
   def turn
-    puts "Please enter 1-9 player #{current_player}"
     position = current_player.move(board)
     if board.valid_move?(position)
       board.update(position, current_player)
