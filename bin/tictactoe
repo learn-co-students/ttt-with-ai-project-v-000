@@ -15,8 +15,16 @@ players = gets.strip.to_i
     game.play
   when 1
     puts "You have chosen to play against the computer"
-    puts "Will you be player 1 or player 2? (1-2)"
-    input = gets.strip
+    puts "Would you like an easy or hard opponent?"
+    cpu = gets.strip
+    if cpu == "easy"
+      puts "Will you be player 1 or player 2? (1-2)"
+      input = gets.strip
+    else
+      "GREETINGS PROFESSOR FALKEN.\nSHALL WE PLAY A GAME?\n".each_char do |c|
+        putc c ; sleep 0.05; $stdout.flush
+      end
+    end
   when 2
     puts "You have chosen to play against another person"
     game = Game.new
