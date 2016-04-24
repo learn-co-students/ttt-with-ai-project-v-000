@@ -10,6 +10,8 @@ players = gets.strip.to_i
   case players
   when 0
     puts "You have chosen for the computer to play itself"
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+    game.play
   when 1
     puts "You have chosen to play against the computer"
   when 2
