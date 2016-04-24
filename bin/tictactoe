@@ -8,27 +8,55 @@ puts ""
 puts "How many human players? (0-2)"
 players = gets.strip.to_i
 
-  case players
-  when 0
+  case players # Number of human players
+  when 0 # Computer plays itself
     puts "You have chosen for the computer to play itself"
     game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
     game.play
-  when 1
+
+  when 1 # You play against the computer
     puts "You have chosen to play against the computer"
     puts "Would you like an easy or hard opponent?"
     cpu = gets.strip
-    if cpu == "easy"
+    case cpu # Choose computer difficulty
+    when "easy"
       puts "Will you be player 1 or player 2? (1-2)"
       input = gets.strip
-    else
-      "GREETINGS PROFESSOR FALKEN.\nSHALL WE PLAY A GAME?\n".each_char do |c|
+      case input # Player 1 or 2 choice
+      when "1"
+        game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+        game.play
+      when "2"
+        game = Game.new(Player::Computer.new("X"), Player::Human.new("O"))
+        game.play
+      end
+    when "hard"
+      "GREETINGS PROFESSOR FALKEN.\n".each_char do |c|
         putc c ; sleep 0.05; $stdout.flush
       end
+      sleep 0.5
+      "SHALL WE PLAY A GAME?\n".each_char do |c|
+        putc c ; sleep 0.05; $stdout.flush
+      end
+        input = gets.strip
+        case input
+        when "yes"
+          game = Game.new(Player::Human.new("X"), Player::Joshua.new("O"))
+          game.play
+        else
+          "THAT WAS A RHETORICAL QUESTION.\n".each_char do |c|
+            putc c ; sleep 0.05; $stdout.flush
+          end
+          game = Game.new(Player::Joshua.new("X"), Player::Human.new("O"))
+          game.play
+        end
     end
-  when 2
+
+  when 2 # You play against another person
     puts "You have chosen to play against another person"
     game = Game.new
     game.play
-  else
+
+  else # You're bad at following instructions
     puts "Invalid entry... Goodbye!"
   end

@@ -74,7 +74,7 @@ end
       when true
         puts "Cats Game!"
       when false
-        puts "Congratulations #{winner}!"
+        puts "Congratulations #{winner}! You won in #{board.turn_count} turns!"
       end
     end
   end
