@@ -52,6 +52,14 @@ class Board
     input.to_i.between?(1, 9) && !taken?(input)
   end
 
+  def current_valid_moves
+    valid = []
+    (1..9).each do |num|
+      valid << num unless taken?(num)
+    end
+    valid.join(", ")
+  end
+
   def update(input, player)
     if valid_move?(input)
       input = input.to_i - 1

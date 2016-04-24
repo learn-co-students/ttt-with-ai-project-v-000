@@ -4,6 +4,7 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic-Tac-Toe!"
 puts ""
+
 puts "How many human players? (0-2)"
 players = gets.strip.to_i
 
@@ -14,6 +15,8 @@ players = gets.strip.to_i
     game.play
   when 1
     puts "You have chosen to play against the computer"
+    puts "Will you be player 1 or player 2? (1-2)"
+    input = gets.strip
   when 2
     puts "You have chosen to play against another person"
     game = Game.new
