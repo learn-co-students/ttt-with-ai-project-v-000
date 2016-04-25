@@ -56,7 +56,7 @@ end
   end
 
   def turn
-    position = current_player.move(board)
+    position = current_player.move(board, self)
     if board.valid_move?(position)
       board.update(position, current_player)
       board.display
@@ -83,7 +83,7 @@ end
   def play_again?
     puts "Would you like to play again?"
     input = gets.strip.downcase
-    if input == "yes"
+    if input == "yes" || input == "y"
       system "ruby bin/tictactoe"
     else
       puts "Goodbye!"

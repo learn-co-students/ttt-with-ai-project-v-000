@@ -66,4 +66,16 @@ class Board
       cells[input] = player.token
     end
   end
+
+  def available_spaces
+    space_list = []
+    (1..9).each do |num|
+      space_list << num unless taken?(num)
+    end
+    space_list
+  end
+
+  def reset_space_at(space)
+    cells[space.to_i - 1] = " "
+  end
 end
