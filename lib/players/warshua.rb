@@ -1,4 +1,4 @@
-class Player::Joshua < Player
+class Player::Warshua < Player
 
   def move(board, game)
     @current_game = game
@@ -15,6 +15,7 @@ class Player::Joshua < Player
       best_move
     end
   end
+
 
   def get_best_move(board, depth = 0, best_score = {})
     return 0 if @current_game.draw?

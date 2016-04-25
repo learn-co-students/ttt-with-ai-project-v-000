@@ -3,6 +3,9 @@ require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
+  @@games_played = []
+  @@games_won = []
+
   WIN_COMBINATIONS = [
   [0,1,2], # Top row
   [3,4,5], # Middle row
@@ -77,6 +80,24 @@ end
         puts "\033[1;40;36mCongratulations #{winner}! You won in #{board.turn_count} turns!\033[0m"
       end
       play_again?
+    end
+  end
+
+  def wargames
+    while board.turn_count < 9 && !over?
+      turn
+    end
+    if over?
+      @@games_played << 1
+      case draw?
+      when true
+        puts "\033[1;40;31mCat's Game!\033[0m"
+        puts "Games played: #{@@games_played.size}. Games won: #{@@games_won.size}."
+      when false
+        @@games_won << 1
+        puts "\033[1;40;36mCongratulations #{winner}! You won in #{board.turn_count} turns!\033[0m"
+        puts "Games played: #{@@games_played.size}. Games won: #{@@games_won.size}."
+      end
     end
   end
 

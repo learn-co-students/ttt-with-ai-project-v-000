@@ -20,6 +20,18 @@ require_relative '../config/environment'
       when "2"
         game = Game.new(Player::Joshua.new("X"), Player::Joshua.new("O"))
         game.play
+      when "wargames"
+        100.times do
+          game = Game.new(Player::Warshua.new("X"), Player::Warshua.new("O"))
+          game.wargames
+        end
+        "\033[1;40;34mSTRANGE GAME.\n\033[0m".each_char do |c|
+          putc c ; sleep 0.05; $stdout.flush
+        end
+        sleep 0.5
+        "\033[1;40;34mTHE ONLY WINNING MOVE IS NOT TO PLAY.\n\033[0m".each_char do |c|
+          putc c ; sleep 0.05; $stdout.flush
+        end
       else
         puts "Invalid entry... rebooting!"
         system "ruby bin/tictactoe"
