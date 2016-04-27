@@ -1,3 +1,117 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# def Game.start
+#   puts "Welcome to Tic Tac Toe!" # Greet the user with a message.
+#   puts "Please type 0, 1, or 2 players." # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+#   players = gets.strip[0].to_i
+#   if players == 2
+#     self.new
+#   elsif players == 1
+#     puts "Do you want to make the first move? (Y/N)" # Ask the user for who should go first and be "X".
+#     first_move = gets.strip
+#     if first_move == "Y"
+#       self.new(Player::Human.new("X"), Player::Computer.new("O"))
+#     else
+#       self.new(Player::Computer.new("X"), Player::Human.new("O"))
+#     end
+#   else
+#     self.new(Player::Computer.new("X"), Player::Computer.new("O"))
+#   end
+#   puts "Do you want to play again? (Y/N)"
+#   play_again = gets.strip
+#   if play_again == Y
+#     self.start
+#   else
+#     puts "Thanks for playing. See you next time!"
+#   end
+# end
+
+# Use the input to correctly initialize a Game with the appropriate player types and token values.
+# When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
+
+
+# Game.WIN_COMBINATIONS.each do |combo|
+#   # WHILE THERE REMAINS MORE THAN ONE MOVE BEFORE SOMEONE COULD WIN
+#   while (combo[0] == self.token && combo[1] == self.token && combo[2] == " ") == false && (combo[0] == self.token && combo[1] == " " && combo[2] == self.token) == false && (combo[0] == " " && combo[1] == self.token && combo[2] == self.token) == false && (combo[0] != self.token && combo[0] != " " && combo[1] != self.token && combo[1] != " " && combo[2] == " ") == false && (combo[0] != self.token && combo[0] != " " && combo[1] == " " && combo[2] != self.token && combo[2] != " ") == false && (combo[0] == " " && combo[1] != self.token && combo[1] != " " && combo[2] != self.token && combo[2] != " ") == false
+#     #FIRST TURNS: 0,2,4,6,8 || #SECOND TURNS: 1,3,5,7
+#     if board.cells[4] == " " #TAKE CENTER
+#       board.update(5, self.token)
+#     elsif board.turn_count == 1 #TAKE CORNER IF CENTER NOT OPEN
+#       corners = [1, 3, 7, 9]
+#       initial_corner = corners.sample
+#       board.update(initial_corner, self.token)
+#     elsif board.turn_count == 2 && (find_o == 1 || find_o == 3 || find_o == 7 || find_o == 9) #TAKE OPPOSITE CORNER OF OPPONENT'S CORNER
+#       if board.valid_move?(find_o + 8)
+#         board.update(find_o + 8, self.token)
+#       elsif board.valid_move?(find_o - 8)
+#         board.update(find_o - 8, self.token)
+#       elsif board.valid_move?(find_o + 4)
+#         board.update(find_o + 4, self.token)
+#       else
+#         board.update(find_o - 4, self.token)
+#       end
+#     elsif board.turn_count == 2 #TAKE CORNER
+#       corners = [1, 3, 7, 9]
+#       after_center_corner = corners.sample
+#       while !valid_move?(after_center_corner)
+#         after_center_corner = corners.sample
+#       end
+#       board.update(after_center_corner, self.token)
+#     # elsif #winning combinationn
+#     #   Game.WIN_COMBINATIONS.each do |combo|
+#     #     #YOU CAN WIN!
+#     #     if combo[0] == self.token && combo[1] == self.token && combo[2] == " "
+#     #       board.update(combo[2], self.token)
+#     #     elsif combo[0] == self.token && combo[1] == " " && combo[2] == self.token
+#     #       board.update(combo[1], self.token)
+#     #     elsif combo[0] == " " && combo[1] == self.token && combo[2] == self.token
+#     #       board.update(combo[0], self.token)
+#     #     #OTHER PLAYER COULD WIN!
+#     #     elsif combo[0] != self.token && combo[0] != " " && combo[1] != self.token && combo[1] != " " && combo[2] == " "
+#     #       board.update(combo[2], self.token)
+#     #     elsif combo[0] != self.token && combo[0] != " " && combo[1] == " " && combo[2] != self.token && combo[2] != " "
+#     #       board.update(combo[1], self.token)
+#     #     elsif combo[0] == " " && combo[1] != self.token && combo[1] != " " && combo[2] != self.token && combo[2] != " "
+#     #       board.update(combo[0], self.token)
+#     elsif turn_count == 3 && board.cells[4] == self.token # TAKE CORNER
+#       edges = [2, 4, 6, 8]
+#       first_edge = edges.sample
+#       while !valid_move?(first_edge)
+#         first_edge = edges.sample
+#       end
+#       board.update(first_edge, self.token)
+#     elsif turn_count == 3 # TAKE INITIAL_CORNER +/- 6/2
+#       if board.valid_move?(initial_corner + 6)
+#         board.update(initial_corner + 6, self.token)
+#       elsif board.valid_move?(initial_corner - 6)
+#         board.update(initial_corner - 6, self.token)
+#       elsif board.valid_move?(initial_corner + 2, self.token)
+#         board.update(initial_corner + 2, self.token)
+#       else
+#         board.update(initial_corner - 2, self.token)
+#       end
+#     else
+#       "error"
+#     end
+#   end
+#   #YOU CAN WIN!
+#   if combo[0] == self.token && combo[1] == self.token && combo[2] == " "
+#       board.update(combo[2], self.token)
+#     elsif combo[0] == self.token && combo[1] == " " && combo[2] == self.token
+#       board.update(combo[1], self.token)
+#     elsif combo[0] == " " && combo[1] == self.token && combo[2] == self.token
+#       board.update(combo[0], self.token)
+#     #OTHER PLAYER COULD WIN!
+#     elsif combo[0] != self.token && combo[0] != " " && combo[1] != self.token && combo[1] != " " && combo[2] == " "
+#       board.update(combo[2], self.token)
+#     elsif combo[0] != self.token && combo[0] != " " && combo[1] == " " && combo[2] != self.token && combo[2] != " "
+#       board.update(combo[1], self.token)
+#     elsif combo[0] == " " && combo[1] != self.token && combo[1] != " " && combo[2] != self.token && combo[2] != " "
+#       board.update(combo[0], self.token)
+#     end
+
+# def find_o
+#   board.cells.with_index {|cell, index| cell == "O" ? index : nil}.compact.join().to_i + 1
+# end
