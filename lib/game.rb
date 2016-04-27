@@ -9,34 +9,8 @@ class Game
     @board = board
   end
 
-#   def self.start
-#   puts "Welcome to Tic Tac Toe!" # Greet the user with a message.
-#   puts "Please type 0, 1, or 2 players." # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-#   players = gets.strip[0].to_i
-#   if players == 2
-#     self.new
-#   elsif players == 1
-#     puts "Do you want to make the first move? (Y/N)" # Ask the user for who should go first and be "X".
-#     first_move = gets.strip
-#     if first_move == "Y"
-#       self.new(Player::Human.new("X"), Player::Computer.new("O"))
-#     else
-#       self.new(Player::Computer.new("X"), Player::Human.new("O"))
-#     end
-#   else
-#     self.new(Player::Computer.new("X"), Player::Computer.new("O"))
-#   end
-#   puts "Do you want to play again? (Y/N)"
-#   play_again = gets.strip
-#   if play_again == Y
-#     self.start
-#   else
-#     puts "Thanks for playing. See you next time!"
-#   end
-# end
-
   def current_player
-    board.turn_count.even? ? player_1 : player_2
+    @board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -44,46 +18,48 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect {|combo| (board.cells[combo[0]] == "X" || board.cells[combo[0]] == "O") && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]}
+    WIN_COMBINATIONS.detect {|combo| (@board.cells[combo[0]] == "X" || @board.cells[combo[0]] == "O") && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]}
   end
 
   def draw?
-    board.full? && !self.won?
+    @board.full? && !won?
   end
 
   def winner
-    if self.won?
-      WIN_COMBINATIONS.collect do |combo|
-        if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
-          board.cells[combo[0]]
+    if won?
+        total_x = @board.cells.select {|i| i == "X"}.count
+        total_o = @board.cells.select {|i| i == "O"}.count
+        if total_x > total_o
+          "X"
+        else
+          "O"
         end
-      end.compact.uniq.join().gsub(" ","")
-    else
-      nil
     end
   end
 
   def turn
     player = current_player
-    current_move = player.move(board)
-    if !board.valid_move?(current_move)
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
       turn
     else
-      board.update(current_move, player)
+      @board.update(current_move, player)
     end
   end
 
   def play
     while !over?
       turn
+      @board.display
+      puts "Upcoming move by Player '#{current_player.token}'."
     end
     if won?
       puts "Congratulations #{winner}!"
+      @board.display
     elsif draw?
       puts "Cats Game!"
+      @board.display
     end
   end
 
 end
-
-# Game.start
