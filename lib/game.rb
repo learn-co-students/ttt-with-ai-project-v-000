@@ -65,6 +65,7 @@ class Game
     location = current_player.move(@board)
     if @board.valid_move?(location)
       @board.update(location, current_player)
+      puts "You have moved to #{location}"
     else
       turn
     end

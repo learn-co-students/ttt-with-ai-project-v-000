@@ -1,7 +1,7 @@
 require "pry"
 require_relative "../../config/environment.rb"
 
-class Human < Player
+class Player::Human < Player
 
   def move(board)
     puts "Please enter 1 - 9"
