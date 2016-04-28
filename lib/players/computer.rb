@@ -6,7 +6,7 @@ class Player::Computer < Player
   def move(board)
     if !board.taken?("5") #Checks if the middle is taken
       "5" #if it isn't then it goes for the center
-    elsif
+    elsif corners(board)
       corners(board)
     else
       rand(1..9)
@@ -14,7 +14,7 @@ class Player::Computer < Player
   end
 
   def corners(board)
-    [1, 3, 7, 9].detect {|cell| !board.taken?(cell)}
+    ["1", "3", "7", "9"].detect {|cell| !board.taken?(cell)}
   end
 
 end
