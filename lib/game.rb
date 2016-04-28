@@ -62,14 +62,24 @@ class Game
   end
 
   def turn
-    puts "Please enter 1 - 9"
-    location = gets.strip
+    location = current_player.move(@board)
     if @board.valid_move?(location)
       @board.update(location, current_player)
     else
       turn
     end
     @board.display
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cats Game!"
+    end
   end
 
 end

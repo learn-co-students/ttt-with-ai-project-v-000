@@ -1,3 +1,75 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def check
+  puts "What token would you like, X or O?"
+  print @prompt
+  player_token = gets.strip.upcase
+  until player_token == "X" || player_token == "O"
+    puts "Sorry please enter either X or O"
+    print @prompt
+    player_token = gets.strip.upcase
+  end
+  player_token
+end
+
+def another_round?(input)
+  until input == "Y" || input == "N"
+    if input == "Y"
+      true
+    elsif input == "N"
+      false
+    else
+      puts "Sorry, please enter Y or N"
+      print @prompt
+      input = gets.strip.upcase
+    end
+  end
+end
+
+def players
+  puts "Please enter 0, 1, or 2 players:"
+  @prompt = ">"
+  print @prompt
+  @num_players = gets.strip
+end
+
+def play_again
+  puts "Would you like to play another round? (Y/N)"
+  print @prompt
+  input = gets.strip.upcase
+  if another_round?(input)
+    players
+    play
+  else
+    puts "Thanks! See you again soon!"
+  end
+end
+
+def play
+  question = "What token would you like, X or O?"
+  case @num_players
+  when "0"
+    game = Game.new(player_1 = Computer.new("X"), player_2 = Computer("O"), board = Board.new)
+    game.play
+    play_again
+  when "1"
+    print @prompt
+    human_token = check
+    human_token == "X" ? comp_token = "O" : comp_token = "X"
+    game = Game.new(player_1 = Human.new(human_token), player_2 = Computer.new(comp_token))
+    game.play
+    play_again
+  when "2"
+    player_1_token = check
+    player_1_token == "X" ? player_2_token = "O" : player_2_token = "X"
+    game = Game.new(player_1 = Human.new(player_1_token), player_2 = Human.new(player_2_token))
+    game.play
+    play_again
+  end
+end
+
+puts "Welcome to Tic Tac Toe!"
+players
+play
