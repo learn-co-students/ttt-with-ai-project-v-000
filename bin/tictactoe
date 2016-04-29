@@ -1,3 +1,62 @@
 #!/usr/bin/env ruby
+require 'colorize'
 
 require_relative '../config/environment'
+
+module GameMenu
+
+  def menu
+    print %q[
+    ___________  __        __                 __           _______
+    \__    ___/ |__| _____/  |______    _____/  |_  ____  |  ____
+       |    |   |  |/ ___\   __\__  \ _/ ___\_  __\/ __ \ |  ___/
+       |    |   |  \  \___|  |  / __ \  \___  | | | |__| || |_____
+       |____|   |__|\_____>__| (______/\_____>|_|  \____/  \_____/].colorize(:color => :light_black).blink + "\n"
+    "Welcome to Tic Tac Toe!!!!
+    What kind of game would you like to play?
+    1) You vs. Computer
+    2) You vs. another human
+    3) Computer vs. computer
+    4) Exit the game \n: ".colorize(:red).bold
+  end
+  def show
+    menu
+  end
+end
+
+module Promptable
+  def prompt(message)
+    print message
+    gets.chomp
+  end
+end
+
+#gameplay
+
+  include GameMenu
+  include Promptable
+  until [user_input = prompt(show).downcase].include?('q')
+    case user_input
+    when '1'
+      print "Who should go first? Enter 1 for you or 2 for the Computer : "
+      play_order = gets.chomp
+      if play_order == "1"
+        game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+      else
+        game = Game.new(Player::Computer.new("O"), Player::Human.new("X"))
+      end
+      @board.display
+      game.play_cli
+    when '2'
+      game = Game.new(Player::Human.new("X"), Player::Human.new("O"))
+      game.play_cli
+    when '3'
+      game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+      game.play_cli
+    when "4"
+      puts "Maybe next time!"
+      exit
+    else
+      puts 'What was that? (You might have entered an invalid response.)'
+    end
+end

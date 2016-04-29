@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Board
   attr_accessor :cells
 
@@ -6,13 +8,17 @@ class Board
 
   end
 
-  def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
-    puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
-    puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-  end
+  def display(board)
+        output = "\n"
+        0.upto(8) do |position|
+          output << color(board, position)
+          case position % 3
+          when 0, 1 then output << "|".colorize(:color => :white, :background => :black)
+          when 2 then output << "\n" + "-----------".colorize(:color => :white, :background => :black) + "\n" unless position == 8
+          end
+        end
+        puts output
+      end
 
   def reset!
     self.cells = Array.new(9," ")
@@ -40,6 +46,16 @@ class Board
 
   def update(input, player)
     self.cells[input.to_i - 1] = player.token if self.valid_move?(input)
+  end
+
+  private
+
+  def color(board, position)
+    if board.cells[position]
+      " #{board.cells[position]} ".colorize(:color => :green, :background => :black)
+    else
+      " #{position} ".white
+    end
   end
 
 

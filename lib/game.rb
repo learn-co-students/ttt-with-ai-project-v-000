@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -46,10 +48,12 @@ class Game
     player = current_player
     new_move = player.move(@board)
     if !@board.valid_move?(new_move)
+      puts "\nInvalid input.. please try again.".red
+      @board.display(board)
       turn
     else
       @board.update(new_move, player)
-      @board.display
+      @board.display(board)
     end
   end
 
@@ -58,9 +62,27 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner}!".green
     elsif draw?
-      puts "Cats Game!"
+      puts "Cats Game!".red
+    end
+  end
+
+  def play_cli
+    turn until over?
+    puts "Cats Game!" if draw?
+    puts "Congratulations #{winner}!".colorize(:color => :green).bold unless draw?
+    puts "Would you like to play again? Yes or No".colorize(:color => :red).bold
+    input = gets.chomp.downcase
+    case input
+    when "yes", "y"
+      return
+    when "no", "n"
+      puts "Thanks for playing. Goodbye."
+      exit
+    else
+      puts "Thanks for playing. Goodbye."
+      exit
     end
   end
 
