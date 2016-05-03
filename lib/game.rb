@@ -47,7 +47,7 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    #puts "Please enter 1-9:"
+    puts "#{current_player.token} your move."
     pos = current_player.move(@board)
       if @board.update(pos, current_player) == nil
         turn
