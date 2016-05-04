@@ -1,10 +1,8 @@
-require_relative 'player.rb'
-require_relative 'game.rb'
-
 class Board
   attr_accessor :cells
+
   def initialize(cells= nil)
-    @cells = cells || Array.new(9,' ')
+    @cells = Array.new(9,' ')
   end
 
   def reset!
@@ -49,6 +47,6 @@ class Board
   end
 
   def turn_count #returns number of turns based on cell value
-    @cells.reject{|x| x == ' '}.size
+    @cells.count{|cell| cell == "X" || cell == "O"}
   end
 end
