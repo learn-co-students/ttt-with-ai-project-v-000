@@ -1,8 +1,11 @@
 class Board
   attr_accessor :cells
+  attr_reader :move_history
+  
   
   def initialize
     reset!
+    @move_history = []
   end
   
   def reset!
@@ -15,6 +18,12 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+  end
+  
+  def divider
+    puts " "
+    puts "************************"
+    puts " "
   end
   
   def position(input)
@@ -42,6 +51,7 @@ class Board
   
   def update(input, player)
     self.cells[input.to_i - 1] = player.token
+    @move_history << (input.to_i - 1)
   end
   
 end

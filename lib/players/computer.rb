@@ -2,10 +2,17 @@ require 'pry'
 
 class Computer < Player
   
+  WINNING_ROWS = [
+    [1,2,3],[4,5,6],[7,8,9],
+    [1,4,7],[2,5,8],[3,6,9],
+    [1,5,9],[7,5,3]
+  ]
+  
+   
+  
   def move(board)
     @board = board
-    #binding.pry
-    
+
     
     if board.turn_count == 0
       first_move.to_s
@@ -55,10 +62,9 @@ class Computer < Player
   end
   
   def fourth_move
+
     xs = []
-    @board.cells.each_with_index do |cell, cell_index|
-      xs << (cell_index + 1) if cell == "X"
-    end
+    @board.move_history.each_with_index { |move, i| xs << (move + 1) if i.even? }
     
     @opp_first_x, @opp_second_x = xs
     opposite_corner = {1 => 9, 9 => 1, 3 => 7, 7 => 3}
@@ -68,62 +74,60 @@ class Computer < Player
       @my_second_o = [1,3,7,9].reject! do |corner|
         corner == @my_first_o || corner == opposite_x
       end.sample
+    elsif two_of_three("X") && @board.valid_move?(two_of_three("X"))
+      @my_second_o = two_of_three("X")
     else
-      winning_positions.each do |winning_combo|
-        if (xs - winning_combo).empty?
-          @my_second_o = (winning_combo - xs).first
-        else
-          rand(1..9)
-        end
-      end
+      @board.cells.each_with_index { |cell, i| @my_second_o = (i + 1) if cell.empty? }
+      @my_second_o
     end
-  end
+  end  
   
   def rest_of_moves
-    #binding.pry
-    xs = []
-    @board.cells.each_with_index do |cell, cell_index|
-      xs << (cell_index + 1) if cell == "X"
-    end
-    
-    os = []
-    @board.cells.each_with_index do |cell, cell_index|
-      os << (cell_index + 1) if cell == "O"
-    end
-    
-    winning_positions.each do |winning_combo|
-      if (xs - winning_combo).empty?
-        if @board.valid_move?((winning_combo - xs).first)  
-          @my_third_x = (winning_combo - xs).first
+    # binding.pry
+    if two_of_three(@token) && @board.valid_move?(two_of_three(@token))
+      my_move = two_of_three(@token)
+    elsif two_of_three(@opp_token) && @board.valid_move?(two_of_three(@opp_token))
+      my_move = two_of_three(@opp_token)
+    else
+      @board.cells.each_with_index do |cell, i| 
+        if cell == " "
+          my_move = (i + 1)
           break
-        end
-      elsif (os - winning_combo).empty?
-        if @board.valid_move?((winning_combo - os).first)  
-          @my_third_x = (winning_combo - os).first
-          break
-        end
-      else
-        @my_third_x = rand(1..9)
+        end  
       end
     end
+    
+    my_move
+  end
+
+  
+  
+  
+  
+  def two_of_three(token)
+    tokens = current_tokens(token)
+    my_move = false
+    
+    WINNING_ROWS.each do |row|
+      if (row - tokens).size == 1
+        my_move = (row - tokens).first
+        break
+      end
+    end
+    
+    my_move
   end
   
   
   
-  def winning_positions
-    #binding.pry
-    winning_cell_combos = []
-    
-    Game::WIN_COMBINATIONS.each do |winning_combo|
-      winning_cell_combo = []
-      
-      winning_combo.each do |index|
-        winning_cell_combo << index + 1
-      end
-      winning_cell_combos << winning_cell_combo
+  
+  def current_tokens(token)
+    tokens = []
+    @board.cells.each_with_index do |cell, cell_index|
+      tokens << (cell_index + 1) if cell == token
     end
     
-    winning_cell_combos
+    tokens
   end
   
 end

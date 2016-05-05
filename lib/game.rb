@@ -33,14 +33,13 @@ class Game
   end
   
   def turn
-    self.board.display 
-    puts "************"
-    puts "Make Your Move"
-    puts "************"
+
     input = self.current_player.move(self.board)
     
     if self.board.valid_move?(input)
       self.board.update(input, self.current_player)
+      self.board.display 
+      self.board.divider
     else
       "invalid"
       turn
