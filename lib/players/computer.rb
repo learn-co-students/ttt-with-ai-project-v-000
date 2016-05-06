@@ -56,7 +56,9 @@ class Player::Computer < Player
     xs = []
     corners = [1, 3, 7, 9]
     opposite_corner_to = {1 => 9, 9 => 1, 3 => 7, 7 => 3}
-    @board.move_history.each_with_index { |square, i| xs << (square + 1) if i.even? }
+    @board.move_history.each_with_index do |square, i|
+      xs << (square + 1) if i.even?
+    end  
     
     #see if opponent can win. If so, block it.
     if can_win_with(@opp_token)
