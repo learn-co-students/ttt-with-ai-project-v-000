@@ -34,6 +34,11 @@ class Player::Computer < Player
     end
   end
 
+  # The two_of_three method is iterating through the win combinations to find the
+  # combination in which two of the three index spaces were taken and if that
+  # returns true, find the empty index space of that combination and move it there
+  # (using the defend method).
+
   def two_of_three(board)
     Game::WIN_COMBINATIONS.find do |i|
       (board.cells[i[0]] == board.cells[i[1]] && !board.taken?(i[2]+1)) ||
