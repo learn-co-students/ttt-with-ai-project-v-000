@@ -1,6 +1,4 @@
-require 'pry'
-
-class Computer < Player
+class Player::Computer < Player
   
   WINNING_ROWS = [
     [1,2,3],[4,5,6],[7,8,9],
@@ -8,49 +6,39 @@ class Computer < Player
     [1,5,9],[7,5,3]
   ]
   
-   
-  
   def move(board)
     @board = board
-
     
-    if board.turn_count == 0
+    case @board.turn_count
+    when 0
       first_move.to_s
-    elsif board.turn_count == 1
+    when 1
       second_move.to_s
-    elsif board.turn_count == 2
+    when 2
       third_move.to_s
-    elsif board.turn_count == 3
+    when 3
       fourth_move.to_s
-    elsif board.turn_count.between?(4,8)
+    else
       rest_of_moves.to_s
     end
-      
   end
-
-
-
-
-
-
 
   
   def first_move
     @my_first_x = 5
   end
   
+  
   def second_move
-    @opp_first_x = @board.cells.find_index { |cell| cell == "X" } + 1
+    @opp_first_x = first_token_placement
+    @opp_first_x == 5 ? @my_first_o = [1, 3, 7, 9].sample : @my_first_o = 5
     
-    if @opp_first_x == 5
-      @my_first_o = [1, 3, 7, 9].sample
-    else
-      @my_first_o = 5
-    end
+    @my_first_o
   end
   
+  
   def third_move
-    @opp_first_o = @board.cells.find_index { |cell| cell == "O" } + 1
+    @opp_first_o = first_token_placement
     
     if @opp_first_o.even?
       edge_response = {2 => [7, 9], 4 => [3, 9], 6 => [1, 7], 8 => [1, 3]}
@@ -58,67 +46,68 @@ class Computer < Player
     else
       corner_response = {1 => 9, 9 => 1, 3 => 7, 7 => 3}
       @my_second_x = corner_response[@opp_first_o]
-    end    
+    end  
+    
+    @my_second_x
   end
   
+  
   def fourth_move
-
     xs = []
-    @board.move_history.each_with_index { |move, i| xs << (move + 1) if i.even? }
+    corners = [1, 3, 7, 9]
+    opposite_corner_to = {1 => 9, 9 => 1, 3 => 7, 7 => 3}
+    @board.move_history.each_with_index { |square, i| xs << (square + 1) if i.even? }
     
-    @opp_first_x, @opp_second_x = xs
-    opposite_corner = {1 => 9, 9 => 1, 3 => 7, 7 => 3}
-    opposite_x = opposite_corner[@my_first_o]
-    
-    if xs.include?(5) && xs.include?(opposite_x)
-      @my_second_o = [1,3,7,9].reject! do |corner|
-        corner == @my_first_o || corner == opposite_x
+    #see if opponent can win. If so, block it.
+    if can_win_with(@opp_token)
+      @my_second_o = can_win_with(@opp_token)
+      
+    #choose a vacant corner if there is a diagonal line in play  
+    elsif xs.include?(5) && xs.include?(opposite_corner_to[@my_first_o])
+      @my_second_o = corners.reject! do |corner|
+        corner == @my_first_o || corner == opposite_corner_to[@my_first_o]
       end.sample
-    elsif two_of_three("X") && @board.valid_move?(two_of_three("X"))
-      @my_second_o = two_of_three("X")
+      
     else
-      @board.cells.each_with_index { |cell, i| @my_second_o = (i + 1) if cell.empty? }
-      @my_second_o
+      @my_second_o = first_empty_cell
     end
+    
+    @my_second_o
   end  
   
+  
   def rest_of_moves
-    # binding.pry
-    if two_of_three(@token) && @board.valid_move?(two_of_three(@token))
-      my_move = two_of_three(@token)
-    elsif two_of_three(@opp_token) && @board.valid_move?(two_of_three(@opp_token))
-      my_move = two_of_three(@opp_token)
+    
+    if can_win_with(@token)
+      my_move = can_win_with(@token)
+      
+    elsif can_win_with(@opp_token)
+      my_move = can_win_with(@opp_token)
+      
     else
-      @board.cells.each_with_index do |cell, i| 
-        if cell == " "
-          my_move = (i + 1)
-          break
-        end  
-      end
+      my_move = first_empty_cell
     end
     
     my_move
   end
 
   
-  
-  
-  
-  def two_of_three(token)
-    tokens = current_tokens(token)
+  def can_win_with(token)
     my_move = false
+    tokens = current_tokens(token)
     
     WINNING_ROWS.each do |row|
       if (row - tokens).size == 1
-        my_move = (row - tokens).first
-        break
+        possible_move = (row - tokens).first
+        if @board.valid_move?(possible_move)
+          my_move = possible_move
+          break
+        end
       end
     end
     
     my_move
   end
-  
-  
   
   
   def current_tokens(token)
@@ -128,6 +117,20 @@ class Computer < Player
     end
     
     tokens
+  end
+  
+  
+  def first_token_placement
+    @board.cells.find_index { |cell| cell == @opp_token } + 1
+  end
+  
+  
+  def first_empty_cell
+    empty_index = @board.cells.index do |cell|
+      cell == " "
+    end
+    
+    empty_index + 1
   end
   
 end

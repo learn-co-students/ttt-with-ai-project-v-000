@@ -1,8 +1,9 @@
-class Human < Player
+class Player::Human < Player
   
   def move(board)
-    puts "Enter a number between 1 and 9:"
+    puts "Enter an available number between 1 and 9:"
     input = gets.strip
+    input
   end
   
 end
