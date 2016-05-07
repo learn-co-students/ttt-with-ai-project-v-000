@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -333,8 +334,5 @@ describe 'Game' do
 
       game.play
     end
-  end
-
-  describe 'start' do
   end
 end
