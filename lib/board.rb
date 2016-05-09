@@ -60,7 +60,6 @@ class Board
   end
 
   def update(cell_num, player)
-    cells[cell_num.to_i - 1] = token.value
+    cells[cell_num.to_i - 1] = player.token
   end
-
 end
