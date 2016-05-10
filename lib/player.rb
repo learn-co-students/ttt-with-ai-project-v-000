@@ -6,6 +6,7 @@ class Player
   end
 end
 
+=begin
 class Human < Player
   def move(board=[])
     input = gets.strip
@@ -38,3 +39,4 @@ class Computer < Player
     end
   end
 end
+=end
