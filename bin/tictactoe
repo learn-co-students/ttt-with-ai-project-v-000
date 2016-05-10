@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "welcome to the awesomest tic-tac-toe game ever!"
+puts "select option (1-3): \n 1. human v. human \n 2. human v. computer \n 3. computer v. computer"
+
+answer = 0
+while answer > 3 || answer < 1
+  answer = gets.chomp.to_i
+end
+
+game = Game.new(Player::Human.new("X"),Player::Human.new("O"), Board.new) if answer == 1
+game = Game.new(Player::Human.new("X"),Player::Computer.new("O"), Board.new) if answer == 2
+game = Game.new(Player::Computer.new("X"),Player::Computer.new("O"), Board.new) if answer == 3
+game.play
