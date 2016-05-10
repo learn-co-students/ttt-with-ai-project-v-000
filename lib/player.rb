@@ -11,7 +11,7 @@ class Player::Human < Player
 
   def move(board)
     input = 0
-    puts "where would you like to go???"
+    puts "where would you like to go?"
     until input.to_i < 10 && input.to_i > 0
       input = gets
     end
