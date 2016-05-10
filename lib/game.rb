@@ -12,7 +12,7 @@ class Game
 
           attr_accessor :board, :player_1, :player_2
 
-    def initialize(player_1=Player::Human.player_1,player_2=Player::Human.player_2,board=[])
+    def initialize(player_1="X",player_2="O",board=[])
       @player_1 = player_1
       @player_2 = player_2
       @board = board

@@ -1,15 +1,6 @@
 class Player::Human < Player
 
-  attr_reader :player_1, :player_2
-
-  def player_1
-    @player_1 = "X"
-  end
-
-  def player_2
-    @player_2 = "O"
-  end
-
+ 
   def move(board)
     input = gets
     input
