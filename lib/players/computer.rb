@@ -1,9 +1,9 @@
-class Computer < Player
+class Player::Computer < Player
   def move(board)
 
-    #board_chk = board.turn_count
+    board_chk = board.turn_count
 
-    case board_chk = board.turn_count
+    case board_chk
     when board_chk === 0
       if board.cells[4] == " "
         "5"
