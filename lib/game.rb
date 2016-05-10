@@ -60,3 +60,5 @@ class Game
     @board.update(user_input, current_player)
     @board.display
   end
+
+end
