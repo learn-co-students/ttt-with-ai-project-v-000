@@ -44,7 +44,6 @@ class Board
 
     def update(location,player)
       self.cells[(location.to_i - 1)] = "X"
-
     end
 
 end
