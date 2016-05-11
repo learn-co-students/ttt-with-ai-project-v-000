@@ -32,7 +32,7 @@ class Game
   def won?
     won = false
     WIN_COMBINATIONS.each do |x|
-      if @board.cells[x[0]] == "X" && @board.cells[x[1]] == "X" && @board.cells[x[2]] == "X" || @board.cells[x[0]] == "O" && @board.cells[x[1]] == "O" && @board.cells[x[2]] == "O"
+      if board.cells[x[0]] == "X" && board.cells[x[1]] == "X" && board.cells[x[2]] == "X" || board.cells[x[0]] == "O" && board.cells[x[1]] == "O" && board.cells[x[2]] == "O"
         won = true
       end
     end
@@ -55,20 +55,26 @@ class Game
           # I can't figure out why the following raised an error:
           # if @board.cells[x[0]] == @board.cells[x[1]] && @board.cells[x[1]] == @board.cells[x[2]] 
           #    @board.cells[x[0]]
+          # Also, when I used binding.pry to go into my play method (I placed it under #{winner}), it says that won? was true even though there were only two objects on the board.
         end
       end
     end
   end
 
   def turn
-    @board.display
-    puts "Please enter 1-9:"
-    user_input = current_player.move(@board).to_i
-    if !@board.valid_move?(user_input)
-      puts "That is not a valid selection"
-      turn
-    elsif @board.valid_move?(user_input)
-      @board.update(user_input, current_player)
+    if current_player.class == Player::Human
+      puts "When making your selections, please enter 1-9:"
+      user_input = current_player.move(@board).to_i
+      if !@board.valid_move?(user_input)
+        puts "That is not a valid selection"
+        turn
+      elsif @board.valid_move?(user_input)
+        @board.update(user_input, current_player)   
+      end
+    elsif current_player.class == Player::Computer
+      puts "Computer is choosing"
+      sleep(1)
+      board.update(current_player.move(@board), current_player)
     end
     @board.display
   end
