@@ -42,7 +42,7 @@ class Board
     end
 
     def update(location,player)
-      self.cells[(location.to_i - 1)] = "X"
+      cells[(location.to_i - 1)] = player.token
     end
 
 end

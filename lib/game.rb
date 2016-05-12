@@ -52,12 +52,10 @@ class Game
     end
 
     def winner  
-      if won? == true
-       winning_combo = WIN_COMBINATIONS.detect{|x| board.cells[x[0]] == board.cells[x[1]] && board.cells[x[1]] == board.cells[x[2]]
+      if won?
+       winning_combo = WIN_COMBINATIONS.detect{|x| board.cells[x[0]] == "X" && board.cells[x[1]] == "X" && board.cells[x[2]] == "X" || board.cells[x[0]] == "O" && board.cells[x[1]] == "O" && board.cells[x[2]] == "O"
       }
-      board.cells[winning_combo[0]]
-      else
-      nil
+      board.cells[winning_combo[1]]
       end
     end
 
@@ -66,7 +64,7 @@ class Game
       if !board.valid_move?(move_location)
       turn    
       end
-      board.update(move_location.to_i,current_player.token)
+      board.update(move_location,current_player)
     end
     
 
@@ -75,7 +73,7 @@ class Game
         turn
       end
       if won?
-      winner_letter  = winner  
+      winner_letter  = winner
       puts "Congratulations #{winner_letter}!"
       elsif draw?
       puts "Cats Game!"
