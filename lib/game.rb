@@ -52,37 +52,37 @@ class Game
     end
 
     def winner  
-      if won? == true
+      if won?
        winning_combo = WIN_COMBINATIONS.detect{|x| board.cells[x[0]] == board.cells[x[1]] && board.cells[x[1]] == board.cells[x[2]]
       }
       board.cells[winning_combo[0]]
       else
-      return nil
+      nil
       end
     end
 
     def turn
-      move_location = player_1.move(board)
+      move_location = current_player.move(board)
       if !board.valid_move?(move_location)
-        turn     
+      turn    
       end
-      board.update(move_location,player_1.token)  
+      board.update(move_location,current_player.token)
     end
-    #takes input
-    #check if valid input
-    #if not valid, ask for input again. 
-    #if valid, then make a move / update with that
-    #change to next players turn
-#Possibly the stubbing in the test. 
-#It might be expecting player_one to receive the method turn or something and you are calling it on the other player instead.
     
+
+    def play
+      while !over?
+        turn
+      end
+      if won?
+      winner_letter  = winner  
+      puts "Congratulations #{winner_letter}!"
+      elsif draw?
+      puts "Cats Game!"
+      end
+    end
 
 end
 
-#detect for X - get an array of trues where X are. 
-#.each_with_index = put the indexes. match them with the win combinations 
-
-#self.board.cells.each_with_index{|x,index| if x == "X"
-#variable << index
-#end } 
-
+#checks if game is over after every turn
+#plays the first few turns. 

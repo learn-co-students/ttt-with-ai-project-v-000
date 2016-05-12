@@ -20,21 +20,21 @@ class Board
 
     def position(number)
       position_index = number.to_i - 1
-      self.cells[position_index]
+      cells[position_index]
     end
 
     def full?
-      self.cells.all?{|x| x != " "}
+      cells.all?{|x| x != " "}
     end
 
     def turn_count
-      turns = self.cells.collect{|x| x == "X" or x == "O"}
+      turns = cells.collect{|x| x == "X" || x == "O"}
       turns.count {|x| x == true}
     end
 
     def taken?(location)
-      value = self.cells[(location.to_i - 1)]
-      !(value.nil? || value == " " || value == "")
+      value = cells[(location.to_i - 1)]
+      !(value.nil? || value == " ")
     end
 
     def valid_move?(location)
