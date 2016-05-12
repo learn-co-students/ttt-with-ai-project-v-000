@@ -31,23 +31,50 @@ class Game
     end
 
     def won?
-      WIN_COMBINATIONS.detect{|x|
-        board.cells[x[0]] == board.cells[x[1]] && board.cells[x[1]] == board.cells[x[2]]
-      }
-    end  
+      WIN_COMBINATIONS.each do |check|
+      win_index_1 = check[0]
+      win_index_2 = check[1]
+      win_index_3 = check[2]
+
+      position_1 = board.cells[win_index_1]
+      position_2 = board.cells[win_index_2]
+      position_3 = board.cells[win_index_3]
+
+      if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
+        return true
+      end
+      end
+        return false
+    end
 
     def draw?
       !won? && board.full?
     end
 
-    def winner
-      if !won? || draw?
-        return nil
+    def winner  
+      if won? == true
+       winning_combo = WIN_COMBINATIONS.detect{|x| board.cells[x[0]] == board.cells[x[1]] && board.cells[x[1]] == board.cells[x[2]]
+      }
+      board.cells[winning_combo[0]]
       else
-      board.cells[won?[0]]
+      return nil
       end
     end
 
+    def turn
+      move_location = player_1.move(board)
+      if !board.valid_move?(move_location)
+        turn     
+      end
+      board.update(move_location,player_1.token)  
+    end
+    #takes input
+    #check if valid input
+    #if not valid, ask for input again. 
+    #if valid, then make a move / update with that
+    #change to next players turn
+#Possibly the stubbing in the test. 
+#It might be expecting player_one to receive the method turn or something and you are calling it on the other player instead.
     
 
 end
