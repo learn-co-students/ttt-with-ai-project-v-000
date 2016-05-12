@@ -52,7 +52,7 @@ class Game
     end
 
     def winner  
-      if won?
+      if won? == true
        winning_combo = WIN_COMBINATIONS.detect{|x| board.cells[x[0]] == board.cells[x[1]] && board.cells[x[1]] == board.cells[x[2]]
       }
       board.cells[winning_combo[0]]
@@ -66,7 +66,7 @@ class Game
       if !board.valid_move?(move_location)
       turn    
       end
-      board.update(move_location,current_player.token)
+      board.update(move_location.to_i,current_player.token)
     end
     
 
