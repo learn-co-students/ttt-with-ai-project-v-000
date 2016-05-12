@@ -1,23 +1,19 @@
+require 'pry'
 class Player::Computer < Player
   #go to the center
+WIN_COMBINATIONS = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2] ]
 
  def move(board) 
   if board.taken?(4) == false
     "5"
-  elsif board.taken?(0) == false
-    "1"
-  elsif board.taken?(2) == false
-    "3"
-  elsif board.taken?(6) == false
-    "7"
-  elsif board.taken?(8) == false
-    "9"
   else
-    complete_combo(board)
+    random || complete_combo(board)
+  end
+    #complete_combo(board)
 #try to get 3 in a row or block opponent from getting 3 in a row
 #just needs to check if the win combo
 #has two of the same token. if 2 of self, go there. if 2 of opponent, block it
-  end
+  
 end
 
  def has_two_tokens(board)
@@ -30,8 +26,12 @@ end
 
 def complete_combo(board)
   if !has_two_tokens(board).nil?
-    has_two_tokens(board).detect { |index| board.cells[index] == " "}+1
+    has_two_tokens(board).find { |index| board.cells[index] == " "}+1
   end
+end
+
+def random
+  (1..9).to_a.sample
 end
 
 end
