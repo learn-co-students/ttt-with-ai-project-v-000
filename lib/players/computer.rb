@@ -19,5 +19,7 @@ class Player::Computer < Player
 end
 
 
-#move_combos = WINNERS.detect{|x| if board.cells[x[0]] == board.cells[x[1]] || board.cells[x[0]] == board.cells[x[2]] || board.cells[x[1]] == board.cells[x[2]]
+#move_combos = WINNERS.detect{|x| if board.cells[x] == board.cells[x] || board.cells[x] == board.cells[x] || board.cells[x] == board.cells[x]
  #   end}
+
+ #board.cells = ["X","X"," ","O"," "," "," "," "," "]
