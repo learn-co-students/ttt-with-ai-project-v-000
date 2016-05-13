@@ -10,16 +10,14 @@ class Board
   end
 
   def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
   def position(position_number)
-    #"Please list the position which you would like to see the value of?"
-    #position_number = gets.strip
     int_position_number = position_number.to_i
     self.cells[int_position_number-1]
   end
@@ -52,11 +50,12 @@ class Board
 
   def valid_move?(number)
     valid_move = false
-    valid_move = true unless self.cells[number.to_i - 1] == "X" || self.cells[number.to_i - 1] == "O" || number.to_i < 1 || number.to_i > 9
+    valid_move = true unless self.taken?(number) || !number.to_i.between?(1,9)
     valid_move
   end
 
   def update(position, player)
+    #binding.pry
     self.cells[position.to_i - 1] = player.token
   end
 

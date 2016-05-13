@@ -10,15 +10,10 @@ class Game
   end
 
   def current_player
-    count = 0
-    @board.cells.each do |position|
-      if position == "X" || position == "O"
-        count += 1
-      end
-    end
+    count = self.board.turn_count
     if count % 2 == 0
       player_1
-    else
+    elsif count % 2 == 1
       player_2
     end
   end
@@ -55,7 +50,7 @@ class Game
           # I can't figure out why the following raised an error:
           # if @board.cells[x[0]] == @board.cells[x[1]] && @board.cells[x[1]] == @board.cells[x[2]] 
           #    @board.cells[x[0]]
-          # Also, when I used binding.pry to go into my play method (I placed it under #{winner}), it says that won? was true even though there were only two objects on the board.
+          # Also, when I used binding.pry to go into my play method (I placed it under #{winner}), it says that won? was true even though there were only two objects on the board. When I place it at each new location, the #board method displays different results
         end
       end
     end
@@ -65,18 +60,17 @@ class Game
     if current_player.class == Player::Human
       puts "When making your selections, please enter 1-9:"
       user_input = current_player.move(@board).to_i
-      if !@board.valid_move?(user_input)
-        puts "That is not a valid selection"
+      if !board.valid_move?(user_input)
+        puts "That is not a valid selction"
         turn
-      elsif @board.valid_move?(user_input)
-        @board.update(user_input, current_player)   
+      elsif board.valid_move?(user_input)
+        board.update(user_input, current_player)   
       end
     elsif current_player.class == Player::Computer
-      puts "Computer is choosing"
-      sleep(1)
+      puts "Your opponent is choosing"
       board.update(current_player.move(@board), current_player)
     end
-    @board.display
+    board.display
   end
 
   def play
@@ -84,7 +78,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{self.winner}!"
     elsif draw?
       puts "Cats Game!"
     end
