@@ -70,7 +70,9 @@ class Game
 
     def play
       while !over?
+        puts "Please enter where you want to put your symbol."
         turn
+        board.display
       end
       if won?
       winner_letter  = winner

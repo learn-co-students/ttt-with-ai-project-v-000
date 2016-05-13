@@ -3,7 +3,11 @@ class Board
   attr_accessor :cells
 
     def initialize
-      @cells = [" "," "," "," "," "," "," "," "," "]
+      self.cells = [" "," "," "," "," "," "," "," "," "]
+    end
+
+    def test 
+      puts "this is a test!!"
     end
 
     def reset!
@@ -11,11 +15,11 @@ class Board
     end
 
     def display
-      print" #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
-      print"-----------"
-      print" #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
-      print"-----------"
-      print" #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+      puts" #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+      puts"-----------"
+      puts" #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+      puts"-----------"
+      puts" #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
     end
 
     def position(number)
@@ -24,6 +28,7 @@ class Board
     end
 
     def full?
+      
       cells.all?{|x| x != " "}
     end
 
