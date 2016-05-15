@@ -64,6 +64,12 @@ class Game
   end
 
   def turn
-
+    puts "It's #{current_player}'s turn. Please make your move 1-9:"
+    input = gets.strip
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      turn
+    end
   end
 end
