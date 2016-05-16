@@ -92,7 +92,7 @@ class Player::Computer < Player
   def first_move
     if @board.turn_count <= 2 && @board.valid_move?("5")
       "5"
-    else
+    elsif @board.turn_count <= 2 && @board.valid_move?("1")
       "1"
     end
   end
