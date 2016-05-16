@@ -13,27 +13,11 @@ class Game
   end
 
   def current_player
-    counter = 1
-    board.cells.each do |cell|
-      if cell == "X" || cell == "O"
-        counter += 1
-      end
-    end
-    if counter.odd?
-      player_1
-    else
-      player_2
-    end
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
-    if board.cells.all? do |cell|
-      cell == "O" || cell == "X"
-      end
-      true
-    else
-      false
-    end
+    won? || draw?
   end
 
   def won?
@@ -48,7 +32,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
   end
 
   def winner
@@ -65,7 +49,7 @@ class Game
 
     if won? && x_counter > o_counter
       "X"
-    elsif won? && o_counter > x_counter
+    elsif won? && o_counter >= x_counter
       "O"
     else  
     end    
@@ -73,72 +57,86 @@ class Game
 
   def turn
 
-    puts "Please select a move (1-9):"
+    board.display
     players_move = current_player.move(board)
     
-
-    #if board.valid_move?(players_move)
-     # board.update(players_move, current_player)
-    #else
-     # current_player.move(board)
-    #end
-    
-
-
-
-
     if board.valid_move?(players_move)
       board.update(players_move, current_player) 
+      
       #binding.pry
     else
       turn
-
-      
     end
+
 
   end
 
   def play
     #binding.pry
-    turn
-    board.display
-    if over?
-      if won?
-        puts "Congratulations #{winner}!"
-      elsif draw?
-        puts "Cats Game!"
-      else
-      end
-    else
-      play
-    end
-
-    #end
-    #while over? == false && won? == false && draw? == false
-    #  turn
-    #end
-    
-    
-
-    #if won?
-    #  puts "Congratulations #{winner}!"
-    #elsif draw?
-    #  puts "Cats Game!"
-    #end
-
-    #until self.over?
-    #  puts board
-    #  turn 
-    #end
-
-
-
+    until over?
+       turn
+     end
+     if won?
+       board.display
+       puts "Congratulations #{winner}!"
+     elsif draw?
+       board.display
+       puts "Cats Game!"
+     end
 
   end
 
-end
+  def self.start
+    puts "Welcome to Tic Tac Toe!"
+    puts "How many human players are there?"
 
-#game = Game.new
-#binding.pry
+    input = gets.chomp
+
+    if input == "0"
+      Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O")).play
+    elsif input == "1"
+      puts "Would you like to go first? (Y/N)"
+      self.one_player
+    elsif input == "2"
+      Game.new.play
+    else
+      puts "Sorry, the only options are 0, 1, or 2. \nLet's try this again."
+      self.start
+    end
+
+    puts "Would you like to play another exciting game of Tic Tac Toe? (Y/N)"
+    self.new_game?
+    
+  end
+
+  def self.one_player
+    new_input = gets.chomp
+
+    if new_input == "Y" || new_input == "y"
+      Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O")).play
+    elsif new_input == "N" || new_input == "n"
+      Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O")).play
+    else
+      puts "Sorry, I couldn't understand that. Please enter Y or N:"
+      self.one_player
+    end
+  end
+
+  def self.new_game?
+    
+
+    input = gets.chomp
+
+    if input == "Y" or input == "y"
+      self.start
+    elsif input == "N" or input == "n"
+      puts "OK! Goodbye!"
+    else
+      puts "What was that? Please enter Y or N:"
+      self.new_game?
+    end
+  end
+
+end
 
  

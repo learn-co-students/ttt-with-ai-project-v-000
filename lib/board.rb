@@ -45,9 +45,13 @@ class Board
     cells[cell_position] == "X" || cells[cell_position] == "O" 
   end
 
-  def valid_move?(cell_position)
-    cell_position = cell_position.to_i - 1
-    cell_position.between?(0,8) && cells[cell_position] == " "
+  def valid_move?(cell_input)
+    if cell_input.kind_of?(String) ## I added this to make my AI work properly
+      cell_position = cell_input.to_i - 1
+      cell_position.between?(0,8) && !taken?(cell_input)
+    else
+      false 
+    end
   end
 
   def update(cell_position, player_token)
