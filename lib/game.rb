@@ -1,5 +1,3 @@
-require 'pry'
-
 class Game
   attr_accessor :board, :player_1, :player_2
   attr_reader :token
@@ -8,26 +6,20 @@ class Game
     [0,1,2], [3,4,5],
     [6,7,8], [0,3,6],
     [1,4,7], [2,5,8],
-    [0,4,8], [6,4,2]
-  ]
+    [0,4,8], [6,4,2] ]
 
   def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+    @board = board
     @player_1 = player_1
     @player_2 = player_2
-    @board = board
   end
 
   def current_player
-    move_count = board.cells.count { |n| n == "X" || n == "O" }
-    if move_count % 2 == 0
-      player_1
-    else
-      player_2
-    end
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
-    won? || draw? || full?
+    won? || draw?
   end
 
   def won?
@@ -64,12 +56,22 @@ class Game
   end
 
   def turn
-    puts "It's #{current_player}'s turn. Please make your move 1-9:"
-    input = gets.strip
-    if board.valid_move?(input)
-      board.update(input, current_player)
+    player_move = current_player.move(board)
+    if board.valid_move?(player_move)
+      board.update(player_move, current_player)
     else
-      turn
+    turn
+    end
+  end
+
+  def play
+    turn until over?
+    if won?
+      puts ""
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts ""
+      puts "Cats Game!"
     end
   end
 end

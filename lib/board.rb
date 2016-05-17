@@ -7,7 +7,7 @@ class Board
   end
 
   def reset!
-    @cells = [" ", " ", " "," ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -37,8 +37,12 @@ class Board
   def valid_move?(pos)
     pos.to_i.between?(1,9) && !taken?(pos)
   end
+
   def update(cell, player)
     cells[cell.to_i - 1] = player.token
+    puts ""
+    puts "***********"
+    puts ""
+    display
   end
-
 end

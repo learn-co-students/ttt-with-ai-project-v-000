@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -163,10 +164,11 @@ describe 'Game' do
   describe 'turn' do
     it 'makes valid moves' do
       game = Game.new
+      # binding.pry
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("1")
-
+      # binding.pry
       game.turn
     end
 
