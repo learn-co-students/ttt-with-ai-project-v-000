@@ -1,6 +1,13 @@
 class Game 
-  
+  @@winners = []
+  @@draws = 0
   attr_accessor :board, :player_1, :player_2
+  
+  def self.scorecard 
+    puts "'X' won #{@@winners.select{ |w| w == 'X' }.count} times"
+    puts "'O' won #{@@winners.select{ |w| w == 'O' }.count} times"
+    puts "There were #{@@draws} cats games"
+  end
   
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -47,7 +54,9 @@ class Game
     winning_combo = won?
     if winning_combo 
       @winner = board.cell_value(winning_combo[0])
+      @@winners << @winner
     end
+    @winner
   end
   
   def turn 
@@ -75,7 +84,9 @@ class Game
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cats Game!"
+      @@draws += 1
     end
+    board.display
   end
   
   

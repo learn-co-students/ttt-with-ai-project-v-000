@@ -2,4 +2,36 @@
 
 require_relative '../config/environment'
 
-Game.new.play
+def loop 
+  puts "How many players would you like, 0, 1 or 2?"
+  answer = gets.strip
+  if answer == "exit"
+    return 
+  elsif answer == "score"
+    Game.scorecard
+  elsif answer == "wargames"
+    100.times { computer_game }
+    Game.scorecard
+  elsif answer.to_i == 2
+    Game.new.play
+  elsif answer.to_i == 1 
+    human_computer_game
+  elsif answer.to_i == 0 
+    computer_game
+  end
+  loop
+end
+
+def computer_game 
+  player_1 = Player::Computer.new("X")
+  player_2 = Player::Computer.new("O")
+  Game.new(player_1, player_2).play
+end
+
+def human_computer_game 
+  player_1 = Player::Human.new("X")
+  player_2 = Player::Computer.new("O")
+  Game.new(player_1, player_2).play
+end
+
+loop

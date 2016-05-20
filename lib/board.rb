@@ -63,4 +63,23 @@ class Board
     cells[index] == "X" || cells[index] == "O"
   end
   
+  def project_move(move, token)
+    projected_board = []
+    cells.each do |cell|
+      projected_board << cell
+    end
+    projected_board[move.to_i - 1] = token
+    projected_board
+  end
+  
+  def available_moves
+    available = []
+    cells.each_with_index do |val, index|
+      if val == " "
+        available << (index + 1).to_s
+      end
+    end 
+    available
+  end
+  
 end
