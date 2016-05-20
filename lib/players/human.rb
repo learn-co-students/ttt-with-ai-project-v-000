@@ -5,6 +5,6 @@ class Player::Human < Player
     input = gets.strip 
     puts "#{input}"
     input 
-end 
+  end 
 
 end 
