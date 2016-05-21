@@ -1,19 +1,13 @@
-require "pry"
-
 class Board
 
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", 
-              " ", " ", " ", 
-              " ", " ", " "]
+    reset!
   end
 
   def reset!
-    @cells = [" ", " ", " ", 
-              " ", " ", " ", 
-              " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -48,10 +42,3 @@ class Board
     @cells[cell.to_i-1] = player.token
   end
 end
-
-=begin
-test = Board.new
-player = double("player", :token => "X")
-
-test.update("1", player)
-=end
