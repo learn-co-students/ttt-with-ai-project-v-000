@@ -44,9 +44,8 @@ class Board
     taken?(input) == false && (1..9).include?(input.to_i) == true ? true : false
   end
 
-  def update(arg1, arg2)
-    #@cells[space.to_i-1] = 
-binding.pry
+  def update(cell, player)
+    @cells[cell.to_i-1] = player.token
   end
 end
 
