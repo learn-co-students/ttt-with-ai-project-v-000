@@ -1,3 +1,50 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "welcome user(s)"
+puts "how many players would like to play: 0, 1, or 2?"
+num_of_players = gets.chomp
+puts "who would like to go first: X or Y?"
+input = gets.chomp
+
+player_1 = nil
+player_2 = nil
+comp_player_1 = nil
+comp_player_2 = nil
+board = Board.new
+
+if input == "X" || input == "x"
+  player_1 = Player::Human.new("X")
+  player_2 = Player::Human.new("O")
+  comp_player_1 = Player::Computer.new("O")
+  comp_player_2 = Player::Computer.new("X")
+else
+  player_1 = Player::Human.new("O")
+  player_2 = Player::Human.new("X")
+  comp_player_1 = Player::Computer.new("X")
+  comp_player_2 = Player::Computer.new("O")
+end
+
+
+if num_of_players == 2
+  game_1 = Game.new(player_1, player_2, board)
+  game_1.play
+elsif num_of_players == 1
+  game_1 = Game.new(player_1, comp_player_1, board)
+  game_1.play
+else
+  game_1 = Game.new(comp_player_1, comp_player_2, board)
+  game_1.play
+end
+
+puts "would you like to play again: Y or N?"
+play_again = gets.chomp
+
+if play_again == "Y" || play_again == "y"
+  ruby bin/tictactoe
+else
+  puts "goodbye"
+end
+ 

@@ -1,3 +1,5 @@
+require "pry"
+
 class Game
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
@@ -18,7 +20,7 @@ class Game
   end
 
   def current_player
-    @board.cells.count {|space| space != " "} % 2 == 0 ? player_1 : player_2
+    @board.cells.count {|space| space != " "} % 2 == 0 ? @player_1 : @player_2
   end
 
   def over?
@@ -53,13 +55,26 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    input = gets.chomp
-    until valid_move?(input) == true
-      puts "Please enter 1-9:"
-      input = gets.chomp
+    input = current_player.move(@board)
+    if @board.valid_move?(input) == false
+      #binding.pry
+      "invalid"
+      turn
+    else
+      @board.update(input, current_player)
+      input
     end
-    @board.update(input, current_player)
+  end
+
+  def play
+    if over? == false
+      turn
+      play
+    elsif won? == true
+      puts "Congratulations #{winner}!"
+    elsif draw? ==true 
+      puts "Cats Game!"
+    end
   end
 
 
