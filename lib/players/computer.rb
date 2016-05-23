@@ -8,8 +8,6 @@ class Player::Computer < Player
   def move(game)
     if game.current_player == self && game.board.turn_count == 0 
       "1"
-    elsif game.current_player == self && game.board.turn_count == 1
-      game.board.valid_move?("1") ? "1" : "3"
     else 
       minimax(game)
       @best_move 
