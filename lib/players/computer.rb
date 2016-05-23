@@ -5,11 +5,11 @@ class Player
         go_for_middle(board)
         any_move(board)
       else
-        # binding.pry
-        occupied_positions(board).each do |position|
-          ajacent_spots[position].each do |move|
-            return move if board.valid_move?(move)
-          end
+        winning_move = find_winning_move(board)
+        if winning_move
+          winning_move
+        else
+          any_ajacent_move(board)
         end
       end
     end
@@ -30,12 +30,39 @@ class Player
         "9" => ["8", "5", "6"] }
     end
 
+    def find_winning_move(board)
+      Game::WIN_COMBINATIONS.each do |combination|
+        if board.cells[combination[0]] == token && 
+              board.cells[combination[1]] == token && 
+              board.valid_move?((combination[2] + 1).to_s)
+           return (combination[2] + 1).to_s
+        elsif board.cells[combination[1]] == token && 
+              board.cells[combination[2]] == token && 
+              board.valid_move?((combination[0] + 1).to_s)
+            return (combination[0] + 1).to_s
+        elsif board.cells[combination[0]] == token && 
+              board.cells[combination[2]] == token && 
+              board.valid_move?((combination[1] + 1).to_s)
+          return (combination[1] + 1).to_s
+        end
+      end
+      nil
+    end
+
     def occupied_positions(board)
       positions = []
       board.cells.each.with_index do |t, i|
         positions << (i + 1).to_s if t == token
       end
       positions
+    end
+
+    def any_ajacent_move(board)
+      occupied_positions(board).each do |position|
+        ajacent_spots[position].each do |move|
+          return move if board.valid_move?(move)
+        end
+      end
     end
 
     def any_move(board)
