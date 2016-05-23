@@ -3,6 +3,14 @@ require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2 
 
+  def self.clone(game)
+    new_game = Game.new 
+    new_game.player_1 = game.player_1
+    new_game.player_2 = game.player_2 
+    new_game.board = Board.clone(game.board)
+    new_game 
+  end 
+
   WIN_COMBINATIONS = [ 
                       [0,1,2], 
                       [3,4,5], 

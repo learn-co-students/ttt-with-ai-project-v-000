@@ -10,7 +10,13 @@ class Player::Computer < Player
 # it looks at all the game states it generated and the picks the max one
 
   def move(game)
-    "1" 
+    if game.current_player == self && game.board.turn_count == 0 
+      "1"
+    elsif game.current_player == self && game.board.turn_count == 1
+      game.board.valid_move?("1") ? "1" : "3"
+    else 
+      # TODO call minimax 
+    end 
   end 
 
   def score(game)
@@ -32,14 +38,14 @@ class Player::Computer < Player
         possible_moves << (index + 1).to_s 
       end 
     end  
-      possible_moves
+    possible_moves
   end
 
   def minimax(game)
     if game.over? 
       return score(game)
     else
-      
+
     end
   end 
 

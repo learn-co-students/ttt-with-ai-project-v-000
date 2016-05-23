@@ -17,6 +17,12 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end 
 
+  def self.clone(board)
+    new_board = Board.new 
+    new_board.cells = board.cells.clone 
+    new_board
+  end 
+
   def position(input)
     value = input.to_i - 1
     @cells[value]
