@@ -5,17 +5,14 @@ class Player::Computer < Player
 
 ############ Minimax algorithm implementation #####################
 
-# the algorithm looks at the board to see what spaces are open
-# it fills each space it can, assigning a score each time
-# it looks at all the game states it generated and the picks the max one
-
   def move(game)
     if game.current_player == self && game.board.turn_count == 0 
       "1"
     elsif game.current_player == self && game.board.turn_count == 1
       game.board.valid_move?("1") ? "1" : "3"
     else 
-      # TODO call minimax 
+      minimax(game)
+      @best_move 
     end 
   end 
 
@@ -45,7 +42,18 @@ class Player::Computer < Player
     if game.over? 
       return score(game)
     else
-
+      scores_array = self.possible_moves(game).collect do |input| 
+        hypothetical_game = Game.clone(game)
+        hypothetical_game.update(input)
+        self.minimax(hypothetical_game)
+      end
+      if game.current_player == self 
+        best_move_index = scores_array.index(scores_array.maximum)
+        @best_move = possible_moves[best_move_index]
+        scores_array.maximum 
+      else
+        scores_array.minimum
+      end  
     end
   end 
 

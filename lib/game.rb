@@ -72,6 +72,10 @@ class Game
     puts "Here is the current board."
     puts self.board.display
     input = self.current_player.move(self)
+    self.update(input)
+  end 
+
+  def update(input)
     if self.board.valid_move?(input)
       self.board.update(input, self.current_player)
       puts "Here is the updated board."
@@ -79,8 +83,8 @@ class Game
     else
       puts "Please try again, invalid move."
       self.turn 
+    end 
   end 
-end 
 
   def play
     until self.over? do
