@@ -19,9 +19,9 @@ class Player::Computer < Player
   def score(game)
     if game.won?
       if game.winner == self 
-        return 10 
+        return 10 - game.board.turn_count 
       else 
-        return -10 
+        return game.board.turn_count - 10 
       end 
     else
       return 0 
