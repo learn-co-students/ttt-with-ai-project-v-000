@@ -63,7 +63,7 @@ class Game
     puts "It is #{self.current_player.token}'s turn."  
     puts "Here is the current board."
     puts self.board.display
-    input = self.current_player.move(self.board)
+    input = self.current_player.move(self)
     if self.board.valid_move?(input)
       self.board.update(input, self.current_player)
       puts "Here is the updated board."
