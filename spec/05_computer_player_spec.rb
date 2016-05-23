@@ -17,6 +17,13 @@ describe 'Player::Computer' do
       expect(valid_moves).to include(computer_move)
     end
 
+    it 'returns the middle position if it is not occupied' do
+      computer_2 = Player::Computer.new("O")
+      @board.update(1, computer_2)
+      computer_move = @computer.move(@board)
+      expect(computer_move).to eq("5")
+    end
+
     it 'returns a move ajacent to one of its previous moves' do
       @board.update(1, @computer)
       computer_move = @computer.move(@board)
@@ -26,6 +33,15 @@ describe 'Player::Computer' do
     it 'returns a winning move if one is possible' do
       @board.update(1, @computer)
       @board.update(2, @computer)
+      computer_move = @computer.move(@board)
+      expect(computer_move).to eq("3")
+    end
+
+    it 'stops the other player from winning' do
+      computer_2 = Player::Computer.new("O")
+      @board.update(1, computer_2)
+      @board.update(8, @computer)
+      @board.update(2, computer_2)
       computer_move = @computer.move(@board)
       expect(computer_move).to eq("3")
     end
