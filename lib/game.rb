@@ -75,11 +75,13 @@ class Game
     self.update(input)
   end 
 
-  def update(input)
+  def update(input, display = true )
     if self.board.valid_move?(input)
       self.board.update(input, self.current_player)
-      puts "Here is the updated board."
-      self.board.display
+      if display
+        puts "Here is the updated board."
+        self.board.display
+      end 
     else
       puts "Please try again, invalid move."
       self.turn 

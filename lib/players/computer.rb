@@ -44,15 +44,16 @@ class Player::Computer < Player
     else
       scores_array = self.possible_moves(game).collect do |input| 
         hypothetical_game = Game.clone(game)
-        hypothetical_game.update(input)
+        display = false 
+        hypothetical_game.update(input, display)
         self.minimax(hypothetical_game)
       end
       if game.current_player == self 
-        best_move_index = scores_array.index(scores_array.maximum)
-        @best_move = possible_moves[best_move_index]
-        scores_array.maximum 
+        best_move_index = scores_array.index(scores_array.max)
+        @best_move = possible_moves(game)[best_move_index]
+        scores_array.max
       else
-        scores_array.minimum
+        scores_array.min
       end  
     end
   end 

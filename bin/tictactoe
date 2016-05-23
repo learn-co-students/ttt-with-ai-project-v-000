@@ -19,6 +19,7 @@ case input
         computer_token = "X"
         human_token = "O"
         Game.new(Player::Computer.new(computer_token), Player::Human.new(human_token)).play
+      end 
   when 2
     Game.new(Player::Human.new("X"), Player::Human.new("O")).play 
 end 
