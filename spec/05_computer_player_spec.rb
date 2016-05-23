@@ -17,15 +17,10 @@ describe 'Player::Computer' do
       expect(valid_moves).to include(computer_move)
     end
 
-    it 'returns the middle position if it is not occupied' do
+    it 'returns a move ajacent to one of its previous moves if not in sudden death' do
       computer_2 = Player::Computer.new("O")
-      @board.update(1, computer_2)
-      computer_move = @computer.move(@board)
-      expect(computer_move).to eq("5")
-    end
-
-    it 'returns a move ajacent to one of its previous moves' do
       @board.update(1, @computer)
+      @board.update(5, computer_2)
       computer_move = @computer.move(@board)
       expect(["4", "5", "2"]).to include(computer_move)
     end

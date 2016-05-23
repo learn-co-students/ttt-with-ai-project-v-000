@@ -2,7 +2,7 @@ class Player
   class Computer < Player
     def move(board)
       if board.turn_count == 0 || board.turn_count == 1
-        go_for_middle(board) ? go_for_middle(board) : any_move(board)
+        random_move(board)
       else
         winning_move = find_winning_move(board, token)
         opponent_winning_move = find_winning_move(board, other_player_token)
@@ -61,6 +61,14 @@ class Player
         positions
       end
 
+      def empty_positions(board)
+        positions = []
+        board.cells.each.with_index do |t, i|
+          positions << (i + 1).to_s if t == " "
+        end
+        positions
+      end
+
       def any_ajacent_move(board)
         occupied_positions(board).each do |position|
           ajacent_spots[position].each do |move|
@@ -69,9 +77,8 @@ class Player
         end
       end
 
-      def any_move(board)
-        index = board.cells.find_index { |t| t == " " }
-        (index + 1).to_s
+      def random_move(board)
+        empty_positions(board).sample
       end
 
       def other_player_token
