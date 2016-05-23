@@ -20,7 +20,16 @@ class Game
   end
 
   def current_player
-    @board.cells.count {|space| space != " "} % 2 == 0 ? @player_1 : @player_2
+    #@board.cells.count {|space| space != " "} % 2 == 0 ? @player_1 : @player_2
+    player_1_spaces = @board.cells.count {|space| space == @player_1.token}
+    player_2_spaces = @board.cells.count {|space| space == @player_2.token}
+    if player_1_spaces > player_2_spaces
+      @player_2
+    elsif player_2_spaces > player_1_spaces
+      @player_1
+    elsif player_1_spaces == player_2_spaces
+      @player_1 #if player one always goes first
+    end
   end
 
   def over?
@@ -55,24 +64,29 @@ class Game
   end
 
   def turn
-    input = current_player.move(@board)
-    if @board.valid_move?(input) == false
+    current_move = current_player.move(@board)
+    if @board.valid_move?(current_move) == false
       #binding.pry
       "invalid"
       turn
     else
-      @board.update(input, current_player)
-      input
+      puts "Turn # #{@board.turn_count+1}"
+      @board.update(current_move, current_player)
+      current_move
     end
   end
 
   def play
     if over? == false
+      @board.display
+      puts "where would you like to go?"
       turn
       play
     elsif won? == true
+      @board.display
       puts "Congratulations #{winner}!"
-    elsif draw? ==true 
+    elsif draw? ==true
+      @board.display 
       puts "Cats Game!"
     end
   end

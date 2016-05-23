@@ -1,6 +1,6 @@
 class Player::Human < Player
 
   def move(board)
-    gets
+    input = gets.strip
   end
 end
