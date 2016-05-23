@@ -39,10 +39,10 @@ class Start_game
   end
 
 
-  if num_of_players == 2
+  if num_of_players == "2"
     game_1 = Game.new(player_1, player_2, board)
     game_1.play
-  elsif num_of_players == 1
+  elsif num_of_players == "1"
     game_1 = Game.new(player_1, comp_player_1, board)
     game_1.play
   else
@@ -54,7 +54,8 @@ class Start_game
   play_again = gets.chomp
 
   if play_again == "Y" || play_again == "y"
-    Start_game.new
+    next_game = Start_game.new
+    next_game
   else
     puts "goodbye"
   end

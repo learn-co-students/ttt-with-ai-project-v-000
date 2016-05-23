@@ -68,6 +68,9 @@ class Game
     if @board.valid_move?(current_move) == false
       #binding.pry
       "invalid"
+      puts "invalid move"
+      puts "where would you like to go?"
+      @board.display
       turn
     else
       puts "Turn # #{@board.turn_count+1}"
