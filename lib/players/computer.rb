@@ -3,7 +3,8 @@ require "pry"
 class Player::Computer < Player
 
   def move(board)
-    win(board).to_s || block(board).to_s || random(board)
+    #win(board).to_s || block(board).to_s || random(board)
+    random(board)
   end
   
 =begin
@@ -18,6 +19,8 @@ things to fix current error
 change third of thee detect parameters to ||
 =end
 
+########this method basically returns the 
+########winning combo that is two thirds complete
   def third_of_three(board)
 binding.pry
     Game::WIN_COMBINATIONS.detect do |set_of_3|
