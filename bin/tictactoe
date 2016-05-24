@@ -4,19 +4,20 @@ require_relative '../config/environment'
 
 =begin
 notes and to dos for entire proj
-
--play not gets-ing input?, am I calling player_1.move
--play not displaying board
--look thru each method to see where we can spice it up
-  -add where would you like to go? to move in human class
-  -in play method, is move being called on class instance or string or whatever?
-
+-implement a random first player method?
 =end
 
 class Start_game
+
   puts "welcome user(s)"
   puts "how many players would like to play: 0, 1, or 2?"
   num_of_players = gets.chomp
+  puts "simply enter the space where you'd like to make your move. They are numbered as follows:"
+    puts " 1 | 2 | 3 "
+    puts "-----------"
+    puts " 4 | 5 | 6 "
+    puts "-----------"
+    puts " 7 | 8 | 9 "
   puts "who would like to go first: X or O?"
   input = gets.chomp
 
