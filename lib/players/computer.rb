@@ -6,8 +6,8 @@ class Player::Computer < Player
 ############ Minimax algorithm implementation #####################
 
   def move(game)
-    if game.current_player == self && game.board.turn_count == 0 
-      "1"
+    if game.current_player == self && game.board.turn_count == 0
+      "7"
     else 
       minimax(game)
       @best_move 
@@ -49,9 +49,9 @@ class Player::Computer < Player
       if game.current_player == self 
         best_move_index = scores_array.index(scores_array.max)
         @best_move = possible_moves(game)[best_move_index]
-        scores_array.max
+        return scores_array.max
       else
-        scores_array.min
+        return scores_array.min
       end  
     end
   end 
