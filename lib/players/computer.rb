@@ -3,8 +3,8 @@ require "pry"
 class Player::Computer < Player
 
   def move(board)
-    #win(board).to_s || block(board).to_s || random(board)
-    random(board)
+    win(board) || block(board) || random(board)
+    #random(board)
   end
   
 =begin
@@ -22,26 +22,27 @@ change third of thee detect parameters to ||
 ########this method basically returns the 
 ########winning combo that is two thirds complete
   def third_of_three(board)
-binding.pry
     Game::WIN_COMBINATIONS.detect do |set_of_3|
       a = set_of_3[0]
       b = set_of_3[1]
       c = set_of_3[2]
-      (board.cells[a] == board.cells[b] && board.cells[a] != " " ? true : false) || 
-      (board.cells[a] == board.cells[c] && board.cells[a] != " " ? true : false) || 
-      (board.cells[b] == board.cells[c] && board.cells[b] != " " ? true : false)
+      ((board.cells[a] == board.cells[b] && board.cells[a] != " ") || 
+      (board.cells[a] == board.cells[c] && board.cells[a] != " ") || 
+      (board.cells[b] == board.cells[c] && board.cells[b] != " "))
     end
   end
 
   def win(board)
-    if third_of_three(board).detect {|x| board.cells[x] != " "} == self.token
-      third_of_three(board).detect {|y| board.cells[y] == " "}
+    place_holder = third_of_three(board)
+    if place_holder && place_holder.count {|z| board.position(z+1) == self.token} == 2
+      place_holder.detect {|y| board.cells[y] == " "}
     end
   end
 
   def block(board)
-    if third_of_three(board).detect {|x| board.cells[x] != " "} != self.token
-      third_of_three(board).detect {|y| board.cells[y] == " "}
+    place_holder = third_of_three(board)
+    if place_holder && place_holder.count {|z| board.position(z+1) != self.token && board.position(z+1) != " "} == 2
+      place_holder.detect {|y| board.cells[y] == " "}
     end
   end
 
@@ -54,22 +55,5 @@ binding.pry
       random(board)
     end
   end
-
-
-=begin
-  def move(board)
-    random = 1 + rand(9)
-    random = random.to_s
-    if board.valid_move?(random) == true
-      random
-    else
-      move(board)
-    end
-  end
-
-  def opponent_token
-    self.token == "X" ? "O" : "X"
-  end
-=end
 
 end

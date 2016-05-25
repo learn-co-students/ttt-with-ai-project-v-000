@@ -36,6 +36,7 @@ class Game
     won? == true || draw? == true ? true : false
   end
 
+
   def won?
     answer = false
     WIN_COMBINATIONS.detect do |array|
@@ -45,6 +46,7 @@ class Game
       answer = true : answer = false
     end
     answer
+
   end
 
   def draw?

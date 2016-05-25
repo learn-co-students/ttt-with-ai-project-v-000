@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require "pry"
 
 =begin
 notes and to dos for entire proj
@@ -53,6 +54,7 @@ class Start_game
   end
 
   def implement_new_game
+    @board = Board.new
     if @num_of_players == "2"
       @this_game = Game.new(@player_1, @player_2, @board)
     elsif @num_of_players == "1"
@@ -67,7 +69,9 @@ class Start_game
     play_again = gets.chomp
 
     if play_again == "Y" || play_again == "y"
-      next_game.play
+      next_game = implement_new_game
+      next_game = Start_game.new
+      next_game.runner
     else
       puts "goodbye"
     end
@@ -79,7 +83,7 @@ class Start_game
     implement_new_game
     @this_game.play 
     keeping_score
-    play_again
+    play_again?
   end
 
   def keeping_score
@@ -93,6 +97,7 @@ class Start_game
     puts "X wins: #{@@x_wins}, O wins: #{@@o_wins}, and ties: #{@@ties}"
   end
 
+=begin
   def next_game
     if @num_of_players == "2"
       @this_game = Game.new(@player_2, @player_1, @board)
@@ -102,6 +107,8 @@ class Start_game
       @this_game = Game.new(@comp_player_2, @comp_player_1, @board)
     end
   end
+=end
+
 end
 
 first_game = Start_game.new
