@@ -97,6 +97,17 @@ class Game
     end
   end
 
+  def play
+  until self.over?
+    self.turn
+  end
+  if self.won?
+    puts "Congratulations #{self.winner}!"
+  elsif draw?
+    puts "Cats Game!"
+  end
+  end
+
 end
 
 
