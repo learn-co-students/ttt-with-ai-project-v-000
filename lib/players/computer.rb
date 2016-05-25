@@ -26,23 +26,21 @@ change third of thee detect parameters to ||
       a = set_of_3[0]
       b = set_of_3[1]
       c = set_of_3[2]
-      ((board.cells[a] == board.cells[b] && board.cells[a] != " ") || 
+      (board.cells[a] == board.cells[b] && board.cells[a] != " ") || 
       (board.cells[a] == board.cells[c] && board.cells[a] != " ") || 
-      (board.cells[b] == board.cells[c] && board.cells[b] != " "))
+      (board.cells[b] == board.cells[c] && board.cells[b] != " ")
     end
   end
 
   def win(board)
-    place_holder = third_of_three(board)
-    if place_holder && place_holder.count {|z| board.position(z+1) == self.token} == 2
-      place_holder.detect {|y| board.cells[y] == " "}
+    if third_of_three(board) && third_of_three(board).count {|z| board.cells[z] == self.token} == 2
+      third_of_three(board).detect {|y| board.cells[y] == " "}
     end
   end
 
   def block(board)
-    place_holder = third_of_three(board)
-    if place_holder && place_holder.count {|z| board.position(z+1) != self.token && board.position(z+1) != " "} == 2
-      place_holder.detect {|y| board.cells[y] == " "}
+    if third_of_three(board) && third_of_three(board).count {|z| board.cells[z] != self.token && board.cells[z] != " "} == 2
+      third_of_three(board).detect {|y| board.cells[y] == " "}
     end
   end
 
