@@ -3,12 +3,6 @@
 require_relative '../config/environment'
 require "pry"
 
-=begin
-notes and to dos for entire proj
--implement a random first player method?
--add keeping score/record method?
-=end
-
 class Start_game
 
   attr_reader :this_game
@@ -96,18 +90,6 @@ class Start_game
     end
     puts "X wins: #{@@x_wins}, O wins: #{@@o_wins}, and ties: #{@@ties}"
   end
-
-=begin
-  def next_game
-    if @num_of_players == "2"
-      @this_game = Game.new(@player_2, @player_1, @board)
-    elsif @num_of_players == "1"
-      @this_game = Game.new(@comp_player_1, @player_1, @board)
-    else
-      @this_game = Game.new(@comp_player_2, @comp_player_1, @board)
-    end
-  end
-=end
 
 end
 

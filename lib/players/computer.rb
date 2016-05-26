@@ -1,47 +1,56 @@
+
 require "pry"
 
 class Player::Computer < Player
 
   def move(board)
-    win(board) || block(board) || random(board)
-    #random(board)
+    (plus_one(board) || random(board).to_i).to_s
   end
-  
-=begin
-block and win based off similar method called third_of_three
-prioritze win, then block, then corners, then middle, then random
-do i need opponent token?
-  I can just use != self.token
-do we need a win and block?
-  yes, what if there are both options on board
 
-things to fix current error
-change third of thee detect parameters to ||
-=end
+  def plus_one(board)
+    plus = win(board) || block(board)
+    if plus != nil
+      plus + 1
+    end
+  end
 
-########this method basically returns the 
-########winning combo that is two thirds complete
   def third_of_three(board)
-    Game::WIN_COMBINATIONS.detect do |set_of_3|
+    array = []
+    Game::WIN_COMBINATIONS.each do |set_of_3|
       a = set_of_3[0]
       b = set_of_3[1]
       c = set_of_3[2]
-      (board.cells[a] == board.cells[b] && board.cells[a] != " ") || 
-      (board.cells[a] == board.cells[c] && board.cells[a] != " ") || 
-      (board.cells[b] == board.cells[c] && board.cells[b] != " ")
+      if (board.cells[a] == board.cells[b] && board.cells[c] == " " && board.cells[a] != " ") || 
+      (board.cells[a] == board.cells[c] && board.cells[b] == " " && board.cells[a] != " ") || 
+      (board.cells[b] == board.cells[c] && board.cells[a] == " " && board.cells[b] != " ")
+        array << set_of_3
+      end
     end
+    array
   end
 
   def win(board)
-    if third_of_three(board) && third_of_three(board).count {|z| board.cells[z] == self.token} == 2
-      third_of_three(board).detect {|y| board.cells[y] == " "}
+    movement = nil
+    third_of_three(board).each do |array|
+      array.each do |x|
+        if board.cells[x] == self.token
+          movement = array.detect {|x| board.cells[x] == " "}
+        end
+      end
     end
+    movement
   end
 
   def block(board)
-    if third_of_three(board) && third_of_three(board).count {|z| board.cells[z] != self.token && board.cells[z] != " "} == 2
-      third_of_three(board).detect {|y| board.cells[y] == " "}
+    movement = nil
+    third_of_three(board).each do |array|
+      array.each do |x|
+        if board.cells[x] != self.token && board.cells[x] != " "
+          movement = array.detect {|x| board.cells[x] == " "}
+        end
+      end
     end
+    movement
   end
 
   def random(board)
