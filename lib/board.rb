@@ -49,8 +49,7 @@ class Board
   end
 
   def update(position_index, player)
-    binding.pry
-    self.cells[position_index.to_i - 1] = player[token]
+    self.cells[position_index.to_i - 1] = player.token
   end
 
 
