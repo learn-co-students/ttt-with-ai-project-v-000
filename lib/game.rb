@@ -76,6 +76,7 @@ class Game
   end
 
   def play
+    binding.pry
     #over? is returning true even though the turn count is only
     #receiving 1 input into the board
     # binding.pry
