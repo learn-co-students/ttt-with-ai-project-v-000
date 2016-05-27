@@ -86,8 +86,14 @@ class Game
     end
   end
 
+  def self.start
+    "Hey player!"
+    "How many human players are we using today? 0/1 or 2?"
+    num_players = gets.strip
+    "Alright, so who's going to go first and play as X?"
+    Game.new
 
-
+  end
 
 
 
