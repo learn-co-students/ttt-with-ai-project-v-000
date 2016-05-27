@@ -1,8 +1,9 @@
 class Board
-  attr_accessor :board, :cells
+  attr_accessor :board, :cells, :counts
 
   def initialize
     self.cells = Array.new(9, " ")
+    self.counts = { " " => 9, "X" => 0, "O" => 0 }
   end
 
   def reset!
@@ -26,5 +27,31 @@ class Board
     self.cells.include?(" ") ?
     false : true
   end
+
+  def turn_count
+    self.cells.each do |word|
+      self.counts[word] += 1
+    end
+    self.counts["X"] + self.counts["O"]
+  end
+
+  def taken?(position_index)
+    index = position_index.to_i - 1
+    self.cells[index] == "X" || self.cells[index] == "O"
+  end
+
+  def valid_move?(position_index)
+    if ["1", "2", "3", "4", "5", "6", "7", "8", "9"].include?(position_index)
+      !taken?(position_index)
+    else
+      false
+    end
+  end
+
+  def update(position_index, player)
+    binding.pry
+    self.cells[position_index.to_i - 1] = player[token]
+  end
+
 
 end
