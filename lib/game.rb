@@ -10,7 +10,7 @@ class Game
                       [0,4,8],#L-R Diagonal
                       [6,4,2]#R-L Diagonal
                               ]
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner
 
   def initialize(player1 = Player::Human.new("X"), player2 = Player::Human.new("O"), board = Board.new )
     @board = board
@@ -23,7 +23,7 @@ class Game
   end
 
   def over?
-      if board.turn_count == 9
+      if draw? == true || won? == true
         true
       else
         false
@@ -52,7 +52,7 @@ class Game
   end
 
   def draw?
-    win_x.length+win_o.length == 0 ? true : false
+    win_x.length+win_o.length == 0 && board.full? ? true : false
   end
 
   def winner
@@ -76,17 +76,14 @@ class Game
   end
 
   def play
-    binding.pry
-    #over? is returning true even though the turn count is only
-    #receiving 1 input into the board
-    # binding.pry
     until over? == true
       turn
     end
-    # until self.over? do
-    #   self.turn
-    #   "William"
-    # end
+    if self.winner == nil
+      puts "Cats Game!"
+    else
+      puts "Congratulations #{self.winner}!"
+    end
   end
 
 
