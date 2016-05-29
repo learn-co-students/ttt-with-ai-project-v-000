@@ -7,7 +7,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @counts = { " " => 9, "X" => 0, "O" => 0 }
     @save_winner = " "
   end
 
@@ -17,7 +16,7 @@ class Game
   end
 
   def over?
-    self.board.full?
+    draw? || won?
   end
 
   def won?
@@ -32,7 +31,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    self.board.full? && !won?
   end
 
   def winner
@@ -53,8 +52,11 @@ class Game
   end
 
   def play
-    turn
-    over?
+    until over?
+      turn
+    end
+    puts "Congratulations #{self.save_winner}!" if won?
+    puts "Cats Game!" if draw?
   end
 
 

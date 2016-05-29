@@ -1,9 +1,8 @@
 class Board
-  attr_accessor :board, :cells, :counts
+  attr_accessor :board, :cells
 
   def initialize
     self.cells = Array.new(9, " ")
-    self.counts = { " " => 0, "X" => 0, "O" => 0 }
   end
 
   def reset!
@@ -29,12 +28,7 @@ class Board
   end
 
   def turn_count
-    self.cells.each do |word|
-      self.counts[word] += 1
-    end
-    count = self.counts["X"] + self.counts["O"]
-    self.counts = { " " => 0, "X" => 0, "O" => 0 }
-    count
+    self.cells.count("X") + self.cells.count("O")
   end
 
   def taken?(position_index)
