@@ -8,6 +8,7 @@ class Game
     @player_2 = player_2
     @board = board
     @counts = { " " => 9, "X" => 0, "O" => 0 }
+    @save_winner = " "
   end
 
   def current_player
@@ -20,15 +21,11 @@ class Game
   end
 
   def won?
-  # loop through board and collect the winning combination indices
-  # loop through win combinations - collect the tokens - all Xs or Os?
-  # { win_combo => {"X", "X", O"}}
     won = false
     WIN_COMBINATIONS.each_with_index do |win_combo, index|
       if self.board.cells[win_combo[0]] == self.board.cells[win_combo[1]] && self.board.cells[win_combo[0]] == self.board.cells[win_combo[2]] && self.board.cells[win_combo[2]] == self.board.cells[win_combo[2]] && self.board.cells[win_combo[0]] != " "
         won = true
-      else
-        self.save_winner = nil
+        self.save_winner = self.board.cells[win_combo[0]]
       end
     end
     won
@@ -39,17 +36,25 @@ class Game
   end
 
   def winner
-    if won? == true
-      self.board.cells
-    end
+    self.save_winner if won?
   end
 
   def turn
-
+    input = current_player.move(current_player)
+    if self.board.valid_move?(input)
+      self.board.update(input, current_player)
+      current_player
+    else
+      puts "Your input is not valid. Please input a location on the board (1 is the top row left-most column spot and 9 is bottom row right-most column) to select the location of your next move. Please check that this location is not taken."
+      input = current_player.move(current_player)
+      self.board.update(input, current_player)
+      current_player
+    end
   end
 
   def play
-
+    turn
+    over?
   end
 
 

@@ -1,7 +1,7 @@
 class Player::Human < Player
 
   def move(player)
-    puts "Which location on the board do you want to move to?"
+    puts "Input an integer from 1 to 9 to select the location of your next move."
     gets.strip
   end
 

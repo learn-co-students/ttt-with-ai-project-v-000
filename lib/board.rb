@@ -3,7 +3,7 @@ class Board
 
   def initialize
     self.cells = Array.new(9, " ")
-    self.counts = { " " => 9, "X" => 0, "O" => 0 }
+    self.counts = { " " => 0, "X" => 0, "O" => 0 }
   end
 
   def reset!
@@ -32,7 +32,9 @@ class Board
     self.cells.each do |word|
       self.counts[word] += 1
     end
-    self.counts["X"] + self.counts["O"]
+    count = self.counts["X"] + self.counts["O"]
+    self.counts = { " " => 0, "X" => 0, "O" => 0 }
+    count
   end
 
   def taken?(position_index)
