@@ -47,18 +47,22 @@ class Game
   end
 
   def turn
-    until board.valid_move?(position)
-      puts "which position to go?"
-      position = self.current_player.move(board)
-    end  
-    board.update(position, self.current_player)
-    board.display
+    input = self.current_player.move(board)
+    board.valid_move?(input) ? board.update(input, self.current_player) : turn
+
+
+    # begin
+    #   puts "which position to go?"
+    #   position = self.current_player.move(board)
+    # end until board.valid_move?(position)
+    # board.update(position, self.current_player)
+    # board.display
   end
 
   def play
-    # until over?
-    #   turn
-    # end
+    until over?
+            turn
+    end
 
 
 
@@ -68,11 +72,11 @@ class Game
     #   # binding.pry
     # end #while
 
-    if self.won?
-      puts "Congratulations #{self.winner}!"
-    else
-      puts "Cats Game!"
-    end
+    # if self.won?
+    #   puts "Congratulations #{self.winner}!"
+    # else
+    #   puts "Cats Game!"
+    # end
 # binding pry
 
   end
