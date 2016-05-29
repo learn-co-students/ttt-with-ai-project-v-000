@@ -47,10 +47,10 @@ class Game
   end
 
   def turn
-    begin
+    until board.valid_move?(position)
       puts "which position to go?"
       position = self.current_player.move(board)
-    end until board.valid_move?(position)
+    end  
     board.update(position, self.current_player)
     board.display
   end
