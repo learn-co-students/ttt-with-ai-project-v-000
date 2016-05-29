@@ -43,41 +43,23 @@ class Game
   end
 
   def winner
-    won? ? self.result[0] : nil
+    won? ? result[0] : nil
   end
 
   def turn
-    input = self.current_player.move(board)
-    board.valid_move?(input) ? board.update(input, self.current_player) : turn
-
-
-    # begin
-    #   puts "which position to go?"
-    #   position = self.current_player.move(board)
-    # end until board.valid_move?(position)
-    # board.update(position, self.current_player)
-    # board.display
+    position = current_player.move(board)
+    board.valid_move?(position) ? board.update(position, current_player) : turn
+    board.display
   end
 
   def play
-    until over?
-            turn
-            binding.pry
+    turn until over?
+
+    if won?
+      puts "Congratulations #{self.winner}!"
+    else
+      puts "Cats Game!"
     end
-
-
-
-    # while !over?
-    #   turn
-    #   # self.over?
-    #   # binding.pry
-    # end #while
-
-    # if self.won?
-    #   puts "Congratulations #{self.winner}!"
-    # else
-    #   puts "Cats Game!"
-    # end
 # binding pry
 
   end
