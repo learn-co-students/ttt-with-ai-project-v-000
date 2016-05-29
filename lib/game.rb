@@ -31,7 +31,7 @@ class Game
   end
 
   def over?
-    board.full? || won? ? true : false
+    draw? || won? ? true : false
   end
 
   def won?
@@ -39,7 +39,7 @@ class Game
   end
 
   def draw?
-    over? && !won? ? true : false
+    board.full? && !won? ? true : false
   end
 
   def winner
