@@ -62,6 +62,7 @@ class Game
   def play
     until over?
             turn
+            binding.pry
     end
 
 
