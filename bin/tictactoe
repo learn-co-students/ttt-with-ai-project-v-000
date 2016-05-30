@@ -45,7 +45,7 @@ case game_type
     player = gets.strip
   when 2
     puts "Great! You can play Tic-Tac-Toe against another human friend!\n\n"
-    puts "Please select the player who goes first and gets the \"X\" token. \n\nThe player going first should input \"start\" now to get start the game and select their first move.\nOr input help if you want more information about how to play Tic Tac Toe.\n\n"
+    puts "Please select the player who goes first and gets the \"X\" token. \n\nThe player going first should input \"start\" now to get start the game and select their first move.\nOr input \"help\" if you want more information about how to play Tic Tac Toe.\n\n"
     go = gets.strip.downcase
     puts "\n \n"
     player_1 = Player::Human.new("X")
