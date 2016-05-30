@@ -39,6 +39,8 @@ class Game
   end
 
   def turn
+    self.board.display
+    puts "\n \n"
     input = current_player.move(current_player)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
@@ -55,13 +57,13 @@ class Game
     until over?
       turn
     end
+    puts "\n\n"
+    self.board.display
+    puts "\n\n"
     puts "Congratulations #{self.save_winner}!" if won?
     puts "Cats Game!" if draw?
   end
 
-  def start
-
-  end
 
   def help
     puts "To play Tic-Tac-Toe, the first player, \"X\", will start by inputing 1 to 9 indicating their choice of placement on the board below. \n\nThe board is labeled with 1 to 9 to demonstrate the player's options. \n \n"
@@ -72,7 +74,7 @@ class Game
                     " " + "7" + " | " + "8" + " | " + "9" + " " + "\n\n"
     puts board_display
     puts "The goal is to get three of your tokens in the same row, column, or diagonal.\n\n"
-    start
+    play
   end
 
 

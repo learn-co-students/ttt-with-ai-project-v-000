@@ -52,7 +52,7 @@ case game_type
     player_2 = Player::Human.new("O")
     human_human_game = Game.new(player_1, player_2)
     if go == "start"
-      human_human_game.start
+      human_human_game.play
     else
       human_human_game.help
     end
