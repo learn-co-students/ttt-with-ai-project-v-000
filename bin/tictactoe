@@ -42,7 +42,17 @@ case game_type
   when 1
     puts "Great! You can play Tic-Tac-Toe against the computer!"
     puts "Input 1 to go first and use the \"X\" token or input 2 to have the computer go first and have the \"X\" token."
-    player = gets.strip
+    player = gets.strip.to_i
+    if player == 1
+      player_1 = Player::Human.new("X")
+      player_2 = Player::Computer.new("O")
+      human_computer_game = Game.new(player_1, player_2)
+    elsif player == 2
+      player_1 = Player::Computer.new("X")
+      player_2 = Player::Human.new("O")
+      human_computer_game = Game.new(player_1, player_2)
+    end
+    human_computer_game.play
   when 2
     puts "Great! You can play Tic-Tac-Toe against another human friend!\n\n"
     puts "Please select the player who goes first and gets the \"X\" token. \n\nThe player going first should input \"start\" now to get start the game and select their first move.\nOr input \"help\" if you want more information about how to play Tic Tac Toe.\n\n"
