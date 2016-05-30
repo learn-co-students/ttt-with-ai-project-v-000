@@ -54,14 +54,11 @@ class Game
 
   def play
     turn until over?
-
     if won?
       puts "Congratulations #{self.winner}!"
     else
       puts "Cats Game!"
     end
-# binding pry
-
   end
 
 end
