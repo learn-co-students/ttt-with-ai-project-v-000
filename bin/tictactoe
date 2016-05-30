@@ -29,25 +29,31 @@ require_relative '../config/environment'
 puts "***********  Welcome to Tic Tac Toe! *********** \nWhat type of game would you like to play? \n
       Enter 0 for the computer to play itself. \n
       Enter 1 to play the computer. \n
-      Enter 2 to play with a human friend. \n************************************************"
+      Enter 2 to play with a human friend."
 
 game_type = gets.strip
 game_type = game_type.to_i
+puts "************************************************"
 
 case game_type
   when 0
     puts "Great! Let's have the computer play Tic-Tac-Toe against itself!"
-    player = select_first_token
+
   when 1
     puts "Great! You can play Tic-Tac-Toe against the computer!"
-    player = select_first_token
+    puts "Input 1 to go first and use the \"X\" token or input 2 to have the computer go first and have the \"X\" token."
+    player = gets.strip
   when 2
-    puts "Great! You can play Tic-Tac-Toe against another human friend!"
-    player = select_first_token
-end
-
-
-def select_first_token
-  puts "Input \"X\" or \"O\" to select the first player."
-  gets.strip
+    puts "Great! You can play Tic-Tac-Toe against another human friend!\n\n"
+    puts "Please select the player who goes first and gets the \"X\" token. \n\nThe player going first should input \"start\" now to get start the game and select their first move.\nOr input help if you want more information about how to play Tic Tac Toe.\n\n"
+    go = gets.strip.downcase
+    puts "\n \n"
+    player_1 = Player::Human.new("X")
+    player_2 = Player::Human.new("O")
+    human_human_game = Game.new(player_1, player_2)
+    if go == "start"
+      human_human_game.start
+    else
+      human_human_game.help
+    end
 end

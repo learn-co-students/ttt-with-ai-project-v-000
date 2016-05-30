@@ -59,5 +59,21 @@ class Game
     puts "Cats Game!" if draw?
   end
 
+  def start
+
+  end
+
+  def help
+    puts "To play Tic-Tac-Toe, the first player, \"X\", will start by inputing 1 to 9 indicating their choice of placement on the board below. \n\nThe board is labeled with 1 to 9 to demonstrate the player's options. \n \n"
+    board_display = " " + "1" + " | " + "2" + " | " + "3" + " \n" +
+                    "-----------" + "\n" +
+                    " " + "4" + " | " + "5" + " | " + "6" + " \n" +
+                    "-----------" + "\n" +
+                    " " + "7" + " | " + "8" + " | " + "9" + " " + "\n\n"
+    puts board_display
+    puts "The goal is to get three of your tokens in the same row, column, or diagonal.\n\n"
+    start
+  end
+
 
 end
