@@ -41,13 +41,13 @@ class Game
   def turn
     self.board.display
     puts "\n \n"
-    input = current_player.move(current_player)
+    input = current_player.move(board)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
       current_player
     else
-      puts "Your input is not valid. Please input a location on the board (1 is the top row left-most column spot and 9 is bottom row right-most column) to select the location of your next move. Please check that this location is not taken."
-      input = current_player.move(current_player)
+      puts "***Your input is not valid.*** \n1 is top row, left-most cell and 9 is bottom row right-most cell.\n\n"
+      input = current_player.move(board)
       self.board.update(input, current_player)
       current_player
     end
@@ -62,6 +62,7 @@ class Game
     puts "\n\n"
     puts "Congratulations #{self.save_winner}!" if won?
     puts "Cats Game!" if draw?
+    play_again? if over?
   end
 
 
@@ -77,5 +78,17 @@ class Game
     play
   end
 
+  def play_again?
+    puts "Would you like to play again? Enter Y to play again or N to exit."
+    input = gets.strip.downcase
+    case input
+      when "y"
+        TicTacToe.new
+      when "n"
+        exit
+      else
+        play_again?
+    end
+  end
 
 end
