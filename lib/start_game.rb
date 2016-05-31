@@ -2,10 +2,10 @@ class StartGame
 
   attr_accessor :number_players, :player_1, :player_2, :board
 
-  # def initialize
-  #   self.prep_game
-  #   self.launch_game
-  # end
+  def initialize
+    self.prep_game
+    # self.launch_game
+  end
 
   def prep_game
     number_players = prep_players

@@ -5,14 +5,12 @@ require_relative '../config/environment'
 
 
 puts "Welcome to Tic-Tac-Toe"
+input = "Y"
 
-game = StartGame.new
-game.prep_game
-game.launch_game
-puts "would you like to play again?(\"Y\" or \"N\")"
-input = gets.strip
-if input == "Y"
+while input == "Y"
   game = StartGame.new
-  game.prep_game
-  game.launch_game
+
+  binding.pry
+  puts "would you like to play again?(\"Y\" or \"N\")"
+  input = gets.strip
 end
