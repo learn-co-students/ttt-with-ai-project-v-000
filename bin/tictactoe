@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe!"
+keep_playing = "yes"
+until keep_playing == "no"
+  puts "How many players? Please enter 0, 1, or 2:"
+  player_count = gets.strip
+  case player_count
+  when "0"
+    Game.new(Computer.new, Computer.new("O")).play
+  when "1"
+    puts "Player 1, please choose your token: X or O?"
+    player_token = gets.strip.downcase
+    if player_token == "x"
+      Game.new(Human.new, Computer.new("O")).play
+    elsif player_token == "o"
+      Game.new(Human.new("O"), Computer.new).play
+    end
+  when "2"
+    puts "Player 1, please choose your token: X or O?"
+    player_token = gets.strip.downcase
+    if player_token == "x"
+      Game.new(Human.new, Human.new("O")).play
+    elsif player_token == "o"
+      Game.new(Human.new("O"), Human.new("X"))
+    end
+  end
+  puts "Would you like to keep playing? Yes or no?"
+  keep_playing = gets.strip.downcase
+end
