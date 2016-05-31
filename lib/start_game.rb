@@ -4,24 +4,24 @@ class StartGame
 
   def initialize
     self.prep_game
-    # self.launch_game
+    self.launch_game
   end
 
   def prep_game
     number_players = prep_players
     if number_players == 0
-      player_1 = Player::Computer.new("X")
-      player_2 = Player::Computer.new("O")
+      self.player_1 = Player::Computer.new("X")
+      self.player_2 = Player::Computer.new("O")
     end
     if number_players == 1
-      player_1 = Player::Human.new(self.prep_token_player_1)
-      player_2 = Player::Computer.new(self.prep_token_player_2(player_1))
+      self.player_1 = Player::Human.new(self.prep_token_player_1)
+      self.player_2 = Player::Computer.new(self.prep_token_player_2(player_1))
     end
     if number_players == 2
-      player_1 = Player::Human.new(self.prep_token_player_1)
-      player_2 = Player::Human.new(self.prep_token_player_2(player_1))
+      self.player_1 = Player::Human.new(self.prep_token_player_1)
+      self.player_2 = Player::Human.new(self.prep_token_player_2(player_1))
     end
-    board = Board.new
+    self.board = Board.new
   end
 
   def launch_game

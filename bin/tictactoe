@@ -10,7 +10,7 @@ input = "Y"
 while input == "Y"
   game = StartGame.new
 
-  binding.pry
+  # binding.pry
   puts "would you like to play again?(\"Y\" or \"N\")"
   input = gets.strip
 end
