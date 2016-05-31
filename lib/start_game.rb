@@ -25,15 +25,10 @@ class StartGame
   end
 
   def launch_game
-    game = Game.new(player_1, player_2, board)
+    game = Game.new(self.player_1, self.player_2, self.board)
     game.board.display
+    # binding.pry
     game.play
-    puts "would you like to play again?(\"Y\" or \"N\")"
-    input = gets.strip
-    if input == "Y"
-      self.prep_game
-      self.launch_game
-    end
   end
 
   def prep_players
