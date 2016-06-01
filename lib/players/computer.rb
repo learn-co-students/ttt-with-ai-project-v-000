@@ -1,38 +1,63 @@
 class Player::Computer < Player
   WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
-  attr_accessor :valid_moves, :board
+  attr_accessor :valid_moves, :board, :save_token, :save_position, :save_open_combos
+
+
 
   def move(board)
     puts "Computer #{self.token}'s turn!\n\n"
     @valid_moves = []
     @board = board
     board.cells.each_with_index do |cell, index|
-      @valid_moves << index.to_s if board.valid_move?(index.to_s)
+      position = index + 1
+      @valid_moves << position.to_s if board.valid_move?(position.to_s)
     end
-    ai_move
+    @save_open_combos = {}
+    @save_position = @valid_moves[0] if ai_move == nil
   end
 
   def ai_move
-    two_in_a_row
+    two_in_a_row?
+    # token = nil
+    # move_to = nil
+    # if two_in_a_row != []
+    #   if two_in_a_row.count == 1
+    #     two_in_a_row.flatten
+    #     two_in_a_row.each do |position|
+    #       if self.board.cells[position] == "X" || self.board.cells[position] == "0"
+    #         token = self.board.cells[position]
+    #       else
+    #         move_to = position
+    #       end
+    #     end
+    #     if two_in_a_row.count == 2
+    #       two_in_a_row.each do |win_combo|
+    #   end
   end
 
-  def two_in_a_row
-        binding.pry
+  def two_in_a_row?
     save_combos = []
     WIN_COMBINATIONS.each do |win_combo|
-      uneven_true = (board[win_combo[0]] == " ") ^ (board[win_combo[1]] == " ") ^ (board[win_combo[2]] == " ")
-      max_one_true = (!((board[win_combo[0]] == " ") && (board[win_combo[1]] == " "))) && (!((board[win_combo[0]] == " ") && (board[win_combo[2]] == " "))) && (!((board[win_combo[2]] == " ") && (board[win_combo[1]] == " ")))
+      uneven_true = (self.board.cells[win_combo[0]] == " ") ^ (self.board.cells[win_combo[1]] == " ") ^ (self.board.cells[win_combo[2]] == " ")
+      max_one_true = (!((self.board.cells[win_combo[0]] == " ") && (self.board.cells[win_combo[1]] == " "))) && (!((self.board.cells[win_combo[0]] == " ") && (self.board.cells[win_combo[2]] == " "))) && (!((self.board.cells[win_combo[2]] == " ") && (self.board.cells[win_combo[1]] == " ")))
       exactly_one_true = uneven_true && max_one_true
       save_combos << win_combo if exactly_one_true
     end
-    save_open_combos = []
     save_combos.each do |combo|
-      if board[combo[0]] == board[combo[1]] || board[combo[0]] == board[combo[2]] || board[combo[2]] == board[combo[1]]
-        save_open_combos << combo
+      if self.board.cells[combo[0]] == self.board.cells[combo[1]] || self.board.cells[combo[0]] == self.board.cells[combo[2]] || self.board.cells[combo[2]] == self.board.cells[combo[1]]
+        #build a hash with win combo as key and tokens as value
+        self.save_open_combos[combo] = [self.board.cells[combo[0]], self.board.cells[combo[1]], self.board.cells[combo[2]] ]
       end
     end
-    save_open_combos   
+    binding.pry
+    #call win? to check save_open_combos to see if current play can win and defend? to see if opponent can win and should be blocked.
+    #if win? is nil, check defend?. if win? and defend? are nil, then move to forking strategy.
+    win_or_defend
+  end
+
+  def win_or_defend
+
   end
 
 end

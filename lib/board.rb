@@ -48,5 +48,10 @@ class Board
     self.cells[position_index.to_i - 1] = player.token
   end
 
+  def current_player
+    turn_count.even? ?
+    player_1 : player_2
+  end
+
 
 end
