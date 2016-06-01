@@ -2,7 +2,7 @@ class Player::Computer < Player
 
   WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
-  attr_accessor :valid_moves, :board, :save_token, :save_position, :save_open_combos
+  attr_accessor :valid_moves, :board, :save_token, :save_position, :save_open_combos, :save_two_in_a_row
 
 
 
@@ -20,29 +20,66 @@ class Player::Computer < Player
     #consider turn count and then pick strategy
     case self.board.turn_count
       when 0
-        #if you are the first player, select the top left corner (or the middle),
-        #I chose top left corner to be the first choice here
-        @save_position = "1"
+        #if you are the first player, select the middle,
+        #I chose center to be the first choice here, hoping opponent may chose edge
+        @save_position = "5"
       when 1
-        # if you are on the second turn, either take the center if it is open or
+        # check if opponent placed token on edge, if so, call edge to place token
+        # on one of the two corners furthest from edge piece. If no edge move,
+        # either take the center if it is open or
         # if the center is not open take a corner
-        @save_position = "5" if self.board.valid_move("5")
-        @save_position = "1" if self.board.valid_move("1")
+        if self.board.valid_move?("5")
+          @save_position = "5"
+        elsif !edge?
+          @save_position = "1" if self.board.valid_move?("1")
+        end
+        # if you are on the third turn, check if your opponent took an edge
+        # if opponent takes an edge, set up a win by placing token on two corners
+        # furthest from edge piece. If no edge move,
+      when 2
+        corners if !edge?
       else
         two_in_a_row?
     end
 
-    #start by seeing if player can win. if win is not possible, check
-    #to see if you should block opponent's win
-
-    # if self.save_open_combos = {}
-    #   # if two_in_a_row is nil, then move to forking strategy.
-    #
-    # end
-
   end
 
+  def corners
+    self.save_position = "9" if self.board.valid_move?("9")
+    self.save_position = "7" if self.board.valid_move?("7")
+    self.save_position = "3" if self.board.valid_move?("3")
+    self.save_position = "1" if self.board.valid_move?("1")
+    self.save_position = "5" if self.board.valid_move?("5")
+  end
+
+
+  def edge?
+    edge = false
+    if self.board.taken?("2")
+      self.save_position = "9" if self.board.valid_move?("9")
+      self.save_position = "7" if self.board.valid_move?("7")
+      edge = true
+    elsif self.board.taken?("4")
+      self.save_position = "3" if self.board.valid_move?("3")
+      self.save_position = "9" if self.board.valid_move?("9")
+      edge = true
+    elsif self.board.taken?("6")
+      self.save_position = "1" if self.board.valid_move?("1")
+      self.save_position = "7" if self.board.valid_move?("7")
+      edge = true
+    elsif self.board.taken?("8")
+      self.save_position = "1" if self.board.valid_move?("1")
+      self.save_position = "3" if self.board.valid_move?("3")
+      edge = true
+    end
+    edge
+  end
+
+
+
+
   def two_in_a_row?
+    self.save_two_in_a_row = false
     save_combos = []
     WIN_COMBINATIONS.each do |win_combo|
       uneven_true = (self.board.cells[win_combo[0]] == " ") ^ (self.board.cells[win_combo[1]] == " ") ^ (self.board.cells[win_combo[2]] == " ")
@@ -67,6 +104,7 @@ class Player::Computer < Player
       if tokens.include?(self.token)
         @save_position = combo[tokens.index(" ")] + 1
         @save_position = @save_position.to_s
+        self.save_two_in_a_row = true
       end
     end
     if @save_position == nil
@@ -77,38 +115,8 @@ class Player::Computer < Player
       self.save_open_combos.each do |combo, tokens|
         @save_position = combo[tokens.index(" ")] + 1
         @save_position = @save_position.to_s
+        self.save_two_in_a_row = true
       end
     end
   end
 end
-
-
-# Quote from Wikipedia (Tic Tac Toe#Strategy)
-#
-# A player can play a perfect game of Tic-tac-toe (to win or, at least, draw) if they choose the first available move from the following list, each turn, as used in Newell and Simon's 1972 tic-tac-toe program.[6]
-#
-# Win: If you have two in a row, play the third to get three in a row.
-# Block: If the opponent has two in a row, play the third to block them.
-# Fork: Create an opportunity where you can win in two ways.
-# Block Opponent's Fork:
-#
-# Option 1: Create two in a row to force the opponent into defending, as long as it doesn't result in them creating a fork or winning. For example, if "X" has a corner, "O" has the center, and "X" has the opposite corner as well, "O" must not play a corner in order to win. (Playing a corner in this scenario creates a fork for "X" to win.)
-#
-# Option 2: If there is a configuration where the opponent can fork, block that fork.
-# Center: Play the center.
-# Opposite Corner: If the opponent is in the corner, play the opposite corner.
-# Empty Corner: Play an empty corner.
-# Empty Side: Play an empty side.
-
-
-#
-# def won?
-#   won = false
-#   WIN_COMBINATIONS.each_with_index do |win_combo, index|
-#     if self.board.cells[win_combo[0]] == self.board.cells[win_combo[1]] && self.board.cells[win_combo[0]] == self.board.cells[win_combo[2]] && self.board.cells[win_combo[2]] == self.board.cells[win_combo[2]] && self.board.cells[win_combo[0]] != " "
-#       won = true
-#       self.save_winner = self.board.cells[win_combo[0]]
-#     end
-#   end
-#   won
-# end
