@@ -74,6 +74,7 @@ class TicTacToe
     end
     puts "There were #{WarGame.count_wins} wins."
     puts "There were #{WarGame.count_draws} draws."
+    WarGame.play_again?
   end
 
 end

@@ -29,4 +29,20 @@ class WarGame < Game
     @@game_count
   end
 
+  def self.play_again?
+    puts "Would you like to play again? Enter Y to play again or N to exit."
+    input = gets.strip.downcase
+    case input
+      when "y"
+        @@won = 0
+        @@draw = 0
+        @@game_count = 0
+        TicTacToe.new
+      when "n"
+        exit
+      else
+        play_again?
+    end
+  end
+
 end
