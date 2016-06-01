@@ -19,7 +19,7 @@ class StartGame
     if number_players == 1
       self.player_1 = Player::Human.new(self.prep_token_player_1)
       self.player_2 = Player::Computer.new(self.prep_token_player_2(player_1))
-      self.player_2.strategy = Strategy.new(self.board, self)
+      self.player_2.strategy = Strategy.new(self.board, self.game) 
     end
     if number_players == 2
       self.player_1 = Player::Human.new(self.prep_token_player_1)
