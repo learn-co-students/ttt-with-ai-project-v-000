@@ -61,12 +61,22 @@ class Player::Computer < Player
 
   def win_or_defend
     self.save_open_combos.each do |combo, tokens|
-      #if the two combo is player's tokens, place the move in the winning location
+      #if the two combo is player's token, place the move in the winning location
       if tokens.include?(self.token)
-        binding.pry
+        @save_position = combo[tokens.index(" ")] + 1
+        @save_position.to_s
+      end
     end
-  end
-
+    if @save_position = nil
+      self.save_open_combos.each do |combo, tokens|
+        #only block the opponent if player cannot win, if there are more than
+        #two ways opponent can win, does not matter - so just pick one to block,
+        #no need to save multiples
+        #however, is there an optimal location? 
+        @save_position = combo[tokens.index(" ")] + 1
+        @save_position.to_s
+      end
+    end
 end
 
 
