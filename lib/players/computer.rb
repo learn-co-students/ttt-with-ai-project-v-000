@@ -111,7 +111,6 @@ class Player::Computer < Player
       #only block the opponent if player cannot win, if there are more than
       #two ways opponent can win, does not matter - so just pick one to block,
       #no need to save multiples
-      #however, is there an optimal location?
       self.save_open_combos.each do |combo, tokens|
         @save_position = combo[tokens.index(" ")] + 1
         @save_position = @save_position.to_s
