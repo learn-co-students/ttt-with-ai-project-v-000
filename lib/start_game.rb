@@ -1,6 +1,6 @@
 class StartGame
 
-  attr_accessor :number_players, :player_1, :player_2, :board
+  attr_accessor :number_players, :player_1, :player_2, :board, :game
 
   def initialize
     self.prep_game
@@ -8,27 +8,30 @@ class StartGame
   end
 
   def prep_game
+    self.board = Board.new
     number_players = prep_players
     if number_players == 0
       self.player_1 = Player::Computer.new("X")
+      self.player_1.strategy = Strategy.new(self.board, self.game)
       self.player_2 = Player::Computer.new("O")
+      self.player_2.strategy = Strategy.new(self.board, self.game)
     end
     if number_players == 1
       self.player_1 = Player::Human.new(self.prep_token_player_1)
       self.player_2 = Player::Computer.new(self.prep_token_player_2(player_1))
+      self.player_2.strategy = Strategy.new(self.board, self)
     end
     if number_players == 2
       self.player_1 = Player::Human.new(self.prep_token_player_1)
       self.player_2 = Player::Human.new(self.prep_token_player_2(player_1))
     end
-    self.board = Board.new
   end
 
   def launch_game
-    game = Game.new(self.player_1, self.player_2, self.board)
-    game.board.display
+    self.game = Game.new(self.player_1, self.player_2, self.board)
+    self.game.board.display
     # binding.pry
-    game.play
+    self.game.play
   end
 
   def prep_players

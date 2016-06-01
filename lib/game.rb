@@ -23,6 +23,10 @@ class Game
     board.turn_count.even? ? player_1 : player_2
   end
 
+  def non_current_player
+    board.turn_count.even? ? player_2 : player_1
+  end
+
   def winning_combi?
     WIN_COMBINATIONS.any? do |combinations|
       self.result = combinations.collect {|position| board.cells[position]}
