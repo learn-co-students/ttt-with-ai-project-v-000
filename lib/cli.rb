@@ -4,7 +4,8 @@ class TicTacToe
     puts "***********  Welcome to Tic Tac Toe! *********** \nWhat type of game would you like to play? \n
           Enter 0 for the computer to play itself. \n
           Enter 1 to play the computer. \n
-          Enter 2 to play with a human friend."
+          Enter 2 to play with a human friend. \n
+          Enter 3 to play wargames."
 
     game_type = gets.strip
     game_type = game_type.to_i
@@ -17,6 +18,8 @@ class TicTacToe
         computer_human
       when 2
         human_human
+      when 3
+        wargames
     end
   end
 
@@ -57,6 +60,20 @@ class TicTacToe
     else
       human_human_game.help
     end
+  end
+
+  def wargames
+    puts "Great! Let's have the computer play itself 100 times!"
+    puts "Input \"go\" to start."
+    until WarGame.game_count == 100
+      puts "Great! Let's have the computer play Tic-Tac-Toe against itself.\n\n"
+      player_1 = Player::Computer.new("X")
+      player_2 = Player::Computer.new("O")
+      computer_computer_game = WarGame.new(player_1, player_2)
+      computer_computer_game.play
+    end
+    puts "There were #{WarGame.count_wins} wins."
+    puts "There were #{WarGame.count_draws} draws."
   end
 
 end
