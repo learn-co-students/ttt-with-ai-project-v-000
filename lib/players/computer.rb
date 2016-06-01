@@ -2,7 +2,7 @@ class Computer < Player
 
 
   def move(board)
-    self.strategy.move
+    self.strategy.move_player_2
     # @index = 0
     # board.cells.find do |cell|
     #   cell == " "
