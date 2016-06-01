@@ -1,5 +1,5 @@
 class Player::Computer < Player
-  
+
   WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
   attr_accessor :valid_moves, :board, :save_token, :save_position, :save_open_combos
@@ -17,14 +17,28 @@ class Player::Computer < Player
   end
 
   def ai_move
-    #start by seeing if player can win. if win is not possible, check
-    #to see if you should block opponent's win
-    two_in_a_row?
-    if self.save_open_combos = {}
-      # if two_in_a_row is nil, then move to forking strategy.
-
+    #consider turn count and then pick strategy
+    case self.board.turn_count
+      when 0
+        #if you are the first player, select the top left corner (or the middle),
+        #I chose top left corner to be the first choice here
+        @save_position = "1"
+      when 1
+        # if you are on the second turn, either take the center if it is open or
+        # if the center is not open take a corner
+        @save_position = "5" if self.board.valid_move("5")
+        @save_position = "1" if self.board.valid_move("1")
+      else
+        two_in_a_row?
     end
 
+    #start by seeing if player can win. if win is not possible, check
+    #to see if you should block opponent's win
+
+    # if self.save_open_combos = {}
+    #   # if two_in_a_row is nil, then move to forking strategy.
+    #
+    # end
 
   end
 
