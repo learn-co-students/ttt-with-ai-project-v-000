@@ -7,6 +7,7 @@ class Player::Computer < Player
 
   def move(board)
     puts "Computer #{self.token}'s turn!\n\n"
+    @save_position = nil
     @valid_moves = []
     @board = board
     board.cells.each_with_index do |cell, index|
@@ -14,11 +15,14 @@ class Player::Computer < Player
       @valid_moves << position.to_s if board.valid_move?(position.to_s)
     end
     @save_open_combos = {}
-    @save_position = @valid_moves[0] if ai_move == nil
+    ai_move
+    @save_position = @valid_moves[0] if @save_position == nil
   end
 
   def ai_move
+    # if two_in_a_row is nil, then move to forking strategy.
     two_in_a_row?
+
     # token = nil
     # move_to = nil
     # if two_in_a_row != []
@@ -50,14 +54,17 @@ class Player::Computer < Player
         self.save_open_combos[combo] = [self.board.cells[combo[0]], self.board.cells[combo[1]], self.board.cells[combo[2]] ]
       end
     end
-    binding.pry
-    #call win? to check save_open_combos to see if current play can win and defend? to see if opponent can win and should be blocked.
-    #if win? is nil, check defend?. if win? and defend? are nil, then move to forking strategy.
+    #call win_or_defend to check save_open_combos to see if current player can win
+    # if player can't win block opponent
     win_or_defend
   end
 
   def win_or_defend
-
+    self.save_open_combos.each do |combo, tokens|
+      #if the two combo is player's tokens, place the move in the winning location
+      if tokens.include?(self.token)
+        binding.pry
+    end
   end
 
 end
