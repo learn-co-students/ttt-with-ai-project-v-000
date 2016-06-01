@@ -1,4 +1,5 @@
 class Player::Computer < Player
+  
   WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 
   attr_accessor :valid_moves, :board, :save_token, :save_position, :save_open_combos
@@ -19,23 +20,12 @@ class Player::Computer < Player
     #start by seeing if player can win. if win is not possible, check
     #to see if you should block opponent's win
     two_in_a_row?
-    # if two_in_a_row is nil, then move to forking strategy.
+    if self.save_open_combos = {}
+      # if two_in_a_row is nil, then move to forking strategy.
 
-    # token = nil
-    # move_to = nil
-    # if two_in_a_row != []
-    #   if two_in_a_row.count == 1
-    #     two_in_a_row.flatten
-    #     two_in_a_row.each do |position|
-    #       if self.board.cells[position] == "X" || self.board.cells[position] == "0"
-    #         token = self.board.cells[position]
-    #       else
-    #         move_to = position
-    #       end
-    #     end
-    #     if two_in_a_row.count == 2
-    #       two_in_a_row.each do |win_combo|
-    #   end
+    end
+
+
   end
 
   def two_in_a_row?
