@@ -53,5 +53,14 @@ class Board
     player_1 : player_2
   end
 
+  def valid_moves
+    valid_moves = []
+    self.cells.each_with_index do |cell, index|
+      position = index + 1
+      valid_moves << position.to_s if self.valid_move?(position.to_s)
+    end
+    valid_moves
+  end
+
 
 end

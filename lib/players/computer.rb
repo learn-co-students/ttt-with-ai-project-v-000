@@ -8,20 +8,18 @@ class Player::Computer < Player
   def move(board)
     puts "Computer #{self.token}'s turn!\n\n"
     @save_position = nil
-    @valid_moves = []
     @board = board
-    board.cells.each_with_index do |cell, index|
-      position = index + 1
-      @valid_moves << position.to_s if board.valid_move?(position.to_s)
-    end
     @save_open_combos = {}
     ai_move
-    @save_position = @valid_moves[0] if @save_position == nil
+    @save_position = board.valid_moves[0] if @save_position == nil
+    @save_position
   end
 
   def ai_move
-    # if two_in_a_row is nil, then move to forking strategy.
+    #start by seeing if player can win. if win is not possible, check
+    #to see if you should block opponent's win
     two_in_a_row?
+    # if two_in_a_row is nil, then move to forking strategy.
 
     # token = nil
     # move_to = nil
@@ -64,19 +62,20 @@ class Player::Computer < Player
       #if the two combo is player's token, place the move in the winning location
       if tokens.include?(self.token)
         @save_position = combo[tokens.index(" ")] + 1
-        @save_position.to_s
+        @save_position = @save_position.to_s
       end
     end
-    if @save_position = nil
+    if @save_position == nil
+      #only block the opponent if player cannot win, if there are more than
+      #two ways opponent can win, does not matter - so just pick one to block,
+      #no need to save multiples
+      #however, is there an optimal location?
       self.save_open_combos.each do |combo, tokens|
-        #only block the opponent if player cannot win, if there are more than
-        #two ways opponent can win, does not matter - so just pick one to block,
-        #no need to save multiples
-        #however, is there an optimal location? 
         @save_position = combo[tokens.index(" ")] + 1
-        @save_position.to_s
+        @save_position = @save_position.to_s
       end
     end
+  end
 end
 
 
