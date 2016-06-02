@@ -35,8 +35,8 @@ class Board
   end
 
   def taken?(player_move)
-    player_move = player_move.to_i - 1
-    cells[player_move] == "O" || cells[player_move] == "X"
+    cell_idx = player_move.to_i - 1
+    cells[cell_idx] == "O" || cells[cell_idx] == "X"
   end
 
   def valid_move?(player_move)
