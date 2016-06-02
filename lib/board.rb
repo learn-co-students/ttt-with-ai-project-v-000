@@ -32,7 +32,7 @@ class Board
   end
 
   def taken?(position)
-    self.position(position.to_i) == " " ? false : true
+    self.position(position) == " " ? false : true
   end
 
   def valid_move?(position)

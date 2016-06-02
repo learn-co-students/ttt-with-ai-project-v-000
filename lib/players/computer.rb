@@ -9,7 +9,7 @@ class Computer < Player
   end
 
   def strategy(board)
-    win_or_block_adversary(board, self.token) || win_or_block_adversary(board, self.adversary_token) || go_corner?(board, token) || go_randomn
+    win_or_block_adversary(board, self.token) || win_or_block_adversary(board, self.adversary_token) || go_corner?(board, token) || go_randomn(board)
   end
 
   def winning_combi(board, token)
@@ -37,12 +37,14 @@ class Computer < Player
 
   def go_corner?(board, token)
     if [0, 2, 6, 8].none? {|index| board.cells[index] == token}
-      [0, 2, 6, 8].sample
+      position = [0, 2, 6, 8].sample
+      board.taken?(position + 1) ? position : go_corner?(board, token)
     end
   end
 
-  def go_randomn
-    (0..8).to_a.sample
+  def go_randomn(board)
+    position = (0..8).to_a.sample
+    board.taken?(position + 1) ? position : go_randomn(board)
   end
 
   def adversary_token
