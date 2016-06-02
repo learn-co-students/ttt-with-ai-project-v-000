@@ -12,14 +12,11 @@ class StartGame
     number_players = prep_players
     if number_players == 0
       self.player_1 = Player::Computer.new("X")
-      self.player_1.strategy = Strategy.new(self.board, self.game)
       self.player_2 = Player::Computer.new("O")
-      self.player_2.strategy = Strategy.new(self.board, self.game)
     end
     if number_players == 1
       self.player_1 = Player::Human.new(self.prep_token_player_1)
       self.player_2 = Player::Computer.new(self.prep_token_player_2(player_1))
-      self.player_2.strategy = Strategy.new(self.board, self.game) 
     end
     if number_players == 2
       self.player_1 = Player::Human.new(self.prep_token_player_1)
@@ -29,8 +26,13 @@ class StartGame
 
   def launch_game
     self.game = Game.new(self.player_1, self.player_2, self.board)
+    # if self.player_1.class == Computer
+    #   self.player_1.strategy = Strategy.new(self.board, self.game)
+    # end
+    # if self.player_2.class == Computer
+    #   self.player_2.strategy = Strategy.new(self.board, self.game)
+    # end
     self.game.board.display
-    # binding.pry
     self.game.play
   end
 

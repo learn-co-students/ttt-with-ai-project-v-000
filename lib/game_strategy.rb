@@ -69,12 +69,12 @@ class Strategy
     elsif board.turn_count == 3
       self.turn_2
     else
-      for index in 1..9
-        if board.valid_move?(index)
-          board.update(index, current_player)
-          break #allow to break as soon as we found the first solution
-        end
-      end
+      # for index in 1..9
+      #   if board.valid_move?(index)
+      #     board.update(index, current_player)
+      #     break #allow to break as soon as we found the first solution
+      #   end
+      # end
     end
   end
 

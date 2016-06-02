@@ -1,6 +1,6 @@
 class Player
 
-  attr_accessor :strategy
+  # attr_accessor :strategy
   attr_reader :token
 
   def initialize(token)
