@@ -1,8 +1,8 @@
 class Computer < Player
 
   def move(board)
-    if !board.taken?(5)
-      5
+    if !board.taken?('5')
+      '5'
     else
       strategy(board) + 1
     end
@@ -30,7 +30,7 @@ class Computer < Player
   end
 
   def win_or_block_adversary(board, token)
-    if winning_combi(board, token) && find_empty_spot(winning_combi(board, token)) != false
+    if winning_combi(board, token)
       find_empty_spot(winning_combi(board, token))
     end
   end
