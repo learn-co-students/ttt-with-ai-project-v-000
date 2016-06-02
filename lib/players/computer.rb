@@ -30,7 +30,7 @@ class Computer < Player
   end
 
   def win_or_block_adversary(board, token)
-    if winning_combi(board, token)
+    if winning_combi(board, token) && find_empty_spot(winning_combi(board, token)) != false
       find_empty_spot(winning_combi(board, token))
     end
   end
