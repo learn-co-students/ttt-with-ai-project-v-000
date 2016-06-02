@@ -26,12 +26,6 @@ class StartGame
 
   def launch_game
     self.game = Game.new(self.player_1, self.player_2, self.board)
-    # if self.player_1.class == Computer
-    #   self.player_1.strategy = Strategy.new(self.board, self.game)
-    # end
-    # if self.player_2.class == Computer
-    #   self.player_2.strategy = Strategy.new(self.board, self.game)
-    # end
     self.game.board.display
     self.game.play
   end
