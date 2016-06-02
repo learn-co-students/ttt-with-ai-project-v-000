@@ -79,49 +79,4 @@ class Game
     end
   end
 
-
-  def score(depth=0)
-    if self.won?(@player_1)
-      return 10 - depth
-    elsif self.won?(@player_2)
-      return depth - 10
-    else
-      return 0
-    end
-  end
-
-  def get_available_moves
-    (0..8).select { |i| self.board.cells[i] == " "}.collect{|i| (i + 1).to_s}
-  end
-  
-  def minimax(depth=0)
-    return score(self) if self.over?
-    depth += 1
-    scores = [] # an array of scores
-    moves = []  # an array of moves
-
-    # Populate the scores array, recursing as needed
-    self.get_available_moves.each do |position|
-      binding.pry
-      possible_game = self.dup
-      possible_move = possible_game.board.update(position, self.player_1)
-      scores << possible_game.minimax
-      moves << move
-    end
-
-    # Do the min or the max calculation
-    if self.current_player == self.player_1
-      # This is the max calculation
-      max_score_index = scores.each_with_index.max[1]
-      @choice = moves[max_score_index]
-      return scores[max_score_index]
-    else
-      # This is the min calculation
-      min_score_index = scores.each_with_index.min[1]
-      @choice = moves[min_score_index]
-      return scores[min_score_index]
-    end
-  end
-
-
 end
