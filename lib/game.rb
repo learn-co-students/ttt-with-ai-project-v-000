@@ -1,7 +1,7 @@
 require './config/environment.rb'
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2, :choice
+  attr_accessor :board, :player_1, :player_2, :choice, :winner_is
   WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
   def initialize(player_1=Player::Human.new("X"), player_2=Player::Human.new("O"), board=Board.new)
@@ -23,7 +23,7 @@ class Game
       position_3 = self.board.cells[win_index_3]
    
       if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
-        self.winner
+        self.winner_is
       else
         nil
       end
@@ -44,8 +44,7 @@ class Game
 
   def winner
     if won?
-      binding.pry
-      self.current_player.token
+      self.winner_is = self.current_player.token
     end
   end
 
