@@ -1,3 +1,22 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Enter number of Players:"
+num_players = gets.strip
+comp1 = Player::Computer.new("X")
+comp2 = Player::Computer.new("O")
+hum1 = Player::Human.new("X")
+hum2 = Player::Human.new("O")
+new_board = Board.new
+game_state = Game.new
+case num_players
+when "1"
+  game_state.player_2 = comp2
+when "2"
+when "0"
+  game_state.player_1 = comp1
+  game_state.player_2 = comp2
+end
+until game_state.won?
+  game_state.play
+end
