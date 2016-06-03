@@ -35,24 +35,17 @@ class Game
   end
 
   def draw?
-    if !won? && full?
-      true
-    else
-      false
-    end
+    !won? && full?
   end
 
   def over?
-    if won? || draw? || full?
-      true
-    else 
-      false
-    end
+    won? || draw? || full?
   end
 
   def winner
-    if the_winner_combo = won?
-      self.board.cells[the_winner_combo.first]
+    if won?
+      binding.pry
+      self.current_player.token
     end
   end
 
