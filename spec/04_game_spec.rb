@@ -109,7 +109,6 @@ describe 'Game' do
     it 'returns true for a win' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-      #binding.pry
 
       expect(game.won?).to be_truthy
     end
@@ -142,7 +141,6 @@ describe 'Game' do
     it 'returns X when X won' do
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
-#binding.pry
       expect(game.winner).to eq("X")
     end
 

@@ -18,33 +18,31 @@ class Game
     @player_2 = player_2
   end
 
-  def current_player 
+  def current_player
     (turn_count % 2) == 0 ? player_1 : player_2
   end
 
   def turn
-    move = current_player.move(board = "") 
-#binding.pry
-    # until board.valid_move?(move) do
+
+    player_move = current_player.move(board)
+    # until board.valid_move?(player_move) do
     #   puts "invalid"
-    #   move = current_player.move(board = "")
+    #   player_move = current_player.move(board)
     # end
 
-
-    board.cells[move.to_i] = current_player.token
+    board.cells[player_move.to_i] = current_player.token
   end
 
   def turn_count
     counter = 0
     board.cells.each do |play| 
-      play == "X" || play == "O" ? counter += 1 : nil
+      counter += 1 if play == "X" || play == "O"
     end
     counter
   end
 
   def play
     until over? do
-  #binding.pry
       turn
     end
     puts "Congratulations #{winner}!" if won?

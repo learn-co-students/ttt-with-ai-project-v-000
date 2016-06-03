@@ -3,17 +3,9 @@ class Human < Player
     
   @moves = []
 
-  def move (board)
+  def move (board = nil)
     puts "Make your move HU-mon:"
     player_move = gets.chomp
-    until board.valid_move?(player_move) do
-      puts "invalid"
-      move = current_player.move(board = "")
-    end
-    input
+    player_move
   end
-
-
-
-
 end #of Human CLASS
