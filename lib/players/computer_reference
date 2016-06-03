@@ -58,7 +58,6 @@ class Player::Computer < Player
       find_win
     else
       block
-      binding.pry
     end
     #even numbers = O, odd numbers = X
     #iterate through the win combos with 3 variables. Go through board and see if there are any combos that match 2 numbers in any array

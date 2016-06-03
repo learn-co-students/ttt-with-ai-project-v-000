@@ -37,7 +37,7 @@ class Board
   def turn_count
     occupied = cells.collect {|let| let == "X" or let == "O"}
     occupied.delete_if {|x_y| x_y == false}
-    occupied.length
+    occupied.length+1
   end
 
   def taken?(position)
@@ -64,9 +64,6 @@ class Board
     p = position.to_i
     cells[p-1] = player.token
   end
-
-
-
 
 
 
