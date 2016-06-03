@@ -41,7 +41,7 @@ class Board
 
   def valid_move?(player_move)
     cell_idx = player_move.to_i - 1  
-    cell_idx.between?(0,8) && !(self.taken?(player_move))
+    cell_idx.between?(0,8) && !(taken?(player_move))
   end
 
   def update(player_move, player)

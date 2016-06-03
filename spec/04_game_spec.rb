@@ -109,6 +109,7 @@ describe 'Game' do
     it 'returns true for a win' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      #binding.pry
 
       expect(game.won?).to be_truthy
     end
@@ -141,7 +142,7 @@ describe 'Game' do
     it 'returns X when X won' do
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
-
+#binding.pry
       expect(game.winner).to eq("X")
     end
 
@@ -164,7 +165,6 @@ describe 'Game' do
     it 'makes valid moves' do
       game = Game.new
       allow($stdout).to receive(:puts)
-
       expect(game.player_1).to receive(:gets).and_return("1")
 
       game.turn
@@ -236,7 +236,6 @@ describe 'Game' do
       allow(game).to receive(:over?).and_return(false, false, false, true)
 
       game.play
-
       expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
 
