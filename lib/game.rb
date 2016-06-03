@@ -22,20 +22,14 @@ class Game
       position_2 = self.board.cells[win_index_2]
       position_3 = self.board.cells[win_index_3]
    
-      if (position_1 == "X" && position_2 == "X" && position_3 == "X") && player == (self.player_1 || nil)
-        true
-      elsif (position_1 == "O" && position_2 == "O" && position_3 == "O") && player == (self.player_2 || nil)
+      if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
         true
       end
     end
   end
 
   def full?
-    if self.board.cells.all?{|i| (i == "X") || (i == "O")}
-      true
-    else 
-      false
-    end
+    self.board.full?
   end
 
   def draw?
