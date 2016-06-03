@@ -23,13 +23,15 @@ class Game
   end
 
   def turn
-    move = current_player.move(input = "") 
+    move = current_player.move(board = "") 
 #binding.pry
-    until board.valid_move?(move) do
-      puts "invalid"
-      move = current_player.move(input = "")
-    end
-    board.cells[input.to_i] = current_player.token
+    # until board.valid_move?(move) do
+    #   puts "invalid"
+    #   move = current_player.move(board = "")
+    # end
+
+
+    board.cells[move.to_i] = current_player.token
   end
 
   def turn_count
