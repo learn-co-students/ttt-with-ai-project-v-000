@@ -19,7 +19,7 @@ class Game
   end
 
   def current_player
-    board.turn_count.odd? ? player_1 : player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -68,19 +68,42 @@ class Game
   def turn
     #write a sperate method for turn when it's for Human or Computer players. Below is for Human. But it's calling move sooo
     # call PLAYER::COMPUTER? Idk
-    if current_player.class.name == "Player::Computer"
-      puts "Player #{current_player.token}'s turn, Move: #{board.turn_count}"
-    else
-      puts "Where would you like to go #{current_player.name}? Move: #{board.turn_count}"
-    end
+
+    # if current_player.class.name == "Player::Computer"
+    #   puts "Player #{current_player.token}'s turn, Move: #{board.turn_count}"
+    # else
+    #   puts "Where would you like to go #{current_player.name}? Move: #{board.turn_count}"
+    # end
     board.display
     input = self.current_player.move(@board)
-    board.valid_move?(input)
-    if board.valid_move?(input) == false
-      input = current_player.move(@board)
+
+    # board.valid_move?(input)
+    # if board.valid_move?(input) == false
+    #   input = current_player.move(@board)
+    # end
+    # board.update(input,current_player)
+
+
+
+    if board.valid_move?(input)
+      board.update(input,current_player)
+    else
+      puts "Not valid"
+      # input = current_player.move(@board)
+      turn
     end
-    board.update(input,current_player)
+    # board.update(input,current_player)
   end
+
+  # not my turn method
+  # def turn
+  #   player_move = current_player.move(board)
+  #   if board.valid_move?(player_move)
+  #     board.update(player_move, current_player)
+  #   else
+  #   turn
+  #   end
+  # end
 
   def play
     until over? == true

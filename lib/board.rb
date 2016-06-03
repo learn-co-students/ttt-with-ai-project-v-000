@@ -35,9 +35,10 @@ class Board
   end
 
   def turn_count
-    occupied = cells.collect {|let| let == "X" or let == "O"}
-    occupied.delete_if {|x_y| x_y == false}
-    occupied.length+1
+    self.cells.count {|cell| cell == "X" || cell == "O"}
+    # occupied = cells.collect {|let| let == "X" or let == "O"}
+    # occupied.delete_if {|x_y| x_y == false}
+    # occupied.length+1
   end
 
   def taken?(position)
