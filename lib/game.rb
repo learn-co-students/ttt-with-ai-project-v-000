@@ -24,7 +24,7 @@ class Game
 
   def turn
     move = current_player.move(input = "") 
-binding.pry
+#binding.pry
     until board.valid_move?(move) do
       puts "invalid"
       move = current_player.move(input = "")
@@ -42,7 +42,7 @@ binding.pry
 
   def play
     until over? do
-  binding.pry
+  #binding.pry
       turn
     end
     puts "Congratulations #{winner}!" if won?
