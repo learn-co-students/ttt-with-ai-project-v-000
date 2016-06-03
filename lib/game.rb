@@ -12,7 +12,7 @@ class Game
     self.board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
-  def won?(player=nil)
+  def won?
     WIN_COMBINATIONS.detect do |win_combination|
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
@@ -23,7 +23,9 @@ class Game
       position_3 = self.board.cells[win_index_3]
    
       if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
-        true
+        self.winner
+      else
+        nil
       end
     end
   end
@@ -77,9 +79,9 @@ class Game
   end
 
   def score
-    if self.won?(self.player_1)
+    if self.won? && self.current_player == player_1
       return 10
-    elsif self.won?(self.player_2)
+    elsif self.won? && self.current_player == player_2
       return 10
     else
       return 0
