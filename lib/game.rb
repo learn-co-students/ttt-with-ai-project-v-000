@@ -1,7 +1,7 @@
 require './config/environment.rb'
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2, :choice, :winner_is
+  attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
   def initialize(player_1=Player::Human.new("X"), player_2=Player::Human.new("O"), board=Board.new)
@@ -72,45 +72,9 @@ class Game
     end
   end
 
-  def score(game)
-    if game.won? && game.current_player == player_1
-      return 10
-    elsif game.won? && game.current_player == player_2
-      return 10
-    else
-      return 0
-    end
-  end
 
-  def get_available_moves(game)
-    (0..8).select { |i| game.board.cells[i] == " "}.collect{|i| (i + 1).to_s}
-  end
-  
-  def minimax(game)
-    return game.score(game) if game.over?
-    scores = [] # an array of scores
-    moves = []  # an array of moves
-
-    # Populate the scores array, recursing as needed
-    get_available_moves(game).each do |position|
-      possible_game = game.dup
-      possible_move = possible_game.board.update(position, game.current_player)
-      scores << possible_game.minimax(possible_game)
-      moves << position
-    end
-
-    # Do the min or the max calculation
-    if game.current_player == game.player_1
-      # This is the max calculation
-      max_score_index = scores.each_with_index.max[1]
-      game.choice = moves[max_score_index]
-      return scores[max_score_index]
-    else
-      # This is the min calculation
-      min_score_index = scores.each_with_index.min[1]
-      game.choice = moves[min_score_index]
-      return scores[min_score_index]
-    end
+  def get_available_moves
+    (0..8).select { |i| self.board.cells[i] == " "}.collect{|i| (i + 1).to_s}
   end
 
 end
