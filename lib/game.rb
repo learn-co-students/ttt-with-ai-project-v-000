@@ -41,7 +41,11 @@ class Game
 
   def winner
     if winning_combo = won?
-      @winner = @board.cells[winning_combo.first]
+      if @board.cells[winning_combo.first] == "X"
+        @winner = player_1
+      elsif @board.cells[winning_combo.first] == "O"
+        @winner = player_2
+      end
     end
   end
 
@@ -66,7 +70,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner.token}!"
     elsif draw?
       puts "Cats Game!"
     end
