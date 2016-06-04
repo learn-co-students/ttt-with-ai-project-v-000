@@ -38,7 +38,7 @@ class Board
     self.cells.count {|cell| cell == "X" || cell == "O"}
     # occupied = cells.collect {|let| let == "X" or let == "O"}
     # occupied.delete_if {|x_y| x_y == false}
-    # occupied.length+1
+    # occupied.length
   end
 
   def taken?(position)

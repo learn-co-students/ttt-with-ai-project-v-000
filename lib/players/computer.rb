@@ -23,6 +23,8 @@ class Player::Computer < Player
                       [6,4,2]#R-L Diagonal
                               ]
 
+   
+
 
   def move(board)
     @board = board
@@ -63,18 +65,47 @@ class Player::Computer < Player
   end
 
   def block_the_win
-    BLOCK_COMBINATIONS.detect do |combo|
-      if (board.cells[combo[0]] == opponent_token && board.cells[combo[1]] == opponent_token) || (board.cells[combo[0]] == opponent_token && board.cells[combo[2]] == opponent_token) || (board.cells[combo[1]] == opponent_token && board.cells[combo[2]] == opponent_token)
-        #return which number is false
-        @block = combo.detect {|num| board.cells[num] != opponent_token}
-        @block = @block+1
-      else
-        @block = nil
+    # binding.pry
+    @final_combo_index = []
+    @final_combo = []
+    @block = nil
+    true_combo = BLOCK_COMBINATIONS.map {|combo| (board.cells[combo[0]] == opponent_token && board.cells[combo[1]] == opponent_token) || (board.cells[combo[0]] == opponent_token && board.cells[combo[2]] == opponent_token) || (board.cells[combo[1]] == opponent_token && board.cells[combo[2]] == opponent_token) }
+    true_combo.each do |x|
+      if x == true
+        @final_combo_index << true_combo.index(x)
       end
     end
-    BLOCK_COMBINATIONS.delete(block)
+    #have to fix the index on line 79. It constantly returns 0 since index is equal to 0
+    @final_combo_index.each {|x| BLOCK_COMBINATIONS[x].each {|y| @final_combo << y }}
+    @block = @final_combo.detect {|x| board.cells[x] == " "}
+    @block == nil ? @block : @block+1
 
-    @block
+
+
+
+    # BLOCK_COMBINATIONS.collect do |combo|
+    #   if (board.cells[combo[0]] == opponent_token && board.cells[combo[1]] == opponent_token) || (board.cells[combo[0]] == opponent_token && board.cells[combo[2]] == opponent_token) || (board.cells[combo[1]] == opponent_token && board.cells[combo[2]] == opponent_token)
+    #     #return which number is false
+    #     @final_combo << combo
+    #     # @block = combo.detect {|num| board.cells[num] != opponent_token}
+    #   else
+    #     @block = nil
+    #   end
+    #   @final_combo.detect {|num| board.cells[num] == " "}
+    # end
+
+
+    # BLOCK_COMBINATIONS.detect do |combo|
+    #   if (board.cells[combo[0]] == opponent_token && board.cells[combo[1]] == opponent_token) || (board.cells[combo[0]] == opponent_token && board.cells[combo[2]] == opponent_token) || (board.cells[combo[1]] == opponent_token && board.cells[combo[2]] == opponent_token)
+    #     #return which number is false
+    #     @block = combo.detect {|num| board.cells[num] != opponent_token}
+    #     board.valid_move?(@block) ? @block = @block+1 : block_the_win
+    #   else
+    #     @block = nil
+    #   end
+    # end
+
+    # BLOCK_COMBINATIONS.delete(block)
   end
 
   def win_combo
@@ -82,7 +113,7 @@ class Player::Computer < Player
       if (board.cells[combo[0]] == who_goes? && board.cells[combo[1]] == who_goes?) || (board.cells[combo[0]] == who_goes? && board.cells[combo[2]] == who_goes?) || (board.cells[combo[1]] == who_goes? && board.cells[combo[2]] == who_goes?)
         #return which number is false
         @win = combo.detect {|num| board.cells[num] != who_goes?}
-        @win = @win+1
+        board.valid_move?(@win) ? @win = @win+1 : win_combo
       else
         @win = nil
       end
