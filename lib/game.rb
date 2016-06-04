@@ -74,14 +74,14 @@ class Game
 
 
   def turn
+    puts "Current player is #{current_player.token} (#{current_player.class})."
+    puts ""
     move = current_player.move(@board)
-     # binding.pry
     if @board.valid_move?(move)
       board.update(move, current_player)
-      # binding.pry
     else
       puts "invalid input"
-      # binding.pry
+      puts ""
       turn
     end
 
@@ -90,10 +90,14 @@ class Game
 
   def play
     while !over?
-      # binding.pry
+      @board.display
+      puts ""
       turn
-      # binding.pry
+      puts ""
     end
+    @board.display
+    puts " "
+    puts " "
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
   end

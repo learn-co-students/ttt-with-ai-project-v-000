@@ -1,7 +1,7 @@
 class Human < Player
 
   def move(board = nil)
-    puts "Choose your next move."
+    print "Choose your next move (1-9): "
     move = gets.chomp
     move
   end
