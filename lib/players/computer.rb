@@ -17,15 +17,16 @@ class Computer < Player
 
 
   def better_move(board)
+    #TODO improve AI
     b = board
     if !b.taken?(5)
       return "5"
     elsif !b.taken?(1)
       return "1"
+    elsif !b.taken?(9)
+      return "9"   
     elsif !b.taken?(3) 
       return "3"
-    elsif !b.taken?(9)
-      return "9" 
     elsif !b.taken?(7)
       return "7"
     elsif !b.taken?(2)
