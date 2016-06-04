@@ -28,20 +28,13 @@ class Player::Computer < Player
 
   def move(board)
     @board = board
-    binding.pry
     if board.turn_count <= 2
       avail_corners
-    elsif win_or_block == nil || win_or_block == false
+    elsif win_or_block == false
       #this checks the board to see what spots are free and picks a random number
-      free_spot = []
-      board.cells.each_with_index {|point, index|
-      if point == " "
-        new_index = index+1
-        free_spot << new_index.to_s
-      end}
-      free_spot.sample
+      random_number
     else
-      win_or_block
+      board.valid_move?(win_or_block) ? win_or_block : random_number
     end
   end
 
@@ -56,6 +49,18 @@ class Player::Computer < Player
     corner_num.sample
   end
 
+  def random_number
+    free_spot = []
+      board.cells.each_with_index do |point, index|
+        if point == " "
+          new_index = index+1
+          free_spot << new_index.to_s
+        end
+    end
+    free_spot.sample
+  end
+
+
   def who_goes?
     board.turn_count.even? ? "X" : "O"
   end
@@ -66,18 +71,19 @@ class Player::Computer < Player
 
   def block_the_win
     # binding.pry
-    @final_combo_index = []
-    @final_combo = []
+    @final_combo_index_b = []
+    @final_combo_b = []
     @block = nil
     true_combo = BLOCK_COMBINATIONS.map {|combo| (board.cells[combo[0]] == opponent_token && board.cells[combo[1]] == opponent_token) || (board.cells[combo[0]] == opponent_token && board.cells[combo[2]] == opponent_token) || (board.cells[combo[1]] == opponent_token && board.cells[combo[2]] == opponent_token) }
     true_combo.each do |x|
       if x == true
-        @final_combo_index << true_combo.index(x)
+        @final_combo_index_b << true_combo.index(x)
       end
     end
     #have to fix the index on line 79. It constantly returns 0 since index is equal to 0
-    @final_combo_index.each {|x| BLOCK_COMBINATIONS[x].each {|y| @final_combo << y }}
-    @block = @final_combo.detect {|x| board.cells[x] == " "}
+    @final_combo_index_b.each {|x| BLOCK_COMBINATIONS[x].each {|y| @final_combo_b << y }}
+    # @final_combo_index.each {|x| BLOCK_COMBINATIONS.delete_at(x)}
+    @block = @final_combo_b.detect {|x| board.cells[x] == " "}
     @block == nil ? @block : @block+1
 
 
@@ -109,17 +115,39 @@ class Player::Computer < Player
   end
 
   def win_combo
-    WIN_COMBINATIONS.detect do |combo|
-      if (board.cells[combo[0]] == who_goes? && board.cells[combo[1]] == who_goes?) || (board.cells[combo[0]] == who_goes? && board.cells[combo[2]] == who_goes?) || (board.cells[combo[1]] == who_goes? && board.cells[combo[2]] == who_goes?)
-        #return which number is false
-        @win = combo.detect {|num| board.cells[num] != who_goes?}
-        board.valid_move?(@win) ? @win = @win+1 : win_combo
-      else
-        @win = nil
+    @final_combo_index_w = []
+    @final_combo_w = []
+    @win = nil
+    true_combo = WIN_COMBINATIONS.map {|combo| (board.cells[combo[0]] == who_goes? && board.cells[combo[1]] == who_goes?) || (board.cells[combo[0]] == who_goes? && board.cells[combo[2]] == who_goes?) || (board.cells[combo[1]] == who_goes? && board.cells[combo[2]] == who_goes?) }
+    true_combo.each do |x|
+      if x == true
+        @final_combo_index_w << true_combo.index(x)
       end
     end
-    WIN_COMBINATIONS.delete(win)
-    @win
+    #have to fix the index on line 79. It constantly returns 0 since index is equal to 0
+    @final_combo_index_w.each {|x| WIN_COMBINATIONS[x].each {|y| @final_combo_w << y }}
+    # @final_combo_index.each {|x| WIN_COMBINATIONS.delete_at(x)}
+    @win = @final_combo_w.detect {|x| board.cells[x] == " "}
+    @win == nil ? @win : @win+1
+
+
+
+
+
+
+
+
+    # WIN_COMBINATIONS.detect do |combo|
+    #   if (board.cells[combo[0]] == who_goes? && board.cells[combo[1]] == who_goes?) || (board.cells[combo[0]] == who_goes? && board.cells[combo[2]] == who_goes?) || (board.cells[combo[1]] == who_goes? && board.cells[combo[2]] == who_goes?)
+    #     #return which number is false
+    #     @win = combo.detect {|num| board.cells[num] != who_goes?}
+    #     board.valid_move?(@win) ? @win = @win+1 : win_combo
+    #   else
+    #     @win = nil
+    #   end
+    # end
+    # WIN_COMBINATIONS.delete(win)
+    # @win
   end
 
   def win_or_block
