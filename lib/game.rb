@@ -23,8 +23,9 @@ class Game
   end
 
   def turn
-    player_move = current_player.move(board).to_i - 1
-    board.cells[player_move] = current_player.token
+    player_move = current_player.move(board)
+    
+    board.valid_move?(player_move) ? board.update(player_move, current_player) : turn
   end
 
   def turn_count

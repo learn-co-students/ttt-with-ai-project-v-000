@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello HU-mon.  Do you wish to play a game?"
+puts "  How about a nice game of Tic-Tac-Toe?"
+
+Board.new.display
+
+puts "How many HU-mon players? (0, 1, or 2)"
+player_num = gets.chomp
+
+if player_num.to_i < 2
+  #computer player methods
+else
+  Game.new
+end
+
+
+
