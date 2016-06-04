@@ -12,6 +12,7 @@ player_num = gets.chomp
 
 if player_num.to_i < 2
   #computer player methods
+  Game.new (Player::Human.new("X"), Player::Computer.new("O"), board = Board.new)
 else
   Game.new
 end
