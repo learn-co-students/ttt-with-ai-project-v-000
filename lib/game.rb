@@ -40,8 +40,8 @@ class Game
     board.cells[won?[0]] if won?
   end
   def turn
-    puts "It is now #{current_player}'s turn. Please enter 1-9:"
-    input = gets.strip.to_i
+    puts "It is now #{current_player.token}'s turn. Please enter 1-9:"
+    input = $stdin.gets.strip.to_i
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
       display_board
@@ -64,4 +64,4 @@ class Game
     end
   end
 end
-Game.new
+Game.new.turn
