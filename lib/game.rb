@@ -30,6 +30,35 @@ class Game
       board.taken?(combo[0])
     end
   end
-
+  def draw?
+    board.full? && !won?
+  end
+  def over?
+    won? || draw?
+  end
+  def winner
+    if won?
+      winning_position = won?[0]
+      if board.cells[winning_position] == "X"
+        return "X"
+      elsif board.cells[winning_position] == "O"
+        return "O"
+      end
+    end
+  end
+  def turn
+    puts "It is now #{current_player}'s turn. Please enter 1-9:"
+    position = gets.chomp.to_i
+    if board.valid_move?(position.to_s)
+      board.update(position, current_player)
+      display_board
+    elsif position.between?(1, 9) == false
+      puts "That is an invalid move"
+      turn
+    else
+      puts "Whoops! Looks like that position is taken"
+      turn
+    end
+  end
 end
 Game.new

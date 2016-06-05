@@ -19,7 +19,7 @@ class Board
     cells[input - 1]
   end
   def full?
-    cells.all? {|position| position == "X" || position == "O"}
+    cells.none? {|position| position == " " || position == nil}
   end
   def turn_count
     turn = 0
