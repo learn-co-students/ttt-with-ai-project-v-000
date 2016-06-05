@@ -1,6 +1,6 @@
 class Player::Human < Player
 
-  def move
+  def move(board)
     puts "Please input 1-9."
     gets.strip
   end

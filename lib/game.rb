@@ -12,14 +12,14 @@ class Game
     [6,4,2]
   ]
 
-  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Array.new(9, " "))
+  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
   end
 
   def current_player
-    @board.turn_count %2 == 0 ? @player_1 : @player_2
+    @board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -28,8 +28,8 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      @board.cells.[combo[0]] ==  @board.cells.[combo[1]]&&
-      @board.cells.[combo[1]] ==  @board.cells.[combo[2]] &&
+      @board.cells[combo[0]] ==  @board.cells[combo[1]] &&
+      @board.cells[combo[2]] ==  @board.cells[combo[0]] &&
       @board.taken?(combo[2]+1)
     end
   end
@@ -41,11 +41,31 @@ class Game
   def winner
     if win_combo = won?
       @winner = @board.cells[win_combo[0]]
+    end
   end
 
   def turn
-    gets.strip
-    
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      @board.display
+      @board.update(current_move, player)
+      @board.display
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cats Game!"
+    end
   end
 
 end
