@@ -38,7 +38,7 @@ class Game
     board.cells[won?[0]] if won?
   end
   def turn
-    input = current_player.move(board.display)
+    input = current_player.move(board.display).to_i
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
       board.display
