@@ -100,6 +100,8 @@ class Game
     puts " "
     puts "Congratulations #{winner}!" if won?
     puts "Cats Game!" if draw?
+    puts " "
+    puts " "
   end
 
 

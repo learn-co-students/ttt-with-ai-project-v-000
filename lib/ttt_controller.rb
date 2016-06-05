@@ -27,7 +27,7 @@ class TTTController
   end
 
   def goofed
-    puts "Ya dun goofed. Let's try this again."
+    puts "Ya goofed up the input. Numbers. 0-2. Try again. I know you can do it."
     puts ""
     puts ""
     start
