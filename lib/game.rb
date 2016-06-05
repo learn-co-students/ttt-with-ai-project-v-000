@@ -23,8 +23,10 @@ class Game
   end
 
   def turn
+    board.display
+    puts "Player #{current_player.token}'s move..."
     player_move = current_player.move(board)
-    
+
     board.valid_move?(player_move) ? board.update(player_move, current_player) : turn
   end
 
@@ -40,8 +42,12 @@ class Game
     until over? do
       turn
     end
-    puts "Congratulations #{winner}!" if won?
-    puts "Cats Game!" if draw?
+    board.display
+    if won?
+      puts "Congratulations #{winner}!" if won?
+    else
+      puts "Cats Game!" if draw?
+    end
   end # play
 
 
