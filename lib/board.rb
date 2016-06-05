@@ -6,7 +6,7 @@ class Board
   end
 
   def reset!
-    @cells = Array.new(9, "")
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -37,8 +37,8 @@ class Board
     input.to_i.between?(1, 9) && !taken?(input)
   end
 
-  def update(input, player)
-    position(input) = player.token
+  def update(input)
+    position(input)
   end
 
 end
