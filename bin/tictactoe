@@ -1,3 +1,42 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Do you want to play a game?"
+
+response = gets.chomp
+
+if response == "Yes" || response == "yes"
+  puts "Ballerz. I only know tictactoe, so it will have to be that one."
+  puts "player 1: human?"
+  response = gets.chomp
+if response == "yes" || response == "Yes"
+  player_1 = Human.new("X")
+elsif response == "no" || response == "No"
+  player_1 = Computer.new("X")
+end
+
+
+puts "player 2: human?"
+  response = gets.chomp
+if response == "yes" || response == "Yes"
+  player_2 = Human.new("O")
+elsif response == "no" || response == "No"
+  player_2 = Computer.new("O")
+end
+
+new_game = Game.new(player_1,player_2)
+new_game.play
+
+
+
+
+
+
+
+
+
+
+else 
+  puts "You aren't very sporinng, are you? How does that make you feel?"
+end
