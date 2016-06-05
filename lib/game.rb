@@ -25,9 +25,7 @@ class Game
   end
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      board.cells[combo[0]] == board.cells[combo[1]] &&
-      board.cells[combo[1]] == board.cells[combo[2]] &&
-      board.taken?(combo[0])
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[0])
     end
   end
   def draw?
@@ -40,8 +38,7 @@ class Game
     board.cells[won?[0]] if won?
   end
   def turn
-    puts "It is now #{current_player.token}'s turn. Please enter 1-9:"
-    input = gets.strip.to_i
+    input = current_player.move(board.display)
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
       board.display
