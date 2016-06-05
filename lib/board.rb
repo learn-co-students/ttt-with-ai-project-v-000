@@ -26,9 +26,8 @@ class Board
     cells.each {|position| turn += 1 if position == "X" || position == "O"}
     turn
   end
-  def taken?(position)
-    position = position.to_i - 1
-    cells[position] == "X" || cells[position] == "O"
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
   end
   def valid_move?(position)
     position = position.to_i
