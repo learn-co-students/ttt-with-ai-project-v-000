@@ -19,22 +19,22 @@ class Board
     cells[input - 1]
   end
   def full?
-    cells.none? {|position| position == " " || position == nil}
+    cells.none? {|cell| cell == " " || cell == nil}
   end
   def turn_count
     turn = 0
-    cells.each {|position| turn += 1 if position == "X" || position == "O"}
+    cells.each {|cell| turn += 1 if cell == "X" || cell == "O"}
     turn
   end
   def taken?(input)
     position(input) == "X" || position(input) == "O"
   end
-  def valid_move?(position)
-    position = position.to_i
-    !(taken?(position)) && position.between?(1, 9)
+  def valid_move?(input)
+    input = input.to_i
+    !(taken?(input)) && input.between?(1, 9)
   end
-  def update(position, player)
-    position = position.to_i
-    cells[position -1] = player.token
+  def update(input, player)
+    input = input.to_i
+    cells[input -1] = player.token
   end
 end

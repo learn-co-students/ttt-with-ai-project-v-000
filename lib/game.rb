@@ -24,8 +24,8 @@ class Game
     board.turn_count.even?  ? player_1 : player_2
   end
   def won?
-    WIN_COMBINATIONS.detect do |combo|
-      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[0])
+    WIN_COMBINATIONS.find do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] != " "
     end
   end
   def draw?
@@ -38,7 +38,7 @@ class Game
     board.cells[won?[0]] if won?
   end
   def turn
-    input = current_player.move(board.display).to_i
+    input = current_player.move(board).to_i
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
       board.display
@@ -51,6 +51,7 @@ class Game
     end
   end
   def play
+    board.display
     until over?
       turn
     end
