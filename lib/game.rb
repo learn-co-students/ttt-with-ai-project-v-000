@@ -41,10 +41,10 @@ class Game
   end
   def turn
     puts "It is now #{current_player.token}'s turn. Please enter 1-9:"
-    input = $stdin.gets.strip.to_i
+    input = gets.strip.to_i
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
-      display_board
+      board.display
     elsif input.between?(1, 9) == false
       puts "That is an invalid move"
       turn
@@ -64,4 +64,3 @@ class Game
     end
   end
 end
-Game.new.turn
