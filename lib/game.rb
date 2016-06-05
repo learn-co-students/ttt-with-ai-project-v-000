@@ -40,19 +40,19 @@ class Game
     if won?
       winning_position = won?[0]
       if board.cells[winning_position] == "X"
-        return "X"
+       "X"
       elsif board.cells[winning_position] == "O"
-        return "O"
+       "O"
       end
     end
   end
   def turn
     puts "It is now #{current_player}'s turn. Please enter 1-9:"
-    position = gets.chomp.to_i
-    if board.valid_move?(position.to_s)
-      board.update(position, current_player)
+    input = gets.chomp.to_i
+    if board.valid_move?(input.to_s)
+      board.update(input, current_player)
       display_board
-    elsif position.between?(1, 9) == false
+    elsif input.between?(1, 9) == false
       puts "That is an invalid move"
       turn
     else
@@ -60,5 +60,15 @@ class Game
       turn
     end
   end
+#  def play
+#    until over?
+#      turn
+#    end
+#    if draw?
+#      puts "Cats Game!"
+#    elsif won?
+#      puts "Congratulations #{self.winner}!"
+#    end
+#  end
 end
 Game.new
