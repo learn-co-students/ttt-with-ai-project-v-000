@@ -2,14 +2,14 @@ class Computer < Player
   attr_accessor :moves
 
   ::WIN_COMBINATIONS = [
-    [0,1,2], # Top row
-    [3,4,5], # Middle row
-    [6,7,8], # Bottom row
-    [0,3,6], # left column
-    [1,4,7], # middle column
-    [2,5,8], #right column
-    [0,4,8], # diag_1
-    [2,4,6]  # diag_2
+    [0,1,2], # Top row        3
+    [3,4,5], # Middle row     12
+    [6,7,8], # Bottom row     21
+    [0,3,6], # left column    9
+    [1,4,7], # middle column  12  
+    [2,5,8], #right column    15
+    [0,4,8], # diag_1         12
+    [2,4,6]  # diag_2         12
   ]
 
   
@@ -25,7 +25,7 @@ class Computer < Player
 
   def block(board)
     ::WIN_COMBINATIONS.detect do |combo|
-      board.cells[combo[0]] == @board.cells[combo[1]] ||
+      board.cells[combo[0]] == @board.cells[combo[1]] &&
       board.cells[combo[0]] == @board.cells[combo[2]] &&
       board.taken?(combo[0]+1)
     end
@@ -37,10 +37,10 @@ class Computer < Player
     board.cells.each_with_index do |x,i|
       available_moves << i if x == " "
       end
-    available_moves.each_with_index do |x,i|
-      x = x.to_s
-      available_moves[i] = x
-    end
+    # available_moves.each_with_index do |x,i|
+    #   x = x.to_s
+    #   available_moves[i] = x
+    # end
     available_moves
   end
 
@@ -60,7 +60,7 @@ class Computer < Player
 
 
   def move (board = nil)
-    moves = available(board)
+    available_moves = available(board)
 
     first_moves = ["1","3","5","7"]
 
@@ -68,7 +68,7 @@ class Computer < Player
 
     corner_first_counters = ["0","1","2","3","5","6","7","8"]
 
-    player_move = first.moves.shuffle[0] if board_state(board) == "first"
+    player_move = first_moves.shuffle[0] if board_state(board) == "first"
      
       if board_state(board) == "second"
         position_taken = board.cells.index {|x| x != " "}.to_s
@@ -92,6 +92,49 @@ class Computer < Player
       x_counter > o_counter ? player_test = "X" : player_test ="O"
       test_player_moves = moves_made(board, player_test)
       
+
+      #i want to compare each WINCOMBO to test_player_moves such that if we add an Availablemove   
+      ::WIN_COMBINATIONS.each do |combo|
+        a_string = ""
+          combo.each do |x|
+            x = x.to_s
+            a_string << x
+          end
+
+        available_moves.each do |a_move|
+          b_string = ""
+          test_array = []
+           test_player_moves.freeze.each do |x|
+            test_array << x
+          end
+           test_array << a_move
+          test_array.sort!
+            test_array.each do |x|
+              x = x.to_s
+              b_string << x
+              
+            
+            end
+            # puts "a_string =#{a_string} --b_string = #{b_string}"
+           if b_string.include?(a_string) && b_string.length >= 2
+            # puts "player move condition met. a_move =#{a_move}"
+            a_move = a_move.to_i
+            a_move = a_move + 1
+            a_move = a_move.to_s
+            player_move = a_move
+            # puts "player_move = #{player_move}"
+            break
+          end
+          
+        end
+      end
+
+
+        
+
+
+
+
     end
 
 
