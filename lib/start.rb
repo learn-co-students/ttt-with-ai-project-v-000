@@ -8,6 +8,7 @@ class StartTheGame
     start
   end
 
+## Game Type Selected ##
   def game_type
     puts "\nPlease choose the type of game to play"
     puts "0 - Computer vs Computer"
@@ -17,33 +18,15 @@ class StartTheGame
     @game_choice = gets.strip
   end
 
+## Game Started ##
   def start
     case @game_choice
     when "0"
-      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
-      play_again?
+      zero_player_game
     when "1"
-      puts "\nPlayer 1, choose your token: X or 0? X will go first."
-      token_input = gets.strip.upcase
-      if token_input == "X"
-        Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
-      elsif token_input == "O"
-        Game.new(Player::Computer.new("X"), Player::Human.new("O")).play
-      else
-        exit
-      end
-      play_again?
+      one_player_game
     when "2"
-      puts "\nPlayer 1, choose your token: X or 0? X will go first."
-      token_input = gets.strip
-      if token_input == "X"
-        Game.new(Player::Human.new("X"), Player::Human.new("O")).play
-      elsif token_input == "O"
-        Game.new(Player::Human.new("O"), Player::Human.new("X")).play
-      else
-        exit
-      end
-      play_again?
+      two_player_game
     when "3"
       puts "\nThe computer will now play itself 100 times"
       sleep 1
@@ -52,6 +35,39 @@ class StartTheGame
       end
       play_again?
     end
+  end
+  
+
+# Game Types Defined ##
+  def zero_player_game
+    Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+    play_again?
+  end
+  
+  def one_player_game
+    puts "\nPlayer 1, choose your token: X or 0? X will go first."
+    token_input = gets.strip.upcase
+    if token_input == "X"
+      Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
+    elsif token_input == "O"
+      Game.new(Player::Computer.new("X"), Player::Human.new("O")).play
+    else
+      exit
+    end
+    play_again?
+  end
+  
+  def two_player_game
+    puts "\nPlayer 1, choose your token: X or 0? X will go first."
+    token_input = gets.strip
+    if token_input == "X"
+      Game.new(Player::Human.new("X"), Player::Human.new("O")).play
+    elsif token_input == "O"
+      Game.new(Player::Human.new("O"), Player::Human.new("X")).play
+    else
+      exit
+    end
+    play_again?
   end
     
   def play_again?
