@@ -29,6 +29,14 @@ class Board
     cells.count{|token| token == "X" || token == "O"}
   end
 
+  def x_count
+    cells.count{|token| token == "X"}
+  end
+
+  def o_count
+    cells.count{|token| token == "O"}
+  end
+
   def taken?(input)
     if position(input) == "X" || position(input) == "O"
       true

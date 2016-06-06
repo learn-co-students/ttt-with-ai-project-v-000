@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :human_token
 
   WIN_COMBINATIONS = [
       [0,1,2],
@@ -19,7 +19,11 @@ class Game
   end
 
   def current_player
-    @board.turn_count.even? ? @player_1 : @player_2
+    if @board.x_count > @board.o_count
+      @player_2
+    else
+      @player_1
+    end
   end
 
   def over?
@@ -28,7 +32,6 @@ class Game
 
 
   def won?
-    # +1?
      WIN_COMBINATIONS.detect do |combination|
       @board.cells[combination[0]] == @board.cells[combination[1]] &&
       @board.cells[combination[1]] == @board.cells[combination[2]] &&
@@ -52,12 +55,13 @@ class Game
     current_move = player.move(board)
     if @board.valid_move?(current_move)
       @board.update(current_move, player)
+      puts "Turn: #{@board.turn_count}\n"
       @board.display
-      puts "\n\n"
+      puts "\n\n\n"
     else
       turn
       puts "Invalid move, try again."
-      puts "\n\n"
+      puts "\n\n\n"
     end
   end
 
