@@ -115,14 +115,12 @@ class Computer < Player
               
             
             end
-            # puts "a_string =#{a_string} --b_string = #{b_string}"
            if b_string.include?(a_string) && b_string.length >= 2
             # puts "player move condition met. a_move =#{a_move}"
             a_move = a_move.to_i
             a_move = a_move + 1
             a_move = a_move.to_s
             player_move = a_move
-            # puts "player_move = #{player_move}"
             break
           end
           
