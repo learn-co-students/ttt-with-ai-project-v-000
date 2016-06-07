@@ -10,35 +10,33 @@ class StartTheGame
 
 ## Game Type Selected ##
   def game_type
-    puts "\nPlease choose the type of game to play"
+    puts "\n"
+    puts "Please choose the type of game to play"
     puts "0 - Computer vs Computer"
     puts "1 - Human vs Computer"
     puts "2 - Human vs Human"
     puts "3 - Wargames"
+    puts "\n"
     @game_choice = gets.strip
   end
 
-## Game Started ##
+## Start of Game ##
   def start
     case @game_choice
-    when "0"
+    when "0" 
       zero_player_game
     when "1"
       one_player_game
     when "2"
       two_player_game
     when "3"
-      puts "\nThe computer will now play itself 100 times"
-      sleep 1
-      100.times do
-        Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
-      end
-      play_again?
+      war_games
     end
   end
+## End of Game ##
   
 
-# Game Types Defined ##
+## Start of Type of Games ##
   def zero_player_game
     Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
     play_again?
@@ -69,7 +67,27 @@ class StartTheGame
     end
     play_again?
   end
-    
+  
+  def war_games
+    player_1_win_counter = 0
+    player_2_win_counter = 0
+    puts "\nThe computer will now play itself 100 times"
+    sleep 1
+    100.times do
+      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+      if save_winner == "X"
+        player_1_win_counter += 1
+      else
+        player_2_win_counter += 1
+      end
+    end
+    puts "Player 1 won #{player_1_win_counter} games"
+    puts "Player 2 won #{player_2_win_counter} games"
+    play_again?
+  end
+## End of Type of Games ##
+
+## Start of Play Again ##
   def play_again?
     puts "\nDo you want to play again? (yes/no)"
     answer = gets.strip.downcase
@@ -77,6 +95,7 @@ class StartTheGame
       game_type
       start
     elsif answer == "no"
+      puts "╭∩╮（︶︿︶）╭∩╮"
       puts "\n"
       puts "*~*~*~*~*~*~~**~*~*~*~*~*~*~*~*~*~*~*~*"
       puts "*~* Thanks for playing Tic Tac Toe! *~*"
@@ -86,5 +105,6 @@ class StartTheGame
       play_again?
     end
   end
+## End of Play Again ##
   
 end

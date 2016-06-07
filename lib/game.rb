@@ -1,8 +1,6 @@
-require 'pry'
-
 class Game
   
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :save_winner
   
   WIN_COMBINATIONS = [
    [0,1,2],
@@ -34,18 +32,21 @@ class Game
   end
   
   def won?
+    won = false
     WIN_COMBINATIONS.each do |win|
-      win_combo1 = @board.cells[win[0]]
-      win_combo2 = @board.cells[win[1]]
-      win_combo3 = @board.cells[win[2]]
+      win_combo1 = self.board.cells[win[0]]
+      win_combo2 = self.board.cells[win[1]]
+      win_combo3 = self.board.cells[win[2]]
 
       if win_combo1 == "X" && win_combo2 == "X" && win_combo3 == "X"
-        return win
+        won = true
+        self.save_winner = self.board.cells[win[0]]
       elsif win_combo1 == "O" && win_combo2 == "O" && win_combo3 == "O"
-        return win
+        won = true
+        self.save_winner = self.board.cells[win[0]]
       end
     end
-    return false
+    won
   end
   
   def full?
@@ -56,13 +57,9 @@ class Game
     !won? && full? ? true : false
   end
   
-  # Revisit this method. Works in old Tic Tac Toe and works here but not sure what is going on
+  ## Not sure what is going on with win_combo = won ##
   def winner
-    if win_combo = won?
-      return @board.cells[win_combo[0]]
-    else
-      return nil
-    end
+    self.save_winner if won?
   end
 
   def turn
@@ -80,7 +77,7 @@ class Game
     until over?
       turn
     end
-    won? ? (puts "Congratulations #{current_player.token}!") : (puts "Cats Game!")
+    won? ? (puts "Congratulations #{self.save_winner}!") : (puts "Cats Game!")
   end
   
 end
