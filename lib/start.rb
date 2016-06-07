@@ -38,7 +38,8 @@ class StartTheGame
 
 ## Start of Type of Games ##
   def zero_player_game
-    Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+    game.play
     play_again?
   end
   
@@ -74,14 +75,15 @@ class StartTheGame
     puts "\nThe computer will now play itself 100 times"
     sleep 1
     100.times do
-      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
-      if save_winner == "X"
+      game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+      game.play
+      if game.save_winner == "X"
         player_1_win_counter += 1
       else
         player_2_win_counter += 1
       end
     end
-    puts "Player 1 won #{player_1_win_counter} games"
+    puts "\nPlayer 1 won #{player_1_win_counter} games"
     puts "Player 2 won #{player_2_win_counter} games"
     play_again?
   end
