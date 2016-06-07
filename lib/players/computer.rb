@@ -14,7 +14,6 @@ class Player::Computer < Player
   ]
   def move(board)
     @board = board
-    @other = token == "X" ? "O" : "X"
 
     if winning_move != nil
       input = winning_move + 1
@@ -29,9 +28,12 @@ class Player::Computer < Player
     puts "It's now the computer's turn."
     input.to_s
   end
+  def other
+    token == "X" ? "O" : "X"
+  end
   def winning_move
     winning_row = WIN_COMBINATIONS.find do |combo|
-      (board.cells[combo[0]] == token && board.cells[combo[1]] == token) || (board.cells[combo[2]] == token && board.cells[combo[1]] == token) || (board.cells[combo[0]] == token && board.cells[combo[2]] == token) && combo.any? {|cell| cell == " "}
+      ((board.cells[combo[0]] == token && board.cells[combo[1]] == token) || (board.cells[combo[2]] == token && board.cells[combo[1]] == token) || (board.cells[combo[0]] == token && board.cells[combo[2]] == token)) && combo.any? {|cell| cell == " "}
     end
     if winning_row != nil
       winning_cell = winning_row.find {|cell| board.cells[cell] == " "}
@@ -39,7 +41,7 @@ class Player::Computer < Player
   end
   def blocking_move
     winning_row = WIN_COMBINATIONS.find do |combo|
-      (board.cells[combo[0]] == @other && board.cells[combo[2]] == @other) || (board.cells[combo[2]] == @other && board.cells[combo[1]] == @other) || (board.cells[combo[0]] == @other && board.cells[combo[1]] == @other) && combo.any? {|cell| cell == " "}
+      ((board.cells[combo[0]] == other && board.cells[combo[1]] == other) || (board.cells[combo[1]] == other && board.cells[combo[2]] == other) || (board.cells[combo[2]] == other && board.cells[combo[0]] == other)) && combo.any? {|cell| cell == " "}
     end
     if winning_row != nil
       winning_cell = winning_row.find {|cell| board.cells[cell] == " "}
