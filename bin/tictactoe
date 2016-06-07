@@ -13,9 +13,34 @@ def start
     Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
   when "2"
     Game.new(Player::Human.new("X"), Player::Human.new("O")).play
+  when "wargames"
+    counter = 0
+    x = 0
+    o = 0
+    draw = 0
+    until counter == 100
+      counter += 1
+      game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+      game.play
+      if game.draw?
+        draw += 1
+      elsif game.winner == "X"
+        x += 1
+      elsif game.winner == "O"
+        o += 1
+      end
+      puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
+    end
   else
     puts "That is an invalid entry"
     start
+  end
+  puts "That was fun! Would you like to play again? (y/n)"
+  answer = gets.strip
+  if answer == "y"
+    start
+  else
+    puts "Goodbye!"
   end
 end
 start
