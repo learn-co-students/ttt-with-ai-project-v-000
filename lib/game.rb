@@ -57,7 +57,6 @@ class Game
     !won? && full? ? true : false
   end
   
-  ## Not sure what is going on with win_combo = won ##
   def winner
     self.save_winner if won?
   end
