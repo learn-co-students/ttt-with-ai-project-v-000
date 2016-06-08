@@ -13,14 +13,11 @@ class Player::Computer < Player
    [6,4,2]
   ]
   
-  
   def move(board)
     @board = board
     if potential_combo
-      puts "this is a win or block"
       win_or_block
     else
-      puts "this is a rand"
       rand(1..9)
     end
   end
@@ -31,14 +28,12 @@ class Player::Computer < Player
       space0 = @board.cells[c[0]]
       space1 = @board.cells[c[1]]
       space2 = @board.cells[c[2]]
-      (space0 != " " && space0 == space1 && space2 == " ") ||
-      (space1 != " " && space1 == space2 && space0 == " ") ||
-      (space2 != " " && space2 == space0 && space1 == " ")
+      (space0 != " " && space0 == space1 && space2 == " ") || (space1 != " " && space1 == space2 && space0 == " ") || (space2 != " " && space2 == space0 && space1 == " ")
     end
   end
 
   def win_or_block
-    potential_combo.detect {|index| @board.cells[index] == " "}
+    potential_combo.detect {|index| @board.cells[index] == " "} + 1
   end
 
 end
