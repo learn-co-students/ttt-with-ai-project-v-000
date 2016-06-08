@@ -31,7 +31,9 @@ class Player::Computer < Player
       space0 = @board.cells[c[0]]
       space1 = @board.cells[c[1]]
       space2 = @board.cells[c[2]]
-      (space0 != " " && space0 == space1 && space2 == " ") || (space1 != " " && space1 == space2 && space0 == " ") || (space2 != " " && space2 == space0 && space1 == " ")
+      (space0 != " " && space0 == space1 && space2 == " ") ||
+      (space1 != " " && space1 == space2 && space0 == " ") ||
+      (space2 != " " && space2 == space0 && space1 == " ")
     end
   end
 
