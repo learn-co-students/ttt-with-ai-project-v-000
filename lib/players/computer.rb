@@ -16,9 +16,9 @@ class Player::Computer < Player
   def move(board)
     @board = board
     if potential_combo
-      win_or_block
+      win_or_block.to_s
     else
-      rand(1..9)
+      rand(1..9).to_s
     end
   end
 
