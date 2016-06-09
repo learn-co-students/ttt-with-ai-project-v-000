@@ -15,14 +15,18 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
 
   def won?
     WIN_COMBINATIONS.each do |win_combination|
-    position_1 = board[win_combination[0]]
-    position_2 = board[win_combination[1]]
-    position_3 = board[win_combination[2]]
+    position_1 = board.cells[win_combination[0]]
+    position_2 = board.cells[win_combination[1]]
+    position_3 = board.cells[win_combination[2]]
       if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
         return win_combination
       end
     end
     return false
+  end
+
+  def full?
+    board.cells.all? {|position| position == "X" || position == "O"}
   end
 
   def draw?
@@ -36,10 +40,45 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
   def winner
     winning_array = won?
       if winning_array != false
-        return board[winning_array.first]
+        return board.cells[winning_array.first]
       else
         return nil
       end
+  end
+
+  def move(position, character="X")
+   board[position.to_i - 1]=character
+  end
+
+  def position_taken?(position)
+  (board.cells[position] != " " && board.cells[position] != "" && board.cells[position] != nil)
+   end
+
+  def valid_move?(position)
+    position = position.to_i - 1
+    position.between?(0, 8) && !position_taken?(position)
+  end
+
+  def turn
+    turn_count
+    puts "Please enter 1-9:"
+    position = gets.strip
+    if valid_move?(position)
+      move(position, "#{current_player}")
+      board.display
+    else 
+      turn
+    end
+  end
+
+  def turn_count
+    counter = 0
+    board.cells.each do |position|
+      if position == "X" || position == "O"
+        counter += 1
+      end
+    end
+    counter
   end
 
 
