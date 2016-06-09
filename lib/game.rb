@@ -33,7 +33,7 @@ class Game
 
   def winner
     if won?
-      player_1_wins ? "X" : "O"
+      player_1_wins ? "X" : "O"  # "#{@player_1.token}" : "#{@palyer_2.token}"
     end
   end
 
@@ -50,15 +50,35 @@ class Game
   end
 
   def turn
-    puts "Select your move (1-9)!"
+  	@board.display
+    if current_player == @player_1
+      puts "Player 1, select your move (1-9)!"
+    else
+      puts "Player 2, Select your move (1-9)!"
+    end
+    player_move = current_player.move(@board)
 
-    if @board.valid_move?(@player_1.move(@board))
+
+    if @board.valid_move?(player_move)
+       @board.cells[player_move.to_i - 1] = current_player.token
+       @board.display
     else
       turn
     end
   end
 
   def play
+    turn until over?
+    if won?
+      if winner == "X"
+        puts "Congratulations X!"
+      elsif winner == "O"
+        puts "Congratulations O!"
+      end
+    elsif draw?
+      puts "Cats Game!"
+    end
   end
 
 end
+# binding.pry

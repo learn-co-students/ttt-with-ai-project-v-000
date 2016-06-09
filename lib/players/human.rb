@@ -1,7 +1,7 @@
 class Human < Player
 
   def move(array)  # what array?
-    index = gets.chomp
+    position = gets.chomp
   end
 
 end

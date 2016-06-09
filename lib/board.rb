@@ -25,11 +25,11 @@ class Board
   end
 
   def full?
-    @cells.all? {|cell| cell != " "}
+    @cells.all? {|cell| cell == "X" || cell == "O"}
   end
 
   def turn_count
-    @cells.count { |cell| cell != " "}
+    @cells.count { |cell| cell == "X" || cell == "O"}
   end
 
   def taken?(board_position)
@@ -45,5 +45,5 @@ class Board
      @cells[board_position.to_i - 1] = "X"
      #needs to be changed later  player = double("player", :token => "X")
   end
-
+#binding.pry
 end
