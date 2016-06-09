@@ -52,15 +52,16 @@ class Game
     end
   end
   def play
+    board.reset!
     board.display
     until over?
       turn
       sleep(1/@counter) if @wargame == true
     end
     if draw?
-      puts "Cats Game!" unless @wargame == true
+      puts "WINNER: NONE"
     elsif won?
-      puts "Congratulations #{winner}!" unless @wargame == true
+      puts "WINNER: #{winner}"
     end
   end
   def wargames
@@ -74,16 +75,14 @@ class Game
       play
       if draw?
         draw += 1
-        puts "Winner: none"
       elsif winner == "X"
         x += 1
-        puts "Winner: X"
       elsif winner == "O"
         o += 1
-        puts "Winner: O"
       end
     end
     puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
-    puts "A strange game. The only winning move is not to play. How about a nice game of chess?"
+    puts "A STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO PLAY."
+    puts "HOW ABOUT A NICE GAME OF CHESS?"
   end
 end
