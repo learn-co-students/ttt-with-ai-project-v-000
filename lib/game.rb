@@ -50,15 +50,13 @@ class Game
   end
 
   def turn
-  	@board.display
+
     if current_player == @player_1
       puts "Player 1, select your move (1-9)!"
     else
-      puts "Player 2, Select your move (1-9)!"
+      puts "Player 2, select your move (1-9)!"
     end
     player_move = current_player.move(@board)
-
-
     if @board.valid_move?(player_move)
        @board.cells[player_move.to_i - 1] = current_player.token
        @board.display
@@ -68,6 +66,7 @@ class Game
   end
 
   def play
+    @board.display
     turn until over?
     if won?
       if winner == "X"
