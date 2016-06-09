@@ -14,10 +14,11 @@ class Game
   [6, 4, 2]
   ]
 
-  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), wargame = false, board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    @wargame = wargame
   end
 
   def current_player
@@ -54,11 +55,35 @@ class Game
     board.display
     until over?
       turn
+      sleep(1/@counter) if @wargame == true
     end
     if draw?
-      puts "Cats Game!"
+      puts "Cats Game!" unless @wargame == true
     elsif won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner}!" unless @wargame == true
     end
+  end
+  def wargames
+    @counter = 0
+    x = 0
+    o = 0
+    draw = 0
+    until @counter == 100
+      @counter += 1
+      puts "Game #{@counter}"
+      play
+      if draw?
+        draw += 1
+        puts "Winner: none"
+      elsif winner == "X"
+        x += 1
+        puts "Winner: X"
+      elsif winner == "O"
+        o += 1
+        puts "Winner: O"
+      end
+    end
+    puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
+    puts "A strange game. The only winning move is not to play. How about a nice game of chess?"
   end
 end

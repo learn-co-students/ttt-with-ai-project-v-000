@@ -22,15 +22,14 @@ class Player::Computer < Player
       input = blocking_move + 1
     elsif center?
       input = 5
-    elsif corner != nil
+    elsif corner
       input = corner + 1
     else
-      input = (1..9).to_a.sample
       until board.taken?(input) == false
         input = (1..9).to_a.sample
       end
     end
-    puts "It's now the computer's turn."
+    puts "It's now #{token}'s turn."
     input.to_s
   end
   def other
