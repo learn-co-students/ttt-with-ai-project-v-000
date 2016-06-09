@@ -19,13 +19,31 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(position)
-    index = position.to_i - 1
+  def position(board_position)
+    index = board_position.to_i - 1
     @cells[index]
   end
 
-end
+  def full?
+    @cells.all? {|cell| cell != " "}
+  end
 
-board = Board.new
-board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
-board.position("1")
+  def turn_count
+    @cells.count { |cell| cell != " "}
+  end
+
+  def taken?(board_position)
+    self.position(board_position) != " "
+  end
+
+  def valid_move?(board_position)
+    valid_positions = (1..9).to_a.map{|n| n.to_s}
+    valid_positions.include?(board_position) && !taken?(board_position)
+  end
+
+  def update(board_position, player)
+     @cells[board_position.to_i - 1] = "X"
+     #needs to be changed later  player = double("player", :token => "X")
+  end
+
+end
