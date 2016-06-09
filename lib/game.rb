@@ -79,7 +79,7 @@ class Game
 
   def turn
     while !@board.update(current_player.move(@board), self.current_player)
-      !@board.update(current_player.move(@board), self.current_player)
+      @board.update(current_player.move(@board), self.current_player)
     end
   end
 end
