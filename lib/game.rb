@@ -61,12 +61,8 @@ class Game
 
 
   def play
-    @board.reset!
-    while self.over? == false
-      binding.pry
-      @board.display
+    while self.over? == false do
       self.turn
-    end
       if self.won?
         @board.display
         puts "Congratulations #{self.winner}!"
@@ -74,16 +70,16 @@ class Game
         @board.display
         puts "Cats Game!"
       end
-      @board.reset!
+    end
   end
 
 
   def turn
     spot = current_player.move(@board)
-    while !board.valid_move?(spot)
+    while !@board.valid_move?(spot)
       spot = current_player.move(@board)
     end
-     board.update(spot, self.current_player)
+     @board.update(spot, self.current_player)
   end
 end
 
