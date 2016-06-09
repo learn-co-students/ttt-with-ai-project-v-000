@@ -62,30 +62,33 @@ class Game
 
   def play
     @board.reset!
-    while !self.over?
+    while self.over? == false
+      binding.pry
       @board.display
       self.turn
+    end
       if self.won?
         @board.display
         puts "Congratulations #{self.winner}!"
-        break
       elsif self.draw?
         @board.display
         puts "Cats Game!"
-        break
       end
-    end
+      @board.reset!
   end
 
 
   def turn
-    puts "Pick a spot."
-    spot = ""
-    spot = gets.strip
+    spot = current_player.move(@board)
     while !board.valid_move?(spot)
-      puts "Pick a spot."
-      spot = gets.strip
+      spot = current_player.move(@board)
     end
      board.update(spot, self.current_player)
   end
 end
+
+# >
+# [9] pry(#<Game>)> self.over?
+# => false
+# [10] pry(#<Game>)> self.over?
+# => true
