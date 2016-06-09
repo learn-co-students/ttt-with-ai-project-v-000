@@ -56,7 +56,7 @@ class Game
     board.display
     until over?
       turn
-      sleep(1/@counter) if @wargame == true
+      sleep(2/@counter) if @wargame == true
     end
     if draw?
       puts "WINNER: NONE"
