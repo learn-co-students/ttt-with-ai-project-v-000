@@ -28,8 +28,9 @@ class Board
   def update(index, player)
     if valid_move?(index.to_i)
       @cells[index.to_i-1] = player.token
+      return true
     end
-      #logic here for getting a new move if invalid?
+    return false
   end
 
   # def token

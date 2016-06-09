@@ -65,11 +65,11 @@ class Game
       @board.display
       self.turn
       if self.won?
-        @board.display
+      #  @board.display
         puts "Congratulations #{self.winner}!"
         break
       elsif self.draw?
-        @board.display
+        #@board.display
         puts "Cats Game!"
         break
       end
@@ -78,15 +78,11 @@ class Game
 
 
   def turn
-    spot = current_player.move(@board)
-    while !@board.valid_move?(spot) do
-      puts "Invalid."
-      spot = current_player.move(@board)
+    while !@board.update(current_player.move(@board), self.current_player)
+      !@board.update(current_player.move(@board), self.current_player)
     end
-     @board.update(spot, self.current_player)
   end
 end
-
 # >
 # [9] pry(#<Game>)> self.over?
 # => false
