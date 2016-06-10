@@ -19,7 +19,7 @@ You'll be implementing Tic Tac Toe using multiple objects that relate and collab
 
 *Instructions for how to work on a Group Project with Learn*
 
-### Some Hints on Working Together 
+### Some Hints on Working Together
 
 Working on a software project with another person is not something to be taken lightly. While you are a fantastic coder solo, software development is a collaborative activity. Just like anything else, there is skill in collaborating on code. In the end, collaborating with another person boils down to three different styles:
 
@@ -97,13 +97,25 @@ Finally, a board can return values based on its state such as `#full?` when enti
 
 ##### `player.rb` - `Player`
 
-The `Player` class is not actually a valid player of Tic Tac Toe but rather a root class that will act as an inheritance point for actual player classes such as `Player::Human` and `Player::Computer`. The `Player` root class will define only the most basic properties of a player, that they have a `token` property that can be set upon initialization.
+The `Player` class is not actually a valid player of Tic Tac Toe but rather a root class that will act as an inheritance point for actual player classes such as `Human < Player` and `Computer < Player`. The `Player` root class will define only the most basic properties of a player, that they have a `token` property that can be set upon initialization.
 
 Every player subclass will implement a `#move` method that represents how that type of player makes a move in Tic Tac Toe.
 
-##### 'players/human.rb' - `Player::Human`
+##### 'players/human.rb' - `Players::Human`
 
-Define a class `Player::Human` that inherits from `Player`. The human player must implement a `#move` method that takes in a `board` argument and allows a human player to enter a move via the CLI. The method should return the value the user enters. Even though the method accepts a `board` argument, it does not need to use it.
+Define a class `Human` that inherits from `Player`. This class should be namespaced inside the module `Players` because the `human.rb` file is inside the `players/` directory. This keeps our code nice and tidy.
+
+The human player must implement a `#move` method that takes in a `board` argument and allows a human player to enter a move via the CLI. The method should return the value the user enters. Even though the method accepts a `board` argument, it does not need to use it.
+
+>Note on name spacing: You'll notice here that we do `Players::Human < Player` does not work because the `Players` module is not yet defined. So to do this, we'll need to do:
+```ruby
+module Players
+  class Human < Player
+    # your code here
+  end
+end
+```
+Now you when you call your Human class, you'll have to call it inside it's name space with `Players::Human`.
 
 ##### `game.rb` - `Game`
 
@@ -116,9 +128,9 @@ The `Game` class is the main model of the application and represents a singular 
 
 Beyond providing relationships with players and a board, the `Game` instance must also provide the basic game runtime and logic. These methods relate to the state of the game such as `#current_player`, `#won?`, and `#winner`. The other methods relate to managing a game, like `#start`, `#play`, and `#turn`. The test suite describes the method requirements.
 
-##### 'players/computer.rb' - `Player::Computer`
+##### 'players/computer.rb' - `Players::Computer`
 
-Define a class `Player::Computer` that represents a computer player of Tic Tac Toe. Implement a `#move` method that accepts a board and returns the move the computer wants to make in the form of a 1-9 string. How the computer decides to make that move is up to you but it must be capable of returning a valid move at some point.
+Define a class `Players::Computer` that represents a computer player of Tic Tac Toe. Implement a `#move` method that accepts a board and returns the move the computer wants to make in the form of a 1-9 string. How the computer decides to make that move is up to you but it must be capable of returning a valid move at some point.
 
 ```ruby
 def move(board)
@@ -130,7 +142,7 @@ Returns a valid move for the first move but after that your program will go into
 
 Think about the levels of intelligence you can build into this method. Start with the simplest level of intelligence, and get more and more complicated. Each step of the way you should have a working computer player though.
 
-Remember, Tic Tac Toe when played perfectly is unwinnable. You should strive to build computer logic that when the computer plays, the game is unwinnable. You can hardcode your logic, things like "On turn 1 always try to go in the middle if you can" and if not "try to go in a corner" or any logic tree you can think of - there is an algorithm called Min/Max, but it's going to be hard to implement given our current implementation of a Game, so we recommend building something that's a more colloquial or condition-based algorithm. 
+Remember, Tic Tac Toe when played perfectly is unwinnable. You should strive to build computer logic that when the computer plays, the game is unwinnable. You can hardcode your logic, things like "On turn 1 always try to go in the middle if you can" and if not "try to go in a corner" or any logic tree you can think of - there is an algorithm called Min/Max, but it's going to be hard to implement given our current implementation of a Game, so we recommend building something that's a more colloquial or condition-based algorithm.
 
 #### `bin/tictactoe`
 
@@ -149,5 +161,3 @@ If you'd like, implement a "wargames" game type. When asked what kind of game th
 The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
 
 <a href='https://learn.co/lessons/ttt-with-ai-project' data-visibility='hidden'>View this lesson on Learn.co</a>
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/ttt-with-ai-project'>Tic-Tac-Toe with AI</a> on Learn.co and start learning to code for free.</p>
