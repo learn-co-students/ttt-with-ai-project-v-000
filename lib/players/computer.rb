@@ -16,7 +16,6 @@ class Player::Computer < Player
 
   def move(board)
     @board = board
-    puts "It's now #{token}'s turn."
     case
       when winning_move != nil
         input = winning_move + 1

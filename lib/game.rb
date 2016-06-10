@@ -1,7 +1,7 @@
 require "pry"
 
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :timer
 
   WIN_COMBINATIONS = [
   [0, 1, 2],
@@ -19,6 +19,7 @@ class Game
     @player_2 = player_2
     @board = board
     @wargame = wargame
+    @timer = 1.5
   end
 
   def current_player
@@ -39,6 +40,8 @@ class Game
     board.cells[won?[0]] if won?
   end
   def turn
+    puts "It's now #{current_player.token}'s turn."
+    sleep(@timer)
     input = current_player.move(board).to_i
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
@@ -56,7 +59,6 @@ class Game
     board.display
     until over?
       turn
-      sleep(2/@counter) if @wargame == true
     end
     if draw?
       puts "WINNER: NONE"
@@ -72,6 +74,7 @@ class Game
     until @counter == 100
       @counter += 1
       puts "Game #{@counter}"
+      @timer -= 0.2 unless @timer < 0.15
       play
       if draw?
         draw += 1
@@ -80,6 +83,7 @@ class Game
       elsif winner == "O"
         o += 1
       end
+      sleep(@timer)
     end
     puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
     puts "A STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO PLAY."
