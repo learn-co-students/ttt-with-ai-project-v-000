@@ -60,13 +60,11 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
   end
 
   def turn
-    turn_count
-    puts "Please enter 1-9:"
-    position = gets.strip
-    if valid_move?(position)
-      move(position, "#{current_player}")
-      board.display
-    else 
+    input = self.current_player.move(self.board)
+    if self.board.valid_move?(input)
+      board.update(input, self.current_player)
+      self.board.display
+    else
       turn
     end
   end
@@ -81,6 +79,16 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
     counter
   end
 
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
+  end
 
 
 end
