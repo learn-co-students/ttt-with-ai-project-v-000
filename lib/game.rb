@@ -13,15 +13,60 @@ class Game
     @player_2 = p2
     @board = board
   end
+
+  def set_up
+    players = get_num_players
+    if players == 2
+      return
+    elsif players == 0
+      @player_1 = Player::Computer.new("X")
+      @player_2 = Player::Computer.new("O")
+    else
+      get_first 
+    end
+  end
+
+  def get_first
+    first = -1
+    until first.between?(1,2)
+      puts "1 for player first or 2 for computer first"
+      first = gets.strip.to_i
+    end
+    if first == 1
+      @player_2 = Player::Computer.new("O")
+    else
+      @player_1 = Player::Computer.new("X")
+    end
+  end
+
+  def get_num_players
+    players = -1
+    until players.between?(0,2)
+      puts "How many players?"
+      players = gets.strip.to_i
+    end
+    players
+  end
   
   def turn
-    index = current_player.move([])
+    index = current_player.move(@board)
     if @board.valid_move?(index)
       @board.update(index, current_player)
       @board.display
+      puts "\n\n"
     else
       turn
     end
+  end
+
+  def new_game
+    answer = -1
+    until answer == "y" || answer == "n"
+      puts "New Game? (y/n)"
+      answer = gets.strip
+    end
+    return true if answer == "y"
+    false 
   end
 
   def play
