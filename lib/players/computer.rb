@@ -64,14 +64,14 @@ class Player::Computer < Player
   end
   def opposite_corner
     case
-    when board.taken?(1) && !board.taken?(9)
-      9
-    when board.taken?(9) && !board.taken?(1)
-      1
-    when board.taken?(3) && !board.taken?(7)
-      7
-    when board.taken?(7) && !board.taken?(3)
-      3
+      when board.taken?(1) && !board.taken?(9)
+        9
+      when board.taken?(9) && !board.taken?(1)
+        1
+      when board.taken?(3) && !board.taken?(7)
+        7
+      when board.taken?(7) && !board.taken?(3)
+        3
     end
   end
 end
