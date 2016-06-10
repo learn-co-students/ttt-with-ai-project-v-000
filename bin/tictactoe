@@ -2,5 +2,32 @@
 
 require_relative '../config/environment'
 
-game = Game.new
-game.play
+
+puts "Welcome to TicTacToe"
+puts "Please enter a number of players (0-2)"
+
+def pick_play_mode
+  input = gets.strip
+  if input.to_i.between?(0, 2)
+    case input
+    when "0"
+      game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
+    when "1"
+      puts "Do you want to go first? (y, n)"
+      yes_no = gets.strip
+      if yes_no == "y"
+        game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
+      elsif yes_no == "n"
+        game = Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
+      end
+    when "2"
+      game = Game.new
+    end
+  else
+    puts "An invalid number of players. Please pick a number again (0-2)"
+    pick_play_mode
+  end
+  game.play
+end
+
+pick_play_mode

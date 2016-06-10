@@ -1,8 +1,9 @@
 class Computer < Player
 
-  def move(array)   #why array is needed here?  array = @cells ?
-    valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    valid_moves.sample
+  def move(board_cells)
+    possible_moves = board_cells.each_index.select {|i| board_cells[i] == " "}.collect {|n| (n+1).to_s }
+    sleep 2
+    possible_moves.sample
   end
 
 end
