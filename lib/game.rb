@@ -2,7 +2,7 @@ require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2, :winner
 
-  WIN_COMBINATIONS = [
+  Game::WIN_COMBINATIONS = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
@@ -37,51 +37,99 @@ class Game
   end
 
   def over?
-    (@board.full? == true || self.won? == true) ? true : false
+    won? || draw?
   end
 
   def won?
-    Game::WIN_COMBINATIONS.detect do |combo|
+  Game::WIN_COMBINATIONS.detect do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
       @board.cells[combo[1]] == @board.cells[combo[2]] &&
       @board.taken?(combo[0]+1)
     end
-
   end
 
   def winner
     if combo = won?
-      @board.cells[combo.first]
+      @board.cells[combo[0]]
     end
   end
 
   def draw?
-    (self.over? && !self.won?) ? true : false
+    (@board.full? && !won?)
+  end
+
+  def start
+    number = 5
+    puts "Welcome to Tic-Tac-Toe. A challenging game of skill."
+    puts "You can play with a friend, by yourself, or let the computer play itself."
+    while !number.between?(0,2)
+      puts "How many players are there? Please enter 0, 1, or 2."
+      number = gets.strip.to_i
+    end
+    if number == 0
+      @player_1 = Computer.new("X")
+      @player_2 = Computer.new("O")
+    elsif number == 1
+      token = nil
+      while (token != "X" && token != "O")
+        puts "Do you want to be X or O?"
+        token = gets.strip.upcase
+      end
+      if token == "X"
+        @player_1 = Human.new("X")
+        @player_2 = Computer.new("O")
+      elsif token == "O"
+        @player_1 = Computer.new("X")
+        @player_2 = Human.new("O")
+      end
+    elsif number == 2
+      @player_1 = Human.new("X")
+      @player_2 = Human.new("O")
+    end
+    @board.display
+    self.play
+    again = nil
+    while (again != "Y" && again != "N")
+      puts "Do you want to play again? (Y/N)"
+      again = gets.strip.upcase
+    end
+    if again == "Y"
+      @board.reset!
+      start
+    elsif again == "N"
+      puts "Goodbye!"
+      exit
+    end
+
   end
 
 
   def play
-    while self.over? == false do
-      @board.display
-      self.turn
-      if self.won?
-      #  @board.display
-        puts "Congratulations #{self.winner}!"
-        break
-      elsif self.draw?
-        #@board.display
-        puts "Cats Game!"
-        break
-      end
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{self.winner}!"
+
+    elsif draw?
+      puts "Cats Game!"
+
     end
   end
-
 
   def turn
-    while !@board.update(current_player.move(@board), self.current_player)
-      @board.update(current_player.move(@board), self.current_player)
+    valid = @board.update(current_player.move(@board), self.current_player)
+    while !valid
+      puts "invalid"
+      valid = @board.update(current_player.move(@board), self.current_player)
     end
+    puts "Turn: #{board.turn_count+1}"
+    puts "Go #{current_player.token}!"
+    puts
+    @board.display
+    puts
   end
+
 end
 # >
 # [9] pry(#<Game>)> self.over?

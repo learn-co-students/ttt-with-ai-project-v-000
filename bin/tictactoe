@@ -2,5 +2,5 @@
 
 require_relative '../config/environment'
 
-game =Game.new
-game.play
+game =Game.new(Human.new("X"),Human.new("O"))
+game.start
