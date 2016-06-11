@@ -3,8 +3,7 @@ class Player::Computer < Player
 
   def move(board)
     @moves = board.cells.each_index.select { |index| board.cells[index] == " "}
-#binding.pry
-     rand(1..9).to_s  || corners || edges
+      corners || edges || rand(1..9).to_s 
   end
 
     def corners
@@ -32,6 +31,3 @@ class Player::Computer < Player
   end
 
 end
-
-
-  

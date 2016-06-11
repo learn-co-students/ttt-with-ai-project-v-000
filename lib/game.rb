@@ -39,11 +39,11 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
 
   def winner
     winning_array = won?
-      if winning_array != false
-        return board.cells[winning_array.first]
-      else
-        return nil
-      end
+    if winning_array != false
+      return board.cells[winning_array.first]
+    else
+      return nil
+    end
   end
 
   def move(position, character="X")
@@ -51,8 +51,8 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
   end
 
   def position_taken?(position)
-  (board.cells[position] != " " && board.cells[position] != "" && board.cells[position] != nil)
-   end
+    (board.cells[position] != " " && board.cells[position] != "" && board.cells[position] != nil)
+  end
 
   def valid_move?(position)
     position = position.to_i - 1
