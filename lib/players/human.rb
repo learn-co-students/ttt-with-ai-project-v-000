@@ -1,7 +1,8 @@
-class Human < Player
+class Player::Human < Player
+
     
-    def move(input)
-       puts "Where would you like to move?"
-       input = gets.strip
+    def move(board)
+        puts "Which position would you like to move to?"
+        gets.strip
     end
 end

@@ -1,5 +1,5 @@
 class Board
-    attr_accessor :cells
+    attr_accessor :cells, :game
     
     def initialize
        @cells = Array.new(9, " ") 
@@ -23,7 +23,7 @@ class Board
     end
     
     def turn_count
-       9 - self.cells.select{|cell| cell == " "}.length 
+       self.cells.count{|cell| cell == "X" || cell == "O"} 
     end
     
     def taken?(input)
@@ -31,7 +31,7 @@ class Board
     end
     
     def valid_move?(input)
-       (input.strip.to_i) >= 1 && (input.strip.to_i) <= 9 && !taken?(input)  
+       (input.to_i) >= 1 && (input.to_i) <= 9 && !taken?(input)  
     end
     
     def update(input, player)
