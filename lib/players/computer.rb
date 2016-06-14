@@ -18,23 +18,24 @@ class Player::Computer < Player
     def move(board)
         if board.turn_count == 0 || board.turn_count == 1
             if board.valid_move?("5")
-                return "5"
+                return "5" if board.valid_move?("5")
             elsif [1, 3, 7, 9].select {|num| board.valid_move?("#{num}")}.length > 0
                 [1, 3, 7, 9].select {|num| board.valid_move?("#{num}")}.sample.to_s
             end
         else
-            to_win = self.win_combos.dup.select {|combo| combo.reject! {|space| board.cells[space] == self.token && board.cells[space] != " "}}
-            to_block = self.win_combos.dup.select {|combo| combo.reject! {|space| board.cells[space] == self.opp_token && board.cells[space] != " "}}
+            to_win = self.win_combos.dup.select {|combo| combo.reject! {|space| board.cells[space] == self.token}}
+            to_block = self.win_combos.dup.select {|combo| combo.reject! {|space| board.cells[space] == self.opp_token}}
              
             if to_win.any? {|combo| combo.length == 1}
                 to_win = to_win.find {|combo| combo.length == 1}
-                return (to_win[0] + 1).to_s
+                return (to_win[0] + 1).to_s if board.valid_move?((to_win[0] + 1).to_s)
             elsif to_block.any? {|combo| combo.length == 1}
                 to_block = to_block.find {|combo| combo.length == 1}
-                return (to_block[0] + 1).to_s
-            else
-                return rand(9).to_s
+                return (to_block[0] + 1).to_s if board.valid_move?((to_block[0] + 1).to_s)
             end
+            
+            return rand(9).to_s if board.valid_move?(rand(9).to_s)
+            move(board)            
         end
     end
 end

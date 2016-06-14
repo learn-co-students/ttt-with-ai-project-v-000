@@ -40,7 +40,7 @@ class Game
     def turn
         the_move = current_player.move(self.board)
         if self.board.valid_move?(the_move)
-            self.board.update(the_move, current_player)
+            return self.board.update(the_move, current_player)
         else
             turn
         end
