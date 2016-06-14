@@ -42,7 +42,6 @@ class Game
         if self.board.valid_move?(the_move)
             self.board.update(the_move, current_player)
         else
-            puts "Enter a valid move!"
             turn
         end
     end
