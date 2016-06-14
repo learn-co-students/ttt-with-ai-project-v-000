@@ -22,7 +22,7 @@ class Player::Computer < Player
             elsif [1, 3, 7, 9].select {|num| board.valid_move?("#{num}")}.length > 0
                 [1, 3, 7, 9].select {|num| board.valid_move?("#{num}")}.sample.to_s
             end
-        else
+        elsif board.turn_count > 1 && board.turn_count < 8
             to_win = self.win_combos.dup.select {|combo| combo.reject! {|space| board.cells[space] == self.token}}
             to_block = self.win_combos.dup.select {|combo| combo.reject! {|space| board.cells[space] == self.opp_token}}
              
@@ -35,7 +35,11 @@ class Player::Computer < Player
             end
             
             return rand(9).to_s if board.valid_move?(rand(9).to_s)
-            move(board)            
+            move(board) 
+        elsif board.turn_count == 8 
+            last_index = 0
+            board.cells.each_with_index{|cell, index| last_index = index if cell == " "}
+            return (last_index + 1).to_s
         end
     end
 end
