@@ -12,7 +12,6 @@ def pick_play_mode
   if input.to_i.between?(0, 2)
     case input
     when "0"
-<<<<<<< HEAD
       reps = 0
       puts "Wargames simulation? y or n"
       war_mode = gets.strip.downcase
@@ -31,15 +30,11 @@ def pick_play_mode
         game.play
       end
 
-=======
-      game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
->>>>>>> df92f2bf743f893a00d6ba855be3bb01fc234a4c
     when "1"
       puts "Do you want to go first? (y, n)"
       yes_no = gets.strip
       if yes_no == "y"
         game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
-<<<<<<< HEAD
         game.play
       elsif yes_no == "n"
         game = Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
@@ -48,19 +43,12 @@ def pick_play_mode
     when "2"
       game = Game.new
       game.play
-=======
-      elsif yes_no == "n"
-        game = Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
-      end
-    when "2"
-      game = Game.new
->>>>>>> df92f2bf743f893a00d6ba855be3bb01fc234a4c
     end
   else
     puts "An invalid number of players. Please pick a number again (0-2)"
     pick_play_mode
   end
-<<<<<<< HEAD
+
 
 end
 
@@ -96,9 +84,8 @@ def wargames(reps)
   puts "The outcome was a draw #{draw_percent}% of the games."
   puts ""
   puts ""
-=======
   game.play
->>>>>>> df92f2bf743f893a00d6ba855be3bb01fc234a4c
+
 end
 
 pick_play_mode
