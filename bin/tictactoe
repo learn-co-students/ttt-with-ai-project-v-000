@@ -84,7 +84,6 @@ def wargames(reps)
   puts "The outcome was a draw #{draw_percent}% of the games."
   puts ""
   puts ""
-  game.play
 
 end
 
