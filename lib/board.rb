@@ -17,6 +17,7 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts " "
   end
 
   def position(board_position)
@@ -33,17 +34,15 @@ class Board
   end
 
   def taken?(board_position)
-    self.position(board_position) != " "
+    position(board_position) != " "
   end
 
   def valid_move?(board_position)
-    valid_positions = (1..9).to_a.map{|n| n.to_s}
-    valid_positions.include?(board_position) && !taken?(board_position)
+    board_position.to_i.between?(1, 9) && !taken?(board_position)
   end
 
   def update(board_position, player)
-     @cells[board_position.to_i - 1] = "X"
-     #needs to be changed later  player = double("player", :token => "X")
+     @cells[board_position.to_i - 1] = player.token
   end
 #binding.pry
 end

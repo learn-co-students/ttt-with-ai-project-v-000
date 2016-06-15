@@ -1,6 +1,88 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'benchmark'
 
-game = Game.new
-game.play
+
+puts "Welcome to TicTacToe"
+puts "Please enter a number of players (0-2)"
+
+def pick_play_mode
+  input = gets.strip
+  if input.to_i.between?(0, 2)
+    case input
+    when "0"
+      reps = 0
+      puts "Wargames simulation? y or n"
+      war_mode = gets.strip.downcase
+
+      if war_mode == "y"
+        puts " "
+        puts "How many simulations?  Enter a number between 1 - 1000:"
+        until reps.between?(1, 1000)
+          reps = gets.strip.to_i
+        end
+        time = Benchmark.realtime {wargames(reps)}
+        puts "Time elapsed #{time} seconds"
+
+      elsif war_mode == "n"
+        game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
+        game.play
+      end
+
+    when "1"
+      puts "Do you want to go first? (y, n)"
+      yes_no = gets.strip
+      if yes_no == "y"
+        game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
+        game.play
+      elsif yes_no == "n"
+        game = Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
+        game.play
+      end
+    when "2"
+      game = Game.new
+      game.play
+    end
+  else
+    puts "An invalid number of players. Please pick a number again (0-2)"
+    pick_play_mode
+  end
+
+end
+
+def wargames(reps)
+  #reps = 1000
+
+  player_1_wins = 0
+  player_2_wins = 0
+  draw = 0
+
+  # puts "How many matches would you like to run? Enter a number between 1 and 1,000:"
+  # reps = gets.strip.to_i
+  # if reps.between?(1..1000)
+
+    reps.times do
+      game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
+      game.play
+      if game.winner == "X"
+        player_1_wins += 1
+      elsif game.winner == "O"
+        player_2_wins += 1
+      elsif game.draw?
+        draw +=1
+      end
+    end
+
+  p1_percent = player_1_wins * 100.0 / reps
+  p2_percent = player_2_wins * 100.0 / reps
+  draw_percent = draw * 100.0 / reps
+  puts "After #{reps} matches:"
+  puts "Player 1 won #{p1_percent}% of the games."
+  puts "Player 2 won #{p2_percent}% of the games."
+  puts "The outcome was a draw #{draw_percent}% of the games."
+  puts ""
+  puts ""
+end
+
+pick_play_mode
