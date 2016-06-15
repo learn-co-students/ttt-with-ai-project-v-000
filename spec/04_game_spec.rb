@@ -53,7 +53,7 @@ describe 'Game' do
       expect(game.board).to eq(board)
     end
 
-    it 'defaults to two human players, X and O, with am empty board' do
+    it 'defaults to two human players, X and O, with an empty board' do
       game = Game.new
 
       expect(game.player_1).to be_a(Player::Human)
