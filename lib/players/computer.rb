@@ -72,6 +72,8 @@ class Player::Computer < Player
         7
       when board.taken?(7) && !board.taken?(3)
         3
+      else
+        nil
     end
   end
 end
