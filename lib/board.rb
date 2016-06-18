@@ -1,8 +1,8 @@
 class Board
 
   attr_accessor :cells
-  def initialize
-    self.reset!
+  def initialize()
+    reset!
   end
 
   def display
@@ -25,15 +25,11 @@ class Board
     end
   end
 
+
   def turn_count
-    counter = 0
-    self.cells.each do |cell|
-      if cell == "O" || cell == "X"
-        counter += 1
-      end
-    end
-    counter
+    self.cells.count{|token| token == "X" || token == "O"}
   end
+
 
   def taken?(position)
     if self.cells[position.to_i-1] == "X" || self.cells[position.to_i-1] == "O"
@@ -52,6 +48,6 @@ class Board
   end
 
   def reset!
-   self.cells = [" "," "," "," "," "," "," "," "," "]
+   @cells = [" "," "," "," "," "," "," "," "," "]
   end
 end
