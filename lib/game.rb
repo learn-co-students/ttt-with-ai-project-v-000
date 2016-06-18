@@ -17,7 +17,7 @@ class Game
     [0,4,8]
   ]
 
-  def initialize(player_1 = Human.new(token = "X"), player_2 = Human.new(token = "O"), board = Board.new)
+  def initialize(player_1 = Player::Human.new(token = "X"), player_2 = Player::Human.new(token = "O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -62,7 +62,9 @@ class Game
 
   def play
     until self.over?
+      puts "#{self.current_player.token}'s move:"
       self.turn
+      self.board.display
     end
     if won?
       puts "Congratulations #{winner}!"
@@ -70,4 +72,5 @@ class Game
       puts "Cats Game!"
     end
   end
+
 end
