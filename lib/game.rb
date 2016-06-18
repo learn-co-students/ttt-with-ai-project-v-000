@@ -53,10 +53,21 @@ class Game
   end
 
   def turn
-    self.current_player.move(board) #intent: call #current_player on game instance. call #move on that player to get input.
-    until self.board.valid_move?(self.current_player.move(board)) #intent: call #valid_move on this game instance's board. give #valid the user's input from the line above as the position argument. move into the block if the original input isn't valid.
-      self.current_player.move(board) #ask for current player input until it is valid
+    player_turn = self.current_player.move(board)
+    until self.board.valid_move?(player_turn)
+      player_turn = self.current_player.move(board)
     end
-    self.board.update(self.current_player.move(board), self.current_player) #update board with valid position and current player (should place that player's token in the valid position cell)
+    self.board.update(player_turn, self.current_player)
+  end
+
+  def play
+    until self.over?
+      self.turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cats Game!"
+    end
   end
 end
