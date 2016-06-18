@@ -53,16 +53,10 @@ class Game
   end
 
   def turn
-    #self.current_player.move(board) #intention: find current player of game instance. get the player object. call #move method on that player for input
-    after = self.board
-    current = self.current_player
-
-    if !after.valid_move?(current.move(board)) #intention: call #valid move on current game's board to see if above input was a valid play. IF IT ISN'T (next line)
-      until after.valid_move?(current.move(board))
-        current.move(board) #ask the current player for input again because the first wasn't valid
-      end
-    else after.update(current.move(board), current) #if the current player's input was a valid move, call #update method on this game's board to place that player's token in the correct space
-      current.move(board) #now that the original current player went and the board has been updated, call current player on current game again (should give the other player instance) and call #move on them just like the previous player.
+    self.current_player.move(board) #intent: call #current_player on game instance. call #move on that player to get input.
+    until self.board.valid_move?(self.current_player.move(board)) #intent: call #valid_move on this game instance's board. give #valid the user's input from the line above as the position argument. move into the block if the original input isn't valid.
+      self.current_player.move(board) #ask for current player input until it is valid
     end
+    self.board.update(self.current_player.move(board), self.current_player) #update board with valid position and current player (should place that player's token in the valid position cell)
   end
 end
