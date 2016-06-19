@@ -17,7 +17,7 @@ class Game
     [0,4,8]
   ]
 
-  def initialize(player_1 = Player::Human.new(token = "X"), player_2 = Player::Human.new(token = "O"), board = Board.new)
+  def initialize(player_1 = Player::Human.new(@first = "X"), player_2 = Player::Human.new(@second = "O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -53,8 +53,10 @@ class Game
   end
 
   def turn
+    puts "#{self.current_player.token}'s move:"
     player_turn = self.current_player.move(board)
     until self.board.valid_move?(player_turn)
+      puts "Sorry. Move must be valid."
       player_turn = self.current_player.move(board)
     end
     self.board.update(player_turn, self.current_player)
@@ -62,7 +64,6 @@ class Game
 
   def play
     until self.over?
-      puts "#{self.current_player.token}'s move:"
       self.turn
       self.board.display
     end

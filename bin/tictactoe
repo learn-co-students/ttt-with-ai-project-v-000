@@ -1,28 +1,5 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-puts "Hello and welcome to Tic-Tac-Toe!"
-puts "Please enter '0' for computer simulation, '1' for single player mode, or '2' for two player mode."
 
-def players
-  player_number = gets.strip
-  until player_number.include?("0" || "1" || "2")
-    puts "Please enter '0' for computer simulation, '1' for single player mode, or '2' for two player mode."
-    player_number = gets.strip
-  end
-end
-players
-
-puts "Please choose 'X' or 'O' for first player token"
-token = gets.strip.upcase!
-
-def game_type(players, token)
-  if players == "0"
-    Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new)
-  elsif players == "1"
-    Game.new(Player::Human.new(token = "X"), Player::Computer.new(token = "O"), Board.new)
-  elsif players == "2"
-    Game.new(Player::Human.new(token = "X"), Player::Human.new(token = "O"), Board.new)
-  end
-end
-game_type(players, token).play
+CLI.new.run
