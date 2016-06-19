@@ -29,11 +29,11 @@ class Player::Computer < Player
   def go_for_the_kill
       WIN_COMBINATIONS.detect do |win|
         if board.cells[win[0]] == board.cells[win[1]] && board.taken?(win[0]+1) && board.cells[win[0]] == self.token && !board.taken?(win[2])
-  				move = board.cells[win[2]+1]
+  				self.move(board) = board.cells[win[2]+1]
   			elsif board.cells[win[0]] == board.cells[win[2]] && board.taken?(win[0]+1) && board.cells[win[0]] == self.token && !board.taken?(win[1])
-  				move = board.cells[win[1]+1]
+  				self.move(board) = board.cells[win[1]+1]
   			elsif board.cells[win[1]] == board.cells[win[2]] && board.taken?(win[1]+1) && board.cells[win[1]] == self.token && !board.taken?(win[0])
-  				move = board.cells[win[0]+1]
+  				self.move(board) = board.cells[win[0]+1]
         else
           rand(1..9)
   			end
