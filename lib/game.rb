@@ -59,12 +59,12 @@ class Game
       puts "Sorry. Move must be valid."
       player_turn = self.current_player.move(board)
     end
-    self.board.update(player_turn, self.current_player)
+    self.board.update(player_turn, current_player)
   end
 
   def play
-    until self.over?
-      self.turn
+    until over?
+      turn
       self.board.display
     end
     if won?

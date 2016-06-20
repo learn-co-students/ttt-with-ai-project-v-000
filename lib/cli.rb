@@ -1,9 +1,10 @@
 class CLI
 
+#idea: make a win_impossible? method that will call Cats Game early for impossible to win games with empty spaces left
+
   def run
     puts "Hello and welcome to Tic-Tac-Toe!"
     game_type
-    new_game
   end
 
   def game_type
@@ -17,6 +18,7 @@ class CLI
       elsif @players == "2"
         Game.new(Player::Human.new(@first), Player::Human.new(@second), Board.new).play
       end
+      new_game
   end
 
   def player_number
@@ -53,7 +55,7 @@ class CLI
   end
 
   def new_game
-    puts "Would you like to play again?"
+    puts "Would you like to play again? 'yes' or 'no':"
     input = gets.strip
     until input.upcase == "YES" || input.upcase == "NO"
       puts "Sorry...would you like to play again?"
