@@ -26,7 +26,48 @@ class Game
   end
 
   def over?
-    win? || draw?
+    won? || draw?
   end
+
+  def won?
+    WIN_COMBINATIONS.find do |win|
+      win.all? {|p| board.cells[p] == "X"} || win.all? {|p| board.cells[p] == "O"}
+    end
+  end
+
+  def draw?
+    board.full? && !won?
+  end
+
+  def winner
+    the_winner = won?
+    won? ? board.cells[the_winner[0]] : nil
+  end
+
+  def turn
+    input = current_player.move(board)
+
+    board.valid_move?(input) ? board.update(input, current_player) : turn
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cats Game!"
+    end
+  end
+
+
+
+
+
+
+
+
 
 end # => Game Class
