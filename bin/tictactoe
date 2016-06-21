@@ -19,3 +19,15 @@ require_relative '../config/environment'
     puts "Please enter 0, 1 or 2."
     start
   end
+
+  puts "Would you like to play again?"
+
+  response = gets.strip
+
+  if response == "yes"
+    game.play
+  elsif response == "no"
+    exit
+  else
+    puts "Please enter yes or no."
+  end
