@@ -2,4 +2,4 @@
 
 require_relative '../config/environment'
 
-game.start
+Start.new.run

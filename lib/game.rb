@@ -53,44 +53,13 @@ class Game
   def play
     while !over?
       turn
+      board.display
     end
 
     if won?
       puts "Congratulations #{winner}!"
     else
       puts "Cats Game!"
-    end
-  end
-
-  def start
-    puts "Welcome! How many players?"
-
-    mode = gets.strip
-
-    if mode == 0
-      Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
-      game.play
-    elsif mode == 1
-      Game.new(Player::Human.new("X"), Player::Computer.new("O"))
-      game.play
-    elsif mode == 2
-      Game.new(Player::Human.new("X"), Player::Human.new("O"))
-      game.play
-    else
-      puts "Please enter 0, 1 or 2."
-      start
-    end
-
-    puts "Would you like to play again?"
-
-    response = gets.strip
-
-    if response == "yes"
-      game.play
-    elsif response == "no"
-      exit
-    else
-      puts "Please enter yes or no."
     end
   end
 

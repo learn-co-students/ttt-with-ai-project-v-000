@@ -5,6 +5,7 @@ class Computer < Player
 
     if board.valid_move?(input)
       board.update(input, self)
+      board.display
       input
     else
       input
