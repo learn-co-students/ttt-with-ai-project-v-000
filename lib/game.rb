@@ -54,20 +54,12 @@ class Game
     while !over?
       turn
     end
-    
+
     if won?
       puts "Congratulations #{winner}!"
     else
       puts "Cats Game!"
     end
   end
-
-
-
-
-
-
-
-
-
+  
 end # => Game Class
