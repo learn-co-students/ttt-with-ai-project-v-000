@@ -4,10 +4,13 @@ require_relative '../config/environment'
 require 'benchmark'
 
 
-puts "Welcome to TicTacToe"
-puts "Please enter a number of players (0-2)"
+
 
 def pick_play_mode
+
+  puts "Welcome to TicTacToe"
+  puts "Please enter a number of players (0-2)"
+  puts "Enter 'exit' to end the game session."
   input = gets.strip
   if input.to_i.between?(0, 2)
     case input
@@ -18,16 +21,19 @@ def pick_play_mode
 
       if war_mode == "y"
         puts " "
-        puts "How many simulations?  Enter a number between 1 - 1000:"
-        until reps.between?(1, 1000)
+        puts "How many simulations?  Enter a number between 1 - 10,000:"
+        until reps.between?(1, 10000)
           reps = gets.strip.to_i
         end
         time = Benchmark.realtime {wargames(reps)}
-        puts "Time elapsed #{time} seconds"
+        puts "Time elapsed #{time.round(4)} seconds"
+        puts ""
+        play_again?
 
       elsif war_mode == "n"
         game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
         game.play
+        play_again?
       end
 
     when "1"
@@ -36,14 +42,20 @@ def pick_play_mode
       if yes_no == "y"
         game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
         game.play
+        play_again?
       elsif yes_no == "n"
         game = Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
         game.play
+        play_again?
       end
     when "2"
       game = Game.new
       game.play
+      play_again?
+    when "exit"
+      exit
     end
+
   else
     puts "An invalid number of players. Please pick a number again (0-2)"
     pick_play_mode
@@ -52,6 +64,20 @@ def pick_play_mode
 
 end
 
+def play_again?
+  puts "Would you like to play again? y/n"
+  x = gets.strip.downcase
+  if x == "y"
+    pick_play_mode
+  elsif x == "n"
+    exit
+  else
+    play_again?
+  end
+
+end
+
+
 def wargames(reps)
   #reps = 1000
 
@@ -59,13 +85,9 @@ def wargames(reps)
   player_2_wins = 0
   draw = 0
 
-  # puts "How many matches would you like to run? Enter a number between 1 and 1,000:"
-  # reps = gets.strip.to_i
-  # if reps.between?(1..1000)
-
     reps.times do
       game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
-      game.play
+      game.wargames_play
       if game.winner == "X"
         player_1_wins += 1
       elsif game.winner == "O"
@@ -82,7 +104,6 @@ def wargames(reps)
   puts "Player 1 won #{p1_percent}% of the games."
   puts "Player 2 won #{p2_percent}% of the games."
   puts "The outcome was a draw #{draw_percent}% of the games."
-  puts ""
   puts ""
 
 end

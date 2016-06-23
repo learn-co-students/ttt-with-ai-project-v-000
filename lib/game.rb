@@ -91,5 +91,35 @@ class Game
     end
   end
 
+  def wargames_turn
+    # if current_player == player_1
+    #   puts "Player 1, select your move (1-9)!".blue
+    # else
+    #   puts "Player 2, select your move (1-9)!".green
+    # end
+    player_move = current_player.move(@board.cells)
+    if board.valid_move?(player_move)
+       board.update(player_move, current_player)
+      # board.display
+    else
+      puts "Invalid move!  Please select your move again."
+      turn
+    end
+  end
+
+  def wargames_play
+    #board.display
+    wargames_turn until over?
+    if won?
+      if winner == "X"
+        #puts "Congratulations X!"
+      elsif winner == "O"
+        #puts "Congratulations O!"
+      end
+    elsif draw?
+    #  puts "Cats Game!"
+    end
+  end
+
 end
 # binding.pry
