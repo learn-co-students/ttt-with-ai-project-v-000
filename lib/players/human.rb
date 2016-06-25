@@ -1,8 +1,8 @@
-class Human < Player
+class Player::Human < Player
 
 	def move(position)
 	  position = gets.chomp
-	  position
+	  position.to_s
 	end
 
 end

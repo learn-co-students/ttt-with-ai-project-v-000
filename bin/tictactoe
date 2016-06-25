@@ -12,24 +12,23 @@ until choice == "NO" or choice == "N"
 	input = gets.strip
 	case input
 	when "0"
-	  Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"), board = Board.new).play
+	  Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
 	when "1"
 	  puts "Choose your token: X or O"
-	  token = gets.strip.upcase
-	  case token
-	    when "X"
-	      Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"), board = Board.new).play	
-	    when "O"
-	      Game.new(player_1 = Player::Human.new("O"), player_2 = Player::Computer.new("X"), board = Board.new).play		
-	  end 
+	  token = gets.strip.upcase.to_s
+	    if token == "X"
+	      Game.new(Player::Human.new("X"), Player::Computer.new("O")).play	
+	    elsif token == "O"
+	      Game.new(Player::Human.new("O"), Player::Computer.new("X")).play		
+	    end 
 	when "2"
 	  puts "Player 1, choose your token: X or O"
 	  token = gets.strip.upcase
 	  case token
 	    when "X"
-          Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new).play
+          Game.new.play
         when "O"
-          Game.new(player_1 = Player::Human.new("O"), player_2 = Player::Human.new("X"), board = Board.new).play	
+          Game.new(Player::Human.new("O"), Player::Human.new("X")).play	
       end
     end
 	
