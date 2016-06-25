@@ -12,7 +12,7 @@ attr_accessor :board, :player_1, :player_2, :token
   end
 
   def current_player
-    board.turn_count.odd? ? player_2 : player_1
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -32,7 +32,7 @@ attr_accessor :board, :player_1, :player_2, :token
       return player_2.token
     elsif won? == true && current_player == player_2
       return player_1.token
-      end
+    end
   end
 
   def turn
@@ -94,7 +94,7 @@ end
 def play_again
   puts "Would you like to play again? Y/N:"
   play_again = gets.strip
-    if play_again == "Y"
+    if play_again == "Y" || play_again == "y"
       board.reset!
       start
     else
