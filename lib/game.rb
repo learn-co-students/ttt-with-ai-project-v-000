@@ -26,11 +26,11 @@ class Game
   end
 
   def over?
-    return true if draw? || won?
+    return true if board.full? || won?
   end
 
   def draw?
-    return true if board.full? && !won?
+    return true if over? && !won?
   end
 
   def won?
@@ -62,14 +62,28 @@ class Game
   end
 
   def turn
-
-    player = self.current_player
-    move = player.move(board)
-    if board.valid_move?(move)
-      board.update(move, player)
+    if board.turn_count == 0
+      board.display
+      player = self.current_player
+      move = player.move(board)
+      if board.valid_move?(move)
+        board.update(move, player)
+      else
+        puts "Move is invalid."
+        player.move(board)
+      end
+      board.display
     else
-      player.move(board)
+      player = self.current_player
+      move = player.move(board)
+      if board.valid_move?(move)
+        board.update(move, player)
+      else
+        player.move(board)
+      end
+      board.display
     end
+
   
   end
 
@@ -81,9 +95,8 @@ class Game
 
     if won?
       puts "Congratulations #{self.winner}!"
-    end
 
-    if draw?
+    elsif draw?
       puts "Cats Game!"
     end
 

@@ -1,6 +1,7 @@
 class Player::Computer < Player
 
   def move(board)
+    puts "Computer's move:"
   	if !board.taken?("1")
   	  "1"
   	elsif !board.taken?("8")

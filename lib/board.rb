@@ -46,10 +46,13 @@ class Board
 
   def valid_move?(position)
   	if taken?(position)
+      puts "Invalid move"
   	  false
   	elsif position.to_i < 1 or position.to_i > 9
+      puts "Invalid move"
   	  false
   	elsif position.to_i == 0
+      puts "Invalid move"
   	  false
   	else
   	  true
