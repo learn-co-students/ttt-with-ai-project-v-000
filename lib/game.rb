@@ -8,9 +8,13 @@ WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8],
 ]
 
 def initialize(player_1 = nil , player_2 = nil, board = nil)
-  @player_1 = Player::Human.new("X") 
-  @player_2 = Player::Human.new("O") 
-  @board = Board.new 
+  @player_1 = player_1 unless player_1 == nil 
+  @player_2 = player_2 unless player_2 == nil 
+  @board = board unless board == nil 
+
+  #player_1 = Player::Human.new("X") if player_1 == nil 
+  #player_1 = Player::Human.new("O") if player_2 == nil 
+  #board = Board.new if board == nil 
 end
 
 
