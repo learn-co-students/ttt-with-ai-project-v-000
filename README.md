@@ -115,7 +115,7 @@ module Players
   end
 end
 ```
-Now you when you call your Human class, you'll have to call it inside it's name space with `Players::Human`.
+Now when you call your Human class, you'll have to call it inside it's name space with `Players::Human`.
 
 ##### `game.rb` - `Game`
 
@@ -161,3 +161,5 @@ If you'd like, implement a "wargames" game type. When asked what kind of game th
 The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
 
 <a href='https://learn.co/lessons/ttt-with-ai-project' data-visibility='hidden'>View this lesson on Learn.co</a>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/ttt-with-ai-project'>Tic-Tac-Toe with AI</a> on Learn.co and start learning to code for free.</p>
