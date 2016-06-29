@@ -68,15 +68,11 @@ def turn
 end
 
 def play 
-  puts "Welcome to Tic Tac Toe!"
-
-  while true 
-  turn
-  board.display
-  break if over? || won? || draw?
+  while !over?
+    turn
+    board.display
+    break if over? || won? || draw?
   end
 end
 
 end
-
-
