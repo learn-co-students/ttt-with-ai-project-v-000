@@ -72,6 +72,7 @@ def play
 
   while true 
   turn
+  board.display
   break if over? || won? || draw?
   end
 end
