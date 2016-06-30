@@ -76,20 +76,14 @@ end
 def play 
   while true 
    
-   
-
     turn until over? || won? || draw?
 
     if winner
-    token = winner 
-    puts "Congratulations #{token}!"
-    break 
-   end
-    
-    if draw?
+      token = winner 
+      puts "Congratulations #{token}!"
+    elsif draw?
       puts "Cats Game!"
     end
-
     break if over?
   end
 end
