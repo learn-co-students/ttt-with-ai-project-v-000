@@ -19,7 +19,11 @@ def current_player
 end
 
 def over?
-  board.turn_count == 9 
+ if won? || draw?
+  return true
+ else
+  return false
+ end
 end
 
 def won?
@@ -36,7 +40,7 @@ def won?
 end
 
 def draw?
-  over? && !won? 
+  board.turn_count == 9 && !won? 
 end
 
 def winner 
@@ -54,24 +58,36 @@ def winner
   nil
 end
 
-def turn 
-  while true 
-    input = current_player.move(board)
-    
-    if board.valid_move?(input)
-      board.update(input, current_player)
-      break
-    else
-      puts "invalid"
-    end  
-  end
+def turn     
+  input = current_player.move(board)
+    while true 
+      if board.valid_move?(input)
+        board.update(input, current_player)
+        break
+      else
+        puts "invalid"
+        input = current_player.move(board)
+      end  
+    end
+  board.display
 end
 
 def play 
-  while !over?
-    turn
-    board.display
-    break if over? || won? || draw?
+  #puts "Welcome to Tic Tac Toe!"
+  board.display 
+  while true 
+    last_player = current_player.token
+    turn until over?
+  
+    #board.display
+
+  
+    if won? 
+      puts "Congratulations #{last_player}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
+    break if over?
   end
 end
 
