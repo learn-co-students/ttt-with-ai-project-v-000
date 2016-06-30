@@ -66,6 +66,7 @@ def turn
         break
       else
         puts "invalid"
+        board.display
         input = current_player.move(board)
       end  
     end
@@ -73,20 +74,22 @@ def turn
 end
 
 def play 
-  #puts "Welcome to Tic Tac Toe!"
-  board.display 
   while true 
-    last_player = current_player.token
-    turn until over?
-  
-    #board.display
+   
+   
 
-  
-    if won? 
-      puts "Congratulations #{last_player}!"
-    elsif draw?
+    turn until over? || won? || draw?
+
+    if winner
+    token = winner 
+    puts "Congratulations #{token}!"
+    break 
+   end
+    
+    if draw?
       puts "Cats Game!"
     end
+
     break if over?
   end
 end
