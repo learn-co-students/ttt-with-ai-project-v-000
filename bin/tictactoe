@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "\t X O X O X O X O X O X O X O X O X O X O X"
+puts "\t\t Welcome to Tic Tac Toe!"
+puts "\t X O X O X O X O X O X O X O X O X O X O X"
+
+game = Game.new
+game.start
