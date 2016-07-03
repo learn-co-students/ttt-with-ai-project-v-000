@@ -50,16 +50,24 @@ class Game
   end
 
   def turn
-    player = current_player
     this_turn = current_player.move(@board)
-    while @board.valid_move?(this_turn) do
-      puts !"invalid. Please choose another space."
-      end 
-    if player = player_1
-      current_player = player_2
-    elsif player = player_2
-      current_player = player_1   
+    while !@board.valid_move?(this_turn)
+      turn
+    end 
+      @board.update(this_turn, current_player)
+      @board.display
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      "good job"
+    elsif draw?
+      "Cats Game!"
     end
   end
+
 
 end
