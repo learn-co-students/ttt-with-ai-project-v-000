@@ -50,8 +50,9 @@ class Game
   end
 
   def turn
-    this_turn = current_player.move(@board)
-    while !@board.valid_move?(this_turn)
+    this_turn = false
+    while !this_turn
+      this_turn = @board.valid_move?(this_turn)
       turn
     end 
       @board.update(this_turn, current_player)
