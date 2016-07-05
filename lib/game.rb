@@ -51,11 +51,11 @@ class Game
 
   def turn
     this_turn = current_player.move(@board)
-    if @board.valid_move?(this_turn.to_i) 
+    until @board.valid_move?(this_turn.to_i) 
+      turn
+    end
       @board.update(this_turn, current_player)
       @board.display
-    else
-      turn
     end
   end
 
