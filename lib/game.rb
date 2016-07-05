@@ -2,7 +2,7 @@ class Game
 
   attr_accessor :board, :player_1, :player_2
 
-  WIN_COMBINATIONS = [
+  Game::WIN_COMBINATIONS = [
   [0,1,2], # Top row
   [3,4,5], # Middle row
   [6,7,8], # Bottom row
@@ -13,10 +13,38 @@ class Game
   [6,4,2]  # Top-right to bottom-left diagonal
     ]
 
-    def initialize(player_1, player_2, board)
-      @Board = board
+    def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = Board.new)
+      @board = board
       @player_1 = player_1
       @player_2 = player_2
+    end
+
+    def current_player
+      if @board.cells.select{|space| space == " "}.count % 2 == 0
+        player_2
+      else
+        player_1
+      end
+    end
+
+    def over?
+      won? || draw?
+    end
+
+    def won?
+      Game::WIN_COMBINATIONS.detect do |win_combo|
+        @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
+        @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
+        @board.taken?(win_combo[0]+1)
+      end
+    end
+
+    def draw?
+      @board.full? && !won?
+    end
+
+    def play
+
     end
 
 end
