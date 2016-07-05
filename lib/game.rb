@@ -50,14 +50,15 @@ class Game
   end
 
   def turn
-    this_turn = false
-    while !this_turn
-      this_turn = @board.valid_move?(this_turn)
-      turn
-    end 
+    this_turn = current_player.move(@board)
+    if @board.valid_move?(this_turn.to_i) 
       @board.update(this_turn, current_player)
       @board.display
+    else
+      turn
+    end
   end
+
 
   def play
     while !over?

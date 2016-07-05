@@ -1,9 +1,9 @@
 class Human < Player
 
-  def move(input)
-    puts "Please choose your space."
+  def move(board)
+    "Please enter a number 1 through 9."
     input = gets.chomp
-    return input
+    input
   end
 
 end
