@@ -74,7 +74,13 @@ def winner
 end
 
 def turn
-
+  puts "Please enter 1-9:"
+  input = gets.strip
+  if @board.valid_move?(input)
+    @board.move(input, @board.current_player)
+    @board.display
+  else
+    turn
 end
 
 def play 
