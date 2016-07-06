@@ -69,7 +69,7 @@ def winner
     nil 
   else 
   @board.cells[(self.won?.first)]
-  binding.pry
+  #binding.pry
   end
 end
 
@@ -80,7 +80,8 @@ def turn
     @board.move(input, @board.current_player)
     @board.display
   else
-    turn
+    self.turn
+end
 end
 
 def play 
