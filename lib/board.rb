@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board 
   attr_accessor :cells 
 
@@ -23,7 +25,7 @@ def full?
 end
 
 def turn_count
-cells.count{|token| token == "X" || token =="O"}
+  cells.count{|token| token == "X" || token == "O"}
 end
 
 
@@ -32,12 +34,20 @@ cells[input.to_i-1]
 end 
 
 def taken?(input)
-  if (position(input) == "X" || position(input) == "O")
-    true 
-  else
+  if (!(position(input) == " "))
+    true
+  else 
     false
 end
 end
+
+#def taken?(input)
+#  if (@cells[input.to_i-1] == "X") || (@cells[input.to_i-1] == "O")
+#    true 
+#  else
+#    false
+#end
+#end
 
 def valid_move?(input)
   if input.to_i.between?(1,9) && taken?(input) == false 

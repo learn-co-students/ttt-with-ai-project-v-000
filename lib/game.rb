@@ -35,7 +35,11 @@ end
 end
 
 def over? 
-won? || draw?
+if (won? || draw?)
+  true
+else
+  false
+end
 end
 
 
@@ -45,7 +49,7 @@ WIN_COMBINATIONS.each do |combination|
   pos2 = @board.position(combination[1])
   pos3 = @board.position(combination[2])
 
- if (((pos1 == pos2) && (pos2 == pos3)) && (@board.taken?(pos1)))
+ if (((pos1 == pos2) && (pos2 == pos3)) && (@board.taken?(combination[0]+1)))
   return combination
   #binding.pry
 else
@@ -68,23 +72,32 @@ def winner
   if won? == false 
     nil 
   else 
-  @board.cells[(self.won?.first)]
+  return @board.cells[(self.won?.first)]
   #binding.pry
   end
 end
 
 def turn
-  puts "Please enter 1-9:"
-  input = gets.strip
-  if @board.valid_move?(input)
-    @board.move(input, @board.current_player)
+  player = current_player
+  current_move = player.move(@board)
+  if @board.valid_move?(current_move)
     @board.display
+    @board.update(current_move, player)
+    @board.display 
   else
-    self.turn
+    turn
 end
 end
 
 def play 
+  while !(over?)
+    turn
+  end
+  if won? 
+    puts "Congratulations #{winner}!"
+  elsif draw?
+    puts "Cats Game!" 
+  end
 end
 
 end
