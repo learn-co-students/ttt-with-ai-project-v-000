@@ -11,7 +11,7 @@ class Game
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? @player_1 : @player_2
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def over? 
@@ -51,9 +51,9 @@ class Game
 
   def turn
     this_turn = current_player.move(@board)
-    until @board.valid_move?(this_turn.to_i) 
+    if !@board.valid_move?(this_turn)
       turn
-    end
+    else
       @board.update(this_turn, current_player)
       @board.display
     end
@@ -61,13 +61,13 @@ class Game
 
 
   def play
-    while !over?
+    while !over? do
       turn
     end
-    if won?
-      "good job"
-    elsif draw?
-      "Cats Game!"
+    if draw?
+      "Cat's Game!"
+    elsif won?
+      "Congratulations!"
     end
   end
 
