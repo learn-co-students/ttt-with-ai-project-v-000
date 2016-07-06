@@ -40,36 +40,25 @@ end
 
 
 def won?
-WIN_COMBINATIONS.each do |combination| 
-  pos1 = @board.position(combination[0])
-  pos2 = @board.position(combination[1])
-  pos3 = @board.position(combination[2])
+WIN_COMBINATIONS.detect do |combination| 
+  pos1 = @board.position(combination[0]+1)
+  pos2 = @board.position(combination[1]+1)
+  pos3 = @board.position(combination[2]+1)
 
- if (((pos1 == pos2) && (pos2 == pos3)) && (@board.taken?(combination[0]+1)))
-  return combination
-  #binding.pry
-else
-  false
-end 
-end
-return false   
+(((pos1 == pos2) && (pos2 == pos3)) && (@board.taken?(combination[0]+1)))
+end   
 end
 
 def draw? 
-  if won? == false && @board.full? == true
-    true
-  else 
-    false
-  end
+  !won? && @board.full?
 end 
 
 
 def winner
-  if won? == false 
+  if won? == nil
     nil 
   else 
-  return @board.cells[(self.won?.first)]
-  #binding.pry
+  @board.cells[(self.won?.first)]
   end
 end
 

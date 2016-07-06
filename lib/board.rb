@@ -33,21 +33,17 @@ def position(input)
 cells[input.to_i-1]
 end 
 
+#def taken?(input)
+#  !(position(input) == " ")
+#end
+
 def taken?(input)
-  if (!(position(input) == " "))
-    true
-  else 
+  if (@cells[input.to_i-1] == "X") || (@cells[input.to_i-1] == "O")
+    true 
+  else
     false
 end
 end
-
-#def taken?(input)
-#  if (@cells[input.to_i-1] == "X") || (@cells[input.to_i-1] == "O")
-#    true 
-#  else
-#    false
-#end
-#end
 
 def valid_move?(input)
   if input.to_i.between?(1,9) && taken?(input) == false 
