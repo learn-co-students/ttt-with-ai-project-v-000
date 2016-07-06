@@ -19,22 +19,13 @@ def current_player
 end
 
 def over?
- if won? || draw?
-  return true
- else
-  return false
- end
+  won? || draw? ? true : false 
 end
 
 def won?
   WIN_COMBINATIONS.each do |combo|
-    i = combo[0]
-    i2 = combo[1]
-    i3 = combo[2]
-    
-    if board.cells[i] + board.cells[i2] + board.cells[i3] == "XXX" || board.cells[i] + board.cells[i2] + board.cells[i3] == "OOO"
-      return true
-    end
+    i, i2, i3 = combo[0], combo[1], combo[2]
+    return true if board.cells[i] + board.cells[i2] + board.cells[i3] == "XXX" || board.cells[i] + board.cells[i2] + board.cells[i3] == "OOO"
   end
   false 
 end
@@ -79,8 +70,7 @@ def play
     turn until over? || won? || draw?
 
     if winner
-      token = winner 
-      puts "Congratulations #{token}!"
+      puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cats Game!"
     end
