@@ -1,3 +1,99 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def computer_match
+   puts "Computer Match!"
+   Game.new(player_1 = Player::Computer.new("X") , player_2 = Player::Computer.new("O") , board = Board.new).play
+end
+
+def one_player_match
+  puts "Please type the players name"
+  name = gets.chomp
+
+  puts "Which player will go first? #{name} or the 'Computer'?"
+  answer = gets.chomp
+    
+  until answer == name || answer == "Computer" 
+    puts "Invalid! Please enter #{name} or Computer to see who goes first"
+    answer = gets.chomp
+  end
+
+  if answer == name 
+    player_1 = name
+    Game.new(player_1 = Player::Human.new("X") , player_2 = Player::Computer.new("O") , board = Board.new).play
+  else
+    Game.new(player_2 = Player::Computer.new("X") , player_1 = Player::Human.new("O") , board = Board.new).play
+  end
+end
+
+def two_player_match
+  puts "Please type a players name"
+    name = gets.chomp
+  puts "Please type the second players name"
+    name2 = gets.chomp
+
+  puts "Which player will go first?"
+        
+    until answer == name || answer == name2 
+      puts "Invalid! Please enter #{name} or #{name2} to see who goes first"
+      answer = gets.chomp
+    end
+
+  if answer == name 
+    player_1 = name, player_2 = name2 
+    Game.new(player_1 = Player::Human.new("X") , player_2 = Player::Human.new("O") , board = Board.new).play
+  else
+    Game.new(player_2 = Player::Human.new("X") , player_1 = Player::Human.new("O") , board = Board.new).play
+  end
+end
+
+
+def cli_game 
+
+  while true 
+
+    puts "Welcome to Tic Tac Toe!" + "\n" + "\n"
+    puts "How many players for this game? - 0, 1 or 2?"
+
+    input = gets.chomp 
+
+    until input.match(/[012]/)
+      puts "Please enter the correct number: 0, 1 or 2!"
+      input = gets.chomp
+    end
+
+    case input 
+      when "0"
+        computer_match
+      when "1"
+        one_player_match
+      when "2"
+        two_player_match
+    end
+
+    puts "Great game - would you like to play again? Say Yes/No"
+    play_game = gets.chomp 
+
+    until play_game == "Yes" || play_game == "No"
+      puts "Please answer only Yes or No"
+      play_game = gets.chomp
+    end
+
+  if play_game == "Yes" 
+    system('clear')
+    cli_game
+  elsif play_game == "No"
+    puts "thanks for playing!" 
+    break
+  end
+
+  break 
+  end # while true 
+end #cli_game 
+
+cli_game
+  
+
+ 

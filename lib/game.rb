@@ -49,7 +49,8 @@ def winner
   nil
 end
 
-def turn     
+def turn
+  board.display unless board.turn_count < 1 
   input = current_player.move(board)
     while true 
       if board.valid_move?(input)
@@ -57,22 +58,21 @@ def turn
         break
       else
         puts "invalid"
-        board.display
         input = current_player.move(board)
       end  
     end
-  board.display
 end
 
 def play 
   while true 
-   
     turn until over? || won? || draw?
 
     if winner
       puts "Congratulations #{winner}!"
+      board.display
     elsif draw?
       puts "Cats Game!"
+      board.display
     end
     break if over?
   end
