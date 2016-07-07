@@ -14,7 +14,7 @@ class Game
 	]
 
 	def start
-		puts "Would you like to play a 0, 1, or 2 player game? (0, 1, 2)"
+		puts "Would you like to play a 0, 1, or 2 player game, or would you like to enter wargames mode? (0, 1, 2, wargames)"
 		input = gets.strip
 		if input.to_i == 0
 			@player_1 = Player::Computer.new("X")
@@ -30,6 +30,10 @@ class Game
 				@player_1 = Player::Computer.new("X")
 				play
 			end
+		elsif input.to_i == wargames
+			player_1 = Player::Computer.new("X")
+			player_2 = Player::Computer.new("O")
+			wargames_play
 		else
 			play
 		end
@@ -96,7 +100,7 @@ class Game
 		if @board.valid_move?(position)
 			@board.update(position, current_player)
 		else
-	    	puts "Invalid move."
+	    	puts "Invalid move. Please try again."
 	    	position = current_player.move(@board)
 	    end
 	    @board.display
@@ -109,6 +113,30 @@ class Game
 		elsif draw?
     		puts "Cats Game!"
 		end
+	end
+
+	def wargames_play
+		count = 0
+		winner_x_count = 0
+		winner_o_count = 0
+		draw_count = 0
+		until count == 100
+			Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+			turn until board.cells.all? {|cell| board[cell].taken?}
+			if board.cells.all? {|cell| board[cell].taken?}
+				if winner == "X" 
+					winner_x_count += 1
+				elsif winner == "O"
+					winner_o_count += 1
+				elsif draw?
+					draw_count += 1
+				end
+				count += 1
+			end
+		end
+		puts "X won #{winner_x_count} time(s)!"
+		puts "O won #{winner_o_count} time(s)!"
+		puts "The was/were #{draw_count} Cat's Game(s)!"
 	end
 
 end
