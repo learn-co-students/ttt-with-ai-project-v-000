@@ -121,7 +121,7 @@ class Game
 		winner_o_count = 0
 		draw_count = 0
 		until count == 100
-			Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+			
 			turn until board.cells.all? {|cell| board[cell].taken?}
 			if board.cells.all? {|cell| board[cell].taken?}
 				if winner == "X" 
@@ -133,6 +133,7 @@ class Game
 				end
 				count += 1
 			end
+			Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
 		end
 		puts "X won #{winner_x_count} time(s)!"
 		puts "O won #{winner_o_count} time(s)!"
