@@ -252,7 +252,7 @@ describe 'Game' do
 
       game.play
     end
-
+#=begin --- THIS IS THE TEST THAT HANGS...
     it 'checks if the game is draw after every turn' do
       game = Game.new
       allow($stdout).to receive(:puts)
@@ -263,7 +263,7 @@ describe 'Game' do
 
       game.play
     end
-
+#=end
     it 'stops playing if someone has won' do
       game = Game.new
       game.board.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
@@ -334,6 +334,7 @@ describe 'Game' do
 
       game.play
     end
+
   end
 
   describe 'start' do

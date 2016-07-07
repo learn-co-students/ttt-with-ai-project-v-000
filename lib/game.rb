@@ -66,7 +66,7 @@ class Game
   def over?
     puts "--------------- hi, over method here"
     @over_counter += 1
-    if self.board.full?
+    if self.board.full? || self.won?
       true
     else
       false
@@ -116,7 +116,7 @@ class Game
     requested_move = "invalid"
     while requested_move == "invalid"
       puts "  starting while loop"
-      requested_position = current_player.move("dummy_arg")
+      requested_position = current_player.move(current_player.token)
       puts "  requested pos is --- #{requested_position}"
       if self.board.valid_move?(requested_position)
         requested_move = "valid"
@@ -130,11 +130,13 @@ class Game
   def play
     puts "welcome to play, over_counter is #{@over_counter}"
     while !self.over?
+      self.board.display
       puts "going to call turn..."
       self.turn
       puts "...just came back from turn"
       #self.over? #<---- this line baffles me
     end
+    self.board.display
     puts "***** we are at end of play method, after the while loop, over_counter is #{@over_counter}"
   end
 
