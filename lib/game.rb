@@ -22,6 +22,9 @@ class Game
     elsif
       board.full?
         true
+    elsif 
+      draw?
+        true
     else
         false
     end
