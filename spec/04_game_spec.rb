@@ -193,6 +193,7 @@ describe 'Game' do
   end
 
   describe 'play' do
+
     it 'asks for players input on a turn of the game' do
       game = Game.new
       allow($stdout).to receive(:puts)
