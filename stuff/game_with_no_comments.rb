@@ -21,7 +21,7 @@ class Game
     if player_2
       @player_2 = player_2
     else
-      @player_2 = Players::Computer.new("O")
+      @player_2 = Players::Human.new("O")
     end
     if board
       @board = board
@@ -63,7 +63,7 @@ class Game
   end
 
   def over?
-    if self.board.full? || self.won?
+    if self.board.full?
       true
     else
       false
@@ -112,7 +112,8 @@ class Game
     requested_move = "invalid"
 
     while requested_move == "invalid"
-      requested_position = current_player.move(board)
+      requested_position = current_player.move("dummy_arg")
+
       if self.board.valid_move?(requested_position)
         requested_move = "valid"
         self.board.update(requested_position, current_player)
@@ -122,20 +123,9 @@ class Game
 
   def play
     while !self.over?
-      self.board.display
       self.turn
-      self.draw? #<---- checking for a draw at this point is pointless, but the tests want it
-      #self.over? #<---- this line baffles me, this is the one that made the draw? test not hang, I am leaving this for my own reference should I ever have to look at this code again
-    end
-
-    self.board.display
-
-    if won?
-      puts "Congratulations #{self.winner}!"
-      return self.winner
-    else
-      puts "Cats Game!"
-      return "draw"
+      #self.over? #<---- this line baffles me
     end
   end
+
 end
