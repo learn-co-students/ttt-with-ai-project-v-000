@@ -48,23 +48,23 @@ while user_wants_to_play
 
   if game_selection == "4"
     puts "\n...WARGAMES...\n\n"
+
     scoreboard = {"X" => 0, "O" => 0, "draw" => 0, "total_games" => 0}
-    30.times do
+
+    100.times do
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
       result = game.play
-      #puts "FUUUUUUUUUUUUCKKKKKKKKK"
-      #puts "result is #{result}"
+
       scoreboard[result] += 1
       scoreboard["total_games"] += 1
     end
-    #puts "happiness"
+
     puts "\n\nWARGAMES SCORES:\n\n"
     puts "Player X: #{scoreboard["X"]}"
     puts "Player O: #{scoreboard["O"]}"
     puts "Draws: #{scoreboard["draw"]}"
     puts "Total games: #{scoreboard["total_games"]}"
   end
-
 
   puts "\nWould you like to play again? (y/n)"
 
@@ -74,11 +74,5 @@ while user_wants_to_play
     user_wants_to_play = false
   end
 end
+
 puts "\nGood bye!\n\n"
-
-
-
-=begin
-game = Game.new
-game.play
-=end

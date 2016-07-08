@@ -6,9 +6,7 @@ module Players
       token = get_token(board)
 
       puts "ENTER A MOVE, PLAYER #{token}:"
-      a = gets.chomp
-      #puts "    just got input '#{a}' from player"
-      a
+      gets.chomp
     end
 
     def get_token(board)
@@ -21,8 +19,5 @@ module Players
       end
       token
     end
-
-
   end
-
 end

@@ -35,134 +35,92 @@ module Players
         @opponent_token = "X"
       end
 
-      #puts "ENTER A MOVE, PLAYER #{token}:"
-      #VALID_MOVES.sample
-#=begin
       if what_is_winning_move?(board)
         return what_is_winning_move?(board)
       elsif what_is_move_needed_to_block?(board)
         return what_is_move_needed_to_block?(board)
       elsif what_move_to_get_two_in_a_row?(board)
-        #puts "ok looks like we can get two so let's do it...."
-        a = what_move_to_get_two_in_a_row?(board)
-        #puts "a is #{a}, now returning it..."
-        return a
-        #return what_move_to_get_two_in_a_row?(board)
+        return what_move_to_get_two_in_a_row?(board)
       elsif lets_try_the_center(board)
         return lets_try_the_center(board)
       elsif lets_try_a_corner(board)
         return lets_try_a_corner(board)
       else
-        #puts "i'm in the else"
         return VALID_MOVES.sample
       end
-      #puts "i am after the whole fucking if statement"
-#=end
     end
-
-    def get_tokens(board)
-      current_turn = board.turn_count + 1
-
-      if current_turn.odd?
-        return ["X", "O"]
-      else
-        return ["O", "X"]
-      end
-    end
-
-
-
-
-
 
     def what_is_winning_move?(board)
       WIN_COMBINATIONS.each do |actual_positions|
         count_hash = {"X" => 0, "O" => 0, " " => 0}
+
         actual_positions.each do |actual_position|
-          #puts "--- actual_position: #{actual_position}"
-          #puts "--- board.cells[actual_position]: #{board.cells[actual_position]}"
-          #puts "--- count_hash[board.cells[actual_position]]: #{count_hash[board.cells[actual_position]]}"
-          #puts "--- count_hash[board.cells[actual_position]].class: #{count_hash[board.cells[actual_position]].class}"
           count_hash[board.cells[actual_position]] += 1
         end
+
         if count_hash[token] == 2
           actual_positions.each do |actual_position|
             if board.cells[actual_position] == " "
-              #puts "FOUND THE WINNING MOVE, IT IS USER POSITION #{actual_position + 1}"
               return actual_position + 1
             end
           end
         end
-      end #win_combinations each
+      end
       false
-    end #what is winning move?
+    end
 
     def what_is_move_needed_to_block?(board)
       WIN_COMBINATIONS.each do |actual_positions|
         count_hash = {"X" => 0, "O" => 0, " " => 0}
+
         actual_positions.each do |actual_position|
-          #puts "BLOCK--- actual_position: #{actual_position}"
-          #puts "BLOCK--- board.cells[actual_position]: #{board.cells[actual_position]}"
-          #puts "BLOCK--- count_hash[board.cells[actual_position]]: #{count_hash[board.cells[actual_position]]}"
-          #puts "BLOCK--- count_hash[board.cells[actual_position]].class: #{count_hash[board.cells[actual_position]].class}"
           count_hash[board.cells[actual_position]] += 1
         end
+
         if count_hash[opponent_token] == 2
           actual_positions.each do |actual_position|
             if board.cells[actual_position] == " "
-              #puts "FOUND THE BLOCKING MOVE, IT IS USER POSITION #{actual_position + 1}"
               return actual_position + 1
             end
           end
         end
-      end #win_combinations each
+      end
       false
     end
 
     def what_move_to_get_two_in_a_row?(board)
       WIN_COMBINATIONS.each do |actual_positions|
         count_hash = {"X" => 0, "O" => 0, " " => 0}
+
         actual_positions.each do |actual_position|
-          #puts "GETTWO--- actual_position: #{actual_position}"
-          #puts "GETTWO--- board.cells[actual_position]: #{board.cells[actual_position]}"
-          #puts "GETTWO--- count_hash[board.cells[actual_position]]: #{count_hash[board.cells[actual_position]]}"
-          #puts "GETTWO--- count_hash[board.cells[actual_position]].class: #{count_hash[board.cells[actual_position]].class}"
           count_hash[board.cells[actual_position]] += 1
         end
+
         if count_hash[token] == 1 && count_hash[" "] == 2
-          #puts "--------------------------- I CAN GET TWO -----------------------------"
-          array = []
+          array_of_two_open_positions = []
           type_array = []
           actual_positions.each do |actual_position|
             if board.cells[actual_position] == " "
-              array << actual_position
+              array_of_two_open_positions << actual_position
               type_array << POSITION_TYPES[actual_position]
             end
-            #puts "array is #{array}"
-            #puts "type_array is #{type_array}"
-              #puts "FOUND THE WINNING MOVE, IT IS USER POSITION #{actual_position + 1}"
-              #return actual_position + 1
           end
           if type_array.include?("center")
-            #puts "going to return center"
             return 5
           elsif type_array.include?("corner")
-            #puts "going to start loop to return the element of #{array} which is a corner"
-            array.each do |actual_position|
+            array_of_two_open_positions.each do |actual_position|
               if POSITION_TYPES[actual_position] == "corner"
-                #puts "going to return #{actual_position}, which is a corner"
                 return actual_position + 1
               end
             end
           else
-            sampy = array.sample
-            #puts "going to return #{sampy}"
-            return sampy + 1
+            random_choice = array_of_two_open_positions.sample
+            return random_choice + 1
           end
-        end #if
-      end #win_combinations each
+        end
+      end
       false
-    end #method
+    end
 
     def lets_try_the_center(board)
       if board.cells[4] == " "
@@ -182,62 +140,7 @@ module Players
           return false
         end
       end
-
     end
-
-
-  end #class
-end #module
-
-
-
-=begin
-
-
-    def what_move_to_get_two_in_a_row?(board)
-      WIN_COMBINATIONS.each do |actual_positions|
-        count_hash = {"X" => 0, "O" => 0, " " => 0}
-        actual_positions.each do |actual_position|
-          #puts "GETTWO--- actual_position: #{actual_position}"
-          #puts "GETTWO--- board.cells[actual_position]: #{board.cells[actual_position]}"
-          #puts "GETTWO--- count_hash[board.cells[actual_position]]: #{count_hash[board.cells[actual_position]]}"
-          puts "GETTWO--- count_hash[board.cells[actual_position]].class: #{count_hash[board.cells[actual_position]].class}"
-          count_hash[board.cells[actual_position]] += 1
-        end
-        if count_hash[token] == 1 && count_hash[" "] == 2
-          puts "--------------------------- I CAN GET TWO -----------------------------"
-          array = []
-          type_array = []
-          actual_positions.each do |actual_position|
-            if board.cells[actual_position] == " "
-              array << actual_position
-              type_array << POSITION_TYPES[actual_position]
-            end
-            puts "array is #{array}"
-            puts "type_array is #{type_array}"
-              #puts "FOUND THE WINNING MOVE, IT IS USER POSITION #{actual_position + 1}"
-              #return actual_position + 1
-          end
-          if type_array.include?("center")
-            puts "going to return center"
-            return 5
-          elsif type_array.include?("corner")
-            puts "going to start loop to return the element of #{array} which is a corner"
-            array.each do |actual_position|
-              if POSITION_TYPES[actual_position] == "corner"
-                puts "going to return #{actual_position}, which is a corner"
-                return actual_position + 1
-              end
-            end
-          else
-            sampy = array.sample
-            puts "going to return #{sampy}"
-            return sampy + 1
-          end
-        end #if
-      end #win_combinations each
-      false
-    end #method
-
-
-=end
+    
+  end
+end

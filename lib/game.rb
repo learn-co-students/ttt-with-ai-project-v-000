@@ -13,7 +13,6 @@ class Game
   ]
 
   def initialize(player_1 = nil, player_2 = nil, board = nil)
-    #@over_counter = 0  # <--- this is for debugging
     if player_1
       @player_1 = player_1
     else
@@ -64,8 +63,6 @@ class Game
   end
 
   def over?
-    #puts "--------------- hi, over method here"
-    #@over_counter += 1
     if self.board.full? || self.won?
       true
     else
@@ -104,40 +101,35 @@ class Game
   end
 
   def turn
-    #puts "  hi, turn here"
     current_turn = self.board.turn_count + 1
-    #puts "  current turn is #{current_turn}"
+
     if current_turn.odd?
       current_player = self.player_1
     else
       current_player = self.player_2
     end
-    #puts "  current_player is #{current_player}"
+
     requested_move = "invalid"
+
     while requested_move == "invalid"
-      #puts "  starting while loop"
       requested_position = current_player.move(board)
-      #puts "  requested pos is --- #{requested_position}"
       if self.board.valid_move?(requested_position)
         requested_move = "valid"
-        #puts "  it's a valid move"
         self.board.update(requested_position, current_player)
-        #puts "  we just updated the board"
       end
     end
   end
 
   def play
-    #puts "welcome to play, over_counter is #{@over_counter}"
     while !self.over?
       self.board.display
-      #puts "going to call turn..."
       self.turn
-      #puts "...just came back from turn"
       self.draw? #<---- checking for a draw at this point is pointless, but the tests want it
-      #self.over? #<---- this line baffles me
+      #self.over? #<---- this line baffles me, this is the one that made the draw? test not hang, I am leaving this for my own reference should I ever have to look at this code again
     end
+
     self.board.display
+
     if won?
       puts "Congratulations #{self.winner}!"
       return self.winner
@@ -145,8 +137,5 @@ class Game
       puts "Cats Game!"
       return "draw"
     end
-
-    #puts "***** we are at end of play method, after the while loop, over_counter is #{@over_counter}"
   end
-
 end
