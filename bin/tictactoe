@@ -1,5 +1,84 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
 
+  puts "\n"
+  puts "*********************"
+  puts "*  Hi, welcome to   *"
+  puts "*    TIC-TAC-TOE    *"
+  puts "*********************"
+
+user_wants_to_play = true
+
+while user_wants_to_play
+  puts
+  puts "What would you like to play?"
+  puts "1 - Human vs Human"
+  puts "2 - Human vs Computer"
+  puts "3 - Computer vs Computer"
+  puts "4 - WARGAMES --- 100 rounds of Computer vs Computer"
+  puts
+
+  game_selection = gets.chomp
+
+  if game_selection == "1"
+    puts "\n...HUMAN VS HUMAN...\n\n"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    game.play
+  end
+
+  if game_selection == "2"
+    puts "\n...HUMAN vs COMPUTER...\n\n"
+    puts "Who will go first and be \"X\", (H)uman or (C)omputer?"
+    first_player = gets.chomp.upcase
+
+    if first_player == "H"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      game.play
+    else
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      game.play
+    end
+  end
+
+  if game_selection == "3"
+    puts "\n...COMPUTER VS COMPUTER...\n\n"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
+  end
+
+  if game_selection == "4"
+    puts "\n...WARGAMES...\n\n"
+    scoreboard = {"X" => 0, "O" => 0, "draw" => 0, "total_games" => 0}
+    30.times do
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      result = game.play
+      #puts "FUUUUUUUUUUUUCKKKKKKKKK"
+      #puts "result is #{result}"
+      scoreboard[result] += 1
+      scoreboard["total_games"] += 1
+    end
+    #puts "happiness"
+    puts "\n\nWARGAMES SCORES:\n\n"
+    puts "Player X: #{scoreboard["X"]}"
+    puts "Player O: #{scoreboard["O"]}"
+    puts "Draws: #{scoreboard["draw"]}"
+    puts "Total games: #{scoreboard["total_games"]}"
+  end
+
+
+  puts "\nWould you like to play again? (y/n)"
+
+  if gets.chomp.upcase == "Y"
+    user_wants_to_play = true
+  else
+    user_wants_to_play = false
+  end
+end
+puts "\nGood bye!\n\n"
+
+
+
+=begin
 game = Game.new
 game.play
+=end
