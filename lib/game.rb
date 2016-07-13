@@ -43,8 +43,31 @@ class Game
       @board.full? && !won?
     end
 
-    def play
+    def turn
+      puts "#{self.current_player.token}'s move:"
+      player_turn = self.current_player.move(board)
+    until self.board.valid_move?(player_turn)
+      puts "This move is not valid."
+      player_turn = self.current_player.move(board)
+    end
+      self.board.update(player_turn, current_player)
+    end
 
+    def play
+      while !over? do
+        turn
+      end
+      if won?
+        puts "Congratulations #{self.winner}!"
+      else draw?
+        puts "Cats Game!"
+      end
+    end
+
+    def winner
+      if win_combo = won?
+       @winner = @board.cells[win_combo.first]
+      end
     end
 
 end
