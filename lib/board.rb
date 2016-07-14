@@ -33,26 +33,19 @@ class Board
   end
 
   def taken? position
-    position = position.to_i
+    position = position.to_i - 1
     @cells[position] == " " ? false : true
   end
 
   def valid_move? position
-    position = position.to_i
-    position >= 0 && position < 9 && !self.taken?(position) ? true : false
+    index = position.to_i - 1
+    index >= 0 && index < 9 && !self.taken?(position) ? true : false
   end
 
   def update position, player
-    position = position.to_i
+    position = position.to_i - 1
     @cells[position] = player.token
   end
 
 
 end
-
-
-
-
-
-
-
