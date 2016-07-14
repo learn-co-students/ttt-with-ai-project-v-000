@@ -39,7 +39,7 @@ class Board
 
   def valid_move? position
     index = position.to_i - 1
-    index >= 0 && index < 9 && !self.taken?(position) ? true : false
+    index >= 0 && index < 9 && !taken?(position) ? true : false
   end
 
   def update position, player

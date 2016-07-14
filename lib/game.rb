@@ -3,6 +3,7 @@ require "pry"
 class Game
 
   attr_accessor :board, :player_1, :player_2
+  attr_reader :WIN_COMBINATIONS
 
   WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
@@ -22,17 +23,14 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |win_combo|
-      position_1 = board.cells[win_combo[0]]
-      position_2 = board.cells[win_combo[1]]
-      position_3 = board.cells[win_combo[2]]
-      if position_1 == "X" && position_2 == "X" && position_3 == "X"
-        return true
-      elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+      if board.cells[win_combo[0]] == board.cells[win_combo[1]] && board.cells[win_combo[1]] == board.cells[win_combo[2]] && board.taken?(win_combo[0] + 1)
         return true
       end
     end
     return false
   end
+
+
 
   def draw?
     true if board.full? && !won?
@@ -53,21 +51,25 @@ class Game
   end
 
   def turn
-    position = current_player.take_turn
-    turn if !board.valid_move?(position)
+    position = current_player.move(board)
+    if !board.valid_move?(position)
+      puts "INVALID MOVE"
+      turn 
+    end
     board.update(position, current_player)
   end
     
   def play
     turn until over?
-    puts "Congratulations X!" if won? && winner == "X"
-    puts "Congratulations O!" if won? && winner == "O"
-    puts "Cats Game!" if draw?
+    
+    if won? && winner == "X"
+      puts "Congratulations X!" 
+    elsif won? && winner == "O"
+      puts "Congratulations O!" 
+    elsif draw?
+      puts "Cats Game!" 
+    end
+    board.display
   end
 
 end
-
-
-
-
-

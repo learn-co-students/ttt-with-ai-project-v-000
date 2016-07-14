@@ -1,3 +1,43 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to Tic Tac Toe!"
+players  = ""
+first_player = ""
+play_again = ""
+while play_again != "No"
+  until players == "0" || players == "1" || players == "2"
+    puts "How many players are there? 0, 1, or 2?"
+    players = gets.strip
+    puts "Invalid response" if players != "0" && players != "1" && players != "2"
+  end
+  puts "Fantastic! Let's get started with #{players} player(s)!"
+
+  if players == "1"
+    until first_player == "Human" || first_player == "Computer"
+      puts "Who's going first? Human or Computer?"
+      first_player = gets.strip
+      puts "Invalid response" if first_player != "Humand" && first_player != "Computer"
+    end
+
+    if first_player == "Human"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+  end
+
+  Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play if players == "2"
+
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play if players == "0"
+
+  play_again = ""
+  until play_again == "Yes" || play_again == "No" 
+    puts "Would you like to play again? Yes/No"
+    play_again = gets.strip
+    puts "Invalid response" if play_again != "Yes" && play_again != "No"
+  end
+end
+puts "See you next time!"
