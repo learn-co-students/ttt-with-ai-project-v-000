@@ -3,66 +3,31 @@ require 'pry'
 module Players
   class Computer < Player
     def move(board)
+      move = nil
 
-      case token
-      when board.cells[0]
-        case token
-        when board.cells[1] then "3" if board.cells[2] == " "
-        when board.cells[3] then "7" if board.cells[6] == " "
-        when board.cells[4] then "9" if board.cells[8] == " "
-        when board.cells[8] then "5" if board.cells[4] == " "
-        when board.cells[6] then "4" if board.cells[3] == " "
-        when board.cells[2] then "2" if board.cells[1] == " "
-        end
-      when board.cells[1]
-        case token
-        when board.cells[4] then "8" if board.cells[7] == " "
-        when board.cells[7] then "5" if board.cells[4] == " "
-        end
-      when board.cells[2]
-        case token
-        when board.cells[4] then "7" if board.cells[6] == " "
-        when board.cells[6] then "5" if board.cells[4] == " "
-        when board.cells[5] then "9" if board.cells[8] == " "
-        when board.cells[8] then "6" if board.cells[5] == " "
-        end
-      when board.cells[3]
-        case token
-        when board.cells[5] then "5" if board.cells[4] == " "
-        when board.cells[4] then "6" if board.cells[5] == " "
-        end
-      end
-
-      case opponent
-      when board.cells[0]
-        case opponent
-        when board.cells[1] then "3" if board.cells[2] == " "
-        when board.cells[3] then "7" if board.cells[6] == " "
-        when board.cells[4] then "9" if board.cells[8] == " "
-        when board.cells[8] then "5" if board.cells[4] == " "
-        when board.cells[6] then "4" if board.cells[3] == " "
-        when board.cells[2] then "2" if board.cells[1] == " "
-        end
-      when board.cells[1]
-        case opponent
-        when board.cells[4] then "8" if board.cells[7] == " "
-        when board.cells[7] then "5" if board.cells[4] == " "
-        end
-      when board.cells[2]
-        case opponent
-        when board.cells[4] then "7" if board.cells[6] == " "
-        when board.cells[6] then "5" if board.cells[4] == " "
-        when board.cells[5] then "9" if board.cells[8] == " "
-        when board.cells[8] then "6" if board.cells[5] == " "
-        end
-      when board.cells[3]
-        case opponent
-        when board.cells[5] then "5" if board.cells[4] == " "
-        when board.cells[4] then "6" if board.cells[5] == " "
-        end
+      if !board.taken?(5) # if it's the first move, take 5; or, if human doesn't take 5 first, take it
+        move = "5"
+      elsif board.turn_count == 1 # if 
+        move = "1"
+      elsif board.turn_count == 2
+        move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}.to_s
+      elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+        move = "2"
       else
-        board.cells.find_index(" ").+(1).to_s
+        Game::WIN_COMBINATIONS.detect do |cmb|
+          if cmb.select{|i| board.position(i+1) == token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
+            move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+            true
+          elsif cmb.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
+            move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+            true
+          else
+            false
+          end
+        end
+        move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
       end
+      move
     end
   end
 end
