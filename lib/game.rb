@@ -27,16 +27,10 @@ class Game
     self.board.cells == player_1 ? player_2 : player_1
   end
 
-  def player_1
-    @player_1
-    # turn
-    # gets.chomp
-  end
-
-  def player_2
-    @player_2
-    # turn
-    # gets.chomp
+  def winner
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
   end
 
   def over?
@@ -60,7 +54,7 @@ class Game
   end
 
   def won?
-    @winner = WIN_COMBINATIONS.find do |combo|
+    @winner = WIN_COMBINATIONS.detect do |combo|
       # puts position_taken?(combo[0])
       # puts position(combo[1])
       # puts position(combo[2])
@@ -78,7 +72,7 @@ class Game
     # if @winner.class == Array
     #   puts position(@winner[0])
     # end
-    @winner
+    # @winner
     # if @winnner.is_a?(Integer) == true
     #   return true
     # # elsif draw?
@@ -89,15 +83,16 @@ class Game
   end
 
   def draw?
-    if won?
-      return false
-    elsif self.board.full? && over?
-      return true
-    # elsif over?
+    @board.full && !won?
+    # if won?
+    #   return false
+    # elsif self.board.full? && over?
     #   return true
-    else
-      return false
-    end
+    # # elsif over?
+    # #   return true
+    # else
+    #   return false
+    # end
   end
 
   def position(location)
@@ -108,24 +103,36 @@ class Game
     self.board.taken?(location+1)
   end
 
-  def winner
-    if won?.class == Array
-      return position(@winner[0])
-    elsif won?.class == NilClass
-      return nil
-    end
-  end
+  # def winner
+  #   if won?.class == Array
+  #     return position(@winner[0])
+  #   elsif won?.class == NilClass
+  #     return nil
+  #   end
+  # end
 
   def turn
-    self.board.display
-    puts "Please enter 1-9"
-    input = gets
-    if self.board.valid_move?(input)
-      self.board.update(input, current_player)
-      self.board.display
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
     else
-      # turn
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
     end
+    # self.board.display
+    # puts "Please enter 1-9"
+    # input = gets
+    # if self.board.valid_move?(input)
+    #   self.board.update(input, current_player)
+    #   self.board.display
+    # else
+    #   # turn
+    # end
 
   end
 
@@ -138,6 +145,10 @@ class Game
     elsif draw?
       puts "Cats Game!"
     end
+  end
+
+  def current_player
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
 end

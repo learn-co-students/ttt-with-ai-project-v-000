@@ -1,13 +1,9 @@
 class Board
 
-  attr_accessor :cells, :token
+  attr_accessor :cells
 
   def initialize
     reset!
-  end
-
-  def cells
-    @cells
   end
 
   def reset!
@@ -41,14 +37,14 @@ class Board
   def valid_move?(input)
     input.to_i.between?(1,9) && !taken?(input)
   end
-
-  def double(name, hash)
-    @name = name
-    @hash = hash
-  end
+  # 
+  # def double(name, hash)
+  #   @name = name
+  #   @hash = hash
+  # end
 
   def update(location, player)
     @cells[location.to_i-1] = player.token
-    @cells[location.to_i-1]
   end
+
 end

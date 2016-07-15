@@ -1,6 +1,6 @@
 require_relative '../player.rb'
 require_relative '../game.rb'
-require 'spec_helper'
+# require 'spec_helper'
 
 
 module Players
@@ -12,22 +12,22 @@ module Players
     end
 
     def move(board)
-      input = gets
-      input
+      puts "Please enter 1-9:"
+      gets.strip
     end
 
   end
 
-  class Computer < Player
-
-    def initialize(token)
-      @token = token
-    end
-
-    def move(board)
-      input = gets
-      input
-    end
-  end
+  # class Computer < Player
+  #
+  #   def initialize(token)
+  #     @token = token
+  #   end
+  #
+  #   def move(board)
+  #     input = gets
+  #     input
+  #   end
+  # end
 
 end
