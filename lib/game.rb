@@ -1,10 +1,5 @@
-require_relative './players/human.rb'
-require_relative './player.rb'
-
 class Game
-  include Players
-  # include Player
-  attr_accessor :board, :player_1, :player_2, :winner, :token
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -83,7 +78,7 @@ class Game
   end
 
   def draw?
-    @board.full && !won?
+    @board.full? && !won?
     # if won?
     #   return false
     # elsif self.board.full? && over?
@@ -114,16 +109,22 @@ class Game
   def turn
     player = current_player
     current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
-      turn
+    if won?
+      nil
     else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts "\n\n"
+      if !@board.valid_move?(current_move)
+        puts "invalid"
+        turn
+      else
+        puts "Turn: #{@board.turn_count+1}\n"
+        @board.display
+        @board.update(current_move, player)
+        puts "#{player.token} moved #{current_move}"
+        @board.display
+        puts "\n\n"
+      end
     end
+    # won?
     # self.board.display
     # puts "Please enter 1-9"
     # input = gets
@@ -133,7 +134,7 @@ class Game
     # else
     #   # turn
     # end
-
+    won?
   end
 
   def play
