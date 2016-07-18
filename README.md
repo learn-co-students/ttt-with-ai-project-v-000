@@ -24,11 +24,11 @@ You'll be implementing Tic Tac Toe using multiple objects that relate and collab
 Working on a software project with another person is not something to be taken lightly. While you are a fantastic coder solo, software development is a collaborative activity. Just like anything else, there is skill in collaborating on code. In the end, collaborating with another person boils down to three different styles:
 
   - Pair - Pair the entire time working linearly together
-  - Pass - 1 person does 1 requirement and then the next person does the next one
+  - Pass - Each person completes 1 requirement and then passes the project to the other person
   - Parallel - work on different parts at the same time by agreeing on interfaces and stubs and meeting in the middle
-    - Person A does board and player human
-    - Person B does game expecting a working board and player with stubs?
-    - Person A person does computer player
+    - Person A codes the board and the human player class
+    - Person B creates the game engine, expecting a working board and player with stubs
+    - Person A creates the computer player
     - Work together on the AI (It's hard)
 
 Remember! The goal at The Flatiron School is not to do, it is to *learn*. Make sure you have worked in all three styles of collaboration. We want you to learn how the different styles works, and make sure that together you and your partner understand every part of the code.
