@@ -6,7 +6,7 @@ tags:
 languages:
   - ruby
 resources:
-project:
+project: 
   review_criteria:
     - All tests pass
     - 0 player mode works
