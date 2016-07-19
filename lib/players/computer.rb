@@ -1,13 +1,4 @@
 # # Computer Player
-# class Players
-#   # Computer Player Class < Player
-#   class Computer < Player
-#     def move(board)
-#
-#     end
-#   end
-# end
-
 class Players
   # Computer Player Class < Player
   class Computer < Player
@@ -32,17 +23,13 @@ class Players
     def win(board)
       winning_combo = complete_combo?(board, token)
       if winning_combo && winning_combo.count{|index| board.position(index+1) == self.token} == 2
-        puts "...found winning combo #{winning_combo}"
         winning_combo.detect{|index| !board.taken?(index+1)}
       end
     end
 
     def block(board)
-      # puts "...checking for block for #{token} on #{board.cells}"
-
       blocking_combo = complete_combo?(board, self.opponent_token)
       if blocking_combo && blocking_combo.count{|index| board.position(index+1) == self.opponent_token} == 2
-        puts "...found blocking combo #{blocking_combo}"
         blocking_combo.detect{|index| !board.taken?(index+1)}
       end
     end
