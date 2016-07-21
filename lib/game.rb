@@ -42,8 +42,14 @@ class Game
     end
 
     def over?
-      if won? || draw? || full?
+      if won? || draw?
         true
+      end
+    end
+
+    def winner
+      if won?
+        
       end
     end
 
