@@ -49,7 +49,7 @@ class Game
 
     def winner
       if won?
-        
+        current_player.token
       end
     end
 
