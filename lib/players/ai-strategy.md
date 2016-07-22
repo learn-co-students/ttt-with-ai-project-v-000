@@ -1,4 +1,4 @@
-1. winning move?
+1. winning move? <br>
   a. iterate over winning combos and see if any of them have 2 cells that equal current_player.token and one valid_move?
   b. winning move
 2. block?
