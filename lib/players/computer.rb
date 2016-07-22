@@ -35,5 +35,9 @@ class Players
 
     end
 
+    def block(board)
+
+    end
+
   end
 end
