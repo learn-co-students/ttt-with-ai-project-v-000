@@ -69,8 +69,9 @@ class Board
      end
   end
 
-  def update(:player, :token)
-
+  def update(position, player) # player is an rspec double here
+    index = position.to_i
+    @cells[index-1] = player.token
   end
 
 
