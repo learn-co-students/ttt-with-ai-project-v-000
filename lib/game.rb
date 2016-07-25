@@ -50,9 +50,12 @@ class Game # Humans
 
   def turn
     puts "Please enter 1-9:"
-    if @board.valid_move?(player_1.move) # if player makes a valid move
+    if @board.valid_move?(player_1.move(@board)) # if player makes a valid move
       # make a move to the new position = player_1.move
-      true
+      if current_player == player_1
+        player_2.move(@board)
+        binding.pry
+      end
     else
       turn
     end
