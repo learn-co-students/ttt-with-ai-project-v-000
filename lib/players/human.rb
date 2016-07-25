@@ -5,7 +5,7 @@ module Players
 
     # asks the user for input and returns it
     def move(board)
-      input = gets
+      input = gets.strip
       input
     end
 

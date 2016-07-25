@@ -49,16 +49,31 @@ class Game # Humans
   end
 
   def turn
+    # makes valid moves
     puts "Please enter 1-9:"
-    if @board.valid_move?(player_1.move(@board)) # if player makes a valid move
-      # make a move to the new position = player_1.move
-      if current_player == player_1
-        player_2.move(@board)
-        binding.pry
-      end
-    else
-      turn
+    if @board.valid_move?(position)
+      player_1.move
     end
+    # asks for input again after a failed validation
+    if !@board.valid_move?(position)
+      puts "invalid"
+      puts "Please enter 1-9:"
+      player_1.move
+    end
+    player_2.move
+
+
+
+
+    # puts "Please enter 1-9:"
+    # if board.valid_move?(player_1.move(board)) # if player makes a valid move
+    #   # make a move to the new position = player_1.move
+    #     player_2.move(@board)
+    #     binding.pry
+    #   # end
+    # else
+    #   turn
+    # end
   end
 
 # +++++++++++++++++++++++++++++++++++++++++ Helper Methods +++++++++++++++++++++++++++++++++++++++++++++++++++
