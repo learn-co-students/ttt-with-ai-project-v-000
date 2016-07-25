@@ -29,7 +29,7 @@ class Players
       number.to_s
     end
 
-    def has_combination?(board, token)#returns first combo has 2 out of 3.
+    def has_combination?(board, token)#returns first combo
       Game::WIN_COMBINATIONS.detect do |combo|
         (
           (board.cells[combo[0]] == token && board.cells[combo[1]] == token) &&
