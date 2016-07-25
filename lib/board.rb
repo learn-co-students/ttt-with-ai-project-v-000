@@ -23,8 +23,8 @@ class Board
   end
 
   # takes in user input and returns the value of the board cell
-  def position(position)
-    index = (position.to_i)-1
+  def position(input)
+    index = (input.to_i)-1
     if @cells[index] !=" " ||  @cells[index] !=""
        @cells[index]
     end
@@ -50,8 +50,8 @@ class Board
 
   # returns true if the position is X or O
   # returns false if the position is empty or blank
-  def taken?(position)
-    index = (position.to_i)-1
+  def taken?(input)
+    index = (input.to_i)-1
     if @cells[index] =="X" ||  @cells[index] =="O"
       true
     else
@@ -59,8 +59,8 @@ class Board
     end
   end
   # is the position is between 1 and 9  and the position is not already  taken
-  def valid_move?(position)
-    index = position.to_i
+  def valid_move?(input)
+    index = input.to_i
     if index.between?(1,9) && !taken?(index)
       return true
      else

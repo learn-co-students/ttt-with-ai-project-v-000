@@ -51,16 +51,16 @@ class Game # Humans
   def turn
     # makes valid moves
     puts "Please enter 1-9:"
-    if @board.valid_move?(position)
-      player_1.move
+    if board.valid_move?(player_1.move(board))
+      player_1.move(board)
     end
     # asks for input again after a failed validation
-    if !@board.valid_move?(position)
+    if !board.valid_move?(player_1.move(board))
       puts "invalid"
       puts "Please enter 1-9:"
-      player_1.move
+      player_1.move(board)
     end
-    player_2.move
+    player_2.move(board)
 
 
 
