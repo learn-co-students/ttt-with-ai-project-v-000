@@ -1,5 +1,5 @@
 # The root class
-class Player 
+class Player
   attr_reader :token # token cannot be changed once assigned
 
   def initialize(token)

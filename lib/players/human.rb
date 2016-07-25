@@ -1,3 +1,4 @@
+require_relative "../player.rb"
 module Players
   # class Human inherits from Player (root class)
   class Human < Player

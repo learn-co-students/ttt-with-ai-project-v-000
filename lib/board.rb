@@ -3,7 +3,6 @@ class Board
   # has an attribute to store the cells of the board'
   attr_accessor :cells
 
-
   def initialize
     reset!
    end
@@ -59,10 +58,10 @@ class Board
       false
     end
   end
-
+  # is the position is between 1 and 9  and the position is not already  taken
   def valid_move?(position)
-    @index = position.to_i
-    if @index.between?(1,9) && !taken?(@index)
+    index = position.to_i
+    if index.between?(1,9) && !taken?(index)
       return true
      else
       return false
