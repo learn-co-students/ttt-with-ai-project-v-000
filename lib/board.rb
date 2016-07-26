@@ -67,9 +67,10 @@ class Board
       return false
      end
   end
-
-  def update(position, player) # player is an rspec double here
-    index = position.to_i
+  
+  # board updates when player makes a turn
+  def update(input, player) # player is an rspec double here
+    index = input.to_i
     @cells[index-1] = player.token
   end
 

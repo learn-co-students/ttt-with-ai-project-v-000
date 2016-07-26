@@ -18,16 +18,6 @@ class Game # Humans
         [0,4,8],
         [6,4,2]
   ]
-  # a helper method for current_player method
-  def turn_count
-    counter = 0
-    @board.cells.each do | occ_pos |
-      if  occ_pos == "X" ||  occ_pos =="O"
-        counter+=1
-      end
-    end
-    counter
-  end
 
   def current_player
     counter = 0
@@ -49,31 +39,20 @@ class Game # Humans
   end
 
   def turn
-    # makes valid moves
     puts "Please enter 1-9:"
-    if board.valid_move?(player_1.move(board))
-      player_1.move(board)
+    # Because the tests are checking to see if you call move once,
+    # and they will flag an error if you call it twice, and it
+    # so save it under a different name current_move
+    current_move = current_player.move(board)
+    # if player makes an invalid move then turn starts over
+    if !board.valid_move?(current_move)
+      puts "Sorry that is invalid"
+      turn
     end
-    # asks for input again after a failed validation
-    if !board.valid_move?(player_1.move(board))
-      puts "invalid"
       puts "Please enter 1-9:"
-      player_1.move(board)
-    end
-    player_2.move(board)
-
-
-
-
-    # puts "Please enter 1-9:"
-    # if board.valid_move?(player_1.move(board)) # if player makes a valid move
-    #   # make a move to the new position = player_1.move
-    #     player_2.move(@board)
-    #     binding.pry
-    #   # end
-    # else
-    #   turn
-    # end
+      board.update(current_move, current_player)
+      # binding.pry
+      board.display
   end
 
 # +++++++++++++++++++++++++++++++++++++++++ Helper Methods +++++++++++++++++++++++++++++++++++++++++++++++++++
