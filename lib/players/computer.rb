@@ -3,13 +3,12 @@ class Players
     attr_accessor :board
 
     def move(board)
-      @board = board
       if !board.taken?("5")
         "5"
       elsif has_combination?(board, token)
         has_combination?(board, token)
       else
-        random
+        random.to_s
       end
     end
 
@@ -22,8 +21,7 @@ class Players
     end
 
     def random
-      number = rand 0..8
-      number += 1
+      number = rand 1..9
     end
 
     def has_combination?(board, token)#returns first combo
