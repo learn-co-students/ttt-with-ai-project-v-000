@@ -6,8 +6,16 @@ class Players
       @board = board
       if !board.taken?("5")
         "5"
-      else
-        best_move(board)
+      end
+      case
+      when win(board)!= nil
+        input = win(board).to_s
+      when block(board) != nil
+        input = block(board).to_s
+      when corner_move != nil
+        input = corner_move.to_s
+      when !game.over?
+        corner_move
       end
     end
 
@@ -16,12 +24,8 @@ class Players
     end
 
 
-    def corner_move(board)
-      [0,2,6,8].detect{|cell| !board.taken?(cell+1)}
-    end
-
-    def best_move(board)
-      win(board) || block(board) || corner_move(board) || random
+    def corner_move
+      [0,2,6,8].detect{|cell| !board.taken?(cell + 1)} #to i - 1
     end
 
     def random
