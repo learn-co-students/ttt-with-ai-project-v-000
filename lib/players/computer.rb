@@ -15,7 +15,7 @@ class Players
       when corner_move != nil
         input = corner_move.to_s
       when !game.over?
-        corner_move
+        random
       end
     end
 
