@@ -3,12 +3,13 @@ class Players
     attr_accessor :board
 
     def move(board)
+      @move1 = nil
       if !board.taken?("5")
         "5"
-      elsif has_combination?(board, token)
-        has_combination?(board, token)
+      #elsif has_combination?(board)
+      #  has_combination?(board)
       else
-        random.to_s
+        random
       end
     end
 
@@ -16,22 +17,23 @@ class Players
       token == "X" ? "O" : "X"
     end
 
-    def corner_move
-      [0,2,6,8].detect{|cell| !board.taken?(cell + 1)} #to i - 1
-    end
-
     def random
       number = rand 1..9
+      number.to_s
     end
 
-    def has_combination?(board, token)#returns first combo
+    def has_combination?(board)#returns first combo
       Game::WIN_COMBINATIONS.detect do |cmb|
-      	if cmb.select{|i| board.position(i+1) == token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
-      		move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-      	elsif cmb.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
-      		move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+      	if cmb.select{|i| board.position("#{i+1}") == token}.size == 2 && cmb.any?{|i| board.position("#{i+1}") == " "}
+      		@move1 = cmb.select{|i| !board.taken?("#{i+1}")}#.first.to_i.+(1).to_s
+      	elsif cmb.select{|i| board.position("#{i+1}") != " " && board.position("#{i+1}") != token}.size == 2 && cmb.any?{|i| board.position("#{i+1}") == " "}
+      		@move1 = cmb.select{|i| !board.taken?("#{i+1}")}#.first.to_i.+(1).to_s
       	end
       end
+      if @move1 != nil
+        @move1 = @move1[0].to_s
+      end
+      @move1
     end
 
   end
@@ -63,3 +65,7 @@ end
 #      win_combo.detect {|index| !board.taken?(index+1)}
 #    end
 #  end
+
+#def corner_move
+#  [0,2,6,8].detect{|cell| !board.taken?(cell + 1)} #to i - 1
+#end
