@@ -18,10 +18,21 @@ class Game # Humans
         [0,4,8],
         [6,4,2]
   ]
-
+  # asks for players input on a turn of the game
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
+  end
+  # checks who the current player is
   def current_player
     counter = 0
-    @board.cells.each do | occ_pos |
+    board.cells.each do | occ_pos |
       if  occ_pos == "X" ||  occ_pos =="O"
         counter+=1
       end
@@ -63,9 +74,9 @@ class Game # Humans
       win_index_1 = win_comb[0]
       win_index_2 = win_comb[1]
       win_index_3 = win_comb[2]
-      position_1 = @board.cells[win_index_1]
-      position_2 = @board.cells[win_index_2]
-      position_3 = @board.cells[win_index_3]
+      position_1 = board.cells[win_index_1]
+      position_2 = board.cells[win_index_2]
+      position_3 = board.cells[win_index_3]
       if position_1 ==  position_2 && position_2 ==  position_3 && position_1 != " "
          win_comb # return the win_combination indexes that won.
       else
@@ -81,7 +92,7 @@ class Game # Humans
 
   # helper method for draw?
   def full?
-    @board.cells.none? do | position |
+    board.cells.none? do | position |
       position == " "
     end
   end
@@ -91,19 +102,8 @@ class Game # Humans
     win_combination = won?
     if win_combination
       win_index = win_combination[0]
-      wining_token = @board.cells[win_index]
+      wining_token = board.cells[win_index]
       wining_token
-    end
-  end
-
-  def play
-    while !over?
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cats Game!"
     end
   end
 

@@ -3,15 +3,15 @@ module Players
 
     # asks the user for input and returns it
     def move(board)
-      # input = gets.strip
-      # if input = ("1..9")
-      board = Board.new()
+      # save input as strings
+      input = rand(1..9).to_s
+      # if input is valid return input
       if board.valid_move?(input)
-      # if input.match(/[1..9]/)
-      input
-      # else
-      #   "invalid"
+         input
+       else
+         puts "invalid"
       end
     end
+    
   end
 end
