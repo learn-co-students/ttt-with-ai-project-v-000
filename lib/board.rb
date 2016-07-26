@@ -67,7 +67,7 @@ class Board
       return false
      end
   end
-  
+
   # board updates when player makes a turn
   def update(input, player) # player is an rspec double here
     index = input.to_i

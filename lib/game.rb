@@ -41,8 +41,8 @@ class Game # Humans
   def turn
     puts "Please enter 1-9:"
     # Because the tests are checking to see if you call move once,
-    # and they will flag an error if you call it twice, and it
-    # so save it under a different name current_move
+    # they will flag an error if you call it twice, and it
+    # save it under a different name current_move
     current_move = current_player.move(board)
     # if player makes an invalid move then turn starts over
     if !board.valid_move?(current_move)
@@ -93,6 +93,17 @@ class Game # Humans
       win_index = win_combination[0]
       wining_token = @board.cells[win_index]
       wining_token
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
     end
   end
 
