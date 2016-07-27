@@ -122,13 +122,18 @@ class Game # Humans
     until input == "exit"
       input = gets.strip.downcase
       case input
+      # computer vs computer config
       when comp_vs_comp
         game = Game.new(player_1= Players::Computer.new("X"), player_2=Players::Computer.new("O"), board = Board.new)
-        game.play
+        10.times do
+          game.play
+        end
+      # human vs human config
       when hum_vs_hum
         puts "X goes first"
         game = Game.new
         game.play
+      # human vs computer config
       when hum_vs_comp
         game = Game.new(player_1= Players::Human.new("X"), player_2=Players::Computer.new("O"), board = Board.new)
         game.play
