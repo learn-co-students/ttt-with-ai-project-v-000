@@ -62,9 +62,9 @@ class Board
   def valid_move?(input)
     index = input.to_i
     if index.between?(1,9) && !taken?(index)
-      return true
+       true
      else
-      return false
+       false
      end
   end
 

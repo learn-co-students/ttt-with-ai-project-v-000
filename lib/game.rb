@@ -18,17 +18,7 @@ class Game # Humans
         [0,4,8],
         [6,4,2]
   ]
-  # asks for players input on a turn of the game
-  def play
-    while !over?
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cats Game!"
-    end
-  end
+
   # checks who the current player is
   def current_player
     counter = 0
@@ -49,6 +39,7 @@ class Game # Humans
     won? || draw?
   end
 
+  # makes valid moves, changes to playe 2 after the first turn and calls on turn again if failed validation
   def turn
     puts "Please enter 1-9:"
     # Because the tests are checking to see if you call move once,
@@ -61,6 +52,7 @@ class Game # Humans
       turn
     end
       puts "Please enter 1-9:"
+      # updates the cells in the board with the player token according to the input
       board.update(current_move, current_player)
       # binding.pry
       board.display
@@ -104,7 +96,62 @@ class Game # Humans
       win_index = win_combination[0]
       wining_token = board.cells[win_index]
       wining_token
+      # puts "#{wining_token} is the winner!"
     end
+  end
+
+  # asks for players input on a turn of the game
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
+  end
+
+  def begin
+    input=""
+    invalid = "Invalid!"
+    comp_vs_comp = "wargames"
+    hum_vs_comp = "single player"
+    hum_vs_hum = "two player"
+    introduction
+    until input == "exit"
+      input = gets.strip.downcase
+      case input
+      when comp_vs_comp
+        game = Game.new(player_1= Players::Computer.new("X"), player_2=Players::Computer.new("O"), board = Board.new)
+        game.play
+      when hum_vs_hum
+        puts "X goes first"
+        game = Game.new
+        game.play
+      when hum_vs_comp
+        game = Game.new(player_1= Players::Human.new("X"), player_2=Players::Computer.new("O"), board = Board.new)
+        game.play
+      when 'exit'
+        puts 'Game Over.'
+      else
+      puts invalid
+      end
+      if input !='exit' && (game.won? || game.over? || game.draw? || game.full?)
+        puts "To start over choose any of the options again."
+        puts "1. wargames - for Computer vs Computer"
+        puts "2. single player - for Single Player mode"
+        puts "3. two player - for Two Player mode"
+      end
+    end
+  end
+
+  def introduction
+      puts "Welcome to Tic Tac Toe"
+      puts "Which game do you want to play?"
+      puts "1. wargames - for Computer vs Computer"
+      puts "2. single player - for Single Player mode"
+      puts "3. two player - for Two Player mode"
   end
 
 end
