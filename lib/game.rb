@@ -125,9 +125,14 @@ class Game # Humans
       # computer vs computer config
       when comp_vs_comp
         game = Game.new(player_1= Players::Computer.new("X"), player_2=Players::Computer.new("O"), board = Board.new)
-        10.times do
+        count = 0
+        100.times do
+          if game.won?
+            count +=1
+          end
           game.play
         end
+        puts "Game won #{count} times!"
       # human vs human config
       when hum_vs_hum
         puts "X goes first"

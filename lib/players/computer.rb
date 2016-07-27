@@ -8,15 +8,13 @@ module Players
       # move = input
       # if input is valid return input
       if board.valid_move?(input)
-         input
-       else
+        input
+        elsif !board.valid_move?(input)
          puts "invalid"
-      end
-      if !board.taken?(1)
-        move = "1"
-      end
-      if board.turn_count == 0
-        move = "1"
+        elsif !board.taken?(1)
+          move = "1"
+        elsif board.turn_count == 3
+          move = "6"
       end
       # binding.pry
     end
