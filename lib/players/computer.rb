@@ -5,18 +5,19 @@ module Players
     def move(board)
       # save input as strings
       input = rand(1..9).to_s
-      # move = input
-      # if input is valid return input
       if board.valid_move?(input)
         input
-        elsif !board.valid_move?(input)
+        elsif board.valid_move?(input)
          puts "invalid"
-        elsif !board.taken?(1)
-          move = "1"
-        elsif board.turn_count == 3
+        elsif board.taken?(1) && board.taken?(2)
+          move = "3"
+        elsif board.taken?(4) && board.taken?(5)
           move = "6"
+        elsif board.taken?(7) && board.taken?(8)
+          move = "9"
+        elsif board.taken?(4) && board.taken?(5)
+          move = "5"
       end
-      # binding.pry
     end
 
   end
