@@ -12,14 +12,14 @@ class Player::Computer < Player
     [0,2,6]
     ]
 
-    Computer::CORNER_PAIRS = [
-      [0,8],
-      [2,6]
-    ]
+  Computer::CORNER_PAIRS = [
+    [0,8],
+    [2,6]
+  ]
 
-    Computer::CORNERS = [0,2,6,8]
+  Computer::CORNERS = [0,2,6,8]
 
-    Computer::CENTER = 4
+  Computer::CENTER = 4
 
   def initialize(token)
     super
