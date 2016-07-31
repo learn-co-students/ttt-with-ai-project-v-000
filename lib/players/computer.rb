@@ -3,10 +3,10 @@ class Player::Computer < Player
   attr_accessor :board
 
   def move(board)
-    if !board.taken?(5)
-      "5"
+    if !board.taken?('5')
+      '5'
     elsif
-      !board.taken?(corner)
+      corner(board)
       corner.sample
     else
       location.to_i.between?(1,9).sample
@@ -19,27 +19,3 @@ class Player::Computer < Player
   end
 
 end
-=begin
-  def best_move(board)
-    win(board) || block(board) || corner(board) || random
-  end
-
-  def block(board)
-    block_test(board).detect {|x| board.cells[x] == " "} + 1 if !block_test(board).nil?
-  end
-
-  def random
-    number = rand 1..9
-  end
-
-end
-
-
-def move(board)
-  if !board.taken?('5')
-    '5'
-  else
-    best_move(board) + 1
-  end
-end
-=end
