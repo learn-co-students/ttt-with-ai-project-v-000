@@ -1,63 +1,78 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
 
-def play_again?
-  puts "\nDo you want to play again? (yes/no)"
-  play_again = gets.strip.downcase
-  if play_again == "yes" || play_again == "y"
-    puts "Please choose the number of players for your game:\n\n",
-         "\t0, 1, or 2\n\n"
-    user_input = gets.strip
-  elsif play_again == "no" || play_again == "n"
-    puts "\n"
-    puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO"
-    puts "O      Thanks for playing Tic Tac Toe!     X"
-    puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO"
-    exit
-  else
-    play_again?
+  def welcome
+    # clear screen
+    puts "\e[H\e[2J"
+    puts <<-DOC
+      XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+      O                                          X
+      X       Welcome to Tic Tac Toe!!           O
+      O                                          X
+      XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+    DOC
+      puts "Please enter your name: \n"
+            name = gets.strip.capitalize
+      puts "\n\nGreetings #{name}!\n",
+           "How about a game of Tic-Tac-Toe?\n\n"
+    players
   end
-end
 
 
-  puts "\e[H\e[2J"
-  puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO"
-  puts "O                                          X"
-  puts "X       Welcome to Tic Tac Toe!!           O"
-  puts "O                                          X"
-  puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO\n\n"
-
-  puts "Please enter your name: \n"
-        name = gets.strip.capitalize
-  puts "\n\nGreetings #{name}!\n",
-       "How about a game of Tic-Tac-Toe?\n\n",
-       "Please choose the number of players:\n\n",
-       "\t0, 1, or 2\n\n",
+ def players
+   puts "Please choose the number of players:\n\n",
+       "\tEnter 0, 1, or 2. Enter 3 for WAR GAMES MODE.\n\n",
        "\t(0) Computer mode (Computer vs. Computer)\n\n",
        "\t(1) One player mode. You will play against the computer.\n\n",
        "\t(2) Two player mode. There are 2 players and 'X' will go first.\n\n",
-       "\t(q) Quit/Exit the program\n\n",
+       "\t(3) WAR GAMES MODE\n\n",
        "Please make a selection:"
+       input = gets.chomp
 
-       user_input = gets.strip.downcase
+       case input
+       when /0/
+         puts "\n\nThe computer will play itself.\n\n"
+         Game.new(Player::Computer.new("X"), Player::Computer.new("O")).start
+       when /1/
+         puts "\n\nYour opponent will be the computer. Good luck!\n\n"
+         Game.new(Player::Human.new("X"), Player::Computer.new("O")).start
+       when /2/
+         puts "\n\nThere are two players. X will go first.\n\n"
+         Game.new(Player::Human.new("X"), Player::Human.new("O")).start
+       when /3/
+         puts "\nWargames mode\n"
+         100.times do Game.new(Player::Computer.new("X"),  Player::Computer.new("O")).start
+         end
+       when /^(e|exit)$/i
+         thanks
+         exit!
+       else
+         puts "Please try again."
+       end
+       replay
+     end
 
-  case user_input
-  when "0"
-     Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
-  when "1"
-     Game.new( Player::Human.new("X"), Player::Computer.new("O")).play
-  when "2"
-     Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O")).play
-  when "q"
-    puts "\n"
-    puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO"
-    puts "O      Thanks for playing Tic Tac Toe!     X"
-    puts "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO"
-    exit
-  end
+   def replay
+     puts "\nWould you like to play again?"
+     input = gets.chomp
+     case input
+     when /^(y|yes)$/i
+       players
+     when /^(n|no)$/i
+       thanks
+       exit
+     end
+   end
 
-  game = Game.new
-  until game.won?
-    play_again?
-    game.play
-  end
+   def thanks
+     puts "\e[H\e[2J"
+     puts <<-DOC
+         XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+         O                                          X
+         X      Thanks for playing Tic Tac Toe!     O
+         O                                          X
+         XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+     DOC
+   end
+
+  welcome

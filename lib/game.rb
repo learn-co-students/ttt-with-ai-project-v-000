@@ -70,4 +70,9 @@ class Game
       end
     end
 
+    def start
+     self.board.display
+     self.play
+   end
+
 end
