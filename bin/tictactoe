@@ -16,31 +16,53 @@ require_relative '../config/environment'
   end
 
   def players
-    puts "\nHow many players? Enter 0, 1, or 2."
-    input = gets.chomp.to_i
+    puts "\nHow many players? Enter 0, 1, or 2. Enter 3 for WAR GAMES MODE."
+    input = gets.chomp
 
     case input
-    when 0
+    when /0/
       puts "\n\nThe computer will play itself.\n\n"
-      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
-    when 1
+      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).start
+    when /1/
       puts "\n\nYour opponent will be the computer. Good luck!\n\n"
-      Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
-    when 2
+      Game.new(Player::Human.new("X"), Player::Computer.new("O")).start
+    when /2/
       puts "\n\nThere are two players. X will go first.\n\n"
-      Game.new(Player::Human.new("X"), Player::Human.new("O")).play
+      Game.new(Player::Human.new("X"), Player::Human.new("O")).start
+    when /3/
+      puts "\nWargames mode\n"
+      100.times do Game.new(Player::Computer.new("X"),  Player::Computer.new("O")).start
+      end
     when /^(e|exit)$/i
-      puts "Goodbye!"
+      thanks
       exit!
     else
       puts "Please try again."
     end
+    replay
   end
 
-  # puts "Would you like to play again?"
-  # input = gets.chomp
-  # case input
-  # when /^(y|yes)$/i then
-  # when /^(n|no)$/i  then
+  def replay
+    puts "Would you like to play again?"
+    input = gets.chomp
+    case input
+    when /^(y|yes)$/i
+      players
+    when /^(n|no)$/i
+      thanks
+      exit
+    end
+  end
+
+  def thanks
+    puts "\e[H\e[2J"
+    puts <<-DOC
+        XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+        O                                          X
+        X      Thanks for playing Tic Tac Toe!     O
+        O                                          X
+        XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+    DOC
+  end
 
 welcome

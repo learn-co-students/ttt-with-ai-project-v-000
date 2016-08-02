@@ -61,11 +61,17 @@ class Game
       player_turn = self.current_player.move(board)
     end
     self.board.update(player_turn, current_player)
+    self.board.display
   end
 
   def winner
    if winning_combo = won?
      @winner = @board.cells[winning_combo.first]
    end
+ end
+
+ def start
+   self.board.display
+   self.play
  end
 end
