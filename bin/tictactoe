@@ -22,13 +22,16 @@ require_relative '../config/environment'
     case input
     when 0
       puts "\n\nThe computer will play itself.\n\n"
-      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).start
     when 1
       puts "\n\nYour opponent will be the computer. Good luck!\n\n"
-      Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
+      Game.new(Player::Human.new("X"), Player::Computer.new("O")).start
     when 2
       puts "\n\nThere are two players. X will go first.\n\n"
-      Game.new(Player::Human.new("X"), Player::Human.new("O")).play
+      Game.new(Player::Human.new("X"), Player::Human.new("O")).start
+    when 3
+      puts "\nWargames mode\n"
+      Game.new(Player::Computer.new("X"), Player::Computer.new("O")).start.10.times
     when /^(e|exit)$/i
       puts "Goodbye!"
       exit!

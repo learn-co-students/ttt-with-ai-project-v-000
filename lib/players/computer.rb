@@ -1,25 +1,36 @@
 class Player::Computer < Player
   attr_accessor :my_moves, :opponent_moves, :empty_spaces, :opponent_token
 
+  Computer::WINNING_COMBINATIONS = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
+    [1,4,7],
+    [2,5,8],
+    [3,6,9],
+    [1,5,9],
+    [7,5,3]
+    ]
+
   Computer::FORK_COMBINATIONS = [
-    [0,2,4],
-    [4,6,8],
-    [0,4,6],
-    [2,4,8],
-    [0,2,8],
-    [0,6,8],
-    [2,6,8],
-    [0,2,6]
+    [1,3,5],
+    [5,7,9],
+    [1,5,7],
+    [3,5,9],
+    [1,3,9],
+    [1,7,9],
+    [3,7,9],
+    [1,3,7]
     ]
 
   Computer::CORNER_PAIRS = [
-    [0,8],
-    [2,6]
+    [1,9],
+    [3,7]
   ]
 
-  Computer::CORNERS = [0,2,6,8]
+  Computer::CORNERS = [1,3,7,9]
 
-  Computer::CENTER = 4
+  Computer::CENTER = 5
 
   def initialize(token)
     super
@@ -36,46 +47,51 @@ class Player::Computer < Player
   def read_board(board)
     board.cells.each_with_index do |cell, index|
       if cell == self.token
-          if (@my_moves.include?(index) == false)
-            @my_moves << index
+          if (@my_moves.include?(index + 1) == false)
+            @my_moves << index + 1
+            @empty_spaces.keep_if {|empty_space| empty_space != index + 1}
           end
       elsif cell == self.opponent_token
-        if(@opponent_moves.include?(index) == false)
-          @opponent_moves << index
+        if(@opponent_moves.include?(index + 1) == false)
+          @opponent_moves << index + 1
+          @empty_spaces.keep_if {|empty_space| empty_space != index + 1}
         end
-      else
-        if(@empty_spaces.include?(index) == false)
-          @empty_spaces << index
-        end
+      elsif (self.empty_spaces.include?(index + 1) == false)
+        @empty_spaces. << index + 1
       end
     end
   end
 
-  def valid_move?(board, location)
-    location.to_i.between?(1,9) && !taken?(board, location.to_i - 1)
-  end
-
-
 
   def move(board)
-    case self.read_board(board)
+    self.read_board(board)
 
-    when self.valid_move?(board, self.winning_move(@my_moves))
-      self.winning_move(@my_moves)
-    when self.valid_move?(board, self.winning_move(@opponent_moves))
-      self.winning_move(@opponent_moves)
-    when self.valid_move?(board, self.fork_move(@my_moves))
-      self.fork_move(@my_moves)
-    when self.valid_move?(board, self.fork_move(@opponent_moves))
-      self.fork_move(@opponent_moves)
-    when self.valid_move?(board, CENTER)
-      CENTER
-    when self.valid_move?(board, self.opposite_corner)
-      self.opposite_corner
-    when self.valid_move?(board, self.corner)
-      self.corner
+    if(self.winning_move(@my_moves) != nil && self.empty_spaces.include?(self.winning_move(@my_moves)))
+
+      self.winning_move(@my_moves).to_s
+
+    elsif(self.winning_move(@opponent_moves) != nil && self.empty_spaces.include?(self.winning_move(@opponent_moves)))
+      self.winning_move(@opponent_moves).to_s
+
+    elsif(self.fork_move(@my_moves) != nil && self.empty_spaces.include?(self.fork_move(@my_moves)))
+
+      self.fork_move(@my_moves).to_s
+
+    elsif(self.fork_move(@opponent_moves) != nil && self.empty_spaces.include?(self.winning_move(@my_moves)))
+
+      self.fork_move(@opponent_moves).to_s
+
+    elsif(!self.fork_move(@opponent_moves) && self.empty_spaces.include?(CENTER))
+
+      CENTER.to_s
+
+    elsif(self.corner != nil)
+
+      self.corner.to_s
+
     else
-      self.empty_space
+
+      self.empty_spaces.sample.to_s
     end
   end
 
@@ -83,14 +99,14 @@ class Player::Computer < Player
     check_combo = []
     almost_won = []
     winning_position = nil
-    Game.WIN_COMBINATIONS.each do |combo|
+    WINNING_COMBINATIONS.each do |combo|
       if ((moves & combo).length == 2)
         check_combo = combo
         almost_won = (moves & combo)
       end
     end
     if (almost_won.empty? == false)
-      winning_position = check_combo - almost_won
+      winning_position = (check_combo - almost_won).first
     end
     return winning_position
   end
@@ -106,28 +122,16 @@ class Player::Computer < Player
       end
     end
     if (almost_fork.empty? == false)
-      fork_position = check_combo - almost_fork
+      fork_position = (check_combo - almost_fork).first+1
     end
     return fork_position
   end
 
-  def opposite_corner
-    opposite_corner = nil
-    CORNER_PAIRS.each do |corner_pair|
-      opponent_corner = @opponent_moves & corner_pair
-      if (opponent_corner.empty? == false)
-        opposite_corner = opponent_corner - corner_pair
-      end
-    end
-    return opposite_corner
-  end
-
   def corner
-    return CORNERS.sample
-  end
-
-  def empty_space
-    return @empty_spaces.sample
+    corner = nil
+    if ((CORNERS & empty_spaces).empty? == false)
+      corner = (CORNERS & empty_spaces).sample
+    end
   end
 
 end
