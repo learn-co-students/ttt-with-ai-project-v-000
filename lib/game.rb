@@ -1,6 +1,6 @@
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner
   WIN_COMBINATIONS = [
   [0,1,2],
   [3,4,5],
@@ -32,6 +32,12 @@ class Game
       board.position(combo[0]) == board.position(combo[1]) &&
       board.position(combo[1]) == board.position(combo[2]) &&
       board.taken?(combo[0])
+    # WIN_COMBINATIONS.detect do |win_combo|
+    #   location1 = win_combo[0]
+    #   location2 = win_combo[1]
+    #   location3 = win_combo[2]
+    #
+    #   board[location1] == board[location2] && board[location2] == board[location3] && board.taken?(location1)
     end
   end
 
@@ -41,8 +47,14 @@ class Game
 
   def winner
     if winning_combo = won?
-      board.position(winning_combo[1])
+      board.position(winning_combo.first)
+      binding.pry
     end
+    # winning_combo = won?
+  #  if winning_combo
+  #    winning_location = winning_combo[0]
+  #    board[winning_location]
+  #  end
   end
 
   # Managing the game methods
@@ -61,11 +73,9 @@ class Game
       puts "invalid"
       turn(player)
     else
-      board.update(input, player)
+      board.update(input, player.token)
+      # ?
     end
-
-
-
 
   end
 end
