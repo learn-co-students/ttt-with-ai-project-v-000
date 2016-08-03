@@ -20,7 +20,7 @@ class Game
 
   # Game State methods:
   def current_player
-    self.board.turn_count % 2 == 0 ? player_1 : player_2
+    self.board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def over?
@@ -32,12 +32,6 @@ class Game
       board.cells.at(combo[0]) == board.cells.at(combo[1]) &&
       board.cells.at(combo[1]) == board.cells.at(combo[2]) &&
       board.taken?(combo[0])
-    # WIN_COMBINATIONS.detect do |win_combo|
-    #   location1 = win_combo[0]
-    #   location2 = win_combo[1]
-    #   location3 = win_combo[2]
-    #
-    #   board[location1] == board[location2] && board[location2] == board[location3] && board.taken?(location1)
     end
   end
 
@@ -49,11 +43,6 @@ class Game
     if winning_combo = won?
       board.cells[winning_combo.first]
     end
-    # winning_combo = won?
-  #  if winning_combo
-  #    winning_location = winning_combo[0]
-  #    board[winning_location]
-  #  end
   end
 
   # Managing the game methods
@@ -62,19 +51,22 @@ class Game
   end
 
   def play
-
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{@winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
   end
 
-  def turn(player)
-    input = player.move
-    binding.pry
-    if !board.valid_move?(input)
+  def turn
+    this_move = current_player.move(board)
+    if !board.valid_move?(this_move)
       puts "invalid"
-      turn(player)
-    else
-      board.update(input, player.token)
-      # ?
+      turn
     end
-
+    board.update(this_move, current_player)
   end
 end
