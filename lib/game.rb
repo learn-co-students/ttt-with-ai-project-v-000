@@ -18,17 +18,15 @@ class Game
 	  [0,4,8]  # Top left to bottom right
 	]
 
-	def initialize(player_1 = Human.new, player_2 = nil, board = Board.new)
+	def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
 		@board = board
 		@player_1 = player_1
 		@player_2 = player_2
 	end
 
-	# def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-	# 	@board = board
-	# 	@player_1 = player_1
-	# 	@player_2 = player_2
-	# end
+	def current_player
+		
+	end
 
 	# binding.pry
 
