@@ -29,8 +29,8 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      board.position(combo[0]) == board.position(combo[1]) &&
-      board.position(combo[1]) == board.position(combo[2]) &&
+      board.cells.at(combo[0]) == board.cells.at(combo[1]) &&
+      board.cells.at(combo[1]) == board.cells.at(combo[2]) &&
       board.taken?(combo[0])
     # WIN_COMBINATIONS.detect do |win_combo|
     #   location1 = win_combo[0]
@@ -47,8 +47,7 @@ class Game
 
   def winner
     if winning_combo = won?
-      board.position(winning_combo.first)
-      binding.pry
+      board.cells[winning_combo.first]
     end
     # winning_combo = won?
   #  if winning_combo
