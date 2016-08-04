@@ -26,8 +26,8 @@ class Board
   end
 
   def taken?(location)
-    !(position(location).nil? || position(location) == " ")
-    # position(location) == "X" || position(location) == "O"
+    # !(position(location).nil? || position(location) == " ")
+    position(location) == "X" || position(location) == "O"
   end
 
   def valid_move?(input)
@@ -40,8 +40,6 @@ class Board
 
   # returns the number of turns by counting X's and Y's on board
   def turn_count
-    # 9 - cells.count {|i| i == " "}
-    # OR
     self.cells.count{|token| token == "X" || token == "O"}
   end
 

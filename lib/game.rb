@@ -29,9 +29,9 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      board.cells.at(combo[0]) == board.cells.at(combo[1]) &&
-      board.cells.at(combo[1]) == board.cells.at(combo[2]) &&
-      board.taken?(combo[0])
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+      board.cells[combo[1]] == board.cells[combo[2]] &&
+      board.taken?(combo[0] + 1)
     end
   end
 
@@ -47,7 +47,7 @@ class Game
 
   # Managing the game methods
   def start
-
+    self.play
   end
 
   def play
@@ -55,13 +55,14 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{@winner}!"
+      puts "Congratulations #{self.winner}!"
     elsif draw?
       puts "Cats Game!"
     end
   end
 
   def turn
+    board.display
     this_move = current_player.move(board)
     if !board.valid_move?(this_move)
       puts "invalid"
