@@ -53,6 +53,7 @@ class Game
   def play
     while !over?
       turn
+      sleep(1)
     end
     if won?
       puts "Congratulations #{self.winner}!"
@@ -68,6 +69,7 @@ class Game
       puts "invalid"
       turn
     end
+    puts "#{current_player.token}'s move:"
     board.update(this_move, current_player)
   end
 end
