@@ -46,8 +46,8 @@ class Game
     #   @board.cells[won?[0]]
     # end
 
-    if combo = won?
-      @winner = @board.cells[combo.first]
+    if won?
+      @winner = @board.cells[won?.first]
     end
 
   end
@@ -63,10 +63,10 @@ class Game
     if !@board.valid_move?(current_move)
       turn
     else
-      puts "Turn: #{@board.turn_count+1}\n" #increment turn count?
+      puts "Turn: #{@board.turn_count+1}\n" #increment turn count and display it
       @board.display
       @board.update(current_move, player) # update the board with the player's move
-      puts "#{player.token} moved #{current_move}"
+      puts "#{player.token} moved to spot #{current_move}"
       @board.display
       puts "\n"
     end
