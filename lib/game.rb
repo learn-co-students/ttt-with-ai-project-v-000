@@ -18,11 +18,7 @@ class Game
   end
 
   def won?
-    if WIN_COMBINATIONS.any? {|combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.cells[combo[0]] != " "}
-      true
-    else
-      false
-    end
+    WIN_COMBINATIONS.any? {|combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.cells[combo[0]] != " "}
   end
 
   def draw?
@@ -44,8 +40,8 @@ class Game
     move = current_player.move(@board)
     if @board.valid_move?(move)
       @board.update(move, current_player)
-    else
-      turn
+    # else
+    #   turn
     end
   end
 
@@ -56,11 +52,11 @@ class Game
         puts "Cats Game!"
       else
         puts "Congratulations #{winner}!"
-        @board.display
       end
-    else
       @board.display
-      play
+    # else
+    #   @board.display
+    #   play
     end
   end
       
