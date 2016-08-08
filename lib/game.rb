@@ -44,7 +44,6 @@ class Game
     if @board.valid_move?(move)
       @board.update(move, current_player)
     else
-      puts "Invalid move please try again."
       turn
     end
   end
