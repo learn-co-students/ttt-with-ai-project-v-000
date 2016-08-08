@@ -32,14 +32,15 @@ class Game
   def winner
     if @board.cells.count("X") > @board.cells.count("O")
       "X"
-    elsif @board.cells.count("X") == @board.cells.count("O")
-      nil
-    else
+    elsif @board.cells.count("X") < @board.cells.count("O")
       "O"
+    else
+      nil
     end
   end
 
   def turn
+    puts "It is #{current_player.token}'s turn."
     move = current_player.move(@board)
     if @board.valid_move?(move)
       @board.update(move, current_player)
@@ -55,8 +56,10 @@ class Game
         puts "Cats Game!"
       else
         puts "Congratulations #{winner}!"
+        @board.display
       end
-    else false
+    else
+      @board.display
       play
     end
   end

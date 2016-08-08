@@ -53,7 +53,7 @@ describe 'Game' do
       expect(game.board).to eq(board)
     end
 
-    it 'defaults to two human players, X and O, with am empty board' do
+    it 'defaults to two human players, X and O, with an empty board' do
       game = Game.new
 
       expect(game.player_1).to be_a(Players::Human)
@@ -137,7 +137,7 @@ describe 'Game' do
     end
   end
 
-  describe 'winner' do
+  describe '#winner' do
     it 'returns X when X won' do
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
@@ -252,7 +252,7 @@ describe 'Game' do
       game.play
     end
 
-    it 'checks if the game is draw after every turn' do
+    it 'checks if the game is a draw after every turn' do
       game = Game.new
       allow($stdout).to receive(:puts)
       allow(game.player_1).to receive(:gets).and_return("1", "2")
