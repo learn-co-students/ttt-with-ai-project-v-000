@@ -5,8 +5,23 @@ class Game
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
-    @player_1 = player_1
-    @player_2 = player_2
+  end
+
+  def get_players
+    puts "How many players would you like to have?"
+    player_count = gets.chomp
+    if player_count == "2"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Human.new("O")
+    elsif player_count == "1"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Computer.new("O")
+    elsif player_count == "0"
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+    else
+    get_players
+    end
   end
 
   def current_player
@@ -26,9 +41,9 @@ class Game
   end
 
   def winner
-    if @board.cells.count("X") > @board.cells.count("O")
+    if @board.cells.count("X") > @board.cells.count("O") && won?
       "X"
-    elsif @board.cells.count("X") < @board.cells.count("O")
+    elsif @board.cells.count("X") < @board.cells.count("O") && won?
       "O"
     else
       nil
@@ -37,16 +52,16 @@ class Game
 
   def turn
     puts "It is #{current_player.token}'s turn."
-    move = current_player.move(@board)
+    move = current_player.move(Marshal.load(Marshal.dump(self)))
     if @board.valid_move?(move)
       @board.update(move, current_player)
-    # else
-    #   turn
+    else
+      turn
     end
   end
 
   def play
-    turn
+    turn unless over?
     if over?
       if draw?
         puts "Cats Game!"
@@ -54,10 +69,14 @@ class Game
         puts "Congratulations #{winner}!"
       end
       @board.display
-    # else
-    #   @board.display
-    #   play
+    else
+      @board.display
+      play
     end
+  end
+
+  def get_available_moves
+    (1..9).to_a.select{ |move| @board.valid_move?(move) }
   end
       
 
