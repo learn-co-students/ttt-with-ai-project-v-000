@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   attr_accessor :cells
 
@@ -18,8 +19,36 @@ class Board
      puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
    end
 
-   def position
-     
+   def position(input)
+     @cells[input.to_i-1]
+   end
+
+   def full?
+     @cells.all? { |c| c == "X" || c == "O" }
+   end
+
+   def turn_count
+     ct = 0
+     @cells.each do |c|
+       if c == "X" || c == "O"
+         ct += 1
+       end
+     end
+     ct
+   end
+
+   def taken?(input)
+     position(input) != " "
+   end
+
+   def valid_move?(input)
+     if input.to_i.is_a?(Integer) && input.to_i.between?(1, 9)
+       taken?(input.to_i) == false
+     end
+   end
+
+   def update(input, ptoken)
+      cells[input.to_i-1] = ptoken.token
    end
 
 end
