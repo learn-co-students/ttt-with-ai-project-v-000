@@ -2,40 +2,15 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic-Tac-Toe!"
-puts "What kind of game do you want to play? Please enter 1-3. Here are the game options"
-puts "1 = two computers"
-puts "2 = one human, one computer"
-puts "3 = two humans"
-game_type = gets.strip
-
-# If both players are computers
-if game_type.include?("1" || "two computers")
-    game = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-# If one player is a computer and one is a human
-elsif game_type.include?("2" || "one human" || "one computer")
-  puts "Who should go first and be X: human or computer?"
-    first_player = gets.strip
-    if first_player.include?("human")
-      game = Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-    else
-      game = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-    end
-# If both players are human
-elsif game_type.include?("3" || "two humans")
-  game = Game.new
-# validation
-else
-  puts "Please pick a valid option!"
-end
+game = Game.new
+game.start(game_type)
 
 
-game.start
 
 puts "Would you like to play again? Y/N?"
   answer = gets.strip
   if answer.downcase == "y"
-    game.start
+    game.start(game_type)
   else
     puts "Thanks for playing! Goodbye!"
   end
