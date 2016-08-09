@@ -3,14 +3,14 @@
 require_relative '../config/environment'
 
 game = Game.new
-game.start(game_type)
+game.start
 
 
 
-puts "Would you like to play again? Y/N?"
-  answer = gets.strip
-  if answer.downcase == "y"
-    game.start(game_type)
-  else
-    puts "Thanks for playing! Goodbye!"
-  end
+# puts "Would you like to play again? Y/N?"
+#   answer = gets.strip
+#   if answer.downcase == "y"
+#     game.start
+#   else
+#     puts "Thanks for playing! Goodbye!"
+#   end

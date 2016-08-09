@@ -48,7 +48,44 @@ class Game
 
   # Managing the game methods
   def start
+    puts "Welcome to Tic-Tac-Toe!"
+    puts "What kind of game do you want to play? Please enter 1-3. Here are the game options"
+    puts "1 = two computers"
+    puts "2 = one human, one computer"
+    puts "3 = two humans"
+    @game_type = gets.strip
+    # If both players are computers
+    if @game_type.include?("1" || "two computers")
+        self.player_1 = Players::Computer.new("X")
+        self.player_2 = Players::Computer.new("O")
+    # If one player is a computer and one is a human
+  elsif @game_type.include?("2" || "one human" || "one computer")
+      puts "Who should go first and be X: human or computer?"
+        first_player = gets.strip
+        if first_player.include?("human")
+          self.player_1 = Players::Human.new("X")
+          self.player_2 = Players::Computer.new("O")
+        else
+          self.player_1 = Players::Computer.new("X")
+          self.player_2 = Players::Human.new("O")
+        end
+    # If both players are human
+  elsif @game_type.include?("3" || "two humans")
+    # validation
+    else
+      puts "Please pick a valid option!"
+    end
+
     self.play
+
+    puts "Would you like to play again? Y/N?"
+      answer = gets.strip
+      if answer.downcase == "y"
+        game = Game.new
+        game.start
+      else
+        puts "Thanks for playing! Goodbye!"
+      end
   end
 
   def play
@@ -74,3 +111,13 @@ class Game
     board.update(this_move, current_player)
   end
 end
+
+# def play_again
+#   puts "Would you like to play again? Y/N?"
+#     answer = gets.strip
+#     if answer.downcase == "y"
+#       game.start
+#     else
+#       puts "Thanks for playing! Goodbye!"
+#     end
+# end
