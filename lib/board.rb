@@ -65,9 +65,9 @@ class Board
     !self.taken?(position_number) && position_number.to_i.between?(1, 9)
   end
 
-  # def update(position_number, player)
-  #   self.position(position_number) = 
-  # end
+  def update(position_number, player)
+    self.position(position_number) = player.token
+  end
 
 
 
