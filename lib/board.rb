@@ -66,7 +66,8 @@ class Board
   end
 
   def update(position_number, player)
-    self.position(position_number) = player.token
+    #self.position(position_number) = player.token
+    @cells(position_number) = player.token
   end
 
 
