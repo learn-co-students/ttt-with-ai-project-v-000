@@ -2,18 +2,9 @@
 
 require_relative '../config/environment'
 
-# "Welcome to Tic Tac Toe by Kerry"
-
-# "How many players? (1 or 2, or 0 if you want to watch 2 computers play against each other)"
-
-# "Who should go first and play 'X'?"
-
-# Use the input to correctly initialize a Game with the appropriate player types and token values.
-
-# When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
-
-# If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the number of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should never be able to win, like in the case of thermonuclear war.
+welcome
+players
 
 
 
-
+play_again?
