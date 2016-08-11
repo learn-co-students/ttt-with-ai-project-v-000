@@ -1,6 +1,10 @@
 class GamePlay
   attr_accessor :game
 
+  def initialize
+    @game = Game.new
+  end
+
   def welcome
     puts "Welcome to Tic Tac Toe by Kerry"
   end
@@ -10,14 +14,11 @@ class GamePlay
     players_count = gets
     case players_count
     when "0"
-      @game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-      puts "Great, X goes first"
+      self.game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     when "1"
-      @game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-      puts "Great, X goes first" 
+      self.game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     when "2"
-      @game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-      puts "Great, X goes first"
+      self.game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     end
   end
 
