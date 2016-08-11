@@ -1,5 +1,3 @@
-require 'pry'
-
 class Board
   attr_accessor :cells
 
@@ -73,8 +71,6 @@ class Board
     index = position_number.to_i - 1
     self.cells[index] = player.token
   end
-
-
 
 end
 
