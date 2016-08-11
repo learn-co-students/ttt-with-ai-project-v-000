@@ -36,11 +36,11 @@ class Board
   end
 
   def display
-    puts " #{self.position(1)} | #{self.position(2)} | #{self.position(3)} "
+    puts " #{self.position("1")} | #{self.position("2")} | #{self.position("3")} "
     puts "-----------"
-    puts " #{self.position(4)} | #{self.position(5)} | #{self.position(6)} "
+    puts " #{self.position("4")} | #{self.position("5")} | #{self.position("6")} "
     puts "-----------"
-    puts " #{self.position(7)} | #{self.position(8)} | #{self.position(9)} "
+    puts " #{self.position("7")} | #{self.position("8")} | #{self.position("9")} "
   end
 
   def full?
