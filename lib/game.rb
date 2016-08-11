@@ -1,5 +1,3 @@
-require 'pry'
-
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -21,11 +19,11 @@ class Game
   end
 
   def current_player
-    self.board.turn_count % 2 == 0 ? player_1 : player_2
+    self.board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def over?
-    self.board.full? || self.won?
+    won? || draw?
   end
 
   def won?
@@ -41,20 +39,55 @@ class Game
   end
 
   def winner
-    if self.won?
-      WIN_COMBINATIONS.collect do |win_combo|
-        self.board.taken?((win_combo[0] + 1).to_s) &&
-        self.board.cells.values_at(win_combo[0]) == self.board.cells.values_at(win_combo[1]) &&
-        self.board.cells.values_at(win_combo[1]) == self.board.cells.values_at(win_combo[2])
-      end
+    if winning_combo = self.won?
+      self.board.cells[winning_combo.first]
+    end
+  end
+  ## why does this work?? ^
+
+  def turn
+    current_move = current_player.move(self.board)
+    if !self.board.valid_move?(current_move)
+      turn
+    else
+      self.board.display
+      self.board.update(current_move, current_player)
+      puts "#{current_player.token} moved to #{current_move}"
+      self.board.display
     end
   end
 
-  def turn
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
   end
 
-  def play
-  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
