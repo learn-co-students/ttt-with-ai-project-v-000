@@ -39,6 +39,7 @@ class GamePlaySelection
     puts "Would you like to play again? (Y or N)"
     if gets == "Y"
       self.players
+      self.play_game
     else
       puts "Thanks for playing!"
     end
