@@ -15,11 +15,11 @@ class GamePlaySelection
       @board = Board.new
     when "1"
       puts "Do you want to go first or second? (enter 1 or 2)"
-      if gets = "1"
+      if gets == "1"
         @player_1 = Players::Human.new("X")
         @player_2 = Players::Computer.new("O")
         @board = Board.new
-      elsif gets = "2"
+      elsif gets == "2"
         @player_1 = Players::Computer.new("X")
         @player_2 = Players::Human.new("O")
         @board = Board.new
