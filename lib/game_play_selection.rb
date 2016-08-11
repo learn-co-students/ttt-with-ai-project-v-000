@@ -1,5 +1,5 @@
 class GamePlaySelection
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :game
 
   def welcome
     puts "Welcome to Tic Tac Toe by Kerry"
@@ -32,7 +32,7 @@ class GamePlaySelection
   end
 
   def play_game
-    GamePlay.new(player_1, player_2, board)
+    @game = Game.new(player_1, player_2, board)
   end
 
   def play_again?
