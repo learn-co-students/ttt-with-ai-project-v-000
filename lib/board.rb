@@ -65,9 +65,13 @@ class Board
     !self.taken?(position_number) && position_number.to_i.between?(1, 9)
   end
 
+  # def update(position_number, player)
+  #   self.position(position_number) = player.token
+  # end
+
   def update(position_number, player)
-    #self.position(position_number) = player.token
-    @cells(position_number) = player.token
+    index = position_number.to_i - 1
+    self.cells[index] = player.token
   end
 
 
