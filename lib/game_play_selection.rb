@@ -13,25 +13,29 @@ class GamePlaySelection
       @player_1 = Players::Computer.new("X")
       @player_2 = Players::Computer.new("O")
       @board = Board.new
+      self.play_game(player_1, player_2, board)
     when "1"
       puts "Do you want to go first or second? (enter 1 or 2)"
       if gets == "1"
         @player_1 = Players::Human.new("X")
         @player_2 = Players::Computer.new("O")
         @board = Board.new
+        self.play_game(player_1, player_2, board)
       elsif gets == "2"
         @player_1 = Players::Computer.new("X")
         @player_2 = Players::Human.new("O")
         @board = Board.new
+        self.play_game(player_1, player_2, board)
       end
     when "2"
       @player_1 = Players::Human.new("X")
       @player_2 = Players::Human.new("O")
       @board = Board.new
+      self.play_game(player_1, player_2, board)
     end
   end
 
-  def play_game
+  def play_game(player_1, player_2, board)
     @game = Game.new(player_1, player_2, board)
   end
 
