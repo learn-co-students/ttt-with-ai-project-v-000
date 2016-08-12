@@ -46,14 +46,14 @@ class Game
   ## why does this work?? ^
 
   def turn
-    current_move = current_player.move(self.board)
-    if !self.board.valid_move?(current_move)
+    self.board.display
+    current_move_number = current_player.move(self.board)
+    if !self.board.valid_move?(current_move_number)
+      puts "#{current_move_number} is already taken, pick another place to move"
       turn
     else
-      self.board.display
-      self.board.update(current_move, current_player)
-      puts "#{current_player.token} moved to #{current_move}"
-      self.board.display
+      puts "#{current_player.token} moved to position #{current_move_number}"
+      self.board.update(current_move_number, current_player)
     end
   end
 

@@ -3,13 +3,12 @@
 require_relative '../config/environment'
 require 'pry'
 
-binding.pry
 
-# new_game = GamePlaySelection.new
+new_game = GamePlaySelection.new
 
-# new_game.welcome
-# new_game.players
-# new_game.play_game(player_1, player_2, board)
-# new_game.game.play
+new_game.welcome
+new_game.players
 
-# new_game.play_again?
+new_game.game.play
+
+new_game.play_again?
