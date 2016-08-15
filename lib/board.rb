@@ -22,7 +22,7 @@ class Board
   end
 
   def taken?(position)
-    if position(position) == " "
+    if @cells[position.to_i - 1] == " "
       false
     else
       true

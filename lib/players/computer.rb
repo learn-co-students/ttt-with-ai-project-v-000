@@ -1,5 +1,5 @@
 class Player::Computer < Player
-  BEST_LOCATION = [4,0,2,6,8,1,3,5,7]
+  BEST_LOCATION = [5,1,3,7,9,2,4,6,8]
 
   def about_to_win(token, board)
     counter = 0
@@ -9,6 +9,7 @@ class Player::Computer < Player
       winning_combo = Game::WIN_COMBINATIONS[counter]
       space_count = 0
       token_count = 0
+      free_space = 0
       winning_combo.each_index do |i|
         if board.cells[winning_combo[i]] == token
           token_count += 1
@@ -22,7 +23,7 @@ class Player::Computer < Player
       if token_count == 2 and space_count == 1
         #next move is winner
         win_combo = 'y'
-        position = free_space
+        position = free_space + 1
       end
       counter += 1
     end
@@ -35,10 +36,11 @@ class Player::Computer < Player
     while counter < 9 and best == "n" do
       if !board.taken?(BEST_LOCATION[counter])
         best = "y"
+      else
+        counter += 1
       end
-      counter += 1
     end
-    BEST_LOCATION[counter-1]
+    BEST_LOCATION[counter]
   end
 
   def move(board)
@@ -56,7 +58,6 @@ class Player::Computer < Player
         position = best_position(board)
       end
     end
-    position += 1
     char = position.to_s
   end
 
