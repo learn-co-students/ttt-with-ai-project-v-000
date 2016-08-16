@@ -20,8 +20,8 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(location)
-    @cells[location.to_i - 1]
+  def position(user_input)
+    @cells[user_input.to_i - 1]
   end
 
   def turn_count
@@ -34,20 +34,15 @@ class Board
     end
   end
 
-  def taken?(location)
-    @cells[location.to_i - 1] != " " && @cells[location.to_i - 1] != ""
+  def taken?(user_input)
+    @cells[user_input.to_i - 1] != " " && @cells[user_input.to_i - 1] != ""
   end
 
-  def valid_move?(location)
-    location.to_i.between?(1,9) && !taken?(location)
+  def valid_move?(user_input)
+    user_input.to_i.between?(1,9) && !taken?(user_input)
   end
 
-  def update(location, player)
-    @cells[location.to_i - 1] = player.token
+  def update(user_input, player)
+    @cells[user_input.to_i - 1] = player.token
   end
-
-
-
-
-
 end

@@ -59,12 +59,12 @@ class Game
     end
 
     def turn
-     
-      puts "Please enter 1-9"
-      move = gets
-        if @board.valid_move?(move)
-          input = gets.strip
-         else player_2
+      puts "#{self.current_player.token}'s move:"
+      player_turn = self.current_player.move(board)
+      until @board.valid_move?(player_turn)
+        puts "This move is not valid."
+        player_turn = self.current_player.move(board)
       end
+        @board.update(player_turn, current_player)
     end
 end
