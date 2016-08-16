@@ -1,5 +1,7 @@
+require 'pry'
+
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :depth
 
   WIN_COMBINATIONS = [
     [0, 1, 2], # Top row = WIN_COMBINATIONS[0]
@@ -16,10 +18,15 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    @depth = 0
   end
 
   def current_player
     self.board.turn_count % 2 == 0 ? @player_1 : @player_2
+  end
+
+  def current_opponent
+    self.board.turn_count % 2 == 0 ? @player_2 : @player_1
   end
 
   def over?
@@ -47,12 +54,18 @@ class Game
 
   def turn
     self.board.display
-    current_move_number = current_player.move(self.board)
-    if !self.board.valid_move?(current_move_number)
-      puts "#{current_move_number} is already taken, pick another place to move"
-      turn
+    if current_player.class == Players::Human
+      current_move_number = current_player.move(board)
+      if !self.board.valid_move?(current_move_number)
+        puts "#{current_move_number} is already taken, pick another place to move"
+        turn
+      else
+        puts "#{current_player.token} moved to position #{current_move_number}"
+        self.board.update(current_move_number, current_player)
+      end
     else
-      puts "#{current_player.token} moved to position #{current_move_number}"
+      best_move = self.minmax
+      current_move_number = current_player.move(best_move)
       self.board.update(current_move_number, current_player)
     end
   end
@@ -67,5 +80,41 @@ class Game
       puts "Cats Game!"
     end
   end
+
+  # def score
+  #   if won? && winner == current_player
+  #     return 10 - depth
+  #   elsif won? && winner == current_opponent
+  #     return depth - 10
+  #   else
+  #     return 0
+  #   end
+  # end
+
+  # def minmax
+  #   return score if self.over?
+  #   @depth += 1
+  #   scores = [] # an array of scores
+  #   moves = []  # an array of moves
+
+  #   # Populate the scores array, recursing as needed
+  #   board.available_positions.each do |position|
+  #     player = self.current_player
+  #     possible_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+  #     possible_game.board.update(position, player)
+  #     scores << possible_game.minmax
+  #     moves << position
+  #   end
+
+  #   max_score_index = scores.each_with_index.max[1]
+  #   min_score_index = scores.each_with_index.min[1]
+
+  #   if scores[max_score_index] > 0
+  #     best_move = moves[max_score_index]
+  #   else
+  #     best_move = moves[min_score_index]
+  #   end
+  #   best_move
+  # end
 
 end

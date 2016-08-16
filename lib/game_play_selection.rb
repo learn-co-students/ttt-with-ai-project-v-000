@@ -27,7 +27,17 @@ class GamePlaySelection
   end
 
   def play_game(player_1, player_2, board)
-    @game = Game.new(@player_1, @player_2, @board)
+    if @player_1.class == Players::Computer
+      @game = Game.new(@player_1, @player_2, @board)
+      player_1.game = self
+      player_1.game.board = self.board
+    elsif @player_2.class == Players::Computer
+      @game = Game.new(@player_1, @player_2, @board)
+      player_2.game = self
+      player_2.game.board = self.board
+    else
+      @game = Game.new(@player_1, @player_2, @board)
+    end
   end
 
   def play_again?
