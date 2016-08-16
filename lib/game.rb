@@ -61,10 +61,11 @@ class Game
     def turn
       puts "#{self.current_player.token}'s move:"
       player_turn = self.current_player.move(board)
-      until @board.valid_move?(player_turn)
-        puts "This move is not valid."
-        player_turn = self.current_player.move(board)
-      end
-        @board.update(player_turn, current_player)
+      if @board.valid_move?(player_turn)
+            return @board.update(player_turn, current_player)
+          else
+            puts "This move is not valid."
+            player_turn = self.current_player.move(board)
+        end
     end
 end
