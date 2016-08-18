@@ -28,13 +28,7 @@ class Board
    end
 
    def turn_count
-     ct = 0
-     @cells.each do |c|
-       if c == "X" || c == "O"
-         ct += 1
-       end
-     end
-     ct
+     cells.count{|token| token == "X" || token == "O"}
    end
 
    def taken?(input)
