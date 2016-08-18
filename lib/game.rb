@@ -54,18 +54,12 @@ class Game
 
   def turn
     self.board.display
-    if current_player.class == Players::Human
-      current_move_number = current_player.move(board)
-      if !self.board.valid_move?(current_move_number)
-        puts "#{current_move_number} is already taken, pick another place to move"
-        turn
-      else
-        puts "#{current_player.token} moved to position #{current_move_number}"
-        self.board.update(current_move_number, current_player)
-      end
+    current_move_number = current_player.move(board)
+    if !self.board.valid_move?(current_move_number)
+      puts "#{current_move_number} is already taken, pick another place to move"
+      turn
     else
-      best_move = self.minmax
-      current_move_number = current_player.move(best_move)
+      puts "#{current_player.token} moved to position #{current_move_number}"
       self.board.update(current_move_number, current_player)
     end
   end
