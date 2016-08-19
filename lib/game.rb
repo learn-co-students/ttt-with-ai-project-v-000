@@ -22,10 +22,10 @@ class Game
     end
 
     def current_player
-      if self.board.cells.count.even?
-          return player_2
+      if self.board.cells.count.odd?
+          return player_1
         else
-          return player_1 
+          return player_2
       end
     end
 
@@ -59,13 +59,12 @@ class Game
     end
 
     def turn
-      puts "#{self.current_player.token}'s move:"
-      player_turn = self.current_player.move(board)
-      if @board.valid_move?(player_turn)
-            return @board.update(player_turn, current_player)
+      player = current_player
+      current_move = player.move(board)
+      if @board.valid_move?(current_move)
+            return @board.update(current_move, player)
           else
-            puts "This move is not valid."
-            player_turn = self.current_player.move(board)
+            current_player.move(board)
         end
     end
 end
