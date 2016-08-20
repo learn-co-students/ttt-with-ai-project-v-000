@@ -1,3 +1,76 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  puts ""
+  puts "What type of Tic-Tac-Toe game would you like to play?"
+  puts ""
+  puts "0 Players (Computer vs. Computer)"
+  puts "1 Player (Human vs. Computer)"
+  puts "2 Players (Human vs. Human)"
+  puts ""
+  puts "Please Enter 0, 1, or 2:"
+
+  game = gets.strip
+
+  if game == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+
+  elsif game == "1"
+    puts "Would you like to go first?(Y/N)"
+    order = gets.strip
+    if order == "Y" || order == "Yes" || order == "y" || order == "yes"
+      puts ""
+      puts "Game On!!!"
+      puts " 1 | 2 | 3 "
+      puts "-----------"
+      puts " 4 | 5 | 6 "
+      puts "-----------"
+      puts " 7 | 8 | 9 "
+      puts ""
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    elsif order == "n" || order == "No" || order == "n" || order == "no"
+      puts ""
+      puts "Game On!!!"
+      puts " 1 | 2 | 3 "
+      puts "-----------"
+      puts " 4 | 5 | 6 "
+      puts "-----------"
+      puts " 7 | 8 | 9 "
+      puts ""
+      Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+    end
+        
+  elsif game == "2"
+    puts ""
+    puts "Game On!!!"
+    puts " 1 | 2 | 3 "
+    puts "-----------"
+    puts " 4 | 5 | 6 "
+    puts "-----------"
+    puts " 7 | 8 | 9 "
+    puts ""
+    Game.new.play
+  
+  else
+    start
+  end
+
+  puts ""
+  puts "Want to play again?(Y/N)"
+
+  input = gets.strip
+
+  if input == "Y" || input == "Yes" || input == "y" || input == "yes"
+    start
+  elsif input == "N" || input == "No" || input == "n" || input == "no"
+    exit
+  end
+end
+
+puts ""
+puts "Welcome! Welcome! Welcome!"
+start
+
+
