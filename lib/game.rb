@@ -53,7 +53,9 @@ class Game
   ## why does this work?? ^
 
   def turn
-    self.board.display
+    if self.board.turn_count == 0
+      self.board.display
+    end
     current_move_number = current_player.move(board)
     if !self.board.valid_move?(current_move_number)
       puts "#{current_move_number} is already taken, pick another place to move"
@@ -74,41 +76,5 @@ class Game
       puts "Cats Game!"
     end
   end
-
-  # def score
-  #   if won? && winner == current_player
-  #     return 10 - depth
-  #   elsif won? && winner == current_opponent
-  #     return depth - 10
-  #   else
-  #     return 0
-  #   end
-  # end
-
-  # def minmax
-  #   return score if self.over?
-  #   @depth += 1
-  #   scores = [] # an array of scores
-  #   moves = []  # an array of moves
-
-  #   # Populate the scores array, recursing as needed
-  #   board.available_positions.each do |position|
-  #     player = self.current_player
-  #     possible_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-  #     possible_game.board.update(position, player)
-  #     scores << possible_game.minmax
-  #     moves << position
-  #   end
-
-  #   max_score_index = scores.each_with_index.max[1]
-  #   min_score_index = scores.each_with_index.min[1]
-
-  #   if scores[max_score_index] > 0
-  #     best_move = moves[max_score_index]
-  #   else
-  #     best_move = moves[min_score_index]
-  #   end
-  #   best_move
-  # end
 
 end

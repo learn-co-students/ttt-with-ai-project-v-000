@@ -66,6 +66,7 @@ class Board
   def update(position_number, player)
     index = position_number.to_i - 1
     self.cells[index] = player.token
+    self.display
   end
 
   def available_positions
@@ -77,6 +78,10 @@ class Board
       end
     end
     positions_available.uniq
+  end
+
+  def random
+    self.available_positions.sample
   end
 
 end
