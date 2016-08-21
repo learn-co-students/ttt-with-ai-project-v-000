@@ -18,29 +18,27 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(input)
-     @cells[input.to_i - 1]
-   
-  end
-
-
  def full?
     @cells.all?{|token| token == "X" || token == "O"}
   end
   
+ def position(input)
+    @cells[input.to_i - 1]
+  end
 
   def turn_count
-    counter = 0
+    count = 0
     @cells.each do |cell|
       if cell == "X" || cell == "O"
-        counter += 1
+        count += 1
       end
     end
-    counter
+    count
   end
 
   def taken?(input)
-    !(position(input).nil? || position(input) == " ")
+    cell = position(input)
+    cell == "X" || cell == "O"
   end
 
   def valid_move?(input)
@@ -48,6 +46,7 @@ class Board
   end
 
   def update(input, player)
+    #if valid_move?(input) == true
     cells[input.to_i-1] = player.token
   end
 
