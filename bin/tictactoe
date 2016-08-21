@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Let's play some tic-tac-toe! Y/N?"
+game_start = gets.chomp.upcase
+if game_start == "Y" || game_start == "YES" then
+  puts "How many players human players? (0, 1, or 2)?"
+  players_num = gets.chomp.to_i
+
+  case players_num
+  when 0
+    game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+    until game.over?
+      game.play
+    end
+  when 1
+    game = Game.new(Players::Computer.new("X"))
+    until game.over?
+      game.play
+    end
+  when 2
+    game = Game.new
+    until game.over?
+      game.play
+    end
+  else
+    puts "I am sorry, that is not a valid option"
+  end
+
+else
+  puts "Sorry to hear that, maybe later"
+end
