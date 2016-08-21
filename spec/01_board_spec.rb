@@ -93,7 +93,7 @@ describe "Board" do
 
   describe '#taken?' do
     it 'returns true if the position is X or O' do
-
+      board.cells = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
       expect(board.taken?("1")).to be(true)
       expect(board.taken?("9")).to be(true)
     end

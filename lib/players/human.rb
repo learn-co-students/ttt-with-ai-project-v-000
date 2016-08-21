@@ -2,12 +2,8 @@ module Players
   class Human < Player
 
     def move(board)
-      point = location.to_i - 1
-      return board[point]
+      puts "Please enter 1-9:"
+      gets.strip
     end
-
-    
   end
-  
-
 end
