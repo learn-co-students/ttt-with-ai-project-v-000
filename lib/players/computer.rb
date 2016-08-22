@@ -6,17 +6,20 @@ module Players
      case board.turn_count
        #for any of the first three moves, take an empty corner
      when 0..2
-       #find the free cells
-       free = board.cells.size.times.select { |i| board.cells[i] == " " }
-       #find the free corners in the free cells Array
-       free_corners = free.select { |e| e == 0 || e == 2 || e == 6 || e == 8 }
-       #select a random free corner for the move
-       free_corners.sample.+(1).to_s
+       if board.cells[4] == " "
+         "5"
+       else
+         #find the free cells
+         free = board.cells.size.times.select { |i| board.cells[i] == " " }
+         #find the free corners in the free cells Array
+         free_corners = free.select { |e| e == 0 || e == 2 || e == 6 || e == 8 }
+         #select a random free corner for the move
+         free_corners.sample.+(1).to_s
+       end
      when 3..8
        comp_move = ""
        #go through the win combinations
        Game::WIN_COMBINATIONS.find do |win|
-         #and find the ones that have 2 of my tokens in them and that are on the board and a blank space and return the blank space as my move
          #find the computer players moves on the board
         my_moves = board.cells.size.times.select { |i| board.cells[i] == token }
         #find the opponent's moves on the board
@@ -24,7 +27,7 @@ module Players
         #From the win combination, subtract the opponent's moves and my moves (the computer's moves)
         leftover = win - my_moves
         opp_wins = win - opp_moves
-        
+
         if leftover.size == 1
           leftover = leftover - opp_moves
         end

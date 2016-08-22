@@ -1,15 +1,18 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
-puts "Welcome to Tic Tac Toe!"
-puts "What kind of game would you like to play: 0, 1, or 2 players?"
-input = gets.strip
-input = input.to_i
-if input > 2
-  until input > 2
-    puts "Please enter a vaid game choice"
-    input.to_i = gets.strip
+
+
+def choose_game
+  puts "What kind of game would you like to play: 0, 1, or 2 players?"
+  input = gets.strip
+  input = input.to_i
+  if input > 2
+    until input < 3
+      puts "Please enter a vaid game choice"
+      input = gets.strip
+      input = input.to_i
+    end
   end
-else
   case input
       when 0
         game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
@@ -27,21 +30,16 @@ else
           game.play
         end
       end
-    end
+end
 
-#
-# play_again = ""
-# until play_again.downcase == "n" || play_again.downcase == "no"
-#   puts "Would you like to play again?"
-#   play_again = gets.strip
-#   play_again.downcase == "y" || play_again.downcase == "yes"
-#   game = Game.new
-#   until game.won?
-#     game.play
-#   end
-# end
-# puts "Welcome to Tic Tac Toe!"
-# game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-# until game.won?
-#   game.play
-# end
+puts "Welcome to Tic Tac Toe!"
+choose_game
+play_again = ""
+until play_again == "n"
+  puts "Would you like to play again: y/n?"
+  play_again = gets.strip
+  if play_again == "n"
+    exit
+  end
+  choose_game
+end
