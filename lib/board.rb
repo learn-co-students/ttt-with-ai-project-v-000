@@ -10,7 +10,8 @@ class Board
     @cells = Array.new(9, " ")
   end
 
-  def display                 
+  def display
+    puts "\n"      
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
@@ -38,7 +39,7 @@ class Board
 
   def taken?(input)
     cell = position(input)
-    cell == "X" || cell == "O"
+    (cell == "X") || (cell == "O")
   end
 
   def valid_move?(input)
@@ -46,7 +47,6 @@ class Board
   end
 
   def update(input, player)
-    #if valid_move?(input) == true
     cells[input.to_i-1] = player.token
   end
 
