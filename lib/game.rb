@@ -25,22 +25,23 @@ attr_accessor :board ,:player_1, :player_2
    end
 
    def over?
-     board.full?
+      won? || draw?
    end
 
    def won?
      WIN_COMBINATIONS.any? do |num_array|
+       board.cells[num_array[0]] != " " &&
        board.cells[num_array[0]] == board.cells[num_array[1]] && board.cells[num_array[1]] == board.cells[num_array[2]]
      end
    end
 
    def draw?
-     if won?
-       false
-     elsif board.full?
+     if !won? && board.full?
        true
+     else
+       false
      end
-    end
+   end
 
     def winner
       player = WIN_COMBINATIONS.detect do |num_array|
@@ -58,6 +59,14 @@ attr_accessor :board ,:player_1, :player_2
     end
 
     def play
+      until over?
+        turn
+      end
+      if won?
+        puts "Congratulations #{winner}!"
+      else
+        puts "Cats Game!"
+      end
     end
 
 
