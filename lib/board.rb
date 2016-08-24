@@ -42,8 +42,9 @@ class Board
   end
 
   def valid_move?(str)
-    int = Integer(str) rescue false
-    int ? !taken?(int) : int
+    #int = Integer(str) rescue false
+    int = str.to_i
+    int.between?(1,9) ? !taken?(int) : false
     #binding.pry
   end
 

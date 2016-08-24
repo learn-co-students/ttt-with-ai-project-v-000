@@ -1,3 +1,51 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+#require "pry"
+
+
+def call
+
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "Please input 0, 1, or 2 players."
+  how_many = gets.strip
+  call if not how_many.to_i.between?(0,2)
+
+  puts "Would the first player like to play X or O?"
+  puts "please select on your keyboard, X or O"
+  player1 = gets.chomp
+
+
+  player1 == "O" ? player2 = "X" : player2 = "O"
+  #binding.pry
+
+  case how_many
+  when "0"
+    game = Game.new(Players::Computer.new(player1), Players::Computer.new(player2))
+     game.play
+  when "1"
+    game = Game.new(Players::Human.new(player1), Players::Computer.new(player2))
+     game.play
+  when "2"
+      game = Game.new(Players::Human.new(player1), Players::Human.new(player2))
+      game.play
+    end
+  end
+
+    def end_game
+      puts "Would you like to play another game?"
+      puts "Y / N"
+      i = gets.chomp
+      case i
+        when "Y"
+          call
+        when "N"
+          exit
+        else
+        end_game
+      end
+    end
+
+
+   call
+   end_game

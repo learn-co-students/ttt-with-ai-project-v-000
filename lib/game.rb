@@ -53,14 +53,18 @@ attr_accessor :board ,:player_1, :player_2
 
     def turn
     #  binding.pry
-      mv = current_player.move(current_player.token)
+      mv = current_player.move(board)
+      #binding.pry
       turn if not board.valid_move?(mv)
       board.update(mv, current_player)
+      #puts "great move!"
+      #binding.pry
     end
 
     def play
       until over?
         turn
+        board.display
       end
       if won?
         puts "Congratulations #{winner}!"
@@ -68,6 +72,10 @@ attr_accessor :board ,:player_1, :player_2
         puts "Cats Game!"
       end
     end
+
+
+
+
 
 
 end
