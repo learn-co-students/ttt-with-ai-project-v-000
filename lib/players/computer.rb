@@ -3,17 +3,20 @@ require "pry"
     def move(board)
       #board.cells
       #binding.pry
-      puts "Coumputer is scratching it's head"
-      sleep 1
-      print"."
-      sleep 1
-      print"."
-      sleep 1
-      print"."
       puts "\r" , "\r"
-      #puts "Got a great idea!"
-
-      move_array = ["1","5","2","4","7","3","8","9","6"]
-      move_array.detect {|position| board.valid_move?(position)}
+      self.token == "O" ? enemy = "X" : enemy = "O"
+      if board.turn_count == 0
+        1
+      elsif board.turn_count == 1
+        5
+      else
+      great = Game.win_comb.detect do |win_array|
+        (board.cells[win_array[0]] == enemy || board.cells[win_array[0]] == " ") && (board.cells[win_array[1]] == enemy || board.cells[win_array[1]] == " ") && (board.cells[win_array[2]] == enemy || board.cells[win_array[2]] == " ")
+      end
+      better = great.detect do |array|
+      board.valid_move?(array)
+      end
+      better
     end
   end
+end

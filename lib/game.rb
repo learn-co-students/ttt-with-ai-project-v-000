@@ -2,6 +2,11 @@ require "pry"
 class Game
 attr_accessor :board ,:player_1, :player_2
 
+def self.win_comb
+  WIN_COMBINATIONS
+end
+
+
   WIN_COMBINATIONS =[
    [0,1,2],
    [3,4,5],
@@ -52,13 +57,12 @@ attr_accessor :board ,:player_1, :player_2
     end
 
     def turn
-    #  binding.pry
-      mv = current_player.move(board)
       #binding.pry
-      turn if not board.valid_move?(mv)
+      mv = "yata"
+      until board.valid_move?(mv)
+        mv = current_player.move(board)
+      end
       board.update(mv, current_player)
-      #puts "great move!"
-      #binding.pry
     end
 
     def play
