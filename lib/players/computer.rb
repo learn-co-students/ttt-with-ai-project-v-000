@@ -1,9 +1,10 @@
 module Players
   class Computer < Player
+
+
+
     def move(board)
       sleep(1)
-
-
       if !board.taken?(5)
         move = "5"
       elsif board.taken?(5) && !board.corners_taken?
