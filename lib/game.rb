@@ -1,4 +1,3 @@
-require "pry"
 class Game
 attr_accessor :board ,:player_1, :player_2
 
@@ -17,15 +16,13 @@ end
    [0,4,8],
    [2,4,6]
  ]
-   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)#binding.pry
-     @board = []
+   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
      @player_1 = player_1
      @player_2 = player_2
      @board = board
    end
 
    def current_player
-     #binding.pry
      board.turn_count % 2 == 0 ? player_1 : player_2
    end
 
@@ -41,11 +38,7 @@ end
    end
 
    def draw?
-     if !won? && board.full?
-       true
-     else
-       false
-     end
+      !won? && board.full?
    end
 
     def winner
@@ -57,8 +50,7 @@ end
     end
 
     def turn
-      #binding.pry
-      mv = "yata"
+      mv = " "
       until board.valid_move?(mv)
         mv = current_player.move(board)
       end

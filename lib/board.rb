@@ -1,15 +1,13 @@
-require 'pry'
 class Board
 
   attr_accessor :cells
 
 
   def initialize
-    @cells = Array.new(9, " ")
+    reset!
   end
 
   def reset!
-    #binding.pry
     @cells = Array.new(9, " ")
   end
 
@@ -21,9 +19,8 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(int)
-    int = int.to_i
-    cells[int-1]
+  def position(inp)
+    cells[inp.to_i - 1]
   end
 
   def full?
@@ -31,25 +28,18 @@ class Board
   end
 
   def turn_count
-    count = 0
-    cells.map { |cell|  count += 1 if cell != " "  }
-    count
+    cells.count { |token| token != " "  }
   end
 
-  def taken?(str)
-    int = str.to_i-1
-    cells[int] != " " ? true : false
+  def taken?(inp)
+    position(inp) != " "
   end
 
-  def valid_move?(str)
-    #int = Integer(str) rescue false
-    int = str.to_i
-    int.between?(1,9) ? !taken?(int) : false
-    #binding.pry
+  def valid_move?(inp)
+    inp.to_i.between?(1,9) && !taken?(inp)
   end
 
   def update(pos, player)
-    #binding.pry
     cells[pos.to_i-1] = player.token
   end
 
