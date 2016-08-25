@@ -58,7 +58,7 @@ end
 
     def turn
       #binding.pry
-      mv = "yata"
+      mv = " "
       until board.valid_move?(mv)
         mv = current_player.move(board)
       end
