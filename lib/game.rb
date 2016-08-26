@@ -50,6 +50,10 @@ end
     end
 
     def turn
+<<<<<<< HEAD
+=======
+      #binding.pry
+>>>>>>> 6250d7fb7ef3a37983e9197f6d720f12b3c43803
       mv = " "
       until board.valid_move?(mv)
         mv = current_player.move(board)
