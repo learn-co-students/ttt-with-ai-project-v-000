@@ -24,7 +24,7 @@ until play_again.downcase == "n" || play_again.downcase == "no"
     puts "(2) Go second and be O?"
     puts "Please choose:"
     response = gets.strip
-    if response.to_i != 1 || response.to_i != 2
+    if response.to_i < 1 || response.to_i > 2
       response = gets.strip
     elsif response.to_i == 1
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
