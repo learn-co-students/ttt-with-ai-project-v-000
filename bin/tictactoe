@@ -43,7 +43,7 @@ def start_game
           start_game
         elsif play_again == "n"
             puts "Thanks for playing! Until next time!"
-            return
+            return "Thanks"
         end
       end
     end
