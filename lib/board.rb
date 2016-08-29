@@ -28,9 +28,10 @@ class Board
   end
 
   def position(pos)
-    pos_i = pos.to_i
-    pos_i -= 1
-    cells[pos_i]
+    current_pos = pos.to_i
+
+    cells[current_pos-1]
+
   end
 
   def full?
@@ -42,13 +43,11 @@ class Board
   end
 
   def turn_count
-    count = 0
-    @cells.each do |turn|
-      if turn.include?("X") || turn.include?("O")
-        count +=1
-      end
-    end
-    count
+    # count = 0
+    counted = @cells.count{|x| x == " "}
+
+    full_count = 9-counted
+
   end
 
   def taken?(x)
@@ -60,8 +59,11 @@ class Board
   end
 
   def valid_move?(is_valid)
-    if is_valid.to_i.between?(1,9)
-      if taken?(is_valid)
+    validated = is_valid.to_i
+
+    if validated.between?(1,9)
+
+      if taken?(validated)
         false
       else
         true

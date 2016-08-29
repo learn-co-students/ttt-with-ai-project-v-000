@@ -34,21 +34,14 @@ class Game
 
   def current_player
 
-    has_x = 0
-    has_o = 0
-    board.cells.each do |value|
-      if value.include?("X")
-        has_x +=1
-      elsif value.include?("O")
-        has_o +=1
-      end
 
-    end
-    if has_x <= has_o
+    if board.turn_count%2 == 0
       player_1
     else
       player_2
+
     end
+
 
   end
 
@@ -57,13 +50,11 @@ class Game
   end
 
   def won?
-    # did_win = false
-    # if !board.cells.include?(" ")
       WIN_COMBINATIONS.detect do |x|
 
         @board.cells[x[0]] == @board.cells[x[1]] && @board.cells[x[1]] == @board.cells[x[2]]&&
         @board.taken?(x[0]+1)
-          # did_win = true
+
         end
 
   end
@@ -81,12 +72,13 @@ class Game
 
   def turn
     player = current_player
+
     current_move = player.move(@board)
     if !@board.valid_move?(current_move)
       turn
     else
       puts "Turn: #{@board.turn_count+1}"
-      @board.display
+
       @board.update(current_move, player)
       puts "#{player.token} moved #{current_move}"
       @board.display
