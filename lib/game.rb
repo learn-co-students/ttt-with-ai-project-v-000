@@ -19,18 +19,6 @@ class Game
     @player_2 = player_2
     @board = board
   end
-  # 
-  # def board
-  #   @board
-  #
-  # end
-
-  def player_1
-    @player_1
-  end
-  def player_2
-    @player_2
-  end
 
   def current_player
 
@@ -68,6 +56,8 @@ class Game
       if winning = won?
       @winner = @board.cells[winning.first]
     end
+
+    # @winner = @board.cells[won?.first]
   end
 
   def turn
