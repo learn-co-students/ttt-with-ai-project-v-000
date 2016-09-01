@@ -45,24 +45,11 @@ class Board
   end
 
   def taken?(x)
-    if position(x) == "X" || position(x) == "O"
-      true
-    else
-      false
-    end
+    position(x) == "X" || position(x) == "O"
   end
 
-  def valid_move?(is_valid)
-    validated = is_valid.to_i
-
-    if validated.between?(1,9)
-
-      if taken?(validated)
-        false
-      else
-        true
-      end
-    end
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input.to_i)
   end
 
   def update(pos, x_or_o)
