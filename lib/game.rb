@@ -25,9 +25,9 @@ class Game
 
 
   def play
+    @board.display
     until over?
       turn
-      @board.display
     end
     if won?
       puts "Congratulations #{winner}!"
@@ -45,10 +45,10 @@ class Game
   end
 
   def turn
-    current_move = current_player.move(@board)
-    if board.valid_move?(current_move)
-      board.update(current_move, current_player)
-      board.display
+    current_move = current_player.move(board)
+    if @board.valid_move?(current_move)
+      @board.update(current_move, current_player)
+      @board.display
     elsif
       turn
     end
