@@ -4,7 +4,7 @@ class Board
 
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    reset!
+    
   end
   def cells
     @cells
