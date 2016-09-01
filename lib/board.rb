@@ -25,7 +25,7 @@ class Board
   end
 
   def position(pos)
-    cells[pos.to_i -1]
+    @cells[pos.to_i-1]
 
   end
 
@@ -40,8 +40,6 @@ class Board
 
     counted = @cells.count{|x| x == "X" || x == "O"}
 
-    full_count = 9-counted
-
   end
 
   def taken?(x)
@@ -52,11 +50,8 @@ class Board
     input.to_i.between?(1,9) && !taken?(input.to_i)
   end
 
-  def update(pos, x_or_o)
-    pos = pos.to_i
-    pos -= 1
-    @cells[pos] = x_or_o.token
-
+  def update(pos, player)
+    @cells[pos.to_i-1] = player.token
   end
 
 end
