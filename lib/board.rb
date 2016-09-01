@@ -3,16 +3,13 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    
-  end
-  def cells
-    @cells
+    @cells = Array.new(9, " ")
+
   end
 
   def reset!
 
-     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+     @cells = Array.new(9, " ")
 
   end
 
@@ -28,18 +25,15 @@ class Board
   end
 
   def position(pos)
-    current_pos = pos.to_i
-
-    cells[current_pos-1]
+    cells[pos.to_i -1]
 
   end
 
   def full?
-    @cells.each do |is_full|
-      if is_full.include?(" ")
-        return false
-      end
-    end
+    @cells.all? do |token|
+      token == "X" || token == "O"
+
+    end    
   end
 
   def turn_count
