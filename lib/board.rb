@@ -33,12 +33,12 @@ class Board
     @cells.all? do |token|
       token == "X" || token == "O"
 
-    end    
+    end
   end
 
   def turn_count
-    # count = 0
-    counted = @cells.count{|x| x == " "}
+
+    counted = @cells.count{|x| x == "X" || x == "O"}
 
     full_count = 9-counted
 
