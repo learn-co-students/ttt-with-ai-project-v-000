@@ -2,16 +2,22 @@
 
 class Game
   #The test suite describes the method requirements.
+  WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
-  @board = [" "," "," "," "," "," "," "," "," "]
+  attr_accessor :board, :player_1, :player_2
+  #@board = [" "," "," "," "," "," "," "," "," "]
   #A game has one `Board` through its `board` property.
-  @player_1 = []
-  @player_2 = []
+  #@player_1 = []
+  #@player_2 = []
   #A game has two `Player`s stored in a `player_1` and `player_2` property.
   #`Board` and `Player` do not directly relate to the `Game` but do collaborate with each other through arguments.
 
   #Beyond providing relationships with players and a board, the `Game` instance must also provide the basic game runtime and logic.
-
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+    self.board = board
+    self.player_1 = player_1
+    self.player_2 = player_2
+  end
   #These methods relate to the state of the game:
   def current_player
 
