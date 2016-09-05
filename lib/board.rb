@@ -1,50 +1,56 @@
-#The `Board` class represents the data and logic of a Tic Tac Toe game board.
 class Board
-
-  #It has a property, `cells`, that stores the data of the state of the board in an array.
+  attr_accessor :cells
 
   def reset!
-    @@cells = [" "," "," "," "," "," "," "," "," "]
-    #can reset the state of the cells to what a board should look like at the start of a game, an array with 9 `" "` elements.
-  end
+    self.cells = [" "," "," "," "," "," "," "," "," "]
+    end
 
   def initialize
-    reset!
-    #When a board is initialized, it should start with cells for a new game of Tic Tac Toe. You can and should use `#reset!`.
+    self.reset!
   end
 
   def display
-    @@cells
-    #A board can print its current state with the `#display` method.
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts "-----------"
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts "-----------"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
+  #it seemed clunky trying to use this position method in #update, #taken?, and #valid_move?, so I avoided it... Try again on refactor!
   def position(input_string)
-    #You'll also build a `#position` method that takes in the user's input in the form of 1-9 strings like "2" or "9" and looks up the value of the cells at the correct index from the array's perspective. All other methods will take input in the user's perspective of 1-9 strings AND USE `#POSITION` TO LOOK UP THE VALUE ACCORDING TO THE CELLS' ARRAY INDEX.
+    self.cells[input_string.to_i-1]
+    #All other methods will take input in the user's perspective of 1-9 strings AND USE `#POSITION` TO LOOK UP THE VALUE ACCORDING TO THE CELLS' ARRAY INDEX.
   end
 
-  def update(input_string, object)
-    position(input_string)
-    token(object, index(?)) => "set [the array index] equal to the token of the player object"
-    #Similarly, you're going to build an `#update` method that represents updating the board when a player makes a move. This method will take two arguments, the first will be the POSITION the user wants to occupy in the form of 1-9 strings that you will need to convert to the board cells' array index, along with the player object making the move. When you update the appropriate index in the cells, you will set it equal to the token of the player object BY CALLING THE `#TOKEN` METHOD ON THE PLAYER.
+  def update(input_string, player)
+    self.cells[input_string.to_i-1] = player.token
   end
 
-  def token(object, index(?))
+  #Token is set in player.rb
+  #def token(object, index)
     #set the appropriate index equal to the token of the player object
-  end
+  #end
 
   def full?
-    #TRUE when entirely occupied with "X" and "O"s
+    self.cells.none?{|cell| cell == " "}
   end
 
   def turn_count
-    #based on how many positions in the cells array are filled.
+    counter = 0
+    self.cells.each do |position|
+      if position != " " && position != ""
+        counter += 1
+      end
+    end
+    counter
   end
 
-  def taken?
-    #will return TRUE OR FALSE for an individual position.
+  def taken?(position)
+    !(self.cells[position.to_i-1].nil? || self.cells[position.to_i-1] == " ")
   end
 
-  def valid_move?
-    #will ensure that moves are between 1-9 AND not taken.
+  def valid_move?(position)
+    !self.taken?(position) && (position.to_i).between?(1,9)
   end
 end
