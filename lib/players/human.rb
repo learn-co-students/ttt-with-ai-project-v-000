@@ -12,8 +12,10 @@ module Players
   #Define a class `Human` that inherits from `Player`. This class should be namespaced inside the module `Players` because the `human.rb` file is inside the `players/` directory. This keeps our code nice and tidy.
   class Human < Player
 
-    def move(board= nil)
-      #The human player must implement a `#move` method that takes in a `board` argument and allows a human player to ENTER A MOVE VIA THE CLI. The method should RETURN THE VALUE THE USER ENTERS. Even though the method accepts a `board` argument, it does not need to use it.
+    def move(board=nil)
+      puts "Where would you like to go?"
+      input = gets.strip
+      input
     end
   end
 end
