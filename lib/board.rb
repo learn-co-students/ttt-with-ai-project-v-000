@@ -1,9 +1,6 @@
 class Board
   attr_accessor :cells
 
-  def reset!
-    self.cells = [" "," "," "," "," "," "," "," "," "]
-  end
 
   def initialize
     reset!
@@ -19,6 +16,10 @@ class Board
 
   def position(input_string)
     cells[input_string.to_i-1]
+  end
+
+  def reset!
+    self.cells = [" "," "," "," "," "," "," "," "," "]
   end
 
   def update(input_string, player)
