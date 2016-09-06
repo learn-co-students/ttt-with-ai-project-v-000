@@ -13,6 +13,10 @@ module Players
   class Human < Player
 
     def move(board= nil)
+      puts "Where would you like to move? Please input a location, 1 - 9"
+
+      input = gets.strip
+      input
       #The human player must implement a `#move` method that takes in a `board` argument and allows a human player to ENTER A MOVE VIA THE CLI. The method should RETURN THE VALUE THE USER ENTERS. Even though the method accepts a `board` argument, it does not need to use it.
     end
   end
