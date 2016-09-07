@@ -29,7 +29,17 @@ class Game
   end
 
   def winner
-
+    if won?
+      WIN_COMBINATIONS.select do |wc|
+        if board.cells[wc[0]] == "X" && board.cells[wc[1]] == "X" && board.cells[wc[2]] == "X"
+          return "X"
+        elsif board.cells[wc[0]] == "O" && board.cells[wc[1]] == "O" && board.cells[wc[2]] == "O"
+          return "O"
+        end
+      end
+    else
+      nil
+    end
   end
 
   #Methods related to managing a game
