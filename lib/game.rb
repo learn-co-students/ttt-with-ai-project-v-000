@@ -14,15 +14,18 @@ class Game
   end
 
   def over?
-
+    (won? || draw?) ? true : false
   end
 
   def won?
-
+    WIN_COMBINATIONS.any? do |wc|
+      board.cells[wc[0]] == "X" && board.cells[wc[1]] == "X" && board.cells[wc[2]] == "X" ||
+      board.cells[wc[0]] == "O" && board.cells[wc[1]] == "O" && board.cells[wc[2]] == "O"
+    end
   end
 
   def draw?
-
+    board.full? && !won?
   end
 
   def winner
