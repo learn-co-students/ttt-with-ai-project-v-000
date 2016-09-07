@@ -21,12 +21,40 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combination|
+    WIN_COMBINATIONS.detect do |combination|
       board.taken?(combination[0] + 1) && board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[1]] == board.cells[combination[2]]
     end
   end
 
   def draw?
     @board.full? && !won?
+  end
+
+  def winner
+    if winner = won?
+      winner = board.cells[winner.first]
+    end
+  end
+
+  def turn
+    player = current_player
+    player_move = player.move(board)
+    if board.valid_move?(player_move)
+      board.update(player_move, player)
+      board.display
+    else
+      turn
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cats Game!"
+    end
   end
 end
