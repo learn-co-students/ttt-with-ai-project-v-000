@@ -8,6 +8,7 @@ class Game
     self.player_1 = player_1
     self.player_2 = player_2
   end
+
   #These methods relate to the state of the game:
   def current_player
     board.turn_count.even? ? player_1 : player_2
@@ -49,7 +50,14 @@ class Game
   end
 
   def play
-
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
   end
 
   def turn
@@ -62,5 +70,5 @@ class Game
     end
     board.display
   end
-
+  
 end
