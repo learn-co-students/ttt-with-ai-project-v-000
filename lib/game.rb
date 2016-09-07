@@ -53,7 +53,14 @@ class Game
   end
 
   def turn
-
+    input = current_player.move
+    if board.valid_move?(input) == true
+      board.update(input, current_player)
+    elsif board.valid_move?(input) == false
+      puts "That is not a valid move."
+      turn
+    end
+    board.display
   end
 
 end
