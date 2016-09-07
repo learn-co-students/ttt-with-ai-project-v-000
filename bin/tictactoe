@@ -2,25 +2,11 @@
 
 require_relative '../config/environment'
 
+Game.start
+play
+
 #The requirements of your CLI are as follows, free for you to implement however you see fit as we provide no tests against the CLI.
 
-#* Greet the user with a message.
-puts "Hello, Welcome to Tic Tac Toe!"
-#* Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-puts "What kind of game would you like to play: 0, 1, or 2 players?"
-  #Input 0, 1, or 2
-    #If 0,
-  #Initialize Computer Player-1 and Computer Player-2
-  #Execute Game, defalut to Player-1
-    #if 1,
-puts "Who should go first and be 'X'? Player-1 or Computer?"
-    #If input = Player-1, #Initialize Human Player-1 w/ token="X"
-    #If input = Computer, #Initialize Computer Player w/ token="X"
-
-    #if 2,
-puts "Who should go first and be 'X'? Player-1 or Player-2?"
-    #If input = Player-1, #Initialize Human Player-1 w/ token="X"
-    #If input = Player-2, #Initialize Human Player-2 w/ token="X"
 
 #* Use the input to correctly initialize a `Game` with the appropriate player types and token values.
 #* When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
