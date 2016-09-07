@@ -4,6 +4,8 @@ class Game
 
   attr_accessor :board, :player_1, :player_2
 
+  
+
   WIN_COMBINATIONS = [
     [0,1,2], #top row
     [3,4,5], #middle row
@@ -22,15 +24,15 @@ class Game
     end
 
     def current_player
-      if self.board.cells.count.odd?
-          return player_1
+      if @board.turn_count.even?
+           player_1
         else
-          return player_2
+           player_2
       end
     end
 
     def over?
-      if @board.full? == true
+      if @board.full? || won? || draw?
           true
         else false
       end
@@ -59,6 +61,7 @@ class Game
     end
 
     def turn
+
       player = current_player
       current_move = player.move(@board)
       if !@board.valid_move?(current_move)
@@ -70,6 +73,17 @@ class Game
         puts "#{player.token} moved #{current_move}"
         @board.display
         puts "\n"
+      end
+    end
+
+    def play
+      while !over? 
+       turn
+      end
+      if won? 
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cats Game!"
       end
     end
 end
