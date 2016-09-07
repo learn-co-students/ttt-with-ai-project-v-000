@@ -38,8 +38,6 @@ class Game
           return "O"
         end
       end
-    else
-      nil
     end
   end
 
@@ -62,13 +60,13 @@ class Game
 
   def turn
     input = current_player.move
-    if board.valid_move?(input) == true
+    if board.valid_move?(input)
       board.update(input, current_player)
-    elsif board.valid_move?(input) == false
+    else
       puts "That is not a valid move."
       turn
     end
     board.display
   end
-  
+
 end
