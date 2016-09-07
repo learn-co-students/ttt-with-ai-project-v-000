@@ -10,14 +10,18 @@ class Game
   end
   #These methods relate to the state of the game:
   def current_player
-    if board.turn_count.odd?
-      player_2
-    elsif board.turn_count.even?
-      player_1
-    end
+    board.turn_count.even? ? player_1 : player_2
+  end
+
+  def over?
+
   end
 
   def won?
+
+  end
+
+  def draw?
 
   end
 
