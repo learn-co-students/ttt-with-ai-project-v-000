@@ -43,25 +43,27 @@ class Game
 
   #Methods related to managing a game
 
-#  def start
-#    puts "Hello, Welcome to Tic Tac Toe!"
-#    puts "What kind of game would you like to play: 0, 1, or 2 players?"
-#    input = gets.strip
-#    if input == 0
-#      Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-#    elsif input == 1
-#      puts "Who should go first and be 'X'? Player-1 or Computer?"
-#      if input == Player-1
-#        Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-#      elsif input == Computer
-#        Game.new(player_1=Players::Computer.new("O"), player_2=Players::Human.new("O"), board=Board.new)
-#    elsif input == 2
-#      Game.new
-#    else
-#      puts "I didn't understand that."
-#      start
-#    end
-#  end
+  def self.start
+    puts "Hello, Welcome to Tic Tac Toe!"
+    puts "What kind of game would you like to play: 0, 1, or 2 players?"
+    input = gets.strip
+    if input == "0"
+      Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+    elsif input == "1"
+      puts "Who should go first and be 'X'? Player-1 or Computer?"
+      input = gets.strip
+      if input == "Player-1"
+        Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+      elsif input == "Computer"
+        Game.new(player_1=Players::Computer.new("O"), player_2=Players::Human.new("O"), board=Board.new)
+      end
+    elsif input == "2"
+      Game.new
+    else
+      puts "I didn't understand that."
+      start
+    end
+  end
 
   def play
     until over?

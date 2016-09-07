@@ -2,8 +2,8 @@
 
 require_relative '../config/environment'
 
-Game.start
-play
+game = Game.start
+game.play
 
 #The requirements of your CLI are as follows, free for you to implement however you see fit as we provide no tests against the CLI.
 
