@@ -55,7 +55,7 @@ class Game
       if input == "Player-1"
         Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
       elsif input == "Computer"
-        Game.new(player_1=Players::Computer.new("O"), player_2=Players::Human.new("O"), board=Board.new)
+        Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
       end
     elsif input == "2"
       Game.new
@@ -77,7 +77,7 @@ class Game
   end
 
   def turn
-    input = current_player.move
+    input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
     else
