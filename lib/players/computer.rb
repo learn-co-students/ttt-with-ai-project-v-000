@@ -5,7 +5,7 @@ module Players
       if !board.taken?(5)
         move = "5"
       elsif !board.taken?(1)
-        move = [1, 3, 7, 9].detect{|index| !board.taken?(index)}
+        move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}
       else
         Game::WIN_COMBINATIONS.detect do |com|
           if com.select{|i| board.position(i+1) == token}.size == 2 && com.any?{|i| board.position(i+1) == " "}
