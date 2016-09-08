@@ -21,7 +21,7 @@ until another_round.downcase == "n" || another_round.downcase == "no"
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
       puts "You are player X!"
     elsif reply = "AI"
-      game = Game.new(Players:Computer.new("X"), Players::Computer.new("O"))
+      game = Game.new(Players:Computer.new("X"), Players::Human.new("O"))
       puts "You are player O"
     end
   elsif reply.to_i == 2
