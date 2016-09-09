@@ -1,6 +1,6 @@
 class Game
 
-  attr_accessor :board, :player_1, :player_2, :cli
+  attr_accessor :board, :player_1, :player_2#, :cli
 
   WIN_COMBINATIONS = [
     [0, 1, 2],
@@ -134,7 +134,8 @@ class Game
   def turn
     current_player = self.current_player # doing this assignment as an optimization as the current_player method requires a lot of computation
     if current_player == self.player_1
-      player_turn_prompt(current_player, 1)
+      # self.cli.player_turn_prompt(current_player, 1)
+      self.player_turn_prompt(current_player, 1)
       # valid = false
       # while !valid do
       #   puts "Make your move, Player 1."
@@ -148,7 +149,8 @@ class Game
       #   end
       # end
     elsif current_player == self.player_2
-      player_turn_prompt(current_player, 1)
+      # self.cli.player_turn_prompt(current_player, 1)
+      self.player_turn_prompt(current_player, 1)
       # valid = false
       # while !valid do
       #   puts "Make your move, Player 2."

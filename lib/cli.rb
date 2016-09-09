@@ -27,20 +27,20 @@ class Cli
     end
   end
 
-  def player_turn_prompt(current_player, player_num)
-    valid = false
-    while !valid do
-      puts "Make your move, Player #{player_num}."
-      self.board.display
-      move = current_player.move(board)
-      if self.board.valid_move?(move)
-        self.board.update(move, current_player)
-        valid = true
-      else
-        puts "Invalid move. Instructions for playing Tic-Tac-Toe can be found here: https://en.wikipedia.org/wiki/Tic-tac-toe"
-      end
-    end
-  end
+  # def player_turn_prompt(current_player, player_num)
+  #   valid = false
+  #   while !valid do
+  #     puts "Make your move, Player #{player_num}."
+  #     self.board.display
+  #     move = current_player.move(board)
+  #     if self.board.valid_move?(move)
+  #       self.board.update(move, current_player)
+  #       valid = true
+  #     else
+  #       puts "Invalid move. Instructions for playing Tic-Tac-Toe can be found here: https://en.wikipedia.org/wiki/Tic-tac-toe"
+  #     end
+  #   end
+  # end
 
   def setup_game
     puts "Will there be 0, 1 or 2 players?"
@@ -94,5 +94,6 @@ class Cli
       end
     end
     self.game = Game.new(player_1, player_2)
+    # self.game.cli = self
   end
 end
