@@ -63,11 +63,12 @@ class Game
   end
 
   def draw?
-    return false if self.won?
-    self.board.cells.each do |position|
-        return false if position == " "
-    end
-    true
+    # return false if self.won?
+    # self.board.cells.each do |position|
+    #     return false if position == " "
+    # end
+    # true
+    return true if !self.won? && self.board.full?
   end
 
   def over?
@@ -76,18 +77,23 @@ class Game
   end
 
   def winner
-    return nil if !self.won?
-    o_count = 0
-    x_count = 0
-    self.board.cells.each do |position|
-      if position == "X"
-        x_count += 1
-      elsif position == "O"
-        o_count += 1
-      end
+    # return nil if !self.won?
+    # o_count = 0
+    # x_count = 0
+    # self.board.cells.each do |position|
+    #   if position == "X"
+    #     x_count += 1
+    #   elsif position == "O"
+    #     o_count += 1
+    #   end
+    # end
+    # return "X" if x_count > o_count
+    # return "O" if o_count > x_count
+    # nil
+    WIN_COMBINATIONS.each do |win|
+      ref = self.board.cells[win[0]]
+      return ref if (ref == "X" || ref == "O") && self.board.cells[win[1]] == ref && self.board.cells[win[2]] == ref
     end
-    return "X" if x_count > o_count
-    return "O" if o_count > x_count
     nil
   end
 
@@ -96,6 +102,7 @@ class Game
       valid = false
       while !valid do
         puts "Make your move, Player 1."
+        self.board.display
         move = self.player_1.move(board)
         if self.board.valid_move?(move)
           self.board.update(move, player_1)
@@ -108,6 +115,7 @@ class Game
       valid = false
       while !valid do
         puts "Make your move, Player 2."
+        self.board.display
         move = self.player_2.move(board)
         if self.board.valid_move?(move)
           self.board.update(move, player_2)
@@ -118,6 +126,7 @@ class Game
       end
     else
       puts "Who are you?"
+      # This would be an exception in a real project
       return "Invalid player!"
     end
   end
@@ -128,11 +137,15 @@ class Game
     end
 
     if self.won?
-      puts "Congratulations " + self.winner + "!"
+      puts "Congratulations " + self.winner + "!" if self.winner != nil
+      self.board.display
     else
       puts "Cats Game!"
+      self.board.display
     end
 
   end
+
+
 
 end
