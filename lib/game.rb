@@ -52,6 +52,13 @@ class Game
       start_1_player
     elsif input == "2"
       Game.new
+    elsif input == "wargames"
+      puts "Executing wargames"
+      sleep(0.5)
+      wargames
+      puts "Game 100"
+      sleep(0.1)
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     else
       puts "I didn't understand that."
       start
@@ -107,4 +114,16 @@ class Game
       play_again?
     end
   end
+
+  def self.wargames
+    counter = 1
+      until counter == 100
+      puts "Game #{counter}"
+      sleep(0.01)
+      game= Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+      counter+=1
+    end
+  end
+
 end
