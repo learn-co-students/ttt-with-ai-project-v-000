@@ -41,10 +41,11 @@ class Game
   end
   def turn
     puts "It's now #{current_player.token}'s turn."
-    sleep(@timer)
-    input = current_player.move(board).to_i
+    input = current_player.move(board, timer).to_i
     if board.valid_move?(input.to_s)
       board.update(input, current_player)
+      system('clear')
+      puts "Game #{@counter}" if @wargame
       board.display
     elsif input.between?(1, 9) == false
       puts "That is an invalid move"
@@ -56,6 +57,8 @@ class Game
   end
   def play
     board.reset!
+    system('clear')
+    puts "Game #{@counter}" if @wargame
     board.display
     until over?
       turn
@@ -73,8 +76,6 @@ class Game
     draw = 0
     until @counter == 100
       @counter += 1
-      puts "Game #{@counter}"
-      @timer -= 0.2 unless @timer < 0.15
       play
       if draw?
         draw += 1
@@ -83,7 +84,8 @@ class Game
       elsif winner == "O"
         o += 1
       end
-      sleep(@timer)
+      sleep(@timer*1.5)
+      @timer -= (@timer/3)
     end
     puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
     puts "A STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO PLAY."

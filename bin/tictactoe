@@ -21,14 +21,13 @@ def start
   end
   puts "That was fun! Would you like to play again? (y/n)"
   answer = gets.strip
-  until (answer == "y" || answer == "n")
-    puts "Please input y or n"
-    answer = gets.strip
-  end
   if answer == "y"
     start
-  else
+  elsif answer == "n"
     puts "Goodbye!"
+  else
+    puts "Please input y or n"
+    answer = gets.strip
   end
 end
 start

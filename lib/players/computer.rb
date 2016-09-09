@@ -14,8 +14,9 @@ class Player::Computer < Player
   ]
   CORNERS = [0, 2, 8, 6]
 
-  def move(board)
+  def move(board, timer)
     @board = board
+    timer <= 0 ? @timer = 0.01 : @timer = timer
     case
       when winning_move != nil
         input = winning_move + 1
@@ -32,6 +33,7 @@ class Player::Computer < Player
           input = (1..9).to_a.sample
         end
     end
+    sleep(@timer)
     input.to_s
   end
   def other
