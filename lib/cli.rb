@@ -11,11 +11,12 @@ class Cli
 
   def play_again?
     puts "Play another game? (y/n)"
-    yn = gets.strip
-    if yn == "y" || yn == "Y" || yn == "yes" || yn == "Yes" || yn == "YES" || yn == "YeS"
+    yn = gets.strip.upcase
+
+    if yn.first == "Y"
       puts "Do you want to change the settings?"
       yn = gets.strip
-      if yn == "y" || yn == "Y" || yn == "yes" || yn == "Yes" || yn == "YES" || yn == "YeS"
+      if yn.first == "Y" 
         self.setup_game
       else
         self.game.board.reset!

@@ -1,8 +1,6 @@
 class Board
   attr_accessor :cells
 
-
-
   def reset!
     @cells = Array.new(9, " ")
   end
@@ -19,15 +17,12 @@ class Board
     puts  " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  # DRYing it up
   def index(location)
     location.to_i - 1
   end
 
   def position(location)
-    ## Subtracted one from input to get index value of array
-    ## implment location.to_i - 1 somewhere else to get DRY
-    # @cells[location.to_i - 1]
+
     @cells[self.index(location)]
   end
 
@@ -46,9 +41,7 @@ class Board
   end
 
   def taken?(location)
-    ## Subtracted one from input to get index value of array
-    ## implment location.to_i - 1 somewhere else to get DRY
-    # !(@cells[location.to_i - 1] == " ")
+
     !(@cells[self.index(location)] == " ")
   end
 
@@ -57,10 +50,7 @@ class Board
   end
 
   def update(location, player)
-    ## Subtracted one from input to get index value of array
-    ## implment location.to_i - 1 somewhere else to get DRY
-    # @cells[location.to_i - 1] = player.token
+
     @cells[self.index(location)] = player.token
   end
-
 end
