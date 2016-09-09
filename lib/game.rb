@@ -47,20 +47,27 @@ class Game
     puts "What kind of game would you like to play: 0, 1, or 2 players?"
     input = gets.strip
     if input == "0"
-      Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     elsif input == "1"
-      puts "Who should go first and be 'X'? Player-1 or Computer?"
-      input = gets.strip
-      if input == "Player-1"
-        Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-      elsif input == "Computer"
-        Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-      end
+      start_1_player
     elsif input == "2"
       Game.new
     else
       puts "I didn't understand that."
       start
+    end
+  end
+
+  def self.start_1_player
+    puts "Who should go first and be 'X'? Player-1 or Computer?"
+    input = gets.strip
+    if input == "Player-1"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    elsif input == "Computer"
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+    else
+      puts "I didn't understand that."
+      start_1_player
     end
   end
 
@@ -89,7 +96,7 @@ class Game
   def play_again?
     puts "Would you like to play again? (Y/N)"
     input = gets.strip
-    if input == "Y" 
+    if input == "Y"
       game = Game.start
       game.play
       play_again?
