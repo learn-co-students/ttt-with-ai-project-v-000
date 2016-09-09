@@ -9,6 +9,33 @@ class Cli
     self.game.play
   end
 
+  def create_game(num_players, first_player)
+    if first_player == 1
+      if num_players == 0
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+      elsif num_players == 1
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+      elsif num_players == 2
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      end
+    elsif first_player == 2
+      if num_players == 0
+        player_1 = Players::Computer.new("O")
+        player_2 = Players::Computer.new("X")
+      elsif num_players == 1
+        player_1 = Players::Human.new("O")
+        player_2 = Players::Computer.new("X")
+      elsif num_players == 2
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      end
+    end
+    self.game = Game.new(player_1, player_2)
+  end
+
   def play_again?
     puts "Play another game? (y/n)"
     yn = gets.strip
@@ -62,7 +89,7 @@ class Cli
       else
         puts "Invalid selection!"
         puts "Please enter 0, 1 or 2."
-        num_players = gets.chomp.to_i
+        num_players = gets.strip.to_i
         return false
       end
     end
@@ -83,40 +110,43 @@ class Cli
     #   end
     # end
     go_first = ->(first_player) do
-      if num_players == 0 && first_player == 1
-        player_1 = Players::Computer.new("X")
-        player_2 = Players::Computer.new("O")
-        self.game = Game.new(player_1, player_2)
-        valid = true
-      elsif num_players == 0 && first_player == 2
-        player_2 = Players::Computer.new("X")
-        player_1 = Players::Computer.new("O")
-        self.game = Game.new(player_1, player_2)
-        valid = true
-      elsif num_players == 1 && first_player == 1
-        player_1 = Players::Human.new("X")
-        player_2 = Players::Computer.new("O")
-        self.game = Game.new(player_1, player_2)
-        valid = true
-      elsif num_players == 1 && first_player == 2
-        player_1 = Players::Human.new("O")
-        player_2 = Players::Computer.new("X")
-        self.game = Game.new(player_1, player_2)
-        valid = true
-      elsif num_players == 2 && first_player == 1
-        player_1 = Players::Human.new("X")
-        player_2 = Players::Human.new("O")
-        self.game = Game.new(player_1, player_2)
-        valid = true
-      elsif num_players == 2 && first_player == 2
-        player_1 = Players::Human.new("O")
-        player_2 = Players::Human.new("X")
-        self.game = Game.new(player_1, player_2)
+      # if num_players == 0 && first_player == 1
+      #   player_1 = Players::Computer.new("X")
+      #   player_2 = Players::Computer.new("O")
+      #   self.game = Game.new(player_1, player_2)
+      #   valid = true
+      # elsif num_players == 0 && first_player == 2
+      #   player_2 = Players::Computer.new("X")
+      #   player_1 = Players::Computer.new("O")
+      #   self.game = Game.new(player_1, player_2)
+      #   valid = true
+      # elsif num_players == 1 && first_player == 1
+      #   player_1 = Players::Human.new("X")
+      #   player_2 = Players::Computer.new("O")
+      #   self.game = Game.new(player_1, player_2)
+      #   valid = true
+      # elsif num_players == 1 && first_player == 2
+      #   player_1 = Players::Human.new("O")
+      #   player_2 = Players::Computer.new("X")
+      #   self.game = Game.new(player_1, player_2)
+      #   valid = true
+      # elsif num_players == 2 && first_player == 1
+      #   player_1 = Players::Human.new("X")
+      #   player_2 = Players::Human.new("O")
+      #   self.game = Game.new(player_1, player_2)
+      #   valid = true
+      # elsif num_players == 2 && first_player == 2
+      #   player_1 = Players::Human.new("O")
+      #   player_2 = Players::Human.new("X")
+      #   self.game = Game.new(player_1, player_2)
+      #   valid = true
+      if (first_player == 1 || first_player == 2) && (num_players == 1 || num_players == 2 || num_players == 0)
+        self.create_game(num_players, first_player)
         valid = true
       else
         puts "Invalid selection!"
         puts "Please enter 1 or 2."
-        first_player = gets.chomp.to_i
+        first_player = gets.strip.to_i
       end
     end
     first_player = self.integer_input_validation_loop(go_first, "Should Player 1 or Player 2 play X and go first?")
