@@ -15,7 +15,7 @@ class Game
   end
 
   def over?
-    (won? || draw?) ? true : false
+    won? || draw?
   end
 
   def won?
@@ -44,7 +44,6 @@ class Game
   #Methods related to managing a game
 
   def self.start
-    puts "Hello, Welcome to Tic Tac Toe!"
     puts "What kind of game would you like to play: 0, 1, or 2 players?"
     input = gets.strip
     if input == "0"
