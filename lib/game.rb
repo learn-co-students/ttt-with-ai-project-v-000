@@ -86,4 +86,18 @@ class Game
     board.display
   end
 
+  def play_again?
+    puts "Would you like to play again? (Y/N)"
+    input = gets.strip
+    if input == "Y" 
+      game = Game.start
+      game.play
+      play_again?
+    elsif input == "N"
+      puts "Thanks for playing!"
+    else
+      puts "I didn't understand that."
+      play_again?
+    end
+  end
 end
