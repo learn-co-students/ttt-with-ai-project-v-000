@@ -37,11 +37,11 @@ class Cli
   end
 
   def play_again?
-    puts "Play another game? (y/n)"
+    puts "Play another game (y/N)?"
     yn = gets.strip.upcase
 
     if yn[0] == "Y"
-      puts "Do you want to change the settings?"
+      puts "Do you want to change the settings (y/N?"
       yn = gets.strip.upcase
       if yn[0] == "Y"
         self.setup_game
@@ -150,7 +150,21 @@ class Cli
       end
     end
     first_player = self.integer_input_validation_loop(go_first, "Should Player 1 or Player 2 play X and go first?")
-    self.create_game(num_players.to_i, first_player.to_i)
+
+    set_difficulty = ->(difficulty) do
+      if difficulty == "1" || difficulty == "2" || difficulty == "3" || difficulty == "4" || difficulty == "5" || difficulty == "6" || difficulty == "7" || difficulty == "8" || difficulty == "9"
+        return true
+      else
+        puts "Invalid selection!"
+        puts "Please enter a number 1-9."
+        return false
+      end
+    end
+
+    num_players == "2" ? difficulty = "1" : difficulty = self.integer_input_validation_loop(set_difficulty, "What difficulty level for the computer players (1-9)?")
+
+
+    self.create_game(num_players.to_i, first_player.to_i, difficulty.to_i)
 
     # puts "Should Player 1 or Player 2 play X and go first?"
     # first_player = gets.strip.to_i
