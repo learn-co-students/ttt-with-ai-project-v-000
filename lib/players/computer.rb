@@ -13,13 +13,26 @@ module Players
     ]
 
     def move(board)
-      return self.win_array(board) unless self.win_array(board) == nil
-      return self.lose_array(board) unless self.lose_array(board) == nil
-      self.non_winning_moves(board)
+      return self.win_check(board) unless self.win_check(board) == nil
+      return self.block_check(board) unless self.block_check(board) == nil
+      return self.non_winning_moves(board) unless self.non_winning_moves(board) == nil
+      self.random_move(board, (0..8).to_a)
     end
 
+    def random_move(board, possible_indexes)
+      valid = false
+      while !valid && possible_indexes.length > 0
+        rand_num = rand(possible_indexes.length)
+        if board.cells[possible_indexes[rand_num]] == " " || nil
+          return "#{possible_indexes[rand_num]+1}"
+          valid = true
+        else
+          possible_indexes.delete_at(rand_num)
+        end
+      end
+    end
 
-    def win_array(board)
+    def win_check(board)
       WIN_COMBINATIONS.each do |win|
         if board.cells[win[0]] == self.token && board.cells[win[1]] == self.token && board.cells[win[2]] == " "
           return "#{win[2]+1}"
@@ -32,7 +45,7 @@ module Players
       nil
     end
 
-    def lose_array(board)
+    def block_check(board)
       self.token == "X" ? opponent_token = "O" : opponent_token = "X"
       WIN_COMBINATIONS.each do |win|
         if board.cells[win[0]] == opponent_token && board.cells[win[1]] == opponent_token && board.cells[win[2]] == " "
@@ -48,28 +61,33 @@ module Players
 
     def non_winning_moves(board)
       if board.turn_count == 0
-        return "1"
+        # return "1"
+        return random_move(board, [0,2,6,8])
       elsif board.cells[4] == " "
         return "5"
       elsif board.cells[4] != self.token
-        temp = [0,2,6,8]
-        temp.each do |check|
-          if board.cells[check] == " "
-            return "#{check + 1}"
-          end
-        end
+        # temp = [0,2,6,8]
+        # temp.each do |check|
+        #   if board.cells[check] == " "
+        #     return "#{check + 1}"
+        #   end
+        # end
+        random_move(board, [0,2,6,8])
       elsif board.cells[4] == self.token
-        temp = [1,3,5,7]
-          temp.each do |check|
-            if board.cells[check] == " "
-              break "#{check + 1}"
-            end
-          end
-      else
-        (1..9).each do |location|
-          return "#{location}" if board.cells[location-1] == " "
-        end
+        # temp = [1,3,5,7]
+        #   temp.each do |check|
+        #     if board.cells[check] == " "
+        #       break "#{check + 1}"
+        #     end
+        #   end
+        return random_move(board, [1,3,5,7])
+      # else
+        # (1..9).each do |location|
+        #   return "#{location}" if board.cells[location-1] == " "
+        # end
       end
+      nil
     end
+
   end
 end

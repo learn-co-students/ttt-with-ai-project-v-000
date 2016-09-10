@@ -150,7 +150,7 @@ class Game
       # end
     elsif current_player == self.player_2
       # self.cli.player_turn_prompt(current_player, 1)
-      self.player_turn_prompt(current_player, 1)
+      self.player_turn_prompt(current_player, 2)
       # valid = false
       # while !valid do
       #   puts "Make your move, Player 2."
