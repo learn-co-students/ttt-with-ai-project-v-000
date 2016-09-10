@@ -72,25 +72,25 @@ class Cli
 
   def integer_input_validation_loop(validation, prompt = "")
     puts prompt
-    input = gets.strip.to_i
+    input = gets.strip
     valid = false
     while !valid do
       valid = validation.(input)
+      input = gets.strip if !valid
     end
     return input
   end
 
   def setup_game
     game_type = ->(num_players) do
-      if num_players == 0 || num_players == 2
+      if num_players == "0" || num_players == "2"
         return true
-      elsif num_players == 1
+      elsif num_players == "1"
         puts "In a single player game, Player 1 will be human while Player 2 will be computer."
         return true
       else
         puts "Invalid selection!"
         puts "Please enter 0, 1 or 2."
-        num_players = gets.strip.to_i
         return false
       end
     end
@@ -141,13 +141,13 @@ class Cli
       #   player_2 = Players::Human.new("X")
       #   self.game = Game.new(player_1, player_2)
       #   valid = true
-      if (first_player == 1 || first_player == 2) && (num_players == 1 || num_players == 2 || num_players == 0)
-        self.create_game(num_players, first_player)
-        valid = true
+      if (first_player == "1" || first_player == "2" ) && (num_players == "1" || num_players == "2" || num_players == "0")
+        self.create_game(num_players.to_i, first_player.to_i)
+        return true
       else
         puts "Invalid selection!"
         puts "Please enter 1 or 2."
-        first_player = gets.strip.to_i
+        return false
       end
     end
     first_player = self.integer_input_validation_loop(go_first, "Should Player 1 or Player 2 play X and go first?")
