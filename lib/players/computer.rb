@@ -2,7 +2,7 @@ require "pry"
 module Players
   class Computer < Player
 
-    attr_accessor :difficulty
+    attr_reader :difficulty
 
     WIN_COMBINATIONS = [
       [0, 1, 2],
@@ -15,12 +15,37 @@ module Players
       [2, 4, 6]
     ]
 
+    def initialize(token, difficulty = 1)
+      @token = token
+      @difficulty = difficulty
+    end
+
     def move(board)
-      return self.win_check(board) unless self.win_check(board) == nil
-      return self.block_check(board) unless self.block_check(board) == nil
-      return self.openings(board) unless self.openings(board) == nil
-      return self.corners_over_sides(board) unless self.corners_over_sides(board) == nil
-      self.random_move(board, (0..8).to_a)
+      if self.difficulty == 1
+        return self.block_check(board) unless self.block_check(board) == nil
+        return self.win_check(board) unless self.win_check(board) == nil
+        self.random_move(board, (0..8).to_a)
+      elsif self.difficulty == 2
+        return self.win_check(board) unless self.win_check(board) == nil
+        return self.block_check(board) unless self.block_check(board) == nil
+        self.random_move(board, (0..8).to_a)
+      elsif self.difficulty == 3
+        return self.win_check(board) unless self.win_check(board) == nil
+        return self.block_check(board) unless self.block_check(board) == nil
+        return self.openings(board) unless self.openings(board) == nil
+        self.random_move(board, (0..8).to_a)
+      elsif self.difficulty == 4
+        return self.win_check(board) unless self.win_check(board) == nil
+        return self.block_check(board) unless self.block_check(board) == nil
+        return self.corners_over_sides(board) unless self.corners_over_sides(board) == nil
+        self.random_move(board, (0..8).to_a)
+      else
+        return self.win_check(board) unless self.win_check(board) == nil
+        return self.block_check(board) unless self.block_check(board) == nil
+        return self.openings(board) unless self.openings(board) == nil
+        return self.corners_over_sides(board) unless self.corners_over_sides(board) == nil
+        self.random_move(board, (0..8).to_a)
+      end
     end
 
     def random_move(board, possible_indexes)

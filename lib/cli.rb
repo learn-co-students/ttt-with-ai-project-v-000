@@ -9,25 +9,25 @@ class Cli
     self.game.play
   end
 
-  def create_game(num_players, first_player)
+  def create_game(num_players, first_player, difficulty = 1)
     if first_player == 1
       if num_players == 0
-        player_1 = Players::Computer.new("X")
-        player_2 = Players::Computer.new("O")
+        player_1 = Players::Computer.new("X", difficulty)
+        player_2 = Players::Computer.new("O", difficulty)
       elsif num_players == 1
         player_1 = Players::Human.new("X")
-        player_2 = Players::Computer.new("O")
+        player_2 = Players::Computer.new("O", difficulty)
       elsif num_players == 2
         player_1 = Players::Human.new("X")
         player_2 = Players::Human.new("O")
       end
     elsif first_player == 2
       if num_players == 0
-        player_1 = Players::Computer.new("O")
-        player_2 = Players::Computer.new("X")
+        player_1 = Players::Computer.new("O", difficulty)
+        player_2 = Players::Computer.new("X", difficulty)
       elsif num_players == 1
         player_1 = Players::Human.new("O")
-        player_2 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("X", difficulty)
       elsif num_players == 2
         player_1 = Players::Human.new("X")
         player_2 = Players::Human.new("O")
@@ -142,7 +142,6 @@ class Cli
       #   self.game = Game.new(player_1, player_2)
       #   valid = true
       if (first_player == "1" || first_player == "2" ) && (num_players == "1" || num_players == "2" || num_players == "0")
-        self.create_game(num_players.to_i, first_player.to_i)
         return true
       else
         puts "Invalid selection!"
@@ -151,6 +150,7 @@ class Cli
       end
     end
     first_player = self.integer_input_validation_loop(go_first, "Should Player 1 or Player 2 play X and go first?")
+    self.create_game(num_players.to_i, first_player.to_i)
 
     # puts "Should Player 1 or Player 2 play X and go first?"
     # first_player = gets.strip.to_i
