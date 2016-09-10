@@ -13,9 +13,10 @@ module Players
     ]
 
     def move(board)
-    self.win_array(board)
-    self.lose_array(board)
-    
+      return self.win_array(board) unless self.win_array(board) == nil
+      return self.lose_array(board) unless self.lose_array(board) == nil
+      self.non_winning_moves(board)
+
     end
 
 
@@ -34,23 +35,22 @@ module Players
     end
 
     def lose_array(board)
-
-      self.token == "X" ? oppent_token = "O" : oppent_token = "X"
-        WIN_COMBINATIONS.each do |win|
-          if board.cells[win[0]] == oppent_token && board.cells[win[1]] == oppent_token && board.cells[win[2]] == " "
-            return "#{win[2]+1}"
-          elsif board.cells[win[1]] == oppent_token && board.cells[win[2]] == oppent_token && board.cells[win[0]] == " "
-            return "#{win[0]+1}"
-          elsif board.cells[win[0]] == oppent_token && board.cells[win[2]] == oppent_token && board.cells[win[1]] == " "
-            return "#{win[1]+1}"
-          else
-            return self.non_winning_moves(board)
-          end
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+      WIN_COMBINATIONS.each do |win|
+        if board.cells[win[0]] == opponent_token && board.cells[win[1]] == opponent_token && board.cells[win[2]] == " "
+          return "#{win[2]+1}"
+        elsif board.cells[win[1]] == opponent_token && board.cells[win[2]] == opponent_token && board.cells[win[0]] == " "
+          return "#{win[0]+1}"
+        elsif board.cells[win[0]] == opponent_token && board.cells[win[2]] == opponent_token && board.cells[win[1]] == " "
+          return "#{win[1]+1}"
+        end
       end
+      nil
     end
 
+
     def non_winning_moves(board)
-      self.token == "X" ? oppent_token = "O" : oppent_token = "X"
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
         if board.turn_count == 0
           return "1"
         elsif board.cells[4] == " "
