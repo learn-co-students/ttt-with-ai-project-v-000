@@ -40,10 +40,10 @@ class Cli
     puts "Play another game? (y/n)"
     yn = gets.strip.upcase
 
-    if yn.first == "Y"
+    if yn[0] == "Y"
       puts "Do you want to change the settings?"
-      yn = gets.strip
-      if yn.first == "Y" 
+      yn = gets.strip.upcase
+      if yn[0] == "Y"
         self.setup_game
       else
         self.game.board.reset!
