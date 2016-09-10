@@ -1,6 +1,9 @@
 require "pry"
 module Players
   class Computer < Player
+
+    attr_accessor :difficulty
+
     WIN_COMBINATIONS = [
       [0, 1, 2],
       [3, 4, 5],
@@ -15,7 +18,8 @@ module Players
     def move(board)
       return self.win_check(board) unless self.win_check(board) == nil
       return self.block_check(board) unless self.block_check(board) == nil
-      return self.non_winning_moves(board) unless self.non_winning_moves(board) == nil
+      return self.openings(board) unless self.openings(board) == nil
+      return self.corners_over_sides(board) unless self.corners_over_sides(board) == nil
       self.random_move(board, (0..8).to_a)
     end
 
@@ -59,32 +63,20 @@ module Players
       nil
     end
 
-    def non_winning_moves(board)
+    def openings(board)
       if board.turn_count == 0
-        # return "1"
         return random_move(board, [0,2,6,8])
       elsif board.cells[4] == " "
         return "5"
-      elsif board.cells[4] != self.token
-        # temp = [0,2,6,8]
-        # temp.each do |check|
-        #   if board.cells[check] == " "
-        #     return "#{check + 1}"
-        #   end
-        # end
-        random_move(board, [0,2,6,8])
+      end
+      nil
+    end
+
+    def corners_over_sides(board)
+      if board.cells[4] != self.token
+        return random_move(board, [0,2,6,8])
       elsif board.cells[4] == self.token
-        # temp = [1,3,5,7]
-        #   temp.each do |check|
-        #     if board.cells[check] == " "
-        #       break "#{check + 1}"
-        #     end
-        #   end
         return random_move(board, [1,3,5,7])
-      # else
-        # (1..9).each do |location|
-        #   return "#{location}" if board.cells[location-1] == " "
-        # end
       end
       nil
     end
