@@ -17,5 +17,30 @@ class Game
         @player_1 = player_1
         @player_2 = player_2
     end
+    
+    def current_player
+        @board.turn_count.even? ? player_1 : player_2
+    end
+    
+    def over?
+        if @board.full? || self.won? != []
+            true
+        else
+            false
+        end
+    end
+    
+    ## refactor if at all possible
+    def won?
+        x_wins = WIN_COMBINATIONS.select { |array| @board.cells[array[0]] == "X" && @board.cells[array[1]] == "X" && @board.cells[array[2]] == "X"}
+        o_wins = WIN_COMBINATIONS.select { |array| @board.cells[array[0]] == "O" && @board.cells[array[1]] == "O" && @board.cells[array[2]] == "O"}
+        if  x_wins != []
+            return x_wins
+        elsif  o_wins != []
+            return o_wins
+        else
+            return false
+        end
+    end
 
 end
