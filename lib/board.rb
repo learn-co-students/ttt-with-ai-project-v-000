@@ -2,11 +2,11 @@ class Board
     attr_accessor:cells
     
     def initialize
-        @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        self.reset!
     end
     
     def reset!
-        @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        @cells = Array.new(9, " ")
     end
     
     def display
@@ -17,8 +17,12 @@ class Board
         puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
     end
     
+    def index(input)
+        input.to_i - 1
+    end
+    
     def position(input)
-        @cells[input.to_i - 1]
+        @cells[self.index(input)]
     end
     
     def full?
@@ -42,9 +46,8 @@ class Board
         end
     end
     
-    ## too many repeats. see if we can refactor this one to use the #position method? 
     def update(input, player)
-        @cells[input.to_i - 1] = player.token
+        @cells[self.index(input)] = player.token
     end
         
 end

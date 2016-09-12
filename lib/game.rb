@@ -28,16 +28,17 @@ class Game
         !self.draw? && !self.won? ? false : true
     end
     
-    ## refactor if at all possible
+    
     def won?
         x_wins = WIN_COMBINATIONS.select { |array| @board.cells[array[0]] == "X" && @board.cells[array[1]] == "X" && @board.cells[array[2]] == "X"}
         o_wins = WIN_COMBINATIONS.select { |array| @board.cells[array[0]] == "O" && @board.cells[array[1]] == "O" && @board.cells[array[2]] == "O"}
-        if  x_wins != []
+        
+        if x_wins != []
             x_wins.flatten
-        elsif  o_wins != []
+        elsif o_wins != []
             o_wins.flatten
         else
-            return false
+            false
         end
     end
     
@@ -45,10 +46,9 @@ class Game
         @board.full? && !self.won? ? true : false
     end
     
-    # may also need refactoring
     def winner
-        if won? != false
-            return @board.cells[self.won?[0]]
+        if won?
+            @board.cells[self.won?[0]]
         end
     end
             
@@ -58,6 +58,7 @@ class Game
     
     def play
         while !self.over?
+            @board.display
             self.turn
         end
         if self.won?
