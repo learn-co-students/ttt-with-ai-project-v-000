@@ -1,0 +1,54 @@
+class Board
+  attr_accessor :cells, :token
+
+
+  def initialize
+    reset!
+  end
+
+  def reset!
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  end
+
+  def display
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts "-----------"
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts "-----------"
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+  end
+
+  def position(cell)
+    @cells[cell.to_i - 1]
+  end
+
+  def full?
+    @cells.none? do |cell|
+      cell == " "
+    end
+  end
+
+  def turn_count
+    @cells.count {|token| token == "X" || token == "O"}
+  end
+
+  def taken?(cell)
+    position(cell) != " " && position(cell) != ""
+  end
+
+  def valid_move?(cell)
+    cell.to_i.between?(1,9) && !taken?(cell)
+  end
+
+  def token
+    turn_count.even? ? "X" : "O"
+  end
+
+
+  def update(cell, player)
+    if valid_move?(cell)
+      cells[cell.to_i - 1] = player.token
+    end
+  end
+
+end
