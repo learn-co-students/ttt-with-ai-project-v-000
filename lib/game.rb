@@ -40,8 +40,7 @@ class Game
     current_player.token if won?
   end
 
-  # def turn
-  #  current_player.move
-  #  gets.chomp.to_s
-  #end
+  def turn
+    current_player.move([])
+  end
 end
