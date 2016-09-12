@@ -12,6 +12,7 @@ module Players
             if board.class != Board # this is just here to pass the 03_human_player spec
                 receive_input
             else
+                receive_input
                 while !board.valid_move?(@input)
                     puts "I'm sorry, I don't recognize that"
                     receive_input
