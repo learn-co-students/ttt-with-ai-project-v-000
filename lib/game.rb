@@ -60,7 +60,7 @@ class Game
             
     def turn
         move = self.current_player.move(@board)
-        current_player.add_move(move)
+        self.current_player.add_move(move)
         @board.update(move, self.current_player)
     end
     
