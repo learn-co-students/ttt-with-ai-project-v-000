@@ -1,12 +1,22 @@
 module Players
     class Computer < Player
         
-        attr_accessor:moves
+        attr_accessor:moves, :taken_spots
         
         def add_move(input)
             @moves << input
             input
         end
+        
+        def taken_spots(board)
+            spots = []
+            board.cells.each_with_index do |cell, index| 
+                if cell != " " 
+                    spots << index + 1
+                end
+            end
+        end
+            
         
         def move(board)
             turn_count = board.turn_count

@@ -53,7 +53,9 @@ class Game
     end
             
     def turn
+        self.current_player.move(@board)
         while !@board.valid_move?(self.current_player.input)
+            puts "I don't recognize that."
             self.current_player.move(@board)
         end
         @board.update(self.current_player.input, self.current_player)
