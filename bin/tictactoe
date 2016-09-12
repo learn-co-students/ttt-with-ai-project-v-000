@@ -55,6 +55,8 @@ case
             end
             game_count += 1
         end
-        puts "#{won_count} out of 100 games were won"
+        puts ""
+        puts "Wargames complete!"
+        puts "#{won_count} out of 100 games had a winner."
 end
 
