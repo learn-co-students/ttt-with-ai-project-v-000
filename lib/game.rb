@@ -66,11 +66,11 @@ class Game
   end
 
   def self.start_1_player
-    puts "Who should go first and be 'X'? Player-1 or Computer?"
-    input = gets.strip
-    if input == "Player-1"
+    puts "Who should go first and be 'X'? (Human/Computer)"
+    input = gets.strip.upcase
+    if input == "HUMAN"
       Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    elsif input == "Computer"
+    elsif input == "COMPUTER"
       Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
     else
       puts "I didn't understand that."
@@ -102,7 +102,7 @@ class Game
 
   def play_again?
     puts "Would you like to play again? (Y/N)"
-    input = gets.strip
+    input = gets.strip.upcase
     if input == "Y"
       game = Game.start
       game.play
