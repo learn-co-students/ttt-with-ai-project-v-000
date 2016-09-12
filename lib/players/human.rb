@@ -14,7 +14,7 @@ module Players
             else
                 receive_input
                 while !board.valid_move?(@input)
-                    puts "I'm sorry, I don't recognize that"
+                    puts "Invalid move!"
                     receive_input
                 end
             end

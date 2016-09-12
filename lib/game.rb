@@ -18,10 +18,16 @@ class Game
         @board = board
         @player_1 = player_1
         @player_2 = player_2
+        @player_1.game = self
+        @player_2.game = self
     end
     
     def current_player
         @board.turn_count.even? ? player_1 : player_2
+    end
+    
+    def not_current_player
+        @board.turn_count.even? ? player_2 : player_1
     end
     
     def over?
@@ -54,6 +60,7 @@ class Game
             
     def turn
         move = self.current_player.move(@board)
+        current_player.add_move(move)
         @board.update(move, self.current_player)
     end
     
