@@ -115,7 +115,7 @@ module Players
   end
 end
 ```
-Now when you call your Human class, you'll have to call it inside it's name space with `Players::Human`.
+Now when you call your Human class, you'll have to call it inside its name space with `Players::Human`.
 
 ##### `game.rb` - `Game`
 
