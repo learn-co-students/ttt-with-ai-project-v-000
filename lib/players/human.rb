@@ -3,6 +3,7 @@ module Players
     attr_accessor :token
 
     def move(board)
+      board.display
       puts "Please enter the box in which you would like to move"
       input = gets.chomp
     end

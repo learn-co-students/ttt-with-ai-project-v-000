@@ -2,17 +2,47 @@
 
 require_relative '../config/environment'
 
-class Greetings
+class CLI
 
   def initialize
-  puts "Hello User! What kind of Tic Tac Toe game would you like to play?"
-    game_type = gets.strip.to_i
-  puts "and which player should go first and be 'X' (Player 1 or Player 2)?"
-    first_player = gets.strip
+    puts "Hello User, Welcome to Tic Tac Toe! How many human players will be playing today: 0, 1, or 2?"
+      game_type = gets.strip.to_i
+      @game_type = game_type
+      if @game_type == 1
+        puts "Who should pick first and be 'X': Human or Computer?"
+        @goes_first = gets.strip
+      else
 
-    @game_type = game_type
-    @first_player = first_player
+      end
   end
 
+  def gameplay
+    if @game_type == 2
+      game = Game.new
+    elsif @game_type == 1 && @goes_first == "Human" || @goes_first == "human"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    elsif @game_type == 1 && @goes_first == "Computer" || @goes_first == "computer"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    elsif @game_type == 0
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    else
+      initialize
+      game
+    end
+      game.play
+      next_game
+  end
+
+  def next_game
+    puts "Would you like to play again: Yes or No?"
+    response = gets.strip
+    if response != "Yes" || "yes"
+      puts "Goodbye!"
+    else
+      CLI.new.gameplay
+  end
+end
 
 end
+
+CLI.new.gameplay
