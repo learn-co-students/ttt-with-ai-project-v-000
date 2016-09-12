@@ -1,7 +1,8 @@
+require 'pry'
+
 module Players
-  #Define a class `Players::Computer` that represents a computer player of Tic Tac Toe.
+
   class Computer < Player
-    attr_accessor :x_ary, :o_ary
 
     WIN_COMBINATIONS = [
       [0,1,2],
@@ -14,98 +15,162 @@ module Players
       [2,4,6]
     ]
 
-    CORNERS = ["1","3","7","9"]
-    SIDES = ["2","4","6","8"]
+    DIAGONALS = [
+      [0,4,8],
+      [2,4,6]
+    ]
+    SIDES = [
+      [0,1,2],
+      [6,7,8],
+      [0,3,6],
+      [2,5,8]
+    ]
+
+    VERTICALS = [
+      [3,4,5],
+      [1,4,7]
+    ]
+
     MOVES = ["5", "1", "3", "7", "9", "2", "4", "6", "8"]
 
-    def move(board= nil)
-  
-     if self.token == "X"   #Token = "X"/ First player
-        if board.turn_count < 3         #First move
-            if board.valid_move?("1")
-              "1"
-            elsif board.valid_move?("9")        #Second move (Perfect X)
-              "9"
-            else
-              CORNERS.find {|corner| board.valid_move?(corner)}
-            end
-
-        elsif board.turn_count >= 3
-          find_x_index(board)
-          win = WIN_COMBINATIONS.find do |wc|
-            if x_ary.include?(wc[0]) && x_ary.include?(wc[1]) && board.cells[wc[2]] == " "
-               return wc[2]+1
-            elsif x_ary.include?(wc[2]) && x_ary.include?(wc[1]) && board.cells[wc[0]] == " "
-               return wc[0]+1
-            elsif x_ary.include?(wc[0]) && x_ary.include?(wc[2]) && board.cells[wc[1]] == " "
-               return wc[1]+1
-            end
-          end
-          if win == nil
-            MOVES.find {|move| board.valid_move?(move)}
-          end
-        end
-
-      end #if self.token == "X"
-
-      if self.token == "O"                #Token = "O"/ Second player
-        if board.valid_move?("5")        #First move
-          "5"                               #Perfect "X"
-        elsif board.turn_count < 3 #elsif board.cells[4] == "X"        #Imperfect "X"
-          CORNERS.find {|corner| board.valid_move?(corner)}
-        elsif #board.turn_count >= 3
-          find_o_index(board)
-          win = WIN_COMBINATIONS.find do |wc|
-            if o_ary.include?(wc[0]) && o_ary.include?(wc[1]) && board.cells[wc[2]] == " "
-               return wc[2]+1
-            elsif o_ary.include?(wc[2]) && o_ary.include?(wc[1]) && board.cells[wc[0]] == " "
-               return wc[0]+1
-            elsif o_ary.include?(wc[0]) && o_ary.include?(wc[2]) && board.cells[wc[1]] == " "
-               return wc[1]+1
-            end
-          end
-          if win == nil
-            MOVES.find {|move| board.valid_move?(move)}
-          end
-        end
-      end #if self.token == "O"
-    end #def move
-
-    def find_x_index(board= nil)
-      self.x_ary = []
-        board.cells.each_index do |e|
-          if board.cells[e] == "X"
-            x_ary << e.to_i
-          end
-        end
+    def move(board)
+      if win(board) == true
+        win(board)
+      elsif block(board) == true
+        block(board)
+      elsif diagonal_fork_move(board) == true
+        diagonal_fork_move(board)
+      elsif sides_fork_move(board) == true
+        sides_fork_move(board)
+      elsif vertical_block_fork(board) == true
+        vertical_block_fork(board)
+      elsif diagonal_block_fork(board) == true
+        diagonal_block_fork(board)
+      elsif sides_block_fork(board) == true
+        sides_block_fork(board)
+      elsif opposite_corner(board) == true
+        opposite_corner(board)
+      else
+        moves(board)
+      end
     end
 
-    def find_o_index(board= nil)
-      self.o_ary = []
-        board.cells.each_index do |e|
-          if board.cells[e] == "O"
-            o_ary << e.to_i
+
+    def win(board)
+      WIN_COMBINATIONS.each do |wc|
+         if board.cells[wc[0]] == self.token && board.cells[wc[1]] == self.token && board.cells[wc[2]] == " "
+           "#{wc[2]+1}"
+         elsif board.cells[wc[1]] == self.token && board.cells[wc[2]] == self.token && board.cells[wc[0]] == " "
+           "#{wc[0]+1}"
+         elsif board.cells[wc[0]] == self.token && board.cells[wc[2]] == self.token && board.cells[wc[1]] == " "
+           "#{wc[1]+1}"
+         end
+       end
+    end
+
+    def block(board)
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+      WIN_COMBINATIONS.each do |wc|
+         if board.cells[wc[0]] == opponent_token && board.cells[wc[1]] == opponent_token && board.cells[wc[2]] == " "
+           "#{wc[2]+1}"
+         elsif board.cells[wc[1]] == opponent_token && board.cells[wc[2]] == opponent_token && board.cells[wc[0]] == " "
+           "#{wc[0]+1}"
+         elsif board.cells[wc[0]] == opponent_token && board.cells[wc[2]] == opponent_token && board.cells[wc[1]] == " "
+           "#{wc[1]+1}"
+         end
+       end
+    end
+
+    def diagonal_fork_move(board)
+      SIDES.each do |side|
+        if board.cells[side[0]] == self.token && board.cells[side[1]] == " " && board.cells[side[2]] == self.token
+          "8"
+        else
+          "6"
+        end
+      end
+    end
+
+    def sides_fork_move(board)
+      SIDES.each do |side|
+        if board.cells[side[0]] == self.token && board.cells[side[1]] == " " && board.cells[side[2]] == self.token
+          if board.cells[0] == " " && board.cells[1] == " " && board.cells[2] == self.token
+            "1"
+          elsif board.cells[6] == " " && board.cells[7] == " " && board.cells[8] == self.token
+            "7"
+          elsif board.cells[0] == " " && board.cells[3] == " " && board.cells[6] == self.token
+            "1"
+          else board.cells[2] == " " && board.cells[5] == " " && board.cells[8] == self.token
+            "3"
           end
         end
+      end
     end
-  end
-end
 
-#    def move(board= nil)
-#     WIN_COMBINATIONS.find do |wc|
-#        if (board.cells[wc[0]] == board.cells[wc[1]]) && (board.cells[wc[0]] != board.cells[wc[2]])
-#          return "#{wc[2]}"
-#        elsif (board.cells[wc[2]] == board.cells[wc[1]]) && (board.cells[wc[2]] != board.cells[wc[0]])
-#          return "#{wc[0]}"
-#        elsif (board.cells[wc[0]] == board.cells[wc[2]]) && (board.cells[wc[0]] != board.cells[wc[1]])
-#          return "#{wc[1]}"
-#        else
-#          moves = ["5", "1", "3", "7", "9", "2", "4", "6", "8"]
-#          moves.find do |move|
-#            board.taken?(move) == false
-#          end
-#        end
-#      end
-#    end #move method
-#  end #class Computer < Player
-#end #module Players
+    def vertical_block_fork(board)
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+      DIAGONALS.each do |diag|
+        if board.cells[diag[0]] == opponent_token && board.cells[diag[1]] == self.token && board.cells[diag[2]] == opponent_token
+          if board.cells[3] == " " && board.cells[4] == self.token && board.cells[5] == " "
+            "6"
+          elsif board.cells[1] == " " && board.cells[4] == self.token && board.cells[7] == " "
+            "8"
+          end
+        end
+      end
+    end
+
+    def diagonal_block_fork(board)
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+      SIDES.each do |side|
+        if board.cells[side[0]] == opponent_token && board.cells[side[1]] == " " && board.cells[side[2]] == opponent_token
+          if board.cells[0] == opponent_token && board.cells[4] == " " && board.cells[8] == " "
+            "9"
+          else board.cells[2] == opponent_token && board.cells[4] == " " && board.cells[6] == " "
+            "7"
+          end
+        end
+      end
+    end
+
+    def sides_block_fork(board)
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+      SIDES.each do |side|
+        if board.cells[side[0]] == opponent_token && board.cells[side[1]] == " " && board.cells[side[2]] == opponent_token
+          if board.cells[0] == opponent_token && board.cells[1] == " " && board.cells[2] == " "
+            "3"
+          elsif board.cells[6] == opponent_token && board.cells[7] == " " && board.cells[8] == " "
+            "9"
+          elsif board.cells[0] == opponent_token && board.cells[3] == " " && board.cells[6] == " "
+            "7"
+          else board.cells[2] == opponent_token && board.cells[5] == " " && board.cells[8] == " "
+            "9"
+          end
+        end
+      end
+    end
+
+    def center(board)
+      if board.cells[4] == " "
+        "5"
+      end
+    end
+
+    def opposite_corner(board)
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+      if board.cells[0] == opponent_token && board.cells[8] == " "
+        "9"
+      elsif board.cells[2] == opponent_token && board.cells[6] == " "
+        "7"
+      elsif board.cells[6] == opponent_token && board.cells[2] == " "
+        "3"
+      elsif board.cells[8] == opponent_token && board.cells[0] == " "
+        "1"
+      end
+    end
+
+    def moves(board)
+      MOVES.find {|move| board.valid_move?(move)}
+    end
+  end #class Computer < Player
+end#module Players
