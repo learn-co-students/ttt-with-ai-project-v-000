@@ -7,6 +7,7 @@ class Game
     self.board = board
     self.player_1 = player_1
     self.player_2 = player_2
+    board.display_positions
   end
 
   #These methods relate to the state of the game:
