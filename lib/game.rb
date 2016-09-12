@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
     WIN_COMBINATIONS = [
         [0,1,2], # top row
@@ -23,11 +25,7 @@ class Game
     end
     
     def over?
-        if @board.full? || self.won? != []
-            true
-        else
-            false
-        end
+        !self.draw? && !self.won? ? false : true
     end
     
     ## refactor if at all possible
@@ -35,12 +33,37 @@ class Game
         x_wins = WIN_COMBINATIONS.select { |array| @board.cells[array[0]] == "X" && @board.cells[array[1]] == "X" && @board.cells[array[2]] == "X"}
         o_wins = WIN_COMBINATIONS.select { |array| @board.cells[array[0]] == "O" && @board.cells[array[1]] == "O" && @board.cells[array[2]] == "O"}
         if  x_wins != []
-            return x_wins
+            x_wins.flatten
         elsif  o_wins != []
-            return o_wins
+            o_wins.flatten
         else
             return false
         end
     end
-
+    
+    def draw?
+        @board.full? && !self.won? ? true : false
+    end
+    
+    # may also need refactoring
+    def winner
+        if won? != false
+            return @board.cells[self.won?[0]]
+        end
+    end
+            
+    def turn
+        self.current_player.move(@board)
+    end
+    
+    def play
+        while !self.over?
+            self.turn
+        end
+        if self.won?
+            puts "Congratulations #{winner}!"
+        else
+            puts "Cats Game!"
+        end
+    end
 end
