@@ -64,9 +64,13 @@ class Game
             self.turn
         end
         if self.won?
+            @board.display
             puts "Congratulations #{winner}!"
+            return self.winner
         else
+            @board.display
             puts "Cats Game!"
+            return self.winner
         end
     end
 end

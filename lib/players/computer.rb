@@ -1,14 +1,23 @@
 module Players
     class Computer < Player
         
-        attr_accessor:moves, :taken_spots
+        attr_accessor:moves, :other_players_moves
         
-        ALMOST_WINS = [
+            WIN_COMBINATIONS_AI = [
+        ["0", "1" ,"2"], # top row
+        ["3" ,"4" ,"5"], # middle row
+        ["6" ,"7" ,"8"], # bottom row
+        ["0" ,"3" ,"6"], # first column
+        ["1", "4", "7"], # second column
+        ["2", "5", "8"], # third column
+        ["0", "4", "8"], # top left to bottom right diagonal
+        ["2", "4", "6"]  # top right to bottom left diagonal
             ]
         
         def initialize(token)
             super
             @moves = []
+            @other_players_moves = []
         end
         
         def add_move(input)
@@ -16,11 +25,10 @@ module Players
             input
         end
         
-        def taken_spots(board)
-            spots = []
-            board.cells.each_with_index do |cell, index| 
-                if cell != " " 
-                    spots << index + 1
+        def other_players_moves(board)
+            board.each do |cell|
+                if cell != self.token && cell != " "
+                    @other_players_moves << cell
                 end
             end
         end
