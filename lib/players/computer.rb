@@ -19,13 +19,12 @@ module Players
     MOVES = ["5", "1", "3", "7", "9", "2", "4", "6", "8"]
 
     def move(board= nil)
-
+  
      if self.token == "X"   #Token = "X"/ First player
-
-        if board.turn_count == 0           #First move
-            "1"
-        elsif board.turn_count == 2
-            if board.valid_move?("9")        #Second move (Perfect X)
+        if board.turn_count < 3         #First move
+            if board.valid_move?("1")
+              "1"
+            elsif board.valid_move?("9")        #Second move (Perfect X)
               "9"
             else
               CORNERS.find {|corner| board.valid_move?(corner)}
@@ -33,26 +32,42 @@ module Players
 
         elsif board.turn_count >= 3
           find_x_index(board)
-          WIN_COMBINATIONS.each do |wc|
-            if x_ary.include?(wc[0]) && x_ary.include?(wc[1]) && board[wc[2]] == " "
-               "#{board[wc[2]]+1}"
-            elsif x_ary.include?(wc[2]) && x_ary.include?(wc[1]) && board[wc[0]] == " "
-               "#{board[wc[0]]+1}"
-            elsif x_ary.include?(wc[0]) && x_ary.include?(wc[2]) && board[wc[1]] == " "
-               "#{board[wc[1]]+1}"
+          win = WIN_COMBINATIONS.find do |wc|
+            if x_ary.include?(wc[0]) && x_ary.include?(wc[1]) && board.cells[wc[2]] == " "
+               return wc[2]+1
+            elsif x_ary.include?(wc[2]) && x_ary.include?(wc[1]) && board.cells[wc[0]] == " "
+               return wc[0]+1
+            elsif x_ary.include?(wc[0]) && x_ary.include?(wc[2]) && board.cells[wc[1]] == " "
+               return wc[1]+1
             end
           end
+          if win == nil
+            MOVES.find {|move| board.valid_move?(move)}
+          end
         end
+
       end #if self.token == "X"
 
       if self.token == "O"                #Token = "O"/ Second player
         if board.valid_move?("5")        #First move
           "5"                               #Perfect "X"
-        elsif  #elsif board.cells[4] == "X"        #Imperfect "X"
+        elsif board.turn_count < 3 #elsif board.cells[4] == "X"        #Imperfect "X"
           CORNERS.find {|corner| board.valid_move?(corner)}
-        else
-          MOVES.find {|move| board.valid_move?(move)}
-        end #if board.cells[4]/beginning of moves conditional
+        elsif #board.turn_count >= 3
+          find_o_index(board)
+          win = WIN_COMBINATIONS.find do |wc|
+            if o_ary.include?(wc[0]) && o_ary.include?(wc[1]) && board.cells[wc[2]] == " "
+               return wc[2]+1
+            elsif o_ary.include?(wc[2]) && o_ary.include?(wc[1]) && board.cells[wc[0]] == " "
+               return wc[0]+1
+            elsif o_ary.include?(wc[0]) && o_ary.include?(wc[2]) && board.cells[wc[1]] == " "
+               return wc[1]+1
+            end
+          end
+          if win == nil
+            MOVES.find {|move| board.valid_move?(move)}
+          end
+        end
       end #if self.token == "O"
     end #def move
 
@@ -61,7 +76,6 @@ module Players
         board.cells.each_index do |e|
           if board.cells[e] == "X"
             x_ary << e.to_i
-          else
           end
         end
     end
@@ -71,7 +85,6 @@ module Players
         board.cells.each_index do |e|
           if board.cells[e] == "O"
             o_ary << e.to_i
-          else
           end
         end
     end
