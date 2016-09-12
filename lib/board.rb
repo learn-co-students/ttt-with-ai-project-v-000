@@ -10,11 +10,20 @@ class Board
   end
 
   def display
-    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    a = taken?("1") ? cells[0] : "1"
+    b = taken?("2") ? cells[1] : "2"
+    c = taken?("3") ? cells[2] : "3"
+    d = taken?("4") ? cells[3] : "4"
+    e = taken?("5") ? cells[4] : "5"
+    f = taken?("6") ? cells[5] : "6"
+    g = taken?("7") ? cells[6] : "7"
+    h = taken?("8") ? cells[7] : "8"
+    i = taken?("9") ? cells[8] : "9"
+    puts " #{a} | #{b} | #{c} "
     puts "-----------"
-    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts " #{d} | #{e} | #{f} "
     puts "-----------"
-    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts " #{g} | #{h} | #{i} "
   end
 
   def position(input_string)
