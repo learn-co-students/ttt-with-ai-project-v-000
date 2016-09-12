@@ -3,16 +3,50 @@ module Players
         
         attr_accessor:moves, :other_players_moves
         
-            WIN_COMBINATIONS_AI = [
-        ["0", "1" ,"2"], # top row
-        ["3" ,"4" ,"5"], # middle row
-        ["6" ,"7" ,"8"], # bottom row
-        ["0" ,"3" ,"6"], # first column
-        ["1", "4", "7"], # second column
-        ["2", "5", "8"], # third column
-        ["0", "4", "8"], # top left to bottom right diagonal
-        ["2", "4", "6"]  # top right to bottom left diagonal
-            ]
+        WINNING_COMBINATIONS_HASH = {
+            "1" => [
+                ["2", "3"],
+                ["4", "7"],
+                ["5", "9"]
+                ],
+            "2" => [
+                ["1", "3"],
+                ["5", "8"]
+                ],
+            "3" => [
+                ["1", "2"],
+                ["6", "9"],
+                ["5", "7"]
+                ],
+            "4" => [
+                ["5", "6"],
+                ["1", "7"],
+                ],
+            "5" => [
+                ["6", "4"],
+                ["2", "8"],
+                ["1", "9"],
+                ["3", "7"]
+                ],
+            "6" => [
+                ["4", "5"],
+                ["3", "9"]
+                ],
+            "7" => [
+                ["8", "9"],
+                ["1", "4"],
+                ["3", "5"]
+                ],
+            "8" => [
+                ["7", "9"],
+                ["2", "5"]
+                ],
+            "9" => [
+                ["7", "8"],
+                ["3", "6"],
+                ["1", "5"]
+                ]
+        }
         
         def initialize(token)
             super
@@ -31,7 +65,12 @@ module Players
                     @other_players_moves << cell
                 end
             end
+            @other_players_moves
         end
+        
+        def self_winning?
+            WINNING_COMBINATIONS_AI.find do |array|
+                
             
         
         def move(board)
