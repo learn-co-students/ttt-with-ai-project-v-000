@@ -22,8 +22,8 @@ attr_accessor :cells
   end
 
   def update(input, player)
-    player.token = @cells[input.to_i - 1]
-    
+    @cells[input.to_i - 1] = player.token
+
   end
 
   def full?
