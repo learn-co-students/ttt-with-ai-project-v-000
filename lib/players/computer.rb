@@ -92,7 +92,7 @@ module Players
     end
 
     def first_move(board)
-      if board.cells[0] == " "
+      if board.turn_count == 0
         "1"
       end
     end
