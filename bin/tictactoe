@@ -1,3 +1,18 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+class Greetings
+
+  def initialize
+  puts "Hello User! What kind of Tic Tac Toe game would you like to play?"
+    game_type = gets.strip.to_i
+  puts "and which player should go first and be 'X' (Player 1 or Player 2)?"
+    first_player = gets.strip
+
+    @game_type = game_type
+    @first_player = first_player
+  end
+
+
+end
