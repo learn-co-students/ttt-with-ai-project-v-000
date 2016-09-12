@@ -41,6 +41,9 @@ class Game
   end
 
   def turn
-    current_player.move([])
+    position = current_player.move(@board)
+    @board.update(position, current_player)
+    binding.pry
+    return position
   end
 end

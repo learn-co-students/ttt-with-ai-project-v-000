@@ -1,10 +1,11 @@
 module Players
   class Human < Player
 
-    def move(x)
-      # puts "Please enter a position: "
-      input = gets.chomp
-      # binding.pry
+    def move(board)
+      puts "Please enter a position: "
+      position = gets.chomp.to_s
+      return position
     end
+    
   end
 end
