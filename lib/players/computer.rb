@@ -15,31 +15,22 @@ module Players
       [2,4,6]
     ]
 
-    DIAGONAL_WINS = [
-      [0,4,8],
-      [2,4,6]
-    ]
-    SIDE_WINS = [
-      [0,1,2],
-      [0,3,6],
-      [6,7,8],
-      [2,5,8]
-    ]
-    CENTER_WINS = [
-      [3,4,5],
-      [1,4,7]
-    ]
-
     OPPOSITES = [[0,8],[2,6]]
     CORNERS = ["1","3","7","9"]
     SIDES = ["2","4","6","8"]
     MOVES = ["1", "5", "3", "7", "9", "2", "4", "6", "8"]
 
     def move(board)
-      if win(board) !=nil
+      if first_move(board) !=nil
+        first_move(board)
+      elsif win(board) !=nil
         win(board)
       elsif block(board) !=nil
         block(board)
+      elsif corner_fork(board) != nil
+        corner_fork(board)
+      elsif block_corner_fork(board) !=nil
+        block_corner_fork(board)
       elsif center(board) !=nil
         center(board)
       elsif opposite_corner(board) !=nil
@@ -77,6 +68,33 @@ module Players
          end
        end
        block
+    end
+
+    def corner_fork(board)
+      fork = nil
+      OPPOSITES.find do |opp|
+        if opp[0] == self.token && opp[1] == self.token
+          fork = CORNERS.find {|corner| board.valid?(corner)}
+        end
+      end
+      fork
+    end
+
+    def block_corner_fork(board)
+      self.token == "X" ? opponent_token = "O" : opponent_token = "X"
+      block = nil
+      OPPOSITES.find do |opp|
+        if board.cells[opp[0]] == opponent_token && board.cells[opp[1]] == opponent_token && board.cells[4] == self.token
+          block = SIDES.find {|side| board.valid_move?(side)}
+        end
+      end
+      block
+    end
+
+    def first_move(board)
+      if board.cells[0] == " "
+        "1"
+      end
     end
 
     def center(board)

@@ -41,7 +41,4 @@ class Board
     !taken?(input_string) && (input_string.to_i).between?(1,9)
   end
 
-#  def clear?
-#    cells == [" "," "," "," "," "," "," "," "," "]
-#  end
 end
