@@ -19,12 +19,29 @@ attr_accessor :board, :player_1, :player_2, :token
     @board = board
   end
 
-  def current_player
-  if board.turn_count.even?
-    @player_1
-  else
-    @player_2
+  def turn
+    input = current_player.gets
+    if board.valid_move?(input)
+
+    else
+      turn
+    end
   end
+
+  def current_player
+    if board.turn_count.even?
+      @player_1
+    else
+      @player_2
+    end
+  end
+
+  def winner
+    if won?
+      won?
+    else
+      nil
+    end
   end
 
   def over?
@@ -47,9 +64,9 @@ attr_accessor :board, :player_1, :player_2, :token
   position_3 = @board.cells[win_index_3]
 
   if position_1 == "X" && position_2 == "X" && position_3 == "X"
-    return win_combination
+    return "X"
   elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
-    return win_combination
+    return "O"
   else
     false
   end
