@@ -1,5 +1,7 @@
 require_relative "../player.rb"
 
+require 'pry'
+
 module Players
   class Human < Player
     attr_accessor :token

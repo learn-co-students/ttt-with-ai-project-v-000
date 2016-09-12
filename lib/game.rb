@@ -20,13 +20,24 @@ attr_accessor :board, :player_1, :player_2, :token
   end
 
   def turn
-    input = current_player.gets
+    input = current_player.move(@board)
     if board.valid_move?(input)
-
+      board.update(input, current_player)
     else
       turn
     end
   end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+     puts "Congratulations #{winner[0]}!"
+    else
+     puts "Cats Game!"
+    end
+   end
 
   def current_player
     if board.turn_count.even?
