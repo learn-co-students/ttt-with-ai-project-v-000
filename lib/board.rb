@@ -17,12 +17,8 @@ class Board
         puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
     end
     
-    def index(input)
-        input.to_i - 1
-    end
-    
     def position(input)
-        @cells[self.index(input)]
+        @cells[input.to_i - 1]
     end
     
     def full?
@@ -47,7 +43,7 @@ class Board
     end
     
     def update(input, player)
-        @cells[self.index(input)] = player.token
+        @cells[input.to_i - 1] = player.token
     end
         
 end
