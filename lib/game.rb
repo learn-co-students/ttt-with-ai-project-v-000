@@ -6,8 +6,8 @@ class Game
   [0, 3, 6], [1, 4, 7], [2, 5, 8],
   [0, 4, 8], [2, 4, 6]]
 
-  def initialize(player_1 = Players::Human.new("X"), 
-                 player_2 = Players::Human.new("O"), 
+  def initialize(player_1 = Players::Human.new("X"),
+                 player_2 = Players::Human.new("O"),
                  board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -37,7 +37,13 @@ class Game
   end
 
   def winner
-    current_player.token if won?
+    ["X","O"].detect do |player|
+      WIN_COMBINATIONS.any? do |combo|
+        combo.all? do |position|
+          @board.cells[position] == player
+        end
+      end
+    end
   end
 
   def turn

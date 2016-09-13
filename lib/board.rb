@@ -40,7 +40,7 @@ class Board
   end
 
   def turn_count
-    1 + @cells.count {|cell| cell == "X" || cell == "0"}
+    @cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   private
