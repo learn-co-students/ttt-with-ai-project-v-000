@@ -4,9 +4,82 @@ require_relative '../config/environment'
 
 puts "Hello, Welcome to Tic Tac Toe!"
 sleep(1)
-game = Game.start
+puts "What kind of game would you like to play: 0, 1, or 2 players?"
+input = gets.strip
+game = nil
+until game != nil
+  if input == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  elsif input == "1"
+    until game != nil
+      puts "Who should go first and be 'X'? (Human/Computer)"
+      input = gets.strip.upcase
+      if input == "HUMAN"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      elsif input == "COMPUTER"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+      else
+        puts "I didn't understand that."
+      end
+    end
+  elsif input == "2"
+    game = Game.new
+  elsif input == "wargames"
+    puts "Executing wargames"
+    sleep(0.5)
+    Game.wargames
+    puts "Game 100"
+    sleep(0.1)
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  else
+    puts "I didn't understand that."
+    puts "What kind of game would you like to play: 0, 1, or 2 players?"
+  end
+end
 game.play
 
 sleep(1)
 
-game.play_again?
+until input == "N"
+  puts "Would you like to play again? (Y/N)"
+  input = gets.strip.upcase
+  if input == "Y"
+    puts "What kind of game would you like to play: 0, 1, or 2 players?"
+    input = gets.strip
+    game = nil
+    until game != nil
+      if input == "0"
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      elsif input == "1"
+        until game != nil
+          puts "Who should go first and be 'X'? (Human/Computer)"
+          input = gets.strip.upcase
+          if input == "HUMAN"
+            game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+          elsif input == "COMPUTER"
+            game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+          else
+            puts "I didn't understand that."
+          end
+        end
+      elsif input == "2"
+        game = Game.new
+      elsif input == "wargames"
+        puts "Executing wargames"
+        sleep(0.5)
+        Game.wargames
+        puts "Game 100"
+        sleep(0.1)
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      else
+        puts "I didn't understand that."
+        puts "What kind of game would you like to play: 0, 1, or 2 players?"
+      end
+    end
+    game.play
+  elsif input == "N"
+    puts "Thanks for playing!"
+  else
+    puts "I didn't understand that."
+  end
+end

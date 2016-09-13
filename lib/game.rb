@@ -44,40 +44,6 @@ class Game
 
   #Methods related to managing a game
 
-  def self.start
-    puts "What kind of game would you like to play: 0, 1, or 2 players?"
-    input = gets.strip
-    if input == "0"
-      Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-    elsif input == "1"
-      start_1_player
-    elsif input == "2"
-      Game.new
-    elsif input == "wargames"
-      puts "Executing wargames"
-      sleep(0.5)
-      wargames
-      puts "Game 100"
-      sleep(0.1)
-      Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-    else
-      puts "I didn't understand that."
-      start
-    end
-  end
-
-  def self.start_1_player
-    puts "Who should go first and be 'X'? (Human/Computer)"
-    input = gets.strip.upcase
-    if input == "HUMAN"
-      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    elsif input == "COMPUTER"
-      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
-    else
-      puts "I didn't understand that."
-      start_1_player
-    end
-  end
 
   def play
     until over?
@@ -101,24 +67,9 @@ class Game
     board.display
   end
 
-  def play_again?
-    puts "Would you like to play again? (Y/N)"
-    input = gets.strip.upcase
-    if input == "Y"
-      game = Game.start
-      game.play
-      play_again?
-    elsif input == "N"
-      puts "Thanks for playing!"
-    else
-      puts "I didn't understand that."
-      play_again?
-    end
-  end
-
   def self.wargames
     counter = 1
-      until counter == 100
+      until counter == 101
       puts "Game #{counter}"
       sleep(0.01)
       game= Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
