@@ -4,17 +4,6 @@ module Players
 
   class Computer < Player
 
-    WIN_COMBINATIONS = [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-      [0,4,8],
-      [2,4,6]
-    ]
-
     OPPOSITES = [[0,8],[2,6]]
     CORNERS = ["1","3","7","9"]
     SIDES = ["2","4","6","8"]
@@ -42,7 +31,7 @@ module Players
 
     def win(board)
       win = nil
-      WIN_COMBINATIONS.find do |wc|
+      Game::WIN_COMBINATIONS.find do |wc|
          if board.cells[wc[0]] == self.token && board.cells[wc[1]] == self.token && board.cells[wc[2]] == " "
            win = "#{wc[2]+1}"
          elsif board.cells[wc[1]] == self.token && board.cells[wc[2]] == self.token && board.cells[wc[0]] == " "
@@ -58,7 +47,7 @@ module Players
     def block(board)
       self.token == "X" ? opponent_token = "O" : opponent_token = "X"
       block = nil
-      WIN_COMBINATIONS.find do |wc|
+      Game::WIN_COMBINATIONS.find do |wc|
          if board.cells[wc[0]] == opponent_token && board.cells[wc[1]] == opponent_token && board.cells[wc[2]] == " "
            block = "#{wc[2]+1}"
          elsif board.cells[wc[1]] == opponent_token && board.cells[wc[2]] == opponent_token && board.cells[wc[0]] == " "
