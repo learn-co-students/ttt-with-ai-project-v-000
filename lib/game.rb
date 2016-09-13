@@ -47,8 +47,22 @@ class Game
   end
 
   def turn
-    position = current_player.move(@board)
-    @board.update(position, current_player)
-    return position
+     position = current_player.move(@board)
+     
+      while !@board.valid_move?(position)
+        puts "Sorry, no dice"
+        position = current_player.move(@board)
+      end
+      
+      @board.update(position, current_player)
   end
+  
+  def play
+    while !self.over?
+    binding.pry
+    turn
+    end
+  end
+  
+  
 end
