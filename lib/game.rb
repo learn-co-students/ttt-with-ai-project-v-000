@@ -20,13 +20,11 @@ class Game
   end
 
   def current_player
-    if self.board.turn_count % 2 == 0
-      return player_1 if player_1.token == "X"
-      return player_2
-    else
-      return player_2 if player_2.token == "O"
-      return player_1
-    end
+   if self.board.turn_count % 2 == 0
+     player_1.token == "X" ? player_1 : player_2
+   else
+     player_2.token == "O" ? player_2 : player_1
+   end
   end
 
   def win_array
@@ -77,6 +75,7 @@ class Game
       self.player_turn_prompt(current_player, 1)
     else
       puts "Who are you?"
+
       return "Invalid player!"
     end
   end
