@@ -13,9 +13,9 @@ module Players
     ]
 
     def move(board)
-    return self.win_array(board) unless   self.win_array(board) == nil
-    return self.lose_array(board) unless self.lose_array(board) == nil
-    self.non_winning_moves(board)
+      return self.win_array(board) unless self.win_array(board) == nil
+      return self.lose_array(board) unless self.lose_array(board) == nil
+      self.non_winning_moves(board)
     end
 
 
@@ -34,14 +34,15 @@ module Players
 
     def lose_array(board)
       self.token == "X" ? opponent_token = "O" : opponent_token = "X"
-        WIN_COMBINATIONS.each do |win|
-          if board.cells[win[0]] == opponent_token && board.cells[win[1]] == opponent_token && board.cells[win[2]] == " "
-            return "#{win[2]+1}"
-          elsif board.cells[win[1]] == opponent_token && board.cells[win[2]] == opponent_token && board.cells[win[0]] == " "
-            return "#{win[0]+1}"
-          elsif board.cells[win[0]] == opponent_token && board.cells[win[2]] == opponent_token && board.cells[win[1]] == " "
-            return "#{win[1]+1}"
-          end
+      WIN_COMBINATIONS.each do |win|
+        if board.cells[win[0]] == opponent_token && board.cells[win[1]] == opponent_token && board.cells[win[2]] == " "
+          return "#{win[2]+1}"
+        elsif board.cells[win[1]] == opponent_token && board.cells[win[2]] == opponent_token && board.cells[win[0]] == " "
+          return "#{win[0]+1}"
+        elsif board.cells[win[0]] == opponent_token && board.cells[win[2]] == opponent_token && board.cells[win[1]] == " "
+          return "#{win[1]+1}"
+        end
+      end
       nil
     end
 
@@ -59,23 +60,17 @@ module Players
             end
           end
         elsif board.cells[4] == self.token
-          binding.pry
           temp = [1,3,5,7]
-            temp.each do |check|
-              if board.cells[check] == " "
-                break "#{check + 1}"
-              end
+          temp.each do |check|
+            if board.cells[check] == " "
+              break "#{check + 1}"
             end
+          end
         else
           (1..9).each do |location|
-              return "#{location}" if board.cells[location-1] == " "
-            end
+            return "#{location}" if board.cells[location-1] == " "
+          end
         end
-
     end
-
-
-
-
   end
 end
