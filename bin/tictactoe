@@ -8,7 +8,19 @@ def start
     if input == "0"
       @game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     elsif input == "1"
-      start_1_player
+      puts "Who should go first and be 'X'? (Human/Computer)"
+      input = gets.strip.upcase
+      until @game != nil
+        if input == "HUMAN"
+          @game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+        elsif input == "COMPUTER"
+          @game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+        else
+          puts "I didn't understand that."
+          puts "Who should go first and be 'X'? (Human/Computer)"
+          input = gets.strip.upcase
+        end
+      end
     elsif input == "2"
       @game = Game.new
     elsif input == "wargames"
@@ -21,19 +33,6 @@ def start
     else
       puts "I didn't understand that."
       start
-    end
-  end
-
-  def start_1_player
-    puts "Who should go first and be 'X'? (Human/Computer)"
-    input = gets.strip.upcase
-    if input == "HUMAN"
-      @game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    elsif input == "COMPUTER"
-      @game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
-    else
-      puts "I didn't understand that."
-      start_1_player
     end
   end
 
@@ -55,4 +54,5 @@ sleep(1)
 start
 @game.play
 sleep(1)
+@game = nil
 play_again?
