@@ -58,10 +58,14 @@ class Game
   end
   
   def play
-    while !self.over?
-    turn
+    while !over?
+      turn
     end
+    
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cats Game!"
+    end    
   end
-  
-  
 end
