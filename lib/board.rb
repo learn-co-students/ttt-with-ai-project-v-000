@@ -29,7 +29,29 @@ class Board
 
 #returns true for a full board
 	def full?
-	    self.cells.all? {|value| value == "X" || value == "O"}
+	    self.cells.all? {|value| (value == "X" || value == "O")}
+	end
+
+#turn_count keeps track of the number of turns
+  def turn_count
+    self.cells.count{|value| (value=="X" || value== "O")}
+  end
+
+#taken? checks that player's desired location is empty/available to be played.  If the position is free, method returns false
+	def taken?(position)
+		!(self.position(position).nil? || self.position(position) == " ")
+	end
+
+#valid_move? returns true if move is on the board and not already occupied
+  def valid_move?(position)
+    (position.to_i).between?(1, 9) && !(taken?(position))
+  end
+
+#update updates the cells in the board with the player token according to input.  player is Player object and has a token property
+	def update(position, player)
+		if valid_move?(position)
+			self.cells[position.to_i - 1] = player.token
+		end
 	end
 
 end
