@@ -19,7 +19,7 @@ class Game
   end
 
   def over?
-    @board.full? || won?
+    draw? || won?
   end
 
   def won?
@@ -33,7 +33,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    @board.full? && !won?
   end
 
   def winner
@@ -59,7 +59,6 @@ class Game
   
   def play
     while !self.over?
-    binding.pry
     turn
     end
   end
