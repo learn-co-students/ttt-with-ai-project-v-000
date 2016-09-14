@@ -1,7 +1,6 @@
 class Board
   attr_accessor :cells, :token
 
-
   def initialize
     reset!
   end
@@ -39,11 +38,6 @@ class Board
   def valid_move?(cell)
     cell.to_i.between?(1,9) && !taken?(cell)
   end
-
-  def token
-    turn_count.even? ? "X" : "O"
-  end
-
 
   def update(cell, player)
     if valid_move?(cell)
