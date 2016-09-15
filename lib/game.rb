@@ -39,11 +39,7 @@ class Game
   end
 
   def valid_move?(input)
-    input.to_i >= 1 && input.to_i <= 9 && !position_taken?(input.to_i)
-  end
-
-  def position_taken?(input)
-    self.board.cells[input - 1] != " "
+    input.to_i >= 1 && input.to_i <= 9 && !self.board.taken?(input)
   end
 
   def turn
