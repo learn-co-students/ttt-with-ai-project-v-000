@@ -32,7 +32,7 @@ class Game
      WIN_COMBINATIONS.detect do |combo|
       self.board.cells[combo[0]] == self.board.cells[combo[1]] &&
       self.board.cells[combo[1]] == self.board.cells[combo[2]] &&
-      self.board.taken?(combo[0])
+      self.board.taken?(combo[0]+1)
     end
   end
 
