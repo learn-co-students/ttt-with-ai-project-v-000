@@ -28,16 +28,9 @@ attr_accessor :cells
 
   def full?
     @cells.all? do |spaces|
-    if  spaces == "X" || spaces == "O"
-    true
-
-    else
-    false
-
+    spaces == "X" || spaces == "O"
     end
   end
-  end
-
 
   def taken?(input)
     !(@cells[input.to_i - 1].nil? || @cells[input.to_i - 1] == " ")

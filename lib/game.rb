@@ -55,11 +55,7 @@ attr_accessor :board, :player_1, :player_2, :token
   end
 
   def over?
-  if won? || full? || draw?
-    true
-  else
-    false
-  end
+    won? || board.full?
   end
 
   def won?
@@ -84,27 +80,8 @@ attr_accessor :board, :player_1, :player_2, :token
   false
   end
 
-
-  def full?
-    @board.cells.all? do |spaces|
-  if  spaces == "X" || spaces == "O"
-    true
-
-  else
-    false
-
-    end
-  end
-  end
-
-
   def draw?
-  if !won? && full?
-    true
-  else
-    false
+    !won? && board.full?
   end
-  end
-
 
 end
