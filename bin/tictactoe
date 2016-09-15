@@ -1,3 +1,35 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+### Different game initializations available ###
+
+def start
+
+  tic_tac_toe = nil
+
+  print "Welcome to TicTacToe!\nChoose a game type:\n1) 0-player game (watch the computer go head-to-head!)\n2) 1-player game (you start first!)\n3) 1-player game (the computer starts first!)\n4) 2-player game (play with a carbon-based friend!)\nChoose your selection: "
+  input = gets.strip
+  until input.to_i >= 1 && input.to_i <= 4
+    print "Sorry, try again.  Please Enter 1-4: "
+    input = gets.strip
+  end
+
+  case input
+  when "1"
+    tic_tac_toe = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+  when "2"
+    tic_tac_toe = Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+  when "3"
+    tic_tac_toe = Game.new(Players::Computer.new("X"),Players::Human.new("O"))
+  else
+    tic_tac_toe = Game.new(Players::Human.new("X"),Players::Human.new("O"))
+  end
+
+  tic_tac_toe.play
+end
+
+start
+
+
+
