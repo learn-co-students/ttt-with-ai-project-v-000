@@ -32,7 +32,7 @@ class Game
      WIN_COMBINATIONS.detect do |combo|
       self.board.cells[combo[0]] == self.board.cells[combo[1]] &&
       self.board.cells[combo[1]] == self.board.cells[combo[2]] &&
-      self.board.taken?(combo[0]+1)
+      self.board.taken?(combo[0]+1)  # combo[0] + 1 required becaue of #position indexing
     end
   end
 
@@ -52,12 +52,8 @@ class Game
     end
 
 # returns the winner of the game
-    def winner  ## start here: method doesn't return nil if game isn't won
-      if !(self.won?.nil?)
-        self.board.cells[self.win[0]]
-      else
-        nil
-      end
+    def winner
+      self.won?.nil? ? nil : self.board.cells[self.win[0]]
     end
 
 end
