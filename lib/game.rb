@@ -58,7 +58,7 @@ class Game
   end
 
   def play
-    puts "GAME START!"
+    
     self.board.display
 
     while !over?
