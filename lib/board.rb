@@ -31,8 +31,7 @@ class Board
   end
 
   def taken?(input)
-    cell = position(input)
-    (cell == "X") || (cell == "O")
+    (position(input) == "X") || (position(input) == "O")
   end
 
   def valid_move?(input)
