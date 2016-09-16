@@ -31,19 +31,11 @@ class Board
   end
 
   def taken?(input)
-    if position(input) == "X" || position(input) == "O"
-      return true
-    else
-      false
-    end
+    position(input) == "X" || position(input) == "O"? true : false
   end
 
   def valid_move?(input)
-    if input.to_i.between?(1,9) && !taken?(input)
-      true
-    else
-      false
-    end
+    input.to_i.between?(1,9) && !taken?(input)? true : false
   end
 
   def update(input, player)
