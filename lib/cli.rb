@@ -33,5 +33,20 @@ class CLI
           puts "Starting game...."
           game.play
       end
+      
+      def human_vs_computer
+      end
+      
+      def human_vs_human
+          puts "Player #1, would you like to play as X or O?"
+          input = gets.chomp
+          case input.downcase
+            when 'x'
+              game = Game.new(Players::Human.new('X'), Players::Human.new('O'))
+            when 'o'
+              game = Game.new(Players::Human.new('O'), Players::Human.new('X'))
+            end
+            game.play
+      end
     
 end

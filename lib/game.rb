@@ -57,9 +57,19 @@ class Game
       @board.update(position, current_player)
   end
   
+  def player
+    if current_player == @player_1
+      "Player #1"
+    else
+      "Player #2"
+    end
+  end
+  
   def play
     while !over?
+      print "#{player}:  "
       turn
+      @board.display
     end
     
     if won?
