@@ -1,11 +1,12 @@
+require "pry"
+
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner
 
-  def initialize(player_1, player_2, board)
-    @board = Board.new
-    @player_1 = Player.new("X")
-    @player_2 = Player.new("O")
-
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
   end
 
   WIN_COMBINATIONS = [
@@ -16,24 +17,37 @@ class Game
     [1,4,7], #Middle Column
     [2,5,8], #Right Column
     [0,4,8], #Diagonal from top right
-    [6,4,2] #Diagonal from top left
+    [6,4,2]  #Diagonal from top left
     ]
 
-    def current_player(board)
-      turn_count.even? ? "X" : "O"
+    # @winning_combo = []
+
+    def current_player
+      board.turn_count.even? ? @player_1 : @player_2
     end
 
     def won?
-      WIN_COMBINATIONS.detect do |win_comb|
-        if (win_comb.any? {|position| position_taken?(position)}) && (@board[win_comb[0]] == @board[win_comb[1]] && @board[win_comb[0]] == @board[win_comb[2]])
-          win_comb
-        end
+      WIN_COMBINATIONS.any? do |win_comb|
+        board.position(win_comb[0]) == board.position(win_comb[1]) &&
+        board.position(win_comb[0]) == board.position(win_comb[2]) &&
+        board.taken?(win_comb[0])
       end
     end
 
+    def over?
+      won? || draw?
+    end
 
+    def draw?
+      board.full? && !won?
+    end
 
-
-
-
+    def winner
+      if won? && @board.cells.count("X") > @board.cells.count("O")
+        "X"
+      elsif won? && @board.cells.count("X") < @board.cells.count("O")
+        "O"
+      end
+    end
+    
 end

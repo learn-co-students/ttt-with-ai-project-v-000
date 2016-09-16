@@ -6,16 +6,5 @@ module Players
       cell = gets.strip
     end
 
-
-    #     move(position, current_player)
-    #   else
-    #     puts "Invalid move."
-    #     turn
-    #   end
-    #   display_board
-    # end
-
-
-
   end
 end
