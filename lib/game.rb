@@ -51,9 +51,33 @@ class Game
       self.won? || self.draw?
     end
 
-# returns the winner of the game
+#returns the winner of the game
     def winner
       self.won?.nil? ? nil : self.board.cells[self.win[0]]
+    end
+
+#contains a single cycle of gameplay: first player makes a valid move, then switches to second player
+    def turn
+      x = self.current_player.move(self.board)
+
+      if self.board.valid_move?(x)
+        self.board.update(x, self.current_player)
+        self.current_player
+      else
+        self.turn
+      end
+    end
+
+#play manages the game, checking that the board is still playable and whether or not there's a winner
+    def play
+      until self.over?
+        self.turn
+      end
+      if self.won?
+        puts "Congratulations #{self.winner}!"
+      else
+        puts "Cats Game!"
+      end
     end
 
 end
