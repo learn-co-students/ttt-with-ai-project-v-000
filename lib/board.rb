@@ -18,11 +18,11 @@ attr_accessor :cells
   end
 
   def position(input)
-    @cells[input.to_i - 1]
+    @cells[input]
   end
 
   def update(input, player)
-    @cells[input.to_i - 1] = player.token
+    @cells[input] = player.token
 
   end
 
@@ -33,11 +33,11 @@ attr_accessor :cells
   end
 
   def taken?(input)
-    !(@cells[input.to_i - 1].nil? || @cells[input.to_i - 1] == " ")
+    !(@cells[input].nil? || @cells[input] == " ")
   end
 
   def valid_move?(input)
-    (input.to_i - 1).between?(0,8) && !taken?(input.to_i)
+    (input).between?(0,8) && !taken?(input)
   end
 
   def turn_count
