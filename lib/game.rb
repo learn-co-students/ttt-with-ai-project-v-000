@@ -80,4 +80,11 @@ class Game
       end
     end
 
+#start manages the logic of running a game: 0, 1, or 2 players, who goes first/is 'X', initialize Game
+    def start
+      puts "Would you like to play a game of tic-tac-toe? (y/n)"
+      input = gets.strip
+      
+    end
+
 end
