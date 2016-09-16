@@ -49,9 +49,7 @@ class Board
 
 #update updates the cells in the board with the player token according to input.  player is Player object and has a token property
 	def update(position, player)
-		if valid_move?(position)
 			self.cells[position.to_i - 1] = player.token
-		end
 	end
 
 end
