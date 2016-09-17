@@ -27,12 +27,21 @@ class Game
     end
 
     def won?
-      WIN_COMBINATIONS.any? do |win_comb|
-        board.position(win_comb[0]) == board.position(win_comb[1]) &&
-        board.position(win_comb[0]) == board.position(win_comb[2]) &&
-        board.taken?(win_comb[0])
+      WIN_COMBINATIONS.detect do |combo|
+        board.position(combo[0] + 1) == board.position(combo[1] + 1) &&
+        board.position(combo[1] + 1) == board.position(combo[2] + 1) &&
+        board.taken?(combo[0] + 1)
       end
     end
+
+
+    # def won?
+    #   WIN_COMBINATIONS.any? do |win_comb|
+    #     board.position(win_comb[0]) == board.position(win_comb[1]) &&
+    #     board.position(win_comb[0]) == board.position(win_comb[2]) &&
+    #     board.taken?(win_comb[0])
+    #   end
+    # end
 
     def over?
       won? || draw?
@@ -43,11 +52,17 @@ class Game
     end
 
     def winner
-      if won? && @board.cells.count("X") > @board.cells.count("O")
-        "X"
-      elsif won? && @board.cells.count("X") < @board.cells.count("O")
-        "O"
-      end
+          if won?
+            @board.cells[won?[0]]
+          end
+    #   if won? && @board.cells.count("X") > @board.cells.count("O")
+    #     return "X"
+    #   elsif won? && @board.cells.count("X") < @board.cells.count("O")
+    #     return "O"
+    #   else
+    #     return "No winner"
+    #   end
+      # winning_combo
     end
-    
+
 end
