@@ -72,10 +72,12 @@ class Game
         end
         if self.won?
             @board.display
+            puts ""
             puts "Congratulations #{winner}!"
             return self.winner
         else
             @board.display
+            puts ""
             puts "Cats Game!"
             return self.winner
         end
