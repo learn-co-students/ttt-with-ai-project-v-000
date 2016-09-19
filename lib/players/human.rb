@@ -1,7 +1,9 @@
 module Players
     class Human < Player
         
-       # attr_accessor:input
+   ### ORIGINAL    
+        
+   #     attr_accessor:input
         
    #     def receive_input
    #         puts "Make your move by entering 1-9."
@@ -20,6 +22,8 @@ module Players
    #         end
    #         @input
    #     end
+   
+   ### REFACTORED
         
         def move(board)
             input = ""
