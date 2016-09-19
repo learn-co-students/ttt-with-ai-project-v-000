@@ -62,8 +62,10 @@ class Game
 
       if self.board.valid_move?(x)
         self.board.update(x, self.current_player)
-        self.current_player
+        self.board.display
+        #self.current_player
       else
+        puts "that move isn't valid; try again:"
         self.turn
       end
     end
@@ -82,9 +84,39 @@ class Game
 
 #start manages the logic of running a game: 0, 1, or 2 players, who goes first/is 'X', initialize Game
     def start
+      input = nil
+
       puts "Would you like to play a game of tic-tac-toe? (y/n)"
-      input = gets.strip
-      
+      input = gets.strip.upcase
+
+      #until input == "EXIT" || input == "N" || input == "NO"  this line doesn't work here--never asks user for input again...
+        puts "How many players?  0 = computer plays itself; 1 = you play the computer; 2 = you and a friend play (0/1/2)"
+        total_players = gets.strip
+
+        case total_players
+        when "0"
+          puts "still working on it"
+        when "1"
+          puts "Player 1 is X and goes first.  Type 'X' to be Player 1.\nOtherwise, type 'O' to be Player 2, and the computer will go first."
+          choice = gets.strip.upcase
+          if choice == "X"
+            self.class.new(Players::Human.new("X"), Players::Computer.new("O"))
+            self.play
+          else
+            self.class.new(Players::Computer.new("X"), Players::Human.new("O"))
+            binding.pry
+            self.play
+          end
+        when "2"
+          puts "Player 1 is X and goes first; Player 2 is O."
+          self.class.new
+          self.play
+        end
     end
+
+#exit_game controls ending of game
+  def exit_game
+    puts "Okay, by then!"
+  end
 
 end
