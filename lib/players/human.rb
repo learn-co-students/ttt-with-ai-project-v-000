@@ -1,7 +1,7 @@
 module Players
     class Human < Player
         
-        attr_accessor:input
+       # attr_accessor:input
         
    #     def receive_input
    #         puts "Make your move by entering 1-9."
@@ -24,13 +24,15 @@ module Players
         def move(board)
             input = ""
             if board.class != Board # this is just here to pass the 03_human_player spec
-                puts "enter 1-9"
-                input = gets
+                CLI.get_move
+                input = gets.strip
             else
-                input = CLI.get_move
+                CLI.get_move
+                input = gets.strip
                 while !board.valid_move?(input)
                     puts "Invalid move!"
-                    input = CLI.get_move
+                    CLI.get_move
+                    input = gets.strip
                 end
             end
             input

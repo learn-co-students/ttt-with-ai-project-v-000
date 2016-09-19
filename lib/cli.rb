@@ -4,8 +4,6 @@ class CLI
     
     def self.get_move
         puts "Make your move by entering 1-9."
-        input = gets
-        input
     end
     
     
