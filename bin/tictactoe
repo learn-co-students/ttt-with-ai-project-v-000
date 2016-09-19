@@ -1,3 +1,23 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome. How many players (0, 1, or 2)?"
+players = gets.chomp.to_i
+if players == 0 
+	new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+	new_game.start
+elsif players == 1
+	puts "Would you like to be X or O?"
+	input = gets.chomp
+	if input == "X"
+		new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+		new_game.start
+	elsif input == "O"
+		new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+		new_game.start
+	end
+elsif players == 2
+	new_game = Game.new
+	new_game.start
+end
