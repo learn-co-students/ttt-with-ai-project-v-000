@@ -19,7 +19,7 @@ class Game
   end
 
   def over?
-    @board.full? || won?
+    draw? || won?
   end
 
   def won?
@@ -33,7 +33,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    @board.full? && !won?
   end
 
   def winner
@@ -57,12 +57,25 @@ class Game
       @board.update(position, current_player)
   end
   
-  def play
-    while !self.over?
-    binding.pry
-    turn
+  def player
+    if current_player == @player_1
+      "Player #1"
+    else
+      "Player #2"
     end
   end
   
-  
+  def play
+    while !over?
+      print "#{player}:  "
+      turn
+      @board.display
+    end
+    
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cats Game!"
+    end    
+  end
 end
