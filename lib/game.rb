@@ -67,7 +67,7 @@ class Game
   
   def play
     while !over?
-      print "#{player}:  "
+      puts "#{player}:  "
       turn
       @board.display
     end
