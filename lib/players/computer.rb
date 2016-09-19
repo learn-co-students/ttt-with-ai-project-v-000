@@ -130,6 +130,7 @@ module Players
         end
         
         def move(board)
+            sleep 0.5
             if self.game.class == Game && self.opponent_winning?
                 self.opponent_winning?
             elsif self.self_winning?
