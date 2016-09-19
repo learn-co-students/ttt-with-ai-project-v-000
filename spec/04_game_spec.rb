@@ -195,8 +195,11 @@ describe 'Game' do
 
   describe 'play' do
     it 'asks for players input on a turn of the game' do
+     # binding.pry
       game = Game.new
+      
       allow($stdout).to receive(:puts)
+      
       allow(game).to receive(:over?).and_return(false, true)
 
       expect(game.player_1).to receive(:gets).at_least(:once).and_return("1")

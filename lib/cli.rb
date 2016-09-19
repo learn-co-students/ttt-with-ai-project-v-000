@@ -1,6 +1,14 @@
 class CLI
     attr_accessor:game_mode, :token
     
+    
+    def self.get_move
+        puts "Make your move by entering 1-9."
+        input = gets
+        input
+    end
+    
+    
     def greeting
         puts ""
         puts "Welcome to Tic Tac Toe!"
@@ -27,7 +35,7 @@ class CLI
     
     def human_vs_human
         puts "X goes first! Are you ready?"
-        game = Game.new
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
         game.play
     end
     

@@ -3,22 +3,37 @@ module Players
         
         attr_accessor:input
         
-        def receive_input
-            puts "Make your move by entering 1-9."
-            @input = gets.strip
-        end
-            
+   #     def receive_input
+   #         puts "Make your move by entering 1-9."
+   #         @input = gets.strip
+   #     end
+   #         
+   #     def move(board)
+   #         if board.class != Board # this is just here to pass the 03_human_player spec
+   #             receive_input
+   #         else
+   #             receive_input
+   #             while !board.valid_move?(@input)
+   #                 puts "Invalid move!"
+   #                 receive_input
+   #             end
+   #         end
+   #         @input
+   #     end
+        
         def move(board)
+            input = ""
             if board.class != Board # this is just here to pass the 03_human_player spec
-                receive_input
+                puts "enter 1-9"
+                input = gets
             else
-                receive_input
-                while !board.valid_move?(@input)
+                input = CLI.get_move
+                while !board.valid_move?(input)
                     puts "Invalid move!"
-                    receive_input
+                    input = CLI.get_move
                 end
             end
-            @input
+            input
         end
     end
 end
