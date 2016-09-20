@@ -84,36 +84,79 @@ class Game
 
 #start manages the logic of running a game: 0, 1, or 2 players, who goes first/is 'X', initialize Game
     def start
-      input = nil
 
-      puts "Would you like to play a game of tic-tac-toe? Typing 'n' will exit the game. (y/n)"
-      input = gets.strip.upcase
+      puts "How many players for this game?\n0 = computer plays itself; 1 = you play the computer; 2 = you and a friend play"
+      puts "Or...play wargames = computer plays itself 100 times (0/1/2/wargames)"
+      total_players = gets.strip
 
-        puts "How many players?  0 = computer plays itself; 1 = you play the computer; 2 = you and a friend play (0/1/2)"
-        total_players = gets.strip
-
-        case total_players
-        when "0"
-          Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-        when "1"
-          puts "Player 1 is X and goes first.  Type 'X' to be Player 1.\nOtherwise, type 'O' to be Player 2, and the computer will go first."
-          choice = gets.strip.upcase
-          if choice == "X"
-            Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-          else
-            Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
-          end
-        when "2"
-          puts "Player 1 is X and goes first; Player 2 is O."
-          Game.new().play
+      case total_players
+      when "0"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      when "1"
+        puts "Player 1 is X and goes first.  Type 'X' to be Player 1.\nOtherwise, type 'O' to be Player 2, and the computer will go first."
+        choice = gets.strip.upcase
+        if choice == "X"
+          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        else
+          Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
         end
+      when "2"
+        puts "Player 1 is X and goes first; Player 2 is O."
+        Game.new().play
+      when "wargames"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).wargames
+      end
 
-        exit_game
+      sleep(0.5)  #slight delay before prompting for another game
+
+      play_again
+
     end
+
+#play_again controls playing another game
+  def play_again
+
+    puts "\nWould you like to play again? (y/n)"
+    again = gets.strip.upcase
+
+    if again == "Y" || again == "YES"
+      start
+    else
+      exit_game
+    end
+  end
 
 #exit_game controls ending of game
   def exit_game
+
     puts "Okay, bye then!"
+
   end
+
+#wargames initializes the computer to play itself 100 times, keeping track of wins for X, wins for O, and draws
+  def wargames
+    counter = 0
+    wins_for_x = 0
+    wins_for_o = 0
+    draws = 0
+
+    until counter == 100
+      puts "round #{counter}"
+      play
+      if draw?
+        draws+=1
+      elsif winner == "X"
+        wins_for_x+=1
+      else
+        wins_for_o+=1
+      end
+      sleep(1)
+      self.board.reset!
+    counter+=1
+    end
+
+  puts "wins for X: #{wins_for_x}\nwins for O:#{wins_for_o}\ndraws: #{draws}"
+  end
+
 
 end
