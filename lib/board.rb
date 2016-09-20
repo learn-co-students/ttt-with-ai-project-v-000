@@ -1,8 +1,9 @@
 class Board
 	attr_accessor :cells
 
-	def initialize
-		@cells = Array.new(9, " ")
+	def initialize(board = Array.new(9, " "))
+		@cells = board
+		# @cells = Array.new(9, " ")
 	end
 
 	def reset!

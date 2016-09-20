@@ -1,7 +1,7 @@
 require 'pry'
 
 class Game
-	attr_accessor :board, :player_1, :player_2
+	attr_accessor :board, :player_1, :player_2, :error, :x_wins, :o_wins
 
 	# Define your WIN_COMBINATIONS constant
 	WIN_COMBINATIONS = [
@@ -19,6 +19,9 @@ class Game
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
+		@error = 0
+		@x_wins = 0
+		@o_wins = 0
 	end
 
 	def current_player
@@ -55,10 +58,12 @@ class Game
 	end
 
 	def turn
-		input = self.current_player.move([])
+		input = self.current_player.move(self.board)
 		if self.board.valid_move?(input) 
 			self.board.update(input, self.current_player)
-		else
+		elsif self.error < 5
+		 puts "Invalid move: #{input} #{error}."
+		 self.error += 1
 		 self.turn
 		end
 	end
@@ -73,10 +78,10 @@ class Game
 
 	def start
 		input = ""
-		until input == "no" do
+		until input == "n" do
 			self.play
 			self.board.reset!
-			puts "Play again?"
+			puts "Play again (y/n?)"
 			input = gets.chomp
 		end
 	end
