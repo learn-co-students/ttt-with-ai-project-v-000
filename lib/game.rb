@@ -63,7 +63,7 @@ class Game
       if self.board.valid_move?(x)
         self.board.update(x, self.current_player)
         self.board.display
-        #self.current_player
+        #self.current_player  ** not sure if this line of code is needed; test suite passes regardless
       else
         puts "that move isn't valid; try again:"
         self.turn
@@ -86,37 +86,38 @@ class Game
     def start
       input = nil
 
-      puts "Would you like to play a game of tic-tac-toe? (y/n)"
+      puts "Would you like to play a game of tic-tac-toe? Typing 'n' will exit the game. (y/n)"
       input = gets.strip.upcase
 
-      #until input == "EXIT" || input == "N" || input == "NO"  this line doesn't work here--never asks user for input again...
         puts "How many players?  0 = computer plays itself; 1 = you play the computer; 2 = you and a friend play (0/1/2)"
         total_players = gets.strip
 
         case total_players
         when "0"
-          puts "still working on it"
+          game = self.class.new(Players::Computer.new("X"), Players::Computer.new("O"))
+          game.play
         when "1"
           puts "Player 1 is X and goes first.  Type 'X' to be Player 1.\nOtherwise, type 'O' to be Player 2, and the computer will go first."
           choice = gets.strip.upcase
           if choice == "X"
-            self.class.new(Players::Human.new("X"), Players::Computer.new("O"))
-            self.play
+            game = self.class.new(Players::Human.new("X"), Players::Computer.new("O"))
+            game.play
           else
-            self.class.new(Players::Computer.new("X"), Players::Human.new("O"))
-            binding.pry
-            self.play
+            game = self.class.new(Players::Computer.new("X"), Players::Human.new("O"))
+            game.play
           end
         when "2"
           puts "Player 1 is X and goes first; Player 2 is O."
           self.class.new
           self.play
         end
+    
+        exit_game
     end
 
 #exit_game controls ending of game
   def exit_game
-    puts "Okay, by then!"
+    puts "Okay, bye then!"
   end
 
 end
