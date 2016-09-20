@@ -5,11 +5,13 @@ class Cli
     puts "Welcome to tic tac toe! How many players wish to play?"
     num_players = gets.strip.to_i
 
-    if num_players == 0
+    case num_players
+
+    when 0
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-    elsif num_players == 1
+    when 1
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    elsif num_players == 2
+    when 2
       game = Game.new
     end
 
