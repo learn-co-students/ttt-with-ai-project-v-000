@@ -94,24 +94,20 @@ class Game
 
         case total_players
         when "0"
-          game = self.class.new(Players::Computer.new("X"), Players::Computer.new("O"))
-          game.play
+          Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
         when "1"
           puts "Player 1 is X and goes first.  Type 'X' to be Player 1.\nOtherwise, type 'O' to be Player 2, and the computer will go first."
           choice = gets.strip.upcase
           if choice == "X"
-            game = self.class.new(Players::Human.new("X"), Players::Computer.new("O"))
-            game.play
+            Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
           else
-            game = self.class.new(Players::Computer.new("X"), Players::Human.new("O"))
-            game.play
+            Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
           end
         when "2"
           puts "Player 1 is X and goes first; Player 2 is O."
-          self.class.new
-          self.play
+          Game.new().play
         end
-    
+
         exit_game
     end
 
