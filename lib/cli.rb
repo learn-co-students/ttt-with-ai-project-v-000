@@ -2,7 +2,11 @@ class Cli
 
   def start
 
-    puts "Welcome to tic tac toe! How many players wish to play?"
+    puts "Welcome to Tic Tac Toe! Select one of options below:"
+    puts "Option 0: Computer will play itself"
+    puts "Option 1: Play against Computer"
+    puts "Option 2: Play against an Opponent"
+    
     num_players = gets.strip.to_i
 
     case num_players
