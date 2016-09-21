@@ -60,6 +60,10 @@ class Game
             
     def turn
         move = self.current_player.move(@board)
+        if !@board.valid_move?(move)
+            puts "Invalid move!"
+            turn
+        end
         self.current_player.add_move(move)
         @board.update(move, self.current_player)
     end

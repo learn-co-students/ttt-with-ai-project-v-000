@@ -1,23 +1,7 @@
-class CLI
-    attr_accessor:game_mode, :token, :user_input
+require 'pry'
 
-    ### This version passes tests
-    
-  #  def self.get_move
-  #      puts "Make your move by entering 1-9."
-  #  end
-    
-    ### This version works during game play, but causes Rspec to hang
-    
-    def self.get_move(board)
-        puts "Make your move by entering 1-9."
-        input = gets.strip
-        while !board.valid_move?(input)
-            puts "Invalid move!"
-            input = gets.strip
-        end
-        input
-    end
+class CLI
+    attr_accessor:game_mode, :token
     
     def greeting
         puts ""
