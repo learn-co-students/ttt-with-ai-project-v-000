@@ -1,7 +1,7 @@
 require "pry"
 
 class Game
-  attr_accessor :board, :player_1, :player_2, :winner
+  attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
@@ -20,8 +20,6 @@ class Game
     [6,4,2]  #Diagonal from top left
     ]
 
-    # @winning_combo = []
-
     def current_player
       board.turn_count.even? ? @player_1 : @player_2
     end
@@ -34,15 +32,6 @@ class Game
       end
     end
 
-
-    # def won?
-    #   WIN_COMBINATIONS.any? do |win_comb|
-    #     board.position(win_comb[0]) == board.position(win_comb[1]) &&
-    #     board.position(win_comb[0]) == board.position(win_comb[2]) &&
-    #     board.taken?(win_comb[0])
-    #   end
-    # end
-
     def over?
       won? || draw?
     end
@@ -52,17 +41,33 @@ class Game
     end
 
     def winner
-          if won?
-            @board.cells[won?[0]]
-          end
-    #   if won? && @board.cells.count("X") > @board.cells.count("O")
-    #     return "X"
-    #   elsif won? && @board.cells.count("X") < @board.cells.count("O")
-    #     return "O"
-    #   else
-    #     return "No winner"
-    #   end
-      # winning_combo
+      if won?
+        @board.cells[won?[0]]
+      end
+    end
+
+    def turn
+      cell = current_player.move(board)
+      if board.valid_move?(cell)
+        board.update(cell, current_player)
+      else
+        puts "invalid"
+        turn
+      end
+      board.display
+    end
+
+    def play
+      until over?
+        turn
+      end
+
+      if won?
+        puts "Congratulations #{winner}!"
+        puts "You've won the game!"
+      elsif draw?
+        puts "Cats Game!"
+      end
     end
 
 end

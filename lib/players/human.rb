@@ -4,6 +4,7 @@ module Players
     def move(board)
       puts "Please enter a valid move for positions 1-9:"
       cell = gets.strip
+      cell
     end
 
 
