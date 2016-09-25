@@ -20,27 +20,6 @@ module Players
        (corner_position << center_position).sample
     end
 
-    def corner_position
-      [1, 3, 7, 9]
-    end
-
-    def edge_position
-      [2, 4, 6, 8]
-    end
-
-    def center_position
-      [5]
-    end
-
-    def random_move(board)
-      move = ""
-      until board.valid_move?(move) do
-        move = (1..9).to_a.sample.to_s
-      end
-      puts "Computer made a random move at #{move}."
-      return move
-    end
-
     def first_move_second_player(board)
       first_move = 1 + board.cells.find_index {|cell| cell != " "}
 
@@ -61,13 +40,31 @@ module Players
         when 4
           move = [1, 7].sample
         end
-
       end
       move
     end
 
+    def random_move(board)
+      move = ""
+      until board.valid_move?(move) do
+        move = (1..9).to_a.sample.to_s
+      end
+      puts "Computer made a random move at #{move}."
+      return move
+    end
+
+    def corner_position
+      [1, 3, 7, 9]
+    end
+
+    def edge_position
+      [2, 4, 6, 8]
+    end
+
+    def center_position
+      [5]
+    end
   end
 end
-
 
 
