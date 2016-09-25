@@ -4,7 +4,7 @@ module Players
       puts "The computer is thinking about it's next move..."
 
       if board.turn_count == 0
-        move = open_move
+        move = opening_move
       elsif board.turn_count == 1
         move = first_move_second_player(board)
       else
@@ -17,10 +17,10 @@ module Players
 
     private
     def opening_move
-       corner_position << center_position).sample
+       (corner_position << center_position).sample
     end
 
-    def corner_positions
+    def corner_position
       [1, 3, 7, 9]
     end
 
