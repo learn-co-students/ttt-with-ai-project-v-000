@@ -11,7 +11,7 @@ module Players
         move = random_move(board)
       end
 
-      # sleep 2
+      sleep 2
       return move.to_s
     end
 
@@ -33,12 +33,12 @@ module Players
     end
 
     def random_move(board)
-      (1..9).each_with_object("") do |x, obj|
-        if board.valid_move?(x)
-          obj = x.to_s
-          return obj
-        end
+      move = ""
+      until board.valid_move?(move) do
+        move = (1..9).to_a.sample.to_s
       end
+      puts "Computer made a random move at #{move}."
+      return move
     end
 
     def first_move_second_player(board)
