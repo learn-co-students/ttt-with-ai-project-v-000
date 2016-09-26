@@ -7,7 +7,16 @@ module Players
         move = opening_move
       elsif board.turn_count == 1
         move = first_move_second_player(board)
+      elsif find_win_or_block(board, token)
+        puts "The computer is winning."
+        move = win_or_block(board, token)
+        puts "The winning move is #{move}."
+      elsif find_win_or_block(board, opponent)
+        puts "The computer is blocking."
+        move = win_or_block(board, opponent)
+        puts "The blocking move is #{move}."
       else
+        puts "The computer is making a random move."
         move = random_move(board)
       end
 
@@ -15,7 +24,40 @@ module Players
       return move.to_s
     end
 
+    def win_or_block(board, token)
+      move_set = find_win_or_block(board, token)
+      if move_set
+        move = move_set.find do |position|
+          board.cells[position] == " "
+        end
+      end
+      if move
+        (move + 1).to_s
+      end
+    end
+
+    def find_win_or_block(board, token)
+      win = Game::WIN_COMBINATIONS
+      win.find do |positions|
+        matches = positions.count do |position|
+          board.cells[position] == token
+        end
+        if positions.any? {|x| board.cells[x] == other_player(token)}
+          matches = nil
+        end
+        matches == 2
+      end
+    end
+
     private
+    def other_player(token)
+      if token == "X"
+        "O"
+      else
+        "X"
+      end
+    end
+
     def opening_move
        (corner_position << center_position).sample
     end
@@ -51,6 +93,14 @@ module Players
       end
       puts "Computer made a random move at #{move}."
       return move
+    end
+
+    def opponent
+      if token == "X"
+        "O"
+      else
+        "X"
+      end
     end
 
     def corner_position
