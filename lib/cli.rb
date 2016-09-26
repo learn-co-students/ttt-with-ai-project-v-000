@@ -1,15 +1,22 @@
 class CLI
 
   def call
+    puts ""
+    puts "Tic-Tac-Toe"
+    horizontal_rule
+    game_loop("Welcome to Tic-Tac-Toe!")
+    puts "Thank you for playing!"
+  end
 
-    puts "Welcome"
+  def game_loop(message)
     loop do
-
-      puts "How many players? Type 'Exit' to exit."
-      puts "0 Players - Computer vs Computer"
-      puts "1 Player - Computer vs Human"
-      puts "2 Players - Human vs Human"
-      puts "Exit"
+      puts message
+      puts "Please chose the number of players:"
+      puts "0. Players - Computer vs Computer"
+      puts "1. Player - Computer vs Human"
+      puts "2. Players - Human vs Human"
+      puts "Type 'Exit' to exit."
+      print ">"
 
       input = gets.chomp
       case input
@@ -22,63 +29,76 @@ class CLI
       when "exit" || "Exit"
         break
       else
-        #TO DO: restart the loop here
-        restart
+        message = "#{input} is not a valid selection.  Please try: 0, 1, 2, or exit"
       end
     end
   end
 
+  def horizontal_rule
+    puts "-------------------------"
+  end
+
   def computer_vs_computer
+    horizontal_rule
+    puts "The computer is now playing itself..."
     game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
-    puts "Starting game...."
     game.play
   end
 
   def human_vs_computer
-    puts "Human, would you like to be player #1 or player #2?"
-    input = gets.chomp
-    case input
-    when '1'
-      puts "Would you like to be X or O?"
+    horizontal_rule
+    message = "Please choose Player #1 or #2:"
+    begin
+      puts message
+      print ">"
       input = gets.chomp
-      case input.downcase
-      when 'x'
-        game = Game.new(Players::Human.new('X'), Players::Computer.new('O'))
-      when 'o'
-        game = Game.new(Players::Human.new('O'), Players::Computer.new('X'))
+      case input
+      when '1'
+        token = select_token("Player #1")
+        game = Game.new(Players::Human.new(token), Players::Computer.new(opponent(token)))
+      when '2'
+        token = select_token("Player #2")
+        game = Game.new(Players::Computer.new(opponent(token)), Players::Human.new(token))
+      else
+        puts "#{input} is not valid.  Please try 1 or 2:"
       end
-    when '2'
-      puts "Would you like to be X or O?"
-      input = gets.chomp
-      case input.downcase
-      when 'x'
-        game = Game.new(Players::Computer.new('X'), Players::Human.new('O'))
-      when 'o'
-        game = Game.new(Players::Computer.new('O'), Players::Human.new('X'))
-      end
-    else
-      # TODO: Bad input.
-    end
+    end until game
+    puts "Your game is starting..."
     game.play
   end
 
   def human_vs_human
-    puts "Player #1, would you like to play as X or O?"
-    game = select_token
+    horizontal_rule
+    token = select_token("Player #1")
+    game = Game.new(Players::Human.new(token), Players::Human.new(opponent(token)))
+    puts "Your game is starting..."
     game.play
   end
 
   private
-  def select_token
-    input = gets.chomp
-    case input.downcase
-    when 'x'
-      game = Game.new(Players::Human.new('X'), Players::Human.new('O'))
-    when 'o'
-      game = Game.new(Players::Human.new('O'), Players::Human.new('X'))
-    end
-    return game
+  def select_token(message)
+    begin
+      puts "#{message}, please choose your token, 'X' or 'O':"
+      print ">"
+      input = gets.chomp
+      case input.downcase
+      when 'x'
+        token = "X"
+      when 'o'
+        token = "O"
+      else
+        puts "Your selection was not valid,..."
+      end
+    end until token
+    return token
   end
 
-
+  def opponent(token)
+    if token == "X"
+      "O"
+    else
+      "X"
+    end
+  end
 end
+

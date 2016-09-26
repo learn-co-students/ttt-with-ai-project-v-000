@@ -17,6 +17,23 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+  def display_with_numbers
+    i = 1
+    x = cells.collect do |cell|
+      if cell == " "
+        cell = i
+      end
+      i += 1
+      cell
+    end
+
+    puts " #{x[0]} | #{x[1]} | #{x[2]} "
+    puts "-----------"
+    puts " #{x[3]} | #{x[4]} | #{x[5]} "
+    puts "-----------"
+    puts " #{x[6]} | #{x[7]} | #{x[8]} "
+  end
+
   def update(position, player)
     if valid_move?(position)
       @cells[position.to_i - 1] = player.token

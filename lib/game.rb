@@ -50,7 +50,7 @@ class Game
      position = current_player.move(@board)
      
       while !@board.valid_move?(position)
-        puts "Sorry, no dice"
+        puts "Please provide a valid move: "
         position = current_player.move(@board)
       end
       
@@ -66,11 +66,21 @@ class Game
   end
   
   def play
+    puts ""
+    @board.display_with_numbers
     while !over?
+      puts ""
+      puts "-------------------------"
+      puts ""
       puts "#{player}:  "
       turn
-      @board.display
+      puts ""
+      @board.display_with_numbers
     end
+    
+    puts ""
+    puts "--------------------------"
+    puts ""
     
     if won?
       puts "Congratulations #{winner}!"
