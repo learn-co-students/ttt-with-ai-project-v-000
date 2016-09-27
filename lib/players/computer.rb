@@ -1,127 +1,37 @@
-<<<<<<< HEAD
-class Players::Computer < Player
-  def move(board)
-    if !board.taken?('5')
-      '5'
-    else
-      best_move(board) + 1
+#Please ignore previous pull request. This is the code I was originally working with. When I submitted, I took a look at the computer.rb solution. I copied two solutions so that I could study them more, particularly a previous solution that seemed to go along with what I had been reading about the minimax algorithim. I copied them over just so I could look back at them and try to understand the logic. I came up with the code here by writing out all possible move combinations I could think of, but when it reaches a certain point I get a message saying that the stack is too deep. What can I do to make this work cleanly?
+
+module Players
+  class Computer < Player
+    def move(board)
+      move = nil
+
+      if !board.taken?(5)
+        move = "5"
+
+      elsif !board.taken?(1)
+        move = "1"
+
+      elsif (board.position(1) == board.position(3) || board.position(5) == board.position(8))
+        move = "2"
+
+      elsif (board.position(1) == board.position(2) || board.position(5) == board.position(7) || board.position(6) == board.position(9))
+        move = "3"
+
+      elsif (board.position(1) == board.position(7) || board.position(5) == board.position(6))
+        move = "4"
+
+      elsif (board.position(3) == board.position(9) || board.position(4) == board.position(5))
+        move = "6"
+
+      elsif (board.position(1) == board.position(4) || board.position(3) == board.position(5) || board.position(8) == board.position(9))
+        move = "7"
+
+      elsif (board.position(2) == board.position(5) || board.position(7) == board.position(9))
+        move = "8"
+
+      elsif (board.position(1) == board.position(5) || board.position(3) == board.position(6) || board.position(7) == board.position(8))
+        move = "9"
+      end
     end
-  end
-
-  def best_move(board)
-    win(board) || block(board) || corner(board) || random
-  end
-
-  def corner(board)
-    [0,2,6,8].detect{|cell| !board.taken?(cell+1)}
-  end
-
-  def complete_combo?(board, token)
-    Game::WIN_COMBINATIONS.detect do |combo|
-      (
-        (board.cells[combo[0]] == token && board.cells[combo[1]] == token) &&
-        !board.taken?(combo[2]+1)
-      ) ||
-      (
-        (board.cells[combo[1]] == token && board.cells[combo[2]] == token) &&
-        !board.taken?(combo[0]+1)
-      ) ||
-      (
-        (board.cells[combo[0]] == token && board.cells[combo[2]] == token) &&
-        !board.taken?(combo[1]+1)
-      )
-    end
-  end
-
-  def win(board)
-    # puts "...checking for win for #{token} on #{board.cells}"
-
-    winning_combo = complete_combo?(board, self.token)
-    if winning_combo && winning_combo.count{|index| board.position(index+1) == self.token} == 2
-      puts "...found winning combo #{winning_combo}"
-      winning_combo.detect{|index| !board.taken?(index+1)}
-    end
-  end
-
-  def block(board)
-    # puts "...checking for block for #{token} on #{board.cells}"
-
-    blocking_combo = complete_combo?(board, self.opponent_token)
-    if blocking_combo && blocking_combo.count{|index| board.position(index+1) == self.opponent_token} == 2
-      puts "...found blocking combo #{blocking_combo}"
-      blocking_combo.detect{|index| !board.taken?(index+1)}
-    end
-  end
-
-  def opponent_token
-    self.token == "X" ? "O" : "X"
-  end
-
-  def random
-    (0..8).to_a.sample
   end
 end
-=======
-class Players::Computer < Player
-  def move(board)
-    if !board.taken?('5')
-      '5'
-    else
-      best_move(board) + 1
-    end
-  end
-
-  def best_move(board)
-    win(board) || block(board) || corner(board) || random
-  end
-
-  def corner(board)
-    [0,2,6,8].detect{|cell| !board.taken?(cell+1)}
-  end
-
-  def complete_combo?(board, token)
-    Game::WIN_COMBINATIONS.detect do |combo|
-      (
-        (board.cells[combo[0]] == token && board.cells[combo[1]] == token) &&
-        !board.taken?(combo[2]+1)
-      ) ||
-      (
-        (board.cells[combo[1]] == token && board.cells[combo[2]] == token) &&
-        !board.taken?(combo[0]+1)
-      ) ||
-      (
-        (board.cells[combo[0]] == token && board.cells[combo[2]] == token) &&
-        !board.taken?(combo[1]+1)
-      )
-    end
-  end
-
-  def win(board)
-    # puts "...checking for win for #{token} on #{board.cells}"
-
-    winning_combo = complete_combo?(board, self.token)
-    if winning_combo && winning_combo.count{|index| board.position(index+1) == self.token} == 2
-      puts "...found winning combo #{winning_combo}"
-      winning_combo.detect{|index| !board.taken?(index+1)}
-    end
-  end
-
-  def block(board)
-    # puts "...checking for block for #{token} on #{board.cells}"
-
-    blocking_combo = complete_combo?(board, self.opponent_token)
-    if blocking_combo && blocking_combo.count{|index| board.position(index+1) == self.opponent_token} == 2
-      puts "...found blocking combo #{blocking_combo}"
-      blocking_combo.detect{|index| !board.taken?(index+1)}
-    end
-  end
-
-  def opponent_token
-    self.token == "X" ? "O" : "X"
-  end
-
-  def random
-    (0..8).to_a.sample
-  end
-end
->>>>>>> 140da58964871a66d1e1d7b769594670de8d9db2
