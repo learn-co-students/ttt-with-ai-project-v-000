@@ -1,4 +1,10 @@
-#Please ignore previous pull request. This is the code I was originally working with. When I submitted, I took a look at the computer.rb solution. I copied two solutions so that I could study them more, particularly a previous solution that seemed to go along with what I had been reading about the minimax algorithim. I copied them over just so I could look back at them and try to understand the logic. I came up with the code here by writing out all possible move combinations I could think of, but when it reaches a certain point I get a message saying that the stack is too deep. What can I do to make this work cleanly?
+#Please ignore previous pull request. This is the code I was originally working with. 
+#When I submitted, I took a look at the computer.rb solution. I copied two solutions 
+#so that I could study them more, particularly a previous solution that seemed to go 
+#along with what I had been reading about the minimax algorithim. I copied them over 
+#just so I could look back at them and try to understand the logic. I came up with the 
+#code here by writing out all possible move combinations I could think of, but when it 
+#reaches a certain point I get a message saying that the stack is too deep. What can I do to make this work cleanly?
 
 module Players
   class Computer < Player
