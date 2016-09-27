@@ -41,7 +41,7 @@ class CLI
                     new_game.board.reset!
                 end
                 puts "Results of #{games_played} games: X Wins - #{new_game.x_wins}, O Wins = #{new_game.o_wins}"
-            end
+            
         end
     end
 end
