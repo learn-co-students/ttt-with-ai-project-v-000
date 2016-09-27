@@ -1,25 +1,30 @@
-
+require 'pry'
 module Players
 
   class Computer < Player
 
     def move(board)
-
-      a = ["2", "4", "6", "7", "8", "9"] # array of moves, less center and upper corner
-      #take center square if open, otherwise, upper corner; otherwise, random move
-      if board.valid_move?(5)
-        "5"
-      elsif board.valid_move?(1)
+      if board.valid_move?(1)
         "1"
+      elsif board.valid_move?(5)
+        "5"
       elsif board.valid_move?(3)
         "3"
+      elsif board.valid_move?(2)
+        "2"
+      elsif board.valid_move?(8)
+        "8"
+      elsif board.valid_move?(4)
+        "4"
+      elsif board.valid_move?(6)
+        "6"
+      elsif board.valid_move?(9)
+        "9"
       else
-        a.sample
+        "7"
       end
-      # a = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      # a.sample
     end
 
-  end
+  end #class end
 
-end
+end #module end
