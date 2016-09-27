@@ -42,19 +42,15 @@ class Game
     end
 
     def won?
-       WIN_COMBINATIONS.each do |combination|
-            a = combination.collect { |index| self.board.cells[index] }
-            if a.all?{ |a| a=="X"} 
-                return "X"
-            elsif a.all?{ |a| a=="O"}
-               return "O"
-            end
-        end
-        nil
+        WIN_COMBINATIONS.detect do |combo|
+            @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
+        end 
     end
 
     def winner
-        self.won?
+        if self.won?
+            @board.cells[self.won?[0]]
+        end
     end
 
     def turn
@@ -73,7 +69,7 @@ class Game
             self.turn
         end
 
-        self.won? ? (puts "Congratulations #{won?}!") : (puts "Cats Game!")
+        self.won? ? (puts "Congratulations #{winner}!") : (puts "Cats Game!")
     end
 
     def start
