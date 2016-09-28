@@ -59,7 +59,7 @@ module Players
     end
 
     def opening_move
-       (corner_position << center_position).sample
+      (corner_position + center_position).sample
     end
 
     def first_move_second_player(board)

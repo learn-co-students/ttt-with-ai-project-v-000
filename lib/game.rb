@@ -84,8 +84,14 @@ class Game
     
     if won?
       puts "Congratulations #{winner}!"
+      puts ""
+      puts "--------------------------"
+      puts ""
     else
       puts "Cats Game!"
+      puts ""
+      puts "--------------------------"
+      puts ""
     end    
   end
 end
