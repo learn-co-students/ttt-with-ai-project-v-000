@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+
+  puts "Greetings Joshua, How about a nice game of Tic Tac Toe?"
+  sleep(2)
+  puts "How many players? Press 0, 1 or 2. Or, type Wargames for a suprise"
+  input = gets.strip.to_i
+  sleep(2)
+    case input
+      when 2
+        puts "Okay, 2 human players. Makes sense, it's a really trump game and a waste of my time"
+        sleep(2)
+        puts "The first player to take a turn will be X, the second will be O."
+        new_game_2 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        new_game_2.play
+      when 1  
+      puts "alright, looks like it's me against you"
+      sleep(2)
+      puts "I will be the O and you will be the X because what are you going to do about it? Would you like to go first or shall I?"
+      sleep(2)
+      puts "Press 1 if you would like to go first, press 2 if I should" 
+      gamer_1 = gets.strip.to_i
+      if gamer_1 == 1
+        new_game_1 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        new_game_1.play_for_computer
+      elsif gamer_1 == 2
+        new_game_1 = Game.new(player_2 = Players::Computer.new("O"), player_1 = Players::Human.new("X"), board = Board.new)
+        new_game_1.play_for_computer
+      end
+      when 0
+        puts "Okay, Skynet vs HAL"
+        sleep(2)
+        new_game_0 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        new_game_0.play
+    end    
+
+
+
