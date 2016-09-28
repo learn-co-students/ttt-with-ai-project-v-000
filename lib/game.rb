@@ -59,13 +59,14 @@ class Game
 #contains a single cycle of gameplay: first player makes a valid move, then switches to second player
     def turn
       x = self.current_player.move(self.board)
+      #binding.pry
 
       if self.board.valid_move?(x)
         self.board.update(x, self.current_player)
         self.board.display
         #self.current_player  ** not sure if this line of code is needed; test suite passes regardless
       else
-        puts "that move isn't valid; try again:"
+        puts "#{x}: that move isn't valid; try again:"
         self.turn
       end
     end
