@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+
+
+game = Game.new
+until game.won?
+	game.start
+end
+
+play_again = ""
+until play_again.downcase == "n" || play_again.downcase == "no"
+  puts "Would you like to play again?"
+  play_again = gets.strip
+  play_again.downcase == "y" || play_again.downcase == "yes"
+  game = Game.new
+  until game.won?
+    game.start
+  end
+end
+
+#possible code for wargames
+if game.start.num_players == "wargames"
+	while counter < 100
+		Game.new
+		counter += 1
+	end
+end
