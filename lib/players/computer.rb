@@ -1,16 +1,12 @@
 module Players
   class Computer < Player
 
-    WIN_COMBINATIONS = [
-      [0,1,2], #Top Row
-      [3,4,5], #Middle Row
-      [6,7,8], #Bottom Row
-      [0,3,6], #Left Column
-      [1,4,7], #Middle Column
-      [2,5,8], #Right Column
-      [0,4,8], #Diagonal from top right
-      [6,4,2]  #Diagonal from top left
-      ]
+    CORNER_PAIRS = [
+      [0, 2],
+      [2, 8],
+      [8, 6],
+      [6, 0]
+    ]
 
     def call
       puts
@@ -19,54 +15,47 @@ module Players
 
     def move(board)
       call
-      first_move(board)
-      # puts
-      # puts "#{token}'s move:"
-      # if !board.taken?("5")
-      #   "5"
-      # elsif board.taken?("5")
-      #   (1..9).to_a.reject{|i| i == 5}.sample.to_s
-
-
-      # elsif complete_combo(board) != nil
-      #   cell = complete_combo(board)
-      #   cell
-      # end
-
-
-
-    end
-
-    def first_move(board)
-      board.valid_move?("5") ? "5" : (1..9).to_a.reject{|i| i == 5}.sample.to_s
-    end
-
-
-    # def player_2_move_1(board)
-    #
-    # end
-    #
-    # def opp_corners(board)
-    #
-    # end
-
-    def complete_combo(board)
-      WIN_COMBINATIONS.detect do |combo|
-        combo.detect do |cell| #need to iterate over combos and return a cell?
-
-          board.position(cell) != self.token && board.position(cell) == " "
-        # if (board.position(combo[0] + 1) == self.token && board.position(combo[1] + 1) == self.token) && (board.position(combo[2] + 1) == " ")
-        #   (combo[2] + 1).to_s
-        # elsif (board.position(combo[1] + 1) == self.token && board.position(combo[2] + 1) == self.token) && (board.position(combo[0] + 1) == " ")
-        #   (combo[0] + 1).to_s
-        # elsif (board.position(combo[0] + 1) == self.token && board.position(combo[2] + 1) == self.token) && (board.position(combo[1] + 1) == " ")
-        #   (combo[1] + 1).to_s
-        # else
-        #   "1"
-        end
+      if (first_move(board) != nil) && ((board.turn_count == 0) || (board.turn_count == 1))
+        first_move(board)
+      elsif block_or_win(board) == nil && corner_move(board) != nil
+        corner_move(board)
+      elsif block_or_win(board) != nil
+        block_or_win(board)
+      else
+        (1..9).to_a.reject{|i| !board.valid_move?(i)}.sample.to_s
       end
     end
 
-    # binding.pry
+    def first_move(board)
+      corners = ["1", "3", "7", "9"]
+      board.valid_move?("5") ? "5" : corners.sample
+    end
+
+    def corner_move(board)
+      move = nil
+      CORNER_PAIRS.detect do |pair|
+        if board.cells[pair[0]] != " " && board.cells[pair[1]] == " "
+          move = (pair[1] + 1).to_s
+        elsif board.cells[pair[1]] != " " && board.cells[pair[0]] == " "
+          move = (pair[0] + 1).to_s
+        end
+      end
+      move
+    end
+
+    def block_or_win(board)
+      move = nil
+      Game::WIN_COMBINATIONS.detect do |combo|
+        if board.cells[combo[0]] != " " && board.cells[combo[1]] != " " && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " "
+          move = (combo[2] + 1).to_s
+        elsif board.cells[combo[1]] != " " && board.cells[combo[2]] != " " && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " "
+          move = (combo[0] + 1).to_s
+        elsif board.cells[combo[0]] != " " && board.cells[combo[2]] != " " && board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " "
+          move = (combo[1] + 1).to_s
+        end
+      end
+      move
+    end
+
   end
 end
