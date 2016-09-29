@@ -2,5 +2,36 @@
 
 require_relative '../config/environment'
 
-game = Game.new
-game.play
+puts
+puts "Welcome to Tic Tac Toe!"
+puts
+
+def start
+  puts "What type of game would you like to play? Enter a letter from this list to choose."
+  puts
+  puts "A) Two players (player vs player)"
+  puts "B) One player (player vs computer)"
+  puts "C) Zero players (computer vs computer)"
+  puts
+
+  input = gets.strip.downcase
+  if input == "a"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    puts
+    puts "X will play the first move. Get ready, X!" #implement a coin flip to help players decide who goes first?
+    game.play
+  elsif input == "b"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+  elsif input == "c"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+  else
+    puts
+    puts "Invalid choice"
+    puts
+    start
+  end
+end
+
+start

@@ -116,3 +116,7 @@
 # #   board.cells[winning_combo[0]]
 # # end
 # binding.pry
+
+# def move(board)
+#   board.valid_move?("5") ? "5" : (1..9).to_a.reject{|i| i == 5}.sample.to_s
+# end

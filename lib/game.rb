@@ -51,22 +51,36 @@ class Game
       if board.valid_move?(cell)
         board.update(cell, current_player)
       else
-        puts "invalid"
+        puts ""
+        if current_player.is_a?(Players::Human)
+          puts "Invalid move. Try again, #{current_player.token}!"
+        else
+          puts "(Invalid entry)"
+        end
         turn
       end
-      board.display
     end
 
     def play
+      puts
+      board.display
+
       until over?
         turn
+        puts
+        board.display
       end
 
       if won?
-        puts "Congratulations #{winner}!"
+        puts
+        puts "Congratulations, #{winner}!"
+        puts
         puts "You've won the game!"
+        puts
       elsif draw?
-        puts "Cats Game!"
+        puts
+        puts "Cat's Game! Draw! No winner!"
+        puts
       end
     end
 
