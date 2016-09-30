@@ -51,7 +51,7 @@ class Game
       if board.valid_move?(cell)
         board.update(cell, current_player)
       else
-        puts ""
+        puts
         if current_player.is_a?(Players::Human)
           puts "Invalid move. Try again, #{current_player.token}!"
         else
@@ -64,22 +64,27 @@ class Game
     def play
       puts
       board.display
-
       until over?
         turn
         puts
         board.display
+        if player_1.is_a?(Players::Computer)
+          sleep(0.05)
+        else
+          sleep(0.8)
+        end
       end
-
       if won?
         puts
         puts "Congratulations, #{winner}!"
         puts
         puts "You've won the game!"
+        sleep(0.33)
         puts
       elsif draw?
         puts
         puts "Cat's Game! Draw! No winner!"
+        sleep(0.33)
         puts
       end
     end

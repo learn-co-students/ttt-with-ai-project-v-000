@@ -13,6 +13,8 @@ module Players
       puts "#{token}'s move:"
     end
 
+
+
     def move(board)
       call
       if (first_move(board) != nil) && ((board.turn_count == 0) || (board.turn_count == 1))
@@ -21,6 +23,14 @@ module Players
         corner_move(board)
       elsif block_or_win(board) != nil
         block_or_win(board)
+      else
+        (1..9).to_a.reject{|i| !board.valid_move?(i)}.sample.to_s
+      end
+    end
+
+    def easy_mode(board)
+      if (first_move(board) != nil) && ((board.turn_count == 0) || (board.turn_count == 1))
+        first_move(board)
       else
         (1..9).to_a.reject{|i| !board.valid_move?(i)}.sample.to_s
       end
