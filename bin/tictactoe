@@ -49,7 +49,7 @@ def play_again
       puts
       puts "For 2 player games, last round's loser should play the first move as X this time."
       puts
-      sleep(1.5)
+      sleep(1)
       start
     else
       sleep(1)

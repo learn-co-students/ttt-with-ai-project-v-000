@@ -28,7 +28,7 @@ module Players
       end
     end
 
-    def easy_mode(board)
+    def easy_mode(board) #Implement in future? --allows player to win easily, and also allows CPUs in Wargames mode to win triggering #the_end 
       if (first_move(board) != nil) && ((board.turn_count == 0) || (board.turn_count == 1))
         first_move(board)
       else

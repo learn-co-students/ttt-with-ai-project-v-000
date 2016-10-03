@@ -71,7 +71,7 @@ class Game
         if player_1.is_a?(Players::Computer)
           sleep(0.05)
         else
-          sleep(0.8)
+          sleep(0.5)
         end
       end
       if won?
