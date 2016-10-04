@@ -32,7 +32,7 @@ class Game
   def win_array
     WIN_COMBINATIONS.each do |win|
       ref = self.board.cells[win[0]]
-      [true, ref] if (ref == "X" || ref == "O") && self.board.cells[win[1]] == ref && self.board.cells[win[2]] == ref
+      return [true, ref] if (ref == "X" || ref == "O") && self.board.cells[win[1]] == ref && self.board.cells[win[2]] == ref
     end
     [false, nil]
   end
