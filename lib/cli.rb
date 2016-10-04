@@ -5,8 +5,15 @@ class Cli
   def initialize
   end
 
+  def welcome
+    print "\nWelcome to TTT CLI!\n"
+    print "The Leader in Tic-Tac-Toe Command Line Interfaces!\n\n"
+    self.setup_game
+  end
+
   def play_game
     self.game.play
+    self.play_again?
   end
 
   def create_game(num_players, first_player, difficulty = 1)
@@ -34,6 +41,7 @@ class Cli
       end
     end
     self.game = Game.new(player_1, player_2)
+    self.play_game
   end
 
   def play_again?
@@ -47,11 +55,10 @@ class Cli
         self.setup_game
       else
         self.game.board.reset!
+        self.play_game
       end
-      return true
     else
       puts "Thanks for playing!"
-      return false
     end
   end
 
