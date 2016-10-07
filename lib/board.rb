@@ -22,9 +22,7 @@ class Board
   end
 
   def full?
-    @cells.none? do |cell|
-      cell == " "
-    end
+    @cells.all? {|cell| cell != " "}
   end
 
   def turn_count

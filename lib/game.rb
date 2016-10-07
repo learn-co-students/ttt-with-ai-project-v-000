@@ -1,7 +1,5 @@
-require "pry"
-
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :cli
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
@@ -42,7 +40,7 @@ class Game
 
     def winner
       if won?
-        @board.cells[won?[0]]
+        board.cells[won?[0]]
       end
     end
 
@@ -62,25 +60,19 @@ class Game
     end
 
     def play
-      puts
       board.display
       until over?
         turn
         puts
         board.display
-        if player_1.is_a?(Players::Computer)
+        if player_1.is_a?(Players::Computer) && player_2.is_a?(Players::Computer)
           sleep(0.05)
         else
           sleep(0.5)
         end
       end
       if won?
-        puts
-        puts "Congratulations, #{winner}!"
-        puts
-        puts "You've won the game!"
-        sleep(0.33)
-        puts
+        cli.win_msg
       elsif draw?
         puts
         puts "Cat's Game! Draw! No winner!"
@@ -88,5 +80,6 @@ class Game
         puts
       end
     end
+
 
 end
