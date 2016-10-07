@@ -57,6 +57,7 @@ class Game
     move = current_player.move(board)
     if board.valid_move?(move)
       board.update(move, current_player)
+      board.display
     else
       turn
     end
@@ -73,4 +74,37 @@ class Game
     end
   end
 
+  def start
+    # greet the user
+    puts "❌⭕️❌⭕️❌⭕️❌⭕️❌⭕️❌⭕️"
+    puts "Welcome to TicTacToe!"
+    puts "❌⭕️❌⭕️❌⭕️❌⭕️❌⭕️❌⭕️"
+    # ask the user how many players
+    puts "Please select the number of players"
+    puts "0 = Computer vs. Computer"
+    puts "1 = Computer vs. Human"
+    puts "2 = Human vs. Human"
+
+    input = gets.strip
+
+      if input == "0"
+        puts "Computer vs Computer..."
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      elsif input == "1"
+        puts "Computer vs Human..."
+        puts "Type 'X' to be player 1. Type 'O' to be player 2."
+        human_input = gets.strip.upcase
+        if human_input == "X"
+          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        else
+          Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+        end
+      elsif input == "2"
+        puts "Human vs Human..."
+        Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+      else
+        puts "Not sure what you want, type 0,1,2"
+        start
+      end
+    end
 end
