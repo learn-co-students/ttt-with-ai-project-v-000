@@ -1,86 +1,22 @@
 require 'pry'
 
 class Game
-attr_accessor :board, :player_1, :player_2
-
+  attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
-[0,1,2],
-[3,4,5],
-[6,7,8],
-[0,3,6],
-[1,4,7],
-[2,5,8],
-[0,4,8],
-[6,4,2]
-]
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [6,4,2]
+  ]
 
-  def initialize(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-  end
-
-
-
-  def play
-    while !over?
-      sleep(1)
-      turn
-    end
-    if won?
-      sleep(1)
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      sleep(1)
-      puts "Cats Game!"
-    end
-  end
-
-  def play_wargames
-    while !over?
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cats Game!"
-
-  end
-
-  def turn
-    player = current_player
-    current_move = player.win_or_block(@board)
-    if !@board.valid_move?(current_move)
-      puts "Invalid move moron, can't you see that spot is filled? Try again"
-      turn
-    else
-      puts "Turn: #{@board.turn_count+1}"
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts "\n\n"
-    end
-  end
-
-  def winner
-    WIN_COMBINATIONS.find do |win_combo|
-      if @board.cells[win_combo[0]] == "X" && @board.cells[win_combo[1]] == "X" && @board.cells[win_combo[2]] == "X"
-        return "X"
-      elsif @board.cells[win_combo[0]] == "O" && @board.cells[win_combo[1]] == "O" && @board.cells[win_combo[2]] == "O"
-        return "O"
-      # binding.pry
-      end
-    end
-  end
-
-
-
-  def won?
-    WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
-    end
   end
 
   def over?
@@ -89,6 +25,46 @@ attr_accessor :board, :player_1, :player_2
 
   def current_player
     @board.turn_count % 2 == 0 ? @player_1 : @player_2
+  end
+
+  def winner
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
+  end
+
+  def turn
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+    end
+  end
+   
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cats Game!"
+    end
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
+    end
   end
 
   def draw?
@@ -103,51 +79,38 @@ attr_accessor :board, :player_1, :player_2
     puts "How many players? Press 0, 1, 2, or 100 to see the Wargames game mode."
     input = gets.strip.to_i
     sleep(1)
-      if input == 2
-        # when 2
-          puts "Okay, 2 human players. Makes sense, it's a really trumpy game and a waste of my time"
-          sleep(1)
-          puts "The first player to take a turn will be X, the second will be O."
-          Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("O"), board = Board.new).play
-
-      elsif input == 100
-        puts "Strange game, the only winning move is not to play. And that's how M.A.D. works children."
-        Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("0"), board = Board.new).wargames
-
-
-      # when 1
-      elsif input == 1
-        puts "alright, looks like it's me against you"
+    if input == 2
+      # when 2
+        puts "Okay, 2 human players. Makes sense, it's a really trumpy game and a waste of my time"
         sleep(1)
-        puts "I will be the X and you will be the O because what are you going to do about it? Would you like to go first or shall I?"
-        sleep(1)
-        puts "Press 1 if you would like to go first, press 2 if I should"
-        gamer_1 = gets.strip.to_i
-
-
-          if gamer_1 == 1
-            Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new).play
-
-          elsif gamer_1 == 2
-            Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
-
-          end
-
-
-
-
-        # when 0
-      elsif input == 0
-        puts "Okay, Skynet vs HAL"
-        sleep(0.5)
-        Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
-      end
+        puts "The first player to take a turn will be X, the second will be O."
+        Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new).play
+    elsif input == 100
+      puts "Strange game, the only winning move is not to play. And that's how M.A.D. works children."
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("0"), board = Board.new).wargames
+    # when 1
+    elsif input == 1
+      puts "alright, looks like it's me against you"
+      sleep(0.5)
+      puts "I will be the X and go first you will be the O and go second because what are you going to do about it? Would you like to go first or shall I?"
+      sleep(0.5)
+      # puts "Press 1 if you would like to go first, press 2 if I should"
+      # gamer_1 = gets.strip.to_i
+      #   if gamer_1 == 1
+        #   Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new).play
+        # else
+          Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+      # when 0
+    elsif input == 0
+      puts "Okay, Skynet vs HAL"
+      sleep(0.5)
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+    sleep(1)
     end
+    play_again
+  end
 
-      sleep(1)
-      play_again
-    end
-  end  
+
 
 
   def play_again
@@ -169,30 +132,25 @@ attr_accessor :board, :player_1, :player_2
 
   def wargames
     counter = 0
-    x_wins = 0
-    o_wins = 0
+    wins_for_x = 0
+    wins_for_o = 0
     draws = 0
-
-    while counter < 100
+    until counter == 100
       puts "round #{counter}"
-      play_wargames
+      play
       if draw?
-        binding.pry
-        draws += 1
+        draws+=1
       elsif winner == "X"
-        x_wins += 1
-      elsif winner == "O"
-        o_wins += 1
+        wins_for_x+=1
+      else
+        wins_for_o+=1
       end
-      # sleep(0)
+      sleep(1)
       self.board.reset!
-    counter += 1
+    counter+=1
     end
-    puts "After #{counter} games of tic tac toe against myself:"
-    puts "X won: #{x_wins} times"
-    puts "O won: #{o_wins} times"
-    puts "We tied #{draws} times"
-    # puts "wins for X: #{wins_for_x}\nwins for O:#{wins_for_o}\ndraws: #{draws}"
+  puts "wins for X: #{wins_for_x}\nwins for O:#{wins_for_o}\ndraws: #{draws}"
+  end
 end
 
 
