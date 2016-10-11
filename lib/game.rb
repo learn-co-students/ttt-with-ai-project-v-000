@@ -1,4 +1,3 @@
-
 class Game
   require 'pry'
 
@@ -22,7 +21,7 @@ class Game
   end
 
   def over?
-  self.board.full?
+  self.board.full? || self.won? == true
   end
 
   def won?
@@ -39,9 +38,7 @@ class Game
   end 
 
   def draw?
-    if board.full? == true && self.won? == false
-      return true
-      end
+    @board.full? && !won?
     end
 
   def winner
@@ -50,26 +47,31 @@ class Game
       end
     end
 
-    def turn                  
-      #makes a valid move
-      #expect(game.player_1).to receive(:gets).and_return("1")                
-      
-      input = gets.chomp
-      if board.valid_move?(input) == true
-        return "1"
-        binding.pry 
-
+  def turn 
+    input = current_player.move(@board)
+      if @board.valid_move?(input) == false
+        puts "That is not a valid move please try again"
+        turn
+      else
+        @board.update(input, current_player)
       end
-
     end
 
-
-      
-
-
-
-
-
-
+  def play
+    board.display
+    until over? == true || self.won? == true || self.draw? == true
+      turn
+      puts " "
+      puts " "
+      board.display
+    end
+    
+    if won? == true
+      puts "Congratulations #{@winner}!"
+    elsif 
+      draw? == true
+      puts "Cats Game!"
+    end
+  end
 
 end

@@ -19,16 +19,15 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} " 
   end
 
-
   def position(input)
     cells[input.to_i-1]
   end
 
   def position_taken?(input)
-    if cells[input] == " " 
-      return true
-    else 
+    if cells[input.to_i-1] == " " 
       return false
+    else 
+      return true
     end
   end
 
@@ -44,22 +43,20 @@ class Board
     if cells[input.to_i - 1] != " " 
       return true
     else 
-      false
+      return false
     end
   end
 
   def valid_move?(input)
-    !taken?(input.to_i) && input.to_i.between?(1,9)
+    if taken?(input) == false && input.to_i.between?(1,9) == true
+      return true
+    else 
+      return false
   end
+end
 
   def update(input, player)
-    cells[input.to_i-1] = player.token
+    cells[input.to_i - 1] = player.token
   end
-
-
-    
-    
-#learn --fail-fast
-  
 
 end

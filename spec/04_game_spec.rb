@@ -1,4 +1,4 @@
-require 'spec_helper'
+    require 'spec_helper'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
