@@ -8,19 +8,18 @@ module Players
       [6, 0]
     ]
 
-    def call_for_move
-      puts
-      puts "#{token}'s move:"
-    end
-
     def move(board)
-      call_for_move
+      puts "\n#{token}'s move:\n"
       if (first_move(board) != nil) && ((board.turn_count == 0) || (board.turn_count == 1))
         first_move(board)
+=begin
+  To enable Easy Mode (with beatable AI and therefore a possibility of CPU winning in Wargames) comment out both elsif conditionals that follow below.
+=end
       elsif block_or_win(board) == nil && corner_move(board) != nil
         corner_move(board)
       elsif block_or_win(board) != nil
         block_or_win(board)
+#end commenting here for Easy Mode
       else
         (1..9).to_a.reject{|i| !board.valid_move?(i)}.sample.to_s
       end
@@ -58,13 +57,4 @@ module Players
     end
 
   end
-
-  # def easy_mode(board) #Implement in future? --allows player to win easily, and also allows CPUs in Wargames mode to win triggering #the_end
-  #   if (first_move(board) != nil) && ((board.turn_count == 0) || (board.turn_count == 1))
-  #     first_move(board)
-  #   else
-  #     (1..9).to_a.reject{|i| !board.valid_move?(i)}.sample.to_s
-  #   end
-  # end
-
 end

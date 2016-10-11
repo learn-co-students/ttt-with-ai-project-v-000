@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2, :cli
+  attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
@@ -39,47 +39,32 @@ class Game
     end
 
     def winner
-      if won?
-        board.cells[won?[0]]
-      end
+      won? ? board.cells[won?[0]] : nil
     end
 
     def turn
+      board.display
       cell = current_player.move(board)
       if board.valid_move?(cell)
+        wait_time
         board.update(cell, current_player)
       else
-        puts
-        if current_player.is_a?(Players::Human)
-          puts "Invalid move. Try again, #{current_player.token}!"
-        else
-          puts "(Invalid entry)"
-        end
+        puts "\nInvalid move. Try again, #{current_player.token}!"
         turn
       end
     end
 
     def play
+      turn until over?
       board.display
-      until over?
-        turn
-        puts
-        board.display
-        if player_1.is_a?(Players::Computer) && player_2.is_a?(Players::Computer)
-          sleep(0.05)
-        else
-          sleep(0.5)
-        end
-      end
-      if won?
-        cli.win_msg
-      elsif draw?
-        puts
-        puts "Cat's Game! Draw! No winner!"
-        sleep(0.33)
-        puts
-      end
     end
 
+    def wait_time
+      if player_1.is_a?(Players::Computer) && player_2.is_a?(Players::Computer)
+        sleep 0.05
+      else
+        sleep 0.5
+      end
+    end
 
 end

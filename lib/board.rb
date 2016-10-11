@@ -10,7 +10,7 @@ class Board
   end
 
   def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts "\n #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
@@ -38,9 +38,7 @@ class Board
   end
 
   def update(cell, player)
-    if valid_move?(cell)
-      cells[cell.to_i - 1] = player.token
-    end
+    valid_move?(cell) ? cells[cell.to_i - 1] = player.token : nil
   end
 
 end
