@@ -6,13 +6,13 @@ module Players
   WIN_COMBINATIONS = [[0,1,2],[3,4,5,],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
   
   def move(board)
-    if board.turn_count < 3
-      first_move(board) || random(board)
-    elsif 
-      board.turn_count > 2
-      block_or_win(board) 
-      binding.pry  
-    end
+    #if board.turn_count < 5
+      first_move(board) #|| random(board)
+    #elsif 
+   #   board.turn_count > 4
+   #   block_or_win(board) 
+    
+   # end
   end
 
   def first_move(board)
