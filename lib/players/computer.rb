@@ -2,56 +2,59 @@ module Players
   require 'pry'
 
   class Computer < Player
+
   WIN_COMBINATIONS = [[0,1,2],[3,4,5,],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+  
   def move(board)
     if board.turn_count < 4
-      first_move(board) || corners(board) || random(board)
-    elsif board.turn_count > 3
-      almost_won(board)
+      first_move(board) || random(board)
+    elsif 
+      board.turn_count > 3
+      block_or_win(board)
+      random(board)   
     end
   end
 
   def first_move(board)
-    input = "5" unless board.taken?(5)
+    input = "5" unless board.valid_move?("5") == false
   end
 
   def random(board)
-    valid_moves =["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    valid_moves =["1", "2", "3", "4", "5", "6", "?", "8", "9"]
     input = valid_moves.sample
-  end
-
-  def corners(board)
-    corner = ["1", "3", "7", "9"]
-    input = corner.sample
     if board.valid_move?(input) == true
-     input
+      return input
+    else 
+      random(board)
     end
   end
-  def almost_won(board)
-    WIN_COMBINATIONS.each do |game1|
-    win_1 = game1[0]
-    win_2 = game1[1]
-    win_3 = game1[2]
-      if board.cells[win_1] == "#{self.token}" && board.cells[win_2] == "#{self.token}" && board.cells[win_3] == " "
-        input = win_3 + 1
-        input.to_s
-      elsif
-       board.cells[win_1] == "#{self.token}" && board.cells[win_2] == " " && board.cells[win_3] == "#{self.token}"
-       input = win_2 + 1
-        input.to_s
-      elsif 
-        board.cells[win_1] == " " && board.cells[win_2] == "#{self.token}" && board.cells[win_3] == "#{self.token}"
-        input = win_1 + 1
-        input.to_s
-      else 
-        random(board)
-        binding.pry
-     end
+
+  def player_2
+    if self.token == "X"
+      return "O"
+    else return "X"
     end
   end 
 
+  def near_win_combo(board, token) 
+    WIN_COMBINATIONS.detect do |index|
+      ((board.cells[index[0]] == token && board.cells[index[1]] == token && board.cells[index[2]] == " ") ||
+      (board.cells[index[0]] == token && board.cells[index[1]] == " " && board.cells[index[2]] == token) ||
+      (board.cells[index[0]] == " " && board.cells[index[1]] == token && board.cells[index[2]] == token))
+    end
+  end
 
- 
+  def block_or_win(board)
+    combo = near_win_combo(board, token)
+    if combo[0] == " " && combo[1] == self.token || player_2
+      return combo[0] + 1 
+    elsif combo[1] == " " && combo[2] == self.token || player_2
+      return combo[1] + 1
+    elsif combo[2] == " " && combo[1] == self.token || player_2
+      return combo[2] + 1
+    end
+  end
+
 end
 end
 

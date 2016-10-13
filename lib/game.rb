@@ -49,6 +49,7 @@ class Game
 
   def turn 
     input = current_player.move(@board)
+    #puts input
       if @board.valid_move?(input) == false
         puts "That is not a valid move please try again"
         turn
