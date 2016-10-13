@@ -10,8 +10,8 @@ module Players
       first_move(board) || random(board)
     elsif 
       board.turn_count > 2
-      block_or_win(board)
-      random(board)   
+      block_or_win(board) 
+      binding.pry  
     end
   end
 
