@@ -52,6 +52,7 @@ module Players
       return combo[1] + 1
     elsif combo[2] == " " && combo[1] == self.token || player_2
       return combo[2] + 1
+      binding.pry
     end
   end
 
