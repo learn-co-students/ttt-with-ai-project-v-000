@@ -6,10 +6,10 @@ module Players
   WIN_COMBINATIONS = [[0,1,2],[3,4,5,],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
   
   def move(board)
-    if board.turn_count < 4
+    if board.turn_count < 3
       first_move(board) || random(board)
     elsif 
-      board.turn_count > 3
+      board.turn_count > 2
       block_or_win(board)
       random(board)   
     end
@@ -20,7 +20,7 @@ module Players
   end
 
   def random(board)
-    valid_moves =["1", "2", "3", "4", "5", "6", "?", "8", "9"]
+    valid_moves =["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     input = valid_moves.sample
     if board.valid_move?(input) == true
       return input
@@ -46,14 +46,15 @@ module Players
 
   def block_or_win(board)
     combo = near_win_combo(board, token)
-    binding.pry
-    if combo[0] == " " && combo[1] == self.token || player_2
+    if near_win_combo(board, token) == nil
+      random(board)
+    elsif combo[0] == " " && combo[1] == self.token || player_2
       return combo[0] + 1 
     elsif combo[1] == " " && combo[2] == self.token || player_2
       return combo[1] + 1
     elsif combo[2] == " " && combo[1] == self.token || player_2
       return combo[2] + 1
-      binding.pry
+      
     end
   end
 
