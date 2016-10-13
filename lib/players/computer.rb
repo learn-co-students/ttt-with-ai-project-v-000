@@ -46,6 +46,7 @@ module Players
 
   def block_or_win(board)
     combo = near_win_combo(board, token)
+    binding.pry
     if combo[0] == " " && combo[1] == self.token || player_2
       return combo[0] + 1 
     elsif combo[1] == " " && combo[2] == self.token || player_2
