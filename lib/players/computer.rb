@@ -1,41 +1,32 @@
 module Players
   class Computer < Player
 
-    WIN_COMBINATIONS = [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-      [0,4,8],
-      [2,4,6]
-    ]
-
-    # CORNERS = []
+    CORNERS = ["1", "3", "7", "9"]
+    SIDES = ["2", "4", "6", "8"]
 
     def move(board)
-      if board.valid_move?(5)
-        "5"
-      else
-        move = rand(1..9)
+      @move = nil
+      Game::WIN_COMBINATIONS.each do |win_combo|
+        if board.cells[win_combo[0]] != " " && board.cells[win_combo[1]] != " " && board.cells[win_combo[0]] == board.cells[win_combo[1]] && board.valid_move?(win_combo[2] + 1)
+          @move = (win_combo[2] + 1).to_s
+        elsif board.cells[win_combo[1]] != " " && board.cells[win_combo[2]] != " " && board.cells[win_combo[1]] == board.cells[win_combo[2]] && board.valid_move?(win_combo[0] + 1)
+          @move = (win_combo[0] + 1).to_s
+        elsif board.cells[win_combo[0]] != " " && board.cells[win_combo[2]] != " " && board.cells[win_combo[0]] == board.cells[win_combo[2]] && board.valid_move?(win_combo[1] + 1)
+          @move = (win_combo[1] + 1).to_s
+        end
       end
+
+      if @move.nil?
+        if board.valid_move?(5)
+          @move = 5
+        elsif CORNERS.any?{|corner| board.valid_move?(corner)}
+          @move = CORNERS.find{|corner| board.valid_move?(corner)}
+        else
+          @move = SIDES.find{|side| board.valid_move?(side)}
+        end
+      end
+      @move
     end
-    #  if (false)
-    #  else
-    #    next_best_move(board)
-    #  end
-
-    # go through and check if all the positions needed in the combination are free, if they are, start making those moves
-
-    #  def next_best_move(board)
-    #   #  random_array = Random.rand(1..9)
-    #    Game::WIN_COMBINATIONS.find do |wc|
-    #          binding.pry
-    #        end
-    #      end
-    #    end
-    #  end
 
   end #close class
 end #close module

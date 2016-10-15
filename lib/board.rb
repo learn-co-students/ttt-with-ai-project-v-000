@@ -18,6 +18,10 @@ class Board
   end
 
   def position(input)
+<<<<<<< Updated upstream
+=======
+    # binding.pry
+>>>>>>> Stashed changes
     cells[input.to_i-1]
   end
 
