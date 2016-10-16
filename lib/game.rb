@@ -47,7 +47,8 @@ class Game
       end
     end
 
-  def turn 
+  def turn
+    puts "player #{current_player.token}'s turn" 
     input = current_player.move(@board)
       if @board.valid_move?(input) == false
         puts "That is not a valid move please try again"
