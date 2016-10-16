@@ -1,13 +1,9 @@
 class TicTacToeCLI
 
-  def initialize
-  end
-
   def call 
     puts "Welcome to Tic Tac Toe"
     puts "**********************"
     puts "Please choose how many players: 0, 1 or 2"
-    
     
     input = gets.strip
 
