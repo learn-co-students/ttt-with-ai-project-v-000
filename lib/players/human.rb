@@ -6,6 +6,5 @@
     gets.strip
    end
  
-
 end
 

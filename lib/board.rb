@@ -40,20 +40,12 @@ class Board
   end
 
   def taken?(input)
-    if cells[input.to_i - 1] != " " 
-      return true
-    else 
-      return false
-    end
+    cells[input.to_i - 1] == "X" || cells[input.to_i - 1] == "O"
   end
 
   def valid_move?(input)
-    if taken?(input) == false && input.to_i.between?(1,9) == true
-      return true
-    else 
-      return false
+    taken?(input) == false && input.to_i.between?(1,9) == true
   end
-end
 
   def update(input, player)
     cells[input.to_i - 1] = player.token

@@ -6,13 +6,7 @@ module Players
   WIN_COMBINATIONS = [[0,1,2],[3,4,5,],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
   
   def move(board)
-    #if board.turn_count < 5
-      first_move(board) #|| random(board)
-    #elsif 
-   #   board.turn_count > 4
-   #   block_or_win(board) 
-    
-   # end
+      first_move(board) || near_win_combo(board) || random(board)
   end
 
   def first_move(board)
@@ -28,36 +22,29 @@ module Players
       random(board)
     end
   end
-
+  
   def player_2
-    if self.token == "X"
-      return "O"
-    else return "X"
-    end
+    self.token == "X" ? "O" : "X"
   end 
 
-  def near_win_combo(board, token) 
-    WIN_COMBINATIONS.detect do |index|
-      ((board.cells[index[0]] == token && board.cells[index[1]] == token && board.cells[index[2]] == " ") ||
-      (board.cells[index[0]] == token && board.cells[index[1]] == " " && board.cells[index[2]] == token) ||
-      (board.cells[index[0]] == " " && board.cells[index[1]] == token && board.cells[index[2]] == token))
+  def near_win_combo(board) 
+    WIN_COMBINATIONS.each do |index|
+      if board.cells[index[0]] == self.token && board.cells[index[1]] == self.token && board.cells[index[2]] == " "
+        return "#{index[2]+1}"
+      elsif board.cells[index[1]] == self.token && board.cells[index[2]] == self.token && board.cells[index[0]] == " "
+        return "#{index[0]+1}"
+      elsif board.cells[index[2]] == self.token && board.cells[index[0]] == self.token && board.cells[index[1]] == " "
+        return "#{index[1]+1}"
+      elsif board.cells[index[0]] == player_2 && board.cells[index[1]] == player_2 && board.cells[index[2]] == " "
+        return "#{index[2]+1}"
+      elsif board.cells[index[1]] == player_2 && board.cells[index[2]] == player_2 && board.cells[index[0]] == " "
+        return "#{index[0]+1}"
+      elsif board.cells[index[2]] == player_2 && board.cells[index[0]] == player_2 && board.cells[index[1]] == " "
+      return "#{index[1]+1}" 
+      end
     end
+    return nil
   end
-
-  def block_or_win(board)
-    combo = near_win_combo(board, token)
-    if near_win_combo(board, token) == nil
-      random(board)
-    elsif combo[0] == " " && combo[1] == self.token || player_2
-      return combo[0] + 1 
-    elsif combo[1] == " " && combo[2] == self.token || player_2
-      return combo[1] + 1
-    elsif combo[2] == " " && combo[1] == self.token || player_2
-      return combo[2] + 1
-      
-    end
-  end
-
 end
 end
 
