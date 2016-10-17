@@ -21,6 +21,11 @@ def zero_player
   game.board.display
   puts "Lets begin!"
   game.play
+  puts "Would you like them to have another go? (yes or exit)"
+  input = gets.strip
+  if input == "yes"
+    zero_player
+  end
 end
 
 def one_player
@@ -31,11 +36,21 @@ def one_player
     game.board.display
     puts "Lets begin!"
     game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      one_player
+    end
   elsif input == "2"
     game = Game.new(Players::Computer.new(token = "X"), Players::Human.new(token = "O"), Board.new)
     game.board.display
     puts "Lets begin!"
     game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      one_player
+    end
   else
     puts "1 or 2?"
     one_player
@@ -50,14 +65,24 @@ def two_player
     game.board.display
     puts "Lets begin!"
     game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      two_player
+    end
   elsif input == "2"
     game = Game.new(Players::Human.new(token = "X"), Players::Human.new(token = "O"), Board.new)
     game.board.display
     puts "Lets begin!"
     game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      two_player
+    end
   else
     puts "1 or 2?"
-    one_player
+    two_player
   end
 end
 

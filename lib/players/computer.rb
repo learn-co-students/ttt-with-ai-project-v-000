@@ -1,13 +1,5 @@
 module Players
   class Computer < Player
-
-    ##TWO IN A ROW 1,2  #2,3   #1,4    #2,5    #3,6    #4,5    #5,6    #4,7    #5,8    #6,9    #7,8    #8,9    #1,3    #1,7
-    ##TWO IN A ROW     #1,9    #2,8
-    #3,9
-    #4,6
-    #7,9
-
-
     def move(board)
       if board.position("1") == "X" && board.position("2") == "X" && !board.taken?("3")
           input = "3"
