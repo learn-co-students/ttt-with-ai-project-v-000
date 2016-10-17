@@ -7,7 +7,6 @@ class Board
   end
 
   def reset!
-    @cells.clear
     @cells = [" "," "," "," "," "," "," "," "," "]
   end
 
