@@ -3,6 +3,9 @@ class Game
 
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
 
+  TWO_IN_A_ROW = [[0,1],[1,2],[0,3],[1,4],[2,5],[3,4],[4,5],[3,6],[4,7],[5,8],[6,7],[7,8],[0,2],[0,6],[0,8],
+  [1,7],[2,8],[3,5],[6,8]]
+
   def initialize(*args)
     @board = args[2]
     @player_1 = args[0]
@@ -35,7 +38,7 @@ class Game
   end
 
   def over?
-    if @board.full? || draw? || won?
+    if draw? || won?
       true
     else
       false
@@ -90,7 +93,6 @@ class Game
     if !board.valid_move?(player_move)
       turn
     else
-      board.display
       board.update(player_move, player)
       board.display
     end

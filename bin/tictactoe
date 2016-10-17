@@ -1,3 +1,68 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  input = gets.strip
+  if input == "0"
+    zero_player
+  elsif input == "1"
+    one_player
+  elsif input == "2"
+    two_player
+  else
+    puts "try again!"
+    start
+  end
+end
+
+def zero_player
+  game = Game.new(Players::Computer.new(token = "X"), Players::Computer.new(token = "O"), Board.new)
+  game.board.display
+  puts "Lets begin!"
+  game.play
+end
+
+def one_player
+  puts "Who should go first with the token X? You(1) or the computer?(2)"
+  input = gets.strip
+  if input == "1"
+    game = Game.new(Players::Human.new(token = "X"), Players::Computer.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+  elsif input == "2"
+    game = Game.new(Players::Computer.new(token = "X"), Players::Human.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+  else
+    puts "1 or 2?"
+    one_player
+  end
+end
+
+def two_player
+  puts "Who should go first with the token X? You(1) or the other you(2)?"
+  input = gets.strip
+  if input == "1"
+    game = Game.new(Players::Human.new(token = "X"), Players::Human.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+  elsif input == "2"
+    game = Game.new(Players::Human.new(token = "X"), Players::Human.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+  else
+    puts "1 or 2?"
+    one_player
+  end
+end
+
+puts "Welcome to Tic Tac Toe!"
+
+puts "How many players? 0, 1, or 2?"
+
+start
