@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+# new_board = Board.new()
+puts "Welcome to this awesome game of Tic Tac Toe!"
+puts "\n"
+puts "How many players do we have today?"
+puts "1: one player (good luck to you!)"
+puts "2: two players (heh, easiest of all games)"
+puts "3: just watch the computers fight!"
+
+new_game = Game.new()
+new_game.play
