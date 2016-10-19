@@ -23,6 +23,23 @@ class Game
     @board.turn_count.even? ? player_1 : player_2
   end
   
+  def welcome
+    puts "Welcome to this awesome game of Tic Tac Toe!"
+    puts "\n"
+    puts "How many players do we have today?"
+    puts "0: just watch the computers fight!"
+    puts "1: one player (good luck to you!)"
+    puts "2: two players (heh, easiest of all games)"
+    response = gets.strip
+    
+    if response == "0" 
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+    elsif response == "1"
+      @player_2 = Players::Computer.new("O")
+    end
+  end
+  
   def won?
     # does the board, have each token type, matching these arrays
     # this needs to happen at each turn
