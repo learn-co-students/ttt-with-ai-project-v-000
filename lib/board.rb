@@ -41,5 +41,6 @@ class Board
   def update(move, player)
     cells[move.to_i-1] = player.token
   end
+  
       
 end
