@@ -4,8 +4,8 @@ module Players
 
   class Human < Player
 
-    def move(player)
-      puts "Player #{player}, enter your next move:"
+    def move(move)
+      puts "Enter your next move (1-9):"
       move = gets
       move.chomp
     end
