@@ -8,15 +8,12 @@ class Game
     @board = board
   end
 
-  def input_to_index
-  end
-
-  def turn_count
-    @board.cells.count{|token| token == "X" || token == "O"}
+  def input_to_index(input)
+    input.to_i - 1
   end
 
   def current_player
-    turn_count % 2 == 0 ? @player_1 : @player_2
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   WIN_COMBINATIONS = [
@@ -30,34 +27,10 @@ class Game
     [6,4,2]
   ]
 
-  def position_taken?(move)
-    if @board.cells[move] == " "
-      false
-    elsif @board.cells[move] == ""
-      false
-    elsif @board.cells[move] == nil
-      false
-    else
-      true
-    end
-  end
-
-  def valid_move?(move)
-    if position_taken?(move)
-      false
-    elsif move > 8
-      false
-    elsif move < 0
-      false
-    else
-      true
-    end
-  end
-
   def turn
     loop do
-      input = current_player.move(@board)
-      if valid_move?(input) == true
+      input = input_to_index(current_player.move(@board))
+      if @board.valid_move?(input + 1) == true
         @board.cells[input] = current_player.token
         @board.display
         break
@@ -89,16 +62,8 @@ class Game
       end
   end
 
-  def full?
-    if @board.cells.include?(" ")
-      false
-    else
-      true
-    end
-  end
-
   def draw?
-    !won? && full?
+    !won? && @board.full?
   end
 
   def over?
