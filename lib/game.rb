@@ -24,8 +24,6 @@ class Game
   end
   
   def welcome
-    puts "Welcome to this awesome game of Tic Tac Toe!"
-    puts "\n"
     puts "How many players do we have today?"
     puts "0: just watch the computers fight!"
     puts "1: one player (good luck to you!)"

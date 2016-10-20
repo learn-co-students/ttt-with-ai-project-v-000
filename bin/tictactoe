@@ -3,8 +3,8 @@
 require_relative '../config/environment'
 
 
-# new_board = Board.new()
-
+puts "Welcome to this awesome game of Tic Tac Toe!"
+puts "\n"
 new_game = Game.new()
 new_game.welcome
 new_game.play
