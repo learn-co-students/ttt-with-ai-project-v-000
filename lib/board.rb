@@ -17,6 +17,9 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts
+    puts 
+    puts
   end
 
   def position(move)
