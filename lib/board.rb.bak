@@ -4,16 +4,13 @@ class Board
 
   def initialize
     @cells = []
-    self.cells_populate
+    9.times { @cells << " " }
   end
 
   def reset!
-    @cells.clear
-    self.cells_populate
-  end
-
-  def cells_populate
+    @cells = []
     9.times { @cells << " " }
+    @cells
   end
 
   def display
@@ -37,7 +34,7 @@ class Board
   end
 
   def taken?(pos)
-    self.position(pos) == "X" || self.position(pos) == "O"
+    @cells[pos.to_i - 1] == "X" || @cells[pos.to_i - 1] == "O"
   end
 
   def valid_move?(pos)

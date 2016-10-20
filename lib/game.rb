@@ -1,8 +1,8 @@
-require "players/human.rb"
+#require "players/human.rb"
 
 class Game
 
-  include Players
+#  include Players
 
   attr_accessor :board, :player_1, :player_2
 
@@ -24,14 +24,17 @@ class Game
     @board.full?
   end
 
+  def is_winner?(player)
+    WIN_COMBINATIONS.each { |combination|
+       if combination.all? { |position| @board.cells[position] == player }
+         return true
+       end }
+     false
+   end
+
+
   def won?
-    WIN_COMBINATIONS.each do |combination|
-       if combination.all? { |position| @board.cells[position] == "X" } ||
-          combination.all? { |position| @board.cells[position] == "O" }
-          return true
-      end
-    end
-     return false
+    is_winner?("X") || is_winner?("O")
   end
 
   def draw?
@@ -39,24 +42,25 @@ class Game
   end
 
   def winner
-    winner = nil
-    WIN_COMBINATIONS.each do |combination|
-       if combination.all? { |position| @board.cells[position] == "X" }
-         winner = "X"
-       end
-       if combination.all? { |position| @board.cells[position] == "O" }
-         winner = "O"
-       end
-     end
-     winner
+      is_winner?("X") && "X" || is_winner?("O") && "O" || nil
    end
 
    def turn
-     move = 0
-     while move == 0
-       move = self.current_player.move(self.board).to_i
+     move = self.current_player.move(@board)
+     while !@board.valid_move?(move)
+       puts "Invalid move, enter again:"
+       move = self.current_player.move(@board)
      end
-     @board.cells[move - 1] = current_player.token
+     @board.update(move.to_i, self.current_player)
+   end
+
+   def play
+    while !self.over?
+      self.turn
+      if self.won?
+        return self.winner
+      end
+    end
    end
 
 end

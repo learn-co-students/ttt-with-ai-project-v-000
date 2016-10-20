@@ -1,18 +1,21 @@
 require 'spec_helper'
 
-describe 'Players::Human' do
-  it 'inherits from Player' do
-    expect(Players::Human.ancestors).to include(Player)
+describe 'Player' do
+
+  describe '#initialize' do
+    it 'accepts a token to assign' do
+      player = Player.new("X")
+      expect(player.token).to eq("X")
+    end
   end
 
-  describe '#move' do
-    it 'asks the user for input and returns it' do
-      human = Players::Human.new("X")
-      allow($stdout).to receive(:puts)
+  describe '#token' do
+    it 'cannot be changed once assigned in initialize' do
+      player = Player.new("O")
+      expect(player.token).to eq("O")
 
-      expect(human).to receive(:gets).and_return("1")
-
-      expect(human.move([])).to eq("1")
+      expect{player.token = "O"}.to raise_error(NoMethodError)
+      expect(player).to_not respond_to(:token=)
     end
   end
 end
