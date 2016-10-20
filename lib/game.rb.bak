@@ -21,7 +21,7 @@ class Game
   end
 
   def over?
-    won? || draw?
+    @board.full?
   end
 
   def is_winner?(player)
@@ -38,7 +38,7 @@ class Game
   end
 
   def draw?
-    @board.full? && !won?
+    !self.won? && self.over?
   end
 
   def winner
@@ -46,23 +46,20 @@ class Game
    end
 
    def turn
-     move = current_player.move(@board)
+     move = self.current_player.move(@board)
      while !@board.valid_move?(move)
        puts "Invalid move, enter again:"
-       move = current_player.move(@board)
+       move = self.current_player.move(@board)
      end
-     @board.update(move.to_i, current_player)
+     @board.update(move.to_i, self.current_player)
    end
 
    def play
-    while !over?
-      turn
-    end
-    if won?
-      champ = winner
-      puts "Congratulations #{champ}!"
-    else
-      pust "Cats Game!"
+    while !self.over?
+      self.turn
+      if self.won?
+        return self.winner
+      end
     end
    end
 
