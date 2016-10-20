@@ -1,60 +1,53 @@
 class Board
 
   attr_accessor :cells
-  attr_reader :board
 
-  def initialize
-    self.reset!
-  end
-
-  def board
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
-    puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
-    puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-  end
-
-
-  def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-  end
-
-  def display
-    self.board
-  end
-
-  def position(input)
-    self.cells[input.to_i - 1]
-  end
-
-  def full?
-    if self.cells.all? {|cell| cell == "X" || cell == "O"}
-      true
+    def initialize
+      self.cells = [" "," "," "," "," "," "," "," "," "]
     end
-  end
 
-  def turn_count
-    turns = []
-    self.cells.each {|cell| turns << cell unless cell == " "}
-    turns.size
-  end
-
-  def taken?(p)
-    self.position(p) != " " ? true : false
-  end
-
-  def valid_move?(p)
-    if p.to_i.between?(1,9) && !self.taken?(p)
-      true
-    else
-      false
+    def test
+      puts "this is a test!!"
     end
-  end
 
-  def update(input, player)
-    self.cells[input.to_i - 1] = player.token
-  end
+    def reset!
+      self.cells = [" "," "," "," "," "," "," "," "," "]
+    end
 
+    def display
+      puts" #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+      puts"-----------"
+      puts" #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+      puts"-----------"
+      puts" #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+    end
+
+    def position(number)
+      position_index = number.to_i - 1
+      cells[position_index]
+    end
+
+    def full?
+
+      cells.all?{|x| x != " "}
+    end
+
+    def turn_count
+      turns = cells.collect{|x| x == "X" || x == "O"}
+      turns.count {|x| x == true}
+    end
+
+    def taken?(location)
+      value = cells[(location.to_i - 1)]
+      !(value.nil? || value == " ")
+    end
+
+    def valid_move?(location)
+      location.to_i.between?(1,9) &&  !taken?(location)
+    end
+
+    def update(location,player)
+      cells[(location.to_i - 1)] = player.token
+    end
 
 end
