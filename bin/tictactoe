@@ -2,4 +2,17 @@
 
 require_relative '../config/environment'
 
-Game.new
+get_info = puts "Type 'friend' to play against a friend, 'machine' to play against Skynet, and 'spectate', to watch an epic robot war"
+
+get_info
+input = gets.strip
+
+if input == "machine"
+  Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+elsif input == 'friend'
+  Game.new.play
+elsif input == 'spectate'
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+else
+  get_info
+end

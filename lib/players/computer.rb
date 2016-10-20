@@ -5,7 +5,7 @@ module Players
       if board.turn_count == 0
         "4"
       else
-        "1"
+        "2"
       end
     end
 
