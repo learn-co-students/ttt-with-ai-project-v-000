@@ -48,7 +48,9 @@ class Game
    def turn
      move = current_player.move(@board)
      while !@board.valid_move?(move)
-       puts "Invalid move, enter again:"
+       if current_player.is_a? Players::Human
+         puts "Invalid move! enter again:"
+       end
        move = current_player.move(@board)
      end
      @board.update(move.to_i, current_player)
@@ -56,14 +58,11 @@ class Game
 
    def play
     while !over?
+      puts @board.display
       turn
     end
-    if won?
-      champ = winner
-      puts "Congratulations #{champ}!"
-    else
-      pust "Cats Game!"
-    end
+    puts @board.display
+    won? ? puts("Congratulations #{winner}!") : puts("Cats Game!")
    end
 
 end
