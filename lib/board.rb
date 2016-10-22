@@ -1,5 +1,8 @@
 class Board
 
+	CORNERS = [0,2,6,8]
+	MIDDLE = 5
+
 	attr_accessor :cells
 
 	def initialize
