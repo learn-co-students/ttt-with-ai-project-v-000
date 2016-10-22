@@ -51,6 +51,7 @@ class Game
 		current_turn = ''
 		player = current_player
 		while !@board.valid_move?(current_turn)
+			print "\nInvalid move. "
 		  current_turn = player.move(@board)
 		end
 		@board.update(current_turn,player)
@@ -59,8 +60,18 @@ class Game
 	def play
 		while !over?
 			turn
+			@board.display
 		end
 
+		if draw?
+			puts "Cats Game!"
+		else
+			puts "Congratulations #{winner}!"
+		end
+	end
+
+	def self.start
+		
 	end
 
 end
