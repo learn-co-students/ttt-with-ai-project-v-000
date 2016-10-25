@@ -1,10 +1,8 @@
-require 'pry'
-
 class Board
   attr_accessor :cells
 
   def initialize(cells = nil)
-    @cells = cells || Array.new(9, " ")
+    reset!
   end
 
   def input_to_index(user_input)
@@ -18,7 +16,7 @@ class Board
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
     puts
-    puts 
+    puts
     puts
   end
 
@@ -32,24 +30,16 @@ class Board
   end
 
   def full?
-    @cells.include?(" ") == false
+    @cells.all? {|cell| cell != " "}
   end
 
   def turn_count
-    counter = 0
-    @cells.each do |cell|
-      counter += 1 if cell != " "
-    end
-    counter
+    cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   def taken?(move)
     move = input_to_index(move)
-    if @cells[move] == " "
-      false
-    elsif @cells[move] == ""
-      false
-    elsif @cells[move] == nil
+    if @cells[move] == " " || @cells[move] == "" || @cells[move] == nil
       false
     else
       true
@@ -57,11 +47,7 @@ class Board
   end
 
   def valid_move?(move)
-    if taken?(move)
-      false
-    elsif input_to_index(move) > 8
-      false
-    elsif input_to_index(move) < 0
+    if taken?(move) || input_to_index(move) > 8 || input_to_index(move) < 0
       false
     else
       true
