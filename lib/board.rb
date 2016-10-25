@@ -3,16 +3,11 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = []
-    cells_populate
+    self.reset!
   end
 
   def reset!
-    @cells.clear
-    cells_populate
-  end
-
-  def cells_populate
+    @cells = []
     9.times { @cells << " " }
   end
 
@@ -29,11 +24,11 @@ class Board
   end
 
   def full?
-    !@cells.any? { |cell| cell == " " }
+    @cells.all? { |cell| cell != " " }
   end
 
   def turn_count
-    9 - @cells.count(" ")
+    @cells.count { |cell| cell == "X" || cell =="O" }
   end
 
   def taken?(pos)
