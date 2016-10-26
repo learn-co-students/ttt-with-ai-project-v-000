@@ -1,3 +1,55 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+
+#Defines the primary game play including selection of number of players
+def game_play
+  print "How many players? (0, 1 or 2): "
+  input = gets.strip
+  blank = Board.new #Sample blank board to familiarize the player
+  blank.cells = [1, 2, 3, 4, 5, 6, 7, 8, 9] #Entering position values to familiarize the player
+  if input == "0"
+    puts "You have selected Computer vs. Computer"
+    blank.display #Display the blank board
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    puts "Game over! Would you like to play again?"
+    game_loop
+  elsif input == "1"
+    puts "You have selected single player game"
+    blank.display
+    Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    puts "Game over! Would you like to play again?"
+    game_loop
+  elsif input == "2"
+    puts "You have selected dual player game"
+    blank.display
+    Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+    puts "Game over! Would you like to play again?"
+    game_loop
+  elsif input == "wargames"
+    puts "You have selected Wargames!"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).wargames
+    puts "Game over! Would you like to play again?"
+    game_loop
+  else
+    puts "That is not a valid choice!"
+    game_play
+  end
+end
+
+def game_loop
+  print "Please enter y or n: "
+  choice = gets.strip
+  if choice == "y"
+    game_play
+  elsif choice == "n"
+    puts "Goodbye! Have a nice day."
+  else
+    puts "That is not a valid choice!"
+    game_loop
+  end
+end
+
+game_play
