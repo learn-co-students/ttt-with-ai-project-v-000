@@ -2,11 +2,12 @@ Employed AI Methodology from Wikipedia's Tic Tac Toe Strategy <br />
 Link: https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy <br />
 (Points 3 & 4 from the wikipedia strategy have not been implemented) <br />
 
-<ol>
-<li> Win: If the player has two in a row, they can place a third to get three in a row.
+<ul>
+<lh> Applied in this order - </lh>
+<li> Win: If the player has two in a row, they can place a third to get three in a row. </li>
 2. Block: If the opponent has two in a row, the player must play the third themselves to block the opponent.
 5. Center: A player marks the center. (If it is the first move of the game, playing on a corner gives "O" more opportunities to make a mistake and may therefore be the better choice; however, it makes no difference between perfect players.)
 6. Opposite corner: If the opponent is in the corner, the player plays the opposite corner.
 7. Empty corner: The player plays in a corner square.
 8. Empty side: The player plays in a middle square on any of the 4 sides.
-</ol>
+</ul>
