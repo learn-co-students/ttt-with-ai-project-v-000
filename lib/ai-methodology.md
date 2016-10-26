@@ -3,7 +3,7 @@ Link: https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy <br />
 (Points 3 & 4 from the wikipedia strategy have not been implemented) <br />
 
 <ul>
-<lh> Applied in this order - </lh>
+<lh><u> Applied in this order - </u></lh>
 <li><b>Win:</b> If the player has two in a row, they can place a third to get three in a row. </li>
 <li><b>Block:</b> If the opponent has two in a row, the player must play the third themselves to block the opponent.</li>
 <li><b>Center:</b> A player marks the center. (If it is the first move of the game, playing on a corner gives "O" more opportunities to make a mistake and may therefore be the better choice; however, it makes no difference between perfect players.)</li>
