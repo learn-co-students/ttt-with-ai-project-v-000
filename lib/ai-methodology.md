@@ -1,6 +1,6 @@
 Employed AI Methodology from Wikipedia's Tic Tac Toe Strategy
-https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy
-(Points 3 & 4 from the above strategy have not been implemented)
+Link: https://en.wikipedia.org/wiki/Tic-tac-toe#Strategy
+(Points 3 & 4 from the wikipedia strategy have not been implemented)
 
 1. Win: If the player has two in a row, they can place a third to get three in a row.
 2. Block: If the opponent has two in a row, the player must play the third themselves to block the opponent.
