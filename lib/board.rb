@@ -23,7 +23,7 @@ class Board
   
   def full?
     # what is a full board? i board that has X or O in all the cells
-    true unless cells.any? {|cell| cell == " "}
+    cells.all? {|cell| cell == "X" || cell == "O"}
   end
   
   def turn_count

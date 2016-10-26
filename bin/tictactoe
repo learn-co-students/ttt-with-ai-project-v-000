@@ -3,8 +3,4 @@
 require_relative '../config/environment'
 
 
-puts "Welcome to this awesome game of Tic Tac Toe!"
-puts "\n"
-new_game = Game.new()
-new_game.welcome
-new_game.play
+App.new.start

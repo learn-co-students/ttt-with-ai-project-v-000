@@ -23,21 +23,6 @@ class Game
     @board.turn_count.even? ? player_1 : player_2
   end
   
-  def welcome
-    puts "How many players do we have today?"
-    puts "0: just watch the computers fight!"
-    puts "1: one player (good luck to you!)"
-    puts "2: two players (heh, easiest of all games)"
-    response = gets.strip
-    
-    if response == "0" 
-      @player_1 = Players::Computer.new("X")
-      @player_2 = Players::Computer.new("O")
-    elsif response == "1"
-      @player_2 = Players::Computer.new("O")
-    end
-  end
-  
   def won?
     # does the board, have each token type, matching these arrays
     # this needs to happen at each turn
@@ -58,21 +43,21 @@ class Game
   end
     
   def winner
-    if something = won?
-      @winner = @board.cells[something.first]
+    if won = won?
+      @board.cells[something.first]
     end
   end
   
   def turn
-    player = current_player
-    the_move = player.move(@board)
+    current_player
+    the_move = current_player.move(@board)
     if !@board.valid_move?(the_move)
       puts "Sorry, this isn't a valid move, Mister #{player.token}."
       turn
     else
       puts "\n"
       puts "Turn: #{@board.turn_count+1}\n"
-      @board.update(the_move, player)
+      @board.update(the_move, current_player)
       @board.display
     end
   end
