@@ -24,17 +24,12 @@ class Game
     won? || draw?
   end
 
-  def is_winner?(player)
-    WIN_COMBINATIONS.each { |combination|
-       if combination.all? { |position| @board.cells[position] == player }
-         return true
-       end }
-     false
-   end
-
-
   def won?
-    is_winner?("X") || is_winner?("O")
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
+    end
   end
 
   def draw?
@@ -42,7 +37,9 @@ class Game
   end
 
   def winner
-      is_winner?("X") && "X" || is_winner?("O") && "O" || nil
+      if won = won?
+        board.cells[won.first]
+      end
    end
 
    def turn
