@@ -43,18 +43,18 @@ class Game
 	end
 
 	def winner
-		combo = won?
-		!combo ? nil : @board.cells[combo[0]]
+		if won = won?
+		  board.cells[won.first]
+		end
 	end
 
 	def turn
 		current_turn = ''
-		player = current_player
 		while !@board.valid_move?(current_turn)
 			print "\nInvalid move. " if current_turn != ''
-		  current_turn = player.move(@board)
+		  current_turn = current_player.move(@board)
 		end
-		@board.update(current_turn,player)
+		@board.update(current_turn,current_player)
 	end
 
 	def play
@@ -66,53 +66,10 @@ class Game
 		end
 
 		if draw?
-			puts "Cats Game!"
+			puts "\nCats Game!"
 		else
-			puts "Congratulations #{winner}!"
+			puts "\nCongratulations #{winner}!"
 		end
-	end
-
-  def self.input_validation(input,valid_array)
-    while !valid_array.include?(input)
-    	print "\nInvalid input. Try again. "
-    	input = gets.chomp
-    end
-    input
-  end
-
-	def self.start
-		exit = false
-		while !exit
-			puts 'Welcome to our Tic Tac Toe.'
-			print 'How many human players? (0,1,2): '
-			humans = input_validation(gets.chomp, ['0','1','2'])
-			puts "\n\nO.K. Playing with #{humans} human player."
-			if humans == '1'
-				print 'Who goes first, computer or human? '
-				first = input_validation(gets.chomp, ['computer','human'])
-				if first == "computer"
-					player_1 = Players::Computer.new("X")
-					player_2 = Players::Human.new("O")
-				else
-					player_1 = Players::Human.new("X")
-					player_2 = Players::Computer.new("O")
-				end
-				puts "\nO.K. The #{first} opens play."
-			elsif humans == '0'
-				player_1 = Players::Computer.new("X")
-				player_2 = Players::Computer.new("O")
-			elsif humans == '2'
-				player_1 = Players::Human.new("X")
-				player_2 = Players::Human.new("O")
-			end
-			game = self.new(player_1,player_2)
-			game.play
-			print "\nWould you like to play a new game? (y,n) "
-			repeat = input_validation(gets.chomp, ['y','n'])
-			repeat.downcase == "y" ? exit = false : exit = true
-		end
-
-		puts "\nThank you for playing!"		
 	end
 
 end

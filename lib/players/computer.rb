@@ -18,6 +18,7 @@ module Players
     # The computer tries to (1) win, (2) block the opponent's imminent win, (3) move into the middle, (4) move into an empty corner, (5) move into an empty space.
 		def move(board)
 			puts "\nPlayer #{self.token} moves."
+      sleep 1
       win_hash = winnable(board,self.token)
       if win_hash[:truth]
       	win_hash[:move]
