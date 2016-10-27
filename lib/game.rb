@@ -66,9 +66,11 @@ class Game
 		end
 
 		if draw?
-			puts "\nCats Game!"
+			puts
+			puts "Cats Game!"
 		else
-			puts "\nCongratulations #{winner}!"
+			puts
+			puts "Congratulations #{winner}!"
 		end
 	end
 
