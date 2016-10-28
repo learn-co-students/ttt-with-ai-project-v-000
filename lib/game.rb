@@ -1,5 +1,7 @@
 class Game
 
+	attr_reader :board
+
 	WIN_COMBINATIONS = [
 						[0,3,6],
 						[0,1,2],
@@ -11,4 +13,11 @@ class Game
 						[0,4,8],
 						[6,4,2]
 						]
-end
+
+	def board=(board)
+		@board = board
+	end 
+
+
+end 
+
