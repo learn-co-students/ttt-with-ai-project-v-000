@@ -6,7 +6,7 @@ class TicTacToeCLI
     puts "Welcome to Tic Tac Toe"
     puts "How many players?"
     puts ""
-    puts "0. Computer vs Itself"
+    puts "0. Computer vs itself"
     puts "1. One Player vs Computer"
     puts "2. Two players"
 
