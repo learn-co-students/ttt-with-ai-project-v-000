@@ -1,10 +1,10 @@
 class Game
 
-require 'pry'
+	require 'pry'
 	# attr_reader :board
-	attr_accessor :board, :player_1, :player_2
+	attr_accessor :board, :player_1, :player_2, :token
 
-	def initialize(player_1 = Player.new("X"), player_2 = Player.new("O"), board = Board.new)
+	def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
@@ -24,24 +24,10 @@ require 'pry'
 
 	def board=(board)
 		@board = board
-	end 
-
-
-	@cells = Array.new(9," ")
+	end
+  
+  	def current_player  
+  		@board.turn_count % 2  == 0 ? @player_1 : @player_2
+  	end
 
 end 
-
-    # it 'returns true for a win' do
-    #   game = Game.new
-    #   game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
-
-    #   expect(game.won?).to be_truthy
-    # end
-   
-    def won?
-    	# will return true if game won
-    	@cells
-    	binding.pry
-
-    end 
-
