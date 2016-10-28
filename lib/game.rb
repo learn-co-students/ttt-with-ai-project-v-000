@@ -1,6 +1,8 @@
 class Game
 
+require 'pry'
 	attr_reader :board
+	attr_accessor :player_1, :player_2
 
 	WIN_COMBINATIONS = [
 						[0,3,6],
@@ -19,5 +21,21 @@ class Game
 	end 
 
 
+	@cells = Array.new(9," ")
+
 end 
+
+    # it 'returns true for a win' do
+    #   game = Game.new
+    #   game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+
+    #   expect(game.won?).to be_truthy
+    # end
+   
+    def won?
+    	# will return true if game won
+    	@cells
+    	binding.pry
+
+    end 
 
