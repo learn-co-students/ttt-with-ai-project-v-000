@@ -1,8 +1,14 @@
 class Game
 
 require 'pry'
-	attr_reader :board
-	attr_accessor :player_1, :player_2
+	# attr_reader :board
+	attr_accessor :board, :player_1, :player_2
+
+	def initialize(player_1 = Player.new("X"), player_2 = Player.new("O"), board = Board.new)
+		@player_1 = player_1
+		@player_2 = player_2
+		@board = board
+	end
 
 	WIN_COMBINATIONS = [
 						[0,3,6],
