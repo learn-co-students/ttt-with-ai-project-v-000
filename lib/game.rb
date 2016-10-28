@@ -34,16 +34,21 @@ class Game
   		@board.full?
   	end
 
-   
   	def won?
-
+  		WIN_COMBINATIONS.each do |win_combo| 
+  			 i = @board.cells.values_at(win_combo[0], 
+  			 	win_combo[1], win_combo[2]).uniq
+		  			 return true if i.size == 1  
+		  	 end 
+  		else
+  			false
   	end
-
-
-
-
-
-
-
-
-end 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+end  
