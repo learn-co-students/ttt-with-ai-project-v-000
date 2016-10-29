@@ -9,7 +9,7 @@ class Game
 		@board
 	end
 
-	def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+	def initialize(player_1 = Players::Human.new("X", name), player_2 = Players::Human.new("O", name), board = Board.new)
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
@@ -20,7 +20,7 @@ class Game
 	end
 
 	def over?
-		self.board.full?
+		draw? || won?
 	end
 
 	def won?
@@ -32,7 +32,7 @@ class Game
 	end
 
 	def draw?
-		!self.won? && self.board.full?
+		!won? && self.board.full?
 	end
 
 	def winner
@@ -44,17 +44,19 @@ class Game
 	def turn
 		player = current_player
 		current_move = player.move(board)
-		current_move
+		# current_move
 			self.board.display
-			if !self.board.valid_move?(current_move) && !over?
+			if !self.board.valid_move?(current_move)
 				puts "That is not a valid move."
 				turn
 			else
-				puts "Turn: #{self.board.turn_count + 1}\n"
+				puts "Turn: #{self.board.turn_count + 1}\n\n"
 				self.board.display
 				self.board.update(current_move, player)
-				puts "#{player} moved to #{current_move}."
+				puts "#{player} moved to Position #{current_move}.\n\n"
 				self.board.display
+				play
+				exit
 			end
 	end
 
@@ -63,11 +65,10 @@ class Game
 			turn
 		end
 		if won?
-			puts "Congratulations, #{winner}!"
+			puts "Congratulations #{winner}!"
 		elsif draw?
-			puts "Cat's Game!"
+			puts "Cats Game!"
 		end
-
 	end
 
 end
