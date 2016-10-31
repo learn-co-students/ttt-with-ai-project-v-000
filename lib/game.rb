@@ -68,6 +68,12 @@ class Game
         end
     end
 
+
+    def top
+      puts "Welcome to Tic-Tac-Toe (Object-Oriented Version)"
+      puts "======================"
+    end
+
     def turn
         x =""
         until @board.valid_move?(x) do
@@ -79,8 +85,9 @@ class Game
             end
         end
         @board.update(x,current_player)
+        system "clear"
+        top
         @board.display
-        puts " "
     end
 
     def play
