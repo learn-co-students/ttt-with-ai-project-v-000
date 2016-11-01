@@ -99,61 +99,52 @@ class Game
 
     if style == "wargame"
       wargame
-
-    elsif style.to_i == 0
-      board = Board.new
-      game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
-
-    elsif style.to_i == 1
-      puts "OK! X goes first. Do you want to play X? y/n"
-      player_first = gets.strip.downcase
-      while !["y", "n"].include? player_first
-        puts "Please enter y or n."
-        player_first = gets.strip.downcase
-      end
-      if player_first == "y"
+    else
+      if style.to_i == 0
         board = Board.new
-        game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), board)
+        game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
+
+      elsif style.to_i == 1
+        puts "OK! X goes first. Do you want to play X? y/n"
+        player_first = gets.strip.downcase
+        while !["y", "n"].include? player_first
+          puts "Please enter y or n."
+          player_first = gets.strip.downcase
+        end
+        if player_first == "y"
+          board = Board.new
+          game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), board)
+        else
+          board = Board.new
+          game = Game.new(Players::Computer.new('X'), Players::Human.new('O'), board)
+        end
+
       else
         board = Board.new
-        game = Game.new(Players::Computer.new('X'), Players::Human.new('O'), board)
+        game = Game.new(Players::Human.new('X'), Players::Human.new('O'), board)
       end
 
-    else
-      board = Board.new
-      game = Game.new(Players::Human.new('X'), Players::Human.new('O'), board)
+      puts ""
+      puts "Got it! Let's play."
+      puts ""
+      board.display
+      puts ""
+      game.play
     end
-
-    puts ""
-    puts "Got it! Let's play."
-    puts ""
-    board.display
-    puts ""
-    game.play
   end
 
   def wargame
-    n = 1
-    result = []
-    while n <= 5 
-      puts "starting n= " + n.to_s
-      g = gets
-      computer1 = Players::Computer.new('X')
-      computer2 = Players::Computer.new('O')
+    wins = 0
+    n = 0
+    while n < 100
       board = Board.new
-      game = Game.new(computer1, computer2, board)
+      game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
       game.play
-      puts winner
-      result << "#{n.to_s} : #{winner}"
+      if game.won?
+        wins += 1
+      end
       n += 1
     end
-    board.reset!
-    board = nil
-    game = nil
-    computer1 = nil
-    computer2 = nil
-    puts result.to_s
-    puts n
+    puts "There were #{wins} wins in the #{n} battles between the computers." # Simulations usually land around 87%, consistent with http://mathforum.org/kb/thread.jspa?forumID=13&threadID=1164858&messageID=3821102
   end
-
 end
