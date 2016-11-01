@@ -44,9 +44,9 @@ class Game
 	def turn
 		player = current_player
 		current_move = player.move(board)
-		# current_move
 			self.board.display
 			if !self.board.valid_move?(current_move)
+				puts current_move
 				puts "That is not a valid move."
 				turn
 			else
