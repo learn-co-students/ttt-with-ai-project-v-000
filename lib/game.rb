@@ -85,21 +85,22 @@ class Game
 
   def start
     puts "Welcome to TicTacToe!"
-    puts "Choose 0, 1 or 2 players — or watch a 'wargame'."
-    n = gets.chomp
-
-    if n == "wargame"
+    puts "Choose 0, 1 or 2 players — or watch a 'wargame'." # "Players" here is meant in the colloquial sense of human players.
+    style = gets.chomp
+    if style == "wargame"
       wargame
-    elsif n.to_i == 0
-      computer1 = Players::Computer.new('X')
-      computer2 = Players::Computer.new('O')
+    elsif style.to_i == 0
       board = Board.new
-      game = Game.new(computer1, computer2, board)
-    elsif n.to_i == 1
-      player_1 = Players::Human.new('X')
-      computer2 = Players::Computer.new('O')
-      board = Board.new
-      game = Game.new(player_1, computer2, board)
+      game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
+    elsif style.to_i == 1
+      puts "OK! X goes first. Do you want to play X?"
+      start = gets.chomp.strip
+      if start = "y"
+        board = Board.new
+        game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), board)
+      elsif start = "n"
+        game = Game.new(Players::Computer.new('X'), Players::Human.new('O'), Board.new)
+      end
     else
       player1 = Players::Human.new('X')
       player2 = Players::Human.new('O')
@@ -134,5 +135,5 @@ class Game
     puts result.to_s
     puts n
   end
-  
+
 end
