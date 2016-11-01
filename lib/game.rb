@@ -96,13 +96,9 @@ class Game
  end
 
  def turn
-   if @board.turn_count.even?
-     current_player = player_1
-     n = player_1.move([])
-   else
-     n = player_2.move([])
-     current_player = player_2
-   end
+
+   n = current_player.move(board)
+   puts current_player
    ##puts "Please enter 1-9:"
    ##n = gets.strip
    ##index= input_to_index(n)
@@ -113,7 +109,7 @@ class Game
       turn
     end
     @board.update(n, current_player)
-    ##@board.display_board
+    @board.display
     ##binding.pry
 end
 
@@ -123,7 +119,7 @@ end
 
 def play
   until over?
-  ##puts "Input on a turn of the game player " + current_player(board)
+  puts "turn of the game player " + current_player.token
        turn
    end
  if won?
@@ -136,4 +132,65 @@ elsif  draw?
   puts "Cats Game!"
 end
 end
+
+
+def start
+puts "Welcome to TicTacToe"
+
+puts "What kind of game you would like to play"
+puts "0, 1 or 2 player game or wargame"
+n = gets.chomp
+if n == "wargame"
+   wargame
+end
+puts n
+if n.to_i == 0
+  computer1 = Players::Computer.new('X')
+  computer2 = Players::Computer.new('O')
+  board=Board.new
+  game=Game.new(computer1,computer2,board)
+elsif n.to_i == 1
+  puts "in else 1"
+  player_1 = Players::Human.new('X')
+  computer2 = Players::Computer.new('O')
+  board=Board.new
+  game=Game.new(player_1,computer2,board)
+else
+  player1 = Players::Human.new('X')
+  player2 = Players::Human.new('O')
+  board=Board.new
+  game=Game.new(player1,player2,board)
+end
+board.display
+puts "displayih players"
+puts game.player_1
+puts game.player_2
+puts "starting game"
+game.play
+end
+
+def wargame
+  n = 1
+  result = []
+  while n <=5
+    puts "starting n= " + n.to_s
+    g = gets
+    computer1 = Players::Computer.new('X')
+    computer2 = Players::Computer.new('O')
+    board = Board.new
+    game=Game.new(computer1,computer2,board)
+    game.play
+    puts winner
+    result << n.to_s +" : " + winner 
+    n = n + 1
+end
+board.reset!
+board=nil
+game=nil
+computer1=nil
+computer2=nil
+puts result.to_s
+puts n
+end
+
 end

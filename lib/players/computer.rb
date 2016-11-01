@@ -9,7 +9,11 @@ module Players
   end
     n=n+1
   end
-  computer_valid_moves
+  r=rand(computer_valid_moves.length)
+  n=computer_valid_moves[r]
+  ##board.update(n)
+  ##board.display
+  n
   end
 end
 end
