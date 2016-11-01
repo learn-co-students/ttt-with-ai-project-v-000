@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -62,11 +64,12 @@ class Game
 
   def turn
     n = current_player.move(board)
-    if !board.valid_move?(n)
-      puts "The board runs left to right, top to bottom. Please choose a free space, 1 - 9. "
+    if board.valid_move?(n)
+      board.update(n, current_player)
+    else
+      puts "The board runs left to right, top to bottom. Please choose a free space, 1 - 9."
       turn
     end
-    @board.update(n, current_player)
     @board.display
   end
 
@@ -86,29 +89,44 @@ class Game
   def start
     puts "Welcome to TicTacToe!"
     puts "Choose 0, 1 or 2 players — or watch a 'wargame'." # "Players" here is meant in the colloquial sense of human players.
-    style = gets.chomp
+    style = gets.strip.downcase
+    while !["0", "1", "2", "wargame"].include? style
+      puts "Please enter 0, 1, 2 or wargame."
+      style = gets.strip.downcase
+    end
+
     if style == "wargame"
       wargame
+
     elsif style.to_i == 0
       board = Board.new
       game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
+
     elsif style.to_i == 1
-      puts "OK! X goes first. Do you want to play X?"
-      start = gets.chomp.strip
-      if start = "y"
+      puts "OK! X goes first. Do you want to play X? y/n"
+      start = gets.strip.downcase
+      while !["y", "n"].include? start
+        puts "Please enter y or n."
+        start = gets.strip.downcase
+      end
+      if start == "y"
         board = Board.new
         game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), board)
-      elsif start = "n"
-        game = Game.new(Players::Computer.new('X'), Players::Human.new('O'), Board.new)
+      else
+        board = Board.new
+        game = Game.new(Players::Computer.new('X'), Players::Human.new('O'), board)
       end
+
     else
-      player1 = Players::Human.new('X')
-      player2 = Players::Human.new('O')
       board = Board.new
-      game = Game.new(player1, player2, board)
+      game = Game.new(Players::Human.new('X'), Players::Human.new('O'), board)
     end
+
+    puts ""
     puts "Got it! Let's play."
+    puts ""
     board.display
+    puts ""
     game.play
   end
 
