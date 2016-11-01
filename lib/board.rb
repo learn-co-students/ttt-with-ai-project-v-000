@@ -1,5 +1,6 @@
+require "pry"
 class Board
-  cells = []
+
   attr_accessor :cells
 def initialize
 @cells = [' ', ' ' ,' ',' ',' ',' ',' ',' ',' ']
@@ -17,7 +18,7 @@ end
 
 def position(n)
   index=n.to_i - 1
-  cells[index]
+  @cells[index]
 end
 
 def full?
@@ -36,15 +37,15 @@ end
 
 def taken?(n)
   index= n.to_i - 1
-  if cells[index] != ' '
-     return true
+  if @cells[index] == ' '
+     return false
   else
-    return false
+    return true
   end
 end
 
   def valid_move?(n)
-   if n.to_i >=1 && n.to_i <=9 && !taken?(n)
+   if n.to_i >=1 && n.to_i <=9 && taken?(n)==false
       return true
     else
       return false

@@ -1,7 +1,9 @@
-class Players::Human < Player
-def move(board)
-  puts "enter"
-  gets n
+module Players
+  class Human < Player
+  def move
+  puts "enter move"
+  n = gets.chomp
   return n
+end
 end
 end
