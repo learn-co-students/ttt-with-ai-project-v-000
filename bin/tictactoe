@@ -2,3 +2,23 @@
 
 require_relative '../config/environment.rb'
 Game.new.start
+
+# Incorporating the logic below into game.rb caused the game#play tests to break.
+def Replay
+  while true # This condition lets the game replay indefinitely
+    puts "Play again? y/n"
+    play_again = gets.strip.downcase
+    while !["y", "n"].include? play_again
+      puts "Please enter y or n."
+      play_again = gets.strip.downcase
+    end
+    if play_again == "y"
+      Game.new.start
+    else
+      puts "Thanks for playing. See you next time."
+      exit
+    end
+  end
+end
+
+Replay()

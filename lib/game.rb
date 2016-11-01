@@ -70,7 +70,9 @@ class Game
       puts "The board runs left to right, top to bottom. Please choose a free space, 1 - 9."
       turn
     end
+    puts ""
     @board.display
+    puts ""
   end
 
   def play
@@ -104,12 +106,12 @@ class Game
 
     elsif style.to_i == 1
       puts "OK! X goes first. Do you want to play X? y/n"
-      start = gets.strip.downcase
-      while !["y", "n"].include? start
+      player_first = gets.strip.downcase
+      while !["y", "n"].include? player_first
         puts "Please enter y or n."
-        start = gets.strip.downcase
+        player_first = gets.strip.downcase
       end
-      if start == "y"
+      if player_first == "y"
         board = Board.new
         game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), board)
       else
@@ -133,7 +135,7 @@ class Game
   def wargame
     n = 1
     result = []
-    while n <= 5
+    while n <= 5 
       puts "starting n= " + n.to_s
       g = gets
       computer1 = Players::Computer.new('X')
