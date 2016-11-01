@@ -1,6 +1,6 @@
 module Players
   class Human < Player
-  def move
+  def move(array)
   puts "enter move"
   n = gets.chomp
   return n

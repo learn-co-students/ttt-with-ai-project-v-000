@@ -98,9 +98,9 @@ class Game
  def turn
    if @board.turn_count.even?
      current_player = player_1
-     n = player_1.move
+     n = player_1.move([])
    else
-     n = player_2.move
+     n = player_2.move([])
      current_player = player_2
    end
    ##puts "Please enter 1-9:"
