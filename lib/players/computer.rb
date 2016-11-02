@@ -3,9 +3,15 @@ require 'pry'
 module Players
   class Computer < Player
     def move(board)
-      if turn_count == 0
+      if win(board) != nil
+        win(board)
+      elsif block_win(board) != nil
+        block_win(board)
+      elsif check_mate(board) != nil
+        check_mate(board)
+      elsif turn_count == 0
         move_first(board)
-      elsif turn_count == 1 # After our opponent plays first, we want to play in the middle if possible, or else in a corner.
+      elsif turn_count == 1
         go_for_the_middle(board)
       elsif turn_count >= 3 && turn_count <= 7
         win(board)
@@ -15,11 +21,7 @@ module Players
     end
 
     def go_for_the_middle(board)
-      if board.cells[4] == " " # Array notation starts at 0
-        5 # Matches colloquial interface for user, starting at 1
-      else
-        1
-      end
+      board.cells[4] == " " ? 5 : 1 # Play in the upper-left WLOG.
     end
 
     def move_first(board)
@@ -27,30 +29,26 @@ module Players
     end
 
     def win(board)
-      move = nil
       Game.win_combinations.each do |wc|
-        mine = 0 # Of the 3 spaces in the given win combination, we'll count up how many are already mine (hopefully 2), and how many are free (hopefully 1). A more efficient algo would break as soon as it found one of the opponent's tokens in the row.
+        mine = 0
         free = 0
-        candidate = nil # i.e., the candidate for the winning move
+        candidate = nil
         wc.each_with_index do |cell, index|
           if board.cells[cell] == self.token
             mine += 1
           elsif board.cells[cell] == " "
             free += 1
             candidate = wc[index] + 1
-          end # finished checking the given cell
-        end # finished counting up mine and free for the given win combination
+          end
+        end
         if mine == 2 && free == 1
-          move = candidate
-        end # finished altogether with the given win combination
-        # binding.pry
-      end # finished with all win combinations
-      move = block_win(board) unless move != nil # If we can't win on this turn, we should try to block the other side from winning.
-      move
+          return candidate
+        end
+      end
+      nil
     end
 
-    def block_win(board) # Check if the opponent is about to win, and if so, block her.
-      move = nil
+    def block_win(board)
       Game.win_combinations.each do |wc|
         hers = 0
         free = 0
@@ -64,18 +62,17 @@ module Players
           end
         end
         if hers == 2 && free == 1
-          move = candidate
+          return candidate
         end
       end
-      move = check_mate(board) unless move
-      move
+      nil
     end
 
     def check_mate(board)
       valid_moves(board).each do |m|
         pb = []
         board.cells.each{|e| pb.push(e)}
-        pb[m - 1] = self.token
+        pb[m.to_i - 1] = self.token
         winners = []
         Game.win_combinations.each do |wc|
           mine = 0
@@ -96,8 +93,8 @@ module Players
         if winners.uniq.size > 1 # The key is that we have multiple winning moves NEXT turn, so that our opponent can only block one of them between now and then.
           return m
         end
-      end # m
-      move_randomly(board) # Move randomly if we didn't find two winners.
+      end
+      nil
     end
 
     def move_randomly(board)
