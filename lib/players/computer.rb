@@ -3,8 +3,8 @@ require 'pry'
 module Players
   class Computer < Player
     def move(board)
-      if win(board) != nil
-        win(board)
+      if win(board, self) != nil
+        win(board, self)
       elsif block_win(board) != nil
         block_win(board)
       elsif check_mate(board) != nil
@@ -28,20 +28,20 @@ module Players
       "5" # This is a string to satisfy a test that is looking for a string. It's unclear why the test is looking for strings.
     end
 
-    def win(board)
+    def win(board, player)
       Game.win_combinations.each do |wc|
-        mine = 0
+        already = 0
         free = 0
         candidate = nil
         wc.each_with_index do |cell, index|
-          if board.cells[cell] == self.token
-            mine += 1
+          if board.cells[cell] == player.token
+            already += 1
           elsif board.cells[cell] == " "
             free += 1
             candidate = wc[index] + 1
           end
         end
-        if mine == 2 && free == 1
+        if already == 2 && free == 1
           return candidate
         end
       end
