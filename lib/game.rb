@@ -3,7 +3,7 @@ require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
-  WIN_COMBINATIONS = [
+  @@WIN_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -13,9 +13,15 @@ class Game
   [0, 4, 8],
   [6, 4, 2]]
 
-  def initialize(player1=Players::Human.new('X'), player2=Players::Human.new('O'), board=Board.new)
-    @player_1 = player1
-    @player_2 = player2
+  WIN_COMBINATIONS = @@WIN_COMBINATIONS # This is needed to pass a test but violates DRY. Check solution for more compact and elegant approach.
+
+  def self.win_combinations
+    @@WIN_COMBINATIONS
+  end
+
+  def initialize(player_1=Players::Human.new('X'), player_2=Players::Human.new('O'), board=Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
     @board = board
   end
 
@@ -26,6 +32,8 @@ class Game
         count += 1
       end
     end
+    @player_1.turn_count = count # Could refactor turn_count as a class variable within Player for DRY.
+    @player_2.turn_count = count
     count
   end
 
@@ -38,7 +46,7 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |wc|
+    @@WIN_COMBINATIONS.each do |wc|
       if wc.all?{|c| board.cells[c] == "X"} || wc.all?{|c| board.cells[c] == "O"}
         return wc
       end
@@ -68,6 +76,7 @@ class Game
       board.update(n, current_player)
     else
       puts "The board runs left to right, top to bottom. Please choose a free space, 1 - 9."
+      exit # For debugging so the program stops crashing.
       turn
     end
     puts ""
