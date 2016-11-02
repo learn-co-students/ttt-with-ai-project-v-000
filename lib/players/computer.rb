@@ -23,7 +23,7 @@ module Players
     end
 
     def move_first(board)
-      5
+      "5" # This is a string to satisfy a test that is looking for a string. It's unclear why the test is looking for strings.
     end
 
     def win(board)
@@ -58,7 +58,7 @@ module Players
         wc.each_with_index do |cell, index|
           if board.cells[cell] != self.token && board.cells[cell] != " "
             hers += 1
-          elsif board.cells[cell] == " " # slightly redundant but written for parallelism with ftw(board)
+          elsif board.cells[cell] == " " # slightly redundant but written for parallelism with win(board)
             free += 1
             candidate = wc[index] + 1
           end
@@ -67,11 +67,11 @@ module Players
           move = candidate
         end
       end
-      move = find_two_winners(board) unless move
+      move = check_mate(board) unless move
       move
     end
 
-    def find_two_winners(board)
+    def check_mate(board)
       n = 1
       valid_moves = []
       while n <= 9
@@ -81,30 +81,27 @@ module Players
         n += 1
       end
       valid_moves.each do |m|
-        pb = Board.new # For each projected board, we hope to find that it offers at least 2 ways to win on the next turn.
-        pb.cells = board.cells # Unfortunately this seems to be passing by reference, not value (or reverse reference?), s.t. updating pb updates board, which is bad news.
-        pb.cells[m - 1] = self.token
-        binding.pry
+        pb = []
+        board.cells.each{|e| pb.push(e)}
+        pb[m - 1] = self.token
         winners = []
         Game.win_combinations.each do |wc|
           mine = 0
           free = 0
+          candidate = nil
           wc.each_with_index do |cell, index|
-            candidate = nil
-            if pb.cells[cell] == self.token
+            if pb[cell] == self.token
               mine += 1
-            elsif pb.cells[cell] == " "
+            elsif pb[cell] == " "
               free += 1
-              candidate = wc[index] + 1 # A candidate is a possible move, 1 through 9.
-            end
-            if mine == 2 && free == 1
-              winners << candidate
-              # binding.pry
+              candidate = wc[index] + 1 # A candidate is a possible winning move on the NEXT turn, 1 through 9, subject to playing m on THIS turn.
             end
           end # cell
+          if mine == 2 && free == 1
+            winners << candidate
+          end
         end # wc
-        if winners.count(1) > 1 || winners.count(2) > 1 || winners.count(3) > 1 || winners.count(4) > 1 || winners.count(5) > 1 || winners.count(6) > 1 || winners.count(7) > 1 || winners.count(8) > 1 || winners.count(9) > 1
-          # binding.pry
+        if winners.uniq.size > 1 # The key is that we have multiple winning moves NEXT turn, so that our opponent can only block one of them between now and then.
           return m
         end
       end # m

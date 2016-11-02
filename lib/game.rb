@@ -76,7 +76,6 @@ class Game
       board.update(n, current_player)
     else
       puts "The board runs left to right, top to bottom. Please choose a free space, 1 - 9."
-      exit # For debugging so the program stops crashing.
       turn
     end
     puts ""
