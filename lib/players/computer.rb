@@ -45,11 +45,11 @@ module Players
         end # finished altogether with the given win combination
         # binding.pry
       end # finished with all win combinations
-      move = block(board) unless move != nil # If we can't win on this turn, we should try to block the other side from winning.
+      move = block_win(board) unless move != nil # If we can't win on this turn, we should try to block the other side from winning.
       move
     end
 
-    def block(board) # Check if the opponent is about to win, and if so, block her.
+    def block_win(board) # Check if the opponent is about to win, and if so, block her.
       move = nil
       Game.win_combinations.each do |wc|
         hers = 0
@@ -72,15 +72,7 @@ module Players
     end
 
     def check_mate(board)
-      n = 1
-      valid_moves = []
-      while n <= 9
-        if board.valid_move?(n)
-          valid_moves << n
-        end
-        n += 1
-      end
-      valid_moves.each do |m|
+      valid_moves(board).each do |m|
         pb = []
         board.cells.each{|e| pb.push(e)}
         pb[m - 1] = self.token
@@ -109,17 +101,21 @@ module Players
     end
 
     def move_randomly(board)
+      valid_moves = valid_moves(board)
+      valid_moves[rand(valid_moves.length)]
+    end
+
+    def valid_moves(board)
       n = 1
-      computer_valid_moves = []
+      valid_moves = []
       while n <= 9
         if board.valid_move?(n)
-          computer_valid_moves << n.to_s
+          valid_moves << n.to_s
         end
         n += 1
       end
-      r = rand(computer_valid_moves.length)
-      computer_valid_moves[r]
-    end # #move_randomly
+      valid_moves
+    end
 
   end # Class Computer
 end # Module Players
