@@ -3,18 +3,16 @@ require 'pry'
 module Players
   class Computer < Player
     def move(board)
-      if win(board, self) != nil
-        win(board, self)
-      elsif block_win(board) != nil
-        block_win(board)
-      elsif check_mate(board) != nil
-        check_mate(board)
-      elsif turn_count == 0
-        move_first(board)
+      if win(board, self) != nil # If you can win ...
+        win(board, self) # win.
+      elsif win(board, opponent) != nil # Otherwise, if your opponent might win next turn ...
+        win(board, opponent) # ...block him.
+      elsif check_mate(board) != nil # Otherwise, if you can check mate ...
+        check_mate(board) # ... check mate.
       elsif turn_count == 1
         go_for_the_middle(board)
-      elsif turn_count >= 3 && turn_count <= 7
-        win(board)
+      elsif turn_count == 0
+        move_first(board)
       else
         move_randomly(board)
       end
@@ -42,26 +40,6 @@ module Players
           end
         end
         if already == 2 && free == 1
-          return candidate
-        end
-      end
-      nil
-    end
-
-    def block_win(board)
-      Game.win_combinations.each do |wc|
-        hers = 0
-        free = 0
-        candidate = nil
-        wc.each_with_index do |cell, index|
-          if board.cells[cell] != self.token && board.cells[cell] != " "
-            hers += 1
-          elsif board.cells[cell] == " " # slightly redundant but written for parallelism with win(board)
-            free += 1
-            candidate = wc[index] + 1
-          end
-        end
-        if hers == 2 && free == 1
           return candidate
         end
       end
