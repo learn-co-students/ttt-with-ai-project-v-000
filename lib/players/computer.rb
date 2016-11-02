@@ -7,8 +7,8 @@ module Players
         win(board, self) # win.
       elsif win(board, opponent) != nil # Otherwise, if your opponent might win next turn ...
         win(board, opponent) # ...block him.
-      elsif check_mate(board) != nil # Otherwise, if you can check mate ...
-        check_mate(board) # ... check mate.
+      elsif check_mate(board, self) != nil # Otherwise, if you can check mate ...
+        check_mate(board, self) # ... check mate.
       elsif turn_count == 1
         go_for_the_middle(board)
       elsif turn_count == 0
@@ -46,29 +46,29 @@ module Players
       nil
     end
 
-    def check_mate(board)
+    def check_mate(board, player)
       valid_moves(board).each do |m|
         pb = []
         board.cells.each{|e| pb.push(e)}
-        pb[m.to_i - 1] = self.token
+        pb[m.to_i - 1] = player.token
         winners = []
         Game.win_combinations.each do |wc|
-          mine = 0
+          already = 0
           free = 0
           candidate = nil
           wc.each_with_index do |cell, index|
-            if pb[cell] == self.token
-              mine += 1
+            if pb[cell] == player.token
+              already += 1
             elsif pb[cell] == " "
               free += 1
               candidate = wc[index] + 1 # A candidate is a possible winning move on the NEXT turn, 1 through 9, subject to playing m on THIS turn.
             end
           end # cell
-          if mine == 2 && free == 1
+          if already == 2 && free == 1
             winners << candidate
           end
         end # wc
-        if winners.uniq.size > 1 # The key is that we have multiple winning moves NEXT turn, so that our opponent can only block one of them between now and then.
+        if winners.uniq.size > 1
           return m
         end
       end
