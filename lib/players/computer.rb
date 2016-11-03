@@ -9,8 +9,10 @@ module Players
         win(board, opponent) # ... block him.
       elsif check_mate(board, self) != nil # Otherwise, if you can check-mate him ...
         check_mate(board, self) # ... do so.
+        binding.pry
       elsif check_mate(board, opponent) != nil # Otherwise, if your opponent might check-mate you next turn ...
         check_mate(board, opponent) # ... block his check-mate.
+        binding.pry # Currently this does not get hit in simulations.
       elsif threaten(board, self) != nil # Otherwise, if you can get two in a row ...
         threaten(board, self) # ... do so.
       elsif move_strongly(board) != nil # Otherwise, if a generally strong position is available ...
@@ -90,12 +92,12 @@ module Players
           threats += candidates # i.e., if, for the given wc, the row has threat-potential, shovel each of its 2 open cells into the threats array. Later, we'll choose our favorite threat based on heuristics.
         end
       end # wc
-      [5, 1, 3, 7, 9, 2, 4, 6, 8].each do |move| # Our moves in order of preference.
-        if threats.include? move
-          puts "I'm going to move to #{move} in order to threaten."
-          return move
-        end
-      end
+
+      return "5" unless !threats.include? "5"
+      corner_threats = [1, 3, 7, 9] & threats
+      return corner_threats[rand(corner_threats.length)] unless corner_threats == nil
+      side_threats = [2, 4, 6, 8] & threats
+      return side_threats[rand(side_threats.length)] unless side_threats == nil
       nil
     end
 
@@ -104,14 +106,19 @@ module Players
       if valid_moves.include? "5"
         return "5"
       else
-        free_corners = ["1", "3", "7", "9"] & valid_moves
-        free_corners[rand(free_corners.length)]
+        return move_cornerly(board)
       end
+      nil
     end
 
     def move_randomly(board)
       valid_moves = valid_moves(board)
       valid_moves[rand(valid_moves.length)]
+    end
+
+    def move_cornerly(board)
+      free_corners = ["1", "3", "7", "9"] & valid_moves(board)
+      free_corners[rand(free_corners.length)]
     end
 
     def valid_moves(board)

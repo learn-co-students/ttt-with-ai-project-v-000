@@ -144,16 +144,19 @@ class Game
   def wargame
     wins = 0
     n = 0
+    final_cell_arrangements = []
     while n < 100
       board = Board.new
       game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
       game.play
+      final_cell_arrangements << board.cells
       if game.won?
         wins += 1
         binding.pry
       end
       n += 1
     end
-    puts "There were #{wins} wins in the #{n} battles between the computers." # Simulations usually land around 87%, consistent with http://mathforum.org/kb/thread.jspa?forumID=13&threadID=1164858&messageID=3821102
+    puts "There were #{wins} wins in the #{n} battles between the computers." # Currently running at 0% wins, yet to confirm that that is due to perfect defense (as opposed to bad offense).
+    puts "There were #{final_cell_arrangements.uniq.size} unique final boards."
   end
 end
