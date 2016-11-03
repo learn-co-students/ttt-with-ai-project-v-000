@@ -150,6 +150,7 @@ class Game
       game.play
       if game.won?
         wins += 1
+        binding.pry
       end
       n += 1
     end
