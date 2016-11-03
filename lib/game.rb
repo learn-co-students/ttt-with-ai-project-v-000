@@ -110,7 +110,7 @@ class Game
     else
       if style.to_i == 0
         board = Board.new
-        game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
+        game = Game.new(Players::Computer::AdvancedAI.new('X'), Players::Computer::AdvancedAI.new('O'), board)
 
       elsif style.to_i == 1
         puts "OK! X goes first. Do you want to play X? y/n"
@@ -121,10 +121,10 @@ class Game
         end
         if player_first == "y"
           board = Board.new
-          game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), board)
+          game = Game.new(Players::Human.new('X'), Players::Computer::AdvancedAI.new('O'), board)
         else
           board = Board.new
-          game = Game.new(Players::Computer.new('X'), Players::Human.new('O'), board)
+          game = Game.new(Players::Computer::AdvancedAI.new('X'), Players::Human.new('O'), board)
         end
 
       else
@@ -143,20 +143,28 @@ class Game
 
   def wargame
     wins = 0
+    basicAI_wins = 0
+    advancedAI_wins = 0
     n = 0
     final_cell_arrangements = []
     while n < 100
       board = Board.new
-      game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
+      game = Game.new(Players::Computer::BasicAI.new('X'), Players::Computer::AdvancedAI.new('O'), board)
       game.play
       final_cell_arrangements << board.cells
       if game.won?
         wins += 1
-        binding.pry
+        if game.winner == "X"
+          basicAI_wins += 1
+          # binding.pry
+        else
+          advancedAI_wins += 1
+        end
       end
       n += 1
     end
     puts "There were #{wins} wins in the #{n} battles between the computers." # Currently running at 0% wins, yet to confirm that that is due to perfect defense (as opposed to bad offense).
+    puts "BasicAI, playing first as X, won #{basicAI_wins} times. AdvancedAI, playing second as O, won #{advancedAI_wins}."
     puts "There were #{final_cell_arrangements.uniq.size} unique final boards."
   end
 end
