@@ -4,7 +4,9 @@ describe 'Players::Computer' do
   it 'inherits from Player' do
     expect(Players::Computer.ancestors).to include(Player)
   end
-
+  #-----------Aditional test for the AI ------------------------------------
+  
+  #-------------------------------------------------------------------------
   describe '#move' do
     it 'returns a valid position for the computer to move' do
       computer = Players::Computer.new("X")

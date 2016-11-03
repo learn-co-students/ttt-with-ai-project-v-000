@@ -337,4 +337,16 @@ describe 'Game' do
 
   describe 'start' do
   end
+
+  #---------------aditional tests for AI-----------------
+
+
+  describe '#available_moves' do
+    it 'return all the indexex with empty string' do
+      game = Game.new
+
+      size = game.board.cells.size
+      expect(game.available_moves.size).to eq(size)
+    end
+  end
 end

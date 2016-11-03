@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Board" do
   let(:board){Board.new}
@@ -125,4 +126,5 @@ describe "Board" do
       expect(board.position("1")).to eq("X")
     end
   end
+
 end

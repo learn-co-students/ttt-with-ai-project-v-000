@@ -1,54 +1,74 @@
+require 'pry'
 class Game
+	
+	attr_accessor :board, :player_1, :player_2
 
-	require 'pry'
-	# attr_reader :board
-	attr_accessor :board, :player_1, :player_2, :token
+  WIN_COMBINATIONS = [
+	  [0,1,2], #Top row
+		[3,4,5], #Middle row
+		[6,7,8], #Bottem row
+		[0,3,6], #Left column
+		[1,4,7], #Middle column
+		[2,5,8], #Right column
+		[0,4,8], #Top left to bottom right
+		[2,4,6]  #Top right to bottom left
+	]
 
 	def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
 	end
-
-	WIN_COMBINATIONS = [
-						[0,3,6],
-						[0,1,2],
-						[3,4,5],
-						[6,7,8],
-						[0,6,2],
-						[1,4,7],
-						[2,5,8],
-						[0,4,8],
-						[6,4,2]
-						]
-
-	def board=(board)
-		@board = board
-	end
   
-  	def current_player  
-  		@board.turn_count % 2  == 0 ? @player_1 : @player_2
-  	end
+	def current_player  
+		@board.turn_count % 2  == 0 ? @player_1 : @player_2
+	end
 
-  	def over?
-  		@board.full?
-  	end
+	def over?
+		self.won? || self.draw?
+	end
 
-  	def won?
-  		WIN_COMBINATIONS.each do |win_combo| 
-  			 i = @board.cells.values_at(win_combo[0], 
-  			 	win_combo[1], win_combo[2]).uniq
-		  			 return true if i.size == 1  
-		  	 end 
-  		else
-  			false
-  	end
- 
- 
- 
- 
- 
- 
- 
- 
-end  
+	def won?
+		WIN_COMBINATIONS.detect do |win_combo| 
+			 i = @board.cells.values_at(win_combo[0], win_combo[1], win_combo[2]).uniq
+			 i.size == 1 && i[0] != " "
+	  end 
+	end
+
+	def draw?
+		!self.won? && @board.full?	
+	end
+
+	def winner
+		if self.won? 
+		  @winner = @board.cells[self.won?.first]
+		end   
+	end
+
+	def turn
+		player = current_player
+		player_move = player.move(self)
+
+		if @board.valid_move?(player_move)
+			 puts "Turn #{@board.turn_count}"
+			 @board.update(player_move, player)
+			 @board.display
+		else
+		   self.turn
+		end 
+    
+	end
+
+  def play
+     while !self.over?
+       self.turn
+     end
+
+     if self.won?
+       puts "Congratulations #{self.winner}!"
+     elsif self.draw?
+       puts "Cats Game!"
+     end        	  
+  end
+
+end 
