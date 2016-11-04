@@ -1,3 +1,4 @@
+require 'pry'
 require 'spec_helper'
 
 describe 'Game' do
@@ -347,6 +348,16 @@ describe 'Game' do
 
       size = game.board.cells.size
       expect(game.available_moves.size).to eq(size)
+    end
+  end
+
+  describe '#get_new_state' do
+    it 'return a new state of the board for the computer player' do
+       binding.pry
+       game = Game.new
+       
+       board = [" ", "X", " ", " ", " ", " ", " ", " ", " "]
+       expect(game.get_new_state(2)).to eq(board) 
     end
   end
 end
