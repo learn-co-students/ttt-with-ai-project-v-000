@@ -1,6 +1,13 @@
 class GamePlaySelection
   attr_accessor :board, :player_1, :player_2, :game
 
+  def call
+    welcome
+    players
+    play_game
+    play_again?
+  end
+
   def welcome
     puts "Welcome to Tic Tac Toe"
   end

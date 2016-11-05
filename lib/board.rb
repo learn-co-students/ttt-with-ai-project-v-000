@@ -3,30 +3,11 @@ class Board
 
   def initialize
     # @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    @cells = Array.new(9, " ")
+    self.reset!
   end
 
   def position(position_number)
-    case position_number
-    when "1"
-      self.cells[0]
-    when "2"
-      self.cells[1]
-    when "3"
-      self.cells[2]
-    when "4"
-      self.cells[3]
-    when "5"
-      self.cells[4]
-    when "6"
-      self.cells[5]
-    when "7"
-      self.cells[6]
-    when "8"
-      self.cells[7]
-    when "9"
-      self.cells[8]
-    end
+     self.cells[position_number.to_i-1]
   end
 
   def reset!
@@ -46,13 +27,7 @@ class Board
   end
 
   def turn_count
-    counter = 0
-    self.cells.each do |position|
-      if position == "X" || position == "O"
-      counter += 1
-      end
-    end
-    counter
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(position_number)
