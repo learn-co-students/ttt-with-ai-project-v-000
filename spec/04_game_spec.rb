@@ -353,8 +353,10 @@ describe 'Game' do
 
   describe '#get_new_state' do
     it 'return a new state of the board for the computer player' do
-       binding.pry
-       game = Game.new
+       computer = Players::Computer.new("X")
+       game = Game.new(computer)
+       game.board.cells = ["O", " ", "X", "X", " ", " ", "X", "O", "O"]
+       game.player_1.move("h")
        
        board = [" ", "X", " ", " ", " ", " ", " ", " ", " "]
        expect(game.get_new_state(2)).to eq(board) 
