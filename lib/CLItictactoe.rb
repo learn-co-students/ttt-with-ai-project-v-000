@@ -59,10 +59,21 @@ def start
       puts ""
       board.display
       puts ""
-      game.play
+      play(game)
    end
     Replay()
   end
 
+  def play(game)
+    until game.over?
+      puts "Player #{game.current_player.token}'s turn:"
+      game.turn
+    end
+    if game.won?
+      puts "Congratulations #{game.winner}!"
+    elsif game.draw?
+      puts "Cats Game!"
+    end
+  end
 
 end

@@ -37,13 +37,20 @@ class Game
   end
 
   def won?
-    @@WIN_COMBINATIONS.each do |wc|
-      if wc.all?{|c| board.cells[c] == "X"} || wc.all?{|c| board.cells[c] == "O"}
-        return wc
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
-    return false
   end
+  ##def won?
+  ##  @@WIN_COMBINATIONS.each do |wc|
+  ##    if wc.all?{|c| board.cells[c] == "X"} || wc.all?{|c| board.cells[c] == "O"}
+  ##      return wc
+  ##    end
+  ##  end
+  ##  return false
+  ##end
 
   def full?
     !board.cells.any? {|c| c == " " || c == ""}
@@ -58,7 +65,10 @@ class Game
   end
 
   def winner
-    won? ? board.cells[won?[0]] : nil
+    if won = won?
+  board.cells[won.first]
+   end
+    ##won? ? board.cells[won?[0]] : nil
   end
 
   def turn
@@ -73,20 +83,19 @@ class Game
     @board.display
     puts ""
   end
-
+=begin
   def play
     until over?
       puts "Player #{current_player.token}'s turn:"
       turn
     end
-
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cats Game!"
     end
   end
-
+=end
 
 
   def self.wargame
@@ -98,7 +107,7 @@ class Game
     while n < 100
       board = Board.new
       game = Game.new(Players::Computer::BasicAI.new('X'), Players::Computer::AdvancedAI.new('O'), board)
-      game.play
+      CLItictactoe.new.play(game)
       final_cell_arrangements << board.cells
       if game.won?
         wins += 1
