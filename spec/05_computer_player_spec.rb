@@ -5,11 +5,12 @@ describe 'Players::Computer' do
     expect(Players::Computer.ancestors).to include(Player)
   end
   #-----------Aditional test for the AI ------------------------------------
-  
-  #-------------------------------------------------------------------------
+
   describe '#move' do
     it 'returns a valid position for the computer to move' do
       computer = Players::Computer.new("X")
+      #modified code by me 
+      game = Game.new(computer)
       board = Board.new
 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]

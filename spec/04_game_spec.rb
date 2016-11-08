@@ -1,4 +1,3 @@
-require 'pry'
 require 'spec_helper'
 
 describe 'Game' do
@@ -347,7 +346,7 @@ describe 'Game' do
       game = Game.new
 
       size = game.board.cells.size
-      expect(game.available_moves.size).to eq(size)
+      expect(game.get_available_moves.size).to eq(size)
     end
   end
 
@@ -355,11 +354,12 @@ describe 'Game' do
     it 'return a new state of the board for the computer player' do
        computer = Players::Computer.new("X")
        game = Game.new(computer)
-       game.board.cells = ["O", " ", "X", "X", " ", " ", "X", "O", "O"]
-       game.player_1.move("h")
-       
-       board = [" ", "X", " ", " ", " ", " ", " ", " ", " "]
-       expect(game.get_new_state(2)).to eq(board) 
+       # game.board.cells = ["O", " ", "X", "X", " ", " ", "X", "O", "O"]
+         game.board.cells = ["X", "X", "O", 
+                             "O", "O", " ", 
+                             "X", " ", " "]
+
+       expect(game.player_1.move("h")).to eq("6") 
     end
   end
 end
