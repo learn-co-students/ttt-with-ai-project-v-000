@@ -1,5 +1,5 @@
 require 'pry'
-class Game
+class Game < AI 
 	
 	attr_accessor :board, :player_1, :player_2
 
@@ -9,7 +9,7 @@ class Game
 		[6,7,8], #Bottem row
 		[0,3,6], #Left column
 		[1,4,7], #Middle column
-		[2,5,8], #Right column
+		[2,5,8], #Right column	
 		[0,4,8], #Top left to bottom right
 		[2,4,6]  #Top right to bottom left
 	]
@@ -18,6 +18,8 @@ class Game
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
+		@player_1.game = self
+		@player_2.game = self
 	end
   
 	def current_player  
@@ -30,8 +32,8 @@ class Game
 
 	def won?
 		WIN_COMBINATIONS.detect do |win_combo| 
-			 i = @board.cells.values_at(win_combo[0], win_combo[1], win_combo[2]).uniq
-			 i.size == 1 && i[0] != " "
+			 tokens = @board.cells.values_at(win_combo[0], win_combo[1], win_combo[2]).uniq
+			 tokens.size == 1 && tokens[0] != " "
 	  end 
 	end
 
@@ -47,13 +49,15 @@ class Game
 
 	def turn
 		player = current_player
-		player_move = player.move(self)
-
-		if @board.valid_move?(player_move)
-			 puts "Turn #{@board.turn_count}"
+		puts "#{player.token} -- Where would you like to move?"
+		player_move = player.move(@board)
+    
+    if @board.valid_move?(player_move)
+			 puts "Turn #{@board.turn_count+1}"
 			 @board.update(player_move, player)
-			 @board.display
-		else
+			 @board.display 
+		else	
+			 puts "Please entere a valid move"
 		   self.turn
 		end 
     

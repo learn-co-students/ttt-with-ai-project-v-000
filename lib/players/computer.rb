@@ -4,20 +4,23 @@ module Players
 
     #return a string of the ultimate position based on the Minimax algorithm
 		def move(parameter)
-			  
 				@temperary_board = @game.board.cells
 				@player = @game.current_player.token
 				@opponent = @player != @game.player_1.token ? @game.player_1.token : @game.player_2.token
 				@choice = nil
         @depth = 0
-       
-				self.minimax
+        
+        if !@game.board.taken?(5)
+           @choice = "5"
+        else     
+				  self.minimax
+				end  
 
         @game.board.cells = @temperary_board
 	      "#{@choice}"
-
 	  end
-
+    
+    #the minimax will detect the move with the best score(-10,0,+10) for the current player
 		def minimax
 			  
 				return self.score if @game.over?
@@ -48,7 +51,8 @@ module Players
 		      return scores[min_score_index]
 		    end
 		end
-   
+
+    #check if the current player or the opponent winning then return their score otherwise, return 0  
 		def score
 				if @game.winner == @player
 				   10 

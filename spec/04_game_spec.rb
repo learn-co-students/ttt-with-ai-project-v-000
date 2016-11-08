@@ -341,10 +341,10 @@ describe 'Game' do
   #---------------aditional tests for AI-----------------
 
 
-  describe '#available_moves' do
+  describe '#get_available_moves' do
     it 'return all the indexex with empty string' do
       game = Game.new
-
+      
       size = game.board.cells.size
       expect(game.get_available_moves.size).to eq(size)
     end
@@ -354,8 +354,8 @@ describe 'Game' do
     it 'return a new state of the board for the computer player' do
        computer = Players::Computer.new("X")
        game = Game.new(computer)
-       # game.board.cells = ["O", " ", "X", "X", " ", " ", "X", "O", "O"]
-         game.board.cells = ["X", "X", "O", "O", "O", " ", "X", " ", " "]
+       
+       game.board.cells = ["X", "X", "O", "O", "O", " ", "X", " ", " "]
 
        expect(game.player_1.move("h")).to eq("6") 
     end
