@@ -40,7 +40,7 @@ module Players
               already += 1
             when " "
               free += 1
-              candidate = wc[index] + 1 # A candidate is a possible winning move on the NEXT turn, 1 through 9, subject to playing m on THIS turn.
+              candidate = wc[index] + 1 # A candidate is a possible winning move on the NEXT turn, 1 through 9 subject to playing m on THIS turn.
             end
           end # cell
           if already == 2 && free == 1

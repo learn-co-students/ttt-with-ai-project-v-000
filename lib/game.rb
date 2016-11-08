@@ -26,23 +26,14 @@ class Game
   end
 
   def turn_count
-    count = 0
-    @board.cells.each do | c |
-      if c == 'X' || c == 'O'
-        count += 1
-      end
-    end
+    count = @board.cells.count{|c| c == "X" || c == "O"}
     @player_1.turn_count = count # Could refactor turn_count as a class variable within Player for DRY.
     @player_2.turn_count = count
     count
   end
 
   def current_player
-    if turn_count.even?
-      @player_1
-    else
-      @player_2
-    end
+    turn_count.even? ? @player_1: @player_2
   end
 
   def won?
@@ -71,9 +62,9 @@ class Game
   end
 
   def turn
-    n = current_player.move(board)
-    if board.valid_move?(n)
-      board.update(n, current_player)
+    next_move = current_player.move(board)
+    if board.valid_move?(next_move)
+      board.update(next_move, current_player)
     else
       puts "The board runs left to right, top to bottom. Please choose a free space, 1 - 9."
       turn
@@ -96,52 +87,9 @@ class Game
     end
   end
 
-  def start
-    puts "Welcome to TicTacToe!"
-    puts "Choose 0, 1 or 2 players — or watch a 'wargame'." # "Players" here is meant in the colloquial sense of human players.
-    style = gets.strip.downcase
-    while !["0", "1", "2", "wargame"].include? style
-      puts "Please enter 0, 1, 2 or wargame."
-      style = gets.strip.downcase
-    end
 
-    if style == "wargame"
-      wargame
-    else
-      if style.to_i == 0
-        board = Board.new
-        game = Game.new(Players::Computer::AdvancedAI.new('X'), Players::Computer::AdvancedAI.new('O'), board)
 
-      elsif style.to_i == 1
-        puts "OK! X goes first. Do you want to play X? y/n"
-        player_first = gets.strip.downcase
-        while !["y", "n"].include? player_first
-          puts "Please enter y or n."
-          player_first = gets.strip.downcase
-        end
-        if player_first == "y"
-          board = Board.new
-          game = Game.new(Players::Human.new('X'), Players::Computer::AdvancedAI.new('O'), board)
-        else
-          board = Board.new
-          game = Game.new(Players::Computer::AdvancedAI.new('X'), Players::Human.new('O'), board)
-        end
-
-      else
-        board = Board.new
-        game = Game.new(Players::Human.new('X'), Players::Human.new('O'), board)
-      end
-
-      puts ""
-      puts "Got it! Let's play."
-      puts ""
-      board.display
-      puts ""
-      game.play
-    end
-  end
-
-  def wargame
+  def self.wargame
     wins = 0
     basicAI_wins = 0
     advancedAI_wins = 0

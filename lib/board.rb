@@ -4,7 +4,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    @cells = reset!
   end
 
   def reset!
@@ -28,7 +28,7 @@ class Board
   end
 
   def turn_count
-    cells.select{|c| c == "X" || c == "O"}.length
+    cells.count{|c| c == "X" || c == "O"}
   end
 
   def taken?(n)
