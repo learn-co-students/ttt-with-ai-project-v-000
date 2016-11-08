@@ -19,29 +19,30 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(n)
-    cells[n.to_i - 1]
+  def position(number_selected)
+    cells[number_selected.to_i - 1]
   end
 
   def full?
-    !cells.include?(' ')
+    ##!cells.include?(' ')
+    cells.all? {|cell| cell != " "}
   end
 
   def turn_count
     cells.count{|c| c == "X" || c == "O"}
   end
 
-  def taken?(n)
-    index = n.to_i - 1
+  def taken?(number_selected)
+    index = number_selected.to_i - 1
     !(cells[index].nil? || cells[index] == " ")
   end
 
-  def valid_move?(n)
-    !taken?(n.to_i) && n.to_i.between?(1,9)
+  def valid_move?(number_selected)
+    !taken?(number_selected.to_i) && number_selected.to_i.between?(1,9)
   end
 
-  def update(n, player)
-    index = n.to_i - 1
+  def update(number_selected, player)
+    index = number_selected.to_i - 1
     cells[index] = player.token
   end
 end
