@@ -18,29 +18,17 @@ class Game
     end
 
     def current_player
-        if @board.turn_count%2==0
-            temp = "X"
-        else
-            temp = "O"
-        end
-
-        if temp == player_1.token
-            player_1
-        else
-            player_2
-        end
+        @board.turn_count.even? ? @player_1 : @player_2
     end
 
     def won?
-        WIN_COMBINATIONS.any? do |combo|
-            x=combo.all? do |index|
-                @board.cells[index]=="X"
-            end
-            o=combo.all? do |index|
-                @board.cells[index]=="O"
-            end
-            x||o
+        WIN_COMBINATIONS.detect do |combo|
+          @board.cells[combo[0]] == @board.cells[combo[1]] &&
+          @board.cells[combo[0]] == @board.cells[combo[2]] &&
+          @board.taken?(combo[0] + 1)
+          #Last part checks to make sure spot is taken by an actual player
         end
+        #returns the winning combination, too
     end
 
     def draw?
@@ -52,20 +40,12 @@ class Game
     end
 
     def winner
-        temp=WIN_COMBINATIONS.detect do |combo|
-            x=combo.all? do |index|
-                @board.cells[index]=="X"
-            end
-            o=combo.all? do |index|
-                @board.cells[index]=="O"
-            end
-            x||o
-        end
-        if temp.nil?
-            nil
-        else
-            @board.cells[temp[0]]
-        end
+      if won = won?
+      #Using variable assignment as a condition!
+      #if the assignment occurs properly (not nul) the condition is true
+      #if the assignment is to a nul value, the if statement aborts
+        board.cells[won.first]
+      end
     end
 
 

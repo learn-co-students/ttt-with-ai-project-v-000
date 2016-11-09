@@ -34,13 +34,11 @@ class Board
     end
 
     def taken?(pos)
-        cell=@cells[pos.to_i-1]
-        cell!=" "
+        @cells[pos.to_i-1]!=" "
     end
 
     def valid_move?(pos)
-        index=pos.to_i
-        index>0 && index<10 && !taken?(pos)
+        pos.to_i>0 && pos.to_i<10 && !taken?(pos)
     end
 
 end
