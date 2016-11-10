@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment.rb'
-CLItictactoe.new.start
+CLItictactoe.new.call

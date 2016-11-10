@@ -1,24 +1,5 @@
-# Incorporating the logic below into game.rb caused the game#play tests to break.
 class CLItictactoe
-  def Replay
-    while true # This condition lets the game replay indefinitely
-      puts "Play again? y/n"
-      play_again = gets.strip.downcase
-      while !["y", "n"].include? play_again
-        puts "Please enter y or n."
-        play_again = gets.strip.downcase
-      end
-      if play_again == "y"
-        start
-      else
-        puts "Thanks for playing. See you next time."
-        exit
-      end
-    end
-  end
-
-
-def start
+  def call
     puts "Welcome to TicTacToe!"
     puts "Choose 0, 1 or 2 players — or watch a 'wargame'." # "Players" here is meant in the colloquial sense of human players.
     style = gets.strip.downcase
@@ -30,11 +11,10 @@ def start
     if style == "wargame"
       Game.wargame
     else
-      if style.to_i == 0
+      if style.to_i == 0 # 0 human players
         board = Board.new
         game = Game.new(Players::Computer::AdvancedAI.new('X'), Players::Computer::AdvancedAI.new('O'), board)
-
-      elsif style.to_i == 1
+      elsif style.to_i == 1 # 1 human player
         puts "OK! X goes first. Do you want to play X? y/n"
         player_first = gets.strip.downcase
         while !["y", "n"].include? player_first
@@ -48,8 +28,7 @@ def start
           board = Board.new
           game = Game.new(Players::Computer::AdvancedAI.new('X'), Players::Human.new('O'), board)
         end
-
-      else
+      else # 2 human players
         board = Board.new
         game = Game.new(Players::Human.new('X'), Players::Human.new('O'), board)
       end
@@ -60,7 +39,7 @@ def start
       board.display
       puts ""
       play(game)
-   end
+    end
     Replay()
   end
 
@@ -73,6 +52,23 @@ def start
       puts "Congratulations #{game.winner}!"
     elsif game.draw?
       puts "Cats Game!"
+    end
+  end
+
+  def Replay
+    while true
+      puts "Play again? y/n"
+      play_again = gets.strip.downcase
+      while !["y", "n"].include? play_again
+        puts "Please enter y or n."
+        play_again = gets.strip.downcase
+      end
+      if play_again == "y"
+        call
+      else
+        puts "Thanks for playing. See you next time."
+        exit
+      end
     end
   end
 

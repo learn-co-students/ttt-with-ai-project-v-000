@@ -65,7 +65,7 @@ class Game
   end
 
   def winner
-    if won == won?
+    if won = won?
       board.cells[won.first]
     end
   end
