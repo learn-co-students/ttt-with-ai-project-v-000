@@ -1,4 +1,7 @@
 class CLItictactoe
+  def initialize
+  end
+
   def call
     puts "Welcome to TicTacToe!"
     puts "Choose 0, 1 or 2 players — or watch a 'wargame'." # "Players" here is meant in the colloquial sense of human players.

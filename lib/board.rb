@@ -4,7 +4,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    reset!
+    self.reset!
   end
 
   def reset!
@@ -24,7 +24,6 @@ class Board
   end
 
   def full?
-    ##!cells.include?(' ')
     cells.all? {|cell| cell != " "}
   end
 
