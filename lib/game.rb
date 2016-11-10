@@ -43,14 +43,6 @@ class Game
       @board.taken?(combo[0] + 1)
     end
   end
-  ##def won?
-  ##  @@WIN_COMBINATIONS.each do |wc|
-  ##    if wc.all?{|c| board.cells[c] == "X"} || wc.all?{|c| board.cells[c] == "O"}
-  ##      return wc
-  ##    end
-  ##  end
-  ##  return false
-  ##end
 
   def full?
     !board.cells.any? {|c| c == " " || c == ""}
@@ -82,20 +74,6 @@ class Game
     @board.display
     puts ""
   end
-=begin
-  def play
-    until over?
-      puts "Player #{current_player.token}'s turn:"
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cats Game!"
-    end
-  end
-=end
-
 
   def self.wargame
     wins = 0
