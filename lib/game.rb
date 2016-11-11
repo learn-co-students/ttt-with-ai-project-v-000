@@ -3,7 +3,7 @@ class Game
 
   attr_accessor :board, :player_1, :player_2
 
-  def initialize(player_1 = "X", player_2 = "O", board = Array.new(9, " "))
+  def initialize(player_1 = "X", player_2 = "O", board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
