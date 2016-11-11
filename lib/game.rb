@@ -21,27 +21,30 @@ class Game
                               ]
 
   def current_player
+    #if self.board.turn_count % 2 == 0
+     #"X"
+   #else
+     #"O"
+   #end
   end
 
-  def over?
+  def turn
+  end
 
+  def play
   end
 
   def won?
-
   end
 
   def draw?
   end
 
+  def over?
+    won? || draw?
+  end
+
   def winner
-  end
-
-  def turn
-
-  end
-
-  def play
   end
 
 end
