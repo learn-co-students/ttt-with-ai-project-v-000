@@ -3,7 +3,7 @@ class Game
 
   attr_accessor :board, :player_1, :player_2
 
-  def initialize(player_1 = "X", player_2 = "O", board = Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -21,23 +21,26 @@ class Game
                               ]
 
   def current_player
-    #if self.board.turn_count % 2 == 0
-     #"X"
-   #else
-     #"O"
-   #end
+    if board.turn_count % 2 == 0
+      player_1.token
+    else
+      player_2.token
+    end
   end
 
   def turn
   end
 
   def play
+  
   end
 
   def won?
+
   end
 
   def draw?
+    board.full? && !(won?)
   end
 
   def over?
@@ -45,6 +48,7 @@ class Game
   end
 
   def winner
+
   end
 
 end
