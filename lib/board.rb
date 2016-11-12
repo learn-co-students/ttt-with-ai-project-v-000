@@ -38,17 +38,26 @@ class Board
   end
 
   def taken?(index)
-    (@cells[index.to_i - 1] != " " || nil) ? true : false
+    if (@this[index.to_i - 1] != " " || nil)
+      true
+    else
+      false
+    end
   end
 
   def valid_move?(index)
-    (index.to_i.between?(1, 9) && (@cells[index.to_i - 1] == " " || @cells[index.to_i - 1] == nil)) ? true : false
-  end
-
-  def update(player, token = "X")
-    if player.to_i % 2 == 0 || turn_count.even? == true # it's all even
-      player
+    if (index.to_i.between?(1, 9) && (@this[index.to_i - 1] == " " || @this[index.to_i - 1] == nil))
+      true
     else
-      "O"
+      false
     end
   end
+
+  def update(index, player)
+    if index.to_i % 2 == 0 || turn_count.even? == true
+      player = "O"
+    else
+      player = "X"
+    end
+  end
+end
