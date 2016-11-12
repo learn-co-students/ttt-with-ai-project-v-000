@@ -1,9 +1,6 @@
+require 'pry'
 class Board
-  attr_writer :cells
-
-  def cells
-    @cells =  []
-  end
+  attr_accessor :cells
 
   def reset!
     @cells.clear
@@ -23,9 +20,7 @@ class Board
   end
 
   def position(take)
-    take = gets.chomp
-    @cells["#{take.to_i - 1}"]
-    display
+    @cells[take.to_i - 1]
   end
 
   def full?
@@ -39,26 +34,15 @@ class Board
   end
 
   def taken?(index)
-    if (@this[index.to_i - 1] != " " || nil)
-      true
-    else
-      false
-    end
+    (@cells[index.to_i - 1] == " " || nil) ? false : true
   end
 
   def valid_move?(index)
-    if (index.to_i.between?(1, 9) && (@this[index.to_i - 1] == " " || @this[index.to_i - 1] == nil))
-      true
-    else
-      false
-    end
+    (index.to_i.between?(1, 9) && (@cells[index.to_i - 1] == " " || @cells[index.to_i - 1] == nil)) ? true : false
   end
 
   def update(index, player)
-    if index.to_i % 2 == 0 || turn_count.even? == true
-      player = "O"
-    else
-      player = "X"
-    end
+     @cells[index.to_i - 1] = player.token
   end
 end
+#binding.pry
