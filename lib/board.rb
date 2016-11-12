@@ -5,11 +5,12 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "] #holds the current state of the game @cells
+    @cells = [] #holds the current state of the game @cells
+    self.reset! #sets @cells to empty board when Board.new invoked
   end
 
   def reset!
-   self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "] #clears all tokens from the game @cells
+   self.cells = Array.new(9, " ") #clears all tokens from the game @cells
   end
 
   def display
@@ -21,18 +22,16 @@ class Board
   end
 
   def position(pos_from_user)
-    position = pos_from_user.to_i - 1 #decreases num from user to match array indices
-    @cells[position] #returns value from position
+    @cells[pos_from_user.to_i - 1] #decreases num from user to match array indices
   end
 
   def full?
-    full = @cells.any? {|position| position == " "} #if any position us empty returns true
-    full ? false : true #if any position is empty, full == true and #full? returns false
+    full = @cells.all? {|cell| cell != " "} #if any position us empty returns true
+    full ? true : false #if any position is empty, full == true and #full? returns false
   end
 
   def turn_count
-    empty = @cells.count {|position| position == " "} #returns number of empty positions
-    turns_taken = 9 - empty #returns number of non-empty positions (turns taken)
+    @cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(pos_from_user)
@@ -42,9 +41,7 @@ class Board
   end
 
   def valid_move?(pos_from_user) #returns true for user input between 1-9 that is not taken
-    if pos_from_user.to_i.between?(1,9) && self.taken?(pos_from_user) == false
-      true
-    end
+    pos_from_user.to_i.between?(1,9) && self.taken?(pos_from_user) == false
   end
 
   def update(pos_from_user,player) #updates the cells in the board with the player token according to the input

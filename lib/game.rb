@@ -29,13 +29,11 @@ class Game
   end
 
   def won?
-    combo_match = nil
-    combo_match = WIN_COMBINATIONS.detect do |combo| #each combo is one of the win patterns
-      combo.all?{|space| board.cells[space] == "X"} || combo.all?{|space| board.cells[space] == "O"}
-      #checks to see if any of the combos patterns match for either "X" or "O"
-      #if yes, returns the matching combo. If not, returns nil.
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
-    combo_match
   end
 
   def draw?
@@ -43,7 +41,10 @@ class Game
   end
 
   def winner
-    won? ? board.cells[won?[0]] : nil
+    binding.pry
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
@@ -66,5 +67,4 @@ class Game
       puts "Cats Game!"
     end
   end
-
 end
