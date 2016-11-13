@@ -22,9 +22,9 @@ class Game
 
   def current_player
     if board.turn_count % 2 == 0
-      player_1.token
+      player_1
     else
-      player_2.token
+      player_2
     end
   end
 
@@ -32,7 +32,7 @@ class Game
   end
 
   def play
-  
+
   end
 
   def won?
@@ -40,11 +40,21 @@ class Game
   end
 
   def draw?
-    board.full? && !(won?)
+    if board.full? && !(won?)
+      true
+    elsif !(board.full?) && won?
+      false
+    else
+      nil
+    end
   end
 
   def over?
-    won? || draw?
+    if won? || draw?
+      true
+    else
+      false
+    end
   end
 
   def winner
