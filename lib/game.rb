@@ -44,8 +44,7 @@ class Game
     if !board.valid_move?(choice)
       puts "invalid"; turn
     else
-      board.update(choice, current_player)
-      board.display
+      board.update(choice, current_player); board.display
     end
   end
 
