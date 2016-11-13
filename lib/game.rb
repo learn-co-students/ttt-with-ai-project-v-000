@@ -48,4 +48,15 @@ class Game
     end
   end
 
+  def play
+    #uses Human::move method for turn initiation // maybe use board.postion too??
+    #uses the .over? method // checking after every turn
+    #uses the .turn method // checking after every turn
+    #uses the .won? method // checking after every turn
+    #uses the .draw? method // checking after every turn
+    #will have to board.display each time a new action's made
+    #uses the .winner method
+    #congratulates winner
+  end
+
 end
