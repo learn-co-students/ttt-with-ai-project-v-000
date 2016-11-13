@@ -1,14 +1,15 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [6, 4, 2],
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [6, 4, 2],
   ]
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
@@ -27,7 +28,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |win|
-    win.all? {|i| board.cells[i] == "X"} || win.all? {|i| board.cells[i] == "O"}
+      win.all? {|i| board.cells[i] == "X"} || win.all? {|i| board.cells[i] == "O"}
     end
   end
 
@@ -49,14 +50,9 @@ class Game
   end
 
   def play
-    #uses Human::move method for turn initiation // maybe use board.postion too??
-    #uses the .over? method // checking after every turn
-    #uses the .turn method // checking after every turn
-    #uses the .won? method // checking after every turn
-    #uses the .draw? method // checking after every turn
-    #will have to board.display each time a new action's made
-    #uses the .winner method
-    #congratulates winner
+    until won? || draw?; turn end
+    if won?; puts "Congratulations #{winner}!"
+    else draw?; puts "Cats Game!" end
   end
-
+#binding.pry
 end
