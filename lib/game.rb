@@ -10,7 +10,6 @@ class Game
   [0, 4, 8],
   [6, 4, 2],
   ]
-  @board = []
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
@@ -41,7 +40,19 @@ class Game
   end
 
   def turn
-    
+    loop do
+      choice = current_player.move(board.cell)
+      if board.valid_move?(choice) == true
+        case choice
+          when choice.equal?(player_1)
+            index = player_1.move(board.cell)
+          when choice.equal?(player_2)
+            index = player_2.move(board.cell)
+        end
+      end
+      board.update(index, current_player)
+      board.display
+    end
   end
 
 end
