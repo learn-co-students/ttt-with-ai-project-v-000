@@ -40,17 +40,11 @@ class Game
   end
 
   def turn
-    loop do
-      choice = current_player.move(board.cell)
-      if board.valid_move?(choice) == true
-        case choice
-          when choice.equal?(player_1)
-            index = player_1.move(board.cell)
-          when choice.equal?(player_2)
-            index = player_2.move(board.cell)
-        end
-      end
-      board.update(index, current_player)
+    choice = current_player.move(board.cells)
+    if !board.valid_move?(choice)
+      puts "invalid"; turn
+    else
+      board.update(choice, current_player)
       board.display
     end
   end
