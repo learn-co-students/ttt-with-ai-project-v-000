@@ -1,4 +1,3 @@
-require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
@@ -54,5 +53,4 @@ class Game
     if won?; puts "Congratulations #{winner}!"
     else draw?; puts "Cats Game!" end
   end
-#binding.pry
 end
