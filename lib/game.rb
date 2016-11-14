@@ -1,6 +1,8 @@
 require 'pry'
 class Game
 
+  include Players
+
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -29,13 +31,7 @@ class Game
   end
 
   def turn
-    puts "Where would you like to move?"
-    input = gets.to_i
-    board.valid_move?(input)
-    while
-      !(board.valid_move?(input))
-      puts "Your choice is not a valid position. Please choose a position between 1 and 9."
-    end
+  
   end
 
   def play
