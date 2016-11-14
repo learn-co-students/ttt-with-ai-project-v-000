@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello. Thank you for playing tic-tac-toe"
+puts "Who would like to go first and be 'X'?"
+input = gets.chomp

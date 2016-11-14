@@ -31,11 +31,24 @@ class Game
   end
 
   def turn
-  
+    move = current_player.move(board)
+    if board.valid_move?(move)
+      board.update(move, current_player)
+    else
+      puts "Your input was invalid. Please enter a choice again."
+      turn
+    end
   end
 
   def play
-
+    while !(over?)
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else draw?
+      puts "Cats Game!"
+    end
   end
 
   def won?
