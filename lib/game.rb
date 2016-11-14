@@ -29,6 +29,13 @@ class Game
   end
 
   def turn
+    puts "Where would you like to move?"
+    input = gets.to_i
+    board.valid_move?(input)
+    while
+      !(board.valid_move?(input))
+      puts "Your choice is not a valid position. Please choose a position between 1 and 9."
+    end
   end
 
   def play
@@ -36,12 +43,12 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.collect do |index|
+    WIN_COMBINATIONS.each do |index|
     position_1 = board.cells[index[0]]
     position_2 = board.cells[index[1]]
     position_3 = board.cells[index[2]]
       if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == 'O' && position_2 == 'O' && position_3 == 'O'
-        return true
+        return index
       end
     end
     false
@@ -56,7 +63,7 @@ class Game
   end
 
   def winner
-    current_player.token if won?
+    board.cells[won?.first] if won?
   end
 
 end
