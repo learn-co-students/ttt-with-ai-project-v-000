@@ -12,6 +12,14 @@ class Board
       @cells = Array.new(9, " ")
     end
 
+    def first_display
+      puts " #{1} | #{2} | #{3} "
+      puts "-----------"
+      puts " #{4} | #{5} | #{6} "
+      puts "-----------"
+      puts " #{7} | #{8} | #{9} "
+    end
+
     def display
       puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
       puts "-----------"
