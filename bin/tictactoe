@@ -2,6 +2,12 @@
 
 require_relative '../config/environment'
 
-puts "Hello. Thank you for playing tic-tac-toe"
-puts "Who would like to go first and be 'X'?"
-input = gets.chomp
+puts "Who would like to be player 1?"
+puts "Please enter your name:"
+p_1 = gets.strip
+puts "Hello #{p_1} you are 'X'."
+puts "Who would like to be player 2?"
+puts "Please enter your name:"
+p_2 = gets.strip
+new_game = Game.new
+new_game.play

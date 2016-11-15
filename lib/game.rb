@@ -34,6 +34,7 @@ class Game
     move = current_player.move(board)
     if board.valid_move?(move)
       board.update(move, current_player)
+      puts "Your turn #{current_player.token}."
     else
       puts "Your input was invalid. Please enter a choice again."
       turn
@@ -43,6 +44,7 @@ class Game
   def play
     while !(over?)
       turn
+      board.display
     end
     if won?
       puts "Congratulations #{winner}!"
