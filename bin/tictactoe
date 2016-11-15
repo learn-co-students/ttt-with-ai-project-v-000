@@ -2,31 +2,5 @@
 
 require_relative '../config/environment'
 
-puts "Hello, welcome to this tic-tac-toe game."
-puts "Would you like to play in 1 player, 2 player, or computer mode?"
-response = gets.strip.to_s
-
-  if response == "1 player" || "1"
-    puts "Hello, please enter your name:"
-    p_1 = gets.strip
-    puts "Hello #{p_1}! You are players 'X' and 'O'."
-    new_game = Game.new
-    puts "Here is a hard copy of the board to help you strategize:"
-    new_game.board.first_display
-    new_game.play
-  end
-
-  if response == "2 player" || response == "2"
-    puts "Who would like to be player 1?"
-    puts "Please enter your name:"
-    p_1 = gets.strip
-    puts "Hello #{p_1}! You are player 'X'."
-    puts "Who would like to be player 2?"
-    puts "Please enter your name:"
-    p_2 = gets.strip
-    puts "Hello #{p_2}! you are player 'O'."
-    new_game = Game.new
-    puts "Here is a hard copy of the board to help you strategize:"
-    new_game.board.first_display
-    new_game.play
-  end
+new_game = CLI.new
+new_game.start

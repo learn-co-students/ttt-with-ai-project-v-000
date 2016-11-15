@@ -35,7 +35,7 @@ class Game
     if board.valid_move?(move)
       board.update(move, current_player)
     else
-      puts "Your input was invalid. Please enter a choice again."
+      puts "Your input was invalid."
       turn
     end
   end
