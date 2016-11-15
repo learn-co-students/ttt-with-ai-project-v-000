@@ -2,7 +2,7 @@ class CLI
 
   def start
     puts "Hello, welcome to this tic-tac-toe game."
-    puts "Please press '1' for single-player mode, 2 for dual-player mode, or 3 for computer mode?"
+    puts "Please press '1' for single-player mode, '2' for dual-player mode, or '3' for computer mode?"
 
     response = gets.strip.to_i
 
