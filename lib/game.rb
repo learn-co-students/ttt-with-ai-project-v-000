@@ -38,7 +38,7 @@ class Game
   end
 
   def turn
-    choice = current_player.move(board.cells)
+    choice = current_player.move(board)
     if !board.valid_move?(choice)
       puts "invalid"; turn
     else
