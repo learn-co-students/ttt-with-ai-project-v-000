@@ -53,7 +53,7 @@ class Game
     pos = nil
     loop do
       puts "Player #{current_player.token}, please enter a position (1 - 9):"
-      pos = self.current_player.move
+      pos = self.current_player.move(self.board)
       break if self.board.valid_move?(pos)
     end
     self.board.update(pos, self.current_player)
