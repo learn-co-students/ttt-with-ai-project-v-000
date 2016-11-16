@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+puts "Hello and welcome to the first and ONLY 'virtual Tic Tac Toe' game to EVER be created!(Not really...)"
+puts "-----------"
+puts "Powered by, and brought to you by:  The Voltron 5,000 Power Ranger Engine 2.0"
+puts "-----------"
+sleep(1)
+puts "How many players wish to play this epic game?"
+num_players = gets.chomp.to_i
+puts "You chose: #{num_players}."
+
+if num_players == 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+
+elsif num_players == 1
+  def chosen_token=(value)
+   value
+   end
+  def prompt
+    puts "Who should go first? 'X' or 'O'? (the Computer is 'O' by default)"
+    player_token = gets.strip.upcase
+    unless player_token == "X"
+      puts "Wrong character!"
+      prompt
+    else
+      puts "You chose: #{player_token}."
+      chosen_token=(player_token)
+    end
+  end
+  puts prompt
+  game = Game.new(Players::Human.new(chosen_token), Players::Computer.new("O"), Board.new)
+  game.play
+
+elsif num_players == 2
+
+  puts "Who should go first? 'X' or 'O'? (the Computer is 'O' by default)"
+  player_token = gets.chomp.upcase
+  puts "You chose: #{player_token}."
+
+  game = Game.new
+  game.play
+end
