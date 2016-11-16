@@ -44,7 +44,8 @@ class Board
     def valid_move?(user_input)
         new_user_input = user_input.to_i - 1
         new = self.cells[new_user_input]
-          if new == ""
+        # binding.pry
+          if new == " "
             true
           else
             false
