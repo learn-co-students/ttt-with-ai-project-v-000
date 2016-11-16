@@ -50,9 +50,12 @@ class Game
   end
 
   def turn
+    system("clear")
+    puts "\n"
+    self.board.display
     pos = nil
     loop do
-      puts "Player #{current_player.token}, please enter a position (1 - 9):"
+      puts "\nPlayer #{current_player.token}, please enter a position (1 - 9):"
       pos = self.current_player.move(self.board)
       break if self.board.valid_move?(pos)
     end
@@ -60,8 +63,12 @@ class Game
   end
 
   def play
-    self.board.display
+    system("clear")
     self.turn until self.over?
+    system("clear")
+    puts "\n"
+    self.board.display
+    puts "\n"
     puts self.draw? ? "Cats Game!" : "Congratulations #{self.winner}!"
   end
 end
