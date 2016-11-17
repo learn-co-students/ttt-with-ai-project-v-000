@@ -124,5 +124,4 @@ class TicTac_CLI
     end
   end
 end
-
 TicTac_CLI.player_options
