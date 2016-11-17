@@ -48,7 +48,7 @@ class Game
 
   def play
     until won? || draw?; turn end
-    if won?; puts "Congratulations to player: #{winner}!"
+    if won?; puts "Congratulations #{winner}!"
     else draw?; puts "Cats Game!" end
   end
 end
