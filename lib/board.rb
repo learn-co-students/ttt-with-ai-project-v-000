@@ -1,4 +1,3 @@
-require 'pry'
 class Board
   attr_accessor :cells
 
@@ -45,4 +44,3 @@ class Board
      @cells[index.to_i - 1] = player.token
   end
 end
-#binding.pry
