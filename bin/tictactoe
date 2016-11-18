@@ -15,7 +15,6 @@ class TicTac_CLI
   @num_players = gets.chomp.to_i
   puts "You chose: #{@num_players}."
 
-
   def self.again?
     sleep(1)
     puts "Play virtual Tic Tac Toe again? Type 'yes' or 'no' please."
@@ -124,4 +123,5 @@ class TicTac_CLI
     end
   end
 end
+
 TicTac_CLI.player_options
