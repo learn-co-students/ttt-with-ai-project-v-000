@@ -27,14 +27,14 @@ def start
     if name_1 == nil || name_1 == ""
       name_1 == auto_name_1
     end
-    set_player_1 = Players::Human.new("X", name_1)
+    set_player_1 = Players::Human.new("X")
 
     puts "Please enter the name of Player 2."
     name_2 = gets.strip
     if name_2 == nil || name_2 == ""
       name_2 == auto_name_2
     end
-    set_player_2 = Players::Human.new("O", name_2)
+    set_player_2 = Players::Human.new("O")
 
 
   elsif human_players.to_i == 1
@@ -44,17 +44,17 @@ def start
     if name_1 == nil || name_1 == ""
       name_1 == auto_name_1
     end
-    set_player_1 = Players::Human.new("X", name_1)
+    set_player_1 = Players::Human.new("X")
 
     # assign name to computer player
     name_2 = auto_name_2
-    set_player_2 = Players::Computer.new("O", name_2)
+    set_player_2 = Players::Computer.new("O")
   else
     # assign names to computer players
     name_1 = auto_name_1
-    set_player_1 = Players::Computer.new('X', name_1)
+    set_player_1 = Players::Computer.new('X')
     name_2 = auto_name_2
-    set_player_2 = Players::Computer.new('O', name_2)
+    set_player_2 = Players::Computer.new('O')
   end
 
   game = Game.new(set_player_1, set_player_2)
