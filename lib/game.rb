@@ -96,25 +96,4 @@ WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8
     end
   end
 
-  def start
-    puts "Welcome to fun with Tic Tac Toe!"
-    puts "How many human players will be in this game?(0, 1, 2)"
-    human_players = gets.strip
-
-    # create array of names for computer players
-
-    if human_players == 2
-      # ask for name of each player
-    elsif human_players = 1
-      # ask for the name of the human player and if human or computer goes first
-      # assign name to computer player
-    else
-      # assign names to computer players
-    end
-
-    # game = self.new()
-    # game.play start the game
-
-  end
-
 end
