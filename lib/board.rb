@@ -3,11 +3,10 @@ class Board
     attr_accessor :cells
 
     def initialize
-      @cells = Array.new(9, " ")
+      reset!
     end
 
     def reset!
-      @cells.clear
       @cells = Array.new(9, " ")
     end
 
@@ -28,8 +27,7 @@ class Board
     end
 
     def position(board_choice)
-      choice = @cells[board_choice.to_i - 1]
-      choice
+      @cells[board_choice.to_i - 1]
     end
 
     def full?
@@ -37,9 +35,7 @@ class Board
     end
 
     def turn_count
-      counter = 0
-      @cells.each {|turn| counter += 1 if turn == "X" || turn == "O"}
-      counter
+      @cells.count {|cell| cell == "X" || cell == "O"}
     end
 
     def taken?(input)

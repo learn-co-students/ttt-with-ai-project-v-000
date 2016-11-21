@@ -22,11 +22,7 @@ class Game
   end
 
   def current_player
-    if board.turn_count % 2 == 0
-      player_1
-    else
-      player_2
-    end
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def turn
@@ -52,15 +48,11 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |index|
-    position_1 = board.cells[index[0]]
-    position_2 = board.cells[index[1]]
-    position_3 = board.cells[index[2]]
-      if position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == 'O' && position_2 == 'O' && position_3 == 'O'
-        return index
-      end
+    WIN_COMBINATIONS.detect do |combo|
+     @board.cells[combo[0]] == @board.cells[combo[1]] &&
+     @board.cells[combo[0]] == @board.cells[combo[2]] &&
+     @board.taken?(combo[0] + 1)
     end
-    false
   end
 
   def draw?
@@ -72,7 +64,9 @@ class Game
   end
 
   def winner
-    board.cells[won?.first] if won?
+    if w = won?
+      board.cells[w.first]
+    end
   end
 
 end

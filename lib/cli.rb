@@ -6,7 +6,7 @@ class CLI
 
     response = gets.strip.to_i
 
-    if !(response == 1 || response == 2 || response == 3)
+    if !(response.between?(1,3))
       puts "Your input is incorrect. Please start over."
       start
     elsif response == 1
