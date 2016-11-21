@@ -42,8 +42,8 @@ class Game < AI
 	end
 
 	def winner
-		if self.won? 
-		  @winner = @board.cells[self.won?.first]
+		if won = self.won?
+			@board.cells[won.first]
 		end   
 	end
 
