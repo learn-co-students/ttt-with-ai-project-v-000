@@ -31,10 +31,9 @@ class Board
   	@cells.all?{ |cell| cell == "X" || cell == "O"}
   end
 
-  #Count the number of turns that has been played
+  #Count the number of turns that have been played
   def turn_count
-  	count = @cells.select{ |cell| cell == "X" || cell == "O" }
-  	count.size  
+  	@cells.count { |cell| cell == "X" || cell == "O" } 
   end
 
   #Check if a certain position(at index number) is occupied with either "X" or "O"  
