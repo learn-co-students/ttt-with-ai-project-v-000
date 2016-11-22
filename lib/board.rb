@@ -26,7 +26,7 @@ class Board
   end
 
   def turn_count
-    self.cells.select {|cell| cell == "X" || cell == "O"}.size
+    self.cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(pos)
@@ -34,11 +34,7 @@ class Board
   end
 
   def valid_move?(pos)
-    if (1..9).include?(pos.to_i) && taken?(pos) == false
-      return true
-    else
-      false
-    end 
+    (1..9).include?(pos.to_i) && !taken?(pos)
   end
 
   def update(pos, player)

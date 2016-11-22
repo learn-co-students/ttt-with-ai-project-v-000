@@ -22,21 +22,19 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |e|
-      if e.all? { |pos| self.board.position(pos + 1) == self.player_1.token} || e.all? { |pos| self.board.position(pos + 1) == self.player_2.token}
-        @token_win = self.board.cells[e[0]]
-        return true
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
-    false
   end
 
   def over?
-    self.won? || self.draw? ? true : false
+    self.won? || self.draw?
   end
 
   def winner
-    self.won? ? self.token_win == "X" ? self.player_1.token : self.player_2.token : nil
+    self.won? ? @board.cells[self.won?[0]] : nil
   end
 
   def turn
