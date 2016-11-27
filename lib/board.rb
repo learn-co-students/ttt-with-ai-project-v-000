@@ -22,13 +22,11 @@ class Board
   end
 
   def full?
-    (@cells.all? { |turn| (turn == "X" || turn == "O") }) ? true : false
+    @cells.all? {|cell| cell != " "}
   end
 
   def turn_count
-    counter = 0
-    @cells.each { |turn| counter += 1 if turn == "X" || turn == "O" }
-    counter
+    @cells.count { |turn| turn == "X" || turn == "O" }
   end
 
   def taken?(index)
