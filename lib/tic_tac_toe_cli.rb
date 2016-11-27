@@ -100,7 +100,7 @@ class TicTacToeCLI
     puts "         ▀▀▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀"
     sleep(2)
     puts ""
-    100.times.each_with_index { |item, index| puts "Game #{index + 1} has been played with this result:"; @item = game.play }
+    100.times.each_with_index { |item, index| puts "Game #{index + 1} has been played with this result:"; item = game.play }
     again?
     end
   end
