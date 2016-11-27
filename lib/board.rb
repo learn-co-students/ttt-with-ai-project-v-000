@@ -49,4 +49,8 @@ class Board
     @cells[input.to_i-1]
   end
 
+  def update(input, player)
+    @board[input.to_i-1] = player.token
+  end
+
 end
