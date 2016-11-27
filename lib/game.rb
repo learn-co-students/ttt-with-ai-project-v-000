@@ -30,11 +30,13 @@ class Game
   end
 
   def draw?
-    (won? || !over?) ? false : true
+    !won? && over?
   end
 
   def winner
-    (won?) ? board.cells[won?[0]] : nil
+    if move = won?
+      board.cells[move.first]
+    end
   end
 
   def turn

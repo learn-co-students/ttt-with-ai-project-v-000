@@ -34,7 +34,7 @@ class Board
   end
 
   def valid_move?(index)
-    (index.to_i.between?(1, 9) && (@cells[index.to_i - 1] == " " || @cells[index.to_i - 1] == nil)) ? true : false
+    index.to_i.between?(1, 9) && (@cells[index.to_i - 1] == " " || @cells[index.to_i - 1] == nil)
   end
 
   def update(index, player)
