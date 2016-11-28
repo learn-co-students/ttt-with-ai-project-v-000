@@ -306,13 +306,13 @@ describe 'Game' do
       game.play
     end
 
-    it 'prints "Cats Game!" on a draw' do
+    it 'prints "Cat\'s Game!" on a draw' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       allow($stdout).to receive(:puts)
 
-      expect($stdout).to receive(:puts).with("Cats Game!")
+      expect($stdout).to receive(:puts).with("Cat's Game!")
 
       game.play
     end
