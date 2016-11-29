@@ -23,31 +23,15 @@ WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8
   end
 
   def current_player
-    if (@board.turn_count.odd?)
-      return @player_2
-    else
-      return @player_1
-    end
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
-
-    WIN_COMBINATIONS.each do |win_combination|
-      win_index_1 = win_combination[0]
-      win_index_2 = win_combination[1]
-      win_index_3 = win_combination[2]
-
-      position_1 = @board.cells[win_index_1]
-      position_2 = @board.cells[win_index_2]
-      position_3 = @board.cells[win_index_3]
-
-      if (position_1 == position_2 && position_2 == position_3  && position_1 != " " && position_2 != " " && position_3 != " ")
-        return win_combination
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
-
-    return false
-
   end
 
   def draw?
@@ -63,20 +47,11 @@ WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8
   end
 
   def over?
-    if (won? || draw? || @board.full?)
-      return true
-    else
-      return false
-    end
+    won? || draw? ? true : false
   end
 
   def winner
-    if !(won?)
-      return nil
-    else
-      win_combination = won?
-      return @board.cells[win_combination[0]]
-    end
+    !won? || draw? ? nil : @board.cells[won?.first]
   end
 
   def play

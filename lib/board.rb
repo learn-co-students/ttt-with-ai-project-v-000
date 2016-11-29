@@ -20,8 +20,7 @@ attr_accessor :cells
   end
 
   def position(input)
-    index = input.to_i-1
-    return @cells[index]
+    return @cells[input.to_i-1]
   end
 
   def update(input, player)
@@ -29,39 +28,19 @@ attr_accessor :cells
   end
 
   def valid_move?(input)
-    if !taken?(input) && input.to_i.between?(1, 9)
-      true
-    elsif taken?(input)
-      false
-    end
+    !taken?(input) && input.to_i.between?(1, 9)
   end
 
   def turn_count
-    count = 0
-    @cells.each do |move|
-      if (move == "X" || move == "O")
-        count += 1
-      end
-    end
-
-    return count
+    @cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(input)
-    if @cells[input.to_i-1] == " "
-      false
-    elsif @cells[input.to_i-1] = "X" || @cells[input.to_i-1] == "O"
-      true
-    end
+    @cells[input.to_i-1] != " " ? true : false
   end
 
   def full?
-    @cells.detect do |index|
-      if(index == " ")
-        return false
-      end
-    end
-    return true
+    @cells.all? { |cell| cell != " " }
   end
 
 end
