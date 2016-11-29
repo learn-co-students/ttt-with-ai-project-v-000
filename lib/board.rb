@@ -44,13 +44,8 @@ class Board
     input.between?(1,9) && !self.taken?(input)
   end
 
-  def update(input, :token => "X")
-    binding.pry
-    @cells[input.to_i-1]
-  end
-
   def update(input, player)
-    @board[input.to_i-1] = player.token
+    @cells[input.to_i-1] = player.token
   end
 
 end
