@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def play_again?
+  puts "Would you like to play again? y/n"
+  input=gets.strip.downcase
+  if input == "y"
+    players
+    play
+  else
+    input == "n"
+    exit
+  end
+end
+
+def players
+  puts "How many players? (0,1,2)"
+  @players=gets.strip
+end
+
+def play
+  case @players
+when "0"
+  Game.new(player_1=Player::Computer.new("X"),player_2=Player::Computer.new("O"),board=Board.new).play
+  play_again?
+when "1"
+  puts "Would you like to be: X or O ?"
+  p1_token = gets.strip.upcase
+  p1_token == "X" ? comp_token = "O" : comp_token = "X"
+  Game.new(player_1=Player::Human.new(p1_token),player_2=Player::Computer.new(comp_token),board=Board.new).play
+  play_again?
+when "2"
+  Game.new(player_1=Player::Human.new(p1_token),player_2=Player::Human.new(p2_token),board=Board.new).play
+  puts "Would you like to be: X or O ?"
+  p1_token = gets.strip.upcase
+  p1_token == "X" ? p2_token = "O" : p2_token = "X"
+  play_again?
+end
+end
+
+puts "Welcome to Tic Tac Toe!"
+players
+play

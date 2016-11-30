@@ -3,7 +3,7 @@
 ## Objectives
 
 1. Build a CLI
-2. Create a domain model with multiple relating and collaborating objects.
+2. Create a domain model multiple relating and collaborating objects.
 
 ## Overview
 
