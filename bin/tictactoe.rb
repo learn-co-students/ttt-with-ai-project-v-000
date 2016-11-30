@@ -14,6 +14,9 @@ class CLI
     if human_reponse.between?(0,2) == false
       puts "Invalid entry. Please start again."
       start
+    elsif human_response == 0
+      new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+ +      new_game.play
     elsif human_response == 1
       puts "Hello, please enter your name:"
       player1 = gets.strip
@@ -33,6 +36,6 @@ class CLI
       new_game.board.first_display
       new_game.play
     end
-    binding.pry
+
   end
 end
