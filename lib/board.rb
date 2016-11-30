@@ -42,9 +42,9 @@ class Board
   end
 
   def turn_count
-    filled = cells.select do |cell| cell != " "
+    open = cells.select do |cell| cell != " "
     end
-    count = filled.size
+    count = open.size
     return count
   end
 
@@ -70,6 +70,7 @@ class Board
 
   def update(input, player)
     cells[input.to_i-1] = player.token
+    display
   end
 
 end
