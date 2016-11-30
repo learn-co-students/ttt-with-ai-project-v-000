@@ -91,7 +91,7 @@ module Players
       num = rand(1..9)
       if board.taken?(num) == false
         puts "The computer's move: #{num}"
-        return num
+        return num.to_s
       else
         move(board)
       end

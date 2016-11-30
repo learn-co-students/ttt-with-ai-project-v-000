@@ -96,18 +96,18 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
-      puts "Do you wish to play again?"
-      answer = gets.strip
-      if (answer == "yes") || (answer == "YES") || (answer == "Yes")
-        start
-      end
+      #play_again
     elsif draw?
       puts "Cats Game!"
-      puts "Do you wish to play again?"
-      answer = gets.strip
-      if (answer == "yes") || (answer == "YES") || (answer == "Yes")
-        start
-      end
+      #play_again
+    end
+  end
+
+  def play_again
+    "Do you wish to play again?"
+    answer = gets.strip
+    if (answer == "yes") || (answer == "YES") || (answer == "Yes")
+      start
     end
   end
 
