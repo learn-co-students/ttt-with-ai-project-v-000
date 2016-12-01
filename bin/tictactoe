@@ -1,3 +1,58 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+keep_playing = true
+puts "Hi, welcome to Tic Tac Toe!"
+
+while keep_playing == true
+  possible_inputs = [0, 1, 2]
+  input = nil
+  until possible_inputs.include?(input)
+    puts "How many humans would like to play? (Please enter 0, 1, or 2.)"
+    input = gets.strip.to_i
+  end
+  case input
+  when 0
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  when 1
+    possible_tokens = ["X", "O"]
+    possible_answers = ["Y", "N"]
+    token_selection = nil
+    answer_selection = nil
+    computer_token = nil
+    until possible_tokens.include?(token_selection)
+      puts "Which token would you like to play as, X or O?"
+      token_selection = gets.strip.upcase
+    end
+    computer_token = "X" if token_selection == "O"
+    computer_token = "O" if token_selection == "X"
+    until possible_answers.include?(answer_selection)
+      puts "Would you like to go first? (Y/N)"
+      answer_selection = gets.strip.upcase
+    end
+    if answer_selection == "Y"
+      game = Game.new(Players::Human.new(token_selection), Players::Computer.new(computer_token), Board.new)
+    else
+      game = Game.new(Players::Computer.new(computer_token), Players::Human.new(token_selection), Board.new)
+    end
+  when 2
+    possible_tokens = ["X", "O"]
+    token_selection = nil
+    until possible_tokens.include?(token_selection)
+      puts "Would X or O like to go first?"
+      token_selection = gets.strip.upcase
+    end
+    other_token = possible_tokens.reject{|t| t == token_selection}.first
+    game = Game.new(Players::Human.new(token_selection), Players::Human.new(other_token), Board.new)
+  end
+  game.play
+  possible_answers = ["Y", "N"]
+  answer = nil
+  until possible_answers.include?(answer)
+    puts "Do you want to start a new game? (Y/N)"
+    answer = gets.strip.upcase
+  end
+  keep_playing = true if answer == "Y"
+  keep_playing = false if answer == "N"
+end
