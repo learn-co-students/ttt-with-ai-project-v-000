@@ -3,7 +3,7 @@ class Game
 
   attr_accessor :board, :player_1, :player_2, :token
 
-  #extend Players
+  # include Players::Human
 
   WIN_COMBINATIONS =
     [
@@ -24,13 +24,55 @@ class Game
     end
 
     def current_player
-      binding.pry
-      output = self.board.cells.count {|token| token == "X" || token == "O"}
-      if output % 2 == 0
-        @token = "X"
+      if board.turn_count % 2 == 0
+        self.player_1
       else
-        @token = "O"
+        self.player_2
       end
     end
+
+    def over?
+      self.board.cells.all?{|positions| positions == "X" || positions == "O"}
+    end
+
+    def won?
+      WIN_COMBINATIONS.find do |win_combination|
+        if self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X"
+          true
+        elsif self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
+          true
+        else
+          false
+        end
+      end
+    end
+
+    def draw?
+      if over? && !won?
+        true
+      else won?
+        false
+      end
+    end
+
+    def winner
+      if won?
+        self.board.cells[won?[0]]
+      else
+        nil
+      end
+    end
+
+    def turn
+      # binding.pry
+
+    end
+
+    # 1) Game turn makes valid moves
+    #  Failure/Error: expect(game.player_1).to receive(:gets).and_return("1")
+    #    (#<Players::Human:0x00000001cab9c0>).gets(*(any args))
+    #        expected: 1 time with any arguments
+    #        received: 0 times with any arguments
+    #  # ./spec/04_game_spec.rb:168:in `block (3 levels) in <top (required)>'
 
 end
