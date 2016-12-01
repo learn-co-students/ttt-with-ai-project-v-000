@@ -1,3 +1,5 @@
+This project was coded by Ian Devivi(learn.co/iandevivi) and Han Lee(learn.co/tpstar)
+
 # Tic Tac Toe with AI
 
 ## Objectives
