@@ -3,8 +3,6 @@ class Game
 
   attr_accessor :board, :player_1, :player_2, :token
 
-  # include Players::Human
-
   WIN_COMBINATIONS =
     [
       [0,1,2],
@@ -32,7 +30,11 @@ class Game
     end
 
     def over?
-      self.board.cells.all?{|positions| positions == "X" || positions == "O"}
+      if board.full? || won? || draw?
+        true
+      else
+        false
+      end
     end
 
     def won?
@@ -48,7 +50,7 @@ class Game
     end
 
     def draw?
-      if over? && !won?
+      if board.full? && !won?
         true
       else won?
         false
@@ -64,15 +66,53 @@ class Game
     end
 
     def turn
-      # binding.pry
-
+      #binding.pry
+      #This is where I believe I will program in the ability for the AI to function and actually return moves
+      #if PLAYERS == 0
+        #run computer game
+      #elsif PLAYERS == 1
+        #run semi-computer game
+      #else
+        puts "Please enter 1-9:"
+        board.display
+        input = self.current_player.move(self.board.cells)
+        if board.valid_move?(input)
+          board.update(input, self.current_player)
+        else
+          turn
+        end
     end
 
-    # 1) Game turn makes valid moves
-    #  Failure/Error: expect(game.player_1).to receive(:gets).and_return("1")
-    #    (#<Players::Human:0x00000001cab9c0>).gets(*(any args))
-    #        expected: 1 time with any arguments
-    #        received: 0 times with any arguments
-    #  # ./spec/04_game_spec.rb:168:in `block (3 levels) in <top (required)>'
+    def play
+      until over?
+        turn
+      end
+      if won?
+        board.display
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        board.display
+        puts "Cats Game!"
+      end
+    end
+
+    # def players
+    # input = gets.strip
+    # # def select_game_type(input)
+    #   if input == 0
+    #     # PLAYERS = input
+    #     newgame = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+    #   elsif input == 1
+    #     # PLAYERS =  input
+    #     newgame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    #   else
+    #     # PLAYERS == 2
+    #     newgame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    #   end
+    #   binding.pry
+    #   newgame.play
+    # end
 
 end
+
+#  cd ~/code/labs/ttt-with-ai-project-v-000
