@@ -18,9 +18,9 @@ class Board
       " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
 
-    def position(user_input)
-      new_user_input = user_input.to_i - 1
-        self.cells[new_user_input]
+    def position(location)
+      new_location = location.to_i - 1
+        self.cells[new_location]
     end
 
     def full?
@@ -31,9 +31,9 @@ class Board
       self.cells.count { |token| token == "X" || token == "O" }
     end
 
-    def taken?(user_input)
-      new_user_input = user_input.to_i - 1
-      new = self.cells[new_user_input]
+    def taken?(location)
+      new_location = location.to_i - 1
+      new = self.cells[new_location]
         if new == "X" || new == "O"
           true
         else
@@ -41,17 +41,19 @@ class Board
         end
     end
 
-    def valid_move?(user_input)
-        new_user_input = user_input.to_i - 1
-        new = self.cells[new_user_input]
-        # binding.pry
-          if new == " "
+    def valid_move?(location)
+      new_location = location.to_i - 1
+        new = self.cells[new_location]
+          if location.to_i.between?(1,9) && new == " "
             true
           else
             false
           end
       end
 
+    def update(location, player_token)
+      self.cells[location.to_i - 1] = player_token.token
+    end
 
 
 end
