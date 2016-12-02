@@ -85,13 +85,14 @@ attr_accessor :player_1, :player_2, :board, :the_winner
   end #turn
 
   def play
-    until over? == true do
+    #until over? == true do
       turn
-    end
+    #end
     if won? != nil
       puts "Congratulations #{winner}"
       return winner
     end
+    play if over? == false
   end
 
 end #class
