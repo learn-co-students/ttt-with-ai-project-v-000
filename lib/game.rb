@@ -61,6 +61,7 @@ class Game
       input = self.current_player.move(board)
     end
       self.board.update(input, self.current_player)
+      self.board.display
   end
 
   def play

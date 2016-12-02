@@ -17,7 +17,8 @@ class Board
     row1 = " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     row2 = " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
     lines = '-----------'
-    puts row0, lines, row1, lines, row2
+    spaces = '           '
+    puts row0, lines, row1, lines, row2, spaces
   end
 
   def position(user_input)
