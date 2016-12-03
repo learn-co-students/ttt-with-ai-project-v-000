@@ -32,13 +32,7 @@ class Board
   end
 
   def full?
-    cells.all? do |char|
-      if (char == "X") || (char == "O")
-        true
-      else
-        false
-      end
-    end
+    cells.all? {|cell| cell != " "}
   end
 
   def turn_count
