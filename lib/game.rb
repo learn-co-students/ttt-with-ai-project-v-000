@@ -23,10 +23,6 @@ class Game
     self.board.turn_count%2 == 0 ? player_1 : player_2
   end
 
-  def draw?
-    self.board.full? && !self.won?
-  end
-
   def over?
     self.draw? || self.won?
   end
@@ -36,6 +32,10 @@ class Game
       self.board.cells(combo[0]) == self.board.cells(combo[1]) &&
       self.board.cells(combo[1]) == self.board.cells(combo[2]) && self.board.taken?(combo[0])
     end
+  end
+
+  def draw?
+    self.board.full? && !self.won?
   end
 
   def winner
