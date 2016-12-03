@@ -49,7 +49,7 @@ attr_accessor :player_1, :player_2, :board, :the_winner
   end
 
   def draw?
-    if @board.full? == true && won? == nil
+    if @board.full? && won? == nil
       true
     else
       false
@@ -57,7 +57,7 @@ attr_accessor :player_1, :player_2, :board, :the_winner
   end
 
   def over?
-    if won? != nil || draw? == true
+    if won? || draw?
       true
     else
       false
@@ -65,7 +65,7 @@ attr_accessor :player_1, :player_2, :board, :the_winner
   end
 
   def winner
-    if won? != nil
+    if won?
       winning_combo = won?
       return @board.position(winning_combo[0]+1)
     else
@@ -77,6 +77,7 @@ attr_accessor :player_1, :player_2, :board, :the_winner
     puts "Please enter 1-9:"
     desired_move = current_player.move(@board)
     if @board.valid_move?(desired_move)
+      puts desired_move
       @board.update(desired_move, current_player)
     else
       puts "invalid"
@@ -87,10 +88,13 @@ attr_accessor :player_1, :player_2, :board, :the_winner
   def play
     until over? == true do
       turn
+      @board.display
     end
-    if won? != nil
-      puts "Congratulations #{winner}"
+    if won?
+      puts "Congratulations #{winner}!"
       return winner
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 
