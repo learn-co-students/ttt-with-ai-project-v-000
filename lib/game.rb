@@ -32,36 +32,21 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |win_combo|
-      win_index1 = win_combo[0]
-      win_index2 = win_combo[1]
-      win_index3 = win_combo[2]
-
-      position1 = board.cells[win_index1]
-      position2 = board.cells[win_index2]
-      position3 = board.cells[win_index3]
-
-      if ((position1 == "X") && (position2 == "X") &&
-         (position3 == "X")) ||
-         ((position1 == "O") && (position2 == "O") && (position3 == "O"))
-
-        return win_combo
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
-    false
   end
 
   def winner
-    WIN_COMBINATIONS.each do |win_combo|
-      if win_combo == won?
-        return board.cells[win_combo[0]]
-      end
+    if won = won?
+      board.cells[won.first]
     end
-    nil
   end
 
   def draw?
-    if (won? == true)
+    if won? 
       false
     elsif (board.full? == true) && (won? == false)
       true
