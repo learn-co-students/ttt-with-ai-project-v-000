@@ -61,15 +61,31 @@ class Game
       input = self.current_player.move(board)
     end
       self.board.update(input, self.current_player)
+      self.player_1.update_board(self.board.cells)
+      self.player_2.update_board(self.board.cells)
       self.board.display
   end
 
   def play
     turn until over?
       if self.draw?
-        puts "Cats Game!"
+        puts "Cats Game! Would you like to play again? Y/n?"
+        answer = gets.strip
+          if answer == 'Y'
+            self.board.reset!
+            play
+          else
+            puts 'Bye!'
+          end
       elsif self.won?
-        puts "Congratulations #{winner[0]}!"
+        puts "Congratulations #{winner[0]}! Would you like to play again? Y/n?"
+        answer = gets.strip
+        if answer == 'Y'
+          self.board.reset!
+          play
+        else
+          puts "That's too bad! Bye!"
+        end
       end
     end
   end
