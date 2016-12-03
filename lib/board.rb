@@ -42,10 +42,7 @@ class Board
   end
 
   def turn_count
-    open = cells.select do |cell| cell != " "
-    end
-    count = open.size
-    return count
+    cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   def taken?(input)
@@ -59,13 +56,7 @@ class Board
   end
 
   def valid_move?(input)
-    if (input.to_i.between?(1, 9) == true) && (taken?(input.to_i) == true)
-      false
-    elsif (input.to_i.between?(1, 9) == false) || (taken?(input.to_i) == true)
-      false
-    elsif (input.to_i.between?(1, 9) == true) && (taken?(input.to_i) == false)
-      true
-    end
+    input.to_i.between?(1, 9) && !taken?(input)
   end
 
   def update(input, player)
