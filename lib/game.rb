@@ -1,9 +1,11 @@
+require 'pry'
+
 class Game
 
     attr_accessor :board, :player_1, :player_2
 
 
-  WIN_COMBINATIONS = [
+  WIN_COMBINATIONS = [ #WIN_COMBINATIONS[0] => [0,1,2]
                      [0,1,2],
                      [3,4,5],
                      [6,7,8],
@@ -21,6 +23,7 @@ class Game
   end
 
   def current_player
+            #even                #odd, X   #even, O
    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
@@ -28,14 +31,24 @@ class Game
    @board.turn_count == 9
   end
 
+
   def won?
-    i = 0
-    num = 7
-    begin
-    @board[WIN_COMBINATIONS[i]]
-    i += 1
+    WIN_COMBINATIONS.find do
+       |combo| #[0,1,2] @board = X || O ["X", "O", "X", "O", "X", "X", "O", "O", "X"] @board[2] => X
+       @board.cells[combo[0]] == @board.cells[combo[1]] &&
+       @board.cells[combo[1]] == @board.cells[combo[2]]
    end
-   until i == num
   end
+
+  def draw?
+    @board.full? && !won?
+  end
+
+  def winner
+    if player = won?
+    @winner = @board.cells[player.first]
+ end
+end
+
 
 end
