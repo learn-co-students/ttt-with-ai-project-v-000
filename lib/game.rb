@@ -98,39 +98,7 @@ class Game
       end
     end
 
-    def computer_ai
-      # binding.pry
-      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      corners = ["1","3","7","9"]
-      #self = full game object - this is where I can start to build out basic AI
-      # 1 - Checks for center taken
-      if self.board.cells[4] == " "
-        "5"
-      elsif
-binding.pry
-        corners.find do |corner|
-          # binding.pry
-          board.taken?(corner) != true; "#{corner}"
-        end
-        # "#{corner}"
-      else
-        valid_moves.sample
-      end
-    end
 
-    # def offense_defense
-    #   WIN_COMBINATIONS.find do |win_combination|
-    #     binding.pry
-    #     if self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X"
-    #       return "#{win_combination[2]}"
-    #     elsif self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O"
-    #       return "#{[win_combination[2]]}"
-    #     else
-    #       return false
-    #     end
-    #     "#{win_combination[2]}"
-    #   end
-    # end
 
 
 end
