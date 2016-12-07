@@ -34,15 +34,52 @@ class Game
     end
 
     def current_player
-      # binding.pry
+
       self.turn_count
       if self.turn_count % 2 == 0
-        self.player_1.token
+        self.player_1
       else
-        self.player_2.token
+        self.player_2
       end
     end
 
+    def over?
+     self.board.cells.all? {|cell|
+       cell == "X" || cell == "O"}
+    end
 
+    def won?
+        WIN_COMBINATIONS.any? do |win_combination|
+          self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X" ||
+          self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
+      end
+    end
+
+    def draw?
+      if self.won? == false
+        true
+    end
+  end
+
+  def winner
+
+      WIN_COMBINATIONS.detect do |win_combination|
+
+      if winner_1 = self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X"
+        return self.player_1.token
+
+      elsif winner_2 = self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
+         return self.player_2.token
+
+          else
+            nil
+          end
+       end
+     end
+
+     def turn
+       input = gets.chomp
+       input
+     end
 
 end
