@@ -16,12 +16,33 @@ class Game
     ]
 
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      #This initialize creates whole new objects thru the config methods (one a descendant of Players that creates a human object and then another one that creates a computer object)
+      # self = #<Game:0x000000011eb620>
       @player_1 = player_1
+      #<Players::Human:0x000000011eb788 @token="X">
       @player_2 = player_2
+      #<Players::Computer:0x000000011eb738 @token="O">
+      #<Game:0x000000011eb620 @player_1=#<Players::Human:0x000000011eb788 @token="X">, @player_2=#<Players::Computer:0x000000011eb738 @token="O">>
       @board = board
+      #<Board:0x000000011eb710 @cells=[" ", " ", " ", " ", " ", " ", " ", " ", " "]>
+    end
+
+
+    def play
+      until over?
+        turn
+      end
+      if won?
+        board.display
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        board.display
+        puts "Cats Game!"
+      end
     end
 
     def current_player
+      #self is the game object, and the current_player instance method is looking against the whole self --> board is calling the board object and also why you are able to run the board.turn_count method since youre calling the instance method on the board class (i.e we would have access to all the board methods).  This method looks to check the board to determine whose turn it is, knowing that X always goes first and therefore a divisor determines if it's player_1(X) or player_2(O) and then returns that object, denoted as X and O by the object's token
       if board.turn_count % 2 == 0
         self.player_1
       else
@@ -66,52 +87,51 @@ class Game
     end
 
     def turn
-      #binding.pry
-      #This is where I believe I will program in the ability for the AI to function and actually return moves
-      #if PLAYERS == 0
-        #run computer game
-      #elsif PLAYERS == 1
-        #run semi-computer game
-      #else
-        puts "Please enter 1-9:"
-        board.display
-        input = self.current_player.move(self.board.cells)
-        if board.valid_move?(input)
-          board.update(input, self.current_player)
-        else
-          turn
-        end
-    end
-
-    def play
-      until over?
+      puts "Please enter 1-9:"
+      board.display
+      # binding.pry
+      input = self.current_player.move(self)
+      if board.valid_move?(input)
+        board.update(input, self.current_player)
+      else
         turn
       end
-      if won?
-        board.display
-        puts "Congratulations #{winner}!"
-      elsif draw?
-        board.display
-        puts "Cats Game!"
+    end
+
+    def computer_ai
+      # binding.pry
+      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      corners = ["1","3","7","9"]
+      #self = full game object - this is where I can start to build out basic AI
+      # 1 - Checks for center taken
+      if self.board.cells[4] == " "
+        "5"
+      elsif
+binding.pry
+        corners.find do |corner|
+          # binding.pry
+          board.taken?(corner) != true; "#{corner}"
+        end
+        # "#{corner}"
+      else
+        valid_moves.sample
       end
     end
 
-    # def players
-    # input = gets.strip
-    # # def select_game_type(input)
-    #   if input == 0
-    #     # PLAYERS = input
-    #     newgame = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
-    #   elsif input == 1
-    #     # PLAYERS =  input
-    #     newgame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-    #   else
-    #     # PLAYERS == 2
-    #     newgame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    # def offense_defense
+    #   WIN_COMBINATIONS.find do |win_combination|
+    #     binding.pry
+    #     if self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X"
+    #       return "#{win_combination[2]}"
+    #     elsif self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O"
+    #       return "#{[win_combination[2]]}"
+    #     else
+    #       return false
+    #     end
+    #     "#{win_combination[2]}"
     #   end
-    #   binding.pry
-    #   newgame.play
     # end
+
 
 end
 

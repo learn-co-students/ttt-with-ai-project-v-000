@@ -2,8 +2,12 @@ require 'pry'
 class Board
   attr_accessor :cells, :board, :token
 
+# Board object = #<Board:0x000000018f0d30 @cells=[" ", " ", " ", " ", " ", " ", " ", " ", " "]>
+# Each method calls on the board object and analyzes it based on an input
+
   def initialize
     @cells = Array.new(9, " ")
+    #create the board self and populates the @cells
   end
 
   def reset!
@@ -12,6 +16,7 @@ class Board
   end
 
   def display
+    #self = #<Board:0x000000018f0d30 @cells=[" ", " ", " ", " ", " ", " ", " ", " ", " "]>
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
