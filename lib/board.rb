@@ -9,7 +9,7 @@ class Board
   end
 
   def reset!
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -32,11 +32,7 @@ class Board
   end
 
   def turn_count
-    count = 0
-    @cells.each do |pos|
-      count +=1 if (pos != " ")
-    end
-    count
+    @cells.count { |pos| pos != " "}
   end
 
   def taken?(pos)
@@ -44,15 +40,7 @@ class Board
   end
 
   def valid_move?(pos)
-    if pos.match(/\A[1-9]\z/) == nil
-      false
-    else
-      if self.taken?(pos)
-        false
-      else
-        true
-      end #if/else
-    end #if/else
+    pos.to_i.between?(1,9) && !taken?(pos)
   end
 
   def update(pos, player)

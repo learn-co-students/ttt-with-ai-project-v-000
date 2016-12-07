@@ -2,8 +2,7 @@ class Players
 
   class Human < Player
     def move(board)
-      desired_move = gets.chomp
-      desired_move
+      gets.chomp
     end
   end #Human
 end #Players

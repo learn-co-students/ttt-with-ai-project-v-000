@@ -23,29 +23,30 @@ attr_accessor :player_1, :player_2, :board, :the_winner
   end
 
   def current_player
-    if @board.turn_count % 2 == 0
-      @player_1
-    else
-      @player_2
-    end
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
-    winning_combo = nil
-    WIN_COMBINATIONS.each do |combo|
-      if combo.all? do |pos|
-        @board.position(pos+1) == "X"
-        end
-        winning_combo = combo
-      elsif combo.all? do |pos|
-          @board.position(pos+1) == "O"
-        end
-        winning_combo = combo
-      else
-        next
-      end #end if
-    end #Match all winning combos to the current board
-    winning_combo
+    # winning_combo = nil
+    # WIN_COMBINATIONS.each do |combo|
+    #   if combo.all? do |pos|
+    #     @board.position(pos+1) == "X"
+    #     end
+    #     winning_combo = combo
+    #   elsif combo.all? do |pos|
+    #       @board.position(pos+1) == "O"
+    #     end
+    #     winning_combo = combo
+    #   else
+    #     next
+    #   end #end if
+    # end #Match all winning combos to the current board
+    # winning_combo
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
+    end
   end
 
   def draw?
@@ -65,11 +66,14 @@ attr_accessor :player_1, :player_2, :board, :the_winner
   end
 
   def winner
-    if won?
-      winning_combo = won?
-      return @board.position(winning_combo[0]+1)
-    else
-      nil
+    # if won?
+    #   winning_combo = won?
+    #   return @board.position(winning_combo[0]+1)
+    # else
+    #   nil
+    # end
+    if winning_combo = won?
+      @board.cells[winning_combo.first]
     end
   end #winner
 
