@@ -34,9 +34,10 @@ class Game
 
   def won?
     WIN_COMBINATIONS.find do
-       |combo| #[0,1,2] @board = X || O ["X", "O", "X", "O", "X", "X", "O", "O", "X"] @board[2] => X
+       |combo| #[0,1,2] @board = X || O ["", "", "", "O", "X", "X", "O", "O", "X"] @board[2] => X
        @board.cells[combo[0]] == @board.cells[combo[1]] &&
-       @board.cells[combo[1]] == @board.cells[combo[2]]
+       @board.cells[combo[1]] == @board.cells[combo[2]] &&
+       @board.taken?(combo[0]+1)
    end
   end
 
@@ -47,7 +48,19 @@ class Game
   def winner
     if player = won?
     @winner = @board.cells[player.first]
- end
+   end
+  end
+
+  def turn
+    puts "Pick a number 1-9, to select your move:"
+    input  = gets.chomp
+    if !@board.valid_move?(input)
+        turn
+
+    #def update(input, player)
+     #cells[input.to_i - 1] = player.token
+    #end
+  end
 end
 
 
