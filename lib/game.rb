@@ -28,14 +28,4 @@ class Game
    @board.turn_count == 9
   end
 
-  def won?
-    i = 0
-    num = 7
-    begin
-    @board[WIN_COMBINATIONS[i]]
-    i += 1
-   end
-   until i == num
-  end
-
-end
+  

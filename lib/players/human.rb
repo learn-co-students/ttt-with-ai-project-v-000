@@ -8,8 +8,6 @@ module Players
   # @token = token
 # end
 
-
-
     def move(board)
       input = gets.chomp
       return input
