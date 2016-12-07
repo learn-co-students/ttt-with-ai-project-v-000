@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
-    it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
+    it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do #1
       expect(Game::WIN_COMBINATIONS).to include_array([0,1,2])
       expect(Game::WIN_COMBINATIONS).to include_array([3,4,5])
       expect(Game::WIN_COMBINATIONS).to include_array([6,7,8])
@@ -15,7 +15,7 @@ describe 'Game' do
   end
 
   describe '#board' do
-    it 'provides access to the board' do
+    it 'provides access to the board' do #2
       game = Game.new
       game.board = []
       expect(game.board).to eq([])
@@ -23,7 +23,7 @@ describe 'Game' do
   end
 
   describe '#player_1' do
-    it 'provides access to player_1' do
+    it 'provides access to player_1' do #3
       game = Game.new
       player_1 = Player.new("X")
       game.player_1 = player_1
@@ -31,7 +31,7 @@ describe 'Game' do
     end
   end
 
-  describe '#player_2' do
+  describe '#player_2' do #4
     it 'provides access to player_2' do
       game = Game.new
       player_2 = Player.new("X")
@@ -41,7 +41,7 @@ describe 'Game' do
   end
 
   describe 'initialize' do
-    it 'accepts 2 players and a board' do
+    it 'accepts 2 players and a board' do #5
       board = Board.new
       player_1 = Player.new("X")
       player_2 = Player.new("O")
@@ -53,7 +53,7 @@ describe 'Game' do
       expect(game.board).to eq(board)
     end
 
-    it 'defaults to two human players, X and O, with an empty board' do
+    it 'defaults to two human players, X and O, with an empty board' do #6
       game = Game.new
 
       expect(game.player_1).to be_a(Players::Human)
@@ -67,7 +67,7 @@ describe 'Game' do
   end
 
   describe '#current_player' do
-    it 'returns the correct player, X, for the third move' do
+    it 'returns the correct player, X, for the third move' do #7
       game = Game.new
       game.board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
 
@@ -76,21 +76,21 @@ describe 'Game' do
   end
 
   describe '#over?' do
-    it 'returns true for a draw' do
+    it 'returns true for a draw' do #8
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(game.over?).to be_truthy
     end
 
-    it 'returns true for a won game' do
+    it 'returns true for a won game' do #9
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
       expect(game.over?).to be_truthy
     end
 
-    it 'returns false for an in-progress game' do
+    it 'returns false for an in-progress game' do #10
       game = Game.new
       game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
 
@@ -99,14 +99,14 @@ describe 'Game' do
   end
 
   describe '#won?' do
-    it 'returns false for a draw' do
+    it 'returns false for a draw' do #11
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(game.won?).to be_falsey
     end
 
-    it 'returns true for a win' do
+    it 'returns true for a win' do #12
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
@@ -115,21 +115,21 @@ describe 'Game' do
   end
 
   describe '#draw?' do
-    it 'returns true for a draw' do
+    it 'returns true for a draw' do #13
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(game.draw?).to be_truthy
     end
 
-    it 'returns false for a won game' do
+    it 'returns false for a won game' do #14
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
 
       expect(game.draw?).to be_falsey
     end
 
-    it 'returns false for an in-progress game' do
+    it 'returns false for an in-progress game' do #15
       game = Game.new
       game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
 
@@ -138,21 +138,21 @@ describe 'Game' do
   end
 
   describe '#winner' do
-    it 'returns X when X won' do
+    it 'returns X when X won' do #16
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
 
       expect(game.winner).to eq("X")
     end
 
-    it 'returns O when O won' do
+    it 'returns O when O won' do #17
       game = Game.new
       game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
 
       expect(game.winner).to eq("O")
     end
 
-    it 'returns nil when no winner' do
+    it 'returns nil when no winner' do #18
       game = Game.new
       game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
 
@@ -161,7 +161,7 @@ describe 'Game' do
   end
 
   describe 'turn' do
-    it 'makes valid moves' do
+    it 'makes valid moves' do #19
       game = Game.new
       allow($stdout).to receive(:puts)
 
@@ -170,7 +170,7 @@ describe 'Game' do
       game.turn
     end
 
-    it 'asks for input again after a failed validation' do
+    it 'asks for input again after a failed validation' do #20
       game = Game.new
       allow($stdout).to receive(:puts)
 
@@ -180,7 +180,7 @@ describe 'Game' do
       game.turn
     end
 
-    it 'changes to player 2 after the first turn' do
+    it 'changes to player 2 after the first turn' do #21
       game = Game.new
       allow($stdout).to receive(:puts)
 
@@ -193,7 +193,7 @@ describe 'Game' do
   end
 
   describe 'play' do
-    it 'asks for players input on a turn of the game' do
+    it 'asks for players input on a turn of the game' do #22
       game = Game.new
       allow($stdout).to receive(:puts)
       allow(game).to receive(:over?).and_return(false, true)
