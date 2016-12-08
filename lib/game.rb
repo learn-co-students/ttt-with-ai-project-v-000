@@ -53,6 +53,7 @@ class Game
     moving = tokens.move(@board) #[" "," "," "," "," "," "," "," "," "] ask for input and give back input
     if !@board.valid_move?(moving)
       turn #recursion
+      puts "Not a valid move"
     else
      @board.update(moving, tokens)
      @board.display
@@ -65,7 +66,8 @@ end
 
   def play
    board.reset!
-    while !over?
+   board.display
+    until !over?
       turn
     end
      if won?

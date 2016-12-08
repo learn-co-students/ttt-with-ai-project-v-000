@@ -10,7 +10,7 @@ module Players
 
     def move(board)
       input = gets.chomp
-      return input
+       input
     end
 
   end
