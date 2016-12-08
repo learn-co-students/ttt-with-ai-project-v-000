@@ -27,11 +27,6 @@ class Game
    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
-  def over?
-   @board.turn_count == 9
-  end
-
-
 
   def won?
     WIN_COMBINATIONS.find do
@@ -53,16 +48,31 @@ class Game
   end
 
   def turn
-    puts "Pick a number 1-9, to select your move:"
-    input  = gets.chomp
-    if !@board.valid_move?(input)
-        turn
 
-    #def update(input, player)
-     #cells[input.to_i - 1] = player.token
-    #end
+    tokens = current_player  # "X" || "O"
+    moving = tokens.move(@board) #[" "," "," "," "," "," "," "," "," "] ask for input and give back input
+    if !@board.valid_move?(moving)
+      turn #recursion
+    else
+     @board.update(moving, tokens)
   end
 end
+
+  def over?
+   won? || draw?
+  end
+
+  def play
+
+    while !over?
+      turn
+    end
+     if won?
+        puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat\'s Game!"
+    end
+  end
 
 
 end
