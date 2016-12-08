@@ -9,9 +9,6 @@ class Board
    reset!
   end
 
-
-
-
   def reset!
    @cells = [" "," "," "," "," "," "," "," "," "]
   end
@@ -27,7 +24,7 @@ class Board
 
 
   def position(input)
-    cells[input.to_i - 1]
+   cells[input.to_i - 1]
   end
 
   def full?
@@ -51,8 +48,8 @@ class Board
   def valid_move?(input)
    if taken?(input) === false && input.to_i.between?(1, 8)
     true
+   end
   end
-end
 
   def update(input, player)
    cells[input.to_i - 1] = player.token

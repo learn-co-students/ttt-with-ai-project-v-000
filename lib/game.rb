@@ -55,6 +55,7 @@ class Game
       turn #recursion
     else
      @board.update(moving, tokens)
+     @board.display
   end
 end
 
@@ -63,7 +64,7 @@ end
   end
 
   def play
-
+   board.reset!
     while !over?
       turn
     end

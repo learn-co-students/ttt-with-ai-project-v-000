@@ -1,52 +1,23 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-puts "Hello and Welcome to Tic Tac Toe!"
-puts "Which game would you like to play: 0, 1, or 2 player?"
-input = gets.chomp.to_i
 
-  if input == 0
-    computer_0 = Game.new(player_1 = Players::Computer.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
-    until game.won?
-      computer_0.play
-    if computer_0.won?
-     puts "Would you like to play again? Press \"Y\" or \"N\" to confirm."
-     answer = gets.chomp
-    if answer == "Y"
-       computer_0.play
-    else
-      puts "Thanks for playing!"
+
+    def start
+    puts "Hello and Welcome to Tic Tac Toe!"
+    puts "Which game would you like to play: 0, 1, or 2 player?"
+    input = gets.chomp
+     case input
+     when "0"
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
+        game.play
+      when "1"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
+          game.play
+       when "2"
+        game = Game.new #(player_1 = Players::Human.new("X"), player_2= Players::Human.new("O"), board = Board.new
+          game.play
+       else
+         puts "I say again.. Pick a number: 0, 1, or 2"
      end
-
-  elsif input == 1
-    computer_1 = Game.new(player_1 = Players::Human.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
-    until game.won?
-      computer_1.play
-    if computer_1.won?
-     puts "Would you like to play again? Press \"Y\" or \"N\" to confirm."
-     answer = gets.chomp
-    if answer == "Y"
-       computer_1.play
-    else
-      puts "Thanks for playing!"
-     end
-
-  elsif input == 2
-    game = Game.new #(player_1 = Players::Human.new("X"), player_2= Players::Human.new("O"), board = Board.new)
-  until game.won?
-    game.play
-    if game.won?
-   puts "Would you like to play again? Press \"Y\" or \"N\" to confirm."
-   answer = gets.chomp
-  if answer == "Y"
-     game.play
-  else
-    puts "Thanks for playing!"
-   end
-  end
- end
- end
-end
-end
-end
 end
