@@ -30,27 +30,35 @@ class Game
     end
   end
 
-  def won?
-    WIN_COMBINATIONS.each do |win_combination|
-      # puts "win_combination is #{win_combination}"
-      win_check = [@board.cells[win_combination[0]], @board.cells[win_combination[1]], @board.cells[win_combination[2]]]
-      # puts "win_check is #{win_check}"
-      if win_check.all? {|player| player == 'O'} then
-          # puts "evaluated true; winner O"
-          @win_player = "O"
-          #return win_combination
-          return true
-      elsif win_check.all? {|player| player == 'X'} then
-          # puts "evaluated true; winner X"
-          @win_player = "X"
-          #return win_combination
-          return true
-      else
-          # puts "evaluated false"
-      end
-    end
-    return false
+  # def won?
+  #   WIN_COMBINATIONS.each do |win_combination|
+  #     # puts "win_combination is #{win_combination}"
+  #     win_check = [@board.cells[win_combination[0]], @board.cells[win_combination[1]], @board.cells[win_combination[2]]]
+  #     # puts "win_check is #{win_check}"
+  #     if win_check.all? {|player| player == 'O'} then
+  #         # puts "evaluated true; winner O"
+  #         @win_player = "O"
+  #         #return win_combination
+  #         return true
+  #     elsif win_check.all? {|player| player == 'X'} then
+  #         # puts "evaluated true; winner X"
+  #         @win_player = "X"
+  #         #return win_combination
+  #         return true
+  #     else
+  #         # puts "evaluated false"
+  #     end
+  #   end
+  #   return false
+  # end
+
+def won?
+  WIN_COMBINATIONS.detect do |combo|
+    @board.cells[combo[0]] == @board.cells[combo[1]] &&
+    @board.cells[combo[0]] == @board.cells[combo[2]] &&
+    @board.taken?(combo[0] + 1)
   end
+end
 
   def draw?
     if ((!self.won?) && (@board.full?)) then
@@ -61,14 +69,13 @@ class Game
   end
 
   def winner
-    self.won?
-    return @win_player
+    self.won? ? @win_player = @board.cells[self.won?[0]] : nil
   end
 
   def start
     self.play
     if self.won? then
-      return @win_player
+      return self.winner
     else
       return "draw"
     end
@@ -110,7 +117,7 @@ class Game
       self.over? ? game_over = true : nil
     end
     if game_over then
-      self.won? ? (puts "Congratulations #{win_player}!") : nil #works in irb
+      self.won? ? (puts "Congratulations #{self.winner}!") : nil #works in irb
       self.draw? ? (puts "Cats Game!") : nil #works in irb
       @board.display
     end

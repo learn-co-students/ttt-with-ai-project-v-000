@@ -3,11 +3,11 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    self.reset! #set the @cells property to an empty board
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -24,21 +24,16 @@ class Board
   end
 
   def full?
-    if @cells.include?(" ") then
-      return false
-    else
+    if cells.all? {|cell| cell != " "} then
       return true
+    else
+      return false
     end
+
   end
 
   def turn_count
-    counter = 0
-    @cells.each do |contents|
-      if contents != ' '
-        counter += 1
-      end
-    end
-    return counter
+    @cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(location)
@@ -47,12 +42,7 @@ class Board
   end
 
   def valid_move?(location)
-    location = location.to_i
-    if ((taken?(location)) || !(location.between?(1,9)))
-      false
-    else
-      true
-    end
+    location.to_i.between?(1,9) && !taken?(location)
   end
 
   def update(index, player)
