@@ -50,10 +50,14 @@ class Game
   def turn
 
     tokens = current_player  # "X" || "O"
-    moving = tokens.move(@board) #[" "," "," "," "," "," "," "," "," "] ask for input and give back input
+    moving = tokens.move(@board)
+     #[" "," "," "," "," "," "," "," "," "] ask for input and give back input
     if !@board.valid_move?(moving)
-      turn #recursion
       puts "Not a valid move"
+      puts
+      turn #recursion
+
+
     else
      @board.update(moving, tokens)
      @board.display
@@ -66,8 +70,7 @@ end
 
   def play
    board.reset!
-   board.display
-    until !over?
+    until over?
       turn
     end
      if won?

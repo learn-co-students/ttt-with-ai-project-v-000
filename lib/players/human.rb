@@ -9,6 +9,7 @@ module Players
 # end
 
     def move(board)
+      puts "Choose a number between 1-9 fam:"
       input = gets.chomp
        input
     end
