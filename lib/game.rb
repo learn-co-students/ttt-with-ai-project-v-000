@@ -56,8 +56,6 @@ class Game
       puts "Not a valid move"
       puts
       turn #recursion
-
-
     else
      @board.update(moving, tokens)
      @board.display
@@ -69,7 +67,6 @@ end
   end
 
   def play
-   board.reset!
     until over?
       turn
     end
