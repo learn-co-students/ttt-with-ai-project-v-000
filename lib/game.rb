@@ -22,7 +22,7 @@ class Game
       @board = board
 
     end
-
+# binding.pry
     def turn_count
       counter = 0
       self.board.cells.each do |current_turn|
@@ -80,6 +80,7 @@ class Game
      def turn
        input = gets.chomp
        input
+
      end
 
 end
