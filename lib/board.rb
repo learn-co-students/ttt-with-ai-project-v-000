@@ -11,6 +11,7 @@ class Board
 
   # A board can print its current state with the `#display` method.
   def display
+    self.print
   end
 
   # You'll also build a `#position` method that takes in the user's input
