@@ -2,16 +2,20 @@ class Board
   attr_accessor :cells
 
    def initialize
-     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+     reset!
    end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   # A board can print its current state with the `#display` method.
   def display
-    self.print
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts "-----------"
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts "-----------"
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
   # You'll also build a `#position` method that takes in the user's input
@@ -19,8 +23,10 @@ class Board
   # cells at the correct index from the array's perspective. All other methods
   # will take input in the user's perspective of 1-9 strings and use `#position`
   # to look up the value according to the cells' array index.
-  def position
+  def position(position)
+    @cells[position.to_i - 1]
   end
+
 
   # represents updating the board when a player makes a move. This method
   # will take two arguments, the first will be the position the user wants
@@ -28,29 +34,34 @@ class Board
   #  board cells' array index, along with the player object making the move.
   # When you update the appropriate index in the cells, you will set it equal
   # to the token of the player object by calling the `#token` method on the player.
-  def update
-  end
-
-  def token
+  def update(position, player)
+    self.cells[position.to_i - 1] = player.token
   end
 
   # return values based on its state such as `#full?` when entirely occupied with "X" and "O"s
   def full?
+    @cells.all? { |cell| cell == "X" || cell == "O" }
+
+    #if @cells.include?(" ") || @cells.include?(nil)
+      #false
+    #else
+      #true
+    #end
   end
 
   # based on how many positions in the cells array are filled
   def turn_count
+    @cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   # will return true or false for an individual position.
-  def taken?
+  def taken?(input)
+    @cells[input.to_i - 1] == "X" || @cells[input.to_i - 1] == "O"
   end
 
-  # will ensure that moves are between 1-9 and not taken.
-  def valid_move?
+  # returns true for user input between 1-9 that is not taken
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !(taken?(input))
   end
-
-
-
 
 end
