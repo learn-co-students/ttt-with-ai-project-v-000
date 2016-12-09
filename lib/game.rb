@@ -48,10 +48,19 @@ class Game
   end
 
   def turn
-    # makes a valid_move?
-    # asks for input if !valid_move?
-    # changes to player_2 after first turn
-    
+    # ask for input, if the move is valid, make the move and change to player_2
+    move = current_player.move(board)
+    if board.valid_move?(move)
+      board.update(move, current_player)
+    else
+      # if the move is not valid, ask for input, call turn again
+      puts "Your move was invalid. Try again."
+      turn
+    end
+  end
+
+  def play
+
   end
 
 
