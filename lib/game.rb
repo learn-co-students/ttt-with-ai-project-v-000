@@ -56,18 +56,21 @@ class Game
       board.update(move, current_player)
     else
       # if the move is not valid, ask for input, call turn again
-      puts "Your move was invalid. Try again."
+      puts "That move has already been taken! Try again."
       turn
     end
   end
 
   def play
     while !over?
+      board.display
       turn
     end
     if won?
+      board.display
       puts "Congratulations #{winner}!"
     elsif draw?
+      board.display
       puts "Cat's Game!"
     end
   end
