@@ -23,8 +23,8 @@ class Board
   # cells at the correct index from the array's perspective. All other methods
   # will take input in the user's perspective of 1-9 strings and use `#position`
   # to look up the value according to the cells' array index.
-  def position(position)
-    @cells[position.to_i - 1]
+  def position(pos)
+    @cells[pos.to_i - 1]
   end
 
 
@@ -55,13 +55,13 @@ class Board
   end
 
   # will return true or false for an individual position.
-  def taken?(input)
-    @cells[input.to_i - 1] == "X" || @cells[input.to_i - 1] == "O"
+  def taken?(pos)
+    position(pos) == "X" || position(pos) == "O"
   end
 
   # returns true for user input between 1-9 that is not taken
-  def valid_move?(input)
-    input.to_i.between?(1,9) && !(taken?(input))
+  def valid_move?(pos)
+    pos.to_i.between?(1,9) && !(taken?(pos))
   end
 
 end

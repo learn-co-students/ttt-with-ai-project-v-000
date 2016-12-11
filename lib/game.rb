@@ -30,7 +30,8 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |win_combo|
       @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
-      @board.cells[win_combo[0]] == @board.cells[win_combo[2]]
+      @board.cells[win_combo[0]] == @board.cells[win_combo[2]] &&
+      @board.taken?(win_combo[0] + 1)
     end
   end
 
@@ -43,8 +44,9 @@ class Game
   end
 
   def winner
-    win = won?
-    win ? @board.cells[win.first] : nil
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
@@ -60,8 +62,14 @@ class Game
   end
 
   def play
-
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
-
 
 end
