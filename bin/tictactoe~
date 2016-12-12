@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe."
+puts "Please input your choice (0-2):  0 , 1, or 2 Players."
+
+choice = gets.chomp
+
+case choice
+
+when "0"
+	Game.new(Computer.new('X'), Computer.new('O')).play
+	
+when "1"
+	puts "Please would be X, player or computer (P/C):"
+	input = gets.chomp.upcase
+	Game.new(Human.new('X'), Computer.new('O')).play if input == 'P'
+	Game.new(Computer.new('X'), Human.new('O')).play if input == 'C'
+
+when "2"
+	puts " which player wants to be X (1/2):"
+	input = gets.chomp.to_i
+	if input == 1
+		human_1 = Human.new('X')
+		human_2 = Human.new('O')
+	elsif input == 2
+		human_1 = Human.new('O')
+		human_2 = Human.new('X')
+	end
+
+	Game.new(human_1, human_2).play
+end
+
+
+
+
