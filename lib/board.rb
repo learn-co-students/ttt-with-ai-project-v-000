@@ -18,15 +18,15 @@ class Board
   end
 
   def position(user_input)
-    cells[user_input.to_i - 1]
+    self.cells[user_input.to_i - 1]
   end
 
   def full?
-    cells.include?(" ") ? false : true
+    self.cells.include?(" ") ? false : true
   end
 
   def turn_count
-    9 - cells.count(" ")
+    9 - self.cells.count(" ")
   end
 
   def taken?(user_input)
@@ -38,6 +38,6 @@ class Board
   end
 
   def update(user_input, player)
-    cells[user_input.to_i - 1] = player.token
+    self.cells[user_input.to_i - 1] = player.token
   end
 end
