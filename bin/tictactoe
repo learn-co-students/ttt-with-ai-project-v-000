@@ -1,3 +1,79 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+def tic_tac_toe
+
+  while true
+    puts "Welcome to Tic Tac Toe"
+    puts "Would you like to play a 0, 1, or 2 person game? Type 'wargames' for a wargames simulation."
+    game_type = gets.chomp
+
+    case game_type
+    when "0"
+      player_1 = Computer.new("X")
+      player_2 = Computer.new("O")
+      game = Game.new(player_1, player_2)
+      game.play
+    when "1"
+      puts "Who should go first? Press \"h\" for the human, \"c\" for the computer."
+      token = gets.chomp  # need check for bad input.
+      if token == "c"
+        player_1 = Computer.new("X")
+        player_2 = Human.new("O")
+        puts "Player 1 is the Computer and has a token of 'X'."
+        puts "Player 2 is the Human and has a token of 'O'."
+      else
+        puts "You entered 'h' (or perhaps something besides 'c')..."
+        player_1 = Human.new("X")
+        player_2 = Computer.new("O")
+        puts "Player 1 is the Human and has a token of 'X'."
+        puts "Player 2 is the Computer and has a token of 'O'."
+      end
+      game = Game.new(player_1, player_2)
+      game.play
+    when "2"
+      puts "Whoever wants to be 'X' is player 1 and should go first."
+      player_1 = Human.new("X")
+      player_2 = Human.new("O")
+      game = Game.new(player_1, player_2)
+      game.play
+    when "wargames"
+      puts "How many games would you like to simulate (1-1000)"
+      num_games = gets.chomp.to_i
+      results = {"X" => 0, "O" => 0, "draw" => 0}
+      if num_games <= 1000
+        num_games.times do
+          player_1 = Computer.new("X")
+          player_2 = Computer.new("O")
+          game = Game.new(player_1, player_2)
+          result = game.play
+          case result
+          when "X"
+            results["X"] += 1
+          when "O"
+            results["O"] += 1
+          when nil
+            results["draw"] += 1
+          end
+        end
+        puts results
+      end
+    else
+      puts "bad input, defaulting to a 1 player game"
+      player_1 = Human.new("X")
+      player_2 = Computer.new("O")
+      game = Game.new(player_1, player_2)
+      game.play
+    end
+
+    # game = Game.new(player_1, player_2)
+    # game.play
+
+    puts "would you like to play again?  (y/n)"
+    again = gets.chomp
+    return nil if again == "n"
+  end
+end
+
+tic_tac_toe
+puts "bye"
