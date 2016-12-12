@@ -1,3 +1,59 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+g = GameRunner.new
+g.interface
+#FIRST VERSION  CLEANED UP AN MOVED TO GAMERUNNER.RB
+# playing = true
+#
+# while playing
+#   pid = fork{ exec 'afplay', "./fixtures/POL-sunset-route-short.wav"}
+#   puts "Welcome to the battle of a lifetime."
+#   puts "Tic Tac Toe  MASTER!!!"
+#   puts "Pick your game. 1 - 4 or quit"
+#   puts "1)   COMP VS COMP"
+#   puts "2) PLAYER VS COMP"
+#   puts "3)   COMP VS PLAYER"
+#   puts "4) PLAYER VS PLAYER"
+#   puts "Type: 'quit' any time to quit."
+#   puts "______________________________"
+#   puts "-----> X GOES FIRST <--------!"
+#   puts "=============================="
+#
+#
+#
+# ############## get game type selection
+#   input = gets.strip
+#
+# ############## initialize based on game type
+#   if input == "quit"
+#     puts "Thanks for playing."
+#     playing = false
+#   end
+#
+#   case input
+#   when "1"
+#     g = Game.new(Player::Computer("X"), Player::Computer("O"))
+#     g.play
+#     puts "Wana play again? Type : y"
+#     play_again = gets.strip
+#     playing = false unless play_again.downcase == "y"
+#   when "2"
+#     g = Game.new(Player::Human("X"), Player::Computer("O"))
+#     g.play
+#     puts "Wana play again? Type : y"
+#     play_again = gets.strip
+#     playing = false unless play_again.downcase == "y"
+#   when "3"
+#     g = Game.new(Player::Computer("X"), Player::Human("O"))
+#     g.play
+#     puts "Wana play again? Type : y"
+#     play_again = gets.strip
+#     playing = false unless play_again.downcase == "y"
+#   when "4"
+#     g = Game.new
+#     g.play
+#     puts "Wana play again? Type : y"
+#     play_again = gets.strip
+#     playing = false unless play_again.downcase == "y"
+#   end
+# end
