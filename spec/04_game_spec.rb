@@ -335,6 +335,14 @@ describe 'Game' do
     end
   end
 
-  describe 'start' do
-  end
+  # describe 'start' do
+  #   it 'responds to a start method to start the CLI' do
+  #     expect(Game.new).to respond_to(:start)
+  #   end
+  #
+  #   # it 'asks the user for input at some point' do
+  #   #   game = Game.new
+  #   #   expect(game.start).to receive(:gets)
+  #   # end
+  # end
 end
