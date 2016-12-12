@@ -1,3 +1,59 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Steven's Tic Tac Toe!"
+response = nil
+while response != "no"
+  puts "How many players? Enter 0, 1, 2, or wargames"
+  input = gets.chomp
+  if input == "0"
+    game = Game.new(Computer.new("X"), Computer.new("O"))
+    game.board.display
+    game.play
+    puts "Thanks for playing! Would you like to play again? Enter yes or no"
+    response = gets.chomp
+  elsif input == "1"
+    puts "Who should go first? Enter me or computer"
+      answer = gets.chomp
+      if answer == "me"
+        game = Game.new(Human.new("X"), Computer.new("O"))
+        game.board.display
+        game.play
+        puts "Thanks for playing! Would you like to play again? Enter yes or no"
+        response = gets.chomp
+      elsif answer == "computer"
+        game = Game.new(Computer.new("X"), Human.new("O"))
+        game.board.display
+        game.play
+        puts "Thanks for playing! Would you like to play again? Enter yes or no"
+        response = gets.chomp
+      end
+  elsif input == "2"
+    game = Game.new
+    game.board.display
+    game.play
+    puts "Thanks for playing! Would you like to play again? Enter yes or no"
+    response = gets.chomp
+  elsif input == "wargames"
+  x_wins = 0
+  o_wins = 0
+  draws = 0
+    100.times do
+      game = Game.new(Computer.new("X"), Computer.new("O"))
+      game.board.display
+      game.play
+      if game.winner == "X"
+        x_wins +=1
+      elsif game.winner == "O"
+        o_wins +=1
+      else
+        draws +=1
+      end
+    end
+    puts "X won #{x_wins} times, O won #{o_wins} times, and the players tied #{draws} times."
+    puts "Thanks for playing! Would you like to play again? Enter yes or no"
+    response = gets.chomp
+  end
+end
+puts "I hope you enjoyed playing Steven's Tic Tac Toe. Play again soon!"
