@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -163,10 +164,11 @@ describe 'Game' do
   describe 'turn' do
     it 'makes valid moves' do
       game = Game.new
+      
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("1")
-
+      
       game.turn
     end
 
@@ -194,8 +196,11 @@ describe 'Game' do
 
   describe 'play' do
     it 'asks for players input on a turn of the game' do
+     
       game = Game.new
+      
       allow($stdout).to receive(:puts)
+      
       allow(game).to receive(:over?).and_return(false, true)
 
       expect(game.player_1).to receive(:gets).at_least(:once).and_return("1")
