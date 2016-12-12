@@ -1,3 +1,55 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+module GameMenu
+
+  def menu
+    "Welcome to Tic Tac Toe!!!!
+    What kind of game would you like to play?
+    1) Me vs. the Machine
+    2) Me vs. another Human
+    3) Machine vs. Machine
+    Q) Changed my mind. Exit the game."
+  end
+  def show
+    menu
+  end
+end
+
+module Promptable
+  def prompt(message)
+    print message
+    gets.chomp
+  end
+end
+
+#gameplay
+
+  include GameMenu
+  include Promptable
+  until [user_input = prompt(show).downcase].include?('q')
+    case user_input
+    when '1'
+      puts "Who should go first (and be 'X')? Enter 1 for you or 2 for the Computer:"
+      play_order = gets.chomp
+      if play_order == "1"
+        game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+      else
+        game = Game.new(Player::Computer.new("O"), Player::Human.new("X"))
+      end
+      game.play_cli
+    when '2'
+      game = Game.new(Player::Human.new("X"), Player::Human.new("O"))
+      game.play_cli
+    when '3'
+      game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+      game.play_cli
+    when "q"
+      exit
+    else
+      puts 'What was that? (You might have entered an invalid response.)'
+    end
+end
+
+
