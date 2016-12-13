@@ -22,7 +22,8 @@ class Game
       @board = board
 
     end
-# binding.pry
+
+
     def turn_count
       counter = 0
       self.board.cells.each do |current_turn|
@@ -33,21 +34,27 @@ class Game
       counter
     end
 
+
     def current_player
 
       self.turn_count
       if self.turn_count % 2 == 0
         self.player_1
+
       else
         self.player_2
+
       end
     end
 
+
     def over?
-     self.board.cells.all? {|cell|
-       cell == "X" || cell == "O"}
+       self.won? || self.draw?
+
     end
 
+    #  self.board.cells.all? {|cell|
+    #    cell == "X" || cell == "O"}
     def won?
         WIN_COMBINATIONS.any? do |win_combination|
           self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X" ||
@@ -55,14 +62,16 @@ class Game
       end
     end
 
+
     def draw?
-      if self.won? == false
-        true
+      if !self.won? && board.full?
+      true
+        else
+        false
+      end
     end
-  end
 
   def winner
-
       WIN_COMBINATIONS.detect do |win_combination|
 
       if winner_1 = self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X"
@@ -78,9 +87,29 @@ class Game
      end
 
      def turn
-       input = gets.chomp
-       input
-
+        location = current_player.move(board)
+         if board.valid_move?(location)
+           board.update(location, current_player)
+           board.display
+         else
+           self.turn
+         end
      end
+
+     def play
+        until self.over?
+          self.turn
+          self.won?
+        end
+        if self.won?
+          puts "Congratulations #{self.winner}!"
+        else
+          self.draw?
+          puts "Cats Game!"
+        end
+      end
+
+
+
 
 end

@@ -39,6 +39,8 @@ class Board
         else
           false
         end
+# binding.pry
+        # self.cells[location] != " " && self.cells[location] != ""
     end
 
     def valid_move?(location)
@@ -53,6 +55,7 @@ class Board
 
     def update(location, player_token)
       self.cells[location.to_i - 1] = player_token.token
+# binding.pry 
     end
 
 
