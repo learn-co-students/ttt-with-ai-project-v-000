@@ -21,6 +21,7 @@ class Board
     def position(location)
       new_location = location.to_i - 1
         self.cells[new_location]
+      
     end
 
     def full?
@@ -55,7 +56,7 @@ class Board
 
     def update(location, player_token)
       self.cells[location.to_i - 1] = player_token.token
-# binding.pry 
+
     end
 
 
