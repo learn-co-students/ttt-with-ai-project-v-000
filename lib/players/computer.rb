@@ -8,9 +8,9 @@ module Players
       new_random_no = random_no.index(random_no)
 
          if board.taken?(new_random_no)
-           board.update(new_random_no, self)
+           new_random_no
          else
-          new_random_no
+          board.update(new_random_no, self)
 
         end
       end
