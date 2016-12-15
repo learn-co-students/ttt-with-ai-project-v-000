@@ -15,9 +15,6 @@ def play_time
   elsif players == 2
     Game.new(Players::Human.new("X"), Players::Human.new("O")).play
   end
-end
-
-def play_again
   puts "Would you like to play again? (enter yes or no)"
   answer = gets.strip
   if answer == "yes"
