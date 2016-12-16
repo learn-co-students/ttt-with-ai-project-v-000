@@ -17,6 +17,7 @@ class Board
       " #{cells[3]} | #{cells[4]} | #{cells[5]} ",
       "-----------",
       " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+      binding.pry
     end
 
 
