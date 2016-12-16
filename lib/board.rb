@@ -1,8 +1,10 @@
 class Board
-  attr_accessor :cells, :turn_count
+  attr_accessor :cells, :turn_count, :exes, :oes
 
   def initialize
     @cells = Array.new(9, " ")
+    @exes = []
+    @oes = []
   end
 
   def reset!
@@ -20,6 +22,14 @@ class Board
   def position(input)
     index = input.to_i - 1
     @cells[index]
+  end
+
+  def exes
+    @exes = cells.map.with_index.map { |mark, i| i if mark == "X" }
+  end
+
+  def oes
+    @oes = cells.map.with_index.map { |mark, i| i if mark == "O" }
   end
 
   def full?
