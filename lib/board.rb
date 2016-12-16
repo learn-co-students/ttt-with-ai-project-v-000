@@ -11,11 +11,12 @@ class Board
     end
 
     def display
-      print " #{cells[0]} | #{cells[1]} | #{cells[2]} "
-      print "-----------"
-      print " #{cells[3]} | #{cells[4]} | #{cells[5]} "
-      print "-----------"
-      print " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+
+      print " #{cells[0]} | #{cells[1]} | #{cells[2]} ",
+      "-----------",
+      " #{cells[3]} | #{cells[4]} | #{cells[5]} ",
+      "-----------",
+      " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
 
 
