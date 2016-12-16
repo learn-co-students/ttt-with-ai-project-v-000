@@ -4,7 +4,7 @@ module Players
 
     def move(input)
       puts "It's your turn #{token}! What's your move? (Enter a number between 1 and 9)"
-      input = gets.strip
+      gets.strip
     end
 
   end
