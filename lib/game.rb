@@ -53,8 +53,7 @@ class Game
 
     end
 
-    #  self.board.cells.all? {|cell|
-    #    cell == "X" || cell == "O"}
+
     def won?
         WIN_COMBINATIONS.any? do |win_combination|
           self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X" ||

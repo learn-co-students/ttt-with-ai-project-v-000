@@ -3,16 +3,14 @@ module Players
 
 
     def move(board)
-
       random_no = board.cells.sample
-      new_random_no = random_no.index(random_no)
-
-         if board.taken?(new_random_no)
-           new_random_no
-         else
-          board.update(new_random_no, self)
-
-        end
+        new_random_no = random_no.index(random_no)
+          random = (new_random_no + 1)
+          if board.taken?(random)
+            new_random_no
+          else
+            board.update(random, self)
+          end
       end
 
 

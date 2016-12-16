@@ -12,16 +12,17 @@ class Board
 
     def display
       print " #{cells[0]} | #{cells[1]} | #{cells[2]} ",
-      "-----------",
-      " #{cells[3]} | #{cells[4]} | #{cells[5]} ",
-      "-----------",
-      " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+            "-----------",
+            " #{cells[3]} | #{cells[4]} | #{cells[5]} ",
+            "-----------",
+            " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
+
 
     def position(location)
       new_location = location.to_i - 1
         self.cells[new_location]
-      
+
     end
 
     def full?
@@ -40,8 +41,7 @@ class Board
         else
           false
         end
-# binding.pry
-        # self.cells[location] != " " && self.cells[location] != ""
+
     end
 
     def valid_move?(location)
@@ -56,7 +56,6 @@ class Board
 
     def update(location, player_token)
       self.cells[location.to_i - 1] = player_token.token
-
     end
 
 
