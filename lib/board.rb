@@ -11,20 +11,16 @@ class Board
     end
 
     def display
-    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
-    puts "-----------"
-    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
-    puts "-----------"
-    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
-
-
+      puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+      puts "-----------"
+      puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+      puts "-----------"
+      puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
-
 
     def position(location)
       new_location = location.to_i - 1
         self.cells[new_location]
-
     end
 
     def full?
@@ -34,12 +30,12 @@ class Board
     def turn_count
       counter = 0
       self.cells.each do |current_move|
-    if current_move == 'X' || current_move == 'O'
-      counter += 1
+      if current_move == 'X' || current_move == 'O'
+        counter += 1
+        end
       end
+      counter
     end
-    counter
-  end
 
 
     def taken?(location)
@@ -50,7 +46,6 @@ class Board
         else
           false
         end
-
     end
 
     def valid_move?(location)
