@@ -86,14 +86,18 @@ class Game
      end
 
      def turn
-        location = current_player.move(board)
+
+location = current_player.move(board)
          if board.valid_move?(location)
+
            board.update(location, current_player)
            board.display
+
          else
            self.turn
          end
      end
+        #  location = current_player.move(board)
 
      def play
         until self.over?
