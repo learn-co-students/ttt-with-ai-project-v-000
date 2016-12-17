@@ -26,7 +26,7 @@ class Game
 
     def turn_count
       counter = 0
-      self.board.cells.each do |current_turn|
+      self.board.cells.map do |current_turn|
         if current_turn == "X" || current_turn == "O"
           counter += 1
         end

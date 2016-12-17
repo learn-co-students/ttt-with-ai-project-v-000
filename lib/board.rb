@@ -11,13 +11,13 @@ class Board
     end
 
     def display
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts "-----------"
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts "-----------"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
 
-      print " #{cells[0]} | #{cells[1]} | #{cells[2]} ",
-      "-----------",
-      " #{cells[3]} | #{cells[4]} | #{cells[5]} ",
-      "-----------",
-      " #{cells[6]} | #{cells[7]} | #{cells[8]} "
-      binding.pry
+
     end
 
 
@@ -32,8 +32,15 @@ class Board
     end
 
     def turn_count
-      self.cells.count { |token| token == "X" || token == "O" }
+      counter = 0
+      self.cells.each do |current_move|
+    if current_move == 'X' || current_move == 'O'
+      counter += 1
+      end
     end
+    counter
+  end
+
 
     def taken?(location)
       new_location = location.to_i - 1

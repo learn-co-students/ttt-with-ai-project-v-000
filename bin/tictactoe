@@ -1,10 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/environment'
+ require_relative '../config/environment'
 game = Game.new
-puts "Hi! Welcome to Tic-Tac-Toe"
+game.player_1 = Players::Computer.new("X")
 board = Board.new
-board.display
+puts "Hi! Welcome to Tic-Tac-Toe"
 game.play
-board
-Players::Human.move(board)
