@@ -1,8 +1,20 @@
 #!/usr/bin/env ruby
 
  require_relative '../config/environment'
+
+# puts "1 player or 2 player? Please type 1 or 2"
+# input = gets.chomp
+# if input == 1
 game = Game.new
 game.player_1 = Players::Computer.new("X")
-board = Board.new
+game.player_1
 puts "Hi! Welcome to Tic-Tac-Toe"
 game.play
+# else
+#   game = Game.new
+#   game.player_1
+#   game.player_2
+#   board = Board.new
+#   puts "Hi! Welcome to Tic-Tac-Toe"
+#   board.display
+#   game.play

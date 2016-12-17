@@ -73,16 +73,16 @@ class Game
   def winner
       WIN_COMBINATIONS.detect do |win_combination|
 
-      if winner_1 = self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X"
-        return self.player_1.token
+        if winner_1 = self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X"
+          return self.player_1.token
 
-      elsif winner_2 = self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
-         return self.player_2.token
+        elsif winner_2 = self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
+           return self.player_2.token
 
-          else
-            nil
-          end
-       end
+        else
+          nil
+        end
+      end
      end
 
      def turn
@@ -100,12 +100,12 @@ class Game
           self.turn
           self.won?
         end
-        if self.won?
-          puts "Congratulations #{self.winner}!"
-        else
-          self.draw?
-          puts "Cats Game!"
-        end
+          if self.won?
+            puts "Congratulations #{self.winner}!"
+          else
+            self.draw?
+            puts "Cats Game!"
+          end
       end
 
 

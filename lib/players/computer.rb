@@ -4,15 +4,13 @@ module Players
 
 
     def move(board)
-
       if board.turn_count == 0
-      "5"
+          "5"
       else
-      "1" || "2" || "3" || "4" || "6" || "7" || "8" || "9"
-
+            "1" || "2" || "3" || "4" || "6" || "7" || "8" || "9"
       end
     end
-
+    
        #   Game::WIN_COMBINATIONS[1][1].to_s
 
        #  else
