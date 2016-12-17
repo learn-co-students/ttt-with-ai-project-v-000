@@ -4,11 +4,8 @@ module Players
 
 
     def move(board)
-
-       board.turn_count == 0
+      if board.turn_count == 0
           "5"
-          binding.pry
-          if board.taken?("5")
       else
             "1" || "2" || "3" || "4" || "6" || "7" || "8" || "9"
       end
