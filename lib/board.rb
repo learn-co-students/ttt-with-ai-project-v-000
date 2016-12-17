@@ -2,13 +2,13 @@ class Board
   attr_accessor :cells, :turn_count, :exes, :oes
 
   def initialize
-    @cells = Array.new(9, " ")
-    @exes = []
-    @oes = []
+    self.reset!
   end
 
   def reset!
     @cells = Array.new(9, " ")
+    @exes = []
+    @oes = []
   end
 
   def display
@@ -33,8 +33,7 @@ class Board
   end
 
   def full?
-    return false if @cells.any? { |e| e == " " }
-    true
+    @cells.all? { |cell| cell != " " }
   end
 
   def taken?(pos)
@@ -42,16 +41,11 @@ class Board
   end
 
   def turn_count
-    turn_count = 0
-    @cells.each { |e| turn_count += 1 if e != " " }
-    turn_count
+    @cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def valid_move?(move)
-    if self.taken?(move) || !((1..9).include?(move.to_i))
-      return false
-    end
-    true
+    !self.taken?(move) && (1..9).include?(move.to_i)
   end
 
   def update(move, player)

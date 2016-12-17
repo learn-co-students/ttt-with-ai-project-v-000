@@ -22,16 +22,15 @@ class Game
   end
 
   def won?
-    exes = @board.cells.map.with_index.map { |mark, i| i if mark == "X" }
-    oes = @board.cells.map.with_index.map { |mark, i| i if mark == "O" }
-
-    WIN_COMBINATIONS.each { |e| return "X" if e - exes == [] }
-    WIN_COMBINATIONS.each { |e| return "O" if e - oes == [] }
-    false
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == board.cells[combo[1]] &&
+      @board.cells[combo[0]] == board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
+    end
   end
 
   def draw?
-    if @board.full? && won? == false
+    if @board.full? && won? == nil
       true
     else
     false
@@ -39,10 +38,8 @@ class Game
   end
 
   def winner
-    if won?
-      won?
-    else
-      nil
+    if won = won?
+      board.cells[won.first]
     end
   end
 
@@ -63,10 +60,8 @@ class Game
 
     if draw?
       puts "Cat's Game!"
-    elsif won? == "X"
-      puts "Congratulations X!"
     else
-      puts "Congratulations O!"
+      puts "Congratulations #{winner}!"
     end
   end
 end
