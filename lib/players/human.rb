@@ -9,8 +9,6 @@ module Players
       board
     end
 
-
-
   end
 
 

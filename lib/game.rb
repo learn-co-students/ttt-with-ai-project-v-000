@@ -87,7 +87,7 @@ class Game
 
      def turn
 
-location = current_player.move(board)
+       location = current_player.move(board)
          if board.valid_move?(location)
 
            board.update(location, current_player)
@@ -97,7 +97,7 @@ location = current_player.move(board)
            self.turn
          end
      end
-        #  location = current_player.move(board)
+
 
      def play
         until self.over?
@@ -113,6 +113,33 @@ location = current_player.move(board)
       end
 
 
+def start
+  puts "Hi! Welcome to Tic-Tac-Toe"
+ board = Board.new
+ board.display
 
+
+ puts "Please choose one option "
+ puts "0 player - (type 0)"
+ puts "1 player - (type 1)"
+ puts "2 players - (type 2)"
+   # binding.pry
+ input = gets.chomp
+ # puts "Would you like to move first? Y/N?"
+ # input_1 = gets.chomp
+
+ if input == 0
+
+ game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+ game.play
+ elsif
+   input == 1
+   game = Game.new(player_1 = Players::Computer.new("X"))
+   game.play
+ elsif
+   input == 2
+   game = Game.new
+ end
+end
 
 end
