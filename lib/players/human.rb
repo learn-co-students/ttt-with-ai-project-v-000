@@ -5,7 +5,7 @@ module Players
   class Human < Player
     attr_accessor :input
 
-    def move(board)
+    def move(game)
       @input = gets.strip
     end
 
