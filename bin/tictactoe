@@ -7,8 +7,10 @@
 # if input == 1
 game = Game.new
 game.player_1 = Players::Computer.new("X")
-game.player_1
+game.player_2
+
 puts "Hi! Welcome to Tic-Tac-Toe"
+# binding.pry
 game.play
 # else
 #   game = Game.new
