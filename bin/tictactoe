@@ -17,7 +17,5 @@ input = gets.strip
     newgame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
   else input == "WAR GAMES"
     puts "WAR GAMES!!!!!"
-  # else
-  #   puts "You've entered an invalid number, please select, 0,1,2"
   end
 # newgame.play

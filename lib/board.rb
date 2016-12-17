@@ -37,7 +37,6 @@ class Board
   end
 
   def taken?(input)
-    binding.pry
     if self.position(input) == "X" || self.position(input) == "O"
       true
     else
