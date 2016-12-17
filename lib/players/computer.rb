@@ -7,19 +7,19 @@ module Players
 
       if board.turn_count == 0
       "5"
-    else
+      else
       "1" || "2" || "3" || "4" || "6" || "7" || "8" || "9"
-        
-        end
-       end
+
+      end
+    end
 
        #   Game::WIN_COMBINATIONS[1][1].to_s
-       # #   binding.pry
+
        #  else
        #   Game::WIN_COMBINATIONS[0][0].to_s || Game::WIN_COMBINATIONS[0][2].to.s || Game::WIN_COMBINATIONS[1][0].to_s || Game::WIN_COMBINATIONS[1][2].to_s || Game::WIN_COMBINATIONS[2][0].to_s || Game::WIN_COMBINATIONS[2][2].to_s
 
-      # Game::WIN_COMBINATIONS.detect do |elements|
-      # new_board = board.taken?(elements[0]) && board.taken?(elements[1]) || board.taken?(elements[0]) && board.taken?(elements[2]) || board.taken?(elements[1]) && board.taken?(elements[2])
+      #  Game::WIN_COMBINATIONS.detect do |elements|
+      #  new_board = board.taken?(elements[0]) && board.taken?(elements[1]) || board.taken?(elements[0]) && board.taken?(elements[2]) || board.taken?(elements[1]) && board.taken?(elements[2])
 
 
 
