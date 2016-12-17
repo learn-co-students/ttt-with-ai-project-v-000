@@ -4,10 +4,12 @@ module Players
 
 
     def move(board)
-      if board.turn_count == 0
-          "5"
-      else
+      board.turn_count == 0
+        
+          if board.taken?("5")
             "1" || "2" || "3" || "4" || "6" || "7" || "8" || "9"
+          else
+            "5"
       end
     end
 
