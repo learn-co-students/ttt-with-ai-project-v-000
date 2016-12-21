@@ -47,23 +47,27 @@ class Game
 
   def turn
     player = current_player
-    current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
-      turn
-    else
-      "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts "\n\n"
-    end
+    current_move = player.move(board)
+      self.board.display
+      if !self.board.valid_move?(current_move)
+        puts current_move
+        puts "That is not a valid move."
+        turn
+      else
+        puts "Turn: #{self.board.turn_count + 1}\n\n"
+        self.board.display
+        self.board.update(current_move, player)
+        puts "#{player} moved to Position #{current_move}.\n\n"
+        puts "Next player input your move!"
+        self.board.display
+        play
+        exit
+      end
   end
 
   def play
     while !over?
       turn
-      board.display
     end
     if won?
       puts "Congratulations #{winner}!"
