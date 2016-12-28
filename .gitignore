@@ -1,2 +1,4 @@
 .bundle/
 .ruby*
+.idea
+vendor
