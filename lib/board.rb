@@ -41,7 +41,7 @@ class Board
   end
 
   def valid_move?(input)
-    0 < input.to_i && input.to_i < 10 && !taken?(input)
+    0 < input.to_i && input.to_i < 10 && !self.taken?(input)
   end
 
   def update(input, player)
