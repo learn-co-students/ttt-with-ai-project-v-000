@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9, ' ')
+    self.reset!
   end
 
   def reset!
@@ -30,7 +30,7 @@ class Board
   end
 
   def taken?(input)
-    case self.cells[input.to_i - 1]
+    case position(input)
     when 'X'
       true
     when 'O'
