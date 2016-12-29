@@ -8,7 +8,7 @@ class Game
       [0, 3, 6],
       [1, 4, 7],
       [2, 5, 8],
-  ]
+  ].freeze
 
   attr_accessor :board, :player_1, :player_2
 
@@ -68,7 +68,7 @@ class Game
   end
 
   def play_again?
-    puts 'Play again? (y/n)'
+    puts '', 'Play again? (y/n)'
     input = gets.chomp.downcase
     case input
     when 'y'
@@ -81,7 +81,7 @@ class Game
   end
 
   def rematch?
-    puts 'Rematch? (y/n)'
+    puts '', 'Rematch? (y/n)'
     input = gets.chomp.downcase
     case input
     when 'y'
