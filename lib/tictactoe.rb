@@ -4,7 +4,9 @@ module TicTacToe
   def play
     welcome_message
     sleep(1)
-    initialize_game.play
+    @game = initialize_game
+    @game.play
+    play_again?
   end
 
   def welcome_message
@@ -27,13 +29,19 @@ module TicTacToe
   end
 
   def zero_player_game
+    puts '', 'Is the first computer smart or dumb? (smart/dumb)'
+    computer_1 = Players::Computer.new('X')
+    computer_1.intelligence = get_computer_intelligence
+    puts '', 'Is the second computer smart or dumb? (smart/dumb)'
+    computer_2 = Players::Computer.new('O')
+    computer_2.intelligence = get_computer_intelligence
     puts '', 'War Games? (y/n)'
     input = gets.chomp.downcase
     case input
     when 'y'
-      WarGames.new(Players::Computer.new('X'), Players::Computer.new('O'))
+      WarGames.new(computer_1, computer_2)
     when 'n'
-      Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+      Game.new(computer_1, computer_2)
     else
       zero_player_game
     end
@@ -41,7 +49,11 @@ module TicTacToe
 
   def one_player_game
     get_tokens
-    get_player_order
+    human    = Players::Human.new("#{@token}")
+    computer = Players::Computer.new("#{@cpu_token}")
+    puts '', 'Is the computer smart or dumb? (smart/dumb)'
+    computer.intelligence = get_computer_intelligence
+    get_player_order(human, computer)
   end
 
   def get_tokens
@@ -51,14 +63,20 @@ module TicTacToe
     @cpu_token = @token == 'X' ? 'O' : 'X'
   end
 
-  def get_player_order
+  def get_computer_intelligence
+    @intelligence = gets.chomp.downcase
+    return get_computer_intelligence if @intelligence != 'smart' && @intelligence != 'dumb'
+    @intelligence
+  end
+
+  def get_player_order(human, computer)
     puts '', 'Would you like to go first? (y/n)'
     input = gets.chomp.downcase
     case input
     when 'y'
-      Game.new(Players::Human.new("#{@token}"), Players::Computer.new("#{@cpu_token}"))
+      Game.new(human, computer)
     when 'n'
-      Game.new(Players::Computer.new("#{@cpu_token}"), Players::Human.new("#{@token}"))
+      Game.new(computer, human)
     else
       get_player_order
     end
@@ -74,6 +92,36 @@ module TicTacToe
       Game.new(Players::Human.new('O'), Players::Human.new('X'))
     else
       two_player_game
+    end
+  end
+
+  def play_again?
+    sleep(1)
+    puts '', 'Play again? (y/n)'
+    input = gets.chomp.downcase
+    case input
+    when 'y'
+      rematch?
+    when 'n'
+      nil
+    else
+      play_again?
+    end
+  end
+
+  def rematch?
+    puts '', 'Rematch? (y/n)'
+    input = gets.chomp.downcase
+    case input
+    when 'y'
+      @game.play
+      play_again?
+    when 'n'
+      @game = initialize_game
+      @game.play
+      play_again?
+    else
+      rematch?
     end
   end
 end

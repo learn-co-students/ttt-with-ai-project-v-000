@@ -9,13 +9,18 @@ class Game
       [1, 4, 7],
       [2, 5, 8],
   ].freeze
+  CORNERS = [0, 2, 6, 8].freeze
+  SIDES = [1, 3, 5, 7].freeze
+  CENTER = 4
 
   attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
-    self.player_1 = player_1
-    self.player_2 = player_2
-    self.board    = board
+    @player_1 = player_1
+    @player_2 = player_2
+    @board    = board
+    @player_1.opponent, @player_1.player_num = @player_2, 1
+    @player_2.opponent, @player_2.player_num = @player_1, 2
   end
 
   def current_player
@@ -54,43 +59,16 @@ class Game
       board.display
       return turn
     end
+    current_player.board_positions << input
     board.update(input, current_player)
     board.display
   end
 
   def play
+    board.reset!
     board.display
     turn until over?
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
-    # sleep(1)
-   #TODO uncomment this method after all requirements are implemented -> play_again?
-  end
-
-  def play_again?
-    puts '', 'Play again? (y/n)'
-    input = gets.chomp.downcase
-    case input
-    when 'y'
-      rematch?
-    when 'n'
-      nil
-    else
-      play_again?
-    end
-  end
-
-  def rematch?
-    puts '', 'Rematch? (y/n)'
-    input = gets.chomp.downcase
-    case input
-    when 'y'
-      board.reset!
-      play
-    when 'n'
-      TicTacToe.initialize_game.play
-    else
-      rematch?
-    end
   end
 end
