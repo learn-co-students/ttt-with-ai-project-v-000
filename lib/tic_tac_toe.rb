@@ -32,9 +32,11 @@ module TicTacToe
     puts '', 'Is the first computer smart or dumb? (smart/dumb)'
     computer_1 = Players::Computer.new('X')
     computer_1.intelligence = get_computer_intelligence
+
     puts '', 'Is the second computer smart or dumb? (smart/dumb)'
     computer_2 = Players::Computer.new('O')
     computer_2.intelligence = get_computer_intelligence
+
     puts '', 'War Games? (y/n)'
     input = gets.chomp.downcase
     case input
@@ -59,8 +61,12 @@ module TicTacToe
   def get_tokens
     puts '', 'Would you like to be X or O? (x/o)'
     @token = gets.chomp.upcase
-    return get_tokens if @token != 'X' && @token != 'O'
-    @cpu_token = @token == 'X' ? 'O' : 'X'
+
+    if @token == 'X' || @token == 'O'
+      @cpu_token = @token == 'X' ? 'O' : 'X'
+    else
+      get_tokens
+    end
   end
 
   def get_computer_intelligence

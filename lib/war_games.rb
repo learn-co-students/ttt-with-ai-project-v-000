@@ -14,8 +14,6 @@ class WarGames < Game
     eval("#{games}").times do
       super
       collect_game_data
-      player_1.board_positions.clear
-      player_2.board_positions.clear
       board.reset!
     end
 
@@ -39,7 +37,13 @@ class WarGames < Game
 
   def num_of_games
     puts '', 'How many games do you want to simulate?'
-    gets.chomp.to_i
+    num = gets.chomp.to_i
+    if num < 1
+      puts '', 'Must be greater than zero'.bold.red
+      num_of_games
+    else
+      num
+    end
   end
 
   def winners_report

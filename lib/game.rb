@@ -66,6 +66,8 @@ class Game
 
   def play
     board.display
+    player_1.board_positions.clear
+    player_2.board_positions.clear
     turn until over?
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
