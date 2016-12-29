@@ -16,6 +16,7 @@ class WarGames < Game
       collect_game_data
       player_1.board_positions.clear
       player_2.board_positions.clear
+      board.reset!
     end
 
     self.end_time = Time.now

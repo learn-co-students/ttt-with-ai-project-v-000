@@ -114,6 +114,7 @@ module TicTacToe
     input = gets.chomp.downcase
     case input
     when 'y'
+      @game.board.reset!
       @game.play
       play_again?
     when 'n'

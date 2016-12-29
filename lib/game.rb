@@ -65,7 +65,6 @@ class Game
   end
 
   def play
-    board.reset!
     board.display
     turn until over?
     puts "Congratulations #{winner}!" if won?
