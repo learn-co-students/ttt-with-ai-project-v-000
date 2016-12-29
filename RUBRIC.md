@@ -3,4 +3,4 @@
   - [x] 1 player mode works
   - [x] 2 player mode works
   - [x] Game is playable via CLI
-  - [ ] AI is able to play with some strategy
+  - [x] AI is able to play with some strategy
