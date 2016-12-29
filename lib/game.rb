@@ -19,19 +19,20 @@ class Game
   end
 
   def current_player
-    self.board.turn_count.even? ? self.player_1 : self.player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
-    self.draw? || self.won?
+    draw? || won?
   end
 
   def won?
     won = nil
 
     WIN_COMBINATIONS.each do |combo|
-      if combo.all? { |cell| self.board.cells[cell] == 'X' } || combo.all? { |cell| self.board.cells[cell] == 'O' }
+      if combo.all? { |cell| board.cells[cell] == 'X' } || combo.all? { |cell| board.cells[cell] == 'O' }
         won = combo
+        return won
       end
     end
 
@@ -39,25 +40,57 @@ class Game
   end
 
   def draw?
-    self.board.full? && !self.won?
+    board.full? && !won?
   end
 
   def winner
-    self.board.cells[won?.first] if self.won?
+    board.cells[won?.first] if won?
   end
 
   def turn
-    input = self.current_player.gets
-    self.turn unless self.board.valid_move?(input)
-    self.board.update(input, self.current_player)
+    puts "#{current_player.token}, please enter 1-9"
+    input = current_player.move(board)
+    unless board.valid_move?(input)
+      board.display
+      return turn
+    end
+    board.update(input, current_player)
+    board.display
   end
 
   def play
-    until self.over?
-      puts "#{self.current_player}, please enter 1-9"
-      self.turn
+    board.display
+    turn until over?
+    puts "Congratulations #{winner}!" if won?
+    puts "Cat's Game!" if draw?
+    # sleep(1)
+   #TODO uncomment this method after all requirements are implemented -> play_again?
+  end
+
+  def play_again?
+    puts 'Play again? (y/n)'
+    input = gets.chomp.downcase
+    case input
+    when 'y'
+      rematch?
+    when 'n'
+      nil
+    else
+      play_again?
     end
-    puts "Congratulations #{self.winner}!" if self.won?
-    puts "Cat's Game!" if self.draw?
+  end
+
+  def rematch?
+    puts 'Rematch? (y/n)'
+    input = gets.chomp.downcase
+    case input
+    when 'y'
+      board.reset!
+      play
+    when 'n'
+      TicTacToe.initialize_game.play
+    else
+      rematch?
+    end
   end
 end

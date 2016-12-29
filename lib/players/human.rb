@@ -1,10 +1,6 @@
 module Players
   class Human < Player
-    def move(input)
-      input = self.gets
-    end
-
-    def gets
+    def move(_)
       gets.chomp
     end
   end

@@ -2,35 +2,37 @@ class Board
   attr_accessor :cells
 
   def initialize
-    self.reset!
+    reset!
   end
 
   def reset!
-    @cells = Array.new(9, ' ')
+    self.cells = Array.new(9, ' ')
   end
 
   def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts ''
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts '-----------'
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts '-----------'
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts ''
   end
 
   def position(input)
-    self.cells[input.to_i - 1]
+    cells[input.to_i - 1]
   end
 
   def full?
-    self.cells.all? { |cell| cell == 'X' || cell == 'O' }
+    cells.all? { |cell| cell != ' ' }
   end
 
   def turn_count
-    self.cells.select { |cell| cell == 'X' || cell == 'O' }.size
+    cells.select { |cell| cell != ' ' }.size
   end
 
   def taken?(input)
-    case self.position(input)
+    case position(input)
     when 'X'
       true
     when 'O'
@@ -41,7 +43,7 @@ class Board
   end
 
   def valid_move?(input)
-    input.to_i.between?(1, 9) && !self.taken?(input)
+    input.to_i.between?(1, 9) && !taken?(input)
   end
 
   def update(input, player)
