@@ -31,7 +31,7 @@ module TicTacToe
     input = gets.chomp.downcase
     case input
     when 'y'
-      WarGames.new.game
+      WarGames.new(Players::Computer.new('X'), Players::Computer.new('O'))
     when 'n'
       Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
     else
