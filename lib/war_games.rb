@@ -1,13 +1,10 @@
 class WarGames < Game
   attr_accessor :games, :winners, :start_time, :end_time, :x_wins, :o_wins
 
-  def initialize(player1, player2, board = Board.new)
-    super
-    @games = num_of_games
-    @winners = []
-  end
-
   def play
+    self.games = num_of_games
+    self.winners = []
+
     self.start_time = Time.now
 
     eval("#{games}").times do
