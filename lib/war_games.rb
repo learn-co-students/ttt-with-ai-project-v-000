@@ -19,10 +19,11 @@ class WarGames < Game
 
     self.end_time = Time.now
     winners_report
+    pry?
   end
 
   def collect_game_data
-    winners << winner unless winner.nil?
+    winners << winner if winner
 
     if winner == 'X'
       x_wins << player_1.board_positions.dup
@@ -73,6 +74,31 @@ class WarGames < Game
       sleep(0.15)
       print "\r                     "
       sleep(0.05)
+    end
+  end
+
+  def pry?
+    puts ''
+    puts 'Would you like to open a ' + 'Pry'.red + ' session to inspect the simulation results? (y/n)'
+    input = gets.chomp.downcase
+    case input
+    when 'y'
+      x_win_boards.map! do |brd|
+        b = Board.new
+        b.cells = brd
+        b
+      end
+      o_win_boards.map! do |brd|
+        b = Board.new
+        b.cells = brd
+        b
+      end
+      binding.pry
+    when 'n'
+      nil
+    else
+      puts "Please enter 'y' or 'n'.".bold.red
+      pry?
     end
   end
 end

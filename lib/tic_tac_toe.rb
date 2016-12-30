@@ -102,14 +102,13 @@ module TicTacToe
   end
 
   def play_again?
-    sleep(1)
     puts '', 'Play again? (y/n)'
     input = gets.chomp.downcase
     case input
     when 'y'
       rematch?
     when 'n'
-      nil
+      goodbye
     else
       play_again?
     end
@@ -130,5 +129,30 @@ module TicTacToe
     else
       rematch?
     end
+  end
+
+  def goodbye
+    puts '', ''
+    msg = ['g '.red, 'o '.yellow, 'o '.magenta, 'd '.blue, 'b '.cyan, 'y '.green, 'e '.red]
+
+    2.times do
+      print "\r"
+      msg.each do |l|
+        print l
+        sleep(0.02)
+      end
+      sleep(0.1)
+      print "\r              "
+    end
+
+    20.times do
+      print "\r              "
+      sleep(0.02)
+      print "\r"
+      msg.each { |l| print l }
+      sleep(0.05)
+    end
+
+    puts '', ''
   end
 end
