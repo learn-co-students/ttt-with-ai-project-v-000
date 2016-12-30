@@ -17,7 +17,7 @@ class WarGames < Game
 
     # Simulate the number of games chosen by the user.
     # Call the super method, collect the game stats, reset the board, repeat.
-    eval("#{games}").times do
+    games.times do
       super
       collect_game_stats
       board.reset!
