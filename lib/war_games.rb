@@ -57,12 +57,7 @@ class WarGames < Game
   end
 
   def stats_bar
-    5.times do
-      STDOUT.print "\rCalculating totals...".bold.yellow
-      sleep(0.15)
-      STDOUT.print "\r                     "
-      sleep(0.05)
-    end
+    calculating_totals
     stats = []
     (x_wins.size.to_f / games * 50).round.times { stats << '='.bold.red }
     (o_wins.size.to_f / games * 50).round.times { stats << '='.bold.blue }
@@ -70,5 +65,14 @@ class WarGames < Game
     print "\r[".bold.yellow
     stats.each { |i| print i; sleep(0.02) }
     print ']'.bold.yellow
+  end
+
+  def calculating_totals
+    5.times do
+      STDOUT.print "\rCalculating totals...".bold.yellow
+      sleep(0.15)
+      STDOUT.print "\r                     "
+      sleep(0.05)
+    end
   end
 end
