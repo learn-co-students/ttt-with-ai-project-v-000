@@ -32,14 +32,7 @@ class Board
   end
 
   def taken?(input)
-    case position(input)
-    when 'X'
-      true
-    when 'O'
-      true
-    else
-      false
-    end
+    position(input) != ' '
   end
 
   def valid_move?(input)
