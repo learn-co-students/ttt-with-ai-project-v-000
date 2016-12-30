@@ -2,4 +2,4 @@
 
 require_relative '../config/environment'
 
-TicTacToe.play
+TicTacToeCLI.play

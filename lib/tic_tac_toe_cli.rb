@@ -1,18 +1,16 @@
-module TicTacToe
+module TicTacToeCLI
   module_function
 
+  # Welcome the user(s) and start the game loop.
   def play
-    welcome_message
+    puts 'Welcome to Tic Tac Toe!'
     sleep(1)
     @game = initialize_game
     @game.play
     play_again?
   end
 
-  def welcome_message
-    puts 'Welcome to Tic Tac Toe!'
-  end
-
+  # Get the number of players and initialize the appropriate game type.
   def initialize_game
     puts '', 'How many humans will be playing today? (press 0, 1 or 2 and hit <return>)'
     players = gets.chomp
@@ -24,10 +22,13 @@ module TicTacToe
     when '2'
       two_player_game
     else
+      puts '', 'Input must be 0, 1, or 2'.bold.red
       initialize_game
     end
   end
 
+  # The computer plays itself. Either 'player' can be smart (plays with strategy) or dumb (plays randomly).
+  # The user can select War Games or a single game.
   def zero_player_game
     puts '', 'Is the first computer smart or dumb? (smart/dumb)'
     computer_1 = Players::Computer.new('X')
@@ -49,6 +50,8 @@ module TicTacToe
     end
   end
 
+  # The user plays the computer. The user can select their token, the intelligence of the computer opponent, and
+  # whether they want to go first or second.
   def one_player_game
     get_tokens
     human    = Players::Human.new("#{@token}")
@@ -58,6 +61,7 @@ module TicTacToe
     get_player_order(human, computer)
   end
 
+  # Gets the player's preferred token and sets the computer's token based on the choice.
   def get_tokens
     puts '', 'Would you like to be X or O? (x/o)'
     @token = gets.chomp.upcase
@@ -69,12 +73,17 @@ module TicTacToe
     end
   end
 
+  # Lets the user pick a smart or dumb opponent.
   def get_computer_intelligence
     @intelligence = gets.chomp.downcase
-    return get_computer_intelligence if @intelligence != 'smart' && @intelligence != 'dumb'
-    @intelligence
+    if @intelligence == 'smart' || @intelligence == 'dumb'
+      @intelligence
+    else
+      get_computer_intelligence
+    end
   end
 
+  # Lets the user pick if they want to go first or second, and initializes the game.
   def get_player_order(human, computer)
     puts '', 'Would you like to go first? (y/n)'
     input = gets.chomp.downcase
@@ -88,6 +97,7 @@ module TicTacToe
     end
   end
 
+  # Initializes a Human vs. Human. Player's can select which token will go first. X first is default Game setting.
   def two_player_game
     puts '', "X's or O's first? (x/o)"
     input = gets.chomp.downcase
@@ -101,6 +111,8 @@ module TicTacToe
     end
   end
 
+  # Ask the user if they want to play again. If yes, ask if they want a rematch of the same game format.
+  # If not, say goodbye with style.
   def play_again?
     puts '', 'Play again? (y/n)'
     input = gets.chomp.downcase
@@ -114,6 +126,8 @@ module TicTacToe
     end
   end
 
+  # Ask the user if they want a rematch. If yes, reset the board and restart the same game within a new game loop.
+  # If not, initialize a brand new game with new game options and start a new game loop.
   def rematch?
     puts '', 'Rematch? (y/n)'
     input = gets.chomp.downcase
@@ -131,10 +145,28 @@ module TicTacToe
     end
   end
 
+  # Print a rainbow goodbye.
   def goodbye
     puts '', ''
     msg = ['g '.red, 'o '.yellow, 'o '.magenta, 'd '.blue, 'b '.cyan, 'y '.green, 'e '.red]
+    scroll_message(msg)
+    flash_message(msg)
+    puts '', ''
+  end
 
+  # Flash it 20 times.
+  def flash_message(msg)
+    20.times do
+      print "\r              "
+      sleep(0.02)
+      print "\r"
+      msg.each { |l| print l }
+      sleep(0.05)
+    end
+  end
+
+  # Scroll it twice.
+  def scroll_message(msg)
     2.times do
       print "\r"
       msg.each do |l|
@@ -144,15 +176,5 @@ module TicTacToe
       sleep(0.1)
       print "\r              "
     end
-
-    20.times do
-      print "\r              "
-      sleep(0.02)
-      print "\r"
-      msg.each { |l| print l }
-      sleep(0.05)
-    end
-
-    puts '', ''
   end
 end

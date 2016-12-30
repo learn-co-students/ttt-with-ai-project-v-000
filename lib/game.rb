@@ -1,4 +1,6 @@
 class Game
+
+  # Game constants for winning combinations and corner, side and center cells.
   WIN_COMBINATIONS = [
       [0, 1, 2],
       [3, 4, 5],
@@ -15,12 +17,15 @@ class Game
 
   attr_accessor :board, :player_1, :player_2
 
+  # Initialize a game, setting the players and the board, plus the :opponent and :player_num of both players.
   def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board    = board
-    @player_1.opponent, @player_1.player_num = @player_2, 1
-    @player_2.opponent, @player_2.player_num = @player_1, 2
+    @player_1.opponent   = @player_2
+    @player_1.player_num = 1
+    @player_2.opponent   = @player_1
+    @player_2.player_num = 2
   end
 
   def current_player
@@ -31,17 +36,11 @@ class Game
     draw? || won?
   end
 
+  # Find the first WIN_COMBINATION where every cell is an 'X' or every cell is an 'O'.
   def won?
-    won = nil
-
-    WIN_COMBINATIONS.each do |combo|
-      if combo.all? { |cell| board.cells[cell] == 'X' } || combo.all? { |cell| board.cells[cell] == 'O' }
-        won = combo
-        return won
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      combo.all? { |cell| board.cells[cell] == 'X' } || combo.all? { |cell| board.cells[cell] == 'O' }
     end
-
-    won
   end
 
   def draw?
@@ -52,18 +51,7 @@ class Game
     board.cells[won?.first] if won?
   end
 
-  def turn
-    puts "#{current_player.token}, please enter 1-9"
-    input = current_player.move(board)
-    unless board.valid_move?(input)
-      board.display
-      return turn
-    end
-    current_player.board_positions << input
-    board.update(input, current_player)
-    board.display
-  end
-
+  # Make sure each player's board positions are clear. Take turns until the game is over, and declare if won or draw.
   def play
     board.display
     player_1.board_positions.clear
@@ -71,5 +59,20 @@ class Game
     turn until over?
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
+  end
+
+  # Ask the player for a selection. Check if it's valid, and the cell to the player's tally of board positions
+  # and update the board. If it's not, display the board and ask again.
+  def turn
+    puts "#{current_player.token}, please enter 1-9"
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      current_player.board_positions << input
+      board.update(input, current_player)
+      board.display
+    else
+      board.display
+      return turn
+    end
   end
 end
