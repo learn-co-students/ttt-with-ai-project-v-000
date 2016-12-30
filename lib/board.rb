@@ -28,7 +28,7 @@ class Board
   end
 
   def turn_count
-    cells.select { |cell| cell != ' ' }.size
+    cells.count { |cell| cell != ' ' }
   end
 
   def taken?(input)

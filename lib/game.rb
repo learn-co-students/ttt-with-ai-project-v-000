@@ -48,7 +48,9 @@ class Game
   end
 
   def winner
-    board.cells[won?.first] if won?
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   # Make sure each player's board positions are clear. Take turns until the game is over, and declare if won or draw.
