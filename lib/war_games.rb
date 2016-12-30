@@ -69,9 +69,9 @@ class WarGames < Game
 
   def calculating_totals
     5.times do
-      STDOUT.print "\rCalculating totals...".bold.yellow
+      print "\rCalculating totals...".bold.yellow
       sleep(0.15)
-      STDOUT.print "\r                     "
+      print "\r                     "
       sleep(0.05)
     end
   end
