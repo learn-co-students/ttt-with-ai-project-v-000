@@ -16,7 +16,7 @@ class WarGames < Game
     self.start_time = Time.now
 
     # Simulate the number of games chosen by the user.
-    # Call the super method, collect the game states, reset the board, repeat.
+    # Call the super method, collect the game stats, reset the board, repeat.
     eval("#{games}").times do
       super
       collect_game_stats
