@@ -59,8 +59,11 @@ class Game
     player_1.board_positions.clear
     player_2.board_positions.clear
     turn until over?
-    puts "Congratulations #{winner}!" if won?
-    puts "Cat's Game!" if draw?
+    if winner = self.winner
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
   end
 
   # Ask the player for a selection. Check if it's valid, and the cell to the player's tally of board positions
