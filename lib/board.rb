@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    self.reset!
+    reset!
   end
 
   def reset!
@@ -22,7 +22,7 @@ class Board
   end
 
   def position(pos)
-    self.cells[self.input_to_index(pos)]
+    self.cells[input_to_index(pos)]
   end
 
   def full?
@@ -34,15 +34,15 @@ class Board
   end
 
   def taken?(pos)
-    self.position(pos) != " "
+    position(pos) != " "
   end
 
   def valid_move?(pos)
-    index = self.input_to_index(pos)
+    index = input_to_index(pos)
     index.between?(0, 8) && !taken?(pos)
   end
 
   def update(pos, player)
-    self.cells[self.input_to_index(pos)] = player.token
+    self.cells[input_to_index(pos)] = player.token
   end
 end

@@ -27,26 +27,25 @@ class Game
 
   def won?
     cells = self.board.cells
-    WIN_COMBINATIONS.each do |combo|
-      if self.board.taken?((combo[0] + 1).to_s) &&\
-         cells[combo[0]] == cells[combo[1]] &&\
-         cells[combo[0]] == cells[combo[2]]
-        return combo
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      self.board.taken?(combo[0] + 1) &&
+      cells[combo[0]] == cells[combo[1]] &&
+      cells[combo[0]] == cells[combo[2]]
     end
-    nil
   end
 
   def over?
-    self.won? || self.draw?
+    won? || draw?
   end
 
   def draw?
-    !self.won? && self.board.full?
+    !won? && self.board.full?
   end
 
   def winner
-    self.won? && self.board.cells[self.won?[0]]
+    if won = won?
+      self.board.cells[won.first]
+    end
   end
 
   def turn
@@ -56,19 +55,19 @@ class Game
     pos = nil
     loop do
       puts "\nPlayer #{current_player.token}, please enter a position (1 - 9):"
-      pos = self.current_player.move(self.board)
+      pos = current_player.move(self.board)
       break if self.board.valid_move?(pos)
     end
-    self.board.update(pos, self.current_player)
+    self.board.update(pos, current_player)
   end
 
   def play
     system("clear")
-    self.turn until self.over?
+    turn until over?
     system("clear")
     puts "\n"
     self.board.display
     puts "\n"
-    puts self.draw? ? "Cats Game!" : "Congratulations #{self.winner}!"
+    puts draw? ? "Cats Game!" : "Congratulations #{winner}!"
   end
 end
