@@ -77,7 +77,7 @@ class Game
       board.display
     else
       board.display
-      return turn
+      turn
     end
   end
 end

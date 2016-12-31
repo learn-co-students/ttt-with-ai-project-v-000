@@ -47,11 +47,16 @@ class WarGames < Game
 
   # Ask the user how many games they want to simulate.
   def num_of_games
-    puts '', 'How many games do you want to simulate?'
+    puts '', 'How many games do you want to simulate?'.blue
     num = gets.chomp.to_i
     if num < 1
       puts '', 'Must be greater than zero'.bold.red
       num_of_games
+    elsif
+      num > 100_000
+      puts '', "#{num} seems like a lot. That could use a lot of memory. Are you sure?".bold.yellow
+      puts '', "Enter 'yes' to continue.".bold.blue
+      gets.chomp.downcase == 'yes' ? num : num_of_games
     else
       num
     end
@@ -94,7 +99,7 @@ class WarGames < Game
   # Ask the user if they want to inspect the simulation results.
   def pry?
     puts ''
-    puts 'Would you like to open a ' + 'Pry'.blue + ' session to inspect the simulation results? (y/n)'
+    puts 'Would you like to open a ' + 'Pry'.yellow + ' session to inspect the simulation results? ' + '(y/n)'.blue
     input = gets.chomp.downcase
     case input
     when 'y'

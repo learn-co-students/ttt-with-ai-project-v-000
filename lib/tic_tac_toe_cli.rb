@@ -3,7 +3,7 @@ module TicTacToeCLI
 
   # Welcome the user(s) and start the game loop.
   def play
-    puts 'Welcome to Tic Tac Toe!'
+    puts '', '- - - Welcome to Tic Tac Toe! - - -'.bold.yellow
     sleep(1)
     @game = initialize_game
     @game.play
@@ -12,7 +12,7 @@ module TicTacToeCLI
 
   # Get the number of players and initialize the appropriate game type.
   def initialize_game
-    puts '', 'How many humans will be playing today? (press 0, 1 or 2 and hit <return>)'
+    puts '', 'How many humans will be playing today? ' + '(press 0, 1 or 2 and hit <return>)'.blue
     players = gets.chomp
     case players
     when '0'
@@ -30,15 +30,15 @@ module TicTacToeCLI
   # The computer plays itself. Either 'player' can be smart (plays with strategy) or dumb (plays randomly).
   # The user can select War Games or a single game.
   def zero_player_game
-    puts '', 'Is the first computer smart or dumb? (smart/dumb)'
+    puts '', 'Is the first computer smart or dumb? ' + '(smart/dumb)'.blue
     computer_1 = Players::Computer.new('X')
     computer_1.intelligence = get_computer_intelligence
 
-    puts '', 'Is the second computer smart or dumb? (smart/dumb)'
+    puts '', 'Is the second computer smart or dumb? ' + '(smart/dumb)'.blue
     computer_2 = Players::Computer.new('O')
     computer_2.intelligence = get_computer_intelligence
 
-    puts '', 'War Games? (y/n)'
+    puts '', 'War Games? ' + '(y/n)'.blue
     input = gets.chomp.downcase
     case input
     when 'y'
@@ -56,14 +56,14 @@ module TicTacToeCLI
     get_tokens
     human    = Players::Human.new("#{@token}")
     computer = Players::Computer.new("#{@cpu_token}")
-    puts '', 'Is the computer smart or dumb? (smart/dumb)'
+    puts '', 'Is the computer smart or dumb? ' + '(smart/dumb)'.blue
     computer.intelligence = get_computer_intelligence
     get_player_order(human, computer)
   end
 
   # Gets the player's preferred token and sets the computer's token based on the choice.
   def get_tokens
-    puts '', 'Would you like to be X or O? (x/o)'
+    puts '', 'Would you like to be X or O? ' + '(x/o)'.blue
     @token = gets.chomp.upcase
 
     if @token == 'X' || @token == 'O'
@@ -85,7 +85,7 @@ module TicTacToeCLI
 
   # Lets the user pick if they want to go first or second, and initializes the game.
   def get_player_order(human, computer)
-    puts '', 'Would you like to go first? (y/n)'
+    puts '', 'Would you like to go first? ' + '(y/n)'.blue
     input = gets.chomp.downcase
     case input
     when 'y'
@@ -114,7 +114,7 @@ module TicTacToeCLI
   # Ask the user if they want to play again. If yes, ask if they want a rematch of the same game format.
   # If not, say goodbye with style.
   def play_again?
-    puts '', 'Play again? (y/n)'
+    puts '', 'Play again? ' + '(y/n)'.blue
     input = gets.chomp.downcase
     case input
     when 'y'
@@ -129,7 +129,7 @@ module TicTacToeCLI
   # Ask the user if they want a rematch. If yes, reset the board and restart the same game within a new game loop.
   # If not, initialize a brand new game with new game options and start a new game loop.
   def rematch?
-    puts '', 'Rematch? (y/n)'
+    puts '', 'Rematch? ' + '(y/n)'.blue
     input = gets.chomp.downcase
     case input
     when 'y'
