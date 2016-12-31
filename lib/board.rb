@@ -39,7 +39,7 @@ class Board
 
   def valid_move?(pos)
     index = self.input_to_index(pos)
-    index.between?(0, 8) && self.position(pos) == " "
+    index.between?(0, 8) && !taken?(pos)
   end
 
   def update(pos, player)
