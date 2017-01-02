@@ -23,7 +23,7 @@ class Game
   end
 
   def over?
-    draw? || won? ? true : false
+    draw? || won?
   end
 
   def won?
@@ -35,8 +35,7 @@ class Game
   end
 
   def winner
-    if won?
-      winner = won?
+    if winner = won?
       board.cells[winner[0]]
     end
   end
