@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def initialize
@@ -18,15 +18,15 @@ class Board
   end
 
   def position(user_input)
-    self.cells[user_input.to_i - 1]
+    cells[user_input.to_i - 1]
   end
 
   def full?
-    self.cells.include?(" ") ? false : true
+    self.cells.all? {|cell| cell != " "}
   end
 
   def turn_count
-    9 - self.cells.count(" ")
+    9 - cells.count(" ")
   end
 
   def taken?(user_input)
@@ -34,10 +34,10 @@ class Board
   end
 
   def valid_move?(user_input)
-    user_input.to_i.between?(1, 9) && taken?(user_input) == false
+    user_input.to_i.between?(1, 9) && !taken?(user_input)
   end
 
   def update(user_input, player)
-    self.cells[user_input.to_i - 1] = player.token
+    cells[user_input.to_i - 1] = player.token
   end
 end

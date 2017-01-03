@@ -14,6 +14,7 @@ module Players
         possibilities = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         current_move = possibilities.find{|i| !board.taken?(i)}
       end
+      current_move
     end
   end
 end
