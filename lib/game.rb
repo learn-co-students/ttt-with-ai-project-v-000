@@ -1,3 +1,60 @@
+class Game
+    WIN_COMBINATIONS = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [6, 4, 2]
+    ].freeze
+
+    # attr_accessor: :board, :player_1, :player_2
+
+    def initialize(board = [], player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+        @board = board
+        @player_1 = player_1
+        @player_2 = player_2
+    end
+
+    # define current_player here
+    def current_player
+      if turn_count.even? == true
+        'X'
+      else
+        'O'
+      end
+    end
+
+    # over? here - won, is a draw, or full
+    def over?
+      won? || draw? || full?
+    end
+
+    def won?
+      WIN_COMBINATIONS.detect do |win_combo|
+        if board[win_combo[0]] == board[win_combo[1]] &&
+          board[win_combo[1]] == board[win_combo[2]] &&
+          (board[win_combo[0]] == 'X' || board[win_combo[0]] == 'O')
+          return win_combo
+        else
+          false
+        end
+      end
+    end
+
+    # define draw? here
+    def draw?
+      !won? && full?
+    end
+
+    # define winner here
+    def winner
+      if winner = won?
+        @board[winner.first]
+      end
+    end
 
     # define turn method here
     def turn
@@ -12,44 +69,6 @@
     end
 
 
-    # define current_player here
-    def current_player
-        if turn_count.even? == true
-            'X'
-        else
-            'O'
-        end
-    end
-
-    def won?
-        WIN_COMBINATIONS.detect do |win_combo|
-            if board[win_combo[0]] == board[win_combo[1]] &&
-               board[win_combo[1]] == board[win_combo[2]] &&
-               (board[win_combo[0]] == 'X' || board[win_combo[0]] == 'O')
-                return win_combo
-            else
-                false
-            end
-        end
-  end
-
-      # define draw? here
-    def draw?
-        !won? && full?
-    end
-
-    # over? here - won, is a draw, or full
-    def over?
-        won? || draw? || full?
-    end
-
-    # define winner here
-    def winner
-        if winner = won?
-            @board[winner.first]
-        end
-    end
-
     # define #play here
     def play
         until over? # until the game is over
@@ -61,3 +80,4 @@
              puts 'Cats Game!'
         end
     end
+  end
