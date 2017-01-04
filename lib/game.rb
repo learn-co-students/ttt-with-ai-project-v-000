@@ -55,7 +55,7 @@ class Game
 
 
     def won?
-        WIN_COMBINATIONS.any? do |win_combination|
+        WIN_COMBINATIONS.detect do |win_combination|
           self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X" ||
           self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
       end
@@ -71,28 +71,18 @@ class Game
     end
 
   def winner
-      WIN_COMBINATIONS.detect do |win_combination|
 
-        if winner_1 = self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X"
-          return self.player_1.token
-
-        elsif winner_2 = self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
-           return self.player_2.token
-
-        else
-          nil
-        end
-      end
-     end
+    if won = won?
+      self.board.cells[won.first]
+    end
+  end
 
      def turn
-
-       location = current_player.move(board)
+          location = current_player.move(board)
          if board.valid_move?(location)
-
            board.update(location, current_player)
            board.display
-
+           puts "it's now #{current_player.token}'s turn"
          else
            self.turn
          end
@@ -113,33 +103,5 @@ class Game
       end
 
 
-def start
-  puts "Hi! Welcome to Tic-Tac-Toe"
- board = Board.new
- board.display
-
-
- puts "Please choose one option "
- puts "0 player - (type 0)"
- puts "1 player - (type 1)"
- puts "2 players - (type 2)"
-   # binding.pry
- input = gets.chomp
- # puts "Would you like to move first? Y/N?"
- # input_1 = gets.chomp
-
- if input == 0
-
- game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
- game.play
- elsif
-   input == 1
-   game = Game.new(player_1 = Players::Computer.new("X"))
-   game.play
- elsif
-   input == 2
-   game = Game.new
- end
-end
 
 end

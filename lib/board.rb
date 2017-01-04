@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
     def initialize
-      @cells = Array.new(9, " ")
+     @cells = Array.new(9, " ")
     end
 
     def reset!
@@ -28,13 +28,7 @@ class Board
     end
 
     def turn_count
-      counter = 0
-      self.cells.each do |current_move|
-      if current_move == 'X' || current_move == 'O'
-        counter += 1
-        end
-      end
-      counter
+      cells.count {|current_move|current_move == 'X' || current_move == 'O'}
     end
 
 
@@ -49,14 +43,8 @@ class Board
     end
 
     def valid_move?(location)
-      new_location = location.to_i - 1
-        new = self.cells[new_location]
-          if location.to_i.between?(1,9) && new == " "
-            true
-          else
-            false
-          end
-      end
+      location.to_i.between?(1,9) && !self.taken?(location)
+    end
 
     def update(location, player_token)
       self.cells[location.to_i - 1] = player_token.token

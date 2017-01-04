@@ -12,7 +12,6 @@ module Players
     end
 
 
-
       #  Game::WIN_COMBINATIONS.detect do |elements|
       #  new_board = board.taken?(elements[0]) && board.taken?(elements[1]) || board.taken?(elements[0]) && board.taken?(elements[2]) || board.taken?(elements[1]) && board.taken?(elements[2])
 
