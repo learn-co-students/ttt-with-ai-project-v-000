@@ -1,9 +1,9 @@
 module Players
   class Human < Player
     # move method
-    def move (position, token = "X")
-      index = position.to_i - 1
-      @board[index] = token
+    def move(board)
+      puts "Please make a move by entering a number from 1 - 9."
+      input = gets.chomp
     end
   end
 end
