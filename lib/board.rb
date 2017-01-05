@@ -17,22 +17,19 @@ class Board
         puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
 
-    # position method
-    def position
+    def input_index(input)  #this one line is all over the place!
+      input.to_i - 1
     end
 
-    # position_taken? method
-    def position_taken?(position)
-        if @board[position] == 'X' || @board[position] == 'O'
-            true
-        else
-            false
-        end
+    # position method
+    def position(input)
+      @cells[input_index(input)]
     end
+
 
     # define full here - every element on the board contains "X" or "O"
     def full?
-        @board.all? do |mark|
+        @cells.all? do |mark|
             mark == 'X' || mark == 'O'
         end
     end
@@ -46,21 +43,23 @@ class Board
       counter
     end
 
-    # define taken?
-    def taken?
+    # taken? method
+    def taken?(input)
+      exxo = position(input)
+      exxo != " " ? true:false
     end
 
     # valid_move? method here
-    def valid_move?(position)
-        position = position.to_i - 1
-        if !position_taken?(position) && position.between?(0, 8)
-            return true # position on the board && position not taken
-        else
-            return false # return false or nil here for invalid move
-        end
+    def valid_move?(input)
+      if position(input) == " " && input.to_i.between?(1, 9)
+        true # input on the board && input not taken
+      else
+        false # return false or nil here for invalid move
+      end
     end
 
     # define update
-    def update
+    def update(input, player)
+      @cells[input_index(input)] = player.token
     end
 end
