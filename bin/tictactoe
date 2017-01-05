@@ -2,27 +2,41 @@
 
 require_relative '../config/environment'
 
-puts "Hi! Welcome to the battlezone. Tic Tac Toe is the name of the game!"
-puts "Please enter your name so that we can provide the best experience:"
+puts 'Hi! Welcome to the battlezone. Tic Tac Toe is the name of the game!'
+puts 'Please enter your name so that we can provide the best experience:'
 name = gets.chomp
 
 puts "Thanks #{name}! What kind of game would you like to play?"
-puts "Enter 1 to play against the computer."
-puts "Enter 2 to play against a human."
-puts "Enter 00110011 to watch the computers let it all out."
 
+puts 'Enter 1 to play against the computer.'
+puts 'Enter 2 to play against a human.'
+puts 'Enter 00110011 to watch the computers battle to their circuits.'
+puts "WHISPERS 'or enter wargames if you want to have a good time'"
 game_type = gets.chomp
+first_move = ''
 
-#When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
+if game_type == '2' # hum vs hum
+    game = Game.new
+    game.play
+elsif game_type == '00110011' # comp vs comp
+    game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new)
+    game.play
+elsif game_type == '1' # hum vs comp
+    puts "So umm...who's going first?!"
+    puts "If you want to go first, choose 'X'. Otherwise, choose 'O'"
+    first_move = gets.strip.upcase
+    while first_move != 'X' && first_move != '0'
+        puts 'Cmon, son! What are you doing?! Enter X or O, please.'
+        first_move = gets.strip.upcase
+    end
 
-# Would you like to play again? Please enter "Y" for Yes or "N" for No.
-#again = gets.chomp
-
-#If again == Y
-#Ask what type of game they would like to play
-#Else if No
-#Exit the game
-
-# If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the number of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should never be able to win, like in the case of thermonuclear war.
+    game = nil
+    if first_move == 'X'
+        game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
+    else
+        game = Game.new(Players::Computer.new('X'), Players::Human.new('X'), Board.new)
+    end
+    game.play
+end
 
 # TicTacToe.new.play
