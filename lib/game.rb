@@ -10,33 +10,29 @@ class Game
         [6, 4, 2]
     ].freeze
 
-    # attr_accessor: :board, :player_1, :player_2
+    attr_accessor :board, :player_1, :player_2
 
-    def initialize(board = [], player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
-        @board = board
+    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         @player_1 = player_1
         @player_2 = player_2
+        @board = board
     end
 
     # define current_player here
     def current_player
-      if turn_count.even? == true
-        'X'
-      else
-        'O'
-      end
+      @board.turn_count.even? ? player_1 : player_2
     end
 
     # over? here - won, is a draw, or full
     def over?
-      won? || draw? || full?
+      won? || draw?
     end
 
     def won?
       WIN_COMBINATIONS.detect do |win_combo|
-        if board[win_combo[0]] == board[win_combo[1]] &&
-          board[win_combo[1]] == board[win_combo[2]] &&
-          (board[win_combo[0]] == 'X' || board[win_combo[0]] == 'O')
+        if @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
+          @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
+          (@board.cells[win_combo[0]] == 'X' || @board.cells[win_combo[0]] == 'O')
           return win_combo
         else
           false
@@ -46,38 +42,37 @@ class Game
 
     # define draw? here
     def draw?
-      !won? && full?
+      !self.won? && board.full?
     end
 
     # define winner here
     def winner
-      if winner = won?
-        @board[winner.first]
+      if win_combo = won?
+        @board.cells[win_combo.first]
       end
     end
 
     # define turn method here
-    def turn
-        puts 'Please enter 1-9:'
-        position = gets.strip
-        if valid_move?(position)
-            move(position, current_player)
-            display_board
-        elsif !valid_move?(position)
-            turn
-        end
+    def turn #work on this dadgum method
+      move = self.current_player.move(@board)
+      if !board.valid_move?(move)
+        puts "NOT a valid move. Play again, please!"
+        turn
+      end
+        @board.update(move, self.current_player)
     end
 
 
     # define #play here
     def play
-        until over? # until the game is over
-            turn # take turns
-        end
-        if won?
-            puts "Congratulations #{winner}!"
-        else draw?
-             puts 'Cats Game!'
-        end
+      until self.over? # until the game is over
+        @board.display
+        self.turn # take turns
+      end
+      if self.won?
+          puts "Congratulations #{winner}!"
+      else draw?
+           puts "Cat's Game!"
+      end
     end
   end
