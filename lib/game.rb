@@ -13,8 +13,53 @@ class Game
 
   def current_player
     @board.turn_count % 2 != 0 ? self.player_2 : self.player_1  
-      
+  end 
+
+  def over?
+    self.won? ||self.draw?
+  end 
+
+  def won?
+        WIN_COMBINATIONS.detect do |win_combination|
+          self.board.cells[win_combination[0]] == "X" && self.board.cells[win_combination[1]] == "X" && self.board.cells[win_combination[2]] == "X" ||
+          self.board.cells[win_combination[0]] == "O" && self.board.cells[win_combination[1]] == "O" && self.board.cells[win_combination[2]] == "O"
+      end
+    end
+    
+  def draw?
+    if board.full? && !won? 
+        true
+      else
+        false
+    end 
 
   end 
 
+  def winner
+    if won = won?
+      self.board.cells[won[0]]
+    end
+  end
+
+  def turn
+    move = current_player.move(board)
+    if board.valid_move?(move)
+      board.update(move, current_player)
+    else
+      turn
+    end
+  end 
+
+  def play
+        until over?
+          turn
+          won?
+        end
+          if won?
+            puts "Congratulations #{winner}!"
+          else
+            draw?
+            puts "Cat's Game!"
+          end
+      end
 end 
