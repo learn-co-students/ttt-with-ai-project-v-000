@@ -40,9 +40,9 @@ class Game
     won? || draw?
   end
 
-  def winner
-    board.cells[won?.first] if won?
-  end
+if won = won?
+  board.cells[won.first]
+end
 
   def turn
     move = current_player.move(board)
