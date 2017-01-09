@@ -7,7 +7,7 @@ class Board
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -26,9 +26,9 @@ class Board
     @cells.all? {|c| c != " "}
   end
 
-  def turn_count
-    @cells.select {|c| c != " "}.size
-  end
+def turn_count
+  cells.count { |cell| cell != " " }
+end
 
   def taken?(index)
     @cells[index.to_i - 1] != " "
