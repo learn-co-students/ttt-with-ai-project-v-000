@@ -48,4 +48,12 @@ class Board
   def update(position, player)
     @cells[position.to_i-1] = player.token
   end
+
+  def get_valid_moves
+    return_array = []
+    @cells.each_with_index do |cell, index|
+      return_array << index + 1 if cell == ' '
+    end
+    return_array
+  end
 end
