@@ -12,7 +12,7 @@ class Game
     [2,4,6]
   ]
 
-  def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Computer.new('O'), board = Board.new)
+  def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -62,7 +62,7 @@ class Game
     else
       puts "Turn: #{@board.turn_count+1}"
       @board.display
-      puts "\n\n"
+      puts "\n"
       @board.update(current_move, player)
       puts "#{player.token} moved to position #{current_move}"
       @board.display
@@ -76,9 +76,9 @@ class Game
     end
 
     if self.won?
-      puts "Congratulations #{self.winner}!"
+      puts "Congratulations #{self.winner}!\n"
     elsif self.draw?
-      puts "Cat's Game!"
+      puts "Cat's Game!\n"
     end
   end
 end
