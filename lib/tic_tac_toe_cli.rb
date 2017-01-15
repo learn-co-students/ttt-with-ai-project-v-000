@@ -2,7 +2,7 @@ class TicTacToeCLI
 
   def initialize
   end
-  
+
   def start
     puts "Welcome to Tic Tac Toe!"
     puts "Select the number of players: (0-2)?"
@@ -12,7 +12,7 @@ class TicTacToeCLI
       game = Game.new(Computer.new("X", true), Computer.new("O", true))
       game.play
     elsif input == "1"
-      puts "Who should go first? Choose h for Human and c for Computer?"
+      puts "Who should go first? Choose h for Human or c for Computer?"
       first = gets.strip
       if first == "h"
         game = Game.new(Human.new("X", true), Computer.new("O", true))
