@@ -6,7 +6,7 @@ module Players
 	class Human < Player
 		
 		
-		def move(board, game)
+		def move(board, game=Game.new)
 			input = gets.chomp
 			input
 
