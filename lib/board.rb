@@ -1,10 +1,11 @@
 
 
 class Board
-	attr_accessor :cells
+	attr_accessor :cells, :answer_token
 
 	def initialize
 		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		@answer_token = []
 	end
 
 	def reset!
@@ -57,7 +58,7 @@ class Board
 
 	def block_positions
 		board = self.cells
-		
+		@answer_token = []
 		answers = []
 		Game::WIN_COMBINATIONS.each do |combo|
 			i1 = combo[0]
@@ -66,9 +67,11 @@ class Board
 			indexes = [i1, i2, i3]
 			my_combo = [board[i1], board[i2], board[i3]]
 			if  my_combo.sort === [" ", "X", "X"] || my_combo.sort === [" ", "O", "O"]
+				answer_token << my_combo.sort[2]
 				answers << indexes.select do |index|
 					board[index] == " "
 				end
+				
 			end
 		end
 		answers.flatten!
