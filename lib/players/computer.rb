@@ -9,7 +9,7 @@ module Players
 
 			if board.turn_count == 3 && (corners[0] == [opponent_token, opponent_token] || corners[1] == [opponent_token, opponent_token]) && board.cells[4] != " "
 				["2", "4", "6", "8"].sample
-			elsif board.needs_block?
+			elsif board.block_positions != []
 				board.block_positions
 				if board.answer_token.include?(game.current_player.token)
 					index = board.answer_token.index(game.current_player.token)

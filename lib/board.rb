@@ -23,27 +23,11 @@ class Board
 	end
 
 	def which_cornors?
-		board = self.cells
 		corners = ["1", "3", "7", "9"]
 		eligible_corners = corners.select do |corner|
 			!self.taken?(corner)
 		end
 		eligible_corners.sample
-	end
-
-	def needs_block?
-		needs_block = false
-		board = self.cells
-		Game::WIN_COMBINATIONS.each do |combo|
-			i1 = combo[0]
-			i2 = combo[1]
-			i3 = combo[2]
-			my_combo = [board[i1], board[i2], board[i3]]
-			if  my_combo.sort === [" ", "X", "X"] || my_combo.sort === [" ", "O", "O"]
-				needs_block = true
-			end
-		end
-		needs_block
 	end
 
 	def available_spots
@@ -60,18 +44,14 @@ class Board
 		board = self.cells
 		@answer_token = []
 		answers = []
-		Game::WIN_COMBINATIONS.each do |combo|
-			i1 = combo[0]
-			i2 = combo[1]
-			i3 = combo[2]
-			indexes = [i1, i2, i3]
-			my_combo = [board[i1], board[i2], board[i3]]
+		Game::WIN_COMBINATIONS.each do |c|
+			indexes = [c[0], c[1], c[2]]
+			my_combo = [board[c[0]], board[c[1]], board[c[2]]]
 			if  my_combo.sort === [" ", "X", "X"] || my_combo.sort === [" ", "O", "O"]
 				answer_token << my_combo.sort[2]
 				answers << indexes.select do |index|
 					board[index] == " "
-				end
-				
+				end	
 			end
 		end
 		answers.flatten!
