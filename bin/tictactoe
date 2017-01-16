@@ -42,7 +42,7 @@ while play_again != "N"
 		puts "Draws: #{Game.draws}"
 		play_again = nil
 		while play_again != "Y" && play_again != "N"
-		print "Play again? (y/n)"
+		print "Play again? (y/n) "
 		play_again = gets.strip.upcase
 	end
 	else
@@ -60,7 +60,7 @@ while play_again != "N"
 		game.play
 		play_again = nil
 		while play_again != "Y" && play_again != "N"
-		print "Play again? (y/n)"
+		print "Play again? (y/n) "
 		play_again = gets.strip.upcase
 		
 		end

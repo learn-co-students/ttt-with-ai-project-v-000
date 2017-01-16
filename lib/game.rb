@@ -65,6 +65,8 @@ class Game
 		end
 		self.board.update(input, self.current_player)
 		self.current_player = (self.current_player == @player_1) ? @player_2 : @player_1
+		
+
 	end
 
 	def play

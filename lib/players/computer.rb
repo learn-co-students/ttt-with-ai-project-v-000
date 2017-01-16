@@ -3,8 +3,9 @@ require_relative '../player.rb'
 module Players
 	class Computer < Player
 		def move(board, game)
-			
+
 			if board.needs_block?
+				board.block_positions
 				if board.answer_token.include?(game.current_player.token)
 					index = board.answer_token.index(game.current_player.token)
 					board.block_positions[index]
@@ -19,6 +20,7 @@ module Players
 			else 
 				board.available_spots
 			end
+
 		end
 	end
 end
