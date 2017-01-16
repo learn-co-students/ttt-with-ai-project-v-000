@@ -2,7 +2,15 @@
 
 require_relative '../config/environment'
 
+puts %q[
+  ___________ .__        __
+  \__    ___/ |__| _____/  |______    ____
+     |    |   |  |/ ___\   __\__  \ _/ ___\
+     |    |   |  \  \___|  |  / __ \  \___
+     |____|   |__|\___  >__| (____  /\___  >
+                      \/          \/     \/].green
 puts 'Hi! Welcome to the battlezone. Tic Tac Toe is the name of the game!'
+
 puts 'Please enter your name so that we can provide the best experience:'
 name = gets.chomp
 
@@ -12,31 +20,32 @@ puts 'Enter 1 to play against the computer.'
 puts 'Enter 2 to play against a human.'
 puts 'Enter 00110011 to watch the computers battle to their circuits.'
 puts "WHISPERS 'or enter wargames if you want to have a good time'"
+puts "\nYou may also enter 'q' to Quit"
 game_type = gets.chomp
 first_move = ''
 
 if game_type == '2' # hum vs hum
-    game = Game.new
-    game.play
+  game = Game.new
+  game.play
 elsif game_type == '00110011' # comp vs comp
-    game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new)
-    game.play
+  game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new)
+  game.play
 elsif game_type == '1' # hum vs comp
-    puts "So umm...who's going first?!"
-    puts "If you want to go first, choose 'X'. Otherwise, choose 'O'"
+  puts "So umm...who's going first?!"
+  puts "If you want to go first, choose 'X'. Otherwise, choose 'O'"
+  first_move = gets.strip.upcase
+  while first_move != 'X' && first_move != '0'
+    puts 'Cmon, son! What are you doing?! Enter X or O, please.'
     first_move = gets.strip.upcase
-    while first_move != 'X' && first_move != '0'
-        puts 'Cmon, son! What are you doing?! Enter X or O, please.'
-        first_move = gets.strip.upcase
-    end
+  end
 
-    game = nil
-    if first_move == 'X'
-        game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
-    else
-        game = Game.new(Players::Computer.new('X'), Players::Human.new('X'), Board.new)
-    end
-    game.play
+  game = nil
+  if first_move == 'X'
+    game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
+  else
+    game = Game.new(Players::Computer.new('X'), Players::Human.new('X'), Board.new)
+  end
+  game.play
 end
 
 # TicTacToe.new.play

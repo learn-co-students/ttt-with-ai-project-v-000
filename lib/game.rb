@@ -12,12 +12,12 @@ class Game
 
     attr_accessor :board, :player_1, :player_2
 
-    #need to add name somewhere in the initialization?
+    # need to add name somewhere in the initialization?
 
-    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-        @player_1 = player_1
-        @player_2 = player_2
-        @board = board
+    def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
+      @player_1 = player_1
+      @player_2 = player_2
+      @board = board
     end
 
     # define current_player here
@@ -32,19 +32,19 @@ class Game
 
     def won?
       WIN_COMBINATIONS.detect do |win_combo|
-        if @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
-          @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
-          (@board.cells[win_combo[0]] == 'X' || @board.cells[win_combo[0]] == 'O')
-          return win_combo
-        else
-          false
-        end
+          if @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
+           @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
+           (@board.cells[win_combo[0]] == 'X' || @board.cells[win_combo[0]] == 'O')
+            return win_combo
+          else
+            false
+          end
       end
     end
 
     # define draw? here
     def draw?
-      !self.won? && board.full?
+      !won? && board.full?
     end
 
     # define winner here
@@ -55,26 +55,25 @@ class Game
     end
 
     # define turn method here
-    def turn #work on this dadgum method
-      move = self.current_player.move(@board)
-      if !board.valid_move?(move)
-        puts "NOT a valid move. Play again, please!"
+    def turn # work on this dadgum method
+      move = current_player.move(@board)
+      unless board.valid_move?(move)
+        puts 'NOT a valid move. Play again, please!'.red
         turn
       end
-        @board.update(move, self.current_player)
+      @board.update(move, current_player)
     end
-
 
     # define #play here
     def play
-      until self.over? # until the game is over
+      until over? # until the game is over
         @board.display
-        self.turn # take turns
+        turn # take turns
       end
-      if self.won?
-          puts "Congratulations #{winner}!"
-      else draw?
-           puts "Cat's Game!"
+      if won?
+        puts "Congratulations #{winner}!".green
+      elsif draw?
+        puts "Cat's Game!"
       end
     end
-  end
+end

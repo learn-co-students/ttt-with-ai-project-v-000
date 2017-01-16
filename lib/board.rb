@@ -17,7 +17,7 @@ class Board
         puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
 
-    def input_index(input)  #this one line is all over the place!
+    def input_index(input) # this one line is all over the place!
       input.to_i - 1
     end
 
