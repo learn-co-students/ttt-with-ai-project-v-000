@@ -2,7 +2,8 @@ require_relative '../player.rb'
 
 module Players
 	class Computer < Player
-		def move(board, game)
+		def move(board, game=Game.new)
+
 			corners = [[board.cells[0], board.cells[8]], [board.cells[2], board.cells[6]]]
 			opponent_token = game.current_player.token == "X" ? "O" : "X"
 
@@ -24,7 +25,6 @@ module Players
 			else 
 				board.available_spots
 			end
-
 		end
 	end
 end
