@@ -73,7 +73,7 @@ class Game
       if won?
         puts "Congratulations #{winner}!".green
       elsif draw?
-        puts "Cat's Game!"
+        puts "Cat's Game!".yellow
       end
     end
 end

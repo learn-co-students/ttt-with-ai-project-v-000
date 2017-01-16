@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
 puts %q[
-  ___________ .__        __
+  ___________  __        __
   \__    ___/ |__| _____/  |______    ____
      |    |   |  |/ ___\   __\__  \ _/ ___\
      |    |   |  \  \___|  |  / __ \  \___
@@ -24,7 +24,10 @@ puts "\nYou may also enter 'q' to Quit"
 game_type = gets.chomp
 first_move = ''
 
-if game_type == '2' # hum vs hum
+if game_type == 'q'
+  puts 'Hate to see you go. Have a nice day!'.green
+  abort
+elsif game_type == '2' # hum vs hum
   game = Game.new
   game.play
 elsif game_type == '00110011' # comp vs comp
@@ -32,10 +35,10 @@ elsif game_type == '00110011' # comp vs comp
   game.play
 elsif game_type == '1' # hum vs comp
   puts "So umm...who's going first?!"
-  puts "If you want to go first, choose 'X'. Otherwise, choose 'O'"
+  puts "If you want to go first, #{name}, choose 'X'. Otherwise, choose 'O'"
   first_move = gets.strip.upcase
-  while first_move != 'X' && first_move != '0'
-    puts 'Cmon, son! What are you doing?! Enter X or O, please.'
+  while first_move != 'X' && first_move != 'O'
+    puts 'Cmon, son! What are you doing?! Enter X or O, please.'.red
     first_move = gets.strip.upcase
   end
 
@@ -43,7 +46,7 @@ elsif game_type == '1' # hum vs comp
   if first_move == 'X'
     game = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
   else
-    game = Game.new(Players::Computer.new('X'), Players::Human.new('X'), Board.new)
+    game = Game.new(Players::Computer.new('X'), Players::Human.new('O'), Board.new)
   end
   game.play
 end
