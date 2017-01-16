@@ -9,11 +9,10 @@ describe 'Players::Computer' do
     it 'returns a valid position for the computer to move' do
       computer = Players::Computer.new("X")
       board = Board.new
-      game = Game.new
 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-      computer_move = computer.move(board, game)
+      computer_move = computer.move(board)
 
       expect(valid_moves).to include(computer_move)
     end
