@@ -6,6 +6,7 @@ module Players
 			corners1 = [board.cells[0], board.cells[8]]
 			corners2 = [board.cells[2], board.cells[6]]
 			opponent_token = game.current_player.token == "X" ? "O" : "X"
+			
 			if board.turn_count == 3 && (corners1 == [opponent_token, opponent_token] || corners1 == [opponent_token, opponent_token]) && board.cells[4] != " "
 				["2", "4", "6", "8"].sample
 			elsif board.needs_block?
