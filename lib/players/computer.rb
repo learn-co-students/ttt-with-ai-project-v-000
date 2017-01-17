@@ -3,8 +3,6 @@ module Players
 
     def move(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-#      user_input = valid_moves.sample
-#      user_input
       corner_indexes = [0, 2, 6, 8]
       middle_index = [4]
       edge_indexes = [1, 3, 5, 7]
