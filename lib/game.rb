@@ -71,8 +71,10 @@ class Game
       turn # take turns
     end
     if won?
+      @board.display
       puts "Congratulations #{winner}!".green
     elsif draw?
+      @board.display
       puts "Cat's Game!".yellow
     end
   end
