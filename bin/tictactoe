@@ -3,12 +3,12 @@
 require_relative '../config/environment'
 
 puts %q[
-  ___________  __        __
-  \__    ___/ |__| _____/  |______    ____
-     |    |   |  |/ ___\   __\__  \ _/ ___\
-     |    |   |  \  \___|  |  / __ \  \___
-     |____|   |__|\___  >__| (____  /\___  >
-                      \/          \/     \/].green
+  _____ _     _____         _____          
+ |_   _(_) ____   _|_ _  ____   _|__   ___
+   | | | |/ __|| |/ _` |/ __|| |/ _ \ / _ \
+   | | | | (__ | | (_| | (__ | | (_) |  __/
+   |_| |_|\___||_|\__,_|\___||_|\___/ \___|
+                                           ].green
 puts 'Hi! Welcome to the battlezone. Tic Tac Toe is the name of the game!'
 
 puts 'Please enter your name so that we can provide the best experience:'
