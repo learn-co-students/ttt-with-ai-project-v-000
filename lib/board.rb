@@ -47,4 +47,10 @@ class Board
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
+  def win_possible?
+    Game::WIN_COMBINATIONS.find do |combo|
+      ((@cells[combo[0]] == @cells[combo[1]]) && (@cells[combo[0]] != " ") && (@cells[combo[2]] == " ")) || ((@cells[combo[0]] == @cells[combo[2]]) && (@cells[combo[0]] != " ") && (@cells[combo[1]] == " ")) || ((@cells[combo[1]] == @cells[combo[2]]) && (@cells[combo[1]] != " ") && (@cells[combo[0]] == " "))
+    end
+  end
+
 end
