@@ -6,5 +6,4 @@ class Players::Computer < Player
     input = (1..9).to_a.sample
     input.to_s
   end
-
 end

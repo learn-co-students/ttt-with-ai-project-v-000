@@ -33,8 +33,8 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |win_combo|
       if @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
-       @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
-       (@board.cells[win_combo[0]] == 'X' || @board.cells[win_combo[0]] == 'O')
+         @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
+        (@board.cells[win_combo[0]] == 'X' || @board.cells[win_combo[0]] == 'O')
         return win_combo
       else
         false
