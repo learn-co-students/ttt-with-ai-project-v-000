@@ -1,4 +1,6 @@
 class TicTacToeCLI
+  def initialize
+  end
 
 
   puts %q[
@@ -11,9 +13,10 @@ class TicTacToeCLI
   puts 'Hi! Welcome to the battlezone. Tic Tac Toe is the name of the game!'
 
   puts 'Please enter your name so that we can provide the best experience:'
-    name = gets.chomp
-    puts "Thanks #{name}! What kind of game would you like to play?"
-    def call
+  name = gets.chomp
+  puts "Thanks #{name}! What kind of game would you like to play?"
+
+  def call
     puts 'Enter 1 to play against the computer.'
     puts 'Enter 2 to play against a human.'
     puts 'Enter 00110011 to watch the computers battle to their circuits.'
