@@ -65,14 +65,18 @@ class TicTacToeCLI
   end
 
   def merry_go_round
-    puts "I bet you do. Enter 'Y' or 'N'."
     input = gets.chomp
+    while input != 'Y' || input != 'N'
+      puts "Please enter 'Y' or 'N'.".red
     case input
     when 'Y'
       call
     when 'N'
       puts 'Aww man! Ok. See you later!'
       abort
+    else
+      merry_go_round
+      end
     end
   end
 end
