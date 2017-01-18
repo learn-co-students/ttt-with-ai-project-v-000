@@ -37,10 +37,23 @@ class Game
   end
 
   def turn
-    pos = gets
-    while !@board.valid_move?(pos)
-      pos = gets
+    pos = "invalid"
+    until @board.valid_move?(pos) do
+      pos = current_player.move(@board.cells)
     end
-    board.update(pos, current_player)
+    @board.update(pos, current_player)
+  end
+
+  def play
+    until draw? || won? do
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+
   end
 end

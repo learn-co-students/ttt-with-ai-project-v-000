@@ -27,7 +27,7 @@ class Board
   end
 
   def turn_count
-    @cells.keep_if { |cell| cell != " "}.count
+    @cells.count { |cell| cell != " "}
   end
 
   def taken?(pos)
@@ -36,9 +36,8 @@ class Board
   end
 
   def valid_move?(pos)
-    return false if !/[123456789]/.match(pos)
-    pos = pos.to_i - 1
-    @cells[pos] == " "
+    return false if !/^[123456789]$/.match(pos)
+    !taken?(pos)
   end
 
   def update(pos, player)

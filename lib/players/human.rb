@@ -1,8 +1,8 @@
 module Players
   class Human < Player
-    def move(v)
+    def move(board)
       puts "Please enter move: (1-9)"
-      input = gets
+      pos = gets
     end
   end
 end
