@@ -119,7 +119,7 @@ class TicTacToe
       move(input, current_player)
       display_board
     else
-      turn
+      puts "Invalid input"
     end
   end
 
