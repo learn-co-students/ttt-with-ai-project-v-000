@@ -2,10 +2,10 @@ module Players
   class Computer < Player
     def move(board)
       temp = Board.new
-      temp.cells = board.cells
+      temp.cells = board
 
       #dev
-      (board.cells.index{" "} + 1).to_s
+      (board.index(" ") + 1).to_s
     end
   end
 end

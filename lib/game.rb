@@ -42,6 +42,7 @@ class Game
       pos = current_player.move(@board.cells)
     end
     @board.update(pos, current_player)
+    @board.display
   end
 
   def play
