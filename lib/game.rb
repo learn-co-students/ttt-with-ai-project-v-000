@@ -15,7 +15,7 @@ class Game
     [2,4,6]
   ]
 
-  # spec requires arguemnts to be passed in in this order
+  # spec requires arguments to be passed in in this order
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
@@ -77,5 +77,43 @@ class Game
     elsif draw?
      puts "Cat's Game!"
    end
+  end
+
+  def start
+    puts "Welcome to TicTacToe!\n"
+    play_again = 'y'
+    while play_again == 'y'.downcase || play_again == 'yes'.downcase
+      puts "How many human players?\n0\n1\n2"
+      input = gets.strip
+
+      if input == 0
+        puts "This should be fun."
+        sleep 1.5
+        player_1 = Players::Computer.new('X')
+        player_2 = Players::Computer.new('O')
+        self.new(player_1, player_2).play
+      elsif input == 1
+        puts "Would you like to go first? (First player = X)"
+        input == gets.strip
+        if input == 'yes'.downcase || input == 'y'.downcase
+          player_1 = Players::Human.new('X')
+          player_2 = Players::Computer.new('O')
+          self.new(player_1, player_2).play
+        elsif input == 'no'.downcase || input == 'n'.downcase
+          player_1 = Players::Computer.new('X')
+          player_2 = Players::Human.new('O')
+          self.new(player_1, player_2).play
+        end
+      elsif input == 2
+        player_1 = Players::Human.new('X')
+        player_2 = Players::Human.new('O')
+        self.new(player_1, player_2).play
+      end
+      puts "Would you like to play again?\nYes\nNo"
+        play_again = gets.strip
+    end
+    puts "Thanks for playing!"
+    sleep 1
+    abort
   end
 end
