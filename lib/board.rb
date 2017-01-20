@@ -11,10 +11,13 @@ class Board
 
   def display
     i = -1
+
+    puts ""
     3.times do
       puts " #{@cells[i+=1]} | #{@cells[i+=1]} | #{@cells[i+=1]} "
       puts "-----------" if i < 6
     end
+    puts ""
   end
 
   def position(pos)
