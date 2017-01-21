@@ -36,11 +36,12 @@ class Board
 
   # define turn_count here
   def turn_count
-    counter = 0
-    @cells.each do |occupied_spot|
-      counter += 1 if occupied_spot != ' '
-    end
-    counter
+    cells.count { |occupied_spot| occupied_spot != " " }
+#    counter = 0
+#    @cells.each do |occupied_spot|
+#      counter += 1 if occupied_spot != ' '
+#    end
+#    counter
   end
 
   # taken? method
@@ -51,11 +52,7 @@ class Board
 
   # valid_move? method here
   def valid_move?(input)
-    if position(input) == " " && input.to_i.between?(1, 9)
-      true # input on the board && input not taken
-    else
-      false # return false or nil here for invalid move
-    end
+    input.to_i.between?(1, 9) && position(input) == " " 
   end
 
   # define update
