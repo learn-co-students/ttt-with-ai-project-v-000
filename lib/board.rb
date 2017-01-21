@@ -4,12 +4,12 @@ class Board
 	attr_accessor :cells, :answer_token
 
 	def initialize
-		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		self.reset!
 		@answer_token = []
 	end
 
 	def reset!
-		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		@cells = Array.new(9, " ")
 	end
 
 	def display
@@ -32,7 +32,7 @@ class Board
 
 	def available_spots
 		available = []
-		self.cells.each_with_index do |cell, index|
+		cells.each_with_index do |cell, index|
 			if cell == " "
 				available << (index + 1).to_s
 			end
@@ -60,11 +60,11 @@ class Board
 	end
 
 	def position(position)
-		@cells[position.to_i - 1]
+		cells[position.to_i - 1]
 	end
 
 	def full?
-		!self.cells.include?(" ")
+		cells.all? {|cell| cell != " "}
 	end
 
 	def turn_count

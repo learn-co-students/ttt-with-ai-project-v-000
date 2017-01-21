@@ -30,26 +30,20 @@ class Game
 	end
 
 	def won?
-		WIN_COMBINATIONS.each do |combo|
-			board = self.board.cells
-			if board[combo[0]] == "X" && board[combo[1]] == "X" && board[combo[2]] == "X" ||
-			   board[combo[0]] == "O" && board[combo[1]] == "O" && board[combo[2]] == "O"
-			   @winning_symbol = board[combo[0]]
-			   return true
-			end
-		end
-		false
+		WIN_COMBINATIONS.detect do |combo|
+	    	@board.cells[combo[0]] == @board.cells[combo[1]] &&
+	    	@board.cells[combo[0]] == @board.cells[combo[2]] &&
+	    	@board.taken?(combo[0] + 1)
+	    end
 	end
 
 	def draw?
-		!self.board.cells.include?(" ") && !self.won? ? true : false
+		self.board.full? && !self.won? ? true : false
 	end
 
 	def winner
-		if self.won?
-			@winning_symbol
-		else
-			nil
+		if won = won?
+			self.board.cells[won.first]
 		end
 	end
 
@@ -65,8 +59,6 @@ class Game
 		end
 		self.board.update(input, self.current_player)
 		self.current_player = (self.current_player == @player_1) ? @player_2 : @player_1
-		
-
 	end
 
 	def play

@@ -3,15 +3,9 @@ require_relative '../player.rb'
 module Players
 	attr_reader :move
 
-	class Human < Player
-		
-		
+	class Human < Player	
 		def move(board, game=Game.new)
-			input = gets.chomp
-			input
-
+			gets.chomp
 		end
-
 	end
-
 end
