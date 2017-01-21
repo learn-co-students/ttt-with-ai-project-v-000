@@ -3,7 +3,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    self.reset!
     self.display
   end
 
@@ -21,11 +21,11 @@ class Board
   end
 
   def full?
-    @cells.include?(" ") == false
+    @cells.all? {|cell| cell != " "}
   end
 
   def turn_count
-    9 - @cells.count(" ")
+    @cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   def taken?(user_input)
@@ -33,7 +33,7 @@ class Board
   end
 
   def valid_move?(user_input)
-    user_input.to_i.between?(1,9) && self.taken?(user_input) == false
+    user_input.to_i.between?(1,9) && !taken?(user_input)
   end
 
   def update(user_input, player = "X")
@@ -44,7 +44,7 @@ class Board
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def win_possible?
