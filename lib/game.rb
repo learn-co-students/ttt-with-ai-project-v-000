@@ -19,19 +19,15 @@ class Game
   end
 
   def current_player
-    return @player_1 if board.turn_count.even?
-    return @player_2 if board.turn_count.odd?
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
-    WIN_COMBINATIONS.each do |win_combo|
-      if board.cells[win_combo[0]] == 'X' && board.cells[win_combo[1]] == 'X' && board.cells[win_combo[2]] == 'X'
-        return true
-      elsif board.cells[win_combo[0]] == 'O' && board.cells[win_combo[1]] == 'O' && board.cells[win_combo[2]] == 'O'
-        return true
-      end
+    WIN_COMBINATIONS.detect do |win_combo|
+      @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
+      @board.cells[win_combo[0]] == @board.cells[win_combo[2]] &&
+      @board.taken?(win_combo[0] +1)
     end
-    return false
   end
 
   def draw?
@@ -43,14 +39,9 @@ class Game
   end
 
   def winner
-    WIN_COMBINATIONS.each do |win_combo|
-      if board.cells[win_combo[0]] == 'X' && board.cells[win_combo[1]] == 'X' && board.cells[win_combo[2]] == 'X'
-        return 'X'
-      elsif board.cells[win_combo[0]] == 'O' && board.cells[win_combo[1]] == 'O' && board.cells[win_combo[2]] == 'O'
-        return 'O'
-      end
+    if won = won?
+      @board.cells[won.first]
     end
-    return nil
   end
 
   def turn
