@@ -5,9 +5,6 @@ require_relative "../lib/players/computer.rb"
 require_relative "../lib/players/human.rb"
 
 
-
-
-
 class TicTacToe
 
   def initialize
