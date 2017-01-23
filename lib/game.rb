@@ -41,7 +41,7 @@ class Game
   end
 
   def draw?
-    won? == false && @board.full? == true
+    !won? && @board.full?
   end
 
   def over?
@@ -50,13 +50,10 @@ class Game
 
   def winner
     if won?
-      if @board.cells.count("X") <= @board.cells.count("O")
-        "O"
-      else
-        "X"
-      end
-    else
-      nil
+      win = WIN_COMBINATIONS.detect {|combo|
+        (@board.cells[combo[0]] == @board.cells[combo[1]]) && (@board.cells[combo[0]] == @board.cells[combo[2]]) &&
+        @board.cells[combo[0]] != " "}
+      @board.cells[win.first]
     end
   end
 
