@@ -1,6 +1,11 @@
 require 'pry'
 
 class CLI
+
+  def call
+    start
+  end
+  
   def start
     puts "Welcome to TicTacToe!"
     sleep 1
