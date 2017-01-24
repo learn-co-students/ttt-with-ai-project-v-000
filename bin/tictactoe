@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "**** Welcome to Tic Tac Toe! ****\n\n"
+help
+
+loop do
+  puts "\nWhat mode do you want to play?"
+
+  case gets.strip
+  when "1"
+    zero_player
+  when "2"
+    one_player
+  when "3"
+    two_players
+  when "help"
+    help
+  when "exit"
+    break
+  else
+    puts "Invalid! type 'help' for help.\n\n"
+  end
+end
