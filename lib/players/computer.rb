@@ -125,9 +125,6 @@ module Players
         lined = line.collect{|e| cells[e]}.join.gsub(/\s+/, "")
 
         if lined == tokn(cells)
-          #iterate over empty cells
-            #if win(cells).count > 1
-              #return cell
           line.each do |cell|
             temp_cells = cells.dup
             temp_cells[cell] = tokn(cells)
@@ -142,13 +139,18 @@ module Players
 
     def force(cells)
       #get a list of 'singles'
+      singles = @@all.each_with_index.collect do |line, i|
+        lined = line.collect{|e| cells[e]}.join.gsub(/\s+/, "")
+        lined == tokn(cells) ? i : nil
+      end
       #iterate through 'singles' lines
         #drop a token in cell
         #opponent blocks
         #can a double be created?
         #if a double can be created
           #can opponent win somewhere else?
-          #if not then return cell 
+          #if not then return cell
+      nil
     end
 
     def best_move(cells)
