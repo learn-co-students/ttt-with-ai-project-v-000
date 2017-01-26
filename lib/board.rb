@@ -22,9 +22,7 @@ class Board
     cells.none? {|cell| cell == " " || cell == nil}
   end
   def turn_count
-    turn = 0
-    cells.each {|cell| turn += 1 if cell == "X" || cell == "O"}
-    turn
+    cells.count {|cell| cell == "X" || cell == "O"}
   end
   def taken?(input)
     position(input) == "X" || position(input) == "O"
