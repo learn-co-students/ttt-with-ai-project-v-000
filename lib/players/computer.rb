@@ -97,7 +97,6 @@ module Players
     def win(cells)
       wins = @@all.each_with_index.collect do |line, i|
         lined = line.collect{|e| cells[e]}.join.gsub(/\s+/, "")
-
         if lined == tokn(cells) + tokn(cells)
           line[line.index {|e| cells[e] == " "}]
         else
@@ -110,14 +109,13 @@ module Players
     def block(cells)
       blocks = @@all.each_with_index.collect do |line, i|
         lined = line.collect{|e| cells[e]}.join.gsub(/\s+/, "")
-
         if lined == opponent(cells) + opponent(cells)
           line[line.index {|e| cells[e] == " "}]
         else
           nil
         end
       end.compact!
-      blocks if blocks and blocks.count > 0
+      blocks if blocks.count > 0
     end
 
     def double(cells)
@@ -138,19 +136,42 @@ module Players
     end
 
     def force(cells)
+      orig_token = tokn(cells)
       #get a list of 'singles'
       singles = @@all.each_with_index.collect do |line, i|
         lined = line.collect{|e| cells[e]}.join.gsub(/\s+/, "")
         lined == tokn(cells) ? i : nil
-      end
+      end.compact!
       #iterate through 'singles' lines
+      singles.each do |line_i|
         #drop a token in cell
-        #opponent blocks
-        #can a double be created?
-        #if a double can be created
-          #can opponent win somewhere else?
-          #if not then return cell
+        @@all[line_i].each do |cell_i|
+          next if cells[cell_i] != " "
+          temp_cells = cells.dup
+          temp_cells[cell_i] = tokn(temp_cells)
+          tmp_game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+          tmp_game.board.cells = temp_cells
+          while tmp_game.won? == false and tmp_game.draw? == false do
+            tmp_game.turn
+          end
+          if tmp_game.won? and tmp_game.winner == orig_token
+            return cell_i
+          end
+        end
+      end
       nil
+    end
+
+    def avoid_force(cells)
+      safe_spots = cells.each_with_index.collect do |e, i|
+        next if e != " "
+        temp_cells = cells.dup
+        temp_cells[i] = tokn(temp_cells)
+        force(temp_cells) == nil ? i : nil
+      end.compact!
+      puts"Avoid"
+    
+      safe_spots if safe_spots.count > 0
     end
 
     def best_move(cells)
@@ -175,10 +196,10 @@ module Players
       elsif force(cells)
         options << force(cells)
 
-      # elsif block_force(cells, turn)
-      #   options.concat(block_force(cells, turn))
-      #
+      elsif turn == 3 and avoid_force(cells)
+        options.concat(avoid_force(cells))
 
+      #at least try...
 
       elsif turn >= 1 and cells[4] == " "
         options << @@center
