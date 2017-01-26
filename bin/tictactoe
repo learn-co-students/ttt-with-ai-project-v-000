@@ -3,3 +3,7 @@
 require_relative '../config/environment'
 
 puts "Greetings Earthling"
+game = Game.new
+until game.won?
+  game.play
+end
