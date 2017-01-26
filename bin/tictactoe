@@ -6,7 +6,7 @@ input = "go"
 
 until input == "q" do
   puts "Hi there! would you like to play with 0, 1 or 2 player? type 0, 1 or 2 to begin."
-  input = gets.chomp
+  input = gets.chomp.upcase
 
   if input == "0" or input == ""
     player_1 = Players::Computer.new("X")
@@ -21,14 +21,15 @@ until input == "q" do
       player_2 = Players::Human.new("O")
       player_1 = Players::Computer.new("X")
     end
-  elsif input == 2
+  elsif input == "2"
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
+  elsif input == 'Q'
+    return
   else
     next
   end
 
-
-  game = Game.new(player_1, player_2, Board.new) unless input == "q"
-  game.play unless input == "q"
+  game = Game.new(player_1, player_2, Board.new)
+  game.play
 end

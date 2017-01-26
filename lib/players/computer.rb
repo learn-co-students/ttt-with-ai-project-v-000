@@ -169,8 +169,6 @@ module Players
         temp_cells[i] = tokn(temp_cells)
         force(temp_cells) == nil ? i : nil
       end.compact!
-      puts"Avoid"
-    
       safe_spots if safe_spots.count > 0
     end
 
@@ -199,16 +197,13 @@ module Players
       elsif turn == 3 and avoid_force(cells)
         options.concat(avoid_force(cells))
 
-      #at least try...
-
       elsif turn >= 1 and cells[4] == " "
         options << @@center
 
       else
         options << cells.index(" ")
       end
-      binding.pry if options.count == 0
-      puts options
+
       (options.shuffle.last + 1).to_s
     end
 
