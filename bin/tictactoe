@@ -37,4 +37,7 @@ while play_again.downcase == "y" || play_again.downcase == "yes"
     game.play
   end
   puts "Would you like to play again? y/n yes/no"
+  if play_again.downcase != "y" || play_again.downcase != "yes"
+    return
+  end
 end
