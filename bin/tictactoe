@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe!"
+puts "What kind of game would you like to play: 0, 1, or 2 player(s)?"
+game_type = gets.strip
+
+if game_type == "1"
+  puts "Who should go first and be 'X': computer or human?"
+  player_one = gets.strip
+end
+
+if game_type == "0"
+  game = Game.new(Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+elsif game_type == "1" && player_one == "computer"
+  game = Game.new(Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+elsif game_type == "1" && player_one == "human"
+  game = Game.new(Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+elsif game_type == "2"
+  game = Game.new(Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+end
+
+#play the game until its over
+until game.over?
+  game.play
+end
+
+play_again = ""
+puts "Would you like to play again? y/n yes/no"
+play_again = gets.strip
+
+while play_again.downcase == "y" || play_again.downcase == "yes"
+  play_again = gets.strip
+  game = Game.new
+
+  until game.over?
+    game.play
+  end
+  puts "Would you like to play again? y/n yes/no"
+end
