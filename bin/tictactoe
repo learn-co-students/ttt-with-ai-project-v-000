@@ -30,13 +30,14 @@ puts "Would you like to play again? y/n yes/no"
 play_again = gets.strip
 
 while play_again.downcase == "y" || play_again.downcase == "yes"
-  play_again = gets.strip
   game = Game.new
 
   until game.over?
     game.play
   end
   puts "Would you like to play again? y/n yes/no"
+  play_again = gets.strip
+
   if play_again.downcase != "y" || play_again.downcase != "yes"
     return
   end
