@@ -188,7 +188,7 @@ describe 'Game' do
       expect(game.player_2).to receive(:gets).and_return("2")
 
       game.turn
-      game.turn
+      game.turn 
     end
   end
 
