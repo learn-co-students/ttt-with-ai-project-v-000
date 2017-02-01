@@ -28,10 +28,10 @@ module Players
           corners.sample
         end
 
-      elsif i_can_win! != nil
+      elsif i_can_win!
         missing_piece(i_can_win!)
 
-      elsif block_needed != nil
+      elsif block_needed
         missing_piece(block_needed)
 
       elsif upcoming_fork?
