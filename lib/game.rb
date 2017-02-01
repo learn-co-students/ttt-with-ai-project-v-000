@@ -12,6 +12,8 @@ class Game
     [2,4,6]
   ]
 
+  @@all = {"X"=>0, "O"=>0, "Senseless Destruction"=>0}
+
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
@@ -27,11 +29,11 @@ class Game
   end
 
   def over?
-    self.board.full? || won?
+    draw? || won?
   end
 
   def draw?
-    over? && !won?
+    self.board.full? && !won?
   end
 
   def won?
@@ -46,10 +48,41 @@ class Game
   end
 
   def turn
-    puts "Please select a number 1-9 to make your turn."
-    input = gets.chomp
-    if self.board.valid_move?(input)
-      self.board.update(index, current_player)
+    puts "Game status:\n"
+    self.board.display
+    move = current_player.move(self.board)
+    if !self.board.valid_move?(move)
+      puts "Sorry, that's not a valid move"
+      turn
+    else
+      self.board.update(move, current_player)
+    end
+  end
+
+  def play
+    until over? do
+      turn
+    end
+    if won?
+      puts "**GAME OVER**"
+      self.board.display
+      puts "Congratulations #{winner}!"
+      self.class.update(winner.to_s)
+      self.class.display
+    else
+      puts "Cat's Game!"
+      self.class.update("Senseless Destruction")
+      self.class.display
+    end
+  end
+
+  def self.update(winner)
+    @@all[winner]+=1
+  end
+
+  def self.display
+    @@all.each do |k, v|
+      puts "-#{k} has won #{v} times."
     end
   end
 
