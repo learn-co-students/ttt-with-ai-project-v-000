@@ -63,9 +63,6 @@ class GameLogic
     when "Ghost town"
       ghost
     when "Trump"
-      x_victories = 0
-      o_victories = 0
-      @nobody_wins = 0
       100.times do ghost
       end
     end
