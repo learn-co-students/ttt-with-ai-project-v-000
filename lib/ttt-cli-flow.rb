@@ -16,7 +16,7 @@ class GameLogic
     puts "     |__|       \\______/       |__|     |__|   |__| |_______| |_______| /  /"
     puts "______________________________________________________________________/  /"
     puts "|______________________________________________________________________/"
-    puts "What's goin on?! You're about to play a fast-paced, action-packed, mesmerizing \ngame of TIC TAC TOTALLY. It's kind of like Tic-Tac-Toe, except TOTALLY!\nPrepare to have your mind blown by things you've already seen in a game you've \nalready played, but this time brought to you by me!"
+    puts "What's goin on?! You're about to play a fast-paced, action-packed, mesmerizing \ngame of TIC TAC TOTALLY. It's kind of like Tic-Tac-Toe, except TOTALLY!\nPrepare to have your mind blown by things you've already seen in a game you've \nalready played, but this time it's personal."
     puts "\nNOW, y'all tryina play a ONE player or TWO player game? Or maybe even 0 player??\n
     For 1 player, type '1'\n
     For 2 player, type '2'\n
@@ -56,11 +56,11 @@ class GameLogic
 
   def call
     case intro
-    when "1"
+    when "1" || "one"
       one_player
-    when "2"
+    when "2" || "two"
       two_player
-    when "Ghost town"
+    when "Ghost town" || "0"
       ghost
     when "Trump"
       100.times do ghost
