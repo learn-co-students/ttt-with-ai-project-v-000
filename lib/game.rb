@@ -18,6 +18,7 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    puts "\nSweet. When it's your turn, enter a number 1 through 9 to place your token \non the corrosponding spot of the board, '1' being the top left corner and '9' being the bottom right.\n\n"
   end
 
   def current_player
