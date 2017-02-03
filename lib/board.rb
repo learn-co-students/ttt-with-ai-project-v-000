@@ -1,6 +1,6 @@
 class Board
 
-  attr_accessor :cells, :board, 
+  attr_accessor :cells, :board
 
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -32,6 +32,10 @@ class Board
 
   def reset!
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  end
+
+  def empty?
+    self.cells.all? {|c| c == " "}
   end
 
   def full?
