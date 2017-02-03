@@ -14,20 +14,20 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
+  def input_to_i(input)
+    input.to_i - 1
+  end
+
   def position(cell)
     self.cells[input_to_i(cell)]
   end
 
-  def update(cell, player)
+  def update(position, player)
+    self.cells[input_to_i(position)] = player.token
   end
 
   def turn_count
-    turn = self.cells.collect {|c| c == " "}
-    if turn.size % 2 == 0
-      "O"
-    else 
-      "X"
-    end  
+    count = self.cells.select {|c| c != " "}.size
   end
 
   def reset!
@@ -45,10 +45,6 @@ class Board
 
   def valid_move?(cell)
      !(input_to_i(cell) < 0 || input_to_i(cell) > 9) && !(self.cells[input_to_i(cell)]  == "X" || self.cells[input_to_i(cell)] == "O")
-  end
-
-  def input_to_i(input)
-    input.to_i - 1
   end
 
 end
