@@ -24,7 +24,8 @@ class Game
 
   def current_player
     # test calls on player.token, changed true/false statements to player_1/player_2
-      @board.turn_count % 2 == 0 ? @player_1 : @player_2
+      # @board.turn_count % 2 == 0 ? @player_1 : @player_2
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?

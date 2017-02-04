@@ -24,7 +24,8 @@ class Board
   end
 
   def full?
-    !@cells.any?{|c| c == " "}
+    # !@cells.any?{|c| c == " "}
+    cells.all? {|c| c != " "}
   end
 
   def turn_count
