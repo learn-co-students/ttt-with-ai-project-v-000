@@ -13,6 +13,7 @@ module Players
 
   class Computer < Player
 
+    # Array of all open board positions
     def all_options(board)
       options = []
       # position = nil
@@ -22,6 +23,7 @@ module Players
       options
     end
 
+    # Array of positions held by computer
     def owned_spots(board)
       owned_spots = []
       board.cells.each_with_index do |cell, index|
@@ -30,6 +32,7 @@ module Players
       owned_spots
     end
 
+    # Array of positions held by opponent
     def opponent(board)
       opponent = []
       board.cells.each_with_index do |cell, index|
@@ -38,6 +41,7 @@ module Players
       opponent
     end
 
+    # Array of winning combinations which are at least one-thrid filfilled by computer
     def opportunities(board)
       opportunities = []
       owned_spots(board).each do |space|
@@ -51,6 +55,8 @@ module Players
       opportunities
     end
 
+
+    # Array of winning combinations which are two-thirds fulfilled by computer
     def super_opportunities(board)
       super_opportunities = []
       opportunities(board).each do |opportunity|
@@ -59,6 +65,7 @@ module Players
       super_opportunities
     end
 
+    # Array of winning combinations which are at least one-thrid filfilled by opponent
     def threats(board)
       threats = []
       opponent(board).each do |space|
@@ -72,6 +79,7 @@ module Players
       threats
     end
 
+    # Array of winning combinations which are two-thirds fulfilled by opponent
     def super_threats(board)
       super_threats = []
       threats(board).each do |threat|
@@ -111,6 +119,7 @@ module Players
       else
         ai_options = all_options
       end
+      # Prioritizes corner spaces
       if !(corners_available & ai_options).empty?
         ai_options = corners_available & ai_options
       else
@@ -126,5 +135,3 @@ module Players
   end
 
 end
-
-# binding.pry
