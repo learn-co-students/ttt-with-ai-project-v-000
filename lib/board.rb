@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
 attr_accessor :cells
 
@@ -19,7 +21,22 @@ attr_accessor :cells
   end
 
   def position(user_input)
-
+    self.cells[user_input.to_i - 1]
   end
 
+  def full?
+    !self.cells.include? " "
+  end
+
+  def turn_count
+    self.cells.count { |x| x == "X" || x == "O" }
+  end
+
+  def taken?(user_input)
+    !(self.cells[user_input.to_i - 1].nil? || self.cells[user_input.to_i - 1] == " ")
+  end
+
+  def valid_move?(user_input)
+    position(user_input.to_i).between?(0,8) && !taken?(user_input)
+  end
 end
