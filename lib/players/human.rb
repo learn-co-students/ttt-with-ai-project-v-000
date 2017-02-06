@@ -128,7 +128,7 @@ module Players
     end
 
     def move(board)
-      puts ai_options(board)
+      # puts ai_options(board)
       (ai_options(board).sample+1).to_s
     end
 

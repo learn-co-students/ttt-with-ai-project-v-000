@@ -22,18 +22,21 @@ class Game
   ]
 
   def current_player
-    board.cells.select{|cell| !cell.strip.empty?}.count.even? ? player_1 : player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def winner
-    winning_combo = WIN_COMBINATIONS.detect do |combo|
-      [board.cells[combo[0]], board.cells[combo[1]], board.cells[combo[2]]].uniq.count == 1 && !board.cells[combo[0]].strip.empty?
+    if won = won?
+      board.cells[won.first]
     end
-    winning_combo.nil? ? nil : board.cells[winning_combo[0]]
   end
 
   def won?
-    !winner.nil?
+    # !winner.nil?
+    winning_combo = WIN_COMBINATIONS.detect do |combo|
+      [board.cells[combo[0]], board.cells[combo[1]], board.cells[combo[2]]].uniq.count == 1 && !board.cells[combo[0]].strip.empty?
+    end
+    winning_combo
   end
 
   def draw?
@@ -44,13 +47,13 @@ class Game
     won? || draw?
   end
 
-  def valid_move?(input)
-    input >= 1 && input <= 9 && board.cells[input.to_i-1].strip.empty?
-  end
+  # def valid_move?(input)
+  #   input >= 1 && input <= 9 && board.cells[input.to_i-1].strip.empty?
+  # end
 
   def turn
     position = 0
-    until valid_move?(position)
+    until board.valid_move?(position)
       puts "#{current_player.token}'s turn."
       position = current_player.move(board).to_i
     end
@@ -61,6 +64,7 @@ class Game
     until over?
       turn
       board.display
+      puts "\n"
     end
     if draw?
       puts "Cat's Game!"
