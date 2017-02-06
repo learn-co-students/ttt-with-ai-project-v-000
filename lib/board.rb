@@ -6,8 +6,8 @@ class Board
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-  end
+    @cells = Array.new(9," ")
+ end
 
   def display
     i = -1
@@ -30,7 +30,7 @@ class Board
   end
 
   def turn_count
-    @cells.count { |cell| cell != " "} 
+    @cells.count { |cell| cell != " "}
   end
 
   def taken?(pos)
@@ -39,8 +39,7 @@ class Board
   end
 
   def valid_move?(pos)
-    return false if !/^[123456789]$/.match(pos)
-    !taken?(pos)
+    pos.to_i.between?(1,9) && !taken(pos)
   end
 
   def update(pos, player)

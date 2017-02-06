@@ -10,7 +10,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over?
@@ -18,11 +18,10 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.any? do |combo|
-      #non are empty
-      (!combo.any?{|e| @board.cells[e] == " "}) &&
-      #they are all the same
-      combo.collect{|e| @board.cells[e]}.uniq.count == 1
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
   end
 
@@ -31,16 +30,13 @@ class Game
   end
 
   def winner
-    WIN_COMBINATIONS.collect do |combo|
-      (!combo.any?{|e| @board.cells[e] == " "}) && combo.collect{|e| @board.cells[e]}.uniq.count == 1 ? @board.cells[combo[0]] : nil
-    end.compact[0]
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
-    pos = "invalid"
-    until @board.valid_move?(pos) do
-      pos = current_player.move(@board.cells)
-    end
+    pos = current_player.move(@board.cells)
     @board.update(pos, current_player)
   end
 

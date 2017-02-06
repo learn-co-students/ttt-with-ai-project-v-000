@@ -11,7 +11,7 @@ module Players
     @@middles = [1,3,5,7]
 
     def tokn(cells)
-        cells.count { |cell| cell != " "} % 2 == 0 ? "X" : "O"
+        cells.count { |cell| cell != " "}.even? ? "X" : "O"
     end
 
     def opponent(cells)
@@ -77,10 +77,10 @@ module Players
           temp_cells[cell_i] = tokn(temp_cells)
           tmp_game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
           tmp_game.board.cells = temp_cells
-          while tmp_game.won? == false and tmp_game.draw? == false do
+          while tmp_game.won? == nil && tmp_game.draw? == false do
             tmp_game.turn
           end
-          if tmp_game.won? and tmp_game.winner == orig_token
+          if tmp_game.won? != nil && tmp_game.winner == orig_token
             return cell_i
           end
         end
