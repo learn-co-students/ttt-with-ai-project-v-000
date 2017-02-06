@@ -4,7 +4,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" "," "," "," "," "," "," "," "," ",]
+    self.reset!
   end
 
   def display
@@ -16,7 +16,7 @@ class Board
   end
 
   def reset!
-    self.cells = [" "," "," "," "," "," "," "," "," ",]
+    self.cells = Array.new(9, " ")
   end
 
   def position(input)
@@ -25,7 +25,7 @@ class Board
   end
 
   def full?
-    !self.cells.include?(" ") || false
+    cells.all? {|cell| cell != " "}
   end
 
   def turn_count
