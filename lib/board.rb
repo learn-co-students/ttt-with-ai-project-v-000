@@ -33,10 +33,17 @@ attr_accessor :cells
   end
 
   def taken?(user_input)
-    !(self.cells[user_input.to_i - 1].nil? || self.cells[user_input.to_i - 1] == " ")
+    if position(user_input) == " "
+      false
+    else !position(user_input).nil?
+    end
   end
 
   def valid_move?(user_input)
-    position(user_input.to_i).between?(0,8) && !taken?(user_input)
+    !taken?(user_input) && (user_input.to_i - 1).between?(0,8)
+  end
+
+  def update(user_input, token = "X")
+
   end
 end
