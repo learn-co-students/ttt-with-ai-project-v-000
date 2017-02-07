@@ -1,7 +1,7 @@
 require 'pry'
 
 class Board
-attr_accessor :cells, :token
+attr_accessor :cells, :token, :player
 
   def initialize
     @cells = Array.new(9, " ")
@@ -44,8 +44,7 @@ attr_accessor :cells, :token
   end
 
   def update(user_input, player)
-    binding.pry
-    player = token
-    cells[user_input.to_i - 1] = token
+    #binding.pry
+    cells[user_input.to_i - 1] = player
   end
 end
