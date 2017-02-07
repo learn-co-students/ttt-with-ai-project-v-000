@@ -1,13 +1,12 @@
-require 'pry'
 class Board
-attr_accessor :cells, :token 
+attr_accessor :cells, :token
 
   def initialize
     reset!
   end# of initialize
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end# of reset!
 
 
@@ -26,8 +25,8 @@ end# of position
 
 
 def update(position, player_object)
-  cells[position.to_i - 1] = player_object.token 
-end# of update 
+  cells[position.to_i - 1] = player_object.token
+end# of update
 
 
 def full?
@@ -37,17 +36,17 @@ end# of full
 
 def turn_count
   count = 0
-  @cells.each do |cell| 
+  @cells.each do |cell|
     if cell == "X" || cell == "O"
       count += 1
     end# of if
   end# of do
-  count 
+  count
 end# of turn_count
 
 
 def taken?(position)
-  cells[position.to_i - 1] == "X" || 
+  cells[position.to_i - 1] == "X" ||
   cells[position.to_i - 1] == "O"
 end# of taken?
 
