@@ -19,9 +19,9 @@ class Game
     [0, 4, 8], #cross-right win 
     [6, 4, 2] ]#cross-left win 
 
- def current_player
+ def current_player  #returns player object depending on turn_count
     @board.turn_count.even? ? player_1 : player_2
-  end #returns player object depending on turn_count
+  end 
 
  def won? 
     WIN_COMBINATIONS.any? do |combo|
@@ -70,44 +70,75 @@ class Game
      puts "Welcome to Tic Tac Toe!"
      puts "What kind of game would you like to play?: (0, 1, or 2) Players ...or... (4): Wargames"
          while player_amount = gets.chomp.to_i
-          case player_amount
-          
-          when 0
-             system "clear"
-             computers = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-             computers.play
-             break if "exit"
-           when 1
-             system "clear"
-             puts "[Player vs. CPU] -- Who should go first?"
-             while input = gets.chomp
-               if input == "Player" || input == "CPU"
-                 if input == "Player"
-                   player_1 = Players::Human.new("X")
-                   player_2 = Players::Computer.new("O")
-                   break
-                 elsif input == "CPU"
-                   player_1 = Players::Computer.new("X")
-                   player_2 = Players::Human.new("O")
-                   break
+          if player_amount.between?(0, 4)
+              case player_amount
+              when 0
+                 system "clear"
+                 computers = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+                 computers.play
+                 break
+               when 1
+                 system "clear"
+                 puts "[Player vs. CPU] -- Who should go first?"
+                 while input = gets.chomp.downcase
+                   if input == "player" || input == "cpu"
+                     if input == "player"
+                       player_1 = Players::Human.new("X")
+                       player_2 = Players::Computer.new("O")
+                       break
+                     elsif input == "cpu"
+                       player_1 = Players::Computer.new("X")
+                       player_2 = Players::Human.new("O")
+                       break
+                     end
+                    else 
+                      puts "Please choose [Player] or [CPU] to go first."
+                    end
+                  end 
+                 uno_players = self.new(player_1, player_2, Board.new)            
+                 uno_players.play
+                 break
+               when 2
+                 system "clear"
+                 two_players = self.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+                 two_players.play
+                 break
+               when 4
+                 wargame_count = 0 
+                 x_win_count = 0
+                 o_win_count = 0
+                 until wargame_count == 100
+                   system "clear"
+                   this_is_war = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+                   this_is_war.wargames
+                     if this_is_war.draw?
+                        x_win_count += 0
+                     elsif this_is_war.winner == "X"
+                       x_win_count +=1
+                     elsif this_is_war.winner == "O"
+                       o_win_count +=1
+                     end
+                   wargame_count +=1
                  end
-                else 
-                  puts "Please choose [Player] or [CPU] to go first."
-                end
-              end 
-             uno_players = self.new(player_1, player_2, Board.new)            
-             uno_players.play
-             break if "exit"
-           when 2
-             system "clear"
-             two_players = self.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-             two_players.play
-             break if "exit"
-           when 4
-             system "clear"
-             this_is_war = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-             this_is_war.wargames 
-         end
+                 puts "\nNumber of games: #{wargame_count}"
+                 puts "X won #{x_win_count} times."
+                 puts "O won #{o_win_count} times."
+                 puts ""
+                 puts "Press enter to continue."
+                 gets.chomp 
+                 system "clear"
+                 puts "..."
+                 sleep 1
+                 system "clear"
+                 sleep 1
+                 puts "A strange game. The only winning move is not to play."
+                 puts ""
+                 puts "[exit]"
+                 break
+             end
+           else 
+             puts "Invalid Selection. Please choose (0, 1, 2) Players, or (4): Wargames."
+          end 
        end
   end       
 
@@ -130,58 +161,54 @@ class Game
        puts ""
        puts "Congratulations #{self.winner}!" 
        puts "Would you like to play again? [Exit] or [Replay]" 
-       input = gets.chomp 
-         if input == "replay"
-           self.class.start 
-         elsif input == "exit"
-          end
+       while input = gets.chomp.downcase
+         if input == "replay" || input =="exit"
+           if input == "replay"
+             self.class.start 
+           elsif input == "exit"
+             break
+            end
+         else 
+           puts "Invalid input. Type [Exit] or [Replay]."
+         end
+       end
    elsif draw? 
        @board.display
        puts "\nCat's Game!\n"
        puts "Would you like to play again? [Exit] or [Replay]" 
-       input = gets.chomp
-       if input == "replay"
-         self.class.start 
-       elsif input == "exit"
+       while input = gets.chomp.downcase
+        if input == "replay" || input =="exit"
+           if input == "replay"
+             self.class.start 
+           elsif input == "exit"
+             break
+            end
+        else 
+          puts "Invalid input. Type [Exit] or [Replay]."
         end
+      end 
    end
    
  end  
 
  def wargames #custom wargames play method. plays 100 CPU games!
-   wargame = 0
-   x_win_count = 0
-   o_win_count = 0
-   until wargame == 100
        turn until over? 
          if won?
            @board.display 
            puts ""
            puts "Congratulations #{self.winner}!" 
-            if self.winner == "X"
-              x_win_count +=1 
-            else 
-              o_win_count +=1
-            end 
-           wargame +=1
-           puts "Number games: #{wargame}"
          elsif draw? 
            @board.display
            puts "\nCat's Game!\n"
-           wargame +=1
-           puts "Number of simulations played: #{wargame}"
        end
-   end 
-   puts "Computer X has won #{x_win_count} times."
-   puts "Computer O has won #{x_win_count} times."
-   puts "..."
-   puts "A strange game. The only winning move is to not play."
-   input = gets.chomp
-    end
-
+     end 
 
 
    
 end
+
+
+
+   
 
 

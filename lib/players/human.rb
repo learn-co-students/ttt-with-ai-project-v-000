@@ -4,8 +4,6 @@ module Players
     def move(board)
       puts ""
       puts "Player #{@token}, make your move! [1-9]"
-      # ARGV.clear
-      # input = STDIN.gets.chomp
       input = gets.chomp
       input
     end
