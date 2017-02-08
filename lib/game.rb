@@ -35,7 +35,7 @@ class Game
      end
  end
 
- def win_combo 
+ def win_combo #returns winning combination
    WIN_COMBINATIONS.each do |combo|
       if combo.all? {|i| @board.cells[i] == "X"} || combo.all? {|i| @board.cells[i] == "O"} 
         return combo 
@@ -43,7 +43,7 @@ class Game
     end
   end 
    
- def winner
+ def winner  #returns "X" or "O" string
    if over?
      @board.cells[win_combo[0]] == "X" ? "X" : "O"
    else 
@@ -74,7 +74,7 @@ class Game
 
  def play
      turn until self.over?
-     puts "Congratulations #{winner}!"
+     puts "Congratulations #{@winner}!"
 end
 
   
