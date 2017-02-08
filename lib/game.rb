@@ -32,7 +32,7 @@ class Game
         false
        end
      end
- end #returns true/false
+ end 
 
  def win_combo #returns winning combination
    WIN_COMBINATIONS.each do |combo|
@@ -102,7 +102,7 @@ class Game
                  two_players = self.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
                  two_players.play
                  break
-               when 4
+               when 4   #Wargames selected
                  wargame_count = 0 
                  x_win_count = 0
                  o_win_count = 0
@@ -119,22 +119,22 @@ class Game
                      end
                    wargame_count +=1
                  end
-                 puts "\nNumber of games: #{wargame_count}"
-                 puts "X won #{x_win_count} times."
-                 puts "O won #{o_win_count} times."
-                 puts ""
-                 puts "Press enter to continue."
-                 gets.chomp 
-                 system "clear"
-                 puts "..."
-                 sleep 1
-                 system "clear"
-                 sleep 1
-                 puts "A strange game. The only winning move is not to play."
-                 puts ""
-                 puts "[exit]"
-                 break
-             end
+                   puts "\nNumber of games: #{wargame_count}"
+                   puts "X won #{x_win_count} times."
+                   puts "O won #{o_win_count} times."
+                   puts ""
+                   puts "Press enter to continue."
+                   gets.chomp 
+                   system "clear"
+                   puts "..."
+                   sleep 1
+                   system "clear"
+                   sleep 1
+                   puts "A strange game. The only winning move is not to play."
+                   puts ""
+                   puts "[exit]"
+                   break
+                 end
            else 
              puts "Invalid Selection. Please choose (0, 1, 2) Players, or (4): Wargames."
           end 
