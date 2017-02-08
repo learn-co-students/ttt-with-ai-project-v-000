@@ -21,7 +21,7 @@ class Game
 
  def current_player
     @board.turn_count.even? ? player_1 : player_2
-  end
+  end #returns player object depending on turn_count
 
  def won? 
     WIN_COMBINATIONS.any? do |combo|
@@ -33,7 +33,7 @@ class Game
         false
        end
      end
- end
+ end #returns true/false
 
  def win_combo #returns winning combination
    WIN_COMBINATIONS.each do |combo|
@@ -63,15 +63,16 @@ class Game
    end
   end
 
- def self.start #start constructor for CLI Game
+ def self.start #start custom constructor boots up CLI + game 
    puts "Initializing..."
    sleep 1
      system "clear"
      puts "Welcome to Tic Tac Toe!"
-     puts "What kind of game would you like to play?: (0, 1, or 2) Players"
+     puts "What kind of game would you like to play?: (0, 1, or 2) Players ...or... (4): Wargames"
          while player_amount = gets.chomp.to_i
-           case player_amount
-           when 0
+          case player_amount
+          
+          when 0
              system "clear"
              computers = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
              computers.play
@@ -102,6 +103,10 @@ class Game
              two_players = self.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
              two_players.play
              break if "exit"
+           when 4
+             system "clear"
+             this_is_war = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+             this_is_war.wargames 
          end
        end
   end       
@@ -118,8 +123,8 @@ class Game
      end
   end #turn engine for game
 
- def play
-     turn until over? #main turn engine, plays until game over
+ def play  #main turn engine, plays until game over, prompts for replay
+    turn until over? 
     if won?
        @board.display 
        puts ""
@@ -141,9 +146,42 @@ class Game
         end
    end
    
- end 
+ end  
 
-  
+ def wargames #custom wargames play method. plays 100 CPU games!
+   wargame = 0
+   x_win_count = 0
+   o_win_count = 0
+   until wargame == 100
+       turn until over? 
+         if won?
+           @board.display 
+           puts ""
+           puts "Congratulations #{self.winner}!" 
+            if self.winner == "X"
+              x_win_count +=1 
+            else 
+              o_win_count +=1
+            end 
+           wargame +=1
+           puts "Number games: #{wargame}"
+         elsif draw? 
+           @board.display
+           puts "\nCat's Game!\n"
+           wargame +=1
+           puts "Number of simulations played: #{wargame}"
+       end
+   end 
+   puts "Computer X has won #{x_win_count} times."
+   puts "Computer O has won #{x_win_count} times."
+   puts "..."
+   puts "A strange game. The only winning move is to not play."
+   input = gets.chomp
+    end
+
+
+
+   
 end
 
 
