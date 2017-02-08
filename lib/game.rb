@@ -1,6 +1,5 @@
 class Game 
-  # extend Players
-  include Players
+  
   attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
@@ -23,7 +22,7 @@ class Game
     @board.turn_count.even? ? player_1 : player_2
   end 
 
- def won? 
+ def won?  #returns true/false
     WIN_COMBINATIONS.any? do |combo|
        if combo.all? {|i| @board.cells[i] == "X"} || combo.all? {|i| @board.cells[i] == "O"} 
          true 
@@ -51,9 +50,9 @@ class Game
    end
  end
 
- def draw?
+ def draw? #returns true/false
     !self.won? && @board.full? ? true : false
-  end
+  end     
 
  def over? #over if game is won? or draw?
     if won? || draw?
@@ -142,7 +141,7 @@ class Game
        end
   end       
 
- def turn 
+ def turn #turn engine for game
    @board.display
    input = self.current_player.move(@board)
      if @board.valid_move?(input)
@@ -152,7 +151,7 @@ class Game
        puts "That is an invalid move, #{current_player.token} - please try an empty space.\n"
        input = self.current_player.move(@board)
      end
-  end #turn engine for game
+  end 
 
  def play  #main turn engine, plays until game over, prompts for replay
     turn until over? 

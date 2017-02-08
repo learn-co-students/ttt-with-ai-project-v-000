@@ -8,7 +8,7 @@ module Players
            return "1"
         elsif !board.taken?(5) #center if it isn't taken
            return "5"
-        elsif !board.taken?(9) #checkmate start
+        elsif !board.taken?(9) #checkmate start, wow, such genious
            return "9"
         elsif !board.taken?(7)
            return "7"
