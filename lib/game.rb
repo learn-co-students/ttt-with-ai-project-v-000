@@ -10,7 +10,7 @@ class Game
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? "X" : "O"
+    board.turn_count % 2 == 0 ? token = "X" : token = "O"
   end
 
 end
