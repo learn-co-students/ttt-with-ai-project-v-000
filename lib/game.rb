@@ -10,7 +10,21 @@ class Game
   end
 
   def current_player
-    board.turn_count.token % 2 == 0 ? "X" : "O"
+    board.turn_count % 2 == 0 ? player_1 : player_2
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combination|
+      board.position(combination[0]) == board.position(combination[1]) && board.position(combination[1]) == board.position(combination[2])
+    end
+  end
+
+  def draw?
+    board.full? && !won?
+  end
+
+  def over?
+    draw? || won? || board.full?
   end
 
 end
