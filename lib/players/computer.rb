@@ -1,11 +1,9 @@
 module Players
   class Computer < Player
-    # def move(board)
-    #   # binding.pry
-    #   puts "It's your move #{self.token}"
-    #   board.display
-    #   gets.strip
-    # end
+    def move(board)
+      # binding.pry
+      board.cells.first(" ")
+    end
 
   end# class Computer
 end# module Players
