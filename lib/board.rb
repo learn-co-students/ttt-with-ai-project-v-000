@@ -29,7 +29,7 @@ attr_accessor :cells, :token, :player
   end
 
   def turn_count
-    self.cells.count { |x| x == "X" || x == "O" }
+    cells.count { |token| token == "X" || token == "O" }
   end
 
   def taken?(user_input)
