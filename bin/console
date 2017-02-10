@@ -1,0 +1,5 @@
+require_relative "../config/environment"
+require "irb"
+
+puts 'welcome to the debugging console'
+IRB.start
