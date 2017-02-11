@@ -20,8 +20,13 @@ attr_accessor :cells, :token, :player
     initialize
   end
 
-  def position(user_input)
-    self.cells[user_input.to_i - 1]
+  def input_to_index(user_input)
+    user_input.to_i - 1
+  end
+
+  def position(index)
+    index = input_to_index(user_input)
+    self.cells[index]
   end
 
   def full?
@@ -32,19 +37,19 @@ attr_accessor :cells, :token, :player
     cells.count { |token| token == "X" || token == "O" }
   end
 
-  def taken?(user_input)
-    if position(user_input) == " "
+  def taken?(index)
+    if position(index) == " "
       false
-    else !position(user_input).nil?
+    else !position(index).nil?
     end
   end
 
   def valid_move?(user_input)
-    !taken?(user_input) && (user_input.to_i - 1).between?(0,8)
+    !taken?(index) && index.between?(0,8)
   end
 
-  def update(user_input, player)
+  def update(index, player)
     #binding.pry
-    cells[user_input.to_i - 1] = player
+    cells[index] = player.token
   end
 end
