@@ -45,7 +45,7 @@ def turn_count
 end# of turn_count
 
 
-def taken?(position)
+def taken?(position) 
   cells[position.to_i - 1] == "X" ||
   cells[position.to_i - 1] == "O"
 end# of taken?
