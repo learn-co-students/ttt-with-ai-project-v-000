@@ -15,7 +15,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combination|
-      board.cells[combination[0]]== board.cells[combination[1]] && board.cells[combination[1]] == board.cells[combination[2]]
+      board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[1]] == board.cells[combination[2]]
     end
   end
 
@@ -30,6 +30,8 @@ class Game
   def winner
     if combination = won?
       board.cells[combination[0]]
+    elsif board.cells.include? " "
+      return nil
     end
   end
 
