@@ -30,8 +30,6 @@ class Game
   def winner
     if combination = won?
       board.cells[combination[0]]
-    elsif board.cells.include? " "
-      return nil
     end
   end
 
