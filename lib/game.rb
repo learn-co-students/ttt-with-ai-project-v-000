@@ -27,8 +27,10 @@ class Game
     draw? || won? || board.full?
   end
 
-  def winner?
-
+  def winner
+    if combination = won?
+      board.cells[combination[0]]
+    end
   end
 
 end
