@@ -14,13 +14,24 @@ class Game
   end
 
   def turn
-    player_1 = current_player
-    player_1.move(user_input)
-    if board.valid_move?
-      board.update(user_input, current_player)
-      board.display
-    else
+    player = current_player
+    current_move = player.move(board)
+    if !(board.valid_move?(current_move))
       turn
+    else
+       board.update(current_move, player)
+       board.display
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 
