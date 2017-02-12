@@ -14,10 +14,10 @@ class Game
   end
 
   def turn
-    player = current_player
-    move(user_input)
+    player_1 = current_player
+    player_1.move(user_input)
     if board.valid_move?
-      board.update(user_input, player)
+      board.update(user_input, current_player)
       board.display
     else
       turn
