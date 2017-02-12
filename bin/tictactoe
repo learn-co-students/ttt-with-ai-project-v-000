@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+system('clear')
+puts "Tic Tac Toe, Biyotch!  How many Players?"
+input = gets.strip
+
+
+def coin_toss
+    puts "Flip a coin. Call it: heads, or tails?"
+      selection = gets.strip.downcase
+      flip = rand(1..2)
+      sleep(2)
+      heads = 1
+      tails = 2
+
+      if flip == heads && selection == "heads"
+        puts "\nHeads it is.."
+        puts "Winner, winner, chicken dinner!"
+        true
+      elsif flip == tails && selection == "tails" 
+        puts "\nTails it is.."
+        puts "Winner, winner, chicken dinner!"
+        true
+      else 
+        puts "Loser."
+        false 
+      end# of if
+end# of coin_toss
+
+
+  case input
+    when "0"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+
+    when "1"
+     if coin_toss
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+     end# of if
+     
+    when "exit"
+      exit
+
+  end# of case 
+
+
+
+
+  
