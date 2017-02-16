@@ -1,7 +1,8 @@
 module Players
 	class Human < Player
+		
 		def move (array = [])
-			puts "enter your move"
+			puts "#{@name} enter your move 1-9"
 			input = gets.strip
 			
 		end

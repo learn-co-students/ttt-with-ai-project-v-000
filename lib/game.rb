@@ -12,10 +12,12 @@ class Game
     [2,4,6]  # cross right
   ]
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :wargame, :winner
   @winner = ""
+  @wargame = false
 
   def initialize (player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  	
   	@player_1 = player_1
   	@player_2 = player_2
   	@board = board
@@ -47,11 +49,13 @@ class Game
   end
 
   def turn
-  	input_1 = current_player.move.to_i
+  	input_1 = current_player.move(@board).to_i
   	while !@board.valid_move?(input_1) #keep asking input if not valid
-  		input_1 = current_player.move.to_i 
+  		input_1 = current_player.move(@board).to_i 
   	end
+  	puts "#{current_player.name}'s move" if !@wargame
   	@board.update(input_1, current_player)
+  	@board.display if !@wargame
   end
 
   def play
