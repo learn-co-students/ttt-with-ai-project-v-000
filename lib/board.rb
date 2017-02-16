@@ -11,11 +11,11 @@ attr_accessor :cells, :token
 
 
 def display
-  puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+  puts "\n #{cells[0]} | #{cells[1]} | #{cells[2]} "
   puts "-----------"
   puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
   puts "-----------"
-  puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+  puts " #{cells[6]} | #{cells[7]} | #{cells[8]} \n"
 end
 
 
@@ -30,24 +30,17 @@ end# of update
 
 
 def full?
-  cells.none? {|p| p == nil || p == "" || p == " "} ? true : false
+  !@cells.include?(" ") 
 end# of full
 
 
 def turn_count
-  count = 0
-  @cells.each do |cell|
-    if cell == "X" || cell == "O"
-      count += 1
-    end# of if
-  end# of do
-  count
+  @cells.select {|e| e != " "}.count 
 end# of turn_count
 
 
 def taken?(position) 
-  cells[position.to_i - 1] == "X" ||
-  cells[position.to_i - 1] == "O"
+  @cells[position.to_i - 1] != " " 
 end# of taken?
 
 

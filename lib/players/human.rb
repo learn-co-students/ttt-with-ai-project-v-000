@@ -3,7 +3,7 @@ module Players
   class Human < Player
 
     def move(board = nil)
-      puts "Which position would you like to take?"
+      puts "\nIt is #{self.token}'s turn.  Which position will #{self.token} take?"
       input = gets.strip
       input
     end# of move

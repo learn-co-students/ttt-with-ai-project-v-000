@@ -3,11 +3,6 @@
 require_relative '../config/environment'
 
 
-system('clear')
-puts "Tic Tac Toe, Biyotch!  How many Players?"
-input = gets.strip
-
-
 def coin_toss
     puts "Flip a coin. Call it: heads, or tails?"
       selection = gets.strip.downcase
@@ -25,28 +20,63 @@ def coin_toss
         puts "Winner, winner, chicken dinner!"
         true
       else 
-        puts "Loser."
+        puts "You lose."
         false 
       end# of if
 end# of coin_toss
 
 
-  case input
-    when "0"
-      player_1 = Players::Computer.new("X")
-      player_2 = Players::Computer.new("O")
+  system('clear')
+  puts "Tic Tac Toe is ready to go!  How many Players?"
+  puts "Options: 0, 1, or 2"
+  input = nil 
 
-    when "1"
-     if coin_toss
-      player_1 = Players::Human.new("X")
-      player_2 = Players::Computer.new("O")
-     end# of if
-     
-    when "exit"
-      exit
+  until input == "exit"
+    input = gets.strip
 
-  end# of case 
+    case input
+      when "0"
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
 
+      when "1"
+       if coin_toss
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+       end# of if
+
+      when "2"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+       
+      when "exit"
+        exit
+
+    end# of case 
+
+    def thanks
+    puts "Thanks for playing!  Play again?"
+    input = gets.strip
+    end 
+
+    tictactoe = Game.new(player_1, player_2)
+    tictactoe.board.display
+    tictactoe.play 
+    thanks 
+
+
+      if 
+        input == "yes" || input == "y"
+          tictactoe = Game.new(player_1, player_2)
+          tictactoe.board.display
+          tictactoe.play
+          thanks 
+      elsif input == "no" || input == "exit"
+          exit 
+      end# of if 
+
+  
+end# of loop 
 
 
 

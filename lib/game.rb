@@ -55,10 +55,10 @@ WIN_COMBINATIONS = [
 
 
   def turn
-    move = current_player.move 
+    move = current_player.move(board) 
 
     if board.valid_move?(move)  
-      puts "#{current_player.token} takes cell #{move}."
+      puts "\nPlayer '#{current_player.token}' takes cell #{move}.\n"
       @board.update(move, current_player)
       @board.display
 
