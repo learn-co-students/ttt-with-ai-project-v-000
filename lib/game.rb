@@ -24,7 +24,7 @@ class Game
         
     end
     def won?
-        
+        @board.includet
     end
     
     def draw?
@@ -34,5 +34,8 @@ class Game
     end
     
     def turn
+    end
+    
+    def play
     end
 end
