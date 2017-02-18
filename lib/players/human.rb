@@ -4,5 +4,6 @@ module Players
     	puts "Pick a number between 1-9"
     	gets.strip
     end
+
   end
 end

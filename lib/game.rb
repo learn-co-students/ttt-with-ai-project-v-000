@@ -1,7 +1,6 @@
-class Game
+class Game < Players::Human
 
-  attr_accessor :player_one, :player_two
-  attr_reader :board
+  attr_accessor :player_1, :player_2, :board
 
   WIN_COMBINATIONS =[
   [0,1,2],
@@ -14,9 +13,9 @@ class Game
   [0,4,8]
 ]
 
-  def initialize(p1=Human.new("X"), p2=Human.new("O"), bd=Board.new)
-    @player_one = p1
-    @player_two = p2
+  def initialize(p1=Players::Human.new("X"), p2=Players::Human.new("O"), bd=Board.new)
+    @player_1 = p1
+    @player_2 = p2
     @board = bd
   end
 
@@ -67,6 +66,6 @@ class Game
     puts "Welcome to tic tac toe!"
     puts "Would you like a 0, 1, or 2 player game?"
     @player_count = gets.strip
-    
+
   end
 end
