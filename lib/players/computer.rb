@@ -5,7 +5,9 @@ module Players
                board.valid_move?(i)
                }
             
-            valid_moves.sample.to_s
+#            valid_moves.sample.to_s #pick a random valid move
+            
+            # let's make this thing smarter
         end
     end
 end
