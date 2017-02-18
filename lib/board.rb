@@ -7,7 +7,7 @@ class Board
 
 	def reset!
 		@cells = Array.new(9, " ")
-	end 
+	end
 
 	def display
 	    cell = "   "
@@ -35,7 +35,7 @@ class Board
 	end
 
 	def taken?(user_input)
-		if cells[user_input.to_i-1] == "X" 
+		if cells[user_input.to_i-1] == "X"
 			return true
 		elsif cells[user_input.to_i-1] == "O"
 			return true
@@ -55,9 +55,5 @@ class Board
 	def update(user_input, player)
 		cells[user_input.to_i-1] = player.token
 	end
-
-				
-
-
 
 end

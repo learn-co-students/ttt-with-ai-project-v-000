@@ -1,7 +1,6 @@
 class Game
 
-  attr_accessor :board
-  attr_reader :player_one, :player_two
+  attr_reader :board, :player_one, :player_two
 
   WIN_COMBINATIONS =[
   [0,1,2],
@@ -20,14 +19,6 @@ class Game
     @board = bd
   end
 
-  def position_taken?(index)
-    !(board[index].nil? || board[index] == " ")
-  end
-
-  def turn_count
-    @board.count{|token| token == "X" || token == "O"}
-  end
-
   def current_player
     turn_count % 2 == 0 ? "X" : "O"
   end
@@ -36,22 +27,9 @@ class Game
     draw? || won?
   end
 
-  def full?
-    @board.all? {|x| x == "X" || x == "O"}
-  end
-
   def won?
-    WIN_COMBINATIONS.detect do |win|
-      if board[win[0]] == "X" &&
-         board[win[1]] == "X" &&
-         board[win[2]] == "X"
-         board
-      elsif board[win[0]] == "O" &&
-         board[win[1]] == "O" &&
-         board[win[2]] == "O"
-         board
-      end
-    end
+    WIN_COMBINATIONS.detect { |win|
+      board[win[0]] == board[win[1]] == board[win[2]] && (board[win[0] == "X"] || board[win[0] == "O"]) }
   end
 
   def draw?
@@ -61,18 +39,6 @@ class Game
   def winner
     @win = won?
     @win == nil ? nil : @board[@win[0]]
-  end
-
-  def input_to_index(input)
-    input.to_i - 1
-  end
-
-  def move(index, token="X")
-    @board[index] = token
-  end
-
-  def valid_move?(index)
-    index.between?(0,8) && !position_taken?(index)
   end
 
   def turn
