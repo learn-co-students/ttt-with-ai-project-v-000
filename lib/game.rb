@@ -1,6 +1,7 @@
 class Game
 
-  attr_reader :board, :player_one, :player_two
+  attr_accessor :player_one, :player_two
+  attr_reader :board
 
   WIN_COMBINATIONS =[
   [0,1,2],
@@ -20,7 +21,7 @@ class Game
   end
 
   def current_player
-    turn_count % 2 == 0 ? "X" : "O"
+    board.turn_count % 2 == 0 ? "X" : "O"
   end
 
   def over?
@@ -29,25 +30,23 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect { |win|
-      board[win[0]] == board[win[1]] == board[win[2]] && (board[win[0] == "X"] || board[win[0] == "O"]) }
+      board[win[0]] == board[win[1]] && board[win[1]] == board[win[2]] && (board[win[0] == "X"] || board[win[0] == "O"]) }
   end
 
   def draw?
-    full? && !won?
+    board.full? && !won?
   end
 
   def winner
-    @win = won?
-    @win == nil ? nil : @board[@win[0]]
+    won? == nil ? nil : board[win[0]]
   end
 
   def turn
     puts "Please enter 1-9:"
     @input = gets.strip
-    @index = input_to_index(@input)
-    if valid_move?(@index)
-      move(@index, current_player)
-      display_board
+    if board.valid_move?(@input)
+      board.update(@input, current_player)
+      board.display
     else
       turn
     end
@@ -62,5 +61,12 @@ class Game
     else
       puts "Congratulations #{winner}!"
     end
+  end
+
+  def start
+    puts "Welcome to tic tac toe!"
+    puts "Would you like a 0, 1, or 2 player game?"
+    @player_count = gets.strip
+    
   end
 end
