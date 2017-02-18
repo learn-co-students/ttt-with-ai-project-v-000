@@ -1,3 +1,4 @@
+require 'pry'
 class Game < Players::Human
 
   attr_accessor :player_1, :player_2, :board
@@ -20,7 +21,7 @@ class Game < Players::Human
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? "X" : "O"
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
@@ -28,8 +29,17 @@ class Game < Players::Human
   end
 
   def won?
-    WIN_COMBINATIONS.detect { |win|
-      board[win[0]] == board[win[1]] && board[win[1]] == board[win[2]] && (board[win[0] == "X"] || board[win[0] == "O"]) }
+    WIN_COMBINATIONS.detect do |win|
+      if board.cells[win[0]] == "X" &&
+         board.cells[win[1]] == "X" &&
+         board.cells[win[2]] == "X"
+         board
+      elsif board.cells[win[0]] == "O" &&
+         board.cells[win[1]] == "O" &&
+         board.cells[win[2]] == "O"
+         board
+      end
+    end
   end
 
   def draw?
@@ -37,7 +47,8 @@ class Game < Players::Human
   end
 
   def winner
-    won? == nil ? nil : board[win[0]]
+    @win = won?
+    @win == nil ? nil : @board.cells[@win[0]]
   end
 
   def turn
@@ -66,6 +77,6 @@ class Game < Players::Human
     puts "Welcome to tic tac toe!"
     puts "Would you like a 0, 1, or 2 player game?"
     @player_count = gets.strip
-
   end
+
 end
