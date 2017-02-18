@@ -2,7 +2,7 @@ require_relative 'player'
 require_relative 'board'
 
 class Game
-  attr_accessor :player_1, :player_2, :board, :current_player
+  attr_accessor :player_1, :player_2, :board
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -19,7 +19,14 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    @current_player = player_1
+  end
+
+  def turn_count
+    @board.cells.count{|i| i=="X" || i=="O"}
+  end
+
+  def current_player
+     turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
@@ -67,12 +74,9 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    input = gets.strip
-    binding.pry
+    input = current_player.move(@board)
     if @board.valid_move?(input)
-      binding.pry
-      move(input, current_player)
+      @board.update(input, current_player)
     else
       turn
     end
