@@ -1,15 +1,19 @@
-module Players
-    class Human < Player
-        attr_accessor :name
-        
+class Players::Human < Player
+    attr_accessor :name
+
+
     def initialize(name)
+        super
         @name = name
+
     end
-        
+
     def move(board)
-        puts "Where would you like to move? (enter 1 -9)"
-        move = gets.chomp
+
+        puts "Where would you like to move? (enter 1 - 9)"
+
+        gets.strip
+
     end
-        
-    end
+
 end

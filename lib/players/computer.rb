@@ -1,5 +1,11 @@
 module Players
     class Computer < Player
-        #methods
+        def move(board)
+           valid_moves = [*1..9].select { |i|
+               board.valid_move?(i)
+               }
+            
+            valid_moves.sample.to_s
+        end
     end
 end

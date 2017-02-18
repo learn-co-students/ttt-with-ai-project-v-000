@@ -22,7 +22,7 @@ class Board
         i.to_i-1
     end
     def position(i)
-        @cells[self.class.input_to_index(i)]
+        @cells[Board.input_to_index(i)]
     end
 
     def full?
@@ -30,21 +30,21 @@ class Board
     end
 
     def turn_count
-        @cells.count { |space| space != " "} + 1
+        @cells.count { |space| space != " "}
     end
 
     def taken?(i)
-        self.position(i) != " "
+        position(i) != " "
     end
 
     def valid_move?(i)
-        i.to_i >= 1 && i.to_i <= 9 && !self.taken?(i)
+        i.to_i >= 1 && i.to_i <= 9 && !taken?(i)
     end
 
     def update(i,player)
-        if self.valid_move?(i)
-            @cells[self.class.input_to_index(i)] = player.token
-        end
+#        if valid_move?(i)
+        @cells[Board.input_to_index(i)] = player.token
+#        end
     end
 
 end
