@@ -2,6 +2,13 @@
 
 require_relative '../config/environment'
 
-new_game = Game.new
+play = "YES"
 
-new_game.start
+while play == "YES" do
+  new_game = Game.new
+  new_game.start
+  puts "Would you like to play again? Please type yes or no"
+  play = gets.upcase
+end
+
+puts "Thanks for playing!"

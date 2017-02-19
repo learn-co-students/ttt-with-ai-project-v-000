@@ -22,8 +22,13 @@ class Board
 	    puts row3
 	end
 
-	def position(user_input)
-		cells[user_input.to_i-1]
+	def input_to_index(input)
+ 		input.to_i - 1
+	end
+
+	def position(input)
+		index = input_to_index(input)
+		cells[index]
 	end
 
 	def full?
@@ -34,22 +39,18 @@ class Board
 		cells.count {|spot| spot == "X" || spot == "O"}
 	end
 
-	def taken?(user_input)
-		if cells[user_input.to_i-1] == "X"
-			return true
-		elsif cells[user_input.to_i-1] == "O"
-			return true
-		else
-			return false
-		end
+	def taken?(input)
+		index = input_to_index(input)
+		cells[index] == "X" || cells[index] == "O"
 	end
 
-	def valid_move?(user_input)
-		user_input.to_i.between?(1,9) && !taken?(user_input)
+	def valid_move?(input)
+		input.to_i.between?(1,9) && !taken?(input)
 	end
 
-	def update(user_input, player)
-		cells[user_input.to_i-1] = player.token
+	def update(input, player)
+		index = input_to_index(input)
+		cells[index] = player.token
 	end
 
 end

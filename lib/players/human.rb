@@ -4,6 +4,5 @@ module Players
     	puts "#{token}, Pick a number between 1-9"
     	gets.strip
     end
-
   end
 end

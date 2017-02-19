@@ -70,10 +70,7 @@ class Game < Players::Human
     else
       puts "Congratulations #{winner}!"
     end
-    puts "Do you want to play again?"
-    @answer = gets.chomp
-    start if @answer == "yes"
-    puts "Thanks for playing" if @answer == "no"
+
   end
 
   def start
