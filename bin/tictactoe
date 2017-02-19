@@ -2,7 +2,12 @@
 
 require_relative '../config/environment'
 
+<<<<<<< HEAD
 play = "YES"
+=======
+
+new_game = Game.new
+>>>>>>> 4e2051c78c74906a7e27f34fe0a23a69c858a144
 
 while play == "YES" do
   new_game = Game.new

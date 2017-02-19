@@ -69,9 +69,23 @@ class Game < Players::Human
       puts "Cat's Game!"
     else
       puts "Congratulations #{winner}!"
+     puts "Do you want to play again?"
+    @answer = gets.strip
+      if @answer == "yes"
+        start
+      # elsif @answer == "no"
+      #   puts "Thanks for playing"
+      end
     end
+<<<<<<< HEAD
 
   end
+=======
+        
+  
+  
+   end
+>>>>>>> 4e2051c78c74906a7e27f34fe0a23a69c858a144
 
   def start
     puts "Welcome to tic tac toe!"
@@ -95,8 +109,8 @@ class Game < Players::Human
     when 2
       puts "Player 1 will begin"
     end
-
-    play
+play
+    
 
   end
 
