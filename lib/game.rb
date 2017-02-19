@@ -70,12 +70,37 @@ class Game < Players::Human
     else
       puts "Congratulations #{winner}!"
     end
+    puts "Do you want to play again?"
+    @answer = gets.chomp
+    start if @answer == "yes"
+    puts "Thanks for playing" if @answer == "no"
   end
 
   def start
     puts "Welcome to tic tac toe!"
     puts "Would you like a 0, 1, or 2 player game?"
-    @player_count = gets.strip
+    @player_count = gets.strip.to_i
+    case @player_count
+    when 0
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+      puts "The computers will begin playing now"
+    when 1
+      puts "Would you like to go first or second? Please enter 1 or 2"
+      @order = gets.strip
+      if @order == 1
+        @player_2 = Players::Computer.new("O")
+        puts "Player 1 is human and will take the first turn"
+      elsif @order == 2
+        @player_1 = Players::Computer.new("X")
+        puts "The computer is player 1 and will take the first turn"
+      end
+    when 2
+      puts "Player 1 will begin"
+    end
+
+    play
+
   end
 
 end
