@@ -62,14 +62,3 @@ end
 
 puts "Welcome to Tic Tac Toe!"
 num_players
-
-
-
-
-# def who_first
-#   puts "Who should go first?"
-#   token_input = gets.strip
-# end
-
-# Game.new
-# Board.display
