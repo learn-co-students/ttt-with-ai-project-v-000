@@ -47,8 +47,7 @@ class Game < Players::Human
   end
 
   def winner
-    @win = won?
-    @win == nil ? nil : @board.cells[@win[0]]
+    won? == nil ? nil : board.cells[win[0]]
   end
 
   def turn
@@ -76,12 +75,11 @@ class Game < Players::Human
     puts "Welcome to tic tac toe!"
     puts "Would you like a 0, 1, or 2 player game?"
     @player_count = gets.strip.to_i
-    case @player_count
-    when 0
+    if @player_count == 0
       @player_1 = Players::Computer.new("X")
       @player_2 = Players::Computer.new("O")
       puts "The computers will begin playing now"
-    when 1
+    elsif @player_count == 1
       puts "Would you like to go first or second? Please enter 1 or 2"
       @order = gets.strip
       if @order == 1
@@ -91,10 +89,10 @@ class Game < Players::Human
         @player_1 = Players::Computer.new("X")
         puts "The computer is player 1 and will take the first turn"
       end
-    when 2
+    elsif @player_count == 2
       puts "Player 1 will begin"
     end
-play
+  play
     
 
   end
