@@ -21,65 +21,58 @@ class Game
   end
 
   def current_player
-    # binding.pry
     self.board.cells.find_all { |cell| cell == " " }.length % 2 == 0 ? @player_2 : @player_1
   end
 
   def over?
-    self.board.cells.find_all { |cell| cell == " " }.length == 0 ? true : false
+    self.board.cells.find_all { |cell| cell == " " }.length == 0 || won?
   end
 
   def won?
-    # binding.pry
-    # condition = false
-    WIN_COMBINATIONS.each do |combo|
-      # binding.pry
-      if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
-        return self.board.cells[combo[0]]
-      end
+    WIN_COMBINATIONS.find do |combo|
+      [self.board.cells[combo[0]], self.board.cells[combo[1]], self.board.cells[combo[2]]].all? {|position| position == "X"} ||
+      [self.board.cells[combo[0]], self.board.cells[combo[1]], self.board.cells[combo[2]]].all? {|position| position == "O"}
     end
-    false
   end
 
   def draw?
-    over? && !won?
+    self.board.cells.find_all { |cell| cell == " " }.length == 0  && !won?
   end
 
   def winner
     # binding.pry
     if won?
-      if won? == "X"
+      if board.cells[won?[0]] == "X"
         @winner = @player_1.token
-      elsif won? == "O"
+      else board.cells[won?[0]] == "O"
         @winner = @player_2.token
-      else
-        @winner = nil
       end
-    else
-      @winner = nil
     end
   end
 
   def turn
+    self.board.display
     puts "Please enter 1-9:"
     player = current_player
     move = player.move(self.board)
+    puts "#{current_player} moves to #{move}!"
     if !self.board.valid_move?(move)
+      puts "You tried to move to an occupied space, #{move}, please select another."
       turn
+
     else
       self.board.update(move, player)
     end
   end
 
   def play
-    until over?
+    while !over? && !draw?
       turn
     end
     if won?
       puts "Congratulations #{winner}!"
-    else
+    elsif draw?
       puts "Cat's Game!"
     end
   end
-
 end

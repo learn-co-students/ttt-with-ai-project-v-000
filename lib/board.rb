@@ -4,12 +4,11 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = cells
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    reset!
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -18,7 +17,6 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-
   end
 
   def position(input)
@@ -36,7 +34,7 @@ class Board
 
   def taken?(pos)
     # binding.pry
-    true ? self.cells[pos.to_i - 1] == "X" || self.cells[pos.to_i - 1] == "O" : false
+    self.cells[pos.to_i - 1] == "X" || self.cells[pos.to_i - 1] == "O"
   end
 
   def valid_move?(input)
@@ -50,5 +48,4 @@ class Board
       puts "Not a valid move."
     end
   end
-
 end
