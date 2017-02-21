@@ -3,5 +3,10 @@ class Player
 
   def initialize (token = "X")
     @token = token
+    @opponent = switch(token)
+  end
+
+  def switch(token)
+    token == 'X' ? 'O' : 'X'
   end
 end

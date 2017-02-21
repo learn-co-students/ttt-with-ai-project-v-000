@@ -1,27 +1,11 @@
 module Players
   class Computer < Player
 
-    def initialize(token)
-      @token = token
-    end
-
     def move(board)
-
       puts ""
-      puts "Robot ('#{self.token}' Player) is taking turn..."
+      puts "AI bot '#{self.token} Player' is moving..."
       sleep 2
-
-      position = tactics(board)
-      board.cells[position] = "#{self.token}"
-
-      if @game.won?
-        puts ""
-        board.display
-        @game.winner
-      end
-
-      puts ""
-      board.display
+      tactics(board)
     end
 
     ################### AI LOGIC ###################
@@ -29,7 +13,6 @@ module Players
 
     def tactics(board)
       turn = true
-
       x = "X"
       o = "O"
 
@@ -49,7 +32,7 @@ module Players
         if board.cells[rando] != "X" and board.cells[rando] != "O"
 
           board.cells[rando] = "#{self.token}"
-          return rando
+          return rando.to_s
           turn false
         end
       end
@@ -73,10 +56,5 @@ module Players
       end
       return nil
     end
-
-    def switch(token)
-      self.token == 'X' ? 'O' : 'X'
-    end
-
   end
 end

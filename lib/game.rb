@@ -20,13 +20,9 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
   end
-
-  def turn_count
-    @board.cells.count{|i| i=="X" || i=="O"}
-  end
-
+\
   def current_player
-     turn_count % 2 == 0 ? player_1 : player_2
+    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
