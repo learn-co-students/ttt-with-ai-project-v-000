@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner_counter
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -16,10 +16,11 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    @winner_counter = 0
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? player_1 : player_2
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def over?
@@ -49,12 +50,15 @@ class Game
   end
 
   def turn
+    # binding.pry
     input = current_player.move(@board)
     while @board.valid_move?(input) == false
       puts "This move is not valid"
       input = current_player.move(@board)
     end
+    # binding.pry
     @board.update(input, current_player)
+    # binding.pry
   end
 
   def play
@@ -63,6 +67,8 @@ class Game
       puts "Cat's Game!"
     elsif won?
       puts "Congratulations #{winner}!"
+      @winner_counter += 1
+      board.display
     end
   end
 end# class game
