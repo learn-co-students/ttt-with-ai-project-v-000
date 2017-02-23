@@ -90,14 +90,16 @@ class PlayGame
     @player2 = Players::Computer.new("O")
     @game = Game.new(@player1, @player2)
     counter = 0
-    100.times do
+    times_played = 0
+    1000.times do
       @game.play
       counter += @game.winner_counter
       @player1 = Players::Computer.new("X")
       @player2 = Players::Computer.new("O")
       @game = Game.new(@player1, @player2)
-      break if @game.winner_counter == 1
+      times_played += 1
+      # break if counter == 1
     end
-    puts "There have been #{counter} wins and #{100 - counter} draws."
+    puts "There have been #{counter} wins and #{times_played - counter} draws."
   end
 end#class PlayGame
