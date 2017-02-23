@@ -47,7 +47,8 @@ class Game < Players::Human
   end
 
   def winner
-    won? == nil ? nil : board.cells[win[0]]
+    @won = won?
+    @won == nil ? nil : board.cells[win[0]]
   end
 
   def turn
@@ -72,7 +73,6 @@ class Game < Players::Human
   end
 
   def start
-    puts "Welcome to tic tac toe!"
     puts "Would you like a 0, 1, or 2 player game?"
     @player_count = gets.strip.to_i
     if @player_count == 0
@@ -92,9 +92,9 @@ class Game < Players::Human
     elsif @player_count == 2
       puts "Player 1 will begin"
     end
-  play
-    
 
+    play
+    
   end
 
 end
