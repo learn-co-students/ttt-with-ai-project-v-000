@@ -74,4 +74,37 @@ def turn
        puts "Cat's Game!"
     end
  end
-end
+
+
+ def self.start
+    puts "Select the number of players: (0-2)?"
+    input = gets.strip
+
+ 			  if input == "0"
+ 			    puts "Computer vs Computer"
+           game = self.new(Players::Computer.new("X"), Players::Computer.new("O"))
+         game.play
+  elsif input == "1"
+ 			    puts "Human vs Computer. Who would you like to go first? (enter: me or computer)"
+ 			    first_player = gets.strip
+ 			    if first_player == "me"
+           game = self.new(Players::Human.new("X"), Players::Computer.new("O"))
+             game.play
+ 			    elsif first_player == "computer"
+              game = self.new(Players::Computer.new("X"), Players::Human.new("O"))
+ 			   game.play
+       else
+           puts "That is not a valid input."
+           self.start
+         end
+       else self.new.play
+    end
+           puts "Would you like to play again? (yes or no)"
+           input = gets.chomp
+             if input == "yes"
+               self.start
+               else
+               exit
+            end
+        end
+      end
