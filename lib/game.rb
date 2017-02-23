@@ -24,23 +24,20 @@ class Game
   def over?
     if @board.full?
       return true
-    end
-    WIN_COMBINATIONS.each do |combo|
-      if @board.cells.include?(combo)
-        @winning_combo = combo
-        return true
-      else
-        return false
-      end
+    elsif won?
+      return true
+    else
+      return false
     end
   end
 
   def won?
-    if WIN_COMBINATIONS.each do |win_combination|
+    WIN_COMBINATIONS.each do |win_combination|
 
       @position_1 = @board.cells[win_combination[0]]
       @position_2 = @board.cells[win_combination[1]]
       @position_3 = @board.cells[win_combination[2]]
+
 
         if @position_1 == "X" && @position_2 == "X" && @position_3 == "X"
           return true
@@ -48,9 +45,7 @@ class Game
           return true
         end
     end
-    else
-      false
-    end
+    return false
   end
   def draw?
     if over?
@@ -65,12 +60,23 @@ class Game
     end
   end
   def turn
-    puts "Please enter 1-9:"
-    number = gets
-    
-
-
+    index = current_player.move(@board)
+    until @board.valid_move?(index)
+      index = current_player.move(@board)
+    end
+    @board.update(index, current_player)
+    @board.turn_count
+    current_player
   end
 
-
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 end

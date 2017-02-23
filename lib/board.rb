@@ -55,6 +55,10 @@ class Board
     end
   end
   def update(number,player)
+    new_number = number.to_i 
+    input = new_number - 1 
+    
+    self.cells[input] = player.token
     
   end
 
