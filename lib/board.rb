@@ -38,7 +38,7 @@ class Board
   end
 
   def valid_move?(input)
-    true ? (input.to_i >= 1 && input.to_i <= 9) && self.taken?(input) == false : false
+    (input.to_i >= 1 && input.to_i <= 9) && self.taken?(input) == false ? true : false
   end
 
   def update(input, player)

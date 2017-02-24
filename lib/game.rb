@@ -52,27 +52,33 @@ class Game
 
   def turn
     self.board.display
+    # if won?
+    #   play
+    # end
     puts "Please enter 1-9:"
     player = current_player
     move = player.move(self.board)
     puts "#{current_player} moves to #{move}!"
+    self.board.display
     if !self.board.valid_move?(move)
       puts "You tried to move to an occupied space, #{move}, please select another."
       turn
-
     else
       self.board.update(move, player)
     end
   end
 
   def play
-    while !over? && !draw?
+    until over? || draw? || won?
       turn
     end
     if won?
+      self.board.display
       puts "Congratulations #{winner}!"
+      # break
     elsif draw?
       puts "Cat's Game!"
+      # break
     end
   end
 end
