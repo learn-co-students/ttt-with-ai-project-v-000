@@ -3,7 +3,7 @@ class Player
 
   def initialize (token = "X")
     @token = token
-    @opponent = switch(token)
+    @opponent = switch(@token)
   end
 
   def switch(token)

@@ -24,9 +24,9 @@ class Ui
     puts <<~EOF
 
       Please select...
-      1. 0 Players (AI vs AI)
-      2. 1 Player (Human vs AI)
-      3. 2 Player (Human vs Human)
+      1. Terminator vs. Robocop (AI vs AI)
+      2. Neo vs. Agent Smith    (Human vs AI)
+      3. Rocky vs. Ivan         (Human vs Human)
 
     EOF
 

@@ -2,59 +2,68 @@ module Players
   class Computer < Player
 
     def move(board)
-      puts ""
-      puts "AI bot '#{self.token} Player' is moving..."
-      sleep 2
-      tactics(board)
+      message
+      offense(board)
+      return @done if @done
+      defense(board)
+      return @done if @done
+      passive(board)
+      return @done if @done
     end
 
-    ################### AI LOGIC ###################
-    private
-
-    def tactics(board)
-      turn = true
-      x = "X"
-      o = "O"
-
-      o_coord = priority_objectives(board, o)
-      if !o_coord.nil?
-        return o_coord
+    def win_game?(symbol, board)
+      sequences = Game::WIN_COMBINATIONS
+      sequences.each do |seq|
+        return true if seq.all? { |a| board.cells[a] == symbol }
       end
+      false
+    end
 
-      x_coord = priority_objectives(board, x)
-
-      if !x_coord.nil?
-        return x_coord
-      end
-
-      while turn do
-        rando = 1 + rand(8)
-        if board.cells[rando] != "X" and board.cells[rando] != "O"
-
-          board.cells[rando] = "#{self.token}"
-          return rando.to_s
-          turn false
-        end
+    def offense(board)
+      @done = false
+      1.upto(9) do |i|
+        origin = board.cells[i - 1]
+        board.cells[i - 1] = self.token if origin.is_a? Fixnum
+        return @done = i if win_game?(self.token, board)
+        board.cells[i - 1] = origin
       end
     end
 
-    def priority_objectives(board, token)
-      Game::WIN_COMBINATIONS.each do |win|
-
-        objectives = [[0, 1, 2], [0, 2, 1], [1, 2, 0]]
-
-        objectives.each do |priority|
-
-          if (board.cells[win[priority[0]]] == token) and (board.cells[win[priority[1]]] == token)
-
-            if board.cells[win[priority[2]]] == " "
-
-              return win[priority[2]]
-            end
-          end
-        end
+    def defense(board)
+      @done = false
+      1.upto(9) do |i|
+        origin = board.cells[i - 1]
+        board.cells[i - 1] = @opponent if origin.is_a? Fixnum
+        # put it there if player can win that way.
+        return @done = i if win_game?(@opponent, board)
+        board.cells[i - 1] = origin
       end
-      return nil
+    end
+
+    def passive(board)
+      @done = false
+      if board.cells[4].is_a? Fixnum
+        @done = 5
+      else
+        rand < 0.51 ? sides(board) : corners(board)
+      end
+    end
+
+    def sides(board)
+      [2, 4, 6, 8].each do |i|
+        return @done = i if board.cells[i - 1].is_a? Fixnum
+      end
+    end
+
+    def corners(board)
+      [1, 3, 7, 9].each do |i|
+        return @done = i if board.cells[i - 1].is_a? Fixnum
+      end
+    end
+
+    def message
+      puts "AI Player - '#{self.token}' is thinking...."
+      sleep(2)
     end
   end
 end

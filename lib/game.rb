@@ -1,6 +1,3 @@
-require_relative 'player'
-require_relative 'board'
-
 class Game
   attr_accessor :player_1, :player_2, :board
 
@@ -66,7 +63,7 @@ class Game
         return "O"
       end
     end
-    nil
+    return nil
   end
 
   def turn
