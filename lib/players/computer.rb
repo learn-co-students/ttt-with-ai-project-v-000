@@ -16,8 +16,8 @@ module Players
 
     def win_game?(token, board)
       combos = Game::WIN_COMBINATIONS
-      combos.each do |s|
-        return true if s.all? { |a| board.cells[a] == token }
+      combos.each do |c|
+        return true if c.all? { |cell| board.cells[cell] == token }
       end
       false
     end
