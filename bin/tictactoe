@@ -17,7 +17,7 @@ def play_again?
 end
 
 def who_first(num_players)
-  puts "Who should go first?"
+  puts "Who should go first? Enter player or computer."
     player_first = gets.strip.downcase
     if num_players == 1 && player_first == "player"
       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
@@ -25,14 +25,6 @@ def who_first(num_players)
       play_again?
     elsif num_players == 1 && player_first == "computer"
       game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-      game.play
-      play_again?
-    elsif num_players == 2 && player_first == "player 1"
-      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-      game.play
-      play_again?
-    elsif num_players == 2 && player_first == "player 2"
-      game = Game.new(player_2 = Players::Human.new("X"), player_1 = Players::Human.new("O"), board = Board.new)
       game.play
       play_again?
     else
@@ -51,9 +43,12 @@ def num_players
   elsif player_input == "1"
     who_first(1)
     num_players
+    play_again?
+
   elsif player_input == "2"
-    who_first(2)
-    num_players
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    game.play
+    play_again?
   else
     puts "Please enter a valid input"
     num_players
