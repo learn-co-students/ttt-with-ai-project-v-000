@@ -2,15 +2,15 @@ class Ui
 
   def menu
     puts "Lets..."
-    sleep 1
+    sleep 0.5
     puts "play..."
-    sleep 1
+    sleep 0.5
     puts "Tic..."
-    sleep 1
+    sleep 0.5
     puts "Tac..."
-    sleep 1
+    sleep 0.5
     puts "...TOE!"
-    sleep 1
+    sleep 0.5
 
     puts %q[
     ___________  __        __

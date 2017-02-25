@@ -1,6 +1,9 @@
 module Players
   class Computer < Player
 
+    SIDES = [2, 4, 6, 8]
+    CORNERS = [1, 3, 7, 9]
+
     def move(board)
       message
       offense(board)
@@ -11,10 +14,10 @@ module Players
       return @done if @done
     end
 
-    def win_game?(symbol, board)
-      sequences = Game::WIN_COMBINATIONS
-      sequences.each do |seq|
-        return true if seq.all? { |a| board.cells[a] == symbol }
+    def win_game?(token, board)
+      combos = Game::WIN_COMBINATIONS
+      combos.each do |s|
+        return true if s.all? { |a| board.cells[a] == token }
       end
       false
     end
@@ -34,7 +37,6 @@ module Players
       1.upto(9) do |i|
         origin = board.cells[i - 1]
         board.cells[i - 1] = @opponent if origin.is_a? Fixnum
-        # put it there if player can win that way.
         return @done = i if win_game?(@opponent, board)
         board.cells[i - 1] = origin
       end
@@ -50,13 +52,13 @@ module Players
     end
 
     def sides(board)
-      [2, 4, 6, 8].each do |i|
+      SIDES.each do |i|
         return @done = i if board.cells[i - 1].is_a? Fixnum
       end
     end
 
     def corners(board)
-      [1, 3, 7, 9].each do |i|
+      CORNERS.each do |i|
         return @done = i if board.cells[i - 1].is_a? Fixnum
       end
     end
