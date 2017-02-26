@@ -45,6 +45,7 @@ class Board
   end
 
   def valid_move?(board)
+    #binding.pry
     if taken?(board.to_i)
       false
     else
