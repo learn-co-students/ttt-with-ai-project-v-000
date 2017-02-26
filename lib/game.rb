@@ -22,15 +22,15 @@ class Game
   end
 
   def current_player
-    self.board.turn_count % 2 == 0 ? self.player_1 : self.player_2
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
-     self.draw? || self.won?
+     draw? || won?
   end
 
   def draw?
-     self.board.turn_count == 9 && !self.won?
+     board.turn_count == 9 && !won?
   end
 
   def won?
@@ -42,18 +42,18 @@ class Game
    end
 
    def winner
-     self.won? ? self.board.cells[self.won?[0]]:nil
+     won? ? board.cells[won?[0]]:nil
    end
 
    def turn
-     current_move = self.current_player.move(@board)
-     if !self.board.valid_move?(current_move)
+     current_move = current_player.move(@board)
+     if !@board.valid_move?(current_move)
        turn
      else
        puts "Turn: #{@board.turn_count+1}\n"
        @board.display
-       puts "#{self.current_player.token} moved #{current_move}"
-       @board.update(current_move, self.current_player)
+       puts "#{current_player.token} moved #{current_move}"
+       @board.update(current_move, current_player)
        @board.display
        puts "\n\n"
      end

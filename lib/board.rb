@@ -3,7 +3,7 @@ class Board
   attr_accessor :cells
 
   def reset!
-    cells.clear
+    self.cells.clear
     self.cells = Array.new(9," ")
   end
 
@@ -20,11 +20,11 @@ class Board
   end
 
   def position(input)
-    self.cells[input.to_i-1]
+    cells[input.to_i-1]
   end
 
   def full?
-    if !self.cells.include?(" ")
+    if !cells.include?(" ")
       true
     else
       false
@@ -32,12 +32,12 @@ class Board
   end
 
   def turn_count
-    empty = self.cells.count(" ")
+    empty = cells.count(" ")
     9 - empty
   end
 
   def taken?(board)
-    if self.cells[board.to_i-1] != " "
+    if cells[board.to_i-1] != " "
       true
     else
        false

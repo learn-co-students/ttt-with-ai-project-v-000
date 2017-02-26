@@ -9,5 +9,3 @@ module Players
       end
   end
 end
-    #def update(board, player)
-      #cells[board.to_i-1] = computer.token
