@@ -51,6 +51,8 @@ class Board
     move.to_i.between?(1, 9) && !taken?(move.to_i)
   end
 
-
+  def get_valid_moves
+    (1..9).select { |a| valid_move?(a) }
+  end
 
 end
