@@ -24,7 +24,7 @@ class Game
   end
 
   def full?
-    self.board.cells.all? { |square| square == "X" || square == "O"}
+    self.board.full?
   end
 
   def draw?
@@ -71,15 +71,15 @@ class Game
     self.help_game_mode
     type = self.prompt_type
     case type
-    when "2 players"
+    when "2"
       game = self.new
-    when "1 player"
+    when "1"
       if self.prompt_player_token == "X"
         game = self.new(Players::Human.new("X"), Players::Computer.new("O"))
       else
         game = self.new(Players::Computer.new("X"), Players::Human.new("O"))
       end
-    when "0 players"
+    when "0"
       game = self.new(Players::Computer.new("X"), Players::Computer.new("O"))
     end
     game.game_type = type
@@ -90,7 +90,7 @@ class Game
     begin
       puts "Choose game mode:"
       game_type = gets.strip
-    end until game_type == "2 players" || game_type == "1 player" || game_type == "0 players"
+    end until game_type == "2" || game_type == "1" || game_type == "0"
     game_type
   end
 
@@ -103,8 +103,8 @@ class Game
   end
 
   def self.help_game_mode
-    puts "\t2 players"
-    puts "\t1 player"
-    puts "\t0 players"
+    puts "\t2 players (2)"
+    puts "\t1 player (1)"
+    puts "\t0 players (0)"
   end
 end

@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+Game.start
+
+# puts "Welcome to Tic Tac Toe!"
+# puts "Choose player mode:"
+# puts ""
+# game = Game.new
+# game.play
+
+
+# game = Game.new
+# game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
+# puts game.won?

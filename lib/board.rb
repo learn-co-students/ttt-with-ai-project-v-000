@@ -40,5 +40,4 @@ class Board
   def update(i, player)
     @cells[i.to_i-1] = player.token if valid_move?(i)
   end
-  #def update()
 end

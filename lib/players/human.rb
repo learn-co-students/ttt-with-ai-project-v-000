@@ -5,6 +5,5 @@ module Players
       puts "Enter position:"
       gets.strip
     end
-
   end
 end
