@@ -70,7 +70,7 @@ class Game
   end
 
   def play
-    while !over?
+    until won? || draw?
       turn
     end
     if won?
