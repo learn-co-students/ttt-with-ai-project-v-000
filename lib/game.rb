@@ -83,15 +83,15 @@ class Game
       puts "The computers will begin playing now"
     elsif @player_count == 1
       puts "Would you like to go first or second? Please enter 1 or 2"
-      @order = gets.strip
+      @order = gets.strip.to_i
       if @order == 1
         @player_2 = Players::Computer.new("O")
         puts "Player 1 is human and will take the first turn"
-      else @order == 2
+      elsif @order == 2
         @player_1 = Players::Computer.new("X")
         puts "The computer is player 1 and will take the first turn"
       end
-    else @player_count == 2
+    elsif @player_count == 2
       puts "Player 1 will begin"
     end
 
