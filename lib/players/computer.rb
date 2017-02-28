@@ -8,7 +8,11 @@ module Players
     end
 
     def move(board) #generates a random number for the computer
-      rand(1..9).to_s
+      if board.turn_count <= 2
+        ["2","4","5","6","8"].sample
+      else
+        rand(1..9).to_s
+      end
     end
 
   end

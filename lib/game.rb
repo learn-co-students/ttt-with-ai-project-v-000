@@ -74,7 +74,7 @@ class Game
     new_position = nil
     board.display
     if current_player.class == Players::Computer
-      puts "O: Computer\'s Turn"
+      puts "#{current_player.token}: Computer\'s Turn"
     end
     until board.valid_move?(new_position)
       new_position = current_player.move(@board)
