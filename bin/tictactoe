@@ -1,3 +1,28 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+repeat = true
+until !repeat
+  puts "Welcome to Tic Tac Toe!\n"
+  puts "How many players? (\'1\' or \'2\')?"
+  players = "0"
+  until (players == "1") || (players == "2")
+    puts "How many players?"
+    players = gets.strip
+  end
+  if players == "2"
+    game = Game.new
+  else
+    game = Game.new(Players::Human.new("X"),Players::Computer.new("O"),Board.new)
+  end
+  game.play
+  again = nil
+  until (again == "y") || (again == "n")
+    puts "Play again? (\'y\' or \'n\')"
+    again = gets.strip
+  end
+  if again == "n"
+    repeat = false
+  end
+end
