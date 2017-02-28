@@ -1,5 +1,7 @@
 require 'pry'
-class Game < Players::Human
+class Game 
+
+  #<Players::Human
 
   attr_accessor :player_1, :player_2, :board
 
@@ -21,7 +23,7 @@ class Game < Players::Human
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? player_1 : player_2
+    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
@@ -47,8 +49,8 @@ class Game < Players::Human
   end
 
   def winner
-    @won = won?
-    @won == nil ? nil : board.cells[win[0]]
+    win = won?
+    win == nil ? nil : board.cells[win[0]]
   end
 
   def turn
@@ -85,11 +87,11 @@ class Game < Players::Human
       if @order == 1
         @player_2 = Players::Computer.new("O")
         puts "Player 1 is human and will take the first turn"
-      elsif @order == 2
+      else @order == 2
         @player_1 = Players::Computer.new("X")
         puts "The computer is player 1 and will take the first turn"
       end
-    elsif @player_count == 2
+    else @player_count == 2
       puts "Player 1 will begin"
     end
 
