@@ -3,8 +3,7 @@ class Board
   attr_accessor :cells
 
   def reset!
-    self.cells.clear
-    self.cells = Array.new(9," ")
+    @cells = Array.new(9," ")
   end
 
   def initialize
@@ -32,8 +31,7 @@ class Board
   end
 
   def turn_count
-    empty = cells.count(" ")
-    9 - empty
+     cells.count{|token| token == "X" || token == "O"}
   end
 
   def taken?(board)
@@ -44,16 +42,17 @@ class Board
     end
   end
 
-  def valid_move?(board)
+  def valid_move?(input)
     #binding.pry
-    if taken?(board.to_i)
-      false
-    else
-      true && board.to_i.between?(1,9)
-    end
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
   def update(board, player)
     cells[board.to_i-1] = player.token
   end
+
+  #def available_spaces
+    #self.cells.map.with_index {|a, i| a == "" ? i+1 : nil}.compact
+  #end
+
 end
