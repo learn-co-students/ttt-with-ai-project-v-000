@@ -13,24 +13,19 @@ def current_player
 end
 
 def over?
-  won = WIN_COMBINATIONS.detect do |combo|		
-       @board.cells[combo[0]] == @board.cells[combo[1]] &&		
-       @board.cells[combo[1]] == @board.cells[combo[2]] &&		
-       @board.taken?(combo[0]+1)		
-end
-@board.full? || won
+  draw? || won?
 end
 
 def won?
- WIN_COMBINATIONS.detect do |combo|		
+  WIN_COMBINATIONS.detect do |combo|		
        @board.cells[combo[0]] == @board.cells[combo[1]] &&		
        @board.cells[combo[1]] == @board.cells[combo[2]] &&		
        @board.taken?(combo[0]+1)	
- end	
-     end
+  end	
+end
 
      def draw?
-       won? ? false :true
+       @board.full? && !won?
      end
 
      def winner       
@@ -52,10 +47,10 @@ def won?
     #   !taken?(pos) && pos.to_i.between?(1,9)
     # end
 	
-    if !@board.valid_move?(current_move)		#will return true for a valid position , i
-      turn		
+    if (!@board.valid_move?(current_move))	#will return true for a valid position , i
+      turn	
     else		
-      puts "Turn: #{@board.turn_count+1}\n"		
+      puts "Turn: #{@board.turn_count}\n"		
       @board.display		
       @board.update(current_move, player)		
       puts "#{player.token} moved #{current_move}"		
@@ -65,14 +60,13 @@ def won?
 
   def play		
       while !over?		
-       turn		
-     end		
+        turn	
+      end		
      if won?		
        puts "Congratulations #{winner}!"		
      elsif draw?		
-      puts "Cats Game!"		
+      puts "Cat's Game!"		
      end		
    end
-    
-##############################
+    ##############################
 end

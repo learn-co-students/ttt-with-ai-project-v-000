@@ -46,7 +46,7 @@ def valid_move?(pos)
 end
 
  def update(token,player)
-  @cells[token.to_i-1] = player.token
+  @cells[token.to_i-1] =  player.token
 end
 ################################################
 end
