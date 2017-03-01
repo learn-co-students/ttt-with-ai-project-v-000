@@ -1,7 +1,7 @@
 # apalski personal comments
-The majority my time working on this project was spent on the artificial intelligence part of the project. I have added four artificial intelligence sections to the project, they are:
+The majority of my time working on this project was spent on the artificial intelligence part of the project. I have added four artificial intelligence sections to the project, they are:
   1. Code to enable the computer to either block an opponent's winning move or to make a winning move;
-  2. Code that gives the best positions to take (1,3,5,7 or 9), the corners and the centre position, and allows the computer to choose one      of the randomly if it is available.
+  2. Code that gives the best positions to take (1,3,5,7 or 9), the corners and the centre position, and allows the computer to choose one      of them randomly if it is available.
   3. Code where if the computer's opponent has taken an edge position (2, 4, 6, or 8) the computer should take the centre position              (5) if it is available;
   4. Code where if the computer's opponent has taken the centre position (5), the computer checks whether it holds a corner position (1,        3, 7, or 9), and if it does it takes the opposite corner position if it is available;
   
@@ -13,7 +13,7 @@ The effectiveness of the artificial intelligence was tested as follows:
     2. Then the first AI from above was added (block/win) and there were 1,740 wins and 1,260 draws - an improvement;
     3. Then the best positions AI (2. above) was added and there were 1,577 wins and 1,423 draws - a further improvement;
     4. Adding in the 3rd and 4th AI from above did not change the win draw ratio in any significant way;
-    5. Moving the 2nd, 3rd, 4th AI from above into different orders also did not significantly change the win draw ration;
+    5. Moving the 2nd, 3rd, 4th AI from above into different orders also did not significantly change the win draw ratio;
     6. Removing the 1st AI from above but leaving in the 2nd, 3rd and 4th AI from above drastically reduced the      
        effectiveness of the AI - 2,402 wins and 598 draws - nearly as bad as just having the random choice from available positions.
        
