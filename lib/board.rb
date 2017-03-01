@@ -23,7 +23,7 @@ class Board
   end
 
   def turn_count #COUNTS_TURNS
-    count = 0; @cells.each {|cell| count+=1 if cell == "X" || cell == "O"}; return count          #this is so ugly it's starting to resemble JS.
+    @cells.each.count {|cell| cell == "X" || cell == "O"}          
   end
 
   def display #PRINTS BOARD. (The cells are the board. Bit unclear.)

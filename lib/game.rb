@@ -33,12 +33,12 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |win_combination|
-      win_index_1 = win_combination[0]
-      win_index_2 = win_combination[1]
-      win_index_3 = win_combination[2]
-      position_1 = @board.cells[win_index_1]
-      position_2 = @board.cells[win_index_2]
-      position_3 = @board.cells[win_index_3]
+      windex_1 = win_combination[0]
+      windex_2 = win_combination[1]
+      windex_3 = win_combination[2]
+      position_1 = @board.cells[windex_1]
+      position_2 = @board.cells[windex_2]
+      position_3 = @board.cells[windex_3]
       if position_1 == "X" && position_2 == "X" && position_3 == "X"
         win_combination
       elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
@@ -59,11 +59,12 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    @input = current_player.move(board)
-    if board.valid_move?(@input)
-      board.update(@input, current_player)
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
       board.display()
     else
+      puts "Invalid move. Please try again."
       turn                          #invoke turn again
     end
   end
