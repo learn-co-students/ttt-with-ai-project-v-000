@@ -14,7 +14,7 @@ class Game
   [2,5,8], # right col 5
 
   [0,4,8], # right diagonal 6
-  [2,4,6] # left diagonal 7
+  [2,4,6]  # left diagonal 7
   ]
   #aside from spec, no fucking clue where this Players::Human format came from
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
@@ -31,22 +31,15 @@ class Game
     draw? || won?
   end
 
-  def won?
-    WIN_COMBINATIONS.detect do |win_combination|
-      windex_1 = win_combination[0]
-      windex_2 = win_combination[1]
-      windex_3 = win_combination[2]
-      position_1 = @board.cells[windex_1]
-      position_2 = @board.cells[windex_2]
-      position_3 = @board.cells[windex_3]
-      if position_1 == "X" && position_2 == "X" && position_3 == "X"
-        win_combination
-      elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
-        win_combination
-      else
-        false
+  def won?() #Fixed! Switched to WIN_COMBINATIONS.each do |x| :)
+    WIN_COMBINATIONS.each do |box|
+      if @board.cells[box[0]] == "X" && @board.cells[box[1]] == "X" && @board.cells[box[2]] == "X" #way to use .all??
+    return box
+  elsif @board.cells[box[0]] == "O" && @board.cells[box[1]] == "O" && @board.cells[box[2]] == "O"
+        return box #just returns "X" or "O"
       end
     end
+   false
   end
 
   def draw?
