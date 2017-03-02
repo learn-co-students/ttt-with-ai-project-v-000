@@ -124,6 +124,8 @@ class Game
         puts "How many players are you playing with 0, 1, or 2?"
         num_players = gets.strip
 
+
+
             if num_players == "0"
              game = self.new(Players::Computer.new("X"), Players::Computer.new("O"))
              game.play
@@ -138,11 +140,12 @@ class Game
                game.play
              end
            elsif num_players == "2"
+
              game = self.new(Players::Human.new("X"),Players::Human.new("O"))
              game.play
 
            elsif num_players == "exit"
-           
+
 
          else
            puts "Invalid option please choose correctly"
