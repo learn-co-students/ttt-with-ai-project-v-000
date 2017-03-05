@@ -30,7 +30,11 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |win_combination|
-      if ((self.board.cells[win_combination[0]]) == (self.board.cells[win_combination[1]])) && ((self.board.cells[win_combination[1]]) == (self.board.cells[win_combination[2]]))
+      if ((self.board.cells[win_combination[0]]) == (self.board.cells[win_combination[1]])) &&
+        ((self.board.cells[win_combination[1]]) == (self.board.cells[win_combination[2]])) &&
+        ((self.board.cells[win_combination[0]]) != " ") &&
+        ((self.board.cells[win_combination[1]]) != " ") &&
+        ((self.board.cells[win_combination[2]]) != " ") 
         return true
       end
     end
@@ -52,6 +56,7 @@ class Game
   end
 
   def play
+    # binding.pry
     turns = 0
     while turns < 9
       if won?
@@ -61,6 +66,7 @@ class Game
       elsif over?
         break
       else
+        # binding.pry
         turn
       end
       turns += 1
@@ -68,8 +74,13 @@ class Game
   end
 
   def turn
-    location = self.current_player.move until self.board.valid_move?(location)
-    self.board.update(location, current_player)
+    location = self.current_player.move(board)
+    if self.board.valid_move?(location)
+    #  binding.pry
+      self.board.update(location, current_player)
+    else
+      turn
+    end
   end
 
   def over?

@@ -5,7 +5,8 @@ module Players
       @board = board if board
       puts "Where would you like to move? Please enter 1-9:"
       location = gets.strip
-      location ? location : move
+      #binding.pry
+      # location ? location : move
     end
 
   end
