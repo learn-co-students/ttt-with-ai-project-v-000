@@ -15,8 +15,24 @@ class Game
 
   def current_player
     if board.cells.count(player_1.token) > board.cells.count(player_2.token)
-      
+      player_2
+    else
+      player_1
+    end
+  end
 
+  def won?
+    cells = board.cells
+    win = WIN_COMBINATIONS.map{|x| cells[x[0]] == cells[x[1]] && cells[x[1]] == cells[x[2]]}
+    win.length > 0
+  end
+
+  def draw?
+    !won? && !(board.cells.include?(" "))
+  end
+
+  def over?
+    won? || draw?
   end
 
 end
