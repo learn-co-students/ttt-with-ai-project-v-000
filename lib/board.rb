@@ -12,11 +12,13 @@ class Board
   end
 
   def display
+    puts ""
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts ""
   end
 
   def position(input)
@@ -44,7 +46,7 @@ class Board
   def update(input, player)
     if valid_move?(input)
       self.cells[input.to_i - 1] = player.token
-      self.display
+      # self.display
     else
       puts "Not a valid move."
     end

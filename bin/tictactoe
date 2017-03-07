@@ -6,9 +6,9 @@ require_relative '../config/environment'
 def play_again?
   puts "Would you like to play again?"
   play_again = gets.strip.downcase
-  if play_again == "yes"
+  if play_again == "yes" || play_again == "y"
     num_players
-  elsif play_again == "no"
+  elsif play_again == "no" || play_again == "n"
     puts "Game exiting"
   else
     puts "Please enter a valid input"
@@ -19,11 +19,11 @@ end
 def who_first(num_players)
   puts "Who should go first? Enter player or computer."
     player_first = gets.strip.downcase
-    if num_players == 1 && player_first == "player"
+    if num_players == 1 && (player_first == "player" || player_first == "p")
       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       game.play
       play_again?
-    elsif num_players == 1 && player_first == "computer"
+    elsif num_players == 1 && (player_first == "computer" || player_first == "c")
       game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
       game.play
       play_again?
