@@ -23,7 +23,11 @@ class Game
 
   def won?
     cells = board.cells
-    win = WIN_COMBINATIONS.map{|x| cells[x[0]] == cells[x[1]] && cells[x[1]] == cells[x[2]]}
+    win = WIN_COMBINATIONS.select do |x|
+      cells[x[0]] != " " &&
+      cells[x[0]] == cells[x[1]] &&
+      cells[x[1]] == cells[x[2]]
+    end
     win.length > 0
   end
 
