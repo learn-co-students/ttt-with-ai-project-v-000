@@ -39,4 +39,56 @@ class Game
     won? || draw?
   end
 
+  def winner
+    if won?
+      x_moves = board.cells.count("X")
+      o_moves = board.cells.count("O")
+      x_moves > o_moves ? "X" : "O"
+    end
+  end
+
+  def turn
+    move = current_player.move(board)
+    ##solution with recursion
+    # if board.valid_move?(move)
+    #   board.update(move,current_player)
+    # else
+    #   turn
+    # end
+    until board.valid_move?(move)
+      move = current_player.move(board)
+      if !board.valid_move?(move)
+        puts "invalid move"
+      end
+    end
+    board.update(move,current_player)
+  end
+
+  def play
+    until over?
+      turn
+      board.display
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
+
+  # def play
+  #   turn
+  #   board.display
+  #   binding.pry
+  #   if over?
+  #     if won?
+  #       puts "Congratulations #{winner}!"
+  #     else
+  #       puts "Cat's Game!"
+  #     end
+  #   else
+  #     play
+  #   end
+  # end
 end

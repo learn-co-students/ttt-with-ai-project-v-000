@@ -3,5 +3,5 @@
 require_relative '../config/environment'
 
 game = Game.new
-binding.pry
-game.over?
+
+game.play

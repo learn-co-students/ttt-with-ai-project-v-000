@@ -42,7 +42,7 @@ class Board
   end
 
   def update(move,player)
-    position = (move.to_i - 1)
-    cells.map!{|x| cells.index(x) == position ? player.token : x}
+    position = move.to_i-1
+    cells[position] = player.token
   end
 end
