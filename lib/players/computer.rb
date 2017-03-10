@@ -24,10 +24,10 @@ module Players
         move.to_s
       else
         rand(1..9).to_s
-      end
-        
-      
+      end   
     end
+    
+
   end
 end
 
