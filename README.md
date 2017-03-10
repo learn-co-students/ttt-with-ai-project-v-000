@@ -7,7 +7,7 @@
 
 ## Overview
 
-<!-- The goal of this project is to build a version of Tic Tac Toe with 0, 1, and 2 player modes. What is the point of Tic Tac Toe with zero players? Let me explain more. -->
+The goal of this project is to build a version of Tic Tac Toe with 0, 1, and 2 player modes. What is the point of Tic Tac Toe with zero players? Let me explain more.
 
   - A 0 player game has two computer players playing against each other with no interaction from the user.
   - A 1 player game has a human playing against a computer.
