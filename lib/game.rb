@@ -56,7 +56,7 @@ class Game
 
   def turn
       player = current_player
-      input = player.move(player)
+      input = player.move(@board)   ###
       if @board.valid_move?(input)
         @board.update(input, current_player)
         @board.display
