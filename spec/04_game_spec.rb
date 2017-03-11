@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -236,6 +237,8 @@ describe 'Game' do
       allow(game).to receive(:over?).and_return(false, false, false, true)
 
       game.play
+
+      # binding.pry
 
       expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
