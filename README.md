@@ -1,3 +1,5 @@
+#started March 11, 2017
+
 # Tic Tac Toe with AI
 
 ## Objectives
