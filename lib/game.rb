@@ -78,7 +78,11 @@ class Game
       puts "Congratulations #{self.winner}!"
       puts "\n"
     elsif draw?
+      puts "\n"
+      board.display
+      puts "\n"
       puts "Cat's Game!"
+      puts "\n"
     end
   end
 
