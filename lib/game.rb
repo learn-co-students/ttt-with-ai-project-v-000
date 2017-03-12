@@ -19,7 +19,7 @@ class Game
   end
 
   def current_player
-    if board.turn_count % 2 == 0
+    if board.turn_count.even?
       @player_1
     else
       @player_2
@@ -27,16 +27,15 @@ class Game
   end
 
   def over?
-    board.full?
+    won? || draw?
   end
 
   def won?
-    # WIN_COMBINATIONS.any? { |combo| combo.all? {|e| board.cells[e] == "X" } || combo.all? {|e| board.cells[e] == "O"} }
-    WIN_COMBINATIONS.any? { |combo| combo.collect {|e| board.cells[e]}.uniq.length == 1 }
+    WIN_COMBINATIONS.any? { |combo| combo.all? {|e| board.cells[e] == "X" } || combo.all? {|e| board.cells[e] == "O"} }
   end
 
   def draw?
-    self.over? && !self.won?
+    board.full? && !won?
   end
 
   def winner
@@ -52,13 +51,23 @@ class Game
   end
 
   def turn
-    input = self.current_player.move(@board) until @board.valid_move?(input)
-    @board.update(input, self.current_player)
+    puts "Please enter 1-9:"
+    input = current_player.move(@board) #=> gets user input
+    if @board.valid_move?(input)
+      self.board.update(input, self.current_player)
+    else
+      turn
+    end
   end
 
   def play
-    self.turn until self.over?
-    # binding.pry
+    turn until self.over?
+
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw?
+      puts "Cat's Game!"
+    end
   end
 
 end
