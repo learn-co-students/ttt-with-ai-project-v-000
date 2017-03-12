@@ -83,12 +83,8 @@ class Game
   def play
     until over?
       turn
-      if won?
-        puts "Congratulations X!"
-      end
-      if draw?
-        puts "Cats Game!"
-      end
+      won?
+      draw?
     end
   end
 

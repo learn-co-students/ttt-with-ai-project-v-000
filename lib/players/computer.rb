@@ -3,6 +3,7 @@ module Players
   class Computer < Player
 
     def move(board)
+      board.display
       #return valid move in string
       move = "1"
       count = 1
