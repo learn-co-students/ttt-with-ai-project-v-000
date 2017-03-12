@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells, :player_position, :player
+  attr_accessor :cells
 
   def initialize
     @cells = Array.new(9," ")
@@ -15,8 +15,8 @@ class Board
   end
 
   def position(input)
-    @player_position = input.to_i - 1
-    @cells[@player_position]
+    player_position = input.to_i - 1
+    @cells[player_position]
   end
 
   def update(input, player)
@@ -41,13 +41,13 @@ class Board
   end
 
   def valid_move?(input)
-    if input.to_i < 1 || input.to_i > 9
-      return false
+    if input.to_i.between?(1, 9)
+      if taken?(input)
+        return false
+      end
+      return true
     end
-    if taken?(input)
-      return false
-    end
-    return true
+    return false
   end
 
   def reset!

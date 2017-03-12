@@ -1,6 +1,6 @@
-
+require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winning_token
   include Players
 
   WIN_COMBINATIONS = [
@@ -26,16 +26,29 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |combo|
-      winning_token = ""
-      won = true
-      combo.each_with_index do |position, index|
-        if index == 0
-          winning_token = @board.cells[position]
-        elsif @board.cells[position] != winning_token
-            won = false
-        end
+    #   winning_token = ""
+    #   won = true
+    #   combo.each do |position|
+    #     winning_token = @board.cells[combo[0]]
+    #     if winning_token != "X" && winning_token != "O"
+    #       won = false
+    #     end
+    #     if @board.cells[position] != winning_token
+    #         won = false
+    #     end
+    #   end
+    #   if won == true
+    #     @winning_token = winning_token
+    #     return true
+    #   end
+      if @board.cells[combo[0]] == "X" && @board.cells[combo[1]] == "X" && @board.cells[combo[2]] == "X"
+        @winning_token = "X"
+        puts "Congratulations X!"
+        return true
       end
-      if won == true
+      if @board.cells[combo[0]] == "O" && @board.cells[combo[1]] == "O" && @board.cells[combo[2]] == "O"
+        @winning_token = "O"
+        puts "Congratulations O!"
         return true
       end
     end
@@ -43,26 +56,52 @@ class Game
   end
 
   def winner
-
+    if won?
+      return @winning_token
+    end
+    return nil
   end
 
   def start
 
   end
 
-  def play
-
+  def over?
+    if won?
+      true
+    elsif draw?
+      true
+    else
+      false
+    end
   end
 
   def turn
-
+    @board.update(current_player.move(@board), current_player)
   end
 
-  def over?
-    if @board.turn_count == 9
-      return true
+  def play
+    until over?
+      turn
+      if won?
+        puts "Congratulations X!"
+      end
+      if draw?
+        puts "Cats Game!"
+      end
     end
-    return false
   end
+
+  def draw?
+    if won?
+      false
+    elsif @board.full?
+      puts "Cat's Game!"
+      true
+    else
+      false
+    end
+  end
+
 
 end

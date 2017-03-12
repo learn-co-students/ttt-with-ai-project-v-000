@@ -1,3 +1,4 @@
+require 'pry'
 class Player
   attr_reader :token
 
