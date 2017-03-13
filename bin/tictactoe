@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Greetings!"
+puts "Welcome to Tic Tac Toe!"
+
+
+cli = Cli.new
+
+cli.setup_game
+
+play = true
+while play
+  cli.play_game
+end
