@@ -22,11 +22,7 @@ class Game
 
 
   def current_player
-    if @board.turn_count % 2 == 0
-      @player_1
-    else
-      @player_2
-    end
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
@@ -39,7 +35,7 @@ class Game
   end
 
   def draw?
-    won? == nil && @board.full? == true
+    @board.full? && !won?
   end
 
   def over?
@@ -47,11 +43,9 @@ class Game
   end
 
   def winner
-    if won?
-        @board.cells[won?[0]]
-      else
-        nil
-      end
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
