@@ -4,7 +4,7 @@ module Players
 
     def move(input)
       puts "Please enter 1-9:"
-      input = gets.strip
+      gets.chomp
     end
 
   end

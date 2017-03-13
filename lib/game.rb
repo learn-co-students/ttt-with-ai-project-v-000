@@ -31,20 +31,10 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |win_combination|
-      windex_1 = win_combination[0]
-      windex_2 = win_combination[1]
-      windex_3 = win_combination[2]
-      position_1 = @board.cells[windex_1]
-      position_2 = @board.cells[windex_2]
-      position_3 = @board.cells[windex_3]
-      if position_1 == "X" && position_2 == "X" && position_3 == "X"
-        win_combination
-      elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
-        win_combination
-      else
-        false
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
   end
 
@@ -53,7 +43,9 @@ class Game
   end
 
   def winner
-    !!won? ? @board.cells[won?[0]] : nil
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
