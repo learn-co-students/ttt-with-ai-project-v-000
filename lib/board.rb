@@ -10,8 +10,8 @@ class Board
     @cells[input.to_i-1]          #converts passed str (perhaps to simulate a user's kb entry) to int, then subtracts 1 to get index, and returns.
   end
 
-  def taken?(input) #CHECKS OF POSITION TAKEN
-    position(input) == " " ? false : true             #calls above function, evaluates it and returns false if it's an empty cell.
+  def taken?(input) #CHECKS IF POSITION TAKEN
+    position(input) == "X" || position(input) == "O"             #calls above function, evaluates it and returns false if it's an empty cell.
   end
 
   def valid_move?(input) #CHECKS IF MOVE VALID
@@ -23,7 +23,7 @@ class Board
   end
 
   def turn_count #COUNTS_TURNS
-    @cells.each.count {|cell| cell == "X" || cell == "O"}          
+    @cells.each.count {|cell| cell == "X" || cell == "O"}
   end
 
   def display #PRINTS BOARD. (The cells are the board. Bit unclear.)

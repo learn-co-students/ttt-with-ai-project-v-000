@@ -3,7 +3,8 @@ module Players
 class Human < Player
 
   def move(input)
-    input = gets.strip
+    puts "Please enter your move."
+    gets.strip
   end
 
 end
