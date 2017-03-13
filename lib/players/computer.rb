@@ -30,21 +30,37 @@ module Players
 
       #iterate through win combination to check for opponent moves
       WIN_COMBINATIONS.each do |combo|
-        #checks combo for opponent move and open space to block win
-        if combo.count(opponent_token) == 2 && combo.include?(" ")
-          combo.each do |x|
-            input = (x+1).to_s
-            #sets move if space is open to block opponent win
-            if(board.valid_move?(input))
-              return input
-            end
+        #checks the board for opponent moves and open space to block win based on the win combinations
+        #it will return the move to the open space to block the opponent win
+        block_counter = 0
+        empty_space = nil
+        combo.each do |x|
+          if board.cells[x] == opponent_token
+            block_counter += 1
           end
+          if board.cells[x] == " "
+            empty_space = x
+          end
+        end
+        if block_counter == 2 && empty_space != nil
+          return (empty_space+1).to_s
         end
       end
       #attempts to move to the middle if opponent hasn't gone yet
       if(board.valid_move?("5"))
         return "5"
       end
+
+      # corners = ["1", "3", "7", "9"]
+      # corners.each do |x|
+      #   if board.position(x) == self.token
+      #
+      # end
+      #
+      # middles = ["2", "4", "6", "8"]
+      # middles.each do |x|
+      #
+      # end
 
       #if the middle is unavailable and there is no need to block win, go for an open space
       player_move = "1"
