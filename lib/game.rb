@@ -13,7 +13,7 @@ class Game
     [0,4,8],  #First diagonal
     [2,4,6],  #Second diagonal
   ]
-## How does that work ?? - arguments? without including modules?
+
   def initialize(player_1 = Players::Human.new("X") , player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -22,11 +22,7 @@ class Game
 
 
   def current_player
-    if @board.turn_count % 2 == 0
-      @player_1
-    else
-      @player_2
-    end
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
@@ -47,16 +43,14 @@ class Game
   end
 
   def winner
-    if won?
-        @board.cells[won?[0]]
-      else
-        nil
-      end
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
       player = current_player
-      input = player.move(@board)   ###
+      input = player.move(@board)
       if @board.valid_move?(input)
         @board.update(input, current_player)
         @board.display
