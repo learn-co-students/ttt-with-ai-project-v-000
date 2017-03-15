@@ -238,8 +238,6 @@ describe 'Game' do
 
       game.play
 
-      # binding.pry
-
       expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
 
@@ -251,7 +249,6 @@ describe 'Game' do
       allow(game).to receive(:winner).and_return("X")
 
       expect(game).to receive(:won?).at_least(:twice).and_return(false, false, true)
-      # binding.pry
 
       game.play
     end

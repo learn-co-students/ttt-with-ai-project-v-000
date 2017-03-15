@@ -11,10 +11,6 @@ class Game
     [0,4,8],
     [2,4,6]
   ]
-  #=> check free edges (2,6,8)
-  #=> check opponent corner position
-  #=> check win_combos that include that opponent corner position and DON'T include middle position
-  #=> place token where row doesn't contain opponent token
 
   def win_combos
     WIN_COMBINATIONS

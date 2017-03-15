@@ -52,6 +52,7 @@ def start_game
     player_1 = Players::Human.new(starter)
     player_2 = Players::Human.new(opponent)
   end
+  
   if players != "wargames"
     game = Game.new(player_1, player_2)
     sleep(1)
