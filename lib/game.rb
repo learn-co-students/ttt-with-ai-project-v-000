@@ -91,4 +91,9 @@ class Game
   #     play
   #   end
   # end
+
+  def get_new_state(move)
+    new_board = board.dup
+    new_board[move] = current_player.token
+  end
 end
