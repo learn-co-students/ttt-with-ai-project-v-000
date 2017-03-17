@@ -1,7 +1,8 @@
 module Players
   class Computer < Player
     attr_accessor :choice
-    def move(board)
+    def move(game)
+      minimax(game)
       choice
     end
 
@@ -12,6 +13,8 @@ module Players
         else
           -10
         end
+      elsif game.draw?
+        0
       end
     end
 
@@ -24,7 +27,8 @@ module Players
       game.board.each_with_index{|space, i| avail_moves << i if space == " "}
 
       avail_moves.each do |move|
-        poss_state = game.get_new_state(move)
+        poss_state = game.board.dup
+        poss_state[move] = token
         scores << minimax(poss_state)
         moves << move
       end
@@ -37,6 +41,7 @@ module Players
         min_score_index = scores.each_with_index.min[1]
         choice = moves[min_score_index]
         scores[min_score_index]
+      end
     end
   end
 end

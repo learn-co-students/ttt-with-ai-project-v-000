@@ -48,7 +48,7 @@ class Game
   end
 
   def turn
-    move = current_player.move(board)
+    move = current_player.move(self)
     ##solution with recursion
     # if board.valid_move?(move)
     #   board.update(move,current_player)
@@ -56,7 +56,7 @@ class Game
     #   turn
     # end
     until board.valid_move?(move)
-      move = current_player.move(board)
+      move = current_player.move(self)
       if !board.valid_move?(move)
         puts "invalid move"
       end
@@ -91,9 +91,4 @@ class Game
   #     play
   #   end
   # end
-
-  def get_new_state(move)
-    new_board = board.dup
-    new_board[move] = current_player.token
-  end
 end
