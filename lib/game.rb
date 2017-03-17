@@ -1,5 +1,4 @@
 # require 'pry'
-#
 # require_relative './players/human.rb'
 # require_relative './player.rb'
 # require_relative './board.rb'
@@ -26,11 +25,16 @@ class Game
   end
 
   def over?
-    self.board.cells.none?{|cell| cell == " "}
+    if self.board.full?
+      true
+    elsif self.won?
+      true
+    else
+      false
+    end
   end
 
   def win_line
-    # do i need to check here if the game is over?
     board_combinations = WIN_COMBINATIONS.collect do |win_array|
       win_array.collect {|index| self.board.cells[index]}
     end # at this point I expect board_combinations to resemble [["O", "X", "O"], ["X", "X", "O"], ["O","X", "O"] ... ]
@@ -80,15 +84,21 @@ class Game
   end # def turn end
 
   def play
-    if # check whether the game is over
-    # make turns until the game is over
+    # check whether the game is over
+    until self.over?
+      # make turns until the game is over
+        self.turn
+    end
     # when the game is over, congratulate the winner or print cats game
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw?
+      puts "Cat's Game!"
+    end
   end # def play end
 
 end
 
 # hat = Game.new
 #
-# hat.turn
-# hat.turn
-# hat.turn
+# hat.play
