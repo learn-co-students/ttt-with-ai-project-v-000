@@ -1,8 +1,8 @@
-require 'pry'
-require_relative './players/human.rb'
-require_relative './player.rb'
-require_relative './board.rb'
-require_relative './players/computer.rb'
+# require 'pry'
+# require_relative './players/human.rb'
+# require_relative './player.rb'
+# require_relative './board.rb'
+# require_relative './players/computer.rb'
 
 class Game
 
@@ -84,12 +84,12 @@ class Game
   end # def turn end
 
   def play
-    puts "Game on! When it's your turn, choose which spot you'd like to play in by typing a number from 1-9. Each space in the board is represented by a number, as below."
-    puts "| 1 | 2 | 3 |"
-    puts "-----------"
-    puts "| 4 | 5 | 6 |"
-    puts "-----------"
-    puts "| 7 | 8 | 9 |"
+    puts "\nGAME ON! \nWhen it's your turn, choose which spot you'd like to play in by typing a number from 1-9. Each space in the board is represented by a number, as below."
+    puts "\n\t\t\t| 1 | 2 | 3 |"
+    puts "\t\t\t-------------"
+    puts "\t\t\t| 4 | 5 | 6 |"
+    puts "\t\t\t-------------"
+    puts "\t\t\t| 7 | 8 | 9 |\n\n"
     # check whether the game is over
     until self.over?
       # make turns until the game is over
@@ -97,14 +97,63 @@ class Game
     end
     # when the game is over, congratulate the winner or print cats game
     if self.won?
-      puts "Congratulations #{self.winner}!"
+      puts "Congratulations #{self.winner}!/n"
     elsif self.draw?
-      puts "Cat's Game!"
+      puts "Cat's Game!/n"
     end
   end # def play end
 
+  def self.who_goes_first
+    puts "Would you like to go first, or would you like the computer to go first? (please type 'me' or 'computer')\n\n"
+    first_player = gets.strip
+    until /(?i)me/ === first_player || /(?i)computer/ === first_player do
+      puts "Please type 'me' or 'computer'."
+      first_player = gets.strip
+    end
+    first_player
+  end
+
+  def self.how_many_players
+    puts "Would you like to play a game with 1 player (you against a computer)? 2 players (you against another human)? Or 0 players (a computer against another computer)? (please type '0', '1', or '2')\n\n"
+    player_number = gets.strip.to_i
+    until player_number == 1 || player_number == 2 || player_number == 0 do
+      puts "Please type '0', '1', or '2'."
+      player_number = gets.strip
+    end
+    player_number
+  end
+
+  def self.another_game
+    puts "Would you like to play another game? (please type 'yes' or 'no')\n\n"
+    again = gets.strip
+    until /(?i)yes/ === again || /(?i)no/ === again do
+      puts "Please type 'yes' or 'no'."
+      again = gets.strip
+    end
+    again
+  end
+
+  def self.play_a_new_game
+    player_number = self.how_many_players
+    # accepting their input for # of players.
+    if player_number == 1
+      first_player = self.who_goes_first
+      if /(?i)me/ === first_player # me
+        # new game with human player as player 1
+        self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+      elsif /(?i)computer/ === first_player # computer
+        self.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+      end
+    elsif player_number == 2
+      self.new.play
+    else # player_number == 0
+      self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    end
+
+  end
+
 end
 
-hat = Game.new
-
-hat.play
+# hat = Game.new
+#
+# hat.play
