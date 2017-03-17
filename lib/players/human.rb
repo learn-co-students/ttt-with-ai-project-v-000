@@ -4,7 +4,7 @@ module Players
   class Human < Player
 
     def move(board)
-      puts "What space would you like to move into?"
+      puts "What space would you like to move into, player #{self.token}?"
       input = gets.chomp
     end
 

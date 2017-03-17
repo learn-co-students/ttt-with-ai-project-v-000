@@ -1,8 +1,8 @@
-# require 'pry'
-# require_relative './players/human.rb'
-# require_relative './player.rb'
-# require_relative './board.rb'
-# require_relative './players/computer.rb'
+require 'pry'
+require_relative './players/human.rb'
+require_relative './player.rb'
+require_relative './board.rb'
+require_relative './players/computer.rb'
 
 class Game
 
@@ -84,6 +84,12 @@ class Game
   end # def turn end
 
   def play
+    puts "Game on! When it's your turn, choose which spot you'd like to play in by typing a number from 1-9. Each space in the board is represented by a number, as below."
+    puts "| 1 | 2 | 3 |"
+    puts "-----------"
+    puts "| 4 | 5 | 6 |"
+    puts "-----------"
+    puts "| 7 | 8 | 9 |"
     # check whether the game is over
     until self.over?
       # make turns until the game is over
@@ -99,6 +105,6 @@ class Game
 
 end
 
-# hat = Game.new
-#
-# hat.play
+hat = Game.new
+
+hat.play
