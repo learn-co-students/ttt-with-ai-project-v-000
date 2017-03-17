@@ -160,7 +160,7 @@ describe 'Game' do
     end
   end
 
-  describe 'turn' do
+  describe '#turn' do
     it 'makes valid moves' do
       game = Game.new
       allow($stdout).to receive(:puts)
@@ -192,7 +192,7 @@ describe 'Game' do
     end
   end
 
-  describe 'play' do
+  describe '#play' do
     it 'asks for players input on a turn of the game' do
       game = Game.new
       allow($stdout).to receive(:puts)
