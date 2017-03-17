@@ -1,9 +1,11 @@
+require_relative '../player.rb'
+
 module Players
   class Human < Player
 
-    def move(variable)
+    def move(board)
       puts "What space would you like to move into?"
-      input = gets.strip
+      input = gets.chomp
     end
 
   end
