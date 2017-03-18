@@ -1,9 +1,3 @@
-# require 'pry'
-# require_relative './players/human.rb'
-# require_relative './player.rb'
-# require_relative './board.rb'
-# require_relative './players/computer.rb'
-
 class Game
 
   attr_accessor :board, :player_1, :player_2, :current_player
@@ -65,15 +59,15 @@ class Game
     end
   end
 
-  def turn
-    player_move = self.current_player.move(self.board)
+  def turn(delay = 0.25)
+    player_move = self.current_player.move(self.board, delay)
     if self.board.valid_move?(player_move)
       self.board.update(player_move, self.current_player)
       self.board.display
     else
       loop do
         puts "That is not a valid move, please enter 1-9."
-        player_move = self.current_player.move(self.board)
+        player_move = self.current_player.move(self.board, delay)
         if self.board.valid_move?(player_move)
           self.board.update(player_move, self.current_player)
           self.board.display
@@ -114,10 +108,10 @@ class Game
   end
 
   def self.how_many_players
-    puts "Would you like to play a game with 1 player (you against a computer)? 2 players (you against another human)? Or 0 players (a computer against another computer)? (please type '0', '1', or '2')\n\n"
-    player_number = gets.strip.to_i
-    until player_number == 1 || player_number == 2 || player_number == 0 do
-      puts "Please type '0', '1', or '2'."
+    puts "Would you like to play a game with 1 player (you against a computer)? 2 players (you against another human)? Or 0 players (a computer against another computer)? Or would you like to pit the computers in a 100-game wargame? (please type '0', '1', '2' or 'wargame')\n\n"
+    player_number = gets.strip
+    until player_number.to_i == 1 || player_number.to_i == 2 || player_number.to_i == 0 || /(?i)wargame/ === player_number do
+      puts "Please type '0', '1', '2', or 'wargame'."
       player_number = gets.strip
     end
     player_number
@@ -136,7 +130,7 @@ class Game
   def self.play_a_new_game
     player_number = self.how_many_players
     # accepting their input for # of players.
-    if player_number == 1
+    if player_number.to_i == 1
       first_player = self.who_goes_first
       if /(?i)me/ === first_player # me
         # new game with human player as player 1
@@ -144,16 +138,44 @@ class Game
       elsif /(?i)computer/ === first_player # computer
         self.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
       end
-    elsif player_number == 2
+    elsif player_number.to_i == 2
       self.new.play
-    else # player_number == 0
+    elsif /(?i)wargame/ === player_number
+      game = self.wargame(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    else player_number.to_i == 0
       self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
     end
+  end # play_a_new_game end
 
+  def play_wargame
+    self.board.reset!
+    # define variables to count wins and cats games
+    until self.over?
+      # make turns until the game is over
+        self.turn(0)
+    end
+    # when the game is over, return the winner's token or "cat"
+    if self.won?
+      self.winner
+    elsif self.draw?
+      "cat"
+    end
+  end
+
+  # wargame loop
+  def self.wargame(player_1, player_2, board)
+    game = self.new(player_1, player_2, board)
+    wins = []
+    i = 0
+    until i == 100
+      outcome = game.play_wargame
+      wins << outcome
+      i += 1
+      puts "The computers have played #{i} out of 100 games."
+    end
+    puts "There were #{wins.select{|item| item == "cat"}.size} cat's games."
+    puts "Player X won #{wins.select{|item| item == "X"}.size} times."
+    puts "Player O won #{wins.select{|item| item == "O"}.size} times."
   end
 
 end
-
-# hat = Game.new
-#
-# hat.play

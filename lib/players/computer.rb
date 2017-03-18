@@ -9,7 +9,7 @@ module Players
 
     WIN_COMBOS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
 
-    def move(board)
+    def move(board, delay = 0.25)
       # play a winning move
       if self.winning_move(board, self.token) != nil
         choice = self.winning_move(board, self.token) + 1
@@ -36,7 +36,7 @@ module Players
           end
       end
       puts "The computer (#{self.token}) would like to take spot #{choice}"
-      sleep(1)
+      sleep(delay)
       "#{choice}"
     end
 
@@ -108,7 +108,7 @@ module Players
         end
       end
     end
-    
+
   end # class end
 end # module end
 
