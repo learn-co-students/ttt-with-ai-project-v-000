@@ -20,32 +20,14 @@ module Players
       elsif board.open?(5)
         choice = 5
       # play in a corner opposite an opponent's token
-      elsif opponent_in_cell(0, board) && board.open?(9)
-         choice = 9 # choice is an input - this is cell 8
-      elsif opponent_in_cell(2, board) && board.open?(7)
-         choice = 7 # choice is an input - this is cell 6
-      elsif opponent_in_cell(6, board) && board.open?(3)
-         choice = 3 # choice is an input - this is cell 2
-      elsif opponent_in_cell(8, board) && board.open?(1)
-         choice = 1 # choice is an input - this is cell 0
+      elsif self.opposite_corner(board) != nil
+        choice = self.opposite_corner(board)
       # play in any open corner
-      elsif board.open?(1)
-         choice = 1
-      elsif board.open?(3)
-         choice = 3
-      elsif board.open?(7)
-         choice = 7
-      elsif board.open?(9)
-         choice = 9
+      elsif self.open_corner(board) != nil
+        choice = self.open_corner(board)
       # play in the middle square of any side
-      elsif board.open?(2)
-         choice = 2
-      elsif board.open?(6)
-         choice = 6
-      elsif board.open?(8)
-         choice = 8
-      elsif board.open?(4)
-        choice = 4
+      elsif self.middle_square(board) != nil
+        choice = self.middle_square(board)
       # play a random spot
       else
         choice = (rand*9).ceil
@@ -56,6 +38,40 @@ module Players
       puts "The computer (#{self.token}) would like to take spot #{choice}"
       sleep(1)
       "#{choice}"
+    end
+
+    def opposite_corner(board)
+    # create an array of posisble plays based on playing the opposite corner and choose one at random
+    #NOTE this could be cleaned up further with a function that accepts two arguments ie opposite_corner_play(0,9) and then iterating over an array of corners with it...but I'm not going to do that right now.
+      # NOTE opponent_in_cell opperates on indexes, board.open? operates on inputs. return is an input.
+      opposite_corners = []
+      opposite_corners << 9 if opponent_in_cell(0, board) && board.open?(9) # cell 8
+      opposite_corners << 7 if opponent_in_cell(2, board) && board.open?(7) # cell 6
+      opposite_corners << 3 if opponent_in_cell(6, board) && board.open?(3) # cell 2
+      opposite_corners << 1 if opponent_in_cell(8, board) && board.open?(1) # cell 0
+      self.rand_from_array(opposite_corners)
+    end
+
+    def open_corner(board)
+      open_corners = []
+      open_corners << 1 if board.open?(1)
+      open_corners << 3 if board.open?(3)
+      open_corners << 7 if board.open?(7)
+      open_corners << 9 if board.open?(9)
+      self.rand_from_array(open_corners)
+    end
+
+    def middle_square(board)
+      middle_squares = []
+      middle_squares << 2 if board.open?(2)
+      middle_squares << 6 if board.open?(6)
+      middle_squares << 8 if board.open?(8)
+      middle_squares << 4 if board.open?(4)
+      self.rand_from_array(middle_squares)
+    end
+
+    def rand_from_array(array)
+      array[(array.size*rand).floor]
     end
 
     def opponent_in_cell(index, board)
