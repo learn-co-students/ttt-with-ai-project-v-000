@@ -37,6 +37,10 @@ class Board
     self.position(input) != " "
   end
 
+  def open?(input)
+    self.position(input) == " "
+  end
+
   def valid_move?(input)
     if input.to_i > 0 && input.to_i < 10
       taken?(input) == false ? true : false

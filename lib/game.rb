@@ -97,9 +97,9 @@ class Game
     end
     # when the game is over, congratulate the winner or print cats game
     if self.won?
-      puts "Congratulations #{self.winner}!/n"
+      puts "Congratulations #{self.winner}!\n"
     elsif self.draw?
-      puts "Cat's Game!/n"
+      puts "Cat's Game!\n"
     end
   end # def play end
 
