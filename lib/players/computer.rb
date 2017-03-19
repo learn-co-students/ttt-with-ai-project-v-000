@@ -20,7 +20,7 @@ module Players
       block_a_combo unless @i > 0
       # best_spots unless @i > 0
 
-      board.cells.find do |c|
+      board.cells.detect do |c|
         if c == " "
           board.cells[@i] == self.token
           @i += 1
@@ -65,45 +65,6 @@ module Players
   #   end
   # end
 
-    # def no_combos(board)
-    #   if !board.taken?(5)
-    #     move = "5"
-    #   elsif board.turn_count == 2
-    #     move = [1, 3, 7, 9].detect do |i|
-    #       !board.taken?(i).to_s
-    #     end
-    #   end
-    # end
-
-    # def win_move
-    #   @two_token_combo.each do |combo|
-    #     if (combo[0] || combo[1] || combo[2]) == self.token
-    #       combo.each do |cell|
-    #         position = nil
-    #         if cell == " "
-    #           position << cell
-    #           move = (position+1).to_s
-    #         end
-    #       end
-    #     else
-    #       block_move
-    #     end
-    #   end
-    # end
-
-  #  def block_move
-  #    @two_token_combo.each do |combo|
-  #     if (combo[0] || combo[1] || combo[2]) == !self.token
-  #       combo.each do |cell|
-  #         position = nil
-  #         if cell == " "
-  #           position << cell
-  #           move = (position+1).to_s
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
 
   end
 end

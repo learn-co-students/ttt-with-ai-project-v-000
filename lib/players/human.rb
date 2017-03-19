@@ -1,7 +1,7 @@
 module Players
   class Human < Player
 
-    def move(test)
+    def move(board)
       puts "Where would you like to move?"
       gets.strip
     end
