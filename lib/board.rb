@@ -44,8 +44,8 @@ class Board
   end
 
   def valid_move? (index)
-    i = index.to_i
-    !!(i.between?(1, 9) && taken?(i) == false)
+     i = index.to_i
+     !!(i.between?(1, 9) && taken?(i) == false)
   end
 
   def update(cell, player)
