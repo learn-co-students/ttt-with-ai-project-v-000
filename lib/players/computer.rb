@@ -15,54 +15,48 @@ module Players
 
       def move(board)
         @i = 0
-
+        random_spot(board)
+        best_spots(board)
+        block_a_combo(board)
         for_the_win(board)
-        # block_a_combo unless @i > 0
-        best_spots(board) unless @i > 0
-        random_spot(board) unless @i > 0
-
-        # board.cells.find do |c|
-        #   if c == " "
-        #     # board.cells[@i] = self.token
-        #     @i += 1
-        #   end
-        # end
-      "#{@i + 1}"
+        "#{@i + 1}"
       end
 
       def for_the_win(board)
         WIN_COMBINATIONS.each do |combo|
-          binding.pry
-          if combo[0] == combo[1] && combo[2] == " " && combo[0] == self.token
+          if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " " && board.cells[combo[0]] == self.token
             @i = combo[2]
-          elsif combo[1] == combo[2] && combo[0] == " " && combo[0] == self.token
+          elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " " && board.cells[combo[0]] == self.token
             @i = combo[0]
-          elsif combo[0] == combo[2] && combo[1] == " " && combo[0] == self.token
+          elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " " && board.cells[combo[0]] == self.token
             @i = combo[1]
           else
-            @i = 0
+            nil
           end
         end
       end
 
-      def block_a_combo
+      def block_a_combo(board)
         WIN_COMBINATIONS.each do |combo|
-          if combo[0] == combo[1] && combo[2] == " " && combo[0] != " "
+          if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " " && board.cells[combo[0]] != " "
             @i = combo[2]
-          elsif combo[1] == combo[2] && combo[0] == " " && combo[0] != " "
+          elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " " && board.cells[combo[0]] != " "
             @i = combo[0]
-          elsif combo[0] == combo[2] && combo[1] == " " && combo[0] != " "
+          elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " " && board.cells[combo[0]] != " "
             @i = combo[1]
           else
-            @i = 0
+            nil
           end
         end
       end
 
     def best_spots(board)
-      [0, 2, 4, 6, 8].any? do |i|
+      shuffled_array = [0, 2, 4, 6, 8].shuffle
+      shuffled_array.any? do |i|
         if board.cells[i] == " "
           @i = i
+        else
+          nil
         end
       end
     end
