@@ -155,7 +155,7 @@ describe 'Game' do
     it 'returns nil when no winner' do
       game = Game.new
       game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
-# binding.pry
+binding.pry
       expect(game.winner).to be_nil
     end
   end
