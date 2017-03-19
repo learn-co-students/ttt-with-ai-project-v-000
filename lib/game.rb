@@ -25,7 +25,6 @@ class Game
   end
 
   def over?
-  #  @board.full?
     won? || draw?
   end
 
@@ -42,24 +41,19 @@ class Game
   end
 
   def winner
-      if combo = won?
-        winner = @board.cells[combo.first]
+    if combo = won?
+      @board.cells[combo.first]
     end
   end
 
   def turn
     player = current_player
-    # current_move = gets.strip
     board = @board
     current_move = player.move(board)
     if !@board.valid_move?(current_move)
       turn
     else
       puts "Turn: #{@board.turn_count+1}\n"
-<<<<<<< HEAD
-=======
-      # @board.display
->>>>>>> 780209e4f5c4a053b26023f1caf93b858465e43e
       @board.update(current_move, player)
       puts "#{player.token} moved #{current_move}"
       @board.display
