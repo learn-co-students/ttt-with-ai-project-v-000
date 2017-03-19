@@ -45,3 +45,19 @@ module Players
     end
   end
 end
+
+
+##AI strategies
+
+####1 -- Defensive
+# check opposites
+# loop through opponents positions
+# for each position, check opposite space by y = 8-x
+# if opposite space filled by oppenent, take space in between by y = 12 -
+#
+
+
+###board###
+##[0,1,2]##
+##[3,4,5]##
+##[6,7,8]##
