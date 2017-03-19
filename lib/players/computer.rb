@@ -15,8 +15,10 @@ module Players
     @i = 0
 
     def move(board)
+
       for_the_win
       block_a_combo unless @i > 0
+      # best_spots unless @i > 0
 
       board.cells.find do |c|
         if c == " "
@@ -54,6 +56,14 @@ module Players
         end
       end
     end
+
+  # def best_spots
+  #   [0, 2, 4, 6, 8].any? |i|
+  #     if board[i] == " "
+  #       @i = i
+  #     end
+  #   end
+  # end
 
     # def no_combos(board)
     #   if !board.taken?(5)

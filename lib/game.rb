@@ -49,7 +49,7 @@ class Game
 
   def turn
     player = current_player
-    current_move = player.move(@board)
+    current_move = gets.strip
     if !@board.valid_move?(current_move)
       turn
     else
