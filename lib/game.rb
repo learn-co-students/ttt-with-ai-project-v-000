@@ -21,10 +21,12 @@ class Game
   end
 
   def current_player
-
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
-
+  def over?
+    @board.full?
+  end
 
 
 end
