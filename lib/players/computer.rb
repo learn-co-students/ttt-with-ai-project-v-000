@@ -15,10 +15,10 @@ module Players
 
       def move(board)
         @i = 0
-        random_spot(board) # i = 2
-        best_spots(board) # i = 5
-        block_a_combo(board) # 6
-        for_the_win(board) # nil
+        random_spot(board)
+        best_spots(board)
+        block_a_combo(board)
+        for_the_win(board)
         "#{@i + 1}"
       end
 
