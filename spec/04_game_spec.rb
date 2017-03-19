@@ -155,7 +155,7 @@ describe 'Game' do
     it 'returns nil when no winner' do
       game = Game.new
       game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
-binding.pry
+
       expect(game.winner).to be_nil
     end
   end
@@ -172,6 +172,7 @@ binding.pry
 
     it 'asks for input again after a failed validation' do
       game = Game.new
+      
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("invalid")

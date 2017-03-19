@@ -37,12 +37,32 @@ class Game
   end
 
   def winner
-    if self.won?
+    if won?
       combo = self.won?
       self.board.cells[combo[0]]
     else
       nil
     end
+  end
+
+  def turn
+    player = current_player
+    player_move = player.move(self.board).to_i-1
+    if self.board.valid_move?(player_move)
+      puts "Turn: #{self.board.turn_count+1}\n"
+      self.board.display
+      self.board.update(player_move, player)
+      puts "#{player.token} moved #{player_move}"
+      self.board.display
+      puts "\n\n"
+    else
+      turn
+    end
+  end
+
+  def play
+    turn until over?
+    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
 
 end

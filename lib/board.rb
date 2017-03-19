@@ -18,7 +18,10 @@ class Board
   end
 
   def to_index(input)
-    input.to_i - 1
+    if input.class === "String"
+      input.to_i - 1
+    end
+    input
   end
 
   def position(input)
