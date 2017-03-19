@@ -13,6 +13,29 @@ class Game
     @board = board
   end
 
+  def self.start
+    puts "Welcome to CLI Tic Tac Toe!"
+    puts "How many players?"
+
+    num_players = gets.strip
+    case num_players
+    when "0"
+      new(Computer.new("X"), Computer.new("O"))
+    when "1"
+      puts "Are you 'X' or 'O'?"
+      human_token = gets.strip
+      if human_token == "X"
+        new(Human.new("X"), Computer.new("O"))
+      else
+        new(Computer.new("X"), Human.new("O"))
+      end
+    when "2"
+      new(Human.new("X"), Human.new("O"))
+    when "wargames"
+
+    end
+  end
+
   def current_player
     if board.cells.count(player_1.token) > board.cells.count(player_2.token)
       player_2
@@ -57,9 +80,6 @@ class Game
     # end
     until board.valid_move?(move)
       move = current_player.move(board)
-      if !board.valid_move?(move)
-        puts "invalid move"
-      end
     end
     board.update(move,current_player)
   end
@@ -75,6 +95,29 @@ class Game
     else
       puts "Cat's Game!"
     end
+  end
+
+  def wargames
+    x_wins = 0
+    o_wins = 0
+    draws = 0
+
+    100.times do
+      board.reset!
+      
+      until over?
+      turn
+      end
+
+      if won?
+        winner == "X" ? x_wins += 1 : o_wins += 1
+      else
+        draws += 1
+      end
+    end
+    puts "X wins: #{x_wins}"
+    puts "O wins: #{o_wins}"
+    puts "Draws: #{draws}"
   end
 
   # def play
