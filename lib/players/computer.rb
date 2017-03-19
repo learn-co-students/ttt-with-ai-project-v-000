@@ -2,26 +2,37 @@ module Players
   class Computer < Player
 
     WIN_COMBINATIONS = [
-      [1,2,3], # Top row
-      [4,5,6],  # Middle row
-      [7,8,9],  # Bottom row
-      [1,4,7],  # Left Column
-      [2,5,8],  # Middle Column
-      [3,6,9],  # Right Column
-      [1,5,9],  # Diagnoal L to R
-      [3,5,7]  # Diagnoal R to L
+      [0,1,2], # Top row
+      [3,4,5],  # Middle row
+      [6,7,8],  # Bottom row
+      [0,3,6],  # Left Column
+      [1,4,7],  # Middle Column
+      [2,5,8],  # Right Column
+      [0,4,8],  # Diagnoal L to R
+      [2,4,6]  # Diagnoal R to L
     ]
 
     def move(board)
-      WIN_COMBINATIONS.each do |combo|
-        two_token_combo = []
-        if (combo[0] == combo[1] && combo[2] == " ") || (combo[1] == combo[2] && combo[0] == " ") || (combo[0] == combo[2] && combo[1] == " ")
-          two_token_combo << combo
-          win_move
-        else
-          no_combos(board)
+      i = 0
+      board.cells.find do |c|
+        if c == " "
+          board.cells[i] == self.token
+          i += 1
         end
+    
       end
+    "#{i + 1}"
+      # WIN_COMBINATIONS.each do |combo|
+      #   two_token_combo = []
+      #   if (combo[0] == combo[1] && combo[2] == " ") || (combo[1] == combo[2] && combo[0] == " ") || (combo[0] == combo[2] && combo[1] == " ")
+      #     binding.pry
+      #     two_token_combo << combo
+      #     win_move
+      #   else
+      #     binding.pry
+      #     no_combos(board)
+      #   end
+      # end
     end
 
     def no_combos(board)
