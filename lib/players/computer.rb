@@ -1,6 +1,12 @@
 module Players
   class Computer < Player
 
+    attr_accessor :token
+
+    def initialize(token)
+      @token = token
+    end
+
       WIN_COMBINATIONS = [
       [0,1,2],
       [3,4,5],
@@ -13,62 +19,50 @@ module Players
       ]
 
     def move(board)
-      #Iterate through combos to see if there are any win combos with two identical tokens 
-      #and an empty space
-      WIN_COMBINATIONS.each do |combo|
-        two_token_combo = []
-        if (combo[0] == combo[1] && combo[2] == " ") || (combo[1] == combo[2] && combo[0] == " ") || (combo[0] == combo[2] && combo[1] == " ")
-          two_token_combo << combo
-          win_move
-        else
-          no_combos(board)
-        end
-      end
-      #If there are no possible wins for either player, goto the no_combos method
-        
-    end
 
-    def no_combos(board)
-      #will try to take middle always if available, if not will try to take a corner next
-      if !board.taken?(5)
+      opponent_token = ""
+      if self.token == "X"
+        opponent_token = "O"
+      else
+        opponent_token = "X"
+        self.token == "O"
+      end
+
+      if(board.valid_move?("5"))
         move = "5"
+      elsif board.turn_count == 1
+        move = "1"
       elsif board.turn_count == 2
-        move = [1, 3, 7, 9].detect do |i| 
-          !board.taken?(i).to_s
-        end
-      end
-    end
+        move = [1, 3, 7, 9].shuffle.detect{|i| !board.taken?(i)}.to_s
 
-    def win_move
-      two_token_combo.each do |combo| 
-        if (combo[0] || combo[1] || combo[2]) == self.token
-          combo.each do |cell|
-            position = nil
-            if cell == " "
-              position << cell
-              move = (position+1).to_s
+      else
+
+        WIN_COMBINATIONS.detect do |combo|
+          if combo.select{|i| board.position(i+1) == self.token}.size == 2 && 
+             combo.any?{|i| board.position(i+1) == " "}
+             move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+                
+        elsif combo.select{|i| board.position(i+1) == opponent_token}.size == 2 && 
+              combo.any?{|i| board.position(i+1) == " "}
+              move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+                
             end
           end
-        else 
-          block_move
-        end
+            
+        move = [1, 3, 7, 9, 2, 4, 6, 8].shuffle.detect{|i| !board.taken?(i)}.to_s if move == nil
       end
-    end
+      move
 
-    def block_move
-      two_token_combo.each do |combo| 
-        if (combo[0] || combo[1] || combo[2]) == !self.token
-          combo.each do |cell|
-            position = nil
-            if cell == " "
-              position << cell
-              move = (position+1).to_s
-            end
-          end
-        end
-      end
-    end
-          
 
+
+                
+
+
+
+
+
+      
+    end
+      
   end
 end

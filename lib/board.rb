@@ -49,6 +49,12 @@ class Board
 
   #Checks to make sure player input is not taken and is 1-9
   def valid_move?(input)
-    input.to_i.between?(1,9) && !taken?(input)
+    if input.to_i.between?(1, 9)
+      if taken?(input)
+        return false
+      end
+      return true
+    end
+    return false
   end
 end
