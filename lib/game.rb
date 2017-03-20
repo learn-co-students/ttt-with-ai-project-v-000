@@ -21,10 +21,8 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.any? do |combo|
-      if self.board.taken?(combo[0]) && self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
-        return combo
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]] && self.board.taken?(combo[0]+1)
     end
   end
 
@@ -47,7 +45,7 @@ class Game
 
   def turn
     player = current_player
-    player_move = player.move(self.board).to_i-1
+    player_move = player.move(self.board).to_i
     if self.board.valid_move?(player_move)
       puts "Turn: #{self.board.turn_count+1}\n"
       self.board.display

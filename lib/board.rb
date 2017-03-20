@@ -17,15 +17,8 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def to_index(input)
-    if input.class === "String"
-      input.to_i - 1
-    end
-    input
-  end
-
   def position(input)
-    self.cells[to_index(input)]
+    self.cells[input.to_i-1]
   end
 
   def full?
@@ -37,15 +30,15 @@ class Board
   end
 
   def taken?(input)
-    self.cells[to_index(input)] != " "
+    self.cells[input.to_i-1] != " "
   end
 
   def valid_move?(input)
-    !taken?(input) && to_index(input).between?(0,8)
+    !taken?(input) && input.to_i.between?(1,9)
   end
 
   def update(input, player)
-    self.cells[to_index(input)] = player.token
+    self.cells[input.to_i-1] = player.token
   end
 
 end
