@@ -66,4 +66,34 @@ class Game
     end
   end
 
+  def start
+    puts "Welcome to Tic Tac Toe!"
+    puts "How many players? 0, 1 or 2"
+    input = gets.strip.to_i
+    if !input.between?(0,2)
+      puts "Invalid entry, please choose between 0 and 2"
+      start
+    elsif input == 0
+      new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      new_game.play
+    elsif input == 1
+      puts "Hello, please enter your name:"
+      player1 = gets.strip
+      new_game = (player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+      new_game.display
+      new_game.play
+    else input == 2
+      puts "Who wants to be player 1?"
+      puts "Please enter your name:"
+      player1 = gets.strip
+      puts "Hello #{player1}, you will be player X."
+      puts "Player 2, please enter your name:"
+      player2 = gets.strip
+      puts "Hello #{player2}, you will be player 0."
+      new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+      new_game.display
+      new_game.play
+    end
+  end
+
 end
