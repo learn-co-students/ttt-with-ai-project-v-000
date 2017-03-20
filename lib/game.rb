@@ -78,9 +78,9 @@ class Game
     # end
     until board.valid_move?(move)
       move = current_player.move(self)
-      if !board.valid_move?(move)
-        puts "invalid move"
-      end
+      # if !board.valid_move?(move)
+      #   puts "invalid move"
+      # end
     end
     board.update(move,current_player)
   end
