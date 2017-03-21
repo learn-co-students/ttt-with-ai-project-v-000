@@ -78,4 +78,18 @@ class Game
     end
   end
 
+  def first_player
+    first_player = nil
+    loop do
+      puts "Who goes first: "
+      first_player = gets.strip.upcase
+      break if first_player == 'X' || first_player == 'O'
+    end
+
+    if player_1.token != first_player
+      player_2, player_1 = player_1, player_2   #multiple assignment
+    end
+  end
+
+
 end
