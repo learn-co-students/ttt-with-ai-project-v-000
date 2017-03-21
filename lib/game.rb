@@ -53,23 +53,29 @@ class Game
   end
 
   def turn
-    index = current_player.move(board)
-    if board.valid_move?(index)
-      board.update(index, current_player)
-      # display_board(board)
-    else
-      turn
+    index = nil
+    loop do
+      index = current_player.move(board)
+      if board.valid_move?(index)
+        break
+      end
     end
-  end
 
+    board.update(index, current_player)
+  end
 
   def play
-    unless over?
-    human.move
+    until over? || draw? ## draw added to pass test
+      board.display
+       turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+
+    else
+      puts "Cat\'s Game!"
+    end
   end
-
-
-
-
 
 end
