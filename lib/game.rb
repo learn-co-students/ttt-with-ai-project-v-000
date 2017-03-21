@@ -87,7 +87,7 @@ class Game
     end
 
     if player_1.token != first_player
-      player_2, player_1 = player_1, player_2   #multiple assignment
+      @player_2, @player_1 = player_1, player_2   #multiple assignment
     end
   end
 

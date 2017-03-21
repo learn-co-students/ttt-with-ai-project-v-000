@@ -5,7 +5,7 @@ require_relative '../config/environment'
 
 puts "Welcome to TTT"
 
-
+#Ask the user for who should go first and be "X".
 def request_new
   while true
     puts "Select players 0, 1 or 2"
