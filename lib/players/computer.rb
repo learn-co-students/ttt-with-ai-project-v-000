@@ -16,7 +16,7 @@ module Players
       token == 'X' ? 'O' : 'X'
     end
 
-    CELL_CHOICES = [4, 0, 2, 6, 8, 1, 5, 7, 3]
+    CELL_CHOICES = [4, 0, 2, 6, 8, 1, 5, 7, 3].freeze
 
     def move(board)
       Game::WIN_COMBINATIONS.each do |possible_win_indexes|
@@ -27,16 +27,17 @@ module Players
         # ['X', ' ', 'X']
         if possible_win_tokens.count(opponents_token) == 2
           i = possible_win_tokens.index(' ')
-          if i
-            return possible_win_indexes[i] + 1
-          end
+          return (possible_win_indexes[i] + 1).to_s if i
         end
 
         #
       end
 
-      CELL_CHOICES.detect { |index| board.cells[index] == ' ' } + 1
-
+      (CELL_CHOICES.detect { |index| board.cells[index] == ' ' } + 1).to_s
      end
   end
 end
+
+
+
+##this is hard
