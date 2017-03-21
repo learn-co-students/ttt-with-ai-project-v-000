@@ -69,7 +69,7 @@ class Game
   end
 
   def turn
-    move = current_player.move(self)
+    move = current_player.move(board)
     ##solution with recursion
     # if board.valid_move?(move)
     #   board.update(move,current_player)
@@ -77,7 +77,7 @@ class Game
     #   turn
     # end
     until board.valid_move?(move)
-      move = current_player.move(self)
+      move = current_player.move(board)
       # if !board.valid_move?(move)
       #   puts "invalid move"
       # end
@@ -89,6 +89,7 @@ class Game
     until over?
       turn
       board.display
+      puts ""
     end
 
     if won?
