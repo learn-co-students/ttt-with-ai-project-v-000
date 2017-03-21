@@ -53,9 +53,7 @@ class Game
   end
 
   def turn
-
     index = current_player.move(board)
-
     if board.valid_move?(index)
       board.update(index, current_player)
       # display_board(board)
@@ -65,6 +63,10 @@ class Game
   end
 
 
+  def play
+    unless over?
+    human.move
+  end
 
 
 
