@@ -12,7 +12,7 @@ elsif input.to_i == 2
 else
   puts "Okay, are you playing X or O?"
   first_player = gets.chomp
-  if first_player == "X"
+  if first_player == "X" || first_player == "x"
     Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
   else
     Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
