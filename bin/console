@@ -3,6 +3,12 @@
 require 'irb'
 require_relative '../config/environment'
 
-puts ".... loading your CLI Environment"
+# puts ".... loading your CLI Environment"
 
-IRB.start
+# IRB.start
+
+puts "... Testing"
+
+game = Game.new(player1_object=Players::Computer.new("X"))
+
+game.player_1.move(game.board)

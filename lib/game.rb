@@ -5,13 +5,13 @@ class Game
 	attr_accessor :board, :player_1, :player_2
 
 	WIN_COMBINATIONS = [[0,1,2],
-						[3,4,5],
-						[6,7,8],
-						[0,3,6],
-						[1,4,7],
-						[2,5,8],
-						[0,4,8],
-						[6,4,2]]
+											[3,4,5],
+											[6,7,8],
+											[0,3,6],
+											[1,4,7],
+											[2,5,8],
+											[0,4,8],
+											[6,4,2]]
 
 	#could be metaprogrammed to accept arguments in any order
 	def initialize(player1_object=Players::Human.new("X"), player2_object=Players::Human.new("O"), board_object=Board.new)
@@ -25,6 +25,14 @@ class Game
 			player_1
 		else
 			player_2
+		end
+	end
+
+	def other_player
+		if board.turn_count.even?
+			player_2
+		else
+			player_1
 		end
 	end
 
