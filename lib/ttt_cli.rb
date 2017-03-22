@@ -11,7 +11,7 @@ class TicTacToeCLI
       puts "TicTacToe faceoff between a human and a computer!"
       puts "Enter X to be player X and make the first move."
       puts "Enter O to be player O and make the second move."
-      player_identity = gets.strip
+      player_identity = gets.strip.upcase
       if player_identity == "X"
         human_versus_machine = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
         human_versus_machine.play

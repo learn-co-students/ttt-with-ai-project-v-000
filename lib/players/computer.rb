@@ -13,10 +13,9 @@ module Players
     ]
 
     def combo_with_two_xs?(board)
-      WIN_COMBINATIONS.detect do|combo|
-        available_space = combo.any? {|e| board.cells[e] == " "}
+      WIN_COMBINATIONS.detect do |combo|
         two_xs = combo.count {|e| board.cells[e] == "X"}
-        available_space && (two_xs == 2)
+        combo.any? {|e| board.cells[e] == " "} && (two_xs == 2)
       end
     end
 
@@ -39,15 +38,11 @@ module Players
         (combo_with_two_os.detect {|e| board.cells[e] == " "}.to_i + 1).to_s
       elsif !board.taken?("5")
           "5"
-      elsif board.taken?("5")
+      elsif corners.detect {|string_input| !board.taken?(string_input)}
         corners.detect {|string_input| !board.taken?(string_input)}
       else
         available_moves = all_moves.delete_if {|string_input| board.taken?(string_input)}
-        if available_moves.length == 1
-          available_moves.first
-        else
-          available_moves.sample
-        end
+        available_moves.sample
       end
     end
   end
