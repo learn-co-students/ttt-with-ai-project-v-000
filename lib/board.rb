@@ -31,7 +31,7 @@ class Board
   end
 
   def taken?(cell)
-    @cells[cell.to_i-1] != " "? true : false
+    @cells[cell.to_i-1] != " "
   end
 
   def valid_move?(input)
