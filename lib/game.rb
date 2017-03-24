@@ -54,9 +54,10 @@ class Game
     player = self.current_player
     input = " "
     until self.board.valid_move?(input)
-      input = player.move(self.board.cells)
+      input = player.move(self.board)
     end
     self.board.update(input, player)
+    puts "Nice move!"
     self.board.display
   end
 
