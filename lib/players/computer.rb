@@ -2,7 +2,9 @@ require 'pry'
 module Players
   class Computer < Player
 
-    attr_accessor :token, :board
+    attr_accessor :token
+
+    @@board_array = []
 
     def initialize(token)
       @token = token
@@ -19,10 +21,14 @@ module Players
       [6,4,2]
       ]
 
+    def self.board_array
+      @@board_array
+    end
+
 
     def board_combinations_with_index(board)
-      WIN_COMBINATIONS.map {|combo|
-        combo.map {|x| [board[x], (x).to_i.+(1).to_s]}}
+       WIN_COMBINATIONS.map {|combo|
+       combo.map {|x| [board[x], (x).to_i.+(1).to_s]}} 
         ##  board_combinations_with_index(board) = [
         ##  [["X", "1"], ["O", "2"], [" ", "3"]], 
         ##  [[" ", "4"], ["X", "5"], [" ", "6"]], 
@@ -56,14 +62,13 @@ module Players
         #board_combinations_with_index(board) ==
           #Game::WIN_COMBINATIONS.map {|combo|
           #combo.map {|x| [board.position[x], (x).to_i.+(1).to_s]}}
-        
-
-          (board_combinations_with_index(board).detect {|cmb| 
+          #board_combinations_with_index(board)
+          board_combinations_with_index(board).detect {|cmb| 
           (cmb[0][0] == "X" && cmb[1][0] == "X" && cmb[2][0] == " ") ||
           (cmb[0][0] == "X" && cmb[1][0] == " " && cmb[2][0] == "X") ||
-          (cmb[0][0] == " " && cmb[1][0] == "X" && cmb[2][0] == "X")}).detect {|x| 
+          (cmb[0][0] == " " && cmb[1][0] == "X" && cmb[2][0] == "X")}.select {|x| 
             if x[0] == " "
-              (move(board)) == move(x[1].to_s)
+              move = x[1].to_s
             end
           }
         end
