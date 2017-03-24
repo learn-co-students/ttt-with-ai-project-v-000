@@ -3,8 +3,7 @@ class Board
 
   #initiazies board as 9 element array with blank spaces
   def initialize
-    @cells = Array.new(9," ")
-
+    self.reset!
   end
 
   #displays board in a traditional tic tac toe fashion
@@ -37,25 +36,13 @@ class Board
 
   #counts how many turns there have been by checking for "X" or "O" in cells
   def turn_count
-    counter = 0
-    @cells.each do |space|
-      if space == "X" || space == "O"
-        counter += 1
-      end
-    end
-    return counter
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   #determines wether the input given is a valid move on the board by first checking if its a number between 1-9
   #and then checks if that space is taken
   def valid_move?(input)
-    if input.to_i.between?(1, 9)
-      if taken?(input)
-        return false
-      end
-      return true
-    end
-    return false
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
   #clears the board

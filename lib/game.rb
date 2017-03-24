@@ -70,6 +70,8 @@ class Game
     @board.update(current_player.move(@board), current_player)
     #displays the turn
     @board.display
+    puts "***************************"
+    puts ""
   end
 
   #plays the game until the game is over
