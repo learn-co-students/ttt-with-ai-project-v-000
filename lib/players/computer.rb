@@ -1,7 +1,8 @@
+require 'pry'
 module Players
   class Computer < Player
 
-    attr_accessor :token
+    attr_accessor :token, :board
 
     def initialize(token)
       @token = token
@@ -18,51 +19,64 @@ module Players
       [6,4,2]
       ]
 
-    def move(board)
 
-      opponent_token = ""
-      if self.token == "X"
-        opponent_token = "O"
-      else
-        opponent_token = "X"
-        self.token == "O"
+    def board_combinations_with_index(board)
+      WIN_COMBINATIONS.map {|combo|
+        combo.map {|x| [board[x], (x).to_i.+(1).to_s]}}
+        ##  board_combinations_with_index(board) = [
+        ##  [["X", "1"], ["O", "2"], [" ", "3"]], 
+        ##  [[" ", "4"], ["X", "5"], [" ", "6"]], 
+        ##  [[" ", "7"], [" ", "8"], [" ", "9"]], 
+        ##  [["X", "1"], [" ", "4"], [" ", "7"]], 
+        ##  [["O", "2"], ["X", "5"], [" ", "8"]], 
+        ##  [[" ", "3"], [" ", "6"], [" ", "9"]], 
+        ##  [["X", "1"], ["X", "5"], [" ", "9"]], 
+        ##  [[" ", "7"], ["X", "5"], [" ", "3"]]
+        ##] 
       end
+    
 
+
+    def move(board)
+      #board_combinations_with_index(board) = []
+    
+
+
+      #Takes the middle square if available
       if(board.valid_move?("5"))
         move = "5"
+      #Takes Top left square if middle square is taken
       elsif board.turn_count == 1
         move = "1"
+      #Takes a random corner in all other situations
       elsif board.turn_count == 2
         move = [1, 3, 7, 9].shuffle.detect{|i| !board.taken?(i)}.to_s
 
       else
+        #board_combinations_with_index(board) ==
+          #Game::WIN_COMBINATIONS.map {|combo|
+          #combo.map {|x| [board.position[x], (x).to_i.+(1).to_s]}}
+        
 
-        WIN_COMBINATIONS.detect do |combo|
-          if combo.select{|i| board.position(i+1) == self.token}.size == 2 && 
-             combo.any?{|i| board.position(i+1) == " "}
-             move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-                
-        elsif combo.select{|i| board.position(i+1) == opponent_token}.size == 2 && 
-              combo.any?{|i| board.position(i+1) == " "}
-              move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-                
+          (board_combinations_with_index(board).detect {|cmb| 
+          (cmb[0][0] == "X" && cmb[1][0] == "X" && cmb[2][0] == " ") ||
+          (cmb[0][0] == "X" && cmb[1][0] == " " && cmb[2][0] == "X") ||
+          (cmb[0][0] == " " && cmb[1][0] == "X" && cmb[2][0] == "X")}).detect {|x| 
+            if x[0] == " "
+              (move(board)) == move(x[1].to_s)
             end
-          end
-            
-        move = [1, 3, 7, 9, 2, 4, 6, 8].shuffle.detect{|i| !board.taken?(i)}.to_s if move == nil
-      end
+          }
+        end
+
+
+
+          
+        
+  
+
       move
-
-
-
-                
-
-
-
-
-
-      
-    end
+      end
+    
       
   end
 end

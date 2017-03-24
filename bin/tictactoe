@@ -3,8 +3,8 @@
 require_relative '../config/environment'
 include Players
 
-puts "Greetings!"
-puts "Welcome to Tic-Tac-Toe"
+
+puts "Welcome to Tic Tac Toe!"
 puts "How many players are there? Enter 0, 1, or 2"
 input = gets.strip
 if input == "0"
