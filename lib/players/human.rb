@@ -9,7 +9,7 @@ module Players
 
     def move(board) #asks the user for input and returns it
       puts "#{token}: Please select an open position from 1 to 9:"
-      position = gets.strip
+      gets.strip
     end
 
   end

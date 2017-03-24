@@ -3,11 +3,10 @@ class Board
   attr_accessor :cells #has an attribute to store the cells of the board
 
   def initialize #sets the cells of the board to a 9 element array of " "
-    @cells = Array.new(9," ")
+    self.reset!
   end
 
   def reset! #can reset the state of the cells in the board; sets the cells of the board to a 9 element array of " "
-    self.cells.clear
     @cells = Array.new(9," ")
   end
 
@@ -28,12 +27,7 @@ class Board
   end
 
   def full? #returns true for a full board; returns false for an in-progress game
-    @cells.each do |cell|
-      if (cell != "X") && (cell !="O")
-        return false
-      end
-    end
-    true
+    cells.all? {|cell| cell != " " && cell !=""}
   end
 
   def turn_count #eturns the amount of turns based on cell value
@@ -48,12 +42,8 @@ class Board
     end
   end
 
-  def valid_move?(position) #returns true for user input between 1-9 that is not taken
-    if (1..9) === position.to_i && @cells[index(position)] == " "
-      true
-    else
-      false
-    end
+  def valid_move?(input) #returns true for user input between 1-9 that is not taken
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
   def update(position,player) #updates the cells in the board with the player token according to the input

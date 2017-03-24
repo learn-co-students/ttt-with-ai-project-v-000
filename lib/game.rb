@@ -23,25 +23,12 @@ class Game
   end
 
   def current_player #returns the correct player, X, for the third move
-      #if sum of x's and o's is even return player_1, else return player_2
-    token_count = board.cells.count{|x| x == "X" || x == "O"}
-    if token_count.even?
-      @player_1
-    else
-      @player_2
-    end
+    #if sum of x's and o's is even return player_1, else return player_2
+    board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over? #if draw or one of the win combinations, then it is over (e.g. draw occurs when it is full and none of the WIN_COMBINATIONS are met)
-    if won?
-      true
-    elsif draw?
-      true
-    elsif board.full?
-      true
-    else
-      false
-    end
+    won? || draw?
   end
 
   def won?
