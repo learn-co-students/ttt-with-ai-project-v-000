@@ -1,3 +1,55 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts %q[
+  ___________ .__        __
+  \__    ___/ |__| _____/  |______    ____
+     |    |   |  |/ ___\   __\__  \ _/ ___\
+     |    |   |  \  \___|  |  / __ \  \___
+     |____|   |__|\___  >__| (____  /\___  >
+                      \/          \/     \/]
+puts "Let's play Tic Tac Toe!"
+
+def make_game
+  puts "\n\n"
+  puts "Select the number of players: 0, 1 or 2. Please enter the number for your selection."
+  game_type = gets.chomp
+  case game_type
+   when "0"
+     puts "Computer vs Itself"
+     Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+     game_on
+   when "1"
+     puts "Thank you. Would you like to go first? Enter: yes/no."
+     first_player = gets.chomp
+     if first_player == "yes"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      game_on
+     else first_player == "no"
+      Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      game_on
+     end
+    when "2"
+     puts "Mano-e-Mano"
+     Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+     game_on
+    else
+     puts "That is an invalid entry. Please enter 0, 1 or 2."
+     make_game
+  end
+end
+
+def game_on
+  puts "Play again? Enter: yes/no."
+  game_play = gets.chomp
+  case game_play
+    when "yes"
+    make_game
+    when "no"
+    puts "Thanks for playing."
+    else game_on
+  end
+end
+
+make_game
