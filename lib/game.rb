@@ -64,7 +64,7 @@ class Game
   end
 
   def turn
-    puts "Turn #{@board.turn_count+1}. Player #{self.current_player.token} please enter 1-9:"
+    puts "\nTurn #{@board.turn_count+1}. Player #{self.current_player.token} please enter 1-9:"
     print ">" if self.current_player.class == Players::Human
     input = current_player.move(@board)
     if @board.valid_move?(input)
@@ -83,7 +83,7 @@ class Game
     if self.won?
       puts "Congratulations #{self.winner}!"
     elsif self.draw?
-      puts "Cat's Game!"
+      puts "\nCat's Game!\n "
     end
   end
 
