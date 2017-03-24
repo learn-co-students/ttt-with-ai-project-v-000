@@ -1,3 +1,19 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-tac-toe."
+
+game = Game.start
+
+game.play
+
+puts "Would you like to play again? [y, n]"
+answer = gets.chomp
+
+until answer == "n" || answer == "no"
+  game = Game.start
+  game.play
+  puts "Would you like to play again? [y, n]"
+  answer = gets.chomp
+end
