@@ -30,16 +30,12 @@ class Board
     cells.all? {|cell| cell != " " && cell !=""}
   end
 
-  def turn_count #eturns the amount of turns based on cell value
-    @cells.count{|token| token == "X" || token == "O"}
+  def turn_count #returns the amount of turns based on cell value
+    @cells.count {|token| token == "X" || token == "O"}
   end
 
   def taken?(position) #returns true if the position is X or O
-    if @cells[index(position)] == "X" || @cells[index(position)] == "O"
-      true
-    else
-      false
-    end
+    @cells[index(position)] == "X" || @cells[index(position)] == "O"
   end
 
   def valid_move?(input) #returns true for user input between 1-9 that is not taken

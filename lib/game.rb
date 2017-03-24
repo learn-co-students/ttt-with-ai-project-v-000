@@ -36,11 +36,7 @@ class Game
   end
 
   def draw? #returns true for a draw
-    if board.full? && !won?
-      true
-    else
-      false
-    end
+    board.full? && !won?
   end
 
   def winner #returns X when X won, returns O when O won, returns nil when no winner
