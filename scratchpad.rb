@@ -1,4 +1,4 @@
-def move(board = [])
+def move(board) #Computer
   if board.cells[4] == " "
     "5"
   else
