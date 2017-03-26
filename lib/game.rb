@@ -41,9 +41,9 @@ class Game
 	def won?
     # Check all of the winning combinations - does won of the tokens occupy all three cells in the winning combination?
 			WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[0]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0] + 1)
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+      board.cells[combo[0]] == board.cells[combo[2]] &&
+      board.taken?(combo[0] + 1)
       end
 	end
 
