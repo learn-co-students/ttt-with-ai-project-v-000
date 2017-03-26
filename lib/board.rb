@@ -4,7 +4,6 @@ class Board
 	attr_accessor :cells
 
 	def initialize
-		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		reset!
 	end
 
@@ -15,21 +14,21 @@ class Board
 
   # Display the current board
 	def display
-		puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+		puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
 		puts "-----------"
-		puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+		puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
 		puts "-----------"
-		puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+		puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
 	end
 
   # Returns the current value of a cell on the board
 	def position(input)
-		@cells[input.to_i - 1]
+		cells[input.to_i - 1]
 	end
 
   # Is the board full - are there any unoccupied positions
 	def full?
-		!@cells.include?(" " || "")
+		!cells.include?(" " || "")
 	end
 
   # How many turns have been taken
@@ -55,7 +54,7 @@ class Board
 	def update(input, player)
     input = input.to_i
 		if valid_move?(input) # Check for a valid move
-			 @cells[input-1] = player.token # Update the cell of the board with the player's token
+			 cells[input-1] = player.token # Update the cell of the board with the player's token
 		end
 	end
 end
