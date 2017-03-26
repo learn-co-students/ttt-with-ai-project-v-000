@@ -34,7 +34,7 @@ class Board
 
   # How many turns have been taken
 	def turn_count
-		cells.count {|cell| cell == "X" || cell == "O"}
+		cells.count {|cell| cell == "X" || cell == "O"}	
 	end
 
   # Is the position empty
@@ -48,13 +48,7 @@ class Board
 
   # Is the input a valid number between 1 and 9 and is this a valid move
 	def valid_move?(input)
-		if !(1..9).include?(input.to_i) # Valid number between 1 and 9
-			false
-		elsif taken?(input) == true # Position is taken so invalid move
-			false
-		elsif taken?(input) == false # Position is free so valid move
-			true
-		end
+		input.to_i.between?(1,9) && !taken?(input)
 	end
 
   # Update the board entering the player's token into a cell of the board
