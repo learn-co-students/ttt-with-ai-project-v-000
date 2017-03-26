@@ -14,7 +14,6 @@ class Game
 		@player_2 = player_2
     player_2.player = "Player two" # Give the players a name to differentiate between them
 		@board = board
-		@winner = 0
 	end
 
   # Whose turn is it - identify the current player by which turn the game is up to
@@ -40,34 +39,21 @@ class Game
 
   # Has a player won the game?
 	def won?
-		count_x = 0
-		count_o = 0
     # Check all of the winning combinations - does won of the tokens occupy all three cells in the winning combination?
-		WIN_COMBINATIONS.each do |a|
-			if (board.cells[a[0]]== "X" && board.cells[a[1]] == "X" && board.cells[a[2]] == "X") # Has the player with the "X" token won?
-				count_x += 1
-			elsif (board.cells[a[0]]== "O" && board.cells[a[1]] == "O" && board.cells[a[2]] == "O") # Has the player with the "O" token won?
-				count_o += 1
-			end
-		end
-		if count_x > 0
-			@winner = "X"  # The player with the "X" token has won the game
-			true
-		elsif count_o > 0
-			@winner = "O"  # The player with the "O" token has won the game
-			true
-		else
-			false  # No one has won the game as yet
-		end
+			WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
+      end
 	end
 
   # Returns the winner of the game
 	def winner
-		if won? && @winner != nil
-        @winner  # The winner
-		else
-			nil
-		end
+    if board.turn_count.odd? 
+      winner = "X"  # The player with the "X" token has won the game
+    else
+      winner = "O"  # The player with the "O" token has won the game
+    end
 	end
 
   # Plays the game of Tic Tac Toe - asks the players to take a turn
