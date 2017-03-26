@@ -34,13 +34,7 @@ class Board
 
   # How many turns have been taken
 	def turn_count
-		count = 0
-		@cells.each do |a|
-			if a == "X" || a == "O"
-				count += 1
-			end
-		end
-		count
+		cells.count {|cell| cell == "X" || cell == "O"}
 	end
 
   # Is the position empty
