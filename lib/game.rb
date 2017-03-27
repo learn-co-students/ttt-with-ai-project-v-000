@@ -27,7 +27,7 @@ class Game
 
     def won?
     	WIN_COMBINATIONS.detect do |array|
-      		self.board.cells[array[0]] == self.board.cells[array[1]] && self.board.cells[array[1]] == self.board.cells[array[2]] && (self.board.cells[array[0]]=='X' ||self.board.cells[array[0]]=='O')
+      	self.board.cells[array[0]] == self.board.cells[array[1]] && self.board.cells[array[1]] == self.board.cells[array[2]] && (self.board.cells[array[0]]=='X' ||self.board.cells[array[0]]=='O')
     	end
     end
 
@@ -37,34 +37,31 @@ class Game
 
     def winner
     	if self.won?
-      		array_won = self.won?
-      		return self.board.cells[array_won[0]]
+      	array_won = self.won?
+      	return self.board.cells[array_won[0]]
     	end
     end
 
     def turn 
     	puts "Please enter 1-9 for your next move:"
-    	binding.pry
-    	user_input = gets.chomp
-    	#binding.pry
+    	user_input = current_player.move(self.board)
 
     	if self.board.valid_move?(user_input)
      		self.board.update(user_input, self.current_player)
-    	# else
-    	# 	self.turn
+     		self.board.display
+    	else
+    		puts "invalid"
+    	  self.turn
     	end
     end
 
     def play
-    	until self.over?
-    		puts "Please enter 1-9 for your next move:"
-      		self.turn
-    	end
-    	if self.won?
-      		puts "Congratulations #{self.winner}!"
-    	else
-      		puts "Cat's Game!"
-    	end
-    end
+     until self.won? || self.draw?
+       self.turn
+     end
+
+     puts "Cat's Game!" if self.draw?
+     puts "Congratulations #{self.winner}!" if self.won?
+   end
 
 end
