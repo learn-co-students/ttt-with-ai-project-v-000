@@ -1,6 +1,6 @@
 class Board
   attr_accessor :cells
-  def initialize
+  def initialize 
     @cells = Array.new(9, " ")
 
   end
@@ -36,7 +36,7 @@ class Board
     position(pos) == "X" || position(pos) == "O" ? true : false
   end
   def valid_move?(pos)
-     !taken?(pos) && pos.to_i >0 && pos.to_i <10 
+     !taken?(pos) && pos.to_i >0 && pos.to_i <10
   end
 
 end
