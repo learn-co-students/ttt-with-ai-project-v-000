@@ -18,11 +18,6 @@ module Players
 	  	[0,1,3],[1,5,2],[5,7,8],[6,3,7],
 	  	[0,3,5],[0,4,8],[3,4,6]]
 
-		# def move(board)
-		# 	index = board.cells.index(' ')+1
-		# 	index.to_s
-		# end
-
 		def move(board)
 			opponent ='O' if self.token=='X'
 			opponent ='X' if self.token=='O'
@@ -88,20 +83,6 @@ module Players
 				a.detect{|x| board.cells[x]==' '}
 			end
 		end
-
-
-
-		# def fork?(board, player)
-  #     FORK_COMBINATIONS.detect do |array|
-  #       (board.cells[array[0]] == player && board.cells[array[1]] == " " && board.cells[array[2]] == player) ||
-  #       (board.cells[array[0]] == player && board.cells[array[1]] == @opponent && board.cells[array[2]] == player)
-  #     end
-  #   end
-
-    def opposing_player(board)
-      @opponent = 'O' if self.token == 'X'
-      @opponent = 'X' if self.token == 'O'
-    end
 
 	end
 end
