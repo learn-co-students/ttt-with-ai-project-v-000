@@ -36,7 +36,7 @@ class Board
     position(pos) == "X" || position(pos) == "O" ? true : false
   end
   def valid_move?(pos)
-     !taken?(pos) && pos.to_i.between(1,9)
+     !taken?(pos) && pos.to_i.between?(1,9)
   end
 
 end

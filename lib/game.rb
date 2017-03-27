@@ -28,15 +28,15 @@ class Game
     draw? || won?
   end
   def won?
-    WIN_COMBINATIONS.each do |win_combo|
+    WIN_COMBINATIONS.detect do |win_combo|
       position_1 = @board.cells[win_combo[0]]
       position_2 = @board.cells[win_combo[1]]
       position_3 = @board.cells[win_combo[2]]
-      if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
-         return win_combo
-      end
+      position_1 == position_2 && position_2 == position_3 && @board.taken?(win_combo[0]+1)
+    #     return win_combo
+
     end
-    return false
+
   end
   def draw?
     !won? && @board.full?
