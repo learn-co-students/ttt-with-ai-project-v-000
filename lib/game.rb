@@ -43,7 +43,7 @@ class Game
   end
 
   def turn
-    puts "Please enter your move from 1 -9."
+    puts "Please enter your move from 1 - 9."
     current_move = current_player.move(@board)
 
     if @board.valid_move?(current_move)
