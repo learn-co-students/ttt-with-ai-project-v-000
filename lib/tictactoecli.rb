@@ -9,7 +9,7 @@ def initialize
       game = gets.strip.downcase
       puts ' '
     end
-      puts "Thank you for playing. We hope you really enjoyed playing Tic Tac Toe."
+      puts "We hope you really enjoyed playing Tic Tac Toe. Good Bye!"
       puts ' '
   end
 
@@ -25,13 +25,13 @@ def initialize
       new_game.board.display
       new_game.play
     elsif input == "1"
-      puts "You are player 1 is 'X' and I will be player 2 'O'."
+      puts "You are player 1: 'X' and I will be player 2: 'O'."
       new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
       puts "Fight on!"
       new_game.board.display
       new_game.play
     elsif input == "2"
-      puts "Player 1 is 'X' and player 2 is 'O'."
+      puts "Player 1: 'X' and player 2: 'O'."
       new_game = Game.new
       puts "Fight On!"
       new_game.board.display
