@@ -12,12 +12,12 @@ class Board
   end
 
   def display
-    @cells.map!{|c| " #{c} "}
-    puts @cells[0, 3].join("|")
+    game_board = @cells.map{|c| " #{c} "}
+    puts game_board[0, 3].join("|")
     puts "-----------"
-    puts @cells[3, 3].join("|")
+    puts game_board[3, 3].join("|")
     puts "-----------"
-    puts @cells[6, 3].join("|")
+    puts game_board[6, 3].join("|")
   end
 
   def position(input)
