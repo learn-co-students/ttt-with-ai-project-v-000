@@ -29,13 +29,7 @@ class Board
   end
 
   def turn_count
-    i = 0
-    @cells.each do |c|
-      if c != " " || nil
-        i +=1
-      end
-    end
-    i
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(index)
@@ -45,12 +39,11 @@ class Board
 
   def valid_move? (index)
      i = index.to_i
-     !!(i.between?(1, 9) && taken?(i) == false)
+     i.between?(1, 9) && !taken?(i)
   end
 
   def update(cell, player)
     @cells[cell.to_i - 1] = player.token
   end
-
 
 end
