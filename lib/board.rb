@@ -19,6 +19,7 @@ class Board
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts ""
   end
 
 #The position method looks up the value of the cells
@@ -36,7 +37,7 @@ class Board
   end
 
   def full?
-    true if !cells.include?(" ")
+    cells.include?(" ") == false
   end
 
   def turn_count
