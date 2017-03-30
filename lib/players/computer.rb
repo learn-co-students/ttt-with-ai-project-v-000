@@ -63,15 +63,5 @@ module Players
       end
     end
 
-    def other_player
-      x_count = @board.cells.count {|cell| cell == "X"}
-      o_count = @board.cells.count {|cell| cell == "O"}
-      if x_count > o_count
-        return @player_1
-      else
-        return @player_2
-      end
-    end
-
   end
 end
