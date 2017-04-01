@@ -3,11 +3,9 @@ class Board
 
   def initialize
     @cells = Array.new(9, " ")
-
   end
 
   def reset!
-    self.cells.clear
     self.cells = Array.new(9, " ")
   end
 
