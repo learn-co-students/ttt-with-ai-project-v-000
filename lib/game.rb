@@ -26,7 +26,45 @@ class Game
   end
 
   def over?
-    board.full? ? true : false
+    draw? || won?
   end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combination|
+      combo_chars = combination.map { |i| board.cells[i] }
+      combo_chars.all? { |c| c == "X" } || combo_chars.all? { |c| c == "O" }
+    end
+  end
+
+  def draw?
+    !won? && board.full?
+  end
+
+  def winner
+    return nil if !self.won?
+
+    winning_board = won?.map {|i| board.cells[i]}
+    winning_board.first  
+  end
+
+  def turn
+    player = current_player
+    input = player.move(board)
+    if board.valid_move?(input)
+      board.update(input, player) 
+    else
+      player.move(board)
+    end
+  end
+
+  def play
+    self.turn until self.over?
+    if won? 
+      puts "Congratulations #{self.winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+
 
 end
