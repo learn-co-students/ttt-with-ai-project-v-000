@@ -1,14 +1,13 @@
 module Players
   class Human < Player
-    attr_accessor
 
-    def initialize(token)
-      @token = token
+    def initialize
+      @moves = []
     end
 
     def move(board)
       puts "Please enter a number between 1 and 9 to begin."
-      gets.chomp.tap{|a|}
+      gets.chomp.tap{|a| moves << a}      
     end
   end
 end
