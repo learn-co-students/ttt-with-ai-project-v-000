@@ -42,6 +42,13 @@ class Game
   end
 
   def turn
+    if player_1.class == Players::Human && player_2.class == Players::Human # display player prompt if there are two human players
+      if current_player == player_1
+        puts "Player 1's turn"
+      elsif current_player == player_2
+        puts "Player 2's turn"
+      end
+    end
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
