@@ -1,5 +1,6 @@
+require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2, :current_player
+  attr_accessor :board, :player_1, :player_2, :current_player, :winner
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -26,7 +27,7 @@ class Game
     WIN_COMBINATIONS.detect do |combo|
       board.cells[combo[0]] == board.cells[combo[1]] &&
       board.cells[combo[1]] == board.cells[combo[2]] &&
-      self.board.taken?(combo[0])
+      self.board.taken?(combo[0]+1)
     end
   end
 
@@ -35,12 +36,12 @@ class Game
   end
 
   def draw?
-    true if board.full? && !won?
+    self.board.full? && !won?
   end
 
   def winner
     if winning_combo = won?
-      self.board.cells[winning_combo.first]
+      self.winner = self.board.cells[winning_combo.first]
     end
   end
 
@@ -52,6 +53,17 @@ class Game
     else
       puts "Invalid move..."
       turn
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{self.winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 end
