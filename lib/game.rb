@@ -47,7 +47,7 @@ class Game
 
   def turn
     player = self.current_player
-    puts "#{self.board.turn_count}"
+    puts "Turn: #{self.board.turn_count}"
     self.board.display
     move = player.move(self.board)
     if self.board.valid_move?(move)
@@ -65,6 +65,7 @@ class Game
     if won?
       puts "Congratulations #{self.winner}!"
       self.board.display
+      "won"
     elsif draw?
       puts "Cat's Game!"
       self.board.display

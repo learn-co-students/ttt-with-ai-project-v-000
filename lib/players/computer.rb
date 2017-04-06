@@ -1,54 +1,62 @@
-require "pry"
+require 'pry'
+
 module Players
   class Computer < Player
-    attr_accessor :computer_move, :winning_combinations, :board
-
     def move(board)
-      @board = board
-      case board
-      when !board.taken?(5)
-        take_center
-      when near_win?
-        block_opponent_or_win
-      when board.taken?(5)
-        take_corner
+      move = nil
+      if !board.taken?(5)
+        move = '5'
       else
-        self.computer_move = rand(1..9).to_s
-      end
-      self.computer_move
-    end
-
-    def take_center
-      self.computer_move = 5.to_s
-    end
-
-    def take_corner
-      random_num = rand(1..4)
-      if random_num == 1
-        self.computer_move = 1.to_s
-      elsif random_num == 2
-        self.computer_move = 3.to_s
-      elsif random_num == 3
-        self.computer_move = 7.to_s
-      elsif random_num = 4
-        self.computer_move = 9.to_s
+        move = (best_move(board, self.token) + 1).to_s
       end
     end
 
-    def near_win?
+    def best_move(board, token)
+      win(board) || block(board) || corner(board) || random_choice
+    end
+
+    def win(board)
+      if winning_combo = winning_combo?(board, self.token)
+        winning_combo.detect{|cell| !board.taken?(cell+1)}
+      end
+    end
+
+    def winning_combo?(board, token)
       Game::WIN_COMBINATIONS.detect do |combo|
-        (self.board.cells[combo[0]] == self.board.cells[combo[1]] ||
-        self.board.cells[combo[1]] == self.board.cells[combo[2]] ||
-        self.board.cells[combo[0]] == self.board.cells[combo[2]]) &&
-        (self.board.taken?(combo[0]+1) || self.board.taken?(combo[2]+1))
+        (
+        (board.cells[combo[0]] == token &&
+        board.cells[combo[1]] == token) &&
+        !board.taken?(combo[2]+1)
+        ) ||
+        (
+        (board.cells[combo[1]] == token &&
+        board.cells[combo[2]] == token) &&
+        !board.taken?(combo[0]+1)
+        ) ||
+        (
+        (board.cells[combo[0]] == token &&
+        board.cells[combo[2]] == token) &&
+        !board.taken?(combo[1]+1)
+        )
       end
     end
 
-    def block_opponent_or_win
-      combo = near_win?
-      combo.each do |c|
-        self.computer_move == (c + 1).to_s if !self.board.taken?(c+1)
+    def opposing_token
+      self.token == "X" ? "O" : "X"
+    end
+
+    def block(board)
+      if blocking_combo = winning_combo?(board, opposing_token)
+        blocking_combo.detect{|i| !board.taken?(i+1)}
       end
+    end
+
+    def corner(board)
+      [0,2,6,8].detect{|i| !board.taken?(i+1)}
+    end
+
+    def random_choice
+      (0..8).to_a.sample
     end
   end
 end
