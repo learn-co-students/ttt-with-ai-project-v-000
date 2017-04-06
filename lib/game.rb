@@ -46,10 +46,12 @@ class Game
   end
 
   def turn
-    move = self.current_player.move(self.board)
+    player = self.current_player
+    puts "#{self.board.turn_count}"
+    self.board.display
+    move = player.move(self.board)
     if self.board.valid_move?(move)
       self.board.update(move, self.current_player)
-      self.current_player
     else
       puts "Invalid move..."
       turn
@@ -62,8 +64,10 @@ class Game
     end
     if won?
       puts "Congratulations #{self.winner}!"
+      self.board.display
     elsif draw?
       puts "Cat's Game!"
+      self.board.display
     end
   end
 end
