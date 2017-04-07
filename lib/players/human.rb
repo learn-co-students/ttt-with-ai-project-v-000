@@ -1,5 +1,3 @@
-require('pry')
-
 module Players
   class Human < Player
     def move(board)
