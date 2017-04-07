@@ -2,14 +2,14 @@ module Players
   class Computer < Player
     def move(board)
       valid_moves = ["1","2","3","4","5","6","7","8","9"].select {|m| board.valid_move?(m)} # only check valid moves
-      scores = valid_moves.collect {|i| [i,score_move(i)]}  # score each valid move
+      scores = valid_moves.collect {|i|  [i,score_move(i)]}
       sorted = scores.sort {|i,j| i[1] <=> j[1]} # sort the scores by score
-      sorted[0] # return the move with the highest score
+      sorted[0][0] # return the move with the highest score
     end
 
     def score_move(position)
       score = 0
-      relevant_combos = board::WIN_COMBINATIONS.select{|c| c.include?(position)}
+      relevant_combos = Board::WIN_COMBINATIONS.select{|c| c.include?(position)}
       relevant_combos.each {|combo| score+=score_combo(combo)}
     end
 
