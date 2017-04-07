@@ -51,7 +51,7 @@ class Board
 
 	def valid_move?(index)
 		
-		if (index.to_i > 0 && index.to_i < 9) && !taken?(index)
+		if (index.to_i > 0 && index.to_i < 10) && !taken?(index)
 			true
 		else
 			false
