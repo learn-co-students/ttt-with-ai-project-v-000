@@ -18,10 +18,9 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
   def position(user_input)
-    #integer_position= user_input.to_i-1
-    #integer_position.to_s
-    integer = user_input.to_i- 1
-    return "#{@cells[integer]}"
+    integer = user_input.to_i- 1#converst user input string to array index
+    #binding.pry
+    return "#{@cells[integer]}"#looks up the value of the cells at the correct index from the array's perspective
   end
   def full?#defines the full? method w/board array
       cells.all? { |elem| # iterate through ALL of the board array
@@ -30,14 +29,8 @@ class Board
   end
   def turn_count
     i = 0
-    #binding.pry
       cells.each_with_index do |value, index|
-        #binding.pry
-        #for index in 0..8 #=> 27 count !=3
-        #while index < 9
-        #while index < 9
           #https://launchschool.com/books/ruby/read/loops_iterators#controllloop
-          #binding.pry
           if value == "X" || value == "O"
             i = i + 1
           end
@@ -57,11 +50,11 @@ class Board
       true
     end
   end
-  def update(player_number,player)
+  def update(player_position, token = "X")
     #binding.pry
-    if player_number == "1"
-      true
-    end
+    number = position(player_position).to_i
+    #binding.pry
+    self.cells[number] = token
   end
   #end
 end
