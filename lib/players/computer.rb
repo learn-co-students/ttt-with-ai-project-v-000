@@ -22,7 +22,7 @@ module Players
       elsif theirs==2 then return 4
       elsif mine==1 && blanks==2 then return 3
       elsif blanks == 3  then return 2
-      elsif theirs==1 && blanks=2 then return 1
+      elsif theirs==1 && blanks==2 then return 1
       else return 0
       end
     end
