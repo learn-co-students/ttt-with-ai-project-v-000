@@ -39,6 +39,18 @@ class Board
     end
   end
 
+  def turn_count
+    turn = 0
+    self.cells.each do |item|
+      turn+=1 if(item=="O" || item=="X")
+    end
+    turn
+  end
+
+  def full?
+    !self.cells.any?{|i| i==" "}
+  end
+
   def taken?(index)
     (position(index)=="X" || position(index)=="O")
   end

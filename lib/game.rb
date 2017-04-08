@@ -8,19 +8,12 @@ class Game
 	end
 
 	def current_player
-		turn_count.even? ? player_1 : player_2
+		board.turn_count.even? ? player_1 : player_2
 	end
 
-  def turn_count
-	  turn = 0
-	  board.cells.each do |item|
-	    turn+=1 if(item=="O" || item=="X")
-	  end
-	  turn
-	end
 
 	def draw?
-		true if !won? && full?
+		true if !won? && board.full?
 	end
 
   def won?
@@ -32,12 +25,8 @@ class Game
     false
   end
 
-  def full?
-    !board.cells.any?{|i| i==" "}
-  end
-
   def over?
-    won? || draw? || full?
+    won? || draw? || board.full?
   end
 
   def winner

@@ -9,7 +9,7 @@ module Players
 
     def score_move(position)
       score = 0
-      relevant_combos = Board::WIN_COMBINATIONS.select{|c| c.include?(position)}
+      relevant_combos = Game::WIN_COMBINATIONS.select{|c| c.include?(position)}
       relevant_combos.each {|combo| score+=score_combo(combo)}
     end
 
