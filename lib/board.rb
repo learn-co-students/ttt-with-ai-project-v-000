@@ -25,15 +25,15 @@ class Board
     puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
   end
 
-  def position(index)
-    self.cells[index.to_i-1]
+  def position(player_input)
+    self.cells[player_input.to_i-1]
   end
 
-  def position_on_board?(index)
-    value = index.scan(/[0-9]*/)[0]
+  def position_on_board?(player_input)
+    value = player_input.scan(/[0-9]*/)[0]
     if value != ""
-      value = value.to_i
-      result = value.between?(1,9)
+      array_index = value.to_i
+      result = array_index.between?(1,9)
     else
       result = false
     end
@@ -51,16 +51,16 @@ class Board
     !self.cells.any?{|i| i==" "}
   end
 
-  def taken?(index)
-    (position(index)=="X" || position(index)=="O")
+  def taken?(player_input)
+    (position(player_input)=="X" || position(player_input)=="O")
   end
 
-  def valid_move?(index)
-    position_on_board?(index) && !taken?(index)
+  def valid_move?(player_input)
+    position_on_board?(player_input) && !taken?(player_input)
   end
 
-  def update(index, player)
-    self.cells[index.to_i-1] = player.token
+  def update(player_input, player)
+    self.cells[player_input.to_i-1] = player.token
   end
 
   def reset!
