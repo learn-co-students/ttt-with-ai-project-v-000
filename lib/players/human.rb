@@ -1,5 +1,2 @@
-class Human
-  Player::Human
-  def initialize
-  end
+class Players::Human < Player
 end

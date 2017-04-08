@@ -1,3 +1,2 @@
-module Players
-  #Players::Human
+class Players::Human < Player
 end
