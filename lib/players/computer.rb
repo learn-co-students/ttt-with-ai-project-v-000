@@ -15,39 +15,35 @@ module Players
       elsif almost_win(board)
         win_move(board)
       else
-        next_move(board)
-        last_move(board)
+        next_move(board) ? next_move(board) : last_move(board)
       end
       @move.to_s
     end
     
     def next_move(board)
-      array = CORNERS.select{|v| board.taken?(v)}
-      array.sample  
+      array = CORNERS.select{|v| !board.taken?(v)}
+      @move = array.sample  
     end
 
     def block_move(board)
-      @move = almost_lose(board).detect{|b| b == " "}
-      @move
+      @move = almost_lose(board).detect{|b| board.cells[b-1] == " "}
     end
 
     def win_move(board)
-      @move = almost_win(board).detect{|b|b == " "}
-      @move
+      @move = almost_win(board).detect{|b|board.cells[b-1] == " "}
     end
 
     def last_move(board)
-      array = EDGES.select{|v| board.taken?(v)}
-      array.sample
+      array = EDGES.select{|v| !board.taken?(v)}
+      @move = array.sample
     end
 
     def almost_win(board)
-      a = WIN_COMBINATIONS.detect {|w|w.select {|a| board.cells[a-1] == self.token}.length == 2}
+      a = WIN_COMBINATIONS.detect {|w|w.select {|a| board.cells[a-1] == self.token}.length == 2 && w.select {|a| board.cells [a-1] == " "}.length == 1}
     end
 
     def almost_lose(board)
-      a = WIN_COMBINATIONS.detect {|w| w.select {|a| board.cells[a-1] == opposite_token}.length == 2}
-      binding.pry
+      a = WIN_COMBINATIONS.detect {|win_combo| win_combo.select {|a| board.cells[a-1] == opposite_token}.length == 2 && win_combo.select {|a| board.cells [a-1] == " "}.length == 1}
     end
 
     def opposite_token
