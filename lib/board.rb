@@ -33,7 +33,7 @@ class Board
     value = index.scan(/[0-9]*/)[0]
     if value != ""
       value = value.to_i
-      result = value.between?(0,8)
+      result = value.between?(1,9)
     else
       result = false
     end
@@ -56,11 +56,7 @@ class Board
   end
 
   def valid_move?(index)
-    if position_on_board?(index) && !taken?(index)
-      return true
-    else
-      return false
-    end
+    position_on_board?(index) && !taken?(index)
   end
 
   def update(index, player)

@@ -11,7 +11,6 @@ class Game
 		board.turn_count.even? ? player_1 : player_2
 	end
 
-
 	def draw?
 		true if !won? && board.full?
 	end
@@ -40,7 +39,9 @@ class Game
 
 	def turn
 		move_choice = current_player.move(board)
+		# binding.pry
 		if board.valid_move?(move_choice)
+
 			board.update(move_choice,current_player)
 			board.display
 		else
@@ -49,6 +50,7 @@ class Game
 	end
 
 	def play
+		puts "#{current_player.token} starts."
 		while !self.over?
 		 	self.turn
 		end
