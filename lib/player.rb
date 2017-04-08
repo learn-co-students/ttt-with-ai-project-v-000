@@ -1,7 +1,6 @@
 class Player
-attr_accessor :token
+attr_reader :token
   def initialize(token)
-    #binding.pry
-    @token = token#set instance varialble to token argument
+    @token= (token)#set instance varialble to token argument
   end
 end

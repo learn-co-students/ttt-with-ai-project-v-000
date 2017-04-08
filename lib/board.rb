@@ -50,11 +50,11 @@ class Board
       true
     end
   end
-  def update(player_position, token = "X")
+  def update(player_position, player)
     #binding.pry
     number = position(player_position).to_i
-    #binding.pry
-    self.cells[number] = token
+    @cells[number] = player.token
+    #self.cells[number] = "X"
   end
   #end
 end
