@@ -1,4 +1,5 @@
 class Game
+  Players::Human
   attr_accessor :board, :player_1, :player_2
   def initialize(player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new)
     @board = board
