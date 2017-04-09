@@ -5,14 +5,14 @@ module Players
     def move(board)
       valid_moves = ["1","2","3","4","5","6","7","8","9"].select {|m| board.valid_move?(m)} # only check valid moves
       scores = valid_moves.collect {|i|  [i,score_move(i,board)]}
-      sorted = scores.sort {|i,j| j[1] <=> j=i[1]} # sort the scores by score
+      sorted = scores.sort {|i,j| j[1] <=> i[1]} # sort the scores by score
       sorted[0][0] # return the move with the highest score
     end
 
     def score_move(position,board)
       score = 0
       relevant_combos = Game::WIN_COMBINATIONS.select{|c| c.include?(position.to_i-1)}
-      relevant_combos.each do |combo| 
+      relevant_combos.each do |combo|
         tokens=["#{board.cells[combo[0]]}", "#{board.cells[combo[1]]}", "#{board.cells[combo[2]]}"]
         score+=score_combo(tokens)
       end
@@ -46,10 +46,10 @@ possibilities (assume my token is A)
 
 loop through each board position
   if the position is valid_move
-    is it an instant win? --> pick it!
-    does it prevent opponent from winning next turn?  --> pick it!
-    calculate the score if this move by looping through the relevent win combinations 
-      summing their scores 
+    is it an instant win? --> pick it! -> score 5
+    does it prevent opponent from winning next turn?  --> pick it! - score 4
+    calculate the score if this move by looping through the relevent win combinations
+      summing their scores
         +3 for each combo that has at least one of our tokens in it
         +2 for each combo that is blank
         +1 for each combo that has 1 oppenent token
