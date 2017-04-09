@@ -1,10 +1,10 @@
-class Game 
+class Game
   attr_accessor :board, :player_1, :player_2
-  def initialize(player_1=Player.new("X"), player_2=Player.new("O"), board=Board.new)
+  def initialize(player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-  end 
+  end
   # Define your WIN_COMBINATIONS constant
   WIN_COMBINATIONS = [
     [0,1,2], # Top row, #had extra comma&deleted comma, #add comma to delineate element of array WIN_COMBINATIONS
@@ -20,5 +20,5 @@ class Game
   #def player_1
   # player_1 = Player.new("X")
    #self.player_1=(player_1)
-  #end 
-end 
+  #end
+end
