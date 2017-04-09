@@ -19,5 +19,6 @@ class Game
     # ETC, an array for each win combination#add comma to delineate element of array WIN_COMBINATIONS
   ]
  def current_player
+    current_player = Players::Human.new("X")
  end
 end
