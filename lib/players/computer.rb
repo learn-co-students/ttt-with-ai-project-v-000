@@ -19,6 +19,21 @@ module Players
       end
       @move.to_s
     end
+
+    def my_positions(board, combo)
+      array = combo.select{|x| board.cells[x-1] == self.token}
+      array.length == 2 ? true : false
+    end
+    
+    def opp_positions(board, combo)
+      array = combo.select{|x| board.cells[x-1] == opposite_token}
+      array.length == 2 ? true : false
+    end
+
+    def empty_positions(board, combo)
+      array = combo.select{|x| board.cells[x-1] == " "}
+      array.length == 1 ? true : false
+    end
     
     def next_move(board)
       array = CORNERS.select{|v| !board.taken?(v)}
@@ -39,11 +54,11 @@ module Players
     end
 
     def almost_win(board)
-      a = WIN_COMBINATIONS.detect {|w|w.select {|a| board.cells[a-1] == self.token}.length == 2 && w.select {|a| board.cells [a-1] == " "}.length == 1}
+      a = WIN_COMBINATIONS.detect {|combo| empty_positions(board, combo) && my_positions(board, combo)}
     end
 
     def almost_lose(board)
-      a = WIN_COMBINATIONS.detect {|win_combo| win_combo.select {|a| board.cells[a-1] == opposite_token}.length == 2 && win_combo.select {|a| board.cells [a-1] == " "}.length == 1}
+      a = WIN_COMBINATIONS.detect {|combo| empty_positions(board, combo) && opp_positions(board, combo)}
     end
 
     def opposite_token
