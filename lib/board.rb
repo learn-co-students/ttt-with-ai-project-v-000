@@ -64,13 +64,7 @@ class Board
   end
 
   def position_on_board?(index)
-    value = index.scan(/[1-9]*/)[0]
-    if value != ""
-      value = value.to_i
-      result = value.between?(1,9)
-    else
-      result = false
-    end
+    index.to_i.between?(1,9)
   end
 
   def turn_count
