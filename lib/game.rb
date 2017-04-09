@@ -1,7 +1,7 @@
 class Game
-  Players::Human Human.new("X")
+  #Players::Human Human.new("X")
   attr_accessor :board, :player_1, :player_2
-  def initialize(player_1=Human.new("X"), player_2=Human.new("O"), board=Board.new)
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
@@ -18,8 +18,6 @@ class Game
     [2,4,6],  #diagnoal from ne to sw#add comma to delineate element of array WIN_COMBINATIONS
     # ETC, an array for each win combination#add comma to delineate element of array WIN_COMBINATIONS
   ]
-  #def player_1
-  # player_1 = Player.new("X")
-   #self.player_1=(player_1)
-  #end
+ def current_player
+ end
 end
