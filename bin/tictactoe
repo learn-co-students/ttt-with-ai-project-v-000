@@ -24,6 +24,7 @@ puts "Game Start!"
 case input 
 	when "1"
 		game=Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+		game.board.display
 		game.play
 	when "2"
 		player_selection  = ""
@@ -35,15 +36,18 @@ case input
 			#idea: add menu item to go one level before?
 		end
 		player_selection=="1" ?	game=Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new) : game=Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+		game.board.display
 		game.play
 	when "3"
 		game=Game.new
+		game.board.display
 		game.play
 	else #wargames scenario
 		win_count=0
 		100.times {
 			game=Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
 			game.play
+			game.board.display
 			game.won?
 		}
 		puts "Games has been won #{win_count} times"

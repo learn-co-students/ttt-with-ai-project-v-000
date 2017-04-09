@@ -20,12 +20,11 @@ class Board
 
   def won?
     WIN_COMBINATIONS.each do |win|
-      if win.all? { |ind| self.cells[ind] =="X" } || win.all? { |ind|  self.cells[ind] =="O" }
+      if win.all? { |ind| cells[ind] =="X" } || win.all? { |ind|  cells[ind] =="O" }
         return win
-      else
-        return false
       end
     end
+    false
   end
 
   def full?
@@ -33,20 +32,11 @@ class Board
   end
 
   def draw?
-    true if !won? && full?
-  end
-
-  def over?
-    true if won? || draw? || full?
+    !won? && full?
   end
 
   def winner
-    winning_combo = won?
-    if winning_combo
-      self.cells[winning_combo[0]]
-    else
-      nil
-    end
+    won? ? self.cells[winning_combo[0]] : nil
   end
 
   # Define display_board that accepts a board and prints
@@ -69,11 +59,7 @@ class Board
 
   def turn_count
     turn=0
-    self.cells.each do |item|
-      if(item=="O" || item=="X")
-        turn+=1
-      end
-    end
+    self.cells.each { |item| turn+=1 if(item=="O" || item=="X")}
     turn
   end
 
@@ -82,11 +68,7 @@ class Board
   end
 
   def valid_move?(index)
-    if position_on_board?(index) && !taken?(index)
-      return true
-    else
-      return false
-    end
+    position_on_board?(index) && !taken?(index)
   end
 
   def update(index, player)

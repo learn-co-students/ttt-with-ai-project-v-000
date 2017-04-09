@@ -12,16 +12,11 @@ class Game
 	end
 
 	def draw?
-		true if !won? && board.full?
+		board.draw?
 	end
 
   def won?
-    WIN_COMBINATIONS.each do |win|
-      if win.all? { |ind| self.board.cells[ind] =="X" } || win.all? { |ind|  self.board.cells[ind] =="O" }
-        return win
-      end
-    end
-    false
+    board.won?
   end
 
   def over?
@@ -30,18 +25,13 @@ class Game
 
   def winner
     winning_combo = won?
-    if winning_combo
-      board.cells[winning_combo[0]]
-    else
-      nil
-    end
+    winning_combo ? board.cells[winning_combo[0]] : nil
   end
 
 	def turn
 		move_choice = current_player.move(board)
-		# binding.pry
 		if board.valid_move?(move_choice)
-
+		  puts "The computer player(\"#{current_player.token}\") chooses position #{move_choice}" if current_player.class == Players::Computer
 			board.update(move_choice,current_player)
 			board.display
 		else
