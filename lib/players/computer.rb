@@ -24,8 +24,8 @@ module Players
       theirs = tokens.count(self.opponent_token)
       blanks = tokens.count(" ")
       if blanks==0  then return 0
-      elsif mine==2 then return 5
-      elsif theirs==2 then return 4
+      elsif mine==2 then return 7
+      elsif theirs==2 then return 6
       elsif mine==1 && blanks==2 then return 3
       elsif blanks == 3  then return 2
       elsif theirs==1 && blanks==2 then return 1
@@ -46,8 +46,8 @@ possibilities (assume my token is A)
 
 loop through each board position
   if the position is valid_move
-    is it an instant win? --> pick it! -> score 5
-    does it prevent opponent from winning next turn?  --> pick it! - score 4
+    is it an instant win? --> pick it! -> score 7
+    does it prevent opponent from winning next turn?  --> pick it! - score 6
     calculate the score if this move by looping through the relevent win combinations
       summing their scores
         +3 for each combo that has at least one of our tokens in it
