@@ -1,69 +1,77 @@
 module Players
 
-  class Integer
-    N_BYTES = [42].pack('i').size
-    N_BITS = N_BYTES * 8
-    MAX = 2 ** (N_BITS - 2) - 1
-    MIN = -MAX - 1
-  end
-
   class Computer < Player
 
-    attr_reader :board, :game
-    attr_accessor :x_player_index, :o_player_index
-
-    def initialize(token)
-      super(token)
+    
+    def opponent_token(token)
+      token == "X" ? "O" : "X"
     end
 
-    def opponent_token
-      self.player.token == "X" ? "O" : "X"
-    end
+    def potential_moves(player_token, board)
 
-    def best_move
-      # Returns the number of winning opportunites for each board cell.
-      # Depends on 'min_distance' i.e. how many steps each cell is from a win, and
-      # How many different routes, 'opportunity_count' can be taken a given cell that can provide a win
-      # Smaller distance, less routes is better than many routes with equal distances.
-  
-      board.cells.map do |i|
-        #Integer::Max == Infinity
-        return Integer::MAX if board.cells[i] != ' '
-
-        scores_for_i = Game::WIN_COMBINATIONS.map do |win_combo| 
-          return Integer::MAX if not win_combo.include?(i)
-   
-          score = 0
-          combo_cells = board.cells.values_at(*win_combo)
-          for cell in combo_cells
-            return Integer::MAX if cell == opponent_token
-            score += cell == ' ' ? 1 : 0
+      enemy_token = opponent_token(player_token)
+      
+      return (0..board.cells.count).flat_map do |i|
+        #If a board cell is empty, mark it as Infinite
+        if board.cells[i] != ' '
+          []
+        else
+          #Iterate over win combinations
+          #Mark each cell that is not included in a winning combination as Infinite
+          #scores_for_i is an array that includes a score for each cell index. The smaller the score, the 
+          scores_for_i = Game::WIN_COMBINATIONS.map do |win_combo| 
+            if not win_combo.include?(i)
+              5
+            else 
+              score = 0
+              combo_cells = board.cells.values_at(*win_combo)
+              for cell in combo_cells 
+                if cell == enemy_token
+                  5
+                else
+                  score += cell == ' ' ? 1 : 0
+                end
+              end
+              score
+            end
           end
-          score
-        end
 
-        min_distance = scores_for_i.min
-        opportunity_count = scores_for_i.filter { |s| s == min_distance }.count
-        cell_index = i
-       
-        return Move.new(min_distance, opportunity_count, cell_index)
+          min_distance = scores_for_i.min
+          opportunity_count = scores_for_i.select { |s| s == min_distance }.count
+          cell_index = (i + 1).to_s
+        
+          return [ Move.new(min_distance, opportunity_count, cell_index) ]
+        end
       end
     end
 
-    def game_tactic
-      # Determines whether the next move is to attack or block the opponent
-      if best_move
-    end
-
     def move(board)
-      game_tactic
+      # Determines whether the next move is to attack or block the opponent
+      # Get player token for player and players opponent
+      player = self.token
+      opponent = opponent_token(player)
+      
+      # Calculate the best move for the player, if min_distance == 1, play cell_index
+      best_move_player = potential_moves(player, board)
+      best_move_opponent = potential_moves(opponent, board)
+
+      player_winning_move = best_move_player.detect {|m| m.distance == 1}
+      
+      if player_winning_move
+        player_winning_move.cell_index
+      else
+        opponent_winning_move = best_move_opponent.detect {|m| m.distance == 1}
+        if opponent_winning_move
+          opponent_winning_move.cell_index
+        else
+          best_move_player.max_by {|m| m.opportunity_count}.cell_index
+        end
+      end
     end
 
-
-      
     class Move 
 
-      attr_accessor :distance, :opportunity_count
+      attr_accessor :distance, :opportunity_count, :cell_index
 
       def initialize(distance, opportunity_count, cell_index)
         @distance = distance
@@ -72,12 +80,11 @@ module Players
       end
     end
 
+  end
 end
 
     
     
-
-
   
   
   
