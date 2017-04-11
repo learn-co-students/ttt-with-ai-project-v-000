@@ -36,14 +36,38 @@ class Game
 
   def win_combination
     test = WIN_COMBINATIONS.find do |combination_array|
-       if combination_array.all? { |index| @board[index]=="X" }
+       if combination_array.all? { |index| board.cells[index]=="X" }
              true
-       elsif combination_array.all? { |index| @board[index]=="O"}
+       elsif combination_array.all? { |index| board.cells[index]=="O"}
               true
        else
            false
        end
      end
   end
+
+  def won?
+    if self.over? && self.win_combination == nil
+        false
+    elsif self.over? && self.win_combination != nil
+        true
+    elsif !self.over? && self.win_combination !=nil
+        true
+    end
+  end
+
+  def draw?
+    !self.won?
+  end
+
+  def winner
+    if win_combination == nil
+      nil
+    else
+      index = win_combination[0]
+      self.board.cells[index]
+    end
+  end
+
 
 end
