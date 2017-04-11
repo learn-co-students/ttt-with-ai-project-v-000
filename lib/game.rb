@@ -1,3 +1,4 @@
+#require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
@@ -78,12 +79,13 @@ class Game
  end
  def turn
    puts "Please enter 1-9:"
+   #binding.pry
    input= gets.chomp
    input= input_to_index(input)
    if valid_move?
      move
      display_board
-   elsif
+   else
      turn #here is the missing line for 9-12 pm
    end
  end
