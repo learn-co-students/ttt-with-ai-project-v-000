@@ -55,12 +55,8 @@ class Board
 
   def update(position, player)
     token = player.token
-    if valid_move?(position)
-      self.cells[self.to_integer(position)] = token
-
-   else
-     puts "invalid move, please use position 1-9"
-   end
+    self.cells[self.to_integer(position)] = token
+  
   end
 
 end

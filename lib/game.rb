@@ -69,5 +69,19 @@ class Game
     end
   end
 
+  def turn
+    move = self.current_player.move
+    until self.board.valid_move?(move)
+      puts "Please enter a valid move"
+      move = self.current_player.move
+    end
+    self.board.update(move,self.current_player)
+  end
+
+  def play
+    self.turn
+    
+
+  end
 
 end
