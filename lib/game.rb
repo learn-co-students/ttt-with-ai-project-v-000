@@ -1,12 +1,10 @@
 class Game
-  #Players::Human Human.new("X")
   attr_accessor :board, :player_1, :player_2
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
   end
-  # Define your WIN_COMBINATIONS constant
   WIN_COMBINATIONS = [
     [0,1,2], # Top row, #had extra comma&deleted comma, #add comma to delineate element of array WIN_COMBINATIONS
     [3,4,5],  # Middle row, #add comma to delineate element of array WIN_COMBINATIONS
@@ -16,7 +14,6 @@ class Game
     [2,5,8],  # third columns#add comma to delineate element of array WIN_COMBINATIONS
     [0,4,8],  #diagnoal from nw to se#add comma to delineate element of array WIN_COMBINATIONS
     [2,4,6],  #diagnoal from ne to sw#add comma to delineate element of array WIN_COMBINATIONS
-    # ETC, an array for each win combination#add comma to delineate element of array WIN_COMBINATIONS
   ]
  def current_player
     current_player = Players::Human.new("X")
@@ -29,17 +26,65 @@ class Game
      position_1 == position_2 && position_2 == position_3 && position_1 != " "
    end
  end
- #accepts a board and returns true if the board has not been won and is full and false if the board is not won and the board is not full,
- #and false if the board is won. You should be able to compose this method solely using the methods you used above with some ruby logic
- def draw?#(board)
+ def draw?
     !won? && full?
  end
- def full?#defines the full? method w/board array
-   board.cells.all? { |elem| # iterate through ALL of the board array
-     elem == "X"  || elem == "O" || elem != " "#value is comparable to X OR O OR is not empty
+ def full?
+   board.cells.all? { |elem|
+     elem == "X"  || elem == "O" || elem != " "
    }
  end
  def over?
     !won? && full? || won?
+ end
+ def winner
+   win = won?
+   return if win.nil?
+   position_1 = board.cells[win[0]]
+   position_2 = board.cells[win[1]]
+   position_3 = board.cells[win[2]]
+   if position_1 == "X"
+     return "X"
+   elsif position_1 == "O"
+     return "O"
+   else
+     false
+   end
+ end
+ def display_board
+   puts " #{board.cells[0]} | #{board.cells[1]} | #{board.cells[2]} "
+   puts "-----------"
+   puts " #{board.cells[3]} | #{board.cells[4]} | #{board.cells[5]} "
+   puts "-----------"
+   puts " #{board.cells[6]} | #{board.cells[7]} | #{board.cells[8]} "
+ end
+ def input_to_index(user_input)
+   user_input.to_i-1
+ end
+
+ def move
+   board.cells[index] = current_player
+   #updated board entries in one line w/ 3 arguments = placeholder for values in the bin/move file
+ end
+ def valid_move?
+   board.cells.index.between?(0,8) && !position_taken?#To get the index of an array item, use the index method
+ end
+ def position_taken?
+   if board.cells[index] == "" || board.cells[index] == " "|| board.cells[index] == nil
+     false
+   else #board[index] == "X" || "O"
+     true
+   end
+ end
+ def turn
+   puts "Please enter 1-9:"
+   input= gets
+   input= input_to_index(input)
+   if valid_move?
+     move
+     display_board
+   elsif
+     turn #here is the missing line for 9-12 pm
+   end
  end
 end
