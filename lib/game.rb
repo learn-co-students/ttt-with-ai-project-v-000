@@ -21,44 +21,25 @@ class Game
  def current_player
     current_player = Players::Human.new("X")
  end
- def won?(board) WIN_COMBINATIONS.find do |win|
-   #FIND the 1 unique combination in the constant WIN_COMBINATIONS
-   #when its constant argument,win, is assigned to the board array as part of a local variable
-   #that if it passes the logic test of a winning combination, it returns the
-   #winning combination indexes' values
- #binding.pry
-     position_1 = board[win[0]]
-     position_2 = board[win[1]]
-     position_3 = board[win[2]]
-     if position_1 == position_2 && position_2 == position_3 && position_1 != " "
-       #|| position_1 == position_3
-          return win
-     #elsif position_1 == "X" && position_2 == "O" && position_3 == "X"
-         #return true
-         else
-           false
-     end
-                         end
+ def won?
+   WIN_COMBINATIONS.find do |win|
+     position_1 = board.cells[win[0]]
+     position_2 = board.cells[win[1]]
+     position_3 = board.cells[win[2]]
+     position_1 == position_2 && position_2 == position_3 && position_1 != " "
+   end
  end
  #accepts a board and returns true if the board has not been won and is full and false if the board is not won and the board is not full,
  #and false if the board is won. You should be able to compose this method solely using the methods you used above with some ruby logic
- def draw?(board)
-   if !won?(board) && full?(board)
-     true
-   else
-     false
-   end
+ def draw?#(board)
+    !won? && full?
  end
- def full?(board) #defines the full? method w/board array
-   board.all? { |elem| # iterate through ALL of the board array
+ def full?#defines the full? method w/board array
+   board.cells.all? { |elem| # iterate through ALL of the board array
      elem == "X"  || elem == "O" || elem != " "#value is comparable to X OR O OR is not empty
    }
  end
  def over?
-   if !won?(board) && full?(board) || won?(board)
-     true
-   else
-     false
+    !won? && full? || won?
  end
-end
 end
