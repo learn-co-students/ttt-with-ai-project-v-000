@@ -1,5 +1,5 @@
-class Game < Board
-  attr_accessor :player_1, :player_2
+class Game
+  attr_accessor :player_1, :player_2, :board
 
   def initialize(player_1 = Players::Human.new("X") , player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
@@ -18,6 +18,32 @@ class Game < Board
     [2,4,6]
   ]
 
+  def current_player
+    if @board.turn_count.even?
+      @current_player = @player_1
+    else
+      @current_player = @player_2
+    end
+  end
 
+  def over?
+    if @board.full?
+      true
+    else
+      false
+    end
+  end
+
+  def win_combination
+    test = WIN_COMBINATIONS.find do |combination_array|
+       if combination_array.all? { |index| @board[index]=="X" }
+             true
+       elsif combination_array.all? { |index| @board[index]=="O"}
+              true
+       else
+           false
+       end
+     end
+  end
 
 end
