@@ -1,4 +1,4 @@
-#require 'pry'
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
@@ -63,27 +63,26 @@ class Game
    user_input.to_i-1
  end
 
- def move
-   board.cells[index] = current_player
-   #updated board entries in one line w/ 3 arguments = placeholder for values in the bin/move file
+ def update(player_position, player)
+   board.update(player_position, player)
  end
- def valid_move?
-   board.cells.index.between?(0,8) && !position_taken?#To get the index of an array item, use the index method
+ def valid_move?(input)
+   binding.pry
+   board.valid_move?(input)
  end
- def position_taken?
-   if board.cells[index] == "" || board.cells[index] == " "|| board.cells[index] == nil
-     false
-   else #board[index] == "X" || "O"
-     true
-   end
+ def taken?(input)
+   board.taken?(input)
  end
  def turn
    puts "Please enter 1-9:"
    #binding.pry
    input= gets.chomp
+   puts "Please enter number of players: 0, 1, or 2"
+   player= gets.chomp
+   #binding.pry
    input= input_to_index(input)
-   if valid_move?
-     move
+   if valid_move?(input)
+     update(input, player)
      display_board
    else
      turn #here is the missing line for 9-12 pm

@@ -38,17 +38,14 @@ class Board
       end
     i
   end
-  def taken?(cells_index)
-    if cells_index == "1" || cells_index == "9"
-      true
-    else
-      false
-    end
+  def input_to_index(user_input)
+    user_input.to_i-1
   end
-  def valid_move?(value)
-    if value == "1"
-      true
-    end
+  def valid_move?(input)
+     input.to_i.between?(1,9) && !taken?(input) && input != /^a-z*$/ && input !=/^A-Z*$/ && position(input) != "X" && position(input)!="O"
+  end
+  def taken?(user_input)
+     position(user_input) == "X" || position(user_input) == "O"
   end
   def update(player_position, player)
     #binding.pry
