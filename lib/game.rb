@@ -66,7 +66,7 @@ class Game
   def turn
     move = self.current_player.move(@board)
     current_player = self.current_player
-
+    puts "Please make your move"
     until self.board.valid_move?(move)
       puts "Please enter a valid move"
       move = self.current_player.move(@board)
@@ -76,7 +76,9 @@ class Game
 
   def play
     until self.over?
+      puts "#{self.board.turn_count}"
       self.turn
+      self.board.display
     end
     if self.won?
       puts "Congratulations #{self.winner}!"
