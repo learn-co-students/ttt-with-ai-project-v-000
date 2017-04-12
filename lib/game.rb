@@ -57,6 +57,9 @@ class Game
         puts "Current Turn: #{@board.turn_count + 1} \n"
         @board.display
         @board.update(current_move, player)
+        puts "#{player.token} moved #{current_move}"
+        @board.display
+        puts "\n\n"
       end
   end
 
@@ -64,8 +67,10 @@ class Game
     while !over?
       turn
     end
-    if winner?
-      puts "Congratulations #{@winner}!"
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
 
   end
