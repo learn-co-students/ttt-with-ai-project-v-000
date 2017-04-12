@@ -29,6 +29,12 @@ when "1"
     new_game.play
   end
 
+when "2"
+  new_game = Game.new
+  puts "Please enter your first move"
+  new_game.play
+
 else
-  nil
+  puts "Please input valid number of players (0-2)"
+  input = gets.chomp
 end
