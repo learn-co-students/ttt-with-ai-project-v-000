@@ -27,7 +27,7 @@ class Game
   end
 
   def over?
-    if @board.full?
+    if self.draw? || self.won?
       true
     else
       false
@@ -47,17 +47,11 @@ class Game
   end
 
   def won?
-    if self.over? && self.win_combination == nil
-        false
-    elsif self.over? && self.win_combination != nil
-        true
-    elsif !self.over? && self.win_combination !=nil
-        true
-    end
+    return true if self.win_combination != nil
   end
 
   def draw?
-    !self.won?
+    self.board.full? && !self.won?
   end
 
   def winner
@@ -70,18 +64,22 @@ class Game
   end
 
   def turn
-    move = self.current_player.move
+    move = self.current_player.move(@board)
+    current_player = self.current_player
+
     until self.board.valid_move?(move)
       puts "Please enter a valid move"
-      move = self.current_player.move
+      move = self.current_player.move(@board)
     end
-    self.board.update(move,self.current_player)
+    self.board.update(move,current_player)
   end
 
   def play
-    self.turn
-    
-
+    until self.over?
+      self.turn
+      p self.over?
+      self.over?
+    end
   end
 
 end

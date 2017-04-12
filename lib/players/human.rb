@@ -1,8 +1,9 @@
 require_relative "../player.rb"
 module Players
   class Human < Player
-    def move(input=nil)
-      @input =  gets.strip
+    def move(board)
+      @board = board
+      @input =  gets.chomp
     end
   end
 
