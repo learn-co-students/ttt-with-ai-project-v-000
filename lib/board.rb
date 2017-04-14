@@ -1,5 +1,6 @@
+require 'pry'
 class Board
-attr_accessor :cells, :player
+attr_accessor :cells
 
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -48,14 +49,16 @@ attr_accessor :cells, :player
   def valid_move?(user_input)
     if taken?(user_input)
       return false
-    elsif user_input.to_i > 9 || user_input.to_i < 1 
+    elsif user_input.to_i > 9 || user_input.to_i < 1
       return false
     else
       return true
     end
   end
 
-  def update
+  def update(user_input, player)
+    index = (user_input.to_i) - 1
+    @cells[index] = player.token
   end
-  
+
 end

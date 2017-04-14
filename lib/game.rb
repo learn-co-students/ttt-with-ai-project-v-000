@@ -13,8 +13,18 @@ WIN_COMBINATIONS = [
   [2,4,6], #left diagonal
 ]
 
-  def initialize
-    
+  def initialize(player_1, player_2, board)
+    @player_1 = Player.new
+    @player_2 = Player.new
+    @board = Board.new
   end
-  
+
+  def current_player(board)
+    if turn_count(board) % 2 == 0
+      return "0"
+    else
+      return "X"
+    end
+  end
+
 end

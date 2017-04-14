@@ -1,6 +1,6 @@
 class Players
 
-  class Human < Player 
+  class Human < Player
 
     def move(user_input)
       gets.strip
