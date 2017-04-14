@@ -14,7 +14,7 @@ WIN_COMBINATIONS = [
   [2,4,6], #left diagonal
 ]
 
-  def initialize(board = @cells)
+  def initialize(board = nil)
     @player_1 = Players::Human.new("X")
     @player_2 = Players::Human.new("O")
     @board = Board.new
@@ -29,42 +29,19 @@ WIN_COMBINATIONS = [
     end
   end
 
-  def won?
-    WIN_COMBINATIONS.detect do |win_combination|
-      win_index_1 = win_combination[0]
-      win_index_2 = win_combination[1]
-      win_index_3 = win_combination[2]
-      position_1 = @board[win_index_1] # load the value of the board at win_index_1
-      position_2 = @board[win_index_2] # load the value of the board at win_index_2
-      position_3 = @board[win_index_3]
-        if position_1 == player_1 && position_2 == player_1 && position_3 == player_1
-          return win_combination # return the win_combination indexes that won.
-        elsif position_1 == player_2 && position_2 == player_2 && position_3 == player_2
-          return win_combination
-        else
-      end
-    end
+  def over?
+
   end
 
-  def full?
-    @board.none? {|index| index == " "}
+  def won?
+
   end
 
   def draw?
-    if won? || !full?
-      return false
-    else
-      return true
-    end
+
   end
 
-  def over?
-    if draw?
-      return true
-    elsif won?
-      return true
-    elsif !full?
-      return false
-    end
+  def winner
+
   end
 end
