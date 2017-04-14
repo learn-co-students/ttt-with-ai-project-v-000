@@ -35,14 +35,9 @@ class Board
     (self.taken?(cell) == true || self.position(cell) == nil) ? false : true
   end
 
-  def valid_player?(player)
-    (player == "X" || player == "O") ? true : false
-  end
-
   def update(cell, player)
-    player = player.token # why is player passed in as a hash???
     index = cell.to_i - 1
-    self.cells[index] = player if (valid_move?(cell) == true && valid_player?(player) == true)
+    self.cells[index] = player.token if valid_move?(cell) == true
   end
 
   def reset!
