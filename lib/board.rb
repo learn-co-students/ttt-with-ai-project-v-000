@@ -5,6 +5,16 @@ class Board
     self.reset!
   end
 
+  # def rankings
+  #   {
+  #     cell_1: {
+  #       value: self.cells[0],
+  #       ranking:
+  #     }
+  #   }
+  #   # @board.rankings.cell_1.value || @board.rankings.cell_1.ranking @board.ranksings["cell_#{i+1}"] = 9
+  # end
+
   def display
     separator_row = "-----------"
     row1 = " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
