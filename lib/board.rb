@@ -18,8 +18,7 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
   def position(user_input)
-    integer = user_input.to_i- 1#converst user input string to array index
-    #binding.pry
+    integer = user_input.to_i- 1#looks up the value of the cells at the correct index from the array's perspective
     return "#{@cells[integer]}"#looks up the value of the cells at the correct index from the array's perspective
   end
   def full?#defines the full? method w/board array

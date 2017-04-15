@@ -19,7 +19,11 @@ class Game
     [2,4,6],  #diagnoal from ne to sw#add comma to delineate element of array WIN_COMBINATIONS
   ]
  def current_player
-    current_player = Players::Human.new("X")
+    if board.turn_count.odd? == true
+      player_2
+    else
+      player_1
+    end
  end
  def won?
    WIN_COMBINATIONS.find do |win|
@@ -69,7 +73,6 @@ class Game
    board.update(player_position, player)
  end
  def valid_move?(input)
-   binding.pry
    board.valid_move?(input)
  end
  def taken?(input)
