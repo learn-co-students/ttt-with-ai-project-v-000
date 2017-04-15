@@ -8,7 +8,8 @@ module Players
     # Then, rank according to Win, Block, Fork, Block Fork, etc.
 
     def move(board=[])
-      computer_move = rand(1..9).to_s
+      posible_moves = board.map.with_index{|token, i| (token != "X" && token != "O") ? (i + 1) : nil}.compact
+      computer_move = posible_moves.sample.to_s
       puts "Computer's Move"
       sleep(1)
       computer_move

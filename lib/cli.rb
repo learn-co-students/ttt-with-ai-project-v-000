@@ -36,7 +36,11 @@ class Cli
     when 0
       @p1, @p2 = [Players::Computer.new(@p1_token), Players::Computer.new(@p2_token)]
     when 1
-      @p1, @p2 = [Players::Human.new(@p1_token), Players::Computer.new(@p2_token)]
+      if player_first == 1
+        @p1, @p2 = [Players::Human.new(@p1_token), Players::Computer.new(@p2_token)]
+      elsif player_first == 2
+        @p1, @p2 = [Players::Computer.new(@p1_token), Players::Human.new(@p2_token)]
+      end
     when 2
       @p1, @p2 = [Players::Human.new(@p1_token), Players::Human.new(@p2_token)]
     end

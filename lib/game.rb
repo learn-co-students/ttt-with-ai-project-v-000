@@ -50,12 +50,12 @@ class Game
   end
 
   def turn
-    cell = self.current_player.move
+    cell = self.current_player.move(self.board.cells)
     system('clear')
     while self.board.valid_move?(cell) == false
       self.board.display
       puts "It is not possible to move to that square"
-      cell = self.current_player.move
+      cell = self.current_player.move(self.board.cells)
       system('clear')
     end
     self.board.update(cell, self.current_player)
