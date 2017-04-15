@@ -88,9 +88,18 @@ WIN_COMBINATIONS = [
     end
   end
 
-  def turn
-    puts "Please enter 1-9:"
-    user_input = gets.strip
+  def valid_move?(index)
+    if taken?(index)
+      return false
+    elsif index > 8 || index < 0
+      return false
+    else
+      return true
+    end
+  end
+
+  def turn(user_input)
+    puts "Please enter 1 - 9:"
     index = (user_input.to_i) - 1
       if valid_move?(index)
         move(index, "#{current_player}")
@@ -99,5 +108,6 @@ WIN_COMBINATIONS = [
         turn
       end
   end
+
 
 end
