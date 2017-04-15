@@ -6,35 +6,4 @@ require_relative '../config/environment'
 # Also, the AI needs to be reviewed. Right now it has a random strategy.
 
 puts "Hello and welcome to Tic-Tac-Toe!"
-
-
-def setup
-  puts "Do you want to play a 0, 1, or a 2 player game?"
-  num_players = gets.strip.to_i
-
-  system('clear')
-  puts "Okay! So, this will be a #{num_players} player(s) game of Tic-Tac-Toe. Let's get started!"
-  puts "But first, who go first? 1) Player 1 or 2) Player 2?"
-  player = gets.strip.to_i
-  p1_token, p2_token = ["O", "X"]
-  p1_token, p2_token = ["X", "O"] if player == 1
-
-  game = nil
-
-  case num_players
-    when 0
-      game = Game.new(Players::Computer.new(p1_token), Players::Computer.new(p2_token))
-    when 1
-      game = Game.new(Players::Human.new(p1_token), Players::Computer.new(p2_token))
-    when 2
-      game = Game.new(Players::Human.new(p1_token), Players::Human.new(p2_token))
-    end
-  game
-end
-
-game = setup
-game.play
-
-puts "Would you like to start another game? Yes == y, No == n"
-new_game = gets.strip
-(new_game == "y") ? setup.play : (puts "Goodbye!")
+Cli.new.run_game
