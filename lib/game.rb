@@ -14,7 +14,7 @@ WIN_COMBINATIONS = [
   [2,4,6], #left diagonal
 ]
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = " ")
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -29,18 +29,75 @@ WIN_COMBINATIONS = [
   end
 
   def over?
-
+    if draw?
+      return true
+    elsif won?
+      return true
+    elsif !full?
+      return false
+    end
   end
 
   def won?
-
+    WIN_COMBINATIONS.detect do |win_combination|
+      win_index_1 = win_combination[0]
+      win_index_2 = win_combination[1]
+      win_index_3 = win_combination[2]
+      position_1 = @board.cells[win_index_1] # load the value of the board at win_index_1
+      position_2 = @board.cells[win_index_2] # load the value of the board at win_index_2
+      position_3 = @board.cells[win_index_3]
+        if position_1 == @player_1.token && position_2 == @player_1.token && position_3 == @player_1.token
+          return win_combination # return the win_combination indexes that won.
+        elsif position_1 == @player_2.token && position_2 == @player_2.token && position_3 == @player_2.token
+          return win_combination
+        else
+      end
+    end
   end
 
-  def draw?
+  def full?
+    @board.cells.none? {|index| index == " "}
+  end
 
+
+  def draw?
+    if won? || !full?
+      return false
+    else
+      return true
+    end
   end
 
   def winner
-
+    if won?
+      WIN_COMBINATIONS.each do |win_combination|
+      win_index_1 = win_combination[0]
+      win_index_2 = win_combination[1]
+      win_index_3 = win_combination[2]
+      position_1 = @board.cells[win_index_1] # load the value of the board at win_index_1
+      position_2 = @board.cells[win_index_2] # load the value of the board at win_index_2
+      position_3 = @board.cells[win_index_3]
+        if position_1 == player_1.token && position_2 == player_1.token && position_3 == player_1.token
+          return player_1.token # return the win_combination indexes that won.
+        elsif position_1 == player_2.token && position_2 == player_2.token && position_3 == player_2.token
+          return player_2.token
+        else
+        end
+      end
+    else
+    end
   end
+
+  def turn
+    puts "Please enter 1-9:"
+    user_input = gets.strip
+    index = (user_input.to_i) - 1
+      if valid_move?(index)
+        move(index, "#{current_player}")
+        display
+      else
+        turn
+      end
+  end
+
 end
