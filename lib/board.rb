@@ -43,4 +43,8 @@ class Board
   def update(position, player)
     @cells[position.to_i - 1] = player.token
   end
+
+  def valid_cells
+    indeces = @cells.each_index.select{|i| @cells[i] == " "}
+  end
 end

@@ -47,14 +47,16 @@ class Game
   end
 
   def turn
+    puts "#{current_player.token}, it's your turn"
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
     else
       puts "This is invalid. Please try again."
       self.turn
     end
-    board.display
+
   end
 
   def play
@@ -65,6 +67,28 @@ class Game
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
+    end
+  end
+
+  def self.start
+    puts "Welcome to Tic Tac Toe with AI"
+    puts "Do you want to play 0, 1, or 2 player game?"
+    player_size = gets.strip
+
+    if player_size == "0"
+      self.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    elsif player_size == "1"
+      puts "Who wants to go first? Human or Computer?"
+      first_player = gets.strip
+      if first_player == "Human"
+        self.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif first_player == "Computer"
+        self.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      else
+        puts "That's an invalid response. Try again"
+      end
+    elsif player_size == "2"
+      self.new(Players::Human.new("X"), Players::Human.new("O")).play
     end
   end
 end
