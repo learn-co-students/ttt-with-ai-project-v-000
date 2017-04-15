@@ -1,4 +1,6 @@
 require 'pry'
+#require_relative "./players/human.rb"
+#require_relative "./players/computer.rb"
 class Game
   attr_accessor :board, :player_1, :player_2
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
@@ -74,13 +76,8 @@ class Game
    board.taken?(input)
  end
  def turn
-   puts "Please enter 1-9:"
-   #binding.pry
-   input= gets.chomp
-   puts "Please enter number of players: 0, 1, or 2"
-   player= gets.chomp
-   #binding.pry
-   input= input_to_index(input)
+   user_input = current_player.move(board)
+   input= input_to_index(user_input)
    if valid_move?(input)
      update(input, player)
      display_board
