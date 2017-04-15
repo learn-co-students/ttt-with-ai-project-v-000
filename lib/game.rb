@@ -14,7 +14,7 @@ WIN_COMBINATIONS = [
   [2,4,6], #left diagonal
 ]
 
-  def initialize(player_1 = Players::Human("X"), player_2 = Players::Human("O"), board = " ")
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = " ")
     @player_1 = player_1
     @player_2 = player_2
     @board = board
