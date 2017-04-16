@@ -5,7 +5,7 @@ class Game
   attr_accessor :board, :player_1, :player_2
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
-    @player_1 = player_1
+    @player_1 = player_1#assigns token "X" in Game.new
     @player_2 = player_2
   end
   WIN_COMBINATIONS = [
@@ -81,8 +81,9 @@ class Game
  def turn
    user_input = current_player.move(board)
    #input= input_to_index(user_input)
-   if valid_move?(input)
-     update(input, player)
+   if valid_move?(user_input)
+     player = current_player
+     update(user_input, player)
      display_board
    else
      turn #here is the missing line for 9-12 pm
