@@ -22,8 +22,8 @@ This game was made as part of the Learn.co curriculum.
 
 You can read the following 2 blog posts for some of my thoughts on coding this game:
 
-[https://blog.yechiel.me/tic-tac-tips-517d5c80f47d#.q4mkp2lbn](Tic-Tac-Tips)
+[Tic-Tac-Tips](https://blog.yechiel.me/tic-tac-tips-517d5c80f47d#.q4mkp2lbn)
 
-[https://blog.yechiel.me/puts-solution-61f4eef49bc1#.gcy9ucr87](puts Solution)
+[puts Solution](https://blog.yechiel.me/puts-solution-61f4eef49bc1#.gcy9ucr87)
 
-You can read more about my journy at blog.yechiel.me or learn more about me and get in touch at [http://yechiel.me](yechiel.me)
+You can read more about my journy at blog.yechiel.me or learn more about me and get in touch at [yechiel.me](http://yechiel.me)
