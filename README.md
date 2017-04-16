@@ -16,32 +16,6 @@ There are 4 game modes: 0 Player, 1 Player, 2 Player and Wargames mode.
 
 To play, clone this repository run `bundle istall` and then run `bin/tictactoe` in your command line from the root directory.
 
-### Project Structure
-
-```
-├── Gemfile
-├── Gemfile.lock
-├── README.md
-├── Rakefile
-├── bin
-│   └── tictactoe
-├── config
-│   └── environment.rb
-├── lib
-    ├── players
-        ├── computer.rb
-        └── human.rb
-    ├── board.rb
-    ├── game.rb
-    └── player.rb
-└── spec
-    ├── 01_board_spec.rb
-    ├── 02_player_spec.rb
-    ├── 03_human_player_spec.rb
-    ├── 04_game_spec.rb
-    ├── 05_computer_player_spec.rb
-    └── spec_helper.rb
-```
 ------------
 
 This game was made as part of the Learn.co curriculum. 
@@ -52,8 +26,4 @@ https://blog.yechiel.me/tic-tac-tips-517d5c80f47d#.q4mkp2lbn
 
 https://blog.yechiel.me/puts-solution-61f4eef49bc1#.gcy9ucr87
 
-You can read more about my journy at https://blog.yechiel.me/ or learn more about me and get in touch at https://yechiel.me
-
-<a href='https://learn.co/lessons/ttt-with-ai-project' data-visibility='hidden'>View this lesson on Learn.co</a>
-
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/ttt-with-ai-project'>Tic-Tac-Toe with AI</a> on Learn.co and start learning to code for free.</p>
+You can read more about my journy at https://blog.yechiel.me/ or learn more about me and get in touch at yechiel.me
