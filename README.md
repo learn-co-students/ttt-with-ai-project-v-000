@@ -26,4 +26,4 @@ You can read the following 2 blog posts for some of my thoughts on coding this g
 
 [puts Solution](https://blog.yechiel.me/puts-solution-61f4eef49bc1#.gcy9ucr87)
 
-You can read more about my journy at blog.yechiel.me or learn more about me and get in touch at [yechiel.me](http://yechiel.me)
+You can read more about my journy at [blog.yechiel.me](https://blog.yechiel.me) or learn more about me and get in touch at [yechiel.me](http://yechiel.me)
