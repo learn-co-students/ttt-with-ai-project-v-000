@@ -41,7 +41,7 @@ class Board
     user_input.to_i-1
   end
   def valid_move?(input)
-     input.to_i.between?(0,8) && !taken?(input) && input != /^[a-z]+$/ && input !=/^[A-Z]+$/ && position(input) != "X" && position(input)!="O"
+    input.to_i.between?(1,9) && !taken?(input)
   end
   def taken?(user_input)
      position(user_input) == "X" || position(user_input) == "O"
