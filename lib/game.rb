@@ -1,4 +1,4 @@
-require 'pry'
+#require 'pry'
 #require_relative "./players/human.rb"
 #require_relative "./players/computer.rb"
 class Game
@@ -80,7 +80,7 @@ class Game
  end
  def turn
    user_input = current_player.move(board)
-   input= input_to_index(user_input)
+   #input= input_to_index(user_input)
    if valid_move?(input)
      update(input, player)
      display_board

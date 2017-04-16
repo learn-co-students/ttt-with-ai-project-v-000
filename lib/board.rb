@@ -41,16 +41,14 @@ class Board
     user_input.to_i-1
   end
   def valid_move?(input)
-    input.to_i.between?(1,9) && !taken?(input)
+    input_to_index(input).between?(0,8) && !taken?(input)
   end
   def taken?(user_input)
      position(user_input) == "X" || position(user_input) == "O"
   end
   def update(player_position, player)
-    #binding.pry
     number = position(player_position).to_i
     @cells[number] = player.token
-    #self.cells[number] = "X"
   end
   #end
 end
