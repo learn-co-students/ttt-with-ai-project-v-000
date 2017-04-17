@@ -23,11 +23,7 @@ class Board
   end
 
   def full?
-    if @cells.none? {|i| i == " "}
-      return true
-    else
-      return false
-    end
+    @cells.none? {|i| i == " "} ? true : false
   end
 
   def turn_count
