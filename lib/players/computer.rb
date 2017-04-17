@@ -17,6 +17,7 @@ module Players
       @o_spaces = []
       @missing_x_nums = []
       @missing_o_nums = []
+      #binding.pry
       board.cells.each_with_index do |token, index|
         if token == "X"
           @x_spaces << index
@@ -27,11 +28,14 @@ module Players
         end
       end
 
-      if board.turn_count == 0 || board.turn_count == 1
+      if board.turn_count <= 1
         if @empty_spaces.include?(4)
           return "5"
         else
-          return [1, 3, 7, 9].sample
+          number = [0, 2, 6, 8].detect do |n|
+            @empty_spaces.any? {|i| n == i}
+          end
+          return number + 1
         end
       end
 
@@ -47,7 +51,11 @@ module Players
 
     def player_x
       x_combo = WIN_COMBINATIONS.detect do |win_combo| #this finds the currently taken X spaces that match with win combos
-        @x_spaces.all? {|i| win_combo.include?(i)}
+        if @x_spaces.size <= 2
+          @x_spaces.all? {|i| win_combo.include?(i)}
+        else
+          @x_spaces.any? {|i| win_combo.include?(i)}
+        end
       end
 
       @missing_x_nums = x_combo.reject {|i| @x_spaces.include?(i)}
@@ -55,10 +63,14 @@ module Players
 
     def player_o
       o_combo = WIN_COMBINATIONS.detect do |win_combo| #this finds the currently taken O spaces that match with win combos
-        @o_spaces.all? {|i| win_combo.include?(i)}
+        #if @o_spaces.size <= 2
+        #  @o_spaces.all? {|i| win_combo.include?(i)}
+        #else
+          @o_spaces.any? {|i| win_combo.include?(i)}
+        #end
       end
 
-      @missing_o_num = o_combo.reject {|i| @o_spaces.include?(i)}
+      @missing_o_nums = o_combo.reject {|i| @o_spaces.include?(i)}
     end
 
 
@@ -68,7 +80,10 @@ module Players
       elsif @missing_o_nums.size == 1
         return @missing_o_nums[0] + 1
       else
-        return @missing_x_nums.sample + 1
+        number = @missing_x_nums.detect do |n|
+          @empty_spaces.any? {|i| n == i}
+        end
+        return number + 1
       end
     end
 
@@ -78,17 +93,16 @@ module Players
       elsif @missing_x_nums.size == 1
         return @missing_x_nums[0] + 1
       else
-        return @missing_o_nums.sample + 1
+        number = @missing_o_nums.detect do |n|
+          @empty_spaces.any? {|i| n == i}
+        end
+        return number + 1
       end
     end
 
 
   end
 end
-
-#Need to figure out what to do on the first turns when the arrays are empty, there are no Xs or Os.
-#Could be as simple as saying if the turn count is 0 or 1, choose the middle if it is avaiable or if it is not avaiable, choose a random corner
-
 
 # AI Logic Ideas
 # - When the computer is "X" -

@@ -55,9 +55,10 @@ class Game
 
   def turn
     puts "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    puts "Player #{current_player.token} - please choose a number 1-9:\n"
+    puts "Player #{current_player.token} - please choose a number 1-9: (Turn Number: #{board.turn_count})\n"
     @board.display
     user_input = self.current_player.move(@board)
+    puts "Thank you #{current_player.token} for your input of: #{user_input}"
     if @board.valid_move?(user_input)
       index = @board.input_to_index(user_input)
       @board.cells[index] = self.current_player.token
