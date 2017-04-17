@@ -58,7 +58,7 @@ attr_accessor :cells
 
   def update(user_input, player)
     index = (user_input.to_i) - 1
-    @cells[index] = player.token
+    cells[index] = player.token
   end
 
 end

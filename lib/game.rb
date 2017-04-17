@@ -22,9 +22,9 @@ WIN_COMBINATIONS = [
 
   def current_player
     if board.turn_count % 2 == 0
-      return @player_1
+      return player_1
     else
-      return @player_2
+      return player_2
     end
   end
 
@@ -43,12 +43,12 @@ WIN_COMBINATIONS = [
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
       win_index_3 = win_combination[2]
-      position_1 = @board.cells[win_index_1] # load the value of the board at win_index_1
-      position_2 = @board.cells[win_index_2] # load the value of the board at win_index_2
-      position_3 = @board.cells[win_index_3]
-        if position_1 == @player_1.token && position_2 == @player_1.token && position_3 == @player_1.token
+      position_1 = board.cells[win_index_1] # load the value of the board at win_index_1
+      position_2 = board.cells[win_index_2] # load the value of the board at win_index_2
+      position_3 = board.cells[win_index_3]
+        if position_1 == player_1.token && position_2 == player_1.token && position_3 == player_1.token
           return win_combination # return the win_combination indexes that won.
-        elsif position_1 == @player_2.token && position_2 == @player_2.token && position_3 == @player_2.token
+        elsif position_1 == player_2.token && position_2 == player_2.token && position_3 == player_2.token
           return win_combination
         else
       end
@@ -56,7 +56,7 @@ WIN_COMBINATIONS = [
   end
 
   def full?
-    @board.cells.none? {|index| index == " "}
+  board.cells.none? {|index| index == " "}
   end
 
 
@@ -74,9 +74,9 @@ WIN_COMBINATIONS = [
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
       win_index_3 = win_combination[2]
-      position_1 = @board.cells[win_index_1] # load the value of the board at win_index_1
-      position_2 = @board.cells[win_index_2] # load the value of the board at win_index_2
-      position_3 = @board.cells[win_index_3]
+      position_1 = board.cells[win_index_1] # load the value of the board at win_index_1
+      position_2 = board.cells[win_index_2] # load the value of the board at win_index_2
+      position_3 = board.cells[win_index_3]
         if position_1 == player_1.token && position_2 == player_1.token && position_3 == player_1.token
           return player_1.token # return the win_combination indexes that won.
         elsif position_1 == player_2.token && position_2 == player_2.token && position_3 == player_2.token
@@ -88,26 +88,26 @@ WIN_COMBINATIONS = [
     end
   end
 
-  def valid_move?(index)
-    if taken?(index)
-      return false
-    elsif index > 8 || index < 0
-      return false
+  def turn
+    index = current_player.move(board)
+    if board.valid_move?(index)
+      board.update(index, current_player)
+      board.display
     else
-      return true
+      turn
     end
   end
 
-  def turn(user_input)
-    puts "Please enter 1 - 9:"
-    index = (user_input.to_i) - 1
-      if valid_move?(index)
-        move(index, "#{current_player}")
-        display
-      else
-        turn
-      end
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    else
+    end
   end
-
-
 end
