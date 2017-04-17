@@ -2,13 +2,65 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-puts "~~~~~~~~~~~~~~~~~~~~~~~"
-puts "Would you like to play with 0, 1 or 2 players?"
-input = gets.chomp
-#gets input here
-#puts "Who would like to be X - Player 1 or Player 2 (computer)?"
-#gets input here
-Game.new.play if input
+def start
+  computer_one = Players::Computer.new("X")
+  computer_two = Players::Computer.new("O")
+  human_one = Players::Human.new("X")
 
-puts "Would you like to play again?"
+  puts "Welcome to Tic Tac Toe!"
+  puts "~~~~~~~~~~~~~~~~~~~~~~~"
+  puts "Would you like to play with 0, 1 or 2 players? [0/1/2]"
+  player_number = gets.chomp
+
+  if player_number == "0"
+    Game.new(computer_one, computer_two).play
+
+  elsif player_number == "1"
+    puts "Would you like to take the first turn? [Y/N]"
+    input = gets.chomp
+
+    if input == "Y" || input == "y" || input == "Yes" || input == "yes"
+      Game.new(human_one, computer_two).play
+    elsif input == "N" || input == "n" || input == "No" || input == "no"
+      Game.new(computer_one).play
+    else
+      puts "Invalid entry, please try again."
+      start
+    end
+
+  elsif player_number == "2"
+    Game.new.play
+
+  else
+    puts "Invalid entry, please try again."
+    start
+  end
+end
+
+def replay?
+  puts "Would you like to play again? [Y/N]"
+  input = gets.chomp
+  if input == "Y" || input == "y" || input == "Yes" || input == "yes"
+    start
+  elsif input == "N" || input == "n" || input == "No" || input == "no"
+    exit
+  else
+    puts "Invalid entry, please try again."
+    replay?
+  end
+end
+
+start
+replay?
+
+
+
+
+#AI Logic
+#New game instance, but values passed in should be 1/2 computer instances.
+#One player - should ask if the player wants to go first (set human player token to X)
+# or if they want computer to go first (set computer player token to X)
+#Begin game with play
+#Tell the computer to make a move
+# In the computer instance, build the logic for it to find the best and valid position, then return that position (not as an index)
+# Allow turn to check if valid and convert to index and move the token
