@@ -4,8 +4,9 @@
 class Game
   attr_accessor :board, :player_1, :player_2
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+   #assigns token "X" and "O" to respective player in Game.new
     @board = board
-    @player_1 = player_1#assigns token "X" in Game.new
+    @player_1 = player_1
     @player_2 = player_2
   end
   WIN_COMBINATIONS = [
@@ -87,6 +88,17 @@ class Game
      display_board
    else
      turn #here is the missing line for 9-12 pm
+   end
+ end
+ def play
+   puts "who should go first and be 'X', player_1 or
+   player_2? Enter 1 for player_1, 2 for player_2"
+   #binding.pry
+   player = gets.chomp
+   if player == "1"
+       game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"))
+   elsif player == "2"
+      game = Game.new(player_1=Players::Human.new("O"),player_2=Players::Human.new("X"))
    end
  end
 end
