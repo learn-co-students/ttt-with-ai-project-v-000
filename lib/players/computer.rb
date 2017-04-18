@@ -8,11 +8,11 @@ module Players
       if board.cells[4] == " "
         move = "5"
         #if going second and they took mid, take top left
-      elsif board.cells[4] != " "
+      elsif board.cells[4] != " " && board.turn_count == 1
         move = "1"
 
         #check the rest of the corners for a good move (turn 3)
-      elsif board.cells[4] != " " && board.cells[1] != " "
+      elsif board.turn_count == 2
         move = [1, 3, 7, 9].detect {|i| !board.taken?(i)}.to_s
 
         #check if there are winning combinations available, and either win or stop it.

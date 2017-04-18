@@ -48,6 +48,21 @@ class Game
     end
   end
 
+
+  def turn
+    puts "It's #{current_player.token}'s turn"
+    move = current_player.move(board)
+    if board.valid_move?(move)
+      board.update(move, current_player)
+      board.display
+    else
+      puts "Try again boss"
+      self.turn
+    end
+  end
+
+
+=begin
   def turn
     player = current_player
     current_move = player.move(@board)
@@ -62,6 +77,9 @@ class Game
         puts "\n\n"
       end
   end
+=end
+
+
 
   def play
     while !over?
