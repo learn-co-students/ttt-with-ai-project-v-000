@@ -27,14 +27,7 @@ class Board
   end
 
   def turn_count
-    turn_count = 0
-
-    @cells.each do |x|
-      if x != " "
-        turn_count += 1
-      end
-    end
-    turn_count
+    @cells.count{|cell| cell != " "}
   end
 
   def taken?(location)
