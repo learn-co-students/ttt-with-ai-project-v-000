@@ -23,7 +23,8 @@ elsif players == "1"
   end
 
 elsif players == "2"
-  
+  self.new(Players::Human.new("X"), Players::Human.new("O")).play
+end
 
 game = Game.new
 
