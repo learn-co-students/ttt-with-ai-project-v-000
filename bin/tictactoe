@@ -18,7 +18,9 @@ def play_again?
 
   if input == "Y" || input == "y"
     game = Game.new
-    game.play
+    until game.won?
+      game.play
+    end
   elsif input == "N" || input == "n"
     puts "Oh geez, too bad. Maybe try again harder next time boss."
   else
