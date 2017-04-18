@@ -11,11 +11,7 @@ class Game
   end
 
   def current_player
-    if self.board.turn_count.even?
-      self.player_1
-    elsif self.board.turn_count.odd?
-      self.player_2
-    end
+    self.board.turn_count.even? ? self.player_1 : self.player_2
   end
 
   def over?
