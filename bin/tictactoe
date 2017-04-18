@@ -9,6 +9,7 @@ puts "How many players?"
 players = gets.strip
 
 if players == "0"
+  game = Game.new
   self.new(Players::Computer.new("x"), Players::Computer.new("O")).play
 elsif players == "1"
   puts "Who goes first, player or computer?"
@@ -48,6 +49,8 @@ def play_again?
   else
     puts "That's not a viable answer."
 
-    play_again
+    play_again?
   end
 end
+
+play_again?
