@@ -71,7 +71,7 @@ describe 'Game' do
       game = Game.new
       game.board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
 
-      expect(game.current_player.token).to eq("X")
+      expect(game.current_player).to eq("X")
     end
   end
 

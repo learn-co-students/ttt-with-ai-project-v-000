@@ -58,4 +58,4 @@ class Board
       @cells[ind.to_i - 1] = player.token
   end
 
-end  
+end
