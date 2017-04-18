@@ -102,6 +102,7 @@ class Game
     until game.won?
       game.play
     end
+    play_again?
   end
 
   def play_again?
