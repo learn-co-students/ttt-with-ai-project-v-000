@@ -35,11 +35,8 @@ class Game
   end
 
   def winner
-    if won?
-      combo = self.won?
-      self.board.cells[combo[0]]
-    else
-      nil
+    if combo = won?
+      board.cells[combo[0]]
     end
   end
 
