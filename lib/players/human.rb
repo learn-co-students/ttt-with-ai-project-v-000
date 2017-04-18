@@ -5,7 +5,7 @@ module Players
 
     def move(board, delay = 0)
       puts "What space would you like to move into, player #{self.token}?"
-      input = gets.chomp
+      gets.chomp
     end
 
   end
