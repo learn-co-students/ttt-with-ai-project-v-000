@@ -29,6 +29,7 @@ module Players
         move = "4"
 
       else
+        
         Game::WIN_COMBINATIONS.detect do |combo|
 
           #first check if we can win.
