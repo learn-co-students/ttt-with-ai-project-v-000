@@ -29,7 +29,7 @@ module Players
         move = "4"
 
       else
-        
+
         Game::WIN_COMBINATIONS.detect do |combo|
 
           #first check if we can win.
@@ -47,7 +47,7 @@ module Players
 
         #if no win combinations possible, play a square
 
-        move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)|.to_s if move == nil}
+        move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i).to_s if move == nil}
       end
       move
     end

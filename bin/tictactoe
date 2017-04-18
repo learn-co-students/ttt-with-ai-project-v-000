@@ -4,6 +4,27 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
 
+puts "How many players?"
+
+players = gets.strip
+
+if players == "0"
+  self.new(Players::Computer.new("x"), Players::Computer.new("O")).play
+elsif players == "1"
+  puts "Who goes first, player or computer?"
+  input = gets.strip
+
+  if input == "player"
+    self.new(Players::Human.new("X"), Players::Computer.new("O")).play
+  elsif input == "computer"
+    self.new(Players::Computer.new("X"), Players::Human.new("O")).play
+  else
+    puts "Invalid response, please try again."
+  end
+
+elsif players == "2"
+  
+
 game = Game.new
 
 until game.won?
