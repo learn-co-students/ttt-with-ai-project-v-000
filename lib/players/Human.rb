@@ -1,7 +1,7 @@
 class Players
   class Human < Player
      def move(num)
-       num = gets.chomp
+       @num = gets.chomp
      end
   end
 

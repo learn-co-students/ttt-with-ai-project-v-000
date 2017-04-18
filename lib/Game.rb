@@ -18,9 +18,30 @@ class Game
   ]
   def current_player
     if board.turn_count%2 == 0
-     @player_1.token
+     @player_1
     else
-     @player_2.token
+     @player_2
+    end
+  end
+  def won?
+     WIN_COMBINATIONS.detect{|win| board.cells[win[0]] ==  board.cells[win[1]] && board.cells[win[1]] ==  board.cells[win[2]] && board.taken?(win[2]+1)}
+  end
+  def draw?
+       board.full? && !won?
+  end
+  def over?
+    draw? || won?
+  end
+  def winner
+    if won?
+      board.cells[won?[0]]
+    else
+      return nil
+    end
+  end
+  def turn
+    if board.valid_move?(player_1.move(num))
+      player_1.move(num)
     end
   end
 end

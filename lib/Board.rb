@@ -43,4 +43,5 @@ class Board
   def update(num,player)
     cells[index(num)] = player.token
   end
+  
 end
