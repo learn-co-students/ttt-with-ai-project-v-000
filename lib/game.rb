@@ -24,9 +24,9 @@ class Game
 
   def current_player
     if board.turn_count % 2 == 0
-      player_1.token
+      @curr_token = player_1.token
     else
-      player_2.token
+      @curr_token = player_2.token
     end
   end
 
@@ -62,6 +62,20 @@ class Game
     if won?
       @winner_X_O
     end
+  end
+
+  def turn
+      current_player
+      if @curr_token = "X"
+        @move = player_1.move(board)
+      else
+        @move = player_2.move(board)
+      end
+      if !board.valid_move?(@move)
+        turn
+      else
+        @move
+      end
   end
 
 end
