@@ -91,10 +91,9 @@ class Game
    end
  end
  def play
-   puts "who should go first and be 'X', Computer or Human"
-   #binding.pry
-   player = gets.chomp
-   if player == "1"
+   puts "what kind of game do you want to play? 0,1, or 2 player"
+   player_count = gets.chomp
+   if player_0 == "1"
        game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"))
    elsif player == "2"
       game = Game.new(player_1=Players::Human.new("O"),player_2=Players::Human.new("X"))
