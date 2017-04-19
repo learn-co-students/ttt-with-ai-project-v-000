@@ -65,17 +65,38 @@ class Game
   end
 
   def turn
-      current_player
-      if @curr_token = "X"
-        @move = player_1.move(board)
-      else
-        @move = player_2.move(board)
-      end
+    current_player
+    if @curr_token == "X"
+      puts "Player 'X' please enter 1-9:"
+      @move = player_1.move(board)
       if !board.valid_move?(@move)
         turn
       else
+        board.update(@move, player_1)
         @move
       end
+    else
+      puts "Player 'O' please enter 1-9:"
+      @move = player_2.move(board)
+      if !board.valid_move?(@move)
+        turn
+      else
+        board.update(@move, player_2)
+        @move
+      end
+    end
+  end
+
+  def play
+    until over?
+      board.display
+      turn
+    end
+    if won?
+      puts "Congratulations #{@winner_X_O}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
 
 end

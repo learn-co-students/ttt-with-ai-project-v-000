@@ -35,7 +35,7 @@ class Board
   def turn_count
     count = 0
     @cells.each {| elem | elem == "X" || elem == "O" ? count += 1 : count = count}
-    return count
+    count
   end
 
   def taken?(val)
@@ -55,7 +55,7 @@ class Board
   end
 
   def update(ind, player)
-      @cells[ind.to_i - 1] = player.token
+    @cells[ind.to_i - 1] = player.token
   end
 
 end
