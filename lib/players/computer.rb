@@ -1,12 +1,22 @@
 module Players
   class Computer < Player
-    include Players::InstanceMethod
+    def move(board)
+      if valid_move?()
+        #user_input = gets
+        "#{user_input}"
+      end
+    end
+    def position(user_input)
+      integer = user_input.to_i- 1#converst user input string to array index
+      #binding.pry
+      return "#{@cells[integer]}"#looks up the value of the cells at the correct index from the array's perspective
+    end
+    def valid_move?(input)
+      input.to_i.between?(1,9) && !taken?(input)
+    end
+    def taken?(user_input)
+       position(user_input) == "X" || position(user_input) == "O"
+    end
     #https://www.ruby-forum.com/topic/113558
-    #move method that accepts a board and returns the move
-    #the computer wants to make in the form
-    #of a 1-9 string
-    #but it must be
-    #capable of returning a
-    #valid move at some point.
   end
 end
