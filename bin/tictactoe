@@ -13,3 +13,4 @@ elsif kind_of_game == "1"
 elsif kind_of_game == "2"
   Game.new
 end
+#how about using case/when?
