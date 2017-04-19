@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to Tic Tac Toe!\n What kind of game you want to play? 0,1,2"
+kind_of_game = gets.chomp
+
+if kind_of_game == "0"
+  Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+elsif kind_of_game == "1"
+  Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+elsif kind_of_game == "2"
+  Game.new
+end
