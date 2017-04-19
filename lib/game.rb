@@ -66,9 +66,27 @@ class Game
     end
   end
 
-  def start
+  def wargame #computer vs. computer, 100 games outcome
 
+    game_counter = 1
+    x = 0
+    o = 0
+    draw = 0
+
+    while game_counter <= 100
+      play
+      if draw?
+        draw += 1
+      elsif winner == "X"
+        x += 1
+      elsif winner == "O"
+        o += 1
+      end
+      game_counter += 1
+      baord.reset!
+      sleep(0.15)    
+    end
+    puts "X wins: #{x}, O wins: #{o}, draws: #{draw}"
   end
-
 
 end
