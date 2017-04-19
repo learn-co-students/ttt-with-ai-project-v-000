@@ -1,9 +1,8 @@
+require 'pry'
 module Players
   class Human < Player
+    include Players::InstanceMethod
     #https://www.ruby-forum.com/topic/113558
-    def move(board)
-      puts "Please enter 1-9:"
-      gets.strip
-    end
+    #binding.pry
   end
 end

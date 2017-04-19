@@ -1,9 +1,12 @@
 module Players
   class Computer < Player
+    include Players::InstanceMethod
     #https://www.ruby-forum.com/topic/113558
-    def move(user_input)
-    user_input = gets
-    "#{user_input}"
-    end
+    #move method that accepts a board and returns the move
+    #the computer wants to make in the form
+    #of a 1-9 string
+    #but it must be
+    #capable of returning a
+    #valid move at some point.
   end
 end

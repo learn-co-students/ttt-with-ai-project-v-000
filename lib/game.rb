@@ -91,8 +91,7 @@ class Game
    end
  end
  def play
-   puts "who should go first and be 'X', player_1 or
-   player_2? Enter 1 for player_1, 2 for player_2"
+   puts "who should go first and be 'X', Computer or Human"
    #binding.pry
    player = gets.chomp
    if player == "1"
