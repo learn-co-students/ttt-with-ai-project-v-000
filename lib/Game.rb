@@ -22,26 +22,47 @@ class Game
     else
      @player_2
     end
+  #how about this : board.turn_count.even? ? player_1 : player_2
   end
+
   def won?
      WIN_COMBINATIONS.detect{|win| board.cells[win[0]] ==  board.cells[win[1]] && board.cells[win[1]] ==  board.cells[win[2]] && board.taken?(win[2]+1)}
   end
+
   def draw?
        board.full? && !won?
   end
+
   def over?
     draw? || won?
   end
+
   def winner
     if won?
       board.cells[won?[0]]
     else
       return nil
     end
+    # won? ? board.cells[won?[0]] : nil
   end
+
   def turn
-    if board.valid_move?(player_1.move(num))
-      player_1.move(num)
+    puts "Put num: "
+    a = current_player.move(board)
+    board.valid_move?(a)? board.update(a,current_player) : turn
+  end #done!
+
+  def play
+    puts "Start Tic Tac Toe"
+    board.display
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else draw?
+      puts "Cat's Game!"
     end
   end
+
 end
