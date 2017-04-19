@@ -4,5 +4,10 @@ class Players
        @num = gets.chomp
      end
   end
+  class Computer < Player
+     def move(board)
+        "1"
+     end
+  end
 
 end
