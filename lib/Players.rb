@@ -4,6 +4,7 @@ class Players
        gets.chomp
      end
   end
+
   class Computer < Player
     def strategy
       available_moves = []
@@ -19,7 +20,7 @@ class Players
         board.WIN_COMBINATIONS.detect.with_index do |x,i|
              x[0] == self.token && self.token == x[1] && available_moves.include?(i)
              #i want to use the WIN_COMBINATIONS array to detect our next best move to win.
-             #checking if the token is occupying two out of three winning spots, and hopefully returning the move 
+             #checking if the token is occupying two out of three winning spots, and hopefully returning the move
         end
       end
      def move(board)
@@ -29,6 +30,7 @@ class Players
         else
            strategy #this method is in progress
         end
-  end
+      end
+    end
 
-end
+end#end of players
