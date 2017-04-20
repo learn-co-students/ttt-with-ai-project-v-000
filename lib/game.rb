@@ -93,7 +93,7 @@ class Game
     end
   end
 
-  
+
   def play_again?
     puts "Would you like to play again?  Press Y or N (for Yes, I would like to play this most excellent game of
     Tic Tac Toe again, or for No, I would not like to play this most excellent game of Tic Taco Toe again)."

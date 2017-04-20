@@ -27,7 +27,7 @@ elsif players == "2"
   game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
 end
 
-until game.won?
+until game.won? == true
   game.play
 end
 
