@@ -2,9 +2,10 @@
 
 require_relative '../config/environment'
 
+def start
 
-puts "Welcome to Tic Tac Toe!\n What kind of game you want to play? 0,1,2"
-def player_mode
+  def player_mode
+    puts "Welcome to Tic Tac Toe!\n What kind of game you want to play? 0,1,2"
     kind_of_game = gets.chomp
     case kind_of_game
      when "0"
@@ -14,6 +15,16 @@ def player_mode
      when  "2"
       Game.new
     end
+  end
+      if player_mode.over? #this doesn't work right now, it ends the game but doesn't ask the player if they want to play again
+      puts "Would you like to play again?\n Y or N"
+      answer = gets.chomp
+          if answer == "Y"
+            start
+          end
+      else
+        player_mode.play
+     end
 end
 
-player_mode.play
+start

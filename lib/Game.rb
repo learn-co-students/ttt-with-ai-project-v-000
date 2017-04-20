@@ -63,6 +63,7 @@ class Game
     else draw?
       puts "Cat's Game!"
     end
+
   end
 
 end
