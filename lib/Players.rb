@@ -10,8 +10,8 @@ class Players
     attr_accessor :available_moves, :pos_taken, :board
 
     def move(board)
-      @board = board #we can access to this board in any function with self.board_Niki
-      board.turn_count <=5 ? Random.rand(1..10) : self.strategy
+      @board = board   #we can access to this board in any function with self.board_Niki
+      board.turn_count <=5 ? Random.rand(0..9) : self.strategy
     end
  # maybe it would be better to divide this function (strategy -> search_moves + strategy)_Niki
     def search_moves

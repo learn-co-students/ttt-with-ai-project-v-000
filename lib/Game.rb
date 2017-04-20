@@ -54,9 +54,9 @@ class Game
 
   def play
     puts "Start Tic Tac Toe"
-    board.display
     until over?
       turn
+      board.display
     end
     if won?
       puts "Congratulations #{winner}!"

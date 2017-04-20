@@ -4,13 +4,16 @@ require_relative '../config/environment'
 
 
 puts "Welcome to Tic Tac Toe!\n What kind of game you want to play? 0,1,2"
-kind_of_game = gets.chomp
-
-if kind_of_game == "0"
-  Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
-elsif kind_of_game == "1"
-  Game.new(Players::Human.new("X"),Players::Computer.new("O"))
-elsif kind_of_game == "2"
-  Game.new
+def player_mode
+    kind_of_game = gets.chomp
+    case kind_of_game
+     when "0"
+      Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+     when "1"
+      Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+     when  "2"
+      Game.new
+    end
 end
-#how about using case/when?
+
+player_mode.play
