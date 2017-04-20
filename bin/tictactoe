@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+#maybe we can make cli game start class so that we can make this window clean.
 require_relative '../config/environment'
 
 def start
@@ -8,23 +9,25 @@ def start
     puts "Welcome to Tic Tac Toe!\n What kind of game you want to play? 0,1,2"
     kind_of_game = gets.chomp
     case kind_of_game
-     when "0"
-      Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
-     when "1"
-      Game.new(Players::Human.new("X"),Players::Computer.new("O"))
-     when  "2"
-      Game.new
+      when "0"
+        Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+      when "1"
+        Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+      when  "2"
+        Game.new
     end
   end
-      if player_mode.over? #this doesn't work right now, it ends the game but doesn't ask the player if they want to play again
-      puts "Would you like to play again?\n Y or N"
-      answer = gets.chomp
-          if answer == "Y"
-            start
-          end
-      else
-        player_mode.play
-     end
+
+  if player_mode.over?
+    puts "Would you like to play again?\n Y or N"
+    answer = gets.chomp.upcase
+    start
+      if answer == "Y"
+        start
+      end
+  else
+    player_mode.play
+  end
 end
 
 start

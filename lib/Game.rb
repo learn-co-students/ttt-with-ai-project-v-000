@@ -1,11 +1,6 @@
 require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O") , board = Board.new)
-    @board =  board
-    @player_1 = player_1
-    @player_2 = player_2
-  end
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -16,13 +11,15 @@ class Game
     [0,3,6],
     [1,4,7]
   ]
+
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O") , board = Board.new)
+    @board =  board
+    @player_1 = player_1
+    @player_2 = player_2
+  end
+
   def current_player
-    if board.turn_count%2 == 0
-     @player_1
-    else
-     @player_2
-    end
-  #how about this : board.turn_count.even? ? player_1 : player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def won?
@@ -38,19 +35,14 @@ class Game
   end
 
   def winner
-    if won?
-      board.cells[won?[0]]
-    else
-      return nil
-    end
-    # won? ? board.cells[won?[0]] : nil
+    won? ? board.cells[won?[0]] : nil
   end
 
   def turn
     puts "Put num: "
     a = current_player.move(board)
     board.valid_move?(a)? board.update(a,current_player) : turn
-  end #done!
+  end
 
   def play
     puts "Start Tic Tac Toe"
@@ -63,7 +55,6 @@ class Game
     else draw?
       puts "Cat's Game!"
     end
-
   end
 
 end
