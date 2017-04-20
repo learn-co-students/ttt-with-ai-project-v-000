@@ -37,12 +37,13 @@ class Board
   end
 
   def taken?(position) #Returns false if the position is empty
-    index = input_to_index(position)
-    !(@cells[index].nil? || @cells[index] == " ")
+    position = position.to_i - 1 if position.class == String
+    !(@cells[position].nil? || @cells[position] == " ")
   end
 
   def valid_move?(position) # returns true for 1-9 that is not taken
-    position.to_i.between?(1,9) && !taken?(position)
+    new_position = input_to_index(position)
+    new_position.between?(0,8) && !taken?(new_position)
   end
 
   def update(position, player)

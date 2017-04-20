@@ -28,76 +28,92 @@ module Players
         end
       end
 
+      #If it is the first or second turn#
+
       if board.turn_count <= 1
         if @empty_spaces.include?(4)
           return "5"
         else
-          number = [0, 2, 6, 8].detect do |n|
-            @empty_spaces.any? {|i| n == i}
-          end
-          return number + 1
+          #binding.pry
+          number = [1, 3, 7, 9].sample
+          return number
         end
       end
+
+      #If it passed the first or second turn#
 
       player_x
       player_o
+
       if self.token == "X"
-        best_x_move?
+        number = best_x_move?
       else
-        best_o_move?
+        number = best_o_move?
       end
+
+      #if valid?(number)
+      #  number + 1
+      #else
+      #  move(board)
+      #end
 
     end
 
+    # DETECT - only returns the first element that is true
+    # SELECT - returns an array elements that returned true
+    # ANY - returns true if at least one iteration returns true, false if none of them do
+    # ALL - every iteration must return true
+    # REJECT - returns array with elements that are false
+
     def player_x
-      x_combo = WIN_COMBINATIONS.detect do |win_combo| #this finds the currently taken X spaces that match with win combos
-        if @x_spaces.size <= 2
-          @x_spaces.all? {|i| win_combo.include?(i)}
-        else
+      x_combo = WIN_COMBINATIONS.select do |win_combo| #iterates through winning combinations, finds
+                                                      #the taken X spaces that match with win combos, returns
+                                                      # array of arrays with all winning combos that X can go for
           @x_spaces.any? {|i| win_combo.include?(i)}
-        end
       end
 
-      @missing_x_nums = x_combo.reject {|i| @x_spaces.include?(i)}
+      @missing_x_nums = x_combo.reject {|i| @x_spaces.include?(i)} # TEST THIS
     end
 
     def player_o
-      o_combo = WIN_COMBINATIONS.detect do |win_combo| #this finds the currently taken O spaces that match with win combos
-        #if @o_spaces.size <= 2
-        #  @o_spaces.all? {|i| win_combo.include?(i)}
-        #else
+      o_combo = WIN_COMBINATIONS.select do |win_combo|
           @o_spaces.any? {|i| win_combo.include?(i)}
-        #end
       end
 
-      @missing_o_nums = o_combo.reject {|i| @o_spaces.include?(i)}
+      @missing_o_nums = o_combo.reject {|i| @o_spaces.include?(i)} # TEST THIS
     end
 
 
-    def best_x_move?
+    def best_x_move? # Should iterate through x_combo & o_combo, find the winning combination
+                      # that is closest (has 2 tokens), and choose the missing token. Or find opponents
+                      # missing token if opponent has 2. Else, pick one at random?
       if @missing_x_nums.size == 1
-        return @missing_x_nums[0] + 1
+        number = @missing_x_nums[0]
       elsif @missing_o_nums.size == 1
-        return @missing_o_nums[0] + 1
+        number = @missing_o_nums[0]
       else
         number = @missing_x_nums.detect do |n|
           @empty_spaces.any? {|i| n == i}
         end
-        return number + 1
+        number
       end
     end
 
     def best_o_move?
       if @missing_o_nums.size == 1
-        return @missing_o_nums[0] + 1
+        number = @missing_o_nums[0]
       elsif @missing_x_nums.size == 1
-        return @missing_x_nums[0] + 1
+        number = @missing_x_nums[0]
       else
         number = @missing_o_nums.detect do |n|
           @empty_spaces.any? {|i| n == i}
         end
-        return number + 1
       end
+      number
+    end
+
+    def valid?(number)
+      number.to_i.between?(0,8) && @empty_spaces.include?(number)
     end
 
 
@@ -105,19 +121,8 @@ module Players
 end
 
 # AI Logic Ideas
-# - When the computer is "X" -
+# - When the computer is "O" -
 # 1. First turn, try the middle space. If middle is taken, try a corner space
-# 2. Each turn, If X (you) has two in the winning combos and it is your turn, choose the 3rd in the combo
-# 3. Then, check to see if O has two in the winning combos (including in the corners), and if yes, choose the 3rd in the combo
-# 4. Otherwise, choose a spot next to another one of your tokens (x)
-
-# WIN_COMBINATIONS = [
-#  [0, 1, 2], --> [0, 1] or [1, 2] or [0, 2]
-#  [3, 4, 5], --> [3, 4] or [4, 5] or [3, 5]
-#  [6, 7, 8], --> [6, 7] or [7, 8] or [6, 8]
-#  [0, 3, 6], --> [0, 3] or [3, 6] or [0, 6]
-#  [1, 4, 7], --> [1, 4] or [4, 7] or [1, 7]
-#  [2, 5, 8], --> [2, 5] or [5, 8] or [2, 8]
-#  [0, 4, 8], --> [0, 4] or [4, 8] or [0, 8]
-#  [6, 4, 2] --> [6, 4] or [4, 2] or [6, 2]
-#]
+# 2. Each turn, If O (you) has two in the winning combos and it is your turn, choose the 3rd in the combo
+# 3. Then, check to see if X has two in the winning combos (including in the corners), and if yes, choose the 3rd in the combo
+# 4. Otherwise, choose a spot next to another one of your tokens (O)
