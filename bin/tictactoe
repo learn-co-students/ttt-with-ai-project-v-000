@@ -2,8 +2,4 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-puts "The board is numbered 1 to 9 starting in the top left corner"
-puts "The first move will be taken by player 'X'"
-
-Game.new.play
+Game.new.start

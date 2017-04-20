@@ -69,6 +69,9 @@ class Game
     if @curr_token == "X"
       puts "Player 'X' please enter 1-9:"
       @move = player_1.move(board)
+      if @move == "exit"
+        exit
+      end
       if !board.valid_move?(@move)
         turn
       else
@@ -78,6 +81,9 @@ class Game
     else
       puts "Player 'O' please enter 1-9:"
       @move = player_2.move(board)
+      if @move == "exit"
+        exit
+      end
       if !board.valid_move?(@move)
         turn
       else
@@ -96,6 +102,40 @@ class Game
       puts "Congratulations #{@winner_X_O}!"
     elsif draw?
       puts "Cat's Game!"
+    end
+    puts "Do you wish to play again? 'y' or 'n'"
+    input = gets.strip
+    if input == "y"
+      start
+    else
+      exit
+    end
+  end
+
+  def start
+    puts "Welcome to Tic Tac Toe!"
+    puts "The board is numbered 1 to 9 starting in the top left corner"
+    puts " 0 player game has two computer players playing against each other with no interaction from the user"
+    puts " 1 player game has a human(player1) playing against a computer(player2)"
+    puts " 2 player game has two human players"
+    puts "Whoever plays first will be 'X'"
+    puts "Please select 0, 1, or 2 for the type of game you wish to play"
+    puts "or enter 'exit at any time to quit the game:"
+    input = ""
+    while input != "exit"
+      input = gets.strip
+      if input == "exit"
+        exit
+      end
+      case input
+        when "0"
+          Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        when "1"
+          Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        when "2"
+          Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      end
+      play
     end
   end
 
