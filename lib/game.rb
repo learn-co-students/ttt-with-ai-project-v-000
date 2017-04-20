@@ -89,40 +89,11 @@ class Game
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
+      play_again?
     end
   end
 
-  def self.start
-    puts "Welcome to Tic Tac Toe!"
-    puts ""
-    puts "How many players?"
-
-    players = gets.strip
-
-    if players == "0"
-      game = Game.new(Players::Computer.new("x"), Players::Computer.new("O")).play
-    elsif players == "1"
-      puts "Who goes first, player or computer?"
-      input = gets.strip
-
-      if input == "player"
-        game = Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-      elsif input == "computer"
-        game = Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
-      else
-        puts "Invalid response, please try again."
-      end
-
-    elsif players == "2"
-      game = Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-    end
-
-    until game.won?
-      game.play
-    end
-    play_again?
-  end
-
+  
   def play_again?
     puts "Would you like to play again?  Press Y or N (for Yes, I would like to play this most excellent game of
     Tic Tac Toe again, or for No, I would not like to play this most excellent game of Tic Taco Toe again)."
