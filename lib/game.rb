@@ -94,7 +94,7 @@ class Game
 
   def self.start
     puts "Welcome to Tic Tac Toe!"
-
+    puts ""
     puts "How many players?"
 
     players = gets.strip
