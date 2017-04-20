@@ -52,6 +52,7 @@ class Game
     input = player.move(board)
     if board.valid_move?(input)
       board.update(input, player) 
+      board.display
     else
       player.move(board)
     end
@@ -83,8 +84,8 @@ class Game
         o += 1
       end
       game_counter += 1
-      baord.reset!
-      sleep(0.15)    
+      board.reset!
+      sleep(0.05)    
     end
     puts "X wins: #{x}, O wins: #{o}, draws: #{draw}"
   end

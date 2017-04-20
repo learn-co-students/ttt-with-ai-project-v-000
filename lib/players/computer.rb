@@ -1,7 +1,11 @@
+require 'pry-byebug'
 module Players
 
   class Computer < Player
 
+    def initialize(token)
+      super(token)
+    end
     
     def opponent_token(token)
       token == "X" ? "O" : "X"
@@ -12,24 +16,26 @@ module Players
       enemy_token = opponent_token(player_token)
       
       return (0..board.cells.count).flat_map do |i|
-        #If a board cell is empty, mark it as Infinite
-        if board.cells[i] != ' '
+        #If a board cell is empty, mark it as a high score of 5
+        if board.cells[i] != " "
           []
         else
           #Iterate over win combinations
           #Mark each cell that is not included in a winning combination as Infinite
           #scores_for_i is an array that includes a score for each cell index. The smaller the score, the 
           scores_for_i = Game::WIN_COMBINATIONS.map do |win_combo| 
+            #binding.pry
             if not win_combo.include?(i)
-              5
+              7
             else 
               score = 0
               combo_cells = board.cells.values_at(*win_combo)
               for cell in combo_cells 
                 if cell == enemy_token
-                  5
+                  score = 5
+                  break
                 else
-                  score += cell == ' ' ? 1 : 0
+                  score += cell == " " ? 1 : 0
                 end
               end
               score
@@ -40,7 +46,7 @@ module Players
           opportunity_count = scores_for_i.select { |s| s == min_distance }.count
           cell_index = (i + 1).to_s
         
-          return [ Move.new(min_distance, opportunity_count, cell_index) ]
+          [ Move.new(min_distance, opportunity_count, cell_index) ]
         end
       end
     end
@@ -57,10 +63,10 @@ module Players
 
       player_winning_move = best_move_player.detect {|m| m.distance == 1}
       
-      if player_winning_move
-        player_winning_move.cell_index
-      else
-        opponent_winning_move = best_move_opponent.detect {|m| m.distance == 1}
+        if player_winning_move
+          player_winning_move.cell_index
+        else
+          opponent_winning_move = best_move_opponent.detect {|m| m.distance == 1}
         if opponent_winning_move
           opponent_winning_move.cell_index
         else
