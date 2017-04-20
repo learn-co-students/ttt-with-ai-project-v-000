@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
-
-#maybe we can make cli game start class so that we can make this window clean.
+#
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
