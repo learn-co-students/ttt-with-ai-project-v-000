@@ -63,6 +63,7 @@ class Game
       index = @board.input_to_index(user_input)
       @board.cells[index] = self.current_player.token
     else
+      binding.pry
       puts "That number is invalid."
       turn
     end
