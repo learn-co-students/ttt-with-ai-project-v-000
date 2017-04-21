@@ -38,9 +38,20 @@ def start
     Game.new.play
 
   elsif player_number == "wargames"
-    wargame = Game.new(computer_one, computer_two).play
-    num_wins = wargame.wargames_count
-    puts "#{num_wins} times won!"
+    number_of_wins = 0
+    number_of_draws = 0
+
+    100.times do
+      wargame = Game.new(computer_one, computer_two)
+      wargame.play
+
+      if wargame.won?
+        number_of_wins += 1
+      elsif wargame.draw?
+        number_of_draws +=1
+      end
+    end
+    puts "\n#{number_of_wins} wins!\n#{number_of_draws} ties!"
 
 
   else

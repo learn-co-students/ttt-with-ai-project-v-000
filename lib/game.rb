@@ -79,7 +79,6 @@ class Game
     end
 
     if won?
-      wargames_count
       puts "\n"
       puts "Congratulations #{winner}!"
     elsif draw?
@@ -87,10 +86,6 @@ class Game
       puts "Cat's Game!"
     end
     board.display
-  end
-
-  def self.wargames_count
-    num_times_won += 1
   end
 
 end
