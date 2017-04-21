@@ -39,13 +39,19 @@ class Game
   end
 
   def turn
-    puts "Put num: "
+    print "Put num: "
     a = current_player.move(board)
-    board.valid_move?(a)? board.update(a,current_player) : turn
+    if board.valid_move?(a)
+      board.update(a,current_player)
+    else
+      puts "Please enter vaild value."
+      turn
+    end
   end
 
   def play
     puts "Start Tic Tac Toe"
+    board.display
     until over?
       turn
       board.display
