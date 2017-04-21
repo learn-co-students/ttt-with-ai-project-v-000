@@ -35,6 +35,7 @@ def start
     puts "Invalid entry, please try again."
     start
   end
+  replay?
 end
 
 def replay?
@@ -51,16 +52,3 @@ def replay?
 end
 
 start
-replay?
-
-
-
-
-#AI Logic
-#New game instance, but values passed in should be 1/2 computer instances.
-#One player - should ask if the player wants to go first (set human player token to X)
-# or if they want computer to go first (set computer player token to X)
-#Begin game with play
-#Tell the computer to make a move
-# In the computer instance, build the logic for it to find the best and valid position, then return that position (not as an index)
-# Allow turn to check if valid and convert to index and move the token

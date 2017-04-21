@@ -12,117 +12,93 @@ module Players
     ]
 
     def move(board)
-      @empty_spaces = []
-      @x_spaces = []
-      @o_spaces = []
-      @missing_x_nums = []
-      @missing_o_nums = []
+      @board = board
+      set_tokens
       #binding.pry
-      board.cells.each_with_index do |token, index|
-        if token == "X"
-          @x_spaces << index
-        elsif token == "O"
-          @o_spaces << index
-        else
-          @empty_spaces << index
-        end
+      if check_for_winning_move != nil
+        number = check_for_winning_move
+      elsif block_opponent != nil
+        number = block_opponent
+      else
+        number = free_move
       end
+      number += 1
+      return number.to_s #is returning the non-indexed number
+    end
 
-      #If it is the first or second turn#
-
-      if board.turn_count <= 1
-        if @empty_spaces.include?(4)
-          return "5"
-        else
-          #binding.pry
-          number = [1, 3, 7, 9].sample
-          return number
-        end
-      end
-
-      #If it passed the first or second turn#
-
-      player_x
-      player_o
-
+    def set_tokens
       if self.token == "X"
-        number = best_x_move?
+        @my_token = "X"
+        @opponent_token = "O"
       else
-        number = best_o_move?
-      end
-
-      #if valid?(number)
-      #  number + 1
-      #else
-      #  move(board)
-      #end
-
-    end
-
-    # DETECT - only returns the first element that is true
-    # SELECT - returns an array elements that returned true
-    # ANY - returns true if at least one iteration returns true, false if none of them do
-    # ALL - every iteration must return true
-    # REJECT - returns array with elements that are false
-
-    def player_x
-      x_combo = WIN_COMBINATIONS.select do |win_combo| #iterates through winning combinations, finds
-                                                      #the taken X spaces that match with win combos, returns
-                                                      # array of arrays with all winning combos that X can go for
-          @x_spaces.any? {|i| win_combo.include?(i)}
-      end
-
-      @missing_x_nums = x_combo.reject {|i| @x_spaces.include?(i)} # TEST THIS
-    end
-
-    def player_o
-      o_combo = WIN_COMBINATIONS.select do |win_combo|
-          @o_spaces.any? {|i| win_combo.include?(i)}
-      end
-
-      @missing_o_nums = o_combo.reject {|i| @o_spaces.include?(i)} # TEST THIS
-    end
-
-
-    def best_x_move? # Should iterate through x_combo & o_combo, find the winning combination
-                      # that is closest (has 2 tokens), and choose the missing token. Or find opponents
-                      # missing token if opponent has 2. Else, pick one at random?
-      if @missing_x_nums.size == 1
-        number = @missing_x_nums[0]
-      elsif @missing_o_nums.size == 1
-        number = @missing_o_nums[0]
-      else
-        number = @missing_x_nums.detect do |n|
-          @empty_spaces.any? {|i| n == i}
-        end
-        number
+        @my_token = "O"
+        @opponent_token = "X"
       end
     end
 
-    def best_o_move?
-      if @missing_o_nums.size == 1
-        number = @missing_o_nums[0]
-      elsif @missing_x_nums.size == 1
-        number = @missing_x_nums[0]
-      else
-        number = @missing_o_nums.detect do |n|
-          @empty_spaces.any? {|i| n == i}
+    def check_for_winning_move
+      WIN_COMBINATIONS.detect do |win_combo|
+        position_1 = @board.cells[win_combo[0]]
+        position_2 = @board.cells[win_combo[1]]
+        position_3 = @board.cells[win_combo[2]]
+
+        if (position_1 == @my_token && position_2 == @my_token && position_3 == " ")
+          @winning_move = win_combo[2]
+        elsif (position_1 == @my_token && position_2 == " " && position_3 == @my_token)
+          @winning_move = win_combo[1]
+        elsif (position_1 == " " && position_2 == @my_token && position_3 == @my_token)
+          @winning_move = win_combo[0]
+        else
+          @winning_move = nil
         end
       end
-      number
+      @winning_move
     end
 
-    def valid?(number)
-      number.to_i.between?(0,8) && @empty_spaces.include?(number)
+    def block_opponent
+      WIN_COMBINATIONS.detect do |win_combo|
+        position_1 = @board.cells[win_combo[0]]
+        position_2 = @board.cells[win_combo[1]]
+        position_3 = @board.cells[win_combo[2]]
+
+        if (position_1 == @opponent_token && position_2 == @opponent_token && position_3 == " ")
+          @blocking_move = win_combo[2]
+        elsif (position_1 == @opponent_token && position_2 == " " && position_3 == @opponent_token)
+          @blocking_move = win_combo[1]
+        elsif (position_1 == " " && position_2 == @opponent_token && position_3 == @opponent_token)
+          @blocking_move = win_combo[0]
+        else
+          @blocking_move = nil
+        end
+      end
+      @blocking_move
     end
 
-
+    def free_move
+      corners = [0, 2, 6, 8]
+      corner_move = corners.detect {|i| @board.cells[i] == " "}
+      if @board.cells[4] == " "
+        return 4
+      elsif corner_move
+        return corner_move
+      else
+        empty = []
+        @board.cells.each_with_index do |space, index|
+          if space == " "
+            empty << index
+          end
+        end
+        return empty.sample
+      end
+    end
   end
 end
 
-# AI Logic Ideas
-# - When the computer is "O" -
-# 1. First turn, try the middle space. If middle is taken, try a corner space
-# 2. Each turn, If O (you) has two in the winning combos and it is your turn, choose the 3rd in the combo
-# 3. Then, check to see if X has two in the winning combos (including in the corners), and if yes, choose the 3rd in the combo
-# 4. Otherwise, choose a spot next to another one of your tokens (O)
+# - AI Logic -
+# 1. Check to see if the computer has a winning combo with two tokens and one empty space
+# --> If yes: put the token in the empty space
+# 2. Check to see if the opponent has a winning combo with two tokens and one empty space
+# --> If yes: put the token in the empty space
+# 3. Else, check if the middle space is open
+# 4. Else, check if a corner space is open
+# 5. Else, choose another space at random
