@@ -1,7 +1,7 @@
-require 'pry'
 class Players
   class Human < Player
     def move(board)
+      print "Put num: "
       gets.chomp
     end
   end
@@ -10,7 +10,8 @@ class Players
     attr_accessor :available_moves, :pos_taken, :board
 
     def move(board)
-      board.turn_count <= 5 ? Random.rand(0..9).to_s : self.strategy
+      sleep(1)
+      board.turn_count <= 5 ? Random.rand(1..10).to_s : self.strategy
     end
 
     def search_moves
@@ -26,10 +27,15 @@ class Players
     end
 
     def strategy
-      self.board.WIN_COMBINATIONS.each do |win_combination|
-        win_combination.detect.with_index do |x,i|
-          x == self.token && self.available_moves.include?(x)
+      begin
+        self.board.WIN_COMBINATIONS.each do |win_combination|
+          win_combination.detect.with_index do |x,i|
+            x == self.token && self.available_moves.include?(x)
+          end
         end
+      rescue
+        puts "Resign."
+        exit
       end
     end
   end

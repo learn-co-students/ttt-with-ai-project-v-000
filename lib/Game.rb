@@ -39,7 +39,7 @@ class Game
   end
 
   def turn
-    print "Put num: "
+    # puts "Put num: "
     a = current_player.move(board)
     if board.valid_move?(a)
       board.update(a,current_player)
@@ -60,6 +60,7 @@ class Game
   def play
     display_before_play
     until over?
+      puts "#{current_player.token}'s turn."
       turn
       board.display
     end
