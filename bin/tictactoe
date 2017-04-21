@@ -15,7 +15,7 @@ def start
   ].green
   puts "\nWelcome to Tic Tac Toe!".green
   puts "~~~~~~~~~~~~~~~~~~~~~~~".blue
-  puts "How many players? [0 (comp v. comp) || 1 (comp. v. human) || 2 (human v. human)]"
+  puts "How many players? [0 (comp v. comp) || 1 (comp. v. human) || 2 (human v. human) || wargames]"
   player_number = gets.chomp
 
   if player_number == "0"
@@ -36,6 +36,12 @@ def start
 
   elsif player_number == "2"
     Game.new.play
+
+  elsif player_number == "wargames"
+    wargame = Game.new(computer_one, computer_two).play
+    num_wins = wargame.wargames_count
+    puts "#{num_wins} times won!"
+
 
   else
     puts "Invalid entry, please try again."
