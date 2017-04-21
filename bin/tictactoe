@@ -7,9 +7,15 @@ def start
   computer_two = Players::Computer.new("O")
   human_one = Players::Human.new("X")
 
-  puts "Welcome to Tic Tac Toe!"
-  puts "~~~~~~~~~~~~~~~~~~~~~~~"
-  puts "Would you like to play with 0, 1 or 2 players? [0/1/2]"
+  puts %q[
+            ---------   ---------   ---------
+            \__   __/   \__   __/   \__   __/
+               | |         | |         | |
+               |_|         |_|         |_|
+  ].green
+  puts "\nWelcome to Tic Tac Toe!".green
+  puts "~~~~~~~~~~~~~~~~~~~~~~~".blue
+  puts "How many players? [0 (comp v. comp) || 1 (comp. v. human) || 2 (human v. human)]"
   player_number = gets.chomp
 
   if player_number == "0"

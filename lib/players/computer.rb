@@ -1,5 +1,6 @@
 module Players
   class Computer < Player
+    attr_reader :board
     WIN_COMBINATIONS = [
       [0, 1, 2],
       [3, 4, 5],
@@ -13,8 +14,9 @@ module Players
 
     def move(board)
       @board = board
-      set_tokens
-      #binding.pry
+
+      opponent_token
+
       if check_for_winning_move != nil
         number = check_for_winning_move
       elsif block_opponent != nil
@@ -26,64 +28,60 @@ module Players
       return number.to_s #is returning the non-indexed number
     end
 
-    def set_tokens
+    def opponent_token
       if self.token == "X"
-        @my_token = "X"
-        @opponent_token = "O"
+        opponent_token = "O"
       else
-        @my_token = "O"
-        @opponent_token = "X"
+        opponent_token = "X"
       end
     end
 
     def check_for_winning_move
+      winning_move = nil
       WIN_COMBINATIONS.detect do |win_combo|
-        position_1 = @board.cells[win_combo[0]]
-        position_2 = @board.cells[win_combo[1]]
-        position_3 = @board.cells[win_combo[2]]
+        position_1 = board.cells[win_combo[0]]
+        position_2 = board.cells[win_combo[1]]
+        position_3 = board.cells[win_combo[2]]
 
-        if (position_1 == @my_token && position_2 == @my_token && position_3 == " ")
-          @winning_move = win_combo[2]
-        elsif (position_1 == @my_token && position_2 == " " && position_3 == @my_token)
-          @winning_move = win_combo[1]
-        elsif (position_1 == " " && position_2 == @my_token && position_3 == @my_token)
-          @winning_move = win_combo[0]
-        else
-          @winning_move = nil
+        if (position_1 == self.token && position_2 == self.token && position_3 == " ")
+          winning_move = win_combo[2]
+        elsif (position_1 == self.token && position_2 == " " && position_3 == self.token)
+          winning_move = win_combo[1]
+        elsif (position_1 == " " && position_2 == self.token && position_3 == self.token)
+          winning_move = win_combo[0]
         end
       end
-      @winning_move
+      winning_move
     end
 
     def block_opponent
+      blocking_move = nil
       WIN_COMBINATIONS.detect do |win_combo|
-        position_1 = @board.cells[win_combo[0]]
-        position_2 = @board.cells[win_combo[1]]
-        position_3 = @board.cells[win_combo[2]]
+        position_1 = board.cells[win_combo[0]]
+        position_2 = board.cells[win_combo[1]]
+        position_3 = board.cells[win_combo[2]]
 
-        if (position_1 == @opponent_token && position_2 == @opponent_token && position_3 == " ")
-          @blocking_move = win_combo[2]
-        elsif (position_1 == @opponent_token && position_2 == " " && position_3 == @opponent_token)
-          @blocking_move = win_combo[1]
-        elsif (position_1 == " " && position_2 == @opponent_token && position_3 == @opponent_token)
-          @blocking_move = win_combo[0]
-        else
-          @blocking_move = nil
+        if (position_1 == opponent_token && position_2 == opponent_token && position_3 == " ")
+          blocking_move = win_combo[2]
+        elsif (position_1 == opponent_token && position_2 == " " && position_3 == opponent_token)
+          blocking_move = win_combo[1]
+        elsif (position_1 == " " && position_2 == opponent_token && position_3 == opponent_token)
+          blocking_move = win_combo[0]
         end
       end
-      @blocking_move
+      blocking_move
     end
 
     def free_move
       corners = [0, 2, 6, 8]
-      corner_move = corners.detect {|i| @board.cells[i] == " "}
-      if @board.cells[4] == " "
+      corner_move = corners.detect {|i| board.cells[i] == " "}
+      if board.cells[4] == " "
         return 4
       elsif corner_move
         return corner_move
       else
         empty = []
-        @board.cells.each_with_index do |space, index|
+        board.cells.each_with_index do |space, index|
           if space == " "
             empty << index
           end

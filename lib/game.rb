@@ -18,8 +18,12 @@ class Game
     @board = board
   end
 
+  def board
+    @board
+  end
+
   def current_player
-    @board.turn_count.even? ? @player_1 : @player_2
+    board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over?
@@ -28,25 +32,25 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each {|win_combo|
-      position_1 = @board.cells[win_combo[0]]
-      position_2 = @board.cells[win_combo[1]]
-      position_3 = @board.cells[win_combo[2]]
+      position_1 = board.cells[win_combo[0]]
+      position_2 = board.cells[win_combo[1]]
+      position_3 = board.cells[win_combo[2]]
 
       return win_combo if ((position_1 == "X" && position_2 == "X" && position_3 == "X") ||
-      (position_1 == "O" && position_2 == "O" && position_3 == "O"))
+                           (position_1 == "O" && position_2 == "O" && position_3 == "O"))
     }
     return false
   end
 
   def draw?
-    !won? && @board.full? ? true : false
+    !won? && board.full? ? true : false
   end
 
   def winner
     index = won?
-    if index && @board.cells[index[0]] == "X"
+    if index && board.cells[index[0]] == "X"
       return "X"
-    elsif index && @board.cells[index[0]] == "O"
+    elsif index && board.cells[index[0]] == "O"
       return "O"
     else
       return nil
@@ -55,13 +59,14 @@ class Game
 
   def turn
     puts "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    puts "Player #{current_player.token} - please choose a number 1-9:\n"
-    @board.display
-    user_input = self.current_player.move(@board)
-    index = @board.input_to_index(user_input)
-    #binding.pry
-    if @board.valid_move?(user_input)
-      @board.cells[index] = self.current_player.token
+    puts "Player #{current_player.token}'s turn!\n"
+    puts "Where would you like to move? (1-9):\n"
+    board.display
+
+    user_input = current_player.move(board)
+
+    if board.valid_move?(user_input)
+      board.update(user_input, current_player)
     else
       puts "That number is invalid."
       turn
@@ -76,12 +81,11 @@ class Game
     if won?
       puts "\n"
       puts "Congratulations #{winner}!"
-      @board.display
     elsif draw?
       puts "\n"
       puts "Cat's Game!"
-      @board.display
     end
+    board.display
   end
 
 end
