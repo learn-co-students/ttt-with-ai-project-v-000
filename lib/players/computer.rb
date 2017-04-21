@@ -41,9 +41,10 @@ module Players
            @return = @return_hold
         end
         if @return == nil || @return == 0
-          @return = 1
+          # choose randomly between 1 and 9
+          @return = rand 1..9
       		until board.valid_move?(@return.to_s) do
-      		  @return+= 1
+      		  @return = rand 1..9
       		end
         end
       end

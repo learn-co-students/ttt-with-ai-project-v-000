@@ -3,3 +3,21 @@
 require_relative '../config/environment'
 
 Game.new.start
+
+
+input = ""
+while input != "n"
+  Game.new.start
+  puts "Do you wish to play again? 'y' or 'n'?"
+  input = gets.strip
+  case input
+    when "y"
+      start
+    when "n"
+      exit
+    when "exit"
+      exit
+    else
+      puts "Invalid selection - Please try again!"
+  end    
+end

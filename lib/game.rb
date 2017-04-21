@@ -110,6 +110,9 @@ class Game
       puts "Cat's Game!"
     end
     board.display
+  end
+
+  def new_game?
     input = ""
     while input != "y" && input != "n"
       puts "Do you wish to play again? 'y' or 'n'?"
@@ -119,6 +122,8 @@ class Game
           start
         when "n"
           exit
+        when "exit"
+          exit
         else
           puts "Invalid selection - Please try again!"
       end
@@ -126,32 +131,29 @@ class Game
   end
 
   def start
-    puts "Welcome to Tic Tac Toe!"
-    puts "The board is numbered 1 to 9 starting in the top left corner"
-    puts " A 0 player game has two computer players playing against each other with no interaction from the user"
-    puts " A 1 player game has a human playing against a computer"
-    puts " A 2 player game has two human players"
-    puts "Whoever plays first will be 'X'"
-    puts "Please select 0, 1, or 2 for the type of game you wish to play"
+    puts "****************************************************************"
+    puts "*                *** Welcome to Tic Tac Toe! ***               *"
+    puts "* The board is numbered 1 to 9 starting in the top left corner *"
+    puts "*  A 0 player game has two computer players playing            *"
+    puts "*      against each other with no interaction from the user    *"
+    puts "*  A 1 player game has a human playing against a computer      *"
+    puts "*  A 2 player game has two human players                       *"
+    puts "* Whoever plays first will be 'X'                              *"
+    puts "****************************************************************"
+    puts "Please enter 0, 1, or 2 for the type of game you wish to play   "
     puts "or enter 'exit' at any time to quit the game:"
-    puts ""
-    input = ""
-    while input != "exit"
-      input = gets.strip
-      if input == "exit"
+    input = gets.strip
+    case input
+      when "0"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      when "1"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      when "2"
+        Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+      when "exit"
         exit
-      end
-      case input
-        when "0"
-          Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-        when "1"
-          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-        when "2"
-          Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-        else
-          puts "Invalid selection - Please try again!"
-          start
-      end
+      else
+          puts "Invalid selection - Please try again!"  
     end
   end
 
