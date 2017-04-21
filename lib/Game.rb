@@ -48,10 +48,17 @@ class Game
       turn
     end
   end
-
-  def play
+  def display_before_play
     puts "Start Tic Tac Toe"
-    board.display
+    puts " 1 | 2 | 3 "
+    puts "------------"
+    puts " 4 | 5 | 6 "
+    puts "------------"
+    puts " 7 | 8 | 9 "
+    puts "============="
+  end
+  def play
+    display_before_play
     until over?
       turn
       board.display
