@@ -48,11 +48,15 @@ class Game
 
   def won?
     @return = false
-    WIN_COMBINATIONS.each do | win_combo |
-      if ((board.cells[win_combo[0]] == "X" && board.cells[win_combo[1]] == "X" && board.cells[win_combo[2]] == "X") ||
-          (board.cells[win_combo[0]] == "O" && board.cells[win_combo[1]] == "O" && board.cells[win_combo[2]] == "O"))
-          @winner_X_O = board.cells[win_combo[0]]
-          @return = true
+    b = board.cells
+    w = WIN_COMBINATIONS
+    w.each do |sequence|
+      if sequence.all? { |a| b[a] == 'X' }
+        @winner_X_O = "X"
+        @return = true
+      elsif sequence.all? { |a| b[a] == 'O' }
+        @winner_X_O = "O"
+        @return = true
       end
     end
     @return
@@ -73,6 +77,7 @@ class Game
         exit
       end
       if !board.valid_move?(@move)
+        puts "Invalid entry"
         turn
       else
         board.update(@move, player_1)
@@ -85,6 +90,7 @@ class Game
         exit
       end
       if !board.valid_move?(@move)
+        puts "Invalid entry"
         turn
       else
         board.update(@move, player_2)
@@ -103,24 +109,32 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
-    puts "Do you wish to play again? 'y' or 'n'"
-    input = gets.strip
-    if input == "y"
-      start
-    else
-      exit
+    board.display
+    input = ""
+    while input != "y" && input != "n"
+      puts "Do you wish to play again? 'y' or 'n'?"
+      input = gets.strip
+      case input
+        when "y"
+          start
+        when "n"
+          exit
+        else
+          puts "Invalid selection - Please try again!"
+      end
     end
   end
 
   def start
     puts "Welcome to Tic Tac Toe!"
     puts "The board is numbered 1 to 9 starting in the top left corner"
-    puts " 0 player game has two computer players playing against each other with no interaction from the user"
-    puts " 1 player game has a human(player1) playing against a computer(player2)"
-    puts " 2 player game has two human players"
+    puts " A 0 player game has two computer players playing against each other with no interaction from the user"
+    puts " A 1 player game has a human playing against a computer"
+    puts " A 2 player game has two human players"
     puts "Whoever plays first will be 'X'"
     puts "Please select 0, 1, or 2 for the type of game you wish to play"
-    puts "or enter 'exit at any time to quit the game:"
+    puts "or enter 'exit' at any time to quit the game:"
+    puts ""
     input = ""
     while input != "exit"
       input = gets.strip
@@ -129,13 +143,15 @@ class Game
       end
       case input
         when "0"
-          Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+          Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
         when "1"
-          Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
         when "2"
-          Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+          Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+        else
+          puts "Invalid selection - Please try again!"
+          start
       end
-      play
     end
   end
 
