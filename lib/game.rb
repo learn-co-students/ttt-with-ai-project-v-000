@@ -112,24 +112,6 @@ class Game
     board.display
   end
 
-  def new_game?
-    input = ""
-    while input != "y" && input != "n"
-      puts "Do you wish to play again? 'y' or 'n'?"
-      input = gets.strip
-      case input
-        when "y"
-          start
-        when "n"
-          exit
-        when "exit"
-          exit
-        else
-          puts "Invalid selection - Please try again!"
-      end
-    end
-  end
-
   def start
     puts "****************************************************************"
     puts "*                *** Welcome to Tic Tac Toe! ***               *"
@@ -153,7 +135,7 @@ class Game
       when "exit"
         exit
       else
-          puts "Invalid selection - Please try again!"  
+        puts "Invalid selection - Please try again!"
     end
   end
 
