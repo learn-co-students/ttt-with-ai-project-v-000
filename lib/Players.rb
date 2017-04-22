@@ -1,43 +1,35 @@
+require 'pry'
 class Players
   class Human < Player
     def move(board)
       print "Put num: "
       gets.chomp
-    end
-  end
+    end#move
+  end#human
 
   class Computer < Player
-    attr_accessor :available_moves, :pos_taken, :board
+    attr_accessor :available_moves, :board
 
     def move(board)
+      @board = board
       sleep(1)
-      board.turn_count <= 5 ? Random.rand(1..10).to_s : self.strategy
-    end
+      (self.strategy+1).to_s
+    end#move
 
     def search_moves
       self.available_moves = []
-      self.pos_taken = []
-      self.board.cells.each.with_index do |val,index|
-        if val == " "
-          self.available_moves << index
-        elsif val == self.token
-          self.pos_taken << index
-        end
+      self.board.cells.each_with_index do |val,index|
+        self.available_moves << index if val == " "
       end
     end
 
     def strategy
-      begin
-        self.board.WIN_COMBINATIONS.each do |win_combination|
-          win_combination.detect.with_index do |x,i|
-            x == self.token && self.available_moves.include?(x)
-          end
-        end
-      rescue
-        puts "Resign."
-        exit
+      search_moves
+      if self.board.turn_count <= 3 && self.available_moves.include?(4)
+        4
+      else
+        available_moves.sample
       end
     end
   end
-
 end

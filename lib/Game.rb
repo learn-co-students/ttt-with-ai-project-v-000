@@ -39,7 +39,6 @@ class Game
   end
 
   def turn
-    # puts "Put num: "
     a = current_player.move(board)
     if board.valid_move?(a)
       board.update(a,current_player)

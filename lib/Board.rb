@@ -9,8 +9,8 @@ class Board
     @cells = Array.new(9, " ")
   end
 
-  def index(som)
-    som.to_i - 1
+  def index(input_str)
+    input_str.to_i - 1
   end
 
   def display
@@ -36,16 +36,16 @@ class Board
     count
   end
 
-  def taken?(num)
-    position(num) != " " ? true : false
+  def taken?(input_str)
+    position(input_str) != " " ? true : false
   end
 
-  def valid_move?(num)
-    num.between?("1","9") && !taken?(num)
+  def valid_move?(input_str)
+    input_str.between?("1","9") && !taken?(input_str)
   end
 
-  def update(num,player)
-    cells[index(num)] = player.token
+  def update(input_str,player)
+    cells[index(input_str)] = player.token
   end
 
 end
