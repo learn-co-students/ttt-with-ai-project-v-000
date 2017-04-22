@@ -78,25 +78,27 @@ class Game
  end
  def taken?(input)
    board.taken?(input)
+ 
  end
  def turn
    user_input = current_player.move(board)
    #input= input_to_index(user_input)
    if valid_move?(user_input)
-     player = current_player
-     update(user_input, player)
+     update(user_input, current_player)
      display_board
    else
      turn #here is the missing line for 9-12 pm
    end
  end
+
  def play
-   puts "what kind of game do you want to play? 0,1, or 2 player"
-   player_count = gets.chomp
-   if player_0 == "1"
-       game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"))
-   elsif player == "2"
-      game = Game.new(player_1=Players::Human.new("O"),player_2=Players::Human.new("X"))
-   end
+   # puts "what kind of game do you want to play? 0,1, or 2 player"
+   # player_count = gets.chomp
+   # if player_0 == "1"
+   #     game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"))
+   # elsif player == "2"
+   #    game = Game.new(player_1=Players::Human.new("O"),player_2=Players::Human.new("X"))
+   # end
+   self.turn
  end
 end
