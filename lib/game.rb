@@ -81,7 +81,11 @@ class Game
  
  end
  def turn
-   user_input = current_player.move(board)
+   # the most important part of finding a method defintion is understanding the receiver.
+
+   # if board is a method, what is it being called on?
+
+   user_input = current_player.move(self.board)
    #input= input_to_index(user_input)
    if valid_move?(user_input)
      update(user_input, current_player)
@@ -99,6 +103,18 @@ class Game
    # elsif player == "2"
    #    game = Game.new(player_1=Players::Human.new("O"),player_2=Players::Human.new("X"))
    # end
-   self.turn
- end
+    until self.over?
+      self.turn
+    end
+    #CLI should prompt the user if they would like to play again and 
+    #allow them to choose a new configuration for the game as described above. 
+    #If the user doesn't want to play again, exit the program. Response: how?
+    puts "would you like to play again? enter 'Y' or 'N' "
+    user_response = gets.strip
+    if user_response == "Y"
+      play
+    else 
+      puts "WHAT?!!!"
+    end
+  end
 end

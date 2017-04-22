@@ -21,10 +21,10 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  # def position(user_input)
-  #   integer = user_input.to_i- 1#looks up the value of the cells at the correct index from the array's perspective
-  #   return "#{@cells[integer]}"#looks up the value of the cells at the correct index from the array's perspective
-  # end
+   def position(user_input)
+    integer = user_input.to_i- 1#looks up the value of the cells at the correct index from the array's perspective
+     return "#{@cells[integer]}"#looks up the value of the cells at the correct index from the array's perspective
+   end
 
   def full?#defines the full? method w/board array
       cells.all? { |elem| # iterate through ALL of the board array
@@ -66,9 +66,7 @@ class Board
     # player will be an instance of a player
 
     updated_position = player_position.to_i-1
-
     @cells[updated_position] = player.token
-
     # number = position(player_position).to_i
     # @cells[number] = player.token
   end
