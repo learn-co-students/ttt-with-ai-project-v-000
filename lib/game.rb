@@ -20,7 +20,7 @@ class Game
     [2,4,6],  #diagnoal from ne to sw#add comma to delineate element of array WIN_COMBINATIONS
   ]
  def current_player
-    if board.turn_count.odd? == true
+    if board.turn_count.odd? == true#0 is an even number, as all are even except odd#s'
       player_2
     else
       player_1
@@ -82,10 +82,11 @@ class Game
  end
  def turn
    # the most important part of finding a method defintion is understanding the receiver.
-
-   # if board is a method, what is it being called on?
+   # if board is a method, what is it being called on? "self"
 
    user_input = current_player.move(self.board)
+   #how does Human knows to move the token to user_input location?
+   #Human receives move method, as move is being called on? "Human"
    #input= input_to_index(user_input)
    if valid_move?(user_input)
      update(user_input, current_player)
@@ -111,8 +112,16 @@ class Game
     #If the user doesn't want to play again, exit the program. Response: how?
     puts "would you like to play again? enter 'Y' or 'N' "
     user_response = gets.strip
+    #if user_response == "Y"
+    # puts "#{user_response}"
+    #end 
     if user_response == "Y"
+      puts "User Entered Yes"
       play
+      #until self.over? #NOT executing this line!
+      #  puts "Entered into Turn method"
+      #  self.turn 
+      #end 
     else 
       puts "WHAT?!!!"
     end

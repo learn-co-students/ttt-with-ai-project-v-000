@@ -18,7 +18,6 @@ if user_input == "Y"
 		player_o = Players::Human.new("O")
 		game = Game.new(player_x, player_o)
 		game.play
-		
 		# puts "2 player game started"
 	end 
 elsif user_input == "N"
