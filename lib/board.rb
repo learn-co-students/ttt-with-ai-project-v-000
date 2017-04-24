@@ -25,4 +25,9 @@ class Board
     self.cells[index]
   end
 
+  def full?
+    # binding.pry
+    self.cells.include?("X") || self.cells.include?("O")
+  end
+
 end
