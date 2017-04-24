@@ -1,6 +1,14 @@
 class Board
   attr_accessor :cells
 
+  def reset!
+    self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  end
+
+  def initialize
+
+  end
+
   # def display_board(board)
   #   puts " #{board[0]} | #{board[1]} | #{board[2]} "
   #   puts "-----------"
