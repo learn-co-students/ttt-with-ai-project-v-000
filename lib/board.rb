@@ -29,4 +29,24 @@ class Board
     self.cells.include?("X") && self.cells.include?("O") if !self.cells.include?(" ")
   end
 
+  def turn_count
+    counter = 0
+    self.cells.each do |i|
+      if i == "X" || i == "O"
+        counter += 1
+      end
+    end
+    return counter
+  end
+
+  #def turn_count(board)
+    # counter = 0
+    #     board.each do |turn|
+    #     if turn == "X" || turn == "O"
+    #     counter += 1
+    #       end
+    #   end
+    #   return counter
+  # end
+
 end
