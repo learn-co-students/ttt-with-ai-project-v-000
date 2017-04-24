@@ -1,5 +1,7 @@
+require 'pry'
+
 class Board
-  attr_accessor :cells, :board
+  attr_accessor :cells
 
   def reset!
     self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -15,6 +17,12 @@ class Board
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+  end
+
+  def position
+    puts "Please enter 1-9:"
+    input = gets.strip.to_i - 1
+    binding.pry
   end
 
 end
