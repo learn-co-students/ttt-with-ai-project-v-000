@@ -40,16 +40,9 @@ class Board
   end
 
   def taken?(input)
-    binding.pry
     position(input) == "X" || position(input) == "O"
   end
 
-  # def position_taken?(board, index)
-  #   if board[index] == " " || board[index] == "" || board[index] == nil
-  #     false
-  #   else board[index] == "X" || board[index] == "O"
-  #     true
-  #   end
-  # end
+  
 
 end
