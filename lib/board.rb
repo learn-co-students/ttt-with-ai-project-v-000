@@ -6,7 +6,7 @@ class Board
   end
 
   def initialize
-
+    reset! 
   end
 
   # def display_board(board)
