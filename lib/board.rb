@@ -19,10 +19,12 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position
+  def position(input)
     puts "Please enter 1-9:"
-    input = gets.strip.to_i - 1
-    binding.pry
+    # binding.pry
+    response = gets.strip
+    input = response - 1
+    cells[input]
   end
 
 end
