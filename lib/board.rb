@@ -1,20 +1,20 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :board
 
   def reset!
     self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def initialize
-    reset! 
+    reset!
   end
 
-  # def display_board(board)
-  #   puts " #{board[0]} | #{board[1]} | #{board[2]} "
-  #   puts "-----------"
-  #   puts " #{board[3]} | #{board[4]} | #{board[5]} "
-  #   puts "-----------"
-  #   puts " #{board[6]} | #{board[7]} | #{board[8]} "
-  # end
+  def display
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts "-----------"
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts "-----------"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+  end
 
 end
