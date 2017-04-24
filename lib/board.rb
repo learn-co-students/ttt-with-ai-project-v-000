@@ -21,10 +21,8 @@ class Board
 
   def position(input)
     puts "Please enter 1-9:"
-    # binding.pry
-    response = gets.strip
-    input = response - 1
-    cells[input]
+    index = input.to_i - 1
+    self.cells[index]
   end
 
 end
