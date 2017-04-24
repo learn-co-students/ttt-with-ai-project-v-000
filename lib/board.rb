@@ -26,10 +26,7 @@ class Board
   end
 
   def full?
-    # binding.pry
-    # self.cells.include?(" ")
     self.cells.include?("X") && self.cells.include?("O") if !self.cells.include?(" ")
-
   end
 
 end
