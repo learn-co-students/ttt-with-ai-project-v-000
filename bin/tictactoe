@@ -23,6 +23,7 @@ elsif players == "1"
     puts "Invalid response, please try again."
   end
 
+
 elsif players == "2"
   game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
 end

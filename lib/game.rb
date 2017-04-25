@@ -87,6 +87,7 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
+      abort
     elsif draw?
       puts "Cat's Game!"
       play_again?
@@ -95,8 +96,9 @@ class Game
 
 
   def play_again?
-    puts "Would you like to play again?  Press Y or N (for Yes, I would like to play this most excellent game of
-    Tic Tac Toe again, or for No, I would not like to play this most excellent game of Tic Taco Toe again)."
+    puts "Would you like to play again?
+
+    Y or N"
 
     input = gets.strip
 
@@ -107,12 +109,11 @@ class Game
       end
     elsif input == "N" || input == "n"
       puts "Oh geez, too bad. Maybe try again harder next time boss."
+      abort
     else
       puts "That's not a viable answer."
 
       play_again?
     end
   end
-
-
 end
