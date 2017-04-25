@@ -6,5 +6,4 @@ class Players
       input = gets.strip
     end
 
-  end
 end
