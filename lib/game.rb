@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -14,7 +16,6 @@ class Game
   ]
 
   # def initialize(player_1, player_2, board)
-  #
   # end
 
 end
