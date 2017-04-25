@@ -25,7 +25,11 @@ class Board
   end
 
   def position(input)
-    index = input_to_index(input)
+    if input.instance_of?(String)
+      index = input_to_index(input)
+    else
+      index = input
+    end
     @cells[index]
   end
 
