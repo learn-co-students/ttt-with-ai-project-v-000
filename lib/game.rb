@@ -47,7 +47,7 @@ class Game
  end
  def winner
    win = won?
-   return if win.nil?
+   return if win.nil? # IF win is nothing IS TRUE
    position_1 = board.cells[win[0]]
    position_2 = board.cells[win[1]]
    position_3 = board.cells[win[2]]
@@ -97,33 +97,33 @@ class Game
  end
 
  def play
-   # puts "what kind of game do you want to play? 0,1, or 2 player"
-   # player_count = gets.chomp
-   # if player_0 == "1"
-   #     game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"))
-   # elsif player == "2"
-   #    game = Game.new(player_1=Players::Human.new("O"),player_2=Players::Human.new("X"))
-   # end
-    until self.over?
-      self.turn
+    puts "about to start playing"
+    #counter = 0 
+    #for counter in 1..10
+     #  if  self.over? #counter < 5 && 
+    until self.over? #do #=> "is true" but skips on the 2nd turn
+          self.turn# returns this line
+         #counter +=1
     end
+    #play
+    #end
     #CLI should prompt the user if they would like to play again and 
     #allow them to choose a new configuration for the game as described above. 
     #If the user doesn't want to play again, exit the program. Response: how?
-    puts "would you like to play again? enter 'Y' or 'N' "
-    user_response = gets.strip
+      puts "would you like to play again? enter 'Y' or 'N' "
+      user_response = gets.strip
     #if user_response == "Y"
     # puts "#{user_response}"
     #end 
-    if user_response == "Y"
+      if user_response == "Y"
       puts "User Entered Yes"
-      play
+      turn# INSTEAD OF CALLING PLAY
       #until self.over? #NOT executing this line!
       #  puts "Entered into Turn method"
       #  self.turn 
       #end 
-    else 
+      else 
       puts "WHAT?!!!"
-    end
+      end
   end
 end
