@@ -20,7 +20,7 @@ class Game
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? player_1 : player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -38,7 +38,9 @@ class Game
   end
 
   def winner
-    won? ? board.cells[won?[0]] : nil
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
