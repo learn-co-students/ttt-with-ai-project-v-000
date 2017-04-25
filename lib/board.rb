@@ -48,9 +48,6 @@ class Board
   end
 
   def update(input, player)
-    # binding.pry
-    # position(input)
-    # player(token) if position == valid_move?(input)
     index = input.to_i - 1
     self.cells[index] = player.token if valid_move?(input)
   end
