@@ -47,4 +47,9 @@ class Board
     input.to_i.between?(1, 9) && !taken?(input)
   end
 
+  def update(position, player)
+    binding.pry
+    Player.token if position == valid_move?(input)
+  end
+
 end
