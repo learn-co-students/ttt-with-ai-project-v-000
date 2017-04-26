@@ -5,8 +5,14 @@ module Players
     def move(board)
       if board.cells[0] == " " && board.cells[4] == " "
         "1"
-      else board.cells[4] == "0"
+      elsif board.cells[4] == " "
         "5"
+      elsif board.cells[2] == " "
+        "3"
+      elsif board.cells[6] == " "
+        "7"
+      elsif board.cells[8] == " "
+        "9"
       end
     end
 
