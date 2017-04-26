@@ -5,21 +5,45 @@ module Players
     def move(board)
       current_board = board.cells
       new_sim = Sim.new(Computer.new("X"),Computer.new("O"),current_board)
-      10.times do new_sim.run_trial
-      "1"
+      potential_moves = self.get_empties(board)
+
+      scoreboard = []
+
+      #run trials
+      10.times do
+        trial_scores = new_sim.run_trial
+        trial_scores.each_with_index do |score,index|
+          if potential_moves.include?(i)
+            scoreboard << [index,score]
+          end
+        end
+      end
+
+      best = scoreboard.max_by do |array|
+        array[1]
+      end
+
+      (best[0]+1).to_s
     end
 
     def ran_move(board)
       #randomly chooses an open position
+      empties = self.get_empties(board)
+      (empties.sample + 1).to_s
+    end
+
+    def get_empties(board)
+      #collects indices of empty spaces on board in array and returns array
       empties = []
       board.cells.each_with_index do |cell,index|
         if cell == " "
           empties << index
         end
       end
-      (empties.sample + 1).to_s
+      empties
     end
-  end
+
+  end #end Computer class
 
   class Sim
     attr_accessor :player_1, :player_2, :board, :scoreboard
@@ -85,49 +109,57 @@ module Players
       self.board.full? && !self.won?
     end
 
-    def turn
-      prompting = true
-      while prompting
-        input = self.current_player.move(self.board)
-        if self.board.valid_move?(input)
-          return self.board.update(input,self.current_player)
-        end
-      end
-    end
+    # def turn
+    #   prompting = true
+    #   while prompting
+    #     input = self.current_player.move(self.board)
+    #     if self.board.valid_move?(input)
+    #       return self.board.update(input,self.current_player)
+    #     end
+    #   end
+    # end
 
     def trial_turn
       running = true
       while running
-        input = self.current_player.move(self.board)
+        input = self.current_player.ran_move(self.board)
         if self.board.valid_move?(input)
           return self.board.update(input,self.current_player)
         end
       end
     end
 
-    def play
-      while !self.over?
-        self.turn
-      end
-
-      if self.draw?
-        puts "Cat's Game!"
-      else
-        puts "Congratulations #{self.winner}!"
-      end
-    end
+    # def play
+    #   while !self.over?
+    #     self.turn
+    #   end
+    #
+    #   if self.draw?
+    #     puts "Cat's Game!"
+    #   else
+    #     puts "Congratulations #{self.winner}!"
+    #   end
+    # end
 
     def run_trial
       while !self.over?
         self.trial_turn
       end
 
-      if winner == "X"
-        self.board.cells.each do |cell|
-          if cell == "X"
+      #do scoring if not a draw
+      if winner
+        self.board.cells.each_with_index do |cell,index|
+          if cell == winner.token
+            self.scoreboard[index] += 1
+          elsif cell == " "
+          else
+            self.scoreboard[index] -= 1
+          end
         end
       end
+      self.scoreboard
     end
-  end
 
-end
+  end #end Sim class
+
+end #end module
