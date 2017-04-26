@@ -1,3 +1,60 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe! How many players do you have, 0, 1 or 2?"
+player_amount = gets.strip
+player_amount.to_i
+
+until player_amount.between?(0,2)
+  puts "Please enter 0, 1, or 2:"
+  player_amount = gets.strip
+  player_amount.to_i
+end
+
+if player_amount == 2
+  game = Game.new()
+  game.play
+  puts "Would you like to play again, Y or N?"
+  answer = gets.strip
+
+  until answer == "N"
+    game = Game.new()
+    game.play
+    puts "Would you like to play again, Y or N?"
+    answer = gets.strip
+  end
+
+elsif player_amount == 1
+  puts "Would you like to go first, Y or N? "
+
+  if answer == "Y"
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"),Board.new)
+    game.play
+    puts "Would you like to play again, Y or N?"
+    answer = gets.strip
+
+    until answer == "N"
+      game = Game.new()
+      game.play
+      puts "Would you like to play again, Y or N?"
+      answer = gets.strip
+    end
+
+  else
+    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"),Board.new)
+    game.play
+    puts "Would you like to play again, Y or N?"
+    answer = gets.strip
+
+    until answer == "N"
+      game = Game.new()
+      game.play
+      puts "Would you like to play again, Y or N?"
+      answer = gets.strip
+    end
+  end
+else
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"),Board.new)
+  game.play
+end
