@@ -68,6 +68,8 @@ class Game
 
       if self.board.valid_move?(input)
         return self.board.update(input,self.current_player)
+      else
+        puts "Enter valid move."
       end
     end
   end
@@ -77,7 +79,7 @@ class Game
       self.turn
     end
 
-    #self.board.display
+    self.board.display
 
     if self.draw?
       puts "Cat's Game!"
