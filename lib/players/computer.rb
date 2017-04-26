@@ -9,7 +9,7 @@ module Players
       scoreboard = [0,0,0,0,0,0,0,0,0]
 
       #run trials
-      100.times do
+      600.times do
         trial_board = Board.new
         trial_board.cells = board.cells.dup
 
@@ -25,9 +25,15 @@ module Players
       end
 
       best = scoreboard.max
-      best = scoreboard.find_index(best)
+      best_array = []
 
-      (best+1).to_s
+      scoreboard.each_with_index do |score,index|
+        if score == best
+          best_array << index
+        end
+      end
+
+      (best_array.sample+1).to_s
     end
 
     def ran_move(board)
