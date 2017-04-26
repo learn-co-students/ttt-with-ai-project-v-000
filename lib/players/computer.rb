@@ -8,8 +8,9 @@ module Players
     def first_move
       if board.cells[0] == " " && board.cells[4] == " "
         "1"
-      else
-        
+      else board.cells[4] == "0"
+        "5"
+      end
     end
 
 
