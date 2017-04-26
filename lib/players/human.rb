@@ -3,6 +3,7 @@ module Players
   class Human < Player
 
     def move(board)
+      board.display
       print "Enter move (1-9):"
       input = gets.chomp
     end

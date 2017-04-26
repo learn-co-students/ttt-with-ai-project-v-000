@@ -3,27 +3,31 @@ module Players
   class Computer < Player
 
     def move(board)
-      current_board = board.cells
-      new_sim = Sim.new(Computer.new("X"),Computer.new("O"),current_board)
       potential_moves = self.get_empties(board)
 
-      scoreboard = []
+      neg = -1.0/0
+      scoreboard = [0,0,0,0,0,0,0,0,0]
 
       #run trials
-      10.times do
+      100.times do
+        trial_board = Board.new
+        trial_board.cells = board.cells.dup
+
+        new_sim = Sim.new(Computer.new("X"),Computer.new("O"),trial_board)
         trial_scores = new_sim.run_trial
         trial_scores.each_with_index do |score,index|
-          if potential_moves.include?(i)
-            scoreboard << [index,score]
+          if potential_moves.include?(index)
+            scoreboard[index] += score
+          else
+            scoreboard[index] = -1.0/0
           end
         end
       end
 
-      best = scoreboard.max_by do |array|
-        array[1]
-      end
+      best = scoreboard.max
+      best = scoreboard.find_index(best)
 
-      (best[0]+1).to_s
+      (best+1).to_s
     end
 
     def ran_move(board)
@@ -149,7 +153,7 @@ module Players
       #do scoring if not a draw
       if winner
         self.board.cells.each_with_index do |cell,index|
-          if cell == winner.token
+          if cell == winner
             self.scoreboard[index] += 1
           elsif cell == " "
           else

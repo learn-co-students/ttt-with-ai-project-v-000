@@ -24,7 +24,6 @@ class Board
 
   def update(location,player)
     self.cells[location.to_i-1] = player.token if self.valid_move?(location)
-
     location
   end
 

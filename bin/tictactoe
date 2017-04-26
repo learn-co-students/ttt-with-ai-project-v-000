@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toad!"
+running = true
+while running
+  print "Choose number of players (0,1,2): "
+  game_type = gets.chomp
+  puts ""
+  print "Choose player 1, who plays 'X' (me,comp): "
+  starts = gets.chomp
+
+  if game_type == "0"
+    game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+  elsif game_type == "1"
+    if starts == "me"
+      game = Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+    else
+      game = Game.new(Players::Computer.new("X"),Players::Human.new("O"))
+    end
+  elsif game_type == "battleship"
+    10.times do
+      game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+      game.play
+    end
+  else
+    game = Game.new(Players::Human.new("X"),Players::Human.new("O"))
+  end
+
+  game.play
+
+  print "Do you want to play again? (y/n): "
+  again = gets.chomp
+  if again == 'n'
+    running = false
+  end
+end
