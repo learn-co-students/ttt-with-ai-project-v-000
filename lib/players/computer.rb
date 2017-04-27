@@ -20,3 +20,4 @@ module Players
     #https://www.ruby-forum.com/topic/113558
   end
 end
+#https://codereview.stackexchange.com/questions/108961/tictactoe-game-with-functional-ai-in-ruby-follow-up

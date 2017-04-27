@@ -49,6 +49,7 @@ class Board
   # end
   
   def valid_move?(input)
+    puts "#{input}"
     input.to_i.between?(1,9) && !taken?(input)
   end
   

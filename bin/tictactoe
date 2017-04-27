@@ -12,7 +12,11 @@ if user_input == "Y"
 	if player_type == "0"
 
 	elsif player_type == "1"
-
+		player_x = Players::Human.new("X")
+		player_o = Players::Computer.new("O")
+		#http://neverstopbuilding.com/minimax
+		game = Game.new(player_x, player_o)
+        game.play
 	elsif player_type == "2"
 		player_x = Players::Human.new("X")
 		player_o = Players::Human.new("O")

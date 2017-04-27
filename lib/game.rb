@@ -83,11 +83,8 @@ class Game
  def turn
    # the most important part of finding a method defintion is understanding the receiver.
    # if board is a method, what is it being called on? "self"
-
    user_input = current_player.move(self.board)
-   #how does Human knows to move the token to user_input location?
-   #Human receives move method, as move is being called on? "Human"
-   #input= input_to_index(user_input)
+   puts "#{user_input}"
    if valid_move?(user_input)
      update(user_input, current_player)
      display_board
@@ -98,30 +95,14 @@ class Game
 
  def play
     puts "about to start playing"
-    #counter = 0 
-    #for counter in 1..10
-     #  if  self.over? #counter < 5 && 
     until self.over? #do #=> "is true" but skips on the 2nd turn
           self.turn# returns this line
-         #counter +=1
     end
-    #play
-    #end
-    #CLI should prompt the user if they would like to play again and 
-    #allow them to choose a new configuration for the game as described above. 
-    #If the user doesn't want to play again, exit the program. Response: how?
       puts "would you like to play again? enter 'Y' or 'N' "
       user_response = gets.strip
-    #if user_response == "Y"
-    # puts "#{user_response}"
-    #end 
       if user_response == "Y"
       puts "User Entered Yes"
       turn# INSTEAD OF CALLING PLAY
-      #until self.over? #NOT executing this line!
-      #  puts "Entered into Turn method"
-      #  self.turn 
-      #end 
       else 
       puts "WHAT?!!!"
       end
