@@ -71,14 +71,16 @@ class Game
  end
 
  def update(player_position, player)
+       puts "hi i am BEFORE UPDATE call method on Board Object"
    board.update(player_position, player)
+        puts "hi i am after UPDATE call on Game Class"
+
  end
  def valid_move?(input)
    board.valid_move?(input)
  end
  def taken?(input)
    board.taken?(input)
- 
  end
  def turn
    # the most important part of finding a method defintion is understanding the receiver.
@@ -86,8 +88,11 @@ class Game
    user_input = current_player.move(self.board)
    puts "#{user_input}"
    if valid_move?(user_input)
+      puts "#{user_input}"
      update(user_input, current_player)
+     puts "hi i am after UPDATE method in Game Class"
      display_board
+     puts "hi i am after display_board"
    else
      turn #here is the missing line for 9-12 pm
    end
@@ -98,13 +103,5 @@ class Game
     until self.over? #do #=> "is true" but skips on the 2nd turn
           self.turn# returns this line
     end
-      puts "would you like to play again? enter 'Y' or 'N' "
-      user_response = gets.strip
-      if user_response == "Y"
-      puts "User Entered Yes"
-      turn# INSTEAD OF CALLING PLAY
-      else 
-      puts "WHAT?!!!"
-      end
   end
 end

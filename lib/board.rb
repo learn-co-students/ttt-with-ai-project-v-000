@@ -61,11 +61,9 @@ class Board
     # how is it updating the board?
     # what information do I have?
     # what do I need to change?
-
     # receives user input and turns the interger from bd arrays' perspective - ex turn 1 into 0 and 9 into 8
     # player_position will be what they typed in, ex "5", "1"
     # player will be an instance of a player
-
     updated_position = player_position.to_i-1
     @cells[updated_position] = player.token
     # number = position(player_position).to_i
