@@ -68,16 +68,16 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
-      abort
     elsif draw?
       puts "Cat's Game!"
-      play_again?
     end
   end
+end
 
 
+=begin
   def play_again?
-    puts "Would you like to play again?  
+    puts "Would you like to play again?
 
     Y or N"
 
@@ -90,11 +90,10 @@ class Game
       end
     elsif input == "N" || input == "n"
       puts "Oh geez, too bad. Maybe try again harder next time boss."
-      abort
     else
       puts "That's not a viable answer."
 
       play_again?
     end
   end
-end
+=end
