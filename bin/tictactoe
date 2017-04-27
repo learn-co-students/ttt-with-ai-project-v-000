@@ -9,15 +9,20 @@ players = gets.strip.to_i
 
   if players == 2
     Game.new
+    game.play
   elsif players == 1
-    puts "Enter 1 to go first and play as X or enter 2 to go second and play as 0"
-    Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    puts "Enter 1 to go first and play as X or enter 2 to go second and play as O"
+    first = gets.strip.to_i
+      if first == 1
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        game.play
+      elsif first == 2
+        Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        game.play
+      end
   else
     Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
   end
 
-  game.play
-
   puts "Would you like to play again?"
-
-  self
