@@ -72,4 +72,28 @@ class Game
       puts "Cat's Game!"
     end
   end
+
+  def self.begin
+
+    puts "Welcome to Tic Tac Toe!"
+    puts "How many players?"
+
+    players = gets.strip
+
+    if players == "0"
+      game = Game.new(Players::Computer.new("x"), Players::Computer.new("O")).play
+    elsif players == "1"
+      puts "Who goes first, player or computer?"
+      input = gets.strip
+
+      if input == "player"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif input == "computer"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      else
+        puts "Invalid response, please try again."
+      end
+    end
+  end
+
 end
