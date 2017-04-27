@@ -40,7 +40,7 @@ class Game
   def draw?
     @board.full? && !won?
   end
-
+  
   def winner
     if won?
       combo = won?
@@ -83,7 +83,7 @@ class Game
     if players == "0"
       game = Game.new(Players::Computer.new("x"), Players::Computer.new("O")).play
     elsif players == "1"
-      puts "Who goes first, player or computer?"
+      puts "Who goes first, player or computer? Type it in"
       input = gets.strip
 
       if input == "player"
