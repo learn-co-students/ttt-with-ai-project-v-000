@@ -1,3 +1,24 @@
 #!/usr/bin/env ruby
+require 'pry'
 
 require_relative '../config/environment'
+
+puts "Hello! Welcome to Tic-Tac-Toe!"
+puts "Would you like to play 0, 1, or 2 players?"
+players = gets.strip.to_i
+
+  if players == 2
+    Game.new.play
+  elsif players == 1
+    puts "Enter 1 to go first and play as X or enter 2 to go second and play as O"
+    first = gets.strip.to_i
+      if first == 1
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif first == 2
+        Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      end
+  else
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+  end
+
+  puts "Would you like to play again?"
