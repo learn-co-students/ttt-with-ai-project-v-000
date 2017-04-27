@@ -73,27 +73,3 @@ class Game
     end
   end
 end
-
-
-=begin
-  def play_again?
-    puts "Would you like to play again?
-
-    Y or N"
-
-    input = gets.strip
-
-    if input == "Y" || input == "y"
-      game = Game.new
-      until game.won?
-        game.play
-      end
-    elsif input == "N" || input == "n"
-      puts "Oh geez, too bad. Maybe try again harder next time boss."
-    else
-      puts "That's not a viable answer."
-
-      play_again?
-    end
-  end
-=end
