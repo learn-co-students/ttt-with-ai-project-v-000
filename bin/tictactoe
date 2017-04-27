@@ -17,6 +17,9 @@ first = gets.strip
   else
     Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
   end
+
   game.play
+
   puts "Would you like to play again?"
+
   self
