@@ -3,7 +3,7 @@ module Players
     attr_reader :board, :cells
 
     def move(board)
-      until over? do
+      # until game.over?
         if board.cells[0] == " " && board.cells[4] == " "
           "1"
         elsif board.cells[4] == " "
@@ -16,7 +16,7 @@ module Players
           "9"
         end
       end
-    end
+    # end
 
   end
 end
