@@ -25,13 +25,14 @@ if user_input == "Y"
 		if game.over? 
 			puts "would you like to play again? enter 'Y' or 'N' "
       		user_response = gets.strip
-      			if user_response == "Y"
-      				puts "User Entered Yes"
-      				game.play# INSTEAD OF CALLING PLAY
-      			else 
-      				puts "WHAT?!!!"
-      			end# puts "2 player game started"
-      	end
+      	end 
+      	if user_response == "Y"
+      		puts "User Entered Yes"
+      		game.play# INSTEAD OF CALLING PLAY
+      	else 
+      		puts "WHAT?!!!"
+      	end# puts "2 player game started"
+      	#end
 	end 
 elsif user_input == "N"
 	puts "YOU TYPED IN N BYE"
