@@ -43,4 +43,14 @@ class Game
     end
     board.update(user_input, current_player)
   end
+  def play
+    while !over?
+      turn
+    end
+    if draw?
+      puts "Cat\'s Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
+  end
 end
