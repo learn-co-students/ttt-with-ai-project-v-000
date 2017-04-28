@@ -1,3 +1,4 @@
+require "pry"
 class Game
   WIN_COMBINATIONS =
   [
@@ -11,13 +12,35 @@ class Game
     [2,4,6]
   ]
   attr_accessor :board, :player_1, :player_2
-  def initialize (player_1 = Player.new("X"), player_2=Player.new("O"), board = Array.new(9, " "))
-    self.board = board
-    self.player_1 = player_1
-    self.player_2 = player_2
+  def initialize (player_1 = Players::Human.new("X"), player_2=Players::Human.new("O"), board= Board.new)
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
+    #binding.pry
   end
-  def board
-
+  def current_player
+    self.board.turn_count%2==0? player_1 : player_2
   end
-
+  def over?
+    draw? || won?
+  end
+  def won?
+    WIN_COMBINATIONS.detect do |win_combo|
+      win_combo.all?{|index| board.cells[index]=="X"} ||
+      win_combo.all?{|index| board.cells[index]=="O"}
+    end
+  end
+  def draw?
+    board.full? && !won?
+  end
+  def winner
+    board.cells[won?.first] if won?
+  end
+  def turn
+    user_input = current_player.move(board)
+    while !board.valid_move?(user_input)
+      user_input = current_player.move(board)
+    end
+    board.update(user_input, current_player)
+  end
 end
