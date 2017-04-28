@@ -16,7 +16,7 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-  end 
+  end
 
   def position(user_input)
     index = (user_input.to_i) - 1
@@ -36,7 +36,7 @@ class Board
         turns += 1
       end
     end
-    turns 
+    turns
   end
 
   def taken?(user_input)
@@ -49,9 +49,9 @@ class Board
   end
 
   def valid_move?(user_input)
-    if taken?(user_input) 
-      false 
-    elsif user_input.to_i > 9 || user_input.to_i < 1 
+    if taken?(user_input)
+      false
+    elsif user_input.to_i > 9 || user_input.to_i < 1
       false
     else
       true
@@ -62,5 +62,5 @@ class Board
     index = (user_input.to_i) - 1
     @cells[index] = player.token
   end
-  
+
 end

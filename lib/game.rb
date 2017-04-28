@@ -1,6 +1,6 @@
 class Game
 
-  include Players 
+  include Players
   extend Players
 
   attr_accessor :board, :player_1, :player_2
@@ -17,7 +17,7 @@ class Game
   ]
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new) 
-    @player_1 = player_1 
+    @player_1 = player_1
     @player_2 = player_2
     @board = board
   end
@@ -48,24 +48,24 @@ class Game
     won? || draw?
   end
 
-  def winner 
+  def winner
     if win_combination = won?
       @winner = @board.cells[win_combination.first]
     end
   end
 
-  def turn 
-    player = current_player 
+  def turn
+    player = current_player
     current_move = player.move(@board)
     if @board.valid_move?(current_move)
       @board.update(current_move, player)
       @board.display
-    else 
-      turn 
+    else
+      turn
     end
   end
 
-  def play 
+  def play
     while !over?
       turn
     end
@@ -75,5 +75,5 @@ class Game
       puts "Cat's Game!"
     end
   end
-  
+
 end
