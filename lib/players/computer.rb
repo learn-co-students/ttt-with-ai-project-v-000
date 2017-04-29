@@ -1,23 +1,28 @@
 module Players
   class Computer < Player
-    def move(board)
-      if valid_move?()
-        #user_input = gets
-        "#{user_input}"
+
+    def move(board)      
+      # corner_move(board)
+      if !board.taken?("5")  # "5"
+        "5"
+      else
+        random_move(board)
+      end #=> 5
+
+      # Then, always move into any available corner (maybe the opposite corner of theres)
+      # go in random      
+    end
+
+    def random_move(board)
+      # pick any random available position
+      guess = rand(1..9)
+      if !board.taken?(guess)
+        return guess
+      else
+        random_move(board)
       end
     end
-    def position(user_input)
-      integer = user_input.to_i- 1#converst user input string to array index
-      #binding.pry
-      return "#{@cells[integer]}"#looks up the value of the cells at the correct index from the array's perspective
-    end
-    def valid_move?(input)
-      input.to_i.between?(1,9) && !taken?(input)
-    end
-    def taken?(user_input)
-       position(user_input) == "X" || position(user_input) == "O"
-    end
-    #https://www.ruby-forum.com/topic/113558
+
   end
 end
-#https://codereview.stackexchange.com/questions/108961/tictactoe-game-with-functional-ai-in-ruby-follow-up
+

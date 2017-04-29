@@ -34,23 +34,28 @@ class Game
      position_1 == position_2 && position_2 == position_3 && position_1 != " "
    end
  end
+ 
  def draw?
     !won? && full?
  end
+
  def full?
    board.cells.all? { |elem|
      elem == "X"  || elem == "O" || elem != " "
    }
  end
+
  def over?
-    !won? && full? || won?
+    draw? || won?
  end
+
  def winner
    win = won?
    return if win.nil? # IF win is nothing IS TRUE
    position_1 = board.cells[win[0]]
    position_2 = board.cells[win[1]]
    position_3 = board.cells[win[2]]
+ 
    if position_1 == "X"
      return "X"
    elsif position_1 == "O"
@@ -59,6 +64,7 @@ class Game
      false
    end
  end
+ 
  def display_board
    puts " #{board.cells[0]} | #{board.cells[1]} | #{board.cells[2]} "
    puts "-----------"
@@ -66,6 +72,7 @@ class Game
    puts "-----------"
    puts " #{board.cells[6]} | #{board.cells[7]} | #{board.cells[8]} "
  end
+ 
  def input_to_index(user_input)
    user_input.to_i-1
  end
@@ -76,12 +83,15 @@ class Game
         puts "hi i am after UPDATE call on Game Class"
 
  end
+ 
  def valid_move?(input)
    board.valid_move?(input)
  end
+ 
  def taken?(input)
    board.taken?(input)
  end
+
  def turn
    # the most important part of finding a method defintion is understanding the receiver.
    # if board is a method, what is it being called on? "self"
@@ -101,7 +111,9 @@ class Game
  def play
     puts "about to start playing"
     until self.over? #do #=> "is true" but skips on the 2nd turn
-          self.turn# returns this line
+      self.turn# returns this line
     end
+    puts "Congratulations #{self.winner}!" if self.won?
+    puts "Cat's Game!" if self.draw?
   end
 end
