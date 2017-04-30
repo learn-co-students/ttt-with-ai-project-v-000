@@ -10,12 +10,19 @@ module Players
       else
         #move 3rd or more > look if there are two tokens of the same player in the WIN_COMBINATIONS
         Game::WIN_COMBINATIONS.detect do |win_combo|
-          if board.cells[win_combo[0]] == board.cells[win_combo[1]] &&  board.cells[win_combo[0]] != " "
-            computer_input = win_combo[2]
-          elsif board.cells[win_combo[1]] == board.cells[win_combo[2]] &&  board.cells[win_combo[0]] != " "
-            computer_input = win_combo[0]
-          elsif board.cells[win_combo[0]] == board.cells[win_combo[2]] &&  board.cells[win_combo[1]] != " "
-            computer_input = win_combo[1]
+          if (board.cells[win_combo[0]] == board.cells[win_combo[1]] &&
+            board.cells[win_combo[0]] != " " &&
+            board.cells[win_combo[2]] == " ")
+            computer_input = win_combo[2]+1
+            #puts "1st if #{computer_input}"
+          elsif (board.cells[win_combo[1]] == board.cells[win_combo[2]] &&
+            board.cells[win_combo[1]] != " " &&
+            board.cells[win_combo[0]] == " ")
+            computer_input = win_combo[0]+1
+          elsif (board.cells[win_combo[0]] == board.cells[win_combo[2]] &&
+            board.cells[win_combo[0]] != " " &&
+            board.cells[win_combo[1]] == " ")
+            computer_input = win_combo[1]+1
           end
         end
         # if it's not the game start and no 2 tokens were found in a win_combo > Second move

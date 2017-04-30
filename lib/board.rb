@@ -4,6 +4,7 @@ class Board
         reset!
     end
     def display
+      #binding.pry
       puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
       puts "-----------"
       puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
@@ -18,10 +19,11 @@ class Board
     end
     def valid_move?(user_input)
       user_input_to_i = user_input.to_i
-      user_input_to_i <= 9 && user_input_to_i >= 1 && !taken?(user_input_to_i)
+      user_input <= "9" && user_input >= "1" && !taken?(user_input)
     end
     def update(user_input, player)
       cells[user_input.to_i-1]=player.token if !taken?(user_input) && valid_move?(user_input)
+      display
     end
     def full?
       !cells.include?(" ")
