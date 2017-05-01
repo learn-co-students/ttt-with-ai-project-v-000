@@ -26,7 +26,7 @@ class Game
   end
 
   def current_player
-    (self.turn_count.even? == true) ? player_1 : player_2
+    self.turn_count.even? ? player_1 : player_2
   end
 
   def ganador?(token)
