@@ -2,7 +2,7 @@ require 'pry'
 class Board
   attr_accessor :cells
   def initialize
-    @cells =  Array.new(9, " ")
+    self.reset!
   end
 
   def reset!
@@ -27,13 +27,15 @@ class Board
   end
 
   def full?
-    cells.detect{|cell| cell == " "}? false : true
+    cells.all? {|cell| cell != " "}
+    #cells.detect{|cell| cell == " "}? false : true
   end
 
   def turn_count
-    count = 0
-    cells.each {|cell| count += 1 if cell != " "}
-    count
+    cells.count { |cell| cell == "X" || cell == "O" }
+    # count = 0
+    # cells.each {|cell| count += 1 if cell != " "}
+    # count
   end
 
   def taken?(input_str)
