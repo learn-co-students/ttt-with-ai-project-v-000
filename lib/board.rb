@@ -18,8 +18,7 @@ class Board
       position(user_input) != " "
     end
     def valid_move?(user_input)
-      user_input_to_i = user_input.to_i
-      user_input <= "9" && user_input >= "1" && !taken?(user_input)
+      user_input.to_i.between?(1,9) && !taken?(user_input)
     end
     def update(user_input, player)
       cells[user_input.to_i-1]=player.token if !taken?(user_input) && valid_move?(user_input)
@@ -29,7 +28,7 @@ class Board
       !cells.include?(" ")
     end
     def turn_count
-      cells.select{|cell| cell != " "}.count
+      cells.count{|cell| cell != " "}
     end
     def reset!
         @cells=Array.new(9," ")

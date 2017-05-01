@@ -17,8 +17,13 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
   end
+  def self.create (player_1, player_2)
+    new_game = Game.new(player_1,player_2)
+    new_game.board.display
+    new_game.play
+  end
   def current_player
-    self.board.turn_count%2==0? player_1 : player_2
+    self.board.turn_count.even?? player_1 : player_2
   end
   def over?
     draw? || won?
@@ -33,7 +38,8 @@ class Game
     board.full? && !won?
   end
   def winner
-    board.cells[won?.first] if won?
+    won= won?
+    board.cells[won.first] if won
   end
   def turn
     user_input = current_player.move(board)
@@ -50,44 +56,6 @@ class Game
       puts "Cat\'s Game!"
     else
       puts "Congratulations #{winner}!"
-    end
-  end
-  def self.start
-    puts "Welcome to Tic-Tac-Toe AI"
-
-    loop do
-    puts "What kind of game do you want to play?"
-    puts "0,1 or 2 players?"
-    game_type = gets.strip
-
-      case game_type
-      when "0"
-          new_game = self.new(Players::Computer.new("X"),Players::Computer.new("O"))
-          new_game.board.display
-          new_game.play
-      when "1"
-          puts "Would you like to go first and be the \"X\" player?"
-          puts "press y for yes, any key for no"
-          user_imput = gets.strip
-          if user_imput == "y"
-              new_game = self.new(Players::Human.new("X"),Players::Computer.new("O"))
-              new_game.board.display
-              new_game.play
-          else
-              new_game = self.new(Players::Computer.new("X"),Players::Human.new("O"))
-              new_game.board.display
-              new_game.play
-          end
-      when "2"
-        new_game = self.new(Players::Human.new("X"),Players::Human.new("O"))
-        new_game.board.display
-        new_game.play
-      end
-
-      puts "Do you want to play again?"
-      puts "press y for yes, any key for no"
-      start = gets.strip
-      break if start != "y"
     end
   end
 
