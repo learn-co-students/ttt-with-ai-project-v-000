@@ -4,7 +4,7 @@ module Players
     GAME_INDEX = [1,2,3,4,5,6,7,8,9]
     def move (board)
       computer_input = nil
-      #Game start: first move goes in the middle
+      #Game start: first move for 1st and 2nd player goes in the middle
       if board.turn_count<3 && board.cells[4]==" "
         computer_input = 5
       else
