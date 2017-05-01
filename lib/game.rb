@@ -19,11 +19,7 @@ class Game
   ]
 
   def current_player
-    if @board.turn_count.even?
-      @current_player = @player_1
-    else
-      @current_player = @player_2
-    end
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over?
