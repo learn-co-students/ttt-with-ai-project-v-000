@@ -5,7 +5,7 @@ module Players
     def move (board)
       computer_input = nil
       #Game start: first move goes in the middle
-      if board.cells.all?{|cell| cell == " "}
+      if board.turn_count<3 && board.cells[4]==" "
         computer_input = 5
       else
         #move 3rd or more > look if there are two tokens of the same player in the WIN_COMBINATIONS
