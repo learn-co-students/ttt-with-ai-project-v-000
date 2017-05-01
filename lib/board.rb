@@ -42,7 +42,8 @@ class Board
   end
 
   def valid_move?(cell)
-    (self.taken?(cell) == true || self.position(cell) == nil) ? false : true
+    #(self.taken?(cell) == true || self.position(cell) == nil) ? false : true
+    input.to_i.between?(0,8) && !taken(cell)
   end
 
   def update(cell, player)
