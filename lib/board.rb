@@ -47,6 +47,6 @@ class Board
   end
 
   def update(position, player)
-    valid_move?(position) ? cells[input_to_index(position)] == player : nil
+    valid_move?(position) ? cells[input_to_index(position)] == player.token : nil
   end
 end
