@@ -1,3 +1,5 @@
+require "pry"
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -15,7 +17,7 @@ class Game
     # Diagonal
     [0, 4, 8], # Left to right
     [2, 4, 6] # Right to left
-  ]
+  ].freeze
 
   def initialize(player_1 = Player.new("X"), player_2 = Player.new("O"), board = Board.new)
     @player_1 = player_1
@@ -32,22 +34,34 @@ class Game
   end
 
   def won?
-    count = 0
+    i = 0
     is_won = false
-    while count < WIN_COMBINATIONS.size && is_won != true
-      hold = WIN_COMBINATIONS[count].collect { |p| board.cells[p] }
-      is_won = hold.uniq!.count == 1 && !hold.include?(" ")
-      count += 1
+    while i < WIN_COMBINATIONS.size && is_won != true
+      hold = WIN_COMBINATIONS[i].collect { |p| board.cells[p] }
+      is_won = hold.uniq.size == 1 && !hold.include?(" ")
+      i += 1
     end
-
     is_won
   end
 
   def draw?
-
+    over? && !won?
   end
 
   def winner
-
+    hold = nil
+    winner_found = false
+    if won?
+      i = 0
+      while i < WIN_COMBINATIONS.size && !winner_found
+        hold = WIN_COMBINATIONS[i].collect { |p| board.cells[p] }
+        if hold.all? && !hold.include?(" ")
+          hold = hold[0]
+          winner_found = true
+        end
+        i += 1
+      end
+    end
+    hold
   end
 end
