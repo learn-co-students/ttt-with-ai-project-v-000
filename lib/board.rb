@@ -60,7 +60,7 @@ class Board
     end
   end
 
-  def update(cell,player="X")
-    @cells[cell.to_i-1] = "X"
+  def update(input,player="X")
+    cells[input.to_i-1] = player.token
   end
 end
