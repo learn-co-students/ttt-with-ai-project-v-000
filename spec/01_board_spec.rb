@@ -94,7 +94,6 @@ describe "Board" do
   describe '#taken?' do
     it 'returns true if the position is X or O' do
       board.cells = ["X", " ", " ", " ", " ", " ", " ", " ", "O"]
-
       expect(board.taken?("1")).to be(true)
       expect(board.taken?("9")).to be(true)
     end
@@ -110,7 +109,6 @@ describe "Board" do
   describe '#valid_move?' do
     it 'returns true for user input between 1-9 that is not taken' do
       board.cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "]
-
       expect(board.valid_move?("1")).to be_truthy
       expect(board.valid_move?("5")).to be_falsey
       expect(board.valid_move?("invalid")).to be_falsey
