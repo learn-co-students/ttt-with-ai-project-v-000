@@ -1,5 +1,3 @@
-require "pry"
-
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -61,16 +59,16 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
     user_input = current_player.move(board)
-    if board.valid_move?(user_input)
-      board.update(user_input, current_player)
-    else
-      turn
-    end
+    turn unless board.valid_move?(user_input)
+    board.update(user_input, current_player)
+    board.display
   end
 
   def play
-
+    board.display
+    turn until over? || won? || draw?
+    puts "Congratulations #{winner}!" if won?
+    puts "Cat's Game!" if draw?
   end
 end
