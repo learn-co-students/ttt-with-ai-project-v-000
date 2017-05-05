@@ -1,7 +1,13 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+# http://patorjk.com/software/taag/#p=display&f=Slant&t=TicTacToe
 
+puts  "   _______     ______          ______"
+puts  "  /_  __(_)___/_  __/___ _____/_  __/___  ___"
+puts  "   / / / / ___// / / __ `/ ___// / / __ \\/ _ \\"
+puts  "  / / / / /__ / / / /_/ / /__ / / / /_/ /  __/"
+puts " /_/ /_/\\___//_/  \\__,_/\\___//_/  \\____/\\___/"
 puts "Welcome to Tic Tac Toe!"
 game = Game.new
-game.play
+game.start

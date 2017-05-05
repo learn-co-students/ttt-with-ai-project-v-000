@@ -73,4 +73,14 @@ class Game
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
   end
+
+  def replay?
+    puts "Would you like to play again? (y/n)"
+    true if gets.chomp == "y"
+  end
+
+  def start
+    play
+    start if replay?
+  end
 end
