@@ -23,10 +23,6 @@ class Game
 		board.turn_count.even? ? player_1 : player_2
 	end
 
-	def over?
-		board.full?
-	end
-
 	def won?
 		WIN_COMBINATIONS.detect do |combination|
 			board.taken?(combination[0]) &&
@@ -36,7 +32,11 @@ class Game
 	end
 
 	def draw?
-		!won? && over?
+		board.full? && !won?
+	end
+
+	def over?		
+		won? || draw?
 	end
 
 	def winner
@@ -44,13 +44,25 @@ class Game
 	end
 
 	def turn
-		puts 'test'
-		input = gets.chomp
+		input = current_player.move(board)
 
 		if board.valid_move?(input)
 			board.update(input, current_player)
+			board.display
 		else
 			turn
+		end
+	end
+
+	def play
+		until over?
+			turn
+		end
+
+		if won?
+			puts "Congratulations #{winner}!"
+		else
+			puts "Cat's Game!"
 		end
 	end
 

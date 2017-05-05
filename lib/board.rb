@@ -30,7 +30,8 @@ class Board
 	end
 
 	def taken?(input)
-		position(input) != ' '
+		# Using cells[input] for #won? as it's already at the correct index
+		input.class == String ? position(input) != ' ' : cells[input] != ' '
 	end
 
 	def valid_move?(input)
