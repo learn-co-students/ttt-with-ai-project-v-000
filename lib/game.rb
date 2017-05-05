@@ -26,6 +26,7 @@ class Game
     board.full?
   end
 
+  # TODO: refactor with #winner
   def won?
     i = 0
     is_won = false
@@ -41,6 +42,7 @@ class Game
     over? && !won?
   end
 
+  # TODO: refactor with #won?
   def winner
     hold = nil
     winner_found = false
