@@ -1,5 +1,3 @@
-require "pry"
-
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -21,7 +19,6 @@ class Game
   end
 
   def current_player
-    # board.turn_count.even? ? player_1 : player_2
     return player_1 if board.turn_count.even?
     player_2
   end
@@ -65,44 +62,57 @@ class Game
   end
 
   def turn
+    puts "Turn: #{board.turn_count + 1}"
+    puts "#{current_player.token} make your move."
+    board.display
+    puts "\n"
     user_input = current_player.move(board)
     turn unless board.valid_move?(user_input)
-    # puts "Turn: #{board.turn_count + 1}"
-    # board.display
     board.update(user_input, current_player)
-    # puts "#{current_player.token} moved #{user_input}"
     board.display
-    puts "\n\n"
+    puts "\n"
+    puts "---------------------"
+    puts "\n"
   end
 
   def play
+    config_players
     turn until over?
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
   end
 
-  # def config
-  #   puts "Enter number of players: 0, 1, 2:"
-  #   input = gets.chomp
-  #   case input
-  #   when "0"
-  #     @player_1 = Players::Computer.new
-  #     @player_2 = Players::Computer.new
-  #   when "1"
-  #     @player_2 = Players::Computer.new
-  #   else
-  #     puts "Does not compute"
-  #     config
-  #   end
-  # end
+  def config_players
+    puts "Enter number of players: 0, 1, 2:"
+    input = gets.chomp
+    case input
+    when "0"
+      @player_1 = Players::Computer.new
+      @player_2 = Players::Computer.new
+    when "1"
+      @player_2 = Players::Computer.new
+      config_difficulty
+    when "2"
+      nil # 2 human players is default in init
+    else
+      puts "Does not compute"
+      config_players
+    end
+  end
 
-  # def replay
-  #   puts "Would you like to play again? (y/n)"
-  #   play if gets.chomp == "y"
-  # end
-
-  # def start
-  #   play
-  #   start if replay?
-  # end
+  def config_difficulty
+    puts "Select difficulty level"
+    puts "1 - Easy"
+    puts "2 - Moderate"
+    puts "3 - Mission Impossible"
+    input = gets.chomp
+    case input
+    when "1"
+    when "2"
+    when "3"
+    else
+      puts "Does not compute"
+      config_difficulty
+    end
+  end
 end

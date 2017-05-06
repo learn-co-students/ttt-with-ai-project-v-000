@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-# http://patorjk.com/software/taag/#p=display&f=Slant&t=TicTacToe
 
 puts  "   _______     ______          ______"
 puts  "  /_  __(_)___/_  __/___ _____/_  __/___  ___"
@@ -11,15 +10,18 @@ puts " /_/ /_/\\___//_/  \\__,_/\\___//_/  \\____/\\___/"
 puts "Welcome to Tic Tac Toe!"
 
 game = Game.new
-game.play
+game.play until game.over?
+puts "Would you like to play again? (y/n)"
+system("bin/tictactoe") if gets.chomp == "y"
 
 # TODO:
 # [x] Get spec #4 passing
 # [ ] Prompt the user for game type: 0, 1, 2 player
 # [ ] Ask the user who should go first
-# [ ] Ask the user if they want to play again
+# [x] Ask the user if they want to play again
 # [ ] Implement some level of AI
 # [ ] Refactor duplicate code into modules
+# [ ] Add styling and formatting
 # -------------------------------------
 # [ ] Implement different levels of AI
 # [ ] Allow the user to select
