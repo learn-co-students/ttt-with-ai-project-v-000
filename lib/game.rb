@@ -1,3 +1,5 @@
+require "pry"
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -19,14 +21,16 @@ class Game
   end
 
   def current_player
-    board.turn_count.even? ? player_1 : player_2
+    # board.turn_count.even? ? player_1 : player_2
+    return player_1 if board.turn_count.even?
+    player_2
   end
 
   def over?
-    board.full?
+    won? || draw?
   end
 
-  # TODO: refactor with #winner
+  # TODO: refactor
   def won?
     i = 0
     is_won = false
@@ -39,10 +43,10 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
   end
 
-  # TODO: refactor with #won?
+  # TODO: refactor
   def winner
     hold = nil
     winner_found = false
@@ -63,24 +67,42 @@ class Game
   def turn
     user_input = current_player.move(board)
     turn unless board.valid_move?(user_input)
+    # puts "Turn: #{board.turn_count + 1}"
+    # board.display
     board.update(user_input, current_player)
+    # puts "#{current_player.token} moved #{user_input}"
     board.display
+    puts "\n\n"
   end
 
   def play
-    board.display
-    turn until over? || won? || draw?
+    turn until over?
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
   end
 
-  def replay?
-    puts "Would you like to play again? (y/n)"
-    true if gets.chomp == "y"
-  end
+  # def config
+  #   puts "Enter number of players: 0, 1, 2:"
+  #   input = gets.chomp
+  #   case input
+  #   when "0"
+  #     @player_1 = Players::Computer.new
+  #     @player_2 = Players::Computer.new
+  #   when "1"
+  #     @player_2 = Players::Computer.new
+  #   else
+  #     puts "Does not compute"
+  #     config
+  #   end
+  # end
 
-  def start
-    play
-    start if replay?
-  end
+  # def replay
+  #   puts "Would you like to play again? (y/n)"
+  #   play if gets.chomp == "y"
+  # end
+
+  # def start
+  #   play
+  #   start if replay?
+  # end
 end

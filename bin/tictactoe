@@ -9,5 +9,17 @@ puts  "   / / / / ___// / / __ `/ ___// / / __ \\/ _ \\"
 puts  "  / / / / /__ / / / /_/ / /__ / / / /_/ /  __/"
 puts " /_/ /_/\\___//_/  \\__,_/\\___//_/  \\____/\\___/"
 puts "Welcome to Tic Tac Toe!"
+
 game = Game.new
-game.start
+game.play
+
+# TODO:
+# [x] Get spec #4 passing
+# [ ] Prompt the user for game type: 0, 1, 2 player
+# [ ] Ask the user who should go first
+# [ ] Ask the user if they want to play again
+# [ ] Implement some level of AI
+# [ ] Refactor duplicate code into modules
+# -------------------------------------
+# [ ] Implement different levels of AI
+# [ ] Allow the user to select

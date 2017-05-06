@@ -21,7 +21,7 @@ module Players
     # Computer should take the 3rd position to block the player
     # def block
     #   WIN_COMBINATIONS.detect do |c|
-    #     
+    #
     #   end
     # end
   end
