@@ -1,6 +1,6 @@
 module Players
 	class Human < Player
-		def move(input)
+		def move(board)
 			puts "Where do you want to move?"
 			input = gets.chomp
 		end

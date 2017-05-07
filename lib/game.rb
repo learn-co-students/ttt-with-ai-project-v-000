@@ -49,7 +49,7 @@ class Game
 
 		# validates a choosen move if not valid it will ask again
 		def turn
-			input = current_player.move(input)
+			input = current_player.move(board)
 				if @board.valid_move?(input)
 					@board.update(input, current_player)
 					@board.display
