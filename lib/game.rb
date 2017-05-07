@@ -14,36 +14,40 @@ class Game
      [8,4,0],#6 #left_to_right adj
      [2,4,6] #7 #right_to_left adj
    ]
-
+	 			#creates 2 human player X && O while setting up a new board from board class
     def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
       @board = board
       @player_1 = player_1
       @player_2 = player_2
     end
 
+		#keeps track of the current player w/ the following ternary operator
     def current_player
      @board.turn_count.even? ? @player_1 : @player_2
     end
 
+		#returns true || false if the game is over
     def over?
        won? || draw?
     end
-
+		# returns nil if the game is not won or the set where they wom
     def won?
       WIN_COMBINATIONS.find do |index|
         @board.cells[index[0]] == @board.cells[index[1]] &&
         @board.cells[index[1]] == @board.cells[index[2]] && @board.taken?(index[2]+1)
       end
     end
-
+		# returns boolean if its a draw
     def draw?
       won?.nil? && board.full?
     end
 
+		# returns X || O depending on the winner
     def winner
        won? ? @board.cells[won?[0]] : nil
     end
 
+		# validates a choosen move if not valid it will ask again
 		def turn
 			input = current_player.move(nil)
 				if @board.valid_move?(input)
@@ -54,6 +58,7 @@ class Game
 			end
 		end
 
+		# loops until the game is over which means there will be a winner or draw
 		def play
 			turn until over?
 			if winner !=nil
