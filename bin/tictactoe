@@ -10,6 +10,7 @@ puts " /_/ /_/\\___//_/  \\__,_/\\___//_/  \\____/\\___/"
 puts "Welcome to Tic Tac Toe!"
 
 game = Game.new
+game.config_players
 game.play until game.over?
 puts "Would you like to play again? (y/n)"
 system("bin/tictactoe") if gets.chomp == "y"

@@ -44,6 +44,12 @@ class Game
   end
 
   # TODO: refactor
+  # BUG: This returned Congrats X
+  #  X | O | X
+  # -----------
+  # " "| O |" "
+  # -----------
+  # " "| O | X
   def winner
     hold = nil
     winner_found = false
@@ -76,7 +82,6 @@ class Game
   end
 
   def play
-    config_players
     turn until over?
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
@@ -87,10 +92,10 @@ class Game
     input = gets.chomp
     case input
     when "0"
-      @player_1 = Players::Computer.new
-      @player_2 = Players::Computer.new
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
     when "1"
-      @player_2 = Players::Computer.new
+      @player_2 = Players::Computer.new("O")
       config_difficulty
     when "2"
       nil # 2 human players is default in init
@@ -101,15 +106,15 @@ class Game
   end
 
   def config_difficulty
-    puts "Select difficulty level"
-    puts "1 - Easy"
-    puts "2 - Moderate"
-    puts "3 - Mission Impossible"
+    puts "Select difficulty level\n1. Easy\n2. Moderate\n3. Mission Impossible"
     input = gets.chomp
     case input
     when "1"
+      player_2.difficulty = "easy"
     when "2"
+      player_2.difficulty = "moderate"
     when "3"
+      player_2.difficulty = "hard"
     else
       puts "Does not compute"
       config_difficulty

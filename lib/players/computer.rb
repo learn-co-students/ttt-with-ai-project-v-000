@@ -1,8 +1,20 @@
+require "pry"
+
 module Players
   class Computer < Player
+    attr_accessor :difficulty
+
     def move(board)
-      # Pretty much random
-      (1 + board.cells.find_index { |c| c == " " }).to_s
+      case difficulty
+      when "easy"
+        random(board)
+      when "moderate"
+        block(board)
+      when "hard"
+        hard(board)
+      else
+        random(board)
+      end
     end
 
     WIN_COMBINATIONS = [
@@ -20,46 +32,45 @@ module Players
     CENTER = 4
     EDGES = [1, 3, 5, 7].freeze
 
-    def corner
+    def corner(board)
       CORNERS.detect { |c| !board.taken?(c + 1) }
     end
 
-    def corner_diagonal
+    #   0 |  1  |  2
+    # ---------------
+    #   3 |  4  |  5
+    # ---------------
+    #   6 |  7  |  8
 
-    end
-
-    def edge
+    def edge(board)
       EDGES.detect { |e| !board.taken?(e + 1) }
     end
 
-    def random
-      (1 + board.cells.find_index { |c| c == " " }).to_s
+    def random(board)
+      m = Random.new.rand(1..9).to_s
+      random(board) unless board.valid_move?(m)
+      m
     end
 
-    # Blocking
-    # Iterate through board
-    # Check if opposing player has 2 of 3 of winning combo
-    # Computer should take the 3rd position to block the player
-    def block
-      next_move = nil
-      WIN_COMBINATIONS.each do |c|
-        # [0, 1, 2]
-        hold = []
-        c.each { |i| hold << board.cells[i] }
-        # hold => ["X", " ", "X"]
-        next_move = 1 + c[hold.index(" ")] if hold.uniq.length == 2 && hold.include?(" ")
-      end
-      next_move
-    end
-
-    def move_with_ai
+    def hard(board)
       if board.turn_count == 0
         corner
       elsif board.turn_count == 1 && !board.taken?(CENTER)
         corner
       else
-        random
+        random(board)
       end
+    end
+
+    def block(board)
+      next_move = random(board)
+      WIN_COMBINATIONS.each do |c|
+        hold = [board.cells[c[0]], board.cells[c[1]], board.cells[c[2]]]
+        if hold.count(" ") == 1 && hold.count("X") == 2
+          next_move = (1 + c[hold.index(" ")]).to_s
+        end
+      end
+      next_move
     end
   end
 end
