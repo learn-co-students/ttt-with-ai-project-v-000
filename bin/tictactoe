@@ -31,3 +31,12 @@ elsif num_players == 0
    game.board.display
    game.play
 end
+
+ puts "Would you like to play again ?"
+  answer = gets.downcase.strip
+
+  if answer == "yes"
+    load 'bin/tictactoe'
+  elsif answer == "no"
+    puts "goodbye!"
+  end
