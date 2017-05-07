@@ -12,7 +12,7 @@ def reload!
   load './lib/game.rb'
   load './lib/player.rb'
   load './lib/players/computer.rb'
-  load './lib/player/human.rb'
+  load './lib/players/human.rb'
 end
 
  puts "...loading your environment"
