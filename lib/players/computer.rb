@@ -1,7 +1,8 @@
 module Players
 	class Computer < Player
 		def move(board)
-
+			puts "thinking ..."
+			sleep(2)
 			if board.cells[0] == " "
 				"1"
 			elsif board.cells[4] == " "

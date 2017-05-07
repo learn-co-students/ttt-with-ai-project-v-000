@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+
+puts "Welcome"
+puts "How many Human Players will be playing today?"
+num_players = gets.chomp.to_i
+
+if num_players ==2
+ puts "'X' starts the game"
+ game = Game.new
+ game.board.display
+ game.play
+elsif num_players ==1
+ puts "Who should start the game Human or Computer ? ('X' starts the game)"
+ first_player = gets.downcase.chomp
+   if first_player == "human"
+     game=Game.new(player_1=Players::Human.new("X"),player_2=Players::Computer.new("O"))
+     game.board.display
+     game.play
+
+   elsif first_player == "computer"
+     game=Game.new(player_1=Players::Computer.new("X"),player_2=Players::Human.new("O"))
+     game.board.display
+     game.play
+
+   end
+elsif num_players == 0
+   game=Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"))
+   game.board.display
+   game.play
+end
