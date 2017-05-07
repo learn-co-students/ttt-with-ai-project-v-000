@@ -3,6 +3,7 @@
 require_relative '../config/environment'
 
 
+
 puts "Welcome"
 puts "How many Human Players will be playing today?"
 num_players = gets.chomp.to_i
