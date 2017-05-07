@@ -10,7 +10,9 @@ require_relative '../config/environment'
 num_players = gets.chomp.to_i
 
     if num_players ==2
+    puts "'X' starts the game"
       game = Game.new
+      game.board.display
       game.play
     elsif num_players ==1
       puts "Who should go first Human or Computer ? ('X' starts the game)"
