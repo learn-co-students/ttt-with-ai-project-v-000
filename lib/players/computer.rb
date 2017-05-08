@@ -1,5 +1,3 @@
-require "pry"
-
 module Players
   class Computer < Player
     include Constable
@@ -45,10 +43,6 @@ module Players
       "O"
     end
 
-    def fill(token, board)
-      find_move(token, board)
-    end
-
     def fill(board)
       next_move = block(board)
       WIN_COMBINATIONS.each do |c|
@@ -63,10 +57,8 @@ module Players
     def hard(board)
       if board.turn_count < 3
         corner(board)
-      elsif board.turn_count > 2
-        fill(board)
       else
-        random(board)
+        fill(board)
       end
     end
   end
