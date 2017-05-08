@@ -19,24 +19,19 @@ class Board
   end
 
   def position(input)
-    "#{cells[input.to_i-1]}"
+    @cells[input.to_i-1]
   end
 
   def full?
-    self.cells.all? {|cell| cell == "O" || cell == "X"}
+    @cells.all? {|cell| cell == "O" || cell == "X"}
   end
 
   def turn_count
-    counter = 0
-    self.cells.each do |cell| if cell == "X" || cell == "O"
-      counter += 1
-    end
-    end
-    counter
+    @cells.select{|cell| cell == "O" || cell == "X"}.size
   end
 
   def taken?(input)
-    @cells[input.to_i-1] == "X" || @cells[input.to_i-1] == "O"
+    position(input) == "X" || position(input) == "O"
   end
 
   def valid_move?(input)
@@ -44,7 +39,7 @@ class Board
   end
 
   def update(cell, player)
-    self.cells[cell.to_i-1] = player.token
+    @cells[cell.to_i-1] = player.token
   end
 
 end
