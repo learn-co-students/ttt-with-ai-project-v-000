@@ -1,16 +1,7 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  include Constable
 
-  WIN_COMBINATIONS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ].freeze
+  attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
@@ -27,44 +18,19 @@ class Game
     won? || draw?
   end
 
-  # TODO: refactor
   def won?
-    i = 0
-    is_won = false
-    while i < WIN_COMBINATIONS.size && is_won != true
-      hold = WIN_COMBINATIONS[i].collect { |p| board.cells[p] }
-      is_won = hold.uniq.size == 1 && !hold.include?(" ")
-      i += 1
+    b = board.cells
+    WIN_COMBINATIONS.detect do |c|
+      b[c[0]] == b[c[1]] && b[c[1]] == b[c[2]] && b[c[0]] != " "
     end
-    is_won
   end
 
   def draw?
     board.full? && !won?
   end
 
-  # TODO: refactor
-  # BUG: This returned Congrats X
-  #  X | O | X
-  # -----------
-  # " "| O |" "
-  # -----------
-  # " "| O | X
   def winner
-    hold = nil
-    winner_found = false
-    if won?
-      i = 0
-      while i < WIN_COMBINATIONS.size && !winner_found
-        hold = WIN_COMBINATIONS[i].collect { |p| board.cells[p] }
-        if hold.all? && !hold.include?(" ")
-          hold = hold[0]
-          winner_found = true
-        end
-        i += 1
-      end
-    end
-    hold
+    won? ? board.cells[won?.first] : nil
   end
 
   def turn
