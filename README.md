@@ -1,4 +1,4 @@
-# Tic Tac Toe with AI
+# Tic Tac Toe with AI #
 
 ## Objectives
 
@@ -15,7 +15,7 @@ The goal of this project is to build a version of Tic Tac Toe with 0, 1, and 2 p
 
 You'll be implementing Tic Tac Toe using multiple objects that relate and collaborate, including separate classes for Human players and Computer players. The computer player class will have some sort of artificial intelligence or logic to make move decisions. Finally, you'll wrap all of this up in a Command Line Interface.
 
-## Group Project Instructions ###
+## Group Project Instructions 
 
 *Instructions for how to work on a Group Project with Learn*
 
