@@ -49,18 +49,17 @@ end
 #--------------------------------------------------------
 def turn
 
-#gets move
-puts "Please enter 1-9 player:"
-current_move_index = input_to_index(gets.strip)
+current_move = current_player.move(@board)
 
   #checks validity of move and if it passes, displays it, otherwise
   #re-prompts user to enter a valid move
-  if valid_move?(current_move_index)
-  move(current_move_index,current_player)
-  display_board
-  # puts "Gutsiest move I ever saw, Mav."
+
+  if @board.valid_move?(current_move)
+            @board.update(current_move,current_player)
+            @board.display
+  
   else
-    turn
+            turn
   end
 
 end
@@ -84,8 +83,8 @@ end
 
 #----------------------------------------------------
 def won?
-  x_spots = @board.each_index.select {|i| @board[i] == "X"}
-  o_spots = @board.each_index.select {|i| @board[i] == "O"}
+  x_spots = @board.cells.each_index.select {|i| @board.cells[i] == "X"}
+  o_spots = @board.cells.each_index.select {|i| @board.cells[i] == "O"}
   is_a_win = false
 
 
@@ -128,7 +127,7 @@ end
 #----------------------------------------------------
 def full?
   #if any of the elements are blank, it will return true, which means it will be not full
-  return !@board.any? {|x| x == " "}
+  return !@board.cells.any? {|x| x == " "}
 end
 
 
@@ -154,7 +153,7 @@ end
 def winner
 
    #this leverages ruby truthiness, where an array returned evaluates to truthy
-  won? ? (return @board[won?[0]]) : (return nil)
+  won? ? (return @board.cells[won?[0]]) : (return nil)
 
 end
 

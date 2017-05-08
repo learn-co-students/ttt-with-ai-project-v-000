@@ -1,3 +1,4 @@
+require 'pry'
 class Board
 
 
@@ -89,7 +90,8 @@ def turn
 
 #gets move
 puts "Please enter 1-9 player:"
-current_move_index = input_to_index(gets.strip)
+current_move = gets.strip
+current_move_index = input_to_index(current_move)
 
   #checks validity of move and if it passes, displays it, otherwise
   #re-prompts user to enter a valid move
