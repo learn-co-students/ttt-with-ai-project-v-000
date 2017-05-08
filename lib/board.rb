@@ -111,9 +111,9 @@ def turn_count
 end
 
 #--------------------------------------------------------
-def update (input, char)
+def update (input, player)
 position = input_to_index(input)
-@cells[position] = char
+@cells[position] = player.token
 end
 
 
