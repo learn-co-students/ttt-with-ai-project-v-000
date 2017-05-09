@@ -26,7 +26,7 @@ class Computer < Player
 
         #throws in a bit of smack talk
         puts @@random_smack_array[rand(@@random_smack_array.count-1)]
-        actual_move
+        actual_move.to_s
         end
 end
 
