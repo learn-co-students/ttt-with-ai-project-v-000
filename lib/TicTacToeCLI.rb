@@ -66,7 +66,7 @@ class TicTacToeCLI
     puts "Would you like to play again? [Y/N]"
     input = gets.chomp
     if input == "Y" || input == "y" || input == "Yes" || input == "yes"
-      start
+      call
     elsif input == "N" || input == "n" || input == "No" || input == "no"
       exit
     else
