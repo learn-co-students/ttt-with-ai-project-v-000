@@ -37,7 +37,7 @@ class Game
       position_3 = board.cells[win_combo[2]]
 
       return win_combo if ((position_1 == "X" && position_2 == "X" && position_3 == "X") ||
-                           (position_1 == "O" && position_2 == "O" && position_3 == "O"))
+                          (position_1 == "O" && position_2 == "O" && position_3 == "O"))
     }
     return false
   end
@@ -47,13 +47,8 @@ class Game
   end
 
   def winner
-    index = won?
-    if index && board.cells[index[0]] == "X"
-      return "X"
-    elsif index && board.cells[index[0]] == "O"
-      return "O"
-    else
-      return nil
+    if won = won?
+      board.cells[won.first]
     end
   end
 

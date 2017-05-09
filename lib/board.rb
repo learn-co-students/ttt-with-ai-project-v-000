@@ -32,13 +32,6 @@ class Board
 
   def turn_count #Returns the amount of turns
     cells.count {|cell| cell == "X" || cell == "O"}
-    # turn = 0
-    # cells.each do |index|
-    #   if index == "X" || index == "O"
-    #     turn += 1
-    #   end
-    # end
-    # turn
   end
 
   def taken?(num) #Returns false if the position is empty
