@@ -6,7 +6,6 @@ class Board
 def initialize()
 @cells = []
 reset!
-puts "Welcome to Tic Tac Toe!"
 display('Display')
 end
 
@@ -77,6 +76,17 @@ def taken? (input)
 index = input_to_index(input)
 @cells[index] == 'X' || @cells[index] == 'O' ? (return true) : (return false)
 end
+
+def available_cells
+indices_of_available_cells = []
+@cells.each_with_index {|value,index|
+                        if value == " "
+                        indices_of_available_cells << index  
+                      end
+                        }
+indices_of_available_cells
+end
+
 #--------------------------------------------------------
 def valid_move? (input)
 index = input_to_index(input)

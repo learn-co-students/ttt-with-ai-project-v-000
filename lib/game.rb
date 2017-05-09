@@ -12,7 +12,129 @@ def board= (board)
 end
 
 
+#----------------------------------------------------
+def start_up
+puts "Welcome to tic-tac-toe. What type of game would you like to play?"
+puts "Type 'one player' to play against the computer"
+puts "Type 'two player' to play against a human friend"
+puts "Type 'cyborg max super battle' to launch the WWIII of ai tic-tac-toe."
+puts "type 'done' if you don't like this game anymore and want to go home"
+game_type = gets.strip
+
+case game_type
+            when "one player"
+              one_player_setup
+            when "two player"
+              two_player_setup
+            when "cyborg max super battle"
+                cyborg_setup
+            when "done"
+
+            else
+                start_up
+            end
+
+
+
+end
+
+
+def one_player_setup
+                player_1 = Players::Human.new("X")
+                player_2 = Players::Computer.new("O")
+                new_board = Board.new
+                initialize(player_1,player_2,new_board)
+                puts "Player 1 (you) goes first and plays with an #{player_1.token}."
+                puts "Player 2 (the cyborg living in your laptop) goes second and plays with an #{player_2.token}."
+                play
+                start_up
+end
+
+def two_player_setup
+                player_1 = Players::Human.new("X")
+                player_2 = Players::Human.new("O")
+                new_board = Board.new
+                initialize(player_1,player_2,new_board)
+                puts "Player 1 (you) goes first and plays with an #{player_1.token}."
+                puts "Player 2 (your friend) goes second and plays with an #{player_2.token}."
+                play
+                start_up
+end
+
+def cyborg_setup
+                results = []
+                cat_wins = 0
+                x_wins = 0
+                o_wins = 0
+                puts "How many games do you want the cyborgs to play?"
+                num_games = gets.strip.to_i
+
+                num_games.times{
+                player_1 = Players::Computer.new("X")
+                player_2 = Players::Computer.new("O")
+                new_board = Board.new
+                initialize(player_1,player_2,new_board)
+                results << cyborg_play
+                }
+                puts "//////////////////////////////////////////////////////////////////////////////////"
+                puts "//////////////////////////////////////////////////////////////////////////////////"
+                puts "//////////////////////////////////////////////////////////////////////////////////"
+                puts "///////////                CYBORG BATTLE COMPLETE                /////////////////"
+                puts "//////////////////////////////////////////////////////////////////////////////////"
+                puts "//////////////////////////////////////////////////////////////////////////////////"
+                puts "//////////////////////////////////////////////////////////////////////////////////"
+                sleep(2)
+                puts "Tabulating final results..."
+                sleep(3)
+                puts "Carrying the 7."
+                sleep(3)
+                puts"Shit. Actually, carrying the 4."
+                sleep(2)
+                puts"...4 pi r squared"
+                sleep(2)
+                results.each{|winner|
+                            if winner == "CatGame"
+                                cat_wins += 1
+                            elsif winner == "X"
+                                x_wins += 1
+                            elsif winner == "O"
+                                o_wins += 1
+                            end
+
+                            }
+                sleep(3)
+                puts
+                puts
+                puts
+                puts "Cyborg X: #{x_wins}"
+                puts "Cyborg O: #{o_wins}"
+                puts "Cat: The cat won #{cat_wins} times"
+                sleep(3)
+                puts
+                puts
+                puts
+                puts "But remember, you're all winners in your mothers' books."
+                puts
+                puts
+                puts
+                puts
+                sleep(12)
+                puts "Reinitializing the Terradactyl"
+                sleep(2)
+                puts
+                sleep(2)
+                puts
+                sleep(2)
+                start_up
+end             
+
+
+
+
+
+#----------------------------------------------------
 def initialize (player_1 = Players::Human.new("X") ,player_2 = Players::Human.new("O"), board = Board.new)
+
 @board = board
 @player_1 = player_1
 @player_2 = player_2
@@ -171,5 +293,19 @@ def play
 
 end
 
+
+
+#--------------------------------------------------------
+def cyborg_play
+
+  #keep calling turns until the game is #over?
+  #changed to until to make it a bit more semantic here
+  #should be functionally identical to while
+  (turn) until over?
+
+  won? ? winner : "CatGame"
+
+
+end
 #the end of the class (below)
 end
