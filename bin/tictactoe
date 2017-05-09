@@ -1,3 +1,83 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# 2 player game
+
+def human_vs_human
+  puts "Player One choose X or O"
+
+  input = gets.strip
+
+  player_one = Players::Human.new(input)
+
+  if player_one.token == "X"
+    player_two = Players::Human.new("O")
+  else
+    player_two = Players::Human.new("X")
+  end
+
+  return player_one, player_two
+end
+
+# -------------------------------------------------------------------
+
+# Human vs computer game
+
+def human_vs_comp
+  puts "Player One choose X or O"
+
+  input = gets.strip
+
+  player_one = Players::Human.new(input)
+
+  if player_one.token == "X"
+    player_two = Players::Computer.new("O")
+  else
+    player_two = Players::Computer.new("X")
+  end
+
+  return player_one, player_two
+end
+
+# -------------------------------------------------------------------
+puts 'Hello, Welcome to Tic Tac Toe!'
+puts "Please choose gametype:"
+puts "1 Player mode => Type 1"
+puts "2 Player mode => Type 2"
+puts "Spectator mode => Type 3"
+puts "To exit Tic Tac Toe => Type 4"
+
+
+def gametype
+
+  user_input = gets.strip
+
+  case user_input
+    when "1"
+      saved = human_vs_comp
+      p1 = saved[0]
+      comp = saved[1]
+      Game.new(p1, comp).play
+
+    when "2"
+      saved = human_vs_human
+      p1 = saved[0]
+      p2 = saved[1]
+      Game.new(p1, p2).play
+
+    when "3"
+      comp_1 = Players::Computer.new("X")
+      comp_2 = Players::Computer.new("O")
+      Game.new(comp_1, comp_2).play
+
+    when "4"
+
+    else
+      puts "Please enter 1, 2, 3, or 4"
+      gametype
+  end
+
+end
+
+gametype
