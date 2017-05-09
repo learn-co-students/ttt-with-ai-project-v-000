@@ -10,4 +10,4 @@ puts "| |_| | (__| || (_| | (__| || (_) |  __/"
 puts " \\__|_|\\___|\\__\\__,_|\\___|\\__\\___/ \\___|"
 puts "\nWelcome to Tic Tac Toe!"
 
-Game.start
+CLI.new.start

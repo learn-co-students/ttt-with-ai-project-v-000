@@ -1,8 +1,48 @@
 module Players
 
 	class Computer < Player
+
+# Pending... Trying to make my initial logic work.
+
+# WIN_BLOCK_INDEX_PRIORIES = [ [0, 1, 2], [0, 2, 1], [1, 2, 0] ]
+
+#     def move(board)
+#       @board = board
+#       # returns as input an index of type string
+#       win_or_block_move('X') || win_or_block_move('O') || next_regular_move
+#     end
+
+#     def win_or_block_move(token)
+#       # Attack: check win possibilities. If the player has tokens present in two cells of a winning combo,
+#       #         check if the third one is available.
+#       # Defend: check if oponent has win possibility.
+#       Game::WIN_COMBINATIONS.each do |combination|
+#         WIN_BLOCK_INDEX_PRIORIES.each do |priority|
+#           binding.pry
+#           if @board.cells[combination[priority[0]]] == token && @board.cells[combination[priority[1]]] == token
+#             third_cell = combination[priority[2]] + 1
+#             if !@board.taken?(third_cell)
+#               return third_cell.to_s
+#             end
+#           end
+#         end
+#       end
+#       nil
+#     end
+
+#     def next_regular_move
+#       # If the third cells for win or block are not availabe, move to a random availabe cell.
+#       while true do
+#           random_space = rand(8) + 1
+#           if @board.taken?(random_space)
+#             return random_space.to_s
+#           end
+#         end
+#       end
+#     end
 		
 		def move(board)
+      sleep 1
       move = nil
 
       # When going first, take the middle square. When going second, take the middle square if it isn't yet taken.
@@ -38,47 +78,10 @@ module Players
         # If none of the WIN_COMBINATIONS patterns have two squares taken by the same token and a third empty square, play into the first open square you find, first checking corners and then checking sides.
         move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
       end
+
       move
 		end
 
 	end
 
 end
-
-# Pending... Trying to make my initial logic work.
-# WIN_BLOCK_INDEX_PRIORIES = [ [0, 1, 2], [0, 2, 1], [1, 2, 0] ]
-
-# 		def move(board)
-# 			@board = board
-# 			# returns as input an index of type string
-# 			win_or_block_move('X') || win_or_block_move('O') || next_regular_move
-# 		end
-
-# 		def win_or_block_move(token)
-# 			# Attack: check win possibilities. If the player has tokens present in two cells of a winning combo,
-# 			# 				check if the third one is available.
-# 			# Defend:	check if oponent has win possibility.
-# 			Game::WIN_COMBINATIONS.each do |combination|
-# 				WIN_BLOCK_INDEX_PRIORIES.each do |priority|
-# 					binding.pry
-# 					if @board.cells[combination[priority[0]]] == token && @board.cells[combination[priority[1]]] == token
-# 						third_cell = combination[priority[2]] + 1
-# 						if !@board.taken?(third_cell)
-# 							return third_cell.to_s
-# 						end
-# 					end
-# 				end
-# 			end
-# 			nil
-# 		end
-
-# 		def next_regular_move
-# 			# If the third cells for win or block are not availabe, move to a random availabe cell.
-# 			while true do
-#           random_space = rand(8) + 1
-#           if @board.taken?(random_space)
-#             return random_space.to_s
-#           end
-#         end
-#       end
-#     end
