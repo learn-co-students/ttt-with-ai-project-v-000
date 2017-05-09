@@ -36,9 +36,4 @@ Game.new.start
 puts "Would you like to play again? Please enter [play again] or [exit]"
 input = gets.strip
 
-#   if input == "play again"
-#     puts "What kind of game do you want to play - 0, 1, or 2 players?"
-#   else
-#     exit
-#   end
  end
