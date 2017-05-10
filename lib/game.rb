@@ -27,7 +27,8 @@ class Game
   end
 
   def over?
-    !self.board.cells.include? " " #true for a draw
+    # binding.pry
+    draw? || won?
   end
 
 
@@ -46,12 +47,12 @@ class Game
 
       # (position_1 == "X" || position_1 == "O") &&
       # binding.pry
-      position_1 == position_2 && position_2 == position_3 && self.board.taken?(win_index_1 +1)
+      position_1 == position_2 && position_2 == position_3 && position_1 != " "
     end
   end
 
   def draw?
-    over? && won? == nil
+    board.full? && won? == nil
   end
 
   def winner
@@ -67,14 +68,93 @@ class Game
   end
 
   def turn
-    # binding.pry
-    puts "Please enter 1-9:"
-    # ARGV.clear
+    if board.turn_count.even?
+      puts "Player 1:"
+      move = self.player_1.move(self.board)
+      if board.valid_move?(move)
+        board.update(move, self.player_1)
+        board.display
+      else
+        puts "Invalid move"
+        turn
+      end
+    else
+      puts "Player 2"
+      move = self.player_2.move(self.board)
+      if board.valid_move?(move)
+        board.update(move, self.player_2)
+        board.display
+      else
+        puts "Invalid move"
+        turn
+      end
+    end
+  end
+
+  def play
+    while !over?
+      puts "Player, please enter 1 - 9"
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    else draw?
+      puts "Cat's Game!"
+    end
+
+    play_again
+
+  end
+
+  def self.start
+    puts "Welcome to TicTacToe"
+    puts "Please choose 0, 1, or 2 players"
     input = gets.strip
-    # if board.valid_move?(input)
-    #   board.update(input, player_1.token)
-    # else
-    #   turn
-    # end
+    if input == "0"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      game.play
+    elsif input == "1"
+      puts "Choose token: X or O:"
+      token = gets.strip.upcase
+      if token == "X"
+        game = Game.new(Players::Human.new(token), Players::Computer.new("O"))
+        game.play
+      elsif token == "O"
+        game = Game.new(Players::Human.new(token), Players::Computer.new("X"))
+        game.play
+      else
+        puts "Please choose an X or O token only."
+        start
+      end
+    elsif input == "2"
+      puts "Choose token: X or O for player 1:"
+      token - gets.strip.upcase
+      if token == "X"
+        game = Game.new(Players::Human.new(token), Players::Human.new("O"))
+        game.play
+      elsif token == "O"
+        game = Game.new(Players::Human.new(token), Players::Human.new("X"))
+        game.play
+      else
+        puts "Please choose an X or O token only."
+        start
+      end
+    else
+      puts "Invalid input"
+      start
+    end
+  end
+
+  def play_again
+    puts "Play again? y/n:"
+    input = gets.strip.upcase
+    if input == "Y"
+      self.class.start
+    elsif input == "N"
+      exit
+    else
+      play_again
+    end
   end
 end

@@ -31,7 +31,7 @@ class Board
   end
 
   def taken?(input)
-    position(input) == "X" || position(input) == "O" ? true : false
+    position(input) == "X" || position(input) == "O"
   end
 
   # Evaluate position selected is occupied
@@ -41,6 +41,11 @@ class Board
 
   def valid_move?(input)
     !taken?(input) && input.to_i.between?(1,9)
+  end
+
+  def available_moves
+    # binding.pry
+    cells.each_index.select {|cell| cells[cell] == " "}
   end
 
   def update(input, player)
