@@ -6,14 +6,10 @@ module Players
     def initialize(player_token)
       super
       self.token == "X" ? self.opponent_token = "O" : self.opponent_token = "X"
-      # binding.pry
-        # self.board = game.board
     end
 
     def move(board)
-      # binding.pry
       if position_priority(board) != nil
-        # binding.pry
         priority = position_priority(board)
         move = priority.detect {|cell| board.cells[cell] == " "} + 1
         sleep 1
@@ -25,11 +21,6 @@ module Players
       end
     end
 
-#     def check_priority
-#       flag = true
-# end
-#
-#
     def position_priority(board)
 
       Game::WIN_COMBINATIONS.find do |combo|
