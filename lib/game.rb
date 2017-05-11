@@ -18,6 +18,9 @@ class Game
     self.board = board
     self.player_1 = player_1
     self.player_2 = player_2
+    # player_1.board = self.board
+    # player_2.board = self.board
+    # binding.pry
   end
 
   def current_player
@@ -70,20 +73,20 @@ class Game
   def turn
     if board.turn_count.even?
       puts "Player 1:"
+      board.display
       move = self.player_1.move(self.board)
       if board.valid_move?(move)
         board.update(move, self.player_1)
-        board.display
       else
         puts "Invalid move"
         turn
       end
     else
-      puts "Player 2"
+      puts "Player 2:"
+      board.display
       move = self.player_2.move(self.board)
       if board.valid_move?(move)
         board.update(move, self.player_2)
-        board.display
       else
         puts "Invalid move"
         turn
@@ -98,13 +101,13 @@ class Game
     end
 
     if won?
+      puts "Winning board:"
+      board.display
       puts "Congratulations #{winner}!"
     else draw?
+      board.display
       puts "Cat's Game!"
     end
-
-    play_again
-
   end
 
   def self.start
@@ -150,7 +153,7 @@ class Game
     puts "Play again? y/n:"
     input = gets.strip.upcase
     if input == "Y"
-      self.class.start
+      self.start
     elsif input == "N"
       exit
     else

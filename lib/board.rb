@@ -22,6 +22,10 @@ class Board
     self.cells[input.to_i - 1]
   end
 
+  def board_pos(input)
+    self.cells[input]
+  end
+
   def full?
     !self.cells.include?(" ")
   end
