@@ -24,9 +24,6 @@ module Players
     def position_priority(board)
 
 
-
-
-
       Game::WIN_COMBINATIONS.find do |combo|
         (board.board_pos(combo[0]) == opponent_token && board.board_pos(combo[1]) == opponent_token && board.board_pos(combo[2]) == " ") ||
         (board.board_pos(combo[0]) == opponent_token && board.board_pos(combo[2]) == opponent_token && board.board_pos(combo[1]) == " ") ||
