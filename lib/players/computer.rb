@@ -9,18 +9,19 @@ module Players
     end
 
     def move(board)
-      if position_priority(board) != nil
+      if position_priority(board) != nil # If a combination is found where player or opponent has 2/3 winning moves, block win or take win.
         priority = position_priority(board)
         move = priority.detect {|cell| board.cells[cell] == " "} + 1
         sleep 1
         move.to_s
-      else
+      else  # for early moves where no one has 2/3 winning combination. Not very smart.
         move = board.available_moves.sample + 1
         sleep 1
         move.to_s
       end
     end
 
+# Determine if opponent has 2 of 3 spots in a winning combination, or if player has 2 of 3 spots in a winning combination, then return that winning combination.
     def position_priority(board)
 
 

@@ -34,11 +34,12 @@ class Board
     self.cells.reject {|cell| cell == ' '}.size
   end
 
+  # Evaluate position and return based on player input
   def taken?(input)
     position(input) == "X" || position(input) == "O"
   end
 
-  # Evaluate position selected is occupied
+  # Evaluate position selected is occupied and return true|false based on array index
   def position_taken?(position)
     !(self.board.cells[position].nil? || self.board.cells[position] == " ")
   end
@@ -47,11 +48,13 @@ class Board
     !taken?(input) && input.to_i.between?(1,9)
   end
 
+  # Check board for all spaces not occupied by X or O.
   def available_moves
     # binding.pry
     cells.each_index.select {|cell| cells[cell] == " "}
   end
 
+  # Update board with player's move
   def update(input, player)
     # binding.pry
     input = input.to_i - 1
