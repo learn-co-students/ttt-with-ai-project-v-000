@@ -6,12 +6,10 @@ module Players
     attr_reader :playermove
 
     def move(board)
-      board[(board.size*rand).floor]
-
-      # board.cells.each do |space|
-      #   if space.valid_move?
-      #     valid_moves << space.index.to_str
-      #   end
+      board.cells.each do |space|
+        if space.valid_move?
+          valid_moves << space.index.to_str
+        end
       # end
       # binding.pry
       # player_move = valid_moves
