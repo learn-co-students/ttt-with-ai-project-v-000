@@ -1,63 +1,75 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-
-  #--- Game Types -----------------------------
-
-  def one_player
-    puts "Player 1, please choose X or O"
-    player_one_token = gets.strip
-    player_one = Players::Human.new(input)
-    if player_one.token == "X"
-      player_two = Players::Computer.new("O")
-    else
-      player_two = PLayers::Computer.new("X")
-    end
-    Game.new(player_one, player_two)
-  end
-
-  def two_player
-    puts "Player 1, please choose X or O"
-    player_one_token = gets.strip
-    player_one = Players::Human.new(input)
-    if player_one.token == "X"
-      player_two = Players::Human.new("O")
-    else
-      player_two = PLayers::Human.new("X")
-    end
-    Game.new(player_one, player_two)
-  end
-
-  def computer_play
-    player_one = Players::Computer.new("X")
-    player_two = Players::Computer.new("O")
-    Game.new(player_one, player_two)
-  end
-
-  def gameplay(input)
-    if input == "0"
-      computer_play
-    elsif input == "1"
-      one_player
-    else
-      two_player
-    end
-  end
-  #--------------------------------------------
+  #
+  # #--- Game Types -----------------------------
+  #
+  # def one_player
+  #   puts "Player 1, please choose X or O"
+  #   player_one_token = gets.strip
+  #   player_one = Players::Human.new(input)
+  #   if player_one.token == "X"
+  #     player_two = Players::Computer.new("O")
+  #   else
+  #     player_two = PLayers::Computer.new("X")
+  #   end
+  #   Game.new(player_one, player_two)
+  # end
+  #
+  # def two_player
+  #   puts "Player 1, please choose X or O"
+  #   player_one_token = gets.strip
+  #   player_one = Players::Human.new(input)
+  #   if player_one.token == "X"
+  #     player_two = Players::Human.new("O")
+  #   else
+  #     player_two = PLayers::Human.new("X")
+  #   end
+  #   Game.new(player_one, player_two)
+  # end
+  #
+  # def computer_play
+  #   player_one = Players::Computer.new("X")
+  #   player_two = Players::Computer.new("O")
+  #   Game.new(player_one, player_two)
+  # end
+  #
+  # def gameplay(input)
+  #   if input == "0"
+  #     computer_play
+  #   elsif input == "1"
+  #     one_player
+  #   else
+  #     two_player
+  #   end
+  # end
+  # #--------------------------------------------
 
 puts "Welcome to Tic Tac Toe"
-puts "How many players are joining?(0, 1 or 2)"
-input = gets.strip
-Game.new #gameplay(input)
-  until input == "no"
-    puts "Would you like to play again?(yes/no)"
-    if input == "yes"
-      puts "How many players are joining?(0, 1 or 2)"
-      input = gets.strip
-      Game.new
-    else
-      break
-    end
 
-  # end
+puts "How many players are joining? (0, 1 or 2)"
+player_number = gets.strip
+
+puts "Player one, pick X or O"
+player_one_token = gets.strip
+
+if player_one_token == "X"
+  player_two_token = "O"
+else
+  player_two_token = "X"
+end
+
+puts "Begin"
+puts " 1 | 2 | 3 "
+puts "------------"
+puts " 4 | 5 | 6 "
+puts "------------"
+puts " 7 | 8 | 9 "
+
+if player_number == "2"
+  Game.new(Players::Human.new("#{player_one_token}"), Players::Human.new("#{player_two_token}"))
+elsif player_number == "1"
+  Game.new(Players::Human.new("#{player_one_token}"), Players::Computer.new("#{player_two_token}"))
+else
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 end
