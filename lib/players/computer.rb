@@ -3,31 +3,11 @@ require 'pry'
 module Players
   class Computer < Player
 
-    attr_reader :playermove
+    attr_reader :computer_move
 
     def move(board)
-
-
-      @playermove = playermove
-      # binding.pry
+      ["1", "2", "3", "4", "5", "6", "7", "8", "9"].sample
     end
-
-    def random_play(board)
-      board.cells.rand
-
-      # board.cells.each do |space|
-      #   if space.valid_move?
-      #     valid_moves << space.index.to_str
-      #   end
-        # end
-        # binding.pry
-        # player_move = valid_moves
-        #   if space = " "
-        #     avail << space.index.to_str
-        #   end
-        # end
-        # player_move = avail
-        # player_move.tap {|space| space.to_str}
 
   end
 end
