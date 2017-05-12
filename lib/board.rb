@@ -50,7 +50,7 @@ class Board
 
   def valid_move?(input)
     post = input.to_i
-    if taken?(input) == false
+    if !taken?(input)
       if post > 0 && post < 10
         true
       end
