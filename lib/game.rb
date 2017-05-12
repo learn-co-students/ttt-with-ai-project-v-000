@@ -19,6 +19,51 @@ class Game
     @board = board
   end
 
+  #
+  # #--- Game Types -----------------------------
+  #
+  # def one_player(player_one_token)
+  #   puts "Player 1, please choose X or O"
+  #   player_one_token = gets.strip
+  #   player_one = Players::Human.new(input)
+  #   if player_one.token == "X"
+  #     player_two = Players::Computer.new("O")
+  #   else
+  #     player_two = PLayers::Computer.new("X")
+  #   end
+  #   Game.new(player_one, player_two)
+  # end
+  #
+  # def two_player
+  #   puts "Player 1, please choose X or O"
+  #   player_one_token = gets.strip
+  #   player_one = Players::Human.new(input)
+  #   if player_one.token == "X"
+  #     player_two = Players::Human.new("O")
+  #   else
+  #     player_two = PLayers::Human.new("X")
+  #   end
+  #   Game.new(player_one, player_two)
+  # end
+  #
+  # def computer_play
+  #   player_one = Players::Computer.new("X")
+  #   player_two = Players::Computer.new("O")
+  #   Game.new(player_one, player_two)
+  # end
+  #
+  # def gameplay(input)
+  #   if input == "0"
+  #     computer_play
+  #   elsif input == "1"
+  #     one_player
+  #   else
+  #     two_player
+  #   end
+  # end
+  # #--------------------------------------------
+
+
   def current_player
     if self.board.turn_count.even?
       self.player_1
