@@ -22,7 +22,6 @@ class Board
 
   def position(input)
     token = @cells[input.to_i-1]
-    # puts "#{token}"
     token
   end
 
