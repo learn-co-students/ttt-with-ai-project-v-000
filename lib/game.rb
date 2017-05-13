@@ -20,17 +20,15 @@ class Game
   end
 
   def current_player
-    if self.board.turn_count.even?
-      self.player_1
+    if @board.turn_count.even?
+      player_1
     else
-      self.player_2
+      player_2
     end
   end
 
   def over?
-    if self.board.cells.all? {|position| board.taken?(position)}
-      return true
-    end
+    draw? || won?
   end
 
   def won?
@@ -38,7 +36,7 @@ class Game
   end
 
   def draw?
-    self.over? && !self.won?
+    board.full? && !won?
   end
 
   def winner
@@ -71,8 +69,7 @@ class Game
   end
 
   def play
-    # self.turn
-    until self.won? || self.draw?
+    until over?
       self.turn
     end
     if self.won?
@@ -82,6 +79,7 @@ class Game
     else
       puts "something is wrong"
     end
+
   end
 
 end

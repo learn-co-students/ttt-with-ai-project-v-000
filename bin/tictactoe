@@ -10,9 +10,12 @@ player_number = gets.strip
 puts "Player one, pick X or O"
 player_one_token = gets.strip
 
-if player_one_token == "X"
+
+if player_one_token == "X" || player_one_token =="x"
+  player_one_token = "X"
   player_two_token = "O"
-else
+elsif player_one_token =="O" || player_one_token == "o"
+  player_one_token = "O"
   player_two_token = "X"
 end
 
@@ -35,3 +38,11 @@ else
 end
 
 @game.play
+
+puts "Play again?(y/n)"
+input = gets.strip
+if input == "y"
+  load 'bin/tictactoe'
+elsif input == "n"
+  puts "Goodbye!"
+end
