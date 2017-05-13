@@ -96,6 +96,13 @@ describe 'Game' do
 
       expect(game.over?).to be_falsey
     end
+
+    it 'returns false for an in-progress game of only space 9' do
+      game = Game.new
+      game.board.cells = [" ", " ", " ", " ", " ", " ", " ", " ", "O"]
+
+      expect(game.over?).to be_falsey
+    end
   end
 
   describe '#won?' do
