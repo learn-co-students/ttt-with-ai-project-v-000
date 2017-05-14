@@ -45,7 +45,7 @@ class Game
 
   def turn
     current_player.board = board
-    number = current_player.input
+    number = current_player.move(board)
     if board.valid_move?(number)
       board.update(number, current_player)
     else
@@ -55,6 +55,7 @@ class Game
 
   def play
     until won? || draw?
+      board.display
       turn
     end
     if draw?
