@@ -1,3 +1,75 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "What type of game do you want to play?  0, 1 or 2 player game?"
+
+def number_of_players
+  playas = ""
+  until playas == "0" || playas == "1" || playas == "2" || playas == "wargames"
+    puts "Please enter '0', '1', or '2' or 'wargames'."
+    playas = gets.strip
+  end
+  playas
+end
+
+def first_play
+  selection = ""
+  until selection == "player" || selection == "computer"
+    puts "Who should go first and be 'X'?  Select 'player' or 'computer'"
+    selection = gets.strip
+  end
+  selection
+end
+
+def start_game
+  num = number_of_players
+  if num == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
+  elsif num == "1"
+    first = first_play
+    if first == "player"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      game.board.display
+      game.play
+    else
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      game.board.display
+      game.play
+    end
+  elsif num == "2"
+      game = Game.new
+      game.board.display
+      game.play
+  elsif  num == "wargames"
+      wargames
+  end
+end
+
+def wargames
+  counter = 0
+  100.times do
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
+    if game.won? != false
+      counter += 1
+    end
+  end
+  puts "Computer won #{counter} times."
+  puts "Nuclear War is a zero-sum gain... shutting down... beeeeeeeeeeewww..."
+end
+
+start_game
+pa = ""
+until pa == "no"
+  puts "Do you want to play again?  Please enter 'yes' or 'no'."
+  pa = gets.strip
+  if pa == "yes"
+    puts "What type of game do you want to play?  0, 1 or 2 player game?"
+    start_game
+  else
+    puts "Thanks for playing!"
+  end
+end
