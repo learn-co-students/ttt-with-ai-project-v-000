@@ -1,3 +1,4 @@
+require 'pry'
 module Players
   class Computer < Player
     @@valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -6,22 +7,22 @@ module Players
      ]
 
       def move(board)
+        input = @@valid_moves.sample
         combo2 = WIN_COMBINATIONS.detect do |combo|
-          board.cells[combo[0]] == board.cells[combo[1]] && board.taken?(combo[0]) ||
-          board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[1]) ||
-          board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0])
+          board.cells[combo[0]] == board.cells[combo[1]] && board.taken?(combo[0]+1) && board.cells[combo[2]] == " "   ||
+          board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[1]+1) && board.cells[combo[0]] == " "   ||
+          board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0]+1) && board.cells[combo[1]] == " "
         end
         if combo2 != nil
           blocker = combo2.map {|index| board.cells[index]}
           index = blocker.find_index(" ")
            if index != nil
-            index2 = combo2[blocker.find_index(" ")]
-            index2 +=1
+            input = combo2[blocker.find_index(" ")]
+            input +=1
            end
-        else
-          @@valid_moves.sample
         end
+        input
       end
-    end
 
+  end
 end

@@ -1,4 +1,4 @@
-module Players 
+module Players
   class Human < Player
 
     def move(board)
@@ -6,5 +6,7 @@ module Players
       input = gets.chomp
     end
   end
+
+
 
 end
