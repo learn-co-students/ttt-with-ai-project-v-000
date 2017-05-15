@@ -20,7 +20,7 @@ class Board
 
   def position(num)
     num = num.to_i
-    position = cells[num-1]
+    cells[num-1]
   end
 
   def full?
