@@ -104,5 +104,3 @@ class Game
   end
 
 end
-
-#rspec spec/04_game_spec.rb
