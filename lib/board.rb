@@ -2,12 +2,12 @@ class Board
 
   attr_accessor :cells
 
-  def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  def initialize()
+    self.reset!
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -27,7 +27,7 @@ class Board
   end
 
   def turn_count
-    @cells.select{|cell| cell == "O" || cell == "X"}.size
+    @cells.count{|cell| cell == "O" || cell == "X"}
   end
 
   def taken?(input)

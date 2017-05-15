@@ -1,7 +1,7 @@
 require 'pry'
 class Game
 
-  attr_accessor :board, :player_1, :player_2, :winner
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [[0,1,2],
                      [3,4,5],
@@ -16,8 +16,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @board.display
-    @winner = winner
   end
 
   def start
@@ -27,7 +25,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count%2 == 0 ? @player_1 : @player_2
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over?
@@ -35,16 +33,11 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combo|
-      if combo.all?{|p|@board.cells[p] == "O"}
-        @winner = "O"
-        return true
-      elsif combo.all?{|p|@board.cells[p] == "X"}
-        @winner = "X"
-        return true
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
-    return false
   end
 
   def draw?
@@ -52,8 +45,9 @@ class Game
   end
 
   def winner
-    won?
-    return @winner
+    if winning_combo = won?
+    @winner = @board.cells[winning_combo.first]
+    end
   end
 
   def turn
