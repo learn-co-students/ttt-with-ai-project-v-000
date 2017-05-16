@@ -1,3 +1,113 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def welcome_message
+  puts "Welcome to Tic Tac Toe!"
+
+  puts "Please choose one of the following game styles by number:"
+  puts "1. Human vs. Human"
+  puts "2. Human vs. Computer"
+  puts "3. Computer vs. Computer"
+  puts "4. Wargames"
+end
+
+def start
+  input = gets.strip
+
+  if input == "1"
+    puts "Choose Player 1's token, X or O:"
+    token_input = gets.strip
+    if token_input == "X" || token_input == "x"
+      Game.new.play
+    elsif token_input == "O" || token_input == "o"
+      Game.new(Players::Human.new("O"), Players::Human.new("X")).play
+    elsif token_input != "O" && token_input != "X" && token_input != "o" && token_input != "x"
+      welcome_message
+      start
+    end
+
+  elsif input == "2"
+    puts "Would you like to be Player 1? Please enter Y or N:"
+    player_input = gets.strip
+
+    if player_input == "Y" || player_input == "y"
+      puts "Choose Player 1's token, X or O:"
+      token_input = gets.strip
+      if token_input == "X" || token_input == "x"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif token_input == "O" || token_input == "o"
+        Game.new(Players::Human.new("O"), Players::Computer.new("X")).play
+      elsif token_input != "O" && token_input != "X" && token_input != "o" && token_input != "x"
+
+        start
+      end
+
+    elsif player_input == "N" || player_input == "n"
+      puts "Choose Player 1's token, X or O:"
+      token_input = gets.strip
+      if token_input == "X" || token_input == "x"
+        Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      elsif token_input == "O" || token_input == "o"
+        Game.new(Players::Computer.new("O"), Players::Human.new("X")).play
+      elsif token_input != "O" && token_input != "X" && token_input != "o" && token_input != "x"
+
+        welcome_message
+        start
+      end
+
+    elsif player_input != "Y" && player_input != "N" && player_input != "y"  && player_input == "n"
+      welcome_message
+      start
+    end
+
+  elsif input == "3"
+      puts "Choose Player 1's token, X or O:"
+      token_input = gets.strip
+      if token_input == "X" || token_input == "x"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      elsif token_input == "O" || token_input == "o"
+        Game.new(Players::Computer.new("O"), Players::Computer.new("X")).play
+      elsif token_input != "O" && token_input != "X" && token_input != "o" && token_input != "x"
+
+        welcome_message
+        start
+      end
+
+#bug or feature? the wargames count doesn't start at 0 if you've been playing other rounds, either of wargames
+#or of other versions of the game.
+  elsif input == "4"
+    puts "Choose Player 1's token, X or O:"
+    token_input = gets.strip
+    if token_input == "X" || token_input == "x"
+      100.times do
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      end
+      Game.wargames.each {|key, value| puts "#{key}: #{value}" }
+    elsif token_input == "O" || token_input == "o"
+      100.times do
+        Game.new(Players::Computer.new("O"), Players::Computer.new("X")).play
+      end
+      Game.wargames.each {|key, value| puts "#{key}: #{value}" }
+    elsif token_input != "O" && token_input != "X" && token_input != "o" && token_input != "x"
+      welcome_message
+      start
+    end
+
+  else
+    welcome_message
+    start
+  end
+
+end
+
+welcome_message
+start
+
+puts "Would you like to play again? Y/N"
+repeat_input = gets.strip
+if repeat_input == "Y" || repeat_input == "y"
+  at_exit {load("bin/tictactoe")}
+else puts "Thank you for playing!"
+  exit
+end
