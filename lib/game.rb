@@ -44,7 +44,14 @@ class Game
 
 		# returns X || O depending on the winner
     def winner
-       won? ? @board.cells[won?[0]] : nil
+      # won? ? @board.cells[won?[0]] : nil
+
+	      # if won? returns true it will assign the local variable won
+				# and execute the code. If won is assigned we could use that #variable
+				#instead of calling won? twice like the original code
+			if won = won?
+  			board.cells[won.first]
+			end
     end
 
 		# validates a choosen move if not valid it will ask again
@@ -67,6 +74,14 @@ class Game
 				else
 					puts "Cat's Game!"
 			end
-			
+
+			# if its computer vs computer doesn't give the option to  play again.
+			# TicTacToeClI.new.continue might break test from passing
+			if @player_1.class == Players::Computer && @player_2.class == Players::Computer
+				puts "GoodBye!!"
+			else
+				TicTacToeClI.new
+			end
+
 		end
 end

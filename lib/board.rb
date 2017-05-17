@@ -33,7 +33,8 @@ attr_accessor :cells
 
     #counts how many slots are occupied
   def turn_count
-    @cells.reject{|obj| obj==" "}.size
+    #@cells.reject{|obj| obj==" "}.size
+    @cells.count{|cell| cell=="X" || cell=="O"}
   end
 
     #checks to see if a cell is occupied w/ X or O returns true||false
@@ -44,11 +45,7 @@ attr_accessor :cells
 
     #same as above to validate the move taken
   def valid_move?(num)
-    num = num.to_i
-    if num.between?(1,9)
-       !taken?(num)
-     else
-    end
+    num.to_i.between?(1,9) && !taken?(num)
   end
 
     #if valid move it saves the move
