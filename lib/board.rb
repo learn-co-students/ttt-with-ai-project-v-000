@@ -13,7 +13,6 @@ class Board
 
 	def reset!
 		self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		#self.cells.collect! {|i| i.clear.gsub("", " ")}
 	end
 
 	def display

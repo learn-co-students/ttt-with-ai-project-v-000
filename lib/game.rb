@@ -1,5 +1,5 @@
 class Game
-	attr_accessor :board, :player_1, :player_2 #:moves
+	attr_accessor :board, :player_1, :player_2
 
 	WIN_COMBINATIONS = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -11,13 +11,8 @@ class Game
   	@player_1 = player_1
   	@player_2 = player_2
   	@board = board
-    #for Computer to "see" moves
-    #@moves = []
+    
   end
-
-  #def moves
-    #self.moves
-  #end
 
   def current_player
   	if board.turn_count.even?
@@ -60,8 +55,6 @@ class Game
   	player_move = player.move(self.board).to_i
   	if self.board.valid_move?(player_move)
   		self.board.update(player_move, player)
-      #shooting for some ai
-      #self.moves << player_move
   		self.board.display
   	else
   		turn
@@ -76,13 +69,6 @@ class Game
   		puts "Cat's Game!"
   	end
   end
-
-
-
-
-
-
-
 
 end
 
