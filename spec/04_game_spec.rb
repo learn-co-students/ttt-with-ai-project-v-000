@@ -18,6 +18,7 @@ describe 'Game' do
     it 'provides access to the board' do
       game = Game.new
       game.board = []
+      
       expect(game.board).to eq([])
     end
   end
