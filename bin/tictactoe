@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-
+input = ""
 puts "Welcome to Tic Tac Toe"
 puts "Would you like to play (yes or no):"
 while input != "no" do
@@ -18,13 +18,12 @@ while input != "no" do
       # human = gets.strip.to_i
       # puts "do you want to be X or O?:"
       player_number =gets.strip
-      if player_number == 1
+      if player_number == "1"
         player_1 = Players::Human.new('X')
         player_2 = Players::Computer.new('O')
       else
         player_2 = Players::Human.new('O')
         player_1 = Players::Computer.new('X')
-
       end
     elsif input.to_i == 2
       player_1 = Players::Human.new('X')
@@ -33,4 +32,6 @@ while input != "no" do
   end
   game = Game.new(player_1,player_2)
   game.play
+  puts "Would you like to play again? (yes or no):"
+  input = gets.strip
 end
