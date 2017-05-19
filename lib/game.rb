@@ -41,7 +41,7 @@ class Game
 
   def draw?
     if won? == false && @board.full?
-      puts "Cat's Game!"
+      # puts "Cat's Game!"
       true
     end
   end
@@ -63,11 +63,9 @@ class Game
 
   def turn
     player = current_player
-    # binding.pry
     player_move = player.move(board)
     # binding.pry
     @board.valid_move?(player_move.to_i) ? @board.update(player_move.to_i, player) : turn
-    # binding.pry
     @board.display
   end
 
