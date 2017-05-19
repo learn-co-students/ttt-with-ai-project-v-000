@@ -2,26 +2,32 @@
 
 require_relative '../config/environment'
 
-
+def start
   puts "Hey there! Welcome to tic-tac-toe!"
   puts "Would you like to play a 0, 1, or 2 person game?"
   input = gets.chomp.to_i
-while input != "exit"
-  if input == 0
-    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-  elsif input == 1
-    puts "Would you like to go first? [yes/no]"
-    first_player_input = gets.chomp.upcase
-    if first_player_input == "YES"
-      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-    elsif first_player_input == "NO"
-      Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+  while input != "exit"
+    if input == 0
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    elsif input == 1
+      puts "Would you like to go first? [yes/no]"
+      puts "Type 'back' to go back to main menu"
+      first_player_input = gets.chomp.upcase
+      if first_player_input == "YES"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif first_player_input == "NO"
+        Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      elsif first_player_input == "BACK"
+        start
+      else
+        puts "Invalid Input, please enter yes, no, or back"
+      end
+    elsif input == 2
+        Game.new(Players::Human.new("X"), Players::Human.new("O")).play
     else
-      puts "Invalid Input"
+      puts "Invalid Input, please enter 0, 1, 2, or exit"
     end
-  elsif input == 2
-      Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-  else
-    puts "Invalid Input, please enter 0, 1, 2, or exit"
   end
 end
+
+start
