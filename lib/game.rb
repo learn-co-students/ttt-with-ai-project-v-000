@@ -30,12 +30,14 @@ class Game
 
   def won?
     WIN_COMBINATIONS.any? do |combo|
-      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] != ""
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1) # Add 1 because #taken takes in user input and subtracts 1
     end
   end
 
   def draw?
-    board.full? && !won?
+    @board.full? && !won?
   end
 
   def over?
@@ -46,10 +48,12 @@ class Game
     #current_player if won?
     if won?
       win_combo = WIN_COMBINATIONS.detect do |combo|
-        board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] != ""
+        @board.cells[combo[0]] == @board.cells[combo[1]] &&
+        @board.cells[combo[1]] == @board.cells[combo[2]] &&
+        @board.cells[combo[0]] != ""
       end
-      board.cells[win_combo[0]]
-    else !won?
+      @board.cells[win_combo[0]]
+    else
       nil
     end
   end
