@@ -66,7 +66,7 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
-    elsif
+    else
       puts "Cat's Game!"
     end
   end

@@ -24,20 +24,13 @@ puts "  How Many Players? Choose from 0, 1, 2:"
 input = gets.strip.to_i
 if input.between?(0, 2) && input == 0
   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  until game.won?
-    game.play
-  end
+  game.play
 elsif input.between?(0, 2) && input == 1
   game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
   game.play
-  until game.won?
-    game.play
-  end
 elsif input.between?(0, 2) && input == 2
   game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  until game.won?
-    game.play
-  end
+  game.play
 else
   puts "  Please enter valid number of players!"
 end
