@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe!"
+puts "Press enter to begin."
+
+TttCli.new
