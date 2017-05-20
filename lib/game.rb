@@ -20,7 +20,7 @@ class Game
 
 
   def current_player
-    board.turn_count % 2 == 0 ? player_1 : player_2 #oppure usa .odd?/.even?
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over?
@@ -41,7 +41,9 @@ class Game
 
   def winner
     #accedo direttamente all'array vincente usando un qualsiasi index (0..2) e chiamando won?[]. Perchè? Perchè won? restituisce un array di index vincenti!
-    won? ? board.cells[won?[0]] : nil
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def input_to_index(user_input)
