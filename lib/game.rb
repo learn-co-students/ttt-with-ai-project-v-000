@@ -16,9 +16,7 @@ class Game
     end
 
     def current_player
-    	count = self.board.turn_count
-    	return self.player_1 if count.even?
-    	return self.player_2 if count.odd?
+    	@board.turn_count.even? ? @player_1 : @player_2
     end
 
     def over?
@@ -36,9 +34,8 @@ class Game
     end
 
     def winner
-    	if self.won?
-      	array_won = self.won?
-      	return self.board.cells[array_won[0]]
+    	if array_won = self.won?
+      	self.board.cells[array_won.first]
     	end
     end
 
