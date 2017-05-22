@@ -30,7 +30,11 @@ class Board
 
   def turn_count
     turns = 0
-    @cells.each{|cell| cell == "O" || cell == "X" ? turns += 1 : turns += 0}
+    @cells.each do |cell|
+      if cell == "O" || cell == "X"
+        turns += 1
+      end
+    end
     turns
   end
 

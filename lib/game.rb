@@ -20,8 +20,10 @@ class Game
   ]
 
   def current_player
-    if Board.new.turn_count.even?
+    if board.turn_count.even?
       player_1
+    else
+      player_2
     end
   end
 
@@ -32,9 +34,9 @@ class Game
   def won?
     WIN_COMBINATIONS.any? do |combo|
 
-      if @board.cells[combo[0]] == "X" && @board.cells[combo[1]] == "X" && @board.cells[combo[2]] == "X"
+      if @board.cells.values_at(combo[0], combo[1], combo[2]) == ["X", "X", "X"]
         true
-      elsif @board.cells[combo[0]] == "O" && @board.cells[combo[1]] == "O" && @board.cells[combo[2]] == "O"
+      elsif @board.cells.values_at(combo[0], combo[1], combo[2]) == ["O", "O", "O"]
         true
       else
         false
@@ -48,11 +50,35 @@ class Game
   end #darw?
 
   def winner
-    if won? && current_player == player_1
-      binding.pry
-      current_player.token
-    elsif won? && current_player == player_2
-      player_2.token
+    if won?
+      result = ""
+      WIN_COMBINATIONS.detect do |combo|
+        if @board.cells.values_at(combo[0], combo[1], combo[2]) == ["X", "X", "X"]
+          result << @board.cells[combo[0]]
+        elsif @board.cells.values_at(combo[0], combo[1], combo[2]) == ["O", "O", "O"]
+          result << @board.cells[combo[0]]
+        end
+      end #detect
+      result
+      end #if
+   end #winner
+
+  def turn
+    player = current_player
+    input = player.move(board)
+    if !board.valid_move?(input)
+      puts "Invalid Move, please enter a number between 1 to 9:"
+      @board.display
+      turn
+    else
+      board.update(input, player)
+      @board.display
+    end
+  end
+
+  def play
+    !over? || !won?
+      turn
     end
   end
 
