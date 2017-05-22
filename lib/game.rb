@@ -35,11 +35,16 @@ class Game
     def turn
         input = "invalid"
         while !@board.valid_move?(input)
-            puts "Please enter a position from 1 to 9 (Player #{@current_player.token})"
+            puts "\nPlease enter a position from 1 to 9 (Player #{@current_player.token})"
             input = @current_player.move(@board)
         end
         @board.update(input, @current_player)
         swap_player()
+    end
+
+    def bot_turn(index)
+        swap_player()
+        @board.update((index + 1).to_s, @current_player)
     end
 
     def swap_player
@@ -48,6 +53,7 @@ class Game
 
     def play
         while !over?
+            puts "\n"
             @board.display()
             turn
         end
