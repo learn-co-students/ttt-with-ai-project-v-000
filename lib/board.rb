@@ -21,11 +21,11 @@ class Board
   def position(input)
     num = input.to_i
     num = num -1
-    cells[num]
+    @cells[num]
   end
 
   def full?
-    @cells.include?(" " || "") ? false : true 
+    @cells.include?(" ") ? false : true
   end #full?
 
   def turn_count
@@ -34,5 +34,26 @@ class Board
     turns
   end
 
+  def valid_input?(input)
+    int = input.to_i
+    int.between?(1, 9) ? true : false
+  end
+
+  def taken?(position)
+    int = position.to_i - 1
+
+    @cells[int] == "X" || @cells[int] == "O" ? true : false
+  end #taken?
+
+
+  def valid_move?(input)
+    integer = input.to_i
+    valid_input?(input) && !taken?(input) ? true : false
+  end
+
+  def update(input, player)
+    index = input.to_i - 1
+    @cells[index] = player.token
+  end
 
 end # class Board
