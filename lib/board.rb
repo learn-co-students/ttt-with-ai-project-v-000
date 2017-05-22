@@ -5,11 +5,11 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    self.reset!
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -25,17 +25,11 @@ class Board
   end
 
   def full?
-    @cells.none? {|position| position == " "}
+    @cells.all? {|position| position != " "}
   end
 
   def turn_count
-    counting = 0
-    @cells.each do |position|
-      if position == "X" || position == "O"
-        counting += 1
-      end
-    end
-    counting
+    @cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   def taken?(input)
@@ -48,7 +42,6 @@ class Board
   end
 
     def update(index, player)
-      # index = position.to_i-1
       @cells[index.to_i - 1] = player.token
     end
 

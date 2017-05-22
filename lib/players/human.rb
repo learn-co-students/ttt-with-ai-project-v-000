@@ -6,8 +6,7 @@ module Players
     attr_reader :playermove
 
     def move(board)
-      playermove = gets.strip
-      @playermove = playermove
+      gets.strip
     end
 
 
