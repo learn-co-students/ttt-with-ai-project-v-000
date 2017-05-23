@@ -6,10 +6,12 @@ module Players
             internal_board = board.cells.clone
             # if it is the first move go randomly anyway, for the challange
             # res = (board.available_indexes().sample + 1).to_s # -> Plays randomly
-            scores = minMax(internal_board, 0, 2)
+            scores = minMax(internal_board, 0, 2) # min max is broken, cannot look more then two levels deep
             # puts scores
             max = scores.values.max
-            (scores.select{|k, v| v == max }.keys.sample + 1).to_s
+            res = (scores.select{|k, v| v == max }.keys.sample + 1).to_s
+            puts res
+            res
         end
 
         def minMax(board, level, levels)

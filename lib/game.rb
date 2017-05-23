@@ -35,7 +35,7 @@ class Game
     def turn
         input = "invalid"
         while !@board.valid_move?(input)
-            puts "\nPlease enter a position from 1 to 9 (Player #{@current_player.token})"
+            print "\nPlease enter a position from 1 to 9 (Player #{@current_player.token}): "
             input = @current_player.move(@board)
         end
         @board.update(input, @current_player)
@@ -58,6 +58,7 @@ class Game
             turn
         end
         self.draw? ? puts("Cat's Game!") : puts("Congratulations #{winner()}!")
+        puts ""
         @board.display()
     end
 end
