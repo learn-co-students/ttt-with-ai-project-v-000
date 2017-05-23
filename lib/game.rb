@@ -28,7 +28,7 @@ class Game
   end
 
   def over?
-    @board.cells.include?(" ") ? false : true
+    won? || draw? ? true : false
   end
 
   def won?
@@ -46,7 +46,7 @@ class Game
   end #won
 
   def draw?
-    over? && !won? ? true : false
+    board.full? && !won? ? true : false
   end #darw?
 
   def winner
@@ -77,9 +77,17 @@ class Game
   end
 
   def play
-    !over? || !won?
+    puts "Welcome to Tic-Tac_Toe"
+    until over?
       turn
-    end
-  end
+    end #until
+
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end #if
+
+  end #play
 
 end # Class Game
