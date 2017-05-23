@@ -49,8 +49,26 @@ class Board
     end
     counter
    end
-       
 
-    
+   def taken?(index_number)
+       if @cells[index_number.to_i-1] == " " || @cells[index_number.to_i-1] == "" || @cells[index_number.to_i-1] == nil
+       false
+     elsif @cells[index_number.to_i-1]== "X" || "O"
+       true
+     end
+     end
+
+     def valid_move?(index_number)
+         if index_number.to_i.between?(0, 8) && taken?(index_number.to_i) == false
+            binding.pry
+        else
+          true
+       end
+       end
+
+
+
+        
+        
 
 end
