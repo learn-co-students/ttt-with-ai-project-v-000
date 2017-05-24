@@ -13,7 +13,7 @@ class CLI
             puts "would you like to play again? Y or N"
             input = gets.strip
             if input == "y" 
-                Game.new
+            Game.new.play
             if input == "N"
                 exit
             end
