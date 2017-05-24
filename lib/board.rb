@@ -1,7 +1,7 @@
 require 'pry'
 
 class Board
-    attr_accessor :cells
+    attr_accessor :cells, :token
     
     def initialize
         
@@ -51,24 +51,34 @@ class Board
    end
 
    def taken?(index_number)
-       if @cells[index_number.to_i-1] == " " || @cells[index_number.to_i-1] == "" || @cells[index_number.to_i-1] == nil
+       index = index_number.to_i - 1
+       if @cells[index] == " " || @cells[index] == "" || @cells[index] == nil
        false
-     elsif @cells[index_number.to_i-1]== "X" || "O"
+     elsif @cells[index]== "X" || "O"
        true
      end
      end
 
      def valid_move?(index_number)
-         if index_number.to_i.between?(0, 8) && taken?(index_number.to_i) == false
-            binding.pry
+               
+         index = index_number.to_i - 1
+
+        if index.between?(0, 8) == true &&  taken?(index_number) == false
+            true
         else
-          true
+            false
+            
        end
-       end
+    end
+    def input_to_index(input)
+        input.to_i-1
 
+    end
 
-
-        
-        
-
+    def update(index, player)
+        fixed_index = input_to_index(index)
+      !taken?(index) ? @cells[fixed_index] = player.token : nil
+      
+    end
+    
 end
