@@ -14,11 +14,12 @@ class Game
 
 
    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-     @player_1 = player_1
+    @player_1 = player_1
     @player_2 = player_2
     @board = board
+    
 
-end
+    end
 
 
     def current_player
@@ -70,6 +71,7 @@ end
                 board.update(player_turn, current_player)
                 board.display
             else
+                puts "Space already taken! Try again!"
                 turn
                
             end
