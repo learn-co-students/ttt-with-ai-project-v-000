@@ -1,7 +1,8 @@
 def start
   puts "Welcome to TicTacToe!"
   input_string = ""
-  puts "Please choose your game type. 1 player, 2 players, or I want to watch my computer play!:"
+  puts "Please choose your game type."
+  puts "1 for 1 player, 2 for 2 players, or 3 for I want to watch my computer play!:"
 
   input_string << input = gets.chomp.to_s
 
@@ -16,6 +17,9 @@ def start
       new_game.play
     when "1b", "1c"
       new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      new_game.play
+    when "3c", "3a", "3b"
+      new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       new_game.play
     when "2a"
       new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
