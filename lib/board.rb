@@ -1,5 +1,5 @@
 class Board
-  
+
   attr_accessor :cells
 
   def initialize
@@ -21,11 +21,11 @@ class Board
   def position(user_input)
     cells[user_input.to_i-1]
   end
-  
+
   def full?
-   cells.include?(" ") ? false:true
+   cells.all? {|cell| cell != " "}
     end
-    
+
   def turn_count
     cells.count { |turn| turn !=" "}
     end
@@ -35,11 +35,10 @@ class Board
   end
 
    def valid_move?(index)
-  index.to_i.between?(1,9) && !taken?(index) ? true:false
+  index.to_i.between?(1,9) && !taken?(index) 
    end
 
    def update(position,player)
      @cells[position.to_i-1]= player.token
    end
 end
-  
