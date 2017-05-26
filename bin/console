@@ -3,6 +3,6 @@
 require_relative '../config/environment'
 require 'irb'
 
-puts "starting the console exit"
+puts "starting the console"
 
 IRB.start

@@ -13,10 +13,12 @@ class Game
    [2,4,6]]
 
 
-   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+   def initialize(player_1 = nil, player_2 = nil, board = nil)
+   #binding.pry
+   
     @player_1 = player_1
     @player_2 = player_2
-    @board = board
+    @board = Board.new
     #how do I control which player goes first?
 
     end
@@ -69,7 +71,7 @@ class Game
             player_turn = current_player.move(board)
             if board.valid_move?(player_turn)
                 board.update(player_turn, current_player)
-                board.display
+                board.display   
             else
                 puts "Space already taken! Try again!"
                 turn
@@ -79,18 +81,18 @@ class Game
         
         def play
 
-            while !over?
-                turn
+                while !over?
+                    turn
+                
+                if won?
+                    puts "Congratulations #{winner}!"
+                elsif draw?
+                puts "Cat's Game!"
+                
             end
-            if won?
-                puts "Congratulations #{winner}!"
-            elsif draw?
-            puts "Cat's Game!"
-            
-        end
-        end
+         end
 
-
+        end
 
         
         

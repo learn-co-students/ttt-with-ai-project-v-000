@@ -5,7 +5,7 @@ module Players
     class Human < Player
 
         
-        def move(input)
+        def move(board)
             
             puts "Please choose a space: 1-9"
            
