@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   attr_accessor :cells
 
@@ -6,7 +7,8 @@ class Board
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "] 
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    # can also write as Array.new(9, " ")
   end
 
   def display
