@@ -17,20 +17,6 @@ class Game
     @player_2 = player_2
   end
 
-  def over?
-    won? || draw?
-  end
-
-  def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2
-  end
-
-  def winner
-    if winning_combo = won?
-      @winner = @board.cells[winning_combo.first]
-    end
-  end
-
   def turn
     player = current_player
     current_move = player.move(@board)
@@ -54,6 +40,20 @@ class Game
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
+    end
+  end
+
+  def over?
+    won? || draw?
+  end
+
+  def current_player
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+  end
+
+  def winner
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
     end
   end
 

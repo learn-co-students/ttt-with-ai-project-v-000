@@ -5,11 +5,11 @@ module Players
 
 
       if !board.taken?(5)
-        move = "5"
+        move = "5" #puts in the middle
 
 
       elsif board.turn_count == 1
-        move = "1"
+        move = "1" #if middle is taken put in the top left corner
 
       elsif board.turn_count == 2
         move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}.to_s
@@ -17,7 +17,6 @@ module Players
 
       elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
         move = "2"
-
 
       else
         Game::WIN_COMBINATIONS.detect do |cmb|
