@@ -11,12 +11,24 @@ until num_human_players == "0" || num_human_players == "1" || num_human_players 
   num_human_players = gets.strip
 end
 
-if first_player != "2"
-  puts "Who should go first? (computer or human)"
-  first_player = gets.strip
-  until first_player == "computer" || first_player == "human"
-    puts "ERROR: #{first_player} is not a valid option. Please enter computer or human" 
-    first_player = gets.strip
+computer_first = "n"
+if num_human_players == "1"
+  puts "Let computer go first? (y/N)"
+  computer_first = gets.strip.downcase
+  computer_first = 'n' if computer_first == ""
+  until computer_first == "y" || computer_first == "n"
+    puts "ERROR: #{computer_first} is not a valid option. Please enter y or n" 
+    computer_first = gets.strip
   end
 end
 
+if num_human_players == "0"
+  player_1 = Players::Computer.new('X')
+  player_2 = Players::Computer.new('O')
+elsif num_human_players == "1"
+  player_1 = computer_first == "n" ? Players::Human.new('X') : Players::Computer.new('X')
+  player_2 = computer_first == "n" ? Players::Computer.new('O') : Players::Human.new('O')
+else
+  player_1 = Players::Human.new('X')
+  player_2 = Players::Human.new('O')
+end
