@@ -11,3 +11,12 @@ until num_human_players == "0" || num_human_players == "1" || num_human_players 
   num_human_players = gets.strip
 end
 
+if first_player != "2"
+  puts "Who should go first? (computer or human)"
+  first_player = gets.strip
+  until first_player == "computer" || first_player == "human"
+    puts "ERROR: #{first_player} is not a valid option. Please enter computer or human" 
+    first_player = gets.strip
+  end
+end
+
