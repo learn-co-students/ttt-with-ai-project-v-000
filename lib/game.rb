@@ -45,6 +45,7 @@ class Game
     selection = current_player.move(board)
     if board.valid_move?(selection)
       board.update(selection, current_player)
+      board.display
     else
       puts "#{selection} is not a valid move.  Please enter again (1 ~ 9)"
       turn
@@ -55,15 +56,15 @@ class Game
 
 
     until over?
-      puts "#{current_player.token}, please enter 1-9 (1 is top left and 9 is bottom right)"
+      puts "\n#{current_player.token}'s turn! Please enter 1-9 (1 is top left and 9 is bottom right)"
       turn
     end
 
     win = winner
     if win
-      puts "Congratulations #{winner}!"
+      puts "\nCongratulations #{winner}!"
     else
-      puts "Cat's Game!"
+      puts "\nCat's Game!"
     end
   end                  
 end

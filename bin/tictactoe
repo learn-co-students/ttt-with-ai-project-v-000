@@ -15,7 +15,10 @@ computer_first = "n"
 if num_human_players == "1"
   puts "Let computer go first? (y/N)"
   computer_first = gets.strip.downcase
-  computer_first = 'n' if computer_first == ""
+  if computer_first == ""
+    computer_first = "n"
+    puts "No input was provided. Human will go first by default"
+  end
   until computer_first == "y" || computer_first == "n"
     puts "ERROR: #{computer_first} is not a valid option. Please enter y or n" 
     computer_first = gets.strip
@@ -32,3 +35,6 @@ else
   player_1 = Players::Human.new('X')
   player_2 = Players::Human.new('O')
 end
+
+game = Game.new(player_1, player_2)
+game.play
