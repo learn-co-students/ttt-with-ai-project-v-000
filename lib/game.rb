@@ -39,5 +39,15 @@ class Game
   def winner
     combination = won?
     combination ? board.cells[combination[0]] : nil
+  end
+
+  def turn
+    selection = current_player.move(board)
+    if board.valid_move?(selection)
+      board.update(selection, current_player)
+    else
+      puts "#{selection} is not a valid move.  Please enter again (1 ~ 9)"
+      turn
+    end
   end                    
 end
