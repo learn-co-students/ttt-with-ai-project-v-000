@@ -1,3 +1,13 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "\e[H\e[2J"
+puts "Welcome to Tic Tac Toe!"
+puts "How many human players for this game? (0, 1, or 2)"
+num_human_players = gets.strip
+until num_human_players == "0" || num_human_players == "1" || num_human_players == "2"
+  puts "ERROR: #{num_human_players} is not a valid option. Please enter 0, 1, or 2" 
+  num_human_players = gets.strip
+end
+
