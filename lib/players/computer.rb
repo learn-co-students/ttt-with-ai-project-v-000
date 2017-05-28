@@ -9,9 +9,16 @@ module Players
     end
 
     def move(board)
-      puts "difficulty: #{difficulty}"
+      puts "Computer level: #{difficulty}"
       # temporarily brute-forces a choice
-      better_move(board)
+      choose_move(board)
+    end
+
+    def choose_move(board)
+      chance = 65 if difficulty == "1"
+      chance = 85 if difficulty == "2"
+      chance = 100 if difficulty == "3"
+      chance <= Random.rand(100) + 1 ? poor_move(board) : better_move(board)
     end
 
     def poor_move(board)
