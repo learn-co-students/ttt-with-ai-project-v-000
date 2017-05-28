@@ -19,8 +19,12 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
+  def to_index(input)
+    input.to_i - 1
+  end
+
   def position(input)
-    cells[input.to_i - 1]
+    cells[to_index(input)]
   end
 
   def full?
@@ -29,5 +33,17 @@ class Board
 
   def turn_count
     cells.select { |cell| cell != " " }.size
+  end
+
+  def taken?(input)
+    cells[to_index(input)] != " "
+  end
+
+  def valid_move?(input)
+    !taken?(input) && to_index(input) >= 0 && to_index(input) < 9
+  end
+
+  def update(input, player)
+    cells[to_index(input)] = player.token if valid_move?(input)
   end
 end
