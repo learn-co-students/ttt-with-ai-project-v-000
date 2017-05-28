@@ -9,5 +9,28 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+  end
+
+  def current_player
+    board.turn_count % 2 == 0 ? player_1 : player_2
+  end
+
+  def full?
+    board.full?
+  end
+
+  def over?
+    won? || full? 
+  end
+
+  def draw?
+    full? && !won?
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combination|
+      p1, p2, p3 = combination[0], combination[1], combination[2]
+      board.cells[p1] == board.cells[p2] && board.cells[p2] == board.cells[p3]
+    end
   end                    
 end
