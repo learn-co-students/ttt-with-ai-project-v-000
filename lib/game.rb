@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -30,7 +32,12 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |combination|
       p1, p2, p3 = combination[0], combination[1], combination[2]
-      board.cells[p1] == board.cells[p2] && board.cells[p2] == board.cells[p3]
+      board.cells[p1] == board.cells[p2] && board.cells[p2] == board.cells[p3] && board.cells[p1] != " "
     end
+  end
+
+  def winner
+    combination = won?
+    combination ? board.cells[combination[0]] : nil
   end                    
 end
