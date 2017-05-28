@@ -26,15 +26,15 @@ if num_human_players == "1"
 end
 
 if num_human_players == "0" || num_human_players == "1"
-  puts "\nComputer's skill level? (1 = easy, 2, 3 = impossible)"
-  puts "No input or invalid entries will default to level of 1"
+  puts "\nComputer's skill level? (1, 2, 3)"
+  puts "No input or invalid entries will default to level of 1 (easy)"
   computer1_level = gets.strip
   computer1_level = "1" if computer1_level != "1" && computer1_level != "2" && computer1_level != "3"
 end
 
 if num_human_players == "0"
-  puts "\nComputer 2's skill level? (1 = easy, 2, 3 = impossible)"
-  puts "No input or invalid entries will default to level of 1"
+  puts "\nComputer 2's skill level? (1, 2, 3)"
+  puts "No input or invalid entries will default to level of 1 (easy)"
   computer2_level = gets.strip
   computer2_level = "1" if computer2_level != "1" && computer2_level != "2" && computer2_level != "3"
 end
