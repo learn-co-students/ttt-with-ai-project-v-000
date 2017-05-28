@@ -6,18 +6,19 @@ flag = false
 
 until flag
   puts "\e[H\e[2J"
-  puts "Welcome to Tic Tac Toe!"
+  puts "Welcome to Tic Tac Toe!\n"
   puts "How many human players for this game? (0, 1, or 2)"
-  puts "Enter -1 to simulate 10000 computer player games"
+  puts "  Enter -1 to simulate 10000 computer player games"
   num_human_players = gets.strip
   until num_human_players == "0" || num_human_players == "1" || num_human_players == "2" || num_human_players == "-1"
-    puts "ERROR: #{num_human_players} is not a valid option. Please enter 0, 1, or 2" 
+    puts "ERROR: #{num_human_players} is not a valid option. Please enter 0, 1, 2, or -1" 
     num_human_players = gets.strip
   end
 
   computer_first = "n"
   if num_human_players == "1"
     puts "Let computer go first? (y/N)"
+    puts "  Just hit enter for 'n"
     computer_first = gets.strip.downcase
     if computer_first == ""
       computer_first = "n"
@@ -32,14 +33,14 @@ until flag
   # The hardest computer level will not lose any games.
   if num_human_players == "0" || num_human_players == "1" || num_human_players == "-1"
     puts "\nComputer's skill level? (1, 2, 3)"
-    puts "No input or invalid entries will default to level of 1 (easy)"
+    puts "  No input or invalid entries will default to level of 1 (easy)"
     computer1_level = gets.strip
     computer1_level = "1" if computer1_level != "1" && computer1_level != "2" && computer1_level != "3"
   end
 
   if num_human_players == "0" || num_human_players == "-1"
     puts "\nComputer 2's skill level? (1, 2, 3)"
-    puts "No input or invalid entries will default to level of 1 (easy)"
+    puts "  No input or invalid entries will default to level of 1 (easy)"
     computer2_level = gets.strip
     computer2_level = "1" if computer2_level != "1" && computer2_level != "2" && computer2_level != "3"
   end
@@ -76,8 +77,8 @@ until flag
 
   if num_human_players == "-1"
     puts "\nAfter 10000 iterations:"
-    puts "Computer 1 wins: #{comp1win}"
-    puts "Computer 2 wins: #{comp2win}"
+    puts "Computer 1 (level: #{computer1_level}) wins: #{comp1win}"
+    puts "Computer 2 (level: #{computer2_level}) wins: #{comp2win}"
     puts "Computer draws:  #{draw_count}"
   end
   puts "\nPlay again? (y/n)"
@@ -90,3 +91,5 @@ until flag
 
   flag = true if choice == 'n'
 end
+
+puts "\nThank you for playing!"
