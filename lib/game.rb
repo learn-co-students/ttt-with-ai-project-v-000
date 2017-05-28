@@ -22,7 +22,7 @@ class Game
   end
 
   def over?
-    won? || full? 
+    won? || draw? 
   end
 
   def draw?
@@ -49,5 +49,21 @@ class Game
       puts "#{selection} is not a valid move.  Please enter again (1 ~ 9)"
       turn
     end
-  end                    
+  end
+
+  def play
+
+
+    until over?
+      puts "#{current_player.token}, please enter 1-9 (1 is top left and 9 is bottom right)"
+      turn
+    end
+
+    win = winner
+    if win
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end                  
 end
