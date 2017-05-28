@@ -25,12 +25,27 @@ if num_human_players == "1"
   end
 end
 
+if num_human_players == "0" || num_human_players == "1"
+  puts "\nComputer's skill level? (1 = easy, 2, 3 = impossible)"
+  puts "No input or invalid entries will default to level of 1"
+  computer1_level = gets.strip
+  computer1_level = "1" if computer1_level != "1" && computer1_level != "2" && computer1_level != "3"
+end
+
 if num_human_players == "0"
-  player_1 = Players::Computer.new('X')
-  player_2 = Players::Computer.new('O')
+  puts "\nComputer 2's skill level? (1 = easy, 2, 3 = impossible)"
+  puts "No input or invalid entries will default to level of 1"
+  computer2_level = gets.strip
+  computer2_level = "1" if computer2_level != "1" && computer2_level != "2" && computer2_level != "3"
+end
+puts computer2_level
+
+if num_human_players == "0"
+  player_1 = Players::Computer.new('X', computer1_level)
+  player_2 = Players::Computer.new('O', computer2_level)
 elsif num_human_players == "1"
-  player_1 = computer_first == "n" ? Players::Human.new('X') : Players::Computer.new('X')
-  player_2 = computer_first == "n" ? Players::Computer.new('O') : Players::Human.new('O')
+  player_1 = computer_first == "n" ? Players::Human.new('X') : Players::Computer.new('X', computer1_level)
+  player_2 = computer_first == "n" ? Players::Computer.new('O', computer1_level) : Players::Human.new('O')
 else
   player_1 = Players::Human.new('X')
   player_2 = Players::Human.new('O')
