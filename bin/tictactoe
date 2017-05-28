@@ -2,54 +2,91 @@
 
 require_relative '../config/environment'
 
-puts "\e[H\e[2J"
-puts "Welcome to Tic Tac Toe!"
-puts "How many human players for this game? (0, 1, or 2)"
-num_human_players = gets.strip
-until num_human_players == "0" || num_human_players == "1" || num_human_players == "2"
-  puts "ERROR: #{num_human_players} is not a valid option. Please enter 0, 1, or 2" 
+flag = false
+
+until flag
+  puts "\e[H\e[2J"
+  puts "Welcome to Tic Tac Toe!"
+  puts "How many human players for this game? (0, 1, or 2)"
+  puts "Enter -1 to simulate 10000 computer player games"
   num_human_players = gets.strip
-end
-
-computer_first = "n"
-if num_human_players == "1"
-  puts "Let computer go first? (y/N)"
-  computer_first = gets.strip.downcase
-  if computer_first == ""
-    computer_first = "n"
-    puts "No input was provided. Human will go first by default"
+  until num_human_players == "0" || num_human_players == "1" || num_human_players == "2" || num_human_players == "-1"
+    puts "ERROR: #{num_human_players} is not a valid option. Please enter 0, 1, or 2" 
+    num_human_players = gets.strip
   end
-  until computer_first == "y" || computer_first == "n"
-    puts "ERROR: #{computer_first} is not a valid option. Please enter y or n" 
-    computer_first = gets.strip
+
+  computer_first = "n"
+  if num_human_players == "1"
+    puts "Let computer go first? (y/N)"
+    computer_first = gets.strip.downcase
+    if computer_first == ""
+      computer_first = "n"
+      puts "No input was provided. Human will go first by default"
+    end
+    until computer_first == "y" || computer_first == "n"
+      puts "ERROR: #{computer_first} is not a valid option. Please enter y or n" 
+      computer_first = gets.strip
+    end
   end
-end
 
-if num_human_players == "0" || num_human_players == "1"
-  puts "\nComputer's skill level? (1, 2, 3)"
-  puts "No input or invalid entries will default to level of 1 (easy)"
-  computer1_level = gets.strip
-  computer1_level = "1" if computer1_level != "1" && computer1_level != "2" && computer1_level != "3"
-end
+  # The hardest computer level will not lose any games.
+  if num_human_players == "0" || num_human_players == "1" || num_human_players == "-1"
+    puts "\nComputer's skill level? (1, 2, 3)"
+    puts "No input or invalid entries will default to level of 1 (easy)"
+    computer1_level = gets.strip
+    computer1_level = "1" if computer1_level != "1" && computer1_level != "2" && computer1_level != "3"
+  end
 
-if num_human_players == "0"
-  puts "\nComputer 2's skill level? (1, 2, 3)"
-  puts "No input or invalid entries will default to level of 1 (easy)"
-  computer2_level = gets.strip
-  computer2_level = "1" if computer2_level != "1" && computer2_level != "2" && computer2_level != "3"
-end
-puts computer2_level
+  if num_human_players == "0" || num_human_players == "-1"
+    puts "\nComputer 2's skill level? (1, 2, 3)"
+    puts "No input or invalid entries will default to level of 1 (easy)"
+    computer2_level = gets.strip
+    computer2_level = "1" if computer2_level != "1" && computer2_level != "2" && computer2_level != "3"
+  end
 
-if num_human_players == "0"
-  player_1 = Players::Computer.new('X', computer1_level)
-  player_2 = Players::Computer.new('O', computer2_level)
-elsif num_human_players == "1"
-  player_1 = computer_first == "n" ? Players::Human.new('X') : Players::Computer.new('X', computer1_level)
-  player_2 = computer_first == "n" ? Players::Computer.new('O', computer1_level) : Players::Human.new('O')
-else
-  player_1 = Players::Human.new('X')
-  player_2 = Players::Human.new('O')
-end
+  if num_human_players == "0" || num_human_players == "-1"
+    player_1 = Players::Computer.new('X', computer1_level)
+    player_2 = Players::Computer.new('O', computer2_level)
+  elsif num_human_players == "1"
+    player_1 = computer_first == "n" ? Players::Human.new('X') : Players::Computer.new('X', computer1_level)
+    player_2 = computer_first == "n" ? Players::Computer.new('O', computer1_level) : Players::Human.new('O')
+  else
+    player_1 = Players::Human.new('X')
+    player_2 = Players::Human.new('O')
+  end
 
-game = Game.new(player_1, player_2)
-game.play
+  run_count = 1
+  if num_human_players == "-1"
+    comp1win = 0
+    draw_count = 0
+    comp2win = 0
+    run_count = 10000
+  end
+  
+  run_count.times do
+    game = Game.new(player_1, player_2)
+    game.play
+    if num_human_players == "-1"
+      winner = game.winner
+      comp1win += 1 if winner == 'X'
+      comp2win += 1 if winner == 'O'
+      draw_count += 1 if winner == nil
+    end
+  end
+
+  if num_human_players == "-1"
+    puts "\nAfter 10000 iterations:"
+    puts "Computer 1 wins: #{comp1win}"
+    puts "Computer 2 wins: #{comp2win}"
+    puts "Computer draws:  #{draw_count}"
+  end
+  puts "\nPlay again? (y/n)"
+
+  choice = gets.strip.downcase
+  until choice == "y" || choice == "n"
+    puts "ERROR: #{choice} is not a valid option. Please enter y or n" 
+    choice = gets.strip
+  end
+
+  flag = true if choice == 'n'
+end
