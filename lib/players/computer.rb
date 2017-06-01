@@ -32,7 +32,7 @@ module Players
         valid_move << 3.to_s
       end
 
-      # in terms of 1 Player game
+      # in terms of 1 Player game where logic is for Player 2, the AI
       # if statement - look for a win
       # else statement - look for a block
 
