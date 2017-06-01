@@ -25,13 +25,12 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combination|   #[0,1,2]
+    WIN_COMBINATIONS.each do |combination|   #[0,1,2] which is board range (0-8)
         if @board.cells[combination[0]] == @board.cells[combination[1]] &&
           @board.cells[combination[1]] == @board.cells[combination[2]] &&
-          @board.taken?(combination[0])
-
-          @winner = @board.cells[combination[0]]
-          return true # Checking for winner X or O
+          @board.taken?(combination[0]+1)
+          #Need to +1, because #taken? rspec test is working off user_input range (1-9)
+          return combination
         end
       end
     return false
@@ -46,21 +45,12 @@ class Game
      # IF board is not full, game is in progress (FALSE), ELSE, game is over (TRUE)
   end
 
-  ## COME BACK FOR THIS
   def winner
     if won?
-      @winner
-    elsif !over?
-      nil
+      combination = won?
+      @board.cells[combination[0]] # X or O
     end
   end
 
-  # ask for input after failed validation
-  # make valid move
-  # change to player 2 after first turn
-  def turn
-    puts "Where will you like to put your token?"
-    position = player_1.gets
-  end
 
 end
