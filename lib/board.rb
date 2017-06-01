@@ -36,7 +36,13 @@ class Board
   end
 
   def valid_move?(position)
-    !taken?(position) && position >0 && position <=9
+    !taken?(position) && position.to_i >0 && position.to_i <=9
+  end
+
+  def update(position, player)
+    if valid_move?(position)
+      self.cells[position.to_i-1] = player.token
+    end
   end
 
 
