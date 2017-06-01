@@ -236,7 +236,7 @@ module Players
         valid_move << 5.to_s
       end
 
-      valid_move
-    end
-  end
-end
+      valid_move #return changed variable
+    end #move
+  end #class
+end #module
