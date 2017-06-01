@@ -191,24 +191,6 @@ class Players::Computer < Player
         valid_move << 3.to_s
       end
 
-      # if board.turn_count == 1 && board.cells.values_at(4, 0) == ["X", " "] && board.valid_input?(input)
-      #   valid_move.clear
-      #   valid_move << 1.to_s
-      # elsif board.turn_count == 1 && board.cells.values_at(4, 0) == ["O", " "] && board.valid_input?(input)
-      #   valid_move.clear
-      #   valid_move << 1.to_s
-      # end
-
-      # if board.turn_count == 1 && board.cells.values_at(4, 6) == ["X", " "] && board.valid_input?(input)
-      #   valid_move.clear
-      #   valid_move << 1.to_s
-      # elsif board.turn_count == 1 && board.cells.values_at(4, 0) == ["O", " "] && board.valid_input?(input)
-      #   valid_move.clear
-      #   valid_move << 1.to_s
-      # end
-
       valid_move
-
   end  #move
-
 end #Players::Computer
