@@ -1,3 +1,47 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+
+puts "\nWelcome to Command Line Tic Tac Toe!"
+puts "\nWhat kind of game will you like to play? Please choose player mode:
+
+0 - Computer VS Computer
+1 - You VS Computer
+2 - You VS Your friend"
+
+player_mode = gets.strip
+
+# puts "Do you want to go first? [y/ n]"
+# user_answer = gets.strip
+
+
+if player_mode == "1"
+  puts "Do you want to go first? [y/ n]"
+  user_answer = gets.strip
+  if user_answer == "y"
+    Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+  else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+  end
+
+elsif player_mode == "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+elsif player_mode == "2"
+  Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+end
+
+
+# def start_game(player_mode, user_answer)
+#   if player_mode == "0" && user_answer == "y"
+#     Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+#
+#   elsif player_mode == "1" && user_answer == "y"
+#     Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+#   elsif player_mode == "1" && user_answer == "n"
+#     Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+#
+#   elsif player_mode == "2" && user_answer == "y"
+#     Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+#   elsif player_mode == "2" && user_answer == "n"
+#     Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new).play
+#   end
+# end

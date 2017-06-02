@@ -1,4 +1,4 @@
-require 'spec_helper'
+#require 'spec_helper'
 
 class Game
 
@@ -18,6 +18,7 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    @board.display
   end
 
   def current_player
@@ -57,12 +58,15 @@ class Game
       # changes to player 2 after the first turn
 
   def turn
+    puts "Please enter a number 1-9:"
     @user_input = current_player.move(@board)
     if @board.valid_move?(@user_input)
       @board.update(@user_input, current_player)
-    else puts "Please choose your move again"
+    else puts "Please enter a number 1-9:"
+      @board.display
       turn
     end
+    @board.display
   end
 
   def play
