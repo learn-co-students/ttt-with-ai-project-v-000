@@ -2,7 +2,7 @@ require 'spec_helper'
 
 class Game
 
-  attr_accessor :board, :player_1, :player_2, :winner
+  attr_accessor :board, :player_1, :player_2, :winner, :user_input
 
   WIN_COMBINATIONS = [
   [0,1,2],
@@ -41,7 +41,7 @@ class Game
   end
 
   def over?
-     !@board.full? ? false : true
+     (won? || draw?) ? true : false
      # IF board is not full, game is in progress (FALSE), ELSE, game is over (TRUE)
   end
 
@@ -49,6 +49,28 @@ class Game
     if won?
       combination = won?
       @board.cells[combination[0]] # X or O
+    end
+  end
+
+      # makes valid moves
+      # asks for input again after a failed validation
+      # changes to player 2 after the first turn
+
+  def turn
+    @user_input = current_player.move(@board)
+    if @board.valid_move?(@user_input)
+      @board.update(@user_input, current_player)
+    else puts "Please choose your move again"
+      turn
+    end
+  end
+
+  def play
+    turn until over?
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 
