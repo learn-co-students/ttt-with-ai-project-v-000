@@ -53,10 +53,6 @@ class Game
     end
   end
 
-      # makes valid moves
-      # asks for input again after a failed validation
-      # changes to player 2 after the first turn
-
   def turn
     puts "Please enter a number 1-9:"
     @user_input = current_player.move(@board)
