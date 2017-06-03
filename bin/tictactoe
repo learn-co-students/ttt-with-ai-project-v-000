@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/environment'
+require_relative "../config/environment.rb"
+
 game_running = true
 
 puts "Hello welcome to the Unbeatable TicTacToe"
@@ -26,9 +27,11 @@ while(game_running) do
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
   else
-    exit
+    game_running = false
   end
-  board = Board.new
-  game = Game.new(player_1,player_2,board)
-  game.play
+  if game_running
+    board = Board.new
+    game = Game.new(player_1,player_2,board)
+    game.play
+  end
 end
