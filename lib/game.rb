@@ -57,7 +57,6 @@ class Game
         else
             nil
         end
-        
     end
 
     def turn
@@ -69,6 +68,7 @@ class Game
             again = self.board.valid_move?(input)
        end
        self.board.update(input, current_player)
+       self.board.display
     end
 
     def play
