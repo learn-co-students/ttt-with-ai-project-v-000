@@ -1,15 +1,15 @@
 #!/usr/bin/env ruby
 
-require_relative "../config/environment.rb"
+equire_relative "../config/environment.rb"
 
-game_running = true
-
+app_running = true
 puts "Hello welcome to the Unbeatable TicTacToe"
-while(game_running) do
+while(app_running) do
   puts "What kind of game do you wish to play(Q to Quit)?0 = C v C, 1 = H v C, 2 = H v H"
   game_option = gets.chomp
   player_1 = nil
   player_2 = nil
+  game_running = true
   if(game_option == "1")
     puts "Who should go first and be X?1 = Human, 2 = Computer"
     player_option = gets.chomp
@@ -26,6 +26,9 @@ while(game_running) do
   elsif game_option == "2"
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
+  elsif game_option.upcase == "Q"
+    game_running = false
+    app_running = false
   else
     game_running = false
   end
