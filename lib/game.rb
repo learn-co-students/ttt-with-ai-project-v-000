@@ -63,11 +63,14 @@ class Game
         input = 0
         again = false
        while (!again)
+            puts ""
             puts "Player #{current_player.token}, please enter 1-9:"
+            print ":"
             input = self.current_player.move(self.board)
             again = self.board.valid_move?(input)
        end
        self.board.update(input, current_player)
+       puts ""
        self.board.display
     end
 
@@ -76,8 +79,12 @@ class Game
             self.turn
         end
          if self.draw?
+              puts ""
+              sleep(0.5)
               puts "Cat\'s Game!"
          else
+              puts ""
+              sleep(0.5)
               puts "Congratulations #{self.winner}!"
         end
     end
