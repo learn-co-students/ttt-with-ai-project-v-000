@@ -24,7 +24,7 @@ class Board
   end
 
   def full?
-    @cells.include?(" ") ? false : true
+    !@cells.include?(" ")
   end
 
   def turn_count
@@ -32,7 +32,7 @@ class Board
   end
 
   def taken?(input)
-    position(input) == " " ? false : true
+    position(input) != " "
   end
 
   def valid_move?(input)
