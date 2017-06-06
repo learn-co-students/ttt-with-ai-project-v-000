@@ -16,66 +16,66 @@ WIN_COMBINATIONS = [
     ]
 
 #initalize board and players
-def initialize(board = Board.new, player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
    @board = board
    @player_1 = player_1
-   @player_2 = player_2   
-   @winner 
+   @player_2 = player_2
+   @winner
  end
 
-#If the turn count is an even number, the #current_player method should return "X", otherwise, it should return "O"
- def current_player
-     @board.turn_count.even? ? @player_1 : @player_2
- end
+ #If the turn count is an even number, the #current_player method should return "X", otherwise, it should return "O"
+  def current_player
+      @board.turn_count.even? ? @player_1 : @player_2
+  end
 
- def over?
-   if won? || draw? || @board.full?
-     return true
-   else
+  def over?
+    won? || draw?
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |win_array|
+       if @board.cells[win_array[0]] == "X" && @board.cells[win_array[1]]== "X" && @board.cells[win_array[2]]=="X"||
+          @board.cells[win_array[0]] == "O" && @board.cells[win_array[1]]== "O" && @board.cells[win_array[2]]== "O"
+         return win_array
+       end
+     end
      false
    end
- end
 
- def won?
-   WIN_COMBINATIONS.each do |win_combination|
-     win_index_1 = win_combination[0]
-     win_index_2 = win_combination[1]
-     win_index_3 = win_combination[2]
-     position_1 = @board[win_index_1]
-     position_2 = @board[win_index_2]
-     position_3 = @board[win_index_3]
-
-
-     if position_1 == "X" && position_2 == "X" && position_3 == "X"
-       
-       return  true #win_combination
-     elsif
-         position_1 == "O" && position_2 == "O" && position_3 == "O"
-       return true  #win_combination
-     end
+  def draw?
+    @board.full? && !won?
    end
-   false
+
+   def winner
+     win_array = won?
+     win_array ? @board.cells[win_array[0]] : nil
+   end
+
+ def turn
+   puts "Please enter 1-9:"
+   user_input= gets.strip
+   index = input_to_index(user_input)
+     if valid_move?(index)
+        move(index, current_player)
+        display_board
+     else
+       turn
+     end
  end
 
- def draw?
-    if  @board.full? && !self.won? 
-      return true
-    end
-    return false
+
+   def play
+  until  over?
+         turn
   end
 
-  def winner
-      if won? == true
-        @board.cells[won?[0]]
-      else
-        return nil
-      end   
+  if won?!= false
+    puts "Congratulations " "#{winner}!"
+
+  elsif draw?
+    puts "Cat's Game!"
   end
+ end
 
-def turn
 
-
-end 
- 
-
-end
+ end
