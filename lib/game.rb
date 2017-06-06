@@ -51,17 +51,24 @@ def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new
      win_array ? @board.cells[win_array[0]] : nil
    end
 
+   def input_to_index(user_input) #converts user_input to integer
+     u_input = user_input.to_i
+   end
+
+   def move (index, current_player)
+     @board.cells[index.to_i-1]= current_player.token
+   end
+
  def turn
-   puts "Please enter 1-9:"
-   user_input= gets.strip
-   index = input_to_index(user_input)
-     if valid_move?(index)
-        move(index, current_player)
-        display_board
-     else
-       turn
-     end
- end
+   user_input= current_player.move(@board)
+    index = input_to_index(user_input)
+      if @board.valid_move?(user_input)
+         move(index, current_player)
+         @board.display
+      else
+        turn
+      end
+  end
 
 
    def play
