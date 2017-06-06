@@ -1,3 +1,79 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def game_play
+  puts "Please enter 0, 1, or 2 for number of players:"
+  input = read
+  case input
+  when '0'
+    computer_play
+  when '1'
+    one_player
+  when '2'
+    two_player
+  else
+    invalid_input
+    game_play
+  end
+  game_end
+end
+
+def read
+  gets.strip
+end
+
+def computer_play
+  player_1, player_2, board = Computer.new("X"), Computer.new("O"), Board.new
+  Game.new(player_1, player_2, board).play
+end
+
+def one_player
+  puts "Enter 'x' to go first, 'o' to go second:"
+  input = read
+  if input == 'x'
+    player_1, player_2, board = Human.new("X"), Computer.new("O"), Board.new
+  elsif input == 'o'
+    player_1, player_2, board = Computer.new("X"), Human.new("O"), Board.new
+  end
+  Game.new(player_1, player_2, board).play
+end
+
+def two_player
+  puts "Enter 'x' to go first:"
+  input = read
+  if input == 'x'
+    player_1, player_2, board  = Human.new("X"), Human.new("O"), Board.new
+    Game.new(player_1, player_2, board).play
+  else
+    invalid_input 
+    two_player
+  end  
+end
+
+def invalid_input
+  puts "\nInvalid input"
+end
+
+def game_end
+  puts "Would you like to play again? y/n:" 
+  input = read
+  if input == 'y'
+    game_play
+  elsif input == 'n'
+    puts "Goodbye"
+  else
+    invalid_input
+    game_end
+  end
+end
+
+
+puts "Welcome to tic tac toe!"
+game_play
+
+
+
+
+
+
