@@ -3,30 +3,66 @@
 require_relative '../config/environment'
 
 
-puts "Hello, welcome to tic tac toe!" #Greeting - done
-# if user_input = play then output
-puts "What kind of game do you want to play? 2 = H v H, 1 = H v C, 0 = C v C"
-num_of_players = gets.chomp.to_i
-#if num_of_players == 0 then player_1 = "X", player_2= "O"
-if num_of_players == "2"
-      # puts "Whoever goes first, please type X."
-      player_1 = Player::Human.new("X")
-      player_2 = Player::Human.new("O")
-elsif num_of_players == "1"
-      player_1 = Player::Human.new("X")
-      player_2 = Player::Computer.new("O")
-elsif num_of_players == "0"
-      player_1= Player::Computer.new("X")
-      player_2 = Player::Computer.new("O")
-end
+  puts "Do you want to play? Enter Y or N"
+  play = ""
+  play = gets.chomp
 
-  #play game
-  game = Game.new(player_1, player_2, board = Board.new)
-  #to display the state of the board
-  game.board.display
-  #to play the game (we will test this to see how it works for the computer player)
-  game.play
+while play == "Y"
 
+  # if play == "Y"
+    puts "Hello, welcome to tic tac toe!" #Greeting - done
+    # if user_input = play then output
+    puts "What kind of game do you want to play? (N to leave) 2 = H v H, 1 = H v C, 0 = C v C"
+    num_of_players = gets.chomp.to_s
+    #if num_of_players == 0 then player_1 = "X", player_2= "O"
+    if num_of_players == "2"
+          # puts "Whoever goes first, please type X."
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Human.new("O")
+    elsif num_of_players == "1"
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Computer.new("O")
+    elsif num_of_players == "0"
+          player_1= Players::Computer.new("X")
+          player_2 = Players::Computer.new("O")
+    end
+          #play game
+          game = Game.new(player_1, player_2, board = Board.new)
+          #to display the state of the board
+          game.board.display
+          #to play the game (we will test this to see how it works for the computer player)
+          game.play
+       break if play == "N"
+   end
+
+puts "Thanks you. We hope to see you again"
+
+# def start_game
+# puts "Hello, welcome to tic tac toe!" #Greeting - done
+# # if user_input = play then output
+# puts "What kind of game do you want to play?(Q for Quit) 2 = H v H, 1 = H v C, 0 = C v C"
+# num_of_players = gets.chomp.to_s
+# #if num_of_players == 0 then player_1 = "X", player_2= "O"
+# if num_of_players == "2"
+#       # puts "Whoever goes first, please type X."
+#       player_1 = Players::Human.new("X")
+#       player_2 = Players::Human.new("O")
+# elsif num_of_players == "1"
+#       player_1 = Players::Human.new("X")
+#       player_2 = Players::Computer.new("O")
+# elsif num_of_players == "0"
+#       player_1= Players::Computer.new("X")
+#       player_2 = Players::Computer.new("O")
+# # elsif num_ofplayers == "Q"
+# #       puts "Thanks for playing Tic Tac Toe! Please come again!"
+# end
+
+
+# def exit_game
+#
+#   puts "Thanks for playing Tic Tac Toe. Please come again!"
+#
+# end
 
 # Prompt the user for what kind of game they want to play, 0,1, or 2 player. C V C, H V C, H VH
 # Ask the user for who should go first and be "X".
