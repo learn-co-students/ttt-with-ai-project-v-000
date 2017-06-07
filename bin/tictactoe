@@ -19,9 +19,16 @@ while play == "Y"
           # puts "Whoever goes first, please type X."
           player_1 = Players::Human.new("X")
           player_2 = Players::Human.new("O")
-    elsif num_of_players == "1"
+    elsif num_of_players == "2"
+          player_1 = Players::Human.new("O")
+          player_2 = Players::Human.new("X")
+        end
+    if num_of_players == "1"
           player_1 = Players::Human.new("X")
           player_2 = Players::Computer.new("O")
+    elsif num_of_players == "1"
+          player_1 = Players::Human.new("O")
+          player_2 = Players::Computer.new("X")
     elsif num_of_players == "0"
           player_1= Players::Computer.new("X")
           player_2 = Players::Computer.new("O")
@@ -32,10 +39,12 @@ while play == "Y"
           game.board.display
           #to play the game (we will test this to see how it works for the computer player)
           game.play
+          puts "Would you like to play again? (Type in Y or N)"
+          play = gets.chomp # redefining Yes or No!
        break if play == "N"
    end
 
-puts "Thanks you. We hope to see you again"
+puts "Thanks for checking in. We hope to see you again!"
 
 # def start_game
 # puts "Hello, welcome to tic tac toe!" #Greeting - done

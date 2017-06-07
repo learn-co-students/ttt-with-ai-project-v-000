@@ -79,7 +79,7 @@ def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new
     puts "Congratulations " "#{winner}!"
 
   elsif draw?
-    puts "It's a draw!"
+    puts "Cat's Game!"
   end
  end
 
