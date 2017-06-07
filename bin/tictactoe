@@ -10,13 +10,10 @@ require_relative '../config/environment'
 while play == "Y"
 
   # if play == "Y"
-    puts "Hello, welcome to tic tac toe!" #Greeting - done
-    # if user_input = play then output
-    puts "What kind of game do you want to play? (N to leave) 2 = H v H, 1 = H v C, 0 = C v C"
+    puts "Hello, welcome to Samson and Sabrina's tic tac toe game!" 
+    puts "What kind of game do you want to play? 2 = H v H, 1 = H v C, 0 = C v C"
     num_of_players = gets.chomp.to_s
-    #if num_of_players == 0 then player_1 = "X", player_2= "O"
     if num_of_players == "2"
-          # puts "Whoever goes first, please type X."
           player_1 = Players::Human.new("X")
           player_2 = Players::Human.new("O")
     elsif num_of_players == "2"
@@ -35,9 +32,7 @@ while play == "Y"
     end
           #play game
           game = Game.new(player_1, player_2, board = Board.new)
-          #to display the state of the board
           game.board.display
-          #to play the game (we will test this to see how it works for the computer player)
           game.play
           puts "Would you like to play again? (Type in Y or N)"
           play = gets.chomp # redefining Yes or No!
