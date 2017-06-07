@@ -21,13 +21,39 @@ class Game
     @board
   end
 
+  def play
+    until over?
+      turn
+    end
+    if over?
+      if draw?
+        puts "Cat's Game!"
+      end
+      if won?
+        puts "Congratulations #{winner}!"
+      end
+      puts "Play again? (y/n)"
+      again = gets.strip
+      case again
+      when "y"
+        new_game = Start.new
+      else
+      end
+    end
+  end
+
   def turn
     player = current_player
-    puts "It's #{player}'s turn."
+    puts "\n"
+    puts "#{board.display}\n"
+    puts "It's #{player.token}'s turn."
     puts "Please enter 1-9:"
     #index = input_to_index(input)
-    if player.move(@board).nil?
-      puts "Invalid move. Try again."
+    move = player.move(@board).to_i
+    if board.valid_move?(move)
+      board.cells[move - 1] = player.token
+    else
+      puts "Invalid move. Try again. \n"
       turn
     end
   end
