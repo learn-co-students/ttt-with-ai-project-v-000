@@ -44,14 +44,13 @@ class Game
 
   def turn
     player = current_player
-    puts "\n"
-    puts "#{board.display}\n"
-    puts "It's #{player.token}'s turn."
-    puts "Please enter 1-9:"
+    puts "\nIt's #{player.token}'s turn.\n"
     #index = input_to_index(input)
     move = player.move(@board).to_i
     if board.valid_move?(move)
       board.cells[move - 1] = player.token
+      puts "\n"
+      puts "#{board.display}\n"
     else
       puts "Invalid move. Try again. \n"
       turn
