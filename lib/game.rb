@@ -32,6 +32,7 @@ class Game
       if won?
         puts "Congratulations #{winner}!"
       end
+=begin
       puts "Play again? (y/n)"
       again = gets.strip
       case again
@@ -39,6 +40,7 @@ class Game
         new_game = Start.new
       else
       end
+=end
     end
   end
 

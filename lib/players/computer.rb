@@ -10,7 +10,7 @@ class Players
       until valid_moves[move]
         move = rand(9)
       end
-      move + 1
+      (move + 1).to_s
 
     end
   end
