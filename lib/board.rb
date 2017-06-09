@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :game
 
   def initialize (cells = nil)
     @cells = cells || Array.new(9, " ")

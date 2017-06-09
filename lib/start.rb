@@ -7,7 +7,21 @@ class Start
       num = gets.strip
       case num
       when "0"
-        game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+        puts "How many games?"
+        i = gets.strip
+        score = [0,0,0]
+        i.to_i.times do
+          game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+          game.play
+          if game.winner == "X"
+            score[0] += 1
+          elsif game.winner == "O"
+            score[1] += 1
+          else
+            score[2] += 1
+          end
+        end
+        puts "X wins: #{score[0]}; O wins: #{score[1]}; Draws: #{score[2]}"
       when "1"
         puts "Will human play X or O?"
         human_token = gets.strip
