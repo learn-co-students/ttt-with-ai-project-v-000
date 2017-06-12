@@ -62,13 +62,11 @@ end
   end
 
   def turn
-    puts "Please enter 1-9:"
-    input = gets.strip
-    index = input_to_index(input)
-    if !@board.valid_move?(index)
+    input = current_player.move
+    if !@board.valid_move?(input)
       turn
     end
-    @board.update(index, current_player) #now update method
+    @board.update(input, current_player) #now update method
     @board.display
   end
 
