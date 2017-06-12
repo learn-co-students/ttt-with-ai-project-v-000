@@ -50,7 +50,39 @@ end
     !won? && @board.full?
   end
 
-  # def winner
-  # end
+  def winner
+    if winning_positions = won? # winning_positions = return value of won?(board), which is an array or nil/false
+      @board.cells[winning_positions[0]]
+    end
+  end
+
+  def input_to_index(user_input)
+    indexInput = user_input.to_i
+    indexInput - 1
+  end
+
+  def turn
+    puts "Please enter 1-9:"
+    input = gets.strip
+    index = input_to_index(input)
+    if !@board.valid_move?(index)
+      turn
+    end
+    @board.update(index, current_player) #now update method
+    @board.display
+  end
+
+
+  def play
+    while !over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    else draw?
+      puts "Cat's Game!"
+    end
+  end
 
 end
