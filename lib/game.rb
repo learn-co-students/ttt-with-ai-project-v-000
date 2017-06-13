@@ -61,13 +61,24 @@ end
     indexInput - 1
   end
 
+  # def turn
+  #   input = current_player.move(board)
+  #   if !@board.valid_move?(input)
+  #     turn
+  #   end
+  #   @board.update(input, current_player)
+  #   @board.display
+  # end
+
   def turn
     input = current_player.move(board)
-    if !@board.valid_move?(input)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      board.display
       turn
     end
-    @board.update(input, current_player)
-    @board.display
   end
 
 
