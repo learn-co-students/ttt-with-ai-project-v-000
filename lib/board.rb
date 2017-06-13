@@ -45,8 +45,6 @@ class Board
 
   def update(user_input, char = "X")
     indexInput = user_input.to_i - 1
-    if valid_move?(user_input)
       @cells[indexInput] = char.token
-    end
   end
 end

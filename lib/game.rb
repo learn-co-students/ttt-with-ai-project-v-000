@@ -62,11 +62,11 @@ end
   end
 
   def turn
-    input = current_player.move
+    input = current_player.move(board)
     if !@board.valid_move?(input)
       turn
     end
-    @board.update(input, current_player) #now update method
+    @board.update(input, current_player)
     @board.display
   end
 
