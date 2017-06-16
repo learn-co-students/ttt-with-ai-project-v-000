@@ -48,8 +48,8 @@ class Game
   end
 
   def winner
-    if winning_combination = won?                        #assigns winning array [x, y, z] to var
-      @winner = @board.cells[winning_combination[0]]     #returns token in 0 index of winning array
+    if winning_combination = won?
+      @board.cells[winning_combination[0]]     
     end
   end
 
