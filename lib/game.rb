@@ -1,4 +1,8 @@
 require 'pry'
+<<<<<<< HEAD
+=======
+
+>>>>>>> fbca4f5e704876dc3b2afcdc83b2f9b08f0f44cd
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -49,6 +53,7 @@ class Game
   end
 
   def winner
+<<<<<<< HEAD
     if  winning_combination = won?                        #assigns winning array [x, y, z] to var
     @board.cells[winning_combination[0]]
     end  #returns token in 0 index of winning array
@@ -65,6 +70,19 @@ class Game
     else
       #turn until full?
       end
+=======
+    if winning_combination = won?
+      @board.cells[winning_combination[0]]
+    end
+  end
+
+  def winner
+    if winning_combination = won? #assigns winning array [x, y, z] to var
+      @board.cells[winning_combination[0]] #returns token in 0 index of winning array
+    end
+>>>>>>> fbca4f5e704876dc3b2afcdc83b2f9b08f0f44cd
   end
 
 end
+
+test = Game.new

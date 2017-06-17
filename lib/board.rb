@@ -51,6 +51,16 @@ class Board
       index = input.to_i - 1
       @cells[index] = player.token
     end
+<<<<<<< HEAD
+=======
+    @turns
+  end
+
+  def taken?(input)
+    index = input.to_i - 1
+    @cells[index] == "X" || @cells[index] == "O" || @cells[index] == nil
+  end
+>>>>>>> fbca4f5e704876dc3b2afcdc83b2f9b08f0f44cd
 
 
 
