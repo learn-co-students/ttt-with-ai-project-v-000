@@ -3,7 +3,7 @@ require_relative '../player.rb'
 module Players
   class Human < Player
 
-    def move(board)
+    def move(board)                #.move returns player input
       puts "Please enter 1-9:"
       gets.strip
     end

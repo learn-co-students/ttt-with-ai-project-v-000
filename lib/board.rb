@@ -39,7 +39,7 @@ class Board
 
    def taken?(input)
      index = input.to_i - 1
-      @cells[index] == "X" || @cells[index] == "O" || @cells[index] == nil
+     @cells[index] == "X" || @cells[index] == "O" || @cells[index] == nil
    end
 
    def valid_move?(input)
