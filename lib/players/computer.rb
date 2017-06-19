@@ -1,5 +1,3 @@
-require 'pry'
-
 module Players
 
   class Computer < Player
@@ -14,7 +12,6 @@ module Players
         else
           move = "1"
         end
-        binding.pry
       elsif board.turn_count == 3 #if 3rd move, play first open corner: iterate through all corners, test against taken?
         move = ["1","3","7","9"].detect {|position| !board.taken?(position)}
       else #play first open position
