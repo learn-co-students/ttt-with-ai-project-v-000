@@ -1,5 +1,4 @@
 require 'pry'
-
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -50,17 +49,39 @@ class Game
   end
 
   def winner
-    if winning_combination = won?
-      @board.cells[winning_combination[0]]
+    if  winning_combination = won?                        #assigns winning array [x, y, z] to var
+    @board.cells[winning_combination[0]]
+    end  #returns token in 0 index of winning array
+  end
+
+  # def swap_player
+  #   if player_1 == current_player
+  #     player_1.move
+  #   else player_2.move
+  #   end
+  # end
+
+  def turn
+    puts "Please enter your desired position from 1-9, Player #{@current_player}"
+    input = current_player.move(board)
+    @board.position(input)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+      display
+      input
+    else
+      turn
     end
   end
 
-  def winner
-    if winning_combination = won? #assigns winning array [x, y, z] to var
-      @board.cells[winning_combination[0]] #returns token in 0 index of winning array
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts  "Congratulations #{winner}!"
+    elsif  draw?
+      puts "Cat's Game!"
     end
   end
-
 end
-
-test = Game.new
