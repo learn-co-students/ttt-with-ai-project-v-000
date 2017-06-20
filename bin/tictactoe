@@ -1,3 +1,73 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts <<~PRINT
+
+
+
+
+  Welcome to Tic-Tac-Toe!
+
+  Would you like to...
+  Play against the computer? (1)
+  Play with a friend? (2)
+  Watch the computer play against itself? (3)
+PRINT
+
+game_type = gets.strip.to_i
+until game_type.between?(1,3)
+  puts "Sorry. Please enter a number (1-3) and press Enter."
+  game_type = gets.strip.to_i
+end
+
+case game_type
+when 1
+  puts ""
+  puts "Would you like to go first? Yes (1) / No (2)"
+  yes_no = gets.strip.to_i
+  until yes_no.between?(1,2)
+    puts ""
+    puts "Sorry. Please enter a number (1-2) and press Enter."
+    yes_no = gets.strip.to_i
+  end
+  
+  player_first = yes_no == 1 ? true : false
+
+  if player_first
+    puts ""
+    puts ""
+    puts "lol cheater..."
+    puts ""
+    
+    Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+
+  else
+    puts ""
+    puts ""
+    puts "lol showoff..."
+    puts ""
+    
+    Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+
+  end
+  
+
+
+when 2
+  puts ""
+  puts ""
+  puts "OK, here we go. X goes first!"
+  puts ""
+
+  Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+
+when 3
+  puts ""
+  puts ""
+  puts "lol whatever nerd..."
+  puts ""
+
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+end
