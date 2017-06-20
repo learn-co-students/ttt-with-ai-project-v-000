@@ -62,12 +62,12 @@ class Game
   # end
 
   def turn
-    puts "Please enter your desired position from 1-9, Player #{@current_player}"
+    puts "Please enter your desired position from 1-9, Player #{current_player.token}"
     input = current_player.move(board)
     @board.position(input)
     if @board.valid_move?(input)
       @board.update(input, current_player)
-      display
+      @board.display
       input
     else
       turn
@@ -84,6 +84,55 @@ class Game
       puts "Cat's Game!"
     end
   end
+
+  def start
+  puts "Welcome to Julie & Mel's Tic Tac Toe"
+
+  ####Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+  puts "How many players: 0, 1, or 2?"
+  input = gets.strip.to_i
+  if input == 0 #init 2 computer players
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+  elsif input == 1 #init 1 human/1 computer player, ask for token
+    puts "Would you like to be X or O?"
+    input = gets.strip.upcase
+      if input == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+      elsif input == "O"
+        player_1 = Players::Human.new("O")
+        player_2 = Players::Computer.new("X")
+      else
+        puts "Please enter X or O"
+      end
+  elsif input ==  2 #init 2 human players, ask for token
+    puts "Would Player 1 like to be X or O?"
+    input = gets.strip.upcase
+      if input == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      elsif input == "O"
+        player_1 = Players::Human.new("O")
+        player_2 = Players::Human.new("X")
+      else
+        puts "Please enter X or O"
+      end
+  else
+    puts "Please enter valid number of players: 0, 1, or 2"
+  end
+
+  new_game = Game.new(player_1, player_2, board = Board.new)
+
+  until new_game.over?
+    new_game.play
+  end
+
+
+  ####When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program
+  puts "Would you like to play again?"
+end
+
 
 
 
