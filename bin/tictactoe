@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "WELCOME TO TIC TAC TOE"
+
+again = true
+
+while again
+  valid_input = false
+  input = ""
+  while !valid_input
+    puts "Please select the kind of game you would like to play. Please enter 0, 1, or 2:"
+    input = gets.strip
+    if input == "0" || input == "1" || input == "2"
+      valid_input = true
+    end
+  end
+  game = nil
+  case input
+  when "0"
+    game = Game.new(Players::Computer.new('X'),  Players::Computer.new('O'),  Board.new)
+  when "1"
+    puts "Which player should be X and go first? Enter 1 for human. Enter 2 for computer."
+    choice = gets.strip
+    if choice == "1"
+     game = Game.new(Players::Human.new('X'),  Players::Computer.new('O'),  Board.new)
+    else
+     game =  Game.new(Players::Computer.new('X'),  Players::Human.new('O'),  Board.new)
+    end
+  when "2"
+    game = Game.new(Players::Human.new('X'),  Players::Human.new('O'),  Board.new)
+  end
+  game.play
+  puts "Would you like to play again? Enter YES to continue or anything else to quit."
+  input = gets.strip
+  if input != "YES"
+    again = false
+  end
+end
