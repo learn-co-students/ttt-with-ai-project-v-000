@@ -127,10 +127,6 @@ class Game
   until new_game.over?
     new_game.play
   end
-
-
-  ####When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program
-  puts "Would you like to play again?"
 end
 
 
