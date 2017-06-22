@@ -2,10 +2,12 @@ class Game
 	attr_accessor :board, :player_1, :player_2
 	attr_reader :win_indexes
 
-	def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+	def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
+		@player_2.game = self
+		@player_1.game = self
 	end
 
 	WIN_COMBINATIONS =[
@@ -25,6 +27,10 @@ class Game
   		else
   			@player_1
   		end
+  	end
+
+  	def self.win_combinations 
+  		const_get("WIN_COMBINATIONS")
   	end
 
   	def draw?
@@ -54,7 +60,7 @@ class Game
   	end
 
   	def turn
-  		puts "Player #{current_player.token}, pease enter 1-9..."
+  		puts "Player #{current_player.token}, please enter 1-9..."
   		input = current_player.move(@board)
   		self.turn if !@board.valid_move?(input)
   		@board.update(input, current_player)
