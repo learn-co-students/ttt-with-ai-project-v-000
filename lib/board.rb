@@ -3,6 +3,17 @@ require 'pry'
 class Board
   attr_accessor :cells
 
+  WIN_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [2,4,6],
+    [0,4,8]
+  ]
+
   def initialize
     @cells = Array.new(9, " ")
   end
@@ -25,6 +36,10 @@ class Board
     puts " #{@cells[8]} "
   end
 
+  def current_player
+    @board.turn_count % 2 == 0? "X" : "O"
+  end
+
   def i_to_i(input)
     return input.to_i - 1
   end
@@ -41,6 +56,46 @@ class Board
     end
     return true
   end
+
+  def won?
+    WIN_COMBINATIONS.each do |comb|
+      if @cells[comb[0]] == "X" && @cells[comb[1]] == "X" && @cells[comb[2]] == "X"
+        @win_combo = comb
+        return true
+      end
+      if @cells[comb[0]] == "O" && @cells[comb[1]] == "O" && @cells[comb[2]] == "O"
+        @win_combo = comb
+        return true
+      end
+    end
+    return false
+  end
+
+  def draw?
+    if !(won?) && full?
+      return true
+    else
+      return false
+    end
+  end
+
+  def over?
+    if won? || draw?
+      return true
+    else
+      return false
+    end
+  end
+
+  def winner
+    if won?
+      return @cells[@win_combo[0]]
+    else
+      return nil
+    end
+  end
+
+
 
   def turn_count()
     count = 0

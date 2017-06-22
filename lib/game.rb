@@ -26,25 +26,11 @@ class Game
 
 
   def won?
-    WIN_COMBINATIONS.each do |comb|
-      if @board.cells[comb[0]] == "X" && @board.cells[comb[1]] == "X" && @board.cells[comb[2]] == "X"
-        @win = comb
-        return true
-      end
-      if @board.cells[comb[0]] == "O" && @board.cells[comb[1]] == "O" && @board.cells[comb[2]] == "O"
-        @win = comb
-        return true
-      end
-    end
-    return false
+    board.won?
   end
 
   def draw?
-    if !(won?) && @board.full?
-      return true
-    else
-      return false
-    end
+    board.draw?
   end
 
   def over?
@@ -56,11 +42,7 @@ class Game
   end
 
   def winner
-    if won?
-      return @board.cells[@win[0]]
-    else
-      return nil
-    end
+    board.winner
   end
 
 
