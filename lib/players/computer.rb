@@ -30,14 +30,14 @@ module Players
       end
       if !next_move
         Game::WIN_COMBINATIONS.detect do |combination|
-          if combination.count do {|i| board.position(i+1) == token} == 2 && combination.count{|i| !board.taken?(i+1) == 1}
+          if combination.count {|i| board.position(i+1) == token} == 2 && combination.count{|i| !board.taken?(i+1) == 1}
             next_move = (combination.detect{|i| !board.taken?(i+1)}.to_i + 1).to_s
           end
         end
       end
       if !next_move
         Game::WIN_COMBINATIONS.detect do |combination|
-          if combination.count do {|i| board.position(i+1) == opponent_token} == 2 && combination.count{|i| !board.taken?(i+1) == 1}
+          if combination.count {|i| board.position(i+1) == opponent_token} == 2 && combination.count{|i| !board.taken?(i+1) == 1}
             next_move = (combination.detect{|i| !board.taken?(i+1)}.to_i + 1).to_s
           end
         end
@@ -53,4 +53,5 @@ module Players
   def opponent_token
       @token == "X" ? "O" : "X"
   end
+end
 end
