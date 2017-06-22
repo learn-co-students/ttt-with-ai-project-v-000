@@ -39,7 +39,6 @@ class Board
   def valid_move?(index)
     index = index.to_i
     !taken?(index) && index <= cells.length && index > 0
-    #this might require &&
   end
 
   def update(square, player)
