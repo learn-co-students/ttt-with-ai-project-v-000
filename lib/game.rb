@@ -12,6 +12,8 @@ class Game
     [0,4,8], # diag top left to right
     [6,4,2] #diag top right to left
   ]
+  CORNERS = [1, 3, 7, 9]
+
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
