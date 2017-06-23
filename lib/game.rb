@@ -6,8 +6,8 @@ class Game
 		@player_1 = player_1
 		@player_2 = player_2
 		@board = board
-		@player_2.game = self
-		@player_1.game = self
+		@player_2.game = self 
+		@player_1.game = self 
 	end
 
 	WIN_COMBINATIONS =[
