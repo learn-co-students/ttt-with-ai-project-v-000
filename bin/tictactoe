@@ -76,9 +76,11 @@ def play(input)
 		start_again
 	when "score"
 		score
+		start_again
 	when "reset!"
 		@win_count["X"] = 0
 		@win_count["O"] = 0
+		start_again
 	when "exit!"
 		exit
 	end
@@ -97,15 +99,3 @@ puts "Greetings meatbags! Welcome to Tic-Tac-Robo!
  '----'"
 
 start_again
-
-
-
-
-
-
-	
-
-
-
-
-
