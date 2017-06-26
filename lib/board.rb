@@ -2,12 +2,11 @@ class Board
 	attr_accessor :cells, :index
 
 	def initialize
-	    @cells = []
-		9.times{@cells << " "}
+	    self.reset!
 	end
 
 	def reset!
-		@cells.clear
+		@cells = []
 		9.times{@cells << " "}
 	end	 
 
@@ -28,11 +27,11 @@ class Board
 	end
 
 	def full?
-		!@cells.include?(" ")
+		@cells.all?{|cell| cell != " "} 
 	end
 
 	def turn_count
-		@cells.collect{|i| i if i != " " }.compact.size + 1
+		@cells.count{|cell| cell == "X" || cell == "O"} + 1
 	end
 
 	def taken?(input)
