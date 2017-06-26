@@ -22,7 +22,7 @@ class Game
   	]
 
   	def current_player
-  		@board.turn_count.even? : @player_1 : @player_2
+  		@board.turn_count.even? ? @player_1 : @player_2
   	end
 
   	def self.win_combinations 

@@ -35,7 +35,7 @@ class TicTacToeCLI
 	end	
 
 	def human_versus_robot
-		puts "Enter 1 to have me go first, or enter 2 to have you go first."
+		puts "Enter 1 to have you go first, or enter 2 to have me go first."
 		new_input = gets.chomp
 		case new_input
 		when "1"
@@ -96,6 +96,4 @@ class TicTacToeCLI
 
 		start_again		
 	end
-
 end
-

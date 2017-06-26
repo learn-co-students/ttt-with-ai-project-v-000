@@ -3,22 +3,11 @@ module Players
 		attr_accessor :game
 
 		def move(board)
-			if self_almost_won?.class == Array
-				win_self + 1
-			elsif other_almost_won?.class == Array
-				block_opponent + 1	
-			elsif @game.board.valid_move?(5) 
-				"5"	
-			elsif @game.board.valid_move?(1) 
-				"1"	
-			elsif @game.board.valid_move?(3) 
-				"3"	
-			elsif @game.board.valid_move?(7) 
-				"7"
-			elsif @game.board.valid_move?(9) 
-				"9"		
+			optimal_moves = [5,1,7,3,9, @game.board.cells.index(" ") + 1]	
+			if almost_won != nil
+				block_or_win + 1
 			else
-				@game.board.cells.index(@game.board.cells.detect{|i| i == " "}) + 1
+				optimal_moves.detect{|move| @game.board.valid_move?(move)}
 			end							
 		end
 
@@ -30,24 +19,13 @@ module Players
 			end
 		end
 
-		def self_almost_won?
-  			@game.win_indexes.detect{|index| index == ["#{self.token}","#{self.token}"," "] || index == ["#{self.token}"," ","#{self.token}"] || index == [" ","#{self.token}","#{self.token}"]} 
+		def almost_won
+  			@game.win_indexes.index{|index| index == ["#{self.token}","#{self.token}"," "] || index == ["#{self.token}"," ","#{self.token}"] || index == [" ","#{self.token}","#{self.token}"]} || @game.win_indexes.index{|index| index == ["#{other_token}","#{other_token}"," "] || index == ["#{other_token}"," ","#{other_token}"] || index == [" ","#{other_token}","#{other_token}"]}  
   		end
 
-  		 def other_almost_won?
-  			@game.win_indexes.detect{|index| index == ["#{other_token}","#{other_token}"," "] || index == ["#{other_token}"," ","#{other_token}"] || index == [" ","#{other_token}","#{other_token}"]}  
-  		end
-
-  		def win_self
-  			self_index = @game.win_indexes.index{|index| index == ["#{self.token}","#{self.token}"," "] || index == ["#{self.token}"," ","#{self.token}"] || index == [" ","#{self.token}","#{self.token}"]} 
-  			self_index_index = self_almost_won?.index(" ")
-  			Game.win_combinations[self_index][self_index_index]
-  		end
-
-  		def block_opponent
-  			opponent_index = @game.win_indexes.index{|index| index == ["#{other_token}","#{other_token}"," "] || index == ["#{other_token}"," ","#{other_token}"] || index == [" ","#{other_token}","#{other_token}"]} 
-  			opponent_index_index = other_almost_won?.index(" ")
-  			Game.win_combinations[opponent_index][opponent_index_index]
+  		def block_or_win
+  			winning_cell = @game.win_indexes[almost_won].index(" ")
+  			Game.win_combinations[almost_won][winning_cell]
   		end
 
 	end
