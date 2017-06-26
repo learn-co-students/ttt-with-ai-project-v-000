@@ -1,3 +1,4 @@
+require 'pry'
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -32,7 +33,6 @@ class Game
   end
 
   def won?
-    won_status = false
     WIN_COMBINATIONS.detect do |win_combination|
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
@@ -42,11 +42,22 @@ class Game
       pos_2 = self.board.cells[win_index_2]
       pos_3 = self.board.cells[win_index_3]
 
-      won_status = (pos_1 == player_1.token &&  pos_2 == player_1.token &&  pos_3 == player_1.token) ||
-        (pos_1 == player_2.token &&  pos_2 == player_2.token &&  pos_3 == player_2.token)
+      (pos_1 == player_1.token &&  pos_2 == player_1.token &&  pos_3 == player_1.token) ||
+      (pos_1 == player_2.token &&  pos_2 == player_2.token &&  pos_3 == player_2.token)
       end
-
-      won_status
   end
 
+  def draw?
+    self.over? && !self.won?
+  end
+
+  def winner
+      if self.won?
+        pos = self.won?.first
+        winning_token = self.board.cells[pos]
+        winning_token == 'X' ? 'X' : 'O'
+      else
+        nil
+      end
+  end
 end
