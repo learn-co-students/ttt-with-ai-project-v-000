@@ -28,8 +28,12 @@ class Game
      end
   end
 
-  def over?
+  def full?
     !self.board.cells.include?(" ")
+  end
+
+  def over?
+    self.full? || self.won? || self.draw?
   end
 
   def won?
@@ -48,7 +52,7 @@ class Game
   end
 
   def draw?
-    self.over? && !self.won?
+    self.full? && !self.won?
   end
 
   def winner
@@ -59,5 +63,26 @@ class Game
       else
         nil
       end
+  end
+
+  def turn
+    pos = self.current_player.move(self.board.cells)
+    if self.board.valid_move?(pos)
+      self.board.update(pos, current_player)
+    else
+      "That move is not valid! Please choose again."
+      pos = self.current_player.move(self.board.cells)
+    end
+  end
+
+  def play
+    until self.over?
+      self.turn
+    end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw?
+      puts "Cat's Game!"
+    end
   end
 end
