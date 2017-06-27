@@ -56,12 +56,11 @@ class Game
   end
 
   def turn
-    puts "make a move"
-    input = gets.strip
-    if !board.valid_move?(input)
+    if !board.valid_move?(current_player.move)
+      puts "invalid"
       turn
     else
-      board.cells[input.to_i.pred] = current_player.token
+      board.update(current_player.move, current_player)
     end
   end
 
