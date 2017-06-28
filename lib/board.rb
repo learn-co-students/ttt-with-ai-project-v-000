@@ -29,20 +29,24 @@ class Board
 
   def turn_count
     # binding.pry
-    @cells.delete(" ")
-    @cells.length
+    @cells.count {|token| token != " "}
+
   end
 
   def taken?(input)
-    @cells[input.to_i.pred] != " "
+    # binding.pry
+    (@cells[input.to_i.pred] != " ") && (@cells[input.to_i.pred] != nil)
   end
 
   def valid_move?(input)
-    input.to_i.between?(1, 9) && !taken?(input)
+    # binding.pry
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
   def update(input, player)
+    # binding.pry
     @cells[input.to_i.pred] = player.token
+    @cells
   end
 
 end

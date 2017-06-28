@@ -32,7 +32,8 @@ class Game
   end
 
   def over?
-    !board.cells.include?(" ")
+    # binding.pry
+     draw? || won?
   end
 
   def won?
@@ -42,7 +43,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
   end
 
   def winner
@@ -56,14 +57,27 @@ class Game
   end
 
   def turn
-    if !board.valid_move?(current_player.move)
-      puts "invalid"
-      turn
+    # binding.pry
+    playermove = current_player.move(board)
+    if board.valid_move?(playermove)
+      board.update(playermove, current_player)
     else
-      board.update(current_player.move, current_player)
+      puts "Please make a valid move"
+      turn
     end
   end
 
-
+  def play
+    # Game.new
+    # binding.pry
+    until (over?)
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 
 end
