@@ -55,27 +55,24 @@ class Game
 
   def winner
     if won?
-      win = WIN_COMBINATIONS.detect do |combo|
-        board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" &&
-        board.cells[combo[2]] == "X" ||
-        board.cells[combo[0]] == "O" &&
-        board.cells[combo[1]] == "O" &&
-        board.cells[combo[2]] == "O"
-      end
-    board.cells[win[0]]
-    else
-      nil
+      board.cells[winning_combo[0]]
     end
   end
 
   def won?
-    WIN_COMBINATIONS.any? do |combo|
+    combo = winning_combo
+    combo.class == Array
+  end
+
+  def winning_combo
+    combo = WIN_COMBINATIONS.detect do |combo|
       board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" &&
       board.cells[combo[2]] == "X" ||
       board.cells[combo[0]] == "O" &&
       board.cells[combo[1]] == "O" &&
       board.cells[combo[2]] == "O"
     end
+    combo
   end
 
 end
