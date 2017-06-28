@@ -58,6 +58,7 @@ class Game
 
   def turn
     # binding.pry
+    puts "Enter your move (1-9)"
     playermove = current_player.move(board)
     if board.valid_move?(playermove)
       board.update(playermove, current_player)
@@ -65,6 +66,7 @@ class Game
       puts "Please make a valid move"
       turn
     end
+    board.display
   end
 
   def play
