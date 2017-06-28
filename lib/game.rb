@@ -9,6 +9,7 @@ class Game
     board = Board.new
   end
 
+
   WIN_COMBINATIONS = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -64,16 +65,37 @@ class Game
   end
 
   def turn
+    #player to make a move
     puts "Please enter a number (1-9):"
     user_input = gets.strip
-    index = input_to_index(user_input)
-    if valid_move?(index)
-      token = current_player
-      move(index, token)
-    else
-      turn
-    end
-    display_board
+    index = user_input.to_i - 1
+    #if !board.valid_move?(index)
+      #puts "Invalid move"
+    #else
+      #turn
+    #end
   end
+
+  #def input_to_index(user_input)
+   #user_input.to_i - 1
+  #end
+
+  #def turn
+    #puts "Please enter a number (1-9):"
+    #user_input = gets.strip
+    #index = input_to_index(user_input)
+    #if !valid_move?(index)
+      #puts "Invalid move"
+    #else
+      #turn
+    #end
+  #end
+
+  def move(index, token)
+    @board[index] = token
+  end
+
+
+
 
 end
