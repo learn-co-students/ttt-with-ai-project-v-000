@@ -6,7 +6,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    board = Board.new
   end
 
 
@@ -15,18 +14,6 @@ class Game
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
     [0, 4, 8], [2, 4, 6]
   ]
-
-  def board
-    @board
-  end
-
-  def player_1
-    @player_1
-  end
-
-  def player_2
-    @player_2
-  end
 
   def current_player
     if board.turn_count.even?
@@ -65,31 +52,23 @@ class Game
   end
 
   def turn
-    #player to make a move
     puts "Please enter a number (1-9):"
-    user_input = gets.strip
-    index = user_input.to_i - 1
+    index = current_player.move(board).to_i - 1 
+    binding.pry
+    #binding.pry
+    #user_input = gets.strip
+    #index = user_input.to_i - 1
     #if !board.valid_move?(index)
       #puts "Invalid move"
+    #end
     #else
       #turn
     #end
   end
 
-  #def input_to_index(user_input)
-   #user_input.to_i - 1
-  #end
-
-  #def turn
-    #puts "Please enter a number (1-9):"
-    #user_input = gets.strip
-    #index = input_to_index(user_input)
-    #if !valid_move?(index)
-      #puts "Invalid move"
-    #else
-      #turn
-    #end
-  #end
+  def input_to_index(user_input)
+   user_input.to_i - 1
+  end
 
   def move(index, token)
     @board[index] = token
