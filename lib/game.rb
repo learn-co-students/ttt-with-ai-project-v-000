@@ -48,7 +48,8 @@ class Game
     move = ""
     loop do
       board.display
-      puts "#{self.current_player.name} it's your turn."
+      puts "#{self.current_player.name} it's your turn." if current_player
+      .name
       puts "Please enter 1 - 9: "
       move = current_player.move(board)
       break if board.valid_move?(move)
@@ -82,6 +83,11 @@ class Game
         puts "Player 2 will be \"O\", what is your name? "
         self.player_2.name = gets.chomp
      self.play
+  end
+  
+  def one_player_game   
+    puts "Player 1 you are \"X\"."
+    self.play
   end
 
 end
