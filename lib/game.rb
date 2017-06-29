@@ -63,12 +63,12 @@ class Game
   end
 
   def winning_combo
-    combo = WIN_COMBINATIONS.detect do |combo|
-      board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" &&
-      board.cells[combo[2]] == "X" ||
-      board.cells[combo[0]] == "O" &&
-      board.cells[combo[1]] == "O" &&
-      board.cells[combo[2]] == "O"
+    combo = WIN_COMBINATIONS.detect do |c|
+      board.cells[c[0]] == "X" && board.cells[c[1]] == "X" &&
+      board.cells[c[2]] == "X" ||
+      board.cells[c[0]] == "O" &&
+      board.cells[c[1]] == "O" &&
+      board.cells[c[2]] == "O"
     end
     combo
   end
