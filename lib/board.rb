@@ -1,6 +1,6 @@
 require 'pry'
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :logic_move
 
   def initialize
     @cells = Array.new(9, " ")
