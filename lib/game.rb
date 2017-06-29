@@ -37,6 +37,7 @@ class Game
       self.turn
     end
     if won?
+      board.display
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
@@ -46,6 +47,8 @@ class Game
   def turn
     move = ""
     loop do
+      board.display
+      puts "#{self.current_player.name} it's your turn."
       puts "Please enter 1 - 9: "
       move = current_player.move(board)
       break if board.valid_move?(move)
@@ -71,6 +74,14 @@ class Game
       board.cells[c[2]] == "O"
     end
     combo
+  end
+
+  def two_player_game
+        puts "Player 1 will be \"X\", what is your name? "    
+        self.player_1.name = gets.chomp
+        puts "Player 2 will be \"O\", what is your name? "
+        self.player_2.name = gets.chomp
+     self.play
   end
 
 end
