@@ -1,4 +1,3 @@
-require 'pry'
 module Players
   class Computer < Player
     CORNERS = [0, 2, 6, 8]
@@ -27,7 +26,7 @@ module Players
       else
         if openings[:open] == []
           last_move = ""
-          board.cells.each_with_index{|val,ind| last_move = ind if board.cells[ind] == " "}  
+          board.cells.each_with_index{|val,ind| last_move = ind if board.cells[ind] == " "}
           last_move
         else
           openings[:open].sample.sample #Pick a viable combination
