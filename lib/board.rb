@@ -1,7 +1,7 @@
 require 'pry'
 class Board
 
-  attr_accessor :cells, :token
+  attr_accessor :cells
 
   def initialize
     self.cells = Array.new(9, " ")
@@ -19,35 +19,38 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(user_input)
+  def index(user_input)
     user_input.to_i - 1
-    @cells[user_input.to_i - 1]
+  end
+
+  def position(user_input)
+    @cells[index(user_input)]
   end
 
   def full?
-     @cells.all?{|square| square != " " }
+    @cells.all? do |cell|
+      cell != " "
+    end
   end
 
   def turn_count
-    @cells.count{|square| square != " " }
+    @cells.count do |cell|
+      cell != " "
+    end
   end
 
-  def taken?(index)
-    index.to_i - 1
-    @cells[index.to_i - 1] != " "
+  def taken?(user_input)
+    @cells[index(user_input)] != " "
   end
 
-  def valid_move?(index)
-    integer_index = index.to_i
-    !taken?(integer_index) && integer_index.between?(1,9)
+  def valid_move?(user_input)
+    index(user_input).between?(0,8) && !taken?(user_input)
   end
 
-  def update(index, player)
-    @cells[index.to_i - 1] = player.token
+  def update(user_input, player)
+    @cells[index(user_input)] = player.token
+binding.pry 
   end
 
-  def token
-    "X"
-  end
 
 end

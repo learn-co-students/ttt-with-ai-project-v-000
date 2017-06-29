@@ -1,47 +1,47 @@
 class Game
 
-  attr_accessor :board, :player_1, :player_2
-
-  def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new) # If initialize with Player.new, this could be Human or Computer, need to specifiy with Players::Human.
-    @player_1 = player_1
-    @player_2 = player_2
-    @board = board
-  end
-
+attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8],
-    [0, 3, 6], [1, 4, 7], [2, 5, 8],
-    [0, 4, 8], [2, 4, 6]
-  ]
+   [0, 1, 2], [3, 4, 5], [6, 7, 8],
+   [0, 3, 6], [1, 4, 7], [2, 5, 8],
+   [0, 4, 8], [2, 4, 6]
+ ]
 
-  def current_player
-    if board.turn_count.even?
-      @player_1
-    else
-      @player_2
-    end
-  end
+ def initialize(player_1 = Players::Human.new("X"), player_2 =   Players::Human.new("O"), board = Board.new)
 
-  def over?
-    won? || draw?
-  end
+    @player_1 = player_1
+    @player_2 = player_2
+    @board    = board
 
-  def won?
-    WIN_COMBINATIONS.any? do |combo| #taken?(index) takes an argument
-      #binding.pry
+ end
+
+ def current_player
+   if board.turn_count.even?
+     @player_1
+   else
+     @player_2
+   end
+ end
+
+ def draw?
+   board.full? && !won?
+ end
+
+ def over?
+  won? || draw?
+ end
+
+ def won?
+   WIN_COMBINATIONS.any? do |combo| #taken?(index) takes an argument
       if board.taken?(combo[0]) && board.cells[combo[0]] == board.cells[combo[1]] &&   board.cells[combo[1]] == board.cells[combo[2]]
         return combo
       end
     end
-  end
+ end
 
-  def draw?
-    board.full? && !won?
-  end
-
-  def winner
-    combo = won?
+ def winner
+   combo = won?
     if board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X"
       return "X"
     elsif board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O"
@@ -49,32 +49,29 @@ class Game
     else
       nil
     end
-  end
+ end
 
-  def turn
-    puts "Please enter a number (1-9):"
-    index = current_player.move(board).to_i - 1 
-    binding.pry
-    #binding.pry
-    #user_input = gets.strip
-    #index = user_input.to_i - 1
-    #if !board.valid_move?(index)
-      #puts "Invalid move"
-    #end
-    #else
-      #turn
-    #end
-  end
+ def turn
+#binding.pry 
+    index = current_player.move(board) #board.cells[index]
+    if !board.valid_move?(index)
+      puts "Invalid move"
+      turn
+    else
+      board.update(index, current_player)
+    end
+ end
 
-  def input_to_index(user_input)
-   user_input.to_i - 1
-  end
-
-  def move(index, token)
-    @board[index] = token
-  end
-
-
-
+ def play
+   while !over?
+     turn
+   end  # #over? => #won? and #draw?
+    if won?
+      puts "Congratulations #{winner}!"
+#binding.pry
+    elsif draw?
+      puts "Cat's Game!"
+    end
+ end
 
 end
