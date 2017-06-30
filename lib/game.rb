@@ -13,6 +13,12 @@ class Game
     [3,4,5],
     [6,7,8]
   ]
+  
+  CORNER_MOVE = [1,3,7,9]
+  
+  def self.win_combo
+    WIN_COMBINATIONS
+  end
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
@@ -86,7 +92,12 @@ class Game
   end
   
   def one_player_game   
-    puts "Player 1 you are \"X\"."
+    puts "Player 1 you are \"X\", what is your name? "
+    self.player_1.name = gets.chomp
+    self.play
+  end
+  
+  def computer_played_game
     self.play
   end
 
