@@ -38,36 +38,41 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |win_combination|
-    self.board.cells[win_combination[0]] == self.board.cells[win_combination[1]] && self.board.cells[win_combination[1]] == self.board.cells[win_combination[2]] && self.board.taken?(win_combination[0])
+    WIN_COMBINATIONS.detect do |wc|
+    self.board.cells[wc[0]] == self.board.cells[wc[1]] && self.board.cells[wc[1]] == self.board.cells[wc[2]] && self.board.taken?(wc[0] + 1)
     end
   end
 
   def winner #need to fix, won't return nil if false
-    if won?
-     win_combination = won?
-     self.board.cells[win_combination[0]]
+     if won?
+      wc = won?
+      self.board.cells[wc[0]]
+    else
+       nil
+    end
+ end
+
+
+ def turn
+     user_input = self.current_player.move(board)
+     if self.board.valid_move?(user_input)
+       self.board.update(user_input, current_player)
+       self.board.display
+     elsif !self.board.valid_move?(user_input)
+       puts "Invalid move"
+       turn
+     end
+ end
+
+ def play
+   while !over?
+     turn
+     end
+     board.display
+   if won?
+     puts "Congratulations #{winner}!"
+   elsif draw?
+     puts "Cat's Game!"
+     end
    end
-  end
-
-
-  def turn
-  index = input_to_index(gets.chomp)
-  if self.board.valid_move?(index)
-    self.board.update(user_input, player)
-    player_token = current_player
-    self.human.move(index, player_token)
-    self.board.display
-  else
-    turn
-  end
-end
-
-  def play
-
-  end
-
-  def start
-    
-  end
-end
+ end
