@@ -13,6 +13,9 @@ while response != 'exit'
     player_count = gets.chomp
         
     case player_count
+    when "0"
+        new_game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+        new_game.computer_played_game
     when "1"
         new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
         new_game.one_player_game
