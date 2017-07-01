@@ -7,6 +7,10 @@ require_relative '../config/environment'
 #==============================================
 
 def self.one_player_options
+    # first is used to assign value to computer :player_number,
+    # :player_number lets the computer follow a method of play,
+    # if :player_number == 1, computer uses "attack" method
+    # if :player_number == 2, computer uses "defend" method.
     first = nil
     loop do
         puts "Do you want to go first? (Y)es or (N)o "
