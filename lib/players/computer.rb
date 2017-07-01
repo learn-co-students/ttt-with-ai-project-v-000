@@ -25,9 +25,9 @@ module Players
             move = Game::CORNER_MOVES.sample.to_s
         end
         
-        # Human Doesn't Play Center, CPU 2nd turn should be corner with empty between CPU's (2) turns
+        # Human Doesn't Play Center, CPU's 2nd turn should be Corner.
+        # Corner move here should have (2) CPU tokens in a row, and an empty space between them.
         if board.cells[4] == " " && board.turn_count >= 2
-            #  prev_move = board.cells.index { |i| i == "X" }.to_s
             Game::CORNER_COMBOS.detect do |combo|
                 if combo.select { |i| board.position(i+1) == token }.size == 1 && combo.select { |i| board.position(i+1) == " " }.size == 2
                     if board.position(combo[0]+1) == " "
@@ -39,13 +39,17 @@ module Players
             end
         end
         
-        
+        # On Turn 4 take Center, if it hasn't been done yet.
         if board.turn_count == 4 && board.cells[4] == " "
             move = "5"
         end
         
+        # Look for Possible wins in one move or block
+        if board.turn_count >= 5
+            move = find_or_block_move(board)
+        end
        
-        # Human Plays Center
+        # FlowChart if Human Plays Center
         if board.cells[4] == "O" && board.cells[4] != " " && board.turn_count > 0
             
             # If Opponent plays 1st move to Center. Play opposite corner of your first move.
@@ -69,12 +73,6 @@ module Players
             elsif board.turn_count == 4  
                 move = find_or_block_move(board)
             end
-        end
-       
-        
-        # Look for Possible wins if any exist in one move
-        if board.turn_count >= 5
-            move = find_or_block_move(board)
         end
         
         move
