@@ -14,7 +14,8 @@ class Game
     [6,7,8]
   ]
   
-  CORNER_MOVE = [1,3,7,9]
+  CORNER_MOVES = [1,3,7,9]
+  SIDE_MOVES = [2,4,6,8]
   
   def self.win_combo
     WIN_COMBINATIONS
@@ -54,8 +55,6 @@ class Game
     move = ""
     loop do
       board.display
-      puts "#{self.current_player.name} it's your turn." if current_player
-      .name
       puts "Please enter 1 - 9: "
       move = current_player.move(board)
       break if board.valid_move?(move)
@@ -91,13 +90,7 @@ class Game
      self.play
   end
   
-  def one_player_game   
-    puts "Player 1 you are \"X\", what is your name? "
-    self.player_1.name = gets.chomp
-    self.play
-  end
-  
-  def computer_played_game
+  def start_game
     self.play
   end
 
