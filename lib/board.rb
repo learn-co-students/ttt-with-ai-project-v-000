@@ -32,7 +32,7 @@ class Board
   end
 
   def turn_count
-    self.cells.count { |c| c == "O" || c == "X"}
+    self.cells.count { |c| c == "O" || c == "X"} 
   end
 
   def update(move, player)
