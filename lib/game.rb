@@ -14,6 +14,12 @@ class Game
     [6,7,8]
   ]
   
+  CORNER_COMBOS = [
+      [0,1,2],
+      [0,3,6],
+      [2,5,8],
+      [6,7,8]
+    ]
   CORNER_MOVES = [1,3,7,9]
   SIDE_MOVES = [2,4,6,8]
   
@@ -80,14 +86,6 @@ class Game
       board.cells[c[2]] == "O"
     end
     combo
-  end
-
-  def two_player_game
-        puts "Player 1 will be \"X\", what is your name? "    
-        self.player_1.name = gets.chomp
-        puts "Player 2 will be \"O\", what is your name? "
-        self.player_2.name = gets.chomp
-     self.play
   end
   
   def start_game
