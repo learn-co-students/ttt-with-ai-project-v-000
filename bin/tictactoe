@@ -1,3 +1,19 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to the hardest Tic Tac Toe game you will EVER play!"
+
+#puts "Press t to proceed."
+#  gets.strip
+
+
+puts "Which version would you like to play?  0-players, 1-players
+or 2-players?"
+version = gets.strip
+
+  if version == "1"
+    Game.new.play
+  else
+    Game.new.play
+  end

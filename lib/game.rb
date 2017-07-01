@@ -33,33 +33,37 @@ attr_accessor :board, :player_1, :player_2
  end
 
  def won?
-   WIN_COMBINATIONS.any? do |combo| #taken?(index) takes an argument
-      if board.taken?(combo[0]) && board.cells[combo[0]] == board.cells[combo[1]] &&   board.cells[combo[1]] == board.cells[combo[2]]
-        return combo
-      end
+   WIN_COMBINATIONS.detect do |win_combo|
+    if (board.cells[win_combo[0]]) == "X" && (board.cells[win_combo[1]]) == "X" && (board.cells[win_combo[2]]) == "X"
+      return win_combo
+    elsif (board.cells[win_combo[0]]) == "O" && (board.cells[win_combo[1]]) == "O" && (board.cells[win_combo[2]]) == "O"
+      return win_combo
     end
+   end
  end
 
- def winner
-   combo = won?
-    if board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X"
-      return "X"
-    elsif board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O"
-      return "O"
-    else
-      nil
-    end
+def winner
+ WIN_COMBINATIONS.detect do |win_combo|
+   if (board.cells[win_combo[0]]) == "X" && (board.cells[win_combo[1]]) == "X" && (board.cells[win_combo[2]]) == "X"
+     return "X"
+   elsif (board.cells[win_combo[0]]) == "O" && (board.cells[win_combo[1]]) == "O" && (board.cells[win_combo[2]]) == "O"
+     return "O"
+   else
+     nil
+   end
  end
+end
 
  def turn
-#binding.pry 
+    board.display
+    puts "Sup YO!?  Pick a number (1-9)!"
     index = current_player.move(board) #board.cells[index]
-    if !board.valid_move?(index)
-      puts "Invalid move"
-      turn
-    else
-      board.update(index, current_player)
-    end
+      if board.valid_move?(index)
+         board.update(index, current_player)
+      else
+        puts "Seriously?  You wanna try that again?"
+        turn
+      end
  end
 
  def play
@@ -68,7 +72,7 @@ attr_accessor :board, :player_1, :player_2
    end  # #over? => #won? and #draw?
     if won?
       puts "Congratulations #{winner}!"
-#binding.pry
+      board.display
     elsif draw?
       puts "Cat's Game!"
     end

@@ -49,7 +49,6 @@ class Board
 
   def update(user_input, player)
     @cells[index(user_input)] = player.token
-binding.pry 
   end
 
 
