@@ -2,13 +2,42 @@
 
 require_relative '../config/environment'
 
+#==============================================
+# Functions for Game Mode Options
+#==============================================
+
+def self.one_player_options
+    first = nil
+    loop do
+        puts "Do you want to go first? (Y)es or (N)o "
+        first = gets.chomp.downcase
+        break if first == "y" || first == "n"
+    end
+    if first == "y"
+        computer = Players::Computer.new("O")
+        computer.player_number = 2
+        new_game = Game.new(Players::Human.new("X"), computer)
+        
+    else 
+        computer = Players::Computer.new("X")
+        computer.player_number = 1
+        new_game = Game.new(computer,Players::Human.new("O"))
+    end
+    
+    new_game.start_game
+end
+
+#==============================================
+# Game Setup | Intro
+#==============================================
+
 # Greet the user with a message.
 puts "=" * 40
 puts "Welcome to the Tic Tac Toe!"
 puts "=" * 40
 response = nil
 while response != 'exit'
-    # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+    # Prompt the user for what kind of game they want to play, 0, 1, or 2 player.
     puts "How many Players will there be? 0, 1, or 2: "
     player_count = gets.chomp
         
@@ -17,8 +46,7 @@ while response != 'exit'
         new_game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
         new_game.computer_played_game
     when "1"
-        new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-        new_game.one_player_game
+       self.one_player_options
     when "2"
         new_game = Game.new
         new_game.two_player_game
@@ -26,6 +54,7 @@ while response != 'exit'
     puts "Would you like to play again? Type (yes) or (exit): "
     response = gets.chomp
 end
+
 
     
 
