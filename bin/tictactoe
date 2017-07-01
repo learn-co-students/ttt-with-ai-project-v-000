@@ -27,6 +27,15 @@ def self.one_player_options
     new_game.start_game
 end
 
+def self.cpu_vs_cpu_options
+    computer_1 = Players::Computer.new("X")
+    computer_1.player_number = 1
+    computer_2 = Players::Computer.new("O")
+    computer_2.player_number = 2
+    new_game = Game.new(computer_1,computer_2)
+    new_game.start_game
+end
+
 #==============================================
 # Game Setup | Intro
 #==============================================
@@ -43,13 +52,12 @@ while response != 'exit'
         
     case player_count
     when "0"
-        new_game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
-        new_game.computer_played_game
+        self.cpu_vs_cpu_options
     when "1"
        self.one_player_options
     when "2"
         new_game = Game.new
-        new_game.two_player_game
+        new_game.start_game
     end
     puts "Would you like to play again? Type (yes) or (exit): "
     response = gets.chomp
