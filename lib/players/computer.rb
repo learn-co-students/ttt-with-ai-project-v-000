@@ -25,13 +25,28 @@ module Players
             move = Game::CORNER_MOVES.sample.to_s
         end
         
-        # Human Doesn't Play Center
-        if board.cells[4] == " " && board.turn_count > 0
-            
+        # Human Doesn't Play Center, CPU 2nd turn should be corner with empty between CPU's (2) turns
+        if board.cells[4] == " " && board.turn_count >= 2
+            #  prev_move = board.cells.index { |i| i == "X" }.to_s
+            Game::CORNER_COMBOS.detect do |combo|
+                if combo.select { |i| board.position(i+1) == token }.size == 1 && combo.select { |i| board.position(i+1) == " " }.size == 2
+                    if board.position(combo[0]+1) == " "
+                        move = (combo[0]+1).to_s
+                    else
+                        move = (combo[2]+1).to_s 
+                    end
+                end
+            end
         end
         
+        
+        if board.turn_count == 4 && board.cells[4] == " "
+            move = "5"
+        end
+        
+       
         # Human Plays Center
-        if board.cells[4] != token && board.cells[4] != " " && board.turn_count > 0
+        if board.cells[4] == "O" && board.cells[4] != " " && board.turn_count > 0
             
             # If Opponent plays 1st move to Center. Play opposite corner of your first move.
             if board.turn_count == 2
@@ -48,14 +63,14 @@ module Players
                     move = "1"
                 end
             end
+            # if Human Takes Corner on 2nd move, take last corner. If not, look for Win | Block.
+            if board.turn_count == 4 && Game::CORNER_MOVES.each { |i| board.cells[i-1] == "O"}
+                move = Game::CORNER_MOVES.sample.to_s
+            elsif board.turn_count == 4  
+                move = find_or_block_move(board)
+            end
         end
-        
-        # if Human Takes Corner on 2nd move, take last corner. If not, look for Win | Block.
-        if board.turn_count == 4 && Game::CORNER_MOVES.each { |i| board.cells[i-1] == "O"}
-            move = Game::CORNER_MOVES.sample.to_s
-        elsif board.turn_count == 4  
-            move = find_or_block_move(board)
-        end
+       
         
         # Look for Possible wins if any exist in one move
         if board.turn_count >= 5
@@ -74,7 +89,7 @@ module Players
             ## Stop him from getting 3 corners
             ## create a defense for it
         
-        # On 1st Turn if center open take it.
+        # On 1st Turn, Take 'Center' if open take it.
         move = "5" if !board.taken?(5) && board.turn_count == 1
         
         # CPU has Center FlowChart.
