@@ -1,8 +1,6 @@
 module Players
   class Computer < Player
     
-    attr_accessor :move_lists
-    
     def move(board)
         move = nil
         msg = "Computer moves to "
@@ -11,6 +9,8 @@ module Players
             move = attack_strategy(board)
         elsif self.player_number == 2
             move = defend_strategy(board)
+        else
+           move = attack_strategy(board)
         end
         
         puts msg + "#{move}."
