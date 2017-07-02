@@ -7,6 +7,10 @@ require_relative '../config/environment'
 #==============================================
 
 def self.one_player_options
+    # first is used to assign value to computer :player_number,
+    # :player_number lets the computer follow a method of play,
+    # if :player_number == 1, computer uses "attack" method
+    # if :player_number == 2, computer uses "defend" method.
     first = nil
     loop do
         puts "Do you want to go first? (Y)es or (N)o "
@@ -62,16 +66,3 @@ while response != 'exit'
     puts "Would you like to play again? Type (yes) or (exit): "
     response = gets.chomp
 end
-
-
-    
-
-
-# Ask the user for who should go first and be "X".
-
-# Use the input to correctly initialize a Game with the appropriate player types and token values.
-
-# When the game is over, the CLI should prompt the user if they would like to play again 
-# and allow them to choose a new configuration for the game as described above.
-# If the user doesn’t want to play again, exit the program.
-
