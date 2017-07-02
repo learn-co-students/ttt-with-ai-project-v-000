@@ -20,6 +20,7 @@ class Game
       [2,5,8],
       [6,7,8]
     ]
+    
   CORNER_MOVES = [1,3,7,9]
   SIDE_MOVES = [2,4,6,8]
   
