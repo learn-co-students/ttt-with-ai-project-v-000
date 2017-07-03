@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe 'Players::Computer' do
   it 'inherits from Player' do
-    expect(Player::Computer.ancestors).to include(Player)
+    expect(Players::Computer.ancestors).to include(Player)
   end
 
   describe '#move' do
     it 'returns a valid position for the computer to move' do
-      computer = Player::Computer.new("X")
+      computer = Players::Computer.new("X")
       board = Board.new
 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
