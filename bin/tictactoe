@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Game play asks for players input on a turn of the game
+# Game play checks if the game is over after every turn
+# Game play plays the first turn of the game
+# Game play plays the first few turns of the game
+# Game play checks if the game is won after every turn
+# Game play checks if the game is a draw after every turn
+# Game play stops playing if someone has won
+# Game play congratulates the winner X
+# Game play congratulates the winner O
+# Game play stops playing in a draw
+# Game play prints "Cat's Game!" on a draw
+# Game play plays through an entire game

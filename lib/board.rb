@@ -1,11 +1,10 @@
+require 'pry'
+
 class Board
   attr_accessor :cells
   attr_reader :token
+  # @@cells = []
 # Board #cells has an attribute to store the cells of the board
-  def self.cells
-    @@cells
-    @token = token
-  end
 
 # Board #reset! can reset the state of the cells in the board
 # Board #reset! sets the cells of the board to a 9 element array of " "
@@ -15,7 +14,7 @@ class Board
 
 # Board #initialize sets the cells of the board to a 9 element array of " "
   def initialize
-    self.cells = [" "," "," "," "," "," "," "," "," "]
+    reset!
   end
 
 # Board #display prints the board
@@ -32,20 +31,12 @@ class Board
 # Board #full? returns true for a full board
 # Board #full? returns false for an in-progress game
   def full?
-    cells.none? do |i|
-      i == " " || i.nil?
-    end
+    cells.none? { |cell| cell == " "}
   end
 
 # Board #turn_count returns the amount of turns based on cell value
   def turn_count
-    count = 0
-    cells.each do |play|
-      if play == "X" || play == "O"
-        count += 1
-      end
-    end
-    count
+    cells.count {|cell| cell != " "}
   end
 
 # Board #taken? returns true if the position is X or O

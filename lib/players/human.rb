@@ -3,13 +3,7 @@ module Players
     def move(input)
       puts "Please enter 1-9:"
         input = gets.strip
+        input
     end
   end
 end
-
-
-# def move(board, index, character)
-#   board[index] = character
-#   turn_count(board)
-#   display_board(board)
-# end
