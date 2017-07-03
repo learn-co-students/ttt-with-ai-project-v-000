@@ -41,7 +41,11 @@ module Players
         
         # On Turn 4 take Center, if it hasn't been done yet.
         if board.turn_count == 4 && board.cells[4] == " "
-            move = "5"
+            if find_or_block_move(board)
+                move = find_or_block_move(board)
+            else
+                move = "5"
+            end
         end
         
         # Look for Possible wins in one move or block
@@ -143,7 +147,7 @@ module Players
         end
         
           # Find a Move which isn't taken and play it.
-            move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil && board.turn_count > 2
+            move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil && board.turn_count > 2 && board.turn_count != 4
             
         # return move
         move
