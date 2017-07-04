@@ -81,10 +81,11 @@ class Game
     if board.valid_move?(input)
       board.update(input, current_player)
     else
-      puts "That is not a valid move."
+      puts "That is not a valid move. Please choose another number."
       turn
     end
     board.display
+    puts "Next player:"
   end
 
 # Game play asks for players input on a turn of the game
@@ -108,5 +109,67 @@ class Game
     else won?
       puts "Congratulations #{winner}!"
     end
+  end
+
+#   def start
+#     humans = nil
+#     puts "Welcome to Tic Tac Toe! How many humans are playing today, one or two?"
+#     humans = gets.chomp
+#       if humans == 2
+#         self.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+#       elsif humans == 1
+#         self.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+#       elsif humans == 0
+#         self.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+#       end
+#   end
+# end
+
+def start
+  puts "How many players for this game?\n0 = computer plays itself; 1 = you play the computer; 2 = you and a friend play"
+  puts "Or...play wargames = computer plays itself 100 times (0/1/2/wargames)"
+  ARGV.clear
+  total_players = gets.strip
+
+  case total_players
+  when "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+  when "1"
+    puts "Player 1 is X and goes first.  Type 'X' to be Player 1.\nOtherwise, type 'O' to be Player 2, and the computer will go first."
+    # ARGV.clear
+    choice = gets.strip.upcase
+    if choice == "X"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    else
+      Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+    end
+  when "2"
+    puts "Player 1 is X and goes first; Player 2 is O."
+    Game.new().play
+  # when "wargames"
+    # Game.new(Players::Computer.new("X"), Players::Computer.new("O")).wargames
+  end
+
+  sleep(1)
+
+  play_again
+end
+#play_again controls playing another game
+def play_again
+
+  puts "\nWould you like to play again? (y/n)"
+  again = gets.strip.upcase
+
+  if again == "Y" || again == "YES"
+    start
+  else
+    exit_game
+  end
+end
+
+#exit_game controls ending of game
+  def exit_game
+    sleep(2)
+    puts "Okay, bye then!"
   end
 end

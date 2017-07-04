@@ -1,3 +1,5 @@
+require 'pry'
+
 class Player
   attr_accessor :cells, :board, :game
   attr_reader :token

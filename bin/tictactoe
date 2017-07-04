@@ -1,14 +1,7 @@
 #!/usr/bin/env ruby
+require 'pry'
 
 require_relative '../config/environment'
 
-
-puts "Welcome to Tic Tac Toe! How many humans are playing today, one or two?"
-humans = gets.chomp
-if humans = 2
-  Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-elsif humans = 1
-  Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-elsif humans = 0
-  Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-end
+puts "Welcome to Tic Tac Toe!"
+Game.new.start
