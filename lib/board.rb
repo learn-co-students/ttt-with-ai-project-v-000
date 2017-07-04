@@ -47,7 +47,7 @@ class Board
 # Board #valid_move? returns true for user input between 1-9 that is not taken
   def valid_move?(input)
     index = input.to_i - 1
-    index.between?(0,8) && !taken?(input)
+    index.between?(0,9) && !taken?(input)
   end
 
 # Board #update updates the cells in the board with the player token according to the input
