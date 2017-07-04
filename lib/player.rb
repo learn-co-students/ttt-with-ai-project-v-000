@@ -1,7 +1,9 @@
 class Player
-  attr_reader :token, :cells
+  attr_accessor :cells, :board, :game
+  attr_reader :token
 
   def initialize(token)
     @token = token
+    
   end
 end

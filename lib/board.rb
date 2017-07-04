@@ -2,8 +2,6 @@ require 'pry'
 
 class Board
   attr_accessor :cells
-  attr_reader :token
-  # @@cells = []
 # Board #cells has an attribute to store the cells of the board
 
 # Board #reset! can reset the state of the cells in the board
@@ -55,6 +53,6 @@ class Board
 # Board #update updates the cells in the board with the player token according to the input
   def update(input, player)
     index = input.to_i - 1
-    self.cells[index] = "X"
+    self.cells[index] = player.token
   end
 end

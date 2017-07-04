@@ -6,6 +6,9 @@ class Game
 
 # Game initialize accepts 2 players and a board
 # Game initialize defaults to two human players, X and O, with an empty board
+# Game #board provides access to the board
+# Game #player_1 provides access to player_1
+# Game #player_2 provides access to player_2
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     self.board = board
     self.player_1 = player_1
@@ -22,21 +25,6 @@ class Game
     [2,5,8],
     [0,4,8],
     [2,4,6]]
-
-# Game #board provides access to the board
-  def board=(board)
-    @board = board
-  end
-
-# Game #player_1 provides access to player_1
-  def player_1=(player_1)
-    @player_1 = player_1
-  end
-
-# Game #player_2 provides access to player_2
-  def player_2=(player_2)
-    @player_2 = player_2
-  end
 
 # Game #current_player returns the correct player, X, for the third move
   def current_player
@@ -100,12 +88,23 @@ class Game
   end
 
 # Game play asks for players input on a turn of the game
+# Game play checks if the game is over after every turn
+# Game play plays the first turn of the game
+# Game play plays the first few turns of the game
+# Game play checks if the game is won after every turn
+# Game play checks if the game is a draw after every turn
+# Game play stops playing if someone has won
+# Game play congratulates the winner X
+# Game play congratulates the winner O
+# Game play stops playing in a draw
+# Game play prints "Cat's Game!" on a draw
+# Game play plays through an entire game
   def play
     until over?
       turn
     end
     if draw?
-      puts "Cats Game!"
+      puts "Cat's Game!"
     else won?
       puts "Congratulations #{winner}!"
     end

@@ -2,15 +2,13 @@
 
 require_relative '../config/environment'
 
-# Game play asks for players input on a turn of the game
-# Game play checks if the game is over after every turn
-# Game play plays the first turn of the game
-# Game play plays the first few turns of the game
-# Game play checks if the game is won after every turn
-# Game play checks if the game is a draw after every turn
-# Game play stops playing if someone has won
-# Game play congratulates the winner X
-# Game play congratulates the winner O
-# Game play stops playing in a draw
-# Game play prints "Cat's Game!" on a draw
-# Game play plays through an entire game
+
+puts "Welcome to Tic Tac Toe! How many humans are playing today, one or two?"
+humans = gets.chomp
+if humans = 2
+  Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+elsif humans = 1
+  Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+elsif humans = 0
+  Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+end
