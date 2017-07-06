@@ -2,5 +2,4 @@
 
 require_relative '../config/environment'
 
-tictactoe = TicTacToeCLI.new
-tictactoe.setup_game
+TicTacToeCLI.new.setup_game
