@@ -26,13 +26,7 @@ class Board
   end
 
   def turn_count
-    counter = 0
-    @cells.each do |token|
-      if token == "X" || token == "O"
-        counter += 1
-    end
-  end
-  counter
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(input)
@@ -44,11 +38,7 @@ class Board
   end
 
   def valid_move?(input)
-    if (input.to_i - 1).between?(0,8) && !taken?(input)
-      true
-    else
-      false
-    end
+    input.to_i.between?(1,9) && !taken(input)
   end
 
   def update(input, player)
