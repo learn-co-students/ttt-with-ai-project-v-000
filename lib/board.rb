@@ -63,5 +63,8 @@ def valid_move?(input)
   end
 end
 
+def update(index, token)
+  @cells[index] = token
+end
 
 end
