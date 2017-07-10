@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome user!"
+
+
+done_playing = false
+
+until done_playing
+	puts "What kind of game do you want to play? (0,1,or 2 players)"
+	num_players = gets.chomp.to_i
+
+	player_1 = nil
+	player_2 = nil
+
+	if num_players == 1
+		puts "Who will go first? (Enter 'human' or 'computer')"
+		first_player = gets.chomp
+
+		if first_player == "human"
+			player_1 = Players::Human.new('X')
+			player_2 = Players::Computer.new('O')
+		else
+			player_1 = Players::Computer.new('X')
+			player_2 = Players::Human.new('O')
+		end
+	elsif num_players == 2
+		player_1 = Players::Human.new('X')
+		player_2 = Players::Human.new('O')
+	else
+		player_1 = Players::Computer.new('X')
+		player_2 = Players::Computer.new('O')
+	end
+
+
+	game = Game.new(player_1, player_2)
+	game.play
+
+	puts "Would you like to play again? (y or n)"
+	if gets.chomp == 'n'
+		done_playing = true
+	end 
+end
