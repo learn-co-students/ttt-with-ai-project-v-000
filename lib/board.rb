@@ -23,9 +23,45 @@ def display
   puts row3
 end
 
-def position(cells)
-  input = STDIN.gets.chomp.to_i
-  value = @cells[input-1]
+def position(input)
+  input = input.to_i - 1
+  value = @cells[input]
 end
+
+def full?
+ if @cells.include?(" ")
+    false
+ else
+    true
+ end
+end
+
+def turn_count
+  counter = 0
+  @cells.each do |cell|
+    if cell != " "
+      counter += 1
+    end
+  end
+  counter
+end
+
+def taken?(input)
+  input = input.to_i - 1
+  if @cells[input] == "X" || @cells[input] == "O"
+    return true
+  else false
+  end
+end
+
+def valid_move?(input)
+  input = input.to_i - 1
+  if taken?(input)
+    false
+  elsif input.between?(0,8)
+    true
+  end
+end
+
 
 end
