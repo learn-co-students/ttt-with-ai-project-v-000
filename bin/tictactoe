@@ -22,7 +22,7 @@ input = gets.strip
       player_1 = Players::Computer.new("O")
       player_2 = Players::Human.new("X")
     end
-  elsif input == "0"
+  else
     player_1 = Players::Computer.new("X")
     player_2 = Players::Computer.new("O")
   end
@@ -32,4 +32,3 @@ input = gets.strip
   tic_tac_toe.board.display
   tic_tac_toe.play
 
-  puts "Would you like to play again? (yes or no)"
