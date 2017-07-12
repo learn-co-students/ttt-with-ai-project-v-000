@@ -4,7 +4,7 @@ class Board
 
   def reset!
     # sets the value of each element in cells array to " "
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def initialize

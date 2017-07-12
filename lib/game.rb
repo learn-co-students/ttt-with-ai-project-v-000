@@ -27,17 +27,14 @@ class Game
   def over?
     won? || draw? || self.board.full?
   end
-# below method added and attr_reader :tokens added on line 4
+
   def win_tokens
     @tokens = WIN_COMBINATIONS.map {|combo| combo.map {|index| board.cells[index]}}
-    # should return the token at each index of each array of winning combos relative to the game board
+    # return the token at each index of each array of winning combos relative to the game board
     # which is now an instance variable, reader access granted in attr_reader
   end
-# below method changed, original commented out
-  def won? # should return true or false - currently doesnt do that
-    #WIN_COMBINATIONS.detect do |combo|
-    #  board.cells[combo[0]] == board.cells[combo[1]] &&
-    #  board.cells[combo[1]] == board.cells[combo[2]]
+
+  def won?
     win_tokens
     tokens.include?(["X", "X", "X"]) || win_tokens.include?(["O", "O", "O"])
     # true if the tokens array from win_tokens includes a set of all Xs or all Os
@@ -49,38 +46,32 @@ class Game
   end
 
   def winner
-    #if won? == nil
-    #  winning_combo = won?
-    #  board.cells[winning_combo[0]]
-    #else
-    #  nil
-    #end
-# nope
-    #if won?
-    #  tokens.detect{ |combo| combo == ["X", "X", "X"] || combo == ["O", "O", "O"]}
-    #else
-    #  nil
-    #end
-# more nope
-    #winning_combo = WIN_COMBINATIONS.detect do |combo|
-    #  board.cells[combo[0]] == board.cells[combo[1]] &&
-    #  board.cells[combo[1]] == board.cells[combo[2]]
-    #end
-    #board.cells[winning_combo[0]]
-# still more nope but wait
     win_tokens
     winning_combo = tokens.detect {|combo| combo == ["X", "X", "X"] || combo == ["O", "O", "O"]}
-
-    if won?
-      winning_combo[0]
-    else
-      nil
-    end
+    # the first match of all Xs or all Os is now saved as a variable
+    won? ? winning_combo[0] : nil
   end
 
   def turn
+    player = current_player
+    move = player.move(board)
+    if board.valid_move?(move)
+      board.update(move, player)
+      board.display
+    else
+      board.display
+      turn
+    end
   end
 
   def play
+    while !over?
+      turn
+    end
+    if draw?
+      puts "Cat's Game!"
+    elsif won?
+      puts "Congratulations #{winner}!"
+    end
   end
 end
