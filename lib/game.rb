@@ -55,9 +55,25 @@ class Game
   end
 
   def turn
-    self.current_player.move
+    puts "where would you like to move? (1-9)"
+    move = self.current_player.move(current_player.token)
+    if self.board.valid_move?(move)
+      self.board.update(move, self.current_player)
+    else
+      puts "invalid"
+      puts "where would you like to move? (1-9)"
+      move = self.current_player.move(current_player.token)
+    end
   end
 
   def play
+    while !self.over?
+      self.turn
+    end
+    if self.draw?
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{self.winner}!"
+    end
   end
 end
