@@ -31,3 +31,5 @@ input = gets.strip
   tic_tac_toe = Game.new(player_1, player_2)
   tic_tac_toe.board.display
   tic_tac_toe.play
+
+  puts "Would you like to play again? (yes or no)"
