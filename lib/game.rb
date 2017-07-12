@@ -29,10 +29,51 @@ class Game
     end
 
     def won?
-      WIN_COMBINATIONS.any? do |combo|
-        @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?[combo[0]+1]
+      WIN_COMBINATIONS.detect do |combo|
+        @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
       end
     end
 
+    def draw?
+      @board.full? && !won?
+    end
+
+    def over?
+      won? || draw?
+    end
+
+    def winner
+      won = won?
+      if won? && @board.cells[won[0]] == "X"
+        "X"
+      elsif won? && @board.cells[won[0]] == "O"
+        "O"
+      end
+    end
+
+    def turn
+      player = current_player
+      move = player.move(@board)
+      if @board.valid_move?(move) == false
+        puts "Please enter a valid move"
+        turn
+      else
+        @board.update(move, player)
+      end
+      @board.display
+    end
+
+    def play
+      until over?
+        turn
+      end
+      if winner == "X"
+        puts "Congratulations X!"
+      elsif winner == "O"
+        puts "Congratulations O!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
+    end
 
 end
