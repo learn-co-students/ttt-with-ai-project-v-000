@@ -8,6 +8,7 @@ class Computer < Player
     # find the first that is a valid move
     corners.shift
     # expect this to go thru this and if the move is not valid it will go to the next
+    # this gets stuck in an infinite loop...
   end
 
   end
