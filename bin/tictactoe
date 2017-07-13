@@ -16,9 +16,12 @@ input = gets.strip
       player_1 = Players::Computer.new("O")
       player_2 = Players::Human.new("X")
     end
-  else
+  elsif input == "0"
     player_1 = Players::Computer.new("X")
     player_2 = Players::Computer.new("O")
+  else
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
   end
 
   tic_tac_toe = Game.new(player_1, player_2)
