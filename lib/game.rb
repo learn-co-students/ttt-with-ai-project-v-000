@@ -20,7 +20,7 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1.token : @player_2.token
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def over?
@@ -52,9 +52,24 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def turn
-    input = gets.chomp
-    if !valid_move?
-      input = gets.chomp
+    player = current_player
+    current_move = player.move(board)
+    if !board.valid_move?(current_move)
+      turn
+    else
+      board.update(current_move, player)
+      board.display
+    end
+  end
+
+  def play
+    while !over?
+       turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 
