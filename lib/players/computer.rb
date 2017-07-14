@@ -2,17 +2,23 @@ module Players
   class Computer < Player
     def move(board)
       move = nil
+      middle = "5"
+      corners = ["1", "3", "7", "9"]
+      edges = ["2", "4", "6", "8"]
+      win_combos = Game::WIN_COMBINATIONS
 
-      if !board.taken?("5")
-        move = "5"
-        # take middle position initially
-      elsif board.turn_count == 1
-        move = [1, 3, 7, 9].detect { |i| !board.taken?(i) }.to_s
-        # go in a corner if this is not the first turn
+      if board.valid_move?(middle)
+        move = middle
+      elsif board.turn_count == 1 || board.turn_count == 2
+        move = corners.detect { |i| board.valid_move?(i) }
+      #elsif
 
-        # NEED TO FINISH CHECKING FOR POTENTIAL MOVES
       end
 
     end
   end
 end
+
+#Game::WIN_COMBINATIONS.detect do |combo|
+
+#end

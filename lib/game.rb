@@ -74,4 +74,25 @@ class Game
       puts "Congratulations #{winner}!"
     end
   end
+
+  # add #start or #begin to initiate a new game - bin/tictactoe will include Game.begin or Game.start
+  def begin
+    # puts out a board with position numbers before calling any turns
+    puts "Hello there, would you like to play a game? Please select from the following:"
+    puts "0 = computer versus itself"
+    puts "1 = you versus computer"
+    puts "2 = you and your human friend"
+    puts "What do you choose?"
+    game_type = gets.chomp
+
+    puts "Who should go first and be X?"
+    first = gets.chomp
+
+    # based on the game_type, create a game with zero, one or two players
+    # with first as player_1's token
+    # remember that new games have three arguments
+    # recap the selections before calling #turn
+
+    # finish this after computer player is done!
+  end
 end

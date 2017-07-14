@@ -1,6 +1,5 @@
 class Board
   attr_accessor :cells, :position_index
-  @cells = []
 
   def reset!
     # sets the value of each element in cells array to " "
