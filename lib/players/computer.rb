@@ -11,7 +11,7 @@ module Players
         move = middle
       elsif board.turn_count == 1 || board.turn_count == 2
         move = corners.detect { |i| board.valid_move?(i) }
-      #elsif
+      #else
 
       end
 
