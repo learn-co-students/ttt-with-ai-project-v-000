@@ -55,17 +55,12 @@ def taken?(input)
 end
 
 def valid_move?(input)
-  input = input.to_i - 1
-  if (input.between?(0,8) == false) && (taken?(input) == true)
-    false
-  else
-    true
-  end
+  input.to_i.between?(1,9) && !taken?(input)
 end
 
 def update(input, player)
-  index = index.to_i
-  @cells[index] = token
+  input = input.to_i - 1
+  @cells[input] = player.token
 end
 
 end

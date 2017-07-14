@@ -1,13 +1,10 @@
 require "pry"
 
 class Player
-  attr_accessor :token
+  attr_reader :token
 
   def initialize(token)
-    player = Player.new(token)
-  end
-
-  def token
+    @token = token
   end
 
 end
