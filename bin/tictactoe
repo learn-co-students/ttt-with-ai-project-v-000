@@ -1,3 +1,46 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+play_loop = true
+puts "Welcome to Tic-Tac-Toe!"
+while play_loop
+  puts "What kind of game would you like to play?"
+  puts "For Computer vs. Computer: 0"
+  puts "For Computer vs. Human: 1"
+  puts "For Human vs. Human: 2"
+  players = gets.chomp
+
+  if players.to_i == 0
+    game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+  elsif players.to_i == 1
+    chosen = false
+    while !chosen
+      puts "Do you want the human to be X or O?"
+      player_choice = gets.chomp.upcase
+      if player_choice == "X"
+        game = Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+        chosen = true
+      elsif player_choice == "O"
+        game =         Game.new(Players::Computer.new("X"),Players::Human.new("O"))
+        chosen = true
+      else
+        puts "Invalid, please type X or O"
+      end
+    end
+  elsif players.to_i == 2
+    game = Game.new
+  end
+
+  game.play
+
+
+  play_again = true
+  while play_again
+    puts "Would you like to play again? Y/N"
+    play_again_ans = gets.chomp.upcase
+    play_again = false if play_again_ans == "N" || play_again_ans == "Y"
+    play_loop = false if play_again_ans == "N"
+    puts "Invalid, please type Y or N" if play_again_ans != "Y" && play_again_ans != "N"
+  end
+end
+puts "Goodbye."

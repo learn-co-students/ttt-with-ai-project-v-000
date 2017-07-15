@@ -36,7 +36,7 @@ class Game
   end
 
   def over?
-    (draw? || won?)
+    draw? || won?
   end
 
   def winner
@@ -58,16 +58,20 @@ class Game
 
   def play
     while !over?
+      @board.display
       turn
     end
     if won?
       if winner == "X"
+        @board.display
         puts "Congratulations X!"
       elsif winner == "O"
+        @board.display
         puts "Congratulations O!"
       end
     end
     if draw?
+      @board.display
       puts "Cat's Game!" if draw?
     end
   end

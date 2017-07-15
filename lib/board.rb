@@ -1,8 +1,10 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :moves, :available
 
   def reset!
     @cells = Array.new(9, " ")
+    @moves = Array.new
+    @available = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
   end
 
   def initialize
@@ -34,6 +36,8 @@ class Board
   end
 
   def update(pos,player)
+    @moves << pos.to_s
+    @available.delete(pos.to_s)
     @cells[pos.to_i-1]=player.token
   end
 
@@ -43,6 +47,7 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts ""
   end
 
 end
