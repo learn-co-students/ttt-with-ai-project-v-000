@@ -49,3 +49,5 @@ class Board
     !taken?(position_string) && position_index.between?(0, 8)
   end
 end
+
+# done
