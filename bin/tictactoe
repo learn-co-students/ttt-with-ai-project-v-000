@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe!"
+
+puts "What game would you like to play? Enter 0 player, 1 player, or 2 player:"
+user_input = gets
+
+if user_input == "2 player"
+  puts "Player 1 will be X, Player 2 will be O"
+  game = Game.new
+  game.board.display
+  puts "Player #{game.current_player.token}, please enter 1-9:"
+  game.play
+elsif  user_input == "1 player"
+  player_1 = Players::Human.new("X")
+  player_2 = Players::Computer.new("O")
+
+  puts "You are Player 1. Player 1 will be X, Computer will be O."
+  game = Game.new(player_1, player_2)
+  game.board.display
+  puts "Player #{game.current_player.token}, please enter 1-9:"
+  game.play
+
+elsif user_input == "0 player"
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
+
+  puts "Player 1 will be X, Player 2 will be O."
+  game = Game.new
+  game.board.display(player_1, player_2)
+  puts "Player #{game.current_player.token}, please enter 1-9:"
+  game.play
+
+else
+  puts "Please enter a valid selection."
+end
