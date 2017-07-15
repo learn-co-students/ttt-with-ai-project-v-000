@@ -6,26 +6,36 @@ require 'pry'
 yes = ["yes", "Yes", "y", "Y"]
 no = ["no", "No", "n" "N"]
 
-puts "Hello. Would you like to play a game? (Y/N)"
 
-if yes.include?(gets.strip)
-  puts "How many players? (0-2)"
-  players = gets.strip.to_i
-  # if 0 start comp vs comp game
-  if players == 0
-    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  # if 1 start comp vs human game
-  elsif players == 1
-    puts "Would you like to go first and be X? (Y/N)"
-    if yes.include?(gets.strip)
-      binding.pry
-      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-    else
-      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    end
-  # if 2 start human vs human game
-  elsif players == 2
-    puts ""
-    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  end
-end
+Game.start
+# puts "Hello. Would you like to play a game? (Y/N)"
+#
+# if yes.include?(gets.strip)
+#   puts "How many players? (0-2)"
+#   players = gets.strip.to_i
+#   # if 0 start comp vs comp game
+#   if players == 0
+#     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+#     game.start
+#   # if 1 start comp vs human game
+#   elsif players == 1
+#     puts "Would you like to go first and be X? (Y/N)"
+#     if yes.include?(gets.strip)
+#       # binding.pry
+#       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+#       game.start
+#     else
+#       game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+#       game.start
+#     end
+#   # if 2 start human vs human game
+#   elsif players == 2
+#     puts ""
+#     game = Game.new
+#     # don't need to specify the players bc of Game.new default args
+#     game.start
+#   end
+#
+#   puts "Would you like to play another game? (Y/N)"
+#
+# end
