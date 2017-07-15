@@ -55,11 +55,14 @@ class Game
   def turn
     player = current_player
     move = player.move(board)
+    puts "#{current_player.token} is taking their turn..."
     if board.valid_move?(move)
       board.update(move, player)
       board.display
+      sleep 3
     else
       board.display
+      sleep 3
       turn
     end
   end
@@ -75,24 +78,42 @@ class Game
     end
   end
 
-  # add #start or #begin to initiate a new game - bin/tictactoe will include Game.begin or Game.start
-  def begin
+  def self.start # CLI setup here
     # puts out a board with position numbers before calling any turns
-    puts "Hello there, would you like to play a game? Please select from the following:"
+    puts "Hello there! Would you like to play a game of Tic Tac Toe? Please select from the following:"
     puts "0 = computer versus itself"
-    puts "1 = you versus computer"
-    puts "2 = you and your human friend"
+    puts "1 = computer versus you"
+    puts "2 = you versus your human friend"
     puts "What do you choose?"
     game_type = gets.chomp
-
-    puts "Who should go first and be X?"
-    first = gets.chomp
+    #binding.pry
+    # ask for who goes first BASED on the type of game - if/else
+    # puts "Who should go first and be X?"
+    # puts "0 = computer goes first"
+    # puts "1 = you go first"
+    # puts "2 = your friend goes first"
+    # puts "What do you choose?"
+    # first = gets.chomp
 
     # based on the game_type, create a game with zero, one or two players
     # with first as player_1's token
     # remember that new games have three arguments
     # recap the selections before calling #turn
+    if game_type == "0"
 
-    # finish this after computer player is done!
+      game = self.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      puts "The players are: 1) Computer as X and 2) Computer as O."
+      game.play
+      if game.over?
+        puts "Would you like to play another game? 1 = Yes, 2 = No"
+        another = gets.chomp
+        if another == 1
+          self.class.start
+        else
+          puts "Thank you and farewell!"
+          exit
+        end
+      end
+    end # end of computer v computer
   end
 end
