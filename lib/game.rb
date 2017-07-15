@@ -39,14 +39,16 @@ class Game
   def won?
     # if the cells in any of the combos are all the same symbol
     # there should be a better way to do this
+    # need to fix bc the return statements are gone
+    result = nil
     WIN_COMBINATIONS.each do |combo|
       if board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X"
-        return combo
+        result = combo
       elsif board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O"
-        return combo
+        result = combo
       end
     end
-    return false
+    result
   end
 
   def winner
@@ -66,7 +68,6 @@ class Game
     else
       puts "Invalid move. Please try again"
       self.turn
-      # infinite loop!
     end
   end
 
@@ -110,6 +111,7 @@ class Game
         # game.play
         # game.repeat?
       end
+      binding.pry
       game.play
       game.repeat?
     end
