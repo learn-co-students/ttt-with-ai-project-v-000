@@ -102,7 +102,7 @@ class Game
     puts "Play again? Y or N"
     input = gets.chomp.downcase
     if input == "y"
-      GameController.new
+      #GameController.new
     else
       puts "Thanks for playing!"
     end
