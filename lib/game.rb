@@ -1,8 +1,7 @@
 require "pry"
 
 class Game
-  attr_accessor :board
-  attr_reader :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS =
     [[0,1,2],
@@ -19,46 +18,65 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    play
   end
   #binding.pry
 
+  def self.start
+    puts "Type the number of the mode would you like to play:"
+    puts "1. Player vs. Computer"
+    puts "2. Player vs. Player"
+    puts "3. Computer vs. Computer"
+    puts "4. Wargames! See the average wins of 100 Computer vs. Computer games"
+    puts "\n"
+    game_type = gets.chomp
+    case game_type
+      when "1"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      when "2"
+        Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      when "3"
+        Game.new(Players::Computer.new("O"), Players::Computer.new('0'), Board.new)
+      when "4"
+        #where should the logic for the repeating and reporting go?
+        #make method for wargames!
+      else
+        puts "Please select 1-4 to start a new game"
+        puts "\n"
+        self.start
+      end
+    end
+
 ### GAME MECHANICS ###
   def play
-    while !over?
+    self.board.display
+    while !self.over?
       turn
     end
-    if won? != false
-      board.display
+    if self.won? != false
       puts "Congratulations #{winner}!"
-      play_again
-    elsif draw?
-      board.display
+    elsif self.draw?
       puts "Cat's Game!"
-      play_again
     end
   end
 
   def turn
-    puts "Player #{current_player.token}:"
-    puts "Choose square 1-9 to place your token!"
-    board.display
-    position = current_player.move(board.cells)
-    if  board.valid_move?(position) && position.to_i >= 1 && position.to_i <= 9
-      board.update(position, current_player)
+    player = self.current_player
+    position = player.move(self.board)
+    if  self.board.valid_move?(position)
+      self.board.update(position, player)
+      self.board.display
     else
       turn
     end
   end
 
   def current_player
-    taken_cells = board.cells.find_all {|cell| cell != " "}
-    taken_cells.length.even? ? player_1 : player_2
+    self.board.turn_count.even? ? self.player_1 : self.player_2
   end
 
 ### GAME END METHODS ###
   def over?
-    true if board.full? || won? != false || draw?
+    true if self.board.full? || self.won? != false || draw?
   end
 
   def won?
@@ -67,9 +85,9 @@ class Game
       win_index_2 = win_combination[1]
       win_index_3 = win_combination[2]
 
-      position_1 = board.cells[win_index_1]
-      position_2 = board.cells[win_index_2]
-      position_3 = board.cells[win_index_3]
+      position_1 = self.board.cells[win_index_1]
+      position_2 = self.board.cells[win_index_2]
+      position_3 = self.board.cells[win_index_3]
 
       if position_1 == position_2 && position_2 == position_3 && (position_1 == "X" || position_1 == "O")
         return win_combination
@@ -79,32 +97,23 @@ class Game
   end
 
   def draw?
-    if won? == false && board.full? == true
+    if self.won? == false && self.board.full? == true
       true
-    elsif won? == false && board.full? == false
+    elsif self.won? == false && self.board.full? == false
       false
-    elsif won? != false
+    elsif self.won? != false
       false
     end
   end
 
   def winner
-    if won? == false || draw? == true
+    if self.won? == false || self.draw? == true
       nil
     else
-      winning_line = won?
+      winning_line = self.won?
       index = winning_line[0]
-      board.cells[index]
+      self.board.cells[index]
     end
   end
 
-  def play_again
-    puts "Play again? Y or N"
-    input = gets.chomp.downcase
-    if input == "y"
-      #GameController.new
-    else
-      puts "Thanks for playing!"
-    end
-  end
 end

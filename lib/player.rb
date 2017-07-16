@@ -8,8 +8,4 @@ class Player
     @token = token
   end
 
-  #def move
-    #represents how player makes move
-  #end
-
 end

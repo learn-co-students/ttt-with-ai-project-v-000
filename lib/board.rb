@@ -7,24 +7,23 @@ class Board
     self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
-  def board
-    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
-    puts "-----------"
-    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
-    puts "-----------"
-    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
-  end
-
   def reset!
     self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def display
-    self.board
+    puts "\n"
+    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts "-----------"
+    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts "-----------"
+    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+    puts "\n"
+    puts "\n"
   end
 
-  def position_to_index(input)
-    input.to_i - 1
+  def position_to_index(position)
+    position.to_i - 1
   end
 
   def position(position)
