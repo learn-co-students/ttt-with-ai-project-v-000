@@ -20,7 +20,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
@@ -72,6 +72,22 @@ class Game
     end
     if draw?
       @board.display
+      puts "Cat's Game!" if draw?
+    end
+  end
+
+  def play_no_display
+    while !over?
+      turn
+    end
+    if won?
+      if winner == "X"
+        puts "Congratulations X!"
+      elsif winner == "O"
+        puts "Congratulations O!"
+      end
+    end
+    if draw?
       puts "Cat's Game!" if draw?
     end
   end

@@ -10,6 +10,7 @@ while play_loop
   puts "For Human vs. Human: 2"
   players = gets.chomp
 
+
   if players == "0"
     game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
   elsif players == "1"
@@ -29,6 +30,15 @@ while play_loop
     end
   elsif players == "2"
     game = Game.new
+  elsif players == "wargames"
+    puts "well this is about to get interesting... press any key to continue"
+    gets
+    100.times{
+      game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+      game.play_no_display
+    }
+  else
+    puts "Invalid, please enter 0, 1, or 2"
   end
 
   game.play

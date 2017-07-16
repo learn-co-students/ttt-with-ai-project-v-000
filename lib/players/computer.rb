@@ -66,8 +66,6 @@ module Players
     end
 
     def move(board)
-      puts "Computer's turn..."
-
       first_move = ""
       second_move = ""
       third_move = ""
