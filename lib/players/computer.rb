@@ -42,35 +42,7 @@ class Computer < Player
         self.last = self.win || self.last = self.block || self.last = self.other
       end
     end
-
-    # if self.game == nil
-    #   self.last = valid_moves.sample
-    # elsif self.board.turn_count == 0
-    #   self.last = self.first_player
-    # elsif self.board.turn_count == 1
-    #   self.last = self.second_player
-    # elsif self.board.turn_count == 2
-    #   self.last = self.second_move
-    # else #self.board.turn_count >= 3
-    #   if self.win
-    #     self.last = self.win
-    #   elsif self.block
-    #     self.last = self.block
-    #   else
-    #     self.last = valid_moves.sample
-    #   end
-    # end
-    # self.last
-
-  #   if self.token == self.game.current_player.token && board.cells == Array.new(9," ")
-  #     self.last = self.first_player
-  #   elsif self.token == self.game.current_player.token && board.turn_count == 1
-  #     self.last = self.second_player
-  #   elsif board.turn_count == 2 || board.turn_count == 3
-  #     self.last = self.second_move
-  #   elsif board.turn_count >= 3
-  #     # self.last = self.block || self.last = valid_moves.sample
-  #   end
+    
     self.last
   end
 
