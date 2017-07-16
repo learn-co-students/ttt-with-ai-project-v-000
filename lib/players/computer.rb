@@ -14,39 +14,55 @@ class Computer < Player
     [2,4,6]
   ]
 
-  def move(token)
-    # http://www.wikihow.com/Win-at-Tic-Tac-Toe
+  def move(board)
     valid_moves = (1..9).to_a.map {|i| i.to_s}
-    # binding.pry
-    # this throws an rspec error if the game is nil
-    # break into 2 modes - if first player or if second player
 
+    if self.game == nil
+      #if there's no valid game, it will still return a valid board move
+      self.last = valid_moves.sample
     # first player logic
-
-    # when the computer plays itself they both go to the corners...?
-    if self.game.player_1 == self
-      if board.turn_count == 0
+    elsif self.game.player_1 == self
+      if self.turn_count == 0
         self.last = self.first_player
-      elsif board.turn_count == 2
+        # [1,3,7,9].sample #when i try to use a method here it causes it not to block properly
+      elsif self.turn_count == 2
         self.last = self.second_move
-       elsif self.board.turn_count >= 4
-        self.last = self.win || self.block
-      else
-        self.last = valid_moves.sample
+      elsif self.turn_count == 4
+        self.last = self.win || self.last = self.block || self.last = self.other
+      elsif self.turn_count > 4
+        self.last = self.block || self.last = self.win || self.last = self.other
       end
     # second player logic
     elsif self.game.player_2 == self
-      if board.turn_count == 1
+      if self.turn_count == 1
         self.last = self.second_player
+        # self.board.taken?(5) ? [1,3,7,9].sample : 5
       # when it gets to the 3rd move it doesn't block, it goes for the corner
-      elsif board.turn_count == 3
+      elsif self.turn_count == 3
         self.last = self.block
-      # the second player needs to check for a block when turn_count == 3
-      else
-        self.last = valid_moves.sample
+      elsif self.turn_count > 4
+        self.last = self.block || self.last = self.win || self.last = self.other
       end
     end
 
+    # if self.game == nil
+    #   self.last = valid_moves.sample
+    # elsif self.board.turn_count == 0
+    #   self.last = self.first_player
+    # elsif self.board.turn_count == 1
+    #   self.last = self.second_player
+    # elsif self.board.turn_count == 2
+    #   self.last = self.second_move
+    # else #self.board.turn_count >= 3
+    #   if self.win
+    #     self.last = self.win
+    #   elsif self.block
+    #     self.last = self.block
+    #   else
+    #     self.last = valid_moves.sample
+    #   end
+    # end
+    # self.last
 
   #   if self.token == self.game.current_player.token && board.cells == Array.new(9," ")
   #     self.last = self.first_player
@@ -57,11 +73,15 @@ class Computer < Player
   #   elsif board.turn_count >= 3
   #     # self.last = self.block || self.last = valid_moves.sample
   #   end
-  #
+    self.last
   end
 
   def board
     self.game.board
+  end
+
+  def turn_count
+    self.game.board.turn_count
   end
 
   def first_player
@@ -69,7 +89,7 @@ class Computer < Player
   end
 
   def second_player
-    board.taken?(board.cells[5]) ? [1,3,7,9].sample : 5
+    self.board.taken?(5) ? [1,3,7,9].sample : 5
   end
 
   def second_move
@@ -79,7 +99,9 @@ class Computer < Player
       # 3 => 1 or 9
       # 7 => 1 or 9
       # 9 => 3 or 7
-    if self.last == 1
+    if !self.board.taken?(5)
+      self.last = 5
+    elsif self.last == 1
       self.last = [3,7].sample
     elsif self.last == 3
       self.last = [1,9].sample
@@ -92,14 +114,14 @@ class Computer < Player
   end
 
   def block
-    # if the opponent occupies 2 out of 3 spots of a winning combo then you need to go in the 3rd spot
+    # if the opponent is in 2/3 spots of a winning combo then you go in the empty spot
     block = nil
-    WIN_COMBINATIONS.each do |combo|
-      if (board.cells[combo[0]] != self.token && board.cells[combo[1]] != self.token) && board.cells[combo[2]] == " "
+    WIN_COMBINATIONS.detect do |combo|
+      if (board.cells[combo[0]] != self.token && board.cells[combo[0]] != " ") && (board.cells[combo[1]] != self.token && board.cells[combo[1]] != " ") && board.cells[combo[2]] == " "
         block = combo[2]+1
-      elsif (board.cells[combo[1]] != self.token && board.cells[combo[2]] != self.token) && board.cells[combo[0]] == " "
+      elsif (board.cells[combo[1]] != self.token && board.cells[combo[1]] != " ") && (board.cells[combo[2]] != self.token && board.cells[combo[2]] != " ") && board.cells[combo[0]] == " "
         block = combo[0]+1
-      elsif (board.cells[combo[0]] != self.token && board.cells[combo[2]] != self.token) && board.cells[combo[1]] == " "
+      elsif (board.cells[combo[0]] != self.token && board.cells[combo[0]] != " ") && (board.cells[combo[2]] != self.token && board.cells[combo[2]] != " ") && board.cells[combo[1]] == " "
         block = combo[1]+1
       end
     end
@@ -108,7 +130,7 @@ class Computer < Player
 
   def win
     win = nil
-    WIN_COMBINATIONS.each do |combo|
+    WIN_COMBINATIONS.detect do |combo|
       if (board.cells[combo[0]] == self.token && board.cells[combo[1]] == self.token) && board.cells[combo[2]] == " "
         win = combo[2]+1
       elsif (board.cells[combo[1]] == self.token && board.cells[combo[2]] == self.token) && board.cells[combo[0]] == " "
@@ -118,6 +140,10 @@ class Computer < Player
       end
     end
     win
+  end
+
+  def other
+    [1,3,7,9,2,4,6,8].detect {|i| self.board.cells[i-1] == " "}
   end
 
   end

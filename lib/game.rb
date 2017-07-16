@@ -100,18 +100,15 @@ class Game
           game = self.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
         else
           game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-          # game.play
-          # game.repeat?
         end
       # if 2 start human vs human game
       elsif players == 2
-        puts ""
         game = self.new
         # don't need to specify the players bc of Game.new default args
-        # game.play
-        # game.repeat?
+      else #prevents it from exiting when the user has a typo
+        puts "Invalid input. Please try again."
+        self.start
       end
-      binding.pry
       game.play
       game.repeat?
     end
