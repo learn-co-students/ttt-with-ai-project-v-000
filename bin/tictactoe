@@ -10,9 +10,9 @@ while play_loop
   puts "For Human vs. Human: 2"
   players = gets.chomp
 
-  if players.to_i == 0
+  if players == "0"
     game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
-  elsif players.to_i == 1
+  elsif players == "1"
     chosen = false
     while !chosen
       puts "Do you want the human to be X or O?"
@@ -27,7 +27,7 @@ while play_loop
         puts "Invalid, please type X or O"
       end
     end
-  elsif players.to_i == 2
+  elsif players == "2"
     game = Game.new
   end
 

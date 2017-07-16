@@ -39,11 +39,10 @@ module Players
 
         ret_val = combo[cell_values.index(" ")] if (cell_values.count{|value| value == "X"} == 2 || cell_values.count{|value| value == "O" } == 2) && cell_values.count{|value| value == " " } == 1
         if !(ret_val == false)
-          binding.pry
-          return ret_val+1.to_s
+          return (ret_val+1).to_s
         end
       end
-
+      ret_val
     end
 
     def corner_border(corner,board)
@@ -76,9 +75,9 @@ module Players
       fifth_move = ""
 
       if self.token == "X"
-        binding.pry
+        #binding.pry
         return CORNERS.sample if board.turn_count == 0
-        win_possibility(board) if board.turn_count >= 3 #After turn four, if there is a win possibility for either player, the current player should automatically play there.
+        return win_possibility(board) if board.turn_count >= 3 && win_possibility(board) #After turn four, if there is a win possibility for either player, the current player should automatically play there.
         #THIRD TURN POSSIBILITIES:
         if board.turn_count == 2
           return caddy_corner(board.moves[0]) if board.moves.last == CENTER   #3 if O plays to the center on the second turn, play to the caddy corner of the first move
@@ -96,21 +95,31 @@ module Players
         end
       else
         #After turn four, if there is a win possibility for either player, the current player should automatically play there.
-        win_possibility(board) if board.turn_count >= 4
-        #if X plays to a non-center square, play to the center on second turn
-          #if third move creates a win scenario for X, block and place where a win is possible
-            #if X blocks:
-              #if the fifth move creates a win scenario for X, block and place so that an O win is possible
-            #if X does not block, place O to win
-          #if third move does not threaten a win:
-            #if X is on an edge AND a corner, place an O on the caddy_corner of the X corner move
-            #if X is on 2 edges:
-              #if both X border a corner, play O that corner, then play any square thereafter to draw/win
-              #if X don't border a corner, play any remaining edge. then, O either corner square bordered by only one X.
-            #if X is caddy_corner itself, place an O on any available edge
-              #X and O will block and draw
-        #if x plays to center on first turn, play to any corner
-          #if X win is not possible, play to corner
+        return win_possibility(board) if board.turn_count >= 3 && win_possibility(board)
+        if board.moves[0] == CENTER
+          return (CORNERS&board.available).sample if CORNERS&board.available != nil #IF X went to center first, block first. if X win is not possible, play to corner. if that doesn't work, play to any available spot
+          return board.available.sample
+        else
+          return CENTER if board.turn_count == 1#if X plays to a non-center square, play to the center on second turn
+          if board.turn_count == 3
+            if board.moves[0] #if X is on an edge AND a corner, place an O on the caddy_corner of the X corner move
+            end
+            if [board.moves[0],board.moves[2]]&EDGES==[board.moves[0],board.moves[2]] #if X is on 2 edges:
+              CORNERS.each do |corner|
+                return corner if corner_border(corner,board)["xs"]==2#if both X border a corner, play O that corner, then play any square thereafter to draw/win
+              end
+              return EDGES&board.available #if X don't border a corner, play any remaining edge.
+            end
+            return (EDGES&board.available).sample if caddy_corner?(board.moves[0],board.moves[2])  #if X is caddy_corner itself, place an O on any available edge
+          end
+          if board.turn_count=5
+            (CORNERS&board.available).each do |corner|
+              return corner if corner_border(corner,board)["xs"]==1 #then, O either corner square bordered by only one X.
+            end
+          end
+        end
+
+
       end
     end
   end
