@@ -61,6 +61,7 @@ class Game
 
   def turn
     player = self.current_player
+    puts "Player #{player}:"
     position = player.move(self.board)
     if  self.board.valid_move?(position)
       self.board.update(position, player)
