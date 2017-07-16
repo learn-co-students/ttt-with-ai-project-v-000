@@ -54,8 +54,8 @@ module Players
       spaces = [4,8] if corner == "7"
       spaces = [6,8] if corner == "9"
       spaces.each do |cell|
-        bordered_by["xs"]+=1 if board.cells[cell] == "X"
-        bordered_by["os"]+=1 if board.cells[cell] == "O"
+        bordered_by[:xs]+=1 if board.cells[cell] == "X"
+        bordered_by[:os]+=1 if board.cells[cell] == "O"
       end
       bordered_by
     end
@@ -81,19 +81,19 @@ module Players
         #THIRD TURN POSSIBILITIES:
         if board.turn_count == 2
           return caddy_corner(board.moves[0]) if board.moves.last == CENTER   #3 if O plays to the center on the second turn, play to the caddy corner of the first move
-          return (CORNERS & board.available).sample if CORNERS.include?(board.moves.last) #3 if O plays to a corner, play to either of the open corners
+          return (CORNERS&board.available).sample if CORNERS.include?(board.moves.last) #3 if O plays to a corner, play to either of the open corners
           return CENTER if EDGES.include?(board.moves.last) #3 if O plays to an edge, play to the center square
         elsif board.turn_count == 4
-          fifth_move = CORNERS&board.available if board.moves[1] == CENTER || CORNERS.include?(board.moves[1])  #5th turn if 2nd center: if O played to a corner square on 4th, play to the only available_corners   #FIFTH TURN POSSIBILITIES if 2nd turn Corner, play to the remaining corner
+          return (CORNERS&board.available).sample if board.moves[1] == CENTER || CORNERS.include?(board.moves[1])  #5th turn if 2nd center: if O played to a corner square on 4th, play to the only available_corners   #FIFTH TURN POSSIBILITIES if 2nd turn Corner, play to the remaining corner
           if EDGES.include?(board.moves[1])         #FIFTH TURN POSSIBILITIES if 2nd turn edge, go to corner with no O adjacent to it
-            CORNERS&board.available.each do |corner|
-                fifth_move = corner if corner_border(corner,board)["os"] == 0
+            (CORNERS&board.available).each do |corner|
+                return corner if corner_border(corner,board)["os"] == 0
             end
           end
 
           return fifth_move
         end
-      else
+      elsif self.token == "O"
         #After turn four, if there is a win possibility for either player, the current player should automatically play there.
         return win_possibility(board) if board.turn_count >= 3 && win_possibility(board)
         if board.moves[0] == CENTER
@@ -108,18 +108,17 @@ module Players
               CORNERS.each do |corner|
                 return corner if corner_border(corner,board)["xs"]==2#if both X border a corner, play O that corner, then play any square thereafter to draw/win
               end
-              return EDGES&board.available #if X don't border a corner, play any remaining edge.
+              return (EDGES&board.available).sample #if X don't border a corner, play any remaining edge.
             end
             return (EDGES&board.available).sample if caddy_corner?(board.moves[0],board.moves[2])  #if X is caddy_corner itself, place an O on any available edge
           end
-          if board.turn_count=5
+          if board.turn_count==5
             (CORNERS&board.available).each do |corner|
               return corner if corner_border(corner,board)["xs"]==1 #then, O either corner square bordered by only one X.
             end
+            return (EDGES&board.available).sample
           end
         end
-
-
       end
     end
   end
