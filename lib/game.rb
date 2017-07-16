@@ -72,6 +72,7 @@ class Game
   end
 
   def play
+    self.board.display
     while !self.over?
       self.turn
     end
@@ -83,45 +84,47 @@ class Game
   end
 
   def self.start
-    yes = ["yes", "Yes", "y", "Y"]
-    no = ["no", "No", "n" "N"]
-
-    puts "Hello. Would you like to play a game? (Y/N)" #ideally would want to keep this out of the loop
-    if yes.include?(gets.strip)
-      puts "How many players? (0-2)"
-      players = gets.strip.to_i
-      # if 0 start comp vs comp game
-      if players == 0
-        game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-      # if 1 start comp vs human game
-      elsif players == 1
-        puts "Would you like to go first and be X? (Y/N)"
-        if yes.include?(gets.strip)
-          game = self.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-        else
-          game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-        end
-      # if 2 start human vs human game
-      elsif players == 2
-        game = self.new
-        # don't need to specify the players bc of Game.new default args
-      else #prevents it from exiting when the user has a typo
-        puts "Invalid input. Please try again."
-        self.start
+    puts "How many players? (0-2)"
+    players = gets.strip
+    # if 0 start comp vs comp game
+    if players.to_i == 0
+      game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    # if 1 start comp vs human game
+    elsif players.to_i == 1
+      puts "Would you like to go first and be X? (Y/n)"
+      if ["yes", "Yes", "y", "Y"].include?(gets.strip)
+        game = self.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      else
+        game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
       end
-      game.play
-      game.repeat?
+    # if 2 start human vs human game - don't need to specify the players bc of Game.new default args
+    elsif players.to_i == 2
+      game = self.new
+    else #prevents it from exiting when the user has a typo
+      puts "Invalid input. Please try again."
+      self.start
     end
+    game.play
+    game.repeat?
   end
 
   def repeat?
-    yes = ["yes", "Yes", "y", "Y"]
-    no = ["no", "No", "n" "N"]
-
-    puts "Would you like to play another game? (Y/N)"
-    if yes.include?(gets.strip)
+    puts "Would you like to play another game? (Y/n)"
+    if ["yes", "Yes", "y", "Y"].include?(gets.strip)
       self.class.start
+    # elsif gets.strip == "wargames"
+    #   self.class.wargames
     end
   end
+
+  # def self.wargames
+  #   draws = 0
+  #   100.times do |game|
+  #     game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  #     game.play
+  #     draws += 1 if game.winner == nil
+  #   end
+  #   puts "There were #{100-draws} winners in 100 games."
+  # end
 
 end

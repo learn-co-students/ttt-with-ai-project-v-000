@@ -24,24 +24,22 @@ class Computer < Player
     elsif self.game.player_1 == self
       if self.turn_count == 0
         self.last = self.first_player
-        # [1,3,7,9].sample #when i try to use a method here it causes it not to block properly
       elsif self.turn_count == 2
         self.last = self.second_move
       elsif self.turn_count == 4
         self.last = self.win || self.last = self.block || self.last = self.other
       elsif self.turn_count > 4
-        self.last = self.block || self.last = self.win || self.last = self.other
+        self.last = self.win || self.last = self.block || self.last = self.other
       end
     # second player logic
     elsif self.game.player_2 == self
       if self.turn_count == 1
         self.last = self.second_player
-        # self.board.taken?(5) ? [1,3,7,9].sample : 5
       # when it gets to the 3rd move it doesn't block, it goes for the corner
       elsif self.turn_count == 3
         self.last = self.block
       elsif self.turn_count > 4
-        self.last = self.block || self.last = self.win || self.last = self.other
+        self.last = self.win || self.last = self.block || self.last = self.other
       end
     end
 
