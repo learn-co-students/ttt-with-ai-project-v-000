@@ -1,3 +1,42 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe!"
+
+def lets_play!
+  puts "Who should be 'X' & go first?"
+  player_1 = gets.chomp
+  puts "Should player_1 be 'Human' or 'Computer'?"
+  puts "Please enter 'Human' or 'Computer':"
+  player_1_type = gets.chomp.downcase.capitalize
+  until player_1_type == "Human" || player_1_type == "Computer"
+    puts "Please enter 'Human' or 'Computer':"
+    player_1_type = gets.chomp.downcase.capitalize
+  end
+    if player_1_type == "Human"
+      p1 = Players::Human.new("X")
+    else
+      p1 = Players::Computer.new("X")
+    end
+  puts "Who should be 'O' & go second?"
+  player_2 = gets.chomp
+  puts "Should player_2 be 'Human' or 'Computer'?"
+  puts "Please enter 'Human' or 'Computer':"
+  player_2_type = gets.chomp.downcase.capitalize
+  until player_2_type == "Human" || player_2_type == "Computer"
+    puts "Please enter 'Human' or 'Computer':"
+    player_2_type = gets.chomp.downcase.capitalize
+  end
+    if player_2_type == "Human"
+      p2 = Players::Human.new("O")
+    else
+      p2 = Players::Computer.new("O")
+    end
+
+  puts "Game Starting!"
+
+  Game.new(p1,p2).play
+end
+
+lets_play!
