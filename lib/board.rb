@@ -10,6 +10,10 @@ class Board
     reset!
   end
 
+  #def get_current_state_win_combos
+    # take out get_entries and win_tokens and put that here
+  #end
+
   def display
     # prints the board in its current state
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "

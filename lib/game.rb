@@ -59,10 +59,10 @@ class Game
     if board.valid_move?(move)
       board.update(move, player)
       board.display
-      sleep 3
+      # sleep 3
     else
       board.display
-      sleep 3
+      # sleep 3
       turn
     end
   end

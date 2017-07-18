@@ -3,7 +3,7 @@ require "pry"
 module Players
   class Computer < Player
     def get_entries(board)
-      Game::WIN_COMBINATIONS.map {|combo| combo.map {|index| board.cells[index]}}
+      Game::WIN_COMBINATIONS.map { |combo| combo.map { |index| board.cells[index] } }
     end
 
     def opponent_token
@@ -39,21 +39,23 @@ module Players
       edges = ["2", "4", "6", "8"]
 
       if board.valid_move?(middle)
-        middle
-      else
-        win = winning_move(board)
-        block = blocking_move(board)
+        return middle
+      end
 
-        if win == false && block == false
-          corners.detect { |i| board.valid_move?(i) }
-          if move == nil
-            move = edges.detect { |i| board.valid_move?(i)}
-          end
-        elsif win != false
-          move = win
-        elsif block != false
-          move = block
+      #else
+      win = winning_move(board)
+      block = blocking_move(board)
+
+      if win == false && block == false
+        move = corners.detect { |i| board.valid_move?(i) }
+        if move == nil
+          move = edges.detect { |i| board.valid_move?(i) }
         end
+      elsif win != false
+        move = win
+      elsif block != false
+        move = block
+
       end
       #elsif board.turn_count == 1 || board.turn_count == 2
       #  move = corners.detect { |i| board.valid_move?(i) }
