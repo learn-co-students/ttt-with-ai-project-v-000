@@ -1,3 +1,4 @@
+
 # This line is a test for setting up group repository
 class Board
   attr_accessor :cells
@@ -51,3 +52,4 @@ class Board
   end
 
 end
+
