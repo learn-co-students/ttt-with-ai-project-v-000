@@ -34,20 +34,26 @@ attr_accessor :board, :player_1, :player_2
   def won?
     WIN_COMBINATIONS.detect do |win_combination|
       @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
-      @board.cells[win_combination[1]] == @board.cells[win_combination[2]]
+      @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
+      @board.taken?(win_combination[0] + 1)
     end
   end
 
   def winner
-  WIN_COMBINATIONS.each do |win_combination|
-    if (@board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] == "X" && @board.cells[win_combination[2]] == "X")
-      return "X"
-    elsif (@board.cells[win_combination[0]] == "O" && @board.cells[win_combination[1]] == "O" && @board.cells[win_combination[2]] == "O")
-      return "O"
-    end
-  end
-    if !won?
-      nil
+    # WIN_COMBINATIONS.each do |win_combination|
+    #   if (@board.cells[win_combination[0]] == "X" && @board.cells[win_combination[1]] == "X" && @board.cells[win_combination[2]] == "X")
+    #     return "X"
+    #   elsif (@board.cells[win_combination[0]] == "O" && @board.cells[win_combination[1]] == "O" && @board.cells[win_combination[2]] == "O")
+    #     return "O"
+    #   end
+    # end
+    #   if !won?
+    #     nil
+    #   end
+    if won?
+      return board.cells[won?[0]]
+    else
+      return nil
     end
   end
 
@@ -64,8 +70,9 @@ attr_accessor :board, :player_1, :player_2
 
   def play
     while !over?
-       turn
+      turn
     end
+
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?

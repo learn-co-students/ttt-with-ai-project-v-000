@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+class TicTacToe
+
+  puts "Welcome to TicTacToe"
+
+  def start
+    puts "Choose the number of players: 0, 1, or 2"
+    input = gets.chomp.to_i
+    if input.between?(0, 2) && input == 0
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      puts "Game starts now!"
+      game.play
+    elsif input.between?(0, 2) && input == 1
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      puts "Game starts now! Input your first position on the board, a number from 1 to 9."
+      game.play
+    elsif input.between?(0, 2) && input == 2
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      puts "Game starts now! Input your first position on the board, a number from 1 to 9."
+      game.play
+    else
+      puts "Please enter a valid number of players!"
+    end
+  end
+
+end
+
+TicTacToe.new.start
