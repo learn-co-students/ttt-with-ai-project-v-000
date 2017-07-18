@@ -2,66 +2,29 @@ require "pry"
 
 module Players
   class Computer < Player
-    def get_entries(board)
-      Game::WIN_COMBINATIONS.map { |combo| combo.map { |index| board.cells[index] } }
-    end
 
-    def opponent_token
-      self.token == "X" ? "O" : "X"
-    end
-
-    def winning_move(board)
-      entries = get_entries(board)
-      potential_win = entries.detect { |combo| (combo.count(self.token) == 2) && combo.include?(" ") }
+    def winning_move_for_token(board, player_token)
+      filled_combos = board.get_filled_win_combinations
+      potential_win = filled_combos.detect { |combo| (combo.count(player_token) == 2) && combo.include?(" ") }
       if potential_win == nil
-        false
-      else
-        winning_combo = entries.index(potential_win)
-        (Game::WIN_COMBINATIONS[winning_combo][potential_win.index(" ")] + 1).to_s
+        return nil
       end
+      winning_combo = filled_combos.index(potential_win)
+      (Game::WIN_COMBINATIONS[winning_combo][potential_win.index(" ")] + 1).to_s
     end
 
-    def blocking_move(board)
-      entries = get_entries(board)
-      potential_block = entries.detect { |combo| (combo.count(self.opponent_token) == 2) && combo.include?(" ") }
-      if potential_block == nil
-        false
-      else
-        blocking_combo = entries.index(potential_block)
-        (Game::WIN_COMBINATIONS[blocking_combo][potential_block.index(" ")] + 1).to_s
-      end
+    def get_valid_move(board, positions)
+      positions.detect { |i| board.valid_move?(i) }
     end
 
     def move(board)
-      move = nil
-      middle = "5"
-      corners = ["1", "3", "7", "9"]
-      edges = ["2", "4", "6", "8"]
+      # always take middle position if available = more win potential
+      return Board::MIDDLE if board.valid_move?(Board::MIDDLE)
 
-      if board.valid_move?(middle)
-        return middle
-      end
-
-      #else
-      win = winning_move(board)
-      block = blocking_move(board)
-
-      if win == false && block == false
-        move = corners.detect { |i| board.valid_move?(i) }
-        if move == nil
-          move = edges.detect { |i| board.valid_move?(i) }
-        end
-      elsif win != false
-        move = win
-      elsif block != false
-        move = block
-
-      end
-      #elsif board.turn_count == 1 || board.turn_count == 2
-      #  move = corners.detect { |i| board.valid_move?(i) }
-      #else
+      winning_move_for_token(board, token) || # do i win
+      winning_move_for_token(board, opponent_token) || # do i block
+      get_valid_move(board, Board::CORNERS) || # corner next because there are more potential wins
+      get_valid_move(board, Board::EDGES)
     end
   end
 end
-
-# done

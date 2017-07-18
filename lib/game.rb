@@ -86,7 +86,7 @@ class Game
     puts "2 = you versus your human friend"
     puts "What do you choose?"
     game_type = gets.chomp
-    #binding.pry
+    # binding.pry
     # ask for who goes first BASED on the type of game - if/else
     # puts "Who should go first and be X?"
     # puts "0 = computer goes first"
@@ -115,5 +115,6 @@ class Game
         end
       end
     end # end of computer v computer
+
   end
 end

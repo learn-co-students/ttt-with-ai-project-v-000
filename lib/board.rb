@@ -1,6 +1,10 @@
 class Board
   attr_accessor :cells, :position_index
 
+  MIDDLE = "5"
+  CORNERS = ["1", "3", "7", "9"]
+  EDGES = ["2", "4", "6", "8"]
+
   def reset!
     # sets the value of each element in cells array to " "
     @cells = Array.new(9, " ")
@@ -10,9 +14,19 @@ class Board
     reset!
   end
 
-  #def get_current_state_win_combos
-    # take out get_entries and win_tokens and put that here
-  #end
+  def get_filled_win_combinations
+    # mirrors WIN_COMBINATIONS array but with the filled in tokens from current board
+    Game::WIN_COMBINATIONS.map { |combo| combo.map { |index| cells[index] } }
+    # example when "X" is in 0 index
+      # ["X", " ", " "]
+      # [" ", " ", " "]
+      # [" ", " ", " "]
+      # ["X", " ", " "]
+      # [" ", " ", " "]
+      # [" ", " ", " "]
+      # ["X", " ", " "]
+      # [" ", " ", " "]
+  end
 
   def display
     # prints the board in its current state
@@ -25,7 +39,7 @@ class Board
 
   def position(position_string)
     # takes user input as a number in a string, "2", and finds corresponding array index
-    @position_index = position_string.delete('"').to_i - 1
+    @position_index = position_string.to_i - 1
     cells[position_index]
   end
 
@@ -36,7 +50,7 @@ class Board
   end
 
   def full?
-    cells.all? { |index| index == "X" || index == "O"}
+    turn_count == cells.length
   end
 
   def turn_count
