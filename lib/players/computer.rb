@@ -1,5 +1,3 @@
-require "pry"
-
 module Players
   class Computer < Player
     @@corners = ["1", "3", "7", "9"]
@@ -14,7 +12,6 @@ module Players
     end
 
     def move(board)
-      #returns the move the computer wants to make as 1-9 string
       puts "Computer's move"
       position = ""
 
@@ -95,60 +92,3 @@ module Players
 
   end
 end
-
-#original logic w/out AI
-#until board.valid_move?(position)
-#  position = rand(1..9).to_s
-#end
-
-#0.5 was a good amount of time to rest for single player mode and 1 play c vs c mode
-#0.2 needs testing on wargames mode - is it too quick?
-
-
-#i get to determine the logic!
-#strive to build unbeatable logic
-#ldook into min/max algorithm
-
-### LOGIC ###
-#    iterate over WIN_COMBINATIONS
-#      if any combo has 2 of the other players tokens
-#        fill the empty spot   -- use #check_win_combos_for_2
-#      elsif board.valid_move?(center)
-#        position = center
-#      elsif iterate over corners_array [1, 3, 7, 9]
-#        if !board.valid_move?(corner)
-#          position = corner - 1 || corner + 1 || corner - 3 || corner + 3
-#        else
-#          position = corners_array[0]
-#        end
-#      end
-
-
-### ORIGINAL LOGIC CODE ###
-#pare this shit down... go step by step through the logic and add as necessary
-
-  #if check_win_combos_for_2(board) != ""
-  #  position = check_win_combos_for_2(board)
-  #elsif board.valid_move?("5")
-  #  position = "5"
-  #elsif position == ""
-  #  self.corners.each.with_index do |corner, i|
-  #    #use fucking WHILE
-  #    if !board.valid_move?(corner) && board.position != self.token
-  #      while position == ""
-  #        index_adjustments = [1, -1, 3, -3]
-  #        index_adjustments.each do |adj|
-  #          position = self.corners[index + adj]
-  #        end
-  #      end
-        #position = self.corners[index - 1] unless !board.valid_move?(self.corners[index - 1])
-        #position = self.corners[index + 1] unless !board.valid_move?(self.corners[index + 1])
-        #position = self.corners[index - 3] unless !board.valid_move?(self.corners[index - 3])
-        #position = self.corners[index + 3] unless !board.valid_move?(self.corners[index + 3])
-  #    elsif board.valid_move?(corner)
-  #      position = corner
-  #    end # inner corners if statment
-  #  end #corners iteration statement
-  #else
-  #  self.sides.each {|side| position = side if board.valid_move?(side)}
-  #end #overall logic if statement
