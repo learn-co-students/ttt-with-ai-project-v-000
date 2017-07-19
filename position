@@ -1,0 +1,32 @@
+
+[1mFrom:[0m /home/leigh/code/labs/Object-Oriented-Ruby/ttt-with-ai-project-v-000/lib/players/computer.rb @ line 30 Players::Computer#move:
+
+     [1;34m5[0m: [32mdef[0m [1;34mmove[0m(board)
+     [1;34m6[0m:   [1;34m#returns the move the computer wants to make as 1-9 string[0m
+     [1;34m7[0m:   puts [31m[1;31m"[0m[31mComputer's move[1;31m"[0m[31m[0m
+     [1;34m8[0m:   position = [31m[1;31m"[0m[31m[1;31m"[0m[31m[0m
+     [1;34m9[0m:   corners = [[31m[1;31m"[0m[31m1[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m3[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m7[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m9[1;31m"[0m[31m[0m]
+    [1;34m10[0m:   sides = [[31m[1;31m"[0m[31m2[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m4[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m6[1;31m"[0m[31m[0m, [31m[1;31m"[0m[31m8[1;31m"[0m[31m[0m]
+    [1;34m11[0m: 
+    [1;34m12[0m:   [32mif[0m check_win_combos_for_2(board) == [31m[1;31m"[0m[31m[1;31m"[0m[31m[0m
+    [1;34m13[0m:     [32mif[0m board.valid_move?([1;34m5[0m)
+    [1;34m14[0m:       position = [31m[1;31m"[0m[31m5[1;31m"[0m[31m[0m
+    [1;34m15[0m:     [32melsif[0m
+    [1;34m16[0m:       corners.each.with_index [32mdo[0m |corner, i|
+    [1;34m17[0m:         [32mif[0m !board.valid_move?(corner) && board.position != [1;36mself[0m.token
+    [1;34m18[0m:           position = corners[index - [1;34m1[0m] [32munless[0m !board.valid_move?(corners[index - [1;34m1[0m])
+    [1;34m19[0m:           position = corners[index + [1;34m1[0m] [32munless[0m !board.valid_move?(corners[index + [1;34m1[0m])
+    [1;34m20[0m:           position = corners[index - [1;34m3[0m] [32munless[0m !board.valid_move?(corners[index - [1;34m3[0m])
+    [1;34m21[0m:           position = corners[index + [1;34m3[0m] [32munless[0m !board.valid_move?(corners[index + [1;34m3[0m])
+    [1;34m22[0m:         [32melsif[0m board.valid_move?(corner)
+    [1;34m23[0m:           position = corner
+    [1;34m24[0m:         [32mend[0m
+    [1;34m25[0m:       [32mend[0m
+    [1;34m26[0m:       sides.each {|side| position = side [32mif[0m board.valid_move?(side)}
+    [1;34m27[0m:     [32mend[0m
+    [1;34m28[0m:   [32mend[0m
+    [1;34m29[0m:   sleep([1;35m0.3[0m)
+ => [1;34m30[0m:   binding.pry
+    [1;34m31[0m:   position
+    [1;34m32[0m: [32mend[0m
+

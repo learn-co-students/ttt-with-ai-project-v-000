@@ -2,31 +2,21 @@
 
 require_relative '../config/environment'
 
-#greet user w/ message
-#prompt user for 0, 1, or 2 player game
-#ask who should go first and be X
-#uses input to initialize a Game
-#when game ends cli should prompt user about playing again and choosing new # of players
-#exits program if player is done
-
-#logic can be done here or in Game via methods like #start
-
-#implement a wargames game type:
-#computer plays itself 100 times and reports how many times the game was won - perfect AI should never be able to win
 
 
 
 puts "Welcome to CLI Tic-Tac-Toe!"
 game = Game.start
-game.play
+#game.play
 
 input = ""
 until input == "n"
+  puts "\n"
   puts "Play again? Y or N"
   input = gets.chomp.downcase
   if input == "y"
-    Game.start.play
+    Game.start
   else
-    puts "Thanks for playing!"
+    Game.display_scores
   end
 end
