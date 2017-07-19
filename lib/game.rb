@@ -1,5 +1,3 @@
-require "pry"
-
 class Game
   attr_accessor :board, :player_1, :player_2
   @@draws = 0
@@ -22,7 +20,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
   end
-  #binding.pry
 
   def self.start
     puts "Type the number of the mode would you like to play:"
@@ -40,8 +37,6 @@ class Game
       when "3"
         Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
       when "4"
-        #where should the logic for the repeating and reporting go?
-        #make method for wargames!
         100.times do
           Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
         end
@@ -50,8 +45,6 @@ class Game
         self.x_wins = 0
         self.o_wins = 0
         self.draws = 0
-        #refactor to make wargames go quicker...
-        #custom Computer#move? to make it quicker?
       else
         puts "Please select 1-4 to start a new game"
         puts "\n"
@@ -59,6 +52,7 @@ class Game
       end
     end
 
+### CLASS VARIABLES ###
     def self.draws
       @@draws
     end

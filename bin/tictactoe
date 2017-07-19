@@ -3,11 +3,8 @@
 require_relative '../config/environment'
 
 
-
-
 puts "Welcome to CLI Tic-Tac-Toe!"
 game = Game.start
-#game.play
 
 input = ""
 until input == "n"
