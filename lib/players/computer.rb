@@ -28,7 +28,7 @@ module Players
             index = c[2]
         elsif (board.cells[(c[1].to_i)-1] == enemy_token) && (board.cells[(c[2].to_i)-1] == enemy_token) && board.valid_move?(c[0])
             index = c[0]
-        elsif (board.cells[(c[0].to_i)-1] == enemy_token) && !(board.cells[(c[2].to_i)-1] == enemy_token) && board.valid_move?(c[1])
+        elsif (board.cells[(c[0].to_i)-1] == enemy_token) && (board.cells[(c[2].to_i)-1] == enemy_token) && board.valid_move?(c[1])
             index = c[1]
         end
       end
