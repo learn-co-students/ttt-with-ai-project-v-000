@@ -10,7 +10,7 @@ class Game
   end
 
   def over?
-    won? || draw?
+     won? || draw?
   end
 
   def current_player
@@ -50,7 +50,8 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |win_combo|
+    #previous code used .each to enumerate, but we really needed to use . detect so that it would stop the firts time the code finds that example
+    WIN_COMBINATIONS.detect do |win_combo|
       @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
       @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
       @board.taken?(win_combo[0]+1)
@@ -58,10 +59,12 @@ class Game
   end
 
   def draw?
-   @board.full? && !won?
+   self.board.full? && !won?  #changed @board.full?   to    self.board.full?
   end
 
   def start
   end
 
 end
+
+#        load "config/environment.rb"
