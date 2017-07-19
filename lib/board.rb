@@ -1,4 +1,5 @@
-# This line is a test for setting up group repository
+
+
 class Board
   attr_accessor :cells
 
@@ -51,3 +52,9 @@ class Board
   end
 
 end
+
+#  rspec spec/04_game_spec.rb
+# load "config/environment.rb"
+
+
+#        load "config/environment.rb"
