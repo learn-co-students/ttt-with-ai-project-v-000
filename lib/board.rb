@@ -58,8 +58,6 @@ class Board
   end
 
   def taken?(position_string)
-    # position(position_string) will return the contents of the cell in question
-    # if the cell does not equal an empty string, it is taken
     position(position_string) != " "
   end
 
@@ -68,4 +66,3 @@ class Board
   end
 end
 
-# done
