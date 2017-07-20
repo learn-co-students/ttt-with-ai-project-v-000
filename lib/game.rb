@@ -1,7 +1,6 @@
 require "pry"
 class Game
   attr_accessor :board, :player_1, :player_2
-  attr_reader :tokens
 
   WIN_COMBINATIONS = [
     [0, 1, 2], #top_row_win
@@ -28,41 +27,38 @@ class Game
     won? || draw? || self.board.full?
   end
 
-  def win_tokens
-    @tokens = WIN_COMBINATIONS.map {|combo| combo.map {|index| board.cells[index]}}
-    # return the token at each index of each array of winning combos relative to the game board
-    # which is now an instance variable, reader access granted in attr_reader
-  end
-
   def won?
-    win_tokens
-    tokens.include?(["X", "X", "X"]) || win_tokens.include?(["O", "O", "O"])
-    # true if the tokens array from win_tokens includes a set of all Xs or all Os
+    winner != nil
   end
-
 
   def draw?
     !won? && board.full?
   end
 
-  def winner
-    win_tokens
-    winning_combo = tokens.detect {|combo| combo == ["X", "X", "X"] || combo == ["O", "O", "O"]}
-    # the first match of all Xs or all Os is now saved as a variable
-    won? ? winning_combo[0] : nil
+  def is_winning_combo(combo) # returns true when elements in a combo are all X or all O
+    # example combo ["X", "O", " "]
+    combo.all? { |el| el == combo[0] && combo[0] != " "}
+  end
+
+  def winner # returns "X" if X won and "O" if O won and nil if there is no winner
+    winning_combo = board.get_filled_win_combinations.detect { |combo| is_winning_combo(combo) }
+    winning_combo != nil ? winning_combo[0] : nil
   end
 
   def turn
     player = current_player
-    move = player.move(board)
     puts "#{current_player.token} is taking their turn..."
+    sleep 3
+    move = player.move(board)
     if board.valid_move?(move)
       board.update(move, player)
       board.display
-      # sleep 3
+      sleep 3
     else
+      invalid_selection
+      sleep 1
       board.display
-      # sleep 3
+      sleep 3
       turn
     end
   end
@@ -78,43 +74,104 @@ class Game
     end
   end
 
-  def self.start # CLI setup here
-    # puts out a board with position numbers before calling any turns
-    puts "Hello there! Would you like to play a game of Tic Tac Toe? Please select from the following:"
-    puts "0 = computer versus itself"
-    puts "1 = computer versus you"
-    puts "2 = you versus your human friend"
-    puts "What do you choose?"
-    game_type = gets.chomp
-    # binding.pry
-    # ask for who goes first BASED on the type of game - if/else
-    # puts "Who should go first and be X?"
-    # puts "0 = computer goes first"
-    # puts "1 = you go first"
-    # puts "2 = your friend goes first"
-    # puts "What do you choose?"
-    # first = gets.chomp
-
-    # based on the game_type, create a game with zero, one or two players
-    # with first as player_1's token
-    # remember that new games have three arguments
-    # recap the selections before calling #turn
-    if game_type == "0"
-
-      game = self.new(Players::Computer.new("X"), Players::Computer.new("O"))
-      puts "The players are: 1) Computer as X and 2) Computer as O."
-      game.play
-      if game.over?
-        puts "Would you like to play another game? 1 = Yes, 2 = No"
-        another = gets.chomp
-        if another == 1
-          self.class.start
-        else
-          puts "Thank you and farewell!"
-          exit
-        end
-      end
-    end # end of computer v computer
-
+  def who_first?
+    puts "Who should go first as X?"
+    puts "Your options are:"
+    puts "0 = computer, if you wanted to play the computer"
+    puts "1 = you"
+    puts "2 = your friend, if they wanted to play"
+    puts "3 = exit if you've changed your mind"
+    gets.chomp
   end
+
+  def mixed_computer_first
+    @player_1 = Players::Computer.new("X")
+    @player_2 = Players::Human.new("O")
+    puts "The players are 1) Computer = X and 2) you = O"
+  end
+
+  def mixed_human_first
+    @player_1 = Players::Human.new("X")
+    @player_2 = Players::Computer.new("O")
+    puts "The players are 1) you = X and 2) Computer = O"
+  end
+
+  def human_only
+    @player_1 = Players::Human.new("X")
+    @player_2 = Players::Human.new("O")
+  end
+
+  def computer_only_game
+    @player_1 = Players::Computer.new("X")
+    @player_2 = Players::Computer.new("O")
+    puts "The players are 1) Computer = X and 2) Computer = O"
+  end
+
+  def mixed_game
+    first = who_first?
+    case first
+      when "0" then mixed_computer_first
+      when "1" then mixed_human_first
+      when "exit" then goodbye
+      else invalid_selection
+        who_first?
+    end
+  end
+
+  def human_only_game
+    first = who_first?
+
+    case first
+      when "1" then human_only
+        puts "The players are 1) you = X and 2) your friend = O"
+      when "2" then human_only
+        puts "The players are 1) your friend = X and 2) you = O"
+      when "exit" then goodbye
+      else invalid_selection
+        who_first?
+    end
+  end
+
+  def invalid_selection
+    puts "Your selection is invalid. Please select again."
+    sleep 1
+  end
+
+  def self.game_selection
+    puts "0 = Computer versus Itself"
+    puts "1 = Computer versus You"
+    puts "2 = You versus your Human Friend"
+    puts "exit = leave this game if you've changed your mind"
+    # puts "Please pick wisely - invalid selections will terminate this dialogue."
+    puts "What do you choose?"
+    gets.chomp
+  end
+
+  def goodbye # politely leave the program
+    puts "Thank you and farewell!"
+    exit
+  end
+
+  def self.start # CLI setup here
+    puts "Hello there! Would you like to play a game of Tic Tac Toe? Please select from the following:"
+    # game_selection
+    game_type = game_selection
+    new_game = self.new()
+    case game_type
+      when "0" then new_game.computer_only_game
+      when "1" then new_game.mixed_game
+      when "2" then new_game.human_only_game
+      when "exit" then goodbye
+      else new_game.invalid_selection
+        game_type = game_selection
+    end
+    new_game.board.display
+    new_game.play
+    if new_game.over?
+      puts "Would you like to play another game? 1 = Yes, 2 = No"
+      another = gets.chomp
+      another == "1" ? self.start : goodbye
+    end
+  end
+
 end
