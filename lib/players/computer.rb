@@ -50,27 +50,7 @@ module Players
           board.position(index + 1) == " "
         end
       end
-
       (make_move + 1).to_s if make_move != nil
-
-    end
-
-
-
-    def not_my_token_or_empty_position_and_valid_move?(input1, input2, input3, board)
-      board.position(input1) != token && board.position(input2) != token && board.position(input1) != " " && board.position(input2) != " " && board.position(input3) == " "
-    end
-
-    def my_token_and_valid_move?(input1, input2, input3, board)
-      board.position(input1) == token && board.position(input2) == token && board.position(input3) == " "
-    end
-
-    def find_unblocked_corner(board)
-      make_move = nil
-      make_move = [1,3,7,9].detect do |index|
-        board.valid_move?(index)
-      end
-      make_move.to_s if make_move != nil
     end
 
     def move_in_any_available_position(board)
