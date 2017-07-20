@@ -47,7 +47,7 @@ class Game
 
   def turn
     player = current_player
-    puts "#{current_player.token} is taking their turn..."
+    puts "#{current_player.player_type} #{current_player.token} is taking their turn..."
     sleep 3
     move = player.move(board)
     if board.valid_move?(move)
@@ -80,31 +80,27 @@ class Game
     puts "0 = computer, if you wanted to play the computer"
     puts "1 = you"
     puts "2 = your friend, if they wanted to play"
-    puts "3 = exit if you've changed your mind"
+    puts "bye = exit if you've changed your mind"
     gets.chomp
   end
 
   def mixed_computer_first
     @player_1 = Players::Computer.new("X")
     @player_2 = Players::Human.new("O")
-    puts "The players are 1) Computer = X and 2) you = O"
   end
 
   def mixed_human_first
     @player_1 = Players::Human.new("X")
     @player_2 = Players::Computer.new("O")
-    puts "The players are 1) you = X and 2) Computer = O"
-  end
-
-  def human_only
-    @player_1 = Players::Human.new("X")
-    @player_2 = Players::Human.new("O")
   end
 
   def computer_only_game
     @player_1 = Players::Computer.new("X")
     @player_2 = Players::Computer.new("O")
-    puts "The players are 1) Computer = X and 2) Computer = O"
+  end
+
+  def puts_players
+    puts "The players are 1) #{player_1.player_type} = #{player_1.token} and 2) #{player_2.player_type} = #{player_2.token}"
   end
 
   def mixed_game
@@ -112,21 +108,7 @@ class Game
     case first
       when "0" then mixed_computer_first
       when "1" then mixed_human_first
-      when "exit" then goodbye
-      else invalid_selection
-        who_first?
-    end
-  end
-
-  def human_only_game
-    first = who_first?
-
-    case first
-      when "1" then human_only
-        puts "The players are 1) you = X and 2) your friend = O"
-      when "2" then human_only
-        puts "The players are 1) your friend = X and 2) you = O"
-      when "exit" then goodbye
+      when "bye" then goodbye
       else invalid_selection
         who_first?
     end
@@ -137,41 +119,50 @@ class Game
     sleep 1
   end
 
-  def self.game_selection
+  def self.get_game_type
     puts "0 = Computer versus Itself"
     puts "1 = Computer versus You"
     puts "2 = You versus your Human Friend"
-    puts "exit = leave this game if you've changed your mind"
-    # puts "Please pick wisely - invalid selections will terminate this dialogue."
+    puts "bye = leave this game if you've changed your mind"
     puts "What do you choose?"
-    gets.chomp
+    input = gets.chomp
   end
 
-  def goodbye # politely leave the program
+  def self.goodbye # politely leave the program
     puts "Thank you and farewell!"
     exit
   end
 
+  def self.get_new_game
+    new_game = self.new()
+    while true
+      game_type = get_game_type
+      case game_type
+        when "0" then new_game.computer_only_game
+          break
+        when "1" then new_game.mixed_game
+          break
+        when "2" then new_game
+          break
+        when "exit" then goodbye
+        else new_game.invalid_selection
+      end
+    end
+    new_game
+  end
+
   def self.start # CLI setup here
     puts "Hello there! Would you like to play a game of Tic Tac Toe? Please select from the following:"
-    # game_selection
-    game_type = game_selection
-    new_game = self.new()
-    case game_type
-      when "0" then new_game.computer_only_game
-      when "1" then new_game.mixed_game
-      when "2" then new_game.human_only_game
-      when "exit" then goodbye
-      else new_game.invalid_selection
-        game_type = game_selection
-    end
+
+    new_game = get_new_game
+    new_game.puts_players
     new_game.board.display
     new_game.play
+
     if new_game.over?
       puts "Would you like to play another game? 1 = Yes, 2 = No"
       another = gets.chomp
       another == "1" ? self.start : goodbye
     end
   end
-
 end
