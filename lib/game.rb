@@ -48,12 +48,12 @@ class Game
   def turn
  	puts "Enter your move player #{current_player.token}"
  	move = current_player.move(board)
- 	if board.valid_move?(move)
- 		board.update(move, current_player)
- 	else
- 		puts "invalid input, please try again"
- 		turn
- 	end
+   	if board.valid_move?(move)
+   		board.update(move, current_player)
+   	else
+   		puts "invalid input, please try again"
+   		turn
+   	end
   end
 
   def play
@@ -66,12 +66,5 @@ class Game
   		puts "Cat's Game!"
   	end
   end
-
-
-
-
-
-
-
 
 end 

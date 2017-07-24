@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+new_game = ""
+
+@human_1 = Players::Human.new("X")
+@human_2 = Players::Human.new("O")
+@comp_1 = Players::Computer.new("X")
+@comp_2 = Players::Computer.new("O")
+@board = Board.new
+
+
+def computer_computer_game
+	Game.new(@comp_1, @comp_2, @board)
+end
+
+def human_computer_game
+	get_user_input == "yes" ? Game.new(@human_1, @comp_2, @board) : Game.new(@comp_2, @human_1, @board)
+end
+
+def human_human_game
+	get_user_input == "yes" ? Game.new(@human_1, @human_2, @board) : Game.new(@human_2, @human_1, @board)
+end
+
+def get_user_input
+	choice = ""
+	until choice.include?("yes") || choice.include?("no")
+		puts "do you want to go first ? "
+		choice = gets.chomp.downcase
+		puts "invalid answer." unless choice.include?("yes") || choice.include?("no")
+	end
+	return choice
+end
+
+while new_game != "no"
+	puts "Welcome to TicTacToe"
+
+	puts "Enter what kind of game you would like 0,1,2 player"
+	num_players = gets.chomp
+
+	if num_players == "0"
+		computer_computer_game.play
+	elsif  num_players == "1"
+		human_computer_game.play
+	elsif  num_players == "2"
+		human_human_game.play
+	end
+
+	puts "play again ?...enter yes or no"
+	new_game = gets.chomp.downcase
+	@board.reset!
+end
