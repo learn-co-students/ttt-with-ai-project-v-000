@@ -22,7 +22,7 @@ module Players
       #
       # else
       #
-      #   Game::WIN_COMBINATIONS.each do |win_combination|
+      #   Game::WIN_COMBINATIONS.detect do |win_combination|
       #
       #   if win_combination.select{|i| board.position(i+1) == token}.size == 2 && win_combination.any?{|i| board.position(i+1) == " "}
       #     move = win_combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
@@ -45,15 +45,14 @@ module Players
       else
             Game::WIN_COMBINATIONS.detect do |win_combination|
 
-                if win_combination.select{|i| board.position(i+1) == token}.size == 2 && win_combination.any?{|i| board.position(i+1) == " "}
+                if win_combination.select{|i| board.position(i+1) == token}.length == 2 && win_combination.any?{|i| board.position(i+1) == " "}
                    move = win_combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
 
-                elsif win_combination.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && win_combination.any?{|i| board.position(i+1) == " "}
+                elsif win_combination.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.length == 2 && win_combination.any?{|i| board.position(i+1) == " "}
                    move = win_combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
 
                 end
             end
-
                 move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
         end
 
