@@ -45,10 +45,10 @@ module Players
       else
             Game::WIN_COMBINATIONS.detect do |win_combination|
 
-                if win_combination.select{|i| board.position(i+1) == token}.length == 2 && win_combination.any?{|i| board.position(i+1) == " "}
+                if win_combination.select{|i| board.position(i+1) == token}.length == 2 && win_combination.any?{|i| board.position(i+1) == nil}
                    move = win_combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
 
-                elsif win_combination.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.length == 2 && win_combination.any?{|i| board.position(i+1) == " "}
+                elsif win_combination.select{|i| board.position(i+1) != nil && board.position(i+1) != token}.length == 2 && win_combination.any?{|i| board.position(i+1) == " "}
                    move = win_combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
 
                 end
