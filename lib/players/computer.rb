@@ -43,7 +43,7 @@ module Players
             move = "2"
 
       else
-            Game::WIN_COMBINATIONS.detect do |win_combination|
+            Game::WIN_COMBINATIONS.find do |win_combination|
 
                 if win_combination.select{|i| board.position(i+1) == token}.length == 2 && win_combination.any?{|i| board.position(i+1) == nil}
                    move = win_combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
@@ -53,7 +53,7 @@ module Players
 
                 end
             end
-                move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
+                move = [1, 3, 7, 9, 2, 4, 6, 8].find{|i| !board.taken?(i)}.to_s if move == nil
         end
 
         move
