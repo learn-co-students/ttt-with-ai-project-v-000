@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-puts "========================="
-game = Game.new
-game.start
+tic_tac_toe = TicTacToe.new(Game.new, InputOutput::CLI.new)
+# OR  tic_tac_toe = TicTacToe.new(Game.new, Web.new) for web based input output
+
+tic_tac_toe.play

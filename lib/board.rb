@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :input_output
 
   ALL_POSITIONS = (1..9).to_a
   CORNER_POSITIONS = [1, 3, 7, 9]
@@ -8,7 +8,7 @@ class Board
   ALL_TOKENS = %W(#{TOKEN_NOUGHT} #{TOKEN_CROSS})
 
   def display
-    puts self.to_s
+    self.input_output.display self.to_s
   end
 
   def find_move_in_any_available_position
@@ -53,8 +53,9 @@ class Board
     end
   end
 
-  def initialize
+  def initialize(io = InputOutput::CLI.new)
     reset!
+    self.input_output = io
   end
 
   def position(position)

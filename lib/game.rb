@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :game_choice, :input_output
 
   WIN_COMBINATIONS = [
     [0, 1, 2],
@@ -19,11 +19,19 @@ class Game
   def draw?
     !self.won? && self.board.full?
   end
-
-  def initialize(player_1 = Players::Human.new(Board::TOKEN_CROSS), player_2 = Players::Human.new(Board::TOKEN_NOUGHT), board = Board.new)
+  
+  def initialize(player_1 = Players::Human.new(Board::TOKEN_CROSS),
+                 player_2 = Players::Human.new(Board::TOKEN_NOUGHT),
+                 board = Board.new,
+                 io = InputOutput::CLI.new)
     self.board = board
     self.player_1 = player_1
     self.player_2 = player_2
+    self.input_output = io
+  end
+
+  def lost?
+    !self.won? && !self.draw?
   end
 
   def over?
@@ -35,60 +43,10 @@ class Game
       turn
     end
     if self.won?
-      puts "Congratulations #{winner}!"
+      self.input_output.display "Congratulations #{winner}!"
     elsif self.draw?
-      puts "Cat's Game!"
+      self.input_output.display "Cat's Game!"
     end
-  end
-
-  def select_game_type
-    puts "What kind of game would you like to play?"
-    puts "1. 0 player (Press 1 for 0 player game)"
-    puts "2. 1 player (Press 2 for 1 player game)"
-    puts "3. 2 player (Press 3 for 2 player game)"
-    game_choice = gets.chomp
-
-    case game_choice
-      when "1"
-        puts "You have selected 0 player game."
-        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-
-      when "2"
-        puts "You have selected 1 player game."
-        puts "Who should go first and be player X?"
-        player_choice = gets.chomp
-
-        if player_choice.downcase == "i"
-          game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-        else
-          game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-        end
-
-      when "3"
-        puts "You have selected 2 player game."
-        game = Game.new
-      else
-        puts "Please select the game from options 1, 2 or 3 from the menu!"
-        raise "Wrong choice type!!"
-    end
-    game
-  end
-
-  def start
-    user_has_quit = false
-
-    until user_has_quit
-      game = select_game_type
-      game.board.display
-      game.play
-      user_has_quit = self.does_user_want_to_quit?
-    end
-  end
-
-  def does_user_want_to_quit?
-    puts "Do you want to play again?"
-    answer = gets.strip
-    %w(n no).include?(answer.downcase)
   end
 
   def turn
@@ -96,11 +54,11 @@ class Game
     current_move = player.move(@board)
 
     if self.board.valid_move?(current_move)
-      puts "Turn #{self.board.turn_count + 1}"
+      self.input_output.display "Turn #{self.board.turn_count + 1}"
       self.board.update(current_move, player)
-      puts "Move of player #{player.token} was #{current_move}"
+      self.input_output.display "Move of player #{player.token} was #{current_move}"
       self.board.display
-      puts "\n\n"
+      self.input_output.display "\n\n"
     else
       turn
     end
