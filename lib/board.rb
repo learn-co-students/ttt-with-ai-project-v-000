@@ -35,13 +35,8 @@ def full?
 end
 
 def turn_count
-  counter = 0
-  @cells.each do |cell|
-    if cell != " "
-      counter += 1
-    end
-  end
-  counter
+  turns = self.cells.find_all {|cell| cell != " "}
+  turns.length
 end
 
 def taken?(input)

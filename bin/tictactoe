@@ -16,6 +16,7 @@ class TicTacToe
     elsif input.between?(0, 2) && input == 1
       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       puts "Game starts now! Player 1, please input your first position on the board, a number from 1 to 9."
+      puts "For example, '1' would place you in the first column, first row."
       game.play
     elsif input.between?(0, 2) && input == 2
       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
