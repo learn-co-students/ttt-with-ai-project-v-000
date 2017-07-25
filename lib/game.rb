@@ -25,4 +25,50 @@ class Game
       player_2
     end
   end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+      board.cells[combo[1]] == board.cells[combo[2]] &&
+      board.taken?(combo[0]+1)
+    end
+  end
+
+  def draw?
+    !won? && board.full?
+  end
+
+
+  def over?
+    won? || draw?
+  end
+
+  def winner
+    if won?.is_a?(Array) == true
+      winner = won?
+      board.cells[winner[0]]
+    end
+  end
+
+  def turn
+    player = current_player
+    current_move = player.move(board)
+    position = board.position(current_move)
+    if board.valid_move?(current_move)
+      board.update(current_move, player)
+    else
+      turn
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 end
