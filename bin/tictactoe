@@ -1,3 +1,43 @@
 #!/usr/bin/env ruby
-
+require 'irb'
 require_relative '../config/environment'
+
+# IRB.start
+
+puts "Welcome to Tic Tac Toe!"
+
+input = true
+
+while input
+  puts "Select Game Mode...
+  '0' Computer VS Computer
+  '1' Player 1 VS Computer
+  '2' Player 1 VS Player 2"
+  input = gets.strip
+
+  if input == "0"
+    puts "Computer VS Computer!"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+    game.board.reset!
+  elsif input == "1"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+    game.board.reset!
+  elsif input == "2"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    game.play
+    game.board.reset!
+  else
+    puts "#{input} mode is not supported, please try again!"
+  end
+
+  puts "Would you like to play agian y/n?"
+  input = gets.strip
+
+  if input.downcase == "y"
+    true
+  elsif input.downcase == "n"
+    exit
+  end
+end
