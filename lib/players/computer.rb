@@ -23,8 +23,6 @@ module Players
       elsif board.cells[8,2] == ["X", "X"]
         "6"
       end
-
-      #[[0,2], [0,6], [6,8], [8,2]]
     end
 #
   end
