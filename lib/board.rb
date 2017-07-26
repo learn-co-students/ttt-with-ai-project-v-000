@@ -42,7 +42,7 @@ class Board
   end
 
   def valid_move?(user_input)
-    ((user_input.to_i == 1..9) && !taken?(user_input)) ? true : false
+    (((1..9).to_a.include?(user_input.to_i)) && !taken?(user_input)) ? true : false
   end
 
   def update(user_input, player)

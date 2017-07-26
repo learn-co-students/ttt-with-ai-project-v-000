@@ -26,14 +26,6 @@ class Game
     draw? || won?
   end
 
-  def won? ### get explanation for how this works
-    WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
-    end
-  end
-
   def draw?
     @board.full? && !won?
   end
@@ -45,17 +37,41 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    user_input = gets.strip
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      #binding.pry
+      turn
+    else
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+    end
+  end
 
-    #if @board.valid_move?(user_input)
-    #   move(board, index, current_player(board))
-    #   display_board(board)
-    # else
-    #   turn(board)
-    # end
+  def play
+    while !over?
+      turn
+    end
+    if won? && player.token == 'X'
+      puts 'Congratulations X!'
+    elsif won?
+      puts 'Congratulations O!'
+    end
+
+
 
   end
 
+  def won? ### get explanation for how this works
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
+    end
+  end
 
 end
