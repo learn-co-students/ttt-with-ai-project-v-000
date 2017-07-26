@@ -1,3 +1,4 @@
+require "pry"
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -47,6 +48,8 @@ class Game
   end
 
   def turn
+    puts "Please input your move"
+    board.display
     input = self.current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.cells[input.to_i - 1] = current_player.token
@@ -58,6 +61,7 @@ class Game
 
   def play
     while !(self.over?)
+      sleep 1
       turn
     end
     if won?

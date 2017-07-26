@@ -12,18 +12,16 @@ module Players
         "7"
       elsif board.cells[8] == " "
         "9"
-      elsif board.cells[0,8] == ["X", "X"]
-        "5"
-      elsif board.cells[0,2] == ["X", "X"]
+      elsif board.cells[1] == " "
         "2"
-      elsif board.cells[0,6] == ["X", "X"]
+      elsif board.cells[3] == " "
         "4"
-      elsif board.cells[6,8] == ["X", "X"]
-        "8"
-      elsif board.cells[8,2] == ["X", "X"]
+      elsif board.cells[5] == " "
         "6"
+      elsif board.cells[7] == " "
+        "8"
       end
     end
-#
+    
   end
 end
