@@ -56,6 +56,7 @@ class Game
     position = board.position(current_move)
     if board.valid_move?(current_move)
       board.update(current_move, player)
+      board.display
     else
       turn
     end
