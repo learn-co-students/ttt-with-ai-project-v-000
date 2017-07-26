@@ -61,7 +61,7 @@ class Game
 
   def play
     while !(self.over?)
-      sleep 1
+      sleep 0.5
       turn
     end
     if won?
