@@ -2,68 +2,74 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-puts "Please select game mode:
-Enter: '0' for computer vs computer
-Enter: '1' for player vs computer
-Enter: '2' for player vs player"
-input = gets.strip.downcase
+again = ""
+until again == "n"
+  puts "Welcome to Tic Tac Toe!"
+  puts "Please select game mode:
+  Enter: '0' for computer vs computer
+  Enter: '1' for player vs computer
+  Enter: '2' for player vs player"
+  input = gets.strip.downcase
 
-if input == "wargames"
-  counter = 0
-  winning = 0
-  puts "Computer VS Computer"
-  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  while counter < 101
-    game.play
-    counter += 1
-    if game.won?
-      winning += 1
+  if input == "wargames"
+    counter = 0
+    winning = 0
+    puts "Computer VS Computer"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    while counter < 101
+      game.play
+      counter += 1
+      if game.won?
+        winning += 1
+      end
+      puts "Number of games won: #{winning}"
     end
-    puts "Number of games won: #{winning}"
+
+  elsif input == "0"
+    puts "Computer VS Computer"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+    game.board.reset!
+
+  elsif input == "1"
+    puts "Computer VS Player"
+    puts "Would you like to go first 'y' 'n'"
+    first =  gets.strip.downcase
+    puts "Do you want to be 'X' or 'O'?"
+    token = gets.strip.upcase
+
+    if first == "y" && token == "X"
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    elsif first == "y" && token == "O"
+      game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new)
+    elsif first == "n" && token == "X"
+      game = Game.new(player_1 = Players::Computer.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
+    elsif first == "n" && token == "O"
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    end
+    game.play
+    game.board.reset!
+
+  elsif input == "2"
+    puts "Player VS Player"
+    puts "Would you like to go first 'y' 'n'"
+    first =  gets.strip.downcase
+    puts "Do you want to be 'X' or 'O'?"
+    token = gets.strip.upcase
+
+    if first == "y" && token == "X"
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    elsif first == "y" && token == "O"
+      game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
+    elsif first == "n" && token == "X"
+      game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
+    elsif first == "n" && token == "O"
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    end
+    game.play
+    game.board.reset!
   end
-
-elsif input == "0"
-  puts "Computer VS Computer"
-  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  game.play
-  game.board.reset!
-
-elsif input == "1"
-  puts "Computer VS Player"
-  puts "Would you like to go first 'y' 'n'"
-  first =  gets.strip.downcase
-  puts "Do you want to be 'X' or 'O'?"
-  token = gets.strip.upcase
-
-  if first == "y" && token == "X"
-    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  elsif first == "y" && token == "O"
-    game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new)
-  elsif first == "n" && token == "X"
-    game = Game.new(player_1 = Players::Computer.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
-  elsif first == "n" && token == "O"
-    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  end
-  game.play
-  game.board.reset!
-
-elsif input == "2"
-  puts "Player VS Player"
-  puts "Would you like to go first 'y' 'n'"
-  first =  gets.strip.downcase
-  puts "Do you want to be 'X' or 'O'?"
-  token = gets.strip.upcase
-
-  if first == "y" && token == "X"
-    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  elsif first == "y" && token == "O"
-    game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
-  elsif first == "n" && token == "X"
-    game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
-  elsif first == "n" && token == "O"
-    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  end
-  game.play
-  game.board.reset!
+  puts "Would you like to play again 'Y' or 'N'?"
+  again = gets.strip.downcase
 end
+puts "Good bye!"
