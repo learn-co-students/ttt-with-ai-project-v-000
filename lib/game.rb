@@ -31,7 +31,7 @@ class Game
   end
 
   def winner
-    if winning_combo = won?
+    if winning_combo = won? #does this mean that you are setting 'winning_combo' equal to won?/ the combo that won the game?
       @board.cells[winning_combo.first]
     end
   end
@@ -40,7 +40,6 @@ class Game
     player = current_player
     current_move = player.move(@board)
     if !@board.valid_move?(current_move)
-      #binding.pry
       turn
     else
       puts "Turn: #{@board.turn_count+1}\n"
@@ -56,14 +55,11 @@ class Game
     while !over?
       turn
     end
-    if won? && player.token == 'X'
-      puts 'Congratulations X!'
-    elsif won?
-      puts 'Congratulations O!'
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
-
-
-
   end
 
   def won? ### get explanation for how this works
