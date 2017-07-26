@@ -18,8 +18,7 @@ class Board
   end
 
   def position(input)
-   input = input.to_i
-   input = input - 1
+   input = input.to_i-1
    cells[input]
   end
 

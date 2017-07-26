@@ -1,4 +1,4 @@
-class Game
+  class Game
   attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
@@ -53,7 +53,6 @@ class Game
   def turn
     player = current_player
     current_move = player.move(board)
-    position = board.position(current_move)
     if board.valid_move?(current_move)
       board.update(current_move, player)
       board.display

@@ -4,35 +4,32 @@ require_relative '../config/environment'
 
 
 puts "Welcome to Tic Tac Toe!"
-# puts "Please select game mode:
-# Enter: '0' for computer vs computer
-# Enter: '1' for player vs computer
-# Enter: '2' for player vs player"
+puts "Please select game mode:
+Enter: '0' for computer vs computer
+Enter: '1' for player vs computer
+Enter: '2' for player vs player"
 
-input = true
+input = gets.strip
 
-while input
-  puts "Please select game mode:
-  Enter: '0' for computer vs computer
-  Enter: '1' for player vs computer
-  Enter: '2' for player vs player"
-  input = gets.strip
-  if input == "0"
-    puts "Computer VS Computer"
-    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-    game.play
-    game.board.reset!
-  elsif input == "1"
-    puts "Computer VS Player"
-    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-    game.play
-    game.board.reset!
-  elsif input == "2"
-    puts "Player VS Player"
-    game = Game.new
-    game.play
-    game.board.reset!
-  else
-    puts "That is not a valid game mode please enter a valid number"
-  end
+if input == "0"
+  puts "Computer VS Computer"
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  game.play
+  game.board.reset!
+
+elsif input == "1"
+  puts "Computer VS Player"
+  # game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  puts "Who should go first 'player' or 'computer'"
+  player =  gets.strip.downcase
+  puts "Do you want to be 'X' or 'O'?"
+  token = gets.strip.upcase
+
+  game.play
+  game.board.reset!
+elsif input == "2"
+  puts "Player VS Player"
+  game = Game.new
+  game.play
+  game.board.reset!
 end
