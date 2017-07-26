@@ -1,4 +1,5 @@
 class Game
+  include Players::Human
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -12,10 +13,12 @@ class Game
     [2,4,6]  # Front diagonal
   ]
 
-  def initialize(player_1, player_2, board)
-    @board = []
-    @player_1 = "X"
-    @player_2 = "O"
+  def initialize(player_1 = Players::Human, player_2 = Players::Human, board = [])
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
+    player_1.token = "X"
+    player_2.token = "O"
   end
 
   def current_player
