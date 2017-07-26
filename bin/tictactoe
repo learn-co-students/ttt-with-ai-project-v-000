@@ -2,8 +2,9 @@
 
 require_relative '../config/environment'
 
-require 'irb'
-def reload!
-  load './config/environment'
-end
-IRB.start
+# require 'irb'
+# def reload!
+#   load './config/environment'
+# end
+# IRB.start
+puts "Welcome to CLI Tic Tac Toe"
