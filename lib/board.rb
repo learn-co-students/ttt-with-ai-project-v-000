@@ -9,6 +9,7 @@ class Board
   def reset!
     @cells=[" "," "," "," "," "," "," "," "," "]
   end
+
   def display
       puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
       puts "-----------"
@@ -16,8 +17,9 @@ class Board
       puts "-----------"
       puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
-  def position(index)
-     index=input_to_index(index)
+
+  def position(input)
+     index=input_to_index(input)
      @cells[index]
   end
 
@@ -35,18 +37,18 @@ class Board
      val_count
   end
 
-  def taken?(index)
-
-   if( (self.position(index)=="")|| (self.position(index)==" ")|| (self.position(index)== nil))
+  def taken?(input)
+    index=input_to_index(input)
+   if( (self.cells[index]=="")|| (self.cells[index]==" ")|| (self.cells[index]== nil))
         return false
      else
          return true
      end
   end
 
-  def valid_move?(index)
-   index=input_to_index(index)
+  def valid_move?(input)
 
+   index=input_to_index(input)
     if (index<0 || index>8)
        return false
     else
@@ -57,9 +59,7 @@ class Board
   def update(input,player)
     index=input_to_index(input)
     @cells[index]=player.token
-
-
-  end
+ end
 
 
   private
