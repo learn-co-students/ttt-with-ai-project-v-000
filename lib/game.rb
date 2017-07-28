@@ -47,9 +47,7 @@ end
 end
 
 
-def self.turn(index)
-board.display
-index.between?(0, 8)) && !(position_taken?(index))
+def self.turn
 end
 
 def self.play
