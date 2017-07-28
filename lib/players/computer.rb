@@ -15,7 +15,7 @@ module Players
           if combo.select{|i| board.position(i+1) == token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
             move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
 
-          elsif combo.select{|i| board.postition(i+1) != " " && board.postition(i+1) != token}.size == 2 && combo.any?{|i| board.postition(i+1) == " "}
+          elsif combo.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
             move = combo.select { |i| !board.taken?(i+1)}.first.to_i.+(1).to_s
           end
         end

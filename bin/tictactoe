@@ -1,3 +1,38 @@
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TTT"
+puts "What kind of game do you want to play?"
+  type = gets.chomp.to_i
+#puts "Who wants to go first and be 'X'?"
+#get player_1
+  def start_game(type)
+    if type == 1
+      Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+    elsif type == 2
+      Game.new(Players::Human.new('X'), Players::Human.new('O'))
+    elsif type == 0
+      Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+    end
+  end
+  game = start_game(type)
+
+
+  until game.won?  || game.draw?
+  game.play
+end
+
+play_again = ""
+until play_again.downcase == "n" || play_again.downcase == "no"
+  puts "Would you like to play again?"
+  play_again = gets.strip
+  play_again.downcase == "y" || play_again.downcase == "yes"
+  puts "What kind of game do you want to play?"
+  type = gets.chomp.to_i
+  game = start_game(type)
+  until game.won? || game.draw?
+    game.play
+  end
+end
+ 
