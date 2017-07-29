@@ -20,7 +20,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count[3] ? player_1 : player_2
+    @board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -48,18 +48,69 @@ class Game
 
 
   def turn
-    puts "Please pick a spot 1-9"
-    user_input = self.current_player.move
+    user_input = self.current_player.move(board)
     if board.valid_move?(user_input)
       board.update(user_input, self.current_player)
+      board.display
     else
       puts "Invalid. Please pick a spot 1-9"
-      #turn
-      #user_input = self.current_player.move
-    #  if board.valid_move?(user_input)
-    #    board.update(user_input, self.current_player)
+      turn
     end
 
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+
+  def play_game
+    puts "Would you like to play 0, 1, or 2 player? OR Type exit to exit."
+    user_input = gets.chomp
+    case user_input
+    when '0'
+      puts "The computer will play itself."
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    when '1'
+      puts "Your opponent will be the computer."
+      puts "Would you like to go first and be X? (y/n)"
+      input = gets.strip
+      if input == 'y'
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    else
+      Game.new(Players::Human.new("0"), Players::Computer.new("X")).play
+    end
+
+    when '2'
+      puts "I see there are two humans. Good luck!"
+      puts "Would you like to go first and be X? (y/n)"
+      input = gets.strip
+      if input == 'y'
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    else
+      Game.new(Players::Human.new("0"), Players::Human.new("X")).play
+    end
+    when 'exit'
+      puts "Goodbye for now!"
+    end
+    replay
+  end
+
+  def replay
+    puts "Do you want to play again? (y/n)"
+    user_input = gets.chomp
+    case user_input
+    when 'y'
+      play_game
+    when 'n'
+      puts "Goodbye"
+    end
   end
 
 
