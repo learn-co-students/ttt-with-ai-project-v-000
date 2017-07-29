@@ -182,6 +182,7 @@ describe 'Game' do
 
     it 'changes to player 2 after the first turn' do
       game = Game.new
+      binding.pry
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("1")

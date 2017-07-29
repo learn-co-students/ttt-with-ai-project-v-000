@@ -37,8 +37,8 @@ class Board
     user_input.to_i.between?(1,9) && !(taken?(user_input))
   end
 
-  def update(user_input, user_token)
-    @cells[user_input.to_i-1] = user_token.token
+  def update(user_input, player)
+    @cells[user_input.to_i-1] = player.token
   end
 
 end

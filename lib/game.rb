@@ -9,48 +9,58 @@ class Game
     [2,5,8],  #Third column
     [0,4,8],  #diagonal1
     [2,4,6]  #diagonal2
-]
+  ]
 
-attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2
 
-def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  @player_1 = player_1
-  @player_2 = player_2
-  @board = board
-end
-
-def current_player
-  @board.turn_count[3] ? player_1 : player_2
-end
-
-def over?
-draw? || won?
-end
-
-def won?
-  WIN_COMBINATIONS.detect do |combination|
-    board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[1]] == board.cells[combination[2]] && board.taken?(combination[0])
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
   end
-end
 
-def draw?
-  @board.full? && !won?
-end
+  def current_player
+    @board.turn_count[3] ? player_1 : player_2
+  end
 
-def winner
+  def over?
+    draw? || won?
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combination|
+      board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[1]] == board.cells[combination[2]] && board.taken?(combination[0]+1)
+    end
+  end
+
+  def draw?
+    @board.full? && !won?
+  end
+
+  def winner
     if won?
       win_index = won?[0]
-    @board.cells[win_index]
-  else
-    return nil
-end
-end
+      @board.cells[win_index]
+    else
+      return nil
+    end
+  end
 
 
-def self.turn
-end
+  def turn
+    puts "Please pick a spot 1-9"
+    user_input = self.current_player.move
+    if board.valid_move?(user_input)
+      board.update(user_input, self.current_player)
+    else
+      puts "Invalid. Please pick a spot 1-9"
+      #turn
+      #user_input = self.current_player.move
+    #  if board.valid_move?(user_input)
+    #    board.update(user_input, self.current_player)
+    end
 
-def self.play
-end
+  end
+
 
 end
