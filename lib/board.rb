@@ -27,8 +27,6 @@ class Board # represents the data and logic of a TTT game board
 	end 
 
 	def full? # completely filled with X's or O's
-		# would be false if there is/are a space/space(s)
-		#return true if there are no spaces
 		@cells.all? {|cell| cell == "X" || cell == "O"}
 	end
 

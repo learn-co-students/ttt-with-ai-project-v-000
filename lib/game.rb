@@ -37,7 +37,7 @@ class Game
 		end
 	end
 
-	def won? # use the win combinations
+	def won? # use the win combinations from above
 		WIN_COMBINATIONS.find do |win_combination|
     		if (@board.cells[win_combination[0]]) == "X" && (@board.cells[win_combination[1]]) == "X" && (@board.cells[win_combination[2]]) == "X" || 
     			(@board.cells[win_combination[0]]) == "O" && (@board.cells[win_combination[1]]) == "O" && (@board.cells[win_combination[2]]) == "O"

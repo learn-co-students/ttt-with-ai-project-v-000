@@ -1,4 +1,4 @@
-class Player
+class Player #class to be applied to Human and Computer
 	
 	attr_reader :token
 

@@ -1,4 +1,4 @@
-class TTTCLI
+class TTTCLI #command line interface
 
     def initialize
         puts "Welcome to Tic Tac Toe! "
