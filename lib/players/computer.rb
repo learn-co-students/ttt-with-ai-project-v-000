@@ -1,6 +1,6 @@
 module Players
 
-	class Computer < Player
+	class Computer < Player # computer methods 
 
 		attr_accessor :board
 

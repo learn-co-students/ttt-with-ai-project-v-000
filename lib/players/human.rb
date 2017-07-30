@@ -1,6 +1,6 @@
 module Players
 
-	class Human < Player
+	class Human < Player # human methods
 
 		def move(board) 
 			# allows a human player to enter a move via the CLI
