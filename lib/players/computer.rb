@@ -6,7 +6,7 @@ module Players
         "5"
       elsif !take_corner(board).empty?
        take_corner(board).sample
-     else random(board)
+     else random(board)s
       end
     end
 
