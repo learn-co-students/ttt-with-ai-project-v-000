@@ -5,14 +5,9 @@ module Players
       if !board.taken?("5")
         "5"
       elsif !take_corner(board).empty?
-        take_corner(board).sample # randomly selects a element in an array
-    elsif opponent_token(board).count == 2
-
-    end
-  end
-
-    def find_win_combos(board)
-      Game::WIN_COMBINATIONS.collect { |combo| combo.collect {|cell| cell = board.cells[cell]} }
+       take_corner(board).sample
+     else random(board)
+      end
     end
 
     def take_corner(board)
@@ -20,24 +15,29 @@ module Players
       corners.select { |move| !board.taken?(move)}
     end
 
-    def opponent_token(board)
-      case @token
-      when "X"
-        "O"
-      when "O"
-        "X"
-      end
+    def random(board)
+      move = (1..9).to_a
+      move.sample.to_s
     end
 
-    #
-    # def block_game(board)
-    #
+    # def opponent_token
+    #   if self.token == "X"
+    #     "O"
+    #   else
+    #     "X"
+    #   end
     # end
-    #
-    # def win_game(board)
-    #   if @toke
-    # end
-    #
 
-end
-end
+    # def block_game(board)
+    #   Game::WIN_COMBINATIONS.each do |combo|
+    #       if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == " "
+    #         return combo[2]
+    #       elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[0]] == " "
+    #         return combo[1]
+    #       elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[1]] == " "
+    #         return combo[0]
+    #       end
+    #     end
+    #   end
+    end
+  end

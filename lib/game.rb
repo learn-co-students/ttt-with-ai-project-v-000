@@ -71,6 +71,7 @@ class Game
   end
 
   def play_game
+    puts "WELCOME TO TIC TAC TOE!"
     puts "Would you like to play 0, 1, or 2 player? OR Type exit to exit."
     user_input = gets.chomp
     case user_input
@@ -92,7 +93,7 @@ class Game
       puts "Would you like to go first and be X? (y/n)"
       input = gets.strip
       if input == 'y'
-      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      Game.new(Players::Human.new("X"), Players::Human.new("O")).play
     else
       Game.new(Players::Human.new("0"), Players::Human.new("X")).play
     end
