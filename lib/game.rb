@@ -11,9 +11,9 @@ attr_accessor :player_1, :player_2, :board
 
   def current_player #returns current person who's playing, but yet to move
     if self.board.turn_count.even?
-      self.player_1
+      @player_1
     elsif self.board.turn_count.odd?
-      self.player_2
+      @player_2
     end
   end
 
@@ -44,10 +44,10 @@ attr_accessor :player_1, :player_2, :board
       moving = current_player.move(@board.cells) #returns user_input and moves token to board
       if @board.valid_move?(moving) && !over?
         #if the game is over, and this is true, it becomes false. If the game is not over, and it is false, this becomes true
-        moving
+        
         @board.update(moving, current_player)
         #self.board.display #updates the board
-      else
+      elsif !@board.valid_move?(moving)
         #puts "invalid"
         turn
       end
