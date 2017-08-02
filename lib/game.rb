@@ -1,7 +1,7 @@
 require 'pry'
 class Game
 WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
-attr_accessor :player_1, :player_2, :board, :position
+attr_accessor :player_1, :player_2, :board
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
@@ -25,56 +25,49 @@ attr_accessor :player_1, :player_2, :board, :position
   end
 
   def draw?
-    if self.board.full? && self.won? == nil
-      true
-    else
-      false
-    end
+    self.board.full? && !won?
+
   end
 
   def over? #if game is over, returns true
-    if self.draw? || self.won?
-      true
-    else
-      false
-    end
+    draw? || won?
   end
 
   def winner #returns X or O
-    if self.won? != nil
-      self.board.cells[self.won?[0]]
+    if won? != nil
+      self.board.cells[won?[0]]
     end
   end
 
   def turn #calls once, returns value of input and makes move and switches players, or if move is invalid, runs through again
     #Current player makes a move with their token. Token is place on the board.
-      moving = self.current_player.move(self.board.cells) #returns user_input and moves token to board
-      if self.board.valid_move?(moving) && !self.over?
+      moving = current_player.move(@board.cells) #returns user_input and moves token to board
+      if @board.valid_move?(moving) && !over?
         #if the game is over, and this is true, it becomes false. If the game is not over, and it is false, this becomes true
         moving
-        self.board.update(moving, self.current_player)
-        self.board.display #updates the board
+        @board.update(moving, current_player)
+        #self.board.display #updates the board
       else
-        puts "invalid"
-        self.turn
+        #puts "invalid"
+        turn
       end
-      self.board.turn_count
-      self.current_player
+      #self.board.turn_count
+      #current_player
   end
 
   def play
-    while !self.over?
-      self.turn
+    while !over?
+      turn
     end
 
-    case self.winner
+    case winner
     when "X"
       puts "Congratulations X!"
     when "O"
       puts "Congratulations O!"
     end
 
-    if self.draw?
+    if draw?
       puts "Cat's Game!"
     end
   end
