@@ -1,7 +1,6 @@
 class Game
 
 
-
   def over?
     won? || draw? || board.full?
   end
