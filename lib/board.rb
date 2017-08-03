@@ -45,16 +45,13 @@ class Board
     end
   end
 
-  def valid_move?(position)
-    if (1..9).include?(position.to_i) && !(self.taken?(position))
-      true
-    else
-      false
-    end
+  def valid_move?(position) #returns true or false
+    (1..9).include?(position.to_i) && !(self.taken?(position))
   end
 
   def update(position, player) #come back after player classes
-      self.cells[position.to_i-1] = player.token
+      cells[position.to_i-1] = player.token
+      cells
   end
 
 end

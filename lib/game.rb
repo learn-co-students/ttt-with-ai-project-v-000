@@ -3,7 +3,7 @@ class Game
 WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
 attr_accessor :player_1, :player_2, :board
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -34,30 +34,27 @@ attr_accessor :player_1, :player_2, :board
   end
 
   def winner #returns X or O
-    if won? != nil
+    if won?
       self.board.cells[won?[0]]
     end
   end
 
   def turn #calls once, returns value of input and makes move and switches players, or if move is invalid, runs through again
     #Current player makes a move with their token. Token is place on the board.
-      moving = current_player.move(@board.cells) #returns user_input and moves token to board
-      if @board.valid_move?(moving) && !over?
-        #if the game is over, and this is true, it becomes false. If the game is not over, and it is false, this becomes true
-        
+
+      moving = current_player.move(@board) #returns user_input
+      if @board.valid_move?(moving)
         @board.update(moving, current_player)
-        #self.board.display #updates the board
+
       elsif !@board.valid_move?(moving)
-        #puts "invalid"
         turn
       end
-      #self.board.turn_count
-      #current_player
-  end
+    end
 
-  def play
+  def play #primarily for bin
     while !over?
-      turn
+      self.turn
+      @board.display
     end
 
     case winner

@@ -17,4 +17,13 @@ describe 'Players::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+
+  #describe '#corners' do
+  #  it 'returns an array with the values of each of the four corners on the current board'
+  #    computer = Players::Computer.new("X")
+  #    board = Board.new
+  #    board.cells = ["X", " ", " ", " "]
+
+  #    expect(corners(board)).to match_array(["X", " ", " ", " "])
+  #end
 end
