@@ -1,6 +1,8 @@
+require "pry"
+
 class Game
 
-attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
@@ -29,7 +31,7 @@ attr_accessor :board, :player_1, :player_2
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      combo.all? {|cell| board[cell] == "player_1.token"} || combo.all? {|cell| board[cell] == "player_2.token"}
+      combo.all? {|cell| board.cells[cell] == player_1.token} || combo.all? {|cell| board.cells[cell] == player_2.token}
     end
   end
 
