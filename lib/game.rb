@@ -22,7 +22,7 @@ class Game
   ]
 
   def current_player
-    self.board.turn_count.even? ? player_1 : player_2
+    self.board.turn_count.even? ? @player_1.token : @player_2.token
   end
 
   def over?
