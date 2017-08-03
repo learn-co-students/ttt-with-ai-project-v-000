@@ -22,8 +22,7 @@ class Game
   ]
 
   def current_player
-    #binding.pry
-    self.board.turn_count.even? ? player_1.token : player_2.token
+    self.board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -41,14 +40,14 @@ class Game
   end
 
   def winner
-    player_1.token == won?[0] ? player_1 : player_2 if won?
+    player_1.token == board.cells[won?[0]] ? player_1.token : player_2.token if won?
   end
 
   def turn
     puts "Please enter 1-9:"
-    index = current_player.move
+    index = player.move
     if board.valid_move?(index)
-      board.update(index, current_player)
+      board.update(index, player)
       board.display
     else
       turn
