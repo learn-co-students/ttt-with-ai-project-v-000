@@ -1,5 +1,3 @@
-require "pry"
-
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -22,7 +20,7 @@ class Game
   ]
 
   def current_player
-    self.board.turn_count.even? ? @player_1.token : @player_2.token
+    self.board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -51,6 +49,16 @@ class Game
       board.display
     else
       turn
+    end
+  end
+  def play
+    while over? == false
+      turn
+    end
+    if won? != false
+      puts "Congratulations #{winner}!"
+    else draw?
+      puts "Cat's Game!"
     end
   end
 end
