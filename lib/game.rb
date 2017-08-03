@@ -22,8 +22,7 @@ class Game
   ]
 
   def current_player
-    #binding.pry
-    self.board.turn_count.even? ? player_1.token : player_2.token
+    self.board.turn_count.even? ? @player_1.token : @player_2.token
   end
 
   def over?
