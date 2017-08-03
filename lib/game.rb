@@ -61,13 +61,6 @@ class Game
     else
       puts "Cat's Game!"
     end
-    puts "Would you like to play again? Y or N"
-    again = gets.strip
-    if again == "Y"
-      Game.start
-    else
-      puts "Thanks, peace out!"
-    end
   end
 
   def self.start
@@ -98,6 +91,14 @@ class Game
     end
     game = Game.new(player_1, player_2)
     game.play
+    
+    puts "Would you like to play again? Y or N"
+    again = gets.strip
+    if again == "Y"
+      Game.start
+    else
+      puts "Thanks, peace out!"
+    end
   end
 
 end
