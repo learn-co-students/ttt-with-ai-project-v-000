@@ -55,9 +55,9 @@ class Game
     while over? == false
       turn
     end
-    if won? != false
+    if won?
       puts "Congratulations #{winner}!"
-    else draw?
+    else
       puts "Cat's Game!"
     end
   end
