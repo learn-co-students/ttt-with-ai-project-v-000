@@ -2,7 +2,7 @@ class Game
 
 attr_accessor :board, :player_1, :player_2
 
-  def initialize(player_1 = "X", player_2 = "O", board = Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -20,7 +20,7 @@ attr_accessor :board, :player_1, :player_2
   ]
 
   def current_player
-    self.board.turn_count.even? ? player_1.token : player_2.token
+    self.board.turn_count.even? ? @player_1.token : @player_2.token
   end
 
   def over?
