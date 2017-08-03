@@ -45,9 +45,9 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    index = player.move
+    index = current_player.move(board)
     if board.valid_move?(index)
-      board.update(index, player)
+      board.update(index, current_player)
       board.display
     else
       turn
