@@ -51,6 +51,7 @@ class Game
       turn
     end
   end
+
   def play
     while over? == false
       turn
@@ -61,4 +62,43 @@ class Game
       puts "Cat's Game!"
     end
   end
+
+  def self.start
+    puts "Welcome!"
+    puts "How many players?"
+    puts "0, 1 or 2?"
+      player_count = gets.strip
+    puts "Who will start? X or O?"
+      token = gets.strip
+
+    if token == "X"
+      player_1_token = "X"
+      player_2_token = "O"
+    else
+      player_1_token = "O"
+      player_2_token = "X"
+    end
+    case player_count
+    when "0"
+      player_1 = Players::Computer.new(player_1_token)
+      player_2 = Players::Computer.new(player_2_token)
+    when "1"
+      player_1 = Players::Human.new(player_1_token)
+      player_2 = Players::Computer.new(player_2_token)
+    when "2"
+      player_1 = Players::Human.new(player_1_token)
+      player_2 = Players::Human.new(player_2_token)
+    end
+    game = Game.new(player_1, player_2)
+    game.play
+    
+    puts "Would you like to play again? Y or N"
+    again = gets.strip
+    if again == "Y"
+      Game.start
+    else
+      puts "Thanks, peace out!"
+    end
+  end
+
 end

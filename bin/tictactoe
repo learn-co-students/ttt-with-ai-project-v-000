@@ -2,5 +2,4 @@
 
 require_relative '../config/environment'
 
-game = Game.new
-puts game.current_player
+Game.start
