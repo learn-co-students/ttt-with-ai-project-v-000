@@ -1,5 +1,11 @@
 class Game
-  attr_accessor :board
+  attr_accessor :board, :player_1, :player_2
+
+  def initialize(player_1 = "X", player_2 = "O", board = Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
+  end
 
   WIN_COMBINATIONS = [
     [0,1,2], #top row
@@ -12,4 +18,7 @@ class Game
     [2,4,6]
   ]
 
+  def current_player
+    turn_count.even? ? player_1.token : player_2.token
+  end
 end
