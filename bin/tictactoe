@@ -17,6 +17,7 @@ puts "Welcome to Tic Tac Toe"
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
       game.play
 
+
 #--------------Player vs AI ----------------------
     elsif player_number == "1"
       puts "#{player_number} player it is !"
@@ -53,6 +54,7 @@ puts "Welcome to Tic Tac Toe"
   end
 
   number_players
+  puts "Do you want to play again?"
 
 # puts "Welcome to Tic Tac Toe! How many players - 0, 1, or 2?"
 # input = gets.strip
