@@ -38,7 +38,7 @@ module Players
       board.taken?(random_move) == false
         move = random_move
        
-      else board.turn_count >= 2 
+      else board.cells.token > 2 
         check_winner(board)
      
      end
