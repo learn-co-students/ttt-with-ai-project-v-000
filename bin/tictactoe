@@ -2,14 +2,4 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-#puts "What type of game would you like to play?"
-#puts "Type 'wargames' for 100 rounds of computer simulations."
-#puts "Type 'challenge' to play against the computer"
-  #if challenge, be sure to ask which player they want to be, with a default to player 1 if they do not specify
-#puts "Type 'duel' to play against a friend"
-
-
-Game.new.board.display
-
-Game.new.play
+SelectGame.new.select
