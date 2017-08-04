@@ -92,4 +92,70 @@ class Game
       end
     end
 
+    def call
+    puts "Welcome to Tic Tac Toe!"
+    start
+  end
+
+  def start
+    puts ""
+    puts "How many players - 0, 1, or 2?"
+    puts ""
+    input = gets.strip
+
+  #--------------AI vs AI ----------------------
+    if input== "0"
+      puts "Computer vs Computer eh? "
+      puts ""
+      puts "AI deathmatch initialize..."
+      puts ""
+      puts "FIGHT!"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+
+
+#--------------Player vs AI ----------------------
+    elsif input == "1"
+      puts "#{input} player it is!"
+      puts ""
+      puts "Do you want to go first and be X - "
+      puts "Y or N ?"
+      input = gets.strip.downcase
+      if input == "y"
+        puts "You got it - you will play first."
+        puts "Your token will be X"
+        puts "LET'S PLAY !"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+        game.play
+      elsif input == "n"
+        puts "You got it - you will play second."
+        puts "Your token will be O"
+        puts "LET'S PLAY !"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+        game.play
+      end
+
+#--------------Player vs Player ----------------------
+
+    elsif input == "2"
+      puts "#{input} players it is!"
+      puts "Ready?"
+      puts "FIGHT!"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    else
+      puts "Invalid selection - try again pal"
+      start
+    end
+    puts ""
+    puts "Do you want to play again? Y or N"
+    input = gets.strip.downcase
+    if input == "y"
+      start
+    else
+      puts ""
+      puts "Thank you for playing!"
+      exit
+    end
+  end
 end
