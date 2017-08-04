@@ -15,12 +15,9 @@ module Players
       
       move =nil
 
-      if board.turn_count >= 2 
-        check_winner(board)
-      
 
     # if the middle of the board is empty take it
-      elsif board.taken?("5") == false 
+      if board.taken?("5") == false 
         move="5"
 
 
@@ -33,16 +30,17 @@ module Players
         move = "7"
       elsif board.taken?("9") != true
         move = "9"
-
-        
       
-      else
+      elsif
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       random_move = valid_moves.sample
 
       board.taken?(random_move) == false
         move = random_move
        
+      else board.turn_count >= 2 
+        check_winner(board)
+     
      end
    end
 
