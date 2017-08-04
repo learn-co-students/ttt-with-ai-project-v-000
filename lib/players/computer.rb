@@ -3,55 +3,42 @@ module Players
   class Computer < Player
 
     def move(board)
-      if board.valid_move?("5")
-        "5"
-      elsif about_to_win?(board) != nil
-        "#{about_to_win?(board) + 1}"
-      elsif opponent_to_win?(board) != nil
-        "#{opponent_to_win?(board) + 1}"
-      elsif try_to_win?(board) != nil
-        "#{try_to_win?(board) + 1}"
-      else
-        "#{(0..8).detect {|spot| spot.even? && board.valid_move?(spot)} + 1}"
-      end
-
-    end
-
-    def about_to_win?(board)
-      winner = nil
-      Game::WIN_COMBINATIONS.detect do |combo|
-        xoxocombo = combo.map {|i| board.cells[i]}
-        count = 0
-        xoxocombo.each {|cell| count += 1 if cell == @token}
-        winner = combo.detect {|index| board.valid_move?(index)} if count == 2
-        break if winner != nil
-      end
-      winner
-    end
-
-    def opponent_to_win?(board)
-      winner = nil
       @token == "O" ? opponent_token = "X" : opponent_token = "O"
+
+      if board.valid_move?("5")
+        move_idx = 4
+      elsif next_move(board, @token, 2) != nil
+        move_idx = next_move(board, @token, 2)
+      elsif next_move(board, opponent_token, 2) != nil
+        move_idx = next_move(board, opponent_token, 2)
+      elsif next_move(board, @token, 1, true) != nil
+        move_idx = next_move(board, @token, 1, true)
+      elsif next_move(board, @token, 1) != nil
+        move_idx = next_move(board, @token, 1)
+      elsif next_move(board, @token, 0) != nil
+        move_idx = (0..8).detect {|spot| spot.even? && board.valid_move?("#{spot + 1}")}
+      else
+        move_idx = (0..8).detect {|spot| board.valid_move?("#{spot + 1}")}
+      end
+      "#{move_idx + 1}"
+    end
+
+    def next_move(board, check_token, check_token_count, check_corner = false)
+      winner = nil
       Game::WIN_COMBINATIONS.detect do |combo|
         xoxocombo = combo.map {|i| board.cells[i]}
-        count = 0
-        xoxocombo.each {|cell| count += 1 if cell == opponent_token}
-        winner = combo.detect {|index| board.valid_move?(index)} if count == 2
-        break if winner != nil
+        count = xoxocombo.count{|cell| cell == check_token}
+        if count == check_token_count && count_valid_moves(board, combo) == combo.size - count
+          winner = combo.detect do |index|
+            board.valid_move?("#{index + 1}") && (check_corner == true ? index.even? : true)
+          end
+        end
       end
       winner
     end
 
-    def try_to_win?(board)
-      winner = nil
-      Game::WIN_COMBINATIONS.detect do |combo|
-        xoxocombo = combo.map {|i| board.cells[i]}
-        count = 0
-        xoxocombo.each {|cell| count += 1 if cell == @token}
-        winner = combo.detect {|index| board.valid_move?(index)} if count == 1
-        break if winner != nil
-      end
-      winner
+    def count_valid_moves(board, combo)
+      combo.count {|cell| board.valid_move?("#{cell + 1}")}
     end
 
   end

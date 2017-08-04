@@ -1,5 +1,5 @@
 class Game
-
+  @@wins = 0
   attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
@@ -57,6 +57,7 @@ class Game
       turn
     end
     if won?
+      @@wins += 1
       puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
@@ -66,10 +67,10 @@ class Game
   def self.start
     puts "Welcome!"
     puts "How many players?"
-    puts "0, 1 or 2?"
-      player_count = gets.strip
+    puts "0, 1, 2, or wargames?"
+      player_count = gets.strip.downcase
     puts "Who will start? X or O?"
-      token = gets.strip
+      token = gets.strip.upcase
 
     if token == "X"
       player_1_token = "X"
@@ -88,13 +89,19 @@ class Game
     when "2"
       player_1 = Players::Human.new(player_1_token)
       player_2 = Players::Human.new(player_2_token)
+    when "wargames"
+      player_1 = Players::Computer.new(player_1_token)
+      player_2 = Players::Computer.new(player_2_token)
+      100.times {Game.new(player_1, player_2).play}
+      puts "The game has been won #{@@wins} time(s)!"
+      return
     end
     game = Game.new(player_1, player_2)
     game.play
-    
+
     puts "Would you like to play again? Y or N"
     again = gets.strip
-    if again == "Y"
+    if again.downcase == "y"
       Game.start
     else
       puts "Thanks, peace out!"
