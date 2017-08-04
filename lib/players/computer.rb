@@ -19,17 +19,17 @@ module Players
       if board.taken?("5") == false 
         move="5"
 
-      elsif game.turn_count == 1 && board.taken?("5")
+      elsif board.turn_count == 1 && board.taken?("5")
         move = "1"
 
     #2nd move hit the corners 
-      elsif game.turn_count == 1 && board.taken?("1") != true
+      elsif board.turn_count == 1 && board.taken?("1") != true
         move = "1"
-      elsif game.turn_count == 1 && board.taken?("3") != true
+      elsif board.turn_count == 1 && board.taken?("3") != true
         move = "3" 
-      elsif game.turn_count == 1 && board.taken?("7") != true
+      elsif board.turn_count == 1 && board.taken?("7") != true
         move = "7"
-      elsif game.turn_count == 1 && board.taken?("9") != true
+      elsif board.turn_count == 1 && board.taken?("9") != true
         move = "9"
 
       #don't fall for the corner trick
