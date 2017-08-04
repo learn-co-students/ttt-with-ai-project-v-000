@@ -62,54 +62,57 @@ class Game
   end
 
   def call
-    puts "Welcome to Tic Tac Toe"
+    puts "Welcome to Tic Tac Toe!"
     start
   end
 
   def start
     puts ""
     puts "How many players - 0, 1, or 2?"
-    player_number = gets.strip!
+    puts ""
+    input = gets.strip
 
   #--------------AI vs AI ----------------------
-    if player_number == "0"
+    if input== "0"
       puts "Computer vs Computer eh? "
+      puts ""
       puts "AI deathmatch initialize..."
+      puts ""
       puts "FIGHT!"
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
       game.play
 
 
 #--------------Player vs AI ----------------------
-    elsif player_number == "1"
-      puts "#{player_number} player it is !"
+    elsif input == "1"
+      puts "#{input} player it is!"
+      puts ""
       puts "Do you want to go first and be X - "
       puts "Y or N ?"
-      player_first = gets.chomp
-      player_first == "y" || player_first =="Y"
-      puts "You got it - you will play first."
-      puts "Your token will be X"
-      puts "LET'S PLAY ! "
-      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-      game.play
-    elsif player_first == "n" || player_first =="N"
-      puts "You got it - you will play second."
-      puts "Your token will be O"
-      puts "Your confidence is admirable ?"
-      puts "LET'S PLAY ! "
-      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
-      game.play
+      input = gets.strip.downcase
+      if input == "y"
+        puts "You got it - you will play first."
+        puts "Your token will be X"
+        puts "LET'S PLAY !"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+        game.play
+      elsif input == "n"
+        puts "You got it - you will play second."
+        puts "Your token will be O"
+        puts "LET'S PLAY !"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+        game.play
+      end
 
 #--------------Player vs Player ----------------------
 
-    elsif player_number == "2"
-      puts "#{player_number} players it is !"
-      puts "Ready ? "
+    elsif input == "2"
+      puts "#{input} players it is!"
+      puts "Ready?"
       puts "FIGHT!"
       game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
       game.play
-
-     else
+    else
       puts "Invalid selection - try again pal"
       start
     end
@@ -124,6 +127,4 @@ class Game
       exit
     end
   end
-
-
 end
