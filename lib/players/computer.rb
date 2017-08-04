@@ -14,10 +14,13 @@ module Players
     def move(board)
       
       move =nil
+
+      if board.turn_count >= 2 
+        check_winner(board)
       
 
     # if the middle of the board is empty take it
-      if board.taken?("5") == false 
+      elsif board.taken?("5") == false 
         move="5"
 
 
@@ -31,14 +34,14 @@ module Players
       elsif board.taken?("9") != true
         move = "9"
 
-      check_winner(board)  
+        
       
-      # else
-      # valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      # random_move = valid_moves.sample
+      else
+      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      random_move = valid_moves.sample
 
-      # board.taken?(random_move) == false
-      #   move = random_move
+      board.taken?(random_move) == false
+        move = random_move
        
      end
    end
@@ -75,19 +78,20 @@ module Players
       elsif placement_1 != token && placement_1 != " " && placement_2 != token && placement_2 != " " && placement_3 == " " 
         move_int = win_combos[2]+1
         move = move_int.to_s
-        move 
+      
       elsif placement_1 != token && placement_1 != " " && placement_3 != token && placement_3 != " " && placement_2 == " " 
         move_int = win_combos[2]+1
         move = move_int.to_s
-        move 
+         
       elsif placement_2 != token && placement_2 != " " && placement_3 != token && placement_3 != " " && placement_1 == " " 
         move_int = win_combos[2]+1
         move = move_int.to_s 
-        move 
+        
       else
         move(board) 
         end
       end
+
     end
     
       
