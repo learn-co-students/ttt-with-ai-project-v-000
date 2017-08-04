@@ -6,48 +6,55 @@ require_relative '../config/environment'
   puts "Welcome to Tic Tac Toe"
 
   def number_players
-  puts "How many players - 0, 1, or 2 ?"
-  player_number = gets.chomp
+    puts "How many players - 0, 1, or 2 ?"
+    player_number = gets.strip!
+    
+
+  #--------------AI vs AI ----------------------
     if player_number == "0" 
       puts "Computer vs Computer eh? "
       puts "AI deathmatch initialize..."
       puts "FIGHT!"
-      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-      player_1.game = game
-      player_2.game = game
-      player_1.board = board
-      player_2.board = board
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
       game.play
+     
+#--------------Player vs AI ----------------------
     elsif player_number == "1" 
       puts "#{player_number} player it is !"
-    elsif player_number == "2" 
-      puts "#{player_number} players it is !"
-    else 
-      puts "Invalid selection - try again pal"
-      number_players
-    end
-  end
-  
-  def go_first
-  puts "Do you want to go first and be X - "
-  puts "Y or N ?"
-  player_first = gets.chomp
-    if player_first == "y" || player_first =="Y"
+      puts "Do you want to go first and be X - "
+      puts "Y or N ?"
+      player_first = gets.chomp
+      player_first == "y" || player_first =="Y"
       puts "You got it - you will play first."
       puts "Your token will be X"
-      puts "LET'S PLAY ! "
+      puts "LET'S PLAY ! " 
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
     elsif player_first == "n" || player_first =="N"
       puts "You got it - you will play second."
       puts "Your token will be O"
       puts "Your confidence is admirable ?"
       puts "LET'S PLAY ! "
-    else 
-      puts "Oooops ! Enter y for Yes and n for No - try again please"
-      go_first
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+      game.play 
+
+#--------------Player vs Player ----------------------    
+
+    elsif player_number == "2" 
+      puts "#{player_number} players it is !"
+      puts "Ready ? "
+      puts "FIGHT!"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      game.play 
+
+     else puts "Invalid selection - try again pal"
+      number_players 
+    
     end
+
   end
 
   number_players
-  go_first
-
+ 
+  
 

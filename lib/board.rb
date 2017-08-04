@@ -32,7 +32,6 @@ class Board
   def position(input)
     n = input.to_i - 1
     self.cells[n]
-    
   end
 
   def full?
@@ -57,7 +56,7 @@ class Board
 
   def update(move, player)
     position = input_to_index(move)
-    if self.cells[position] == " "  && position.between?(0,8)  
+    if self.valid_move?(move) && position.between?(0,8)  
       self.cells[position] = player.token
     end
   end

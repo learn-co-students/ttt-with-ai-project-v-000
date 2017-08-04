@@ -34,7 +34,7 @@ class Game
     end
 
     def current_player
-      turn_count % 2 == 0 ? self.player_1 : self.player_2
+      turn_count.even? ? self.player_1 : self.player_2
     end
 
     def won?
@@ -71,14 +71,15 @@ class Game
     end
 
     def turn
+      board.display
       current_move = current_player.move(self.board)
       if self.board.valid_move?(current_move) == true
         self.board.update(current_move, current_player)
-      else self.board.valid_move?(current_move) == false
+      else 
         turn
       end            
     end
-      
+
     def play
       while over? != true
         turn
