@@ -93,7 +93,7 @@ class Game
       if input == "y"
         puts "You got it - you will play first."
         puts "Your token will be X"
-        puts "LET'S PLAY !"
+        puts "LET'S PLAY!"
         game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
         game.play
       elsif input == "n"
