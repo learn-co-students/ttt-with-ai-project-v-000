@@ -99,87 +99,87 @@ module Players
           move = "5"  
 
 
-      #check block  
-      elsif 
-        board.cells[1] != token  && board.cells[2] != token && board.cells[1] != " "  && board.cells[2] != " " && board.taken?("3") == false
-          move = "3"
+      # #check block  
+      # elsif 
+      #   board.cells[1] != token  && board.cells[2] != token && board.cells[1] != " "  && board.cells[2] != " " && board.taken?("3") == false
+      #     move = "3"
 
-      elsif
-        board.cells[3] != token  && board.cells[2] != token && board.cells[3] != " "  && board.cells[2] != " " && board.taken?("1") == false
-          move = "1" 
-      elsif
-        board.cells[3] != token  && board.cells[1] != token && board.cells[3] != " "  && board.cells[1] != " " && board.taken?("2") == false
-          move = "2" 
+      # elsif
+      #   board.cells[3] != token  && board.cells[2] != token && board.cells[3] != " "  && board.cells[2] != " " && board.taken?("1") == false
+      #     move = "1" 
+      # elsif
+      #   board.cells[3] != token  && board.cells[1] != token && board.cells[3] != " "  && board.cells[1] != " " && board.taken?("2") == false
+      #     move = "2" 
       
-      elsif
-        board.cells[4] == token  && board.cells[5] == token && board.cells[4] != " "  && board.cells[5] != " " && board.taken?("6") == false
-          move = "6"
-      elsif
-        board.cells[5] == token  && board.cells[6] == token && board.cells[5] != " "  && board.cells[6] != " " && board.taken?("4") == false
-          move = "4" 
-      elsif
-       board.cells[4] == token  && board.cells[6] == token && board.cells[4] != " "  && board.cells[6] != " " && board.taken?("5") == false
-          move = "5" 
+      # elsif
+      #   board.cells[4] == token  && board.cells[5] == token && board.cells[4] != " "  && board.cells[5] != " " && board.taken?("6") == false
+      #     move = "6"
+      # elsif
+      #   board.cells[5] == token  && board.cells[6] == token && board.cells[5] != " "  && board.cells[6] != " " && board.taken?("4") == false
+      #     move = "4" 
+      # elsif
+      #  board.cells[4] == token  && board.cells[6] == token && board.cells[4] != " "  && board.cells[6] != " " && board.taken?("5") == false
+      #     move = "5" 
 
-      elsif
-        board.cells[7] == token  && board.cells[8] == token && board.cells[7] != " "  && board.cells[8] != " " && board.taken?("9") == false
-          move = "9"
-      elsif
-        board.cells[8] == token  && board.cells[9] == token && board.cells[8] != " "  && board.cells[9] != " " && board.taken?("7") == false
-          move = "7" 
-      elsif
-        board.cells[7] == token  && board.cells[9] == token && board.cells[7] != " "  && board.cells[9] != " " && board.taken?("8") == false
-          move = "8"  
+      # elsif
+      #   board.cells[7] == token  && board.cells[8] == token && board.cells[7] != " "  && board.cells[8] != " " && board.taken?("9") == false
+      #     move = "9"
+      # elsif
+      #   board.cells[8] == token  && board.cells[9] == token && board.cells[8] != " "  && board.cells[9] != " " && board.taken?("7") == false
+      #     move = "7" 
+      # elsif
+      #   board.cells[7] == token  && board.cells[9] == token && board.cells[7] != " "  && board.cells[9] != " " && board.taken?("8") == false
+      #     move = "8"  
 
-      elsif
-        board.cells[1] == token  && board.cells[4] == token && board.cells[1] != " "  && board.cells[4] != " " && board.taken?("7") == false
-          move = "7"
-      elsif
-        board.cells[7] == token  && board.cells[4] == token && board.cells[7] != " "  && board.cells[4] != " " && board.taken?("1") == false 
-          move = "1" 
-      elsif
-        board.cells[1] == token  && board.cells[7] == token && board.cells[1] != " "  && board.cells[7] != " " && board.taken?("4") == false
-          move = "4"
+      # elsif
+      #   board.cells[1] == token  && board.cells[4] == token && board.cells[1] != " "  && board.cells[4] != " " && board.taken?("7") == false
+      #     move = "7"
+      # elsif
+      #   board.cells[7] == token  && board.cells[4] == token && board.cells[7] != " "  && board.cells[4] != " " && board.taken?("1") == false 
+      #     move = "1" 
+      # elsif
+      #   board.cells[1] == token  && board.cells[7] == token && board.cells[1] != " "  && board.cells[7] != " " && board.taken?("4") == false
+      #     move = "4"
 
-      elsif
-       board.cells[2] == token  && board.cells[5] == token && board.cells[2] != " "  && board.cells[5] != " " && board.taken?("8") == false
-          move = "8"
-      elsif
-        board.cells[5] == token  && board.cells[8] == token && board.cells[5] != " "  && board.cells[8] != " " && board.taken?("2") == false
-          move = "2" 
-      elsif
-        board.cells[2] == token  && board.cells[8] == token && board.cells[2] != " "  && board.cells[8] != " " && board.taken?("5") == false
-          move = "5"
+      # elsif
+      #  board.cells[2] == token  && board.cells[5] == token && board.cells[2] != " "  && board.cells[5] != " " && board.taken?("8") == false
+      #     move = "8"
+      # elsif
+      #   board.cells[5] == token  && board.cells[8] == token && board.cells[5] != " "  && board.cells[8] != " " && board.taken?("2") == false
+      #     move = "2" 
+      # elsif
+      #   board.cells[2] == token  && board.cells[8] == token && board.cells[2] != " "  && board.cells[8] != " " && board.taken?("5") == false
+      #     move = "5"
 
-      elsif
-        board.cells[3] == token  && board.cells[6] == token && board.cells[3] != " "  && board.cells[6] != " " && board.taken?("9") == false
-          move = "9"
-      elsif
-        board.cells[6] == token  && board.cells[9] == token && board.cells[6] != " "  && board.cells[9] != " " && board.taken?("3") == false
-          move = "3" 
-      elsif
-        board.cells[3] == token  && board.cells[9] == token && board.cells[3] != " "  && board.cells[9] != " " && board.taken?("6") == false
-          move = "6"
+      # elsif
+      #   board.cells[3] == token  && board.cells[6] == token && board.cells[3] != " "  && board.cells[6] != " " && board.taken?("9") == false
+      #     move = "9"
+      # elsif
+      #   board.cells[6] == token  && board.cells[9] == token && board.cells[6] != " "  && board.cells[9] != " " && board.taken?("3") == false
+      #     move = "3" 
+      # elsif
+      #   board.cells[3] == token  && board.cells[9] == token && board.cells[3] != " "  && board.cells[9] != " " && board.taken?("6") == false
+      #     move = "6"
 
-      elsif
-        board.cells[1] == token  && board.cells[5] == token && board.cells[1] != " "  && board.cells[5] != " " && board.taken?("9") == false
-          move = "9"
-      elsif
-        board.cells[5] == token  && board.cells[9] == token && board.cells[5] != " "  && board.cells[9] != " " && board.taken?("1") == false
-          move = "1" 
-      elsif
-        board.cells[1] == token  && board.cells[9] == token && board.cells[1] != " "  && board.cells[9] != " " && board.taken?("5") == false
-          move = "5"  
+      # elsif
+      #   board.cells[1] == token  && board.cells[5] == token && board.cells[1] != " "  && board.cells[5] != " " && board.taken?("9") == false
+      #     move = "9"
+      # elsif
+      #   board.cells[5] == token  && board.cells[9] == token && board.cells[5] != " "  && board.cells[9] != " " && board.taken?("1") == false
+      #     move = "1" 
+      # elsif
+      #   board.cells[1] == token  && board.cells[9] == token && board.cells[1] != " "  && board.cells[9] != " " && board.taken?("5") == false
+      #     move = "5"  
 
-      elsif
-        board.cells[3] == token  && board.cells[5] == token && board.cells[3] != " "  && board.cells[5] != " " && board.taken?("7") == false
-          move = "7"
-      elsif
-        board.cells[5] == token  && board.cells[7] == token && board.cells[5] != " "  && board.cells[7] != " " && board.taken?("3") == false 
-          move = "3" 
-      elsif
-        board.cells[3] == token  && board.cells[7] == token && board.cells[3] != " "  && board.cells[7] != " " && board.taken?("5") == false
-          move = "5"  
+      # elsif
+      #   board.cells[3] == token  && board.cells[5] == token && board.cells[3] != " "  && board.cells[5] != " " && board.taken?("7") == false
+      #     move = "7"
+      # elsif
+      #   board.cells[5] == token  && board.cells[7] == token && board.cells[5] != " "  && board.cells[7] != " " && board.taken?("3") == false 
+      #     move = "3" 
+      # elsif
+      #   board.cells[3] == token  && board.cells[7] == token && board.cells[3] != " "  && board.cells[7] != " " && board.taken?("5") == false
+      #     move = "5"  
 
     # if the middle of the board is empty take it
       elsif board.taken?("5") == false 
