@@ -15,9 +15,9 @@ module Players
       
       move =nil
 
-      board.cells.each{|token_check| token_check == token}.length
-      if token_check.length >= 2 
+      if tboard.cells.count? >= 2 
         check_winner(board)
+        binding.pry
 
     # if the middle of the board is empty take it
       elsif board.taken?("5") == false 
@@ -34,12 +34,7 @@ module Players
       elsif board.taken?("9") != true
         move = "9"
       
-      else
-      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      random_move = valid_moves.sample
-
-      board.taken?(random_move) == false
-        move = random_move
+      
        
      
      
