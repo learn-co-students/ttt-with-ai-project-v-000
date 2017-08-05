@@ -3,19 +3,16 @@ require "pry"
 module Players
   
   class Computer < Player
-    attr_reader :token
+    attr_reader :token, :board
 
     def initialize(token ="X")
       @token = token
     end
 
-
     
     def move(board)
       move =nil
-
-      binding.pry
-       
+      
       #check winner
   
       if 
@@ -62,6 +59,7 @@ module Players
         board.taken?("1") == true  && board.taken?("7") == true  && board.taken?("4") == false
           move = "4"
 
+      
       elsif
        board.taken?("2") == true  && board.taken?("5") == true  && board.taken?("8") == false
           move = "8"
@@ -72,6 +70,7 @@ module Players
         board.taken?("2") == true  && board.taken?("8") == true  && board.taken?("5") == false
           move = "5"
 
+      
       elsif
         board.taken?("3") == true  && board.taken?("6") == true  && board.taken?("9") == false
           move = "9"
@@ -82,6 +81,7 @@ module Players
         board.taken?("3") == true  && board.taken?("9") == true  && board.taken?("6") == false
           move = "6"
 
+      
       elsif
         board.taken?("1") == true  && board.taken?("5") == true  && board.taken?("9") == false
           move = "9"
@@ -92,6 +92,7 @@ module Players
         board.taken?("1") == true  && board.taken?("9") == true  && board.taken?("5") == false
           move = "5"  
 
+      
       elsif
         board.taken?("3") == true  && board.taken?("5") == true  && board.taken?("7") == false
           move = "7"
@@ -102,9 +103,6 @@ module Players
         board.taken?("3") == true  && board.taken?("7") == true  && board.taken?("5") == false
           move = "5"  
 
-
-       
-      
 
     # if the middle of the board is empty take it
       elsif board.taken?("5") == false 
@@ -120,26 +118,15 @@ module Players
         move = "7"
       elsif board.taken?("9") != true
         move = "9"
-
       
       else 
         valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         random_move = valid_moves.sample
-
         board.taken?(random_move) == false
           move = random_move
         
 
-
-
-
-        end 
-  
-
       end
-
-       
-
-        
+    end
   end
 end
