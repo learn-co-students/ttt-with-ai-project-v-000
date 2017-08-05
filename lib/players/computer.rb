@@ -14,7 +14,7 @@ module Players
     def move(board)
       move =nil
 
-      
+      binding.pry
        
       #check winner
   
