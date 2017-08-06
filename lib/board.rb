@@ -49,4 +49,16 @@ class Board
 
   end
 
+  def valid_move?(input)
+    binding.pry
+    input.to_i.between?(1,9) && !taken?(input)
+    # if input < "0" || input > "8"
+    #   false
+    # elsif taken?(input) == false
+    #   true
+    # else
+    #   false
+    # end
+  end
+
 end
