@@ -1,0 +1,5 @@
+#=> The AI will first try & occupy the middle (5) space.
+#=> Next the computer will go check & see if the opponent has two spaces in any WIN_COMBINATIONS and occupy the 3rd empty space.
+#=> If the opponent does not occupy any two of the same WIN_COMBINATIONS spaces, the AI will occupy a random corner.
+
+#=> The AI is not perfect and can be beaten with some practice.
