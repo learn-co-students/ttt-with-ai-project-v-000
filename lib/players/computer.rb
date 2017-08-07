@@ -30,12 +30,12 @@ module Players
       "5"
 
 
-      elsif kill_zone != nil
-        target = kill_zone.detect do |position|
-          if board.cells[position] == " "
-            position
-          end
+    elsif kill_zone != nil
+      target = kill_zone.detect do |position|
+        if board.cells[position] == " "
+          position
         end
+      end
 
       answer = target + 1
       answer.to_s
@@ -53,8 +53,10 @@ module Players
         "6"
       elsif board.cells[1] == " "
         "2"
-      else board.cells[7] == " "
+      elsif board.cells[7] == " "
         "8"
+      else board.cells[0] == " "
+        "1"
       end
     end
   end
