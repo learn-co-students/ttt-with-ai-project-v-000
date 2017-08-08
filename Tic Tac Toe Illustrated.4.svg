@@ -1164,6 +1164,34 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="scale(0.6,0.6)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mstart-9-2-4"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path9092-8-8-232"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6,0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mstart-123"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path9092-341"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6,0.6)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -1173,8 +1201,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1190584"
-     inkscape:cx="539.30802"
-     inkscape:cy="401.69164"
+     inkscape:cx="575.51403"
+     inkscape:cy="434.22139"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1216,29 +1244,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-287.36218)">
-    <rect
-       style="fill:#b0e2f3;fill-opacity:1;fill-rule:nonzero;stroke:#00048b;stroke-width:0.83621609;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="rect4913-0"
-       width="89.2854"
-       height="15.373646"
-       x="186.24747"
-       y="698.53296"
-       ry="7.6868229" />
-    <text
-       xml:space="preserve"
-       style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
-       id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-8-4-6-1-2"
-       sodipodi:linespacing="125%"
-       inkscape:transform-center-x="3.9835006"
-       inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
-       inkscape:export-xdpi="340.93317"
-       inkscape:export-ydpi="340.93317"
-       x="203.29211"
-       y="707.08844"><tspan
-         style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000080;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-         id="tspan9196-2-7-2-3-9-9-7-8"><tspan
-   style="font-weight:normal;text-align:start;text-anchor:start;-inkscape-font-specification:Courier New"
-   id="tspan4909-6">current_player</tspan>.move(board)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:33.9387207px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
@@ -1750,7 +1755,7 @@
        sodipodi:rx="7.2909441"
        sodipodi:ry="7.2909441"
        d="m 540.88634,428.09055 a 7.2909441,7.2909441 0 1 1 -14.58189,0 7.2909441,7.2909441 0 1 1 14.58189,0 z"
-       transform="matrix(0.66897288,0,0,0.66897288,411.56354,600.26546)" />
+       transform="matrix(0.66897288,0,0,0.66897288,411.56354,572.26546)" />
     <path
        sodipodi:type="arc"
        style="fill:#b0e2f3;fill-opacity:1;fill-rule:nonzero;stroke:#000089;stroke-width:1.29999995;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -1760,10 +1765,10 @@
        sodipodi:rx="7.2909441"
        sodipodi:ry="7.2909441"
        d="m 540.88634,428.09055 a 7.2909441,7.2909441 0 1 1 -14.58189,0 7.2909441,7.2909441 0 1 1 14.58189,0 z"
-       transform="matrix(0.66897288,0,0,0.66897288,411.56359,552.09941)" />
+       transform="matrix(0.66897288,0,0,0.66897288,411.56359,524.09941)" />
     <path
        style="fill:#bdffaf;fill-opacity:1;stroke:none"
-       d="m 730.7273,560.30322 0,24.24298 c 0,0 62.8999,0 62.8999,0 l 0,-24.24298 z"
+       d="m 730.7273,544.30322 0,24.24298 c 0,0 62.8999,0 62.8999,0 l 0,-24.24298 z"
        id="path5035-2-3-2-2-7-4-8-8-8-1-7-3-1-2-2-1-3-9-9-6-5-5-6-6-2-31-4-3-7"
        inkscape:connector-curvature="0"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -1773,7 +1778,7 @@
        xml:space="preserve"
        style="font-size:7.53735113px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
        x="762.11469"
-       y="570.84717"
+       y="554.84717"
        id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-23-1-8-6"
        sodipodi:linespacing="125%"
        inkscape:transform-center-x="6.7736192"
@@ -1782,7 +1787,7 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="762.11469"
-         y="570.84717"
+         y="554.84717"
          style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
          id="tspan9196-2-3-1-7-1">class Player</tspan></text>
     <path
@@ -1894,6 +1899,14 @@
        sodipodi:nodetypes="ccccc" />
     <rect
        style="fill:#b0e2f3;fill-opacity:1;fill-rule:nonzero;stroke:#00048b;stroke-width:0.83621609;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4913-0"
+       width="89.2854"
+       height="15.373646"
+       x="278.34897"
+       y="455.24054"
+       ry="7.6868229" />
+    <rect
+       style="fill:#b0e2f3;fill-opacity:1;fill-rule:nonzero;stroke:#00048b;stroke-width:0.83621609;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect4913-9"
        width="75.567375"
        height="15.373646"
@@ -1981,21 +1994,26 @@
        d="m 202.45182,278.315 c 0,9.09784 -14.75051,16.47309 -32.94617,16.47309 -18.19567,0 -32.94618,-7.37525 -32.94618,-16.47309 0,-9.09783 14.75051,-16.47308 32.94618,-16.47308 18.19566,0 32.94617,7.37525 32.94617,16.47308 z"
        transform="matrix(0.2843012,0,0,0.40719279,169.56371,506.18751)" />
     <path
-       sodipodi:type="arc"
-       style="fill:#b0e2f3;fill-opacity:1;fill-rule:nonzero;stroke:#000089;stroke-width:1.29999995;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path5161-2-89"
-       sodipodi:cx="533.5954"
-       sodipodi:cy="428.09055"
-       sodipodi:rx="7.2909441"
-       sodipodi:ry="7.2909441"
-       d="m 540.88634,428.09055 a 7.2909441,7.2909441 0 1 1 -14.58189,0 7.2909441,7.2909441 0 1 1 14.58189,0 z"
-       transform="matrix(0.66897288,0,0,0.66897288,-68.098343,174.43591)" />
-    <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-6-76-6"
        d="m 172.87643,648.27828 c 0.17576,-67.77446 88.69452,-108.95724 122.21434,-203.0151"
        style="fill:none;stroke:#ae2d11;stroke-width:0.70950258;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart);marker-end:none"
        sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
+       id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-8-4-6-1-2"
+       sodipodi:linespacing="125%"
+       inkscape:transform-center-x="3.9835006"
+       inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
+       inkscape:export-xdpi="340.93317"
+       inkscape:export-ydpi="340.93317"
+       x="295.39362"
+       y="463.79602"><tspan
+         style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000080;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
+         id="tspan9196-2-7-2-3-9-9-7-8"><tspan
+   style="font-weight:normal;text-align:start;text-anchor:start;-inkscape-font-specification:Courier New"
+   id="tspan4909-6">current_player</tspan>.move(board)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
@@ -2276,7 +2294,7 @@
        sodipodi:cy="278.315"
        sodipodi:rx="32.946171"
        sodipodi:ry="16.473085"
-       d="m 202.45182,278.315 a 32.946171,16.473085 0 1 1 -65.89235,0 32.946171,16.473085 0 1 1 65.89235,0 z"
+       d="m 202.45182,278.315 c 0,9.09784 -14.75051,16.47309 -32.94617,16.47309 -18.19567,0 -32.94618,-7.37525 -32.94618,-16.47309 0,-9.09783 14.75051,-16.47308 32.94618,-16.47308 18.19566,0 32.94617,7.37525 32.94617,16.47308 z"
        transform="matrix(0.62310813,0,0,0.46351522,91.423265,704.25652)" />
     <text
        xml:space="preserve"
@@ -2390,8 +2408,8 @@
          id="tspan9196-2-7-2-5-0-4-3-1">@board</tspan></text>
     <path
        inkscape:connector-curvature="0"
-       id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-8-2-77-8"
-       d="m 95.238403,504.52779 c 113.604797,7.88737 99.617797,-34.46167 167.196667,-39.45337 63.22802,-4.67033 131.48122,-55.5208 131.20764,-18.8474 l -1.81439,243.22173 c -0.26123,35.01774 81.82776,3.71965 111.96769,-34.85656"
+       id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-8-2-77-8-2"
+       d="m 95.238938,504.37283 c 39.882112,0.2917 75.028842,-58.78401 152.452132,-79.66575 113.1032,-30.50491 146.2069,-33.30856 145.95218,3.36498 l -1.81439,261.22173 c -0.24322,35.01787 81.82776,3.71965 111.96769,-34.85656"
        style="fill:none;stroke:#38cb41;stroke-width:1.70280623;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart-9-2);marker-end:none"
        sodipodi:nodetypes="csssc" />
     <path
@@ -3184,27 +3202,27 @@
          sodipodi:nodetypes="cccccccc"
          inkscape:connector-curvature="0"
          id="path5029"
-         d="m 254.43541,852.78523 -20.15255,11.59698 5.18833,0 0,5.51977 29.92844,0 0,-5.51977 5.18832,0 z"
+         d="m 254.43541,852.78523 -20.15255,11.59698 5.18833,0 0,5.51977 c 11.05037,-6.68405 20.8795,-5.7693 29.92844,0 l 0,-5.51977 5.18832,0 z"
          style="fill:#fc00ff;fill-opacity:1;stroke:#530050;stroke-opacity:1" />
       <text
          inkscape:export-ydpi="340.93317"
          inkscape:export-xdpi="340.93317"
          inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
-         inkscape:transform-center-x="6.7149648"
+         inkscape:transform-center-x="3.7837463"
          sodipodi:linespacing="125%"
          id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-6-6-1-9"
-         y="866.41119"
-         x="254.44406"
-         style="font-size:10.50876236px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2b0000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
+         y="861.99915"
+         x="254.5731"
+         style="font-size:5.92147589px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2b0000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
          xml:space="preserve"><tspan
            id="tspan9196-2-7-2-5-0-0-3-2-86"
-           style="font-size:10.52411175px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#2b0028;fill-opacity:1;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-           y="866.41119"
-           x="254.44406"
+           style="font-size:5.93012524px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#2b0028;fill-opacity:1;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
+           y="861.99915"
+           x="254.5731"
            sodipodi:role="line">gets</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,12.47164,502.08807)"
+       transform="matrix(0.66897288,0,0,0.66897288,12.583059,502.83686)"
        id="g4810-5-0">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -3388,12 +3406,12 @@
        sodipodi:rx="32.946171"
        sodipodi:ry="16.473085"
        d="m 202.45182,278.315 a 32.946171,16.473085 0 1 1 -65.89235,0 32.946171,16.473085 0 1 1 65.89235,0 z"
-       transform="matrix(0.52852801,0,0,0.40719279,686.27099,344.73658)" />
+       transform="matrix(0.52852801,0,0,0.40719279,686.27099,328.73658)" />
     <text
        xml:space="preserve"
        style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
        x="775.59875"
-       y="458.64334"
+       y="442.64334"
        id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-3-9"
        sodipodi:linespacing="125%"
        inkscape:transform-center-x="3.9835111"
@@ -3403,7 +3421,7 @@
        inkscape:transform-center-y="2.3622548e-005"><tspan
          sodipodi:role="line"
          x="775.59875"
-         y="458.64334"
+         y="442.64334"
          style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New"
          id="tspan9196-2-7-2-5-8-4">#initialize</tspan></text>
     <path
@@ -3415,12 +3433,12 @@
        sodipodi:rx="32.946171"
        sodipodi:ry="16.473085"
        d="m 202.45182,278.315 a 32.946171,16.473085 0 1 1 -65.89235,0 32.946171,16.473085 0 1 1 65.89235,0 z"
-       transform="matrix(0.79740383,0,0,0.4522992,631.83656,309.48817)" />
+       transform="matrix(0.79740383,0,0,0.4522992,631.83656,293.48817)" />
     <text
        xml:space="preserve"
        style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
        x="768.62158"
-       y="436.3392"
+       y="420.3392"
        id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-98-6-0-8"
        sodipodi:linespacing="125%"
        inkscape:transform-center-x="3.9835143"
@@ -3430,7 +3448,7 @@
        inkscape:transform-center-y="-1.7011285e-005"><tspan
          sodipodi:role="line"
          x="768.62158"
-         y="436.3392"
+         y="420.3392"
          style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New"
          id="tspan9196-2-7-2-5-0-4-3-9-2">#taken?(position)</tspan></text>
     <path
@@ -3442,12 +3460,12 @@
        sodipodi:rx="32.946171"
        sodipodi:ry="16.473085"
        d="m 202.45182,278.315 a 32.946171,16.473085 0 1 1 -65.89235,0 32.946171,16.473085 0 1 1 65.89235,0 z"
-       transform="matrix(0.79740383,0,0,0.4522992,631.83659,354.53715)" />
+       transform="matrix(0.79740383,0,0,0.4522992,631.83659,338.53715)" />
     <text
        xml:space="preserve"
        style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
        x="768.62158"
-       y="481.38818"
+       y="465.38818"
        id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-98-6-0-8-5"
        sodipodi:linespacing="125%"
        inkscape:transform-center-x="3.9835143"
@@ -3457,7 +3475,7 @@
        inkscape:transform-center-y="-3.1029997e-005"><tspan
          sodipodi:role="line"
          x="768.62158"
-         y="481.38818"
+         y="465.38818"
          style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New"
          id="tspan9196-2-7-2-5-0-4-3-9-2-5">#taken?(position)</tspan></text>
     <rect
@@ -3466,14 +3484,14 @@
        width="47.679691"
        height="18.385414"
        x="745.59283"
-       y="498.84143"
+       y="482.84143"
        ry="3.4605589"
        rx="3.4605594" />
     <text
        xml:space="preserve"
        style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
        x="769.95862"
-       y="509.17151"
+       y="493.17151"
        id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-98-6-8-5-7"
        sodipodi:linespacing="125%"
        inkscape:transform-center-x="3.9835337"
@@ -3483,7 +3501,7 @@
        inkscape:transform-center-y="-2.5545473e-005"><tspan
          sodipodi:role="line"
          x="769.95862"
-         y="509.17151"
+         y="493.17151"
          style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
          id="tspan9196-2-7-2-5-0-4-3-1-0-1">WIN_COMBINATIONS</tspan></text>
     <rect
@@ -3492,14 +3510,14 @@
        width="32.773643"
        height="18.385414"
        x="760.49884"
-       y="527.22095"
+       y="511.22095"
        ry="3.4605589"
        rx="3.4605589" />
     <text
        xml:space="preserve"
        style="font-size:4.43268013px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
        x="776.05652"
-       y="537.28003"
+       y="521.28003"
        id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-98-6-8-52"
        sodipodi:linespacing="125%"
        inkscape:transform-center-x="3.9835289"
@@ -3509,18 +3527,18 @@
        inkscape:transform-center-y="1.1910581e-005"><tspan
          sodipodi:role="line"
          x="776.05652"
-         y="537.28003"
+         y="521.28003"
          style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
          id="tspan9196-2-7-2-5-0-4-3-1-7">@board</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-8-2-5"
-       d="m 723.7,701.16439 c 20.16527,-2.67935 41.97448,-3.65474 69.16817,-0.86044"
+       d="m 723.7,677.16439 c 20.16527,-2.67935 41.97448,-3.65474 69.16817,-0.86044"
        style="fill:none;stroke:#8409ff;stroke-width:2.82507992;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0.51322752;stroke-dasharray:none;marker-start:url(#Arrow1Sstart);marker-mid:none;marker-end:none"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:#cfc8f0;fill-opacity:1;stroke:none"
-       d="m 717.88796,599.93543 0,20.74342 c 0,0 75.38448,0 75.38448,0 l 0,-20.74342 z"
+       d="m 717.88796,583.93543 0,20.74342 c 0,0 75.38448,0 75.38448,0 l 0,-20.74342 z"
        id="path5035-2-3-2-2-7-4-8-8-8-1-7-3-1-2-2-1-3-9-9-6-5-5-6-6-2-3-8"
        inkscape:connector-curvature="0"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3530,7 +3548,7 @@
        xml:space="preserve"
        style="font-size:7.53735113px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
        x="755.9082"
-       y="608.72961"
+       y="592.72961"
        id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-2-9"
        sodipodi:linespacing="125%"
        inkscape:transform-center-x="6.7735926"
@@ -3539,25 +3557,25 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="755.9082"
-         y="608.72961"
+         y="592.72961"
          style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
          id="tspan9196-2-2-2">module Players</tspan><tspan
          sodipodi:role="line"
          x="755.9082"
-         y="618.16504"
+         y="602.16504"
          style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New"
          id="tspan7551-7" /></text>
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-8-2-77-8-5-3"
-       d="m 721.16414,720.56196 c 23.80166,-4.27023 47.62974,-7.53835 71.66727,-2.84832"
+       d="m 721.16414,696.56196 c 23.80166,-4.27023 47.62974,-7.53835 71.66727,-2.84832"
        style="fill:none;stroke:#38cb41;stroke-width:1.73634219;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart-9-2);marker-end:none"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.1875"
-       y="437.332"
+       y="421.332"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3565,7 +3583,7 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.1875"
-         y="437.332"
+         y="421.332"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026">instance method</tspan></text>
     <rect
@@ -3574,7 +3592,7 @@
        width="75.567375"
        height="15.373646"
        x="717.24243"
-       y="762.38177"
+       y="734.38177"
        ry="7.6868229" />
     <text
        xml:space="preserve"
@@ -3586,7 +3604,7 @@
        inkscape:export-xdpi="340.93317"
        inkscape:export-ydpi="340.93317"
        x="762.95715"
-       y="771.12921"
+       y="743.12921"
        inkscape:transform-center-y="1.5719336e-005"><tspan
          style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000080;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
          id="tspan9196-2-7-2-3-9-9-7-0-4"><tspan
@@ -3595,11 +3613,11 @@
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-8-4-1"
-       d="m 711.98488,789.10673 c 8.34824,-12.65532 17.2296,-24.86578 30.99693,-32.99918"
+       d="m 711.98488,761.10673 c 8.34824,-12.65532 17.2296,-24.86578 30.99693,-32.99918"
        style="fill:none;stroke:#ae2d11;stroke-width:0.98518187;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart-9);marker-end:none"
        sodipodi:nodetypes="cc" />
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,537.53369,491.84532)"
+       transform="matrix(0.66897288,0,0,0.66897288,537.53369,463.84532)"
        id="g4810-8-3-9">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -3630,26 +3648,26 @@
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-9-4-0-8"
-       d="m 721.20561,682.80234 c 23.97642,-3.04667 47.8973,-5.17955 71.43482,-0.99707"
+       d="m 721.20561,658.80234 c 23.97642,-3.04667 47.8973,-5.17955 71.43482,-0.99707"
        style="fill:none;stroke:#ae2d11;stroke-width:0.70950252;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart-9);marker-end:none"
        sodipodi:nodetypes="cc" />
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-6-19-2-7-8"
-       d="m 720.10751,664.36723 c 23.38252,-2.59797 46.75135,-5.26835 71.43481,-0.99705"
+       d="m 720.10751,640.36723 c 23.38252,-2.59797 46.75135,-5.26835 71.43481,-0.99705"
        style="fill:none;stroke:#12770c;stroke-width:0.70950252;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart);marker-end:none"
        sodipodi:nodetypes="cc" />
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-6-19-2-7-2-5"
-       d="m 720.10751,645.63599 c 23.50447,-2.60293 47.00948,-5.20181 71.43481,-0.99705"
+       d="m 720.10751,621.63599 c 23.50447,-2.60293 47.00948,-5.20181 71.43481,-0.99705"
        style="fill:none;stroke:#e7d800;stroke-width:0.70950252;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart);marker-end:none"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="460.13693"
+       y="444.13693"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3657,14 +3675,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="460.13693"
+         y="444.13693"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3">initializing instance method</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="483.29681"
+       y="467.29681"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3672,14 +3690,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="483.29681"
+         y="467.29681"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2">class method (not used)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.13263"
-       y="509.67511"
+       y="493.67511"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3687,14 +3705,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.13263"
-         y="509.67511"
+         y="493.67511"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3">class constant or class variable </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.1875"
-       y="538.68164"
+       y="522.68164"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3702,14 +3720,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.1875"
-         y="538.68164"
+         y="522.68164"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1">instance variable</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.13263"
-       y="574.73413"
+       y="558.73413"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-1"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3717,14 +3735,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.13263"
-         y="574.73413"
+         y="558.73413"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-3">class</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.1875"
-       y="612.49335"
+       y="596.49335"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3732,14 +3750,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.1875"
-         y="612.49335"
+         y="596.49335"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7">module</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.1875"
-       y="646.11957"
+       y="622.11957"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3747,14 +3765,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.1875"
-         y="646.11957"
+         y="622.11957"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2">initialization path</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="702.66852"
+       y="678.66852"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3762,14 +3780,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="702.66852"
+         y="678.66852"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-9">inheritance path</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="720.43799"
+       y="696.43799"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3777,14 +3795,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="720.43799"
+         y="696.43799"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-9-6">class instance as variable path</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.13263"
-       y="770.93292"
+       y="742.93292"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8-5"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3792,43 +3810,43 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.13263"
-         y="770.93292"
+         y="742.93292"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-9-6-0">abstraction tracker to trace method</tspan><tspan
          sodipodi:role="line"
          x="805.13263"
-         y="779.57605"
+         y="751.57605"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan6286">          origin(s) in the program</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-8-2-77-8-5-3-0"
-       d="m 732.14539,847.67381 c 19.51989,-16.10605 43.3568,-2.67625 61.12712,-15.95227"
+       d="m 732.14539,819.67381 c 19.51989,-16.10605 43.3568,-2.67625 61.12712,-15.95227"
        style="fill:none;stroke:#38cb41;stroke-width:1.73634219;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart-9-2);marker-end:none"
        sodipodi:nodetypes="cc" />
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-6-19-2-7-8-0"
-       d="m 750.05693,861.18257 c 23.35337,-14.31766 13.61353,-35.39391 41.4705,-41.75536"
+       d="m 750.05693,833.18257 c 23.35337,-14.31766 13.61353,-35.39391 41.4705,-41.75536"
        style="fill:none;stroke:#12770c;stroke-width:0.70950258;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart);marker-end:none"
        sodipodi:nodetypes="cc" />
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-8-2-77-8-5-3-0-0"
-       d="m 732.14539,895.83985 c 19.51989,-16.10603 43.3568,-2.6763 61.12712,-15.95224"
+       d="m 732.14539,867.83985 c 19.51989,-16.10603 43.3568,-2.6763 61.12712,-15.95224"
        style="fill:none;stroke:#38cb41;stroke-width:1.73634219;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart-9-2);marker-end:none"
        sodipodi:nodetypes="cc" />
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-6-19-2-7-2-5-6"
-       d="m 750.05693,909.34855 c 22.29051,-13.80473 14.3694,-35.81508 41.4705,-41.75531"
+       d="m 750.05693,881.34855 c 22.29051,-13.80473 14.3694,-35.81508 41.4705,-41.75531"
        style="fill:none;stroke:#e7d800;stroke-width:0.70950258;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart);marker-end:none"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="869.94147"
+       y="841.94147"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8-5-0-7"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -3836,7 +3854,7 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="869.94147"
+         y="841.94147"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-9-6-0-0-8">initialization path</tspan></text>
     <rect
@@ -3884,7 +3902,7 @@
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:8.47885227px;text-anchor:start;fill:#6c5353;fill-opacity:1;font-family:Arial;-inkscape-font-specification:Arial Bold"
          id="tspan4026-2-3">TIC - TAC - TOE WITH AI ILLUSTRATED</tspan></text>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,543.01494,519.21009)"
+       transform="matrix(0.66897288,0,0,0.66897288,543.01494,491.21009)"
        id="g4810-2-3">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -3913,7 +3931,7 @@
            sodipodi:role="line">A</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,579.05508,519.21009)"
+       transform="matrix(0.66897288,0,0,0.66897288,579.05508,491.21009)"
        id="g4810-54-3-4-8">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -3942,7 +3960,7 @@
            sodipodi:role="line">C</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,597.07515,519.21009)"
+       transform="matrix(0.66897288,0,0,0.66897288,597.07515,491.21009)"
        id="g4810-54-3-4-8-8">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -3971,7 +3989,7 @@
            sodipodi:role="line">D</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,561.03501,519.21009)"
+       transform="matrix(0.66897288,0,0,0.66897288,561.03501,491.21009)"
        id="g4810-8-3-9-9">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -4003,7 +4021,7 @@
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="804.79083"
-       y="799.28394"
+       y="771.28394"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8-5-8"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4011,14 +4029,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="804.79083"
-         y="799.28394"
+         y="771.28394"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-9-6-0-2">abstraction markers</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="684.28076"
+       y="660.28076"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-8"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4026,14 +4044,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="684.28076"
+         y="660.28076"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-9">variable input path within same class</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="666.52698"
+       y="642.52698"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4041,14 +4059,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="666.52698"
+         y="642.52698"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3">variable input path inter-class</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.19592"
-       y="821.60535"
+       y="793.60535"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-0"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4056,14 +4074,14 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.19592"
-         y="821.60535"
+         y="793.60535"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-7">variable input path inter-class</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.19592"
-       y="835.60535"
+       y="807.60535"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-0-8"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4071,19 +4089,19 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.19592"
-         y="835.60535"
+         y="807.60535"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan6252">class instance that transfers</tspan><tspan
          sodipodi:role="line"
          x="805.19592"
-         y="844.24847"
+         y="816.24847"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan6256">         variable input into new class</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="881.94147"
+       y="853.94147"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-0-8-5"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4091,84 +4109,19 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="881.94147"
+         y="853.94147"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan6256-6">class instance that is set as an</tspan><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="890.58459"
+         y="862.58459"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan6284">       instance variable in another class</tspan></text>
-    <path
-       style="fill:#e9c6af;fill-opacity:1;stroke:none"
-       d="m 301.08722,853.58327 0,76.86026 c 0,0 357.98631,0 357.98631,0 l 0,-76.86026 z"
-       id="path5035-2-3-2-2-7-4-8-8-8-1-7-3-1-2-2-1-3-9-9-6-5-5-6-6-2-31-4-3-1"
-       inkscape:connector-curvature="0"
-       inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
-       inkscape:export-xdpi="340.93317"
-       inkscape:export-ydpi="340.93317" />
-    <text
-       xml:space="preserve"
-       style="font-size:12.32720661px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
-       x="438.30249"
-       y="869.9953"
-       id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-8-5"
-       sodipodi:linespacing="100%"
-       inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
-       inkscape:export-xdpi="340.93317"
-       inkscape:export-ydpi="340.93317"><tspan
-         sodipodi:role="line"
-         x="438.30249"
-         y="869.9953"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:4.20279646px;text-anchor:start;fill:#6c5353;fill-opacity:1;font-family:Arial;-inkscape-font-specification:Arial Bold"
-         id="tspan4026-2-8">AI LOGIC</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:7.53735113px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
-       x="310.27072"
-       y="883.76843"
-       id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-23-1-8-62"
-       sodipodi:linespacing="125%"
-       inkscape:transform-center-x="6.773602"
-       inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
-       inkscape:export-xdpi="340.93317"
-       inkscape:export-ydpi="340.93317"
-       inkscape:transform-center-y="3.3633367e-005"><tspan
-         sodipodi:role="line"
-         x="310.27072"
-         y="883.76843"
-         style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-         id="tspan6365"># The AI will 'cock-block' the opponent to prevent a win</tspan><tspan
-         sodipodi:role="line"
-         x="310.27072"
-         y="893.20386"
-         style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-         id="tspan6375"># the AI is not perfect and can be beaten</tspan><tspan
-         sodipodi:role="line"
-         x="310.27072"
-         y="902.63934"
-         style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-         id="tspan6371">    # first try &amp; occupy the middle space</tspan><tspan
-         sodipodi:role="line"
-         x="310.27072"
-         y="912.07477"
-         style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-         id="tspan6381">    # if opponent can't win on next turn, go to a corner</tspan><tspan
-         sodipodi:role="line"
-         x="310.27072"
-         y="921.51025"
-         style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-         id="tspan6383">    # if opponent can win on next move, go to the box opponent needs to win</tspan><tspan
-         sodipodi:role="line"
-         x="310.27072"
-         y="930.94568"
-         style="font-size:7.54836035px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
-         id="tspan6379">    </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:80.00000119%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="881.15112"
-       y="796.03979"
+       y="768.03979"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8-5-8-1"
        sodipodi:linespacing="80.000001%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4176,12 +4129,12 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="881.15112"
-         y="796.03979"
+         y="768.03979"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:80.00000119%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-9-6-0-2-7">same color =</tspan><tspan
          sodipodi:role="line"
          x="881.15112"
-         y="802.95435"
+         y="774.95435"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:80.00000119%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan3600">same pathway</tspan></text>
     <path
@@ -4220,7 +4173,7 @@
            sodipodi:role="line">A</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,-78.85048,274.17272)"
+       transform="matrix(0.66897288,0,0,0.66897288,-83.905493,275.59444)"
        id="g4810-2-1">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -4251,14 +4204,14 @@
     <path
        inkscape:connector-curvature="0"
        id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-8-2-77-8-5-3-2"
-       d="m 720.75349,738.16392 c 23.80166,-4.27023 47.62974,-7.53835 71.66727,-2.84832"
+       d="m 720.75349,714.16392 c 23.80166,-4.27023 47.62974,-7.53835 71.66727,-2.84832"
        style="fill:none;stroke:#38cb41;stroke-width:1.73599994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3.47199997, 1.73599999;stroke-dashoffset:0;marker-start:url(#Arrow2Mstart-9-2);marker-end:none"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
        x="805.45337"
-       y="738.43799"
+       y="714.43799"
        id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8-2"
        sodipodi:linespacing="100%"
        inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
@@ -4266,17 +4219,17 @@
        inkscape:export-ydpi="340.93317"><tspan
          sodipodi:role="line"
          x="805.45337"
-         y="738.43799"
+         y="714.43799"
          style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
          id="tspan4026-3-2-3-1-7-2-7-3-9-6-1">dashed = sometimes (not always) used</tspan></text>
     <path
        style="fill:#612020;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       d="m 881.31264,789.62258 c -0.52354,0.0496 -0.63633,0.76391 -0.86903,1.16792 -1.08418,2.58446 -1.85949,5.36257 -2.04551,8.21446 -0.10764,2.15741 -0.055,4.36457 0.46025,6.4525 0.15993,0.21898 0.50916,0.14566 0.72817,0.0775 0.16005,-0.1899 -0.0211,-0.53577 0,-0.77327 -0.68898,-4.71597 0.0702,-9.59827 1.83516,-13.92908 0.0842,-0.36178 0.39509,-0.67583 0.3511,-1.06093 -0.0831,-0.1782 -0.3146,-0.14287 -0.46388,-0.14917 z"
+       d="m 881.31264,761.62258 c -0.52354,0.0496 -0.63633,0.76391 -0.86903,1.16792 -1.08418,2.58446 -1.85949,5.36257 -2.04551,8.21446 -0.10764,2.15741 -0.055,4.36457 0.46025,6.4525 0.15993,0.21898 0.50916,0.14566 0.72817,0.0775 0.16005,-0.1899 -0.0211,-0.53577 0,-0.77327 -0.68898,-4.71597 0.0702,-9.59827 1.83516,-13.92908 0.0842,-0.36178 0.39509,-0.67583 0.3511,-1.06093 -0.0831,-0.1782 -0.3146,-0.14287 -0.46388,-0.14917 z"
        id="path5039"
        inkscape:connector-curvature="0" />
     <path
        style="fill:#612020;fill-opacity:1;fill-rule:nonzero;stroke:none"
-       d="m 934.90987,789.62656 c -0.33998,0.0351 -0.18672,0.54746 -0.17981,0.78767 0.45019,3.15009 0.30886,6.39204 -0.40281,9.48183 -0.38702,1.83135 -1.02545,3.58773 -1.73502,5.29486 -0.10061,0.16912 -0.0491,0.45552 0.18158,0.39781 0.28967,0.018 0.66522,0.0168 0.76221,-0.3595 1.40427,-3.0253 2.33601,-6.365 2.44306,-9.7787 0.0562,-1.90793 -0.0632,-3.84202 -0.51009,-5.68673 -0.14344,-0.13863 -0.37707,-0.13121 -0.55912,-0.13724 z"
+       d="m 934.90987,761.62656 c -0.33998,0.0351 -0.18672,0.54746 -0.17981,0.78767 0.45019,3.15009 0.30886,6.39204 -0.40281,9.48183 -0.38702,1.83135 -1.02545,3.58773 -1.73502,5.29486 -0.10061,0.16912 -0.0491,0.45552 0.18158,0.39781 0.28967,0.018 0.66522,0.0168 0.76221,-0.3595 1.40427,-3.0253 2.33601,-6.365 2.44306,-9.7787 0.0562,-1.90793 -0.0632,-3.84202 -0.51009,-5.68673 -0.14344,-0.13863 -0.37707,-0.13121 -0.55912,-0.13724 z"
        id="path5041"
        inkscape:connector-curvature="0" />
     <text
@@ -4295,14 +4248,8 @@
          y="605.61121"
          style="font-size:4.43915462px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#000000;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
          id="tspan9196-2-7-2-5-0-4-3-1-8-2">@player_2</tspan></text>
-    <path
-       inkscape:connector-curvature="0"
-       id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-6-7-9-66-53-55-3-1"
-       d="M 204.40798,828.26353 C 270.67211,700.02909 170.74889,727.69487 172.40613,660.27573"
-       style="fill:none;stroke:#ae2d11;stroke-width:0.70950258;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart);marker-end:none"
-       sodipodi:nodetypes="cc" />
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,30.918965,514.55181)"
+       transform="matrix(0.66897288,0,0,0.66897288,15.122051,563.83818)"
        id="g4810-54-3-4-8-8-8">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -4389,7 +4336,7 @@
            sodipodi:role="line">D</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,6.3757516,427.94979)"
+       transform="matrix(0.66897288,0,0,0.66897288,98.477241,184.65739)"
        id="g4810-54-3-4-8-8-8-0">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
@@ -4418,37 +4365,126 @@
            sodipodi:role="line">D</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,93.86744,195.24477)"
-       id="g4810-54-3-4-8-8-8-0-3">
-      <rect
-         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
-         ry="0"
-         rx="0"
-         y="487.65799"
-         x="-100.49505"
-         height="11.955306"
-         width="11.955306"
-         id="rect4776-3-4-3-8-1-7-6-4"
-         style="fill:#ff8517;fill-opacity:1;fill-rule:nonzero;stroke:#00048b;stroke-width:1.06058502;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+       id="g5071-1"
+       transform="matrix(0.66897288,0,0,0.66897288,171.3189,-75.481576)">
+      <path
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="path5029-7"
+         d="m 254.43541,852.78523 -20.15255,11.59698 5.18833,0 0,5.51977 c 10.43964,5.31348 20.06563,5.32661 29.92844,0 l 0,-5.51977 5.18832,0 z"
+         style="fill:#fc00ff;fill-opacity:1;stroke:#530050;stroke-opacity:1" />
       <text
          inkscape:export-ydpi="340.93317"
          inkscape:export-xdpi="340.93317"
          inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
-         sodipodi:linespacing="100%"
-         id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-9-12-1-8-0-9-4-1-4"
-         y="419.33426"
-         x="279.04443"
-         style="font-size:10.96224117px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;font-family:Sans"
+         inkscape:transform-center-x="6.7149648"
+         sodipodi:linespacing="125%"
+         id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-6-6-1-9-4"
+         y="866.41119"
+         x="254.44406"
+         style="font-size:10.50876236px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2b0000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
          xml:space="preserve"><tspan
-           id="tspan4026-8-3-1-0-6-8-2-3-6"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#000080;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
-           y="419.33426"
-           x="279.04443"
-           sodipodi:role="line">D</tspan></text>
+           id="tspan9196-2-7-2-5-0-0-3-2-86-0"
+           style="font-size:10.52411175px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#2b0028;fill-opacity:1;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
+           y="866.41119"
+           x="254.44406"
+           sodipodi:role="line">gets</tspan></text>
     </g>
     <g
-       transform="matrix(0.66897288,0,0,0.66897288,267.57585,413.34353)"
-       id="g4810-54-3-4-8-8-8-0-0">
+       id="g5071-1-2"
+       transform="matrix(0.66897288,0,0,0.66897288,555.49985,332.95577)">
+      <path
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="path5029-7-4"
+         d="m 254.43541,852.78523 -20.15255,11.59698 5.18833,0 0,5.51977 c 10.43964,5.31348 20.06563,5.32661 29.92844,0 l 0,-5.51977 5.18832,0 z"
+         style="fill:#fc00ff;fill-opacity:1;stroke:#530050;stroke-opacity:1" />
+      <text
+         inkscape:export-ydpi="340.93317"
+         inkscape:export-xdpi="340.93317"
+         inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
+         inkscape:transform-center-x="6.7149648"
+         sodipodi:linespacing="125%"
+         id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-6-6-1-9-4-5"
+         y="866.41119"
+         x="254.44406"
+         style="font-size:10.50876236px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2b0000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
+         xml:space="preserve"><tspan
+           id="tspan9196-2-7-2-5-0-0-3-2-86-0-5"
+           style="font-size:10.52411175px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#2b0028;fill-opacity:1;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
+           y="866.41119"
+           x="254.44406"
+           sodipodi:role="line">gets</tspan></text>
+    </g>
+    <g
+       id="g5071-17"
+       transform="matrix(0.66897288,0,0,0.66897288,686.72744,332.95577)">
+      <path
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="path5029-1"
+         d="m 254.43541,852.78523 -20.15255,11.59698 5.18833,0 0,5.51977 c 11.05037,-6.68405 20.8795,-5.7693 29.92844,0 l 0,-5.51977 5.18832,0 z"
+         style="fill:#fc00ff;fill-opacity:1;stroke:#530050;stroke-opacity:1" />
+      <text
+         inkscape:export-ydpi="340.93317"
+         inkscape:export-xdpi="340.93317"
+         inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
+         inkscape:transform-center-x="3.7837463"
+         sodipodi:linespacing="125%"
+         id="text3154-1-3-6-9-5-0-9-1-16-5-8-9-1-6-1-5-3-1-4-1-2-1-4-7-0-8-1-7-1-5-0-6-0-6-6-1-9-1"
+         y="861.99915"
+         x="254.5731"
+         style="font-size:5.92147589px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#2b0000;fill-opacity:1;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
+         xml:space="preserve"><tspan
+           id="tspan9196-2-7-2-5-0-0-3-2-86-5"
+           style="font-size:5.93012524px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#2b0028;fill-opacity:1;font-family:Courier New;-inkscape-font-specification:Courier New Bold"
+           y="861.99915"
+           x="254.5731"
+           sodipodi:role="line">gets</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
+       x="873.44043"
+       y="907.02667"
+       id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8-5-0-7-2"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
+       inkscape:export-xdpi="340.93317"
+       inkscape:export-ydpi="340.93317"><tspan
+         sodipodi:role="line"
+         x="873.44043"
+         y="907.02667"
+         style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
+         id="tspan4026-3-2-3-1-7-2-7-3-9-6-0-0-8-7">user input ('gets')</tspan><tspan
+         sodipodi:role="line"
+         x="873.44043"
+         y="915.6698"
+         style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
+         id="tspan4989">from user </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.64315701px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#60221f;fill-opacity:1;stroke:none;font-family:Sans"
+       x="743.44043"
+       y="907.02667"
+       id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-4-1-3-4-8-4-7-9-1-8-5-0-7-2-6"
+       sodipodi:linespacing="100%"
+       inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
+       inkscape:export-xdpi="340.93317"
+       inkscape:export-ydpi="340.93317"><tspan
+         sodipodi:role="line"
+         x="743.44043"
+         y="907.02667"
+         style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
+         id="tspan4026-3-2-3-1-7-2-7-3-9-6-0-0-8-7-1">user input ('gets')</tspan><tspan
+         sodipodi:role="line"
+         x="743.44043"
+         y="915.6698"
+         style="font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#60221f;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Oblique"
+         id="tspan4991">to method </tspan></text>
+    <g
+       transform="matrix(0.66897288,0,0,0.66897288,-3.9731071,201.03301)"
+       id="g4810-54-3-4-8-8-8-0-1">
       <rect
          transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
          ry="0"
@@ -4464,16 +4500,80 @@
          inkscape:export-xdpi="340.93317"
          inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
          sodipodi:linespacing="100%"
-         id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-9-12-1-8-0-9-4-1-6"
+         id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-9-12-1-8-0-9-4-1-8"
          y="419.33426"
          x="279.04443"
          style="font-size:10.96224117px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           id="tspan4026-8-3-1-0-6-8-2-3-1"
+           id="tspan4026-8-3-1-0-6-8-2-3-5"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#000080;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
            y="419.33426"
            x="279.04443"
            sodipodi:role="line">D</tspan></text>
     </g>
+    <g
+       transform="matrix(0.66897288,0,0,0.66897288,-77.744696,307.18827)"
+       id="g4810-54-3-4-8-8-8-0-7">
+      <rect
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
+         ry="0"
+         rx="0"
+         y="487.65799"
+         x="-100.49505"
+         height="11.955306"
+         width="11.955306"
+         id="rect4776-3-4-3-8-1-7-6-61"
+         style="fill:#ff8517;fill-opacity:1;fill-rule:nonzero;stroke:#00048b;stroke-width:1.06058502;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         inkscape:export-ydpi="340.93317"
+         inkscape:export-xdpi="340.93317"
+         inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
+         sodipodi:linespacing="100%"
+         id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-9-12-1-8-0-9-4-1-89"
+         y="419.33426"
+         x="279.04443"
+         style="font-size:10.96224117px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           id="tspan4026-8-3-1-0-6-8-2-3-2"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#000080;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
+           y="419.33426"
+           x="279.04443"
+           sodipodi:role="line">D</tspan></text>
+    </g>
+    <g
+       transform="matrix(0.66897288,0,0,0.66897288,-72.531715,271.48724)"
+       id="g4810-54-3-4-8-8-8-0-79">
+      <rect
+         transform="matrix(0.70710678,-0.70710678,0.70710678,0.70710678,0,0)"
+         ry="0"
+         rx="0"
+         y="487.65799"
+         x="-100.49505"
+         height="11.955306"
+         width="11.955306"
+         id="rect4776-3-4-3-8-1-7-6-5"
+         style="fill:#ff8517;fill-opacity:1;fill-rule:nonzero;stroke:#00048b;stroke-width:1.06058502;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <text
+         inkscape:export-ydpi="340.93317"
+         inkscape:export-xdpi="340.93317"
+         inkscape:export-filename="C:\Users\Burd\Desktop\rect8022.png"
+         sodipodi:linespacing="100%"
+         id="text5471-5-7-28-8-1-3-7-4-1-1-8-4-1-8-1-8-6-2-1-1-3-8-0-0-7-6-6-7-2-8-2-8-1-9-12-1-8-0-9-4-1-4"
+         y="419.33426"
+         x="279.04443"
+         style="font-size:10.96224117px;font-style:normal;font-weight:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000080;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           id="tspan4026-8-3-1-0-6-8-2-3-3"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;text-anchor:start;fill:#000080;fill-opacity:1;font-family:Calibri;-inkscape-font-specification:Calibri Bold"
+           y="419.33426"
+           x="279.04443"
+           sodipodi:role="line">D</tspan></text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4602-1-1-9-0-1-4-3-8-2-6-3-1-5-7-9-1-3-3-2-44-2-6-4-9-1-5-4-9-8-8-9-8-96-6-7-7-19-4-4-3-3-2-8-9-6-93-7-6-7-9-66-53-1"
+       d="m 352.99727,464.87018 c -8.71014,8.72287 -20.56515,11.45746 -54.86584,11.39378 -45.48738,-0.0844 -57.38671,8.09641 -74.40833,27.49285 -53.71661,61.21104 -109.41612,33.25565 -129.122981,7.69661"
+       style="fill:none;stroke:#ae2d11;stroke-width:0.70950258;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:url(#Arrow2Mstart);marker-end:none"
+       sodipodi:nodetypes="cssc" />
   </g>
 </svg>
