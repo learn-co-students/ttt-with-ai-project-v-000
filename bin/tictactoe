@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+game = Game.new.start
+game.play
+puts "Would you like to play again? Y or N"
+replay = gets.strip.upcase
+until replay != "Y"
+  game = Game.new.start
+  game.play
+  puts "Would you like to play again? Y or N"
+  replay = gets.strip.upcase
+end
