@@ -60,4 +60,30 @@ attr_accessor :board, :player_1, :player_2
 
   end
 
+  def turn
+
+    input = current_player.move(board)
+
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+      @board.display
+    else
+      turn
+    end
+
+  end
+
+  def play
+
+    until over?
+      self.turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+
+
 end
