@@ -1,15 +1,15 @@
 class Game
-attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
-    [0,1,2], # Top row
-    [3,4,5],  # Middle row
-    [6,7,8],  #Last row
-    [0,4,8],  # Top left to bottom right
-    [2,4,6],  # Top right to bottom left
-    [0,3,6],  # First Column
-    [1,4,7],  #Middle column
-    [2,5,8] # 3rd column
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [2, 4, 6],
+    [0, 4, 8]
   ]
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
@@ -19,71 +19,55 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def current_player
-
     if board.turn_count.even?
       player_1
     else
       player_2
     end
-
   end
 
   def won?
-
-    WIN_COMBINATIONS.detect do |combination|
-
-      @board.cells[combination[0]] == @board.cells[combination[1]] &&
-      @board.cells[combination[0]] == @board.cells[combination[2]] &&
-      @board.taken?(combination[0] + 1)
-
+    WIN_COMBINATIONS.detect do |winning_numbers|
+      board.cells[winning_numbers[0]] == board.cells[winning_numbers[1]] && board.cells[winning_numbers[2]] == board.cells[winning_numbers[0]] && board.taken?(winning_numbers[0] + 1)
     end
-
   end
 
   def draw?
-
-    !won? && @board.full?
-
+    !won? && board.full?
   end
 
   def over?
-
     draw? || won?
-
   end
 
   def winner
-
-    if winner_board = won?
-    @winner = @board.cells[winner_board.first]
+    if winning_game = won?
+      board.cells[winning_game.first]
     end
-
   end
 
   def turn
-
-    input = current_player.move(board)
-
-    if @board.valid_move?(input)
-      @board.update(input, current_player)
-      @board.display
-    else
+    player = current_player
+    current_move = player.move(board)
+    if !board.valid_move?(current_move)
       turn
+    else
+      puts "#{player.name} chooses space #{current_move}."
+      board.update(current_move, player)
+      board.display
     end
-
   end
 
   def play
-
-    until over?
-      self.turn
+    while !over?
+      turn
     end
     if won?
       puts "Congratulations #{winner}!"
+      winner
     elsif draw?
       puts "Cat's Game!"
+      "Cat's Game!"
     end
   end
-
-
 end
