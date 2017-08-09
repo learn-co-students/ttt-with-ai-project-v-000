@@ -1,3 +1,43 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+rematch = ""
+until rematch == "n"
+	puts "Welcome to Tic Tac Toe!"
+	puts "How would you like to play?
+	Enter: '0' for Robot VS Robot
+	Enter: '1' for Mortal VS Robot
+	Enter: '2' for Mortal VS Mortal"
+
+input = gets.strip
+
+	if input == "0"
+		puts "Robot VS Robot"
+		game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+	  game.play
+	  game.board.reset!
+
+	elsif input == "1"
+	  	puts "Mortal VS Robot"
+	  	puts "Do you want to be 'X' or 'O'?"
+	  	token = gets.strip.upcase
+	  	if token == "X"
+	    	game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+	  	else
+	    	game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+	  	end
+	  game.play
+	  game.board.reset!
+
+	elsif input == "2"
+	  	puts "Mortal VS Mortal"
+	  	game = Game.new
+	  game.play
+	  game.board.reset!
+	end
+
+	puts "Care for a rematch? Enter: 'n' to give up and 'y' to try again.\n"
+	rematch = gets.strip
+	puts "There's no crying in Tic Tac Toe!\n"
+end
