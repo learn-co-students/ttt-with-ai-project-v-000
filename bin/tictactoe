@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe. Here we go."
+
+Game.new.play
+
+puts "Play again? y/n:"
+input = gets.chomp.upcase
+while input == "Y"
+  Game.start
+  puts "Play again? y/n:"
+  input = gets.chomp.upcase
+end
