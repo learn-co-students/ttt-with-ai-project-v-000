@@ -20,11 +20,10 @@ module Players
         Game::WIN_COMBINATIONS.each_with_index do |combination, index|
             if empty_board?(board)
               return random_cell
-            elsif two_rule?(board, combination)
-              move = two_rule?(board, combination)
-              return "#{move + 1}"
-            else
-              binding.pry
+            elsif two_rule?(board)
+              move = two_rule?(board)
+              return "#{move.to_i + 1}"
+            elsif two_rule?(board) == false && empty_board?(board) == false
               return available_space(board)
             end
           end
@@ -44,31 +43,34 @@ module Players
         "#{cell}"
       end
 
-      def two_rule?(board, combination)
-        first_token = board.cells[combination[0]]
-        second_token = board.cells[combination[1]]
-        third_token = board.cells[combination[2]]
+      def two_rule?(board)
+        Game::WIN_COMBINATIONS.each do |combination|
+          first_token = board.cells[combination[0]]
+          second_token = board.cells[combination[1]]
+          third_token = board.cells[combination[2]]
 
-        if first_token == "X" && second_token == "X"
-          return combination[2]
-        elsif second_token == "X" && third_token == "X"
-          return combination[0]
-        elsif first_token == "X" && third_token == "X"
-          return combination[1]
-        elsif first_token == "O" && second_token == "O"
-          return combination[2]
-        elsif second_token == "O" && third_token == "O"
-          return combination[0]
-        elsif first_token == "O" && third_token == "O"
-          return combination[1]
-        else
-          return false
+          if first_token == "X" && second_token == "X" && third_token != "O"
+            return "#{combination[2]}"
+          elsif second_token == "X" && third_token == "X" && first_token != "O"
+            return "#{combination[0]}"
+          elsif first_token == "X" && third_token == "X" && second_token != "O"
+            return "#{combination[1]}"
+          elsif first_token == "O" && second_token == "O" && third_token != "X"
+            return "#{combination[2]}"
+          elsif second_token == "O" && third_token == "O" && first_token != "X"
+            return "#{combination[0]}"
+          elsif first_token == "O" && third_token == "O" && second_token != "X"
+            return "#{combination[1]}"
+          else
+            return false
+          end
         end
+
       end
 
       def available_space(board)
         board.cells.each_with_index do |cell, index|
-          if cell != "X" || cell != "O"
+          if cell == " "
             return "#{index + 1}"
           end
         end
