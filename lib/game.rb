@@ -52,40 +52,66 @@ class Game
       end
     end
 
-### CLASS VARIABLES ###
+### SCORE KEEPER VARIABLES AND METHODS ###
     def self.draws
       @@draws
     end
 
-    def self.draws= (game)
-      @@draws += game
+    def self.draws= (i)
+      @@draws += i
     end
 
     def self.x_wins
       @@x_wins
     end
 
-    def self.x_wins= (game)
-      @@x_wins += game
+    def self.x_wins= (i)
+      @@x_wins += i
     end
 
     def self.o_wins
       @@o_wins
     end
 
-    def self.o_wins= (game)
-      @@o_wins += game
+    def self.o_wins= (i)
+      @@o_wins += i
+    end
+
+    def update_score (winner = nil)
+      case winner
+      when "X"
+        self.class.x_wins= (1)
+      when "O"
+        self.class.o_wins= (1)
+      else
+        self.class.draws= (1)
+      end
+    end
+
+    def self.display_scores
+      puts "\n"
+      puts "\n"
+      puts "SCORES:"
+      puts "\n"
+      puts "Player X: #{self.x_wins}"
+      puts "Player O: #{self.o_wins}"
+      puts "Draws:    #{self.draws}"
+      puts "\n"
+      puts "Thanks for playing!"
+      puts "\n"
     end
 
 ### GAME MECHANICS ###
   def play
     self.board.display
     while !self.over?
-      turn
+      self.turn
     end
-    if self.won? != false
+    if self.won?
+      self.update_score(winner)
       puts "Congratulations #{winner}!"
     elsif self.draw?
+      self.update_score
       puts "Cat's Game!"
     end
   end
@@ -97,74 +123,39 @@ class Game
       self.board.update(position, player)
       self.board.display
     else
-      turn
+      self.turn
     end
   end
 
   def current_player
-    self.board.turn_count.even? ? self.player_1 : self.player_2
+    if self.board.turn_count.even?
+      self.player_1
+    else
+      self.player_2
+    end
   end
 
 ### GAME END METHODS ###
   def over?
-    true if self.board.full? || self.won? != false || draw?
+    self.won? || self.draw?
   end
 
   def won?
-    WIN_COMBINATIONS.each do |win_combination|
-      win_index_1 = win_combination[0]
-      win_index_2 = win_combination[1]
-      win_index_3 = win_combination[2]
-
-      position_1 = self.board.cells[win_index_1]
-      position_2 = self.board.cells[win_index_2]
-      position_3 = self.board.cells[win_index_3]
-
-      if position_1 == position_2 && position_2 == position_3 && (position_1 == "X" || position_1 == "O")
-        return win_combination
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      self.board.taken?(combo[0] + 1) &&
+      self.board.cells[combo[0]] == self.board.cells[combo[1]] &&
+      self.board.cells[combo[0]] == self.board.cells[combo[2]]
     end
-    return false
   end
 
   def draw?
-    if self.won? == false && self.board.full? == true
-      self.class.draws= (1)
-      true
-    elsif self.won? == false && self.board.full? == false
-      false
-    elsif self.won? != false
-      false
-    end
+    !self.won? && self.board.full?
   end
 
   def winner
-    if self.won? == false || self.draw? == true
-      nil
-    else
-      winning_line = self.won?
-      index = winning_line[0]
-      winner = self.board.cells[index]
-      if winner == "X"
-        self.class.x_wins= (1)
-      elsif winner == "O"
-        self.class.o_wins= (1)
-      end
+    if winning_line = self.won?
+      winner = self.board.cells[winning_line[0]]
     end
-    winner
-  end
-
-  def self.display_scores
-    puts "\n"
-    puts "\n"
-    puts "SCORES:"
-    puts "\n"
-    puts "Player X: #{self.x_wins}"
-    puts "Player O: #{self.o_wins}"
-    puts "Draws:    #{self.draws}"
-    puts "\n"
-    puts "Thanks for playing!"
-    puts "\n"
   end
 
 end

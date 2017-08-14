@@ -2,18 +2,4 @@
 
 require_relative '../config/environment'
 
-
-puts "Welcome to CLI Tic-Tac-Toe!"
-game = Game.start
-
-input = ""
-until input == "n"
-  puts "\n"
-  puts "Play again? Y or N"
-  input = gets.chomp.downcase
-  if input == "y"
-    Game.start
-  else
-    Game.display_scores
-  end
-end
+CLI_Interface.start

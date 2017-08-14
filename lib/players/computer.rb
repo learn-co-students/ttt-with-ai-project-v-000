@@ -15,19 +15,12 @@ module Players
       puts "Computer's move"
       position = ""
 
-      if check_win_combos(board) != ""
-        position = check_win_combos(board)
+      if self.check_win_combos(board) != ""
+        position = self.check_win_combos(board)
       elsif board.valid_move?("5")
         position = "5"
-      elsif corners_available(board)
-        if check_corners(board) != ""
-          position = check_corners(board)
-        elsif check_corners(board) == ""
-          until board.valid_move?(position)
-            index = rand(0..3)
-            position = self.class.corners[index]
-          end
-        end
+      elsif self.corners_available?(board)
+        position = self.check_corners(board)
       else
         until board.valid_move?(position)
           index = rand(0..3)
@@ -49,29 +42,32 @@ module Players
           end
         end
       end
+      if position == ""
+        until board.valid_move?(position)
+          index = rand(0..3)
+          position = self.class.corners[index]
+        end
+      end
       position
     end
 
-    def corners_available(board)
+    def corners_available?(board)
       self.class.corners.any? {|corner| board.position(corner) == " "}
     end
 
     def check_win_combos(board)
       position = ""
-      Game::WIN_COMBINATIONS.each do |win_combination|
-        win_index_1 = win_combination[0]
-        win_index_2 = win_combination[1]
-        win_index_3 = win_combination[2]
 
-        position_1 = index_to_position(win_index_3)
-        position_2 = index_to_position(win_index_2)
-        position_3 = index_to_position(win_index_1)
+      Game::WIN_COMBINATIONS.each do |combo|
+        position_1 = index_to_position(combo[2])
+        position_2 = index_to_position(combo[1])
+        position_3 = index_to_position(combo[0])
 
-        if compare_positions(board, position_1, position_2) == true
+        if positions_match?(board, position_1, position_2)
           position = position_3 if board.valid_move?(position_3)
-        elsif compare_positions(board, position_1, position_3) == true
+        elsif positions_match?(board, position_1, position_3)
           position = position_2 if board.valid_move?(position_2)
-        elsif compare_positions(board, position_2, position_3) == true
+        elsif positions_match?(board, position_2, position_3)
           position = position_1 if board.valid_move?(position_1)
         end
       end
@@ -82,8 +78,8 @@ module Players
       (index + 1).to_s
     end
 
-    def compare_positions(board, position_1, position_2)
-      if board.valid_move?(position_1) == true || board.valid_move?(position_2) == true
+    def positions_match?(board, position_1, position_2)
+      if board.valid_move?(position_1) || board.valid_move?(position_2)
         false
       elsif board.position(position_1) != self.token && board.position(position_2) != self.token
         true
