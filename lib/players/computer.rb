@@ -91,12 +91,12 @@ module Players
           new_inst.cells[number.to_i - 1] = temp
         end
 
-        max_key= -1
+        block_key= -1
         best_move.each do |val, key|
 
-          if max_key < key
+          if block_key < key
 
-            max_key = key
+            block_key = key
             block_position = val
 
           end
@@ -105,9 +105,9 @@ module Players
 
         if max_key == 0
           arry
-        elsif best_position >= block_position
+        elsif max_key >= block_key
            new_arry << best_position
-        elsif block_position > best_position
+        elsif max_key < block_key
              new_arry << block_position
         end
 

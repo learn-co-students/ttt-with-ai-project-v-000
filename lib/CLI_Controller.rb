@@ -15,7 +15,7 @@ class CliController
      puts "================================="
      puts "To quit, enter 'exit'."
      puts "================================="
-     puts "What would you like to do?"
+     puts "What would you like to do?(1-3 or exit) :"
 
      input = gets.strip
      case input

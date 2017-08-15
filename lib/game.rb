@@ -117,9 +117,13 @@ def play
   end
   @board.display
   if won?
+    puts "***************************"
     puts "Congratulations #{@winner}!"
+    puts "***************************"
   elsif draw?
+    puts "***************************"
     puts "Cat's Game!"
+    puts "***************************"
   end
 
 
