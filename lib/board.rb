@@ -1,7 +1,6 @@
 require 'pry'
 class Board
   attr_accessor :cells
-  # @cells = Array.new
 
   def initialize
     reset!

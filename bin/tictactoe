@@ -1,25 +1,10 @@
 # !/usr/bin/env ruby
 
 require_relative '../config/environment'
-require_relative '../lib/board.rb'
-require_relative '../lib/game.rb'
-require_relative '../lib/player.rb'
-require_relative '../lib/players/computer.rb'
-require_relative '../lib/players/human.rb'
 
 puts "Let's play Tic Tac Toe!"
-game = Game.new
-if !game.won?
+puts Board.new.display
+game = Game.new.start
+if !game.over?
   game.play
 end
-# puts "How many players? Type 0, 1 or 2."
-# player = gets
-# puts "Player 1 is X. Player 2 is O. Who will go first? Type X or O."
-# first = gets
-# if player == 0
-#   game.player_1 = Players::Computer.new("X")
-#   game.player_2 = Players::Computer.new("O")
-# elsif player == 1
-#   game.player_1 = Players::Human.new("X")
-#   game.player_2 = Players::Computer.new("O")
-# end

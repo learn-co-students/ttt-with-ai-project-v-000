@@ -17,11 +17,47 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    board.display
+  end
+
+  def start
+    puts "How many players? Type 0, 1 or 2."
+    players = gets.strip
+    puts "Who wants to go first? Type 1 or 2."
+    first = gets.strip
+
+    if players == "0" && first == "1"
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+      play
+    elsif players == "0" && first == "2"
+      @player_2 = Players::Computer.new("X")
+      @player_1 = Players::Computer.new("O")
+      play
+    elsif players == "1" && first == "1"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Computer.new("O")
+      puts "You are Player 1. The Computer is Player 2."
+      play
+    elsif players == "1" && first == "2"
+      @player_2 = Players::Human.new("X")
+      @player_1 = Players::Computer.new("O")
+      play
+    elsif players == "2" && first == "1"
+      @player_1
+      @player_2
+      play
+    elsif players == "2" && first == "2"
+      @player_2 == Players::Human.new("O")
+      @player_1 == Players::Human.new("X")
+      play
+    else
+      puts "Can't compute. Try again."
+      start
+    end
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? @player_1 : @player_2
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def won?
@@ -51,6 +87,7 @@ class Game
   end
 
   def turn
+    puts "#{current_player.token}, choose a space 1-9."
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
@@ -60,14 +97,28 @@ class Game
     end
   end
 
+  def again?
+    puts "Would you like to play again? Y/N."
+    play_again = gets.chomp
+    if play_again == "Y" || play_again == "y"
+      start
+    else
+      puts "Goodbye!"
+    end
+  end
+
+
+
   def play
     while !over?
       turn
     end
     if won?
       puts "Congratulations #{winner}!"
+      again?
     elsif draw?
       puts "Cat's Game!"
+      again?
     end
   end
 
