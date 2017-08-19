@@ -23,11 +23,11 @@ class Board
   end
 
   def update(input, player)
-     cells[input.to_i - 1] = ""
+     cells[input.to_i - 1] = "#{player.token}"
   end
 
   def token
-
+    turn_count % 2 == 0 ? "O" : "X"
   end
 
   def full?
@@ -36,18 +36,17 @@ class Board
 
   def turn_count
     #returns # of turns that have been played. odd turns are 'x' and even are 'o'
-    counter = 0
-      cells.each{ |turn| counter += 1 if turn == "X" || turn == "O"}
-    counter
+      cells.count {|turn|  turn == "X" || turn == "O"}
   end
 
   def taken?(input)
-    cells[input.to_i - 1] == "X" || cells[input.to_i - 1] == "O"
+    self.position(input) == "X" || self.position(input) == "O"
   end
 
   def valid_move?(input)
     index = input.to_i - 1
     index.between?(0,8) && !taken?(input)
+
   end
 
 end
