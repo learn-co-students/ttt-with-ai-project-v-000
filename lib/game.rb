@@ -101,7 +101,7 @@ class Game
     puts "Would you like to play again? Y/N."
     play_again = gets.chomp
     if play_again == "Y" || play_again == "y"
-      start
+      Game.new.start
     else
       puts "Goodbye!"
     end
