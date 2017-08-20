@@ -1,4 +1,5 @@
 module Players
+
   attr_accessor :board
   class Computer < Player
     def move(board)
