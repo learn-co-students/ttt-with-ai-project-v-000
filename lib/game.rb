@@ -26,15 +26,11 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combination|   #[0,1,2] which is board range (0-8)
-        if @board.cells[combination[0]] == @board.cells[combination[1]] &&
-          @board.cells[combination[1]] == @board.cells[combination[2]] &&
-          @board.taken?(combination[0]+1)
-          #Need to +1, because #taken? rspec test is working off user_input range (1-9)
-          return combination
-        end
-      end
-    return false
+    WIN_COMBINATIONS.detect do |combination|
+      @board.cells[combination[0]] == @board.cells[combination[1]] &&
+      @board.cells[combination[0]] == @board.cells[combination[2]] &&
+      @board.taken?(combination[0] + 1)
+    end
   end
 
   def draw?
@@ -47,10 +43,12 @@ class Game
   end
 
   def winner
-    if won?
-      combination = won?
-      @board.cells[combination[0]] # X or O
+    if won = won?
+      board.cells[won.first]
     end
+  #   If won? returns true, then and only then will the local variable won be assigned,
+  #   otherwise, the method will just abort with a false return value.
+  #   But if won is assigned, we can use that variable instead of calling won? again within the if statement.
   end
 
   def turn

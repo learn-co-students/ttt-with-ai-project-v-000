@@ -6,7 +6,7 @@ module Players
 # Even though the method accepts a board argument, it does not need to use it.
 
     def move(board)
-      input = gets.strip
+      gets.strip
     end
   end
 end

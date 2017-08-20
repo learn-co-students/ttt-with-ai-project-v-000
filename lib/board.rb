@@ -8,7 +8,7 @@ class Board
   end
 
   def initialize
-    self.cells = Array.new(9, " ")
+    self.reset!
   end
 
   def display
@@ -37,12 +37,11 @@ class Board
   end
 
   def valid_move?(position)
-    !taken?(position) && position.to_i >0 && position.to_i <=9
+    !taken?(position) && position.to_i.between?(1,9)
   end
 
   def update(position, player)
       self.cells[position.to_i-1] = player.token
   end
-
 
 end
