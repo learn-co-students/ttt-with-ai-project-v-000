@@ -46,19 +46,73 @@ class Game
   end
 
  
+  def won?
+    WIN_COMBINATIONS.select do |combination|
+      win_index_1 = combination[0]
+      win_index_2 = combination[1]
+      win_index_3 = combination[2]
 
+      position_1 = board.cells[win_index_1]
+      position_2 = board.cells[win_index_2]
+      position_3 = board.cells[win_index_3]
+
+        if (position_1 == "X" && position_2 == "X" && position_3 == "X") ||
+           (position_1 == "O" && position_2 == "O" && position_3 == "O")
+          return combination
+        end
+      end
+      return false
+  end
+
+  def full?
+    board.cells.none?{|i| (i != "X" && i != "O")}
+  end
+
+  def draw?
+    !won? && full?
+  end
+
+  def over?
+    won? || draw?
+  end
+
+  def winner
+    win_combination = won?
+    if won?
+      board[win_combination[0]]
+    else
+      nil
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
   
- 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-# end of class  
-end
+  def winner
+    win_combination = won?
+    if won?
+      board.cells[win_combination[0]]
+    else
+      nil
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
+end #end of class
