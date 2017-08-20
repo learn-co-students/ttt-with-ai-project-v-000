@@ -1,6 +1,7 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
-  
+
     WIN_COMBINATIONS= [
     [0,1,2], #top row
     [3,4,5], #middle row
@@ -17,16 +18,15 @@ class Game
     @player_2 = player_2
     @board  = board
   end
- 
+
    def turn
     puts "Please enter 1-9:"
-    input = gets.strip
-    index = input_to_index(input)
-    if valid_move?(index)
-      move(index, current_player)
+    input = self.current_player.move(@board)
+    if board.valid_move?(input)
+      board.update(input,self.current_player)
     else
       puts "Please try again"
-      turn
+      self.turn
     end
     board.display
    end
@@ -45,7 +45,7 @@ class Game
     turn_count % 2 == 0 ? player_1 : player_2
   end
 
- 
+
   def won?
     WIN_COMBINATIONS.select do |combination|
       win_index_1 = combination[0]
@@ -95,7 +95,7 @@ class Game
       puts "Cat's Game!"
     end
   end
-  
+
   def winner
     win_combination = won?
     if won?
