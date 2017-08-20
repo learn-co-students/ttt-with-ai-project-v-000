@@ -1,3 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "          _____ _        _____             _____
+               /__   (_) ___  /__   \__ _  ___  /__   \___   ___
+                 / /\/ |/ __|   / /\/ _` |/ __|   / /\/ _ \ / _ \
+                / /  | | (__   / / | (_| | (__   / / | (_) |  __/
+                \/   |_|\___|  \/   \__,_|\___|  \/   \___/ \___|"
+                
+puts "Donna's & Yvonne's Tic Tac Toe Game "
+puts "Enter '0' for a computer only game, '1' for a one player game, or '2' for a two player game."
+game_type = gets.strip
