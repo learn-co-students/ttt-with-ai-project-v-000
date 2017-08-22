@@ -1,35 +1,48 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-puts "          _____ _        _____             _____
-               /__   (_) ___  /__   \__ _  ___  /__   \___   ___
-                 / /\/ |/ __|   / /\/ _` |/ __|   / /\/ _ \ / _ \
-                / /  | | (__   / / | (_| | (__   / / | (_) |  __/
-                \/   |_|\___|  \/   \__,_|\___|  \/   \___/ \___|"
+def start_game
+	
+	puts "          _____ _        _____             _____
+	               /__   (_) ___  /__   \__ _  ___  /__   \___   ___
+	                 / /\/ |/ __|   / /\/ _` |/ __|   / /\/ _ \ / _ \
+	                / /  | | (__   / / | (_| | (__   / / | (_) |  __/
+	                \/   |_|\___|  \/   \__,_|\___|  \/   \___/ \___|"
 
-puts "Donna's & Yvonne's Tic Tac Toe Game "
-puts "Enter '0' for a computer only game, '1' for a one player game, or '2' for a two player game."
-puts "Or, enter 'wargames!' to watch the computer play 10 games with itself."
-
-def setup
+	puts "Donna's & Yvonne's Tic Tac Toe Game "
+	puts "Enter '0' for a computer only game, '1' for a one player game, or '2' for a two player game."
+	puts "Or, enter 'wargames!' to watch the computer play 10 games with itself."
 	game_type = gets.strip
+	
 	if game_type == "0" then
-	  Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+	  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+	  game.play
 	elsif game_type == "1" then
-	  Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+	  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+	  game.play
 	elsif game_type == "2"
-	  Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+	  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+	  game.play
 	elsif game_type == "wargames!"
 		10.times do
-			Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+			game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+			game.play
 		end
 	elsif game_type == "exit"
 		puts "bye bye"
 		return
 	else
 		puts "Please enter 0, 1, 2, or wargames!"
-		setup
+		start_game
+	end
+	
+	puts "Would you like to play again? (Y/N)"
+	if gets.strip == "Y"
+		start_game
+	else
+		puts "bye bye"
+		return
 	end
 end
 
-setup
+start_game
