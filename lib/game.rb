@@ -32,7 +32,7 @@ class Game
   end
 
   def turn
-    puts "#{current_player}, please enter 1-9:"
+    puts "#{current_player.class}'#{current_player.token}', please enter 1-9:"
     input = self.current_player.move(@board)
     if board.valid_move?(input)
       board.update(input,self.current_player)
