@@ -1,6 +1,6 @@
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :player_1, :player_2, :board
 
     WIN_COMBINATIONS= [
     [0,1,2], #top row
@@ -20,9 +20,8 @@ class Game
   end
 
   def play
-    
     until over?
-      self.turn
+      turn
     end
     
     if won?
@@ -30,19 +29,18 @@ class Game
     else
       puts "Cat's Game!"
     end
-
   end
 
   def turn
-    puts "Please enter 1-9:"
+    puts "#{current_player}, please enter 1-9:"
     input = self.current_player.move(@board)
     if board.valid_move?(input)
       board.update(input,self.current_player)
+      board.display
     else
       puts "Please try again"
       self.turn
     end
-    board.display
   end
 
   def current_player

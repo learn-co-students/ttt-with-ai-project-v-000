@@ -12,11 +12,11 @@ puts "Enter '0' for a computer only game, '1' for a one player game, or '2' for 
 game_type = gets.strip
 
 if game_type == 0 then
-  game = Game.new(Players::Computer.new("X"), Players::Computer.new("0"))
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 elsif game_type == 1 then
-  game = Game.new(Players::Human.new("X"), Players::Computer.new("0"))
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
 else
-  game = Game.new(Players::Human.new("X"), Players::Human.new("0"))
+  game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
 end
 
 game.play()
