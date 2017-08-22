@@ -44,7 +44,9 @@ class Board
   end
 
   def valid_move?(input)
+
     index = input.to_i - 1
+  
     index.between?(0,8) && !taken?(input)
 
   end

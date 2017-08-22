@@ -54,8 +54,9 @@ class Game
     input = self.current_player.move(board)
     if board.valid_move?(input)
       board.update(input, self.current_player)
+      board.display
     else
-      turn
+      turn #unless over?
     end
   end
 
@@ -64,5 +65,4 @@ class Game
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
   end
-
 end
