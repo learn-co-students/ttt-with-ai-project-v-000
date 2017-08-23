@@ -1,6 +1,6 @@
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :player_1, :player_2, :board
 
     WIN_COMBINATIONS= [
     [0,1,2], #top row
@@ -19,32 +19,33 @@ class Game
     @board  = board
   end
 
-   def turn
-    puts "Please enter 1-9:"
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
+
+  def turn
+    puts "#{current_player.class}'#{current_player.token}', please enter 1-9:"
     input = self.current_player.move(@board)
     if board.valid_move?(input)
       board.update(input,self.current_player)
+      board.display
     else
       puts "Please try again"
       self.turn
     end
-    board.display
-   end
-
-  def turn_count
-    turns = 0
-    board.cells.each do |spot|
-      if spot == player_1.token || spot == player_2.token
-        turns += 1
-      end
-    end
-    turns
   end
 
   def current_player
-    turn_count % 2 == 0 ? player_1 : player_2
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
-
 
   def won?
     WIN_COMBINATIONS.select do |combination|
@@ -64,12 +65,8 @@ class Game
       return false
   end
 
-  def full?
-    board.cells.none?{|i| (i != "X" && i != "O")}
-  end
-
   def draw?
-    !won? && full?
+    !won? && board.full?
   end
 
   def over?
@@ -79,29 +76,7 @@ class Game
   def winner
     win_combination = won?
     if won?
-      board[win_combination[0]]
-    else
-      nil
-    end
-  end
-
-  def play
-    until over?
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    else
-      puts "Cat's Game!"
-    end
-  end
-
-  def winner
-    win_combination = won?
-    if won?
       board.cells[win_combination[0]]
-    else
-      nil
     end
   end
 
