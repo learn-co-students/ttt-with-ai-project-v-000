@@ -15,18 +15,14 @@ def start_game
 	game_type = gets.strip
 	
 	if game_type == "0" then
-	  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-	  game.play
+	  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
 	elsif game_type == "1" then
-	  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
-	  game.play
+	  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
 	elsif game_type == "2"
-	  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
-	  game.play
+	  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
 	elsif game_type == "wargames!"
 		10.times do
-			game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-			game.play
+			game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
 		end
 	elsif game_type == "exit"
 		puts "bye bye"
