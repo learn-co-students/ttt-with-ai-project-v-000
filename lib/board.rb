@@ -1,3 +1,4 @@
+require 'pry'
 class Board
     attr_accessor :cells
     
@@ -31,9 +32,14 @@ class Board
     end
     def valid_move?(index)
         if index.to_i >=1 && index.to_i <= 9 
-            !(taken?(index)) 
+        !(taken?(index)) 
         end    
     end
-    
+    def update(input, player)
+        index = input.to_i - 1
+        cells[index] = player.token 
+    end
 
-end                
+
+
+end         # binding.pry               
