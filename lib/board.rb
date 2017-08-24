@@ -30,10 +30,10 @@ class Board
         !(@cells[index].nil? || @cells[index] == " ")
     end
     def valid_move?(index)
-
         if index.to_i >=1 && index.to_i <= 9 
             !(taken?(index)) 
         end    
     end
+    
 
 end                
