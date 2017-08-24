@@ -19,5 +19,11 @@ class Board
         input = input.to_i - 1
         cells[input]
     end
-   
+    def full?
+        cells.all? { |c|  c == "O" || c == "X"  }  
+    end
+    def turn_count
+        cells.count{ |e|  e == "O" || e == "X"  }
+    end
+
 end                
