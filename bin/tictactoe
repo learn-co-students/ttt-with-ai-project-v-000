@@ -6,7 +6,7 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
 puts "What kind of game do you want to play?."
-puts "Enter a number of players (0, 1, or 2):"
+puts "Enter a number of players (0, 1, 2 or War Games):"
 player_mode = gets.strip
 the_game = nil
 
@@ -36,6 +36,33 @@ until the_game != nil
   elsif player_mode == "2"
     the_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new )
     puts "2-player game start."
+  elsif player_mode.downcase == "war games"
+    3.times do
+      puts "DANGER!"
+      sleep(1)
+    end
+    puts "WAR GAMES MODE COMMENCING IN"
+    sleep(1.5)
+    puts "3"
+    sleep(1)
+    puts "2"
+    sleep(1)
+    puts "1"
+    sleep(1)
+    puts "COMMENCE"
+    sleep(1)
+
+    50000.times do
+      the_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      puts "Zero-player game start."
+      result = the_game.play
+      if result != "Cat's Game!"
+        puts "There was a winner."
+        exit
+      end
+    end
+    puts "There can be no winner."
+    exit
   elsif player_mode == "exit"
     exit
   else

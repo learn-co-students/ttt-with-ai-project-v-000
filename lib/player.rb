@@ -6,5 +6,9 @@ class Player
     @token = token
   end
 
+  def opp_token
+    self.token == "X" ? "O" : "X"
+  end
+
 
 end

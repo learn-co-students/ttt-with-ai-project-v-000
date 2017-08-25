@@ -64,10 +64,13 @@ class Game
 
   def turn #executes a turn and then changes the player.
     player_move = self.current_player.move(self.board.cells)
-
-    until !!self.board.valid_move?(player_move)
-      puts "invalid"
-      player_move = self.current_player.move(self.board.cells)
+    if player_move == "exit"
+      exit
+    else
+      until !!self.board.valid_move?(player_move)
+        puts "invalid"
+        player_move = self.current_player.move(self.board.cells)
+      end
     end
 
     self.board.update(player_move,current_player) #updates board with your valid move
@@ -85,10 +88,10 @@ class Game
     if self.winner
       self.board.display
       puts "Congratulations #{self.winner}!"
-
     else
       self.board.display
       puts "Cat's Game!"
+      return "Cat's Game!"
 
     end
 
