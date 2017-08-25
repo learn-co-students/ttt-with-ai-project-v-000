@@ -11,13 +11,15 @@ class Board
     end
 
     def display
+        puts ""
         puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} \n"
         puts "-----------"
         puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} \n"
         puts "-----------"
         puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} \n"
+        puts ""
     end
-    
+
     def position(input)
         input = input.to_i - 1
         self.cells[input]

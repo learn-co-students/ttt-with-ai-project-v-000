@@ -1,3 +1,51 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#<<<< GAME SETUP >>>>
+
+puts "Welcome to Tic Tac Toe!"
+puts "What kind of game do you want to play?."
+puts "Enter a number of players (0, 1, or 2):"
+player_mode = gets.strip
+the_game = nil
+
+until the_game != nil
+  if player_mode == "0"
+    the_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new )
+    puts "Zero-player game start."
+  elsif player_mode == "1"
+    x_player = nil
+    until x_player != nil
+      puts "Okay, who should go first and be X? The human or the computer?"
+      x_player = gets.strip.downcase
+      if x_player == "human"
+        the_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new )
+        puts "1 player game start.  Human: X, Computer: O."
+      elsif x_player == "computer"
+        the_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new )
+        puts "1 player game start.  Human: O, Computer: X."
+      elsif x_player == "exit"
+        exit
+      else
+        puts "Invalid Choice. Please enter a valid command."
+        x_player = nil
+        redo
+      end
+    end
+  elsif player_mode == "2"
+    the_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new )
+    puts "2-player game start."
+  elsif player_mode == "exit"
+    exit
+  else
+    puts "Invalid choice.  Please make a valid selection."
+    puts "What kind of game do you want to play?."
+    puts "Enter a number of players (0, 1, or 2):"
+    player_mode = gets.strip
+  end
+end
+
+# <<<< GAME START >>>>
+
+the_game.play

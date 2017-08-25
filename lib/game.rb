@@ -69,7 +69,7 @@ class Game
       puts "invalid"
       player_move = self.current_player.move(self.board.cells)
     end
-    
+
     self.board.update(player_move,current_player) #updates board with your valid move
 
     self.change_player
@@ -78,13 +78,18 @@ class Game
 
   def play #executes the entire process of playing a game.
     until self.over?
+      self.board.display
       self.turn
     end
 
     if self.winner
+      self.board.display
       puts "Congratulations #{self.winner}!"
+
     else
+      self.board.display
       puts "Cat's Game!"
+
     end
 
   end
