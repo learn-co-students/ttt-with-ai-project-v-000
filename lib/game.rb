@@ -69,7 +69,7 @@ class Game
       puts "invalid"
       player_move = self.current_player.move(self.board.cells)
     end
-
+    
     self.board.update(player_move,current_player) #updates board with your valid move
 
     self.change_player
