@@ -36,7 +36,7 @@ class Game
       pos_3 = board.cells[combo[2]]
 
       #2) Change status to "true" if all 3 spots are occupied by the same token.
-      if (pos_1 == pos_2 && pos_2 == pos_3 && pos_1) && (pos_1 == "X" || pos_1 == "O")
+      if (pos_1 == pos_2 && pos_2 == pos_3) && (pos_1 == "X" || pos_1 == "O")
         win_combo = combo
         break #ends loop (to avoid returning from inside of loop)
       end
@@ -49,6 +49,7 @@ class Game
   end
 
   def winner
+    # Returns the token whichever player won.
     self.won? ? self.board.cells[self.won?[0]] : nil
   end
 
@@ -69,7 +70,7 @@ class Game
       player_move = self.current_player.move(self.board.cells)
     end
 
-    self.board.update(player_move,current_player)
+    self.board.update(player_move,current_player) #updates board with your valid move
 
     self.change_player
 
@@ -81,7 +82,7 @@ class Game
     end
 
     if self.winner
-      puts "Congratulations #{self.winner}!" if self.winner
+      puts "Congratulations #{self.winner}!"
     else
       puts "Cat's Game!"
     end
