@@ -33,13 +33,19 @@ class Game
     end
 
     def won?
-      WIN_COMBINATIONS.each do |combo|
-        return combo if combo.all? { |position| board.cells[position] == 'X'}
-        return combo if combo.all? { |position| board.cells[position] == 'O'}
-      end
-      false
-    end
+        win_combo = nil
+        WIN_COMBINATIONS.each do |combo|
+          p1 = board.cells[combo[0]]
+          p2 = board.cells[combo[1]]
+          p3 = board.cells[combo[2]]
 
+        if (p1 == p2 && p2 == p3) && (p1 == "X" || p1 == "O")
+          win_combo = combo
+          break
+        end
+      end
+        win_combo
+    end
 
     def draw?
       board.full? && !won?
@@ -57,6 +63,9 @@ class Game
 
    def play
       until over?
+        puts ""
+        @board.display
+        puts ""
         turn
       end
 

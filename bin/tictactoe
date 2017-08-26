@@ -48,7 +48,7 @@ loop do
       x_or_o = ['X','O']
       puts "Do you want to be X or O?"
       puts prompt
-      answer = gets.chomp.upcase
+      answer = gets.chomp
     end until x_or_o.include?(answer)
       x_or_o.delete(answer)
       game = Game.new(Players::Human.new(answer), Players::Computer.new(x_or_o[0])) if one_or_two == "1"
@@ -56,6 +56,7 @@ loop do
   else
     game = Game.new
   end
+  
   game.play
     begin
       puts "Play again?(y/n)"
