@@ -1,3 +1,67 @@
-#!/usr/bin/env ruby
 
 require_relative '../config/environment'
+prompt = ">"
+puts "    Welcome To Wonder's Tic Tac Toe!  "
+puts ""
+puts "    ***************************"
+puts "    *                         *"
+puts "    *        X |   |          *"
+puts "    *       -----------       *"
+puts "    *          | X |          *"
+puts "    *       -----------       *"
+puts "    *          |   | X        *"
+puts "    *                         *"
+puts "    ***************************"
+puts ""
+puts ""
+puts "How to play: "
+puts "Enter a number for the board position you want"
+puts ""
+puts "      1 | 2 | 3   "
+puts "     -----------  "
+puts "      4 | 5 | 6   "
+puts "     -----------  "
+puts "      7 | 8 | 9   "
+puts ""
+
+loop do
+  begin
+    puts "How many players? "
+    puts "  0 - computer plays itself"
+    puts "  1 - you play against the computer"
+    puts "  2 - play against your friend"
+    puts prompt
+    answer = gets.chomp.to_i
+  end until [0,1,2].include?(answer)
+  system 'clear'
+  if answer == 0
+    game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+
+  elsif answer == 1
+    begin
+      puts "Do you want to go first or second? Please enter a number:"
+      puts prompt
+      one_or_two = gets.chomp
+    end until ["1","2"].include?(one_or_two)
+
+    begin
+      x_or_o = ['X','O']
+      puts "Do you want to be X or O?"
+      puts prompt
+      answer = gets.chomp.upcase
+    end until x_or_o.include?(answer)
+      x_or_o.delete(answer)
+      game = Game.new(Players::Human.new(answer), Players::Computer.new(x_or_o[0])) if one_or_two == "1"
+      game = Game.new(Players::Computer.new(x_or_o[0]), Players::Human.new(answer)) if one_or_two == "2"
+  else
+    game = Game.new
+  end
+  game.play
+    begin
+      puts "Play again?(y/n)"
+      puts prompt
+      answer = gets.chomp.downcase
+    end until %w{y n}.include?(answer)
+    break if answer == 'n'
+
+end
