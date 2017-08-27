@@ -1,3 +1,127 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+include Players
+
+puts "Welcome to Tic Tac Toe!"
+play = "Y"
+
+while play != 'n'
+  puts "Would you like to play O, 1 or 2 player? Or try 'wargames'..."
+
+  players = gets.strip
+  until players == "0" || players == "1" || players == "2" || players == "wargames"
+    puts "Sorry that wasn't valid input. Enter 0, 1 or 2."
+    players = gets.strip
+  end
+
+  if players == "0"
+    zero_player = Game.new(Computer.new("O"), Computer.new("X"))
+    zero_player.player_2.name = 'Hal 2000'
+    zero_player.play
+
+  elsif players == "1"
+    puts "What's your name?"
+    name = gets.strip
+
+    puts "Who should go first? You can type 'you', or just press anything else to go first."
+    first_player = gets.strip
+
+    puts "Would you like to be X or O? You can type 'X' or type anything else to be 'O."
+    mark = gets.strip
+
+    if first_player.downcase == 'you'
+      if mark.upcase == 'X'
+        one_player = Game.new(Computer.new("O"), Human.new("X"))
+      else
+        one_player = Game.new(Computer.new("X"), Human.new("O"))
+      end
+      one_player.player_2.name = name
+    else
+      if mark == 'X'
+        one_player = Game.new(Human.new("X"), Computer.new("O"))
+      else
+        one_player = Game.new(Human.new("O"), Computer.new("X"))
+      end
+      one_player.player_1.name = name
+    end
+
+    one_player.play
+
+  elsif players == "2"
+    puts "Player 1: what's your name?"
+    name1 = gets.strip
+
+    puts "Player 2: what's your name?"
+    name2 = gets.strip
+
+    two_player = Game.new
+    two_player.player_1.name = name1
+    two_player.player_2.name = name2
+    puts "#{name1} is 'X' and #{name2} is 'O'"
+
+    two_player.play
+
+
+  elsif players.downcase == "wargames"
+    puts "                 .
+                 .
+                 .       :
+                 :      .
+        :..   :  : :  .
+           ..  ; :: .
+              ... .. :..
+             ::: :...
+         ::.:.:...;; .....
+      :..     .;.. :;     ..
+            . :. .  ;.
+             .: ;;: ;.
+            :; .BRRRV;
+               YB BMMMBR
+              ;BVIMMMMMt
+        .=YRBBBMMMMMMMB
+      =RMMMMMMMMMMMMMM;
+    ;BMMR=VMMMMMMMMMMMV.
+   tMMR::VMMMMMMMMMMMMMB:
+  tMMt ;BMMMMMMMMMMMMMMMB.
+ ;MMY ;MMMMMMMMMMMMMMMMMMV
+ XMB .BMMMMMMMMMMMMMMMMMMM:
+ BMI +MMMMMMMMMMMMMMMMMMMMi
+.MM= XMMMMMMMMMMMMMMMMMMMMY
+ BMt YMMMMMMMMMMMMMMMMMMMMi
+ VMB +MMMMMMMMMMMMMMMMMMMM:
+ ;MM+ BMMMMMMMMMMMMMMMMMMR
+  tMBVBMMMMMMMMMMMMMMMMMB.
+   tMMMMMMMMMMMMMMMMMMMB:
+    ;BMMMMMMMMMMMMMMMMY
+      +BMMMMMMMMMMMBY:
+        :+YRBBBRVt;"
+
+    puts "You have chosen war games..."
+    sleep(1)
+    count = 0
+    100.times do
+      zero_player = Game.new(Computer.new("O"), Computer.new("X"))
+      zero_player.player_2.name = 'Hal 2000'
+
+      winner = zero_player.play
+
+      if winner
+        puts "#{winner.name} has won"
+        count+= 1
+        break
+      end
+
+    end
+
+    if count > 0
+      puts "The unthinkable has happened...."
+    elsif
+      puts "They tied every time!"
+    end
+
+  end
+
+  puts "Play again? Y/n"
+  play = gets.strip
+end
