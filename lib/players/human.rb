@@ -1,9 +1,11 @@
 class Players
+  
   class Human < Player
-   def move(input)
-     input = gets.chomp
+   def move(board)
+     input = gets.strip
      @input = input
     end
-  end  
+  end
+    
 end
 
