@@ -2,5 +2,10 @@
 
 require_relative '../config/environment'
 puts "Welcome to Tic Tac Toe"
-@board= Board.new
-@game.play
+#puts "What kind of game do you want to play, 0, 1, or 2 player?"
+# Get user input
+#user_input = gets.strip
+# Use a case statement here to select the game type.
+# For now assume Computer vs Computer (game type = 0)
+game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+game.computer_play

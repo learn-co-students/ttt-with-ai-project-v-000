@@ -60,4 +60,23 @@ class Game
     turn until over?
     puts winner ?  "Congratulations #{winner}!" : "Cat's Game!"
   end
+
+###### Computer vs Computer game code below ######
+  # Helper Method
+  def computer_turn
+    user_input = self.current_player.move(@board)
+    # check if user_input is valid
+    user_input ? self.board.update(user_input, self.current_player) : self.computer_turn
+    self.board.display
+    1.times { |i| puts ""}
+  end
+  # Helper Method
+  def computer_play
+    self.computer_turn until over?
+    4.times { |i| puts ""}
+    self.board.display
+    1.times { |i| puts ""}
+    puts winner ?  "Congratulations #{winner} !" : "Cat's Game!"
+    1.times { |i| puts ""}
+  end
 end
