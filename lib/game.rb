@@ -67,8 +67,13 @@ class Game
     user_input = self.current_player.move(@board)
     # check if user_input is valid
     user_input ? self.board.update(user_input, self.current_player) : self.computer_turn
-    self.board.display
-    1.times { |i| puts ""}
+    loop do
+      t = Time.now
+      self.board.display
+      1.times { |i| puts ""}
+      sleep(t + 5 - Time.now)
+    end
+
   end
   # Helper Method
   def computer_play
