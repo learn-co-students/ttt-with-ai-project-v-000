@@ -40,6 +40,7 @@ class Board
 
   # Helper Method
   def taken?(user_input)
+    #binding.pry
     index = input_to_index(user_input)
     !(self.cells[index].nil? || self.cells[index] == " ")
   end
