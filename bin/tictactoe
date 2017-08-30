@@ -13,7 +13,7 @@ elsif input == "2"
 else
   game = Game.new( Players::Computer.new("X"),Players::Computer.new("O"))
  
-    game.play if board.valid_move?
+    game.turn if board.valid_move?
 end
 
 
