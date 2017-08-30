@@ -39,8 +39,19 @@ class Game
     end
   end
   def turn
-    puts "please enter a number between(1-9):"
-    self.current_player = gets.strip
+    puts "Enter a number between(1-9):"
+    user_input = current_player.move(board)
+    if board.valid_move?(user_input)
+      board.update(user_input, current_player)
+      board.display
+    else
+      puts "Invalid move"
+      turn
+    end
+  end
+  def play
+    # turn
+    # over?
   end
 end
 
