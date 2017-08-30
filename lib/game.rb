@@ -18,4 +18,29 @@ class Game
   def current_player
     self.board.cells.count{|cell| cell = "X" || cell = "O"}.odd? ? self.player_1 : self.player_2
   end
+  def over?
+    self.draw? || self.won?
+  end
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      self.board.taken?(combo[0]) && self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
+    end
+  end
+  def draw?
+    self.board.full? && !self.won?
+  end
+  def winner
+    if self.won?
+      if self.board.cells[self.won?[0]] == "X"
+        "X"
+      elsif self.board.cells[self.won?[0]] == "O"
+        "O"
+      end
+    end
+  end
+  def turn
+    puts "please enter a number between(1-9):"
+    self.current_player = gets.strip
+  end
 end
+
