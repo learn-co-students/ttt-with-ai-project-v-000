@@ -8,4 +8,4 @@ puts "Welcome to Tic Tac Toe"
 # Use a case statement here to select the game type.
 # For now assume Computer vs Computer (game type = 0)
 game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-game.computer_play
+game.logical_play
