@@ -40,8 +40,11 @@ class Game
   end
 
   def turn #executes a turn and then changes the player.
+  
+    puts "Please pick a number from 1 - 9:"
      player_move = self.current_player.move(self.board.cells) 
      if board.valid_move?(player_move)
+      
       player_move 
      else
       turn   
@@ -51,8 +54,9 @@ class Game
   end
 
   def play 
-    until self.over? || self.won?
-      self.turn    
+    until self.over?
+      self.turn 
+      board.display   
     end
     
     if won?

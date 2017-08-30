@@ -1,3 +1,23 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+ 
+
+puts "Welcome to the Tic-Tac-Toe Game"
+puts "How many players ? (1,2,0)"
+input = gets.strip
+if input == "1"
+  game = Game.new( Players::Human.new("X"),Players::Computer.new("O"))
+elsif input == "2"
+  game = Game.new
+else
+  game = Game.new( Players::Computer.new("X"),Players::Computer.new("O"))
+ 
+    game.play if board.valid_move?
+end
+
+
+game.play
+
+
+
