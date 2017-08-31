@@ -111,7 +111,7 @@ class Game
   end
 
   def start_game
-    puts "Enter '1' to play against the computer.\nEnter '2' to play with a friend.\nEnter '0' to watch the computer play itself.\n\n"
+    puts "Enter '1' to play against the computer.\nEnter '2' to play with a friend.\nEnter '0' to watch the computer play itself.\nIf you want to watch the computer play itself 100 times, type 'wargames.'\n\n"
     game_type = gets.strip
     if game_type == "0" #two computer players
       no_players
@@ -125,6 +125,8 @@ class Game
         end
     elsif game_type == "2"
       two_players
+    elsif game_type.downcase == "wargames"
+      wargames
     else
       puts "Forgive me; I'm just a computer and not as smart as you.  This is what I understand:"
       start_game
@@ -146,6 +148,16 @@ class Game
     else
       puts "You are confusing me, bro."
       game_loop
+    end
+  end
+
+  def wargames
+    no_players
+    100.times do
+      Game.new(@player_1, @player_2)
+      until over?
+        play
+      end
     end
   end
 
