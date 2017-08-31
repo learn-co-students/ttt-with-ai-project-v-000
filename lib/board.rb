@@ -19,12 +19,12 @@ class Board
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} \n\n\n"
     #print the board's current state
   end
 
   def position(input)
-    cells[input.to_i - 1]
+    cells[input.to_i-1]
     #takes in user's input in the form of 1-9 strings and converts it to a index (integer?) on the board array
   end
 
@@ -43,7 +43,7 @@ class Board
   end
 
   def valid_move?(position)
-    position.to_i.between?(1, 8) && !taken?(position)
+    position.to_i.between?(1, 9) && !taken?(position)
     #ensures that moves are between 1-9 and not taken
   end
 
