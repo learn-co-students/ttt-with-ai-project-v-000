@@ -153,11 +153,11 @@ class Game
 
   def wargames
     no_players
-    100.times do
+    counter = 0
+    until counter == 100
       Game.new(@player_1, @player_2)
-      until over?
-        play
-      end
+      play
+      counter += 1
     end
   end
 
