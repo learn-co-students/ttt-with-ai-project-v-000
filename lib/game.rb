@@ -111,7 +111,7 @@ class Game
   end
 
   def start_game
-    puts "Enter '1' to play against the computer.\nEnter '2' to play with a friend.\nEnter '0' to watch the computer play itself.\nIf you want to watch the computer play itself 100 times, type 'wargames.'\n\n"
+    puts "Enter '1' to play against the computer.\nEnter '2' to play with a friend.\nEnter '0' to watch the computer play itself.\n\nType 'wargames' if you want to watch the computer play itself 100 times.\n\n"
     game_type = gets.strip
     if game_type == "0" #two computer players
       no_players
@@ -152,6 +152,12 @@ class Game
   end
 
   def wargames
+    puts "WARGAMES begins in 3..."
+    sleep(1)
+    puts "2..."
+    sleep(1)
+    puts "1..."
+    sleep(1)
     no_players
     counter = 0
     until counter == 100
