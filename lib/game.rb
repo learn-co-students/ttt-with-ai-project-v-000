@@ -65,8 +65,6 @@ if won?
 elsif draw?
   puts "Cat's Game!"
 end
-
 end
-
 
 end #ends the class
