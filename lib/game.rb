@@ -47,7 +47,7 @@ class Game
 
   def winner
     board.cells[won?[0]] if won?
-    git 
+
   end
 
   def turn
