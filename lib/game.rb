@@ -1,7 +1,10 @@
 require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2, :current_player
-  WIN_COMBINATIONS =[
+  def self.win_combo
+    WIN_COMBINATIONS
+  end
+  WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
     [6,7,8],
@@ -41,16 +44,14 @@ class Game
 
   def turn #executes a turn and then changes the player.
   
-    puts "Please pick a number from 1 - 9:"
-     player_move = self.current_player.move(self.board.cells) 
+    
+     player_move = self.current_player.move(self.board) 
      if board.valid_move?(player_move)
-      
       player_move 
      else
       turn   
      end 
-      self.board.update(player_move, current_player)
-      
+      self.board.update(player_move, current_player)   
   end
 
   def play 
