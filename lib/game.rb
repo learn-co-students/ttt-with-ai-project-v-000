@@ -24,6 +24,10 @@ class Game
 
   # Helper Method
   def over?
+    self.board.display
+    1.times { |i| puts ""}
+    t = Time.now
+    sleep(t + 1 - Time.now)
   	won? || draw?
   end
 
@@ -67,10 +71,7 @@ class Game
       user_input = self.current_player.move(@board)
       # check if user_input is valid
       user_input ? self.board.update(user_input, self.current_player) : self.computer_turn
-      self.board.display
-      1.times { |i| puts ""}
-      t = Time.now
-      sleep(t + 1 - Time.now)
+
     end
     # Helper Method
     def computer_play
@@ -79,4 +80,18 @@ class Game
       puts winner ?  "Congratulations #{winner} !" : "Cat's Game!"
       1.times { |i| puts ""}
     end
-  end
+
+###### Computer vs Logic game code below ######
+    def logic_turn
+      user_input = self.current_player.logical_move(@board)
+      # check if user_input is valid
+      user_input ? self.board.update(user_input, self.current_player) : self.logic_turn
+    end
+    # Helper Method
+    def logical_play
+      self.logic_turn until over?
+      1.times { |i| puts ""}
+      puts winner ?  "Congratulations #{winner} !" : "Cat's Game!"
+      1.times { |i| puts ""}
+    end
+end
