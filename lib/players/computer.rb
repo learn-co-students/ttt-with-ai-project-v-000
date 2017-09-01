@@ -13,9 +13,12 @@ module Players
 
       def move(board)
       #call methods below based on who's turn it is
-      logical_play(board)
+      #logical_play(board)
       # Pass input to Game
-      board.valid_move?(user_input) ? input : nil
+      #board.valid_move?(user_input) ? input : nil
+      prng = Random.new
+      input = prng.rand(9) + 1
+      input.to_s
       end
 
     def two_in_row?(board)
