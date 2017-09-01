@@ -13,9 +13,14 @@ module Players
     ]
 
     def move(board)
+      # binding.pry
       open_moves = board.cells.collect.with_index do |c, i|
           i + 1 if c == " "
           end.compact
+
+      corner_move = [1, 3, 7, 9].select do |m|
+        open_moves.include?(m)
+      end
 
       strategy_1 = WIN_COMBINATIONS.find do |win|
         board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == " " && board.cells[win[0]] != " "
@@ -29,7 +34,9 @@ module Players
         board.cells[win[1]] == board.cells[win[2]] && board.cells[win[0]] == " " && board.cells[win[1]] != " "
         end
 
-      if
+      if open_moves.include?(5)
+        "5"
+      elsif
         strategy_1 != nil && open_moves.include?(strategy_1[2]+1)
         answer = strategy_1[2] + 1
         answer.to_s
@@ -41,6 +48,9 @@ module Players
         strategy_3 != nil && open_moves.include?(strategy_3[0]+1)
         answer = strategy_3[0] + 1
         answer.to_s
+      elsif
+        corner_move != []
+        corner_move.sample.to_s
       else
         open_moves.sample.to_s
       end
@@ -49,3 +59,5 @@ module Players
 
   end
 end
+
+#board.cells = ["X", "O", "X", " ", "X", "O", "O", "O", "X"]

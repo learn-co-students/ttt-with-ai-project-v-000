@@ -1,3 +1,4 @@
+
 class Game
   attr_accessor :player_1, :player_2, :board
 
@@ -17,7 +18,6 @@ class Game
     @player_2 = player_2
     @board = board
   end
-
 
   def current_player
     if @board.turn_count.odd?
@@ -68,8 +68,10 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
+      "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
+      "Cat's Game!"
     end
   end
 
@@ -111,7 +113,7 @@ class Game
   end
 
   def start_game
-    puts "Enter '1' to play against the computer.\nEnter '2' to play with a friend.\nEnter '0' to watch the computer play itself.\n\nType 'wargames' if you want to watch the computer play itself 100 times.\n\n"
+    puts "\n\nEnter '1' to play against the computer.\nEnter '2' to play with a friend.\nEnter '0' to watch the computer play itself.\n\nType 'wargames' to see the computer play itself 100 times.\n\n"
     game_type = gets.strip
     if game_type == "0" #two computer players
       no_players
@@ -126,6 +128,26 @@ class Game
     elsif game_type == "2"
       two_players
     elsif game_type.downcase == "wargames"
+      puts "W"
+      sleep(0.25)
+      puts " A"
+      sleep(0.25)
+      puts "  R"
+      sleep(0.25)
+      puts "   G"
+      sleep(0.25)
+      puts "    A"
+      sleep(0.25)
+      puts "     M"
+      sleep(0.25)
+      puts "      E"
+      sleep(0.25)
+      puts "       S"
+      sleep(0.5)
+      puts "        !"
+      sleep(0.5)
+      puts "A smart computer would never be able to beat itself. Let's see what happens..."
+      sleep(2)
       wargames
     else
       puts "Forgive me; I'm just a computer and not as smart as you.  This is what I understand:"
@@ -139,32 +161,38 @@ class Game
   end
 
   def game_loop
-    puts "Would you like to play again? (yes or no)"
+    puts "Type 'yes' to play again. Type anything else to exit."
     answer = gets.strip.downcase
     if answer == "yes"
       Game.new.start_game
-    elsif answer == "no"
-      puts "Goodbye!"
     else
-      puts "You are confusing me, bro."
-      game_loop
+      puts "Goodbye!"
+      exit
     end
   end
 
   def wargames
-    puts "WARGAMES begins in 3..."
-    sleep(1)
-    puts "2..."
-    sleep(1)
-    puts "1..."
-    sleep(1)
-    no_players
-    counter = 0
-    until counter == 100
-      Game.new(@player_1, @player_2)
-      play
-      counter += 1
+    x_win_counter = 0
+    o_win_counter = 0
+    cat_win_counter = 0
+    100.times do
+      no_players
+      w = Game.new(@player_1, @player_2)
+      result = w.play
+      # binding.pry
+      if result == "Congratulations, X!"
+        x_win_counter += 1
+      elsif result == "Congratulations, O!"
+        o_win_counter += 1
+      elsif result == "Cat's Game!"
+        cat_win_counter += 1
+      end
     end
+    puts "\n\n\nResults:\n'X' wins:#{x_win_counter}\n'O' wins:#{o_win_counter}\nCat's Game:#{cat_win_counter}"
+    if cat_win_counter == 100
+      puts "It can't beat itself!  Can you beat the computer?\n\n"
+    end
+    game_loop
   end
 
 end
