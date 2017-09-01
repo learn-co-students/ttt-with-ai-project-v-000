@@ -4,4 +4,30 @@ require_relative '../config/environment'
 
   puts "Hey welcome to Tic-Tac-Toe"
 
+  def start
+  puts "Choose your game type"
+
+  puts "Computer: Enter 0"
+  puts "Single player: Enter 1"
+  puts "Double Player: Enter 2"
+  game_type = gets.chomp
+
+  if game_type == "0" then
+     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+     elsif game_type == "1" then
+     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+     elsif game_type == "2"
+     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+   else
+     puts "Invalid Selection"
+     start
+   end
+   puts "Another round? (Y/N)"
+    if gets.chomp == "Y"
+      start
+    else
+      puts "Later Skater"
+    end
+   end
+
 start
