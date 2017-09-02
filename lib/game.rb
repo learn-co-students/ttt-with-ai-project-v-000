@@ -17,4 +17,21 @@ class Game
     [2,4,6],
     [0,4,8]
   ]
+
+  def won?
+    WIN_COMBINATIONS.detect do |win_combination|
+      @board[win_combination[0]] == @board[win_combination[1]] \
+      && @board[win_combination[2]] == @board[win_combination[1]] \
+      && @board[win_combination[0]] != " "
+    end
+  end
+
+
+#   def draw?
+#    full? && !won?
+#   end
+#
+#   def over?
+#     full? || won? || draw?
+#   end
 end
