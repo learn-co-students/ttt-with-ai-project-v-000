@@ -40,7 +40,8 @@ class Board
     user_input.to_i.between?(1,9) && !taken?(user_input)
   end
 
-  def update(user_input, player)
+  def update(user_input, player = X)
+    @cells(user_input.to_i) = player
   end
 
 
