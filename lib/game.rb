@@ -1,10 +1,10 @@
 class Game
   attr_accessor :board, :player_1, :player_2
-
-  def initialize(player_1, player_2, board)
-    @board = board
+  #Initialize with three optional arguments, new board, instances of humans
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
+    @board = board
   end
 
   WIN_COMBINATIONS = [
@@ -18,20 +18,35 @@ class Game
     [0,4,8]
   ]
 
+  def current_player
+    if @board.turn_count.even?
+      @player_1
+    else
+      @player_2
+    end
+  end
+
+  def over?
+    won? || draw?
+  end
+
   def won?
     WIN_COMBINATIONS.detect do |win_combination|
-      @board[win_combination[0]] == @board[win_combination[1]] \
-      && @board[win_combination[2]] == @board[win_combination[1]] \
-      && @board[win_combination[0]] != " "
+      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] \
+      && @board.cells[win_combination[2]] == @board.cells[win_combination[1]] \
+      && @board.cells[win_combination[0]] != " "
+    end
+  end
+
+  def draw?
+    @board.full? && !won?
+  end
+
+  def winner
+    if winning_combination = won?
+      @board.cells[winning_combination[0]]
     end
   end
 
 
-#   def draw?
-#    full? && !won?
-#   end
-#
-#   def over?
-#     full? || won? || draw?
-#   end
 end
