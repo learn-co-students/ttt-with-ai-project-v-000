@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2
   #Initialize with three optional arguments, new board, instances of humans
@@ -47,6 +49,27 @@ class Game
       @board.cells[winning_combination[0]]
     end
   end
+
+  def turn
+    #first, we want to determine the current player
+    #second, we ask that player to make a move
+    #third, check if the player_input represents a valid move
+    #if the move is invalid, call turn  again
+    #ELSE if the move is valid, update the board with player_input
+    #END
+
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      @board.update(current_move, player)
+      puts "#{player.token} in #{current_move}"
+    end
+
+  end
+
+
 
 
 end

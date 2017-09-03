@@ -29,6 +29,7 @@ class Board
   end
 
   def turn_count
+    #Going through array and checking for empty spots
     @cells.count{|cell| cell != " " }
   end
 
