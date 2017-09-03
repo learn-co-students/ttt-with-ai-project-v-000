@@ -4,33 +4,19 @@ module Players
 
     def move(board)
 
-      player = current_player
-      current_move = current.move(@board)
-      if @board.valid_move?(current_move)
-        update(current_move, player)
-      elsif ....
+      corners = [1, 3, 7, 9]
+      if @board.turn_count == 0 && !@board.taken?("5")
+        "5"
+      elsif @board.turn_count == 1 && !@board.taken?("1")
+        "1"
+      elsif @board.turn_count == 2
+        corners.find { |corner|!@board.taken?(corner) }
       end
     end
 
 
-
-  end
-end
-
-
-
-
-
-
-      # A first move takes center
-      # B takes upper left corner
-      # A takes bottom left corner
-      # B takes upper right corner
-      # A takes middle top
-      # B takes bottom middle
-      # A takes middle left
-      # B takes middle right
-      # A takes bottom right
+      end
+    end
 
 
 
@@ -51,10 +37,3 @@ end
       #   [2,4,6],
       #   [0,4,8]
       # ]
-
-
-
-    end
-
-  end
-end
