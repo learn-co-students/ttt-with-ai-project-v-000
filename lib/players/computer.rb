@@ -3,20 +3,16 @@ module Players
   class Computer < Player
 
     def move(board)
-
-      corners = [1, 3, 7, 9]
-      if @board.turn_count == 0 && !@board.taken?("5")
+      if !@board.taken?("5")
         "5"
-      elsif @board.turn_count == 1 && !@board.taken?("1")
-        "1"
-      elsif @board.turn_count == 2
-        corners.find { |corner|!@board.taken?(corner) }
+      elsif !@board.taken?("1")
+        "1"  
       end
     end
 
 
-      end
-    end
+  end
+end
 
 
 
