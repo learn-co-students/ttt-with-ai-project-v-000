@@ -5,8 +5,9 @@ module Players
     def move(board)
       if !@board.taken?("5")
         "5"
-      elsif !@board.taken?("1")
-        "1"  
+      elsif @board.turn_count == 1 && !@board.taken?("1")
+        "1"
+      elsif
       end
     end
 
@@ -14,10 +15,8 @@ module Players
   end
 end
 
-
-
-      #First move takes center if availabe if not take any corner.
-      #Second move takes center if availabe if not take any corner
+      #First move takes center
+      #Second move takes center if availabe if not takes any corner
       #Blocking: iterate through win combination array.
       #If any two tokens of the same kind take two/three comb spots, and is not my token, take third spot.
       #Winning, iterate through win comb array
