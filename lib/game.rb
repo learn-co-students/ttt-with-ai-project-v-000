@@ -50,14 +50,14 @@ class Game
     end
   end
 
-  def turn
-    #first, we want to determine the current player
-    #second, we ask that player to make a move
-    #third, check if the player_input represents a valid move
-    #if the move is invalid, call turn  again
-    #ELSE if the move is valid, update the board with player_input
-    #END
+  #first, we want to determine the current player
+  #second, we ask that player to make a move
+  #third, check if the player_input represents a valid move
+  #if the move is invalid, call turn  again
+  #ELSE if the move is valid, update the board with player_input
+  #END
 
+  def turn
     player = current_player
     current_move = player.move(@board)
     if !@board.valid_move?(current_move)
@@ -66,10 +66,17 @@ class Game
       @board.update(current_move, player)
       puts "#{player.token} in #{current_move}"
     end
-
   end
 
-
-
+  def play
+    while !over? #while CONDITION == TRUE do something, else stop
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 
 end
