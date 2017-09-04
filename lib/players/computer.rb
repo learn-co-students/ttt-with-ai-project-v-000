@@ -3,34 +3,38 @@ module Players
   class Computer < Player
 
   def move(board)
-
     current_move = nil
-      #computer 1st player, 1st move
-      if !@board.taken?("5")
-        current_move = "5"
-      #computer 2nd player, 1st move
+    #computer 1st player, 1st move
+    if !@board.taken?("5")
+      current_move = "5"
+    #computer 2nd player, 1st move
     elsif @board.turn_count == 1 && !@board.taken?("1") && @board.taken?("5")
-        current_move = "1"
-      #computer 1st player, 2nd move
+      current_move = "1"
+    #computer 1st player, 2nd move
     elsif @board.turn_count <= 2
-      current_move = [1, 3, 7, 9].find |corner|
-        !@board.taken?(corner).to_s
+      current_move = [1, 3, 7, 9].find do |corner|
+      !@board.taken?(corner).to_s
       end
     else
-      combo = GAME::WIN_COMBINATIONS.find do|combo|
-          @board[combo[0]] == @board[combo[1]] && @board[combo[2]] is " "  && @board[combo[0]] != ' '
-          @board[combo[0]] == @board[combo[2]] && @board[combo[1]] is " "
-          @board[combo[1]] == @board[combo[2]] && @board[combo[0]] is " "
+      combo = GAME::WIN_COMBINATIONS.find do |combo|
+        @board[combo[0]] == @board[combo[1]] && @board[combo[2]] is " " && @board[combo[0]] != ' '
+        @board[combo[0]] == @board[combo[2]] && @board[combo[1]] is " " && @board[combo[2]] != ' '
+        @board[combo[1]] == @board[combo[2]] && @board[combo[0]] is " " && @board[combo[1]] != ' '
+      end
+        if @board[combo[0]] == ' '
+          current_move = @board[combo[0 + 1]]
+        elsif @board[combo[1]] == ' '
+          current_move = @board[combo[1 + 1]]
+        elsif @board[board[2]] == ' '
+          current_move = @board[combo[2 + 1]]
+        end
+
+
+
       end
 
-      if combo
-        which index position on the board represents empty string # if @board[combo[0]] == ' '; current_move = combo[0] + 1
-        return combo element where position on board is ' '
-        # add 1 to it
-      end
 
 
-      end
     end
   end
 end
