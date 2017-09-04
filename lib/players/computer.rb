@@ -17,7 +17,10 @@ module Players
         current_move = [1, 3, 7, 9].find |corner|
           !@board.taken?(corner)
       #computer 2nd player, 2nd move
-      elsif @board.turn_count.odd? 
+    elsif @board.turn_count == 3 && @board.position("5") == @board.position("1") \
+        || @board.position("5") == @board.position("3") \
+        || @board.position("5") == @board.position("7") \
+        || @board.position("5") == @board.position("9")
 
 
 
