@@ -16,18 +16,13 @@ module Players
       current_move = [1, 3, 7, 9].find |corner|
         !@board.taken?(corner)
       end
-      #computer 2nd player, 2nd move, 4th spot on board, one spot is yours, two spots aren't check if any two corners match, then block it.
-      elsif @board.turn_count == 3 && @board.position("1") == @board.position("3")\
-        || @board.position("7") == @board.position("9")\
-        || @board.position("1") == @board.position("9")
-        current_move = [2, 4, 6, 8].find |corner|
-        !@board.taken?(corner)
-      else
-        GAME::WIN_COMBINATIONS go through each  |combo|
-          board at combo[0] == board at combo[1] && board at combo[2] is " "  && board at combo[0] != ' '
-          board at combo[0] == board at combo[2] && board at combo[1] is " "
-          board at combo[1] == board at combo[2] && board at combo[0] is " "
-        end
+
+    else
+      GAME::WIN_COMBINATIONS go through each  |combo|
+        board at combo[0] == board at combo[1] && board at combo[2] is " "  && board at combo[0] != ' '
+        board at combo[0] == board at combo[2] && board at combo[1] is " "
+        board at combo[1] == board at combo[2] && board at combo[0] is " "
+      end
 
 
 
@@ -47,3 +42,11 @@ end
 # 7. Winning! If two spots filled are my token, fill third spot with my token
 # 8. Blocking! If two spots filled are NOT my token, fill thrid spot with my token
 # 9. return current_move
+
+
+# #computer 2nd player, 2nd move, 4th spot on board, one spot is yours, two spots aren't check if any two corners match, then block it.
+# elsif @board.turn_count == 3 && @board.position("1") == @board.position("3")\
+#   || @board.position("7") == @board.position("9")\
+#   || @board.position("1") == @board.position("9")
+#   current_move = [2, 4, 6, 8].find |corner|
+#   !@board.taken?(corner)
