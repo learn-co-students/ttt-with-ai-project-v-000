@@ -29,8 +29,8 @@ class Board
   end
 
   def turn_count
-    #Going through array and checking for empty spots
-    @cells.count{|cell| cell != " " }
+    cells.count{ |token| token == "X" || token == "O" }
+    # @cells.count{|cell| cell != " " }
   end
 
   def taken?(user_input)

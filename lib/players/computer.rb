@@ -2,9 +2,25 @@ require 'pry'
 module Players
   class Computer < Player
 
-    def move(board)
+  def move(board)
+
+    current_move = nil
+      #computer 1st player, 1st move
       if !@board.taken?("5")
-        "5"
+        current_move = "5"
+      #computer 2nd player, 1st move
+      elsif @board.turn_count.odd? && @board.taken?("5")
+        current_move = "1"
+      #computer 1st player, 2nd move
+      elsif @board.turn_count.even?
+        # binding.pry
+        current_move = [1, 3, 7, 9].find |corner|
+          !@board.taken?(corner)
+      #computer 2nd player, 2nd move
+      elsif @board.turn_count.odd? 
+
+
+
       end
     end
 
@@ -17,8 +33,8 @@ end
 # 3. If computer is first player place token in middle a.k.a positon 5, no need to check for turn_count
 # 4. If computer is second player aka turn_count is not even, place token in corner position if position 5 has been taken else position 5
 # 5. If computer went first and took the middle on first move, take an open corner. Corners = [1,3,7,9]
-# 5.1
+
 # 6. Check if any of combos within WIN_COMBINATIONS has two spots filled through iteration
 # 7. Winning! If two spots filled are my token, fill third spot with my token
 # 8. Blocking! If two spots filled are NOT my token, fill thrid spot with my token
-# 9. move
+# 9. return current_move
