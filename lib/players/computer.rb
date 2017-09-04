@@ -4,7 +4,7 @@ module Players
   class Computer < Player
 
     def move(board)
-      current_move = nil
+    current_move = nil
       #computer 1st player, 1st move
       if !board.taken?("5")
         current_move = "5"
@@ -14,22 +14,22 @@ module Players
       #computer 1st player, 2nd move
       elsif board.turn_count <= 3
         current_move = [1, 3, 7, 9].find do |corner|
-        !board.taken?(corner).to_s
+          !board.taken?(corner).to_s
         end
       else
         combo = GAME::WIN_COMBINATIONS.find do |combo|
-          board[combo[0]] == board[combo[1]] && board[combo[2]] == " " && board[combo[0]] != ' '
-          board[combo[0]] == board[combo[2]] && board[combo[1]] == " " && board[combo[2]] != ' '
-          board[combo[1]] == board[combo[2]] && board[combo[0]] == " " && board[combo[1]] != ' '
+        board[combo[0]] == board[combo[1]] && board[combo[2]] == " " && board[combo[0]] != ' '
+        board[combo[0]] == board[combo[2]] && board[combo[1]] == " " && board[combo[2]] != ' '
+        board[combo[1]] == board[combo[2]] && board[combo[0]] == " " && board[combo[1]] != ' '
         end
-          if board[combo[0]] == ' '
-            current_move = board[combo[0 + 1]]
-          elsif board[combo[1]] == ' '
-            current_move = board[combo[1 + 1]]
-          elsif board[board[2]] == ' '
-            current_move = board[combo[2 + 1]]
-          end
-      end #closes if st
+        if board[combo[0]] == ' '
+          current_move = board[combo[0 + 1]]
+        elsif board[combo[1]] == ' '
+          current_move = board[combo[1 + 1]]
+        elsif board[board[2]] == ' '
+          current_move = board[combo[2 + 1]]
+        end
+      end #closes if statement
       current_move
     end # closes method
   end #closes class
