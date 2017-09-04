@@ -15,7 +15,7 @@ module Players
       elsif @board.turn_count.even?
       current_move = [1, 3, 7, 9].find |corner|
       !@board.taken?(corner)
-      #computer 2nd player, 2nd move, check if any two corners match, then block it.
+      #computer 2nd player, 2nd move, one spot is yours, two spots aren't check if any two corners match, then block it.
       elsif @board.turn_count == 3 && @board.position("1") == @board.position("3")\
         || @board.position("7") == @board.position("9")\
         || @board.position("1") == @board.position("9")
