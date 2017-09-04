@@ -12,7 +12,7 @@ module Players
       elsif @board.turn_count == 1 && !@board.taken?("1") && @board.taken?("5")
         current_move = "1"
       #computer 1st player, 2nd move
-      elsif @board.turn_count <= 2
+      elsif @board.turn_count <= 3
         current_move = [1, 3, 7, 9].find do |corner|
         !@board.taken?(corner).to_s
         end
