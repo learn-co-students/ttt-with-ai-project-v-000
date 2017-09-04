@@ -21,6 +21,8 @@ module Players
         || @board.position("1") == @board.position("9")
         current_move = [2, 4, 6, 8].find |corner|
         !@board.taken?(corner)
+      else
+        GAME::WIN_COMBINATIONS
 
 
 
@@ -31,8 +33,6 @@ module Players
 
       end
     end
-
-
   end
 end
 
