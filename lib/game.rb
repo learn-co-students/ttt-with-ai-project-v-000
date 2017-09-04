@@ -87,7 +87,7 @@ class Game
 			board.display
 		end
 		if won?
-			binding.pry
+			
 			puts "Congratulations #{self.winner}!"	 
 		elsif draw?
 			puts "Cat's Game!"
