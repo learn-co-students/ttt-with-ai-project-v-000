@@ -12,19 +12,22 @@ module Players
     elsif @board.turn_count == 1 && !@board.taken?("1") && @board.taken?("5")
         current_move = "1"
       #computer 1st player, 2nd move
-    elsif @board.turn_count < 3
+    elsif @board.turn_count <= 2
       current_move = [1, 3, 7, 9].find |corner|
-        !@board.taken?(corner)
+        !@board.taken?(corner).to_s
       end
-
     else
-      GAME::WIN_COMBINATIONS go through each  |combo|
-        board at combo[0] == board at combo[1] && board at combo[2] is " "  && board at combo[0] != ' '
-        board at combo[0] == board at combo[2] && board at combo[1] is " "
-        board at combo[1] == board at combo[2] && board at combo[0] is " "
+      combo = GAME::WIN_COMBINATIONS.find do|combo|
+          @board[combo[0]] == @board[combo[1]] && @board[combo[2]] is " "  && @board[combo[0]] != ' '
+          @board[combo[0]] == @board[combo[2]] && @board[combo[1]] is " "
+          @board[combo[1]] == @board[combo[2]] && @board[combo[0]] is " "
       end
 
-
+      if combo
+        which index position on the board represents empty string # if @board[combo[0]] == ' '; current_move = combo[0] + 1
+        return combo element where position on board is ' '
+        # add 1 to it
+      end
 
 
       end
