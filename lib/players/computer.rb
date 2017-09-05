@@ -14,6 +14,7 @@ module Players
     DIA_CORNER = [[0, 8], [2, 6]]
     CORNER = [[0], [2], [6], [8]]
     INTERIOR = [1, 3, 5, 7]
+
       def two_in_row?(board)
         WIN_COMBO.find do |win|
          ((board.cells[win[0]] == board.cells[win[1]]) && board.cells[win[2]] == " " && board.cells[win[0]] != " ") ||
@@ -47,6 +48,31 @@ module Players
         end
       end
 
+      def occupied_corner(board)
+        CORNER.find do |cor|
+          board.cells[cor[0]] != " "
+        end
+      end
+
+      def center_token(board)
+        case board.cells[4]
+        when "X"
+          binding.pry
+          0
+        when "O"
+          binding.pry
+          1
+        end
+      end
+
+      def above_corner(board)
+
+      end
+
+      def below_corner(board)
+
+      end
+
       def random_move(board)
         prng = Random.new
         input = prng.rand(9) + 1
@@ -55,38 +81,35 @@ module Players
 
       def move(board)
         case board.turn_count
-        when 0
+        when 0 #X1
           random_move(board)
-        when 1
-          #input = "9"
+        when 1 #O1
           move_one(board)
-        when 2
+        when 2 #X2
           move_two(board)
-        when 3
-          move_block_corner(board)
-        when 4
+        when 3 #O2
+          if board.cells[8] != " "
+            input = "6"
+          else
+            move_block(board)
+          end
+        when 4 #X3
           move_block(board)
-        when 5
+        when 5 #O3
           move_block(board)
-        when 6
+        when 6 #X4
           move_block(board)
-        when 7
+        when 7 #O4
           move_block(board)
-        when 8
+        when 8 #X5
           random_move(board)
         end
       end
 
-      def occupied_corner(board)
-        CORNER.find do |cor|
-          board.cells[cor[0]] != " "
-        end
-      end
+
 
       def move_one(board)
-        if occupied_corner(board) != nil
-          input = "5"
-        elsif board.valid_move?("5")
+        if board.valid_move?("5")
           input = "5"
         else
           move_corner(board)
@@ -95,15 +118,14 @@ module Players
 
       def move_two(board)
         if diagonal(board) != nil
-          binding.pry
           case diagonal(board)[0]
           when 0
               input = "3"
           when 2
               input = "1"
           end
-        else
-          move_block(board)
+        else board.cells[4] == "O"
+          move_corner(board)
         end
       end
 
