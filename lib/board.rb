@@ -37,6 +37,10 @@ class Board
     position(user_input) != " "
   end
 
+  def index_taken?(index)
+    @cells[index] != " "
+  end
+
   def valid_move?(user_input)
     user_input.to_i.between?(1,9) && !taken?(user_input)
   end

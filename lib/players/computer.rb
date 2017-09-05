@@ -1,39 +1,62 @@
 require 'pry'
+require 'awesome_print'
 
 module Players
   class Computer < Player
 
     def move(board)
-    current_move = nil
-      #computer 1st player, 1st move
-      if !board.taken?("5")
-        current_move = "5"
-      #computer 2nd player, 1st move
-      elsif board.turn_count == 1 && !board.taken?("1") && board.taken?("5")
-        current_move = "1"
-      #computer 1st player, 2nd move
-      elsif board.turn_count <= 3
-        current_move = [1, 3, 7, 9].find do |corner|
-          !board.taken?(corner).to_s
-        end
+      current_move = nil
+      if !board.index_taken?(4)
+        current_move = 4
       else
-        combo = GAME::WIN_COMBINATIONS.find do |combo|
-        board[combo[0]] == board[combo[1]] && board[combo[2]] == " " && board[combo[0]] != ' '
-        board[combo[0]] == board[combo[2]] && board[combo[1]] == " " && board[combo[2]] != ' '
-        board[combo[1]] == board[combo[2]] && board[combo[0]] == " " && board[combo[1]] != ' '
+        cells = board.cells
+
+        near_win = Game::WIN_COMBINATIONS.find do |combo|
+          x_count = 0
+          o_count = 0
+
+          combo.each do |position|
+            if cells[position] == "X"
+              x_count += 1
+            elsif cells[position] == "O"
+              o_count += 1
+            end
+          end
+
+          if x_count == 2 || o_count == 2
+            true
+          else
+            false
+          end
         end
-        if board[combo[0]] == ' '
-          current_move = board[combo[0 + 1]]
-        elsif board[combo[1]] == ' '
-          current_move = board[combo[1 + 1]]
-        elsif board[board[2]] == ' '
-          current_move = board[combo[2 + 1]]
+
+        if near_win
+          current_move = near_win.find do |position|
+            !board.index_taken? position
+          end
         end
       end #closes if statement
-      current_move
-    end # closes method
-  end #closes class
-end #closes module
+
+      if !current_move
+        current_move = [0, 2, 6, 8].find do |corner|
+          !board.index_taken?(corner)
+        end
+      end
+
+      if !current_move
+        current_move = [1, 3, 5, 7].find do |corner|
+          !board.index_taken?(corner)
+        end
+      end
+
+      if !current_move
+        binding.pry
+      end
+
+      return "#{current_move + 1}"
+    end
+  end
+end
 
 # 1. Checks board positions to make sure board has open spots using the !taken? method
 # 2. Takes in a string as input and puts it on board

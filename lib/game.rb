@@ -58,25 +58,35 @@ class Game
   #END
 
   def turn
+    @board.display
     player = current_player
     current_move = player.move(@board)
+
+    if current_move == 'exit'
+      # Game.
+    end
+
     if !@board.valid_move?(current_move)
       turn
     else
       @board.update(current_move, player)
       puts "#{player.token} in #{current_move}"
     end
+
+    if !over?
+      turn
+    else
+      if won?
+        @board.display
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        @board.display
+        puts "Cat's Game!"
+      end
+    end
   end
 
   def play
-    while !over? #while CONDITION == TRUE do something, else stop
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cat's Game!"
-    end
+    turn
   end
-
 end
