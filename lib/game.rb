@@ -26,8 +26,6 @@ class Game
   def over?
     self.board.display
     1.times { |i| puts ""}
-    t = Time.now
-    sleep(t + 1 - Time.now)
   	won? || draw?
   end
 
@@ -52,7 +50,7 @@ class Game
 
   # Helper Method
   def turn
-    puts "Please enter a number between(1-9):"
+    #puts "Please enter a number between(1-9):"
     #get input
     user_input = self.current_player.move(@board)
     # check if user_input is valid
@@ -62,6 +60,8 @@ class Game
   # Helper Method
   def play
     turn until over?
+    #t = Time.now
+    #sleep(t + 1 - Time.now)
     puts winner ?  "Congratulations #{winner}!" : "Cat's Game!"
   end
 
@@ -83,9 +83,12 @@ class Game
 
 ###### Computer vs Logic game code below ######
     def logic_turn
-      user_input = self.current_player.logical_move(@board)
+      #binding.pry
+      user_input = self.current_player.move(@board)
+      self.board.update(user_input, self.current_player)
+      #user_input = self.current_player.move(@board)
       # check if user_input is valid
-      user_input ? self.board.update(user_input, self.current_player) : self.logic_turn
+      #user_input ? self.board.update(user_input, self.current_player) : self.logic_turn
     end
     # Helper Method
     def logical_play
