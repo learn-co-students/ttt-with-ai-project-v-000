@@ -11,89 +11,167 @@ module Players
       [0,4,8],
       [6,4,2]]
 
-      def move(board)
-      #call methods below based on who's turn it is
-      #logical_play(board)
-      # Pass input to Game
-      #board.valid_move?(user_input) ? input : nil
-      prng = Random.new
-      input = prng.rand(9) + 1
-      input.to_s
+    DIA_CORNER = [[0, 8], [2, 6]]
+    CORNER = [[0], [2], [6], [8]]
+    INTERIOR = [1, 3, 5, 7]
+
+      def two_in_row?(board)
+        WIN_COMBO.find do |win|
+         ((board.cells[win[0]] == board.cells[win[1]]) && board.cells[win[2]] == " " && board.cells[win[0]] != " ") ||
+         ((board.cells[win[0]] == board.cells[win[2]]) && board.cells[win[1]] == " " && board.cells[win[0]] != " ") ||
+         ((board.cells[win[1]] == board.cells[win[2]]) && board.cells[win[0]] == " " && board.cells[win[1]] != " ")
+        end
       end
 
-    def two_in_row?(board)
-      WIN_COMBO.find do |win|
-       board.cells[win[0]] == board.cells[win[1]] && board.cells[win[0]] != " " || board.cells[win[0]] == board.cells[win[2]] && board.cells[win[2]] != " " || board.cells[win[1]] == board.cells[win[2]] && board.cells[win[1]] != " "
+      def diagonal(board)
+        DIA_CORNER.find do |dia|
+          board.cells[dia[0]] == "X" && board.cells[dia[1]] == "O" || board.cells[dia[1]] == "X" && board.cells[dia[0]] == "O"
+        end
       end
-    end
 
-    def random_move(board)
-      prng = Random.new
-      user_input = prng.rand(9) + 1
-
-    end
-
-    def move_one(board)
-      random_move(board)
-    end
-
-    def move_two(board)
-      if board.valid_move?("5")
-        user_input = "5"
-      elsif board.valid_move?("1")
-        user_input = "1"
-      elsif board.valid_move?("3")
-        user_input = "3"
-      elsif board.valid_move?("7")
-        user_input = "7"
-      elsif board.valid_move?("9")
-        user_input = "9"
+      def interior_X(board)
+        INTERIOR.select { |index|  index == "X"  }
       end
-    end
 
-    def move_three(board)
-      if two_in_row?(board) != nil
-        two_in_row?(board).each do |index|
-          user_input = index
-          (user_input +=1).to_s
-          if board.valid_move?(user_input)
-            user_input
+      def interior_O(board)
+        INTERIOR.select { |index|  index == "O"  }
+      end
+
+      def adjacent_X(board)
+        if INTERIOR.select.count == 2
+          case INTERIOR[0] == 1
+          when NTERIOR[1] == 3
+              move_corner(board)
           else
-            move_two(board)
+            move_block_corner(board)
           end
         end
       end
-    end
 
-    def logical_play(board)
-      case board.turn_count
-      when 0
-        move_one(board)
-        #binding.pry
-      when 1
-        move_two(board)
-        #binding.pry
-      when 2
-        move_two(board)
-        #binding.pry
-      when 3
-        move_three(board)
-      when 4
-        move_three(board)
-        #binding.pry
-      when 5
-        move_three(board)
-        #binding.pry
-      when 6
-        move_three(board)
-        #binding.pry
-      when 7
-        move_three(board)
-        #binding.pry
-      when 8
-        move_three(board)
-        #binding.pry
+      def occupied_corner(board)
+        CORNER.find do |cor|
+          board.cells[cor[0]] != " "
+        end
+      end
+
+      def center_token(board)
+        case board.cells[4]
+        when "X"
+          binding.pry
+          0
+        when "O"
+          binding.pry
+          1
+        end
+      end
+
+      def above_corner(board)
+
+      end
+
+      def below_corner(board)
+
+      end
+
+      def random_move(board)
+        prng = Random.new
+        input = prng.rand(9) + 1
+        input.to_s
+      end
+
+      def move(board)
+        case board.turn_count
+        when 0 #X1
+          random_move(board)
+        when 1 #O1
+          move_one(board)
+        when 2 #X2
+          move_two(board)
+        when 3 #O2
+          if board.cells[8] != " "
+            input = "6"
+          else
+            move_block(board)
+          end
+        when 4 #X3
+          move_block(board)
+        when 5 #O3
+          move_block(board)
+        when 6 #X4
+          move_block(board)
+        when 7 #O4
+          move_block(board)
+        when 8 #X5
+          random_move(board)
+        end
+      end
+
+
+
+      def move_one(board)
+        if board.valid_move?("5")
+          input = "5"
+        else
+          move_corner(board)
+        end
+      end
+
+      def move_two(board)
+        if diagonal(board) != nil
+          case diagonal(board)[0]
+          when 0
+              input = "3"
+          when 2
+              input = "1"
+          end
+        else board.cells[4] == "O"
+          move_corner(board)
+        end
+      end
+
+      def move_corner(board)
+        if board.valid_move?("1")
+          input = "1"
+        elsif board.valid_move?("3")
+          input = "3"
+        elsif board.valid_move?("7")
+          input = "7"
+        else
+          input = "9"
+        end
+      end
+
+      def move_interior(board)
+        if board.valid_move?("2")
+          input = "2"
+        elsif board.valid_move?("4")
+          input = "4"
+        elsif board.valid_move?("6")
+          input = "6"
+        elsif
+          input = "8"
+        else
+          nil
+        end
+      end
+
+      def move_block(board)
+        block = two_in_row?(board)
+        if block == nil && move_interior(board) != nil
+          move_interior(board)
+        else
+          move_block_corner(board)
+        end
+      end
+
+      def move_block_corner(board)
+        block = two_in_row?(board)
+        if block == nil
+          move_corner(board)
+        else
+          index = block.detect { |index| board.cells[index] == " " }
+          input = (index +=1).to_s
+        end
       end
     end
   end
-end
