@@ -1,5 +1,10 @@
 module Players
   class Computer < Player
+    attr_accessor :difficulty
+    def initialize(token, difficulty = "H" )
+      @token = token
+      @difficulty = difficulty
+    end
     #constant
     WIN_COMBO = [
       [0,1,2],
@@ -10,11 +15,9 @@ module Players
       [2,5,8],
       [0,4,8],
       [6,4,2]]
-
     DIA_CORNER = [[0, 8], [2, 6]]
     CORNER = [[0], [2], [6], [8]]
     INTERIOR = [1, 3, 5, 7]
-
       def two_in_row?(board)
         WIN_COMBO.find do |win|
          ((board.cells[win[0]] == board.cells[win[1]]) && board.cells[win[2]] == " " && board.cells[win[0]] != " ") ||
@@ -22,21 +25,17 @@ module Players
          ((board.cells[win[1]] == board.cells[win[2]]) && board.cells[win[0]] == " " && board.cells[win[1]] != " ")
         end
       end
-
       def diagonal(board)
         DIA_CORNER.find do |dia|
           board.cells[dia[0]] == "X" && board.cells[dia[1]] == "O" || board.cells[dia[1]] == "X" && board.cells[dia[0]] == "O"
         end
       end
-
       def interior_X(board)
         INTERIOR.select { |index|  index == "X"  }
       end
-
       def interior_O(board)
         INTERIOR.select { |index|  index == "O"  }
       end
-
       def adjacent_X(board)
         if INTERIOR.select.count == 2
           case INTERIOR[0] == 1
@@ -47,13 +46,11 @@ module Players
           end
         end
       end
-
       def occupied_corner(board)
         CORNER.find do |cor|
           board.cells[cor[0]] != " "
         end
       end
-
       def center_token(board)
         case board.cells[4]
         when "X"
@@ -64,27 +61,26 @@ module Players
           1
         end
       end
-
       def above_corner(board)
-
       end
-
       def below_corner(board)
-
       end
-
       def random_move(board)
         prng = Random.new
         input = prng.rand(9) + 1
         input.to_s
       end
-
       def move(board)
         case board.turn_count
         when 0 #X1
           random_move(board)
         when 1 #O1
-          move_one(board)
+          case self.difficulty
+          when "H"
+            move_one(board)
+          else
+            random_move(board)
+          end
         when 2 #X2
           move_two(board)
         when 3 #O2
@@ -105,9 +101,6 @@ module Players
           random_move(board)
         end
       end
-
-
-
       def move_one(board)
         if board.valid_move?("5")
           input = "5"
@@ -115,7 +108,6 @@ module Players
           move_corner(board)
         end
       end
-
       def move_two(board)
         if diagonal(board) != nil
           case diagonal(board)[0]
@@ -128,7 +120,6 @@ module Players
           move_corner(board)
         end
       end
-
       def move_corner(board)
         if board.valid_move?("1")
           input = "1"
@@ -140,7 +131,6 @@ module Players
           input = "9"
         end
       end
-
       def move_interior(board)
         if board.valid_move?("2")
           input = "2"
@@ -154,7 +144,6 @@ module Players
           nil
         end
       end
-
       def move_block(board)
         block = two_in_row?(board)
         if block == nil && move_interior(board) != nil
@@ -163,7 +152,6 @@ module Players
           move_block_corner(board)
         end
       end
-
       def move_block_corner(board)
         block = two_in_row?(board)
         if block == nil
