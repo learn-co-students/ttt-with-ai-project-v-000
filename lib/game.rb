@@ -55,8 +55,6 @@ class Game
     player = current_player
     current_move = player.move(@board)
 
-    binding.pry
-
     if current_move == 'exit'
       puts 'Goodbye!'
       exit
