@@ -10,7 +10,7 @@ user_input = gets.strip
 case user_input
 when "0"
   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-  game.logical_play
+  game.play
 when "1"
   game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
   game.play
