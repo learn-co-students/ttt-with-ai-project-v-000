@@ -35,7 +35,7 @@ module Players
             !board.index_taken? position
           end
         end
-      end #closes if statement
+      end
 
       if !current_move
         current_move = [0, 2, 6, 8].find do |corner|
@@ -44,8 +44,8 @@ module Players
       end
 
       if !current_move
-        current_move = [1, 3, 5, 7].find do |corner|
-          !board.index_taken?(corner)
+        current_move = [1, 3, 5, 7].find do |middle|
+          !board.index_taken?(middle)
         end
       end
 
