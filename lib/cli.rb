@@ -17,7 +17,6 @@ class Cli
     puts "Enter 1 for Computer vs Human"
     puts "Enter 2 for Human vs Human"
     puts "To quit, type 'exit'."
-    puts "To start over, type 'new game'."
     puts "What would you like to do?"
 
     input = gets.strip
@@ -31,8 +30,6 @@ class Cli
       @game = Game.new(Players::Human.new('X'), Players::Human.new('O'))
     when "exit"
       puts 'Goodbye!'
-    when "new game"
-      Board.reset!
     end
   end
 end

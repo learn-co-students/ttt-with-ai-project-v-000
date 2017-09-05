@@ -49,10 +49,6 @@ module Players
         end
       end
 
-      if !current_move
-        binding.pry
-      end
-
       return "#{current_move + 1}"
     end
   end
