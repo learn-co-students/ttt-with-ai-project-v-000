@@ -19,7 +19,13 @@ attr_accessor :board, :player_1, :player_2, :token
 	end
 
 	def over?
-		board.cells.include?(" ") == false
+		if draw?
+			return true
+		end
+		if won?
+			return true
+		end
+		return false
 	end
 
 	def won?
@@ -28,17 +34,21 @@ attr_accessor :board, :player_1, :player_2, :token
 			board.cells[combo[0]] == board.cells[combo[1]] &&
 			board.cells[combo[1]] == board.cells[combo[2]] &&
 			board.taken?(combo[0] + 1)
+		end		
+	end
+
+	def full?
+		board.cells.all? do |spot|
+			spot.include?("X") == true || spot.include?("O") == true
 		end
-
-
-				
 	end
 
 	def draw?
 		if won?
-			false
-		elsif over?
-			true
+			return false
+		end
+		if full?
+			return true
 		end
 	end
 
@@ -61,31 +71,6 @@ attr_accessor :board, :player_1, :player_2, :token
 
   end
 
- #  def play
- #  	# turn
- #  	until over?
- #  		turn
- #  	end
-	# 	if won?
-	# 		puts "Congratulations #{winner}"
-	# 	else
-	# 		puts "Cat's Game!"
-	# 	end		
-	# end
-
-
-  
-
-  #   def play
-  #   until over? || draw?
-  #     turn
-  #   end
-  #   if (won? != nil)
-  #     puts "Congratulations #{winner}!"
-  #   else
-  #     puts "Cat's Game!"
-  #   end
-  # end
 
    def play
     turn until over?
