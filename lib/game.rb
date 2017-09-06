@@ -24,14 +24,73 @@ attr_accessor :board, :player_1, :player_2, :token
 
 	def won?
 		winning_array = Game::WIN_COMBINATIONS::WIN_COMBINATIONS
-		
 		winning_array.detect do |combo|
 			board.cells[combo[0]] == board.cells[combo[1]] &&
 			board.cells[combo[1]] == board.cells[combo[2]] &&
-			board.taken?(combo[0])
+			board.taken?(combo[0] + 1)
 		end
+
+
 				
 	end
+
+	def draw?
+		if won?
+			false
+		elsif over?
+			true
+		end
+	end
+
+
+  def winner
+    if (won? == nil)
+      return nil
+    else
+      board.cells[won?.first]
+    end
+  end
+
+  def turn
+
+  	input = gets.chomp
+  	board.valid_move?(input)
+
+  end
+
+
+  # describe 'turn' do
+  #   it 'makes valid moves' do
+  #     game = Game.new
+  #     allow($stdout).to receive(:puts)
+
+  #     expect(game.player_1).to receive(:gets).and_return("1")
+
+  #     game.turn
+  #   end
+
+  #   it 'asks for input again after a failed validation' do
+  #     game = Game.new
+  #     allow($stdout).to receive(:puts)
+
+  #     expect(game.player_1).to receive(:gets).and_return("invalid")
+  #     expect(game.player_1).to receive(:gets).and_return("1")
+
+  #     game.turn
+  #   end
+
+  #   it 'changes to player 2 after the first turn' do
+  #     game = Game.new
+  #     allow($stdout).to receive(:puts)
+
+  #     expect(game.player_1).to receive(:gets).and_return("1")
+  #     expect(game.player_2).to receive(:gets).and_return("2")
+
+  #     game.turn
+  #     game.turn
+  #   end
+  # end
+
 
 
 end #end Game Class
