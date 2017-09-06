@@ -47,17 +47,20 @@ class Game
     
      player_move = self.current_player.move(self.board) 
      if board.valid_move?(player_move)
-      player_move 
+      # binding.pry
+      self.board.update(player_move, current_player) 
      else
       turn   
      end 
-      self.board.update(player_move, current_player)   
+        
   end
 
   def play 
     until self.over?
       self.turn 
-      board.display   
+      board.display  
+      puts "   " 
+      puts "   "
     end
     
     if won?

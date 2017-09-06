@@ -31,8 +31,9 @@ class Board
         !(@cells[index].nil? || @cells[index] == " ")
     end
     def valid_move?(index)
-        if index.to_i >=1 && index.to_i <= 9 
-        !(taken?(index)) 
+        # binding.pry
+        if index.to_i.between?(1, 9) && !taken?(index) 
+            true
         end    
     end
     def update(input, player)
