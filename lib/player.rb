@@ -14,7 +14,8 @@ class Players::Human < Player
 
 	def move(input)
 		puts "Input a cell"
-		gets.strip
+		input = gets.strip
 	end
+
 	
 end
