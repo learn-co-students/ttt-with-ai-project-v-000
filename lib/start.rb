@@ -37,9 +37,6 @@ class Start
 
   end
 
-  def order
-    puts
-
     # Greeting
     #
     # assign token
@@ -48,15 +45,15 @@ class Start
     #
     # determine how many players
     #
-    # def game_type
-    #
-    #   if token == "X"
-    #     Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-    #   elsif token == "O"
-    #     Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-    #   else
-    #     puts "SELECT A VALID TOKEN, X OR O"
-    #   end
-    # end
+    def game_type
+
+      if token == "X"
+        Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+      elsif token == "O"
+        Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+      else
+        puts "SELECT A VALID TOKEN, X OR O"
+      end
+    end
 
 end    # End of Class

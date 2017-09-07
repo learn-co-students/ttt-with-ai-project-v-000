@@ -2,26 +2,82 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe"
-puts "\n"
-puts "****************"
-puts "\n"
-puts "What kind of game would you like to play?"
-puts "0 player (Computer match), 1 player, or 2 player"
+greeting
+game_type
+collect_params(game_type)
+
+
+
+
+def collect_params(type)
+  if type == 0
+    Game.new
+  elsif type == 1
+    token_assign(type)
+
+
+end
+
+
+
+
+def game_type
+  puts "0 player (Computer match), 1 player, or 2 player"
+  type = $stdin.gets.strip.slice(/\d/).to_i
+  if (0..2).include?(type)
+    type
+  else
+    puts "Invalid"
+    puts "\n"
+    game_type
+  end
+
+  def token_assign(type)
+    puts "Please select a token, X sets first"
+    token = $stdin.gets.strip.upcase
+    players = {player1: "", player2: ""}
+    if token == "X"
+      players[:player1] = "X"
+      players[:player2] = "O"
+    elsif token == "O"
+      players[:player2] = "X"
+      players[:player1] = "O"
+    else
+      puts "\n"
+      token_assign
+    end
+    players
+  end
+def greeting
+  puts "Welcome to Tic Tac Toe"
+  puts "\n"
+  puts "****************"
+  puts "\n"
+  puts "What kind of game would you like to play?"
+  puts "0 player (Computer match), 1 player, or 2 player"
+end
+
+
 
 
 # case input.slice([0-2])
-# when 0
-#   Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-# when 1
-#   puts "Player 1 vs. Computer"
-#   puts "Select your token, 'X' or 'O', 'X' places first"
-#   single_player
-# when 2
-#   puts "Player 1 vs. Player 2"
-#   puts "Player 1, select your token"
+when 0
+  Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+when 1
+  puts "Player 1 vs. Computer"
+  puts "Select your token, 'X' or 'O', 'X' places first"
+  single_player
+when 2
+  puts "Player 1 vs. Player 2"
+  puts "Player 1, select your token"
 
+def game_type
 
-
-
-c
+  if token == "X"
+    Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+  elsif token == "O"
+    Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+  else
+    puts "SELECT A VALID TOKEN, X OR O"
+  end
+end
