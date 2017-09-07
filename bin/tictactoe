@@ -1,3 +1,18 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  puts "Welcome to Tic Tac Toe! Please select the number you would like to play:"
+  puts "1. 2 humans"
+  puts "2. 1 Computer"
+  puts "3. AI"
+
+  input = gets.strip.to_i
+  case input
+    when 1
+      Game.new.play
+    when 2
+      Game.new(Players::Human.new("X"),Players::Computer.new("O")).play
+    when 3
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    end
