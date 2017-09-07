@@ -11,8 +11,5 @@ module Players
       puts "Please enter 1-9:"
       input = gets.strip
     end
-
-
-
   end  #  End of Class
 end  # End of Module

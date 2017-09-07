@@ -17,11 +17,11 @@ class Game
   end
 
   def over?
-    self.board.full? ? true : false || won? ? true : false
+    draw? || won?
   end
 
   def draw?
-    self.board.full? && !won? && over? ? true : false
+    self.board.full? && !won? 
   end
 
   def won?
@@ -41,7 +41,6 @@ class Game
   end
 
   def turn
-
     input = current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
@@ -53,9 +52,7 @@ class Game
   def play
     while !over?
       turn
-      # binding.pry
       if draw?
-        # binding.pry
         puts "Cat's Game!"
       elsif won?
         puts "Congratulations #{winner}!"
