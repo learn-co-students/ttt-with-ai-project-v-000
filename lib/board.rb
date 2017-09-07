@@ -4,7 +4,7 @@ class Board
     @cells = cells || Array.new(9, " ")
   end
 
-  def display
+  def display  #Puts the existing board
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
@@ -12,40 +12,39 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def reset!
+
+  def reset!  # Removes all exising elements from the @cells array
     self.cells = Array.new(9, " ")
   end
 
-  def position(index)
+  def position(index) #  Returns the current value (" ", "X", "O") at the index given
     cell = input_to_index(index)
     self.cells[cell]
   end
 
-  def input_to_index(user_input)
+  def input_to_index(user_input)  #  Converts the input to an integer and then to array index
     index = user_input.to_i - 1
   end
 
-  def full?
+  def full?  # Return false if any of the cells are empty
     self.cells.none? {|cell| cell.lstrip.empty?}
   end
 
-  def turn_count
+  def turn_count  #  Returns number of cells that are not empty
     self.cells.select{|c| !c.lstrip.empty?}.count
   end
 
-  def taken?(input)
+  def taken?(input) # Converts input to index via method and returns boolean in index is occupied with X or O
     index = input_to_index(input)
     self.cells[index].lstrip.empty? ? false : true
   end
 
-  def valid_move?(input)
+  def valid_move?(input) # Returns boolean for cell not taken and input is within range of existing array elements
     !taken?(input) && (1..9).member?(input.to_i)
   end
 
-  def update(input, player)
-    self.cells[self.position(input).to_i] = player.token
-
-
+  def update(input, player)  # Sets array index equal to current player token
+    self.cells[input_to_index(input)] = player.token
   end
 
 

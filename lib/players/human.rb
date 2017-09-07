@@ -7,8 +7,9 @@ module Players
       super
     end
 
-    def move(board)
-      move = gets.chomp
+    def move(board)  #returns user input as a string
+      puts "Please enter 1-9:"
+      input = gets.strip
     end
 
 
