@@ -1,3 +1,0 @@
-class Players::Computer
-
-end
