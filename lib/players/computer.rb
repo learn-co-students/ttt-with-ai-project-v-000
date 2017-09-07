@@ -8,7 +8,7 @@ module Players
 
     def move(board)
       input = (rand * 10).floor
-      board.valid_move?(input) ? input : move(board)
+      board.valid_move?(input) ? input.to_s : move(board)
     end
 
 
