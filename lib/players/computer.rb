@@ -6,11 +6,10 @@ module Players
       super
     end
 
-    # def move(board)
-    #   input = (rand * 10).floor
-    #   board.valid_move?(input) ? input : move
-    #
-    # end
+    def move(board)
+      input = (rand * 10).floor
+      board.valid_move?(input) ? input : move(board)
+    end
 
 
   end  # End of Class

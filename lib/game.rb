@@ -21,7 +21,7 @@ class Game
   end
 
   def draw?
-    self.board.full? && !won? 
+    self.board.full? && !won?
   end
 
   def won?
@@ -37,7 +37,7 @@ class Game
   end
 
   def winner
-    !draw? && over? ? self.board.cells[self.won?[0]] : nil
+    won? ? self.board.cells[self.won?[0]] : nil
   end
 
   def turn
