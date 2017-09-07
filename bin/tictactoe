@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe"
+puts "\n"
+puts "****************"
+puts "\n"
+puts "What kind of game would you like to play?"
+puts "0 player (Computer match), 1 player, or 2 player"
+
+
+case input.slice([0-2])
+when 0
+  Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+when 1
+  puts "Player 1 vs. Computer"
+  puts "Select your token, 'X' or 'O', 'X' places first"
+  single_player
+when 2
+  puts "Player 1 vs. Player 2"
+  puts "Player 1, select your token"
+
+
+
+
+class StartGame
+  attr_accessor :players, :token
+  def initialize(players, token="X")
+    @players = players
+
+  end
+
+  def game_type
+    token = gets.strip.upcase
+    if token == "X"
+      Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+    elsif token == "O"
+      Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+    else
+      puts "SELECT A VALID TOKEN, X OR O"
+    end
+  end
+
+  def token_assign(token)
+    token = gets.strip.upcase
+
+
+    
