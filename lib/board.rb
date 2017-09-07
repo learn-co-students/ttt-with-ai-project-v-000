@@ -1,4 +1,5 @@
 class Board
+<<<<<<< HEAD
   attr_accessor :cells
 
   def initialize
@@ -10,6 +11,23 @@ class Board
   end
 
   def display
+=======
+	attr_accessor :cells
+
+	def initialize
+		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+	end
+
+	def cells
+		@cells
+	end
+
+	def reset!
+		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+	end
+
+	def display
+>>>>>>> 693bbff0765227f35a4baed302b8bae3490b5580
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
@@ -17,6 +35,7 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
+<<<<<<< HEAD
   def position(player_input)
     cells[player_input.to_i - 1]
   end
@@ -44,7 +63,49 @@ class Board
 
   def update(input, player)
   	cells[input.to_i - 1] = player.token
+=======
+  def position(input)
+  	cells[input.to_i - 1]
+  end
+
+  def full?
+  	!cells.include?(" ")
+  end
+
+  def turn_count
+  	turns = 0
+  	cells.each {|cell| turns += 1 if !cell.include?(" ")}
+  	turns
+  end
+
+  def taken?(input)
+  	!cells[input.to_i - 1].include?(" ")
+  end
+
+  def valid_move?(input)
+  	if input.to_i < 1 || input.to_i > 9
+  		false
+  	else
+  		!taken?(input)
+  	end
+  end
+
+  def update(input, player)
+  	cells[input.to_i - 1] = player.token	
+>>>>>>> 693bbff0765227f35a4baed302b8bae3490b5580
   end
 
 
 end
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+>>>>>>> 693bbff0765227f35a4baed302b8bae3490b5580
