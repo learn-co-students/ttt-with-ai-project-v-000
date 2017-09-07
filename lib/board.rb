@@ -1,15 +1,14 @@
 class Board
   attr_accessor :cells
 
-  def initialize
-    @cells = [" "," "," "," "," "," "," "," "," "]
+  def initialize()
+    reset!
   end
 
   def reset!
     @cells = Array.new(9, " ")
   end
 
-  #display_board
   def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
@@ -17,49 +16,28 @@ class Board
     puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
-  # Helper Method
-  def input_to_index(user_input)
-    user_input.to_i - 1
-  end
 
-  def position(user_input)
-    index = input_to_index(user_input)
-    self.cells[index]
-  end
-
-  # Helper Method
   def full?
-    self.cells.all? { |token| token == "X" || token == "O" }
-   #!@board.include?(" ") || !@board.include?("") ||
+    cells.all?{|token| token == "X" || token == "O"}
   end
 
-  # Helper Method
   def turn_count
-    self.cells.count{ |token| token == "X" || token == "O" }
+    cells.count{|token| token == "X" || token == "O"}
   end
 
-  # Helper Method
-  def taken?(user_input)
-    #binding.pry
-    index = input_to_index(user_input)
-    !(self.cells[index].nil? || self.cells[index] == " ")
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
-  # Helper Method
-  def valid_move?(user_input)
-    index = input_to_index(user_input)
-    #binding.pry
-    index.between?(0, 8) && !taken?(user_input)
+  def update(input, player)
+    cells[input.to_i-1] = player.token
   end
 
-  def update(user_input, current_player)
-    valid_move?(user_input) ? move(user_input, current_player) : nil
-    #binding.pry
+  def position(input)
+    cells[input.to_i-1]
   end
 
-  # Helper Method
-    def move(user_input, current_player)
-      index = input_to_index(user_input)
-      self.cells[index] = current_player.token
-    end
+  def taken?(input)
+    !(position(input) == " " || position(input) == "")
+  end
 end
