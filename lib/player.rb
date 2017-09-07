@@ -52,10 +52,11 @@ module Players
       theoretical_board = Game.new
       theoretical_board.board.cells = current_state
       theoretical_board.board.update(move, game.current_player)
+      theoretical_board
     end
 
     def min_max(current_game)
-      return score if current_game.over?
+      return score(current_game) if current_game.over?
 
       scores = []
       moves = []
