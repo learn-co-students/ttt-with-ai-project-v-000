@@ -20,7 +20,7 @@ module Players
 
     def move(board)
       min_max(game)
-      (choice + 1).to_s
+      (self.choice + 1).to_s
       # rand(1..9).to_s
       #MAKE SURE YOU ADD 1 TO THE CHOICE VARIABLE BECAUSE INDICE
     end
@@ -63,19 +63,23 @@ module Players
 
       possible_moves.each do |move|
         possible_game = get_new_state(move)
+        if min_max(possible_game) == nil
+          next
+        end
         scores << min_max(possible_game)
         moves << move
       end
 
-      if game.current_player.token == self.token
-        max_score = scores.each_with_index.max[1]
-        choice = moves[max_score]
-        scores[max_score]
-      else
-
-        min_score = scores.each_with_index[1]
-        choice = moves[min_score]
-        score[min_score]
+      if game.won?
+        if game.winner == self.token
+          max_score = scores.each_with_index.max[1]
+          self.choice = moves[max_score]
+          return scores[max_score]
+        else
+          min_score = scores.each_with_index.min[1]
+          self.choice = moves[min_score]
+          return scores[min_score]
+        end
       end
     end
 

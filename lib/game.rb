@@ -75,10 +75,12 @@ class Game
 
   def turn
     player_input = current_player.move(board) #where board is a pointless argument
+    binding.pry
     #move just asks for a player input from a specific player
     if board.valid_move?(player_input)
       board.update(player_input, current_player)
       board.display
+
     else
       turn
     end
