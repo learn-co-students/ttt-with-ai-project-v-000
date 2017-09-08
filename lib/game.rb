@@ -41,11 +41,13 @@ class Game
   end
 
   def turn
-    puts "#{current_player} - #{current_player.token}"
+    puts "Player #{current_player.token}"
+    puts "\n"
     input = current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
       self.board.display
+      puts "\n"
     else
       turn
     end
@@ -61,23 +63,29 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
+    puts "\n"
+    puts "Would you like to play again?"
+    puts "Y/n"
+    response = $stdin.gets.strip.upcase
+    if response.eql?("Y")
+      Logic.new.start_game
+    elsif response.eql?("N")
+      puts "Goodbye"
+      exit
+    end
   end
-  puts "/n"
-  puts "Would you like to play again?"
-  puts "Y/n"
-  response = $stdin.gets.strip.upcase
-  response.eql?("Y") ? Logic.new.start_game : puts "Goodbye"
+
 end  # End of Class
 
 class Logic
 
-  def initialize 
-      greeting
-  end
-
   def start_game
       # game_type
       collect_params(game_type)
+  end
+
+  def new_game
+    start_game
   end
 
   def greeting
@@ -138,13 +146,7 @@ class Logic
   end
 
   def human_v_human(token)
-
-    if token.eql?("X")
-      # binding.pry
       Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new).play
-    else
-      Game.new(player_1=Players::Human.new("O"), player_2=Players::Human.new("X"), board=Board.new).play
-    end
   end
 
 end # end of Class

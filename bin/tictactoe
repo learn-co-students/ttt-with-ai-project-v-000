@@ -2,4 +2,6 @@
 
 require_relative '../config/environment'
 
-Logic.new.start_game
+ttt = Logic.new
+ttt.greeting
+ttt.start_game
