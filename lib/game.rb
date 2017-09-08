@@ -74,6 +74,10 @@ class Game
   end
 
   def turn
+    if current_player.instance_of?(Players::Computer)
+      best_move = board.min_max(self.board, current_player.token)
+      current_player.choice = best_move
+    end
     player_input = current_player.move(board) #where board is a pointless argument
     #move just asks for a player input from a specific player
     if board.valid_move?(player_input)

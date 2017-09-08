@@ -19,75 +19,12 @@ module Players
     attr_accessor :board, :choice, :game
 
     def move(board)
-      min_max(game)
       binding.pry
       (self.choice + 1).to_s
       # rand(1..9).to_s
       #MAKE SURE YOU ADD 1 TO THE CHOICE VARIABLE BECAUSE INDICE
     end
-
-    def score(game)
-      if game.winner == nil
-        return 0
-      elsif  game.winner == self.token
-        return 10
-      else
-        return -10
-      end
-    end
-
-    def possible_moves
-      possible = []
-      board.cells.each_with_index do |cell, indx|
-         if board.valid_move?((indx + 1).to_s)
-          possible << indx
-         end
-      end
-      possible
-    end    
-
-    def get_new_state(move, current_game)
-      #make new instance of game, with board as it currently is
-      move = (move + 1).to_s
-      current_state = board.cells
-      theoretical_board = game.dup
-      theoretical_board.board.update(move, game.current_player)
-      theoretical_board
-    end
-
-    def min_max(current_game)
-      return score(current_game) if current_game.over?
-
-      scores = []
-      moves = []
-
-      possible_moves.each do |move|
-        possible_game = get_new_state(move, current_game)
-        if min_max(possible_game) == nil
-          next
-        end
-        scores << min_max(possible_game)
-        moves << move
-      end
-
-        if game.current_player == self.token
-          max_score = scores.each_with_index.max[1]
-          self.choice = moves[max_score]
-          return scores[max_score]
-        else
-          min_score = scores.each_with_index.min[1]
-          self.choice = moves[min_score]
-          return scores[min_score]
-      end
-    end
-
-
   end
-
-
-
-
-
 end
 
 
