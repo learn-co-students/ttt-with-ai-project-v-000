@@ -74,7 +74,7 @@ module Players
       elsif
         input = "8"
       else
-        nil
+        random_move(board)
       end
     end
     def move_block(board)
@@ -87,8 +87,13 @@ module Players
     end
     def move_block_corner(board)
       block = two_in_row?(board)
-      index = block.detect { |index| board.cells[index] == " " }
-      input = (index +=1).to_s
+      if block != nil
+        index = block.detect { |index| board.cells[index] == " " }
+        input = (index +=1).to_s
+      else
+        index = board.cells.find_index(" ")
+        input = (index +=1).to_s
+      end
     end
     def move(board)
       case board.turn_count
@@ -126,7 +131,7 @@ module Players
       when 7 #O4
         move_block(board)
       when 8 #X5
-        random_move(board)
+        move_block_corner(board)
       end
     end
   end

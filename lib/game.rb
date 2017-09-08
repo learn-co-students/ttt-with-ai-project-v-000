@@ -50,8 +50,8 @@ class Game
 
   # Helper Method
   def turn
-    #puts "Please enter a number between(1-9):"
-    #get input
+    t = Time.now
+    sleep(t + 1 - Time.now)
     user_input = self.current_player.move(@board)
     # check if user_input is valid
     self.board.valid_move?(user_input) ? self.board.update(user_input, self.current_player) : turn
@@ -60,8 +60,6 @@ class Game
   # Helper Method
   def play
     turn until over?
-    #t = Time.now
-    #sleep(t + 1 - Time.now)
     puts winner ?  "Congratulations #{winner}!" : "Cat's Game!"
   end
 end
