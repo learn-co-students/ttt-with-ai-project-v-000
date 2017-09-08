@@ -30,11 +30,16 @@ module Players
           board.cells[dia[0]] == "X" && board.cells[dia[1]] == "O" || board.cells[dia[1]] == "X" && board.cells[dia[0]] == "O"
         end
       end
+      def opposite_corners(board)
+        DIA_CORNER.find do |dia|
+          board.cells[dia[0]] == "X" && board.cells[dia[1]] == "X" || board.cells[dia[0]] == "O" && board.cells[dia[1]] == "O"
+        end
+      end
       def interior_X(board)
-        INTERIOR.select { |index|  index == "X"  }
+        INTERIOR.select { |token|  token == "X"  }
       end
       def interior_O(board)
-        INTERIOR.select { |index|  index == "O"  }
+        INTERIOR.select { |token|  token == "O"  }
       end
       def adjacent_X(board)
         if INTERIOR.select.count == 2
@@ -84,10 +89,18 @@ module Players
         when 2 #X2
           move_two(board)
         when 3 #O2
-          if board.cells[8] != " "
-            input = "6"
+          block = two_in_row?(board)
+          if block != nil
+            index = block.detect { |index| board.cells[index] == " " }
+            input = (index +=1).to_s
+          elsif board.cells[4] == "X"
+              move_corner(board)
+          elsif board.cells[1] == " " && board.cells[7] == " "
+            input = "2"
+          elsif board.valid_move?("4")
+            input = "4"
           else
-            move_block(board)
+            input = "6"
           end
         when 4 #X3
           move_block(board)
