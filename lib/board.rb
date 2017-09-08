@@ -104,7 +104,7 @@ class Board
   end
 
   def clone
-    Board.new(self.cells)
+    Board.new(self.cells.clone)
   end
 
 

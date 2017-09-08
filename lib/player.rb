@@ -26,7 +26,6 @@ module Players
 
 
     def move(game)
-    return 0 if game.board.cells.all? {|cell| cell == " "}
     min_max(game.clone)
     input_maker
     end
