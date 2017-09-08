@@ -6,7 +6,7 @@ class Game
 
   #  = {player_1: Players.Human.new("X"), player_2: Players.Human.new("O"), board: Board.new}
 
-  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+  def initialize(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -41,9 +41,11 @@ class Game
   end
 
   def turn
+    puts "#{current_player} - #{current_player.token}"
     input = current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
+      self.board.display
     else
       turn
     end
@@ -52,6 +54,7 @@ class Game
   def play
     while !over?
       turn
+      sleep(1)
     end
     if won?
       puts "Congratulations #{winner}!"
@@ -59,5 +62,89 @@ class Game
       puts "Cat's Game!"
     end
   end
-
+  puts "/n"
+  puts "Would you like to play again?"
+  puts "Y/n"
+  response = $stdin.gets.strip.upcase
+  response.eql?("Y") ? Logic.new.start_game : puts "Goodbye"
 end  # End of Class
+
+class Logic
+
+  def initialize 
+      greeting
+  end
+
+  def start_game
+      # game_type
+      collect_params(game_type)
+  end
+
+  def greeting
+    puts "Welcome to Tic Tac Toe"
+    puts "\n"
+    puts "****************"
+    puts "\n"
+
+  end
+
+  def game_type  # returns integer 0, 1, or 2
+    puts "What kind of game would you like to play?"
+    puts "0 player (Computer match), 1 player, or 2 player"
+    type = $stdin.gets.strip.slice(/\d/).to_i
+    if (0..2).include?(type)
+      collect_params(type)
+    else
+      puts "Invalid"
+      puts "\n"
+      game_type
+    end
+  end
+
+  def collect_params(type)
+    if type == 0
+      computer_v_computer
+    elsif type == 1
+      puts "Playing Human Vs. Computer"
+      single_player(token_assign)
+    else
+      puts "Playing Human Vs. Human"
+      human_v_human(token_assign)
+    end
+  end
+
+  def token_assign
+      puts "Player 1, please select a token, X sets first"
+      token = $stdin.gets.strip.upcase
+      if ["X","O"].include?(token)
+        token
+      else
+        puts "\n"
+        token_assign
+      end
+    end
+
+  def computer_v_computer
+    game = Game.new.play
+  end
+
+  def single_player(token)
+
+    if token.eql?("X")
+      Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new).play
+    else
+      Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new).play
+    end
+  end
+
+  def human_v_human(token)
+
+    if token.eql?("X")
+      # binding.pry
+      Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new).play
+    else
+      Game.new(player_1=Players::Human.new("O"), player_2=Players::Human.new("X"), board=Board.new).play
+    end
+  end
+
+end # end of Class
