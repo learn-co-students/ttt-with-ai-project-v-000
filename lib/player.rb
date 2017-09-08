@@ -45,7 +45,7 @@ module Players
       possible
     end    
 
-    def get_new_state(move)
+    def get_new_state(move, current_game)
       #make new instance of game, with board as it currently is
       move = (move + 1).to_s
       current_state = board.cells
@@ -62,16 +62,16 @@ module Players
       moves = []
 
       possible_moves.each do |move|
-        possible_game = get_new_state(move)
+        possible_game = get_new_state(move, current_game)
         if min_max(possible_game) == nil
           next
         end
+        binding.pry
         scores << min_max(possible_game)
         moves << move
       end
 
-      if game.won?
-        if game.winner == self.token
+        if game.current_player == self.token
           max_score = scores.each_with_index.max[1]
           self.choice = moves[max_score]
           return scores[max_score]
@@ -79,7 +79,6 @@ module Players
           min_score = scores.each_with_index.min[1]
           self.choice = moves[min_score]
           return scores[min_score]
-        end
       end
     end
 
