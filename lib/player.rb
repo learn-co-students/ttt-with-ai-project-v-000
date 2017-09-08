@@ -1,12 +1,18 @@
 class Player
   attr_reader :token
 
+  def switch(token)
+    token == 'X' ? 'O' : 'X'
+  end
+
   def initialize(token)
     @token = token
+    @opponent = switch(token)
   end
 end
 
 module Players
+
   class Human < Player
     def move(board)
       puts "Place your token somewhere #{self.token}."
@@ -16,14 +22,62 @@ module Players
   end
 
   class Computer < Player
-    attr_accessor :board, :choice, :game
+    attr_accessor :choice
 
-    def move(board)
-      binding.pry
-      (self.choice + 1).to_s
-      # rand(1..9).to_s
-      #MAKE SURE YOU ADD 1 TO THE CHOICE VARIABLE BECAUSE INDICE
+
+    def move(game)
+    return 0 if game.board.cells.all? {|cell| cell == " "}
+    min_max(game.clone)
+    input_maker
     end
+
+    def input_maker
+      (self.choice.first + 1).to_s
+    end
+
+    def min_max(game)
+      board = game.board
+      return score(game) if game.over? != false
+
+      scores = {}
+
+      get_possible_moves(board).each do |move|
+        possible_game = get_new_state(game, move)
+        scores[move] = min_max(possible_game)
+      end
+
+      if game.current_player.token == self.token
+        self.choice = scores.max_by {|move, score| score}
+        return scores.values.max
+      else
+        return scores.values.min 
+      end
+
+    end
+
+    def score(game)
+      return 10 if game.winner == self.token
+      return -10 if game.winner == switch(token)
+      return 0
+    end
+
+    def get_possible_moves(board)
+      moves = []
+      board.cells.each_with_index do |cell, index|
+        if cell == " "
+          moves << index
+        end
+      end
+      moves
+    end
+
+    def get_new_state(game, move)
+      new_game_state = game.clone
+      new_game_state.board.move(move, game.current_player.token)
+      new_game_state
+    end
+
+
   end
 end
 

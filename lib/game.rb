@@ -14,23 +14,13 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    if player_1.instance_of?(Players::Computer)
-      player_1.board = @board
-      player_1.game = self
-    end
-    if player_2.instance_of?(Players::Computer)
-      player_2.board = @board
-      player_2.game = self
-    end
   end
 
   def current_player
     board.turn_count.even? ? player_1 : player_2
   end
 
-  # def over?
-  #   if board.full?
-  # end
+
   def won?
 
     WIN_COMBINATIONS.each do |win_combination|
@@ -73,12 +63,13 @@ class Game
     won? ? board.cells[won?.first] : nil
   end
 
+  def clone
+    Game.new(player_1 = @player_1, player_2 = @player_2, board = self.board.clone)
+  end
+
   def turn
-    if current_player.instance_of?(Players::Computer)
-      best_move = board.min_max(self.board, current_player.token)
-      current_player.choice = best_move
-    end
-    player_input = current_player.move(board) #where board is a pointless argument
+    player_input = current_player.move(self) #where board is a pointless argument
+    binding.pry
     #move just asks for a player input from a specific player
     if board.valid_move?(player_input)
       board.update(player_input, current_player)
@@ -89,18 +80,7 @@ class Game
     end
   end
 
-  # def turn
-  #   puts "Please enter 1-9:"
-  #   input = gets.strip
-  #   spot = input_to_index(input)
-  #   x_or_o = current_player
-  #   if (valid_move?(spot))
-  #     move(spot,x_or_o)
-  #     display_board
-  #   else
-  #     turn
-  #   end
-  # end
+
 
   def play
     turn until over?

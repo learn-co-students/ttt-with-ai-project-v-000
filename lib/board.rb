@@ -12,8 +12,8 @@ class Board
 
   attr_accessor :cells, :choice
 
-  def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  def initialize(cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "])
+    @cells = cells
   end
 
   def reset!
@@ -57,71 +57,10 @@ class Board
   	cells[input.to_i - 1] = player.token
   end
 
-  def get_new_state(move)
-      #make new instance of game, with board as it currently is
-    theoretical_board = Board.new
-    theoretical_board.cells = cells
-    theoretical_board.cells[move] = theoretical_board.current_player
-    theoretical_board
+  def move(input, token)
+    cells[input] = token
   end
 
-    def min_max(current_game, current_player)
-      return score(current_game, current_player) if current_game.over?
-      scores = []
-      moves = []
-
-      possible_moves.each do |move|
-        possible_game = get_new_state(move)
-        if min_max(possible_game, opp_player) == nil
-          next
-        end
-        scores << min_max(possible_game, opp_player)
-        moves << move
-      end
-
-        if current_player == current_player
-          max_score = scores.each_with_index.max[1]
-          binding.pry
-          self.choice = moves[max_score]
-          return scores[max_score]
-        else
-          min_score = scores.each_with_index.min[1]
-          self.choice = moves[min_score]
-          return scores[min_score]
-        end
-      end
-
-    def score(game, current_player)
-      if winner == nil
-        return 0
-      elsif winner == current_player
-        return 10
-      else
-        return -10
-      end
-    end
-
-    def possible_moves
-      possible = []
-      cells.each_with_index do |cell, indx|
-         if valid_move?((indx + 1).to_s)
-          possible << indx
-         end
-      end
-      possible
-    end
-
-  def current_player
-    turn_count.even? ? "X" : "O"
-  end
-
-  def opp_player
-    turn_count.odd? ? "X" : "O"
-  end
-
-  # def over?
-  #   if board.full?
-  # end
   def won?
 
     WIN_COMBINATIONS.each do |win_combination|
@@ -164,6 +103,9 @@ class Board
     won? ? cells[won?.first] : nil
   end
 
+  def clone
+    Board.new(self.cells)
+  end
 
 
 end
