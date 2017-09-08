@@ -6,7 +6,7 @@ class Game
 
   #  = {player_1: Players.Human.new("X"), player_2: Players.Human.new("O"), board: Board.new}
 
-  def initialize(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -56,23 +56,14 @@ class Game
   def play
     while !over?
       turn
-      sleep(1)
+      sleep(1) if current_player.class.eql?(Players::Computer)
     end
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
-    puts "\n"
-    puts "Would you like to play again?"
-    puts "Y/n"
-    response = $stdin.gets.strip.upcase
-    if response.eql?("Y")
-      Logic.new.start_game
-    elsif response.eql?("N")
-      puts "Goodbye"
-      exit
-    end
+
   end
 
 end  # End of Class
@@ -85,7 +76,16 @@ class Logic
   end
 
   def new_game
-    start_game
+    puts "\n"
+    puts "Would you like to play again?"
+    puts "Y/n"
+    response = $stdin.gets.strip.upcase
+    if response.eql?("Y")
+      Logic.new.start_game
+    elsif response.eql?("N")
+      puts "Goodbye"
+      exit
+    end
   end
 
   def greeting
@@ -133,7 +133,8 @@ class Logic
     end
 
   def computer_v_computer
-    game = Game.new.play
+    Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new).play
+    Logic.new.new_game
   end
 
   def single_player(token)
@@ -142,11 +143,13 @@ class Logic
       Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new).play
     else
       Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new).play
+      Logic.new.new_game
     end
   end
 
   def human_v_human(token)
-      Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new).play
+      Game.new
+      Logic.new.new_game
   end
 
 end # end of Class
