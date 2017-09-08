@@ -53,6 +53,7 @@ class Game
     t = Time.now
     sleep(t + 1 - Time.now)
     user_input = self.current_player.move(@board)
+
     # check if user_input is valid
     self.board.valid_move?(user_input) ? self.board.update(user_input, self.current_player) : turn
   end

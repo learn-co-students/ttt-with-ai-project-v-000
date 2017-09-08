@@ -1,11 +1,6 @@
 module Players
   class Computer < Player
     attr_accessor :difficulty
-    def initialize(token, difficulty = "H" )
-      @token = token
-      @difficulty = difficulty
-    end
-    #constant
     WIN_COMBO = [
       [0,1,2],
       [3,4,5],
@@ -15,17 +10,22 @@ module Players
       [2,5,8],
       [0,4,8],
       [6,4,2]]
-    DIA_CORNER = [[0, 8], [2, 6]]
-
+    CORNERS = [0, 2, 6, 8]
+    DIA_CORNERS = [[0, 8], [2, 6]]
+    INTERIORS = [1, 3, 5, 7]
+    def initialize(token, difficulty = "H" )
+      @token = token
+      @difficulty = difficulty
+    end
     def two_in_row?(board)
-      WIN_COMBO.find do |win|
+      WIN_COMBO.detect do |win|
        ((board.cells[win[0]] == board.cells[win[1]]) && board.cells[win[2]] == " " && board.cells[win[0]] != " ") ||
        ((board.cells[win[0]] == board.cells[win[2]]) && board.cells[win[1]] == " " && board.cells[win[0]] != " ") ||
        ((board.cells[win[1]] == board.cells[win[2]]) && board.cells[win[0]] == " " && board.cells[win[1]] != " ")
       end
     end
     def diagonal(board)
-      DIA_CORNER.find do |dia|
+      DIA_CORNERS.find do |dia|
         board.cells[dia[0]] == "X" && board.cells[dia[1]] == "O" || board.cells[dia[1]] == "X" && board.cells[dia[0]] == "O"
       end
     end
@@ -34,23 +34,11 @@ module Players
       input = prng.rand(9) + 1
       input.to_s
     end
-    def move_one(board)
+    def move_center(board)
       if board.valid_move?("5")
         input = "5"
       else
-        move_corner(board)
-      end
-    end
-    def move_two(board)
-      if diagonal(board) != nil
-        case diagonal(board)[0]
-        when 0
-            input = "3"
-        when 2
-            input = "1"
-        end
-      else board.cells[4] == "O"
-        move_corner(board)
+        nil
       end
     end
     def move_corner(board)
@@ -60,21 +48,10 @@ module Players
         input = "3"
       elsif board.valid_move?("7")
         input = "7"
-      else
+      elsif board.valid_move?("9")
         input = "9"
-      end
-    end
-    def move_interior(board)
-      if board.valid_move?("2")
-        input = "2"
-      elsif board.valid_move?("4")
-        input = "4"
-      elsif board.valid_move?("6")
-        input = "6"
-      elsif
-        input = "8"
       else
-        random_move(board)
+        nil
       end
     end
     def move_block(board)
@@ -97,18 +74,53 @@ module Players
     end
     def move(board)
       case board.turn_count
-      when 0 #X1
-        random_move(board)
-      when 1 #O1
+      when 0 #move1
         case self.difficulty
         when "H"
-          move_one(board)
+          move_center(board) || move_corner(board)
         else
           random_move(board)
         end
-      when 2 #X2
-        move_two(board)
-      when 3 #O2
+      when 1 #move2
+        case self.difficulty
+        when "H"
+          move_center(board) || move_corner(board)
+        else
+          random_move(board)
+        end
+      when 2 #move3
+        index = INTERIORS.detect do |index|
+          board.cells[index] != " "
+        end
+        case index
+        when nil
+          move_corner(board)
+        when 1
+          if board.valid_move?("1")
+            input = "1"
+          else
+            input = "3"
+          end
+        when 4
+          if board.valid_move?("1")
+            input = "1"
+          else
+            input = "7"
+          end
+        when 6
+          if board.valid_move?("3")
+            input = "3"
+          else
+            input = "9"
+          end
+        when 8
+          if board.valid_move?("7")
+            input = "7"
+          else
+            input = "9"
+          end
+        end
+      when 3 #move4
         block = two_in_row?(board)
         if block != nil
           index = block.detect { |index| board.cells[index] == " " }
@@ -122,15 +134,15 @@ module Players
         else
           input = "6"
         end
-      when 4 #X3
+      when 4 #move5
         move_block(board)
-      when 5 #O3
+      when 5 #move6
         move_block(board)
-      when 6 #X4
+      when 6 #move7
         move_block(board)
-      when 7 #O4
+      when 7 #move8
         move_block(board)
-      when 8 #X5
+      when 8 #move9
         move_block_corner(board)
       end
     end
