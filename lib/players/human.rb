@@ -1,10 +1,9 @@
-# class Players
-# end
-#
-# class Player
-#   attr_reader :token
-#
-#   def initialize(token)
-#     @token = token
-#   end
-# end
+module Players
+
+  class Human < Player
+    def move(board)
+      puts "Place your token somewhere #{self.token}."
+      input = gets.strip
+    end
+  end
+end

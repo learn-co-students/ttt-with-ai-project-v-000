@@ -22,34 +22,12 @@ class Game
 
 
   def won?
-
-    WIN_COMBINATIONS.each do |win_combination|
-      #cycles through WIN_COMBINATIONS i.e. [0,1,2], then [3,4,5], then [6,7,8]
-      win_index_1 = win_combination[0]
-      win_index_2 = win_combination[1]
-      win_index_3 = win_combination[2]
-
-      #then gets values at each of these cells
-      position_1 = board.cells[win_index_1] #could be "X", "O", or " "
-      position_2 = board.cells[win_index_2] #could be "X", "O", or " "
-      position_3 = board.cells[win_index_3] #could be "X", "O", or " "
-
-      if position_1 == position_2 && position_2 == position_3 && position_1 != " "
-        return win_combination
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+      board.cells[combo[1]] == board.cells[combo[2]] &&
+      board.taken?(combo[0] + 1)
     end
-    false
   end
-
-# more elegant solution
-  # def won?
-  #   winning_array = Game::WIN_COMBINATIONS::WIN_COMBINATIONS
-  #   winning_array.detect do |combo|
-  #     board.cells[combo[0]] == board.cells[combo[1]] &&
-  #     board.cells[combo[1]] == board.cells[combo[2]] &&
-  #     board.taken?(combo[0] + 1)
-  #   end
-  # end
 
   def draw?
     board.full? && !won?
@@ -68,13 +46,14 @@ class Game
   end
 
   def turn
-    player_input = current_player.move(self) #where board is a pointless argument
-    #move just asks for a player input from a specific player
+    player_input = current_player.move(self) 
     if board.valid_move?(player_input)
+      sleep 0.2
       board.update(player_input, current_player)
+      print %x{clear}
       board.display
-
     else
+
       turn
     end
   end
@@ -83,8 +62,7 @@ class Game
 
   def play
     turn until over?
-    player_2.score
-    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+    puts winner ? ("Congratulations #{winner}!") : "Cat's Game!"
   end
 
   def start # a blank test spec for this...
