@@ -20,6 +20,7 @@ module Players
 
     def move(board)
       min_max(game)
+      binding.pry
       (self.choice + 1).to_s
       # rand(1..9).to_s
       #MAKE SURE YOU ADD 1 TO THE CHOICE VARIABLE BECAUSE INDICE
@@ -49,8 +50,7 @@ module Players
       #make new instance of game, with board as it currently is
       move = (move + 1).to_s
       current_state = board.cells
-      theoretical_board = Game.new
-      theoretical_board.board.cells = current_state
+      theoretical_board = game.dup
       theoretical_board.board.update(move, game.current_player)
       theoretical_board
     end
@@ -66,7 +66,6 @@ module Players
         if min_max(possible_game) == nil
           next
         end
-        binding.pry
         scores << min_max(possible_game)
         moves << move
       end
