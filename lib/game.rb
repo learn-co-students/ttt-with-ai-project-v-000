@@ -11,25 +11,38 @@ class Game
     @player_2 = player_2
   end
 
-  def start
-  end
+  #def start
+  #end
 
   def play
-    #until over?
-    #end
+    until self.over?
+      self.turn
+    end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    end
+    if self.draw?
+      puts "Cat's Game!"
+    end
   end
 
   def turn
+    move = self.current_player.move(self.board)
+    if self.board.valid_move?(move)
+      self.board.update(move, self.current_player)
+    else
+      self.turn
+    end
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? @player_1 : @player_2
+    self.board.turn_count % 2 == 0 ? self.player_1 : self.player_2
   end
 
   def won?
     won = false
     WIN_COMBINATIONS.each do |win|
-      if !won && win.all? {|cell| board.cells[cell] == "X"} || win.all? {|cell| board.cells[cell] == "O"}
+      if !won && win.all? {|cell| self.board.cells[cell] == "X"} || win.all? {|cell| self.board.cells[cell] == "O"}
         won = win
       end
     end
@@ -37,6 +50,9 @@ class Game
   end
 
   def winner
+    if self.won?
+      self.board.cells[self.won?[0]]
+    end
   end
 
   def over?
@@ -44,7 +60,7 @@ class Game
   end
 
   def draw?
-    board.full? && !self.won?
+    self.board.full? && !self.won?
   end
 
 end
