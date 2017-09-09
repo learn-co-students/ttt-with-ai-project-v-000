@@ -1,9 +1,8 @@
 module Players
   class Human < Player
     # your code here
-    def move(input)
-    #  @input = input
-      puts "Question"
+    def move(board)
+      puts "Where do you want to go?"
       answer = gets.chomp
       return answer
     end

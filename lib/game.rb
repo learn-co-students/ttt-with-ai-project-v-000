@@ -44,20 +44,20 @@ class Game
     @player_2 = player_2
   end
 
-
   def current_player
     counter = 0
     oddoreven = 0
-    while counter < 8
+    while counter < 9
       if @board.cells[counter] == " "
       oddoreven = oddoreven + 1
       end
       counter = counter + 1
     end
+  #  binding.pry
     if oddoreven.even?
-      return player_1
-    else
       return player_2
+    else
+      return player_1
     end
   end
 
@@ -98,14 +98,7 @@ class Game
   end
 
   def full?
-    counter = 0
-    while counter < 8
-      if @board.cells[counter] == " "
-        return false
-      end
-      counter = counter + 1
-    end
-    return true
+    board.full?
   end
 
   def winner
@@ -115,7 +108,6 @@ class Game
   end
 
   def turn
-    #binding.pry
     moveturn = current_player.move(board)
     while @board.valid_move?(moveturn) == false
       moveturn = current_player.move(board)
@@ -127,10 +119,9 @@ class Game
   end
 
   def play
-
     while over? == false
       turn
-      #binding.pry
+      board.display
       won?
       draw?
     end
@@ -139,24 +130,6 @@ class Game
     end
     if draw?
       puts "Cat's Game!"
-    end
-  end
-
-  def start
-    puts "Hi!"
-    puts "Would you like to play a 0 player, 1 player, or 2 player game today?"
-    input = gets
-    if gets == "0" || gets == "zero" || gets == "Zero"
-      Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-      play
-    end
-    if gets == "1" || gets == "one" || gets == "One"
-      Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-      play
-    end
-    if gets == "2" || gets == "two" || gets == "Two"
-      Game.new(Players::Human.new("X"), Players::Human.new("O"))
-      play
     end
   end
 

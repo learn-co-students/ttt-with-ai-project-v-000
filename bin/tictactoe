@@ -1,3 +1,90 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hi!"
+want_to_play = true
+while want_to_play == true
+  puts "Would you like to play a wargames, 0 player, 1 player, or 2 player game today?"
+  input = gets.chomp
+  if input == "Zero" || input == "zero" || input == "0"
+    puts "Should the computers be equally smart?"
+      difficult = gets.chomp
+      if difficult == "Y" || difficult == "y" || difficult == "Yes" || difficult == "yes"
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
+        game.play
+      else
+        game = Game.new(Players::Computer.new("X","easy"), Players::Computer.new("O"), board = Board.new)
+        game.play
+      end
+  elsif input == "One" || input == "one" || input == "1"
+    puts "Should the computer be smart?"
+    difficult = gets.chomp
+    puts "Should the computer go first?"
+    first = gets.chomp
+    if difficult == "Y" || difficult == "y" || difficult == "Yes" || difficult == "yes"
+      if first == "Y" || first == "y" || first == "Yes" || first == "yes"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), board = Board.new)
+        game.play
+      else
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new)
+        game.play
+      end
+    else
+      if first == "Y" || first == "y" || first == "Yes" || first == "yes"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O", "easy"), board = Board.new)
+        game.play
+      else
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O", "easy"), board = Board.new)
+        game.play
+      end
+    end
+  elsif input == "Two" || input == "two" || input == "2"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
+    game.play
+  elsif input == "wargames" || input == "Wargames"
+    puts "How many games? Please insert a number"
+    number = gets.chomp
+    puts "Should the computers be equally smart?"
+    difficult = gets.chomp
+    if difficult == "Y" || difficult == "y" || difficult == "Yes" || difficult == "yes"
+      comp = Players::Computer.new("O")
+    else
+      comp = Players::Computer.new("O", "easy")
+    end
+    counter = 0
+    amountofwins = []
+    while counter < number.to_i
+      game = Game.new(Players::Computer.new("X"), comp, board = Board.new)
+      game.play
+      if game.won?
+        amountofwins << game.winner
+      elsif game.draw?
+        amountofwins << "draw"
+      end
+      counter = counter + 1
+    end
+    x_count = 0
+    o_count = 0
+    draw_count = 0
+    amountofwins.each do |result|
+      if result == "X"
+        x_count = x_count + 1
+      elsif result == "O"
+        o_count = o_count + 1
+      else
+        draw_count = draw_count + 1
+      end
+    end
+    puts "X won #{x_count} times"
+    puts "O won #{o_count} times"
+    puts "There were draws #{draw_count} times"
+  end
+  puts "Do you want to play again?"
+  input = gets.chomp
+  if input == "yes" || input == "Yes" || input == "y" || input == "Y"
+    want_to_play = true
+  else
+    want_to_play = false
+  end
+end

@@ -16,5 +16,18 @@ describe 'Players::Computer' do
 
       expect(valid_moves).to include(computer_move)
     end
+
+    it 'returns a way to save the day' do
+      computer = Players::Computer.new("O")
+      board = Board.new
+      game = Game.new(Players::Human.new("X"), computer, board)
+      game.board.cells = ["X", "O", "O", "X", " ", " ", " ", " ", " "]
+
+      valid_moves = ["7"]
+
+      computer_move = computer.move(board)
+
+      expect(valid_moves).to include(computer_move)
+    end
   end
 end
