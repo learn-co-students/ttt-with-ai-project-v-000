@@ -89,7 +89,7 @@ module Players
       case board.turn_count
       when 0 #move1
         case self.difficulty
-        when "H"
+        when "E"
           move_center(board) || move_corner(board)
         else
           random_move(board)
