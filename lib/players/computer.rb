@@ -41,6 +41,19 @@ module Players
         nil
       end
     end
+    def move_interior(board)
+      if board.valid_move?("2")
+        input = "2"
+      elsif board.valid_move?("4")
+        input = "4"
+      elsif board.valid_move?("6")
+        input = "6"
+      elsif board.valid_move?("8")
+        input = "8"
+      else
+        nil
+      end
+    end
     def move_corner(board)
       if board.valid_move?("1")
         input = "1"
