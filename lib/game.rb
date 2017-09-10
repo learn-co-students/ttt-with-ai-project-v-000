@@ -1,4 +1,3 @@
-require 'pry'
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -11,8 +10,38 @@ class Game
     @player_2 = player_2
   end
 
-  #def start
-  #end
+  def start
+    number = nil
+    first = nil
+
+    until number == "0" || number == "1" || number == "2"
+      puts "Enter the number of players (0, 1, or 2):"
+      number = gets.strip
+    end
+
+    if number == "0"
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Computer.new("O")
+      self.play
+    elsif number == "1"
+      until first == "Y" || first == "N"
+        puts "Would you like to go first? (Y/N)"
+        first = gets.strip.upcase
+      end
+      if first == "Y"
+        self.player_2 = Players::Computer.new("O")
+        puts "You're X!"
+      else
+        self.player_1 = Players::Computer.new("X")
+        puts "You're O!"
+      end
+      self.board.display
+      self.play
+    else
+      self.board.display
+      self.play
+    end
+  end
 
   def play
     until self.over?
@@ -30,6 +59,7 @@ class Game
     move = self.current_player.move(self.board)
     if self.board.valid_move?(move)
       self.board.update(move, self.current_player)
+      self.board.display
     else
       self.turn
     end
