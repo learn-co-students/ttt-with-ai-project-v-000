@@ -2,9 +2,10 @@ module Players
     class Human < Player
 
         def move(board)
-            num = gets.chomp
-            return num 
+            puts "Please enter 1-9:"
+            num = gets.strip
+            return num
         end
 
-    end 
+    end
 end
