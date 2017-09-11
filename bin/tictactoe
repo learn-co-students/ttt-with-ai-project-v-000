@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Lorenzo's Tic Tac Toe!"
+sleep(3)
+puts "The Greatest Game In the World!!!!!"
+sleep(3)
+puts "Choose Your Gaming Type:"
+sleep(0.9)
+puts "[1] You VS the Computer"
+sleep(0.9)
+puts "[2] You VS Your Friend"
+sleep(0.9)
+puts "[3] Computer VS Computer for the Ultimate Showdown!!!"
+game_type = gets.strip
+
+if game_type == "1"
+  puts "Player 1 will be X, Computer will be O"
+  game = Game.new(player_1=Players::Human.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
+elsif game_type == "2"
+  puts "Player 1 will be X, Player 2 will be O"
+  game = Game.new(player_1=Players::Human.new("X"), player_2= Players::Human.new("O"), board = Board.new)
+elsif game_type == "3"
+  puts "Computer 1 will be X, Computer 2 will be O"
+  game = Game.new(player_1=Players::Computer.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
+end
+
+sleep(2)
+board.display
+game.play

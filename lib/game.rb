@@ -127,14 +127,25 @@ class Game
     end
 
     def turn
-      index = self.current_player.move(@board).to_i
-      if @board.valid_move?(index) == true
-        @board.update(index, self.current_player)
-        @board.display
-      else
-        puts "invalid"
-        self.turn
-      end
+        if self.current_player.class == Players::Human
+          index = self.current_player.move(@board).to_i
+          if @board.valid_move?(index) == true
+            @board.update(index, self.current_player)
+            @board.display
+          else
+            puts "invalid"
+            self.turn
+          end
+        elsif self.current_player.class == Players::Computer
+          index = self.current_player.move(@board).to_i
+          if @board.valid_move?(index) == true
+            sleep(1.2)
+            @board.update(index, self.current_player)
+            @board.display
+          else
+            self.turn
+          end
+        end
     end
 
     def play
