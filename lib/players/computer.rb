@@ -11,39 +11,17 @@ module Players
       board.valid_move?(input) ? input.to_s : move(board)
     end
 
-
-    # def move(board)
-    #   if board.turn_count > 4
-    #     Game::WIN_COMBINATIONS.detect do |win_combination|  # returns array
-    #       if win_combination.one?{|index|board.cells[index] != "X"}
-    #         # binding.pry
-    #         next_move(win_combination, board)
-    #       elsif win_combination.one?{|index|board.cells[index] != "O"}
-    #         # binding.pry
-    #         next_move(win_combination, board)
-    #       end
-    #     end
-    #   else
-    #     input = (rand * 10).floor
-    #     board.valid_move?(input) ? input.to_s : move(board)
-    #   end
-    # end
-    #
-    # def next_move(win_combo, board)
-    #   # binding.pry
-    #   win_combo.detect do |m|
-    #     # binding.pry
-    #     m += 1
-    #     board.valid_move?(m)
-    #     # binding.pry
-    #
-    #   end
-    # end
-    #
-    # def index_to_input(index)
-    #   index + 1
-    # end
-
-
+    def to_win(board)
+      Game::WIN_COMBINATIONS.collect do |combo|
+        if combo.count{|e| board.position(e) == self.token}.eql?(2) && combo.count{|e| board.position(e) == " "}.eql?(1)
+          combo
+        elsif combo.count{|e| board.position(e) == "X"}.eql?(2) && combo.count{|e| board.position(e) == " "}.eql?(1)
   end  # End of Class
 end  # End of Module
+
+  # def offense(board)
+  #   if combo.count{|e| board.position(e) == "X"}.eql?(2) && combo.count{|e| board.position(e) == " "}.eql?(1)
+  #     combo
+
+def other_token()
+  ["X", "O", " "].detect{|t| t != self.token && t!= " "}
