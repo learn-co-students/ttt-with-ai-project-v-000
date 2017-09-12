@@ -1,3 +1,34 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "Do you want to play 1-player, 2-player, or 0-player?"
+
+choice = gets.strip.to_i
+
+case choice
+when 1
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+when 2
+  game = Game.new #will use default initialization of two humans
+  game.play
+when 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+end
+
+if game.over?
+  game.board.reset!
+end
+
+puts "Would you like to play again?"
+
+input = gets.strip
+
+if input == "yes"
+  puts "Do you want to play 1-player, 2-player, or 0-player?"
+
+
+  
