@@ -14,17 +14,16 @@ module Players
       if board.turn_count < 4
         random_move(board)
       else
-        midway(board)
+        next_move(board) + self.moves.last
       end
     end
 
 
 
-    def midway(board)
-      next_move = NEXT_MOVES.find_index do |index|
+    def next_move(board)
+      NEXT_MOVES.find_index do |index|
         board.position(self.moves.last + index) == " "
       end
-      next_move + self.moves.last
     end
 
 
