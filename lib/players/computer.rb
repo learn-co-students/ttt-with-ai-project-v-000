@@ -8,37 +8,40 @@ module Players
       @moves = []
     end
 
-    NEXT_MOVES = [1, -1, 3, -3, 4, -4]
+    NEXT_MOVES = [1, -1, 3, -3, 4, -4, 6, -6]
 
     def move(board)
       if board.turn_count < 4
         random_move(board)
+      elsif board.turn_count > 8
+        index = next_move(board) + self.moves.last
       else
-        next_move(board) + self.moves.last
+        board.open_spaces.sample
       end
     end
 
 
 
     def next_move(board)
-      NEXT_MOVES.find_index do |index|
-        board.position(self.moves.last + index) == " "
+      NEXT_MOVES.find do |index|
+        (0..8).include?(board.position(self.moves.last + index)) &&
+          board.position(self.moves.last + index) == " "
       end
     end
 
 
 
-    # def to_win?(board)
-    #   Game::WIN_COMBINATIONS.detect do |combo|
-    #     if combo.select {|a| board.cells[a] == self.token}.count = 2
-    #       combo
-    #     elsif combo.select {|a| board.cells[a] == other}.count == 2
-    #       combo
-    #     else
-    #       false
-    #     end
-    #   end
-    # end
+    def to_win?(board)
+      Game::WIN_COMBINATIONS.detect do |combo|
+        if combo.select {|a| board.cells[a] == self.token}.count = 2
+          combo
+        elsif combo.select {|a| board.cells[a] == other}.count == 2
+          combo
+        else
+          false
+        end
+      end
+    end
 
     # def find_index(board)
     #   to_win? ? to_win?(board).detect{|a| board.cells[a] == " "} : false
