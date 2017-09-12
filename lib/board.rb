@@ -39,11 +39,11 @@ class Board
     self.cells[index].lstrip.empty? ? false : true
   end
 
-  def open_spaces
-    self.cells.select do |c|
-      c if self.position(c) == " "
-    end
-  end
+  # def open_spaces
+  #   self.cells.select do |c|
+  #     c if self.position(c) == " "
+  #   end
+  # end
 
   def valid_move?(input) # Returns boolean for cell not taken and input is within range of existing array elements
     !taken?(input) && (1..9).member?(input.to_i)
