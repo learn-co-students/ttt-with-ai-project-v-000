@@ -7,37 +7,35 @@ module Players
     end
 
     def move(board)
-      input = (rand * 10).floor
-      board.valid_move?(input) ? input.to_s : move(board)
-    end
-
-    if !board.taken?(5)
-      move = "5"
-
-    elsif board.taken(5) && turn_count < 5
-      move = ["1", "3", "7", "9"].find {|m| board.position(m) == " "}
-    else
-      Game::WIN_COMBINATIONS.find do |win_combination|
-        if win_combination.select{|index|board.cells[index] == self.token}.count == 2 &&
-          win_combination.one?{|index|board.cells[index] == " "}
-          move = win_combination.find{|index|board.cells[index] == " "}
-          (move += 1).to_s
-        else
-          win_combination.select{|index|board.cells[index] == other}.count == 2 &&
-            win_combination.one?{|index|board.cells[index] == " "}
-            move = win_combination.find{|index|board.cells[index] == " "}
-            (move += 1).to_s
+      if !board.taken?(5)
+        move = 5
+      elsif board.taken?(5)
+        move = [1, 3, 7, 9].select {|m| board.position(m) == " "}.sample
+      else
+        Game::WIN_COMBINATIONS.find do |win_combination|
+          if win_combination.select{|index|board.position[index+1] == self.token}.count == 2 &&
+            win_combination.any?{|index|board.position(index+1) == " "}
+            move = win_combination.find{|index|board.position(index+1) == " "}
+          elsif win_combination.select{|index|board.position(index+1) !=" " && board.position(index+1) != self.token}.count == 2 &&
+            win_combination.any?{|index|board.position(index+1) == " "}
+              move = win_combination.find{|index|board.position(index+1) == " "}
           end
         end
+        move = [9, 7, 3, 1, 2, 4, 6, 8].find {|i| board.position(i) == " "} if move == nil
       end
-      move = (0..8).find {|i| board.position(i)}
-
-
-
-
-    def other
-      self.token.eql?("X") ? "O" : "X"
+      move
     end
+
+  def other
+    self.token.eql?("X") ? "O" : "X"
+  end
+
+
+  end  # End of Class
+end  # End of Module
+
+
+
     # def move(board)
     #   if board.turn_count > 4
     #     Game::WIN_COMBINATIONS.detect do |win_combination|  # returns array
@@ -69,7 +67,3 @@ module Players
     # def index_to_input(index)
     #   index + 1
     # end
-
-
-  end  # End of Class
-end  # End of Module

@@ -44,12 +44,12 @@ class Game
     puts "Player #{current_player.token}"
     puts "\n"
     input = current_player.move(self.board)
-    if self.board.valid_move?(input)
+    if !self.board.valid_move?(input)
+      turn
+    else
       self.board.update(input, current_player)
       self.board.display
       puts "\n"
-    else
-      turn
     end
   end
 

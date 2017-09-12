@@ -27,7 +27,7 @@ class Board
   end
 
   def full?  # Return false if any of the cells are empty
-    self.cells.none? {|cell| cell.lstrip.empty?}
+    self.cells.all? {|cell| cell == "X" || cell == "O"}
   end
 
   def turn_count  #  Returns number of cells that are not empty
@@ -50,7 +50,7 @@ class Board
   end
 
   def update(input, player)  # Sets array index equal to current player token
-    self.cells[input_to_index(input)] = player.token
+    self.cells[(input.to_i) -1] = player.token
   end
 
 
