@@ -63,7 +63,6 @@ class Game
     end
   end
 
-
   #draw? returns true for a draw
   #draw? returns false for a won game
   #draw? returns false for an in-progress game
@@ -90,6 +89,7 @@ class Game
       if self.board.valid_move?(move)
         self.board.update(move, self.current_player)
       else
+        puts "Invalid entry. Please enter a valid space number 1-9."
         self.turn
       end
   end
@@ -118,7 +118,5 @@ class Game
       self.board.display
       puts "Cat's Game!"
     end
-
   end
-
 end
