@@ -53,7 +53,7 @@ module Players
       # Center: If center position is open, take center position
 
       if board.cells[4] == " "
-        "5"
+        return "5"
 
       # if player has center position, focus only on winning combinations that include center mark
 
@@ -73,24 +73,24 @@ module Players
 
         if (pos_1 == pos_2 && pos_1 == self.token && pos_3 == " ") || (pos_2 == pos_3 && pos_2 == self.token && pos_1 == " ")
           if pos_1 == self.token
-            (combo[2] + 1).to_s
+            return (combo[2] + 1).to_s
           else
-            (combo[0] + 1).to_s
+            return (combo[0] + 1).to_s
           end
 
         # Block: If the opponent has two in a row, the player must play the third themselves to block the opponent.
 
         elsif (pos_1 == pos_2 && pos_1 == oppo_player && pos_3 == " " && pos_array.any? {|a| a != " "}) || (pos_2 == pos_3 && pos_2 == oppo_player && pos_1 == " " && pos_array.any? {|a| a != " "})
           if pos_1 == oppo_player
-            (combo[2] + 1).to_s
+            return (combo[2] + 1).to_s
           else
-            (combo[0] + 1).to_s
+            return (combo[0] + 1).to_s
           end
 
         # Create an opportunity where the player has two threats to win (two non-blocked lines of 2).
 
         elsif pos_1 == pos_3 && pos_1 == oppo_player && pos_2 == " "
-            (combo[1] + 1).to_s
+            return (combo[1] + 1).to_s
           end
         end
 
@@ -105,9 +105,9 @@ module Players
 
         if corner_pos_1 == oppo_player && corner_pos_2 == " "|| corner_pos_2 == oppo_player && corner_pos_1 == " "
             if corner_pos_1 == " "
-              (combo[0] + 1).to_s
+              return (combo[0] + 1).to_s
             else
-              (combo[1] + 1).to_s
+              return (combo[1] + 1).to_s
             end
         end
       end
@@ -115,7 +115,7 @@ module Players
       # Empty corner: The player plays in a corner square.
 
       corners.each do |c|
-        (c + 1).to_s if board.cells[c] == " "
+        return (c + 1).to_s if board.cells[c] == " "
       end
 
       side_positons.each do |s|
@@ -125,7 +125,7 @@ module Players
         side_3 = board.cells[s[2]]
 
         if side_1 == " " && side_2 == " " && side_3 == " "
-          (s[1] + 1).to_s
+          return (s[1] + 1).to_s
         end
       end
 
