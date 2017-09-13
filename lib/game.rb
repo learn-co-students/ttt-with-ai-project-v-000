@@ -26,9 +26,9 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |win_combination|
-      if win_combination.all?{|index|self.board.cells[index] == "X"}
+      if win_combination.all?{|index| self.board.cells[index] == "X"}
         win_combination
-      elsif win_combination.all?{|index|self.board.cells[index] == "O"}
+      elsif win_combination.all?{|index| self.board.cells[index] == "O"}
         win_combination
       else
         false

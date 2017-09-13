@@ -18,13 +18,12 @@ class Board
   end
 
   def position(index) #  Returns the current value (" ", "X", "O") at the index given
-    cell = input_to_index(index)
-    self.cells[cell]
+    self.cells[index.to_i - 1]
   end
 
-  def input_to_index(user_input)  #  Converts the input to an integer and then to array index
-    index = user_input.to_i - 1
-  end
+  # def input_to_index(user_input)  #  Converts the input to an integer and then to array index
+  #   index = (user_input.to_i) - 1
+  # end
 
   def full?  # Return false if any of the cells are empty
     self.cells.all? {|cell| cell == "X" || cell == "O"}
@@ -35,8 +34,8 @@ class Board
   end
 
   def taken?(input) # Converts input to index via method and returns boolean in index is occupied with X or O
-    index = input_to_index(input)
-    self.cells[index].lstrip.empty? ? false : true
+    index = (input.to_i)-1
+    self.cells[index] == " " ? false : true
   end
 
   # def open_spaces
