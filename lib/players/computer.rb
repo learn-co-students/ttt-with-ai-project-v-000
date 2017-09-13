@@ -31,9 +31,7 @@ module Players
 
           #if center position is occupied in addition to one of the other positions, the remaining position is a valid move, open position
 
-          if pos_2 == self.token && pos_1 == self.token && board.valid_move?(pos_3)
-            (combo[2] + 1).to_s
-          elsif pos_2 == self.token && pos_3 == self.token && board.valid_move?(combo[0])
+          if (pos_2 == self.token && pos_1 == self.token && board.valid_move?(pos_3)) || (pos_2 == self.token && pos_3 == self.token && board.valid_move?(combo[0]))          
             (combo[2] + 1).to_s
           end
         end
@@ -103,7 +101,7 @@ module Players
 
       # Opposite corner: If the opponent is in the corner, the player plays the opposite corner.
 
-        if corner_pos_1 == oppo_player && corner_pos_2 == " "|| corner_pos_2 == oppo_player && corner_pos_1 == " "
+        if (corner_pos_1 == oppo_player && corner_pos_2 == " ") || (corner_pos_2 == oppo_player && corner_pos_1 == " ")
             if corner_pos_1 == " "
               return (combo[0] + 1).to_s
             else
