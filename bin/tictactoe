@@ -1,3 +1,26 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts 'Welcome to Tic-Tac-Toe'
+loop do
+  puts 'Three game modes available'
+  puts '0 - Computer vs Computer'
+  puts '1 - Human vs Computer'
+  puts '2 - Human vs Human'
+  puts 'Exit to stop the program'
+  print "What game mode do you want to play? "
+  players = gets.chomp
+  case players
+  when '0'
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+  when '1'
+    Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+  when '2'
+    Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+  when 'exit', 'quit'
+    break
+  else
+    puts "Type exit to stop the program or enter a correct game mode"
+  end
+end

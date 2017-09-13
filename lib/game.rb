@@ -13,7 +13,7 @@ class Game
   end
 
   def over?
-    board.full?
+    board.full? || won? || draw?
   end
 
   def won?
@@ -38,16 +38,19 @@ class Game
   def turn
     input = current_player.move(current_player.token)
     if board.valid_move?(input)
+      puts "Computer entered #{input}" if current_player.class == Players::Computer
       board.update(input, current_player)
+      board.display
     else
       turn
     end
   end
 
   def play
-    until over?
-      turn
-    end
+    board.display
+    turn until over?
+    puts "Congratulations #{winner}!" if winner
+    puts "Cat's Game!" if draw?
   end
 
 end
