@@ -45,19 +45,11 @@ class Game
   end
 
   def current_player
-    counter = 0
-    oddoreven = 0
-    while counter < 9
-      if @board.cells[counter] == " "
-      oddoreven = oddoreven + 1
-      end
-      counter = counter + 1
-    end
-  #  binding.pry
+    oddoreven = @board.turn_count
     if oddoreven.even?
-      return player_2
-    else
       return player_1
+    else
+      return player_2
     end
   end
 
@@ -78,7 +70,7 @@ class Game
       position_1 = board.cells[set[0]]
       position_2 = board.cells[set[1]]
       position_3 = board.cells[set[2]]
-      if position_1 == position_2 && position_2 == position_3 && position_taken?(@board.cells, set[0])
+      if position_1 == position_2 && position_2 == position_3 && board.taken?(set[0] + 1)
         return set
       end
     end
@@ -91,10 +83,6 @@ class Game
     else
       return false
     end
-  end
-
-  def position_taken?(boardcells, index)
-    !(@board.cells[index].nil? || @board.cells[index] == " ")
   end
 
   def full?
@@ -119,6 +107,7 @@ class Game
   end
 
   def play
+    board.display
     while over? == false
       turn
       board.display

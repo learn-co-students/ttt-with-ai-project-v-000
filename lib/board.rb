@@ -72,17 +72,25 @@ class Board
   def turn_count
     counter = 0
     turncount = 0
-    while counter < 8
-      if @cells[counter] == " "
+    while counter < 9
+      if @cells[counter] == "X" || @cells[counter] == "O"
         turncount = turncount + 1
       end
       counter = counter + 1
     end
-    9 - turncount
+    turncount
   end
 
   def taken?(input)
     if position(input) == "X" || position(input) == "O"
+      return true
+    else
+      return false
+    end
+  end
+
+  def not_taken(input)
+    if position(input) != "X" && position(input) != "O"
       return true
     else
       return false
