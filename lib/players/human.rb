@@ -1,13 +1,15 @@
 module Players
   class Human < Player
-=begin
-  def move
+
+  def move(board)
     puts "Pick a square 1-9"
     input = gets.strip
-  end
-=end
+
   end
 
+  end
+=begin
+=end
   class Computer
   end
 
