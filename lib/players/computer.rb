@@ -9,30 +9,21 @@ module Players
     def move(board)
       if !board.taken?(5)
         move = "5"
-      elsif board.turn_count < 6
-        move = [1, 3, 7, 9].select {|m| board.position(m) == " "}.sample.to_s
-      elsif board.turn_count > 1
-        if board.position(5) == self.token
-            if board.position(1) == self.token && board.position(9) == " " || board.position(9) == self.token && board.position(1) == " "
-             board.taken?(1) ? move = "9" : move = "1"
-           elsif board.position(7) == self.token && board.position(3) == " " || board.position(3) == self.token && board.position(7) == " "
-              board.taken?(3) ? move = "7" : move = "3"
-        elsif board.position(5) != self.token
-          if board.position(1) == self.token && board.position(3) == " " || board.position(3) == self.token && board.position(1) == " "
-           board.taken?(1) ? move = "3" : move = "1"
-         elsif board.position(7) == self.token && board.position(9) == " " || board.position(9) == self.token && board.position(7) == " "
-            board.taken?(3) ? move = "7" : move = "9"
-         elsif board.position(1) == self.token && board.position(1) == " " || board.position(1) == self.token && board.position(1) == " "
-           board.taken?(1) ? move = "1" : move = "1"
-         elsif board.position(3) == self.token && board.position(9) == " " || board.position(9) == self.token && board.position(3) == " "
-            board.taken?(3) ? move = "3" : move = "9"
-
+      elsif board.turn_count == 1
+        move = [1, 3, 7, 9].shuffle.find {|m| !board.taken?(m)}.to_s
+      elsif board.turn_count  <= 3
+        move = [1, 3, 7, 9].shuffle.find {|m| !board.taken?(m)}.to_s
+      else
         Game::WIN_COMBINATIONS.find do |win_combination|
-          if win_combination.select{|index|board.position(index+1) == self.token}.count == 2 && win_combination.one?{|index|board.position(index+1) == " "}
-            move = win_combination.find{|index| board.position(index+1) == " "}
-          elsif win_combination.select{|index| board.position(index+1) != " " && board.position(index+1) != self.token}.count == 2
+          if win_combination.select{|index|board.position(index+1) == self.token}.size == 2 && win_combination.one?{|index| !board.taken?(index+1)}
+            move = win_combination.select{|index| !board.taken?(index+1)}.first
+            move += 1
+            move.to_s
+          elsif win_combination.select{|index| board.taken?(index+1) && board.position(index+1) != self.token}.count == 2 && win_combination.one?{|index| !board.taken?(index+1)}
             # && win_combination.any?{|index|board.position(index+1) == " "}
-            move = win_combination.find{|index| board.position(index+1) == " "}
+            move = win_combination.select{|index| !board.taken?(index+1)}.first
+            move += 1
+            move.to_s
           end
         end
         move = [9, 7, 3, 1, 2, 4, 6, 8].find {|i| board.position(i) == " "} if move == nil

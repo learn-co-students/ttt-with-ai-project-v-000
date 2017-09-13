@@ -44,7 +44,9 @@ class Game
     puts "Player #{current_player.token}"
     puts "\n"
     input = current_player.move(self.board)
+    # binding.pry
     if !self.board.valid_move?(input)
+      # binding.pry
       turn
     else
       self.board.update(input, current_player)
@@ -139,9 +141,9 @@ class Logic
 
   def single_player(token)
 
-    if token.eql?("X")
+    if token.upcase.eql?("X")
       Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new).play
-    else
+    elsif token.upcase.eql?("O")
       Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new).play
       Logic.new.new_game
     end
