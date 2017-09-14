@@ -1,3 +1,23 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+while !user_input.to_i.between?(1,3)
+
+   user_input = gets.chomp.to_i
+
+   if !user_input.to_i.between?(1,3)
+     puts "Invalid entry. Please enter a number between 1 and 3"
+   end
+
+ end
+
+   if user_input == 1
+     one_player_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+     one_player_game.play
+   elsif user_input == 2
+     two_player_game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+     two_player_game.play
+   else
+     computers_only = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+     computers_only.play
+   end
