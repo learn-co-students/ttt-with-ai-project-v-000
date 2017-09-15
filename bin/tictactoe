@@ -1,3 +1,87 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def choose_num_players
+  puts "(please type in '0', '1', or '2')"
+  input = gets.strip
+  if valid_num_players?(input)
+    input
+  else
+    choose_num_players
+  end
+end
+
+#validate user's num_players choice
+def valid_num_players?(input)
+  input == "0" || input == "1" || input == "2"
+end
+
+#Ask the user to choose which player is "X"
+def choose_token
+  puts "Excellent!  Now which player will be 'X'?  Player 1 or Player 2?"
+  puts "(please type in '1' or '2')"
+  input = gets.strip
+  if valid_token?(input)
+    input
+  else
+    choose_token
+  end
+end
+
+#validate the user's token choice
+def valid_token?(input)
+  input == "1" || input == "2"
+end
+
+def rematch_check
+  rematch = gets.strip
+  if rematch.downcase == "yes" || rematch.downcase == "no"
+    rematch
+  else
+    puts "please type 'yes' or 'no'"
+    rematch_check
+  end
+end
+
+rematch = nil
+until rematch == "no"
+  puts "Welcome to TIC-TAC-TOE!!!!!.  How many players will be playing today?"
+
+  input = choose_num_players
+  input2 = choose_token
+
+
+  case input
+  when "0"
+    puts "AI vs AI"
+    if input2 == "1"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    else input2 == "2"
+      game = Game.new(Players::Computer.new("O"), Players::Computer.new("X"), Board.new)
+    end
+  when "1"
+    puts "Human vs AI"
+    if input2 == "1"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    else
+      input2 == "2"
+      game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new)
+    end
+  when "2"
+    puts "Human vs Human"
+    if input2 == "1"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+    else
+      input2 == "2"
+      game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+    end
+  end
+
+    game.play
+    game.board.reset!
+
+  puts "Want to play again? (type 'yes' or 'no')"
+
+  rematch = rematch_check
+end
