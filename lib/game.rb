@@ -14,22 +14,11 @@ class Game
     [2,4,6],
   ]
 
-  def initialize(player_1 = "X", player_2 = "O", board = "[" ", " ", " ", " ", " ", " ", " ", " ", " "]")
-    if player_1.is_a?(Player)
-      @player_1 = player_1
-    else
-      @player_1 = Players::Human.new(player_1)
-    end
-    if player_2.is_a?(Player)
-      @player_2 = player_2
-    else
-      @player_2 = Players::Human.new(player_2)
-    end
-    if board.is_a?(Board)
-      @board = board
-    else
-      @board = Board.new
-    end
+
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
   end
 
   def current_player
