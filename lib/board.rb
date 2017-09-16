@@ -22,14 +22,14 @@ class Board
     @cells[location.to_i-1]
   end
 
-  def position_taken?(location)
-    @cells[location] != " " && @cells[location] != ""
+  def taken?(location)
+    @cells[location.to_i-1] != " " && @cells[location.to_i-1] != ""
   end
 
   def full?
     count = 0
     while count < 9
-      if position_taken?(count) == false
+      if taken?(count) == false
         return false
       end
       count += 1
@@ -39,6 +39,14 @@ class Board
 
   def turn_count
     @cells.count{|token| token == "X" || token == "O"}
+  end
+
+  def valid_move?(index)
+    index.to_i.between?(1,9) && !taken?(index.to_i)
+  end
+
+  def update(input, player)
+    @cells[input.to_i - 1] = player.token
   end
 
 end
