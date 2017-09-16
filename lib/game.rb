@@ -31,7 +31,7 @@ class Game
   end
 
   def turn
-    input = current_player.move([])
+    input = current_player.move(@board)
     if valid_move?(input.to_i)
       move(input)
       @board.display

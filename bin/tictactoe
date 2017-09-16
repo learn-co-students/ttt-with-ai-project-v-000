@@ -1,3 +1,27 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def choose_game
+  puts "Choose a game type: 2 for two human players, 1 for one human and one AI, and 0 for two AI: "
+  input = gets.chomp
+
+  if input == "2"
+    #2 Player Mode
+    two_player_game = Game.new()
+    two_player_game.play
+  elsif input == "1"
+    #1 Player Mode
+    one_player_game = Game.new(player_1 = Players::Computer.new("X"))
+    one_player_game.play
+  elsif input == "0"
+    #0 Player Mode
+    zero_player_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    zero_player_game.play
+  else
+    choose_game
+  end
+end
+
+choose_game
