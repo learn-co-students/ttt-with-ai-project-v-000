@@ -12,11 +12,10 @@ def test
     [6,4,2]
   ]
 
-  cells = ["X", "O", "O", " ", "X", " ", " ", " ", " "]
-  winning_num = ""
+  cells = ["X", "O", "X", " ", "O", " ", " ", "X", " "]
   winning.detect do |winning_combo|
-    if winning_combo.select {|cell| cells[cell] == "X"}.count == 2
-      return winning_combo.detect {|index| cells[index] == " "}
+    if winning_combo.select {|cell| cells[cell] == "O"}.count == 1 && winning_combo.select {|cell| cells[cell] == " "}.count == 2
+      return winning_combo.detect {|index| cells[index] == " "}, winning_combo
     end
   end
   return false
