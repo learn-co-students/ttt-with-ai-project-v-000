@@ -24,7 +24,46 @@ WIN_COMBINATIONS = [
   end
 
   def over?
-
+    self.won? || self.draw?
   end
+
+  def won?
+    WIN_COMBINATIONS.each do |winning_combo|
+
+      if self.board.cells[winning_combo[0]] == "X" && self.board.cells[winning_combo[1]] == "X" && self.board.cells[winning_combo[2]] == "X"
+        return  winning_combo
+
+      elsif self.board.cells[winning_combo[0]] == "O" && self.board.cells[winning_combo[1]] == "O" && self.board.cells[winning_combo[2]] == "O"
+        return winning_combo
+      end
+    end
+
+    return false
+  end
+
+  def draw?
+    if self.won? || self.board.turn_count != 9
+      return false
+    else
+      true
+    end
+  end
+
+  def winner
+    self.won? ? self.board.cells[self.won?[0]] : nil
+  end
+
+  def turn
+    #input = gets
+    input = (gets.strip).to_1 + 1
+
+    if valid_move?((input.to_i)+1)
+      update(input,player_1)
+    else
+      turn
+    end
+    #valid_move? ? update
+  end
+
 
 end
