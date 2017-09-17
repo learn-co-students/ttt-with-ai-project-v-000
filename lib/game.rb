@@ -54,15 +54,22 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    #input = gets
-    input = (gets.strip).to_1 + 1
+    input = (current_player.move(board))
 
-    if valid_move?((input.to_i)+1)
-      update(input,player_1)
+    if self.board.valid_move?(input)
+      self.board.update(input,player_1)
     else
-      turn
+      self.turn
     end
-    #valid_move? ? update
+  end
+
+  def play
+    input  = (current_player.move(board))
+    until self.over?
+      self.turn
+    end
+
+
   end
 
 
