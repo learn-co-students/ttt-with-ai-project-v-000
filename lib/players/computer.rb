@@ -12,9 +12,11 @@ module Players
       [6,4,2]
     ]
 
-    def last_move(player_token)
+    #binding.pry
+
+    def last_move(board, player_token)
       WIN_COMBINATIONS.detect do |winning_combo|
-        if winning.select {|cell| board.cells[cell] == player_token}.count == 2
+        if winning_combo.select {|cell| board.cells[cell] == player_token}.count == 2
           return winning_combo.detect {|index| board.cells[index] == " "}
         end
       end
@@ -27,13 +29,14 @@ module Players
 
     def move(board)
       case
-      when self.last_move(self.token) != false
+      when self.last_move(board,self.token) != false
         #when 2 current_player tokens are in a row, select third option
-        self.last_move(self.token)
+        self.last_move(board, self.token)
 
-      when self.last_move(op_player) != false
+      when self.last_move(board, op_player) != false
         #when 2 op_player tokens are in a row, select third option
-        self.last_move(op_player)
+        self.last_move(board,op_player)
+
       when board.cells.all? {|cell| cell == " "}
         "4"
       else
