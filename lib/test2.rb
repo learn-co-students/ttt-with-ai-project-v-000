@@ -21,5 +21,3 @@ def test
   end
   return false
 end
-
-test

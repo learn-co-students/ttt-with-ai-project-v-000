@@ -27,16 +27,17 @@ module Players
 
     def move(board)
       case
-
       when self.last_move(self.token) != false
         #when 2 current_player tokens are in a row, select third option
-        last_move(self.token)
+        self.last_move(self.token)
 
-      when self.last_move(board.) != false
+      when self.last_move(op_player) != false
         #when 2 op_player tokens are in a row, select third option
-
+        self.last_move(op_player)
       when board.cells.all? {|cell| cell == " "}
         "4"
+      else
+        "7"
       end
 
     end
