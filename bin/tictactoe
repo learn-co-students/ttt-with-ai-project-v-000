@@ -34,6 +34,7 @@ def start
       end
     end
 
+    new_game.play
 
     puts "Would you like to play again?"
     input = gets.chomp.upcase

@@ -17,7 +17,7 @@ WIN_COMBINATIONS = [
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    self.play
+    #self.play
   end
 
   def current_player
