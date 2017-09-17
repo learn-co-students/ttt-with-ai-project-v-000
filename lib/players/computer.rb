@@ -34,13 +34,16 @@ module Players
     end
 
     def sides(board, player_token)
-      sides = [board.cells[1], board.cells[3], board.cells[5], board.cells[7]]
-      sides.detect do |cell|
+      sides = {board.cells[1] => 1, board.cells[3] => 3, board.cells[5] => 5, board.cells[7] => 7}
+      #sides = [board.cells[1], board.cells[3], board.cells[5], board.cells[7]]
+      sides.keys.detect.with_index do |cell, index|
         cell == player_token
+        return sides.values[index]
       end
     end
 
     def move(board)
+      binding.pry
       case
       when self.last_move(board,self.token) != false
         #1. when 2 current_player tokens are in a row, select third option
