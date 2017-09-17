@@ -31,25 +31,39 @@ module Players
       corners.detect do |cell|
         cell == player_token
       end
+    end
 
+    def sides(board, player_token)
+      sides = [board.cells[1], board.cells[3], board.cells[5], board.cells[7]]
+      sides.detect do |cell|
+        cell == player_token
+      end
     end
 
     def move(board)
       case
       when self.last_move(board,self.token) != false
-        #when 2 current_player tokens are in a row, select third option
+        #1. when 2 current_player tokens are in a row, select third option
         self.last_move(board, self.token)
 
       when self.last_move(board, op_player) != false
-        #when 2 op_player tokens are in a row, select third option
+        #2. when 2 op_player tokens are in a row, select third option
         self.last_move(board,op_player)
 
-      when board.turn_count == 1 && corner(board, player_token)
-        #If 2nd move, CPU plays middle
+      when board.turn_count == 1 && corner(board, op_player)
+        #5. If 2nd move, CPU plays middle
         "5"
       when board.cells.all? {|cell| cell == " "}
         #If CPU first player, select top left
         "1"
+
+      when corner(board, " ")
+        #7. If empty corner, CPU plays empty corner square
+        corner(board, " ")
+
+      when sides(board, " ")
+        #8. If empty sides, CPU plays empty middle square
+        sides(board, " ")
       else
         "8"
       end
