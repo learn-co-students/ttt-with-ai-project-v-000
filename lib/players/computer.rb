@@ -2,10 +2,11 @@ module Players
   class Computer < Player
 
     def move(board)
-      binding.pry
+      case
+      when board.cells.all? {|cell| cell == " "}
+        "4"
+      end
 
-      puts board.cells
-      #input = gets.chomp
     end
 
 
