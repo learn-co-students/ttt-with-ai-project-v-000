@@ -17,6 +17,7 @@ WIN_COMBINATIONS = [
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    self.play
   end
 
   def current_player
@@ -54,6 +55,8 @@ WIN_COMBINATIONS = [
   end
 
   def turn
+    self.board.display
+    puts "Pleae enter a valid move:"
     input = (current_player.move(board))
 
     if self.board.valid_move?(input)
@@ -65,6 +68,7 @@ WIN_COMBINATIONS = [
 
   def play
     self.turn until self.over?
+    self.board.display
     self.won? ? (puts "Congratulations #{self.winner}!") : (puts "Cat's Game!")
   end
 
