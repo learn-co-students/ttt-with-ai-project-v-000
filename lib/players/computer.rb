@@ -27,18 +27,20 @@ module Players
     end
 
     def corner(board, player_token)
-      corners = [board.cells[0], board.cells[2], board.cells[6], board.cells[8]]
+      corners = {0 => board.cells[0], 2 => board.cells[2], 6 => board.cells[6], 8 => board.cells[8]}
       corners.detect do |cell|
         cell == player_token
+        return sides.keys[index] if cell == player_token
       end
     end
 
     def sides(board, player_token)
-      sides = {board.cells[1] => 1, board.cells[3] => 3, board.cells[5] => 5, board.cells[7] => 7}
-      #sides = [board.cells[1], board.cells[3], board.cells[5], board.cells[7]]
-      sides.keys.detect.with_index do |cell, index|
-        cell == player_token
-        return sides.values[index]
+      binding.pry
+      sides = {1 => board.cells[1], 3 => board.cells[3], 5 => board.cells[5], 7 => board.cells[7]}
+      sides.values.detect.with_index do |cell, index|
+        if cell == player_token
+          return sides.keys[index]
+        end
       end
     end
 
