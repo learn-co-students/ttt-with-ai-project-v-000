@@ -17,7 +17,7 @@ module Players
     def last_move(board, player_token)
       WIN_COMBINATIONS.detect do |winning_combo|
         if winning_combo.select {|cell| board.cells[cell] == player_token}.count == 2
-          return winning_combo.detect {|index| board.cells[index] == " "}
+          return (winning_combo.detect {|index| board.cells[index] == " "}+1)
         end
       end
       return false
@@ -40,7 +40,7 @@ module Players
       when board.cells.all? {|cell| cell == " "}
         "4"
       else
-        "7"
+        "8"
       end
 
     end
