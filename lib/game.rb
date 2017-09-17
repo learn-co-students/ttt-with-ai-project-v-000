@@ -1,0 +1,106 @@
+# provides access to the board
+# provides access to player_1
+# provides access to player_2
+# accepts 2 players and a board
+# defaults to two human players, X and O, with an empty board
+
+class Game
+  WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [2,4,6], [0,4,8]]
+  attr_accessor :board, :player_1, :player_2
+
+  def self.win_combinations
+    WIN_COMBINATIONS
+  end
+
+  def initialize (player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
+  end
+# returns the correct player, X, for the third move
+  def current_player
+    if self.board.cells.count(self.player_1.token) == self.board.cells.count(self.player_2.token)
+      player_1
+    else
+      player_2
+    end
+  end
+  # returns true for a draw
+  # returns true for a won game
+  # returns false for an in-progress game
+  def over?
+    true unless self.board.cells.include?(" ")
+  end
+# Returns an array of pieces per the array of win combos. Will be all pieces on board, more or less.
+  def token_combinations
+    self.class.win_combinations.map do |set|
+      set.map do |position|
+        self.board.position((position + 1).to_s)
+      end
+    end
+  end
+# Draws out the first winning set
+  def win_set
+    self.token_combinations.find {|a| a == ["X", "X", "X"] || a == ["O", "O", "O"]}
+  end
+  # returns false for a draw
+  # returns the correct winning combination in the case of a win
+  def won?
+    if self.win_set
+      index_of_win_combo = self.token_combinations.index{|x| x == self.win_set}
+      self.class.win_combinations[index_of_win_combo]
+    end
+  end
+  # returns true for a draw
+  # returns false for a won game
+  # returns false for an in-progress game
+  def draw?
+    !won?
+  end
+# returns X when X won
+# returns O when O won
+# returns nil when no winner
+  def winner
+    self.win_set.uniq.join if self.won?
+  end
+  # asks for input again after a failed validation
+  # changes to player 2 after the first turn
+  # asks for players input on a turn of the game
+  def turn
+    # current player > move him > check if valid > update the board  unless invalid > display
+
+    # ask for input
+    # get input
+    # convert input to index
+    # if index is valid
+    #   make the move for index
+    #   show the board
+    # else
+    #   ask for input again until you get a valid input
+    # end
+    puts "Please enter 1-9:"
+    input = gets.strip
+
+    if self.board.valid_move?(input)
+      self.board.update(input, self.current_player)
+      self.board.display
+    else
+      self.turn
+    end
+
+  end
+  # checks if the game is over after every turn
+  # plays the first turn of the game
+  # plays the first few turns of the game
+  # checks if the game is won after every turn
+  # checks if the game is a draw after every turn
+  # stops playing if someone has won
+  # congratulates the winner X
+  # congratulates the winner O
+  # stops playing in a draw
+  # prints "Cat\'s Game!" on a draw
+  # plays through an entire game
+  def play
+
+  end
+end
