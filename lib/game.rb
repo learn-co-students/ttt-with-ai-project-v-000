@@ -57,19 +57,15 @@ WIN_COMBINATIONS = [
     input = (current_player.move(board))
 
     if self.board.valid_move?(input)
-      self.board.update(input,player_1)
+      self.board.update(input,current_player)
     else
       self.turn
     end
   end
 
   def play
-    input  = (current_player.move(board))
-    until self.over?
-      self.turn
-    end
-
-
+    self.turn until self.over?
+    self.won? ? (puts "Congratulations #{self.winner}!") : (puts "Cat's Game!")
   end
 
 

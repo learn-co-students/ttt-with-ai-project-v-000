@@ -2,7 +2,10 @@ module Players
   class Computer < Player
 
     def move(board)
-      input = gets.chomp
+      binding.pry
+
+      puts board.cells
+      #input = gets.chomp
     end
 
 
