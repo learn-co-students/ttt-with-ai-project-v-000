@@ -29,13 +29,12 @@ module Players
     def corner(board, player_token)
       corners = [board.cells[0], board.cells[2], board.cells[6], board.cells[8]]
       corners.detect do |cell|
-        cell == " "
+        cell == player_token
       end
 
     end
 
     def move(board)
-      binding.pry
       case
       when self.last_move(board,self.token) != false
         #when 2 current_player tokens are in a row, select third option
@@ -45,9 +44,11 @@ module Players
         #when 2 op_player tokens are in a row, select third option
         self.last_move(board,op_player)
 
-      when board.turn_count == 1 && board.cells[0] == op_player
+      when board.turn_count == 1 && corner(board, player_token)
+        #If 2nd move, CPU plays middle
         "5"
       when board.cells.all? {|cell| cell == " "}
+        #If CPU first player, select top left
         "1"
       else
         "8"
