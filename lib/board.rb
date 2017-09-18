@@ -80,13 +80,14 @@ class Board
     !self.position(string) == " "
   end
 
-  def num_check(num)
-    a = (1..9).to_a
-    a.include?(num.to_i)
-  end
+  # def num_check(num)
+  #   a = (1..9).to_a
+  #   a.include?(num.to_i)
+  # end
 # returns true for user input between 1-9 that is not taken
-  def valid_move?(num)
-    true unless taken?(num) || !num_check(num)
+# Instead of setting up num check, simply check for valid input with #between?
+  def valid_move?(string)
+    string.to_i.between?(1,9) && !self.taken?(string)
   end
 # updates the cells in the board with the player token according to the input
 # Returns the new piece on the board
