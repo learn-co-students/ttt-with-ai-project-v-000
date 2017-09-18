@@ -7,6 +7,4 @@ class Game
     @player_2 = player_2
     @board = Board.new
   end
-
-
 end
