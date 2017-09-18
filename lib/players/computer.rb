@@ -39,7 +39,6 @@ module Players
     def corner(board, player_token)
 
       corners = {0 => board.cells[0], 2 => board.cells[2], 6 => board.cells[6], 8 => board.cells[8]}
-      binding.pry
       if corners.values.all? { |cell| cell == " "  }
         return 1
       elsif corners.values[0] == player_token && corners.values[3] == " "
@@ -52,18 +51,14 @@ module Players
         return 3
       end
 
-
-
-
-      corners.values.each_with_index do |cell, index|
-        if cell == player_token
-
-
-        end
-
-        return corners.keys[index] if cell == player_token && corners.values.any? { |i|i == " "  }
-      end
-      return false
+      # corners.values.each_with_index do |cell, index|
+      #   if cell == player_token
+      #
+      #   end
+      #
+      #   return corners.keys[index] if cell == player_token && corners.values.any? { |i|i == " "  }
+      # end
+      # return false
     end
 
     def sides(board, player_token)
