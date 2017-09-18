@@ -69,12 +69,15 @@ class Board
   end
 # returns true if the position is X or O
 # returns false if the position is empty or blank
-  def taken?(num)
-    if position(num) == "X" || position(num) == "O"
-      true
-    else
-      false
-    end
+# I need to check if the space is empty. If it is then false
+  def taken?(string)
+    # if position(num) == "X" || position(num) == "O"
+    #   true
+    # else
+    #   false
+    # end
+
+    !self.position(string) == " "
   end
 
   def num_check(num)
