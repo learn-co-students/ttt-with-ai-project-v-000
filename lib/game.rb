@@ -30,6 +30,8 @@ class Game
     @player_2 = player_2
     @board = board
   end
+
+  
 # returns the correct player, X, for the third move
   def current_player
     if self.board.cells.count(self.player_1.token) == self.board.cells.count(self.player_2.token)
