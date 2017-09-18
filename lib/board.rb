@@ -3,8 +3,9 @@ class Board
   attr_accessor :cells
 # initialized with empty cells
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
+    # @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    # Reset instead of making the new board
+    self.reset!
   end
 # reset the state of the cells in the board
 # make a new array instead of 2 steps
@@ -20,6 +21,12 @@ class Board
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "--------------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+  end
+
+  # must check if board is full?
+  def full?
+    self.cells.all?{|cell| cell == "X" || cell == "O"}
+
   end
 # takes in user input and returns the value of the board cell
   def position(num)
