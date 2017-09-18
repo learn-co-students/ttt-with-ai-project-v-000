@@ -91,7 +91,7 @@ class Board
   end
 # updates the cells in the board with the player token according to the input
 # Returns the new piece on the board
-  def update(num, player_obj)
-    self.cells[num.to_i - 1] = player_obj.token
+  def update(string, player_obj)
+    self.cells[string.to_i - 1] = player_obj.token
   end
 end
