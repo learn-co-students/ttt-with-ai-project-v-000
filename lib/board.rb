@@ -28,12 +28,29 @@ class Board
 
    end
 
+   def token
+
+   end
+
    def update(position, token)
 
+   end
 
+   def full?
+     board.none? {|el| el === " "}
+   end
 
+   def turn_count
 
+   end
 
+   def taken?
+
+   end
+
+   def valid_move?
+
+   end
 
 
 
