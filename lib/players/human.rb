@@ -1,7 +1,7 @@
 module Players
 
   class Human < Player
-    def move(token)
+    def move(board)
       print "Input a number "
       input = gets.chomp
     end

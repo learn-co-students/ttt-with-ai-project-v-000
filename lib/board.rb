@@ -1,8 +1,8 @@
 require 'pry'
 class Board
   attr_accessor :cells
-  # Why is board.cells excepting empty Array?
 
+  # Why is board.cells accepting empty Array?
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end

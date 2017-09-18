@@ -9,7 +9,7 @@ class Game
   end
 
   def current_player
-    board.turn_count.even? ? player_1 : player_2
+    board.turn_count.even? ? player_2 : player_1
   end
 
   def over?
@@ -36,7 +36,7 @@ class Game
   end
 
   def turn
-    input = current_player.move(current_player.token)
+    input = current_player.move(board)
     if board.valid_move?(input)
       puts "Computer entered #{input}" if current_player.class == Players::Computer
       board.update(input, current_player)
