@@ -68,7 +68,7 @@ class Game
   # asks for players input on a turn of the game
   def turn
     # current player > move him > check if valid > update the board  unless invalid > display
-
+    input = self.current_player.move(self.board)
     # ask for input
     # get input
     # convert input to index
@@ -78,8 +78,7 @@ class Game
     # else
     #   ask for input again until you get a valid input
     # end
-    puts "Please enter 1-9:"
-    input = gets.strip
+
 
     if self.board.valid_move?(input)
       self.board.update(input, self.current_player)
