@@ -10,7 +10,7 @@ class Board
   # Instance Methods #
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -26,13 +26,8 @@ class Board
   end
 
 
-
-  def token
-
-  end
-
-  def update(position, token)
-
+  def update(position, player)
+    @cells[position.to_i - 1] = player.token
   end
 
    def full?
@@ -40,15 +35,19 @@ class Board
    end
 
    def turn_count
-
+     count = 0
+     @cells.each do |token|
+       count += 1 if token === 'X' || token === 'O'
+     end
+     count
    end
 
-   def taken?
-
+   def taken?(input)
+     position(input) != " " ? true : false
    end
 
-   def valid_move?
-
+   def valid_move?(input)
+     input.to_i.between?(1,9) && !taken?(input)
    end
 
 
