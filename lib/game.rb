@@ -28,20 +28,12 @@ class Game
   end
 
   def won?
+  winning_array = nil
     WIN_COMBINATIONS.each do |option|
-      if @board.cells[option[0]] == "X" && @board.cells[option[1]] == "X" && @board.cells[option[2]] == "X"
-        true
-        winner
-
-        return option
-      elsif
-        @board.cells[option[0]] == "O" && @board.cells[option[1]] == "O" && @board.cells[option[2]] == "O"
-        true
-        winner
-        return option
-      end
+      winning_array = option if @board.cells[option[0]] == "X" && @board.cells[option[1]] == "X" && @board.cells[option[2]] == "X"
+      winning_array = option if @board.cells[option[0]] == "O" && @board.cells[option[1]] == "O" && @board.cells[option[2]] == "O"
     end
-  false
+  (winning_array != nil) ? winning_array : false
   end
 
   def draw?
@@ -50,47 +42,22 @@ class Game
 
   def winner
     WIN_COMBINATIONS.each do |option|
-       if @board.cells[option[0]] == "X" && @board.cells[option[1]] == "X" && @board.cells[option[2]] == "X"
-           return "X"
-       elsif
-         @board.cells[option[0]] == "O" && @board.cells[option[1]] == "O" && @board.cells[option[2]] == "O"
-           return "O"
-       end
+      return "X" if (@board.cells[option[0]] == "X" && @board.cells[option[1]] == "X" && @board.cells[option[2]] == "X")
+      return "O" if (@board.cells[option[0]] == "O" && @board.cells[option[1]] == "O" && @board.cells[option[2]] == "O")
     end
   return nil
   end
 
 
   def turn
-    puts "Please enter 1-9:"
-    # input = gets.strip
-    # index = input_to_index(input)
-    #   if @board.valid_move?(index)
-    #     @board.update(index, current_player)
-    #   else
-    #     turn
-    #   end
+    input = current_player.move(@board)
+    @board.valid_move?(input) ? @board.update(input, current_player) : current_player.move(@board)
   end
 
   def play
-    # while !over?
-    #  turn
-    # end
-    i = 0
-    while i<9
-      turn
-      i+=1
-    end
-
-    if winner == "X"
-      puts "Congratulations X!"
-    elsif winner == "O"
-      puts "Congratulations O!"
-    end
-
-    if draw?
-      puts "Cat's Game!"
-    end
-
+    turn while !over?
+    puts "Congratulations X!" if winner == "X"
+    puts "Congratulations O!" if winner == "O"
+    puts "Cat's Game!"if draw?
   end
 end
