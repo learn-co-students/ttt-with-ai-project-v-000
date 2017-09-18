@@ -25,9 +25,9 @@ class Board
     @cells[input.to_i - 1]
   end
 
-   def full?
-     !@cells.include?(" ")
-   end
+  def full?
+    !@cells.include?(" ")
+  end
 
   def turn_count
    count = 0
@@ -44,7 +44,7 @@ class Board
   def valid_move?(input)
     input.to_i.between?(1,9) && !taken?(input)
   end
-  
+
   def update(position, player)
     @cells[position.to_i - 1] = player.token
   end

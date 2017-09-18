@@ -1,36 +1,49 @@
 class Game
   attr_accessor :board, :player_1, :player_2
 
+  WIN_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [6,4,2]
+  ]
+
+
   # Initialize #
+
   def initialize(board)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
   end
 
-    def current_player
+  def current_player
 
-    end
+  end
 
-    def won?
+  def won?
 
-    end
+  end
 
-    def winner
+  def winner
 
-    end
+  end
 
-    def start
+  def start
 
-    end
+  end
 
-    def play
+  def play
 
-    end
+  end
 
-    def turn
+  def turn
 
-    end
+  end
 
 
 
