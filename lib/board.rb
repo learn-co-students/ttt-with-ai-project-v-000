@@ -25,31 +25,29 @@ class Board
     @cells[input.to_i - 1]
   end
 
-
-  def update(position, player)
-    @cells[position.to_i - 1] = player.token
-  end
-
    def full?
      !@cells.include?(" ")
    end
 
-   def turn_count
-     count = 0
-     @cells.each do |token|
-       count += 1 if token === 'X' || token === 'O'
-     end
-     count
+  def turn_count
+   count = 0
+   @cells.each do |token|
+     count += 1 if token === 'X' || token === 'O'
    end
+   count
+  end
 
-   def taken?(input)
-     position(input) != " " ? true : false
-   end
+  def taken?(input)
+    position(input) != " " ? true : false
+  end
 
-   def valid_move?(input)
-     input.to_i.between?(1,9) && !taken?(input)
-   end
-
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input)
+  end
+  
+  def update(position, player)
+    @cells[position.to_i - 1] = player.token
+  end
 
 
 end
