@@ -29,28 +29,31 @@ class Board
 
   end
 # takes in user input and returns the value of the board cell
-  def position(num)
-    case num
+# no reason to make a whole case, all we have to do is return the cell.
+  def position(string)
+    # case num
+    #
+    # when "1"
+    #   cells[0]
+    # when "2"
+    #   cells[1]
+    # when "3"
+    #   cells[2]
+    # when "4"
+    #   cells[3]
+    # when "5"
+    #   cells[4]
+    # when "6"
+    #   cells[5]
+    # when "7"
+    #   cells[6]
+    # when "8"
+    #   cells[7]
+    # when "9"
+    #   cells[8]
+    # end
+    self.cells[string.to_i - 1]
 
-    when "1"
-      cells[0]
-    when "2"
-      cells[1]
-    when "3"
-      cells[2]
-    when "4"
-      cells[3]
-    when "5"
-      cells[4]
-    when "6"
-      cells[5]
-    when "7"
-      cells[6]
-    when "8"
-      cells[7]
-    when "9"
-      cells[8]
-    end
   end
 # returns true for a full board
 # returns false for an in-progress game
