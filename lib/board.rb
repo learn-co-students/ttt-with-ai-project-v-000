@@ -61,8 +61,11 @@ class Board
     !self.cells.include?(" ")
   end
 # returns the amount of turns based on cell value
+# Count for the actual thing I want to find. Not subtract to get it.
+# Count for how many pieces put on the board
   def turn_count
-    9 - self.cells.count(" ")
+    # 9 - self.cells.count(" ")
+    self.cells.count{|cell| cell == "X" || cell == "O"}
   end
 # returns true if the position is X or O
 # returns false if the position is empty or blank
