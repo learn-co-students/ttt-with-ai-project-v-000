@@ -1,43 +1,42 @@
 class Board
   attr_accessor :cells
 
+  # Initialize #
 
-  def initialize(cells)
-    @cells = cells
-    reset!(cells)
+  def initialize
+    reset!
   end
-
-
-
 
   # Instance Methods #
 
-  def reset!(cells)
+  def reset!
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def display
-    puts cells
+    puts " #{@cells[0]} " + "|" + " #{@cells[1]} " + "|" + " #{@cells[2]} "
+    puts "-----------"
+    puts " #{@cells[3]} " + "|" + " #{@cells[4]} " + "|" + " #{@cells[5]} "
+    puts "-----------"
+    puts " #{@cells[6]} " + "|" + " #{@cells[7]} " + "|" + " #{@cells[8]} "
   end
 
   def position(input)
-    input = gets.strip
-     if input.include?(1...9)
+    @cells[input.to_i -1]
+  end
 
-     end
 
-   end
 
-   def token
+  def token
 
-   end
+  end
 
-   def update(position, token)
+  def update(position, token)
 
-   end
+  end
 
    def full?
-     board.none? {|el| el === " "}
+     !@cells.include?(" ")
    end
 
    def turn_count
@@ -45,7 +44,7 @@ class Board
    end
 
    def taken?
-    
+
    end
 
    def valid_move?
