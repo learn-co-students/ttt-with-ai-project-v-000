@@ -15,22 +15,30 @@ class Game
 
   # Initialize #
 
-  def initialize(board)
+  def initialize(player_1 = Players::Human.new(token="X"), player_2 = Players::Human.new(token="O"), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
   end
 
   def current_player
+    @board.turn_count.even? ? player_1 : player_2
+  end
 
+  def over?
+    @board.full?
   end
 
   def won?
 
   end
 
-  def winner
+  def draw?
+    over?
+  end
 
+  def winner
+    @board.cells[won?[0]] if won?
   end
 
   def start
