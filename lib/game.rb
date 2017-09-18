@@ -31,14 +31,17 @@ class Game
     @board = board
   end
 
-  
+
 # returns the correct player, X, for the third move
   def current_player
-    if self.board.cells.count(self.player_1.token) == self.board.cells.count(self.player_2.token)
-      player_1
-    else
-      player_2
-    end
+    #
+    # Just check the turn count. If it is an odd number, it is player_2's turn
+    # if self.board.cells.count(self.player_1.token) == self.board.cells.count(self.player_2.token)
+    #   player_1
+    # else
+    #   player_2
+    # end
+    self.board.turn_count % 2 == 0 ? player_1 : player_2
   end
   # returns true for a draw
   # returns true for a won game
