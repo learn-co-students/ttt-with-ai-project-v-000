@@ -7,9 +7,11 @@ class Board
 
   end
 # reset the state of the cells in the board
+# make a new array instead of 2 steps
   def reset!
-    self.cells.clear
-    self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    # self.cells.clear
+    # self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    Array.new(9, " ")
   end
 # prints the board
   def display
