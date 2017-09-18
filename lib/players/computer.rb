@@ -36,8 +36,7 @@ module Players
       self.token == "X" ? "O" : "X"
     end
 
-    def corner(board, player_token)
-
+    def op_corner(board, player_token)
       corners = {0 => board.cells[0], 2 => board.cells[2], 6 => board.cells[6], 8 => board.cells[8]}
       if corners.values.all? { |cell| cell == " "  }
         return 1
@@ -49,16 +48,18 @@ module Players
         return 7
       elsif corners.values[2] == player_token && corners.values[1] == " "
         return 3
+      else
+        return false
       end
+    end
 
-      # corners.values.each_with_index do |cell, index|
-      #   if cell == player_token
-      #
-      #   end
-      #
-      #   return corners.keys[index] if cell == player_token && corners.values.any? { |i|i == " "  }
-      # end
-      # return false
+    def corner(board, player_token)
+      corners = {0 => board.cells[0], 2 => board.cells[2], 6 => board.cells[6], 8 => board.cells[8]}
+
+      corners.values.each_with_index do |cell, index|
+        return corners.keys[index] if cell == player_token
+      end
+      return false
     end
 
     def sides(board, player_token)
@@ -73,7 +74,6 @@ module Players
     end
 
     def move(board)
-
       if self.last_move(board,self.token) != false
         #1. when 2 current_player tokens are in a row, select third option
         self.last_move(board, self.token)
@@ -83,39 +83,32 @@ module Players
         self.last_move(board,op_player)
 
       elsif board.turn_count == 1 && corner(board, op_player)
-        #5. If 2nd move, CPU plays middle
+        #If 2nd move, CPU plays middle
         "5"
       elsif board.cells.all? {|cell| cell == " "}
         #If CPU first player, select top left
         "1"
 
+      elsif self.move_with_one(board, self.token) !=false
+        #3. CPU creates two in a row to force the opponent into defending
+        self.move_with_one(board, self.token)
+      end
+
       elsif board.cells[4] == " "
         #5. CPU plays middle
         "5"
-      elsif self.corner(board, op_player)
-        #6 Plays Opposite Corner
-        self.corner(board, op_player)
-        # binding.pry
-        # if board.cells[[0,8].reject {|i| i == opponent_corner}.first] == " "
-        #   ([0,8].reject {|i| i == opponent_corner}.first + 1)
-        # elsif board.cells[[2,6].reject {|i| i == opponent_corner}.first] == " "
-        #   ([2,6].reject {|i| i == opponent_corner}.first + 1)
-        # end
-
-      elsif self.move_with_one(board, self.token) !=false
-        self.move_with_one(board, self.token)
+      elsif self.op_corner(board, op_player)
+        self.op_corner(board, op_player)
 
       elsif corner(board, " ")
-
         #7. If empty corner, CPU plays empty corner square
         (corner(board, " ")+1)
 
       elsif sides(board, " ")
+
         #8. If empty sides, CPU plays empty middle square
         (sides(board, " ")+1)
-      end
     end
-
 
   end
 end
