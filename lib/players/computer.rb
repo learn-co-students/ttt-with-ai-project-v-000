@@ -83,7 +83,7 @@ module Players
         self.last_move(board,op_player)
 
       elsif board.turn_count == 1 && corner(board, op_player)
-        #If 2nd move, CPU plays middle
+        #If 2nd move and corner was selected first, CPU plays middle
         "5"
       elsif board.cells.all? {|cell| cell == " "}
         #If CPU first player, select top left
@@ -92,11 +92,11 @@ module Players
       elsif self.move_with_one(board, self.token) !=false
         #3. CPU creates two in a row to force the opponent into defending
         self.move_with_one(board, self.token)
-      end
 
       elsif board.cells[4] == " "
         #5. CPU plays middle
         "5"
+
       elsif self.op_corner(board, op_player)
         self.op_corner(board, op_player)
 
@@ -108,6 +108,7 @@ module Players
 
         #8. If empty sides, CPU plays empty middle square
         (sides(board, " ")+1)
+      end
     end
 
   end
