@@ -15,6 +15,7 @@ class Board
 # reset the state of the cells in the board
 # make a new array instead of 2 steps
   def reset!
+    #
     # self.cells.clear
     # self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     Array.new(9, " ")
@@ -108,7 +109,7 @@ class Board
     string.to_i.between?(1,9) && !self.taken?(string)
   end
 
-  
+
 # updates the cells in the board with the player token according to the input
 # Returns the new piece on the board
   def update(string, player_obj)
