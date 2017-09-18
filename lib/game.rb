@@ -48,6 +48,9 @@ class Game
   return nil
   end
 
+  def difficulty
+  end
+
 
   def turn
     input = current_player.move(@board)
@@ -56,8 +59,16 @@ class Game
 
   def play
     turn while !over?
-    puts "Congratulations X!" if winner == "X"
-    puts "Congratulations O!" if winner == "O"
-    puts "Cat's Game!"if draw?
+
+    if winner == "X"
+      @board.display
+      puts "Congratulations X!"
+    elsif winner == "O"
+      @board.display
+      puts "Congratulations O!"
+    end
+    if draw?
+      puts "Cat's Game!"
+    end
   end
 end
