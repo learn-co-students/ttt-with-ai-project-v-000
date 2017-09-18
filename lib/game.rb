@@ -44,7 +44,7 @@ class Game
   end
 
   def draw?
-    (full? && !won?) ? true : false
+    (@board.full? && !won?) ? true : false
   end
 
   def winner
@@ -60,15 +60,29 @@ class Game
   end
 
   def turn
+  puts "Please enter 1-9:"
+  input = gets.strip
+  index = input_to_index(input)
+    if valid_move?(index)
+      move(index, current_player)
+    else
+      turn
+    end
 
-  # puts "Please enter 1-9:"
-  # input = gets.strip
-  # index = input_to_index(input)
-    # if valid_move?(index)
-    #   move(index, current_player)
-    # else
-    #   turn
-    # end
+
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+    end
+
   end
 
   def play
