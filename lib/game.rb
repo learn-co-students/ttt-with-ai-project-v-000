@@ -29,12 +29,13 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |option|
-      if @board[option[0]] == "X" && @board[option[1]] == "X" && @board[option[2]] == "X"
+      if @board.cells[option[0]] == "X" && @board.cells[option[1]] == "X" && @board.cells[option[2]] == "X"
         true
         winner
+
         return option
       elsif
-        @board[option[0]] == "O" && @board[option[1]] == "O" && @board[option[2]] == "O"
+        @board.cells[option[0]] == "O" && @board.cells[option[1]] == "O" && @board.cells[option[2]] == "O"
         true
         winner
         return option
@@ -49,55 +50,47 @@ class Game
 
   def winner
     WIN_COMBINATIONS.each do |option|
-       if @board[option[0]] == "X" && @board[option[1]] == "X" && @board[option[2]] == "X"
-           @player_1
+       if @board.cells[option[0]] == "X" && @board.cells[option[1]] == "X" && @board.cells[option[2]] == "X"
+           return "X"
        elsif
-         @board[option[0]] == "O" && @board[option[1]] == "O" && @board[option[2]] == "O"
-          @player_2
+         @board.cells[option[0]] == "O" && @board.cells[option[1]] == "O" && @board.cells[option[2]] == "O"
+           return "O"
        end
     end
   return nil
   end
 
+
   def turn
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
-    if valid_move?(index)
-      move(index, current_player)
-    else
-      turn
-    end
-
-
-    player = current_player
-    current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
-      turn
-    else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts "\n\n"
-    end
-
+    puts "Please enter 1-9:"
+    # input = gets.strip
+    # index = input_to_index(input)
+    #   if @board.valid_move?(index)
+    #     @board.update(index, current_player)
+    #   else
+    #     turn
+    #   end
   end
 
   def play
-    while !over?
-     turn
+    # while !over?
+    #  turn
+    # end
+    i = 0
+    while i<9
+      turn
+      i+=1
     end
-    WIN_COMBINATIONS.each do |option|
-         if @board[option[0]] == "X" && @board[option[1]] == "X" && @board[option[2]] == "X"
-         puts "Congratulations X!"
-         elsif
-         @board[option[0]] == "O" && @board[option[1]] == "O" && @board[option[2]] == "O"
-         puts "Congratulations O!"
-         elsif draw?
-         puts "Cat's Game!"
-         end
+
+    if winner == "X"
+      puts "Congratulations X!"
+    elsif winner == "O"
+      puts "Congratulations O!"
     end
+
+    if draw?
+      puts "Cat's Game!"
+    end
+
   end
 end
