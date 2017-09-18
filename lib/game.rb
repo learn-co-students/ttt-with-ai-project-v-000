@@ -43,6 +43,8 @@ class Game
     # end
     self.board.turn_count % 2 == 0 ? self.player_1 : self.player_2
   end
+
+
   # returns true for a draw
   # returns true for a won game
   # returns false for an in-progress game
