@@ -49,7 +49,9 @@ class Game
   # returns true for a won game
   # returns false for an in-progress game
   def over?
-    true unless self.board.cells.include?(" ")
+    # We only want it to check if the game was #won? or a #draw?
+    # true unless self.board.cells.include?(" ")
+    self.won? || self.draw?
   end
 # Returns an array of pieces per the array of win combos. Will be all pieces on board, more or less.
   def token_combinations
