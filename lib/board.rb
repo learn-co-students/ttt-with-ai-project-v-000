@@ -1,10 +1,10 @@
 class Board
-  attr_accessor :board
+  attr_accessor :cells
 
 
-  def initialize(board)
-    @board = board
-    reset!
+  def initialize(cells)
+    @cells = cells
+    reset!(cells)
   end
 
 
@@ -12,15 +12,15 @@ class Board
 
   # Instance Methods #
 
-  def reset!
-    board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  def reset!(cells)
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def display
-    board
+    puts cells
   end
 
-  def position
+  def position(input)
     input = gets.strip
      if input.include?(1...9)
 
@@ -45,7 +45,7 @@ class Board
    end
 
    def taken?
-
+    
    end
 
    def valid_move?
