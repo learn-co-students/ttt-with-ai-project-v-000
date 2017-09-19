@@ -54,24 +54,35 @@ class Game
     self.won? || self.draw?
   end
 # Returns an array of pieces per the array of win combos. Will be all pieces on board, more or less.
-  def token_combinations
-    self.class.win_combinations.map do |set|
-      set.map do |position|
-        self.board.position((position + 1).to_s)
-      end
-    end
-  end
+  # def token_combinations
+  #   self.class.win_combinations.map do |set|
+  #     set.map do |position|
+  #       self.board.position((position + 1).to_s)
+  #     end
+  #   end
+  # end
 # Draws out the first winning set
-  def win_set
-    self.token_combinations.find {|a| a == ["X", "X", "X"] || a == ["O", "O", "O"]}
-  end
+  # def win_set
+  #   self.token_combinations.find {|a| a == ["X", "X", "X"] || a == ["O", "O", "O"]}
+  # end
   # returns false for a draw
   # returns the correct winning combination in the case of a win
   def won?
-    if self.win_set
-      index_of_win_combo = self.token_combinations.index{|x| x == self.win_set}
-      self.class.win_combinations[index_of_win_combo]
-    end
+    # if self.win_set
+    #   index_of_win_combo = self.token_combinations.index{|x| x == self.win_set}
+    #   self.class.win_combinations[index_of_win_combo]
+    # end
+
+    #
+    # Take each win combo and #find. Each combo will go in and we want to compare
+    # combo[0] to combo[1] and also combo[1] to combo[2]. and we want to make sure
+    # they aren't empty or else we'll return true for a #won? game that's empty.
+
+    self.class.win_combinations.find do |combo_ary|
+      self.board.cells[combo_ary[0]] == self.board.cells[combo_ary[1]] &&
+      self.board.cells[combo_ary[1]] == self.board.cells[combo_ary[2]] &&
+      self.board.taken?(combo_ary[0] + 1)
+
   end
   # returns true for a draw
   # returns false for a won game
