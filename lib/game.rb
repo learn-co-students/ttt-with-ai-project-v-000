@@ -43,7 +43,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    won? || over?
   end
 
   def winner
