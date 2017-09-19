@@ -18,6 +18,7 @@ if player_choice === "1"
   player_1 = Players::Computer.new("X")
   player_2 = Players::Computer.new("O")
 
+
 elsif player_choice === "2"
   puts "Enter 1 if you want to go first or 2 if you want the AI to go first."
 
@@ -26,19 +27,24 @@ elsif player_choice === "2"
   if turn_choice === "1"
     player_1 = Players::Human.new("X")
     player_2 = Players::Computer.new("O")
+
   elsif turn_choice === "2"
     player_1 = Players::Computer.new("X")
     player_2 = Players::Human.new("O")
+
   end
 
 elsif player_choice === "3"
   player_1 = Players::Human.new("X")
   player_2 = Players::Human.new("O")
 
+
 elsif player_choice === 'exit'
   puts "Goodbye!\n"
+
 else
-  "Invalid selection. Please try again."
+  puts "Invalid selection. Please try again."
+  Game.new(player_1, player_2).play
 end
 
 Game.new(player_1, player_2).play
