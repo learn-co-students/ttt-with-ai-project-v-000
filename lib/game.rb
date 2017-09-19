@@ -32,7 +32,7 @@ class Game
 
   def over?
     # checking ONLY #full? causes infinite loop in play method
-    full?
+    @board.full? || won? || draw?
   end
 
   def won?
@@ -44,7 +44,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    !won? && @board.full?
   end
 
   def winner
@@ -56,43 +56,29 @@ class Game
 
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
     else
-      puts "You made an invalid move! Please try again."
       turn
     end
   end
 
   def play
 
-    while !over?
+    until over?
       turn
     end
 
     if won?
-      puts "Congratulations #{winner}"
+      puts "Congratulations #{winner}!"
     end
 
     if draw?
       puts "Cat's Game!"
     end
 
+
+
   end
-
-    #     checks if the game is over after every turn (FAILED - 5)
-    #     plays the first turn of the game (FAILED - 6)
-    #     plays the first few turns of the game (FAILED - 7)
-    #     checks if the game is won after every turn (FAILED - 8)
-    #     checks if the game is a draw after every turn (FAILED - 9)
-    #     stops playing if someone has won
-    #     congratulates the winner X (FAILED - 10)
-    #     congratulates the winner O (FAILED - 11)
-    #     stops playing in a draw
-    #     prints "Cat's Game!" on a draw (FAILED - 12)
-    #     plays through an entire game (FAILED - 13)
-
-
-
-
 
 
 
