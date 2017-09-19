@@ -1,8 +1,4 @@
 #!/usr/bin/env ruby
-
-require_relative '../config/environment'
-
-#!/usr/bin/env ruby
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
@@ -11,9 +7,9 @@ puts "Choose from 3 game types."
 puts " "
 puts "Enter 1 to watch an AI vs AI game"
 puts "--------------------------------------"
-puts "Enter 2 to play a one player game against the AI"
+puts "Enter 2 to play Human vs AI"
 puts "--------------------------------------"
-puts "Enter 3 to play a game against a friend"
+puts "Enter 3 to play Human vs Human"
 puts "--------------------------------------"
 puts " "
 puts "Which game type would you like to play?"
@@ -37,7 +33,7 @@ elsif player_choice == "2"
     player_2 = Players::Human.new("O")
   end
 
-elsif player_choice == "3" 
+elsif player_choice == "3"
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
 end
