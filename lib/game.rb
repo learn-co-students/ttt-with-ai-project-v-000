@@ -88,13 +88,13 @@ class Game
   # returns false for a won game
   # returns false for an in-progress game
   def draw?
-    !won?
+    self.board.full? && !won?
   end
 # returns X when X won
 # returns O when O won
 # returns nil when no winner
   def winner
-    self.win_set.uniq.join if self.won?
+    self.board.cells[self.won?[0]] if self.won?
   end
   # asks for input again after a failed validation
   # changes to player 2 after the first turn
