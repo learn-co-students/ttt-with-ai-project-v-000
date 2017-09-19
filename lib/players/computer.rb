@@ -1,7 +1,7 @@
 module Players
 
   class Computer < Player
-
+    ### TO DO: Implement a 'wargames' mode ####
     def move(board)
       # input = Random.rand(1..9).to_s
       if board.cells[4] == " "
