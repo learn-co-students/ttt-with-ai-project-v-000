@@ -43,8 +43,7 @@ elsif player_choice === 'exit'
   puts "Goodbye!\n"
 
 else
-  puts "Invalid selection. Please try again."
-  Game.new(player_1, player_2).play
+  puts "Invalid selection. Please try again.\n"
 end
 
 Game.new(player_1, player_2).play
