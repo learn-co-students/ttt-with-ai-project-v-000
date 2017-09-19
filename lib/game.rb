@@ -31,7 +31,8 @@ class Game
   end
 
   def over?
-    @board.full?
+    # Just checking if ONLY full causes infinite loop in play method
+    full?
   end
 
   def won?
@@ -43,21 +44,40 @@ class Game
   end
 
   def draw?
-    won? || over?
+    over? && !won?
   end
 
   def winner
     @board.cells[won?.first] if won?
   end
 
-  def start
-    # makes valid moves (FAILED - 1)
-    #     asks for input again after a failed validation (FAILED - 2)
-    #     changes to player 2 after the first turn (FAILED - 3)
+  def turn
+    input = current_player.move(board)
+
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      puts "You made an invalid move! Please try again."
+      turn
+    end
   end
 
   def play
-    #     asks for players input on a turn of the game (FAILED - 4)
+
+    while !over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}"
+    end
+
+    if draw?
+      puts "Cat's Game!"
+    end
+
+  end
+
     #     checks if the game is over after every turn (FAILED - 5)
     #     plays the first turn of the game (FAILED - 6)
     #     plays the first few turns of the game (FAILED - 7)
@@ -69,11 +89,8 @@ class Game
     #     stops playing in a draw
     #     prints "Cat's Game!" on a draw (FAILED - 12)
     #     plays through an entire game (FAILED - 13)
-  end
 
-  def turn
 
-  end
 
 
 
