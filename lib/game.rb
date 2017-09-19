@@ -82,7 +82,7 @@ class Game
       self.board.cells[combo_ary[0]] == self.board.cells[combo_ary[1]] &&
       self.board.cells[combo_ary[1]] == self.board.cells[combo_ary[2]] &&
       self.board.taken?(combo_ary[0] + 1)
-
+    end
   end
   # returns true for a draw
   # returns false for a won game
