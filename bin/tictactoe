@@ -12,30 +12,35 @@ puts "--------------------------------------"
 puts "Enter 3 to play Human vs Human."
 puts "--------------------------------------"
 puts " "
+puts "Type exit to quit."
+puts " "
 puts "Which game type would you like to play?"
 
 player_choice = gets.chomp
 
-if player_choice == "1"
+if player_choice === "1"
   player_1 = Players::Computer.new("X")
   player_2 = Players::Computer.new("O")
 
-elsif player_choice == "2"
+elsif player_choice === "2"
   puts "Enter 1 if you want to go first or 2 if you want the AI to go first."
 
   turn_choice = gets.chomp
 
-  if turn_choice == "1"
+  if turn_choice === "1"
     player_1 = Players::Human.new("X")
     player_2 = Players::Computer.new("O")
-  elsif turn_choice == "2"
+  elsif turn_choice === "2"
     player_1 = Players::Computer.new("X")
     player_2 = Players::Human.new("O")
   end
 
-elsif player_choice == "3"
+elsif player_choice === "3"
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
+
+elsif player_choice === 'exit'
+  puts "Goodbye!"
 end
 
 Game.new(player_1, player_2).play
