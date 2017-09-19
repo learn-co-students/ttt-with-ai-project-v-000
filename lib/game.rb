@@ -31,7 +31,7 @@ class Game
   end
 
   def over?
-    # Just checking if ONLY full causes infinite loop in play method
+    # checking ONLY #full? causes infinite loop in play method
     full?
   end
 
