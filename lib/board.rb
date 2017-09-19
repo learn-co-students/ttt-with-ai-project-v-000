@@ -18,7 +18,7 @@ class Board
     #
     # self.cells.clear
     # self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    Array.new(9, " ")
+    self.cells = Array.new(9, " ")
   end
 
 
@@ -94,7 +94,7 @@ class Board
     # else
     #   false
     # end
-    !self.position(string) == " "
+    !(self.position(string) == " ")
   end
 
   #
