@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    self.reset
+    self.reset!
   end
 
   def reset!
