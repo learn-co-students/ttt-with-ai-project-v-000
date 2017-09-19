@@ -65,8 +65,8 @@ class Game
     end
   end
 
-  def play
 
+  def play
     until over?
       turn
     end
@@ -78,9 +78,6 @@ class Game
     if draw?
       puts "Cat's Game!"
     end
-
-
-
   end
 
 
