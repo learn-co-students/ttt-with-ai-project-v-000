@@ -133,10 +133,12 @@ class Game
   # prints "Cat\'s Game!" on a draw
   # plays through an entire game
   def play
-    while !draw?
+    while !over?
       self.turn
     end
+    if self.wo
 
+    end
 
 
 
