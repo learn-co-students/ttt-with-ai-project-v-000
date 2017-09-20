@@ -34,18 +34,46 @@ WIN_COMBINATIONS = [
     #binding.pry
   end
 
-  def over?
-    
-  end
-
   def won?
+    winning_combo = nil
     WIN_COMBINATIONS.each do |combo|
-      binding.pry
+      position_1 = @board.cells[combo[0]]
+      position_2 = @board.cells[combo[1]]
+      position_3 = @board.cells[combo[2]]
+
+      if position_1 == "X" && position_2 == "X" && position_3 == "X"
+        winning_combo = combo
+        break
+      elsif
+        position_1 == "O" && position_2 == "O" && position_3 == "O"
+        winning_combo = combo
+        break
+      end
     end
+    winning_combo
   end
 
   def draw?
+    if @board.full? && self.won? == nil
+      true
+    end
+  end
 
+  def over?
+    (self.won? || self.draw?) ? true : false
+  end
+
+  def winner
+    if self.won?
+      self.board.cells[self.won?[0]]
+    end
+    #won_index = self.won?[0]
+    #self.board.cells[won_index]
+  end
+
+  def turn
+    puts ""
+    input =gets.strip
   end
 
 
