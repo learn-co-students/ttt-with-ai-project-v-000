@@ -13,11 +13,11 @@ class Board
 
   def display
 
-    print " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
-    print "-----------"
-    print " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
-    print "-----------"
-    print " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts "-----------"
+    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts "-----------"
+    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
 
   end
 
@@ -27,7 +27,7 @@ class Board
 
   def update(move,user)
     if self.valid_move?(move)
-      self.cells[move.to_i - 1] = user.token 
+      self.cells[move.to_i - 1] = user.token
     end
 
 
@@ -35,6 +35,10 @@ class Board
 
   def full?
     self.cells.none? {|block| block == " "}
+  end
+
+  def empty?
+    self.cells.all? {|block| block == " "}
   end
 
   def turn_count

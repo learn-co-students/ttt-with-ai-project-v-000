@@ -41,7 +41,7 @@ class Game
 
 
   def turn
-    puts "Please enter a number 1-9."
+
     move = self.current_player.move(self.board)
 
     if self.board.valid_move?(move)
@@ -56,10 +56,15 @@ class Game
 
     until self.over?
       self.turn
+      self.board.display
     end
     if self.won?
+
+      self.board.display
       puts "Congratulations #{self.winner}!"
     else
+      
+      self.board.display
       puts "Cat's Game!"
     end
   end
