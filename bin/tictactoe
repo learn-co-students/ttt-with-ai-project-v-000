@@ -7,13 +7,13 @@ until players == "quit"
   puts "Do you have 0,1 or 2 players?(type quit to exit)"
   players = gets.chomp
 
-  if players.to_i == 0
+  if players == '0' && players !=
     player_1 = Players::Computer.new("X")
     player_2 = Players::Computer.new("O")
     game = Game.new(player_1,player_2)
     game.play
 
-  elsif players.to_i == 1
+  elsif players == '1'
     player_1 = nil
     computer = nil
     choice = nil
@@ -30,14 +30,12 @@ until players == "quit"
       else
         puts "Please enter choose using 'first' or 'second'"
       end
+      game = Game.new(player_1,computer)
+      game.play
     end
-    game = Game.new(player_1,computer)
-    game.play
 
-
-  elsif players.to_i == 2
+  elsif players == '2'
     game = Game.new
     game.play
-  else
   end
 end
