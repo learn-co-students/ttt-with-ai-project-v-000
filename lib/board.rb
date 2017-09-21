@@ -27,13 +27,7 @@ class Board
   end
 
   def full?
-    cells.each do |cell|
-      if cell == " " || cell == nil || cell == ""
-        return false
-      else
-        true
-      end
-    end
+    cells.all? { |token| token == "X" || token == "O" }
   end
 
   def turn_count
@@ -47,4 +41,15 @@ class Board
       false
     end
   end
+
+  def valid_move?(input)
+    index = input.to_i - 1
+    if (index.between?(0,8) && taken?(input) == false)
+      true
+    else
+      false
+    end
+  end
+
+  
 end
