@@ -23,6 +23,20 @@ class Board
 
   def position(input)
     index = input.to_i - 1
-    cells[index]    
+    cells[index]
+  end
+
+  def full?
+    cells.each do |cell|
+      if cell == " " || cell == nil || cell == ""
+        return false
+      else
+        true
+      end
+    end
+  end
+
+  def turn_count
+    cells.select { |cell| cell == "X" || cell == "O" }.count
   end
 end
