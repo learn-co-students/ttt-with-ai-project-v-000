@@ -1,3 +1,59 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  def call
+    puts "Welcome to Tic Tac Toe!"
+    game_type
+  end
+
+  def game_type
+    puts "What type of game would you like to play?"
+    puts "Type 0 for Computer Vs. Computer!"
+    puts "Type 1 for 1 Player Vs. Computer!"
+    puts "Type 2 for 2 Players!"
+    puts "Type exit to exit"
+    input=gets.strip
+
+
+    if input == "0"
+      puts "So you have chosen Computer Vs. Computer, Good Luck......Wait Computers don't need luck, they have Flatiron Programmers!"
+      game=Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+      play_again?
+
+    elsif input == "1"
+      puts "Would you like to be X or O?........Choose Wisley"
+      input_2=gets.strip.upcase
+        if input_2 == "X"
+          game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+	  	  else
+	    	  game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+	  	  end
+      game.play
+      play_again?
+
+    elsif  input == "2"
+      puts "A battle of the minds I see........Player 1, pick X or O.........."
+      input_3 = gets.strip.upcase
+        if input_3 =="X"
+          game = Game.new(Players::Human.new("X") , Players::Human.new("O"), Board.new)
+        else
+          game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+        end
+      game.play
+      play_again?
+    end
+  end
+
+    def play_again?
+      puts "Would like to play again? (Y/N)"
+      again = gets.strip.upcase
+        if again == "Y"
+          game_type
+        elsif again =="N"
+          puts "Come Back Soon!"
+        end
+    end
+
+call
