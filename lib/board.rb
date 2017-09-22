@@ -1,5 +1,3 @@
-require 'pry'
-
 class Board
 
   attr_accessor :cells
@@ -56,5 +54,4 @@ class Board
       position(input).replace(player.token)
     end
   end
-
 end
