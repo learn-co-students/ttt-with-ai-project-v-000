@@ -45,7 +45,7 @@ class Game
 
   def winner
     if won?
-      board.turn_count.even? ? "X" : "O"
+      board.cells[won?[0]]
     end
   end
 
