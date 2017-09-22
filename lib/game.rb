@@ -26,7 +26,7 @@ class Game
   end
 
   def over?
-    board.full? || won?
+    draw? || won?
   end
 
   def won?
@@ -44,8 +44,8 @@ class Game
   end
 
   def winner
-    if won?
-      board.cells[won?[0]]
+    if winning_combo = won?
+      board.cells[winning_combo[0]]
     end
   end
 
@@ -59,6 +59,14 @@ class Game
       puts "invalid"
       turn
     end
+  end
+
+  def play
+    until over?
+      turn
+      draw?
+    end
+    puts "Congratulations #{winner}!"
   end
 
 end
