@@ -50,7 +50,6 @@ class Game
   end
 
   def turn
-
     input = current_player.move(board)
 
     if board.valid_move?(input)
@@ -60,8 +59,6 @@ class Game
       puts "invalid"
       turn
     end
-
-
   end
 
 end
