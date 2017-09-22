@@ -51,5 +51,10 @@ class Board
     end
   end
 
-  
+  def update(input, player)
+    if valid_move?(input)
+      position(input).replace(player.token)
+    end
+  end
+
 end
