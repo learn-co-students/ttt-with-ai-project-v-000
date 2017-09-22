@@ -49,4 +49,19 @@ class Game
     end
   end
 
+  def turn
+
+    input = current_player.move(board)
+
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      puts board.turn_count
+    else
+      puts "invalid"
+      turn
+    end
+
+
+  end
+
 end

@@ -20,7 +20,7 @@ class Board
   end
 
   def position(input)
-    index = input.to_i - 1
+    index = input_to_index(input)
     cells[index]
   end
 
@@ -41,17 +41,19 @@ class Board
   end
 
   def valid_move?(input)
-    index = input.to_i - 1
-    if (index.between?(0,8) && taken?(input) == false)
+    if (input_to_index(input).between?(0,8) && taken?(input) == false)
       true
     else
       false
     end
   end
 
+  def input_to_index(input)
+    input.to_i - 1
+  end
+
   def update(input, player)
-    if valid_move?(input)
-      position(input).replace(player.token)
-    end
+    index = input_to_index(input)
+    cells[index]= player.token
   end
 end
