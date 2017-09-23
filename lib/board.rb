@@ -29,15 +29,12 @@ class Board
   end
 
   def turn_count
-    cells.select { |cell| cell == "X" || cell == "O" }.count
+    cells.count { |cell| cell != " "}
   end
 
   def taken?(input)
-    if position(input) == "X" || position(input) == "O"
-      true
-    else
-      false
-    end
+    index = input_to_index(input)
+    cells[index] == "X" || cells[index] == "O"
   end
 
   def valid_move?(input)
