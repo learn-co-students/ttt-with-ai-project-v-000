@@ -56,6 +56,16 @@ class Game
     else
       puts "Invalid number of players, input 0, 1, or 2. Start again!"
     end
+    if game.over?
+      puts "Do you want to play again (#1) or exit (#2)"
+      play_or_exit = gets.strip.to_i
+      if play_or_exit == 1
+        Game.start
+      elsif play_or_exit == 2
+        puts "Thanks for playing, good bye!"
+        exit
+      end
+    end
   end
 
   def current_player
