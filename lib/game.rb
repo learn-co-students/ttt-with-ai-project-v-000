@@ -21,6 +21,43 @@ class Game
     @player_2 = player_2 ||= Players::Human.new("O")
   end
 
+  def self.start
+    puts "Welcome to Tic Tac Toe with AI!"
+    puts "Do you want a game with 0, 1, or 2 player(s)?"
+    player_count = gets.strip.to_i
+
+    if player_count == 0
+      puts "The computer is playing itself:"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      board = Board.new
+      game = self.new(player_1, player_2, board)
+      game.play
+    elsif player_count == 1
+      puts "who should go first and be 'X', you (#1) or the computer (#2)?"
+      first_player = gets.strip.to_i
+      if first_player == 1
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+        board = Board.new
+        game = self.new(player_1, player_2, board)
+        game.play
+      else
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Human.new("O")
+        board = Board.new
+        game = self.new(player_1, player_2, board)
+        game.play
+      end
+    elsif player_count == 2
+      puts "player 1 will go first and be 'X':"
+      game = self.new
+      game.play
+    else
+      puts "Invalid number of players, input 0, 1, or 2. Start again!"
+    end
+  end
+
   def current_player
     board.turn_count.even? ? player_1 : player_2
   end
@@ -54,6 +91,7 @@ class Game
 
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
       puts board.turn_count
     else
       puts "invalid"
@@ -64,10 +102,8 @@ class Game
   def play
     until over?
       turn
-      #draw?
     end
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
-    #binding.pry
   end
 
 end
