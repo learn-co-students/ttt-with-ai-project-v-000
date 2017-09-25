@@ -18,4 +18,46 @@ class Game
     @board = board
   end
 
+  def current_player
+      if board.turn_count % 2 == 0
+        player_1
+      else
+        player_2
+      end
+    end
+
+  def over?
+     won? || draw?
+  end
+
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[0]+1)
+  end
+  end
+
+  def draw?
+    if !won? && board.full?
+      true
+    else
+      false
+    end
+  end
+
+
+  def winner
+    if won?
+    winning_array = won?
+    board.cells[winning_array[0]]
+    end
+  end
+
+
+  def turn
+    puts "Please enter 1-9:"
+    user_input = gets.strip
+  end
+
+
 end
