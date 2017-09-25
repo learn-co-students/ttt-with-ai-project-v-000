@@ -55,8 +55,27 @@ class Game
 
 
   def turn
-    puts "Please enter 1-9:"
-    user_input = gets.strip
+    player = current_player
+    current_move = player.move(@board)
+      if @board.valid_move?(current_move)
+        puts "#{@board.turn_count+1}"
+        @board.display
+        @board.update(current_move, player)
+      else
+        turn
+      end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+
   end
 
 
