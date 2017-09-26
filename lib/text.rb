@@ -53,4 +53,13 @@ module Text
     puts "\n▂▃▅▇█▓▒░۩۞۩        ۩۞۩░▒▓█▇▅▃▂\n\n"
 
   end
+
+  def play_again_prompt
+    puts "Would you like to play again?"
+    puts "Enter 'yes'/'y' or 'no'/'n':"
+  end
+
+  def re_prompt
+    puts "Please enter 'yes'/'y' or 'no'/'n':"
+  end
 end

@@ -1,8 +1,8 @@
 require 'pry'
 require_relative './text.rb'
+
 class Game
   include Text
-
   attr_accessor :board, :player_1, :player_2
 
   def initialize(

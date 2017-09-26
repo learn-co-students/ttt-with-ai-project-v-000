@@ -1,3 +1,4 @@
+require 'pry'
 require_relative './text.rb'
 
 class Board
@@ -57,5 +58,4 @@ class Board
     invalid_alert unless input.to_i.between?(1, 9)
     input.to_i.between?(1, 9) && !taken?(input)
   end
-
 end
