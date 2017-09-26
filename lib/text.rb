@@ -7,7 +7,7 @@ module Text
   end
 
   def prompt
-    puts "\nEnter 1 - 9..."
+    puts "\nEnter 1 - 9 to make your move."
   end
 
   def human_text
@@ -35,5 +35,16 @@ module Text
 
   def divider_text
     puts "\n================================\n\n"
+  end
+
+  def ai_message
+    puts "The AI is thinking..."
+  end
+
+  def directions
+    puts "You'll be picking a number between 1 and 9."
+    puts "Each number corresponds to a position on the"
+    puts "Tic Tac Toe board:"
+    board.display_with_indices
   end
 end
