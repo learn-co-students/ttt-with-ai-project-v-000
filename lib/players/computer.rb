@@ -6,15 +6,13 @@ module Players
 
     def move(board)
       if winning(board)
-        puts "WINNING"
         return winning(board)
       elsif blocking(board)
-        puts "BLOCKING!"
         return blocking(board)
-      elsif middle = middle_is_free?(board)
+      elsif middle = is_middle_free?(board)
         return middle
       elsif free_corner = are_corners_free?(board)
-        return free_corner + 1
+        return free_corner
       else
         return (1..9).to_a.sample
       end
@@ -54,14 +52,14 @@ module Players
       nil
     end
 
-    def middle_is_free?(board)
+    def is_middle_free?(board)
       return 5 if board.cells[4] == " "
     end
 
     def are_corners_free?(board)
       corners = [0,2,6,8]
       corners.each do |corner|
-        return corner if board.cells[corner] == " "
+        return corner + 1 if board.cells[corner] == " "
       end
       nil
     end

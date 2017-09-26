@@ -107,6 +107,17 @@ class Game
         puts "Okay! Player 1 will be 'X' and Player 2 will be 'O'. Lets start!"
 
         Game.new.play
+
+      elsif input == "wargames"
+        @game_count = 0
+        100.times do
+          puts "We're on game ##{@game_count}."
+          @player_1 = Players::Computer.new("X")
+          @player_2 = Players::Computer.new("O")
+          Game.new(@player_1, @player_2).play
+          @game_count +=1
+        end
+
       else
         puts "Invalid response. Please type '0', '1', or '2'."
       end
