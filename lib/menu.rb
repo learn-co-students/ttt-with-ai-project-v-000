@@ -2,7 +2,7 @@ require_relative './text.rb'
 
 def menu
   include Text
-  celebrate_text
+  menu_decoration
   menu_prompts
   input = gets.chomp
 

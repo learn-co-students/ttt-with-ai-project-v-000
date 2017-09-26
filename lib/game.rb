@@ -55,7 +55,10 @@ class Game
   end
 
   def turn
-    sleep 1 if current_player.class == Players::Computer
+    if current_player.class == Players::Computer
+      ai_message
+      sleep 1
+    end
     prompt
     input = current_player.move(board)
     if board.valid_move?(input)
@@ -69,6 +72,7 @@ class Game
   end
 
   def play
+    directions
     current_player.class == Players::Human ? human_text : ai_text
     turn while !over?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"

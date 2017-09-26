@@ -15,6 +15,7 @@ module Text
     puts "\n\n( ͡° ͜ʖ ͡°)\n\n"
     puts "Whoever's first is 'X'."
     puts "Your friend (or the AI) will be 'O'."
+    directions
   end
 
   def ai_text
@@ -30,7 +31,7 @@ module Text
   end
 
   def celebrate_text
-    puts "\n       ▂▃▅▇█▓▒░۩۞۩        ۩۞۩░▒▓█▇▅▃▂\n\n"
+    puts "\n\n(づ ￣ ³￣)づ    ⓈⓂⓄⓄⓉⒽ\n\n"
   end
 
   def divider_text
@@ -46,5 +47,10 @@ module Text
     puts "Each number corresponds to a position on the"
     puts "Tic Tac Toe board:"
     board.display_with_indices
+  end
+
+  def menu_decoration
+    puts "\n▂▃▅▇█▓▒░۩۞۩        ۩۞۩░▒▓█▇▅▃▂\n\n"
+
   end
 end

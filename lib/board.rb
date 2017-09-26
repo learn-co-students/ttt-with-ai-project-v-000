@@ -20,6 +20,16 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
+  def display_with_indices
+    puts "\n"
+    puts " 1 | 2 | 3 "
+    puts "-----------"
+    puts " 4 | 5 | 6 "
+    puts "-----------"
+    puts " 7 | 8 | 9 "
+    puts "\n"
+  end
+
   def position(input)
     cells[input.to_i - 1]
   end
