@@ -1,5 +1,8 @@
 require 'pry'
+require_relative './text.rb'
 class Game
+  include Text
+
   attr_accessor :board, :player_1, :player_2
 
   def initialize(
@@ -33,10 +36,10 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |c|
-      board.taken?(c[0] + 1) &&
-      board.cells[c[0]] == board.cells[c[1]] &&
-      board.cells[c[0]] == board.cells[c[2]]
+    WIN_COMBINATIONS.detect do |combo|
+      board.taken?(combo[0] + 1) &&
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+      board.cells[combo[0]] == board.cells[combo[2]]
     end
   end
 
@@ -52,6 +55,23 @@ class Game
   end
 
   def turn
-    
+    sleep 1 if current_player.class == Players::Computer
+    prompt
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      divider_text
+      board.display
+      divider_text
+    else
+      turn
+    end
+  end
+
+  def play
+    current_player.class == Players::Human ? human_text : ai_text
+    turn while !over?
+    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+    celebrate_text
   end
 end

@@ -1,4 +1,7 @@
+require_relative './text.rb'
+
 class Board
+  include Text
   attr_accessor :cells
 
   def initialize
@@ -40,6 +43,8 @@ class Board
   end
 
   def valid_move?(input)
+    taken_alert if taken?(input)
+    invalid_alert unless input.to_i.between?(1, 9)
     input.to_i.between?(1, 9) && !taken?(input)
   end
 
