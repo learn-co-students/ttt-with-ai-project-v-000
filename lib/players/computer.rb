@@ -5,11 +5,20 @@ module Players
 
 
     def move(board)
-      take_middle(board)
-      take_corner(board)
-      take_random(board)
-      #blocking(board)
-      #winning(board)
+      if winning(board)
+        puts "WINNING"
+        return winning(board)
+      elsif blocking(board)
+        puts "BLOCKING!"
+        return blocking(board)
+      elsif middle = middle_is_free?(board)
+        return middle
+      elsif free_corner = are_corners_free?(board)
+        return free_corner + 1
+      else
+        return (1..9).to_a.sample
+      end
+
     end
 
     def winning(board)
@@ -18,15 +27,14 @@ module Players
         position_2 = board.cells[combo[1]]
         position_3 = board.cells[combo[2]]
         if position_2 == position_3 && position_1 == " " && position_2 == self.token
-          return (combo[0] + 1).to_s
+          return (combo[0] + 1)
         elsif position_3 == position_1 && position_2 == " " && position_3 == self.token
-          return (combo[1] + 1).to_s
+          return (combo[1] + 1)
         elsif position_1 == position_2 && position_3 == " " && position_1 == self.token
-          return (combo[2] + 1).to_s
-        else
-          nil
+          return (combo[2] + 1)
         end
       end
+      nil
     end
 
     def blocking(board)
@@ -35,42 +43,27 @@ module Players
         position_2 = board.cells[combo[1]]
         position_3 = board.cells[combo[2]]
 
-        if position_2 == position_3 && position_1 == " " && position_2 != self.token
-          return (combo[0] + 1).to_s
-        elsif position_3 == position_1 && position_2 == " " && position_3 != self.token
-          return (combo[1] + 1).to_s
-        elsif position_1 == position_2 && position_3 == " " && position_1 != self.token
-          return (combo[2] + 1).to_s
-        else
-          nil
+        if position_2 == position_3 && position_2 != " " && position_1 == " " && position_2 != self.token
+          return (combo[0] + 1)
+        elsif position_3 == position_1 && position_3 != " " && position_2 == " " && position_3 != self.token
+          return (combo[1] + 1)
+        elsif position_1 == position_2 && position_1 != " " && position_3 == " " && position_1 != self.token
+          return (combo[2] + 1)
         end
       end
+      nil
     end
 
-    def take_middle(board)
-      if board.cells[4] == " "
-        return "5"
-      else
-        nil
-      end
+    def middle_is_free?(board)
+      return 5 if board.cells[4] == " "
     end
 
-    def take_corner(board)
-      corner = [0,2,6,8].sample
-      if board.cells[corner] == " "
-        return (corner + 1).to_s
-      else
-        nil
+    def are_corners_free?(board)
+      corners = [0,2,6,8]
+      corners.each do |corner|
+        return corner if board.cells[corner] == " "
       end
-    end
-
-    def take_random(board)
-      random = [1,3,5,7].sample
-      if board.cells[random] == " "
-        return (random + 1).to_s
-      else
-        nil
-      end
+      nil
     end
 
   end

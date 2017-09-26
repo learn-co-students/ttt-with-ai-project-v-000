@@ -57,7 +57,7 @@ class Game
   end
 
   def turn
-    
+    #binding.pry
     move = current_player.move(board)
     if board.valid_move?(move)
       board.update(move, current_player)
@@ -86,6 +86,7 @@ class Game
       if input == '0'
         @player_1 = Players::Computer.new("X")
         @player_2 = Players::Computer.new("O")
+
         Game.new(@player_1, @player_2, board).play
 
       elsif input == '1'
@@ -94,20 +95,31 @@ class Game
         if input_2 == 'yes'
           @player_1 = Players::Human.new("X")
           @player_2 = Players::Computer.new("O")
+
           Game.new(@player_1, @player_2, board).play
         elsif input_2 == 'no'
           @player_1 = Players::Computer.new("O")
           @player_2 = Players::Human.new("X")
+
           Game.new(@player_1, @player_2, board).play
         end
       elsif input == '2'
         puts "Okay! Player 1 will be 'X' and Player 2 will be 'O'. Lets start!"
+
         Game.new.play
       else
         puts "Invalid response. Please type '0', '1', or '2'."
       end
+      puts "Would you like to play again?"
+      input = gets.chomp
+        if input == "yes"
+          start_game
+        else
+          exit!
+        end
 
-    end
+
+    end #end of start_game
 
 
 
