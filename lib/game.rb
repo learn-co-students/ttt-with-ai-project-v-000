@@ -47,22 +47,14 @@ class Game
     end
   end
 
-  def turn
-    # binding.pry
-    # puts Dir.pwd
+def turn
+  input = self.current_player.move(board)
+  until self.board.valid_move?(input)
     puts "#{self.current_player}, make a move."
     input = self.current_player.move(board)
-    self.board.valid_move?("input") && self.board.update(input, self.current_player)
   end
-
-# def turn
-#   input = ""
-#   until self.board.valid_move?("input")
-#     puts "#{self.current_player}, make a move."
-#     input = self.current_player.move(board)
-#   end
-#    self.board.update(input, self.current_player)
-# end
+   self.board.update(input, self.current_player)
+end
 
   def play
     until self.over?
