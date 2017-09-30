@@ -48,6 +48,14 @@ class Game
   end
 
   def turn
+    binding.pry
+    puts Dir.pwd
+    puts "Make a move."
     input = gets.strip
+    until self.board.valid_move?("input")
+      puts "Make a move."
+      input = gets.strip
+    end
+    self.board.update(input, self.current_player)
   end
 end
