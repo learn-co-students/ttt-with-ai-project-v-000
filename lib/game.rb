@@ -57,9 +57,10 @@ def turn
 end
 
   def play
+    self.turn
     until self.over?
       self.board.display
-      "Where would you like to go?"
+      puts "Where would you like to go?"
       self.turn
     end
     if draw?(board)
