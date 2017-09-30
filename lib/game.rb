@@ -65,9 +65,9 @@ class Game
     if draw?(board)
       puts "Cats Game!"
     elsif
-      winner(board) == "X"
+      self.winner == "X"
       puts "Congratulations X!"
-    else winner(board) == "O"
+    else self.winner == "O"
       puts "Congratulations O!"
     end
   end
