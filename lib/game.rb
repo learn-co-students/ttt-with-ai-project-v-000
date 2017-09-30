@@ -48,8 +48,7 @@ class Game
   end
 
   def turn
-    binding.pry
-    puts Dir.pwd
+
     puts "Make a move."
     input = gets.strip
     until self.board.valid_move?("input")
