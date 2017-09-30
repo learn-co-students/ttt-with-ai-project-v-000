@@ -51,8 +51,24 @@ class Game
     # binding.pry
     # puts Dir.pwd
     puts "#{self.board.current_player}, make a move."
-    input = gets.strip
+    input = self.current_player.move?(board)
     self.board.valid_move?("input") && self.board.update(input, self.current_player)
     self.board.current_player
+  end
+
+  def play
+    until self.over?
+      self.board.display
+      "Where would you like to go?"
+      self.turn
+    end
+    if draw?(board)
+      puts "Cats Game!"
+    elsif
+      winner(board) == "X"
+      puts "Congratulations X!"
+    else winner(board) == "O"
+      puts "Congratulations O!"
+    end
   end
 end
