@@ -57,16 +57,14 @@ def turn
 end
 
   def play
-    self.turn
-    until self.over?
+    until self.won? || self.draw?
       self.board.display
       puts "Where would you like to go?"
       self.turn
     end
-    if draw?(board)
-      puts "Cats Game!"
-    elsif
-      self.winner == "X"
+    if self.draw?
+      puts "Cat's Game!"
+    elsif self.winner == "X"
       puts "Congratulations X!"
     else self.winner == "O"
       puts "Congratulations O!"
