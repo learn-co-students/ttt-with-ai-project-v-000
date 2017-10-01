@@ -69,5 +69,6 @@ end
     else self.winner == "O"
       puts "Congratulations O!"
     end
+    self.board.display
   end
 end

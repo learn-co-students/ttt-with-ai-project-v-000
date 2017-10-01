@@ -8,7 +8,9 @@ puts "You have selected a #{input} player game."
 puts "The first person to play shall be player X"
 game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
 if input == 0
-  Players::Computer.move(board)
+  game.player_1 = Players::Computer.new("X")
+  game.player_2 = Players::Computer.new("O")
+  game.play
 else
   game.play
 end
