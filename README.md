@@ -1,4 +1,5 @@
 # Tic-tac-toe with AI
+***Enter bin/tictactoe to start game***
 
 ## Objectives
 1. Build a command-line interface (CLI).
