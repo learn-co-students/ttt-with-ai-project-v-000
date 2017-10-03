@@ -42,22 +42,6 @@ class Board
     @cells[check.to_i - 1] == " "? false : true
   end
 
-  # def position(move)
-  #   # index = move.to_i - 1
-  #   turn = turn_count
-  #
-  #   if turn % 2 == 0
-  #     turn = "X"
-  #   else turn = "O"
-  #   end
-  #
-  #   # if @cells[index] == " "
-  #   #   @cells[index] = turn
-  #   # end
-  #   # @cells
-  #   turn
-  # end
-
   def turn_count
     counter = 0
     @cells.each do |cell|
