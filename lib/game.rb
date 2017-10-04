@@ -34,7 +34,7 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |win_combinations|
      board.cells[win_combinations[0]] == board.cells[win_combinations[1]] && board.cells[win_combinations[1]] == board.cells[win_combinations[2]] && board.taken?(win_combinations[0]+1)
-  end
+    end
   end
 
   def draw?
@@ -56,9 +56,9 @@ class Game
     player = current_player
     current_move = player.move(@board)
     if @board.valid_move?(current_move)
-      puts "#{@board.turn_count+1}"
-      @board.display
+      puts "turn count: #{@board.turn_count+1}"
       @board.update(current_move, player)
+      @board.display
     else
       turn
     end
