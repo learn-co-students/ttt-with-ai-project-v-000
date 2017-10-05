@@ -11,7 +11,7 @@ module Players
         elsif board.taken?(7) == nil || false
           return "7"
         elsif board.taken?(4) == nil || false
-            return "4"
+          return "4"
         elsif board.taken?(1) == nil || false
           return "1"
         elsif board.taken?(9) == nil || false
