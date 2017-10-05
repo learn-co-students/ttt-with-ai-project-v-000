@@ -11,3 +11,15 @@ require_relative '../config/environment'
 #     else
 #       turn(board)
 #   end
+# board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+# index = 0
+# puts "Welcome to Tic Tac Toe!"
+# display_board(board)
+# puts "Please enter 1-9:"
+# user_input = gets.strip
+# input_to_index(user_input = "1..9")
+# position_taken?(board, index)
+# valid_move?(board, index)
+# move(board, index, value="X")
+# display_board(board)
+# turn(board)

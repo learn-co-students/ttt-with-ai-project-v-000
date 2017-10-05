@@ -2,7 +2,7 @@ module Players
 
   class Computer<Player
 
-    def move(board)
+    def move
       #returns the move the computer wants to make in the form of a 1-9 string
     end
 
