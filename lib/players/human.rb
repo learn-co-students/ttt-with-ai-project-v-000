@@ -1,4 +1,4 @@
-class Human<Players
+class Human<Player
 
   def move(board)
     board[index] = current_player

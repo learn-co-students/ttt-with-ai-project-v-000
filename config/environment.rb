@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-module PLAYERS
+module Players
 end
 
 require_all 'lib'
