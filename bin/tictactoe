@@ -1,3 +1,72 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+def run_game
+  board = Board.new
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "Press 0 for computer battle"
+  puts "Press 1 for human vs computer"
+  puts "Press 2 for human vs human"
+
+  input = gets.chomp
+  if input == "0"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+  elsif input == "1"
+    puts "Press 1 for human first move"
+    puts "Press 2 for computer first move"
+    h_v_c_input = gets.chomp
+    if h_v_c_input == "1"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+    elsif h_v_c_input == "2"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+    else
+      puts "Did not put 1 or 2, restarting game as punishment."
+      puts "..."
+
+      run_game
+    end
+  elsif input == "2"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+  else
+    puts "Did not put 1, 2, or 3, restarting game as punishment."
+    puts "..."
+
+    run_game
+  end
+
+  game = Game.new(player_1,player_2,board)
+  game.play
+
+  exit_game
+end
+
+def exit_game
+  puts ""
+  puts "-----------------"
+  puts ""
+
+  puts "Would you like to play again?"
+  puts "Press 1 for yes"
+  puts "Press 2 no"
+
+  continue_input = gets.chomp
+  if continue_input == "1"
+    puts ""
+    puts "-----------------"
+    puts ""
+    run_game
+  elsif continue_input == "2"
+
+  else
+    exit_game
+  end
+end
+
+run_game
