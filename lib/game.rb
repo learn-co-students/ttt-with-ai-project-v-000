@@ -40,6 +40,9 @@ class Game
     end
 
     def winner #returns X when X won, O when O won, nil when no winner
+      if winning_combo = won?(board)
+        board[winning_combo.first]
+      end
     end
 
     def turn #makes valid moves, asks for input again after a failed validation, changes to player 2 after the first turn
