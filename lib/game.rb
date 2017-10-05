@@ -92,7 +92,7 @@ class Game
 
   def self.prompt_type
     begin
-      puts "Choose game mode:"
+      puts "How many players:"
       game_type = gets.strip
     end until game_type == "2" || game_type == "1" || game_type == "0"
     game_type
