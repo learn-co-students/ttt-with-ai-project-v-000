@@ -15,47 +15,65 @@ module Players
       [2, 4, 6] #second diagonal win
     ]
 
-    def two_of_three(board)
-      WIN_COMBINATIONS.detect do |win| #if youve taken 2 of 3 winning cells, take the third
-        if board.cells[win[0]] == @token && board.cells[win[1]] == @token
+    def two_of_three(board) #if youve taken 2 of 3 winning cells, take the third
+      input = nil
+      WIN_COMBINATIONS.detect do |win|
+        if board.cells[win[0]] == @token && board.cells[win[1]] == @token && !board.taken?("#{win[2] +1}")
           input = "#{win[2] + 1}"
-        elsif board.cells[win[0]] == @token && board.cells[win[2]] == @token
+        elsif board.cells[win[0]] == @token && board.cells[win[2]] == @token && !board.taken?("#{win[1] +1}")
           input = "#{win[1] + 1}"
-        elsif board.cells[win[1]] == @token && board.cells[win[2]] == @token
+        elsif board.cells[win[1]] == @token && board.cells[win[2]] == @token && !board.taken?("#{win[0] +1}")
           input = "#{win[0] + 1}"
         end
       end
+      input
     end
 
-    def opponent_two_of_three(board)
-      WIN_COMBINATIONS.detect do |win| #if your opponent has take 2 of 3 winning cells, block them
-        #how do I code the other player's token?
-        if board.cells[win[0]] == (!token && !" ") && board.cells[win[1]] == (!token && !" ")
+    def opponent_two_of_three(board) #if your opponent has taken 2 of 3 winning cells, block them
+      opponent_token = (@token == "X" ? "O" : "X")
+      input = nil
+      WIN_COMBINATIONS.detect do |win|
+        if board.cells[win[0]] == opponent_token && board.cells[win[1]] == opponent_token && !board.taken?("#{win[2] +1}")
           input = "#{win[2] + 1}"
-        elsif board.cells[win[0]] == (!token && !" ") && board.cells[win[2]] == (!token && !" ")
+        elsif board.cells[win[0]] == opponent_token && board.cells[win[2]] == opponent_token && !board.taken?("#{win[1] +1}")
           input = "#{win[1] + 1}"
-        elsif board.cells[win[1]] == (!token && !" ") && board.cells[win[2]] == (!token && !" ")
+        elsif board.cells[win[1]] == opponent_token && board.cells[win[2]] == opponent_token && !board.taken?("#{win[0] +1}")
           input = "#{win[0] + 1}"
         end
       end
+      input
     end
 
-    def move(board)
-      if !board.taken?("5") #if the center isn't taken, take it
-        binding.pry
+    def last_moves(board)
+      if !board.taken?("2")
+        input = "2"
+      elsif !board.taken?("4")
+        input = "4"
+      elsif !board.taken?("6")
+        input = "6"
+      elsif !board.taken?("8")
+        input = "8"
+      end
+    end
+
+    def move(board) #if the center isn't taken, take it
+      if !board.taken?("5")
         input = "5"
       elsif two_of_three(board)
+        two_of_three(board)
       elsif opponent_two_of_three(board)
-      #if a corner is available, take it
-      elsif !board.cells[0].taken?
-          input = "1"
-      elsif !board.cells[2].taken?
-            input = "3"
-      elsif !board.cells[6].taken?
-              input = "7"
-      elsif !board.cells[8].taken?
-                input = "9"
-      end #if loop ends
+        opponent_two_of_three(board)
+      elsif !board.taken?("1") #if a corner is available, take it
+        input = "1"
+      elsif !board.taken?("3")
+        input = "3"
+      elsif !board.taken?("7")
+        input = "7"
+      elsif !board.taken?("9")
+        input = "9"
+      else
+        last_moves(board)
+      end #if loop ends=begin
 
     end #move method ends
 
