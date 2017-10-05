@@ -1,46 +1,44 @@
 class Board
-
   attr_accessor :cells
 
-  def initialize
+  def reset!
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
-  def reset!
-    self.cells.clear
-    self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-  end
-
   def display
-      print " #{cells[0]} | #{cells[1]} | #{cells[2]} "
-      print "-----------"
-      print " #{cells[3]} | #{cells[4]} | #{cells[5]} "
-      print "-----------"
-      print " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts "\n #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts "-----------"
+    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts "-----------"
+    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} \n\n"
   end
 
-  def position(input)
-    cells[input.to_i-1]
-  end
-
-  def full?
-    cells.all?{ |token| token == "X" || token == "O"}
+  def initialize
+    reset!
   end
 
   def turn_count
-    cells.count{ |token| token == "X" || token == "O"}
+    self.cells.count{ |square| square == "X" || square == "O" }
   end
 
-  def taken?(input)
-    !(position(input) == " " || position(input) == "")
+  def position(i)
+    self.cells[i.to_i - 1] if i.to_i.between?(1, 9)
   end
 
-  def valid_move?(input)
-    input.to_i.between?(1,9) && !taken?(input)
+  def update(i, player)
+    @cells[i.to_i - 1] = player.token if valid_move?(i)
   end
 
-  def update(input, player)
-    cells[input.to_i-1] = player.token
+  def full?
+    self.cells.all?{ |square| square == "X" || square == "O"}
+  end
+
+  def taken?(index)
+    self.cells[index.to_i - 1] == "X" || self.cells[index.to_i - 1] == "O"
+  end
+
+  def valid_move?(i)
+    !taken?(i) && i.to_i.between?(1,9)
   end
 
 end
