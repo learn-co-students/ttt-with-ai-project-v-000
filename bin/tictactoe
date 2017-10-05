@@ -10,6 +10,7 @@ def run_game
   puts "Press 0 for computer battle"
   puts "Press 1 for human vs computer"
   puts "Press 2 for human vs human"
+  puts "Type 'wargames' for simulation"
 
   input = gets.chomp
   if input == "0"
@@ -34,6 +35,12 @@ def run_game
   elsif input == "2"
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
+  elsif input == "wargames"
+    counter = 0
+    100.times do
+      counter += wargames
+    end
+    puts "game won #{counter} time(s)"
   else
     puts "Did not put 1, 2, or 3, restarting game as punishment."
     puts "..."
@@ -41,10 +48,25 @@ def run_game
     run_game
   end
 
-  game = Game.new(player_1,player_2,board)
-  game.play
+  if input != "wargames"
+    game = Game.new(player_1,player_2,board)
+    game.play
+  end
 
   exit_game
+end
+
+def wargames
+  counter = 0
+  board = Board.new
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
+  game = Game.new(player_1,player_2,board)
+  game.play
+  if game.won? != false
+    counter += 1
+  end
+  counter
 end
 
 def exit_game
