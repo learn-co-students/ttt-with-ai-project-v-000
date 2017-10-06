@@ -1,7 +1,6 @@
 class Board
 
   attr_accessor :cells
-  @@board = []
 
   def initialize
     self.cells = Array.new(9, " ")
@@ -49,8 +48,5 @@ class Board
   def update(user_input, player)
     self.cells[user_input.to_i - 1] = player.token
   end
-
-
-
 
 end
