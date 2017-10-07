@@ -21,7 +21,6 @@ require_relative '../config/environment'
     end
 
     play_again = ""
-      until play_again.downcase == "n" || play_again.downcase == "no"
         puts "Would you like to play again?"
         play_again = gets.strip
         play_again.downcase == "y" || play_again.downcase == "yes"
@@ -29,5 +28,7 @@ require_relative '../config/environment'
         until game.won?
           game.play
         end
-      end
+        if play_again.downcase == "n" || play_again.downcase == "no"
+          break
+        end
     #Player enters y or yes to play again, n or no to stop - use 'break'
