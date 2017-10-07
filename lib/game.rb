@@ -14,22 +14,22 @@ class Game
   end
 
   def over?
-    won? && draw? && !board.full?
+    #binding.pry
+    won? || board.full?
   end
 
   def won?
-    winning_array = []
-    WIN_COMBINATIONS.each do |combination|
-      board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[0]] == board.cells[combination[2]]
-      winning_array = combination
+    WIN_COMBINATIONS.detect do |combination|
+      (board.cells[combination[0]] == board.cells[combination[1]]) && (board.cells[combination[0]] == board.cells[combination[2]]) unless board.cells[combination[0]] == " "
     end
-    winning_array
   end
 
   def draw?
+    board.full? && !won?
   end
 
   def winner
+    won? ? board.cells[won?[0]] : nil
   end
 
   def turn
