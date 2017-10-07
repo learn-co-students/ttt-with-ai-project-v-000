@@ -2,16 +2,13 @@
 
 require_relative '../config/environment'
 
-# puts "Please enter 1-9:"
-#   input = gets.strip
-#   index = input_to_index(input)
-#     if valid_move?(board, index)
-#       move(board, index)
-#       display_board(board)
-#     else
-#       turn(board)
-#   end
-# board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "What kind of game would you like to play?"
+  puts "Please select the number of players: 0, 1, or 2"
+  gets.strip
+  puts "Who should go first?"
+  gets.strip
+
 # index = 0
 # puts "Welcome to Tic Tac Toe!"
 # display_board(board)
