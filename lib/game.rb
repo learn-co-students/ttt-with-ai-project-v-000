@@ -40,6 +40,7 @@ class Game
     index = current_player.move(board)
     if board.valid_move?(index)
       board.update(index, current_player)
+      board.display
     else
       "invalid"
       turn

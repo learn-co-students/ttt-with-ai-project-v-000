@@ -2,8 +2,44 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
+IRB.start
 
-game = TicTacToe.new
+puts "Welcome to Tic Tac Toe!"
+puts "How many human players are playing today?"
+players = " "
+puts "Is the first player 'X' or 'O'?"
+first_token = " "
+
+until first_token == "X" || first_token == "O"
+  first_token = gets.chomp
+  if first_token != "X" && first_token != "O"
+    puts "X or O. Please! Try again:"
+  end
+end
+if first_token == "X"
+  second_token = "O"
+else
+  second_token = "X"
+end
+
+until (players == 0) || (players == 1) || (players == 2)
+  players = gets.chomp.to_i
+  if (players != 0) && (players != 1) && (players != 2)
+    puts "There's only three choices. Try again..."
+  end
+end
+if players == 0
+  player_1 = Players::Computer.new(first_token)
+  player_2 = Players::Computer.new(second_token)
+elsif players == 1
+  player_1 = Players::Human.new(first_token)
+  player_2 = Players::Computer.new(second_token)
+elsif players == 2
+  player_1 = Players::Human.new(first_token)
+  player_2 = Players::Human.new(second_token)
+end
+
+
+game = Game.new(player_1, player_2)
 
 game.play
