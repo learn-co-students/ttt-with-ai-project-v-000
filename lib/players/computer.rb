@@ -16,6 +16,7 @@ module Players
           move = "2"
 
         end
+        move
       end
 
 
