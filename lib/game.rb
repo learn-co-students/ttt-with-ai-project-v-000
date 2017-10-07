@@ -32,14 +32,41 @@ class Game
     won? ? board.cells[won?[0]] : nil
   end
 
-  def turn
+  def current_player
+    board.turn_count.even? ? player = player_1 : player_2
   end
 
-  def play
+  def turn
+    Players::Human.move(input)
+    if valid_move?(index)
+      board.update(index, current_player)
+    else
+      "invalid"
+      turn
+    end
   end
+
+  # def turn(input)
+  #   # unless over?
+  #     if board.valid_move?(input)
+  #       board.update(input, current.player)
+  #     else
+  #       "invalid"
+  #     end
+  # end
+
+  def play
+   while !over?
+     turn
+   end
+   if won?
+     puts "Congratulations #{winner}!"
+   elsif draw?
+     puts "Cat's Game!"
+   end
+ end
 
   def start
   end
-
 
 end

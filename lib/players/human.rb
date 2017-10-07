@@ -1,5 +1,5 @@
 class Players
-  class Human < Player 
+  class Human < Player
 
     def move(input)
       input = gets.chomp
@@ -7,4 +7,3 @@ class Players
 
   end
 end
-
