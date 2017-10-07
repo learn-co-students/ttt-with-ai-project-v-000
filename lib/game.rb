@@ -82,14 +82,13 @@ class Game
     end
   end
 
+
   def self.start
     puts "what kind of game do you want to play?"
     input = gets.strip
       if "0"
-        game = Game.new( mmn bvcxzZhplayer_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
         game.play
       end
     end
-
-
 end
