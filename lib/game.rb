@@ -15,7 +15,7 @@ class Game
 
   def over?
     #binding.pry
-    won? || board.full?
+    won? || draw?
   end
 
   def won?
@@ -37,23 +37,14 @@ class Game
   end
 
   def turn
-    Players::Human.move(input)
-    if valid_move?(index)
+    index = current_player.move(board)
+    if board.valid_move?(index)
       board.update(index, current_player)
     else
       "invalid"
       turn
     end
   end
-
-  # def turn(input)
-  #   # unless over?
-  #     if board.valid_move?(input)
-  #       board.update(input, current.player)
-  #     else
-  #       "invalid"
-  #     end
-  # end
 
   def play
    while !over?
@@ -65,8 +56,5 @@ class Game
      puts "Cat's Game!"
    end
  end
-
-  def start
-  end
 
 end
