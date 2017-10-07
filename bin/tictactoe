@@ -6,29 +6,37 @@ require_relative '../config/environment'
   puts "Please select the number of players: 0, 1, or 2"
   input = gets.strip
 
-    if input == "0"
-      player_1 = Players::Computer.new("X")
-      player_2 = Players::Computer.new("O")
-      Game.new
-    elsif input == "1"
-      player_1 = Players::Human.new("X")
-      player_2 = Players::Computer.new("O")
-      Game.new
-    elsif input == "2"
-      player_1 = Players::Human.new("X")
-      player_2 = Players::Human.new("O")
-      Game.new
-    end
+     if input == "0"
+       player_1 = Players::Computer.new("X"). player_2 = Players::Computer.new("O"), Board.new
+       game.play
+     elsif input == "1"
+       player_1 = Players::Human.new("X")
+       player_2 = Players::Computer.new("O")
+     elsif input == "2"
+       player_1 = Players::Human.new("X")
+       player_2 = Players::Human.new("O")
+     end
+      # game.play
 
-    play_again = ""
+
+      # play_again = ""
         puts "Would you like to play again?"
         play_again = gets.strip
         play_again.downcase == "y" || play_again.downcase == "yes"
         game = Game.new
-        until game.won?
+        until game.over?
           game.play
         end
         if play_again.downcase == "n" || play_again.downcase == "no"
-          break
         end
-    #Player enters y or yes to play again, n or no to stop - use 'break'
+
+      # play_again = ""
+      # until play_again.downcase == "n" || play_again.downcase == "no"
+      #   puts "Would you like to play again?"
+      #   play_again = gets.strip
+      #   play_again.downcase == "y" || play_again.downcase == "yes"
+      #   game = Game.new
+      #   until game.won?
+      #     game.play
+      #   end
+      # end

@@ -14,7 +14,6 @@ module Players
       #block diagonal:
         elsif board.turn_count == 2 && board.position(1) == board.position(9) || board.position(3) == board.position(7)
           move = "2"
-
         end
         move
       end

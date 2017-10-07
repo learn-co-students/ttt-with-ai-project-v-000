@@ -63,9 +63,9 @@ class Game
       while !over? #checks if the game is over after every turn
         turn
       end
-      if won?#stops playing if someone has won, congratulations the Winner X, Congratulates the winner O
+      if won? #stops playing if someone has won, congratulations the Winner X, Congratulates the winner O
         puts "Congratulations #{winner}!"
-      elsif draw? #stops playing in a draw, prints "Cat's Game!" on adraw, plays through an entire game
+      elsif draw? #stops playing in a draw, prints "Cat's Game!" on a draw, plays through an entire game
         puts "Cat's Game!"
        end
     end
