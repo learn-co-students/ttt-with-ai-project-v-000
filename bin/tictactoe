@@ -3,20 +3,21 @@
 require_relative '../config/environment'
 
   puts "Welcome to Tic-Tac-Toe!"
-  puts "What kind of game would you like to play?"
   puts "Please select the number of players: 0, 1, or 2"
-  gets.strip
-  puts "Who should go first?"
-  gets.strip
+  input = gets.strip
 
-# index = 0
-# puts "Welcome to Tic Tac Toe!"
-# display_board(board)
-# puts "Please enter 1-9:"
-# user_input = gets.strip
-# input_to_index(user_input = "1..9")
-# position_taken?(board, index)
-# valid_move?(board, index)
-# move(board, index, value="X")
-# display_board(board)
-# turn(board)
+    if input = "0"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      Game.new
+    elsif input = "1"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+      Game.new
+    elsif input = "2"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Human.new("O")
+      Game.new
+    end
+
+    #Player enters y or yes to play again, n or no to stop - use 'break'
