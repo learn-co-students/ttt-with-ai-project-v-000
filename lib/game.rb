@@ -44,20 +44,20 @@ class Game
   end
 
   def turn
-     player = current_player
-     move = player.move(@board)
-     if @board.valid_move?(move)
-       @board.display
-       @board.update(move, player)
-     else
-       turn
-     end
+       player = current_player
+       move = player.move(@board)
+       if @board.valid_move?(move)
+         @board.update(move, player)
+         @board.display
+       else
+         turn
+       end
   end
 
   def play
     until over?
     turn
-    end
+  end
       if won?
         puts "Congratulations #{winner}!"
       else
@@ -65,4 +65,25 @@ class Game
       end
   end
 
+  def start
+    puts "Welcome to Tic Tac Toe CLI"
+    puts "what will player 1 (X) be?"
+    puts "put 1 for human anything else for computer"
+    number = gets.strip
+        if number.to_i == 1
+          player_1 = Players::Human.new("X")
+        else
+          player_1 = Players::Computer.new("X")
+        end
+    puts "what will player 2 (O) be?"
+    puts "put 1 for human else for computer"
+    number = gets.strip
+      if number.to_i == 1
+        player_2 = Players::Human.new("X")
+      else
+        player_2 = Players::Computer.new("X")
+      end
+    game = Game.new(player_1, player_2, board = Board.new)
+    game.play
+  end
 end
