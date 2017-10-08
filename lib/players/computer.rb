@@ -8,8 +8,9 @@ module Players
           valid_indexes << i
         end
         end
-        valid_indexes.sample.to_s
+        sleep 1
+        indexes_without_zero = valid_indexes.collect {|space| space + 1}
+        indexes_without_zero.sample.to_s
       end
     end
-
 end

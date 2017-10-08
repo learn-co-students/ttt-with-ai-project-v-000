@@ -47,21 +47,17 @@ class Game
       nil
     end
   end
-    # if WIN_COMBINATIONS.detect {|win_combination| win_combination.all? {|space| board.cells[space] == player_1.token}}
-    #   player_1.token
-    # elsif WIN_COMBINATIONS.detect {|win_combination| win_combination.all? {|space| board.cells[space] == player_2.token}}
-    #   player_2.token
-    # end
 
   def turn
-    puts "what space do you want to go in?"
-    index = current_player.move(board)
-    if board.valid_move?(index)
-      board.update(index, current_player)
-    else
-      puts "not a valid move, try again"
-      turn
-    end
+      puts "what space do you want to go in?"
+      index = current_player.move(board)
+      if board.valid_move?(index)
+        board.update(index, current_player)
+        board.display
+      else
+        puts "not a valid move, try again"
+        turn
+      end
   end
 
   def won?
@@ -82,13 +78,22 @@ class Game
     end
   end
 
-
   def self.start
-    puts "what kind of game do you want to play?"
+    puts "What kind of game would you like to play?"
+    puts "1. watch computers hash it out"
+    puts "2. play against a robot"
+    puts "3. play against a friend (no way to guarantee s/he is not a robot)"
     input = gets.strip
-      if "0"
+      if input == "1"
         game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        game.play
+      elsif input == "2"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        game.play
+      elsif input == "3"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         game.play
       end
     end
+
 end
