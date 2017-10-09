@@ -18,11 +18,13 @@ class Players
         end
       end
       if move == ""
-        if board.cells[2] = " "
+        if board.cells[0] == " "
+          move = "1"
+        elsif board.cells[2] == " "
           move = "3"
-        elsif board.cells[6] = " "
+        elsif board.cells[6] == " "
           move = "7"
-        elsif board.call[8] = " "
+        elsif board.cells[8] == " "
           move = "9"
         end
       end
