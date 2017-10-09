@@ -14,7 +14,29 @@ class Game
     board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
+  # def over?
+  #   board.
+  # end
+
+  def won?
+    WIN_COMBINATIONS.each do |combo|
+      if (board.cells[combo[0]] == "X" and board.cells[combo[1]] == "X" and board.cells[combo[2]] == "X") or
+      (board.cells[combo[0]] == "O" and board.cells[combo[1]] == "O" and board.cells[combo[2]] == "O")
+        return combo
+      end
+    end
+    return nil
+  end
+
+  def over?
+    board.full? or self.won?
+  end
+
   def draw?
+    board.full? and !self.won?
+  end
+
+  def winner
   end
 
 
