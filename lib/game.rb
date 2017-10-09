@@ -37,25 +37,26 @@ class Game
   end
 
   def turn
+    puts "#{current_player.name}, please make a choice: "
     index = current_player.move(board)
     if board.valid_move?(index)
       board.update(index, current_player)
       board.display
     else
-      "invalid"
+      puts "That is not a valid choice. Please enter a valid number 1-9:"
       turn
     end
   end
 
   def play
-   while !over?
+    while !over?
      turn
-   end
-   if won?
+    end
+    if won?
      puts "Congratulations #{winner}!"
-   elsif draw?
+    elsif draw?
      puts "Cat's Game!"
-   end
+    end
  end
 
 end
