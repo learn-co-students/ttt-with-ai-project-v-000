@@ -14,10 +14,6 @@ class Game
     board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
-  # def over?
-  #   board.
-  # end
-
   def won?
     WIN_COMBINATIONS.each do |combo|
       if (board.cells[combo[0]] == "X" and board.cells[combo[1]] == "X" and board.cells[combo[2]] == "X") or
@@ -37,6 +33,11 @@ class Game
   end
 
   def winner
+    self.won? ? board.cells[self.won?[0]] : nil
+  end
+
+  def turn
+    if board.valid_move?(input)
   end
 
 
