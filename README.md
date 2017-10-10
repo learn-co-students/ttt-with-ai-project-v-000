@@ -140,7 +140,7 @@ You can implement this logic within the `bin/tictactoe` directly or encapsulate 
 
 If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the number of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should never be able to win, like in the case of thermonuclear war.
 
-The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
+The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code..
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/ttt-with-ai-project'>Tic-tac-toe with AI</a> on Learn.co and start learning to code for free.</p>
 
