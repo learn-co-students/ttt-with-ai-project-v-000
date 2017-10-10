@@ -24,8 +24,8 @@ class Board
     @cells[@index]
   end
 
-  def update(player)
-    @cells[@index] = player.token
+  def update(user_input, player)
+    @cells[user_input.to_i-1] = player.token
   end
 
   def full?
@@ -55,5 +55,5 @@ class Board
       return true
     end
   end
-  
+
 end
