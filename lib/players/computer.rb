@@ -1,11 +1,17 @@
+require 'pry'
+
 module Players
   class Computer < Player
 
     def move(board)
       if !board.taken?('5')
+        puts "Taking position 5"
         '5'
-      elsif
-        win(board) + 1
+      # elsif
+      #   win(board).to_s
+      else
+        puts "Random position"
+        random + 1
       end
     end
 
@@ -21,24 +27,30 @@ module Players
    ]
 
     def win(board)
-      WIN_COMBINATIONS.each do |combo|
-        position_1 = board.cells[combo[0]]
-        position_2 = board.cells[combo[1]]
-        position_3 = board.cells[combo[2]]
-
-        xo= self.token
-
-      if (position_1 == " " && position_2 == "#{xo}" && position_3 == "#{xo}")
-        return combo[0] + 1
-      elsif (position_1 == "#{xo} " && position_2 == " " && position_3 == "#{xo}")
-        return combo[1] + 1
-      elsif (position_1 == "#{xo} " && position_2 == "#{xo}" && position_3 == " ")
-        return combo[2] + 1
-      elsif
-        false
-      end
+      Game::WIN_COMBINATIONS.each do |combo|
+      #   position_1 = board.cells[combo[0]]
+      #   position_2 = board.cells[combo[1]]
+      #   position_3 = board.cells[combo[2]]
+      #
+      #   xo= self.token
+      #
+      # if (position_1 == " " && position_2 == "#{xo}" && position_3 == "#{xo}")
+      #   return combo[0] + 1
+      # elsif (position_1 == "#{xo} " && position_2 == " " && position_3 == "#{xo}")
+      #   return combo[1] + 1
+      # elsif (position_1 == "#{xo} " && position_2 == "#{xo}" && position_3 == " ")
+      #   return combo[2] + 1
+      # elsif
+      #   false
+      # end
+      return "1"
     end
-
   end
+
+  def random
+    (0...8).to_a.sample
+  end
+
+
 end
 end
