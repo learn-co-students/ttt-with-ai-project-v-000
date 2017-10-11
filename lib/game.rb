@@ -54,8 +54,8 @@ attr_accessor :board, :player_1, :player_2
      player = current_player
      input = player.move(@board)
      if @board.valid_move?(input)
-       @board.display
-       @board.update(input, player)
+      @board.update(input, player)
+      @board.display
      else
        turn
    end
@@ -66,13 +66,44 @@ attr_accessor :board, :player_1, :player_2
       turn
     end
     if won?
+      @board.display
       puts "Congratulations #{winner}!"
     elsif draw?
+      @board.display
       puts "Cat's Game!"
     end
   end
 
-  # def start
-  # end
+  def self.start
+    puts "Welcome to Tic Tac Toe!"
+    puts "How many players do you have? Type 0, 1, or 2:"
+    num_of_players = gets.strip.to_i
 
-end
+          if num_of_players == 0
+                game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+
+          elsif num_of_players == 1
+            puts "Do you want to go first? Y/N"
+              input = gets.strip
+
+              if input == "Y" || input == "y"
+                game = Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+              elsif  input == "Q" || input == "q"
+                exit
+              else
+              game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+            end
+
+          else
+            game = Game.new
+            puts "X will play first."
+          end
+      game.play
+      puts "Exit? Y/N"
+      response = gets.strip
+      if response == "Y" || response == "y"
+        exit
+        #need to revise the loop to keep playing until exit response = yes
+      end
+    end
+  end

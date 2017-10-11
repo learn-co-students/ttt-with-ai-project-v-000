@@ -36,7 +36,7 @@ attr_accessor :cells, :game
   end
 
   def valid_move?(input)
-    input.to_i > 0 && input.to_i < 9 && self.taken?(input) != true
+    input.to_i > 0 && input.to_i < 10 && self.taken?(input) != true
   end
 
   def update(input, player_token)
