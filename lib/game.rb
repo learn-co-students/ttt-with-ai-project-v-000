@@ -68,10 +68,9 @@ class Game
   def turn
     input = self.current_player.move(@board).to_i
     if @board.valid_move?(input)
-      @board[input - 1] = self.current_player.token
+      @board.update(input, current_player)
     else
-      puts "invalid"
-      self.current_player.move(@board)
+      puts "This is invalid. Please try again."
       turn
     end
   end
