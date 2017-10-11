@@ -6,7 +6,7 @@ module Players
       until board.valid_move?(number) == true
         move(board)
       end
-      return number
+      return number.to_s
     end
   end
 
