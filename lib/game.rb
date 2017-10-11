@@ -23,8 +23,32 @@ class Game
       board.turn_count.even? ? self.player_1 : self.player_2
     end
 
-    def over?
+    def won?
+      WIN_COMBINATIONS.find do |win_combination|
+        win_index_1 = win_combination[0]
+        win_index_2 = win_combination[1]
+        win_index_3 = win_combination[2]
 
+        position_1 = self.board.cells[win_index_1]
+        position_2 = self.board.cells[win_index_2]
+        position_3 = self.board.cells[win_index_3]
+
+        position_1 == "X" && position_2 == "X" && position_3 == "X" || position_1 == "O" && position_2 == "O" && position_3 == "O"
+      end
+    end
+
+    def draw?
+      !self.won? && self.board.full?
+    end
+
+    def over?
+      self.draw? || self.won?
+    end
+
+    def winner
+      win_combination = self.won?
+      win_index = win_combination[1]
+      self.won? && self.over? ? self.board.cells[win_index] : nil
     end
 
 end
