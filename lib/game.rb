@@ -25,19 +25,38 @@ class Game
   end
 
   def over?
-    board.full? or self.won?
+    board.full? or won? or draw?
   end
 
   def draw?
-    board.full? and !self.won?
+    board.full? and !won?
   end
 
   def winner
-    self.won? ? board.cells[self.won?[0]] : nil
+    won? ? board.cells[won?[0]] : nil
   end
 
   def turn
+    puts "Please enter 0-9"
+    input = current_player.move
     if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      puts "Try again!"
+      turn
+    end
+  end
+
+  def play
+    while !over? do
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
 
 
