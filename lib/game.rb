@@ -66,7 +66,7 @@ class Game
   end
 
   def turn
-    input = self.current_player.move(@board).to_i
+    input = current_player.move(@board).to_i
     if @board.valid_move?(input)
       @board.update(input, current_player)
     else
@@ -76,6 +76,16 @@ class Game
   end
 
   def play
+    until won? || over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{current_player.token}!"
+      return
+    else
+      puts "Cat's Game!"
+      return
+    end
   end
 
 end
