@@ -37,13 +37,13 @@ class Game
   end
 
   def turn
-    puts "Please enter 0-9"
+    puts "Please enter 1-9"
     input = current_player.move
     if board.valid_move?(input)
       board.update(input, current_player)
       board.display
     else
-      puts "Try again!"
+      print "Try again! "
       turn
     end
   end
