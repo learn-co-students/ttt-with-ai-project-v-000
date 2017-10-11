@@ -1,3 +1,4 @@
+
 require 'pry'
 
 module Players
@@ -5,52 +6,22 @@ module Players
 
     def move(board)
       if !board.taken?('5')
-        puts "Taking position 5"
         '5'
-      # elsif
-      #   win(board).to_s
       else
-        puts "Random position"
-        random + 1
+        next_move(board) + 1
       end
     end
 
-    WIN_COMBINATIONS = [
-     [0,1,2],
-     [3,4,5],
-     [6,7,8],
-     [0,3,6],
-     [1,4,7],
-     [2,5,8],
-     [0,4,8],
-     [6,4,2]
-   ]
+    def next_move(board)
+      corner(board) || random
+    end
 
-    def win(board)
-      Game::WIN_COMBINATIONS.each do |combo|
-      #   position_1 = board.cells[combo[0]]
-      #   position_2 = board.cells[combo[1]]
-      #   position_3 = board.cells[combo[2]]
-      #
-      #   xo= self.token
-      #
-      # if (position_1 == " " && position_2 == "#{xo}" && position_3 == "#{xo}")
-      #   return combo[0] + 1
-      # elsif (position_1 == "#{xo} " && position_2 == " " && position_3 == "#{xo}")
-      #   return combo[1] + 1
-      # elsif (position_1 == "#{xo} " && position_2 == "#{xo}" && position_3 == " ")
-      #   return combo[2] + 1
-      # elsif
-      #   false
-      # end
-      return "1"
+    def corner(board)
+      [0,2,6,8].detect{|cell| !board.taken?(cell+1)}
+    end
+
+    def random
+      (0...8).to_a.sample
     end
   end
-
-  def random
-    (0...8).to_a.sample
-  end
-
-
-end
 end
