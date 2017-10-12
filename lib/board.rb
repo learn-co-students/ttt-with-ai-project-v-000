@@ -12,8 +12,6 @@ class Board
 
   def reset!
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
-
   end
 
   def display
@@ -25,10 +23,23 @@ class Board
   end
 
   def position(user_input)
-    @cells[ user_input.to_i - 1 ]#takes in user input -- puts/gets returns value of the board cell
+    @cells[user_input.to_i - 1]
   end
 
-  def update
+
+  def taken?(user_input)
+  @cells[user_input.to_i - 1] == "X" || @cells[user_input.to_i - 1] == "O"
+
+  end
+
+  def valid_move?(user_input)
+    user_input.to_i.between?(1, 9)  &&  !taken?(user_input)
+  end
+
+  def update(user_input, player)
+    #ask, how do I think about this? connect the token/player, with the move
+    # cells[] = that player's token
+    @cells[user_input.to_i - 1] = player.token
 
   end
 
@@ -38,15 +49,8 @@ class Board
   end
 
   def turn_count
-    @cells.count{ |token| token == "X" || token == "0"}
+    @cells.count{ |token| token == "X" || token == "O"}
   end
 
-  def taken(index)
-    @cells[index]=="X" || @cells[index]=="O"
-  end
-
-  def valid_move(index)
-    index.between[0,8] &&  !taken[index]
-  end
 
 end
