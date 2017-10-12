@@ -59,6 +59,13 @@ class Game
     else
       nil
    end
+
+  end
+
+  def turn
+    puts "Please enter 1-9:"
+    user_input = gets.chomp
+    user_input = user_input.to_i
   end
 
 end
