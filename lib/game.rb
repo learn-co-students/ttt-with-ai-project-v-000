@@ -33,10 +33,24 @@ class Game
     board.full?
   end
   def won?
-    board
+    WIN_COMBINATIONS.detect{|combination|
+      board.cells[combination[0]] == "X" && board.cells[combination[1]] == "X" && board.cells[combination[2]] == "X" ||
+      board.cells[combination[0]] == "O" && board.cells[combination[1]] == "O" && board.cells[combination[2]] == "O"
+
+    }
+    # key: WIN_COMBINATIONS: array of arrays
+    # combination: a winning combination ex: [0,1,2]
+    # combination[0]: ex:0
+
+    # goes through the winning combinations
+    # checks each board cell index by placing in the index of the combination and comparing that to "X" or "O"
+    # On the first loop will check the index 0,1,2 of board.cells and then on the next iteration check the next combination
+    # until a match is found
+
+
+
+
     binding.pry
   end
-
-
 
 end
