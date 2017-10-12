@@ -25,7 +25,7 @@ class Game
 # # game provide s basic game runtime and logic
 #
 # # NEED HELP ON THIS
-	 def current_player(board)
+	 def current_player
 		 #why is this not working?
 		 @board.turn_count.even? ? @player_1 : @player_2
 	 end
