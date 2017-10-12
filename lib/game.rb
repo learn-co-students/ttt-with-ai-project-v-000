@@ -47,10 +47,18 @@ class Game
     # On the first loop will check the index 0,1,2 of board.cells and then on the next iteration check the next combination
     # until a match is found
 
-
-
-
-    binding.pry
+  end
+  def draw?
+    over? && won? == nil
+  end
+  def winner
+    if won?
+      board.cells[won?[0]]
+      board.cells[won?[1]]
+      board.cells[won?[2]]
+    else
+      nil
+   end
   end
 
 end
