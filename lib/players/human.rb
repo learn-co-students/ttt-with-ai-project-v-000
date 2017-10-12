@@ -13,4 +13,5 @@ module Players
 		end
 	end
 
-end 
+end
+#player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")

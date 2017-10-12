@@ -6,10 +6,6 @@ class Board
     reset!
   end
 
-  def position
-
-  end
-
   def reset!
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
@@ -28,8 +24,7 @@ class Board
 
 
   def taken?(user_input)
-  @cells[user_input.to_i - 1] == "X" || @cells[user_input.to_i - 1] == "O"
-
+    @cells[user_input.to_i - 1] == "X" || @cells[user_input.to_i - 1] == "O"
   end
 
   def valid_move?(user_input)
@@ -40,7 +35,6 @@ class Board
     #ask, how do I think about this? connect the token/player, with the move
     # cells[] = that player's token
     @cells[user_input.to_i - 1] = player.token
-
   end
 
   def full?
@@ -51,6 +45,5 @@ class Board
   def turn_count
     @cells.count{ |token| token == "X" || token == "O"}
   end
-
 
 end
