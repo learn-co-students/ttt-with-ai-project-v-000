@@ -1,5 +1,5 @@
 require 'pry'
-class Board
+class Board 
   # Is this saving
 
   attr_accessor :cells
