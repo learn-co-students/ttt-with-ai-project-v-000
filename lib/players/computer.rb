@@ -5,14 +5,21 @@ module Players
     attr_accessor :board
 
     def move(board)
-      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         if board.cells[4] == " "
-          valid_moves = "5"
-        elsif
-          corner_moves = ["1", "3", "7", "9"]
-          corner_moves.sample
+          return "5"
+        # Corner moves
+        elsif board.cells[0] == " "
+          return "1"
+        elsif board.cells[2] == " "
+          return "3"
+        elsif board.cells[6] == " "
+          return "7"
+        elsif board.cells[8] == " "
+          return "9"
+        # Side moves
         else
-          valid_moves.sample
+          valid_moves = ["2", "4", "6", "8"]
+          return valid_moves.sample
       end
     end
 

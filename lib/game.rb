@@ -101,9 +101,10 @@ attr_accessor :board, :player_1, :player_2
       game.play
       puts "Exit? Y/N"
       response = gets.strip
-      if response == "Y" || response == "y"
+      if response == "n"
+        Game.start
+      else
         exit
-        #need to revise the loop to keep playing until exit response = yes
       end
     end
   end
