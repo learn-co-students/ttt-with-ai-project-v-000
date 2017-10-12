@@ -3,34 +3,66 @@
 require_relative '../config/environment'
 
 def start
-  puts "Welcome to the game of Tic Tac Toe!"
   puts "Enter 1 to play with computer"
   puts "Enter 2 to play with a friend"
-  puts "Enter 0 for wargames (computer with play with itself 100 times)"
+  puts "Enter 0 for wargames (computer will play with itself 1000 times)"
   input = gets.strip
+
   if input == "1"
-    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-    game.board.display
-    game.play
+    single_player
   elsif input == "2"
-    game = Game.new
-    game.board.display
-    game.play
+    play_with_friend
   elsif input == "0"
-    wins = 0
-    100.times do
-      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-      game.play
-      wins += 1 if game.won?
-    end
-    puts "The computer won and lost the game #{wins} times!"
+    wargames
   else
     puts "Please enter 1, 2 or 0"
     start
   end
+
+  puts ""
   start
+  
 end
 
+def single_player
+  puts "Please choose your token: X or O"
+  token = gets.strip
+  if token == "X"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.board.display
+    game.play
+  elsif token == "O"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    game.board.display
+    game.play
+  else
+    single_player
+  end
+end
 
+def play_with_friend
+  game = Game.new
+  game.board.display
+  game.play
+end
 
+def wargames
+  wins_x = 0
+  wins_o = 0
+  1000.times do
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+    if game.won?
+      wins_x += 1 if game.winner == "X"
+      wins_o += 1 if game.winner == "O"
+    end
+  end
+  puts "The game was won #{wins_x + wins_o} times!"
+  puts "X: #{wins_x} wins"
+  puts "O: #{wins_o} wins"
+  puts "Draws: #{1000 - wins_x - wins_o}"
+  puts ""
+end
+
+puts "Welcome to the game of Tic Tac Toe!"
 start
