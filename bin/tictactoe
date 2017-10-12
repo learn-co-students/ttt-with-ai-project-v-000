@@ -2,7 +2,35 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to the game of Tic Tac Toe!"
-game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-game.board.display
-game.play
+def start
+  puts "Welcome to the game of Tic Tac Toe!"
+  puts "Enter 1 to play with computer"
+  puts "Enter 2 to play with a friend"
+  puts "Enter 0 for wargames (computer with play with itself 100 times)"
+  input = gets.strip
+  if input == "1"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.board.display
+    game.play
+  elsif input == "2"
+    game = Game.new
+    game.board.display
+    game.play
+  elsif input == "0"
+    wins = 0
+    100.times do
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      game.play
+      wins += 1 if game.won?
+    end
+    puts "The computer won and lost the game #{wins} times!"
+  else
+    puts "Please enter 1, 2 or 0"
+    start
+  end
+  start
+end
+
+
+
+start
