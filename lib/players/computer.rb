@@ -25,7 +25,7 @@ module Players
      end
     end
 
-    def win?(board)
+    def win?(board) #check if there's a possibility to win
       COMBINATIONS.each do |combo|
         if board.cells[combo[0]] == "O" && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " "
           return (combo[2]+1).to_s
@@ -38,7 +38,7 @@ module Players
       false
     end
 
-    def block?(board)
+    def block?(board) #check if need to block the opponent
       COMBINATIONS.each do |combo|
         if board.cells[combo[0]] == "X" && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " "
           return (combo[2]+1).to_s
