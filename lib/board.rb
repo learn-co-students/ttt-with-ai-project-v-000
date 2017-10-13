@@ -30,8 +30,8 @@ class Board
     position(input) != " "
   end
 
-  def something
-
+  def valid_move?(input)
+    !taken?(input) && (0..8)include?(position(input))
   end
 
   def reset!
