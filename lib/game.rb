@@ -46,7 +46,13 @@ class Game
     result ? @board.cells[result[0]] : result
   end
 
+  def turn
+    player = current_player
+    
+    puts "Please enter 1-9:"
+    input = gets.strip
 
 
 
+  end
 end
