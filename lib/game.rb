@@ -20,12 +20,16 @@ class Game
   end
 
   def turn
-    current_player.move(self.board)
+    i = current_player.move(self.board)
+    self.board.update(i, current_player)
   end
 
   def play
-    puts "Please enter a valid position:"
-    i = gets.chomp
+    until over?
+      turn
+    end
+    puts "Congratulations #{winner}!" if won?
+    puts "Cat's Game!" if draw?
   end
 
   def current_player

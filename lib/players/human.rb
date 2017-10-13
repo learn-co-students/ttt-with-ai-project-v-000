@@ -2,12 +2,13 @@ module Players
   class Human  < Player
 
   def move(board)
-    i = nil
-    until board.valid_move?(i)
+    i = "0"
+    binding.pry
+    until i.between?(1,9)
       puts "Please make a valid move:"
       i = gets.chomp
     end
-    board.update(i, self)
+    i
   end
 
 
