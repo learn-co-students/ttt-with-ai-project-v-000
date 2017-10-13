@@ -22,6 +22,10 @@ class Board
     9 - self.cells.count(" ")
   end
 
+  def update(input, player)
+    self.cells[input.to_i-1] = player
+  end
+
   def full?
     self.cells.count("X") + self.cells.count("O") == 9
   end
@@ -31,7 +35,7 @@ class Board
   end
 
   def valid_move?(input)
-    !taken?(input) && (0..8)include?(position(input))
+    !taken?(input) && (input.to_i-1).between?(0,8)
   end
 
   def reset!
