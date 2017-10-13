@@ -67,7 +67,6 @@ class Game
     move = current_player.move(board)
 
     if board.valid_move?(move)
-      move
       board.update(move,current_player)
     else
       turn
@@ -77,16 +76,16 @@ class Game
   end
 
   def play
-    until over? || won? != nil
+    until over? || won?
       turn
-       end
+    end
 
-      # if draw?
-      #   puts "Cat's Game!"
-      # else
-      #   puts "Congratulations #{winner}!"
-      # end
-      binding.pry
+      if draw?
+        puts "Cat's Game!"
+      else
+        puts "Congratulations #{winner}!"
+      end
+      # binding.pry
 
   end
 

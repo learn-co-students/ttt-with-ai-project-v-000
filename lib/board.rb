@@ -48,13 +48,13 @@ class Board
 
   def valid_move?(user_input)
     user_input = user_input.to_i
-    !full? && !taken?(user_input) if user_input >= 1
+    !full? && !taken?(user_input) if user_input >= 1 && user_input < 10
   end
 
   def update(user_input,player)
     user_input = user_input.to_i
 
-    cells[user_input-1] = "X"
+    cells[user_input-1] = player.token
 
     # binding.pry
     #look this over as player is not being used
