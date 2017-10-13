@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+board = Board.new
+player = Human.new("X")
+computer_player = Computer.new("O")
+
+puts "Greetings user, It's time to play some TIC TAC TOE!"
+puts "Would you wish to watch computer vs computer game?"
+puts "Would you like to play against the computer?"
+puts "Would you like to play against another player?"
+# could be separate
+puts ""
+
+
+game = Game.new(player,computer_player,board)
