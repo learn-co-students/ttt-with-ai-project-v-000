@@ -63,9 +63,14 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    user_input = gets.chomp
-    user_input = user_input.to_i
+
+    move = current_player.move(board)
+    if board.valid_move?(move)
+      move
+    else
+      current_player.move(board)
+    end
+    # binding.pry
   end
 
 end
