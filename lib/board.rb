@@ -1,6 +1,6 @@
 class Board
   attr_accessor :cells
-  
+
   def initialize
     @cells = Array.new(9, " ")
   end
@@ -50,5 +50,4 @@ class Board
     result = index.to_i - 1
     @cells[result] = player.token
   end
-
-end
+end # end Board
