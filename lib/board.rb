@@ -26,16 +26,12 @@ class Board
     cells[input.to_i - 1] = player.token
   end
 
-  #def token (index)
-    #cells[index] = token
-  #end
-
   def full? #when entirely occupied
-    cells.all?{|square| square != " " }
+    cells.all?{|token| token != " " }
   end
 
   def turn_count #based on how many positions in the cells array are filled
-    cells.count{|square| square != " " }
+    cells.count{|token| token != " " }
   end
 
   def taken?(input) #returns true or false for an individual person

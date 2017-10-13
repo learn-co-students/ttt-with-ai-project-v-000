@@ -13,22 +13,57 @@ class Game
     [0, 4, 8], [2, 4, 6]
   ]
 
-  def current_player
-    player_1
+  def over?
+    draw? || won?
   end
 
-  def won?
+  def current_player
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def winner
-  end
-
-  def start
-  end
-
-  def play
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
   end
 
   def turn
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "Turn #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+    end
+  end
+
+  def play
+   while !over?
+     turn
+   end
+   if won?
+     puts "Congratulations #{winner}!"
+   elsif draw?
+     puts "Cat's Game!"
+   end
+ end
+
+
+
+  def won?
+   WIN_COMBINATIONS.detect do |combo|
+     @board.cells[combo[0]] == @board.cells[combo[1]] &&
+     @board.cells[combo[1]] == @board.cells[combo[2]] &&
+     @board.taken?(combo[0]+1)
+   end
+ end
+
+  def draw?
+    @board.full? && !won?
   end
 end
