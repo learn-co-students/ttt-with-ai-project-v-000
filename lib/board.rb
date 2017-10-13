@@ -15,11 +15,11 @@ class Board
     row[1] = " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
     row[2] = " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
 
-    puts "\n#{row[0]}"
+    puts row[0]
     puts "-----------"
     puts row[1]
     puts "-----------"
-    puts "#{row[2]}\n"
+    puts row[2]
   end
 
   def position(input)

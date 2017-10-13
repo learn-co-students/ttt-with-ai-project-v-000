@@ -23,11 +23,11 @@ class Game
   end
 
   def over?
-    true if self.draw? || self.won?
+    self.draw? || self.won?
   end
 
   def draw?
-    true if self.board.full? && !self.won?
+    self.board.full? && !self.won?
   end
 
   def won?
@@ -45,21 +45,19 @@ class Game
     if self.board.valid_move?(player_move)
       self.board.update(player_move, self.current_player)
     else
-      puts "\n Please enter a valid board position (1-9).\n"
+      puts "Please enter a valid board position (1-9)."
       self.turn
     end
   end
 
   def play
-    self.board.display
     while !self.over?
       self.turn
-      self.board.display
     end
     if self.won?
-      puts "\nCongratulations #{self.winner}!\n"
+      puts "Congratulations #{self.winner}!"
     else
-      puts "\nCat's Game!\n"
+      puts "Cat's Game!"
     end
   end
 end

@@ -3,9 +3,9 @@
 
 require_relative '../config/environment'
 
-puts "\nGreetings Earthling!  Welcome to SPACE tic-tac-toe!\n"
+puts "Greetings Earthling!  Welcome to SPACE tic-tac-toe!"
 
-puts "\nWill you be playing with 0, 1, 2 players, or WARGAMES?\n"
+puts "Will you be playing with 0, 1, 2 players, or WARGAMES?"
 
 players = nil
 first_player = nil
@@ -22,7 +22,7 @@ case players
 when "1"
 
   while first_player != "Hu-mon" && first_player != "Robot"
-    puts "\nThe first player will use the 'X' token. Which player shall go first? Please select the 'Hu-mon' or the 'Robot'.\n"
+    puts "The first player will use the 'X' token. Which player shall go first? Please select the 'Hu-mon' or the 'Robot'."
     first_player = gets.chomp
   end
 
@@ -35,14 +35,14 @@ when "1"
   end
 
 when "2"
-    puts "\nThe first player will use the 'X' token\n"
+    puts "The first player will use the 'X' token"
     Game.new
 
 when "0"
-  puts "\nPerforming a Robot only simulation\n"
+  puts "Performing a Robot only simulation"
   Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
 
 when "WARGAMES"
-  puts "\nINTER-PLANETARY-WARGAMES\n"
+  puts "INTER-PLANETARY-WARGAMES"
   100.times{Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play}
 end

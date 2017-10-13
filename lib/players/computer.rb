@@ -24,7 +24,7 @@ module Players
 
         best_move = priority.reject{|c| board.taken?(c)}
         puts "\nMOVING INTO POSITION - #{best_move[0]}.  YOU WILL NEVER WIN.\n"
-        best_move[0]
+        best_move[0].to_s
     end
   end
 end
