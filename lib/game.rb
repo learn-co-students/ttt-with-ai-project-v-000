@@ -15,19 +15,14 @@ class Game
     [2,4,6]
   ]
 
-  def board
-    @board
-  end
-
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    @turn_count = @board.turn_count
   end
 
   def current_player
-    if @turn_count % 2 == 0
+    if @board.turn_count % 2 == 0
       player_1
     else
       player_2
@@ -35,7 +30,7 @@ class Game
   end
 
   def over?
-    won? || @board.full? && !won?
+    won? || draw?
   end
 
   def won?
@@ -63,7 +58,7 @@ class Game
   end # method
 
   def draw?
-    over? && !won?
+    @board.full? && !won?
   end
 
   def winner
@@ -77,29 +72,33 @@ class Game
   end
 
   def turn
-    if @turn_count % 2 == 0
-     player = player_1
-    else
-     player = player_2
-    end
+    player = current_player
     index = player.move(@board)
     if !@board.valid_move?(index)
       turn
-    else
-      @turn_count +=1
-      index
+    else #assuming that the player move is valid
+      @board.update(index, player)
+      @board.display
     end
   end
 
   def play
-    until over?
-      position = turn
-      if current_player == player_1
-        player = player_2
-      elsif  current_player == player_2
-        player = player_1
+    puts "Welcome To Tic Tac Toe!\nPlayer 1 please enter a value:"
+
+    turn until over?
+
+    if won?
+      x_amnt = @board.cells.count{|index| index == "X"}
+      o_amnt = @board.cells.count{|index| index == "O"}
+      if x_amnt > o_amnt
+        puts "Congratulations X!"
+      elsif x_amnt < o_amnt
+        puts"Congratulations O!"
       end
-      @board.update(position, player)
+    end
+
+    if draw?
+      puts "Cat's Game!"
     end
   end
 
