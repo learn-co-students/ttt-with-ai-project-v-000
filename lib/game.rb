@@ -30,7 +30,7 @@ class Game
   end
 
   def over?
-    board.full?
+    draw? || won?
   end
   def won?
     WIN_COMBINATIONS.detect{|combination|
@@ -49,7 +49,7 @@ class Game
 
   end
   def draw?
-    over? && won? == nil
+    board.full? && won? == nil
   end
   def winner
     if won?
@@ -76,7 +76,7 @@ class Game
   end
 
   def play
-    until over? || won?
+    until over?
       turn
     end
 
