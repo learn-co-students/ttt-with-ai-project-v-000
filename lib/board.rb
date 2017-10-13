@@ -1,5 +1,5 @@
 require 'pry'
-class Board 
+class Board
   # Is this saving
 
   attr_accessor :cells
@@ -48,7 +48,7 @@ class Board
 
   def valid_move?(user_input)
     user_input = user_input.to_i
-    self.full? == false && self.taken?(user_input) == false if user_input >= 1
+    !full? && !taken?(user_input) if user_input >= 1
   end
 
   def update(user_input,player)
