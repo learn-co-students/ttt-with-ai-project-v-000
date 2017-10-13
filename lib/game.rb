@@ -19,6 +19,14 @@ class Game
     board ? @board = board : @board = Board.new
   end
 
+  def turn
+    current_player.move(self.board)
+  end
+
+  def play
+
+  end
+
   def current_player
     self.board.turn_count%2 == 0 ? self.player_1 : self.player_2
   end
