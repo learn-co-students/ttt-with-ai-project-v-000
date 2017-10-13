@@ -24,7 +24,8 @@ class Game
   end
 
   def play
-
+    puts "Please enter a valid position:"
+    i = gets.chomp
   end
 
   def current_player
