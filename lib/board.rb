@@ -30,7 +30,9 @@ class Board
     position(input) != " "
   end
 
-  def
+  def something
+
+  end
 
   def reset!
     self.cells = Array.new(9, " ")
