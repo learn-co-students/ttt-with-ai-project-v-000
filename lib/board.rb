@@ -3,13 +3,11 @@ class Board
   attr_accessor :cells
 
   def initialize
-  @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    #reset method
+  reset!
   end
 
   def reset!
-    cells.clear
-    cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def display #prints current state
