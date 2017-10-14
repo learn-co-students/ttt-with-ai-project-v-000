@@ -50,13 +50,15 @@ class Game
     player = current_player
 
     puts "Please enter 1-9:"
-    input = gets.strip
 
-    if @board.valid_move?(input)
+    @board.move(user_input)
+
+    if @board.valid_move?(user_input)
+
 
       @board.update(input,player)
     else
-      input = gets.strip
+      @board.move(user_input)
       # "Move Invalid, Please enter 1-9:"
 
     end
