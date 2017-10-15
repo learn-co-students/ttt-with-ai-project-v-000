@@ -29,10 +29,10 @@ module Players
     ]
 
     OUTER = [
-      [0,1,2],
-      [0,3,6],
-      [6,7,8],
-      [2,5,8]
+      [0,1,2,"7","9"],
+      [0,3,6,"3","9"],
+      [6,7,8,"1","3"],
+      [2,5,8,"1","7"]
     ]
 
     EDGE_ATTACKS = [
@@ -63,15 +63,15 @@ module Players
       when 0
         take_center_or_corner(board)
       when 1
-        edge_punish_two? || take_center?(board) || take_corner?(board)
+        edge_punish_two?(board) || take_center?(board) || take_corner?(board)
       when 2
-        edge_attack?(board) || edge_punish_three?(board) || take_center?(board) || take_corner?(board)
+        edge_punish_three?(board) || edge_attack?(board) || take_center?(board) || take_corner?(board)
       when 3
-        x_defend?(board) || edge_defend?(board) || win?(board) || block?(board) || take_corner?(board)
+        edge_punish_four?(board) || x_defend?(board) || edge_defend?(board) || win?(board) || block?(board) || take_center?(board)  || take_corner?(board)
       when 4
-        win?(board) || block?(board) || edge_attack_punish_five?(board) || take_corner?(board) || take_edge
+        win?(board) || block?(board) || edge_attack_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge
       else
-        win?(board) || block?(board) || take_corner?(board) || take_edge
+        win?(board) || block?(board) || take_center?(board) || take_corner?(board) || take_edge
       end
     end
 
@@ -95,7 +95,7 @@ module Players
 
     def edge_defend?(board)
       mv = EDGE_ATTACKS.detect do |attack|
-        board.cells[attack[0]] == "X" && board.cells[attack[1]] == "X"
+        board.cells[attack[0]] == "X" && board.cells[attack[1]] == "X" && board.cells[4] == "O"
       end
       puts "Edge Defended!" if mv
       (mv[2]+1).to_s if mv
@@ -130,15 +130,11 @@ module Players
 
     def edge_punish_two?(board)
       if board.cells[1] == "X" || board.cells[3] == "X"
+        puts "Edge Punish Two"
         "1"
       elsif board.cells[5] == "X" || board.cells[7] == "X"
+        puts "Edge Punish Two"
         "9"
-      end
-    end
-
-    def edge_punish_four?(board)
-      mv = OUTER.detect do |attack|
-        
       end
     end
 
@@ -148,6 +144,19 @@ module Players
       end
       puts "Punished on 3" if mv
       (mv[1]+1).to_s if mv
+    end
+
+    def edge_punish_four?(board)
+      mv = OUTER.detect do |a|
+        board.cells[a[1]] == "X" && board.is_taken?(a[0]) && board.is_taken?(a[2])
+      end
+      if mv
+        if board.cells[mv[0]] == "O"
+          mv[3]
+        else
+          mv[4]
+        end
+      end
     end
 
     def edge_attack_punish_five?(board)
@@ -168,6 +177,10 @@ module Players
       if board.cells[0] == " " || board.cells[2] == " " || board.cells[6] == " " || board.cells[8] == " "
         ["1","3","7","9"][rand(0..3)]
       end
+    end
+
+    def force_take_corner(board)
+      ["1","3","7","9"][rand(0..3)]
     end
 
     def take_edge

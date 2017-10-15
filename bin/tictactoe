@@ -15,12 +15,15 @@ stop = nil
 end
 
 puts "X won #{stats.count("X")} and O won #{stats.count("O")}!"
+
+
+
 # count = 0
-# until stop == "O" || count == 2000
+# until stop == "X" || count == 2000
 #   game = Game.new(player1, player2)
 #   game.board.display
 #   game.play
-#   stop = game.winner if game.winner == "O"
+#   stop = game.winner if game.winner == "X"
 #   count += 1
 # end
 #

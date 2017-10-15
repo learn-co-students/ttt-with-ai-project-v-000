@@ -34,6 +34,10 @@ class Board
     position(input) != " "
   end
 
+  def is_taken?(index)
+    self.cells[index] == "X" || self.cells[index] == "O" 
+  end
+
   def valid_move?(input)
     !taken?(input) && (input.to_i-1).between?(0,8)
   end
