@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-player1 = Players::AdvancedAI.new("X")
+player1 = Players::Computer.new("X")
 player2 = Players::Computer.new("O")
 stats = []
 stop = nil
