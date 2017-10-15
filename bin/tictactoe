@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+puts "Welcome to TicTacToe!"
+puts "Would you like to play 1 or 2 player? Type 1 or 2 and then enter"
+player_number_choice =gets
+if player_number_choice.to_i == 1
+  puts "Ok! Let's play a game versus the computer!"
+  puts "which piece would you like to be (X typically goes first)? Type 1 for X or 2 for O and then enter"
+  token_choice = gets
+
+  if token_choice.to_i == 1
+    game = Game.new(Players::Human.new("X"),Players::Computer.new("O"),Board.new)
+    game.play
+  elsif token_choice.to_i == 2
+    game = Game.new(Players::Computer.new("X"),Players::Human.new("O"),Board.new)
+    game.play
+  end
+elsif player_number_choice.to_i == 2
+  puts "Ok! You and your partner saddle up and get ready to ride!"
+  game =  Game.new(Players::Human.new("X"),Players::Human.new("O"),Board.new)
+  game.play
+elsif player_number_choice.to_i == 0
+  game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new)
+  game.play
+else
+  puts "That is an invalid input. Goodbye."
+end

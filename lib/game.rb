@@ -1,4 +1,5 @@
 require_relative './players/human.rb'
+require_relative './players/computer.rb'
 
 class Game
   WIN_COMBINATIONS = [[0,1,2],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4,2],[3,4,5]]
@@ -26,7 +27,7 @@ class Game
   end
 
   def over?
-    !self.board.cells.include?(" ")
+    self.won? || self.draw?
   end
 
   def won?
@@ -42,12 +43,10 @@ class Game
     return false
   end
 
+
+
   def draw?
-    if over? && !won?
-      return true
-    else
-      return false
-    end
+    self.board.full? && !won?
   end
 
   def winner
@@ -60,11 +59,12 @@ class Game
 
   def turn
     puts "It is your turn player #{self.current_player.token}. Where would you like to go?"
-    whatnot = gets
-    if self.board.valid_move?(whatnot)
-      self.board.update(whatnot, self.current_player)
+    input=self.current_player.move(self.board.cells)
+
+    if self.board.valid_move?(input)
+      self.board.update(input, self.current_player)
       self.board.display
-    else
+   else
       puts "That is not a valid move, try again."
       self.turn
     end
@@ -73,6 +73,26 @@ class Game
   end
 
   def play
+
+    while !over?
+      self.turn
+    end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw?
+      puts "Cat's Game!"
+    end
   end
+
+
+    #  if self.draw?
+    #    puts "Cat's Game!"
+    #  end
+    #  puts
+    #else
+      #self.play
+    #end
+
+
 
 end

@@ -12,7 +12,7 @@ describe 'Players::Computer' do
 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-      computer_move = computer.move(board)
+      computer_move = computer.move(board.cells)
 
       expect(valid_moves).to include(computer_move)
     end

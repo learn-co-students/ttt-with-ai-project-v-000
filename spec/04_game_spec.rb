@@ -96,6 +96,14 @@ describe 'Game' do
 
       expect(game.over?).to be_falsey
     end
+
+    it 'returns true for a not-full board that has been won' do
+      game = Game.new
+      game.board.cells = ["X", "O", "X", " ", "X", " ", "O", "O", "X"]
+
+      expect(game.over?).to be_truthy
+    end
+
   end
 
   describe '#won?' do
