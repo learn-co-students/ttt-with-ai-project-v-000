@@ -57,9 +57,11 @@ class Game
       @board.update(current_move,player)
       @board.display
     end
+
   end
 
   def play
+     
   end
 
 
