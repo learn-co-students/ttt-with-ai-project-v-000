@@ -22,18 +22,18 @@ module Players
       if
         WIN_COMBINATIONS.any? do |combination|
           board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[0]] != self.token && board.cells[combination[0]] != " "
+          move = (board.cells.index(board.cells[combination[2]]) + 1).to_s
         end
-        move = board.cells[combination[2]]
       elsif
-         WIN_COMBINATIONS.any? do |combination|
-           board.cells[combination[0]] == board.cells[combination[2]] && board.cells[combination[0]] != self.token && board.cells[combination[0]] != " "
-         end
-         move = board.cells[combination[1]]
+        WIN_COMBINATIONS.any? do |combination|
+          board.cells[combination[0]] == board.cells[combination[2]] && board.cells[combination[0]] != self.token && board.cells[combination[0]] != " "
+          move = (board.cells.index(board.cells[combination[1]]) + 1).to_s
+        end
       elsif
         WIN_COMBINATIONS.any? do |combination|
           board.cells[combination[1]] == board.cells[combination[2]] && board.cells[combination[1]] != self.token && board.cells[combination[1]] != " "
+          move = (board.cells.index(board.cells[combination[0]]) + 1).to_s
         end
-        move = board.cells[combination[0]]
       else
         move = valid_moves.sample
       end
