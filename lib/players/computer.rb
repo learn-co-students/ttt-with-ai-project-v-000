@@ -2,9 +2,10 @@ module Players
   class Computer < Player
 
     def move(board)
+      puts "Beep Borp! Making Moves *crackle*"
       i = 0
       until board.valid_move?(i)
-        i += 1
+        i = rand(1..9)
       end
       i.to_s
     end

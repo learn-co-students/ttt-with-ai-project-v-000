@@ -1,3 +1,27 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+player1 = Players::AdvancedAI.new("X")
+player2 = Players::Computer.new("O")
+stats = []
+stop = nil
+
+2000.times do
+  game = Game.new(player1, player2)
+  game.board.display
+  game.play
+  stats << game.winner
+end
+
+puts "X won #{stats.count("X")} and O won #{stats.count("O")}!"
+# count = 0
+# until stop == "O" || count == 2000
+#   game = Game.new(player1, player2)
+#   game.board.display
+#   game.play
+#   stop = game.winner if game.winner == "O"
+#   count += 1
+# end
+#
+# puts "It took #{count} games for O to win!"

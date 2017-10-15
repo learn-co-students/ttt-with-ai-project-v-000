@@ -30,6 +30,7 @@ class Game
   def play
     until over?
       turn
+      self.board.display
     end
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
