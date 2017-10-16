@@ -27,7 +27,7 @@ puts "Thank you for playing."
 
 # These are test packages to quickly test new logic.  The first one is just
 # to quickly see the stats of 2,000 games.  The second one is to figure out
-# why an AI was losing by stopping the game when an unexpected loss occurred.
+# why an AI was losing by stopping the loop if that AI lost.
 
 
 # player1 = Players::AdvancedAI.new("X")
