@@ -106,8 +106,9 @@ module Players
     # Initially I only thought the first 4 turns mattered and #x_defend would be
     # enough to never lose.  The basic AI, which randomly selects a space with
     # no logic at all, was able to win 5% of it's games when going first, which
-    # led to the discovery of #edge_defend.  #edge_denfend? inspired
-    # #edge_attack?, which necessitaed the
+    # led to the discovery of #edge_defend?  #edge_denfend? inspired
+    # #edge_attack?, which necessitaed the need for additional logic to
+    # capitalize 2 turns later.
 
     def move(board)
       turn = board.turn_count
