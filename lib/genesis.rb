@@ -1,6 +1,6 @@
 def main_start
   input = nil
-  puts "Welcome to TicTacToe"
+  puts "Welcome to TicTacToe."
   puts "Please Choose a game mode:"
   puts "(1). Human vs. Human"
   puts "(2). Human vs. Computer"
@@ -20,23 +20,26 @@ end
 
 def create_ai(token)
   input = nil
-  until input == "1" || input == "2"
+  until input == "1" || input == "2" || input == "3"
     puts "Please select"
     input = gets.chomp
   end
   case input
   when "1"
-    Players::Computer.new(token)
+    Players::RNG.new(token)
   when "2"
+    Players::Computer.new(token)
+  when "3"
     Players::AdvancedAI.new(token)
   end
 end
 
 def human_vs_ai
-  puts "Player 1:"
+  puts "Player 1 - X :"
   puts "(1). Human"
   puts "(2). Basic AI"
-  puts "(3). Advanced AI"
+  puts "(3). Intermediate AI"
+  puts "(4). Advanced AI"
   input = nil
   until input.to_i.between?(1,3)
     puts "Please Select"
@@ -46,15 +49,18 @@ def human_vs_ai
   when "1"
     player_1 = Players::Human.new("X")
   when "2"
-    player_1 = Players::Computer.new("X")
+    player_1 = Players::RNG.new("X")
   when "3"
+    player_1 = Players::Computer.new("X")
+  when "4"
     player_1 = Players::AdvancedAI.new("X")
   end
 
   if input == "1"
-    puts "Player 2:"
+    puts "Player 2 - O ::"
     puts "(1). Basic AI"
-    puts "(2). Advanced AI"
+    puts "(2). Intermediate AI"
+    puts "(3). Advanced AI"
     player_2 = create_ai("O")
   else
     puts "Player 2: Human"
@@ -68,13 +74,15 @@ end
 
 def ai_vs_ai
   stats = []
-  puts "Player 1:"
+  puts "Player 1 - X :"
   puts "(1). Basic AI"
-  puts "(2). Advanced AI"
+  puts "(2). Intermediate AI"
+  puts "(3). Advanced AI"
   player_1 = create_ai("X")
-  puts "Player 2:"
+  puts "Player 2 - O :"
   puts "(1). Basic AI"
-  puts "(2). Advanced AI"
+  puts "(2). Intermediate AI"
+  puts "(3). Advanced AI"
   player_2 = create_ai("O")
   puts "How many games should they play?"
   input = 0

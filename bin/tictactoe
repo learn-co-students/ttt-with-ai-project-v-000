@@ -11,21 +11,22 @@ sleep(0.5)
 puts "   |_| |_\\__|   |_|\\__,_\\__|   |_|\\___/\\___|"
 sleep(1)
 puts "       All your base are belong to us! \n \n"
-
+sleep(2)
 
 
 exit = nil
 
-until exit == "Y" || exit == "exit" || exit == "Yes"
+until exit == "Y" || exit == "y" || exit == "exit" || exit == "Yes" || exit == "Exit"
   main_start
-  puts "Would you like to exit? '(Y)es' or 'exit' to quit."
-  input = gets.chomp
+  puts "Would you like to exit? '(Y)es' or 'exit' to exit programs."
+  exit = gets.chomp
 end
 
+puts "Thank you for playing."
 
 
-# player1 = Players::AdvancedAI.new("X")
-# player2 = Players::Computer.new("O")
+# player1 = Players::Computer.new("X")
+# player2 = Players::AdvancedAI.new("O")
 # stats = []
 # stop = nil
 #

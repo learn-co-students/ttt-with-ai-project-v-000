@@ -233,8 +233,8 @@ module Players
       [board.cells[arr[0]], board.cells[arr[1]], board.cells[arr[2]]]
     end
 
-    def open_the_pod_bay_doors_hal
-      "I'm sorry Dave. I'm afraid I can't do that."
+    def your_move(creep)
+      "Dead or alive, you're coming with me."
     end
 
     def emote
