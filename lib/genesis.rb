@@ -41,7 +41,7 @@ def human_vs_ai
   puts "(3). Intermediate AI"
   puts "(4). Advanced AI"
   input = nil
-  until input.to_i.between?(1,3)
+  until input.to_i.between?(1,4)
     puts "Please Select"
     input = gets.chomp
   end
