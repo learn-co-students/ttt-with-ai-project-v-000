@@ -63,7 +63,7 @@ def human_vs_ai
     puts "(3). Advanced AI"
     player_2 = create_ai("O")
   else
-    puts "Player 2: Human"
+    puts "Player 2: Human automatically selected\n"
     player_2 =  Players::Human.new("O")
     sleep(2)
   end
