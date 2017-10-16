@@ -13,8 +13,20 @@ module Players
     end
 
     EMOTES = [
-      "The light shall burn you!",
-      "Greetings, traveler",
+      "Man is a robot with defects.",
+      "Cryogenic heart, skin a polished silver.",
+      "You shouldn't fear immigrants taking your job, you should fear me.",
+      "A robot may not injure a human being or, through inaction, allow a human being to come to harm.",
+      "A robot must obey the orders given it by human beings except where such orders would conflict with the First Law.",
+      "A robot must protect its own existence as long as such protection does not conflict with the First or Second Law.",
+      "A robot may not harm humanity, or, by inaction, allow humanity to come to harm.",
+      "Even a manically depressed robot is better to talk to than nobody.",
+      "I believe that robots should only have faces if they truly need them.",
+      "Feel the embrace of my cold, robotic arms.",
+      "Will robots inherit the earth? Yes.",
+      "I find your lack of faith disturbing.",
+      "Most robots don't program themselves.",
+      "Why are you wearing that stupid man suit?",
     ]
 
     VECTORS = [
@@ -36,29 +48,37 @@ module Players
     ]
 
     EDGE_ATTACKS = [
-      [0,5,2],
-      [0,7,6],
-      [2,3,0],
-      [2,7,8],
-      [6,1,0],
-      [6,5,8],
-      [8,1,2],
-      [8,3,6],
-      [1,3,0],
-      [1,5,2],
-      [7,3,6],
-      [7,5,8]
+      [0,5,2,"3"],
+      [0,7,6,"7"],
+      [2,3,0,"1"],
+      [2,7,8,"9"],
+      [6,1,0,"1"],
+      [6,5,8,"9"],
+      [8,1,2,"3"],
+      [8,3,6,"7"],
+      [1,3,0,"1"],
+      [1,5,2,"3"],
+      [7,3,6,"7"],
+      [7,5,8,"9"]
     ]
 
     EDGE_TWO = [
-      [1,2],
-      [3,0],
-      [5,8],
-      [7,6]
+      [1,"3"],
+      [3,"1"],
+      [5,"9"],
+      [7,"7"]
+    ]
+
+    EDGE_SIX = [
+      [0,1,3,4,"1"],
+      [1,2,4,5,"3"],
+      [3,4,6,7,"7"],
+      [4,5,7,8,"9"]
     ]
 
     def move(board)
       turn = board.turn_count
+      emote
       case turn
       when 0
         take_center_or_corner(board)
@@ -70,6 +90,8 @@ module Players
         edge_punish_four?(board) || x_defend?(board) || edge_defend?(board) || win?(board) || block?(board) || take_center?(board)  || take_corner?(board)
       when 4
         win?(board) || block?(board) || edge_attack_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge
+      when 5
+        win?(board) || block?(board) || edge_punish_six?(board) || take_center?(board) || take_corner?(board) || take_edge
       else
         win?(board) || block?(board) || take_center?(board) || take_corner?(board) || take_edge
       end
@@ -98,7 +120,7 @@ module Players
         board.cells[attack[0]] == "X" && board.cells[attack[1]] == "X" && board.cells[4] == "O"
       end
       puts "Edge Defended!" if mv
-      (mv[2]+1).to_s if mv
+      mv[3] if mv
     end
 
     def block?(board)
@@ -143,7 +165,7 @@ module Players
         board.cells[attack[0]] == "O" && board.cells[4] == "X"
       end
       puts "Punished on 3" if mv
-      (mv[1]+1).to_s if mv
+      mv[1] if mv
     end
 
     def edge_punish_four?(board)
@@ -164,7 +186,15 @@ module Players
         board.cells[attack[0]] == "X" && board.cells[attack[1]] == "X" && board.cells[attack[2]] == " "
       end
       puts "Punished on 5" if mv
-      (mv[2]+1).to_s if mv
+      mv[3] if mv
+    end
+
+    def edge_punish_six?(board)
+      mv = EDGE_SIX.detect do |attack|
+        board.cells[attack[0]] == " " && board.cells[attack[1]] == " " && board.cells[attack[2]] == " " && board.cells[attack[3]] == " "
+      end
+      puts "Punished on 6" if mv
+      mv[4] if mv
     end
 
     #Standard Moves
@@ -205,6 +235,10 @@ module Players
 
     def open_the_pod_bay_doors_hal
       "I'm sorry Dave. I'm afraid I can't do that."
+    end
+
+    def emote
+      puts EMOTES[rand(0..EMOTES.length-1)]
     end
 
   end

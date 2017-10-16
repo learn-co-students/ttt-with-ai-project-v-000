@@ -28,6 +28,7 @@ class Game
   end
 
   def play
+    self.board.display
     until over?
       turn
       self.board.display

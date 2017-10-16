@@ -2,19 +2,41 @@
 
 require_relative '../config/environment'
 
-player1 = Players::Computer.new("X")
-player2 = Players::Computer.new("O")
-stats = []
-stop = nil
+puts "  _____ _      _____          _____"
+sleep(0.5)
+puts " |_   _(_)__  |_   _|_ _ __  |_   _|__  ___"
+sleep(0.5)
+puts "   | | | / _|   | |/ _` / _|   | |/ _ \\/ -_)"
+sleep(0.5)
+puts "   |_| |_\\__|   |_|\\__,_\\__|   |_|\\___/\\___|"
+sleep(1)
+puts "       All your base are belong to us! \n \n"
 
-2000.times do
-  game = Game.new(player1, player2)
-  game.board.display
-  game.play
-  stats << game.winner
+
+
+exit = nil
+
+until exit == "Y" || exit == "exit" || exit == "Yes"
+  main_start
+  puts "Would you like to exit? '(Y)es' or 'exit' to quit."
+  input = gets.chomp
 end
 
-puts "X won #{stats.count("X")} and O won #{stats.count("O")}!"
+
+
+# player1 = Players::AdvancedAI.new("X")
+# player2 = Players::Computer.new("O")
+# stats = []
+# stop = nil
+#
+# 2000.times do
+#   game = Game.new(player1, player2)
+#   game.board.display
+#   game.play
+#   stats << game.winner
+# end
+#
+# puts "X won #{stats.count("X")} and O won #{stats.count("O")}!"
 
 
 
