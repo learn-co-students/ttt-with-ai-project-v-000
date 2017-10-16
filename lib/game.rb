@@ -73,6 +73,12 @@ class Game
 
   def turn
     player = current_player
+    if player == player_1
+      number = 1
+    else player == player_2
+      number = 2
+    end
+    puts "Player #{number}'s turn:"
     index = player.move(@board)
     if !@board.valid_move?(index)
       turn
@@ -83,8 +89,6 @@ class Game
   end
 
   def play
-    puts "Welcome To Tic Tac Toe!\nPlayer 1 please enter a value:"
-
     turn until over?
 
     if won?
