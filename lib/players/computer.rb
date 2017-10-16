@@ -13,29 +13,35 @@ module Players
     [2,4,6]
     ]
 
+    def opponent_token
+      if self.token == "X"
+        "O"
+      else
+        "X"
+      end
+    end
+
     def move(board)
       valid_moves = []
-      move = ""
       board.cells.each_with_index do |space, index|
         valid_moves << (index + 1).to_s if board.valid_move?(index + 1)
       end
-      if
-        WIN_COMBINATIONS.any? do |combination|
-          board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[0]] != self.token && board.cells[combination[0]] != " "
-          move = (board.cells.index(board.cells[combination[2]]) + 1).to_s
+      move = valid_moves.sample
+      valid_moves.detect do |space|
+        if space == "1" || space == "3" || space == "5" || space == "7" || space == "9"
+          move = space
         end
-      elsif
-        WIN_COMBINATIONS.any? do |combination|
-          board.cells[combination[0]] == board.cells[combination[2]] && board.cells[combination[0]] != self.token && board.cells[combination[0]] != " "
-          move = (board.cells.index(board.cells[combination[1]]) + 1).to_s
+      end
+      WIN_COMBINATIONS.any? do |combination|
+        if board.cells[combination[0]] == opponent_token && board.cells[combination[1]] == opponent_token && board.cells[combination[2]] == " "
+          move = (combination[2] + 1).to_s
+        elsif board.cells[combination[0]] == opponent_token && board.cells[combination[2]] == opponent_token && board.cells[combination[1]] == " "
+          move = (combination[1] + 1).to_s
+        elsif board.cells[combination[1]] == opponent_token && board.cells[combination[2]] == opponent_token && board.cells[combination[0]] == " "
+          move = (combination[0] + 1).to_s
+        else
+        nil
         end
-      elsif
-        WIN_COMBINATIONS.any? do |combination|
-          board.cells[combination[1]] == board.cells[combination[2]] && board.cells[combination[1]] != self.token && board.cells[combination[1]] != " "
-          move = (board.cells.index(board.cells[combination[0]]) + 1).to_s
-        end
-      else
-        move = valid_moves.sample
       end
       move
     end
