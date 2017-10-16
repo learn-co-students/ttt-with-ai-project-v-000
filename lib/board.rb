@@ -30,7 +30,7 @@ class Board
   end
 
   def turn_count
-    @cells.each {|token| token == "X" || token == "O"}
+    @cells.count {|token| token == "X" || token == "O"}
   end
 
   def taken?(index)
