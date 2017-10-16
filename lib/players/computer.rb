@@ -2,8 +2,6 @@ module Players
   class Computer < Player
 
     def move(board)
-      move = nil
-
       corners = [1, 3, 7 ,9]
       sides = [2, 4, 6, 8]
 
