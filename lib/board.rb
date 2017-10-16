@@ -26,27 +26,22 @@ class Board
   end
 
   def full?
-    @cells.all? {|x| x == "X" || x == "O"}
+    @cells.all? {|token| token == "X" || token == "O"}
   end
 
   def turn_count
-    counter = 0
-    @cells.each {|x| counter += 1 if x == "X" || x == "O"}
-    counter
+    @cells.each {|token| token == "X" || token == "O"}
   end
 
   def taken?(index)
-    input = index.to_i - 1
-    !(@cells[input].nil? || @cells[input] == " ")
+    !(position(index) == " " || position(index) == "")
   end
 
   def valid_move?(index)
-    input = index.to_i
-    input.between?(1,9) && !taken?(index)
+    index.to_i.between?(1,9) && !taken?(index)
   end
 
   def update(index, player)
-    input = index.to_i - 1
-    @cells[input] = player.token
+    @cells[index.to_i - 1] = player.token
   end
 end
