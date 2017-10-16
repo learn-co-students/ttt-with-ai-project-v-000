@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "Please select the number of players: 0, 1, or 2"
+  input = gets.strip
+
+     if input == "0"
+       player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), Board.new
+       Game.new
+
+     elsif input == "1"
+       player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")
+     elsif input == "2"
+     end
+
+     game = Game.new
+     until game.over?
+       game.play
+     end
+
+        puts "Would you like to play again?"
+        play_again = gets.strip
+        play_again.downcase == "y" || play_again.downcase == "yes"
+        game = Game.new
+
+        if play_again.downcase == "n" || play_again.downcase == "no"
+          game.over?
+        end
+
+#Note to reviewers: I've looked at other codes (https://www.theodinproject.com/courses/ruby-programming/lessons/oop) and realize that this example isn't anywhere near what is possible. I've chosen to end it here, flaws and all, because I'm eager to move forward. There's so much I want to learn and I'm certain that I now have the tools to do a project like this in the future --with much better logic & coding. Cheers!
