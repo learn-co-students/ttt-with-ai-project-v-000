@@ -1,3 +1,17 @@
+# ATTENTION!!!! ATTENTION!!!!  ATTENTION!!!! ATTENTION!!!! ATTENTION!!!!
+# ATTENTION!!!! ATTENTION!!!!  ATTENTION!!!! ATTENTION!!!! ATTENTION!!!!
+# ATTENTION!!!! ATTENTION!!!!  ATTENTION!!!! ATTENTION!!!! ATTENTION!!!!
+# This is the solution code! I added it in as the Intermediate
+# AI for the CLI version of my game. My AI code is inside the file:
+#
+#                              advancedai.rb
+#
+# ATTENTION!!!! ATTENTION!!!!  ATTENTION!!!! ATTENTION!!!! ATTENTION!!!!
+# ATTENTION!!!! ATTENTION!!!!  ATTENTION!!!! ATTENTION!!!! ATTENTION!!!!
+# ATTENTION!!!! ATTENTION!!!!  ATTENTION!!!! ATTENTION!!!! ATTENTION!!!!
+
+
+
 module Players
   class Computer < Player
     def move(board)
