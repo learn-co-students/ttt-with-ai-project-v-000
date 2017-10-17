@@ -123,11 +123,11 @@ module Players
       when 3
         edge_punish_four?(board) || x_defend?(board) || edge_defend?(board) || win?(board) || block?(board) || take_center?(board)  || take_corner?(board)
       when 4
-        win?(board) || block?(board) || edge_attack_punish_five?(board) || edge_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge
+        win?(board) || block?(board) || edge_attack_punish_five?(board) || edge_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
       when 5
-        win?(board) || block?(board) || edge_punish_six?(board) || take_center?(board) || take_corner?(board) || take_edge
+        win?(board) || block?(board) || edge_punish_six?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
       else
-        win?(board) || block?(board) || take_center?(board) || take_corner?(board) || take_edge
+        win?(board) || block?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
       end
     end
 
@@ -156,7 +156,7 @@ module Players
     def x_defend?(board)
       if (board.cells[0] == "X" && board.cells[8] == "X") || (board.cells[2] == "X" && board.cells[6] == "X")
         puts "X-Denfended!"
-        take_edge
+        take_edge(board)
       end
     end
 
@@ -340,7 +340,11 @@ module Players
 
     def take_corner?(board)
       if board.cells[0] == " " || board.cells[2] == " " || board.cells[6] == " " || board.cells[8] == " "
-        ["1","3","7","9"][rand(0..3)]
+        i = 0
+        until board.valid_move?(i)
+          i = ["1","3","7","9"][rand(0..3)]
+        end
+        i
       end
     end
 
@@ -348,8 +352,14 @@ module Players
     #sterile.  The ideal would be to collect empty indexes, and then choose one
     # using #rand
 
-    def take_edge
-      ["2","4","6","8"][rand(0..3)]
+    def take_edge(board)
+      if board.cells[1] == " " || board.cells[3] == " " || board.cells[5] == " " || board.cells[7] == " "
+        i = 0
+        until board.valid_move?(i)
+          i = ["2","4","6","8"][rand(0..3)]
+        end
+        i
+      end
     end
 
     # Searches and completes winning combinations. Initial version of the AI
