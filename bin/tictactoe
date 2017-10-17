@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+IRB.start
+
+puts "Welcome to Tic Tac Toe!"
+
+# Chooses how many human players are playing
+
+Game.start
