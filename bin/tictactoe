@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#greet user with a message
+#prompt user for what kind of game they want to play - 0, 1, 2 player
+#ask the user who should go first and their token
+#initialize a Game with proper values
+#prompt play again and new options; if nope exit
+#wargames mode
+
+puts "Welcome to Tic-Tac-Toe"
+
+Options.new.call
