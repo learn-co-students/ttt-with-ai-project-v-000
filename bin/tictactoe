@@ -2,33 +2,6 @@
 
 require_relative '../config/environment'
 
-# board = Board.new
-# player = Human.new("X")
-# player = Human.new("O")
-# computer_player = Computer.new("O")
-# computer_player = Computer.new("X")
-while user_input = gets.chomp do
-  puts "Greetings user, It's time to play some TIC TAC TOE!"
-  puts "Would you wish to watch computer vs computer game?, enter 'watch computer'."
-  puts "Would you like to play against the computer?, enter 'play computer'."
-  puts "Would you like to play against another player? enter 'play player'."
-  puts "press 'exit' to leave."
-  puts "What would you like to do?"
-
-  if user_input == 'exit'
-    break
-  elsif user_input == 'watch computer'
-    puts "Who's 'X' computer 1 or computer 2?,enter '1' or '2'."
-    user_choice = gets.chomp
-    watch_computer(user_choice)
-  elsif user_input == 'player computer'
-    puts "Who's 'X' player 1 or computer 2?,enter '1' or '2'."
-    user_choice = gets.chomp
-    play_computer(user_choice)
-
-  end
-end
-
 def watch_computer(user_choice)
   user_choice = user_choice.to_i
 
@@ -39,21 +12,60 @@ def watch_computer(user_choice)
     computer_player_2 = Computer.new("X") && computer_player_1 = Computer.new("O")
   end
 
-  game = Game.new(computer_player_1,computer_player_2,board)
+  Game.new(computer_player_1,computer_player_2,board)
 
 end
 
 
+while user_input = gets.chomp do
+  puts "Greetings user, It's time to play some TIC TAC TOE!"
+  puts "Would you wish to watch computer vs computer game?, enter 'watch computer'."
+  puts "Would you like to play against the computer?, enter 'computer'."
+  puts "Would you like to play against another player? enter 'player'."
+  puts "press 'exit' to leave."
+  puts "What would you like to do?"
+
+  if user_input == 'exit'
+    break
+  elsif user_input == 'watch computer'
+    puts "----"
+    puts "Who's 'X' computer 1 or computer 2?,enter '1' or '2'."
+    user_choice = gets.chomp
+    watch_computer(user_choice)
+  elsif user_input == 'computer'
+    puts "----"
+    puts "Who's 'X' player 1 or computer 2?,enter '1' or '2'."
+    user_choice = gets.chomp
+    play_computer(user_choice)
+  elsif user_input == 'player'
+    puts "----"
+    puts "Who's 'X' player 1 or player 2?,enter '1' or '2'."
+    user_choice = gets.chomp
+    play_player(user_choice)
+  end
+end
 
 
+def play_computer(user_choice)
+  board = Board.new
+  if user_choice == 1
+    player_1 = Human.new("X") && computer_player_2 = Computer.new("O")
+  else
+    computer_player_2 = Computer.new("X") && player_1 = Human.new("O")
+  end
 
+   Game.new(player_1,computer_player_2,board)
 
-
-
-
-
-
-
-
-
-# game = Game.new(player,computer_player,board)
+end
+#
+# def play_player(user_choice)
+#   board = Board.new
+#   if user_choice == 1
+#     player_1 = Human.new("X") && player_2 = Human.new("O")
+#   else
+#     player_2 = Human.new("X") && player_1 = HUman.new("O")
+#   end
+#
+#   game = Game.new(player_1,player_2,board)
+#
+# end
