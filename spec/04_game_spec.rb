@@ -1,3 +1,4 @@
+require 'pry'
 require 'spec_helper'
 
 describe 'Game' do
@@ -70,7 +71,6 @@ describe 'Game' do
     it 'returns the correct player, X, for the third move' do
       game = Game.new
       game.board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", " "]
-
       expect(game.current_player.token).to eq("X")
     end
   end
