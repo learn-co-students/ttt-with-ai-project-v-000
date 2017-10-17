@@ -3,6 +3,8 @@ module Players
 
 		def move(board)
 			puts "Where would you like to move?"
+			# I'd like to add in the turn_count to say which player, 
+			# if X, where you you like to move #{current_player}?
 			input = gets.chomp
 
 			#allows human player to enter a move via the CLI

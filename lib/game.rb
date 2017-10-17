@@ -64,9 +64,11 @@ class Game
 	 		turn
 	 	end
 	 	if won?
-	 		puts "Congratulations #{winner}!"
+	 		puts "Congratulations #{winner}, you win!"
+	 		#how to add puts "Want to play again?""
 	 	elsif draw?
 	 		puts "Cat's Game!"
+	 		# how to get it out of the loop? 
 	 	end
 	 end
 
@@ -79,11 +81,16 @@ class Game
 	      puts "Turn: #{@board.turn_count+1}\n"
 	      @board.display
 	      @board.update(current_move, player)
+
 	      puts "#{player.token} moved #{current_move}"
 	      @board.display
 	      puts "\n\n"
 	    end
 	  end
+
+	  #add a play_again method? after win/draw? 
+	  # how to quit from within a game? 
+	  #input = "quit"
 
 
 end
