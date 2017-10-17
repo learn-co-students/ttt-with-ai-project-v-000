@@ -26,7 +26,7 @@ describe 'Game' do
     it 'provides access to player_1' do
       game = Game.new
       player_1 = Player.new("X")
-      game.player_1 = player_1
+      game.player_1 = player_1 
       expect(game.player_1).to eq(player_1)
     end
   end
