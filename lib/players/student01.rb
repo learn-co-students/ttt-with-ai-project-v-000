@@ -1,57 +1,65 @@
 module Players
+
   class Student01 < Player
-    attr_accessor :choice
 
-    def move(game)
-       return [1,3,7,9].sample.to_s if game.class == Board
-       return [1,3,7,9].sample if game.board.turn_count == 0
-       min_max(game.clone)
-       input_maker
-    end
-
-    def input_maker
-      (self.choice.first + 1).to_s
-    end
-
-    def min_max(game)
-      board = game.board
-      return score(game) if game.over? != false
-
-      scores = {}
-
-      get_possible_moves(board).each do |move|
-        possible_game = get_new_state(game, move)
-        scores[move] = min_max(possible_game)
-      end
-
-      if game.current_player.token == self.token
-        self.choice = scores.max_by {|move, score| score}
-        return scores.values.max
+    def move(board)
+      move = nil
+      if !board.taken?(5)
+        move = '5'
       else
-        return scores.values.min
+        move = (best_move(board, self.token) + 1).to_s
       end
-
     end
 
-    def score(game)
-      return 10 if game.winner == self.token
-      return -10 if game.winner == switch(token)
-      return 0
+    def best_move(board, token)
+      win(board) || block(board) || corner(board) || random_choice
     end
 
-    def get_possible_moves(board)
-      moves = []
-      board.cells.each_with_index do |cell, index|
-          moves << index if cell == " "
+    def win(board)
+      if winning_combo = winning_combo?(board, self.token)
+        winning_combo.detect { |cell| !board.taken?(cell+1)}
       end
-      moves
     end
 
-    def get_new_state(game, move)
-      new_game_state = game.clone
-      new_game_state.board.move(move, game.current_player.token)
-      new_game_state
+    def winning_combo?(board, token)
+      Game::WIN_COMBINATIONS.detect do |combo|
+        (
+        (board.cells[combo[0]] == token &&
+        board.cells[combo[1]] == token) &&
+        !board.taken?(combo[2]+1)
+        ) ||
+        (
+        (board.cells[combo[1]] == token &&
+        board.cells[combo[2]] == token) &&
+        !board.taken?(combo[0]+1)
+        ) ||
+        (
+        (board.cells[combo[0]] == token &&
+        board.cells[combo[2]] == token) &&
+        !board.taken?(combo[1]+1)
+        )
+      end
+    end
+
+    def opposing_token
+      self.token == "X" ? "O" : "X"
+    end
+
+    def block(board)
+      if blocking_combo = winning_combo?(board, opposing_token)
+        blocking_combo.detect { |i| !board.taken?(i+1)}
+      end
+    end
+
+    def corner(board)
+      [0, 2, 6, 8].detect { |i| !board.taken?(i+1)}
+    end
+
+    def random_choice
+      (0..8).to_a.sample
     end
 
   end
 end
+#test
+#load "config/environment.rb"

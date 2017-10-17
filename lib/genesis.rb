@@ -135,8 +135,8 @@ end
 # why an AI was losing by stopping the loop if that AI lost.
 
 def just_ai
-  player1 = Players::AdvancedAI.new("X")
-  player2 = Players::RNG.new("O")
+  player1 = Players::Student01.new("X")
+  player2 = Players::AdvancedAI.new("O")
   stats = []
 
 
