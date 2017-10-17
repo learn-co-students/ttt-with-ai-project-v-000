@@ -55,6 +55,15 @@ module Players
     # try and win. This most likely only costs a few games against the RNG AI,
     # and programming the AI to understand what the best move is based on
     # available lines of play later seems like a task for future Nikolai.
+    #
+    # EDIT! After playing against various AI's from GitHub, I've come to a few
+    # conclusions. First, I discovered a previously unseen line of play that
+    # stemmed from O not taking center on turn 2 of the game.  Secondly, taking
+    # the center square as X should not be a priority until, especially turn 1.
+    # Finally, to make this AI more efficient I should remove some of the 50%
+    # RNG elements I added to make it more nuanced, and always have it go for
+    # either an #edge_attack?, #edge_punish_three? #corner_punish_five? as
+    # these are the lines to victory.
 
     OUTER = [
       [0,1,2,"7","9"],
@@ -83,6 +92,13 @@ module Players
       [3,"1"],
       [5,"9"],
       [7,"9"]
+    ]
+
+    TURN_2_CORNER = [
+      [0,2,1],
+      [0,6,3],
+      [6,8,7],
+      [8,2,5]
     ]
 
     EDGE_FIVE = [
@@ -115,15 +131,15 @@ module Players
       emote
       case turn
       when 0
-        take_center_or_corner(board)
+        take_corner?(board)
       when 1
         edge_punish_two?(board) || take_center?(board) || take_corner?(board)
       when 2
-        edge_punish_three?(board) || edge_attack?(board) || take_center?(board) || take_corner?(board)
+        edge_punish_three?(board) || edge_attack?(board)  || take_corner?(board) # take_corner? here is a punish for O leaving center open
       when 3
         edge_punish_four?(board) || x_defend?(board) || edge_defend?(board) || win?(board) || block?(board) || take_center?(board)  || take_corner?(board)
       when 4
-        win?(board) || block?(board) || edge_attack_punish_five?(board) || edge_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
+        win?(board) || block?(board) || edge_attack_punish_five?(board) || corner_punish_five?(board) || edge_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
       when 5
         win?(board) || block?(board) || edge_punish_six?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
       else
@@ -189,6 +205,9 @@ module Players
 
     #Advanced Offensive Methods
 
+
+
+
     # Takes an non-touching edge square to set-up a trap.  It is impossible to
     # lose from this position, and requires other AI and people react
     # correctly.
@@ -201,7 +220,7 @@ module Players
     #
 
     def edge_attack?(board)
-      if board.cells[4] == "O" && rand(1..2) == 1
+      if board.cells[4] == "O"# && rand(1..2) == 1
         corner = board.cells.index("X")
         puts "Edge Atacked!"
         case corner
@@ -271,6 +290,16 @@ module Players
           mv[4]
         end
       end
+    end
+
+    # Taking a corner as O on turn 2 instantly loses the game, but there's a
+    # a line where the AI needs to be told to take a corner.  This was
+    # discovered by playing various other students' AI's.
+
+    def corner_punish_five?(board)
+      puts "Turn 2 Corner Punished!"
+      mv = TURN_2_CORNER.detect { |a| board.cells[a[0]] == "X" && board.cells[a[1]] == "X" && board.cells[a[2]] == "O"}
+      take_corner?(board) if mv
     end
 
     # While the standard take a corner will at worst lead to a tie, taking

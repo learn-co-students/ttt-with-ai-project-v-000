@@ -30,21 +30,20 @@ puts "Thank you for playing."
 # why an AI was losing by stopping the loop if that AI lost.
 
 
-# player1 = Players::AdvancedAI.new("X")
-# player2 = Players::RNG.new("O")
+# player1 = Players::RNG.new("X")
+# player2 = Players::AdvancedAI.new("O")
 # stats = []
 # stop = nil
 #
 # 2000.times do
 #   game = Game.new(player1, player2)
-#   game.board.display
 #   game.play
 #   stats << game.winner
 # end
 #
 # puts "X won #{stats.count("X")} and O won #{stats.count("O")}!"
-
-
+#
+#
 
 # count = 0
 # until stop == "X" || count == 2000
