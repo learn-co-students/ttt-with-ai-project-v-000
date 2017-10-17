@@ -1,0 +1,7 @@
+Board
+  - cells stores board - array
+  - reset resets the board to blank elements
+    - should be called on initialize
+  - display prints the board 
+  - position takes a user input and converts to idx
+  -update 

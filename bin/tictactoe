@@ -1,3 +1,42 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts " "
+puts "There are 3 game modes."
+puts " "
+puts "Enter 0 to watch an AI vs AI game"
+puts "- - - - - - - - - - - - - - - - - - "
+puts "Enter 1 to play a one player game against the AI"
+puts "- - - - - - - - - - - - - - - - - - "
+puts "Enter 2 to play a two player game against a friend"
+puts "- - - - - - - - - - - - - - - - - - "
+puts " "
+puts "Which game mode would you like to play?"
+
+player_selection = gets.chomp
+
+if player_selection == "0" 
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
+
+elsif player_selection == "1" 
+  puts "Who should go first?"
+  puts "Enter 1 for the computer to play first or 2 if you want to play first: "
+
+  first_player = gets.chomp
+
+  if first_player == "1" 
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Human.new("O")
+  elsif first_player == "2" 
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+  end 
+
+elsif player_selection == "2" 
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+end 
+
+Game.new(player_1, player_2).play 
