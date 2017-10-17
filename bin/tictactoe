@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Greetings! What kind of game would you like to play? Choose between 0, 1, or 2 player by putting in the corresponding numeral."
+input = gets.strip.to_i
+puts "You have selected a #{input} player game."
+puts "The first person to play shall be player X"
+game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+if input == 0
+  game.player_1 = Players::Computer.new("X")
+  game.player_2 = Players::Computer.new("O")
+  game.play
+else
+  game.play
+end
