@@ -16,7 +16,7 @@ class Game
 
 		!player_1 ? @player_1 = Players::Human.new("X") : @player_1 = player_1
 
-		@player_1.board = @board
+		# @player_1.board = @board
 
 		# if !player_1
 		# 	@player_1 = Players::Human.new("X")
@@ -28,7 +28,7 @@ class Game
 
 		!player_2 ? @player_2 = Players::Human.new("O") : @player_2 = player_2
 
-		@player_2.board = @board
+		# @player_2.board = @board
 	end
 
   def turn_count
@@ -67,18 +67,18 @@ class Game
 	end
 
 	def turn
-		box = current_player.move
+ 		box = current_player.move(board)
 		if valid_move?(box)
-			board.cells[box.to_i - 1] = current_player.token
-		else
-			puts "invalid"
-			turn
-		end
-	end
+ 			board.cells[box.to_i - 1] = current_player.token
+ 		else
+ 			puts "invalid"
+ 			turn
+ 		end
+ 	end
 
-	def valid_move?(num)
-		tester = num.to_i - 1
-		tester.between?(0,8) && board.cells[tester] == " "
+ 	def valid_move?(num)
+ 		tester = num.to_i - 1
+ 		tester.between?(0,8) && board.cells[tester] == " "
 	end
 
 	def play
