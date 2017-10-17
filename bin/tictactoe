@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+ttt = Logic.new
+ttt.greeting
+ttt.start_game
+ttt.new_game
