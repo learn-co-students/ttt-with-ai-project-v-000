@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def choose_game
+  puts "Welcome to Tic Tac Toe. Choose a game type: 2 for two human players, 1 for one human and one AI, and 0 for two AI"
+  puts "To exit the program type exit"
+  input = gets.chomp
+
+  if input == "2"
+    #2 Player Mode
+    two_player_game = Game.new()
+    two_player_game.play
+    choose_game
+  elsif input == "1"
+    #1 Player Mode
+    puts "You have chosen to play against the computer, to go first type 1, to go second type 2, to return to the choose game screen type anything else"
+    input = gets.chomp
+    if input == "1"
+      one_player_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+      one_player_game.play
+    elsif input == "2"
+      one_player_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+      one_player_game.play
+    end
+    choose_game
+  elsif input == "0"
+    #0 Player Mode
+    zero_player_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    zero_player_game.play
+    choose_game
+  elsif input == "exit"
+    return
+  else
+    choose_game
+  end
+end
+
+choose_game
