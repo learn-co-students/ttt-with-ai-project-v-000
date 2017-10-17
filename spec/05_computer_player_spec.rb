@@ -1,4 +1,4 @@
-require 'spec_helper'
+  require 'spec_helper'
 
 describe 'Players::Computer' do
   it 'inherits from Player' do
