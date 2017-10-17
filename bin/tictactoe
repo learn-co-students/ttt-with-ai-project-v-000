@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#greet user with a message
+#prompt the user for what kind of game they want (0,1,2)
+#ask user for who should go first and be "X"
+#Use the input to correctly initialize Game with appropriate player types and token values
+#when game is over CLI should prompt user if they would like to play again and allow them to choose a new configuration for the game as described above.
+#if user doesnt want to play again, exit the program 
