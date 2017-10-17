@@ -20,8 +20,12 @@ while user_input = gets.chomp do
   elsif user_input == 'watch computer'
     puts "Who's 'X' computer 1 or computer 2?,enter '1' or '2'."
     user_choice = gets.chomp
-    watch_computer(user_token)
-  elsif condition
+    watch_computer(user_choice)
+  elsif user_input == 'player computer'
+    puts "Who's 'X' player 1 or computer 2?,enter '1' or '2'."
+    user_choice = gets.chomp
+    play_computer(user_choice)
+
   end
 end
 
