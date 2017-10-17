@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+players = " "
+until players == "quit"
+  puts "Welcome to Tic-Tac_Toe!"
+  puts "Do you have 0,1 or 2 players?(type quit to exit)"
+  players = gets.chomp
+
+  if players == '0' && players !=
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    game = Game.new(player_1,player_2)
+    game.play
+
+  elsif players == '1'
+    player_1 = nil
+    computer = nil
+    choice = nil
+    until choice == "Second" || choice == "second" || choice == "First" || choice == "first"
+      puts "Do you want to go first or second?"
+      puts "Enter: first or second to choose."
+      choice = gets.chomp
+      if choice == "Second" || choice == "second"
+        player_1 = Players::Human.new("O")
+        computer = Players::Computer.new("X")
+      elsif choice == "First" || choice == "first"
+        player_1 = Players::Human.new("X")
+        computer = Players::Computer.new("O")
+      else
+        puts "Please enter choose using 'first' or 'second'"
+      end
+      game = Game.new(player_1,computer)
+      game.play
+    end
+
+  elsif players == '2'
+    game = Game.new
+    game.play
+  end
+end
