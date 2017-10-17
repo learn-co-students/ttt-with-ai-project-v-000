@@ -3,31 +3,56 @@
 require_relative '../config/environment'
 
 
-puts " Welcome to Tic Tac Toe!"
+puts "Welcome to Tic Tac Toe!"
 
-puts " What Kind of Game Do You Want to Play?  0, 1, or 2 Player"
+puts "What Kind of Game Do You Want to Play?  0, 1, or 2 Player(s)"
 
 puts "Enter Number of Player(s):"
 
-gets.strip
+players = " "
 
-puts " Who do you want to go first? Player 1 or Player 2?  - Player selected is token X."
+players = gets.strip.to_i
+case players
 
-puts "Enter Player 1 or Player 2:"
+  when players = 0
 
-gets.strip
+    puts "2 Computers Playing"
 
-puts "Begin the Game By Entering a Number 1 - 9"
+    game = Game.new(player_1 = Players::Computer.new("X"),player_2 = Players::Computer.new("O"))
+    until game.won?
+      game.play
+    end
 
-game = Game.new
-game.play
 
-# if game.over?
-#
-# puts "Do you want to play again?"
-#
-# else
-#   game = Game.new
-#   game.play
+  when players = 1
 
-# end
+    puts "1 Human and 1 Computer Playing"
+
+    game = Game.new(player_1 = Players::Human.new("X"),player_2 = Players::Computer.new("O"))
+    until game.won?
+      game.play
+    end
+
+  when players = 2
+    puts "2 Humans Playing"
+
+    game = Game.new
+    until game.won?
+    game.play
+  end
+
+
+
+
+    play_again = ""
+    until play_again == "N"
+      puts "To stop play enter N, otherwise enter Y to keep playing!"
+    play_again = gets.strip
+  end
+
+    play_again == "Y"
+    game = Game.new
+    until game.won?
+    game.play
+  end
+end
