@@ -15,7 +15,7 @@ class Game
   ]
   attr_accessor :board,:player_1,:player_2
 
-  def initialize(player_1 = Human.new("X") || Computer.new("X"), player_2 = Human.new("O") || Computer.new("O"),board = Board.new)
+  def initialize(player_1 = Human.new("X") || Computer.new("X"), player_2 = Human.new("O") || player_2 = Computer.new("O"),board = Board.new)
     @player_1 = player_1 if player_1
     @player_2 = player_2 if player_2
     @board = board if board
