@@ -27,6 +27,8 @@ class Game
     false
   end
 
+  
+
   def over? 
     draw? || won?
   end
@@ -40,7 +42,7 @@ class Game
   end
 
   def turn
-    move = current_player.move(@board)   
+    move = current_player.move(@board, current_player)   
     if @board.valid_move?(move)
       @board.update(move, current_player)
     else 
