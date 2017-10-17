@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+#require './lib/game.rb'
+
+def game_type?(game_input)
+  if game_input == "2"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+  elsif game_input == "0"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+  elsif game_input == "1"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+  end
+end
+
+def play_again?(input_reply)
+  if input_reply == "Y" || input_reply == "y" || input_reply == "yes" || input_reply == "Yes"
+    start
+  elsif input_reply == "N" || input_reply == "n" || input_reply == "no" || input_reply == "No"
+    puts "Thank you for playing, goodbye!"
+  end
+end
+
+def start
+  puts "What type of game would you like to play- 0, 1, or 2 player?"
+  game_input = gets.strip
+  x = game_type?(game_input)
+
+  x.play
+
+  puts  "Would you like to play again? Y/N"
+  input_reply = gets.strip
+  play_again?(input_reply)
+end
+
+
+puts "Welcome to Tic Tac Toe with AI!"
+start
