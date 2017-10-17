@@ -57,7 +57,6 @@ class Board
     cells[user_input-1] = player.token
 
     # binding.pry
-    #look this over as player is not being used
 
   end
 

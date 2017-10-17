@@ -65,19 +65,23 @@ class TicTacToeController
     end
 
      game = Game.new(player_1,computer_player_2,board)
-     board.display if board.update
      game.play
+     board.display
+
+
 
      puts "Enter 'yes' to play again or 'exit' to go back to the main menu"
      user_response = gets.chomp
      if user_response == 'yes'
-       play_computer(user_choice)
+       board.reset!
+       board.display if board.update
+       game.play
      elsif user_response == 'exit'
        call
      end
 
   end
-  
+
   # def play_player(user_choice)
   #   board = Board.new
   #   if user_choice == 1
