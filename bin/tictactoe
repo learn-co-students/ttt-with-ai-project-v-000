@@ -1,3 +1,46 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start_game
+  first_player = nil
+  puts "Welcome to Tick-Tac-Toe!"
+  puts "How many human players (0-2)?"
+  players = gets.strip
+  until players.to_i.between?(0,2)
+    puts "Please enter 0, 1, or 2"
+    players = gets.strip
+  end
+
+  if players == "1"
+    puts "Who's going first? 1) Human or 2) Computer"
+    first_player = gets.strip.to_i
+    until first_player == 1 || first_player == 2
+      puts "Please enter 1 or 2"
+      first_player = gets.strip.to_i
+    end
+  end
+
+
+
+
+  if players == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  elsif players == "1" && first_player == 1
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  elsif players == "1" && first_player == 2
+    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  elsif players == "2"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  end
+  game.play
+end
+
+start_game
+
+again = "y"
+until  again == "n" 
+  puts "Play again? (y/n)"
+  again = gets.strip
+  start_game if again == "y"
+end
