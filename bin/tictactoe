@@ -1,3 +1,88 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def user_inputs_players
+  puts "How many human players are playing? (0, 1, or 2)\n\n"
+  input = gets.strip.to_i
+  if !input.between?(0, 2) || input.class != Integer
+    puts "Please enter a correct amount!"
+    user_inputs_players
+  else
+    input
+  end
+end
+
+def computer_vs_computer
+  bot1 = Players::Computer.new("X")
+  bot2 = Players::Computer.new("O")
+  board = Board.new
+  game = Game.new(bot1, bot2, board)
+  game.play
+end
+
+def user_picks_token
+  puts "\nWhich token would you like to use? (X or O)\n\n"
+  token_input = gets.strip
+  unless token_input == "x" || token_input == "X" || token_input == "o" || token_input == "O"
+    puts "Sorry, invalid entry."
+    user_picks_token
+  else
+    token_input.capitalize
+  end
+end
+
+def alt_token(token)
+  token == "X" ? "O" : "X"
+end
+
+def human_vs_computer
+  p1_token = user_picks_token
+  p2_token = alt_token(p1_token)
+  human = Players::Human.new(p1_token)
+  bot = Players::Computer.new(p2_token)
+  board = Board.new
+  puts "\n\n"
+  game = Game.new(human, bot, board)
+  game.play
+end
+
+def human_vs_human
+  p1_token = user_picks_token
+  p2_token = alt_token(p1_token)
+  human1 = Players::Human.new(p1_token)
+  human2 = Players::Human.new(p2_token)
+  board = Board.new
+  puts "\n\n"
+  game = Game.new(human1, human2, board)
+  game.play
+end
+
+
+#############################################
+puts "\n\nWelcome to Tic Tac Toe!\n\n"
+
+players = user_inputs_players
+
+#puts "\n\nEnjoy!\n\n"
+
+if players == 0
+  computer_vs_computer
+elsif players == 1
+  human_vs_computer
+elsif players == 2
+  human_vs_human
+end
+
+
+
+# def user_inputs_players
+#   puts "How many human players are playing? (0, 1, or 2)"
+#   input = gets.strip.to_i
+#   if !input.between?(0, 2) || !input.class != Integer
+#     puts "Please enter a correct amount!"
+#     select_players
+#   else
+#     input
+#   end
+# end

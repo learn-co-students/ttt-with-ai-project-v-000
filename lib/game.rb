@@ -6,17 +6,33 @@ class Game
 
 	attr_accessor :board, :player_1, :player_2
 
-	def initialize(player_1 = nil, player_2 = nil, board = nil)
+# Originally tried to make the arguments keywords, but one text would not pass if this was the case
+	# def initialize(player_1: nil, player_2: nil, board: nil)
+	# 	!player_1 ? @player_1 = Players::Human.new("X") : @player_1 = player_1
+	# 	!player_2 ? @player_2 = Players::Human.new("O") : @player_2 = player_2
+	# 	!board ? @board = Board.new : @board = board
+	# end
 
-			# MAKE THESE SYMBOLS...SO YOU CAN DO THE = THINGS AND ORDER DOESN'T MATTER...
 
-		!board ? @board = Board.new : @board = board
 
-		!player_1 ? @player_1 = Players::Human.new("X") : @player_1 = player_1
+	 def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new )
+	 	@board = board
+		@player_1 = player_1
+	 	@player_2 = player_2
+	 end
 
-		!player_2 ? @player_2 = Players::Human.new("O") : @player_2 = player_2
-
-	end
+	# This works.  Uncomment if problem
+	# def initialize(player_1 = nil, player_2 = nil, board = nil)
+	#
+	# 		# MAKE THESE SYMBOLS...SO YOU CAN DO THE = THINGS AND ORDER DOESN'T MATTER...
+	#
+	# 	!board ? @board = Board.new : @board = board
+	#
+	# 	!player_1 ? @player_1 = Players::Human.new("X") : @player_1 = player_1
+	#
+	# 	!player_2 ? @player_2 = Players::Human.new("O") : @player_2 = player_2
+	#
+	# end
 
   def turn_count
 		board.cells.count { |square| square != " " }
@@ -56,9 +72,12 @@ class Game
 	def turn
 		box = current_player.move(board)
 		board.cells[box.to_i - 1] = current_player.token
+		board.display
+		puts "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
 	end
 
 	def play
+		board.display
 		turn until over?
 		puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
 	end
