@@ -1,3 +1,84 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to Tic Tac Toe!"
+puts "What kind of game do you want to play? 0, 1, or 2 player?"
+player_count = gets.strip
+
+    if player_count.include?("0")
+            game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+            until game.won?
+            game.play
+            end
+            play_again = ""
+            until play_again.downcase == "n" || play_again.downcase == "no"
+            puts "Would you like to play again?"
+            play_again = gets.strip
+            play_again.downcase == "y" || play_again.downcase == "yes"
+            game = Game.new
+            until game.won?
+                game.play
+            end
+        end
+    elsif player_count.include?("1")
+        puts "Ok, who goes first? Type 'me' or 'computer'"
+        first_player = gets.strip
+            if first_player.downcase.include?("me")
+                game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+                until game.won?
+                game.play
+                end
+                play_again = ""
+                until play_again.downcase == "n" || play_again.downcase == "no"
+                puts "Would you like to play again?"
+                play_again = gets.strip
+                play_again.downcase == "y" || play_again.downcase == "yes"
+                game = Game.new
+                until game.won?
+                    game.play
+                end
+                end
+            elsif first_player.downcase.include?("computer") || first_player.downcase.include?("c")
+                game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+                until game.won?
+                game.play
+                end
+                play_again = ""
+                until play_again.downcase == "n" || play_again.downcase == "no"
+                puts "Would you like to play again?"
+                play_again = gets.strip
+                play_again.downcase == "y" || play_again.downcase == "yes"
+                game = Game.new
+                until game.won?
+                    game.play
+                end
+                end
+
+            end
+
+    elsif player_count.include?("2")
+        puts "Ok, who goes first and is 'X'?"
+        first_player = gets.strip
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        until game.won?
+          game.play
+        end
+        play_again = ""
+        until play_again.downcase == "n" || play_again.downcase == "no"
+          puts "Would you like to play again?"
+          play_again = gets.strip
+          play_again.downcase == "y" || play_again.downcase == "yes"
+          game = Game.new
+          until game.won?
+            game.play
+          end
+        end
+
+    else
+        until player_count.include?("0", "1", "2")
+        puts "What was that? Try again, this is simple, 0,1,2"
+        end
+    end
+    
