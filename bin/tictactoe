@@ -4,8 +4,10 @@ require_relative '../config/environment'
 
 def user_inputs_players
   puts "How many human players are playing? (0, 1, or 2)\n\n"
-  input = gets.strip.to_i
-  if !input.between?(0, 2) || input.class != Integer
+  input = gets.strip
+  if input == "wargames"
+    input
+  elsif input != "0" && input != "1" && input != "2"
     puts "Please enter a correct amount!"
     user_inputs_players
   else
@@ -58,31 +60,38 @@ def human_vs_human
   game.play
 end
 
+def wargames
+  x_victories = 0
+  o_victories = 0
+  draws = 0
+  game_counter = 0
+  while game_counter < 100
+    victor = computer_vs_computer
+    if victor == "X"
+      x_victories += 1
+    elsif victor == "O"
+      o_victories += 1
+    elsif victor == nil
+      draws += 1
+    end
+    game_counter += 1
+  end
+  puts "\n\nThe computer played itself 100 times..."
+  puts "X won #{x_victories} times. O won #{o_victories} times."
+  puts "There was a draw #{draws} times."
+end
 
 #############################################
 puts "\n\nWelcome to Tic Tac Toe!\n\n"
 
 players = user_inputs_players
 
-#puts "\n\nEnjoy!\n\n"
-
-if players == 0
+if players == "wargames"
+  wargames
+elsif players == "0"
   computer_vs_computer
-elsif players == 1
+elsif players == "1"
   human_vs_computer
-elsif players == 2
+elsif players == "2"
   human_vs_human
 end
-
-
-
-# def user_inputs_players
-#   puts "How many human players are playing? (0, 1, or 2)"
-#   input = gets.strip.to_i
-#   if !input.between?(0, 2) || !input.class != Integer
-#     puts "Please enter a correct amount!"
-#     select_players
-#   else
-#     input
-#   end
-# end

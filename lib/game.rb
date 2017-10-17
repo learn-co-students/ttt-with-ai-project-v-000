@@ -80,6 +80,7 @@ class Game
 		board.display
 		turn until over?
 		puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+		winner #made winner the return value to help in wargames mode
 	end
 
 end
