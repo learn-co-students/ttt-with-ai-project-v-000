@@ -1,3 +1,55 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+play = "yes"
+while play == "yes"
+puts "Welcome to Tic-Tac-Toe With AI!"
+puts "Do you want to play? (enter Y or N)"
+
+#to play or not to play
+loop
+input = gets.chomp
+case input
+	when "y", "Y", "yes"
+		break
+	when "n", "N", "no"
+		puts "OK, see ya later."
+		exit
+	else
+		puts "I don't recognize your input"
+	end
+end
+
+#Choose 0, 1, or 2 player game
+puts "How many players? (enter 0, 1, or 2)"
+puts "	0: the computer plays itself"
+puts "	1: you play the computer"
+puts " 	2: two person game"
+loop
+input = gets.chomp
+case input
+	when 0
+		player_x = Computer.new("X")
+		player_y = Computer.new("Y")
+	when 1
+		loop
+		puts "Who goes first? (enter 'me' or 'computer')"
+		input1 = gets.chomp
+		case input1
+		when "me"
+			player_x = Human.new("X")
+			player_y = Computer.new("Y")
+			break
+		when "computer"
+			player_x = Computer.new("X")
+			player_y = Human.new("Y")
+			break
+		else
+			puts "I don't recognize your input"
+		end
+	end
+end
+
+Game.new(player_x, player_y).start
+
+end
