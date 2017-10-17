@@ -4,18 +4,18 @@ class Board
 
 	attr_accessor :cells
 
-	def initialize 
+	def initialize
 		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		#@cells = Array.new(9, " ")
 	end
 
 
 	def reset!
-		cells.clear
-		cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		#The only way to get this test to pass was to put @cells.  just "cells = ..." wouldn't work.  Tried many different things, below. This gave me so much trouble.
 		#binding.pry
-		cells
-		#171016 - this and update simply won't pass.  I understand update not passing yet.  #reset! is a mystery to me right now. 
+		#cells.clear
+		#cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		#cells
 	end
 
 	def display
@@ -27,12 +27,8 @@ class Board
 	end
 
 	def position(num)
-		# puts "Input position:"
-		# input = gets.strip.to_i
-		# puts "#{cells[input - 1]}"
 		cells[num.to_i-1]
 	end
-
 
 	def full?
 		!cells.include?(" ")
@@ -46,12 +42,12 @@ class Board
 		cells[pos.to_i-1] != " "
 	end
 
-  	def valid_move?(pos)
-    	!taken?(pos) && pos.to_i.between?(1,9)
-  	end
+  def valid_move?(pos)
+  	pos.to_i.between?(1,9) && !taken?(pos)
+	end
 
-  	def update
-
-  	end
+  def update(pos, player)
+		cells[pos.to_i - 1] = player.token
+	end
 
 end

@@ -10,25 +10,12 @@ class Game
 
 			# MAKE THESE SYMBOLS...SO YOU CAN DO THE = THINGS AND ORDER DOESN'T MATTER...
 
-			# had to put the "= nil"s above b/c each argument seems optional...the tests are giving me a hard time if I have arguments and then if I don't have arguments...
-
 		!board ? @board = Board.new : @board = board
 
 		!player_1 ? @player_1 = Players::Human.new("X") : @player_1 = player_1
 
-		# @player_1.board = @board
-
-		# if !player_1
-		# 	@player_1 = Players::Human.new("X")
-		# elsif player_1.class == Players::Computer
-		# 	#puts "Computer Class!
-		# 	player_1.board = @board
-		# end
-
-
 		!player_2 ? @player_2 = Players::Human.new("O") : @player_2 = player_2
 
-		# @player_2.board = @board
 	end
 
   def turn_count
@@ -67,18 +54,8 @@ class Game
 	end
 
 	def turn
- 		box = current_player.move(board)
-		if valid_move?(box)
- 			board.cells[box.to_i - 1] = current_player.token
- 		else
- 			puts "invalid"
- 			turn
- 		end
- 	end
-
- 	def valid_move?(num)
- 		tester = num.to_i - 1
- 		tester.between?(0,8) && board.cells[tester] == " "
+		box = current_player.move(board)
+		board.cells[box.to_i - 1] = current_player.token
 	end
 
 	def play

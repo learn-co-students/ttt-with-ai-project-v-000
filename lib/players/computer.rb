@@ -2,7 +2,7 @@ module Players
 
   class Computer < Player
 
-    attr_accessor :board
+    # attr_accessor :board
 
     def move(board)
       rand(1..9).to_s
