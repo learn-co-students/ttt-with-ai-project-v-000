@@ -150,7 +150,7 @@ def just_ai
 end
 
 def ai_fail
-  player1 = Players::AdvancedAI.new("X")
+  player1 = Players::Student01.new("X")
   player2 = Players::RNG.new("O")
   count = 0
   stop = nil
