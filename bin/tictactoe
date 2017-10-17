@@ -1,3 +1,22 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Welcome to Tic Tac Toe"
+puts "What kind of game do you want to play, 0, 1, or 2 player?"
+# Get user input
+# Use a case statement here to select the game type.
+# For now assume Computer vs Computer (game type = 0)
+#user_input = gets.strip
+#case user_input
+#when "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+#when "1"
+  #puts "What kind of game do you want to play, Easy or Hard"
+  #user_input = gets.strip
+  #game = Game.new(Players::Human.new("X"), Players::Computer.new("O", user_input), Board.new)
+  #game.play
+#when "2"
+  #game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+  #game.play
+#end
