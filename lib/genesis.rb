@@ -136,7 +136,7 @@ end
 
 def just_ai
   player1 = Players::AdvancedAI.new("X")
-  player2 = Players::Student01.new("O")
+  player2 = Players::RNG.new("O")
   stats = []
 
 
@@ -150,15 +150,15 @@ def just_ai
 end
 
 def ai_fail
-  player1 = Players::RNG.new("X")
-  player2 = Players::AdvancedAI.new("O")
+  player1 = Players::AdvancedAI.new("X")
+  player2 = Players::RNG.new("O")
   count = 0
   stop = nil
-  until stop == "X" || count == 2000
+  until stop == "O" || count == 2000
     game = Game.new(player1, player2)
     game.board.display
     game.play
-    stop = game.winner if game.winner == "X"
+    stop = game.winner if game.winner == "O"
     count += 1
   end
 

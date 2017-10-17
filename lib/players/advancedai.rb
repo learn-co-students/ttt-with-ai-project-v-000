@@ -94,6 +94,13 @@ module Players
       [7,"9"]
     ]
 
+    EDGE_TWICE = [
+      [1,3,"9"],
+      [1,5,"7"],
+      [5,7,"1"],
+      [3,7,"3"]
+    ]
+
     TURN_2_CORNER = [
       [0,2,1],
       [0,6,3],
@@ -139,7 +146,7 @@ module Players
       when 3
         edge_punish_four?(board) || x_defend?(board) || edge_defend?(board) || win?(board) || block?(board) || take_center?(board)  || take_corner?(board)
       when 4
-        win?(board) || block?(board) || edge_attack_punish_five?(board) || corner_punish_five?(board) || edge_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
+        win?(board) || block?(board) || edge_attack_punish_five?(board) || edge_twice_punish?(board) || corner_punish_five?(board) || edge_punish_five?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
       when 5
         win?(board) || block?(board) || edge_punish_six?(board) || take_center?(board) || take_corner?(board) || take_edge(board)
       else
@@ -292,9 +299,33 @@ module Players
       end
     end
 
+    # Taking an Edge on turn 2 and 4 is an instant loss, but the right square
+    # needs to be taken. Because the advanced AI has a very predictable opener,
+    # the O will already have lost if they did a double edge, with this logic
+    # being the only case that requires intervention.
+    #
+    #  X | O | X
+    # -----------
+    #  O |   |
+    # -----------
+    #    |   | !
+
+    def edge_twice_punish?(board)
+      mv = EDGE_TWICE.detect do |a|
+        board.cells[a[0]] == "O" && board.cells[a[1]] == "O"
+      end
+      mv[2] if mv
+    end
+
     # Taking a corner as O on turn 2 instantly loses the game, but there's a
     # a line where the AI needs to be told to take a corner.  This was
     # discovered by playing various other students' AI's.
+    #
+    #  O |   | X
+    # -----------
+    #    |   | O
+    # -----------
+    #  ! |   | X
 
     def corner_punish_five?(board)
       puts "Turn 2 Corner Punished!"
