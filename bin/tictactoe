@@ -1,3 +1,74 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "                            "
+puts "        *  *  *  *  *       "
+puts "        –  –  –  –  –       "
+puts "        W E L C O M E       "
+puts "        |     |     |       "
+puts "    _    _   T O   _    _   "
+puts "   |    |     |     |    |  "
+puts "    –    –  T I C  –    –   "
+puts "   |    |     |     |    |  "
+puts "    –    –  T A C  –    –   "
+puts "        |     |     |       "
+puts "         –  T O E  –        "
+puts "        _  _  _  _  _       "
+puts "        *  *  *  *  *       "
+puts "                            "
+puts "                            "
+
+puts "How many players? 0, 1, or 2:"
+num_of_players = gets.strip.to_i
+
+if num_of_players == 0
+  puts "Who should go first and be X?\nEnter '1' for player 1\nEnter '2' for player 2"
+  first = gets.strip.to_i
+  if first == 1
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    game = Game.new(player_1, player_2)
+  elsif first == 2
+    player_1 = Players::Computer.new("O")
+    player_2 = Players::Computer.new("X")
+    game = Game.new(player_1, player_2)
+  end
+  until game.over?
+    game.play
+  end
+end
+
+if num_of_players == 1
+  puts "Who should go first and be X?\nEnter '1' for player 1\nEnter '2' for player 2"
+  first = gets.strip.to_i
+  if first == 1
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+    game = Game.new(player_1, player_2)
+  elsif first == 2
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Human.new("O")
+    game = Game.new(player_1, player_2)
+  end
+  until game.over?
+    game.play
+  end
+end
+
+if num_of_players == 2
+  puts "Who should go first and be X?\nEnter '1' for player 1\nEnter '2' for player 2"
+  first = gets.strip.to_i
+  if first == 1 || first == 2
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+    game = Game.new(player_1, player_2)
+  elsif first == 2
+    player_1 = Players::Human.new("O")
+    player_2 = Players::Human.new("X")
+    game = Game.new(player_2, player_1)
+  end
+    until game.over?
+      game.play
+    end
+  end
