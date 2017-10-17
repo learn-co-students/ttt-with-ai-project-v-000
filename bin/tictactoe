@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe With AI!"
+game = Game.new
+until game.won?
+  game.play
+end
+
+play_again = " "
+until play_again == "No"
+  puts "Would you like to play again? Yes/No"
+  play_again = gets.strip
+  play_again == "Yes"
+  game = Game.new
+  until game.won?
+    game.play
+  end
+end
