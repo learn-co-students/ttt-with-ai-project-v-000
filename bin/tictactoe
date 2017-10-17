@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
 TicTacToeController.new.call
 
 # def watch_computer(user_choice)

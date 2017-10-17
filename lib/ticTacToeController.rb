@@ -1,27 +1,6 @@
 
 class TicTacToeController
-
-
-  def watch_computer(user_choice)
-    user_choice = user_choice.to_i
-
-    board = Board.new
-    if user_choice == 1
-      computer_player_1 = Computer.new("X") && computer_player_2 = Computer.new("O")
-    else
-      computer_player_2 = Computer.new("X") && computer_player_1 = Computer.new("O")
-    end
-
-    Game.new(computer_player_1,computer_player_2,board)
-    puts "enter 'yes' to watch again or 'leave' to go back to the main menu"
-    user_response = gets.chomp
-    if user_response == 'yes'
-      watch_computer(user_choice)
-    else
-      call
-    end
-
-  end
+  include Players
 
   def call
     puts "Greetings user, It's time to play some TIC TAC TOE!"
@@ -55,6 +34,28 @@ class TicTacToeController
     end
   end
 
+  def watch_computer(user_choice)
+    user_choice = user_choice.to_i
+
+    board = Board.new
+    if user_choice == 1
+      computer_player_1 = Computer.new("X") && computer_player_2 = Computer.new("O")
+    else
+      computer_player_2 = Computer.new("X") && computer_player_1 = Computer.new("O")
+    end
+
+    game = Game.new(computer_player_1,computer_player_2,board)
+    game.play
+    puts "enter 'yes' to watch again or 'exit' to go back to the main menu"
+    user_response = gets.chomp
+    if user_response == 'yes'
+      watch_computer(user_choice)
+    else user_response == 'exit'
+      call
+    end
+
+  end
+
   def play_computer(user_choice)
     board = Board.new
     if user_choice == 1
@@ -63,16 +64,31 @@ class TicTacToeController
       computer_player_2 = Computer.new("X") && player_1 = Human.new("O")
     end
 
-     Game.new(player_1,computer_player_2,board)
+     game = Game.new(player_1,computer_player_2,board)
+     board.display if board.update
+     game.play
 
-     puts "Enter 'yes' to play again or 'leave' to go back to the main menu"
+     puts "Enter 'yes' to play again or 'exit' to go back to the main menu"
      user_response = gets.chomp
      if user_response == 'yes'
        play_computer(user_choice)
-     elsif user_response == 'leave'
+     elsif user_response == 'exit'
        call
      end
 
   end
+  
+  # def play_player(user_choice)
+  #   board = Board.new
+  #   if user_choice == 1
+  #     player_1 = Human.new("X") && player_2 = Human.new("O")
+  #   else
+  #     player_2 = Human.new("X") && player_1 = HUman.new("O")
+  #   end
+  #
+  #   game = Game.new(player_1,player_2,board)
+  #
+  # end
+
 
 end
