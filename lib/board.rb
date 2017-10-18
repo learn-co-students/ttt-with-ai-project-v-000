@@ -35,10 +35,10 @@ class Board
 
   def turn_count
     counter = 0
-    if self.full? == false
-      cells.each{|cell| counter += 1 if cell != " "}
-      counter
-    end
+
+    cells.each{|cell| counter += 1 if cell != " "}
+    counter
+
   end
 
   def taken?(user_input)

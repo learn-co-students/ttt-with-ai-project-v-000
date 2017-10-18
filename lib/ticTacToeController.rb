@@ -1,4 +1,4 @@
-
+require 'pry'
 class TicTacToeController
   include Players
 
@@ -38,13 +38,17 @@ class TicTacToeController
 
     board = Board.new
     if user_choice == 1
-      computer_player_1 = Computer.new("X") && computer_player_2 = Computer.new("O")
+      computer_player_1 = Computer.new("X")
+      computer_player_2 = Computer.new("O")
     else
-      computer_player_2 = Computer.new("X") && computer_player_1 = Computer.new("O")
+      computer_player_2 = Computer.new("X")
+      computer_player_1 = Computer.new("O")
     end
+    # binding.pry
 
     game = Game.new(computer_player_1,computer_player_2,board)
     game.play
+
     puts "enter 'yes' to watch again or 'exit' to go back to the main menu"
     user_response = gets.chomp
     if user_response == 'yes'
@@ -56,15 +60,20 @@ class TicTacToeController
   end
 
   def play_computer(user_choice)
+    user_choice = user_choice.to_i
+
     board = Board.new
     if user_choice == 1
-      player_1 = Human.new("X") && computer_player_2 = Computer.new("O")
+      player_1 = Human.new("X")
+      computer_player_2 = Computer.new("O")
     else
-      computer_player_2 = Computer.new("X") && player_1 = Human.new("O")
+      computer_player_2 = Computer.new("X")
+      player_1 = Human.new("O")
     end
 
      game = Game.new(player_1,computer_player_2,board)
      game.play
+
 
 
      puts "Enter 'yes' to play again or 'exit' to go back to the main menu"
@@ -79,17 +88,34 @@ class TicTacToeController
 
   end
 
-  # def play_player(user_choice)
-  #   board = Board.new
-  #   if user_choice == 1
-  #     player_1 = Human.new("X") && player_2 = Human.new("O")
-  #   else
-  #     player_2 = Human.new("X") && player_1 = HUman.new("O")
-  #   end
-  #
-  #   game = Game.new(player_1,player_2,board)
-  #
-  # end
+  def play_player(user_choice)
+    user_choice = user_choice.to_i
+
+    board = Board.new
+    if user_choice == 1
+      player_1 = Human.new("X")
+      player_2 = Human.new("O")
+    else
+      player_2 = Human.new("X")
+      player_1 = HUman.new("O")
+    end
+
+    game = Game.new(player_1,player_2,board)
+    game.play
+
+    puts "Enter 'yes' to play again or 'exit' to go back to the main menu"
+    user_response = gets.chomp
+    if user_response == 'yes'
+      puts "who's 'X' player 1 or player 2, enter 1 or 2."
+      user_response = gets.chomp
+      play_player(user_choice)
+    elsif user_response == 'exit'
+      call
+    end
+
+
+
+  end
 
 
 end
