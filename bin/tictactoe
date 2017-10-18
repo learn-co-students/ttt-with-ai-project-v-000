@@ -2,8 +2,6 @@
 
 require_relative '../config/environment'
 
-##### Background methods #####
-
 def user_inputs_players
   puts "How many human players are playing? (0, 1, or 2)\n\n"
   input = gets.strip
@@ -26,7 +24,7 @@ def computer_vs_computer
 end
 
 def user_picks_token
-  puts "\nPlayer 1, which token would you like to use? (X or O)\n\n"
+  puts "\nWhich token would you like to use? (X or O)\n\n"
   token_input = gets.strip
   unless token_input == "x" || token_input == "X" || token_input == "o" || token_input == "O"
     puts "Sorry, invalid entry."
@@ -83,8 +81,7 @@ def wargames
   puts "There was a draw #{draws} times."
 end
 
-##### Execution #####
-
+#############################################
 puts "\n\nWelcome to Tic Tac Toe!\n\n"
 
 players = user_inputs_players
