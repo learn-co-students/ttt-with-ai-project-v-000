@@ -1,5 +1,3 @@
-require 'pry'
-
 class Board
 
 	attr_accessor :cells, :win_combinations
@@ -11,7 +9,8 @@ class Board
 
 	def reset!
 		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		#The only way to get this test to pass was to put @cells.  Just "cells = ..." wouldn't work.  Tried many different things here.
+		#The only way to get this test to pass was to put @cells.  Just "cells = ..." wouldn't work.
+		#cTried many different things here.
 
 	end
 
