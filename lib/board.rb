@@ -12,6 +12,7 @@ class Board
 	def reset!
 		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 		#The only way to get this test to pass was to put @cells.  Just "cells = ..." wouldn't work.  Tried many different things here.
+
 	end
 
 	def display
