@@ -9,7 +9,8 @@ class Game
 # Originally tried to make the initialize arguments keywords, but one test would not pass if this was the case.
 	 def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new )
 	 	@board = board
-			# Computer instance will need access to WIN_COMBINATIONS (via move(board)) to make decisions on how to move.  This passes WIN_COMBINATIONS to board instance.
+			# The line below is here to give computer player access to WIN_COMBINATIONS (via move(board)) to make decisions on how to move.
+			# This passes WIN_COMBINATIONS to board instance.
 		board.win_combinations = self.class::WIN_COMBINATIONS
 		@player_1 = player_1
 	 	@player_2 = player_2
@@ -28,7 +29,8 @@ class Game
 		WIN_COMBINATIONS.each do |combo|
 			if board.cells[combo[0]] != " " && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
 				winning_combo = combo
-					#PROBLEM with the test here: I keep getting it right with combo 0, 4, 8.  But this test here has two combos winning.  It expects 2, 5, 8 to be the winning combo.  Have to move the combos around to make this work.
+					#PROBLEM with the test here: I keep getting it right with combo 0, 4, 8.  But this test here has two combos winning.
+					# It expects 2, 5, 8 to be the winning combo.  Have to move the combos around to make this work.
 			end
 		end
 		winning_combo
@@ -59,6 +61,7 @@ class Game
 
 	def play
 		board.display
+		puts "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n"
 		turn until over?
 		puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
 		winner #made winner the return value to help in wargames mode
