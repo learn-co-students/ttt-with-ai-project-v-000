@@ -1,3 +1,50 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+
+def game_play
+
+  wargames = []
+
+	puts "Please enter 0, 1, or 2 players. Or enter 100 for wargames (AI vs AI)"
+
+  players = gets.strip.to_i
+  if players == 100
+    100.times do
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      game.play
+      wargames << game.play
+    end
+    puts "#{wargames.uniq}"
+  end
+	case players
+	when 0
+	  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+	when 1
+	  puts "Enter 1 or 2 to play first or second?"
+	  human = gets.strip.to_i
+	  if human == 1
+	    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+	  elsif human == 2
+	    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+		end
+	when 2
+		game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+	end
+
+	game.play
+
+	puts "Would you like to play again? y/n yes/no"
+
+	play_again = gets.strip
+
+	if play_again == "yes" || play_again == "y"
+	  game_play
+	elsif play_again == "no" || play_again == "n"
+	  exit
+	end
+end
+
+game_play
