@@ -34,7 +34,7 @@ class Board
   end
 
   def valid_move?(input)
-    !taken?(input) && input.to_i.between?(1,9) && !full # Do I need a true and false here in order to make it work?
+    !taken?(input) && input.to_i.between?(1,9) && !full? # Do I need a true and false here in order to make it work?
   end
 
   def update
