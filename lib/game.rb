@@ -6,33 +6,14 @@ class Game
 
 	attr_accessor :board, :player_1, :player_2
 
-# Originally tried to make the arguments keywords, but one text would not pass if this was the case
-	# def initialize(player_1: nil, player_2: nil, board: nil)
-	# 	!player_1 ? @player_1 = Players::Human.new("X") : @player_1 = player_1
-	# 	!player_2 ? @player_2 = Players::Human.new("O") : @player_2 = player_2
-	# 	!board ? @board = Board.new : @board = board
-	# end
-
-
-
+# Originally tried to make the initialize arguments keywords, but one test would not pass if this was the case.
 	 def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new )
 	 	@board = board
+			# Computer instance will need access to WIN_COMBINATIONS (via move(board)) to make decisions on how to move.  This passes WIN_COMBINATIONS to board instance.
+		board.win_combinations = self.class::WIN_COMBINATIONS
 		@player_1 = player_1
 	 	@player_2 = player_2
 	 end
-
-	# This works.  Uncomment if problem
-	# def initialize(player_1 = nil, player_2 = nil, board = nil)
-	#
-	# 		# MAKE THESE SYMBOLS...SO YOU CAN DO THE = THINGS AND ORDER DOESN'T MATTER...
-	#
-	# 	!board ? @board = Board.new : @board = board
-	#
-	# 	!player_1 ? @player_1 = Players::Human.new("X") : @player_1 = player_1
-	#
-	# 	!player_2 ? @player_2 = Players::Human.new("O") : @player_2 = player_2
-	#
-	# end
 
   def turn_count
 		board.cells.count { |square| square != " " }

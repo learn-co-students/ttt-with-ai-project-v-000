@@ -45,3 +45,7 @@ def ok?(let)
     puts "ok!"
   end
 end
+
+---------
+
+board::

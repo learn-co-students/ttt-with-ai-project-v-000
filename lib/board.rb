@@ -2,7 +2,7 @@ require 'pry'
 
 class Board
 
-	attr_accessor :cells
+	attr_accessor :cells, :win_combinations
 
 	def initialize
 		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -11,11 +11,7 @@ class Board
 
 	def reset!
 		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		#The only way to get this test to pass was to put @cells.  just "cells = ..." wouldn't work.  Tried many different things, below. This gave me so much trouble.
-		#binding.pry
-		#cells.clear
-		#cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-		#cells
+		#The only way to get this test to pass was to put @cells.  Just "cells = ..." wouldn't work.  Tried many different things here.
 	end
 
 	def display
