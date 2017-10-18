@@ -1,3 +1,88 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greet the user with a message
+puts "Welcome to the Tic-Tac-Toe Game"
+
+
+
+# Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+valid_options = ["0", "1", "2"]
+intro_text = puts "What type of game do you want to play today (0, 1, or 2)"
+intro_text
+input_1 = gets.strip
+
+until valid_options.include? input_1
+  puts "That's not a valid option! Please enter 0, 1, or 2"
+  intro_text
+  input_1 = gets.strip
+end
+
+case input_1
+when "0"
+  puts "zero"
+  game = Game.new(first_player = Players::Computer.new("X"), second_player = Players::Computer.new("O"), game_board = Board.new)
+when "1"
+  puts "one"
+  game = Game.new(first_player = Players::Human.new("X"), second_player = Players::Computer.new("O"), game_board = Board.new)
+when "2"
+  puts "two"
+  game = Game.new
+end
+
+# Ask the user for who should go first and be "X".
+valid_options_2 = ["1", "2"]
+player_options = puts "Who should go first and be X (1 or 2)?"
+player_options
+input_2 = gets.strip
+
+until valid_options_2.include? input_2
+  puts "That's not a valid option! Please enter 1 or 2"
+  player_options
+  input_2 = gets.strip
+end
+
+case input_2
+when 1
+  puts "Player 1"
+when 2
+  puts "Player 2"
+end
+
+puts game.player_1
+puts game.player_2
+puts game.board
+
+if input_1 == "2"
+  until game.won? || game.draw?
+    game.play
+  end
+end
+
+if input_1 == "0"
+  until game.won? || game.draw?
+    game.play
+  end
+end
+
+if input_1 == "1"
+  until game.won? || game.draw?
+    game.play
+  end
+end
+
+# x = game.current_player.move(game.board)                                     => "4"  this is the value you want to input
+# y = game.board.cells[game.current_player.move(game.board).to_i - 1]          => the fourth empty cell in the array
+# basically, "y" needs to be set to equal "x"
+
+
+
+
+# Use the input to correctly initialize a Game with the
+# appropriate player types and token values.
+
+# When the game is over, the CLI should prompt the user
+# if they would like to play again and allow them to choose
+# a new configuration for the game as described above.
+# If the user doesn't want to play again, exit the program.

@@ -1,0 +1,12 @@
+# Unlike the Learn.co (textbook) AI, this AI focuses on preventing the opponent from winning, rather than trying to win itself.
+
+# First the computer will check & see if the opponent has two spaces in any WIN_COMBINATIONS and occupy the 3rd empty space to prevent a win.
+
+# If the opponent does not occupy any two spaces in a WIN_COMBINATIONS array... 
+# ...the AI will next try & occupy the middle (5) space on the board.
+
+# If the middle (5) space is occupied and the opponent does not occupy 2 spaces in a WIN_COMBINATIONS, the AI will then go to a random corner space
+
+# Finally, the AI will go to a random middle space (2, 4, 6, or 8) if no other options exist. 
+
+#=> The AI is not perfect and can be beaten with some practice.
