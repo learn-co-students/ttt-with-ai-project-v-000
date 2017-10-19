@@ -40,8 +40,8 @@ class Board
     (1...9).include?(user_input.to_i) && !self.taken?(user_input)
   end
 
-  def update(user_input, token)  #must fix, won't work till Player.token is set.
-    binding.pry
-    self.cells[user_input.to_i-1] = token
+  def update(user_input, player)  #must fix, won't work till Player.token is set.
+    self.cells[user_input.to_i-1] = player.token
   end
+
 end
