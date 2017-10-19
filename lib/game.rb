@@ -67,17 +67,6 @@ class Game
   #   # p1_move = player_1.move(board)
   #   current_player.move(board) if !board.valid_move?(move)
 
-  # def play
-  #   until over?
-  #     turn
-  #   end
-  #   if won?
-  #     puts "Congratulations #{winner}!"
-  #   end
-  #   if draw?
-  #     puts "Cat's Game!"
-  #   end
-  # end
   def play
     while !over?
       turn
@@ -89,6 +78,5 @@ class Game
       puts "Cat's Game!"
     end
   end
-
 
 end
