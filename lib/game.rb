@@ -43,7 +43,7 @@ end
   end
 
   def over?
-    @board.full?
+    @board.full? || draw? || won?
   end
 
   def winner
@@ -57,6 +57,17 @@ end
       input = self.current_player.move(board)
     end
       @board.update(input, current_player)
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
   end
 
 end
