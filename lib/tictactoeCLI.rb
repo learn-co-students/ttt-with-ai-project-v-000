@@ -10,6 +10,8 @@ class TicTacToeCLI
         puts "You are player X. You go first."
         Game.new(Players::Human("X"), Players::Computer("O"), Board.new).play
       when 2
-
+        puts "You are the first player, X. You may go first."
+        Game.new.play
+      end
+    end
   end
-end

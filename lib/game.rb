@@ -69,6 +69,7 @@ class Game
     input = current_player.move(@board).to_i
     if @board.valid_move?(input)
       @board.update(input, current_player)
+      @board.display
     else
       puts "This is invalid. Please try again."
       turn
@@ -80,10 +81,10 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner}! You're the winner!"
       return
     else
-      puts "Cat's Game!"
+      puts "Oops, sorry. Cat's Game!"
       return
     end
   end

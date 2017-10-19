@@ -55,5 +55,6 @@ class Board
   def update(input, player)
     new_input = input.to_i - 1
     @cells[new_input] = "#{player.token}"
+
   end
 end
