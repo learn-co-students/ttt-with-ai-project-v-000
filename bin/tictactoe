@@ -1,3 +1,42 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Enter number of Players:"
+num_players = gets.strip
+comp1 = Player::Computer.new("X")
+comp2 = Player::Computer.new("O")
+hum1 = Player::Human.new("X")
+hum2 = Player::Human.new("O")
+new_board = Board.new
+game_state = Game.new
+case num_players
+when "1"
+  game_state.player_2 = comp2
+when "2"
+when "0"
+  game_state.player_1 = comp1
+  game_state.player_2 = comp2
+when "war games"
+  game_state.player_1 = comp1
+  game_state.player_2 = comp2
+  x_wins = 0
+  o_wins = 0
+  100.times do
+    until game_state.over?
+      game_state.play
+    end
+    if game_state.winner == game_state.player_1
+      x_wins += 1
+    elsif game_state.winner == game_state.player_2
+      o_wins += 1
+    end
+
+  end
+  puts "X won #{x_wins}"
+  puts "O won #{o_wins}"
+end
+
+
+until game_state.over?
+  game_state.play
+end
