@@ -22,11 +22,12 @@ class Game
   end
 
   def current_player
-     if board.turn_count.even?
-       player_1
-     else
-       player_2
-     end
+    #  if board.turn_count.even?
+    #    player_1
+    #  else
+    #    player_2
+    #  end
+     board.turn_count % 2 == 0 ? player_1 : player_2
 
   end
 
@@ -64,17 +65,16 @@ class Game
   end
 
   def turn
-
     move = current_player.move(board)
 
     if board.valid_move?(move)
       board.update(move,current_player)
+      puts "*****************"
       board.display
     else
       turn
     end
 
-    # binding.pry
   end
 
   def play
@@ -88,7 +88,7 @@ class Game
         puts "Congratulations #{winner}!"
       end
       # binding.pry
-
   end
+
 
 end

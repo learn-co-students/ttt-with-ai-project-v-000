@@ -9,6 +9,13 @@ class TicTacToeController
     puts "Would you like to play against another player? enter 'player'."
     puts "type 'exit' to leave."
     puts "What would you like to do?"
+    puts "\n"
+
+    puts " 1 | 2 | 3 "
+    puts "------------"
+    puts " 4 | 5 | 6 "
+    puts "------------"
+    puts " 7 | 8 | 9 "
 
     while user_input = gets.chomp do
 
@@ -66,20 +73,22 @@ class TicTacToeController
     if user_choice == 1
       player_1 = Human.new("X")
       computer_player_2 = Computer.new("O")
+
+      game = Game.new(player_1,computer_player_2,board)
+      game.play
+
     else
       computer_player_2 = Computer.new("X")
       player_1 = Human.new("O")
+
+      game = Game.new(computer_player_2,player_1,board)
+      game.play
     end
-
-     game = Game.new(player_1,computer_player_2,board)
-     game.play
-
-
 
      puts "Enter 'yes' to play again or 'exit' to go back to the main menu"
      user_response = gets.chomp
      if user_response == 'yes'
-       puts "who's 'X' player 1 or computer 2, enter 1 or 2."
+       puts "who's 'X' player 1 or computer 2?, enter 1 or 2."
        user_response = gets.chomp
        play_computer(user_choice)
      elsif user_response == 'exit'
@@ -97,7 +106,7 @@ class TicTacToeController
       player_2 = Human.new("O")
     else
       player_2 = Human.new("X")
-      player_1 = HUman.new("O")
+      player_1 = Human.new("O")
     end
 
     game = Game.new(player_1,player_2,board)
@@ -106,14 +115,12 @@ class TicTacToeController
     puts "Enter 'yes' to play again or 'exit' to go back to the main menu"
     user_response = gets.chomp
     if user_response == 'yes'
-      puts "who's 'X' player 1 or player 2, enter 1 or 2."
+      puts "who's 'X' player 1 or player 2?, enter 1 or 2."
       user_response = gets.chomp
       play_player(user_choice)
     elsif user_response == 'exit'
       call
     end
-
-
 
   end
 
