@@ -37,7 +37,7 @@ class Board
     !taken?(input) && input.to_i.between?(1,9) && !full? # Do I need a true and false here in order to make it work?
   end
 
-  def update
-
+  def update(input, player)
+    @cells[input.to_i-1] = player.token
   end
 end
