@@ -22,9 +22,9 @@ module Players
 
           if Game::WIN_COMBINATIONS.detect do |combo|
 
-            combo.select{|index| index == token}.size == 2 &&
-               combo.any? {|index| board.position(index) == " "}
-              move = combo.select{|index|board.position}
+            # combo.select{|index| index == token}.size == 2 &&
+            #    combo.any? {|index| board.position(index) == " "}
+            #   move = combo.select{|index|board.position}
            end
 
 
