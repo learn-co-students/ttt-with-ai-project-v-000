@@ -10,13 +10,12 @@ puts "What Kind of Game Do You Want to Play?  0, 1, or 2 Player(s)"
 puts "Enter Number of Player(s):"
 
 
-
 players = " "
 
 players = gets.strip.to_i
 case players
 
-  when players = 0
+when players = 0
     puts "2 Computers Playing"
     game = Game.new(player_1 = Players::Computer.new("X"),player_2 = Players::Computer.new("O"))
     until game.won?
@@ -36,19 +35,18 @@ case players
     game = Game.new
     until game.won?
       game.play
-  end
+    end
 
-
-    puts "To stop play enter N, otherwise enter Y to keep playing!"
-    play_again = ""
-
+    play_again = " "
     until play_again == "N"
-    play_again = gets.strip
-  end
+      puts "To stop play enter N, otherwise enter Y to keep playing!"
+      play_again = gets.strip
 
-    play_again == "Y"
-    game = Game.new
-    until game.won?
-    game.play
-  end
+      if play_again == "Y"
+        game = Game.new
+        until game.won?
+          game.play
+        end
+      end
+    end
 end
