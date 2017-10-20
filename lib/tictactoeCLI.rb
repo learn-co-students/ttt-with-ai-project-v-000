@@ -5,10 +5,10 @@ class TicTacToeCLI
       input = gets.chomp.to_i
       case input
       when 0
-        Game.new(Players::Computer("X"), Players::Computer("O"), Board.new).play
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new.play)
       when 1
         puts "You are player X. You go first."
-        Game.new(Players::Human("X"), Players::Computer("O"), Board.new).play
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new.play)
       when 2
         puts "You are the first player, X. You may go first."
         Game.new.play
