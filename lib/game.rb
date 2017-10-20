@@ -81,10 +81,10 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}! You're the winner!"
+      puts "Congratulations #{winner}!"
       return
     else
-      puts "Oops, sorry. Cat's Game!"
+      puts "Cat's Game!"
       return
     end
   end

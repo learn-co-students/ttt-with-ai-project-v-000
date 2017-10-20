@@ -4,14 +4,14 @@ module Players
     def move(board)
       if board.valid_move?(5) == true
         5.to_s
-      else
-        move = [1,3,7,9].detect{|p| board.valid_move?(p)
-
-      number = rand(1...10)
-      until board.valid_move?(number) == true
-        move(board)
+      elsif [1,3,7,9].any?{|p| board.valid_move?(p)}
+        move = [1,3,7,9].detect?{|p| board.valid_move?(p)}
+      else number = rand(1...10)
+        until board.valid_move?(number) == true
+          move(board)
+        end
+        return number.to_s
       end
-      return number.to_s
     end
   end
 
