@@ -1,3 +1,86 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe! Would you like to play a 0, 1, or 2 person game?"
+
+input = gets.chomp
+continue = true
+
+while continue == true
+  if input == "0" || input == 0
+      game = Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"), board=Board.new)
+      game.play
+      puts "Would you like to play again?"
+        answer = gets.chomp.downcase
+        if answer == "yes"
+          puts "0, 1, or 2 person game?"
+          input = gets.chomp
+        else
+          puts "See you later!"
+          continue = false
+          break
+        end
+
+  elsif input == "1" || input == 1
+      puts "Would you like to go first or second?"
+      response = gets.chomp.downcase
+        if response == "first" || response == "1" || response == "1st" || response == 1
+          game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Computer.new("O"), board=Board.new)
+          puts "Great. You're #{game.current_player.token}."
+          game.play
+          puts "Would you like to play again?"
+            answer = gets.chomp.downcase
+            if answer == "yes"
+              puts "0, 1, or 2 person game?"
+              input = gets.chomp
+            else
+              puts "See you later!"
+              continue = false
+              break
+            end
+        elsif response == "second" || response == "2" || response == "2nd" || response == 2
+          game = Game.new(player_1=Players::Computer.new("X"),player_2=Players::Human.new("O"), board=Board.new)
+          puts "Great. You're O."
+          game.play
+          puts "Would you like to play again?"
+            answer = gets.chomp.downcase
+            if answer == "yes"
+              puts "0, 1, or 2 person game?"
+              input = gets.chomp
+            else
+              puts "See you later!"
+              continue = false
+              break
+            end
+        else
+          puts "Sorry, I didn't understand your response. We'll just let you go first."
+          game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Computer.new("O"), board=Board.new)
+          game.play
+          puts "Would you like to play again?"
+            answer = gets.chomp.downcase
+            if answer == "yes"
+              puts "0, 1, or 2 person game?"
+              input = gets.chomp
+            else
+              puts "See you later!"
+              continue = false
+              break
+            end
+        end
+
+  elsif input == "2" || input == 2
+    game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"), board=Board.new)
+    game.play
+    puts "Would you like to play again?"
+      answer = gets.chomp.downcase
+      if answer == "yes"
+        puts "0, 1, or 2 person game?"
+        input = gets.chomp
+      else
+        puts "See you later!"
+        continue = false
+        break
+      end
+    end
+  end
