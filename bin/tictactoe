@@ -1,3 +1,46 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Greetings, How about a game of Tic-Tac-Toe?"
+puts "Please choose the number of players:"
+puts "0, 1, or 2"
+user_input = gets.chomp.to_i
+
+case user_input
+when 0
+  new_game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+  new_game.board.display
+  new_game.play
+when 1
+  puts "Who should go first and be \"X\"?"
+  puts "Player (enter 1)"
+  puts "Computer (enter 2)"
+
+  user_player = gets.chomp.to_i
+  if user_player == 1
+    new_game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+    new_game.board.display
+    new_game.play
+  else
+    new_game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Human.new("O"))
+    new_game.play
+  end
+when 2
+  puts "Who should go first and be \"X\"?"
+  puts "Player One (enter 1)"
+  puts "Player Two (enter 2)"
+
+  user_player = gets.chomp.to_i
+  new_game = Game.new
+  new_game.board.display
+  new_game.play
+end
+
+#Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+
+#Ask the user for who should go first and be "X".
+
+#Use the input to correctly initialize a Game with the appropriate player types and token values.
+
+#When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
