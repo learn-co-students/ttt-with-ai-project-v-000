@@ -63,6 +63,7 @@ class Game
     puts "Please enter 1-9"
     move = current_player.move(board)
     board.valid_move?(move) ? board.update(move, current_player) : self.turn
+    board.display
   end
   #   # p1_move = player_1.move(board)
   #   current_player.move(board) if !board.valid_move?(move)
@@ -77,6 +78,26 @@ class Game
     if draw?
       puts "Cat's Game!"
     end
+  end
+
+  def start
+    puts "For a computer vs computer game type '0-player'"
+    puts "For a human vs computer game type '1-player'"
+    puts "For a human vs human game type '2-player'"
+    game_type = gets.strip
+
+    case game_type
+    when "0-player"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+    when "1-player"
+      puts "Would you like to go first and be 'X'? type 'yes' or 'no'"
+      input = gets.strip
+      if input == yes
+        player_2 = Players::Computer.new("O")
+      end
+    when "2-player"
+      puts ""
   end
 
 end
