@@ -1,3 +1,78 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+  def welcome
+    # clear screen
+    puts "\e[H\e[2J"
+    puts <<-DOC
+      XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+      O                                          X
+      X       Welcome to Tic Tac Toe!!           O
+      O                                          X
+      XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+    DOC
+      puts "Please enter your name: \n"
+            name = gets.strip.capitalize
+      puts "\n\nGreetings #{name}!\n",
+           "How about a game of Tic-Tac-Toe?\n\n"
+    players
+  end
+
+
+ def players
+   puts "Please choose the number of players:\n\n",
+       "\tEnter 0, 1, or 2. Enter 3 for WAR GAMES MODE.\n\n",
+       "\t(0) Computer mode (Computer vs. Computer)\n\n",
+       "\t(1) One player mode. You will play against the computer.\n\n",
+       "\t(2) Two player mode. There are 2 players and 'X' will go first.\n\n",
+       "\t(3) WAR GAMES MODE\n\n",
+       "Please make a selection:"
+       input = gets.chomp
+
+       case input
+       when /0/
+         puts "\n\nThe computer will play itself.\n\n"
+         Game.new(Player::Computer.new("X"), Player::Computer.new("O")).start
+       when /1/
+         puts "\n\nYour opponent will be the computer. Good luck!\n\n"
+         Game.new(Player::Human.new("X"), Player::Computer.new("O")).start
+       when /2/
+         puts "\n\nThere are two players. X will go first.\n\n"
+         Game.new(Player::Human.new("X"), Player::Human.new("O")).start
+       when /3/
+         puts "\nWargames mode\n"
+         100.times do Game.new(Player::Computer.new("X"),  Player::Computer.new("O")).start
+         end
+       when /^(e|exit)$/i
+         thanks
+         exit!
+       else
+         puts "Please try again."
+       end
+       replay
+     end
+
+   def replay
+     puts "\nWould you like to play again?"
+     input = gets.chomp
+     case input
+     when /^(y|yes)$/i
+       players
+     when /^(n|no)$/i
+       thanks
+       exit
+     end
+   end
+
+   def thanks
+     puts "\e[H\e[2J"
+     puts <<-DOC
+         XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+         O                                          X
+         X      Thanks for playing Tic Tac Toe!     O
+         O                                          X
+         XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO
+     DOC
+   end
+
+  welcome
