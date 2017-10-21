@@ -1,3 +1,46 @@
-#!/usr/bin/env ruby
+
+# !/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts 'Welcome to Tic Tac Toe!'
+puts 'The greatest game in Ruby!'
+
+play_again = ''
+
+until play_again.downcase == 'n' || play_again.downcase == 'no'
+  players = ''
+  play_again = ''
+
+  until players == '0' || players == '1' || players == '2'
+    puts 'How many players will be playing? (0, 1 or 2)'
+    players = gets.strip
+    puts 'Invalid Entry' unless players != '0' || players != '1' || players != '2'
+  end
+
+  case players.to_i
+  when 0
+    game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+  when 1
+    first_player = ''
+
+    until first_player.downcase == 'human' || first_player.downcase == 'computer'
+      puts 'Who will be going first? (Human or Computer)'
+      first_player = gets.strip
+      puts 'Invalid Entry' unless first_player.downcase == 'human' || first_player.downcase == 'computer'
+    end
+
+    game = Game.new(Players::Human.new('X'), Players::Computer.new('O')) if first_player.downcase == 'human'
+    game = Game.new(Players::Computer.new('X'), Players::Human.new('O')) if first_player.downcase == 'computer'
+  when 2
+    game = Game.new
+  end
+
+  game.play until game.won? || game.draw?
+  puts 'Would you like to play again? (Yes or No)'
+
+  until play_again.downcase == 'y' || play_again.downcase == 'yes' || play_again.downcase == 'n' || play_again.downcase == 'no'
+    play_again = gets.strip
+    puts 'Invalid Entry' unless play_again.downcase == 'y' || play_again.downcase == 'yes' || play_again.downcase == 'n' || play_again.downcase == 'no'
+  end
+end
