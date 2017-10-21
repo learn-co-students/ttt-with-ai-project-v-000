@@ -1,3 +1,26 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+loop do
+  puts "Are you ready for some Tic Tac Toe?!?",
+       "Please select the type of game you would like to play:",
+       "\t(1) One player mode",
+       "\t(2) Two player mode",
+       "\t(3) Computer mode (Computer v.s. Computer)",
+       "\t(q) Quit/Exit the program"
+
+  user_input = gets.strip.downcase
+
+  case user_input
+  when "1"
+    Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
+  when "2"
+    Game.new(Player::Human.new("X"), Player::Human.new("O")).play
+  when "3"
+    Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+  when "q"
+    break
+  end
+
+end
