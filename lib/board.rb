@@ -37,7 +37,7 @@ class Board
   end
 
   def valid_move?(user_input)
-    (1...9).include?(user_input.to_i) && !self.taken?(user_input)
+    (1..9).include?(user_input.to_i) && !self.taken?(user_input)
   end
 
   def update(user_input, player)  #must fix, won't work till Player.token is set.
