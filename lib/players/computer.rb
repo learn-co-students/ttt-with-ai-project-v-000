@@ -14,23 +14,39 @@ module Players
         move = "1"
 
       elsif board.turn_count == 2
-        move = [1,3,7,9].detect {|m| !board.taken?(m)}.to_s
+        move = [1,3,7,9].detect {|mv| !board.taken?(mv)}.to_s
 
-      elsif board.turn_count == 3 && !board.taken?(2) && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
-        move = "2"
+      elsif board.turn_count == 3 && !board.taken?(8) && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+        move = "8"
+
+      # elsif board.turn_count == 4 && !board.taken?(7) && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+      #   move = "7"
+
+
       else
 
-          if Game::WIN_COMBINATIONS.detect do |combo|
+          Game::WIN_COMBINATIONS.detect do |combo|
+              binding.pry
+            #if can win do this code
+          if combo.select {|index| board.position(index+1) == token}.size == 2 && combo.any? {|index|board.position(index+1) == " "}
+            move = combo.select{|index|!board.taken?(index+1)}.first.to_i.+(1).to_s
 
-            # combo.select{|index| index == token}.size == 2 &&
-            #    combo.any? {|index| board.position(index) == " "}
-            #   move = combo.select{|index|board.position}
-           end
+            #if can't win, do this code to block
+
+          elsif combo.select {|index| board.position(index+1) != " " &&  board.position(index+1) != token}.size == 2 && combo.any? {|index|board.position(index+1) == " "}
+            move = combo.select{|index|!board.taken?(index+1)}.first.to_i.+(1).to_s
+
+
+          end
+        end
+
+      end
+
+
+
 
 
         # [1,2,3,4,5,6,7,8,9].sample
-        end
-      end
     end
   end
-# end
+end
