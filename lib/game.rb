@@ -26,44 +26,29 @@ class Game
     board.full? || draw? || won?
   end
 
-  def won?  ### fix###
-    # WIN_COMBINATIONS.any? do |combo|
-    #   combo.all? do |i|
-    #     binding.pry
-    #     board.cells[i] == "X" }
-    #     binding.pry
-    #   end
-    # end
-    WIN_COMBINATIONS.each do |combination|
-      if combination.all? do |position|
-        board.cells[position] == "O"
-      end
-      return combination
-      elsif
-        combination.all? do |position|
-          board.cells[position] == "X"
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+        if combo.all? {|i| @board.cells[i] == "X"} || combo.all? {|i| @board.cells[i] == "O"}
+          combo
         end
-        return combination
-      end
     end
-    return false
   end
 
   def draw?
-    board.full? && !won?
+    self.board.full? && !won?
   end
 
   def winner
     if won?
-      board.cells[won?[1]]
+      self.board.cells[won?[1]]
     end
   end
 
   def turn
-    puts "Please enter 1-9"
+    puts "Please enter 1-9 #{current_player.token}"
     move = current_player.move(board)
-    board.valid_move?(move) ? board.update(move, current_player) : self.turn
-    board.display
+    self.board.valid_move?(move) ? board.update(move, current_player) : self.turn
+    self.board.display
   end
   #   # p1_move = player_1.move(board)
   #   current_player.move(board) if !board.valid_move?(move)
@@ -81,6 +66,7 @@ class Game
   end
 
   def start
+    game_type = nil
     puts "For a computer vs computer game type '0-player'"
     puts "For a human vs computer game type '1-player'"
     puts "For a human vs human game type '2-player'"
@@ -88,16 +74,43 @@ class Game
 
     case game_type
     when "0-player"
-      player_1 = Players::Computer.new("X")
-      player_2 = Players::Computer.new("O")
+      binding.pry
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Computer.new("O")
+      binding.pry
+      puts "Game will now begin."
     when "1-player"
+      binding.pry
       puts "Would you like to go first and be 'X'? type 'yes' or 'no'"
       input = gets.strip
-      if input == yes
-        player_2 = Players::Computer.new("O")
+      until input == "yes" || "no"
+        puts "Would you like to go first and be 'X'? type 'yes' or 'no'"
+        if input == yes
+          self.player_2 = Players::Computer.new("O")
+        else
+          self.player_1 = Players::Computer.new("X")
+        end
       end
+      binding.pry
     when "2-player"
-      puts ""
+      puts "Player 1 will go first and be 'X'"
+      puts "Player 2 will go next and be 'O'"
+      puts "Game will now begin."
+    end
+
+    self.start unless game_type == "0-player" || game_type == "1-player" || game_type == "2-player"
+  end
+
+  def end
+    puts "Game is now over."
+    puts "To play again, type 'play'"
+    puts "To quit, type 'exit'"
+    input = gets.strip
+    if input == "play"
+      self.board.reset!
+      self.start
+    end
+    self.end unless input == "exit"
   end
 
 end

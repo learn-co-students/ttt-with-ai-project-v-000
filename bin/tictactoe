@@ -3,15 +3,14 @@
 require_relative '../config/environment'
 
 puts "Hi there, welcome to TicTacToe"
+puts "   |   |   "
+puts "-----------"
+puts "   |   |   "
+puts "-----------"
+puts "   |   |   "
+
+game = Game.new
 puts "What kind of game would you like to play?"
-
-game = Game.new
-puts "   |   |   "
-puts "-----------"
-puts "   |   |   "
-puts "-----------"
-puts "   |   |   "
-
-game = Game.new
 game.start
 game.play
+game.end
