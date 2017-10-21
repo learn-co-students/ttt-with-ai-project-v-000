@@ -16,8 +16,10 @@ game.play
 game.end
 
 # working on game.start method:
-# problem seems to be that when selecting type of game the case...when
-#     statments are not working properly and assigning @player_1 and @player_2 values accordingly, thus Game.self shows default @player_1 and @player_2 values from instantiation
+#  |_  problem seems to be that when selecting type of game the case...when
+#  |_  statments are not working properly and assigning @player_1 and @player_2
+#  |_ values accordingly, thus Game.self shows default @player_1 and @player_2 #  |_ values from instantiation
 # 0-player & 1-player games not working so far
 # 2-player game wasn't working when selecting position#9, but fixed now
-#     |__should work now but not yet tested
+#   |_ position#9 issue: my board.valid_move? method used (1...9).include? but should have been (1..9) to include 9 in the range.
+#   |__should work now but not yet tested
