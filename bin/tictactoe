@@ -1,3 +1,57 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def preamble
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "Please enter a game type"
+  puts "Enter 0 for No Human Players"
+  puts "Enter 1 for One Human Players"
+  puts "Enter 2 for Two Human Players"
+  game_type = gets.chomp
+  case game_type
+    when "0"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      game = Game.new(player_1, player_2)
+      flash_board(game)
+    when "1"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+      puts "GREETINGS PROFESSOR FALKEN."
+      game = Game.new(player_1, player_2)
+      flash_board(game)
+    when "2"
+      puts "Two Player Game!"
+      game = Game.new
+      flash_board(game)
+    when "wargames" #Wargames is a hidden option ;)
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      game = Game.new(player_1, player_2)
+      count = 0
+      1000.times do
+        game.play
+        count += 1 if game.winner == nil
+        game.board.reset!
+      end
+      puts "Computer vs. itself over 1000 times, with #{count} draws"
+    else
+      preamble
+  end
+
+  puts "How about a nice game of Tic-Tac-Toe? (type 'exit' to quit)"
+  if gets.chomp.downcase != "exit"
+    preamble
+  end
+
+end
+
+def flash_board(game)
+  game.board.cells = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+  game.board.display
+  game.board.reset!
+  game.play
+end
+
+preamble
