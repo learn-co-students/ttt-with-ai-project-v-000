@@ -4,15 +4,16 @@ module Players
     def move(board)
       # helper methods: offensive(board), defensive(board), middle?(board),  corners?(board), sides?(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      if middle?(board)
-        board.cells[4] = self.token
+      if middle?(board) #board[4] !== " "
+        board.cells[4] = self.token # board.update(4, self.token)
+        #board.display
       elsif upper_left_corner?(board)
         board.cells[0] = self.token
       elsif upper_right_corner?(board)
         board.cells[2] = self.token
-      elsif lower_left_corner(board)
+      elsif lower_left_corner?(board)
         board.cells[6] = self.token
-      elsif lower_right_corner(board)
+      elsif lower_right_corner?(board)
         board.cells[8] = self.token
       elsif left_side?(board)
         board.cells[3] = self.token
@@ -21,6 +22,9 @@ module Players
       else
         valid_moves.sample
       end
+      puts "Computer move in progress."
+      board.display
+      puts "Now it's your turn."
     end
 
     ## create helper methods ##
