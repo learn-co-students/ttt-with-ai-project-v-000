@@ -25,7 +25,7 @@ module Players
 
     ## create helper methods ##
     def middle?(board)
-      board[4] = " "
+      board[4] == " "
     end
 
     def upper_left_corner?(board)
@@ -51,5 +51,5 @@ module Players
     def right_side?(board)
       board[5] == " "
     end
-  end 
+  end
 end
