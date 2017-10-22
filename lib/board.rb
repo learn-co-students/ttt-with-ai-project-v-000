@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells, :display, :position,   :turn_count,   :update
+  attr_accessor :cells, :display, :position, :turn_count, :update
   def initialize
     @cells = Array.new(9, " ")      #has an attribute to store the cells of the board
   end
