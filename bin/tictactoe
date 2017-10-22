@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+
+puts "Hello. Would you like to play a game? (Y/n)"
+if ["yes", "Yes", "y", "Y"].include?(gets.strip)
+  Game.start
+# elsif gets.strip == "wargames"
+#   Game.wargames
+end
+
+# unable to get the wargames loop to work. like it doesn't know what to do if you type "wargames" or if you try to exit
