@@ -18,16 +18,8 @@ class Game
     [0,4,8]
   ]
 
-  def current_player #returns the correct player, X, for the third move
-    board.turn_count % 2 == 0 ? player_1 : player_2
-  end
-
   def over? #returns true for a draw or a won game
-    if board.full?
-      true
-    else
-      false
-    end
+    won? || draw?
   end
 
   def won?  #returns false for a draw
@@ -60,8 +52,12 @@ class Game
     #returns nil when no winner
   end
 
+  def current_player #returns the correct player, X, for the third move
+    board.turn_count % 2 == 0 ? player_1 : player_2
+  end
+
   def turn
-    position = current_player.move(board)
+    position = current_player.move(@board)
     if board.valid_move?(position)  #makes valid moves
       board.update(position, current_player)  #changes to player 2 after the first turn
       board.display
@@ -70,22 +66,29 @@ class Game
     end
   end
 
+  # def play
+  #   #asks for players input on a turn of the game, don't use a loop
+  #   if board.turn_count < 9 && !over?    #checks if the game is over after every turn
+  #      turn
+  #   end
+  #   if over?
+  #     if won?     #checks if the game is won after every turn
+  #       puts "Congratulations #{winner(cells)}!"  #congratulates the winner X or O
+  #     elsif draw?  #stops playing in a draw
+  #       puts "Cat's Game!"  #prints "Cat's Game!" on a draw
+  #     else
+  #       board.turn_count
+  #     end
+  #   end
   def play
-    #asks for players input on a turn of the game
-    while board.turn_count < 9 && !over?    #checks if the game is over after every turn
-       turn
+    while !over?
+      turn
     end
-    if won?     #checks if the game is won after every turn
-      puts "Congratulations #{winner(cells)}!"  #congratulates the winner X or O
-    elsif draw?(board)    #stops playing in a draw
-      puts "Cat's Game!"  #prints "Cat's Game!" on a draw
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
-    #plays the first turn of the game
-    #plays the first few turns of the game
-    #checks if the game is a draw after every turn
-    #stops playing if someone has won
-
-     #plays through an entire game
-
   end
+
 end
