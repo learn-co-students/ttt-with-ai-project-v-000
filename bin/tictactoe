@@ -1,3 +1,35 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# require 'irb'
+# def reload!
+#   load './config/environment'
+# end
+# IRB.start
+puts "Welcome to CLI Tic Tac Toe"
+play_again = "yes"
+while play_again != "exit"
+  puts "Please enter number of players (0-2 players):"
+  number_of_players = gets.strip
+  if number_of_players.to_i == 0
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    game.play
+  elsif number_of_players.to_i == 1
+    puts "Please choose which player goes first (1: Human 2: Computer):"
+    first_player = gets.strip
+    if first_player.to_i == 1
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+    elsif first_player.to_i == 2
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    end
+  elsif number_of_players.to_i == 2
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+    game.play
+  end
+  puts "Please press enter to play again, othewise type \"exit\""
+  play_again = gets.strip
+
+end
