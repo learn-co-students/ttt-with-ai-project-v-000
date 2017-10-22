@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+tic_tac_toe = TicTacToe.new(Game.new, InputOutput::CLI.new)
+# OR  tic_tac_toe = TicTacToe.new(Game.new, Web.new) for web based input output
+
+tic_tac_toe.play
