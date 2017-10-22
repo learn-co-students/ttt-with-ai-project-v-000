@@ -1,3 +1,54 @@
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
+
+#TODO: 1) fix extra 'enter' required when in mode 2 or 0
+# 2) fix mode 1 crash when '2' is your first move (crashes after second move)
 
 require_relative '../config/environment'
+
+puts "Welcome to TTT"
+puts "How many human players would you like?"
+  type = gets.strip.to_i
+  if type == 1
+    puts "Do you want to go first?"
+    starting_player = gets.strip
+  end
+
+  def start_game(type, starting_player="yes")
+    #binding.pry
+    if type == 1 && starting_player.downcase == "yes" || starting_player.downcase == "y"
+      Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+    elsif type == 1 && starting_player.downcase == "no" || starting_player.downcase == "n"
+      Game.new(Players::Computer.new('X'), Players::Human.new('O'))
+    elsif type == 2
+      Game.new(Players::Human.new('X'), Players::Human.new('O'))
+    elsif type == 0
+      Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+    end
+  end
+
+if type == 1
+  game = start_game(type, starting_player)
+else
+  game = start_game(type)
+end
+
+until game.won?  || game.draw?
+  game.play
+end
+
+play_again = ""
+puts "Would you like to play again?"
+play_again = gets.strip
+until play_again.downcase == "n" || play_again.downcase == "no"
+  play_again.downcase == "y" || play_again.downcase == "yes"
+  puts "How many human players would you like?"
+  type = gets.chomp.to_i
+  puts "Do you want to go first?" if type == 1
+  starting_player = gets.strip
+  game = start_game(type, starting_player)
+  until game.won? || game.draw?
+    game.play
+  end
+  puts "Would you like to play again?"
+  play_again = gets.strip
+end
