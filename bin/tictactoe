@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  puts "Welcome...to TIC TAC TOE"
+  puts "How many human players? (0, 1, 2, or wargames)"
+  player_num = gets.strip
+  while !player_num.to_i.between?(0, 2) && player.num.downcase != "wargames"
+    puts "Invalid entry. How many human players? (0, 1, 2, or wargames)"
+    player_num = gets.strip.to_i
+  end
+  puts "Which player should be X? (1 or 2)"
+  player_x = gets.strip.to_i
+  while !player_x.between?(1, 2)
+    puts "Invalid entry. Which player should be X? (1 or 2)"
+    player_x = gets.strip.to_i
+  end
+  if player_x == 1
+    token_1 = "X"
+    token_2 = "O"
+  elsif player_x == 2
+    token_1 = "O"
+    token_2 = "X"
+  end
+  if player_num.to_i == 0
+    Game.new(Players::Computer.new("#{token_1}"), Players::Computer.new("#{token_2}")).play
+  elsif player_num.to_i == 1
+    Game.new(Players::Human.new("#{token_1}"), Players::Computer.new("#{token_2}")).play
+  elsif player_num.to_i == 2
+    Game.new(Players::Human.new("#{token_1}"), player_2 = Players::Human.new("#{token_2}")).play
+  elsif player_num.downcase == "wargames"
+    100.times do Game.new(Players::Computer.new("#{token_1}"), Players::Computer.new("#{token_2}")).play
+    end
+  end
+  puts "Play again? (Yn)"
+  play = gets.strip.downcase
+  while play != "y" && play != "n"
+    puts "Play again? (Yn)"
+    play = gets.strip.downcase
+  end
+  if play == "y"
+    start
+  elsif play == "n"
+    puts "Okay bye"
+  end
+end
+
+start
