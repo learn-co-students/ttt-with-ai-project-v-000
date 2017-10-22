@@ -10,9 +10,9 @@ module Players
         board.cells[0] = self.token
       elsif upper_right_corner?(board)
         board.cells[2] = self.token
-      elsif lower_left_corner?(board)
+      elsif lower_left_corner(board)
         board.cells[6] = self.token
-      elsif lower_right_corner?(board)
+      elsif lower_right_corner(board)
         board.cells[8] = self.token
       elsif left_side?(board)
         board.cells[3] = self.token
