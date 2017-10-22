@@ -10,7 +10,7 @@ The goal of this project is to build a version of Tic-tac-toe with 0-, 1-, and 2
   - A 1-player game has a human playing against a computer.
   - A 2-player game has two human players.
 
-You'll be implementing Tic-tac-toe using multiple objects that relate and collaborate, including separate classes for human players and computer players. The computer player class will have some sort of artificial intelligence or logic to make move decisions. Finally, you'll wrap all of this up in a CLI.
+You'll be implementing Tic-tac-toe using multiple objects that relate and collaborate, including separate classes for human players and computer players. The computer player class will have some sort of artificial intelligence or logic to make move decisions. Finally, you'll wrap all of this up in a CLI. 
 
 ***NOTE***: You'll have to fork and clone this repository manually. For assistance, check out this [article](http://help.learn.co/workflow-tips/github/how-to-manually-open-a-lab) in the [Learn Help Center](http://help.learn.co/).
 
