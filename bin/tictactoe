@@ -1,3 +1,130 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+play_again = nil
+
+until play_again == "No"
+  num_of_users = nil
+
+  until num_of_users == "0 users" || num_of_users == "1 user" || num_of_users == "2 users"
+    puts "Hello there! Welcome to my Tic-Tac-Toe game. Would you like to play with: 2 users, 1 user, or 0 users?"
+    num_of_users = gets.strip
+  end
+
+  if num_of_users == "0 users" # For computer vs. computer games
+    starting_player = nil
+    x_token = nil
+
+    until starting_player == "Computer 1" || starting_player == "Computer 2"
+      puts "Interesting... Who do you want to go first: Computer 1 or Computer 2?"
+      starting_player = gets.strip
+    end
+
+    until x_token == "Computer 1" || x_token == "Computer 2"
+      puts "Awesome. And which computer would you like to be 'X': Computer 1 or Computer 2?"
+      x_token = gets.strip
+    end
+
+    if starting_player == "Computer 1"
+      if x_token == "Computer 1"
+        computer_1 = Players::Computer.new("X")
+        computer_2 = Players::Computer.new("O")
+        Game.new(computer_1, computer_2).play
+      else
+        computer_1 = Players::Computer.new("O")
+        computer_2 = Players::Computer.new("X")
+        Game.new(computer_1, computer_2).play
+      end
+    end
+
+    if starting_player == "Computer 2"
+      if x_token == "Computer 1"
+        computer_1 = Players::Computer.new("X")
+        computer_2 = Players::Computer.new("O")
+        Game.new(computer_2, computer_1).play
+      else
+        computer_1 = Players::Computer.new("O")
+        computer_2 = Players::Computer.new("X")
+        Game.new(computer_2, computer_1).play
+      end
+    end
+  elsif num_of_users == "1 user"
+    starting_player = nil
+    human_token = nil
+
+    until starting_player == "Computer Team" || starting_player == "Human Team"
+      puts "Bring it on! Who do you want to go first: Computer Team or Human Team?"
+      starting_player = gets.strip
+    end
+
+    until human_token == "X" || human_token == "O"
+      puts "Ok! And do you want to be: X or O?"
+      human_token = gets.strip
+    end
+
+    if starting_player == "Human Team"
+      if human_token == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+        Game.new(player_1, player_2).play
+      else
+        player_1 = Players::Human.new("O")
+        player_2 = Players::Computer.new("X")
+        Game.new(player_1, player_2).play
+      end
+    end
+
+    if starting_player == "Computer Team"
+      if human_token == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+        Game.new(player_2, player_1).play
+      else
+        player_1 = Players::Human.new("O")
+        player_2 = Players::Computer.new("X")
+        Game.new(player_2, player_1).play
+      end
+    end
+  elsif num_of_users == "2 users" # for two human player games
+    player_1_token = nil
+    first_human_player = nil
+
+    until player_1_token == "X" || player_1_token == "O"
+      puts "Ok! Do you want to be: X or O? Your friend will be whichever you don't choose."
+      player_1_token = gets.strip
+    end
+
+    until first_human_player == "X" || first_human_player == "O"
+      puts "And who should go first: X or O?"
+      first_human_player = gets.strip
+    end
+
+    if first_human_player == "X"
+      if player_1_token == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+        Game.new(player_1, player_2).play
+      else
+        player_1 = Players::Human.new("O")
+        player_2 = Players::Human.new("X")
+        Game.new(player_2, player_1).play
+      end
+    end
+
+    if first_human_player == "O"
+      if player_1_token == "X"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+        Game.new(player_2, player_1).play
+      else
+        player_1 = Players::Human.new("O")
+        player_2 = Players::Human.new("X")
+        Game.new(player_1, player_2).play
+      end
+    end
+  end
+
+  puts "That was fun! Do you want to play again: Yes or No?"
+  play_again = gets.strip
+end
