@@ -1,3 +1,23 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome! What kind of game do you want to play? 0, 1, or 2 player?"
+
+input = gets.chomp
+computer_player_1 = Players::Computer.new("X")
+computer_player_2 = Players::Computer.new("O")
+
+case input
+  when "2"
+    game = Game.new
+    game.play
+  when "1"
+    game = Game.new(computer_player_1)
+    game.play
+  when "0"
+    game = Game.new(computer_player_1)
+    until game.over?
+      game.play
+    end
+end
