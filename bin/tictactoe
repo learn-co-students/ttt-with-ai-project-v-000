@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+again = 'y'
+
+while again == 'y'
+
+  puts "Welcome to Jack's TicTacToe!"
+  puts "How many human players would you like in the game? (0,1,2)"
+  n = gets.strip
+  case n
+  when "2"
+    new_game = Game.new()
+    new_game.play
+  when "1"
+    puts "Who goes first? (H or C)"
+    order = gets.strip
+    if order == "H" 
+      player1 = Players::Human.new("X")
+      player2 = Players::Computer.new("O")
+    else
+      player1 = Players::Computer.new("X")
+      player2 = Players::Human.new("O")
+    end
+    new_game = Game.new(player1,player2)
+    new_game.play
+  when "0"
+    player1 = Players::Computer.new("X")
+    player2 = Players::Computer.new("O")
+    new_game = Game.new(player1,player2)
+    new_game.play
+  end
+  puts "Would you like to play again?(y/n)"
+  again = gets.strip
+
+end
