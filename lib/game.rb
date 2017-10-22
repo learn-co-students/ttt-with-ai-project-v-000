@@ -28,7 +28,7 @@ class Game
     WIN_COMBINATIONS.detect do |combo|
        @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
      end
-   end
+  end
 
 
 
@@ -61,7 +61,6 @@ class Game
   end
 
   def play
-
       until over?
         turn
       end
@@ -73,5 +72,3 @@ class Game
       end
     end
   end
-
-  

@@ -6,7 +6,5 @@ module Players
       puts "Please Enter 1 - 9:"
       board = gets.strip
     end
-
   end
-
 end
