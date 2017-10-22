@@ -1,3 +1,79 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  puts "Crappy Tic Tac Toe Game"
+  puts "Enter '0' for a computer only game, '1' for a one player game, or '2' for a two player game."
+  game_decider = gets.strip
+
+  if game_decider == '0'
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    while !game.over?
+      game.play
+    end
+  end
+
+  if game_decider == '1'
+    puts "Would you like to be player 1 and be 'X', or player 2 and 'O'? Enter '1' for player one and '2' for player two."
+    turn_decide = gets.strip
+    if turn_decide == '1'
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      while !game.over?
+        game.play
+      end
+    elsif turn_decide == '2'
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      while !game.over?
+        game.play
+      end
+    end
+  end
+
+  if game_decider == '2'
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    while !game.over?
+      game.play
+    end
+  end
+
+  continue = nil
+    until continue == "n" or continue == "no"
+      puts "Want to keep playing?"
+      continue = gets.strip
+      if continue == "n" or continue == "no"
+        exit
+      end
+      
+      puts "Enter '0' for a computer only game, '1' for a one player game, or '2' for a two player game."
+      game_decider = gets.strip
+
+      if game_decider == '0'
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        while !game.over?
+          game.play
+        end
+      end
+
+      if game_decider == '1'
+        puts "Would you like to be player 1 and be 'X', or player 2 and 'O'? Enter '1' for player one and '2' for player two."
+        turn_decide = gets.strip
+        if turn_decide == '1'
+          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+          while !game.over?
+            game.play
+          end
+        elsif turn_decide == '2'
+          game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+          while !game.over?
+            game.play
+          end
+        end
+      end
+
+      if game_decider == '2'
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        while !game.over?
+          game.play
+        end
+      end
+    end
