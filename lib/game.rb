@@ -15,12 +15,12 @@ attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = nil, player_2=nil, board=nil)
     #binding.pry
-
-    if(!player_1)
-      self.player_1 = Human.new("X")
-    else
-      self.player_1 = player_1
-    end
+    self.player_1 = (!player_1) ? Human.new("X") : player_1
+    #if(!player_1)
+    #self.player_1 = Human.new("X")
+    #else
+    #  self.player_1 = player_1
+    #end
     if(!player_2)
       self.player_2 = Human.new("O")
     else
