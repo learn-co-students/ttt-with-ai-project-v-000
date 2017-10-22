@@ -5,7 +5,7 @@ module Players
       # helper methods: offensive(board), defensive(board), middle?(board),  corners?(board), sides?(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       if middle?(board)
-        board[4] = self.token
+        valid_moves[4]
       elsif upper_left_corner?(board)
         board[0] = self.token
       elsif upper_right_corner?(board)
@@ -25,31 +25,31 @@ module Players
 
     ## create helper methods ##
     def middle?(board)
-      board[4] == " "
+      board.cells[4] == " "
     end
 
     def upper_left_corner?(board)
-      board[0] == " "
+      board.cells[0] == " "
     end
 
     def upper_right_corner?(board)
-      board[2] == " "
+      board.cells[2] == " "
     end
 
     def lower_left_corner?(board)
-      board[6] == " "
+      board.cells[6] == " "
     end
 
     def lower_right_corner?(board)
-      board[8] == " "
+      board.cells[8] == " "
     end
 
     def left_side?(board)
-      board[3] == " "
+      board.cells[3] == " "
     end
 
     def right_side?(board)
-      board[5] == " "
+      board.cells[5] == " "
     end
   end
 end
