@@ -1,3 +1,17 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+g = Game.new
+g.start
+
+####When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program
+puts "Would you like to play again? Y or N"
+input = gets.chomp.upcase
+if input == "Y"
+  g = Game.new
+  g.start
+elsif input == "N"
+  exit
+else
+  puts "Please enter Y to play again or N to exit."
+end
