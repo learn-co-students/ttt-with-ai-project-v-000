@@ -20,11 +20,8 @@ class Game
   end
 
   def turn
-    i = "0"
-    until self.board.valid_move?(i)
-      i = current_player.move(self.board)
-    end
-    self.board.update(i, current_player)
+    move = current_player.move(self.board)
+    self.board.valid_move?(move) ? self.board.update(move, current_player) : self.turn
   end
 
   def play

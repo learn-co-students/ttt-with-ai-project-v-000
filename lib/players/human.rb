@@ -3,7 +3,7 @@ module Players
 
   def move(board)
     puts "Please make a valid move:"
-    i = gets.chomp
+    gets.chomp
   end
 
 
