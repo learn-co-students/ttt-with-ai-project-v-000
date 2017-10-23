@@ -59,5 +59,3 @@ class Board
   end
 
 end
-
- 
