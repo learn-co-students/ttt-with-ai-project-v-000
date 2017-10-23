@@ -24,12 +24,6 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def update(position, player_object)
-    i = position.to_i-1
-    #cells[i] = #????????? player_object.token
-    #you will set it equal to the token of the player object by calling the #token method on the player.
-  end
-
   def position(input)
     index = input.to_i-1
     cells[index]
@@ -62,7 +56,12 @@ class Board
   def valid_move?(input)
     index = input.to_i-1
     index.between?(0, 8) && !taken?(input)
-    #binding.pry
+  end
+
+  def update(position, player_object)
+    i = position.to_i-1
+    cells[i] = player_object.token
+    #you will set it equal to the token of the player object by calling the #token method on the player.
   end
 
 

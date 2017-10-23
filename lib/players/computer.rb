@@ -1,5 +1,7 @@
 module Players
   class Computer < Player
-    # your code here
+    def move
+      #insert magic here
+    end
   end
 end
