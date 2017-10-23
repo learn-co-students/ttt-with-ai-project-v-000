@@ -1,7 +1,7 @@
 require 'pry'
 class Game
-  Players::Human
-  attr_accessor :board, :player_1, :player_2, :cells
+
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -63,7 +63,6 @@ class Game
 
     end
   end
-
 
   def play
     while !over?

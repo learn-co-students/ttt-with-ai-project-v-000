@@ -1,5 +1,5 @@
 require 'pry'
-require 'spec_helper'
+
 module Players
   class Computer < Player
     def move(board)
