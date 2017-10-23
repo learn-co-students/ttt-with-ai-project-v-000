@@ -12,15 +12,13 @@ module Players
     def move(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       corners = ["1", "7", "3", "9"]
-
-      move = nil
       if !board.taken?("5")
         move = "5"
       elsif
         move = corners.select {|corner| !board.taken?(corner)}.sample
       elsif
         move = valid_moves.reject {|move| corners.include?(move)}.sample
-      end # current_player
+      end
       move
     end
 

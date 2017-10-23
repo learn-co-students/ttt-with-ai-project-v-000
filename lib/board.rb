@@ -24,7 +24,7 @@ class Board
     cells[user_input.to_i - 1]
   end
 
-  def full?  # should this method check for "X"s and "O"s specifically? or just empty spaces?
+  def full?
     cells.none? { |position| position == " "}
   end
 
@@ -40,7 +40,7 @@ class Board
     (1..9).include?(user_input.to_i) && !self.taken?(user_input)
   end
 
-  def update(user_input, player)  #must fix, won't work till Player.token is set.
+  def update(user_input, player)
     self.cells[user_input.to_i-1] = player.token
   end
 
