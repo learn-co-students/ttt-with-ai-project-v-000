@@ -47,9 +47,9 @@ attr_accessor :board, :player_1, :player_2
 
   def turn
     #binding.pry
-    input = self.current_player.move(board)
+    input = self.current_player.move#(board)
     while(!self.board.valid_move?(input))
-      input = self.current_player.move(board)
+      input = self.current_player.move#(board)
     end
     self.board.update(input, self.current_player)
   end
