@@ -1,12 +1,13 @@
 module Players
   class Human < Player
-    attr_accessor :input
+
     def initialize(token)
       super
     end
 
-    def move(input)
-      self.input  = gets.strip
+    def move(board)
+      puts "Please make a move:"
+      gets.strip
     end
   end
 
