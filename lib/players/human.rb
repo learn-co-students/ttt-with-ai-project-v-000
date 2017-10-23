@@ -1,11 +1,12 @@
 module Players
   class Human < Player
+    attr_accessor :input
     def initialize(token)
       super
     end
 
     def move(input)
-      input = gets.strip
+      self.input  = gets.strip
     end
   end
 

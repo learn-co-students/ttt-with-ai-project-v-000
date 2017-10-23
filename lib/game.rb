@@ -14,22 +14,40 @@ attr_accessor :board, :player_1, :player_2
   ]
 
   def initialize(player_1 = nil, player_2=nil, board=nil)
-    #binding.pry
     self.player_1 = (!player_1) ? Human.new("X") : player_1
-    #if(!player_1)
-    #self.player_1 = Human.new("X")
-    #else
-    #  self.player_1 = player_1
-    #end
-    if(!player_2)
-      self.player_2 = Human.new("O")
-    else
-      self.player_2 = player_2
+    self.player_2 = (!player_1) ? Human.new("O") : player_2
+    self.board = (!board) ? Board.new : board
+  end
+
+  def current_player
+    board.turn_count.even? ? player_1 : player_2
+  end
+
+  def over?
+    board.full?
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
     end
-    if (!board)
-      self.board = Board.new
-    else
-      self.board = board
+  end
+
+  def draw?
+    !won? ? true : false
+  end
+
+  def winner
+    if(won?)
+      self.board.cells[won?[0]]
+    end
+  end
+
+  def turn
+    while(self.current_player.move(:gets))
+    self.board.valid_move?(self.current_player.move(:gets))
     end
   end
 
