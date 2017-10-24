@@ -61,7 +61,7 @@ describe 'Game' do
 
       expect(game.player_2).to be_a(Players::Human)
       expect(game.player_2.token).to eq("O")
-
+      
       expect(game.board.cells).to match_array(Array.new(9, " "))
     end
   end
