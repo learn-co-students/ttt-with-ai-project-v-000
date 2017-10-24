@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+game = Game.new
+game.start
+
+
+
+# puts "Would you like to play again? Y/N?"
+#   answer = gets.strip
+#   if answer.downcase == "y"
+#     game.start
+#   else
+#     puts "Thanks for playing! Goodbye!"
+#   end
