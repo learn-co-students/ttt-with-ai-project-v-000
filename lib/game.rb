@@ -26,20 +26,21 @@ class Game
     current_player = player_1
     if @board.turn_count % 2 == 0
       player_1
-    elsif @board.turn_count % 2 == 1
+    else
       player_2
     end
   end
 
   def over?
     won? || draw?
-
   end
+
   def draw?
     if @board.full? && !won?
       true
     end
   end
+
   def won?
     WIN_COMBINATIONS.detect do |win|
       @board.cells[win[0]] == "X" && @board.cells[win[1]] == "X" && @board.cells[win[2]] == "X"  && @board.taken?(win[0]+1)||
@@ -56,7 +57,6 @@ class Game
     input = player_1.move(@board)
     if @board.valid_move?(input)
       @board.update(input, current_player)
-
       player_2 = current_player
     else
       turn
@@ -70,7 +70,7 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
-    elsif draw?
+    else
       puts "Cat's Game!"
     end
   end

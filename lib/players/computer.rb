@@ -3,9 +3,9 @@ require 'pry'
 module Players
   class Computer < Player
     def move(board)
-move = nil
+      move = nil
       puts "Please enter a number from 1..9"
-      #binding.pry
+
       if board.taken?(1) == false
       move = "1"
       elsif board.turn_count == 1 && board.taken?(5) == false

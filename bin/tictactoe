@@ -2,18 +2,41 @@
 
 require_relative '../config/environment'
 
-def start
-  puts "Welcome to Tic Tac Toe!"
+puts "Welcome to Tic Tac Toe!"
+puts "How many players? Please choose a number from 0..2?"
+game_type = gets.strip
+if game_type == 0
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
+elsif game_type == 1
+  player_1 = Players::Human.new("X")
+  player_2 = Players::Computer.new("O")
+else
+  player_1 = Players::Human.new("X")
+  player_2 = Players::Human.new("O")
   game = Game.new
-    game.play
-  if game.won?
+  game.play
 
   play_again = ""
+  until play_again == "n" || play_again == "no"
   puts "Would you like to play again?"
-    play_again = gets.strip
-    if play_again == "y" || play_again == "yes"
-      game = Game.new
+  play_again = gets.strip
+if play_again == "y" || play_again == "yes"
+  puts "Welcome to Tic Tac Toe!"
+  puts "How many players? Please choose a number from 0..2?"
+  game_type = gets.strip
+  if game_type == 0
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+  elsif game_type == 1
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+  else
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+    game = Game.new
     game.play
+    end
   end
 end
 end
