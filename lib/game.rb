@@ -46,10 +46,11 @@ class Game
   end
 
   def winner
-    #returns X when X won
-    !won? ? nil : board.cells[won?.first]
-    #returns O when O won
-    #returns nil when no winner
+    #!won? ? nil : board.cells[won?.first]
+    if won = won?
+      board.cells[won.first]
+    end 
+end
   end
 
   def current_player #returns the correct player, X, for the third move

@@ -17,7 +17,7 @@ class Board
   end
 
   def position(input)
-    @cells[input.to_i-1]
+    cells[input.to_i-1]
   end
 
   def full?
@@ -44,15 +44,11 @@ class Board
   end
 
   def valid_move?(board_cell)
-    if board_cell.to_i.between?(1, 9) && taken?(board_cell) == false
-      true
-    else
-      false
-    end
+    board_cell.to_i.between?(1, 9) && !taken?(board_cell)
   end
 
   def update(board_cell, player)
-    if valid_move?(board_cell) == true
+    if valid_move?(board_cell)
       board_cell = board_cell.to_i-1
       cells[board_cell] = player.token
     end

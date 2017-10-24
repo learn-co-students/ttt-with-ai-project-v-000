@@ -18,11 +18,7 @@ module Players
       elsif left_side?(board)
         board.cells[3] = self.token
       elsif right_side?(board)
-<<<<<<< HEAD
-        right_side?(board)
-=======
         board.cells[5] = self.token
->>>>>>> 8e6aea9ec443571516a05474f48f41f51ceec9c7
       else
         valid_moves.sample
       end
@@ -55,18 +51,12 @@ module Players
     def left_side?(board)
       if board.cells[3] == " "
         "3"
-      end 
+      end
     end
 
     def right_side?(board)
-<<<<<<< HEAD
-      if !board.taken?("6")
-        "6"
-      end
-=======
       !board.taken?("5")
       "5"
->>>>>>> 8e6aea9ec443571516a05474f48f41f51ceec9c7
     end
 
   end
