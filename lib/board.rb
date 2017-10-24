@@ -2,6 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
+    binding.pry
     reset!
   end
 
@@ -14,38 +15,51 @@ class Board
   end
 
   def reset!
+    binding.pry
     self.cells = [" "," "," "," "," "," "," "," "," "]
   end
 
   def position(user_input)
-    cells[user_input.to_i - 1]
+    self.cells[user_input.to_i - 1]
   end
 
   def full?
-      cells.all?{|token| token == "X" || token == "O" }
+      self.cells.all?{|token| token == "X" || token == "O" }
   end
 
   def turn_count
-    cells.count{|token| token == "X" || token == "O"}
+    self.cells.count{|token| token == "X" || token == "O"}
   end
 
   def taken?(index)
-    cells[index.to_i-1] == "X" || cells[index.to_i-1] == "O"
+    self.cells[index.to_i-1] == "X" || self.cells[index.to_i-1] == "O"
   end
 
   def valid_move?(index)
     index.to_i.between?(1,9) && !taken?(index)
   end
 
-  def update(index, player)
-    if(valid_move?(index))
-      cells[index.to_i - 1] = player.token
+  def turn
+    binding.pry
+    input = self.current_player.move(board)
+    while(!self.board.valid_move?(input))
+      puts "Invalid move, please pick again"
+      input = self.current_player.move(board)
     end
+    self.board.update(input, self.current_player)
   end
 
   def play
-    if(!over?)
-      input = gets.strip
+    binding.pry
+    while(!self.board.full?)
+      binding.pry
+      turn
+    end
+      #binding.pry
+    if(won?)
+      puts "Congratulations #{winner}"
+    elsif (draw?)
+      puts "Cat's Game!"
     end
   end
 

@@ -24,7 +24,7 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def over?
-    board.full?
+    self.board.full?
   end
 
   def won?
@@ -36,7 +36,7 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def draw?
-    !won? ? true : false
+    board.full? && !won? ? true : false
   end
 
   def winner
@@ -46,9 +46,10 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def turn
-    #binding.pry
+    binding.pry
     input = self.current_player.move(board)
     while(!self.board.valid_move?(input))
+      puts "Invalid move, please pick again"
       input = self.current_player.move(board)
     end
     self.board.update(input, self.current_player)
@@ -56,14 +57,15 @@ attr_accessor :board, :player_1, :player_2
 
   def play
     binding.pry
-    while(!over?)
-      turn
+    while(!self.board.full?)
       binding.pry
-      if(won?)
-        puts "Congratulations #{winner}"
-      elsif (draw?)
-        puts "Cat's Game!"
-      end
+      turn
+    end
+      #binding.pry
+    if(won?)
+      puts "Congratulations #{winner}"
+    elsif (draw?)
+      puts "Cat's Game!"
     end
   end
 

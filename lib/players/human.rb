@@ -7,6 +7,7 @@ module Players
 
     def move(board)
       puts "Please make a move:"
+      puts "#{board}"
       gets.strip
     end
   end
