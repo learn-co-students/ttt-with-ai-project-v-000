@@ -43,4 +43,10 @@ class Board
     end
   end
 
+  def play
+    if(!over?)
+      input = gets.strip
+    end
+  end
+
 end

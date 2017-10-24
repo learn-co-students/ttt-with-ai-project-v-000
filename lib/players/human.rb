@@ -5,7 +5,7 @@ module Players
       super
     end
 
-    def move#(board)
+    def move(board)
       puts "Please make a move:"
       gets.strip
     end
