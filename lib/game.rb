@@ -46,7 +46,7 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def turn
-    binding.pry
+    #binding.pry
     input = self.current_player.move(board)
     while(!self.board.valid_move?(input))
       puts "Invalid move, please pick again"
@@ -56,9 +56,9 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def play
-    binding.pry
+    #binding.pry
     while(!self.board.full?)
-      binding.pry
+      #binding.pry
       turn
     end
       #binding.pry

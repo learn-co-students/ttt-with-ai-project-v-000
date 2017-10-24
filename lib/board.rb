@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    binding.pry
+    #binding.pry
     reset!
   end
 
@@ -15,7 +15,7 @@ class Board
   end
 
   def reset!
-    binding.pry
+    #binding.pry
     self.cells = [" "," "," "," "," "," "," "," "," "]
   end
 
@@ -39,27 +39,9 @@ class Board
     index.to_i.between?(1,9) && !taken?(index)
   end
 
-  def turn
-    binding.pry
-    input = self.current_player.move(board)
-    while(!self.board.valid_move?(input))
-      puts "Invalid move, please pick again"
-      input = self.current_player.move(board)
-    end
-    self.board.update(input, self.current_player)
-  end
-
-  def play
-    binding.pry
-    while(!self.board.full?)
-      binding.pry
-      turn
-    end
-      #binding.pry
-    if(won?)
-      puts "Congratulations #{winner}"
-    elsif (draw?)
-      puts "Cat's Game!"
+  def update(index, player)
+    if(valid_move?(index))
+      cells[index.to_i - 1] = player.token
     end
   end
 
