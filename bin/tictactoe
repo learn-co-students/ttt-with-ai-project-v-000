@@ -1,3 +1,87 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# metod
+def new_game
+  # ask payer number
+  player_num = ""
+  puts "How many players?"
+  until player_num == "0" || player_num == "1" || player_num == "2"
+    puts "Please enter 0/1/2."
+    player_num = gets.strip
+  end
+
+  # assing players
+  case player_num.to_i
+  when 0
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    puts "AI is assigned to both of players."
+  when 1
+    # ask which is first
+    order = ""
+    puts "Which would you like to go first?"
+    until order == "1" || order == "2"
+      puts "Please enter 1: AI / 2: you."
+      order = gets.strip
+    end
+    # assing players
+    case order.to_i
+    when 1
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+      puts "AI will be 'X'."
+      puts "You will be 'O'."
+    when 2
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+      puts "You will be 'X'."
+      puts "AI will be 'O'."
+    end
+  when 2
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+    puts "You are assigned to player 1 and 2."
+  end
+
+  # start game
+  input = ""
+  until input == "s" or input == 'e'
+    puts "Enter 'S' to start."
+    puts "Enter 'E' to exit."
+    input = gets.strip
+    if input == "s"
+      puts "Game start!"
+      Game.new(player_1, player_2).play
+    elsif input == "e"
+      puts "Are you sure to exit?"
+      puts "Enter Y: yes / N: no."
+      input = gets.strip
+       if input == "y"
+         puts "Bye!"
+         return
+       end
+    end
+  end
+
+  # ask again or not
+  answer = ""
+  puts "Would you like to play again?"
+  until answer == "y" || answer == "n"
+    puts "Enter Y: yes / N: no."
+    answer = gets.strip
+  end
+  case answer
+  when "y"
+    new_game
+  when 'n'
+    puts "Bye!"
+  end
+
+end
+
+# welcome
+puts "Welcome to Tic-Tac-Toe!!"
+
+new_game
