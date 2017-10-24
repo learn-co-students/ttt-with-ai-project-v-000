@@ -1,3 +1,24 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+    def start
+    puts "Hello and Welcome to Tic Tac Toe!"
+    puts "Which game would you like to play: 0, 1, or 2 player?"
+    input = gets.chomp
+     case input
+     when "0"
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
+        game.play
+      when "1"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2= Players::Computer.new("O"), board = Board.new)
+          game.play
+       when "2"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2= Players::Human.new("O"), board = Board.new)
+          game.play
+       else
+         puts "I say again.. Pick a number: 0, 1, or 2"
+     end
+end
+start
