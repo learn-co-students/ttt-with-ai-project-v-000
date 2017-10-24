@@ -1,3 +1,177 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+Game.new.start
+
+
+
+
+#   def start
+#     puts "Greetings Joshua, How about a nice game of Tic Tac Toe?"
+#     sleep(1)
+#     puts "How many players? Press 0, 1 or 2."
+#     input = gets.strip.to_i
+#     sleep(1)
+#       if input == 2
+#         # when 2
+#           puts "Okay, 2 human players. Makes sense, it's a really trumpy game and a waste of my time"
+#           sleep(1)
+#           puts "The first player to take a turn will be X, the second will be O."
+#           Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+
+
+
+
+
+#           # play_again = ""
+#           # if play_again.downcase == "y" || play_again.downcase == "yes"
+#           # puts "Would you like to play again?"
+#           # play_again = gets.strip
+#           # play_again.downcase == "y" || play_again.downcase == "yes"
+#           # new_game_2 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+#           # until new_game_2.over?
+#           #   new_game_2.play
+#           # end
+#           # end
+
+
+
+#       # when 1
+#       elsif input == 1
+#         puts "alright, looks like it's me against you"
+#         sleep(1)
+#         puts "I will be the O and you will be the X because what are you going to do about it? Would you like to go first or shall I?"
+#         sleep(1)
+#         puts "Press 1 if you would like to go first, press 2 if I should"
+#         gamer_1 = gets.strip.to_i
+
+
+#           if gamer_1 == 1
+#             Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+
+#           elsif gamer_1 == 2
+#             Game.new(player_2 = Players::Computer.new("O"), player_1 = Players::Human.new("X"), board = Board.new).play
+
+#           end
+
+
+
+
+#         # play_again = ""
+#         #   puts "Would you like to play again?"
+#         #   play_again = gets.strip
+#         # while play_again.downcase == "y" || play_again.downcase == "yes"
+#         #   new_game_1 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+#         #   until new_game_1.over?
+#         #     new_game_1.play
+#         #   end
+#         # end
+
+
+
+
+#         # when 0
+#       elsif input == 0
+#         puts "Okay, Skynet vs HAL"
+#         sleep(0.5)
+#         Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+#       end
+#     end
+#   end
+
+#        # play_again = ""
+#        #    puts "Would you like to play again?"
+#        #    play_again = gets.strip
+#        #  while play_again.downcase == "y" || play_again.downcase == "yes"
+#        #    new_game_0 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+#        #    until new_game_0.over?
+#        #      new_game_0.play
+#        #    end
+
+
+
+#     def play_again
+#     puts "\nWould you like to play again? (y/n)"
+#     again = gets.strip.upcase
+
+#     if again == "Y" || again == "YES"
+#       start
+#     else
+#       exit_game
+#     end
+#   end
+
+# #exit_game controls ending of game
+#   def exit_game
+
+#     puts "later, I'll just be sitting here, waiting..."
+
+#   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  # puts "Greetings Joshua, How about a nice game of Tic Tac Toe?"
+  # sleep(2)
+  # puts "How many players? Press 0, 1 or 2. Or, type Wargames for a suprise"
+  # input = gets.strip.to_i
+  # sleep(1)
+  #   if input == 2
+  #       puts "Okay, 2 human players. Makes sense, it's a really trump game and a waste of my time"
+  #       sleep(1)
+  #       puts "The first player to take a turn will be X, the second will be O."
+  #       new_game_2 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  #       new_game_2.play
+
+  #   elsif input == 1
+  #     puts "alright, looks like it's me against you"
+  #     sleep(1)
+  #     puts "I will be the O and you will be the X because what are you going to do about it? Would you like to go first or shall I?"
+  #     sleep(1)
+  #     puts "Press 1 if you would like to go first, press 2 if I should"
+  #       game_1 = gets.strip
+  #     if game_1 == 1
+  #       new_game_1 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  #       new_game_1.play
+  #     elsif game_1 == 2
+  #       new_game_1 = Game.new(player_2 = Players::Computer.new("O"), player_1 = Players::Human.new("X"), board = Board.new)
+  #       new_game_1.play
+
+
+  #   elsif input == 0
+  #     puts "Okay, Skynet vs HAL"
+  #     sleep(2)
+  #     new_game_0 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  #     new_game_0.play
+  #   end
+  #   end
