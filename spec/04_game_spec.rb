@@ -22,6 +22,8 @@ describe 'Game' do
     end
   end
 
+
+
   describe '#player_1' do
     it 'provides access to player_1' do
       game = Game.new
