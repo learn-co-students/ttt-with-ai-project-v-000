@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+
+new_game = GamePlaySelection.new
+
+new_game.welcome
+new_game.players
+
+new_game.game.play
+
+new_game.play_again?
