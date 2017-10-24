@@ -24,7 +24,7 @@ class Game
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? player_1 : player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def over?
@@ -43,9 +43,9 @@ class Game
     self.board.full? && !won?
   end
 
-  def winner
-    if won?
-      self.board.cells[won?[1]]
+  def winner  # Unless won? returns true, local variable won won't be assigned, if statement won't run, and winner method returns false value.
+    if won = won?
+      self.board.cells[won.first]
     end
   end
 
@@ -79,13 +79,10 @@ class Game
 
     case game_type
     when "0-player"
-      binding.pry
       self.player_1 = Players::Computer.new("X")
       self.player_2 = Players::Computer.new("O")
-      binding.pry
       puts "Game will now begin."
     when "1-player"
-      binding.pry
       input = ""
       until input == "no" || input == "yes"
         puts "Would you like to go first and be 'X'? type 'yes' or 'no'"
@@ -96,7 +93,6 @@ class Game
           self.player_1 = Players::Computer.new("X")
         end
       end
-      binding.pry
     when "2-player"
       puts "Player 1 will go first and be 'X'"
       puts "Player 2 will go next and be 'O'"
@@ -116,7 +112,6 @@ class Game
     if input == "play"
       self.board.reset!
       self.reset!
-      binding.pry
       self.start
     end
     self.end unless input == "exit"

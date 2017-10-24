@@ -29,7 +29,7 @@ class Board
   end
 
   def turn_count
-    cells.select { |position| position != " "}.count
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(user_input)
