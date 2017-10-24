@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "What game would you like to play? 0, 1, or 2 players?"
+gametype = gets.chomp
+puts "Which player should go first('X')? Type 'player one' or 'computer'."
+first = gets.chomp
+puts "Who should go second('O')? Type 'player two' or 'computer'."
+second = gets.chomp
