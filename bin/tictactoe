@@ -1,3 +1,117 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  input = gets.strip
+  if input == "0"
+    zero_player
+  elsif input == "1"
+    one_player
+  elsif input == "2"
+    two_player
+  else
+    puts "try again!"
+    start
+  end
+end
+
+def zero_player
+  puts "single game or wargame?(100)"
+  input = gets.strip
+  if input == "single game"
+    game = Game.new(Players::Computer.new(token = "X"), Players::Computer.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+    puts "Would you like them to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      zero_player
+    end
+  elsif input == "wargame"
+    game = Game.new(Players::Computer.new(token = "X"), Players::Computer.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    x_count = 0
+    o_count = 0
+    100.times do
+      game.play
+      if game.winner == "X"
+        x_count += 1
+      elsif game.winner == "O"
+        o_count += 1
+      end
+    end
+    puts "FINAL SCORE: X won #{x_count} times, O won #{o_count} times."
+    puts "Would you like them to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      zero_player
+    end
+  end
+end
+
+def one_player
+  puts "Who should go first with the token X? You(1) or the computer?(2)"
+  input = gets.strip
+  if input == "1"
+    game = Game.new(Players::Human.new(token = "X"), Players::Computer.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      one_player
+    end
+  elsif input == "2"
+    game = Game.new(Players::Computer.new(token = "X"), Players::Human.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      one_player
+    end
+  else
+    puts "1 or 2?"
+    one_player
+  end
+end
+
+def two_player
+  puts "Who should go first with the token X? You(1) or the other you(2)?"
+  input = gets.strip
+  if input == "1"
+    game = Game.new(Players::Human.new(token = "X"), Players::Human.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      two_player
+    end
+  elsif input == "2"
+    game = Game.new(Players::Human.new(token = "X"), Players::Human.new(token = "O"), Board.new)
+    game.board.display
+    puts "Lets begin!"
+    game.play
+    puts "Would you like to have another go? (yes or exit)"
+    input = gets.strip
+    if input == "yes"
+      two_player
+    end
+  else
+    puts "1 or 2?"
+    two_player
+  end
+end
+
+puts "Welcome to Tic Tac Toe!"
+
+puts "How many players? 0, 1, or 2?"
+
+start
