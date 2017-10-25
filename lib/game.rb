@@ -24,17 +24,12 @@ class Game
   end
 
 	def won?
-		winning_combo = nil
-		WIN_COMBINATIONS.each do |combo|
-			if board.cells[combo[0]] != " " && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
-				winning_combo = combo
-					#PROBLEM with the test here: I keep getting it right with combo 0, 4, 8.  But this
-					# test here has two combos winning.  It expects 2, 5, 8 to be the winning combo.
-					# Had to move the combos around to make this work.
-			end
-		end
-		winning_combo
-	end
+	 WIN_COMBINATIONS.detect do |combo|
+		 @board.cells[combo[0]] == @board.cells[combo[1]] &&
+		 @board.cells[combo[0]] == @board.cells[combo[2]] &&
+		 @board.taken?(combo[0] + 1)
+	 end
+ 	end
 
 	def full?
   	board.cells.all? { |cell| cell != " " }
