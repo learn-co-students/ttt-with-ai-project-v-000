@@ -2,7 +2,6 @@ class Board
   attr_accessor :cells
 
   def initialize
-    #binding.pry
     reset!
   end
 
@@ -15,7 +14,6 @@ class Board
   end
 
   def reset!
-    #binding.pry
     self.cells = [" "," "," "," "," "," "," "," "," "]
   end
 
@@ -40,6 +38,7 @@ class Board
   end
 
   def update(index, player)
+    #binding.pry
     if(valid_move?(index))
       cells[index.to_i - 1] = player.token
     end
