@@ -1,4 +1,7 @@
-# require './lib/player.rb'
+require './lib/player.rb'
+require './lib/board.rb'
+require './lib/players/computer.rb'
+require './lib/players/human.rb'
 
 class Game
   WIN_COMBINATIONS = [
@@ -104,7 +107,44 @@ class Game
   end
 end
 
-# computer_player = Players::Computer.new("O")
-# human_player = Players::Human.new("X")
-# new_game = Game.new#(human_player, computer_player)
-# new_game.play
+
+
+computer_player_x = Players::Computer.new("X")
+computer_player_o = Players::Computer.new("O")
+human_player_x = Players::Human.new("X")
+human_player_o = Players::Human.new("O")
+
+puts "Welcome to Tic-Tac-Toe!"
+input = ""
+while !(input == '0' || input == '1' || input == '2')
+  puts "Please type in desired number of players, '0', '1', or '2'"
+  input = gets.chomp
+  case input
+  when "0"
+    new_game = Game.new(computer_player_x, computer_player_o)
+  when "1"
+    player_input = ""
+    while !(player_input == "o" || player_input == "x")
+      puts "Would you like to play as X or O against the computer? type 'x' or 'o'"
+      player_input = gets.chomp
+      case player_input
+      when "o"
+        new_game = Game.new(computer_player_x, human_player_o)
+        puts "Enter a number between 1-9 to choose a spot"
+      when "x"
+        new_game = Game.new(human_player_x, computer_player_o)
+        puts "Enter a number between 1-9 to choose a spot"
+      else
+        puts "Invalid input, try again"
+      end
+    end
+  when "2"
+    new_game = Game.new(human_player_x, human_player_o)
+    puts "Enter a number between 1-9 to choose a spot"
+  else
+    puts "Invalid input, try again"
+  end
+end
+
+new_game.board.display
+new_game.play
