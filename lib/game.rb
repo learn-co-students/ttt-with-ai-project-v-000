@@ -44,7 +44,9 @@ class Game
  	end
 
 	def winner
-		won? ? board.cells[won?[0]] : nil
+		if won = won?
+  		board.cells[won.first]
+		end
 	end
 
 	def turn
