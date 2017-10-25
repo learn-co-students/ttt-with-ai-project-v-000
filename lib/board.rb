@@ -8,7 +8,7 @@ class Board
 
 
 	def reset!
-		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		@cells = Array.new(9, " ")
 		#The only way to get this test to pass was to put @cells.  Just "cells = ..." wouldn't work.
 		#cTried many different things here.
 
