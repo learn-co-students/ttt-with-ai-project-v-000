@@ -1,3 +1,19 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+new_game = Game.new
+
+input = nil
+
+until input == 'no'
+    new_game.board.reset!
+    new_game.start
+    input = nil
+    until input == "yes" || input == "no"
+        puts "Would you like to play again?"
+        puts "Please answer 'yes' or 'no'"
+        input = gets.strip.downcase
+    end
+
+end
