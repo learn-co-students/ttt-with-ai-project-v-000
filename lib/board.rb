@@ -31,7 +31,7 @@ class Board
 	end
 
 	def turn_count
-		cells.select { |pos| pos == "X" || pos == "O" }.count
+		 cells.count { |cell| cell == "X" || cell == "O" }
 	end
 
 	def taken?(pos)
