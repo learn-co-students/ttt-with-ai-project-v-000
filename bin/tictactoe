@@ -2,6 +2,6 @@
 
 require_relative '../config/environment'
 
-#activate
-just_ai
+activate
+# just_ai
 #ai_fail
