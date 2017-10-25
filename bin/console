@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-load './config/environment.rb' 
+load './config/environment.rb'
 
 def reload!
   load './config/environment.rb'
