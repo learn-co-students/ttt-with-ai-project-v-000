@@ -2,6 +2,6 @@
 
 require_relative '../config/environment'
 
-activate
-# just_ai
-#ai_fail
+Genesis.new.activate
+# Genesis.new.just_ai
+# Genesis.new.ai_fail
