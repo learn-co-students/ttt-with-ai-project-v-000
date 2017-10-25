@@ -3,7 +3,7 @@ class Board
 	attr_accessor :cells, :win_combinations
 
 	def initialize
-		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+		reset!
 	end
 
 
