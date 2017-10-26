@@ -1,3 +1,4 @@
+require 'pry'
 class Game
 include Players
 attr_accessor :board, :player_1, :player_2
@@ -64,5 +65,45 @@ attr_accessor :board, :player_1, :player_2
       puts "Cat's Game!"
     end
   end
+
+  def start_game
+    game_option
+    who_goes_first
+
+  end
+
+  def game_option
+    puts "Select game option:
+      1 - Computer vs Computer
+      2 - You vs Computer
+      3 - You vs another Player"
+      input = gets.strip
+      #binding.pry
+      if input.to_i == 1 || input.to_i == 2 || input.to_i == 3
+        @user_input
+      else
+        puts "#{input} is an invalid entry."
+        game_option
+      end
+    end
+
+
+
+  def who_goes_first
+    puts "Who do you want to go first and be X:
+      1 - Computer
+      2 - You
+      3 - Friend"
+      input = gets.strip
+      if @user_input == 1
+        start_game
+      elsif input.to_i == 2 || input.to_i == 3
+        input
+      else
+        puts "#{input} is an invalid entry."
+        who_goes_first
+      end
+    end
+
 
 end
