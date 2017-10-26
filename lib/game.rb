@@ -67,8 +67,8 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def start_game
-    game_option
-    who_goes_first
+    #binding.pry
+    puts "should stop here"
 
   end
 
@@ -80,7 +80,7 @@ attr_accessor :board, :player_1, :player_2
       input = gets.strip
       #binding.pry
       if input.to_i == 1 || input.to_i == 2 || input.to_i == 3
-        @user_input
+        @user_input = input
       else
         puts "#{input} is an invalid entry."
         game_option
@@ -90,20 +90,22 @@ attr_accessor :board, :player_1, :player_2
 
 
   def who_goes_first
-    puts "Who do you want to go first and be X:
-      1 - Computer
-      2 - You
-      3 - Friend"
-      input = gets.strip
-      if @user_input == 1
-        start_game
-      elsif input.to_i == 2 || input.to_i == 3
+    if @user_input.to_i == 1
+      start_game
+    else
+      puts "Who do you want to go first and be X:
+        1 - Computer
+        2 - You
+        3 - Friend"
+        input = gets.strip
+      if input.to_i == 2 || input.to_i == 3
         input
       else
         puts "#{input} is an invalid entry."
         who_goes_first
       end
     end
+  end
 
 
 end
