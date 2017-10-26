@@ -4,7 +4,7 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
 play_again = ""
-until play_again.downcase == "n" || play_again.downcase == "no"
+until play_again.downcase == "n"
   play = 3
   until play>= 0 && play <= 2
     puts "please enter the amount of human players. 0-2"
@@ -27,12 +27,13 @@ empty = ""
 empty = gets.chomp
 
 
-until game.won?
+
   game.play
-end
 
 
 
-  puts "Would you like to play again?"
-  play_again = gets.strip
+  until play_again.downcase == "y" || play_again.downcase == "n"
+    puts "Would you like to play again? y/n"
+    play_again = gets.strip
+  end
 end
