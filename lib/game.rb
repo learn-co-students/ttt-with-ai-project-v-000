@@ -17,9 +17,7 @@ class Game
   end
 
   def full?(cells)
-    cells.all? do |cell|
-    cell == "X" || cell == "O"
-    end
+    cells.all? {|cell| cell != " "}
   end
 
   def over?

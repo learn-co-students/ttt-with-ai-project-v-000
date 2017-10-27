@@ -28,8 +28,6 @@ class TicTacToeCLI
     if game.won?
       puts "Would you like to play again? Y/N"
       if gets.strip.upcase == "Y"
-        puts "Please enter the number of human players: 0, 1, or 2?"
-        input = gets.strip.to_i
         board.reset!
         game.play
       elsif
