@@ -6,9 +6,14 @@ module Players
     end
 
     def move(board)
+      board.display
       puts "Please enter 1-9:"
-      #puts "#{board}"
-      gets.strip
+
+      move = gets.strip
+      if move.downcase == "exit"
+        exit!
+      end
+      move
     end
   end
 

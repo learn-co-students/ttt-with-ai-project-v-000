@@ -5,10 +5,4 @@ require_relative '../config/environment'
 puts "Welcome to Tic Tac Toe Game!"
 
 
-
-game = Game.new
-
-game.game_option
-game.who_goes_first
-
-#if game.option ==
+GameOptions.new

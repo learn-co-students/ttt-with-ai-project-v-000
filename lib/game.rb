@@ -14,10 +14,10 @@ attr_accessor :board, :player_1, :player_2
     [6,4,2]
   ]
 
-  def initialize(player_1 = nil, player_2=nil, board=nil)
-    self.player_1 = (!player_1) ? Human.new("X") : player_1
-    self.player_2 = (!player_1) ? Human.new("O") : player_2
-    self.board = (!board) ? Board.new : board
+  def initialize(player_1 = Human.new("X"), player_2=Human.new("O"), board=Board.new)
+    self.player_1 = player_1
+    self.player_2 = player_2
+    self.board = board
   end
 
   def current_player
@@ -53,6 +53,7 @@ attr_accessor :board, :player_1, :player_2
       input = self.current_player.move(board)
     end
     self.board.update(input, self.current_player)
+
   end
 
   def play
@@ -60,52 +61,23 @@ attr_accessor :board, :player_1, :player_2
       turn
     end
     if winner
+      board.display
       puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
     end
+    #play_again_or_exit
   end
 
-  def start_game
-    #binding.pry
-    puts "should stop here"
-
-  end
-
-  def game_option
-    puts "Select game option:
-      1 - Computer vs Computer
-      2 - You vs Computer
-      3 - You vs another Player"
-      input = gets.strip
-      #binding.pry
-      if input.to_i == 1 || input.to_i == 2 || input.to_i == 3
-        @user_input = input
-      else
-        puts "#{input} is an invalid entry."
-        game_option
-      end
-    end
-
-
-
-  def who_goes_first
-    if @user_input.to_i == 1
-      start_game
-    else
-      puts "Who do you want to go first and be X:
-        1 - Computer
-        2 - You
-        3 - Friend"
-        input = gets.strip
-      if input.to_i == 2 || input.to_i == 3
-        input
-      else
-        puts "#{input} is an invalid entry."
-        who_goes_first
-      end
+  def play_again_or_exit
+    puts "Would you like to play again?
+          Yes | No"
+    input = gets.strip
+    if input.downcase == "yes" || input.downcase == "y"
+      game_option
+    else input.downcase == "no" || input.downcase == "n" || input.downcase == "exit"
+      exit!
     end
   end
-
 
 end

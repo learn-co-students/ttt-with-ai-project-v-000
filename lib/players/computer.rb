@@ -19,7 +19,6 @@ module Players
          end
          #this needs an end keyword, and perhaps another turn_count = 3 method
        end
-        #binding.pry
         Game::WIN_COMBINATIONS.detect do |combo|
         if (combo.select{|cell| board.cells[cell - 1] == token}.length==2)
           combo.detect do |cell|
@@ -28,7 +27,8 @@ module Players
             end
           end
         end
-      end # End of the Game::WIN_COMBO iteration, if we are occupying two spaces
+      end
+      #binding.pry # End of the Game::WIN_COMBO iteration, if we are occupying two spaces
       move
     end
 
