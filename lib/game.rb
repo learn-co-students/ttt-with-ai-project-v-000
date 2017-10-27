@@ -22,13 +22,7 @@ class Game
   end
 
   def current_player
-    #  if board.turn_count.even?
-    #    player_1
-    #  else
-    #    player_2
-    #  end
-     board.turn_count % 2 == 0 ? player_1 : player_2
-
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over?
@@ -54,14 +48,12 @@ class Game
     board.full? && won? == nil
   end
   def winner
-    if won?
-      board.cells[won?[0]]
-      board.cells[won?[1]]
-      board.cells[won?[2]]
-    else
-      nil
-   end
-
+    if won = won?
+      board.cells[won.first]
+    end
+    # won? returns winning combinations, if not it returns false
+    # if it does return winning combination then var won will be assigned the winning combinations
+    # then show the board cells and show only the first cell of the winning combination which is either "X" or "O"
   end
 
   def turn
@@ -87,7 +79,6 @@ class Game
       else
         puts "Congratulations #{winner}!"
       end
-      # binding.pry
   end
 
 

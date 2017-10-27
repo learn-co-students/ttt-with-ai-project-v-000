@@ -6,14 +6,12 @@ class Board
 
   def initialize(cells = Array.new(9," "))
     @cells = cells
-
+    self.reset!
   end
 
   def reset!
-    cells.clear
-    9.times do
-      cells << " "
-    end
+    @cells.clear
+    @cells = Array.new(9," ")
   end
 
   def display
@@ -25,8 +23,7 @@ class Board
   end
 
   def position(user_input)
-    user_input = user_input.to_i
-    cells[user_input-1]
+    cells[user_input.to_i-1]
   end
 
   def full?
@@ -38,22 +35,15 @@ class Board
   end
 
   def taken?(user_input)
-    user_input = user_input.to_i
-    cells[user_input-1] == "X" || cells[user_input-1] == "O"
+    position(user_input) == "X" || position(user_input) == "O"
   end
 
   def valid_move?(user_input)
-    user_input = user_input.to_i
-    !full? && !taken?(user_input) if user_input >= 1 && user_input < 10
+     user_input.to_i.between?(1,9) if !taken?(user_input)
   end
 
   def update(user_input,player)
-    user_input = user_input.to_i
-
-    cells[user_input-1] = player.token
-
-    # binding.pry
-
+    cells[user_input.to_i-1] = player.token
   end
 
 

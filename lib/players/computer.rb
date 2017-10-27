@@ -5,7 +5,7 @@ module Players
     def move(board)
 
 
-       VALID_MOVES.detect{|move| board.valid_move?(move)}
+      #  VALID_MOVES.detect{|move| board.valid_move?(move)}
 
 
 
@@ -19,8 +19,8 @@ module Players
           middle?(board)
         elsif corners(board)
           corners(board)
-        elsif random_move(board)
-          random_move(board)
+        # elsif random_move(board)
+        #   random_move(board)
 
         end
 
