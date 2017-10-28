@@ -13,12 +13,12 @@ module Players
 
 
       # poss_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].sample
-      "5"
-      # ["1","5"].sample
-      # ["3", "5"].sample
-      #  ["2", "4"].sample
-      # ["3", "5", "7", "9"].sample
-      # ["2","4","6","8"].sample
+
+       ["1","5"].sample
+       ["3", "5"].sample
+       ["2", "4"].sample
+       ["3", "5", "7", "9"].sample
+       ["2","4","6","8"].sample
 
       # poss_moves_new = ["1", "2", "3"].sample
       # poss_moves_mid = ["4", "5", "6"].sample

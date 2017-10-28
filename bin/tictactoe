@@ -6,15 +6,11 @@ puts "Welcome to Tic Tac Toe!"
 puts "How many players? Please choose a number 0..2?"
 game_type = " "
 game_type = gets.strip.to_i
-until game_type == 0 || game_type == 1 || game_type == 2
-  puts "How many players? Please choose a number 0..2?"
-  if game_type == 0 || game_type == 1 || game_type == 2
+
 puts "Who should go first? Please choose a number 0..2"
 player_order = ""
 player_order = gets.strip.to_i
-until player_order == 0 || player_order == 1 || player_order == 2
-  puts "Who should go first? Please choose a number 0..2"
-  if player_order == 0 || player_order == 1 || player_order == 2
+
 if game_type == 0
   player_1 = Players::Computer.new("X")
   player_2 = Players::Computer.new("O")
@@ -53,9 +49,6 @@ if play_again == "y" || play_again == "yes"
     game = Game.new(player_1, player_2)
     game.play
 
-end
-end
-end
-end
+
 end
 end
