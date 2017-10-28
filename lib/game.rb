@@ -47,18 +47,24 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def turn
-    binding.pry
+    #binding.pry
+    board.display
+    puts "Please enter 1-9"
+    #binding.pry
     input = self.current_player.move(board)
     while(!self.board.valid_move?(input))
+      #binding.pry
       puts "Invalid move, please pick again"
       input = self.current_player.move(board)
     end
-    binding.pry
+    #binding.pry
     self.board.update(input, self.current_player)
   end
 
   def play
+    #binding.pry
     until over?
+      #binding.pry
       turn
     end
     if winner

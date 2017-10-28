@@ -38,7 +38,9 @@ class Board
   end
 
   def update(index, player)
+    #binding.pry
     if(valid_move?(index))
+      #binding.pry
       cells[index.to_i - 1] = player.token
     end
   end
