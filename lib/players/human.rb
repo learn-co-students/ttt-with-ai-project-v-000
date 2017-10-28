@@ -3,7 +3,7 @@ module Players
     Players::Human
     def move(board)
       puts "Please enter a number from 1..9"
-      gets.strip
+      move = gets.strip
 
   end
 end

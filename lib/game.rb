@@ -23,7 +23,7 @@ class Game
   end
 
   def current_player
-    current_player = player_1
+
     if @board.turn_count % 2 == 0
       player_1
     else
@@ -53,14 +53,18 @@ class Game
   end
 
   def turn
-    player_1 = current_player
-    input = player_1.move(@board)
-    if @board.valid_move?(input)
-      @board.update(input, current_player)
-      player_2 = current_player
+    counter = 0
+    player = current_player
+    input = player.move(@board)
+
+#binding.pry
+     if @board.valid_move?(input)
+
+      @board.update(input, player)
+      @board.turn_count
+
     else
       turn
-
     end
   end
 

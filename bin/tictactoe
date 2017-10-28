@@ -3,8 +3,18 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
-puts "How many players? Please choose a number from 0..2?"
-game_type = gets.strip
+puts "How many players? Please choose a number 0..2?"
+game_type = " "
+game_type = gets.strip.to_i
+until game_type == 0 || game_type == 1 || game_type == 2
+  puts "How many players? Please choose a number 0..2?"
+  if game_type == 0 || game_type == 1 || game_type == 2
+puts "Who should go first? Please choose a number 0..2"
+player_order = ""
+player_order = gets.strip.to_i
+until player_order == 0 || player_order == 1 || player_order == 2
+  puts "Who should go first? Please choose a number 0..2"
+  if player_order == 0 || player_order == 1 || player_order == 2
 if game_type == 0
   player_1 = Players::Computer.new("X")
   player_2 = Players::Computer.new("O")
@@ -14,7 +24,8 @@ elsif game_type == 1
 else
   player_1 = Players::Human.new("X")
   player_2 = Players::Human.new("O")
-  game = Game.new
+end
+  game = Game.new(player_1, player_2)
   game.play
 
   play_again = ""
@@ -22,9 +33,13 @@ else
   puts "Would you like to play again?"
   play_again = gets.strip
 if play_again == "y" || play_again == "yes"
-  puts "Welcome to Tic Tac Toe!"
-  puts "How many players? Please choose a number from 0..2?"
-  game_type = gets.strip
+
+  puts "How many players? Please choose a number 0..2?"
+  game_type = " "
+  game_type = gets.strip.to_i
+  puts "Who should go first? Please choose a number 0..2"
+  player_order = ""
+  player_order = gets.strip.to_i
   if game_type == 0
     player_1 = Players::Computer.new("X")
     player_2 = Players::Computer.new("O")
@@ -34,9 +49,13 @@ if play_again == "y" || play_again == "yes"
   else
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
-    game = Game.new
-    game.play
-    end
   end
+    game = Game.new(player_1, player_2)
+    game.play
+
+end
+end
+end
+end
 end
 end

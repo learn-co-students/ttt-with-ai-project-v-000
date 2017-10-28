@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   attr_accessor :cells
 
@@ -31,7 +32,8 @@ class Board
   end
 
   def input_to_index(input)
-    input.to_i - 1
+    #binding.pry
+    input = input.to_i - 1
   end
 
   def position(input)
@@ -42,7 +44,7 @@ class Board
   def turn_count
     count = 0
     cells.each do |cell|
-      if cell != " "
+      if cell != " " && count <= 9
         count += 1
       end
     end
@@ -50,6 +52,7 @@ class Board
   end
 
   def valid_move?(input)
+
     if input.to_i.between?(1,9) && position(input) == " "
       true
     end
