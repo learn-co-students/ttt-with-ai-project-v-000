@@ -24,16 +24,24 @@ module Players
        else Game::WIN_COMBINATIONS.find do |combo|
 
            if combo.select{|cell| board.cells[cell] == token}.length==2
+             binding.pry
              move = combo.detect{|cell| board.cells[cell] == " "}
            end
+           binding.pry
+           if combo.select{|cell| board.cells[cell] != " " }.length==2 && combo.select{|cell| board.cells[cell] != token}.length==2 && combo.select{|cell| board.cells[cell] == " " }.length ==1
+             binding.pry
+             move = combo.detect{|cell| board.cells[cell] == " "}
+           end
+           if combo.select{|cell| board.cells[cell] != token}.length==3 && combo.select{|cell| board.cells[cell] == " " }.length ==1
+             move = combo.detect{|cell| board.cells[cell] == " "}
+           end
+           if combo.select{|cell| board.cells[cell] == token}.length==1
 
-           if combo.select{|cell| board.cells[cell] != " " }.length==2 || combo.select{|cell| board.cells[cell] != token}.length==2
-             move = combo.detect{|cell| board.cells[cell] == " "}
-           end
+
 
           end
         end
-        move + 1
+        move = 1 + move
         move.to_s
       end
 

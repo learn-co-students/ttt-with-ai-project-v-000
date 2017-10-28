@@ -71,6 +71,7 @@ attr_accessor :board, :player_1, :player_2
       board.display
       puts "Congratulations #{winner}!"
     else
+      board.display
       puts "Cat's Game!"
     end
     #play_again_or_exit
