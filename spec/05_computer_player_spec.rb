@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe 'Players::Computer' do
   it 'inherits from Player' do
     expect(Players::Computer.ancestors).to include(Player)
@@ -13,7 +13,7 @@ describe 'Players::Computer' do
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
       computer_move = computer.move(board)
-
+      binding.pry
       expect(valid_moves).to include(computer_move)
     end
   end
