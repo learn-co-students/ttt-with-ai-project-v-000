@@ -10,9 +10,10 @@ puts "How many players? Please choose a number 0..2?"
 game_type = gets.strip.to_i
 end
 player_order = ""
-until player_order == 0 || player_order == 1 || player_order == 2
-puts "Who should go first? Please choose a number 0..2"
+puts "Would you like to go first?"
 player_order = gets.strip.to_i
+if player_order == "y" || player_order == "yes"
+  player_1
 end
 if game_type == 0
   player_1 = Players::Computer.new("X")
@@ -40,9 +41,10 @@ if play_again == "y" || play_again == "yes"
   game_type = gets.strip.to_i
   end
   player_order = ""
-  until player_order == 0 || player_order == 1 || player_order == 2
-  puts "Who should go first? Please choose a number 0..2"
+  puts "Would you like to go first?"
   player_order = gets.strip.to_i
+  if player_order == "y" || player_order == "yes"
+    player_1
   end
   if game_type == 0
     player_1 = Players::Computer.new("X")
