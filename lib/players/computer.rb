@@ -20,7 +20,9 @@ module Players
          else
            move = 0
          end
-
+         #binding.pry
+       elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+         move = 1
          else Game::WIN_COMBINATIONS.find do |combo|
            if combo.select{|cell| board.cells[cell] == token}.length==2 && combo.select{|cell| board.position(cell) == " "}.length==1
              move = combo.detect{|cell| board.cells[cell] == " "}
