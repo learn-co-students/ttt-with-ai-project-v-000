@@ -30,26 +30,32 @@ module Players
         end
 
         if move == nil
-          #binding.pry
-          if board.position(1) == board.position(8) && !board.taken?(7)
+          if board.cells[0] && board.cells[7] != " " && board.position(1) == board.position(8)  && !board.taken?(7)
             move = 6
-          elsif board.position(3) == board.position(8) && !board.taken?(9)
+          elsif board.cells[2] && board.cells[7] != " " && board.position(3) == board.position(8) && !board.taken?(9)
             move = 8
-          elsif board.position(2) == board.position(9) && !board.taken?(3)
+          elsif board.cells[1] && board.cells[8] != " " && board.position(2) == board.position(9) && !board.taken?(3)
             move = 2
-          elsif board.position(2) == board.position(7) && !board.taken?(1)
+          elsif board.cells[1] && board.cells[6] != " " && board.position(2) == board.position(7) && !board.taken?(1)
             move = 0
-          elsif board.position(3) == board.position(4) && !board.taken?(1)
+          elsif board.cells[2] && board.cells[4] != " " && board.position(3) == board.position(4) && !board.taken?(1)
             move = 0
-          elsif board.position(4) == board.position(9) && !board.taken?(7)
+          elsif board.cells[3] && board.cells[8] != " " && board.position(4) == board.position(9) && !board.taken?(7)
             move = 6
-          elsif board.position(1) == board.position(6) && !board.taken?(3)
+          elsif board.cells[0] && board.cells[5] != " " && board.position(1) == board.position(6) && !board.taken?(3)
             move = 2
-          elsif board.position(6) == board.position(7) && !board.taken?(9)
+          elsif board.cells[5] && board.cells[6] != " " && board.position(6) == board.position(7) && !board.taken?(9)
+            move = 8
+          elsif board.cells[1] && board.cells[5] != " " && board.position(2) == board.position(6) && !board.taken?(3)
+            move = 2
+          elsif board.cells[1] && board.cells[3] != " " && board.position(2) == board.position(4) && !board.taken?(1)
+            move = 0
+          elsif board.cells[3] && board.cells[7] != " " && board.position(4) == board.position(8) && !board.taken?(7)
+            move = 6
+          elsif board.cells[7] && board.cells[5] != " " && board.position(8) == board.position(6) && !board.taken?(9)
             move = 8
           else
           move = [0,1,2,3,4,5,6,7,8].detect{|cell| board.cells[cell] == " "}
-          #move = [0,2,6,8,1,3,5,7].detect{|cell| board.cells[cell] == " "}
         end
       end
 
