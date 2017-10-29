@@ -4,6 +4,7 @@ class GameOptions
 
   def initialize
     game_option
+
   end
 
   def start_game
@@ -27,7 +28,8 @@ class GameOptions
     puts "Select game option:
       1 - Computer vs Computer
       2 - You vs Computer
-      3 - You vs another Player"
+      3 - You vs another Player
+      --------------------------"
       input = gets.strip
       if input.to_i == 1
         @computer_vs_computer = true
@@ -48,7 +50,8 @@ class GameOptions
     if @option_input == 2
       puts "Who do you want to go first and be X:
         1 - Computer
-        2 - You"
+        2 - You
+        -----------------------------------------"
       end
       input = gets.strip
       if input.to_i == 1 || input.to_i == 2

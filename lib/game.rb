@@ -47,45 +47,54 @@ attr_accessor :board, :player_1, :player_2
   end
 
   def turn
-    #binding.pry
-    board.display
-    puts "Please enter 1-9"
-    #binding.pry
+    if !computer_round_0?
+      board.display
+      puts "Please enter 1-9"
+    end
     input = self.current_player.move(board)
     while(!self.board.valid_move?(input))
-      #binding.pry
       puts "Invalid move, please pick again"
       input = self.current_player.move(board)
     end
-    #binding.pry
     self.board.update(input, self.current_player)
   end
 
+  def computer_round_0?
+    if player_1.is_a?(Computer) && player_2.is_a?(Computer) && board.turn_count == 0 || player_1.is_a?(Computer) && board.turn_count == 0
+      true
+    end
+  end
+
   def play
-    #binding.pry
     until over?
-      #binding.pry
       turn
     end
     if winner
       board.display
       puts "Congratulations #{winner}!"
+      again?
     else
       board.display
       puts "Cat's Game!"
+      again?
     end
-    #play_again_or_exit
   end
 
-  def play_again_or_exit
-    puts "Would you like to play again?
-          Yes | No"
-    input = gets.strip
+  def again?
+    if over?
+      puts "Do you want to play again?"
+      input = gets.strip
+    end
     if input.downcase == "yes" || input.downcase == "y"
-      game_option
-    else input.downcase == "no" || input.downcase == "n" || input.downcase == "exit"
+      GameOptions.new
+    elsif input.downcase == "no" || input.downcase == "n" || input.downcase == "exit"
       exit!
+    else
+      puts "Invalid input"
+      again?
     end
   end
+
+
 
 end
