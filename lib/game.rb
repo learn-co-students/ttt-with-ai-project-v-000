@@ -53,6 +53,7 @@ attr_accessor :board, :player_1, :player_2
     end
     input = self.current_player.move(board)
     while(!self.board.valid_move?(input))
+      binding.pry
       puts "Invalid move, please pick again"
       input = self.current_player.move(board)
     end

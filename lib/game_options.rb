@@ -51,7 +51,7 @@ class GameOptions
       puts "Who do you want to go first and be X:
         1 - Computer
         2 - You
-        -----------------------------------------"
+        ------------"
       end
       input = gets.strip
       if input.to_i == 1 || input.to_i == 2

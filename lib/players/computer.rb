@@ -30,8 +30,28 @@ module Players
         end
 
         if move == nil
-          move = [0,2,6,8,1,3,5,7].detect{|cell| board.cells[cell] == " "}
+          #binding.pry
+          if board.position(1) == board.position(8) && !board.taken?(7)
+            move = 6
+          elsif board.position(3) == board.position(8) && !board.taken?(9)
+            move = 8
+          elsif board.position(2) == board.position(9) && !board.taken?(3)
+            move = 2
+          elsif board.position(2) == board.position(7) && !board.taken?(1)
+            move = 0
+          elsif board.position(3) == board.position(4) && !board.taken?(1)
+            move = 0
+          elsif board.position(4) == board.position(9) && !board.taken?(7)
+            move = 6
+          elsif board.position(1) == board.position(6) && !board.taken?(3)
+            move = 2
+          elsif board.position(6) == board.position(7) && !board.taken?(9)
+            move = 8
+          else
+          move = [0,1,2,3,4,5,6,7,8].detect{|cell| board.cells[cell] == " "}
+          #move = [0,2,6,8,1,3,5,7].detect{|cell| board.cells[cell] == " "}
         end
+      end
 
       end
         move = move + 1
