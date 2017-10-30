@@ -1,73 +1,38 @@
 class Board
-
   attr_accessor :cells
-  @cells = []
-
   def initialize
-    @cells = []
-    # x = 0
-    9.times do |x|
-      @cells[x] = " "
-     end
-
-  end
-
-  def cells
-    @cells
+    reset!
   end
 
   def reset!
-    9.times do |x|
-      @cells[x] = " "
-     end
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
-
   def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
-    puts " ----------- "
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
-    puts " ----------- "
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-    puts
-    puts
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts "-----------"
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts "-----------"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
-
-  def position(move)
-    @cells[move.to_i - 1]
+  def position(input)
+    input = input.to_i
+    cells[input - 1]
   end
-
   def full?
-    @cells.include?(" ")? false : true
+    cells.none? {|cell| cell == " " || cell == nil}
   end
-
-  def taken?(check)
-    @cells[check.to_i - 1] == " "? false : true
-  end
-
   def turn_count
-    counter = 0
-    @cells.each do |cell|
-      if cell != " "
-        counter += 1
-      end
-    end
-    counter
+    cells.count {|cell| cell == "X" || cell == "O"}
   end
-
-  def valid_move?(move)
-    move = move.to_i
-    if move > 0 && move < 10
-      if @cells[move - 1] == " "
-        true
-      end
-    else
-      false
-    end
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
   end
-
-  def update(move, player)
-    move = move.to_i
-    token = player.token
-    @cells[move - 1] = token
+  def valid_move?(input)
+    input = input.to_i
+    !(taken?(input)) && input.between?(1, 9)
+  end
+  def update(input, player)
+    input = input.to_i
+    cells[input -1] = player.token
   end
 end

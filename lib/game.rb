@@ -1,83 +1,94 @@
-class Game
-  attr_accessor :board, :player_1, :player_2
+require "pry"
 
-  WIN_COMBINATIONS = [ #all possible win combinations
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+class Game
+  attr_accessor :board, :player_1, :player_2, :timer
+
+  WIN_COMBINATIONS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [6, 4, 2]
   ]
 
-  def initialize (player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), wargame = false, board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    @wargame = wargame
+    @timer = 1.5
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+    board.turn_count.even?  ? player_1 : player_2
   end
-
-  def won? #checks win combinations and displays winning combo
-    WIN_COMBINATIONS.each do |combination|
-      win_position_1 = combination[0]
-      win_position_2 = combination[1]
-      win_position_3 = combination[2]
-
-      position_1 = self.board.cells[win_position_1]
-      position_2 = self.board.cells[win_position_2]
-      position_3 = self.board.cells[win_position_3]
-      if (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
-        return combination
-      end
-    end
-    return false
-  end
-
-  def over? #stops game if any of the conditions are true
-    if self.board.full? || self.won? || self.draw?
-      return true
+  def won?
+    WIN_COMBINATIONS.find do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] != " "
     end
   end
-
   def draw?
-    self.board.full? && !self.won?
+    board.full? && !won?
   end
-
+  def over?
+    won? || draw?
+  end
   def winner
-    if self.won?
-     self.board.cells[self.won?[0]]
-   end
- end
-
+    board.cells[won?[0]] if won?
+  end
   def turn
-    if board.turn_count == 0
-      puts "Player #{current_player.token}, please enter 1-9:"
-      self.board.display
-    end
-    input = self.current_player.move(self.board)
-    if self.board.valid_move?(input)
-      self.board.update(input, self.current_player)
-      self.board.display
+    puts "It's now #{current_player.token}'s turn."
+    input = current_player.move(board, timer).to_i
+    if board.valid_move?(input.to_s)
+      board.update(input, current_player)
+      system('clear')
+      puts "Game #{@counter}" if @wargame
+      board.display
+    elsif input.between?(1, 9) == false
+      puts "That is an invalid move"
+      turn
     else
-      puts "That move was invalid"
-      self.turn
+      puts "Whoops! Looks like that position is taken"
+      turn
     end
   end
-
   def play
+    board.reset!
+    system('clear')
+    puts "Game #{@counter}" if @wargame
+    board.display
     until over?
       turn
     end
-    if won?
-      puts "Congratulations #{winner}!"
-    else
-      puts "Cat's Game!"
+    if draw?
+      puts "WINNER: NONE"
+    elsif won?
+      puts "WINNER: #{winner}"
     end
   end
-
+  def wargames
+    @counter = 0
+    x = 0
+    o = 0
+    draw = 0
+    until @counter == 100
+      @counter += 1
+      play
+      if draw?
+        draw += 1
+      elsif winner == "X"
+        x += 1
+      elsif winner == "O"
+        o += 1
+      end
+      sleep(@timer*1.5)
+      @timer -= (@timer/3)
+    end
+    puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
+    puts "A STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO PLAY."
+    puts "HOW ABOUT A NICE GAME OF CHESS?"
+  end
 end
