@@ -1,7 +1,7 @@
 require 'pry'
 
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :first_player, :second_player
 
   WIN_COMBINATIONS = [
    [0,1,2],
@@ -70,6 +70,8 @@ class Game
 
   def play
     until over?
+      puts "Where would you like to go?"
+      board.display
       turn
     end
     if won? != false
@@ -77,6 +79,32 @@ class Game
     else
       puts "Cat's Game!"
     end
+  end
+
+  def start
+    puts "Welcome to Tic Tac Toe!"
+    puts "Are you playing 0-player, 1-player, or 2-player?"
+    game_players = gets.strip
+
+    if game_players == "2-player"
+      self.player_1 = Players::Human.new("X")
+      self.player_2 = Players::Human.new("O")
+    elsif game_players == "1-player"
+      puts "Do you want to be X and go first? y/n"
+      answer = gets.strip
+        if answer == "y" || "yes"
+          self.player_1 = Players::Human.new("X")
+          self.player_2 = Players::Computer.new("O")
+        elsif answer == "n" || "no"
+          self.player_1 = Players::Computer.new("X")
+          self.player_2 = Players::Human.new("O")
+        end
+    elsif game_players == "0-player"
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Computer.new("O")
+    end
+
+    self.play
   end
 
 end
