@@ -22,8 +22,7 @@ class Board
   end
 
   def position(input)
-    input = input_to_index(input)
-    cells[input]
+    cells[input.to_i-1]
   end
 
   def full?
@@ -33,27 +32,15 @@ class Board
   end
 
   def turn_count
-    turns = 0
-    cells.each do |cell|
-      if cell == "X" || cell == "O"
-        turns += 1
-      end
-    end
-    turns
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(input)
-    if position(input) == "X" || position(input) == "O"
-      true
-    else
-      false
-    end
+    !(position(input) == " " || position(input) == "")
   end
 
   def valid_move?(input)
-    if !taken?(input) && input.to_i.between?(1,9)
-      true
-    end
+    !taken?(input) && input.to_i.between?(1,9)
   end
 
   def update(input, player)
