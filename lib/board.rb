@@ -4,7 +4,7 @@ class Board
   attr_accessor :cells, :player
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    self.reset!
   end
 
   def display
@@ -32,7 +32,7 @@ class Board
   end
 
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def full?
