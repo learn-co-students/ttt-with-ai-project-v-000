@@ -3,14 +3,14 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
     reset!
   end
 
   def reset!
     cells.clear
-    cells << [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    cells.flatten!
+     cells << [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+     cells.flatten!
   end
 
   def display
@@ -22,48 +22,30 @@ class Board
   end
 
   def full?
-    cells.all? do |cell|
-      if cell == "X" || cell == "O"
-        true
-      elsif cells.include?("")
-        false
-      end
-    end
-  end
+    cells.all? {|token| token == "X" || token == "O"}
+end
 
   def input_to_index(input)
-    #binding.pry
-    input = input.to_i - 1
+     input = input.to_i - 1
   end
 
   def position(input)
-    input = input_to_index(input)
-    cells[input]
+    cells[input.to_i-1]
   end
 
   def turn_count
-    count = 0
-    cells.each do |cell|
-      if cell != " " && count <= 9
-        count += 1
-      end
-    end
-    count
+    cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   def valid_move?(input)
-
     if input.to_i.between?(1,9) && position(input) == " "
       true
     end
   end
 
+
   def taken?(input)
-    if position(input) == "X" || position(input) == "O"
-      true
-    else
-      false
-    end
+  position(input) == "X" || position(input) == "O"
   end
 
 
