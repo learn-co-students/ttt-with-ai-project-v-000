@@ -70,13 +70,15 @@ class Game
 
   def play
     until over?
-      puts "Where would you like to go?"
+      puts "Where would you like to go? Choose a space between 1-9."
       board.display
       turn
     end
     if won? != false
+      board.display
       puts "Congratulations #{winner}!"
     else
+      board.display
       puts "Cat's Game!"
     end
   end
@@ -86,20 +88,20 @@ class Game
     puts "Are you playing 0-player, 1-player, or 2-player?"
     game_players = gets.strip
 
-    if game_players == "2-player"
+    if game_players == "2-player" || game_players == "2"
       self.player_1 = Players::Human.new("X")
       self.player_2 = Players::Human.new("O")
-    elsif game_players == "1-player"
+    elsif game_players == "1-player" || game_players == "1"
       puts "Do you want to be X and go first? y/n"
       answer = gets.strip
-        if answer == "y" || "yes"
+        if answer == "y" || answer == "yes"
           self.player_1 = Players::Human.new("X")
           self.player_2 = Players::Computer.new("O")
-        elsif answer == "n" || "no"
+        elsif answer == "n" || answer == "no"
           self.player_1 = Players::Computer.new("X")
           self.player_2 = Players::Human.new("O")
         end
-    elsif game_players == "0-player"
+    elsif game_players == "0-player" || game_players == "0"
       self.player_1 = Players::Computer.new("X")
       self.player_2 = Players::Computer.new("O")
     end
