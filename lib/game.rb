@@ -64,6 +64,7 @@ class Game
       board.update(players_move, player)
       players_move
     else
+      puts "Invalid move."
       turn
     end
   end
