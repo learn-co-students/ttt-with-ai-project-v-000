@@ -25,6 +25,10 @@ class Board
     cells.include?(" ") ? false : true
   end
 
+  def empty?
+    cells.include?("X") || cells.include?("O") ? false : true
+  end
+
   def turn_count
     cells.find_all { |cell| cell == "X" || cell == "O" }.length
   end

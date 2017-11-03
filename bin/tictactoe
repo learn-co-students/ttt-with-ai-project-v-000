@@ -13,7 +13,7 @@ case game_type
 when "0"
   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 when "1"
-  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
 when "2"
   game = Game.new
 end
