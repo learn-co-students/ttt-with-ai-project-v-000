@@ -8,63 +8,54 @@ class Game
   end
 
   def start
-    puts "Welcome to Tic Tac Toe!\n".colorize(:red)
+    puts "***********************".colorize(:yellow)
+    puts "Welcome to Tic Tac Toe!\n".colorize(:yellow)
     self.board.display_reference
-    sleep(0.8)
-    puts "Select one Option to Play:\n".colorize(:color => :black, :background => :white)
-    puts "-- Computer will play itself <0>".colorize(:magenta)
-    puts "-- Play against Computer <1>".colorize(:yellow)
-    puts "-- Play against an Opponent <2>".colorize(:cyan)
+    sleep(0.5)
+    puts "Select one Option to Play <0/1/2>\n".colorize(:color => :black, :background => :white)
+    sleep(0.5)
+    puts "Computer will play itself <0>".colorize(:red)
+    sleep(0.2)
+    puts "Play against Computer <1>".colorize(:green)
+    sleep(0.2)
+    puts "Play against an Opponent <2>".colorize(:blue)
     input = gets.chomp.to_i
-    case input
 
+    case input
     when 0
       Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
 
     when 1
-      puts "Who starts?"
-      puts "Computer <0> / Human <1>"
+      puts "Who starts? Computer <0> / Human <1>".colorize(:color => :black, :background => :white)
       token_chosen = gets.chomp.to_i
       if token_chosen == 1
-        puts "You start, good luck!"
+        puts "You start, good luck!".colorize(:yellow)
         Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
       elsif token_chosen == 0
-        puts "Computer starts, good luck!"
+        puts "Computer starts, good luck!".colorize(:yellow)
         Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
       else
         self.start
       end
 
     when 2
-      puts "Choose your token <X/O>"
+      puts "Choose your token <X/O>".colorize(:color => :black, :background => :white)
       token_chosen = gets.chomp
       if token_chosen == "x" || token_chosen == "x".upcase
-        puts "You chose X, good luck!"
+        puts "You chose X, good luck!".colorize(:yellow)
         self.play
       else
-        puts "You chose O, good luck!"
+        puts "You chose O, good luck!".colorize(:yellow)
         Game.new(Players::Human.new("O"), Players::Human.new("X")).play
       end
-
-    #when "wargames"
-    #  100.times do
-    #    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-    #  end
-    #  puts
-
     end
     self.another_round
   end
 
   WIN_COMBINATIONS = [
-    [0, 1, 2], #top_row
-    [3, 4, 5], #middle_row
-    [6, 7, 8], #bottom_row
-    [0, 3, 6], #left_column
-    [1, 4, 7], #middle_column
-    [2, 5, 8], #right_column
-    [0, 4, 8], #diagonal_1
-    [2, 4, 6]  #diagonal_2
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], #rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], #columns
+    [0, 4, 8], [2, 4, 6]  #diagonals
   ]
 
   def current_player
@@ -72,9 +63,9 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do | wc |
-      if self.board.cells[wc[0]] == "X" && self.board.cells[wc[1]] == "X" && self.board.cells[wc[2]] == "X" || self.board.cells[wc[0]] == "O" && self.board.cells[wc[1]] == "O" && self.board.cells[wc[2]] == "O"
-        wc
+    WIN_COMBINATIONS.detect do | combo |
+      if self.board.cells[combo[0]] == "X" && self.board.cells[combo[1]] == "X" && self.board.cells[combo[2]] == "X" || self.board.cells[combo[0]] == "O" && self.board.cells[combo[1]] == "O" && self.board.cells[combo[2]] == "O"
+        combo
       else
         false
       end
@@ -107,6 +98,7 @@ class Game
       self.board.update(player_move, player)
       self.board.display
     else
+      puts "That position is taken, try again".colorize(:red)
       turn
     end
   end
@@ -117,7 +109,7 @@ class Game
   end
 
   def another_round
-    puts "Another round? <Y/N>"
+    puts "Keep playing? <Y/N>".colorize(:color => :black, :background => :white)
     user_input = gets.chomp
     if user_input == "y" || user_input == "Y"
       self.start
@@ -127,5 +119,4 @@ class Game
       self.another_round
     end
   end
-
 end
