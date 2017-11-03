@@ -1,4 +1,5 @@
 class Player
+  include Players
   attr_reader :token
 
   def initialize(token)

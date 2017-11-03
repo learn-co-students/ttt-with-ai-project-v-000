@@ -1,4 +1,5 @@
 class Game
+  include Players
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -12,24 +13,24 @@ class Game
     [2,4,6]
   ]
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O") , board=Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O") , board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
   end
 
   def current_player
-    board.turn_count.even? ? player_1 : player_2
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def over?
-    board.full? ? true : false
+    won? || draw?
   end
 
   def won?
     winning_array = false
     WIN_COMBINATIONS.each do |combo|
-      if (board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X") || (board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O")
+      if (@board.cells[combo[0]] == "X" && @board.cells[combo[1]] == "X" && @board.cells[combo[2]] == "X") || (@board.cells[combo[0]] == "O" && @board.cells[combo[1]] == "O" && @board.cells[combo[2]] == "O")
         winning_array = combo
         break
       end
@@ -38,30 +39,29 @@ class Game
   end
 
   def draw?
-    over? && !won? ? true : false
+    board.full? && !won?
   end
 
   def winner
-    won? ? board.cells[won?[0]] : nil
+    won? ? @board.cells[won?[0]] : nil
   end
 
   def turn
-    puts "Please enter 1-9:"
     player = current_player
-    input = player.move(board)
-    # binding.pry
-    if !board.valid_move?(input)
+    input = player.move(@board)
+    if !@board.valid_move?(input)
       puts "invalid"
       turn
     else
-      board.update(input, player)
-      board.display
-
+      @board.update(input, player)
+      puts "#{player.token} chose #{input}:"
+      @board.display
+      puts "\n \n"
     end
   end
 
   def play
-    while !over? && !won? && !draw?
+    while !over?
       turn
     end
     if won?
@@ -72,6 +72,3 @@ class Game
   end
 
 end
-
-# game = Game.new
-# binding.pry
