@@ -37,6 +37,18 @@ class Board
     x.to_i.between?(1, 9) && self.taken?(x) == false
   end
 
+  def valid_moves_array
+    valid_moves = []
+    i = 0
+    until i > 9
+      if self.valid_move?(i) == true
+        valid_moves << i
+      end
+      i += 1
+    end
+    valid_moves
+  end
+
   def update(x, player)
     @cells[x.to_i - 1] = player.token
   end

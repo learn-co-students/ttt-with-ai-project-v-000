@@ -73,6 +73,7 @@ class Game
     elsif self.board.valid_move?(x) == true
       self.board.update(x, self.current_player)
     end
+    self.board.display
   end
 
   def play
