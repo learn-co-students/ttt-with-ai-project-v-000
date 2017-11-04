@@ -6,6 +6,5 @@ module Players
       response = gets.to_s
     end
 
-
   end
 end
