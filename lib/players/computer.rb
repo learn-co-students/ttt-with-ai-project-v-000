@@ -70,6 +70,7 @@ class Players::Computer
     open_spot.to_s
   end
 
+
   def center_open?(array)
     array.cells[4] == " "
   end
