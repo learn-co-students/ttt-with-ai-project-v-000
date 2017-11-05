@@ -1,3 +1,70 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+winx = 0
+wino = 0
+winc = 0
+game_start = " "
+game_type = " "
+
+loop do
+  puts "Welcome to Tic Tac Toe!"
+  puts "What kind of game do you want to play? 0, 1, or 2 Player?"
+
+  loop do
+    game_type = gets.strip
+    break if game_type == "0" || game_type == "1" || game_type == "2"
+  end
+
+  puts "Who goes first, X or O?"
+
+  loop do
+    game_start = gets.strip
+    break if game_start == "X" || game_start == "O"
+  end
+
+  if game_start == "X"
+    token_1 = "X"
+    token_2 = "O"
+  elsif game_start == "O"
+    token_1 = "O"
+    token_2 = "X"
+  end
+
+  if game_type == "0"
+    new_game = Game.new(Players::Computer.new(token_1), Players::Computer.new(token_2))
+  elsif game_type == "1"
+    new_game = Game.new(Players::Human.new(token_1), Players::Computer.new(token_2))
+  elsif game_type == "2"
+    new_game = Game.new(Players::Human.new(token_1), Players::Human.new(token_2))
+  else
+    new_game = Game.new
+  end
+
+  new_game.play
+
+  if new_game.winner == "X"
+    winx += 1
+  elsif new_game.winner == "O"
+    wino += 1
+  else
+    winc += 1
+  end
+
+  play_again = " "
+  puts "Do you want to play again? (Y/N)"
+
+  loop do
+    play_again = gets.strip
+    break if play_again == "Y" || play_again == "N"
+  end
+
+  break if play_again == "N"
+end
+
+
+puts "X won #{winx} times."
+puts "O won #{wino} times."
+puts "Cat's game #{winc} times."
