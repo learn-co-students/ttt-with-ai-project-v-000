@@ -1,5 +1,5 @@
 # Tic-tac-toe with AI
-
+gi
 ## Objectives
 1. Build a command-line interface (CLI).
 2. Create a domain model with multiple relating and collaborating objects.
@@ -141,3 +141,5 @@ If you'd like, implement a "wargames" game type. When asked what kind of game th
 The rest is up to you and your team. Have fun, implement the spirit of the project, meet the requirements as you interpret them, be creative, and don't worry, there are no wrong answers with code.
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/ttt-with-ai-project'>Tic-tac-toe with AI</a> on Learn.co and start learning to code for free.</p>
+
+Made solo branch.
