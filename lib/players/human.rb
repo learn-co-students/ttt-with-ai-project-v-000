@@ -5,7 +5,6 @@ module Players
       # Board.cells[spot.to_i-1] = Player.token
       puts "Pick a space:"
       input = gets.chomp
-      input
     end
 
   end
