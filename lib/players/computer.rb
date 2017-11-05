@@ -7,24 +7,38 @@ module Players
 
       # STRATEGIC PLAY, ADVANCED MODE:
 
-      # win_combos = [
-      #   [0,1,2],
-      #   [3,4,5],
-      #   [6,7,8],
-      #   [0,3,6],
-      #   [1,4,7],
-      #   [2,5,8],
-      #   [0,4,8],
-      #   [2,4,6]
-      # ]
+      win_combos = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+      ]
 
       if board.valid_move?(5)
         return "5"
+      elsif win_combos.any? {|combo| board.cells[combo[0]] == self.token && board.cells[combo[1]] == self.token && board.valid_move?(board.cells[combo[2]])  || board.cells[combo[1]] == self.token && board.cells[combo[2]] == self.token && board.valid_move?(board.cells[combo[0]]) || board.cells[combo[2]] == self.token && board.cells[combo[0]] == self.token && board.valid_move?(board.cells[combo[1]])}
+        space = nil
+        win_combos.each do |combo|
+          if board.cells[combo[0]] == self.token && board.cells[combo[1]] == self.token
+            space = "#{board.cells[combo[2]]}"
+          elsif board.cells[combo[1]] == self.token && board.cells[combo[2]] == self.token
+            space = "#{board.cells[combo[0]]}"
+          elsif board.cells[combo[2]] == self.token && board.cells[combo[0]] == self.token
+            space = "#{board.cells[combo[1]]}"
+          end
+        end
+        return space
+      # elsif win_combos.any? {|combo| board.cells[combo[0]] == board.cells[combo[1]] || board.cells[combo[1]] == board.cells[combo[2]] || board.cells[combo[2]] == board.cells[combo[0]]}
+      #   return nil
       elsif board.position(5) == self.token
         if board.valid_move?(6) && board.valid_move?(4)
-          return "6"
-        elsif board.position(6) == self.token && board.valid_move?(4)
           return "4"
+        elsif board.position(6) == self.token && board.valid_move?(4)
+          return "6"
         elsif board.valid_move?(2) && board.valid_move?(8)
           return "2"
         elsif board.position(2) == self.token && board.valid_move?(8)
@@ -33,6 +47,9 @@ module Players
           return "3"
         elsif board.position(3) == self.token && board.valid_move?(7)
           return "7"
+        else
+          random = "#{rand(1..9)}"
+          return !board.valid_move?(random) ? move(board) : "#{random}"
         end
       elsif board.valid_move?(1)
         return "1"
@@ -45,6 +62,9 @@ module Players
           return "3"
         elsif board.position(3) == self.token && board.valid_move?(2)
           return "2"
+        else
+          random = "#{rand(1..9)}"
+          return !board.valid_move?(random) ? move(board) : "#{random}"
         end
       else
         random = "#{rand(1..9)}"
