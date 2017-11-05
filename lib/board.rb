@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    reset!
   end
 
   def reset!
@@ -15,45 +15,38 @@ class Board
   end
 
   def display
-    puts " #{@cells[0]} | #{cells[1]} | #{cells[2]} \n-----------\n #{@cells[3]} | #{cells[4]} | #{cells[5]} \n-----------\n #{@cells[6]} | #{cells[7]} | #{cells[8]} \n"
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} \n-----------\n #{@cells[3]} | #{@cells[4]} | #{@cells[5]} \n-----------\n #{@cells[6]} | #{@cells[7]} | #{@cells[8]} \n"
   end
 
   def full?
     @cells.all? do |cell|
-      cell == "X" || cell == "O"
+      cell != " "
     end
   end
 
   def turn_count
-    counter = 0
-    @cells.each do |cell|
-      if cell == "X" || cell == "O"
-        counter += 1
-      end
-    end
-    return counter
+    #counter = 0
+    #@cells.each do |cell|
+    #  if cell == "X" || cell == "O"
+    #    counter += 1
+    #  end
+    #end
+    #return counter
+
+    @cells.select { |cell| cell == "X" || cell == "O"}.size
   end
 
   def taken?(input)
-    index = input.to_i - 1
-    if @cells[index] == "X" || @cells[index] == "O"
-      return true
-    else
-      return false
-    end
+     position(input) == "X" || position(input) == "O"
   end
 
   def valid_move?(input)
-    if input.to_i > 0 && input.to_i < 10 && !taken?(input)
-      return true
-    else
-      return false
-    end
+     input.to_i.between?(1, 9) && !taken?(input)
+
   end
 
   def update(input, player)
-    index = input.to_i - 1
-    @cells[index] = player.token
+    @cells[input.to_i - 1] = player.token
   end
 
 end
