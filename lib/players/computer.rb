@@ -1,73 +1,58 @@
 module Players
-
   class Computer < Player
     def move(board)
-      win_combos = [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6]
-      ]
+      # RANDOM MOVE, EASY MODE:
+      # random = "#{rand(1..9)}"
+      # !board.valid_move?(random) ? move(board) : "#{random}"
 
-      if board.empty? #IF BOARD IS EMPTY, TAKE POSITION 1
-        "1"
-      else # IF TTT IS ALMOST COMPLETE, COMPLETE ROW OR COL FOR WIN
-        space = nil
+      # STRATEGIC PLAY, ADVANCED MODE:
 
-        win_combos.each do |combo|
+      # win_combos = [
+      #   [0,1,2],
+      #   [3,4,5],
+      #   [6,7,8],
+      #   [0,3,6],
+      #   [1,4,7],
+      #   [2,5,8],
+      #   [0,4,8],
+      #   [2,4,6]
+      # ]
 
-          if board.cells[combo[0]] == self.token && board.cells[combo[1]] == self.token
-            space = combo[2]
-          elsif board.cells[combo[1]] == self.token && board.cells[combo[2]] == self.token
-            space = combo[0]
-          elsif board.cells[combo[2]] == self.token && board.cells[combo[0]] == self.token
-            space = combo[1]
-          end
+      if board.valid_move?(5)
+        return "5"
+      elsif board.position(5) == self.token
+        if board.valid_move?(6) && board.valid_move?(4)
+          return "6"
+        elsif board.position(6) == self.token && board.valid_move?(4)
+          return "4"
+        elsif board.valid_move?(2) && board.valid_move?(8)
+          return "2"
+        elsif board.position(2) == self.token && board.valid_move?(8)
+          return "8"
+        elsif board.valid_move?(3) && board.valid_move?(7)
+          return "3"
+        elsif board.position(3) == self.token && board.valid_move?(7)
+          return "7"
         end
-
-        if space != nil
-          "#{space}"
-        else # REGULAR MOVES
-          # if board.position(1) != self.token && !board.valid_move?(1)
-          #   if [2,3,4,5,6,7,8,9].all? {|s| board.valid_move?(s)} #IF YOU DON'T CONTROL 1, PLAY FOR CENTER
-          #     "#{5}"
-          #   elsif [2,8].all? {|s| board.valid_move?(s)}
-          #     "#{2}"
-          #   elsif [4,6].all? {|s| board.valid_move?(s)}
-          #     "#{4}"
-          #   elsif [7,3].all? {|s| board.valid_move?(s)}
-          #     "#{3}"
-          #   else
-          #     random = "#{rand(1..9)}"
-          #     !board.valid_move?(random) ? move(board) : "#{random}"
-          #   end
-          # elsif board.position(1) == self.token #If YOU DO CONTROL 1, PLAY FOR CORNERS
-          #   if [2,3].all? {|s| board.valid_move?(s)}
-          #     "#{3}"
-          #   elsif [4,7].all? {|s| board.valid_move?(s)}
-          #     "#{7}"
-          #   else
-          #     random = "#{rand(1..9)}"
-          #     !board.valid_move?(random) ? move(board) : "#{random}"
-          #   end
-          # elsif board.position(1) == self.token && [2,3].all {|s| board.valid_move?(s)}
-          #
-          # end
-
-              random = "#{rand(1..9)}"
-              !board.valid_move?(random) ? move(board) : "#{random}"
+      elsif board.valid_move?(1)
+        return "1"
+      elsif board.position(1) == self.token
+        if board.valid_move?(7) && board.valid_move?(4)
+          return "7"
+        elsif board.position(7) == self.token && board.valid_move?(4)
+          return "4"
+        elsif board.valid_move?(3) && board.valid_move?(2)
+          return "3"
+        elsif board.position(3) == self.token && board.valid_move?(2)
+          return "2"
         end
+      else
+        random = "#{rand(1..9)}"
+        !board.valid_move?(random) ? move(board) : "#{random}"
+      end #end if line 21
 
-      end #1st if end
-    end #move method end
-  end #class end
-end #module end
 
 
-# RANDOM MOVE, EASY MODE:
-# random = "#{rand(1..9)}"
-# !board.valid_move?(random) ? move(board) : "#{random}"
+    end #def move
+  end #class Computer
+end #module Players
