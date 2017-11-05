@@ -15,7 +15,7 @@ module Players
 
     def move(board)
       @board = board
-      sleep(1)
+      sleep(2)
       case
         when winning_move != nil
           input = winning_move + 1
