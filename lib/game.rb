@@ -74,5 +74,24 @@ end
       end
   end
 
+  def wargames
+    x_counter = 0
+    o_counter = 0
+    draw_counter = 0
+    100.times do
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+        if winner == "X"
+          x_counter += 1
+        elsif winner == "O"
+          o_counter += 1
+        # end
+      else draw_counter += 1
+      end
+    end
+    puts "X won #{x_counter} times"
+    puts "O won #{o_counter} times"
+    puts "There were #{draw_counter} draws"
+  end
+
 
 end
