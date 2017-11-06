@@ -21,12 +21,12 @@ def start
       puts "Would you like to play again?"
       play_again
     else
-      puts "That is an invalid entry. Please enter 'y' or 'n':"
+      puts "That is an invalid entry. Please try again."
       start
   end
 end
 def play_again
-  puts "Please input 'y' or 'n':"
+  puts "Please enter 'y' or 'n':"
   answer = gets.strip
   case answer
     when "y"

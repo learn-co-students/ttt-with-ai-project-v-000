@@ -71,6 +71,3 @@ attr_accessor :board, :player_1, :player_2
  end
 
 end
-
-game = Game.new
-game.play
