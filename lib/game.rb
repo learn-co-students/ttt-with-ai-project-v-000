@@ -57,9 +57,8 @@ class Game
     self.board.display
     #binding.pry
     m = self.current_player.move(self.board)
-    m = m.to_i
-    until self.board.valid_move?(m) do
-      binding.pry
+    while !self.board.valid_move?(m)  do
+      #binding.pry
       puts "Invalid board selection."
       m = self.current_player.move(self.board)
     end
@@ -75,7 +74,6 @@ class Game
     else
       self.turn
     end
-
   end
 
 end

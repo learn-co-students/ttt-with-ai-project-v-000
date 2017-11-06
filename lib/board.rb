@@ -33,8 +33,8 @@ class Board
     !(self.cells[index].nil? || self.cells[index] == " ")
   end
   def valid_move?(c)
-    index = input_to_index(c)
-    index.between?(0,8) && !taken?(c)
+    index = self.input_to_index(c)
+    index.between?(0,8) && !self.taken?(c)
   end
   def update(c,player)
     index = input_to_index(c)
