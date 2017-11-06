@@ -1,8 +1,8 @@
 module Players
-  class Players::Human < Player
+  class Human < Player
 
     def move(input)
-      puts "Hey human! It's your turn"
+      puts "Hey! It's your turn. Enter a number 1-9."
       response = gets.to_s
     end
 
