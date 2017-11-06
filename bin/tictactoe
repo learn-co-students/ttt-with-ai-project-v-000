@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+require "pry"
+
+#Greets player and gathers game info
+puts "Welcome! Thank you for Tic Tac Toe!!!"
+puts "How many people are playing? (0-2)"
+num_players = gets.chomp.to_i
+going_first = 1
+#binding.pry
+if num_players == 1
+  puts "Would you like to go first or second? (1/2)"
+  going_first = gets.chomp.to_i
+end
+
+#Creates game instance based on user input
+if num_players == 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new())
+elsif num_players == 1
+  if going_first == 1
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new())
+  else
+    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new())
+  end
+else
+  game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new())
+end
+
+#Plays the created game
+game.play
