@@ -30,9 +30,18 @@ class Game
     count = gets.strip.to_i
     if count == 0
       puts "Commencing 0 player game, X moves first."
-      Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"))
+      Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O")).play
     elsif count == 1
-      puts "in development"
+      print "Would you like to go first? (Y-Human plays X; N-Computer plays X) "
+      go_first = gets.strip
+      if go_first == "Y"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+      else
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Human.new("O")
+      end
+      Game.new(player_1,player_2).play
     elsif count == 2
       puts "Commencing 2 player game, X moves first."
       Game.new.play
@@ -72,7 +81,7 @@ class Game
   end
 
   def turn
-    self.board.display
+
     #binding.pry
     m = self.current_player.move(self.board)
     m = m.to_i
@@ -82,9 +91,11 @@ class Game
       m = self.current_player.move(self.board)
     end
     self.board.update(m,self.current_player)
+    self.board.display
   end
 
   def play
+    self.board.display
     until self.over? do
       turn
     end

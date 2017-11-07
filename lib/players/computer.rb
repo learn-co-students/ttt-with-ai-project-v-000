@@ -11,7 +11,9 @@ module Players
           open_cells << i + 1
         end
       }
-      open_cells.sample.to_s
+      s = open_cells.sample.to_s
+      puts "#{self.token} picks square #{s}."
+      s
     end
   end
 end
