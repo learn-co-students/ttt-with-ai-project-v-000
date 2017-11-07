@@ -56,7 +56,14 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    
+    user = current_player
+    index = user.move(@board)
+    if @board.valid_move?(index)
+      @board.update(index, user)
+      @board.display
+    else
+      turn
+    end
   end
 
 
