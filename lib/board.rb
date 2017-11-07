@@ -35,4 +35,23 @@ class Board
     end
     counter
   end
+
+  def taken?(input)
+    if @cells[input.to_i-1] == "X" || @cells[input.to_i-1] == "O"
+      true
+    else
+      false
+    end
+  end
+
+  def valid_move?(index)
+    if index.to_i.between?(1,9) && !taken?(index)
+     true
+   end
+ end
+
+   def update(index, player)
+     @cells[index.to_i-1] = player.token
+   end
+
 end
