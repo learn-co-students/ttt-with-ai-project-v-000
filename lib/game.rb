@@ -35,7 +35,7 @@ class Game
       puts "in development"
     elsif count == 2
       puts "Commencing 2 player game, X moves first."
-      Game.new
+      Game.new.play
     else
       puts "Game not available for that player count."
     end
@@ -46,7 +46,7 @@ class Game
   end
 
   def over?
-    if self.board.full? == true || self.won? == true
+    if self.board.full? == true || !!self.won? == true || self.draw? == true
       response = true
     else
       response = false
@@ -75,6 +75,7 @@ class Game
     self.board.display
     #binding.pry
     m = self.current_player.move(self.board)
+    m = m.to_i
     while !self.board.valid_move?(m)  do
       #binding.pry
       puts "Invalid board selection."
@@ -84,14 +85,15 @@ class Game
   end
 
   def play
-    #binding.pry
-    self.board.display
-    self.turn
-    if self.over?
-      puts "over"
-    else
-      self.turn
+    until self.over? do
+      turn
     end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw?
+        puts "Cat's Game!"
+    end
+    #puts "Play again?"
   end
 
 end
