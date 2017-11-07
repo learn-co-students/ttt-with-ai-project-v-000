@@ -19,5 +19,32 @@ WIN_COMBINATIONS = [
     @board = board
   end
 
+  def current_player
+    if @board.turn_count % 2 == 0
+       @player_1
+    else
+       @player_2
+    end
+  end
+
+  def won?
+    WIN_COMBINATIONS.find do |win_combo|
+        win_index_0 = win_combo[0]
+        win_index_1 = win_combo[1]
+        win_index_2 = win_combo[2]
+      end
+    end
+
+   def draw?
+     @board.full? == true && won? == nil
+   end
+
+   def over?
+      if won? || draw?
+        true
+      else
+        false
+      end
+   end
 
 end
