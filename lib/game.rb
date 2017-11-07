@@ -107,4 +107,8 @@ class Game
     #puts "Play again?"
   end
 
+  def self.win_combos
+    WIN_COMBINATIONS
+  end
+
 end
