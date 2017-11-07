@@ -41,4 +41,24 @@ WIN_COMBINATIONS = [
     won? || draw?
   end
 
+  def winner
+    WIN_COMBINATIONS.each do |combination|
+      index_1 = combination[0]
+      index_2 = combination[1]
+      index_3 = combination[2]
+      if @board.cells[index_1] ==  "X" && @board.cells[index_2] == "X" && @board.cells[index_3] == "X"
+        return "X"
+      elsif @board.cells[index_1] == "O" && @board.cells[index_2] == "O" && @board.cells[index_3] == "O"
+        return "O"
+      end
+    end
+    nil
+  end
+
+  def turn
+    
+  end
+
+
+
 end
