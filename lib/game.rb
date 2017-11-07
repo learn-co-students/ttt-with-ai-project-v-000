@@ -27,24 +27,4 @@ WIN_COMBINATIONS = [
     end
   end
 
-  def won?
-    WIN_COMBINATIONS.find do |win_combo|
-        win_index_0 = win_combo[0]
-        win_index_1 = win_combo[1]
-        win_index_2 = win_combo[2]
-      end
-    end
-
-   def draw?
-     @board.full? == true && won? == nil
-   end
-
-   def over?
-      if won? || draw?
-        true
-      else
-        false
-      end
-   end
-
 end
