@@ -14,13 +14,31 @@ class Game
   ]
 
   def initialize(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"),board=Board.new)
+    #puts "initialize it"
     @board = board
     @player_1 = player_1
     @player_2 = player_2
   end
 
-  def start
-    @welc
+  def self.message
+    puts "class method message"
+  end
+
+  def self.start
+    puts "Welcome to Tic Tac To"
+    print "Enter number of players: (0,1,2) "
+    count = gets.strip.to_i
+    if count == 0
+      puts "Commencing 0 player game, X moves first."
+      Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"))
+    elsif count == 1
+      puts "in development"
+    elsif count == 2
+      puts "Commencing 2 player game, X moves first."
+      Game.new
+    else
+      puts "Game not available for that player count."
+    end
   end
 
   def current_player
