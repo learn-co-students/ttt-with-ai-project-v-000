@@ -1,6 +1,6 @@
 class Game
 
-attr_accessor :board, :player_1, :player_2
+attr_accessor :board, :player_1, :player_2, :winner
 WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
   def initialize(player_1 = Players::Human.new("X") ,player_2 = Players::Human.new("O"),board = Board.new)
@@ -36,17 +36,34 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4
 
   def winner
      if winning_combo = won?
-       @winner = @board.cells[winning_combo.first]
+       @winner = @board.cells[winning_combo[0]]
      end
    end
 
-  def start
-  end
-
   def play
+    while !over?
+      turn
+    end
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
   end
 
   def turn
-  end
+      player = current_player
+      current_move = player.move(@board)
+      if !@board.valid_move?(current_move)
+        turn
+      else
+        puts "Turn: #{@board.turn_count+1}\n"
+        @board.display
+        @board.update(current_move, player)
+        puts "#{player.token} moved #{current_move}"
+        @board.display
+        puts "\n\n"
+      end
+    end
 
-end
+  end
