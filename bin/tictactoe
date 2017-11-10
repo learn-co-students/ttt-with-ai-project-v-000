@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic-Tac-Toe"
-game = Game.new
+game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
 game.board.display
 puts "This is our board. X goes first. Please enter value between 1-9. 1 is the top left square and 9 is bottom right square."
 until game.over?
