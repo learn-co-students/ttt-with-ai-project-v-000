@@ -2,9 +2,13 @@ class Players
   class Computer < Player
 
     def move(board)
-      board.display
+      puts board.display
       puts "\nTicTacToeBot is making a move"
-      rand(1..9).to_s
+      move = 0
+      until board.valid_move?(move)
+        move = rand(1..9).to_s
+      end
+      move.to_s
     end
 
   end

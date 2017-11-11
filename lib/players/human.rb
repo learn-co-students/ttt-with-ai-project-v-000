@@ -2,7 +2,7 @@ class Players
   class Human < Player
 
     def move(board)
-      board.display
+      puts board.display
       input = gets.strip
     end
 

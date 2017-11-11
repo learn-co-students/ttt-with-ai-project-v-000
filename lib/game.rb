@@ -23,9 +23,9 @@ class Game
     until over? || @board.turn_count == 10
       turn
     end
-    puts "#{@board.display}\n" if won? || draw?
-    puts green("Congratulations #{winner}!") if won?
-    puts brown("Cat's Game!") if draw?
+    puts brown("\n" + @board.display) if won? || draw?
+    puts brown("Congratulations #{winner}!\n") if won?
+    puts brown("Cat's Game!\n") if draw?
   end
 
   def turn
