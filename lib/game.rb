@@ -19,19 +19,21 @@ class Game
     @board = board
   end
 
-  def input_to_index(user_input)
-    user_input.strip.to_i - 1
+  def play
+    until over? || @board.turn_count == 10
+      turn
+    end
+    puts "Congratulations #{self.winner}!" if won?
+    puts "Cat's Game!" if draw?
   end
 
   def turn
-    puts "Please enter 1-9:"
-    input = $stdin.gets.chomp
-    if @board.valid_move?(input)
-      update(input, self.current_player)
-      @board.display
-    else
-      turn
+    move = ''
+    until @board.valid_move?(move)
+      puts "#{self.current_player}, please enter 1-9:"
+      move = current_player.move(@board)
     end
+    @board.update(move, current_player)
   end
 
   def current_player
@@ -39,13 +41,13 @@ class Game
   end
 
   def won?
-      WIN_COMBINATIONS.each do |winning_combo|
-        if @board.cells[winning_combo[0]] == @board.cells[winning_combo[1]] &&
-           @board.cells[winning_combo[1]] == @board.cells[winning_combo[2]] &&
-           @board.taken?(winning_combo[0])
-           return winning_combo
-        end
+    WIN_COMBINATIONS.each do |winning_combo|
+      if @board.cells[winning_combo[0]] == @board.cells[winning_combo[1]] &&
+         @board.cells[winning_combo[1]] == @board.cells[winning_combo[2]] &&
+         @board.taken?(winning_combo[0]+1)
+         return winning_combo
       end
+    end
     false
   end
 
@@ -59,18 +61,6 @@ class Game
 
   def over?
     won? || draw? || @board.full?
-  end
-
-  def play
-    until over? || turn_count == 10
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    end
-    if draw?
-      puts "Cat's Game!"
-    end
   end
 
 end

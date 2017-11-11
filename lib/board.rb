@@ -28,7 +28,7 @@ class Board
   end
 
   def taken?(int)
-    (self.position(int) == "X" || self.position(int) == "O")
+    position(int) == "X" || position(int) == "O"
   end
 
   def valid_move?(int)
@@ -36,7 +36,7 @@ class Board
   end
 
   def update(int, player)
-    cells[int.to_i-1] = player.to_s
+    cells[int.to_i-1] = player.token
   end
 
   def turn_count

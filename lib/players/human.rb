@@ -1,10 +1,10 @@
 class Players
   class Human < Player
 
-    def move(array)
+    def move(board)
+      board.display
       puts "Make a move"
-      input = gets.chomp
-      input.to_s
+      input = gets.strip
     end
 
   end
