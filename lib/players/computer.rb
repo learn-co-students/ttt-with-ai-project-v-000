@@ -3,7 +3,7 @@ class Players
 
     def move(board)
       board.display
-      puts "TicTacToeBot will now make a move"
+      puts "\nTicTacToeBot is making a move"
       rand(1..9).to_s
     end
 

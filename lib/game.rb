@@ -23,14 +23,19 @@ class Game
     until over? || @board.turn_count == 10
       turn
     end
-    puts "Congratulations #{self.winner}!" if won?
-    puts "Cat's Game!" if draw?
+    puts "#{@board.display}\n" if won? || draw?
+    puts green("Congratulations #{winner}!") if won?
+    puts brown("Cat's Game!") if draw?
   end
 
   def turn
     move = ''
     until @board.valid_move?(move)
-      puts "#{self.current_player}, please enter 1-9:"
+      if current_player.token == "X"
+        puts red("\n#{current_player.token}, please enter 1-9:\n")
+      else
+        puts green("\n#{current_player.token}, please enter 1-9:\n")
+      end
       move = current_player.move(@board)
     end
     @board.update(move, current_player)
@@ -62,5 +67,11 @@ class Game
   def over?
     won? || draw? || @board.full?
   end
+
+# coloration
+
+  def red(text) "\e[31m#{text}\e[0m" end
+  def green(text) "\e[32m#{text}\e[0m" end
+  def brown(text) "\e[33m#{text}\e[0m" end
 
 end

@@ -2,4 +2,15 @@
 
 require_relative '../config/environment'
 
-Game.new.play
+puts "Input an integer between 0-2 to indicate number of human players"
+input = gets.strip
+case input
+  when "0"
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+  when "1"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+  when "2"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  else
+    puts "Input an integer between 0-2 to indicate number of human players:"
+  end

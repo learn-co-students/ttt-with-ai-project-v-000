@@ -3,7 +3,6 @@ class Players
 
     def move(board)
       board.display
-      puts "Make a move"
       input = gets.strip
     end
 
