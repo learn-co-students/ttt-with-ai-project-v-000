@@ -23,7 +23,7 @@ class Game
   end
 
   def over?
-    board.full?
+    won? || draw?
   end
 
   def won?
@@ -50,8 +50,23 @@ class Game
     if !@board.valid_move?(current_move)
       turn
     else
-      @board.update(current_move, current_player)
+      puts "Turn: #{@board.turn_count+1}\n"
       @board.display
+      @board.update(current_move, current_player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 
