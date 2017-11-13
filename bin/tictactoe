@@ -48,7 +48,7 @@ again?
 end
 
 def again?
-  puts "Want to play again?"
+  puts "Want to play again?\n"
     play_again = gets.strip
     if play_again == "Y" || play_again == "y" || play_again == "yes" || play_again == "Yes"
       puts "How many players? 0, 1, or 2?"
