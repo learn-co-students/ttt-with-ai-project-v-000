@@ -4,6 +4,6 @@ module Players
     def move(board)
       gets.chomp
     end
-    
+
   end
 end

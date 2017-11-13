@@ -29,16 +29,18 @@ WIN_COMBINATIONS = [
 
   def won?
     WIN_COMBINATIONS.detect do |combination|
-      @board.cells[combination[0]] == @board.cells[combination[1]] && @board.cells[combination[0]] == @board.cells[combination[2]]
+      @board.cells[combination[0]] == @board.cells[combination[1]] &&
+      @board.cells[combination[0]] == @board.cells[combination[2]] &&
+      @board.taken?(combination[0]+1)
     end
   end
 
   def draw?
-    !won? && @board.full?
+    @board.full? && !won?
   end
 
   def over?
-    won? || draw?
+    draw? || won?
   end
 
   def winner
@@ -71,8 +73,10 @@ WIN_COMBINATIONS = [
      until over?
        turn
      end
-     if won?
-       puts "Congratulations #{winner}!"
+     if won? && winner == "X"
+       puts "Congratulations X!"
+     elsif won? && winner == "O"
+       puts "Congratulations O!"
      elsif draw?
        puts "Cat's Game!"
      end
