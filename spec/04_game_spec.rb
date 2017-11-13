@@ -279,7 +279,6 @@ describe 'Game' do
       game.board.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
 
       allow($stdout).to receive(:puts)
-
       expect(game).to_not receive(:turn)
 
       game.play
@@ -289,8 +288,7 @@ describe 'Game' do
       game = Game.new
       game.board.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
       allow($stdout).to receive(:puts)
-
-      expect($stdout).to receive(:puts).with("Congratulations X!")
+      expect($stdout).to receive(:puts).with(/Congratulations X!/)
 
       game.play
     end
@@ -298,11 +296,8 @@ describe 'Game' do
     it 'congratulates the winner O' do
       game = Game.new
       game.board.cells = [" ", " ", " ", " ", " ", " ", "O", "O", "O"]
-
       allow($stdout).to receive(:puts)
-
-      expect($stdout).to receive(:puts).with("Congratulations O!")
-
+      expect($stdout).to receive(:puts).with(/Congratulations O!/)
       game.play
     end
 
@@ -323,7 +318,7 @@ describe 'Game' do
 
       allow($stdout).to receive(:puts)
 
-      expect($stdout).to receive(:puts).with("Cat's Game!")
+      expect($stdout).to receive(:puts).with(/Cat's Game!/)
 
       game.play
     end
@@ -340,7 +335,7 @@ describe 'Game' do
       expect(game.player_2).to receive(:gets).and_return("6")
       expect(game.player_1).to receive(:gets).and_return("7")
 
-      expect($stdout).to receive(:puts).with("Congratulations X!")
+      expect($stdout).to receive(:puts).with(/Congratulations X!/)
 
       game.play
     end
