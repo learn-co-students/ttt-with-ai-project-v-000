@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "At any time, type 'quit' to exit"
+puts "What kind of game would you like to play? 0 player, 1 player, or 2 player?"
+input = gets.chomp
+
+if input == 'quit'
+  then exit
+elsif input == '0 players'
+  then Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+elsif input == '1 player'
+  then
+  puts "You will now begin playing the computer. Who should start first?"
+  input = gets.chomp
+  if input == 'quit' then exit
+  elsif input == "human" then
+  Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+else Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+end
+elsif input == '2 players'
+  then Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+end
