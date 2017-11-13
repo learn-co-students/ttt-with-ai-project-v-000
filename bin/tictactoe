@@ -4,35 +4,27 @@ require_relative '../config/environment'
 
 def start
 
-  puts "Welcome to Tic Tac Toe! What kind of game would you like to play? Please select 1, 2 or 3 player."
+  puts "Welcome to Tic Tac Toe! What kind of game would you like to play? Please type 1, 2 or 3 to select the number of players."
   input = gets.chomp.to_i
 
   case input
   when 1
-    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-    game.board.display
-    game.play
+    puts "This game will be the computer vs the computer!"
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
   when 2
     puts "The first player will utilize the character 'X'. If you would like to make the first move and start the game,
     please type 1. If you would like to make the second move, please type 2."
     user = gets.chomp.to_i
     if user == 1
-      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
-      game.board.display
-      game.play
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
     elsif user == 2
-      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-      game.board.display
-      game.play
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
     end
   when 3
-    puts "The first player will play with the character X"
-    puts "If you would like to make the first move, please choose 1."
-    puts "If you would liek to make the second move, please choose 2."
+    puts "The first player will utilize the character 'X'. If you would like to make the first move and start the game,
+    please type 1. If you would like to make the second move, please type 2."
     player = gets.chomp.to_i
-    game = Game.new
-    game.board.display
-    game.play
+    Game.new.play
   else
     puts "Selection is invalid. Please try again."
   end
