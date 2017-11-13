@@ -5,8 +5,58 @@ require_relative '../config/environment'
 puts "Welcome to TicTacToe!"
 
 puts "How many players? 0, 1, or 2?"
-number_of_players = gets.strip
-game = Game.new
-while !game.over?
-  game.play
+  number_of_players = gets.strip
+
+def new_game(number_of_players)
+  if number_of_players == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    while !game.over?
+      game.play
+    end
+  elsif number_of_players == "1"
+    puts "X goes first. Do you want to be X or O?"
+    token_selection = gets.strip
+      if token_selection == "x" || token_selection == "X"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        while !game.over?
+          game.play
+        end
+      elsif token_selection == "o" || token_selection == "O"
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        while !game.over?
+          game.play
+        end
+      end
+  elsif number_of_players == "2"
+      puts "X goes first. Player 1, do you want to be X or O?"
+      token_selection = gets.strip
+      if token_selection == "x" || token_selection == "X"
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+        puts "Player 1, start the game by making a move!"
+        while !game.over?
+          game.play
+        end
+      elsif token_selection == "o" || token_selection == "O"
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+        puts "Player 2, start the game by making a move!"
+        while !game.over?
+          game.play
+      end
+    end
+  end
+again?
 end
+
+def again?
+  puts "Want to play again?"
+    play_again = gets.strip
+    if play_again == "Y" || play_again == "y" || play_again == "yes" || play_again == "Yes"
+      puts "How many players? 0, 1, or 2?"
+      number_of_players = gets.strip
+      new_game(number_of_players)
+    elsif play_again == "N" || play_again == "n" || play_again == "no" || play_again == "No"
+      puts "Thank you for playing TicTacToe. Play again soon!"
+    end
+  end
+
+new_game(number_of_players)
