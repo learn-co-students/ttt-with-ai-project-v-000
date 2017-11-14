@@ -1,3 +1,24 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to TicTacToe!"
+puts ""
+puts "Press 0 to watch the AI play."
+puts "Press 1 to play against the computer."
+puts "Press 2 to play a two-player game."
+puts ""
+puts "Enjoy!"
+game_modes = gets.chomp
+
+case game_modes
+when "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+when "1"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+when "2"
+  game = Game.new
+end
+
+game.play
