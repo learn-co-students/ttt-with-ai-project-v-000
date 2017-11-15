@@ -1,3 +1,43 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+class NewGame
+
+  def start
+    # Output starts below then comes comes to here.  Asks for how many players and gets response from user.
+    puts "How many players?"
+    puts "Press 1 for 1-player.  Press 2 for 2-player.  Press 0 to watch a computer vs. computer game."
+    command = gets.strip
+
+    if command == "1"
+      # If 1 player, checks if user wants to play first.
+      puts "Would you like to play first? Press Y or N."
+      command_two = gets.strip
+      # Takes in either an upper or lowercase Y or N and creates a new game based on the users selection and runs the play method in the Game class.
+      if command_two == "Y" || command_two == "y"
+        Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+      elsif command_two == "N" || command_two == "n"
+        Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+      end
+    elsif command == "2"
+      # Creates a new game with the default of two human players and runs the play method in the Game class.
+      puts "Player one will go first and be 'X'"
+      Game.new.play
+    elsif command == "0"
+      # Creates a new game with two computer players and runs the play method in the Game class.
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+    end
+      # At the end of game, checks if player(s) want to play again.  If yes, start method is run again.
+      puts "Would you like to play agan? Press Y or N."
+      command_again = gets.strip
+      if command_again == "Y" ||command_again == "y"
+        start
+      end
+  end
+end
+
+# Output to players starts here and then runs the start method in the NewGame class as found above.
+puts "Welcome to Tic Tac Toe!"
+puts "--------------------------------------"
+NewGame.new.start
