@@ -66,10 +66,13 @@ class Game
     puts "Welcome to Tic Tac Toe!"
     puts "How many players? (Enter 0, 1, or 2?)"
     input = gets.strip
-    if input == "0"
+
+    case input
+
+    when "0"
       new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 
-    elsif input == "1"
+    when "1"
       puts "Who goes first? p(layer)/c(omp)"
       first = gets.strip
       puts "X or O?"
@@ -81,13 +84,13 @@ class Game
           new_game = Game.new(Players::Computer.new(other_piece), Players::Human.new(piece))
         end
 
-    elsif input == "2"
+    when "2"
       puts "Player 1 is X or O?"
       piece = gets.strip.upcase
       piece == "X" ? other_piece = "O" : other_piece = "X"
       new_game = Game.new(Players::Human.new(piece), Players::Human.new(other_piece))
 
-    elsif input == "wargames"
+    when "wargames"
       draw = 0
       player_1 = 0
       player_2 = 0
@@ -110,13 +113,18 @@ class Game
       input = gets.strip.downcase
       start if input == "y"
       exit if input == "n"
+
+    when "exit"
+      exit
+
     else
       start
     end
 
     new_game.play
     puts "Play again? (y/n)"
-    input = gets.strip
+    input = gets.strip.downcase
     start if input == "y"
+    exit if input == "n"
   end
 end

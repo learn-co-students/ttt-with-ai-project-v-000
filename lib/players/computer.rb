@@ -28,7 +28,7 @@ module Players
 
       possible_moves(board).each do |move|
         board.cells[move] = current_p
-        scores[move] = -1 * minimax(board, switch(current_p), depth + 1)
+        scores[move] = -minimax(board, switch(current_p), depth + 1)
         board.cells[move] = " "
       end
 
