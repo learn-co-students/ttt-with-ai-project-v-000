@@ -72,8 +72,8 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    puts ""
-    input =gets.strip
+    position = self.current_player.move
+    @board.update(position, self.current_player)
   end
 
 
