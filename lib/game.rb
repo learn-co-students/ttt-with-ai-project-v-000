@@ -73,6 +73,7 @@ class Game
     puts "---Enter <'0'> for Computer vs Computer--"
     puts "---Enter <'1'> for Human vs Computer-----"
     puts "---Enter <'2'> for Human vs Human--------"
+    puts "---Enter <'W'> for THERMONUCLEAR WAR-----"
     puts "-----------------------------------------"
     puts "-----------------------------------------"
 
@@ -91,6 +92,20 @@ class Game
       end
     when '2'
       Game.new.play
+    when 'W'
+      x_wins = 0
+      o_wins = 0
+      cats_games = []
+      100.times do
+        game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new)
+        game.play
+        x_wins += 1 if game.winner == 'X'
+        o_wins += 1 if game.winner == 'O'
+        cats_games += 1 if game.draw?
+      end
+      puts "X won #{x_wins} games"
+      puts "O won #{o_wins} games"
+      puts "#{cats_games} Cat's Games"
     end
 
     puts "Would you like to play again? <y/Y>"
