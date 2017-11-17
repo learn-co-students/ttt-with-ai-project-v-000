@@ -27,7 +27,7 @@ class Game
   end
 
   def over?
-    self.won? || self.board.full?
+    self.won? || self.draw? #self.board.full?
   end
 
   def won?
@@ -46,12 +46,55 @@ class Game
   end
 
   def turn
+    puts "It's your turn #{self.current_player.token}!"
     input = self.current_player.move(self.board)
-    until self.board.valid_move?(input)
-      input = self.current_player.move(self.board)
+
+    if !self.board.valid_move?(input)
+      self.turn
     end
 
     self.board.update(input, self.current_player)
+    self.board.display
   end
 
+  def play
+    self.board.display
+    until self.over?
+      self.turn
+    end
+
+    self.draw? ? (puts "Cat's Game!") : (puts "Congratulations #{winner}!")
+  end
+
+  def start
+    puts "What kind of game would you like to play?"
+    puts "-----------------------------------------"
+    puts "-----------------------------------------"
+    puts "---Enter <'0'> for Computer vs Computer--"
+    puts "---Enter <'1'> for Human vs Computer-----"
+    puts "---Enter <'2'> for Human vs Human--------"
+    puts "-----------------------------------------"
+    puts "-----------------------------------------"
+
+    game_selection = gets.chomp
+
+    case game_selection
+    when '0'
+      Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new).play
+    when '1'
+      puts "Do you want to go first? <y/Y>"
+      input = gets.chomp
+      if input == 'y' || input == 'Y'
+        Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new).play
+      else
+        Game.new(Players::Computer.new('X'), Players::Human.new('O'), Board.new).play
+      end
+    when '2'
+      Game.new.play
+    end
+
+    puts "Would you like to play again? <y/Y>"
+    input = gets.chomp
+    self.start if input == 'y' || input == 'Y'
+  end
 end
