@@ -12,8 +12,8 @@ module Players
                         [2,4,6]]
 
     def move(board)
-      if board.turn_count < 1
-        (1..9).to_a.sample
+      if board.turn_count == 0
+        [1,2,3,4,6,7,8,9].sample
       elsif can_win?(board)
         can_win?(board)
       elsif can_block?(board)
@@ -44,6 +44,9 @@ module Players
         (board.cells[combo[0]] == self.token && board.cells[combo[2]] == self.token && board.cells[combo[1]] == ' ')
       end
 
+    ##END #can_win? METHOD HERE
+
+    ##START #win METHOD HERE
       if opportunity != nil
         index = opportunity.detect do |cell|
           board.cells[cell] == ' '
@@ -61,7 +64,9 @@ module Players
         (board.cells[combo[1]] == self.opponent && board.cells[combo[2]] == self.opponent && board.cells[combo[0]] == ' ') ||
         (board.cells[combo[0]] == self.opponent && board.cells[combo[2]] == self.opponent && board.cells[combo[1]] == ' ')
       end
+      ##END #can_block? METHOD HERE
 
+      ##START #block METHOD HERE
       if threat
         index = threat.detect do |cell|
           board.cells[cell] == ' '
