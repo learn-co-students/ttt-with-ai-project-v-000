@@ -1,9 +1,18 @@
 module Players
   class Computer < Player
+    WIN_COMBINATIONS = [[0,1,2],
+                        [3,4,5],
+                        [6,7,8],
+                        [0,3,6],
+                        [1,4,7],
+                        [2,5,8],
+                        [0,4,8],
+                        [2,4,6]]
+
     def move(board)
-      if valid_move(can_win?(board))
+      if can_win?(board)
         can_win?(board)
-      elsif valid_move(can_block?(board))
+      elsif can_block?(board)
         can_block?(board)
       elsif board.valid_move?('5')
         computer_move = '5'
@@ -31,13 +40,23 @@ module Players
         (board.cells[combo[0]] == self.token && board.cells[combo[2]] == self.token)
       end
 
-      opportunity.index(' ') + 1
+      if opportunity
+        opportunity.index(' ') + 1 #NEEDS TO RETURN INDEX OF BOARD, NOT COMBO
+      end
     end
 
     def can_block?(board)
       #**FIRST** check if any winning combination has two opponent's tokens, and
       #take the open cell in that combo
+      threat = WIN_COMBINATIONS.detect do |combo|
+        (board.cells[combo[0]] == self.opponent && board.cells[combo[1]] == self.opponent) ||
+        (board.cells[combo[1]] == self.opponent && board.cells[combo[2]] == self.opponent) ||
+        (board.cells[combo[0]] == self.opponent && board.cells[combo[2]] == self.opponent)
+      end
 
+      if threat
+        threat.index(' ') + 1
+      end
       #corners = [1,3,7,9]
       #middles = [2,4,6,8]
       # if two opposing corners are taken by opponent move to middle
