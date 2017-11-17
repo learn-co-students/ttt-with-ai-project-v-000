@@ -73,7 +73,7 @@ class Game
     puts "---Enter <'0'> for Computer vs Computer--"
     puts "---Enter <'1'> for Human vs Computer-----"
     puts "---Enter <'2'> for Human vs Human--------"
-    puts "---Enter <'W'> for THERMONUCLEAR WAR-----"
+    puts "---Enter <'wargames'> for a good time----"
     puts "-----------------------------------------"
     puts "-----------------------------------------"
 
@@ -92,7 +92,7 @@ class Game
       end
     when '2'
       Game.new.play
-    when 'W'
+    when 'wargames'
       x_wins = 0
       o_wins = 0
       cats_games = []
