@@ -95,7 +95,7 @@ class Game
     when 'wargames'
       x_wins = 0
       o_wins = 0
-      cats_games = []
+      cats_games = 0
       100.times do
         game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new)
         game.play

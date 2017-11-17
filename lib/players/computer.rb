@@ -1,3 +1,5 @@
+require 'pry'
+
 module Players
   class Computer < Player
     WIN_COMBINATIONS = [[0,1,2],
@@ -10,7 +12,9 @@ module Players
                         [2,4,6]]
 
     def move(board)
-      if can_win?(board)
+      if board.turn_count < 1
+        (1..9).to_a.sample
+      elsif can_win?(board)
         can_win?(board)
       elsif can_block?(board)
         can_block?(board)
@@ -35,13 +39,17 @@ module Players
       #**FIRST** check if any winning combination has two of self's tokens
       #and if the leftover spot is open take it
       opportunity = WIN_COMBINATIONS.detect do |combo|
-        (board.cells[combo[0]] == self.token && board.cells[combo[1]] == self.token) ||
-        (board.cells[combo[1]] == self.token && board.cells[combo[2]] == self.token) ||
-        (board.cells[combo[0]] == self.token && board.cells[combo[2]] == self.token)
+        (board.cells[combo[0]] == self.token && board.cells[combo[1]] == self.token && board.cells[combo[2]] == ' ') ||
+        (board.cells[combo[1]] == self.token && board.cells[combo[2]] == self.token && board.cells[combo[0]] == ' ') ||
+        (board.cells[combo[0]] == self.token && board.cells[combo[2]] == self.token && board.cells[combo[1]] == ' ')
       end
 
-      if opportunity
-        opportunity.index(' ') + 1 #NEEDS TO RETURN INDEX OF BOARD, NOT COMBO
+      if opportunity != nil
+        index = opportunity.detect do |cell|
+          board.cells[cell] == ' '
+        end
+        index + 1 #=> winning move
+      else nil
       end
     end
 
@@ -49,13 +57,18 @@ module Players
       #**FIRST** check if any winning combination has two opponent's tokens, and
       #take the open cell in that combo
       threat = WIN_COMBINATIONS.detect do |combo|
-        (board.cells[combo[0]] == self.opponent && board.cells[combo[1]] == self.opponent) ||
-        (board.cells[combo[1]] == self.opponent && board.cells[combo[2]] == self.opponent) ||
-        (board.cells[combo[0]] == self.opponent && board.cells[combo[2]] == self.opponent)
+        (board.cells[combo[0]] == self.opponent && board.cells[combo[1]] == self.opponent && board.cells[combo[2]] == ' ') ||
+        (board.cells[combo[1]] == self.opponent && board.cells[combo[2]] == self.opponent && board.cells[combo[0]] == ' ') ||
+        (board.cells[combo[0]] == self.opponent && board.cells[combo[2]] == self.opponent && board.cells[combo[1]] == ' ')
       end
 
       if threat
-        threat.index(' ') + 1
+        index = threat.detect do |cell|
+          board.cells[cell] == ' '
+        end
+
+        index + 1 #=> blocking move
+      else nil
       end
       #corners = [1,3,7,9]
       #middles = [2,4,6,8]
