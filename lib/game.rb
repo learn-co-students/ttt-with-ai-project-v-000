@@ -73,7 +73,7 @@ class Game
     puts "---Enter <'0'> for Computer vs Computer--"
     puts "---Enter <'1'> for Human vs Computer-----"
     puts "---Enter <'2'> for Human vs Human--------"
-    puts "---Enter <'wargames'> for a good time----"
+    puts "---Enter <'wargames'> for nuclear war----"
     puts "-----------------------------------------"
     puts "-----------------------------------------"
 
@@ -84,6 +84,7 @@ class Game
       Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new).play
     when '1'
       puts "Do you want to go first? <y/Y>"
+      puts "<Any other key to go second>"
       input = gets.chomp
       if input == 'y' || input == 'Y'
         Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new).play
@@ -109,6 +110,7 @@ class Game
     end
 
     puts "Would you like to play again? <y/Y>"
+    puts "<Any other key to quit>"
     input = gets.chomp
     self.start if input == 'y' || input == 'Y'
   end
