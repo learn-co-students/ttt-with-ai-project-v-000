@@ -70,12 +70,44 @@ class Game
 
   def play
     while !self.over?
+      @board.display
       self.turn
     end
     if self.draw?
+      @board.display
       puts "Cat's Game!"
     else
+      @board.display
       puts "Congratulations #{self.winner}!"
+    end
+  end
+
+
+  def self.start
+    puts "WELCOME TO TIC TAC TOE"
+    puts "Would you like to play with 0, 1, or 2 players?"
+    input = gets.chomp.to_i
+    if !input.between?(0,2)
+      self.start
+    end
+
+    case input
+    when 0
+      game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new)
+      game.play
+    when 1
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+    when 2
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    end
+    puts "Would you like to play again? (y/n)"
+    again = gets.chomp
+    if again == "y"
+      self.start
+    else
+      return
     end
   end
 end
