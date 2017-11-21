@@ -1,4 +1,7 @@
 class Game
+  require_relative "../lib/players/computer.rb"
+
+
   attr_accessor :board, :player_1, :player_2
 
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
@@ -42,6 +45,12 @@ class Game
     draw? || won?
   end
 
+  def end_game
+    @board.reset!
+  end
+
+
+
   def winner
     if winning_combo = won?
       @board.cells[winning_combo.first]
@@ -72,6 +81,42 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
+  end
+
+  def start
+      starting_input = gets.strip
+      case starting_input
+      when '0'
+
+        game = Game.new
+          until game.won?
+            game.play
+          end
+
+
+        when '1'
+          puts "prepare to be destroyed"
+
+        when '2'
+          game = Game.new
+            if !game.won?
+              game.play
+            end
+
+          new_game = ""
+            puts "Would you like to start a new game?"
+              new_game = gets.strip
+                if new_game.downcase == "yes" || new_game.downcase == "y"
+                  game = Game.new
+                    until game.won?
+                      game.play
+                    end
+                elsif new_game.downcase == "no" || new_game.downcase == "n"
+                  puts "Thanks for playing, goodbye!!!"
+                end
+        else
+          puts "Invalid entry, try again."
+      end
   end
 
 end

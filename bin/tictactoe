@@ -4,22 +4,10 @@ require_relative '../config/environment'
 
 
 puts "This is Tic Tac Toe! Welcome!!"
+puts "What kind of game would you like to play?"
+puts "Enter 0 for CPU vs. CPU"
+puts "Enter 1 if you dare challenge Artificial Intelligence"
+puts "Enter 2 to prove to your mate you're far superior: "
 
-game = Game.new
-
-  if !game.won?
-    game.play
-  end
-
-new_game = ""
-
-  until new_game.downcase == "n" || new_game.downcase == "no"
-    puts "Would you like to start a new game?"
-
-    new_game = gets.strip
-    new_game.downcase == "y" || new_game.downcase == "yes"
-      game = Game.new
-      until game.won?
-        game.play
-      end
-  end
+new_game = Game.new
+new_game.start
