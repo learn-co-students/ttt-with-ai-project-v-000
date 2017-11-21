@@ -1,6 +1,14 @@
 module Players
 
   class Computer < Player
+    attr_accessor :board, :player_1, :player_2
+
+    def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      @board = board
+      @player_1 = player_1
+      @player_2 = player_2
+    end
+
     def move(board)
       move = nil
 

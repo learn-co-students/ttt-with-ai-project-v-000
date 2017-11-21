@@ -94,7 +94,7 @@ class Game
           end
 
 
-        when '1'
+      when '1'
           puts "prepare to be destroyed"
 
         when '2'
