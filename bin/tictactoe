@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  puts 'Welcome to tic-tac-toe!'
+  puts 'Enter number of players (0-2): '
+  players = gets.chomp.to_i
+
+  game = Game.new(nil, nil)
+
+  if players == 0
+    player1 = Players::Computer.new("X", game)
+    player2 = Players::Computer.new("O", game)
+  elsif players == 1
+    player1 = Players::Human.new("X")
+    player2 = Players::Computer.new("O", game)
+  elsif players == 2
+    player1 = Players::Human.new("X")
+    player2 = Players::Human.new("O")
+  else
+    puts 'Invalid number of players!'
+    start
+    return nil
+  end
+
+  game.player_1 = player1
+  game.player_2 = player2
+  game.play
+
+  puts "Would you like to play again? (y/n): "
+  response = gets.chomp
+  start if response == 'y'
+end
+
+start
