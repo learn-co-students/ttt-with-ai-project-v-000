@@ -45,4 +45,16 @@ class Board
       @cells[index.to_i-1] = player.token if valid_move?(index)
   end
 
+  def possible_moves
+    pm=[]
+    @cells.each_with_index do |p, i|
+      if p == " " || p == ""
+        pm.push(i+1).to_s
+      end
+    end
+    pm
+    #pm=@board.cells.map.with_index(1).to_a.select{|c,i| i if c==" " or c=="" }
+    #pm.flatten.select{|i| i!=" "}
+  end
+
 end
