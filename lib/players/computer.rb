@@ -3,11 +3,11 @@ module Players
     def move(board)
       best = 0
       combinations = Game::WIN_COMBINATIONS
-      corners = Game::CORNERS.map{ |corner| corner }
+      corners = Game::CORNERS
       center = Game::CENTER
       opponent = self.token == "X" ? "O" : "X"
-      positions = board.cells.map{ |x| x.to_i - 1 }
-      available_positions = (positions - [self.token] - [opponent])
+      positions = board.cells.map.with_index{ |cell, index| cell = index if cell == " " }
+      available_positions = positions - [self.token] - [opponent]
 
       # loop through each winning combo and replace digits with elements
       # appearing on the board at that position. Check how far we are to
@@ -21,9 +21,9 @@ module Players
         option = []
         self_count = 0
         opp_count = 0
-        combo.map do |el|
+        combo.map.with_index do |el, index|
           if ![self.token, opponent].include?(positions[el])
-            next
+            el = index
           elsif positions[el] == self.token
             el = positions[el]
             self_count += 1
@@ -58,7 +58,7 @@ module Players
 
       # get all placement values from the positions array which starts from 1 not 0.
       # best is always center
-      if available_positions.include?(center)
+      if positions.include?(center)
           best = center
       # else best is 3rd spot in a winning combo that has 2 filled already
       elsif best_offense.length > 0
@@ -97,7 +97,7 @@ module Players
           best = available_positions.sample
         end
       end
-      best
+      (best + 1).to_s
     end
   end
 
