@@ -1,6 +1,7 @@
 module Players
   class Human < Player
-    def move(input)
+    def move(input = [])
+      "Please enter 1-9:"
       input = gets.strip
       input
     end
