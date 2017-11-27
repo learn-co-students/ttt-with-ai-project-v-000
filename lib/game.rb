@@ -46,20 +46,19 @@ class Game
   end
 
   def turn
-    puts "Please enter your move from 1 - 9:"
-    if current_player == player_1
-      player_move = self.current_player.move(@board.cells).to_i
-      until @board.cells.map(&:to_i).include?(player_move)
-        puts "invalid"
-        puts "Please enter your move from 1 - 9:"
-        player_move = self.player_1.move(@board.cells).to_i
-      end
-    elsif current_player == player_2
-      player_move = 5#self.player_2.move(@board.cells).to_i
+    #checks the input, returns invalid if invalid and calls the gets again if necessary
+    #changes the player
+    current_player = @board.turn_count.odd? ? player_1 : player_2
+    user_input = self.current_player.move(@board.cells)
+    if @board.valid_move?(user_input)
+      @board.update(user_input, current_player)
+    else
+      user_input = self.current_player.move(@board.cells)
     end
-    player_move
+    @board.display
   end
 
   def play
+    
   end
 end
