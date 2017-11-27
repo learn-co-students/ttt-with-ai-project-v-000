@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
 
     attr_accessor :cells
@@ -23,8 +25,18 @@ class Board
         puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
 
-    def position(user_input)
-        user_input = gets.to_i-1
+    def position(input)
+        cells[input.to_i-1]
+    end
+
+    def full?
+        @cells.all? { |cell| cell !=  " " }
+    end
+
+    def turn_count
+        counter = 0
+        while @cells.each do |cell| cell !=  " "
+        counter +=1
     end
 
 end
