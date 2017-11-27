@@ -29,7 +29,7 @@ class Game
       combo.map do |el|
         win_combo << board.cells[el]
       end
-      win_combo.uniq.length == 1
+      win_combo.uniq.length == 1 && win_combo.first != " "
     end
     win
   end
@@ -39,8 +39,8 @@ class Game
   end
 
   def winner
-    if self.over?
-      winner = board.cells[self.won?.first]
+    if self.over? && self.won?
+      winner = board.cells[self.won?.last]
     end
     winner == " " ? winner = nil : winner
   end
