@@ -48,7 +48,7 @@ class Game
   def turn
     #checks the input, returns invalid if invalid and calls the gets again if necessary
     #changes the player
-    current_player = @board.turn_count.odd? ? player_1 : player_2
+    current_player = @board.turn_count.even? ? player_1 : player_2
     user_input = self.current_player.move(@board.cells)
     if @board.valid_move?(user_input)
       @board.update(user_input, current_player)
@@ -59,6 +59,15 @@ class Game
   end
 
   def play
-
+    if !self.over?
+      self.turn
+      self.play
+    else
+      if self.draw?
+        puts "Cat's Game!"
+      elsif self.won?
+        puts "Congratulations #{self.winner}!"
+      end
+    end
   end
 end
