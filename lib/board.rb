@@ -34,9 +34,22 @@ class Board
     end
 
     def turn_count
-        counter = 0
-        while @cells.each do |cell| cell !=  " "
-        counter +=1
+        @cells.count{|cell| cell != " "}
     end
 
+    def taken?(input)
+        position(input) == "X" || position(input) == "O"
+    end
+
+    def valid_move?(input)
+       !taken?(input) && input.to_i.between?(1, 9)
+    end
+
+    def update(input, player)
+       cells[input.to_i-1] = player.token
+    end
 end
+
+       
+    # when input is made, a token goes in the cell
+    #     a token is X or O depending on the turn count
