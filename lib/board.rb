@@ -49,7 +49,3 @@ class Board
        cells[input.to_i-1] = player.token
     end
 end
-
-       
-    # when input is made, a token goes in the cell
-    #     a token is X or O depending on the turn count

@@ -14,15 +14,9 @@ class Game
         [6,4,2]
       ]
     
-    def board
-        @game = []
-    end
-    
-    def initialize(player_1 = "X", player_2 = "O", board = nil)
+    def initialize(player_1 = "X", player_2 = "O", board = Board.new) #=> #<Board... @cells=[' ', ' '...]>
         @player_1 = player_1
         @player_2 = player_2
-        # cells.board
-        # @board = # @board = board
+        @board = board
     end
-    
 end
