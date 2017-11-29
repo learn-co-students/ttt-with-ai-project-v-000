@@ -76,5 +76,28 @@ WIN_COMBINATIONS = [
     @board.update(position, self.current_player)
   end
 
+  def play
+    if self.over?
+      if self.won?
+        #puts "Congratulations #{self.board.cells[self.won?[0]]}!"
+        puts "Congratulations #{self.winner}!"
+      elsif self.draw?
+        puts "Cat\'s game!"
+      else
+        self.turn
+      end
+    else
+      while !self.over?
+        self.turn
+          if self.won?
+            puts "Congratulations #{self.board.cells[self.won?[0]]}!"
+          elsif self.draw?
+            puts "Cat\'s game!"
+          end
+      end
+    end
+  end
+
+
 
 end
