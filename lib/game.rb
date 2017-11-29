@@ -14,7 +14,7 @@ class Game
         [0,4,8],
         [6,4,2]
       ]
-   
+
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         @player_1 = player_1
         @player_2 = player_2
@@ -26,11 +26,35 @@ class Game
     end
 
     def over?
+        if board.cells.all? { |cell| cell !=  " " }
+            true
+        end
+    end
+
+    def won?
+        WIN_COMBINATIONS.each do |win_combination| board.cells[win_combination[0]] == board.cells[win_combination[1]] && board.cells[win_combination[1]] == board.cells[win_combination[2]]
+            end
+    end
+
+    # def draw?
+    #     over? && !won
+    # end
+
+end
+
+
+# WIN_COMBINATIONS.detect do |win_combination| win_combination.all? {|win_index| board[win_index] == "X" } || win_combination.all? {|win_index| board[win_index] == "O" } == true
+          
+# board[win_combination[0]] == board[win_combination[1]] && board[win_combination[1]] == board[win_combination[2]]
+#                   && position_taken?(board, win_combination[0])
+        
+            
+            
+            # win_combo.all? {|win_index| board[win_index] == "X" } || win_combo.all? {|win_index| board[win_index] == "O" } == true
+            # win_combo
         # game_won = WIN_COMBINATIONS.detect do |win_combination|
         #     win_combination.all? {|win_index| board[win_index] == "X" } ||
         #     win_combination.all? {|win_index| board[win_index] == "O" }
-        if board.cells.all? { |cell| cell !=  " " }
-            true
         # returns true for a draw
         # a draw is when all spaces are full or there is a wining combination ... use the any method? 
         # # if Board.full? || any winning combinations are not possible
@@ -39,24 +63,12 @@ class Game
         # #          && board[win_combination[1]] == board[win_combination[2]]
         # #           && position_taken?(board, win_combination[0])}
         # #       end
-        end
-    end
 
-    def won?
-        if over?
-            false
-        elsif WIN_COMBINATIONS.each do |win_combination| board[win_combination[0]] == board[win_combination[1]] && board[win_combination[1]] == board[win_combination[2]]
-             win_combination   #   && position_taken?(board, win_combination[0])}
-        
-            
-            
-            # win_combo.all? {|win_index| board[win_index] == "X" } || win_combo.all? {|win_index| board[win_index] == "O" } == true
-            # win_combo
-            end
-        end
-    end
-    end
-end
-
-
-# WIN_COMBINATIONS.detect do |win_combination| win_combination.all? {|win_index| board[win_index] == "X" } || win_combination.all? {|win_index| board[win_index] == "O" } == true
+        # def won?
+        #     WIN_COMBINATIONS.each do |win_combination| 
+        #         binding.pry            
+        #         if win_combination[0] == board.cells[win_combination[0]] && win_combination[1] == board.cells[win_combination[1]] && win_combination[2] == board.cells[win_combination[2]]
+        #             win_combination
+        #             end
+        #         end
+        # end
