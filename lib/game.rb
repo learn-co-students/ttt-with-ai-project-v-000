@@ -53,24 +53,80 @@ class Game
   end
 
   def turn
-    input = current_player.move
-    if !board.valid_move?(input)
+    puts "Please enter 1-9:"
+    input = current_player.move(board)
+    until board.valid_move?(input)
       puts "invalid"
-      input = current_player.move
-    else
-      board_index = board.input_to_index(input)
-      board.cells[board_index] = current_player.token
+      puts "Please enter 1-9:"
+      input = current_player.move(board)
     end
+    board_index = board.input_to_index(input)
+    board.cells[board_index] = current_player.token
   end
 
   def play
     until over?
       turn
+      board.display
     end
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
+    end
+  end
+
+  def self.game_intro
+    puts "What kind of game would you like to play?"
+    puts "If you'd like the computer to play itself, enter '0'."
+    puts "If you'd like to play against the computer, enter '1'."
+    puts "If you'd like a two player game, enter '2'."
+    puts "If you'd like the computer to play itself 100 times, enter 'wargames'."
+  end
+
+  def self.start(input)
+    if input == "0"
+      new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      new_game.play
+    elsif input == "1"
+      puts "Who would you like to go first and be 'X'?"
+      puts "If you would like to go first, enter 'me'."
+      puts "If you would like the computer to go first, enter 'computer'."
+      first = gets.strip
+      if first == "me"
+        new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        new_game.play
+      elsif first == "computer"
+        new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        new_game.play
+      end
+    elsif input == "2"
+      new_game = Game.new
+      new_game.play
+    elsif input == "wargames"
+      win_record = []
+      100.times do |w|
+        new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        new_game.play
+        win_record << new_game.winner
+      end
+      if !win_record.include?("X") && !win_record.include?("O")
+        puts "The game was won zero times."
+      elsif win_record.include?("X") && win_record.include?("0")
+        puts "The game was won #{win_record.count} times."
+      end
+    end
+  end
+
+  def self.replay?
+    puts "Would you like to play again? Please enter 'yes' or 'no'."
+    replay_input = gets.strip
+    until replay_input != "yes"
+      game_intro
+      game_input = gets.strip
+      start(game_input)
+      puts "Would you like to play again? Please enter 'yes' or 'no'."
+      replay_input = gets.strip
     end
   end
 
