@@ -4,6 +4,5 @@ class Player
     
     def initialize(token)
         @token = token
-        # @cells.tap! { |cell| cell }
     end
 end

@@ -1,11 +1,11 @@
 module Players
+    class Human < Player
 
-class Human < Player
+        attr_accessor :player_1, :player_2
 
-        attr_accessor 
-    def move(input) 
-        input = gets
+        def move(input) 
+         input = gets
+        end
+
     end
-end
-
 end

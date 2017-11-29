@@ -1,7 +1,6 @@
 class Game
-
-    attr_accessor :player_1, :player_2, :board, :cells
-
+    
+    attr_accessor :player_1, :player_2, :board, :token
 
     WIN_COMBINATIONS = [
         [0,1,2], 
@@ -14,9 +13,17 @@ class Game
         [6,4,2]
       ]
     
-    def initialize(player_1 = "X", player_2 = "O", board = Board.new) #=> #<Board... @cells=[' ', ' '...]>
+    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         @player_1 = player_1
         @player_2 = player_2
         @board = board
+    end
+
+    def current_player
+        board.cells.count{|cell| cell != " "} % 2 == 0 ? @player_1 : @player_2
+    end
+
+    def over?
+        if Board.full? 
     end
 end
