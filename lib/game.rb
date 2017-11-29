@@ -19,7 +19,11 @@ class Game
   end
 
   def over?
+<<<<<<< HEAD
     if won? || draw?
+=======
+    if draw? || won?
+>>>>>>> abcef95ecdcb4d704a4873ec2770e65e27e70215
       true
     else
       false
@@ -28,8 +32,12 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
+<<<<<<< HEAD
       @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]]
       && @board.taken?(combo[0]+1)
+=======
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
+>>>>>>> abcef95ecdcb4d704a4873ec2770e65e27e70215
     end
   end
 
@@ -48,7 +56,11 @@ class Game
     current_move = player_now.move(@board)
     if !@board.valid_move?(current_move)
       turn
+<<<<<<< HEAD
     else
+=======
+    elsif @board.valid_move?(current_move)
+>>>>>>> abcef95ecdcb4d704a4873ec2770e65e27e70215
       puts "Turn: #{@board.turn_count+1}\n"
       @board.display
       @board.update(current_move, player_now)
