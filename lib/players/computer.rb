@@ -1,12 +1,8 @@
 module Players
   class Computer < Player
     def move(board)
-
-<<<<<<< HEAD
        move = rand(1..9)
-=======
-       move = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].detect{|i| !board.taken?(i)}.to_s
->>>>>>> abcef95ecdcb4d704a4873ec2770e65e27e70215
+
 
 
 
