@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
     
     attr_accessor :player_1, :player_2, :board, :token
@@ -24,10 +26,11 @@ class Game
     end
 
     def over?
-        game_won = WIN_COMBINATIONS.detect do |win_combination|
-            win_combination.all? {|win_index| board[win_index] == "X" } ||
-            win_combination.all? {|win_index| board[win_index] == "O" }
-        if game_won || Board.full?
+        # game_won = WIN_COMBINATIONS.detect do |win_combination|
+        #     win_combination.all? {|win_index| board[win_index] == "X" } ||
+        #     win_combination.all? {|win_index| board[win_index] == "O" }
+        if board.cells.all? { |cell| cell !=  " " }
+            true
         # returns true for a draw
         # a draw is when all spaces are full or there is a wining combination ... use the any method? 
         # # if Board.full? || any winning combinations are not possible
@@ -36,9 +39,24 @@ class Game
         # #          && board[win_combination[1]] == board[win_combination[2]]
         # #           && position_taken?(board, win_combination[0])}
         # #       end
+        end
+    end
+
+    def won?
+        if over?
+            false
+        elsif WIN_COMBINATIONS.each do |win_combo| 
+            if win_combo  
+        
+            
+            
+            # win_combo.all? {|win_index| board[win_index] == "X" } || win_combo.all? {|win_index| board[win_index] == "O" } == true
+            # win_combo
+            end
+        end
+    end
     end
 end
-end
-end
 
 
+# WIN_COMBINATIONS.detect do |win_combination| win_combination.all? {|win_index| board[win_index] == "X" } || win_combination.all? {|win_index| board[win_index] == "O" } == true
