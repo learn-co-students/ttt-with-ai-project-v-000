@@ -45,8 +45,8 @@ class Game
     def won?
         if over?
             false
-        elsif WIN_COMBINATIONS.each do |win_combo| 
-            if win_combo  
+        elsif WIN_COMBINATIONS.each do |win_combination| board[win_combination[0]] == board[win_combination[1]] && board[win_combination[1]] == board[win_combination[2]]
+             win_combination   #   && position_taken?(board, win_combination[0])}
         
             
             
