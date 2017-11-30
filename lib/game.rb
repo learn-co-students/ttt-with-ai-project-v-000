@@ -56,13 +56,30 @@ class Game
     end
   end
 
-  def start
+  def turn
+    input = current_player.move(self.board)
+    if self.board.valid_move?(input)
+      self.board.update(input, current_player)
+      self.board.display
+    else
+      puts "Invalid turn! Try again."
+      turn
+    end
+
   end
 
   def play
-  end
-
-  def turn
+    puts "Welcome to Tic Tac Toe!"
+    self.board.display
+    until over? do
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+    
   end
 
 end
