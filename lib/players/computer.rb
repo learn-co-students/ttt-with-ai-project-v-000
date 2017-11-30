@@ -1,7 +1,21 @@
 module Players
   class Computer < Player
     def move(board = nil)
-
+      if board.turn_count == 0 || board.turn_count == 2
+        corner(board)
+      elsif board.turn_count == 1
+        "5"
+      elsif board.turn_count >= 3
+        if win_game(board)
+          win_game(board)
+        elsif block_opponent(board)
+          block_opponent(board)
+        elsif corner(board)
+          corner(board)
+        elsif random(board)
+          random(board)
+        end
+      end
 
     end
 
