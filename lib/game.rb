@@ -69,8 +69,6 @@ class Game
   end
 
   def play
-    puts "Welcome to Tic Tac Toe!"
-    self.board.display
     until over?
       turn
     end
@@ -79,9 +77,6 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
-
-
-
   end
 
 end
