@@ -11,10 +11,10 @@ class Game
   end
 
   def current_player
-    if board.turn_count.odd?
-      player_2
-    elsif board.turn_count.even?
+    if board.turn_count % 2 == 0
       player_1
+    else
+      player_2
     end
   end
 
@@ -28,7 +28,9 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
   end
 
@@ -43,18 +45,16 @@ class Game
   end
 
   def turn
-    player_now = current_player
-    current_move = player_now.move(@board)
-    if !@board.valid_move?(current_move)
-      turn
+    user_input = self.current_player.move(board)
+    if board.valid_move?(user_input)
+      board.update(user_input, self.current_player)
+      board.display
     else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player_now)
-      puts "#{player_now.token} moved #{current_move}"
-      @board.display
+      puts "invalid move."
+      self.turn
     end
   end
+
 
   def play
     while !over?

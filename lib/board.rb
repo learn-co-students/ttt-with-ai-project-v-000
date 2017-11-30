@@ -19,27 +19,30 @@ class Board
   end
 
   def position(move)
-      "#{@cells[move.to_i - 1]}"
+    @cells[move.to_i - 1]
   end
 
   def full?
-    if @cells.any? { |c| c == " "}
-      false
-    else
+    if @cells.all? { |c| c == "X" || c == "O" }
       true
+    else
+      false
     end
   end
 
   def turn_count
-    @cells.select { |c| c != " "}.length
+    counter = 0
+    self.cells.each do |token|
+      if token == "X" || token == "O"
+         counter += 1
+      end
+    end
+    counter
   end
 
+
   def taken?(move)
-    if @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
-      true
-    else
-      false
-    end
+    !(position(move) == " ")
   end
 
   def valid_move?(move)
