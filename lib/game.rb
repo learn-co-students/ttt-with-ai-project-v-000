@@ -45,7 +45,15 @@ class Game
     false
   end
 
+  def draw?
+    !self.won? && self.over?
+  end
+
   def winner
+    if self.won?
+      index = self.won?[0]
+      self.board.cells[index]
+    end
   end
 
   def start
