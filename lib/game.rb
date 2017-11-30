@@ -2,7 +2,7 @@ require 'pry'
 
 class Game
     
-    attr_accessor :player_1, :player_2, :board, :token
+    attr_accessor :player_1, :player_2, :board
 
     WIN_COMBINATIONS = [
         [0,1,2], 
@@ -26,21 +26,45 @@ class Game
     end
 
     def over?
-        if board.cells.all? { |cell| cell !=  " " }
+        if board.cells.all? { |cell| cell !=  " " } || won? == true
             true
+        else
+            false
         end
     end
 
     def won?
-        WIN_COMBINATIONS.each do |win_combination| board.cells[win_combination[0]] == board.cells[win_combination[1]] && board.cells[win_combination[1]] == board.cells[win_combination[2]]
-            end
+        WIN_COMBINATIONS.find do |win_combination| 
+            board.cells[win_combination[0]] == board.cells[win_combination[1]] && 
+            board.cells[win_combination[1]] == board.cells[win_combination[2]] && 
+            board.taken?(win_combination[0])
+        end
     end
 
-    # def draw?
-    #     over? && !won
-    # end
+    def draw?
+        over? && !won?
+    end
+
+    def winner
+         # board.cells[won?.first] if won? #this also works because won?.first represents the first play
+        if win_combination = won?
+            board.cells[win_combination[0]]
+        end
+    end
+
+    def turn
+        if board.input = gets
+            "1"
+            binding.pry
+    end
 
 end
+        # if board.move(input)
+        #     puts "1"
+        # elsif 
+        #     puts "1"
+        
+
 
 
 # WIN_COMBINATIONS.detect do |win_combination| win_combination.all? {|win_index| board[win_index] == "X" } || win_combination.all? {|win_index| board[win_index] == "O" } == true
