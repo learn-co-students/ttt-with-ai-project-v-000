@@ -26,7 +26,7 @@ class Game
   end
 
   def over?
-    !self.board.cells.any?{|cell| cell == " "}
+    self.board.full? || won? || draw?
   end
 
   def won?
@@ -46,7 +46,7 @@ class Game
   end
 
   def draw?
-    !self.won? && self.over?
+    !self.won? && self.board.full?
   end
 
   def winner
@@ -71,7 +71,7 @@ class Game
   def play
     puts "Welcome to Tic Tac Toe!"
     self.board.display
-    until over? do
+    until over?
       turn
     end
     if won?
@@ -79,7 +79,9 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
-    
+
+
+
   end
 
 end
