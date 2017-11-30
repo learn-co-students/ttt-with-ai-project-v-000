@@ -53,18 +53,20 @@ class Game
     end
 
     def turn
-        if board.input = gets
-            "1"
-            binding.pry
-    end
+         gets player_1 input
+         if input == valid_move? 
+            puts "1"
+        then gets player_2 input
+            puts "2"
 
-end
+        end
+    end
         # if board.move(input)
         #     puts "1"
         # elsif 
         #     puts "1"
         
-
+end
 
 
 # WIN_COMBINATIONS.detect do |win_combination| win_combination.all? {|win_index| board[win_index] == "X" } || win_combination.all? {|win_index| board[win_index] == "O" } == true
