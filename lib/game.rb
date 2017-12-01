@@ -10,8 +10,7 @@ class Game
     [0,4,8],
     [6,4,2]
   ]
-  board.display
-  
+
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -62,8 +61,10 @@ class Game
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
       self.board.display
+      return
     else
-      puts "Invalid turn! Try again."
+      puts "Invalid turn! Try again:"
+      current_player.move(self.board)
       turn
     end
 
