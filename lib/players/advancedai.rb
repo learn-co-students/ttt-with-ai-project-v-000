@@ -5,11 +5,7 @@ module Players
 
     def initialize(token)
       @token = token
-      if token == "X"
-        @opponent_token = "O"
-      else
-        @opponent_token = "X"
-      end
+      token == "X" ? @opponent_token = "O" : @opponent_token = "X"
     end
 
     EMOTES = [
@@ -227,7 +223,7 @@ module Players
     #
 
     def edge_attack?(board)
-      if board.cells[4] == "O" #&& rand(1..2) == 1
+      if board.cells[4] == "O" && rand(1..2) == 1
         corner = board.cells.index("X")
         puts "Edge Atacked!"
         case corner

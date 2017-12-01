@@ -3,7 +3,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9, " ")
+    @cells = reset!
   end
 
   def display
@@ -27,7 +27,7 @@ class Board
   end
 
   def full?
-    self.cells.count("X") + self.cells.count("O") == 9
+    self.cells.count(" ") == 0
   end
 
   def taken?(input)
@@ -35,7 +35,7 @@ class Board
   end
 
   def is_taken?(index)
-    self.cells[index] == "X" || self.cells[index] == "O" 
+    self.cells[index] != " "
   end
 
   def valid_move?(input)

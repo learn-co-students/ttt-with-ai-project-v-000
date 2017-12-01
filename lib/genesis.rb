@@ -136,8 +136,10 @@ class Genesis
   # why an AI was losing by stopping the loop if that AI lost.
 
   def just_ai
-    player1 = Players::Student01.new("X")
-    player2 = Players::AdvancedAI.new("O")
+    player1 = Players::AdvancedAI.new("X")
+    player2 = Players::Student01.new("O")
+    # player1 = Players::Student01.new("X")
+    # player2 = Players::AdvancedAI.new("O")
     stats = []
 
 
@@ -151,15 +153,15 @@ class Genesis
   end
 
   def ai_fail
-    player1 = Players::Student01.new("X")
-    player2 = Players::RNG.new("O")
+    player1 = Players::AdvancedAI.new("X")
+    player2 = Players::Student01.new("O")
     count = 0
     stop = nil
     until stop == "O" || count == 2000
       game = Game.new(player1, player2)
       game.board.display
       game.play
-      stop = game.winner if game.winner == "O"
+      stop = game.winner if game.winner == "X"
       count += 1
     end
 

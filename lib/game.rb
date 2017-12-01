@@ -26,12 +26,11 @@ class Game
 
   def play
     self.board.display
-    until over?
+    while !over?
       turn
       self.board.display
     end
-    puts "Congratulations #{winner}!" if won?
-    puts "Cat's Game!" if draw?
+    puts won? ? "Congratulations #{winner}!" : "Cat's Game!"
   end
 
   def current_player
@@ -39,8 +38,9 @@ class Game
   end
 
   def winner
-    winner = won? if won?
-    board.cells[winner[0]] if won?
+    if winner = won?
+      board.cells[winner[0]]
+    end
   end
 
   def over?
