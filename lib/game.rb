@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :current_player
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -19,9 +19,9 @@ class Game
 
   def current_player
     if self.board.turn_count % 2 == 0
-      @player_1
+      @current_player = player_1
     else
-      @player_2
+      @current_player = player_2
     end
   end
 
@@ -57,14 +57,13 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
     input = current_player.move(self.board)
-    unless self.board.valid_move?(input)
+    unless board.valid_move?(input)
       puts "Invalid turn! Try again:"
-      turn
+      self.turn
     end
-    self.board.update(input, current_player)
-    self.board.display
+    board.update(input, current_player)
+    board.display
   end
 
   def play

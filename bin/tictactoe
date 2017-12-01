@@ -16,13 +16,16 @@ loop do
     player_1 = gets.strip
     if player_1 == "me"
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      game.board.display
       game.play
     elsif player_1 == "computer"
       game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      game.board.display
       game.play
     end
   elsif number_of_players == 2
     game = Game.new
+    game.board.display
     game.play
   end
 

@@ -1,11 +1,17 @@
 module Players
   class Computer < Player
     def move(board = nil)
-      if board.turn_count == 0 || board.turn_count == 2
+      if board.turn_count == 0 || board.turn_count == 1 || board.turn_count == 2
         corner(board)
-      elsif board.turn_count == 1
-        "5"
-      elsif board.turn_count >= 3
+      elsif board.turn_count == 3
+        if win_game(board)
+          win_game(board)
+        elsif block_opponent(board)
+          block_opponent(board)
+        elsif corner(board)
+          corner(board)
+        end
+      elsif board.turn_count > 3
         if win_game(board)
           win_game(board)
         elsif block_opponent(board)
@@ -41,60 +47,60 @@ module Players
     def win_game(board = Board.new)
       #top row wins
       if board.cells[0] == self.token && board.cells[1] == self.token && !board.taken?(2)
-        move = "3"
+        input = "3"
       elsif board.cells[0] == self.token && !board.taken?(1) && board.cells[2] == self.token
-        move = "2"
+        input = "2"
       elsif !board.taken?(0) && board.cells[1] == self.token && board.cells[2] == self.token
-        move = "1"
+        input = "1"
       #middle row wins
       elsif board.cells[3] == self.token && board.cells[4] == self.token && !board.taken?(5)
-        move = "6"
+        input = "6"
       elsif board.cells[3] == self.token && !board.taken?(4) && board.cells[5] == self.token
-        move = "5"
+        input = "5"
       elsif !board.taken?(3) && board.cells[4] == self.token && board.cells[5] == self.token
-        move = "4"
+        input = "4"
         #bottom row wins
       elsif board.cells[6] == self.token && board.cells[7] == self.token && !board.taken?(8)
-        move = "9"
+        input = "9"
       elsif board.cells[6] == self.token && !board.taken?(7) && board.cells[8] == self.token
-        move = "8"
+        input = "8"
       elsif !board.taken?(6) && board.cells[7] == self.token && board.cells[8] == self.token
-        move = "7"
+        input = "7"
         #left column wins
       elsif board.cells[0] == self.token && board.cells[3] == self.token && !board.taken?(6)
-        move = "7"
+        input = "7"
       elsif board.cells[0] == self.token && !board.taken?(3) && board.cells[6] == self.token
-        move = "4"
+        input = "4"
       elsif !board.taken?(0) && board.cells[3] == self.token && board.cells[6] == self.token
-        move = "1"
+        input = "1"
         #middle column wins
       elsif board.cells[1] == self.token && board.cells[4] == self.token && !board.taken?(7)
-        move = "8"
+        input = "8"
       elsif board.cells[1] == self.token && !board.taken?(4) && board.cells[7] == self.token
-        move = "5"
+        input = "5"
       elsif !board.taken?(1) && board.cells[4] == self.token && board.cells[7] == self.token
-        move = "2"
+        input = "2"
         #right column wins
       elsif board.cells[2] == self.token && board.cells[5] == self.token && !board.taken?(8)
-        move = "9"
+        input = "9"
       elsif board.cells[2] == self.token && !board.taken?(5) && board.cells[8] == self.token
-        move = "6"
+        input = "6"
       elsif !board.taken?(2) && board.cells[5] == self.token && board.cells[8] == self.token
-        move = "3"
+        input = "3"
         #top left to bottom right diagonal
       elsif board.cells[0] == self.token && board.cells[4] == self.token && !board.taken?(8)
-        move = "9"
+        input = "9"
       elsif board.cells[0] == self.token && !board.taken?(4) && board.cells[8] == self.token
-        move = "5"
+        input = "5"
       elsif !board.taken?(0) && board.cells[4] == self.token && board.cells[8] == self.token
-        move = "1"
+        input = "1"
         #bottom left to top right diagonal
       elsif board.cells[6] == self.token && board.cells[4] == self.token && !board.taken?(2)
-        move = "3"
+        input = "3"
       elsif board.cells[6] == self.token && !board.taken?(4) && board.cells[2] == self.token
-        move = "5"
+        input = "5"
       elsif !board.taken?(6) && board.cells[4] == self.token && board.cells[2] == self.token
-        move = "7"
+        input = "7"
       end
 
     end
