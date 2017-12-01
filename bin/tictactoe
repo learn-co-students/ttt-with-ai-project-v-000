@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+require 'pry'
+
+Pry.start
+
+puts "Welcome to Tic Tac Toe!"
+puts "Would you like to play a Computer-player, 1-player, or 2-player game? Type 0 for Computer-player, 1 for 1-player, and 2 for 2-player"
+
+game_type = gets.strip
+
+if game_type == "0"
+    Computer.move(input)
+elsif game_type == "1"
+    ???
+elsif game_type == "2"
+    ???
+
+
+display
+
+puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:
+
+
+
+
+
+
+

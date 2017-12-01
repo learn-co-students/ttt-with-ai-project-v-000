@@ -26,11 +26,7 @@ class Game
     end
 
     def over?
-        if board.cells.all? { |cell| cell !=  " " } || won? == true
-            true
-        else
-            false
-        end
+        draw? || won?
     end
 
     def won?
@@ -42,7 +38,7 @@ class Game
     end
 
     def draw?
-        over? && !won?
+        @board.full? && !won?
     end
 
     def winner
@@ -53,48 +49,39 @@ class Game
     end
 
     def turn
-         gets player_1 input
-         if input == valid_move? 
-            puts "1"
-        then gets player_2 input
-            puts "2"
-
+        current_turn = current_player.move(@board)
+        if @board.valid_move?(current_turn) #turn chcks if valid move runs itself ... can check if it's valid and do the turn at the same time
+            @board.update(current_turn, current_player) #Notes: use @board and not board because @ is more object oriented #Notes: note how this reads like sentences
+            #can't typically pass a method but you can if you use a VARIABLE
+            #recursion is clling a method within itself
+            
+        else
+            turn
         end
     end
-        # if board.move(input)
-        #     puts "1"
-        # elsif 
-        #     puts "1"
-        
+
+    def play  
+        until over? || draw?
+            turn
+            if turn == "X" && won?
+                puts "Congratulations X!" 
+            # elsif won? && turn == "O" 
+            #     puts "Congratulations O!" 
+            elsif draw? 
+                puts "Cat's Game!"
+            end
+        end
+    end
 end
 
+#require_all './lib'
 
-# WIN_COMBINATIONS.detect do |win_combination| win_combination.all? {|win_index| board[win_index] == "X" } || win_combination.all? {|win_index| board[win_index] == "O" } == true
-          
-# board[win_combination[0]] == board[win_combination[1]] && board[win_combination[1]] == board[win_combination[2]]
-#                   && position_taken?(board, win_combination[0])
-        
-            
-            
-            # win_combo.all? {|win_index| board[win_index] == "X" } || win_combo.all? {|win_index| board[win_index] == "O" } == true
-            # win_combo
-        # game_won = WIN_COMBINATIONS.detect do |win_combination|
-        #     win_combination.all? {|win_index| board[win_index] == "X" } ||
-        #     win_combination.all? {|win_index| board[win_index] == "O" }
-        # returns true for a draw
-        # a draw is when all spaces are full or there is a wining combination ... use the any method? 
-        # # if Board.full? || any winning combinations are not possible
-        # # #     def won?(board)
-        # #         WIN_COMBINATIONS.find {|win_combination| board[win_combination[0]] == board[win_combination[1]]
-        # #          && board[win_combination[1]] == board[win_combination[2]]
-        # #           && position_taken?(board, win_combination[0])}
-        # #       end
+#all of the following in the bin file for the app will open pry for all files
 
-        # def won?
-        #     WIN_COMBINATIONS.each do |win_combination| 
-        #         binding.pry            
-        #         if win_combination[0] == board.cells[win_combination[0]] && win_combination[1] == board.cells[win_combination[1]] && win_combination[2] == board.cells[win_combination[2]]
-        #             win_combination
-        #             end
-        #         end
-        # end
+#!/usr/bin/env ruby
+
+# require_relative '../config/environment'
+
+# require 'pry'
+
+# Pry.start
