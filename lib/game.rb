@@ -57,10 +57,12 @@ class Game
   end
 
   def turn
-    input = current_player.move(self.board)
+    input = current_player.move(board)
     unless board.valid_move?(input)
       puts "Invalid turn! Try again:"
-      self.turn
+      puts input
+      board.display
+      turn
     end
     board.update(input, current_player)
     board.display
