@@ -19,6 +19,26 @@ attr_accessor :board, :player_1, :player_2
     @player_2 = player_2
   end #initialize
 
+  def won? #returns FALSE OR winning line array (called by #winner)
+    any_return = WIN_COMBINATIONS.any? do |combo|
+      @board.cells[combo[0]] == "X" && @board.cells[combo[1]] == "X" && @board.cells[combo[2]] == "X" ||
+        @board.cells[combo[0]] == "O" && @board.cells[combo[1]] == "O" && @board.cells[combo[2]] == "O"
+    end
+      select_return =  WIN_COMBINATIONS.select do |combo|
+        @board.cells[combo[0]] == "X" && @board.cells[combo[1]] == "X" && @board.cells[combo[2]] == "X" ||
+          @board.cells[combo[0]] == "O" && @board.cells[combo[1]] == "O" && @board.cells[combo[2]] == "O"
+    end
+    if any_return == false
+      any_return
+    elsif select_return != nil
+      win_return = select_return[0]
+    end
+  end #won?
+
+  def draw? #is current board full but not won?
+      @board.full? == true && won? == false
+  end #draw?
+
   def current_player
     if (@board.turn_count % 2) == 0
         @player_1
@@ -27,6 +47,9 @@ attr_accessor :board, :player_1, :player_2
       end
   end #current_player
 
+  def over? #come back to this, passes but not the same as OOTTT
+    @board.full?
+  end
 
 
 
