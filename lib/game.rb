@@ -39,6 +39,13 @@ attr_accessor :board, :player_1, :player_2
       @board.full? == true && won? == false
   end #draw?
 
+  def winner #returns winning line array
+    if won? != false
+      win_line = won?
+      @board.cells[win_line[0]]
+    end
+  end #winner
+
   def current_player
     if (@board.turn_count % 2) == 0
         @player_1
