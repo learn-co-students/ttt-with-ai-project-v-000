@@ -18,6 +18,49 @@ class Game
     @player_2 = player_2
   end
 
+  def self.one_player1(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    Game.new(player_1, player_2, board)
+  end
+
+  def self.one_player2(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    Game.new(player_1, player_2, board)
+  end
+
+  def self.wargames(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    Game.new(player_1, player_2, board)
+  end
+
+  def self.game_choice(input = nil)
+    puts "Please select wargames, 1, or 2"
+    input = gets.chop
+    if input == "wargames"
+      new_game = self.wargames
+      new_game.play
+    elsif input == "1"
+      puts "Would you like to go first or second?"
+      input2 = gets.chop
+      if input2 == "first"
+        new_game = self.one_player1
+        new_game.play
+      elsif input2 == "second"
+        new_game = self.one_player2
+        new_game.play
+      else
+        puts "I'm sorry, I couldn't hear you. Please type either first or second."
+        puts "Just kidding, you have to start over because you didn't listen. :p"
+        self.game_choice(1)
+      end
+    elsif input == "2"
+      puts "Enjoy! May the best player win!"
+      new_game = self.new
+      new_game.play
+    else
+      puts "No, no, no, you're lost again."
+      self.game_choice
+    end
+  end
+
+
   def current_player
     self.board.turn_count % 2 == 0 ? player_1 : player_2
   end
@@ -51,6 +94,7 @@ class Game
     else
       self.board.update(current_move, player)
     end
+    self.board.display
   end
 
 
