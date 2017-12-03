@@ -6,7 +6,7 @@ include Players
 #player2 = Computer.new("O")
 #game = Game.new(player1, player2)
 #game.play
-  def intro
+  def intro #passes tests, quick and dirty to make it playable
     puts "Welcome to Tic Tac Toe, please select:"
     puts "1. Human versus Computer."
     puts "2. Human versus Human."
