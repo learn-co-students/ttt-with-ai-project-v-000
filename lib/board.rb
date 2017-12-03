@@ -32,6 +32,7 @@ class Board
 
   def taken?(index)
     @cells[index.to_i]== "X" || @cells[index.to_i] == "O"
+    binding.pry
   end
 
   def valid_move?(index)
