@@ -60,16 +60,21 @@ attr_accessor :board, :player_1, :player_2
 
 #take a break, this won't work until there's a #move defined for all players.
   def turn
-    puts "Please select an empty space in which to move, player #{current_player}, 1-9."
+
+    #puts "Please select an empty space in which to move, player #{current_player}, 1-9."
     @board.display
-    move = @current_player.move(@board) #can't call repeatedly, need one instance
-    while !@board.valid_move?(move)
-      puts "Invalid Move."
+
+    move = current_player.move(@board) #can't call repeatedly, need one instance
+    if !@board.valid_move?(move)
+      #puts "invalid #{move}"
       turn #'til Human gets it right
+    else
+      @board.update(move, current_player)
+      #puts "Updated Board:"
+      @board.display
+
     end
-    @board.update(move, current_player)
-    puts "Updated Board:"
-    @board.display
+
 
 
   end #turn
