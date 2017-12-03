@@ -3,5 +3,6 @@
 require_relative '../config/environment'
 include Players
 player = Computer.new("X")
-game = Game.new(player)
+player2 = Computer.new("O")
+game = Game.new(player, player2)
 game.play
