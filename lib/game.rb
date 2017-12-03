@@ -34,8 +34,16 @@ class Game
     puts "Please select wargames, 1, or 2"
     input = gets.chop
     if input == "wargames"
-      new_game = self.wargames
-      new_game.play
+      counter = 0
+      computer1 = 0
+      computer2 = 0
+      draws = 0
+      until counter == 100 do
+        new_game = self.wargames
+        new_game.play
+        puts "After #{counter} game(s) played: Computer 1 = #{computer1} - Computer 2 = #{computer2} - Cat's Game(s) = (#{counter})"
+        counter += 1
+        end
     elsif input == "1"
       puts "Would you like to go first or second?"
       input2 = gets.chop
@@ -57,6 +65,19 @@ class Game
     else
       puts "No, no, no, you're lost again."
       self.game_choice
+    end
+  end
+
+  def self.ask
+    puts "Would You like to play again (Y/N)?"
+    input = gets.chop
+    if input.match(/[yY]/)
+      self.game_choice
+    elsif input.match(/[nN]/)
+      exit
+    else
+      puts "Okie dokie then. I'll just act like you didn't say that and start over."
+      self.ask
     end
   end
 

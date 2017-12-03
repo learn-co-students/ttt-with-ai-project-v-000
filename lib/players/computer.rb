@@ -12,6 +12,7 @@ module Players
     ]
 
     def move(board)
+      sleep(0.15)
       move = nil
 
      if board.turn_count == 0
@@ -29,12 +30,11 @@ module Players
          if move != nil
            break
          elsif (board.position("#{winning[0] + 1}") == board.position("#{winning[1] + 1}")) && board.taken?("#{winning[0] + 1}") && !board.taken?("#{winning[2] + 1}")
-           move = winning.select{|i| !board.taken?(i + 1)}.first.to_i.+(1).to_s
+           move = "#{winning[2] + 1}"
         elsif (board.position(winning[0] + 1) == board.position(winning[2] + 1)) && board.taken?("#{winning[0] + 1}") && !board.taken?("#{winning[1] + 1}")
-          #move = winning.select{|i| !board.taken?(i + 1)}.first.to_i.+(1).to_s
           move = "#{winning[1] + 1}"
         elsif (board.position(winning[1] + 1) == board.position(winning[2] + 1)) && board.taken?("#{winning[1] + 1}") && !board.taken?("#{winning[0] + 1}")
-             move = winning.select{|i| !board.taken?(i + 1)}.first.to_i.+(1).to_s
+             move = "#{winning[0] + 1}"
          end
     end
           move = [1, 3, 7, 9, 5, 2, 4, 6, 8].select{|i| !board.taken?(i)}.first.to_s if move == nil
