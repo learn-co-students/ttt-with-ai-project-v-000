@@ -31,13 +31,12 @@ class Board
   end
 
   def taken?(index)
-    @cells[index.to_i]== "X" || @cells[index.to_i] == "O"
-    binding.pry
+    @cells[index.to_i - 1]== "X" || @cells[index.to_i - 1] == "O" #only way it passes
   end
 
-  def valid_move?(index)
+  def valid_move?(index) #index = string 1-9
     move = index.to_i
-    move.between?(0,8) && !taken?(move) && move.to_s == index
+    move.between?(1,9) && !taken?(move) && move.to_s == index
   end
 
   def update(index, player)
@@ -45,6 +44,3 @@ class Board
  end
 
 end
-
-
-# rspec spec/01_board_spec.rb
