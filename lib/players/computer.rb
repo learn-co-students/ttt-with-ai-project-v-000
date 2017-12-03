@@ -1,6 +1,7 @@
 module Players
   class Computer < Player
-    def move(board)
+    # https://neverstopbuilding-dropblog.herokuapp.com/minimax is a bit too extensive for this
+    def move(board) #no decision logic, but plays the game for the purposes of the assignment.
       counter = 1
       output = nil
         while counter <= 9
@@ -9,6 +10,7 @@ module Players
           end
           counter +=1
         end
+        sleep(1)
         output
       end
 
