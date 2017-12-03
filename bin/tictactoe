@@ -18,18 +18,23 @@ include Players
         player2 = Computer.new("O")
         game = Game.new(player1, player2)
         game.play
+        intro
       elsif input == 2
         player1 = Human.new("X")
         player2 = Human.new("O")
         game = Game.new(player1, player2)
         game.play
+        intro
       elsif input == 3
         player1 = Computer.new("X")
         player2 = Computer.new("O")
         game = Game.new(player1, player2)
         game.play
+        intro
       elsif input == 4
+
       else intro
       end
+
   end #intro
 intro
