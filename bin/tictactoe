@@ -1,23 +1,32 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+require 'pry'
+play = nil
 
 puts "Welcome to Tic Tac Toe"
 until play == "n"
+
   puts "Would you like to play with 0, 1, or 2 players?"
-  number_players = gets
+  number_players = gets.strip.to_i
   puts "Who would like to be X?"
-  first_player = gets
+  first_player = gets.strip.to_i
+
     if number_players == 0
-      (player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+
     elsif number_players == 1 && first_player == 1
-      (player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+
     elsif number_players == 1 && first_player == 2
-      (player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+
     elsif number_players == 2 && first_player == 1
-      (player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+
     elsif number_players == 2 && first_player == 2
-      (player_1 = Players::Human.new(")"), player_2 = Players::Human.new("X"), board = Board.new)
+      game = Game.new(player_1 = Players::Human.new(")"), player_2 = Players::Human.new("X"), board = Board.new)
+    else
+
     end
 
     until game.over?
