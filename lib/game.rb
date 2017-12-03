@@ -13,10 +13,10 @@ class Game
     [6,4,2]
   ]
 
-  def initialize(player_1 = nil, player_2 = nil, board = nil)
-    player_1 ? @player_1 = player_1 : @player_1 = Players::Human.new("X")
-    player_2 ? @player_2 = player_2 : @player_2 = Players::Human.new("O")
-    board ? @board = board : @board = Board.new
+  def initialize(player_1 = Players::Human.new("X"), player_2 =  @player_2 = Players::Human.new("O"), board = Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
   end
 
   def turn
@@ -38,9 +38,7 @@ class Game
   end
 
   def winner
-    if winner = won?
-      board.cells[winner[0]]
-    end
+    if winner = won? then board.cells[winner[0]] end
   end
 
   def over?
