@@ -31,7 +31,7 @@ class Board
   end
 
   def taken?(index)
-    @cells[index.to_i-1]== "X" || @cells[index.to_i-1] == "O"
+    @cells[index.to_i]== "X" || @cells[index.to_i] == "O"
   end
 
   def valid_move?(index)
@@ -40,7 +40,7 @@ class Board
   end
 
   def update(index, player)
-   @cells[index.to_i] = player
+   @cells[index.to_i - 1] = player.token
  end
 
 end
