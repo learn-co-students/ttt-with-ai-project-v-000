@@ -74,8 +74,14 @@ attr_accessor :board, :player_1, :player_2
   end #turn
 
   def play
-
-
+      until over? || won? || draw? #over is full
+        turn
+      end
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
   end #play
 
 end #END GAME CLASS
