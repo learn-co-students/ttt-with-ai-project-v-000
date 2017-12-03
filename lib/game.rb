@@ -20,21 +20,21 @@ class Game
   end
 
   def turn
-    move = current_player.move(self.board)
-    self.board.valid_move?(move) ? self.board.update(move, current_player) : self.turn
+    move = current_player.move(board)
+    board.valid_move?(move) ? board.update(move, current_player) : turn
   end
 
   def play
-    self.board.display
+    board.display
     while !over?
       turn
-      self.board.display
+      board.display
     end
     puts won? ? "Congratulations #{winner}!" : "Cat's Game!"
   end
 
   def current_player
-    self.board.turn_count%2 == 0 ? self.player_1 : self.player_2
+    board.turn_count%2 == 0 ? player_1 : player_2
   end
 
   def winner
