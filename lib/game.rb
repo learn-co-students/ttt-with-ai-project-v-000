@@ -38,30 +38,35 @@ class Game
       computer1 = 0
       computer2 = 0
       draws = 0
-      until counter == 100 do
+      until counter == 101 do
         new_game = self.wargames
         new_game.play
         puts "After #{counter} game(s) played: Computer 1 = #{computer1} - Computer 2 = #{computer2} - Cat's Game(s) = (#{counter})"
         counter += 1
         end
+        self.ask
     elsif input == "1"
       puts "Would you like to go first or second?"
       input2 = gets.chop
       if input2 == "first"
         new_game = self.one_player1
         new_game.play
+        self.ask
       elsif input2 == "second"
         new_game = self.one_player2
         new_game.play
+        self.ask
       else
         puts "I'm sorry, I couldn't hear you. Please type either first or second."
         puts "Just kidding, you have to start over because you didn't listen. :p"
         self.game_choice(1)
+        self.ask
       end
     elsif input == "2"
       puts "Enjoy! May the best player win!"
       new_game = self.new
       new_game.play
+      self.ask
     else
       puts "No, no, no, you're lost again."
       self.game_choice
