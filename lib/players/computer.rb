@@ -5,7 +5,7 @@ module Players
       output = nil
         while counter <= 9
           if !board.taken?(counter)
-            output = counter
+            output = counter.to_s
           end
           counter +=1
         end

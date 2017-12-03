@@ -60,10 +60,8 @@ attr_accessor :board, :player_1, :player_2
 
 #take a break, this won't work until there's a #move defined for all players.
   def turn
-
     #puts "Please select an empty space in which to move, player #{current_player}, 1-9."
     @board.display
-
     move = current_player.move(@board) #can't call repeatedly, need one instance
     if !@board.valid_move?(move)
       #puts "invalid #{move}"
@@ -72,26 +70,12 @@ attr_accessor :board, :player_1, :player_2
       @board.update(move, current_player)
       #puts "Updated Board:"
       @board.display
-
     end
-
-
-
   end #turn
 
+  def play
 
 
-  #index = input_to_index(user_input)
-  def turn2
-    input = current_player.move
-    char = current_player
-    index = input.to_i -1
-    if @board.valid_move?(index)
-        @board.update(index, char)
-    else turn
-    end
-    @board.display
-  end
-
+  end #play
 
 end #END GAME CLASS
