@@ -4,7 +4,7 @@ module Players
       counter = 1
       output = nil
         while counter <= 9
-          if !board.position_taken?(counter)
+          if !board.taken?(counter)
             output = counter
           end
           counter +=1
