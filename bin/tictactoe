@@ -1,3 +1,87 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+play = "y"
+
+until play == "n"
+  if play == "y"
+    puts "Welcome to Tic Tac Toe! What kind of game would you like to play? (0, 1, 2)"
+    players_count = gets.chomp.to_i
+
+    unless players_count.between?(0,2)
+      puts "Invalid input. Please try again"
+      players_count = gets.chomp.to_i
+    end
+
+    puts "Who would you like to go first: Player 1 or Player 2? Please enter 1 or 2"
+    first = gets.chomp.to_i
+
+    unless first.between?(1,2)
+      puts "Invalid input. Please try again"
+      first = gets.chomp.to_i
+    end
+
+    case players_count
+    when 0
+      if first == 1
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      else
+        game = Game.new(Players::Computer.new("O"), Players::Computer.new("X"))
+      end
+    when 1
+      if first == 1
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      else
+        game = Game.new(Players::Computer.new("O"), Players::Human.new("X"))
+      end
+    when 2
+      if first == 1
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+      else
+        game = Game.new(Players::Human.new("O"), Players::Human.new("X"))
+      end
+    end
+
+    game.board.display
+
+    until game.over?
+      game.play
+    end
+  end
+
+  if play == "wargames"
+    puts "Watch computers play 100 times"
+    winner_1 = 0
+    winner_2 = 0
+    draw = 0
+    100.times do
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      game.board.display
+      until game.over?
+        game.play
+      end
+
+      if game.winner == "X"
+        winner_1 += 1
+      elsif game.winner == "O"
+        winner_1 += 1
+      else
+        draw += 1
+      end
+    end
+    if (draw > winner_1) && (draw > winner_2)
+      puts "Computers draw #{draw} times"
+    elsif winner_1 > winner_2
+      puts "Computer 1 won #{winner_1} times"
+    elsif winner_1 == winner_2
+      puts "Computer 1 and Computer 2 won #{winner_1} times each"
+    else
+      puts "Computer 2 won #{winner_2} times"
+    end
+  end
+
+  puts "Would you like to play again? y/n or 'wargames'"
+  play = gets.chomp
+
+end
