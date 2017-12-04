@@ -7,6 +7,5 @@ module Players
       gets.chomp
     end
 
-
   end
 end

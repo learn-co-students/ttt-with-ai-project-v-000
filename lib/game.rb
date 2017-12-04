@@ -1,4 +1,7 @@
+require './lib/player.rb'
+
 class Game
+   Players::Human
   include Players
   attr_accessor :board, :player_1, :player_2, :token
 
@@ -70,6 +73,7 @@ def turn
   input = current_player.move(board)
   if board.valid_move?(input)
     board.update(input, current_player)
+    @board.display
   elsif input == "quit"
     exit
   else
@@ -84,7 +88,6 @@ def play
   end
   if won?
     puts "Congratulations #{winner}!"
-    "won"
   elsif draw?
     puts "Cat's Game!"
   end
