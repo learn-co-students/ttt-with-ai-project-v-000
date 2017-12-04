@@ -14,7 +14,7 @@ class Game
         [0,4,8],
         [6,4,2]
       ]
-
+      
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         @player_1 = player_1
         @player_2 = player_2
@@ -33,7 +33,7 @@ class Game
         WIN_COMBINATIONS.find do |win_combination| 
             board.cells[win_combination[0]] == board.cells[win_combination[1]] && 
             board.cells[win_combination[1]] == board.cells[win_combination[2]] && 
-            board.taken?(win_combination[0])
+            board.taken?(win_combination[0] + 1) 
         end
     end
 
@@ -42,19 +42,15 @@ class Game
     end
 
     def winner
-         # board.cells[won?.first] if won? #this also works because won?.first represents the first play
         if win_combination = won?
             board.cells[win_combination[0]]
         end
     end
-
+    
     def turn
         current_turn = current_player.move(@board)
-        if @board.valid_move?(current_turn) #turn chcks if valid move runs itself ... can check if it's valid and do the turn at the same time
-            @board.update(current_turn, current_player) #Notes: use @board and not board because @ is more object oriented #Notes: note how this reads like sentences
-            #can't typically pass a method but you can if you use a VARIABLE
-            #recursion is clling a method within itself
-            
+        if @board.valid_move?(current_turn) 
+            @board.update(current_turn, current_player) 
         else
             turn
         end
@@ -66,13 +62,13 @@ class Game
         end
             if draw?
                 puts "Cat's Game!"
-            elsif won? && #???
-                puts "Congratulations X!" 
-            elsif won? && #???
-                puts "Congratulations O!" 
+            elsif won?
+                puts "Congratulations #{winner}!"                 
             end
     end
 end
+
+         # board.cells[won?.first] if won? #this also works because won?.first represents the first play
 
 #require_all './lib'
 
