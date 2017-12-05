@@ -59,13 +59,18 @@ class Game
     def play  
         while !over?
             turn
+            board.display
         end
             if draw?
                 puts "Cat's Game!"
             elsif won?
                 puts "Congratulations #{winner}!"                 
             end
+            
+                board.display
+        
     end
+        
 end
 
          # board.cells[won?.first] if won? #this also works because won?.first represents the first play
