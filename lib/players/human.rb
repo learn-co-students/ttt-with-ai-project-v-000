@@ -16,7 +16,6 @@ module Players
   end
 =begin
 =end
-  class Computer
-  end
+
 
 end
