@@ -11,20 +11,20 @@ def starting_game(input)
           player_1 = Players::Computer.new("X")
           player_2 = Players::Computer.new("O")
           puts "Great! Starting your new game..."
-          game = Game.new(player_1, player_2).play
-          game
+          @game = Game.new(player_1, player_2).play
+          @game
         elsif number_of_players == 1
           player_1 = Players::Human.new("X")
           player_2 = Players::Computer.new("O")
           puts "Great! Starting your new game..."
-          game = Game.new(player_1, player_2).play
-          game
+          @game = Game.new(player_1, player_2).play
+          @game
         elsif number_of_players == 2
           puts "Great! Starting your new game..."
           player_1 = Players::Human.new("X")
           player_2 = Players::Human.new("O")
-          game = Game.new(player_1, player_2).play
-          game
+          @game = Game.new(player_1, player_2).play
+          @game
         end
     else puts "Ok nice to meet you, Goodbye!"
     end
@@ -50,16 +50,9 @@ def start
 end
 
 start
-until game.won?
-  game.play
-end
 
-play_again = ""
-until play_again == "n" || play_again == "no"
-  puts "Would you like to play again?"
-  play_again = gets.strip
-  play_again.downcase == "y" || play_again.downcase == "yes"
-start
-until game.won?
-  game.play
-end
+  puts "Would you like to play again? (Y/n)"
+  play_again = gets.strip.downcase
+  if play_again == "y" || "yes"
+    start   
+  end
