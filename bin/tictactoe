@@ -2,55 +2,10 @@
 
 require_relative '../config/environment'
 
-input = ""
-until input == "exit"
-  puts "Welcome to Tic Tac Toe!"
-  puts "This is a two player game, but you may also play against the computer or watch the computer play itself."
-  puts "If you would like to leave type 'exit.'"
-  puts "How many people would like to play? (0, 1, or 2)"
-  input = gets.strip
 
-  if input == "exit" #Will exit out of program
-    exit
-  elsif input.to_i <= 3 && input.to_i >= 0
-    puts "Awesome! Lets get this game started!"
-    board = Board.new
-  elsif input.to_i >= 3 || input.to_i <= -1
-    puts "Sorry, that is not a vaild response, please enter if 0, 1, or 2 players would like to play."
-    input = gets.strip
-  end
+sleep(1)
+puts "So 0, 1, or 2 players? P.S. 0 players will start 100 games with the computer as both players"
+puts "In order to initialize the computer death match, input 'wargames',"
+puts "otherwise input the number of desired players(1 or 2)"
 
-  if input == "0" #Computer VS Computer
-    first_player = Players::Computer.new("X")
-    second_player = Players::Computer.new("0")
-    game = Game.new(first_player, second_player, board)
-    board.display
-    game.play
-
-
-  elsif input == "1" #Computer VS Human
-    puts "Would you like to go first or second? (first/second)"
-    input = gets.strip
-    if input == "first"
-      first_player = Players::Human.new("X")
-      second_player = Players::Computer.new("0")
-      game = Game.new(first_player, second_player, board)
-      board.display
-      game.play
-    elsif input == "second"
-      first_player = Players::Computer.new("X")
-      second_player = Players::Human.new("O")
-      game = Game.new(first_player, second_player, board)
-      board.display
-      game.play
-    end
-
-
-  elsif input == "2" #Human VS Human
-    puts "The first player is 'X'! Enter a number 1-9 to designate where you would like to go."
-    game = Game.new
-    board.display
-    game.play
-  end
-
-end
+Game.game_choice
