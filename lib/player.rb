@@ -7,6 +7,7 @@ class Player
    end
 
    def move(board)
+     puts "Please enter 1-9:"
      input = gets
      input
    end
