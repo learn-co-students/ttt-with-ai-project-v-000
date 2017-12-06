@@ -85,6 +85,68 @@ WIN_COMBINATIONS = [
     end
   end
 
+  def start
+    input = ""
 
+      while input != "exit"
+        puts "Welcome to Tic Tac Toe!"
+        puts "What kind of game do you want to play? 0, 1, or 2 player? (select: 0 or 1 or 2): "
+        puts "To quit, type 'exit'."
+        game_type_input = gets.strip
+
+          case game_type_input
+          when "0"
+            zero_players
+          when "1"
+            one_player
+          when "2"
+            two_players
+          when "exit"
+            break
+          end
+      end
+  end
+
+  def zero_players
+    puts 'Who should go first and be "X"? (select player: 1 or 2): '
+    input = gets.strip
+      game = Game.new
+        if input == "1"
+          game.player_1 = Player::Computer.new("X")
+          game.player_2 = Player::Computer.new("O")
+        else
+          game.player_1 = Player::Computer.new("O")
+          game.player_2 = Player::Computer.new("X")
+        end
+      game.play
+  end
+
+  def one_player
+    puts 'Who should go first and be "X"? (select player: 1 "Human" or 2 "Computer"): '
+    input = gets.strip
+      game = Game.new
+        if input == "1"
+          game.player_1 = Player::Human.new("X")
+          game.player_2 = Player::Computer.new("O")
+        else
+          game.player_1 = Player::Computer.new("X")
+          game.player_2 = Player::Human.new("O")
+        end
+      game.play
+  end
+
+  def two_players
+    puts 'Who should go first and be "X"? (select player: 1 or 2): '
+    input = gets.strip
+      game = Game.new
+        if input == "1"
+          game.player_1 = Player::Human.new("X")
+          game.player_2 = Player::Human.new("O")
+        else
+          game.player_1 = Player::Human.new("O")
+          game.player_2 = Player::Human.new("X")
+        end
+      game.play
+  end
 
 end
