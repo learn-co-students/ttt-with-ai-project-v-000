@@ -1,65 +1,74 @@
+require 'pry'
 module Players
   class Computer < Player
-    #attr_accessor :game
-    @close = [1,2]
-    @@win_combos = [
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [2,5,8],
-      [0,4,8],
-      [2,4,6]
-    ]
+    attr_accessor :board, :opponent
+
+    def opponent
+      if self.token == "X"
+        "O"
+      elsif self.token == "O"
+        "X"
+      end
+    end
+    ### SHOULD BREAK UP #MOVE INTO SMALLER METHODS WITH A SINGLE FUNCTIONALITY
+  #  def close?(board)
+  #    p = board.cells
+  #    position = ""
+
+  #    @@win_combos.each do |combo|
+  #      combo.detect do |i|
+  #        if combo.count{|i| p[i] == "X"} == 2 && combo.count{|i| p[i] == " "} == 1
+  #          position = "9"
+  #          puts "See ya Space Cowboy"
+  #        elsif combo.count {|i| p[i] == "O"} == 2 && combo.count{|i| p[i] == " "} == 1
+  #          position ="9"
+  #          puts "See ya Space Cowboy"
+  #        end
+  #      end
+  #    end
+  #  end
+
     def move(board)
       p = board.cells
+      @position = nil
+  #    (1 + rand(9)).to_s
+      sleep(0.5)
+      ### Check if comp has 1 of 3 filled in a combination
+      Game::WIN_COMBINATIONS.detect do |combo|
 
+        if (combo.count{|i| p[i] == self.token} == 1 && combo.count{|i|p[i] == " "} == 2)
+          @position = combo.shuffle.detect{|el| !board.taken?(el+1)} + 1
 
-    #  @@win_combos.each do |n|
-    #    n.detect do |i|
-    #      if n.count{|i| p[i] == "X"} == 2
-    #        close << i
-    #        puts close
-    #      elsif n.count {|i| p[i] == "O"} == 2
-    #        close << i
-    #        puts close
-    #      end
-    #    end
-    #  end
-    @@win_combos.each do |n|
-      test = n.select! do |i|
-        (n.count{|i| p[i] == "X"} == 2) || (n.count {|i| p[i] == "O"} == 2)
+        end
       end
-      puts test
-    end
 
+      ### Check if either player has 2 of 3 in a combination
+      Game::WIN_COMBINATIONS.detect do |combo|
 
-    sleep(1)
-    if test != false
-      puts "howdy"
-      puts @close.flatten.sample
-    else
-      (1 + rand(9)).to_s
-    end
+        if (combo.count{|i| p[i] == self.token} == 2 &&combo.count{|i| p[i] == " "} == 1)
+          @position = combo.detect{|el| !board.taken?(el+1)} + 1
+        elsif
+           (combo.count {|i| p[i] == self.opponent} == 2 && combo.count{|i| p[i] == " "} == 1)
 
-      #@@win_combos.each do |n|
-      #  if n.count{|i| p[i] == "X"} == 2
-      #    puts "There are two X's"
-      #  elsif n.count {|i| p[i] == "O"} == 2
-      #    puts "There are two O's"
-      #  end
-      #  (1 + rand(9)).to_s
-      #end
+          @position = combo.detect{|el| !board.taken?(el+1)} + 1
+        end
+      end
 
-
-
-      #p[4] = 4
-      #p[0], [2], [6], and [8] = 3
-      #p[1],[3],[5],[7] = 2
-
-      #combos = Game::WIN_COMBINATIONS
-      #if combos.any?
+      ### Check if any corners or middle are available
+      if @position == nil && [1,3,5,7,9].any?{|i| board.valid_move?(i)}
+        ### If second player, take middle tile if available
+        if self.token == "O" && board.valid_move?(5)
+          "5"
+        else
+          [1,3,5,7,9].shuffle.detect{|i| board.valid_move?(i)}.to_s
+        end
+        ### Take any available prime tile
+      elsif @position == nil && [1,3,5,7,9].none?{|i| board.valid_move?(i)}
+        (1..9).detect{|i| board.valid_move?(i)}.to_s
+      else
+        ### Take highest valued position
+        @position.to_s
+      end
 
     end
   end

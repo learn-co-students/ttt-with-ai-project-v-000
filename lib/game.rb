@@ -57,8 +57,8 @@ class Game
     if current_player.class == Players::Human
       puts "Where would you like to move?"
     end
-    puts
     position = self.current_player.move(@board)
+    #binding.pry
     if board.valid_move?(position)
       board.update(position, self.current_player)
     else
@@ -71,12 +71,8 @@ class Game
     while !over?
       turn
     end
-    won? ? (puts "Congratulations #{winner}!") : (puts "Cat's Game!")
     board.display
-  end
-
-  def start
-    play
+    won? ? (puts "Congratulations #{winner}!") : (puts "Cat's Game!")
   end
 
 end
