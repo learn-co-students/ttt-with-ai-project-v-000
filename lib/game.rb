@@ -32,7 +32,7 @@ class Game
   end
 
   def over?
-    board.full?
+    draw? || won?
   end
 
   def won?
@@ -45,7 +45,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
   end
 
   def winner
@@ -53,18 +53,30 @@ class Game
   end
 
   def turn
+    board.display
+    if current_player.class == Players::Human
+      puts "Where would you like to move?"
+    end
+    puts
     position = self.current_player.move(@board)
-    if @board.valid_move?(position)
-      @board.update(position, self.current_player)
+    if board.valid_move?(position)
+      board.update(position, self.current_player)
     else
+      puts "Invalid move, please select an empty space" if current_player.class == Players::Human
       turn
     end
   end
 
   def play
-    until over?
+    while !over?
       turn
     end
+    won? ? (puts "Congratulations #{winner}!") : (puts "Cat's Game!")
+    board.display
+  end
+
+  def start
+    play
   end
 
 end
