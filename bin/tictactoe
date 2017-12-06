@@ -3,7 +3,12 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
-puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"
+puts "Would you like to play a game? (Y/N)"
+
+input = gets
+
+if input = Y
+    puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"
 
 board = Board.new
 
@@ -12,6 +17,11 @@ board.display
 game = Game.new
 
 game.play
+
+puts "Would you like to play again? (Y/N)"
+
+puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"
+
 
 
 # require 'pry'
