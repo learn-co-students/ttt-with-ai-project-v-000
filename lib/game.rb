@@ -46,10 +46,10 @@ class Game
             board.cells[win_combination[0]]
         end
     end
-    
+
     def turn
         current_turn = current_player.move(@board)
-        if @board.valid_move?(current_turn) 
+        if @board.valid_move?(current_turn)
             @board.update(current_turn, current_player) 
         else
             turn
