@@ -66,9 +66,7 @@ class Game
             elsif won?
                 puts "Congratulations #{winner}!"                 
             end
-            
-                board.display
-        
+        board.display
     end
         
 end

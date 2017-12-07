@@ -2,42 +2,33 @@
 
 require_relative '../config/environment'
 
+puts "Welcome to Tic Tac Toe!"
+puts "Would you like to play a game? (y/n)"
 
-
-def print
-    puts "Welcome to Tic Tac Toe!"
-    puts "Would you like to play a game? (y/n)"
-end
-
-print
-
-#why doesn't this work?
-
-game_start = gets
+game_start = gets.strip
 
 def player_choice(game_start)
     if game_start == "y"
-        puts "hey hey"
+        puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"        
+        board = Board.new 
+        board.display
+        game = Game.new
+        game.play
+        play_again = puts "Would you like to play again? (y/n)"
+            if play_again
+                game_start = gets.strip
+                player_choice(game_start)
+            end
+    elsif game_start == "n"
+        puts "Goodbye. Have a good day!"
+
     end
 end
 
+player_choice(game_start)
 
 
 
-
-puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"
-
-board = Board.new
-
-board.display
-
-game = Game.new
-
-game.play
-
-puts "Would you like to play again? (y/n)"
-
-puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"
 
 
 
