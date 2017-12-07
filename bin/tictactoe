@@ -15,17 +15,16 @@ def player_choice(game_start)
         game = Game.new
         game.play
         play_again = puts "Would you like to play again? (y/n)"
-            if play_again
-                game_start = gets.strip
-                player_choice(game_start)
-            end
+        game_start = gets.strip
+        player_choice(game_start)
     elsif game_start == "n"
         puts "Goodbye. Have a good day!"
-
     end
 end
 
 player_choice(game_start)
+
+
 
 
 
