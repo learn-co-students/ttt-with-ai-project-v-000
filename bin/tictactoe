@@ -2,6 +2,8 @@
 
 require_relative '../config/environment'
 
+
+
 def print
     puts "Welcome to Tic Tac Toe!"
     puts "Would you like to play a game? (y/n)"
@@ -9,11 +11,19 @@ end
 
 print
 
+#why doesn't this work?
+
+game_start = gets
+
 def player_choice(game_start)
-    if game_start.gets = "y"
+    if game_start == "y"
         puts "hey hey"
     end
 end
+
+
+
+
 
 puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"
 
