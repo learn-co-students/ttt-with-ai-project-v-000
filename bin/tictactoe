@@ -2,6 +2,8 @@
 
 require_relative '../config/environment'
 
+
+
 puts "Welcome to Tic Tac Toe!"
 puts "Would you like to play a game? (y/n)"
 
@@ -9,6 +11,31 @@ game_start = gets.strip
 
 def player_choice(game_start)
     if game_start == "y"
+        game_options
+    elsif game_start == "n"
+        puts "Goodbye. Have a good day!"
+    end
+end
+
+# player_choice(game_start)
+
+def game_options
+    puts "Type 0 for a 0-player game (the computer plays itself), 1 for a 1-player game, or 2 for a 2-player game"
+    player_options = gets.strip
+    if player_options == 0.to_s
+        puts "0 player option"
+    elsif player_options == 1.to_s
+        puts "The computer will be X and you will be O. X goes first."
+        board = Board.new 
+        board.display
+        game = Game.new
+        computer = Players::Computer.new(computer)
+        computer.computer_turn
+        # @player_1 = Players::Computer.new("X")
+        game.play
+        play_again = puts "Would you like to play again? (y/n)"
+        game_start = gets.strip
+    elsif player_options == 2.to_s
         puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"        
         board = Board.new 
         board.display
@@ -16,14 +43,10 @@ def player_choice(game_start)
         game.play
         play_again = puts "Would you like to play again? (y/n)"
         game_start = gets.strip
-        player_choice(game_start)
-    elsif game_start == "n"
-        puts "Goodbye. Have a good day!"
     end
 end
-
+        
 player_choice(game_start)
-
 
 
 
