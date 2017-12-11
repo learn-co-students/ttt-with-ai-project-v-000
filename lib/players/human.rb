@@ -6,7 +6,7 @@ module Players
       user_input = gets.chomp
       if user_input.to_i < 1 || user_input.to_i > 9
         self.move(board)
-      end 
+      end
     end
   end
 end
