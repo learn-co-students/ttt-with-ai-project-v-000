@@ -1,8 +1,8 @@
 module Players
   class Human < Player
     def move(board)
-      input = gets
-      input
+      puts "Please enter a numer 1-9:"
+      gets.strip
     end
 
   end

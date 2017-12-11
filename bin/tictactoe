@@ -1,6 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-
-def start
+def play_tictactoe
   puts "Welcom to TicTacToe!"
+  puts "Please choose from one of the following game options:"
+  puts "A. 0-player game"
+  puts "B. 1-player game"
+  puts "C. 2-player game"
+  game_option = gets.chomp
+  case game_option
+  when "A"
+    game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new)
+    game.play
+  when "B"
+    puts "Please choose who should be first and play as X:"
+    puts "A. Me"
+    puts "B. Computer"
+    first_player = gets.chomp
+    case first_player
+    when "A"
+      game = Game.new(Players::Human.new("X"),Players::Computer.new("O"),Board.new)
+      game.play
+    when "B"
+      game = Game.new(Players::Computer.new("X"),Players::Human.new("O"),Board.new)
+      game.play
+    end
+  when "C"
+    game = Game.new(Players::Human.new("X"),Players::Human.new("O"),Board.new)
+    game.play
+  end
+  puts "Would you like to play again?"
+  puts "Y: Yes"
+  puts "N: No"
+  input = gets.chomp
+  play_tictactoe if input == "Y"
+end
+
+
+play_tictactoe

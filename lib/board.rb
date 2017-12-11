@@ -35,7 +35,7 @@ attr_accessor :cells
   end
 
   def valid_move?(position)
-    position.to_i < 10 && position.to_i > 0 && taken?(position) == false
+    position.to_i < 10 && position.to_i > 0 && !taken?(position)
   end
 
   def update(position, player)
