@@ -1,12 +1,10 @@
 class Board
 attr_accessor :cells
   def initialize
-    @cells = []
     reset!
   end
 
   def reset!
-    @cells.clear
     @cells = Array.new(9, " ")
   end
 
@@ -27,7 +25,7 @@ attr_accessor :cells
   end
 
   def turn_count
-    @cells.select {|i| i == "X" || i == "O"}.length
+    @cells.count {|i| i == "X" || i == "O"}
   end
 
   def taken?(position)
@@ -35,7 +33,7 @@ attr_accessor :cells
   end
 
   def valid_move?(position)
-    position.to_i < 10 && position.to_i > 0 && !taken?(position)
+    position.to_i.between?(1, 9) && !taken?(position)
   end
 
   def update(position, player)
