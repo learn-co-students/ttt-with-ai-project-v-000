@@ -39,13 +39,19 @@ class Game
 
   def turn
     player = current_player
-    input = player.move(@board)
-    if !@board.valid_move?(input)
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
       puts "Oh Fiddlesticks! Care to try another move?"
       turn
     else
-      @board.update(input, player)
+      puts "Turn: #{@board.turn_count + 1}"
       @board.display
+      @board.update(current_move, player)
+      puts "\n\n"
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+      #adds empty spaced line so display is nicer
     end
   end
 
