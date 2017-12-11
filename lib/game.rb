@@ -23,7 +23,7 @@ class Game
     end
 
     def over?
-      @board.turn_count == 9 || won?
+       self.draw? || self.won?
     end
 
     def won?
@@ -32,7 +32,7 @@ class Game
     end
 
     def draw?
-      self.over? && !self.won?
+      @board.turn_count == 9 && !self.won?
     end
 
     def winner
@@ -40,7 +40,21 @@ class Game
     end
 
     def turn
-      self.current_player.move(@board)
+      position = self.current_player.move(@board)
+      self.board.cells[position.to_i - 1] = current_player.token
+      @board.turn_count
+    end
+
+    def play
+      while !self.over? do
+        self.turn
+      end
+      if self.won?
+        puts "Congratulations #{self.winner}!"
+      else
+        puts "Cat's Game!"
+      end
+
     end
 
 end
