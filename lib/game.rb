@@ -41,18 +41,42 @@ class Game
   end
 
   def draw?
-    self.over? && self.won? == false
+    over? && won? == false
   end
 
   def winner
      if won? == false
        nil
      else
-       self.board.cells[won?[1]]
+       board.cells[won?[1]]
      end
   end
 
+  def turn
+    puts "Please enter 1-9:"
+    input = gets.strip
+    count = "1"
+    until won? || draw?
+      until !board.taken?(input) && board.valid_move(input)
+        "invalid" 
+        puts "Invalid Move.  Please enter again:"
+        input = gets.strip
+      end
+      count
+      count += 1
+    end
+  end
 
+  def play
+    while over? != true && draw? !=true && turn_count < 10
+      turn
+    end
+    if won? != false
+        puts "Congratulations #{winner}!"
+    elsif draw? == true
+      puts "Cat's Game!"
+    end
+  end
 
 
 end
