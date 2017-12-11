@@ -40,8 +40,8 @@ class Board
   end
 
   def update(position, player)
-    if valid_move?(position) && (player == "X" || player == "O")
-      self.cells[position.to_i-1] = player
+    if valid_move?(position)
+      self.cells[position.to_i-1] = player.token
     end
   end
 end
