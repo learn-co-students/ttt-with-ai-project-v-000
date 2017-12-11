@@ -1,6 +1,6 @@
 
 class Game
-  
+
 
   WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
@@ -27,21 +27,29 @@ class Game
   end
 
   def won?
+    winning = []
     WIN_COMBINATIONS.each do |combo|
       if self.board.cells[combo[0]] != " " && self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
-        combo
-      else
-        false
+        winning = combo
       end
+    end
+    if winning == []
+      false
+    else
+      winning
     end
   end
 
   def draw?
-    self.over? && self.won? != false
+    self.over? && self.won? == false
   end
 
   def winner
-     won?
+     if won? == false
+       nil
+     else
+       self.board.cells[won?[1]]
+     end
   end
 
 
