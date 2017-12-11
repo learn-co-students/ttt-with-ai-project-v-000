@@ -2,7 +2,6 @@ class Board
   attr_accessor :cells
 
   @cells = []
-  turn_count = 0
 
   def initialize
     @cells = Array.new(9," ")
@@ -25,14 +24,24 @@ class Board
   end
 
   def full?
-    self.cells.all? { | entry | entry == "X" || position == "O" }
+    self.cells.all? { | entry | entry == "X" || entry == "O" }
   end
 
   def turn_count
     self.cells.count{ | x | x == "X" || x == "O" }
   end
 
-  # def taken?(position)
-  #   self.cells[position.to_i-1] == "X" || self.cells[position.to_i-1] == "O"
-  # end
+  def taken?(position)
+    self.position(position) == "X" || self.position(position) == "O"
+  end
+
+  def valid_move?(position)
+    position.to_i >= 1 && position.to_i <= 9 && self.position(position) == " "
+  end
+
+  def update(position, player)
+    if valid_move?(position) && (player == "X" || player == "O")
+      self.cells[position.to_i-1] = player
+    end
+  end
 end
