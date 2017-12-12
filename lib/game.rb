@@ -19,7 +19,10 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS
+    WIN_COMBINATIONS.any? do |combo|
+      binding.pry
+      if self.board.taken?(combo[0]) && self.board[combo[0]] == self.board[combo[1]] && self.board[combo[1]] == self.board[combo[2]]
+    end
   end
 
 end
