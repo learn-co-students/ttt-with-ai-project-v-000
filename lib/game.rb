@@ -44,6 +44,7 @@ class Game
       self.board.cells[position.to_i - 1] = current_player.token
       @board.turn_count
       @board.display
+      puts "/n"
     end
 
     def play

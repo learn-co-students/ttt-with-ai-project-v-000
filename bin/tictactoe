@@ -11,15 +11,20 @@ while how_many != 0 && how_many != 1 && how_many != 2
   puts "How many humans will be playing? (enter 0, 1, or 2)"
   how_many = gets.chomp.to_i
   if how_many == 0
-    puts "WarGames version under development. Please try again later."
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
   elsif how_many == 1
     while whos_first != "c" && whos_first != "h"
       puts "Who should go first? (enter c for computer, h for human)"
       whos_first = gets.chomp
       if whos_first == "c"
-        #computer goes first
-      else
         #human goes first
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        game.play
+      else
+        #computer goes first
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        game.play
       end
     end
   elsif how_many == 2
