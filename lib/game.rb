@@ -38,4 +38,13 @@ class Game
     self.board.cells[self.won?[0]] unless self.board.cells[self.won?[0]] == " "
   end
 
+  def turn
+    input = self.current_player.move(self.board)
+    if self.board.valid_move?(input)
+      self.board.update(input, self.current_player)
+    else
+      self.turn
+    end
+  end
+
 end
