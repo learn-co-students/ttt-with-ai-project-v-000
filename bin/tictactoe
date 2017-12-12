@@ -29,7 +29,7 @@ def game_options
         board.display
         computer = Players::Computer.new
         # computer = Players::Computer.new(computer)
-        computer.computer_turn
+        computer.move(board)
         # @player_1 = Players::Computer.new("X")
         play_again = puts "Would you like to play again? (y/n)"
     elsif player_options == 2.to_s

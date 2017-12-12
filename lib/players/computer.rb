@@ -3,28 +3,23 @@ require 'pry'
 module Players
     class Computer < Player
         
-        attr_accessor :player_1, :player_2, :board, :computer, :game
-        #  :current_player
+        attr_accessor :player_1, :player_2, :board
 
         def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
             @player_1 = player_1
             @player_2 = player_2
-
-            binding.pry
         end
 
         def move(board)
-            [1, 2, 3, 4, 5, 6, 7, 8, 9].find {|i| !board.taken?(i)}.to_s
+            # [1, 2, 3, 4, 5, 6, 7, 8, 9].find {|i| !board.taken?(i)}.to_s
+            if !board.taken?(5)
+                move = "5"
+
+            elsif 
         end 
-                
-        def computer_turn(board)
-            move(board)
-
-            board.play
-        end
-
-        
+                        
         def computer_moves
+
         end
 
     end
