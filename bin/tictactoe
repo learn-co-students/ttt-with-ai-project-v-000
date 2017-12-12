@@ -3,7 +3,6 @@
 require_relative '../config/environment'
 
 
-
 puts "Welcome to Tic Tac Toe!"
 puts "Would you like to play a game? (y/n)"
 
@@ -28,13 +27,11 @@ def game_options
         puts "The computer will be X and you will be O. X goes first."
         board = Board.new 
         board.display
-        game = Game.new
-        computer = Players::Computer.new(computer)
+        computer = Players::Computer.new
+        # computer = Players::Computer.new(computer)
         computer.computer_turn
         # @player_1 = Players::Computer.new("X")
-        game.play
         play_again = puts "Would you like to play again? (y/n)"
-        game_start = gets.strip
     elsif player_options == 2.to_s
         puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"        
         board = Board.new 
@@ -42,7 +39,6 @@ def game_options
         game = Game.new
         game.play
         play_again = puts "Would you like to play again? (y/n)"
-        game_start = gets.strip
     end
 end
         
@@ -52,12 +48,9 @@ player_choice(game_start)
 
 
 
-
-
 # require 'pry'
+
+
 
 # Pry.start
 
-# Board.display(board)
-
-# attr_accessor :game ... didn't wor
