@@ -43,6 +43,7 @@ class Game
       position = self.current_player.move(@board)
       self.board.cells[position.to_i - 1] = current_player.token
       @board.turn_count
+      @board.display
     end
 
     def play
