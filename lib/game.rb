@@ -41,6 +41,7 @@ class Game
 
     def turn
       position = self.current_player.move(@board)
+      puts "#{current_player.token} chooses position #{position}"
       self.board.cells[position.to_i - 1] = current_player.token
       @board.turn_count
       @board.display

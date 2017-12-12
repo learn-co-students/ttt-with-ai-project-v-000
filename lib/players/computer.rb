@@ -6,7 +6,7 @@ module Players
       @available = []
       board.cells.each.with_index do | position, index |
         if board.valid_move?(index + 1)
-          @available << index.to_s
+          @available << (index+1).to_s
         end
       end
       computer_move = @available.sample
