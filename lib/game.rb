@@ -19,10 +19,23 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.any? do |combo|
-      binding.pry
-      if self.board.taken?(combo[0]) && self.board[combo[0]] == self.board[combo[1]] && self.board[combo[1]] == self.board[combo[2]]
+    WIN_COMBINATIONS.find do |combo|
+      if self.board.taken?(combo[0]) && self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
+        combo
+      end
     end
+  end
+
+  def draw?
+    self.board.full? && !self.won?
+  end
+
+  def over?
+    self.draw? || self.won?
+  end
+
+  def winner
+    self.board.cells[self.won?[0]] unless self.board.cells[self.won?[0]] == " "
   end
 
 end
