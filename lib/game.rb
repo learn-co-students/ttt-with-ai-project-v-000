@@ -57,11 +57,12 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
+    board.display
+    puts "Player #{current_player.token}, please enter 1-9:"
     input = current_player.move(board)
     puts "Player #{current_player.token} entered: #{input}"
     until board.valid_move?(input)
-      puts "Player #{current_player.token} entered: #{"input"}.  Please re-enter 1-9:"
+      puts "#{"input"} is invalid.  Please re-enter 1-9:"
       input = current_player.move(board)
     end
     board.update(input, current_player)
@@ -70,7 +71,6 @@ class Game
   def play
     while !over? && !won? && !draw?
       turn
-      board.display
     end
     if won?
       puts "Congratulations #{winner}!"
