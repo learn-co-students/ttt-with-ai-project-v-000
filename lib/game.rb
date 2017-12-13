@@ -2,6 +2,7 @@ require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
+
   WIN_COMBINATIONS = [
     [0,1,2], [3,4,5], [6,7,8],
     [0,3,6], [1,4,7], [2,5,8],
@@ -15,43 +16,41 @@ class Game
   end
 
   def current_player
-    self.board.turn_count.even? ? self.player_1 : self.player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def won?
     WIN_COMBINATIONS.find do |combo|
-      if self.board.taken?(combo[0]) && self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
+      if board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
         combo
       end
     end
   end
 
   def draw?
-    self.board.full? && !self.won?
+    board.full? && !won?
   end
 
   def over?
-    self.draw? || self.won?
+    draw? || won?
   end
 
   def winner
-    self.board.cells[self.won?[0]] unless self.board.cells[self.won?[0]] == " "
+    board.cells[won?[0]] if won?
   end
 
   def turn
-    input = self.current_player.move(self.board)
-    if self.board.valid_move?(input)
-      self.board.update(input, self.current_player)
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
     else
-      self.turn
+      turn
     end
   end
 
   def play
-    until self.over? || self.draw? && self.winner
-      self.turn
-    end
-    puts "Congratulations #{self.winner}!"
+    turn until over? || draw?
+    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
 
 end
