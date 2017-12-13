@@ -25,7 +25,7 @@ class Game
   end
 
   def over?
-    board.full?
+    draw? || won?
   end
 
   def won?
@@ -43,7 +43,7 @@ class Game
   end
 
   def draw?
-    over? && won? == false
+    board.full? && !won?
   end
 
   def winner
@@ -67,7 +67,8 @@ class Game
   end
 
   def play
-    while !over? && !won? && !draw?
+    while !over?
+  #    binding.pry
       turn
     end
     if won?
@@ -75,7 +76,6 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
-#    binding.pry
   end
 
 
