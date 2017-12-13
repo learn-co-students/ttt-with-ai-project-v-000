@@ -2,7 +2,7 @@
 class Game
 
 
-  WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
+  WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [0,4,8], [6,4,2], [2,5,8]]
 
   attr_accessor :board, :player_1, :player_2
 
@@ -53,23 +53,21 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    input = gets.strip
-    count = "1"
-    until won? || draw?
-      until !board.taken?(input) && board.valid_move(input)
-        "invalid" 
-        puts "Invalid Move.  Please enter again:"
-        input = gets.strip
+    count = 1
+    until count > 9 || won? || draw?
+      if board.valid_move?(input)
+        count
+        count += 1
+      else
+        "invalid"
       end
-      count
-      count += 1
     end
   end
 
   def play
     while over? != true && draw? !=true && turn_count < 10
-      turn
+      index = turn - 1
+      board[index] = current_player
     end
     if won? != false
         puts "Congratulations #{winner}!"

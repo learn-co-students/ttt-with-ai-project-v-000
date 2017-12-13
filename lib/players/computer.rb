@@ -4,15 +4,16 @@ class Players
 
     def move(board)
       valid_moves = []
-      count = 0
-      while count < 10
+      count = 1
+      while !board.taken?(count) && count < 10
+        valid_moves << count.to_s
         count += 1
-        index = count - 1
-        if board.cells[index] == " "
-          valid_moves << count.to_s
-        end
       end
-      valid_moves[0]
+      if valid_moves.include?"5"
+        "5"
+      else
+        valid_moves[0]
+      end
     end
 
   end
