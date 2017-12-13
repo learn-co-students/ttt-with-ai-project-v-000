@@ -3,25 +3,20 @@ require 'pry'
 module Players
     class Computer < Player
         
-        attr_accessor :player_1, :player_2, :board
+        attr_accessor :player_1, :board
+        
+        # def initialize(player_1)
+        #     @player_1 = player_1  
+        # end
 
-        def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-            @player_1 = player_1
-            @player_2 = player_2
-        end
-
+        # binding.pry
         def move(board)
-            # [1, 2, 3, 4, 5, 6, 7, 8, 9].find {|i| !board.taken?(i)}.to_s
+            move = nil
             if !board.taken?(5)
                 move = "5"
-
-            elsif 
+            end
         end 
                         
-        def computer_moves
-
-        end
-
     end
 end
        
@@ -180,7 +175,8 @@ end
         #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
         #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
         
-    
+                # [1, 2, 3, 4, 5, 6, 7, 8, 9].find {|i| !board.taken?(i)}.to_s
+
     
                
        
@@ -195,7 +191,27 @@ end
         # just encapsulate
 
 
-        
+        # def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+        #     @player_1 = player_1
+        #     @player_2 = player_2
+        # end
+
     
   
 
+            # elsif board.turn_count == 1 && !board.taken?(9)
+            #     move = "9"
+            # elsif board.turn_count == 1 && !board.taken?(9)
+            #     move = "9"
+            # elsif board.turn_count == 1 && !board.taken?(1)
+            #     move = "9"
+            # elsif board.turn_count == 1 && !board.taken?(9)
+            #     move = "9"
+            # elsif board.turn_count == 1 && !board.taken?(9)
+            #     move = "9"
+            # elsif board.turn_count == 1 && !board.taken?(9)
+            #     move = "9"
+            # elsif board.turn_count == 1 && !board.taken?(9)
+            #     move = "9"
+            # elsif board.turn_count == 1 && !board.taken?(9)
+            #     move = "9"

@@ -16,8 +16,6 @@ def player_choice(game_start)
     end
 end
 
-# player_choice(game_start)
-
 def game_options
     puts "Type 0 for a 0-player game (the computer plays itself), 1 for a 1-player game, or 2 for a 2-player game"
     player_options = gets.strip
@@ -28,9 +26,8 @@ def game_options
         board = Board.new 
         board.display
         computer = Players::Computer.new
-        # computer = Players::Computer.new(computer)
-        computer.move(board)
-        # @player_1 = Players::Computer.new("X")
+        game = Game.new(computer)
+        game.play
         play_again = puts "Would you like to play again? (y/n)"
     elsif player_options == 2.to_s
         puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"        

@@ -6,3 +6,5 @@ class Player
         @token = token
     end
 end
+
+players are initialized here
