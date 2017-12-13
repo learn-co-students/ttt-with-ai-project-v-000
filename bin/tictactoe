@@ -3,7 +3,11 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic-Tac-Toe!"
-def new_game
+
+
+
+    def new_game
+
 game = Game.new
 
 
@@ -16,18 +20,18 @@ game_choice = gets.strip
 while game_choice == "0"
 game.start_0(player_1= Players::Computer.new("X"), player_2= Players::Computer.new("O"))
 game.play_again?
- end
+end #game_choice 0
 
 while game_choice == "1"
 game.start_1(player_1, player_2)
 game.play_again?
-end
+end #game_choice 1
 
 
 while game_choice == "2"
 game.start_2(player_1= Players::Human.new("X"),player_2= Players::Human.new("O"))
 game.play_again?
- end
+end #game_choice 2
 
 end #new_game
 
