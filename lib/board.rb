@@ -19,21 +19,21 @@ class Board
   end
 
   def display
-    puts (" #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} ")
+    puts (" #{cells[0]} | #{cells[1]} | #{cells[2]} ")
     puts ("-----------")
-    puts (" #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} ")
+    puts (" #{cells[3]} | #{cells[4]} | #{cells[5]} ")
     puts ("-----------")
-    puts (" #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} ")
+    puts (" #{cells[6]} | #{cells[7]} | #{cells[8]} ")
   end
 
   def position(number)
     index = number.to_i - 1
-    self.cells[index]
+    cells[index]
   end
 
   def update(number, player)
     index = number.to_i - 1
-    self.cells[index] = player.token
+    cells[index] = player.token
   end
 
   def token
@@ -41,24 +41,24 @@ class Board
   end
 
   def full?
-    self.cells.all?{|i| i == "X" || i == "O"}
+    cells.all?{|i| i != " "}
   end
 
   def turn_count
     count = 0
-    self.cells.each {|i| count += 1 if i == "X" || i == "O"}
+    cells.each {|i| count += 1 if i == "X" || i == "O"}
     count
   end
 
   def taken?(number)
     index = number.to_i - 1
-    self.cells[index] == "X" || self.cells[index] == "O"
+    cells[index] == "X" || cells[index] == "O"
   end
 
   def valid_move?(number)
     index = number.to_i - 1
     if 0 <= index && index <= 8
-      self.cells[index] == " "
+      cells[index] == " "
     else
       false
     end

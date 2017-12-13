@@ -14,7 +14,7 @@ class Game
 
   def current_player
     count = 0
-    self.board.cells.each {|i| count += 1 if i != " "}
+    board.cells.each {|i| count += 1 if i != " "}
     if count.even?
       player_1
     else
@@ -23,13 +23,13 @@ class Game
   end
 
   def over?
-    self.board.cells.all?{|i| i != " "}
+    board.full?
   end
 
   def won?
     winning = []
     WIN_COMBINATIONS.each do |combo|
-      if self.board.cells[combo[0]] != " " && self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
+      if board.cells[combo[0]] != " " && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
         winning = combo
       end
     end
@@ -70,14 +70,15 @@ class Game
   end
 
   def play
+    puts "Welcome to Tic-tac-toe game"
     until over? || won? || draw?
       turn
     end
     if won?
-      display.board
+      board.display
       puts "Congratulations #{winner}!"
     elsif draw?
-      display.board
+      board.display
       puts "Cat's Game!"
     end
   end
