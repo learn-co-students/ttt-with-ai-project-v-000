@@ -16,9 +16,9 @@ class Game
     count = 0
     self.board.cells.each {|i| count += 1 if i != " "}
     if count.even?
-      Player.new("X")
+      player_1
     else
-      Player.new("O")
+      player_2
     end
   end
 
@@ -53,27 +53,31 @@ class Game
   end
 
   def turn
-    count = 0
-    until count > 9 || won? || draw?
+      board.display
       puts "Please enter 1-9:"
-      input = gets
-      if board.valid_move?(input)
-        count += 1
-        count.to_s
-      else
+        input = current_player.move(board)
+
+      until board.valid_move?(input)
         "invalid"
+        puts "Please enter 1-9:"
+        input = current_player.move(board)
       end
-    end
+
+      board.update(input, current_player)
+
+      board.turn_count.to_s
+
   end
 
   def play
-    while over? != true && draw? !=true && turn_count < 10
-      index = turn - 1
-      board[index] = current_player
+    until over? || won? || draw?
+      turn
     end
-    if won? != false
-        puts "Congratulations #{winner}!"
-    elsif draw? == true
+    if won?
+      display.board
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      display.board
       puts "Cat's Game!"
     end
   end
