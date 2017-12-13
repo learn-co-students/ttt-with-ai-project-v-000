@@ -47,4 +47,11 @@ class Game
     end
   end
 
+  def play
+    until self.over? || self.draw? && self.winner
+      self.turn
+    end
+    puts "Congratulations #{self.winner}!"
+  end
+
 end
