@@ -59,8 +59,9 @@ class Game
   def turn
     puts "Please enter 1-9:"
     input = current_player.move(board)
+    puts "You entered: #{input}"
     until board.valid_move?(input)
-      puts "Please enter 1-9:"
+      puts "Please re-enter 1-9:"
       input = current_player.move(board)
     end
     board.update(input, current_player)
