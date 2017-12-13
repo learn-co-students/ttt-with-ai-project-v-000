@@ -3,10 +3,11 @@ require 'pry'
 module Players
     class Computer < Player
         
-        attr_accessor :player_1, :board
+        attr_accessor :player_1, :player_2, :board
         
         # def initialize(player_1)
-        #     @player_1 = player_1  
+        #     @player_1 = player_1 
+        #     @player_2 = player_2
         # end
 
         # binding.pry

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-
+include Players
 
 puts "Welcome to Tic Tac Toe!"
 puts "Would you like to play a game? (y/n)"
@@ -21,12 +21,11 @@ def game_options
     player_options = gets.strip
     if player_options == 0.to_s
         puts "0 player option"
-    elsif player_options == 1.to_s
-        puts "The computer will be X and you will be O. X goes first."
-        board = Board.new 
-        board.display
-        computer = Players::Computer.new
-        game = Game.new(computer)
+    elsif player_options == 1.to_s       
+        puts "Player 1 is X. You are Player 1 and the Computer is Player 2. Good luck!"
+        puts ""
+        puts "Type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"
+        game = Game.new(Human.new("X"), Computer.new("O"))
         game.play
         play_again = puts "Would you like to play again? (y/n)"
     elsif player_options == 2.to_s
