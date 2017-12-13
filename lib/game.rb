@@ -40,12 +40,14 @@ class Game
     end
 
     def turn
-      position = self.current_player.move(@board)
-      puts "#{current_player.token} chooses position #{position}"
-      self.board.cells[position.to_i - 1] = current_player.token
-      @board.turn_count
-      @board.display
-      puts "/n"
+      player_move = self.current_player.move(@board)
+      puts "#{current_player.token} chooses position #{player_move}"
+      sleep 1
+      self.board.cells[self.board.input_to_index(player_move)] = current_player.token
+      self.board.turn_count
+      self.board.display
+      sleep 1
+      puts "\n"
     end
 
     def play

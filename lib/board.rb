@@ -1,5 +1,6 @@
 class Board
   attr_accessor :cells
+  attr_reader :index
 
   @cells = []
 
@@ -19,8 +20,12 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(user_input)
-    cells[user_input.to_i-1]
+  def input_to_index(player_move)
+    player_move.to_i - 1
+  end
+
+  def position(player_move)
+    cells[input_to_index(player_move)]
   end
 
   def full?
@@ -31,17 +36,17 @@ class Board
     self.cells.count{ | x | x == "X" || x == "O" }
   end
 
-  def taken?(position)
-    self.position(position) == "X" || self.position(position) == "O"
+  def taken?(player_move)
+    self.position(player_move) == "X" || self.position(player_move) == "O"
   end
 
-  def valid_move?(position)
-    position.to_i >= 1 && position.to_i <= 9 && self.position(position) == " "
+  def valid_move?(player_move)
+    input_to_index(player_move) >= 0 && input_to_index(player_move) <= 8 && self.position(player_move) == " "
   end
 
-  def update(position, player)
-    if valid_move?(position)
-      self.cells[position.to_i-1] = player.token
+  def update(player_move, player)
+    if valid_move?(player_move)
+      self.cells[input_to_index(player_move)] = player.token
     end
   end
 end
