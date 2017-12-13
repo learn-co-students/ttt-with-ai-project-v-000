@@ -17,13 +17,16 @@ game_type = gets.strip
 
 #play
   if game_type == "1"
+    puts "You chose 0 player game. Let's begin."
     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
     game.board.display
     game.play
   elsif game_type == "2"
+    puts "You chose 1 player game. Let's begin."
     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
     game.play
   elsif game_type == "3"
+    puts "You chose 2 players game. Let's begin."
     game = Game.new
     game.play
   end
