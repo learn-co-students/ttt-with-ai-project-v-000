@@ -53,11 +53,13 @@ class Game
   end
 
   def turn
-    count = 1
+    count = 0
     until count > 9 || won? || draw?
+      puts "Please enter 1-9:"
+      input = gets
       if board.valid_move?(input)
-        count
         count += 1
+        count.to_s
       else
         "invalid"
       end
