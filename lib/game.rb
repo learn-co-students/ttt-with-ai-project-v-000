@@ -62,7 +62,7 @@ class Game
     input = current_player.move(board)
     puts "Player #{current_player.token} entered: #{input}"
     until board.valid_move?(input)
-      puts "#{"input"} is invalid.  Please re-enter 1-9:"
+      puts "#{input} is invalid.  Please re-enter 1-9:"
       input = current_player.move(board)
     end
     board.update(input, current_player)
