@@ -1,4 +1,4 @@
-
+require 'pry'
 class Game
 
 
@@ -53,34 +53,26 @@ class Game
   end
 
   def turn
-      board.display
+    puts "Please enter 1-9:"
+    input = current_player.move(board)
+    until board.valid_move?(input)
       puts "Please enter 1-9:"
-        input = current_player.move(board)
-
-      until board.valid_move?(input)
-        "invalid"
-        puts "Please enter 1-9:"
-        input = current_player.move(board)
-      end
-
-      board.update(input, current_player)
-
-      board.turn_count.to_s
-
+      input = current_player.move(board)
+    end
+    board.update(input, current_player)
   end
 
   def play
-    puts "Welcome to Tic-tac-toe game"
-    until over? || won? || draw?
+    while !over? && !won? && !draw?
       turn
+      board.display
     end
     if won?
-      board.display
       puts "Congratulations #{winner}!"
     elsif draw?
-      board.display
       puts "Cat's Game!"
     end
+#    binding.pry
   end
 
 
