@@ -4,11 +4,11 @@ class Players
 
     def move(board)
       possible_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      count = 1
+      possible_moves.delete_if {|number| !board.valid_move?(number)}
 
-      if !board.taken?("5")
+      if !board.valid_move?("5")
         "5"
-      elsif !board.taken?(possible_moves[0])
+      else
         possible_moves[0]
       end
     end

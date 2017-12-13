@@ -10,6 +10,8 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    player_1.board = @board
+    player_2.board = @board
     board.players << player_1
     board.players << player_2
   end
