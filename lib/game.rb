@@ -14,9 +14,10 @@ class Game
     self.player_2 = player_2
     self.board = board
   end
-
+  #//////////////// MAKE METHOD DETERMINE CURRENT PLAYER BY COUNTING THE TOKEN ON BOARD////////
   def current_player
-    board.turn_count.even? ? player_1 : player_2
+    g.board.cells.count("O")
+    # board.turn_count.even? ? player_1 : player_2
   end
 
   def won?
