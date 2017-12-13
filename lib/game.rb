@@ -17,9 +17,7 @@ class Game
   end
 
   def current_player
-    count = 0
-    board.cells.each {|i| count += 1 if i != " "}
-    if count.even?
+    if board.turn_count.even?
       player_1
     else
       player_2
