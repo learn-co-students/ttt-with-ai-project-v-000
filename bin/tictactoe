@@ -10,20 +10,20 @@ puts "Please only enter the game number (1-3)."
 
 game_type = gets.strip
 
-  until game_type == "exit"
+  until game_type == "exit" || game_type == "1"  || game_type == "2"  || game_type == "3"
     puts "Please re-enter the number"
     game_type = gets.strip
   end
 
 #play
-  if game_type == 1
+  if game_type == "1"
     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
     game.board.display
     game.play
-  elsif game_type == 2
+  elsif game_type == "2"
     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
     game.play
-  elsif game_type == 3
+  elsif game_type == "3"
     game = Game.new
     game.play
   end

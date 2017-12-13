@@ -10,6 +10,8 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    board.players << player_1
+    board.players << player_2
   end
 
   def current_player
@@ -75,5 +77,5 @@ class Game
 #    binding.pry
   end
 
-    
+
 end

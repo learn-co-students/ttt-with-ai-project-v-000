@@ -3,16 +3,13 @@ class Players
   class Computer < Player
 
     def move(board)
-      valid_moves = []
+      possible_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       count = 1
-      while !board.taken?(count) && count < 10
-        valid_moves << count.to_s
-        count += 1
-      end
-      if valid_moves.include?"5"
+
+      if !board.taken?("5")
         "5"
-      else
-        valid_moves[0]
+      elsif !board.taken?(possible_moves[0])
+        possible_moves[0]
       end
     end
 

@@ -4,6 +4,11 @@ class Board
 
   def initialize
     @cells = Array.new(9, " ")
+    @players = []
+  end
+
+  def players
+    @players
   end
 
   def reset!
