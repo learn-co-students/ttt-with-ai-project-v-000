@@ -14,11 +14,12 @@ class Game
     self.player_2 = player_2
     self.board = board
   end
-  #//////////////// MAKE METHOD DETERMINE CURRENT PLAYER BY COUNTING THE TOKEN ON BOARD////////
+
+
   def current_player
-    g.board.cells.count("O")
-    # board.turn_count.even? ? player_1 : player_2
-  end
+    board.turn_count.even? ? player_1 : player_2
+    # board.cells.count(player_1.token).odd? ? player_1 : player_2
+      end
 
   def won?
     WIN_COMBINATIONS.find do |combo|
