@@ -1,5 +1,11 @@
 class Game
   attr_accessor :board, :player_1, :player_2
+
+  def initialize
+    @player_1 = self.player_1
+    @player_2 = self.player_2
+    @player_3 = self.player_3
+  end
   
   WIN_COMBINATIONS = [
     [0, 1, 2],
