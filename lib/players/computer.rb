@@ -13,19 +13,26 @@ module Players
     end
 
     def check_tictac(board)
-      check_board = []
   #    for each win combo, check board.cells[positions associated with that combo] to see if 2 of them are the same (X or O)
       Game::WIN_COMBINATIONS.each do | combo |
+        check_board = []
         combo.each do | slot |
-          check_board << game.cells[slot]
+          check_board << board.cells[slot]
+          binding.pry
         end
-        if check_board.count("X") == 2 || check_board.count("O") == 2
-          play.toe
+        if (check_board.count("X") == 2 || check_board.count("O") == 2) && check_board.count(" ") == 1
+          puts "tictac in combo #{combo}"
+          binding.pry
+          play_toe
         end
       end
+    end
+
+    def play_toe
     end
 
   end # Class Computer
 
 end # Module Players
-board = ["X","X"," ","O"," "," ","O"," "," "]
+# game = Game.new
+#
