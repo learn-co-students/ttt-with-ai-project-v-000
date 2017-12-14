@@ -42,6 +42,7 @@ class Game
   end
 
   def turn
+    board.display
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
@@ -53,6 +54,20 @@ class Game
   def play
     turn until over? || draw?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+  end
+
+  def start
+    puts "Welcome To Tic Tac Toe!"
+    puts "Players?  1p 2p or none"
+    input = gets.chomp
+    case input
+    when '1p', '1'
+      Game.new(Players::Human.new('X'), Players::Computer.new('O')).play
+    when '2p', '2'
+      Game.new.play
+    when 'none', '0p', '0'
+      Game.new(Players::Computer.new('X'), Players::Computer.new('O')).play
+    end
   end
 
 end

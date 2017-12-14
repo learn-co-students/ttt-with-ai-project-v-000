@@ -3,11 +3,13 @@ module Players
   class Computer < Player
 
     def move(board)
-      # if !board.taken?("5")
-      #   "5"
+      if !board.taken?("5")
+        "5"
+      else
       board.cells.collect.with_index do |v,i|
          (i+1).to_s if v == " "
        end.compact.sample
+     end
     end
 
     def combos(board)
