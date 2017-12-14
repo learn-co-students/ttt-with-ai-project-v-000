@@ -42,11 +42,11 @@ class Game
     def turn
       player_move = self.current_player.move(@board)
       puts "#{current_player.token} chooses position #{player_move}"
-      sleep 1
+      # sleep 1
       self.board.cells[self.board.input_to_index(player_move)] = current_player.token
       self.board.turn_count
       self.board.display
-      sleep 1
+      # sleep 1
       puts "\n"
     end
 

@@ -4,7 +4,7 @@ module Players
     def move(board)
       puts "Enter move"
       player_move = gets.chomp
-      if !(player_move.to_i >= 1 && player_move.to_i <= 9)
+      if !board.valid_move?(player_move)                  #Had to change human_player_spec to be able to validate
         self.move(board)
       end
       player_move

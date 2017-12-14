@@ -8,11 +8,13 @@ describe 'Players::Human' do
   describe '#move' do
     it 'asks the user for input and returns it' do
       human = Players::Human.new("X")
+
       allow($stdout).to receive(:puts)
 
       expect(human).to receive(:gets).and_return("1")
 
-      expect(human.move([])).to eq("1")
+      # expect(human.move([])).to eq("1")
+      expect(human.move(Board.new)).to eq("1")  #I changed this so the test wouldn't fail if I used #valid_move to verify the player's move
     end
   end
 end
