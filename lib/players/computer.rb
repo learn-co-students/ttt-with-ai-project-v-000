@@ -1,20 +1,21 @@
 module Players
   class Computer < Player
-    attr_accessor :available, :combo
+    attr_accessor :available, :combo, :computer_move
 
     def move(board)
       @available = []
-      if check_for_tictac(board)
-        computer_move = check_for_tictac(board)
+      check_for_tictac(board)
+      if computer_move != nil
         binding.pry
+        computer_move
       else
         board.cells.each.with_index do | position, index |
           if board.valid_move?( index + 1 )
             @available << ( index + 1 ).to_s
           end
         end #board.cells.each
+        computer_move = @available.sample.to_s
       end #if/else
-      computer_move = @available.sample.to_s
     end # #move(board)
 
     def check_for_tictac(board)
@@ -27,24 +28,15 @@ module Players
           puts "tictac in combo #{combo}"
           combo.each do | board_index |
             if game.board.valid_move?(board_index+1)
-              board_index+1.to_s
+              computer_move = board_index+1.to_s
             end
           end #combo.each
         else
-          nil
-          binding.pry
+          computer_move = nil
         end #if/else
       end #WIN_COMBINATIONS.each
 
     end #check_for_tictac
-
-    # def play_toe(combo)
-    #   combo.each do |position|
-    #     if game.board.valid_move?
-    #       computer_move = position + 1
-    #     end
-    #   end
-    # end
 
   end # Class Computer
 
