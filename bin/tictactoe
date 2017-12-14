@@ -20,7 +20,9 @@ def game_options
     puts "Type 0 for a 0-player game (the computer plays itself), 1 for a 1-player game, or 2 for a 2-player game"
     player_options = gets.strip
     if player_options == 0.to_s
-        puts "0 player option"
+        game = Game.new(Computer.new("X"), Computer.new("O"))
+        game.play
+        play_again = puts "Would you like to play again? (y/n)"
     elsif player_options == 1.to_s       
         puts "Player 1 is X. You are Player 1 and the Computer is Player 2. Good luck!"
         puts ""

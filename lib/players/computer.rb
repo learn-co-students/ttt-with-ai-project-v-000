@@ -5,214 +5,72 @@ module Players
         
         attr_accessor :player_1, :player_2, :board
         
-        # def initialize(player_1)
-        #     @player_1 = player_1 
-        #     @player_2 = player_2
-        # end
+        WIN_COMBINATIONS = [
+            [0,1,2], 
+            [3,4,5], 
+            [6,7,8],  
+            [0,3,6],  
+            [1,4,7],  
+            [2,5,8], 
+            [0,4,8],  
+            [2,4,6]  
+          ]
 
-        # binding.pry
-        def move(board)
-            move = nil
-            if !board.taken?(5)
-                move = "5"
+    def move(board)
+        @i = 0
+        random_spot(board)
+        best_spots(board)
+        block_a_combo(board)
+        for_the_win(board)
+        "#{@i + 1}"
+    end
+
+    def for_the_win(board)
+        WIN_COMBINATIONS.each do |combo|
+            if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " " && board.cells[combo[0]] == self.token
+                @i = combo[2]
+            elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " " && board.cells[combo[0]] == self.token
+                @i = combo[0]
+            elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " " && board.cells[combo[0]] == self.token
+                @i = combo[1]
+            else
+                nil
             end
-        end 
-                        
+        end
+        end
+
+    def block_a_combo(board)
+        WIN_COMBINATIONS.each do |combo|
+            if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " " && board.cells[combo[0]] != " "
+                @i = combo[2]
+            elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " " && board.cells[combo[0]] != " "
+                @i = combo[0]
+            elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " " && board.cells[combo[0]] != " "
+                @i = combo[1]
+            else
+                nil
+            end
+        end
+    end
+    
+    def best_spots(board)
+        shuffled_array = [0, 2, 4, 6, 8].shuffle
+        shuffled_array.any? do |i|
+            if board.cells[i] == " "
+                @i = i
+            else
+                nil
+            end
+        end
+    end
+    
+    def random_spot(board)
+        play = [1, 3, 5, 7].sample
+            if board.cells[play] == " "
+                @i = play
+            else
+                random_spot(board)
+         end
+        end
     end
 end
-       
-
-            
-                        # 1 -- 5
-
-        # 2 -- if 1, 9
-        #     if 2, 7
-        #     if 3, 7
-        #         if 4, 9
-        #             if 6, 1
-        #                 if 7, 3
-        #                     if 8, 3
-        #                         if 9, 1 
-        # 3 -- 
-
-        # if 2, 3
-        #     if 1, 3
-        #         if 4, 1
-        #             if 3 1
-        #                 if 7, 9
-        #                     if 8, 9
-        #                         if 6, 7
-        #                             if 9, 6
-
-        # 4 --
-
-        # if 4, 6
-        #     if 2, 9
-        #         if 1, 6
-        #             if 7, 8
-        #                 if 8, 7
-
-        # 5 --
-
-        # if 6, 2
-
-
-            
-            
-            # in this the current player needs to be both the computer and the human
-            # so player 1 will always be the computer and player 2 will always be the human
-            # player 1 will go first
-            # @player 2, the human has a choice and goes (turn)
-            # then player 1 goes with the first set of conditional statements (to be coded frm below)
-            # then player 2 goes until the game is won (part of game.play)
-
-
-
-
-       
-        # 1-player game ... 
-
-        # computer goes first 
-        # so input is what I tell it for the first ... no user input till second
-
-
-
-
-
-        # 1 player game
-
-        # 1 -- 5
-
-        # 2 -- if 1, 9
-        #     if 2, 7
-        #     if 3, 7
-        #         if 4, 9
-        #             if 6, 1
-        #                 if 7, 3
-        #                     if 8, 3
-        #                         if 9, 1 
-        # 3 -- 
-
-        # if 2, 3
-        #     if 1, 3
-        #         if 4, 1
-        #             if 3 1
-        #                 if 7, 9
-        #                     if 8, 9
-        #                         if 6, 7
-        #                             if 9, 6
-
-        # 4 --
-
-        # if 4, 6
-        #     if 2, 9
-        #         if 1, 6
-        #             if 7, 8
-        #                 if 8, 7
-
-        # 5 --
-
-        # if 6, 2
-
-        # 3 -- 
-
-        # 4 -- if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-   
-        # 5 -- if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        # if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-
-        # 6 -- if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        # if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-       
-        # 7 -- if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-
-        # 8 -- if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-           
-        # 9 -- if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        #     if @cells = [" ", " ", " ", " ", "X", " ", " ", " ", " "],
-        
-                # [1, 2, 3, 4, 5, 6, 7, 8, 9].find {|i| !board.taken?(i)}.to_s
-
-    
-               
-       
-
-
-
-
-        # computer goes first 
-
-        # 2 player game
-
-        # just encapsulate
-
-
-        # def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-        #     @player_1 = player_1
-        #     @player_2 = player_2
-        # end
-
-    
-  
-
-            # elsif board.turn_count == 1 && !board.taken?(9)
-            #     move = "9"
-            # elsif board.turn_count == 1 && !board.taken?(9)
-            #     move = "9"
-            # elsif board.turn_count == 1 && !board.taken?(1)
-            #     move = "9"
-            # elsif board.turn_count == 1 && !board.taken?(9)
-            #     move = "9"
-            # elsif board.turn_count == 1 && !board.taken?(9)
-            #     move = "9"
-            # elsif board.turn_count == 1 && !board.taken?(9)
-            #     move = "9"
-            # elsif board.turn_count == 1 && !board.taken?(9)
-            #     move = "9"
-            # elsif board.turn_count == 1 && !board.taken?(9)
-            #     move = "9"
