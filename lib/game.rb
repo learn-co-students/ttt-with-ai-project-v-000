@@ -55,11 +55,8 @@ class Game
       turn
     end
 
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cat's Game!"
-    end  
+    message = won? && "Congratulations #{winner}!" || draw? && "Cat's Game!" 
+    message && puts(message)
   end
   
 end
