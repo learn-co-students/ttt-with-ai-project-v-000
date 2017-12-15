@@ -3,8 +3,11 @@ module Players
   class Computer < Player
 
     def move(board)
-      if !board.taken?("5")
+      if has_tokens_choice(board)
+        has_tokens_choice(board)
+      elsif !board.taken?("5")
         "5"
+        binding.pry
       elsif corners(board)
         corners(board)
       else
@@ -37,16 +40,29 @@ module Players
       end.sample+1
     end
 
+    def has_tokens(board)
+      Game::WIN_COMBINATIONS.select do |x|
+        x.select{|i| board.cells[i] == self.token}.count > 1
+      end
+    end
+
+    def has_tokens_choice(board)
+      if !has_tokens(board).empty?
+        has_tokens(board).flatten.select{|x| board.cells[x] != token}[0]+1
+      end
+    end
+
   end
 end
 
+
+# board.update(8, self)
+# board.update(5, self)
+# board.update(3, self)
+# board.update(7, player_2)
+# board.update(9, player_2)
+# 2,4,7    6,8
+
 # a = [board.cells[0], board.cells[6], board.cells[8]].select{|p| p.strip.empty?}
 #
-# Game::WIN_COMBINATIONS.collect.with_index
-
-
-#  (f.select{|x| board.cells[x] != token}[0] + 1).to_s
-
- # l = Game::WIN_COMBINATIONS.collect do |x|
- #    x.count(8).sum
- #  end
+# board.cells.count(self.token)
