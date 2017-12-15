@@ -42,11 +42,14 @@ class Game
   end
 
   def turn
+    binding.pry
     player_move = current_player.move(@board.cells)
     if @board.valid_move?(player_move)
       @board.update(player_move, current_player)
     else
       turn
     end
-  end 
+  end
+  
+  
 end
