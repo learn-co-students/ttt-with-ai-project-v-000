@@ -22,23 +22,31 @@ class Game
     @board.turn_count.even? ? @player_1 : @player_2
   end
 
-  def full?
-    @board.cells.all? {|board_position| %w[X O].include?(board_position)}
+  def over?
+    @board.cells.all?{|space| space != " "}
   end
 
   def won?
     WIN_COMBINATIONS.detect do |win_combination|
-      win_combination.all? {|win_index| @board.cells[win_index] == @player_1 } ||
-      win_combination.all? {|win_index| @board.cells[win_index] == @player_2 }
+      win_combination.all? {|win_index| @board.cells[win_index] == @player_1.token } ||
+      win_combination.all? {|win_index| @board.cells[win_index] == @player_2.token }
     end
   end
 
   def draw?
-    !won? && full?
+    over? && !won?
   end
 
-  def over?
-    won? || draw?
+  def winner
+    won? && @board.cells[won?[0]]
   end
 
+  def turn
+    player_move = current_player.move(@board.cells)
+    if @board.valid_move?(player_move)
+      @board.update(player_move, current_player)
+    else
+      turn
+    end
+  end 
 end

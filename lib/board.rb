@@ -17,8 +17,12 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+  def user_input_to_index(user_input)
+    user_input.to_i - 1
+  end
+
   def position(user_input)
-    board_position = user_input.to_i - 1
+    board_position = user_input_to_index(user_input)
     @cells[board_position]
   end
 
@@ -37,17 +41,17 @@ class Board
   end
 
   def taken?(user_input)
-    index = user_input.to_i - 1
+    index = user_input_to_index(user_input)
     @cells[index] == "X" || @cells[index] == "O"
   end
 
   def valid_move?(user_input)
-    index = user_input.to_i - 1
+    index = user_input_to_index(user_input)
     !taken?(user_input) && index.between?(0,8)
   end
 
   def update(user_input, player)
-    index = user_input.to_i - 1
+    index = user_input_to_index(user_input)
     @cells[index] = player.token
   end
 end
