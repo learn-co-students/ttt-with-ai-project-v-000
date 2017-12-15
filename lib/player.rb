@@ -7,4 +7,3 @@ class Player
     end
 end
 
-# players are initialized here

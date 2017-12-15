@@ -1,5 +1,3 @@
-require 'pry'
-
 class Game
     
     attr_accessor :player_1, :player_2, :board, :computer, :game
@@ -69,19 +67,4 @@ class Game
             end
         board.display
     end
-        
 end
-
-         # board.cells[won?.first] if won? #this also works because won?.first represents the first play
-
-#require_all './lib'
-
-#all of the following in the bin file for the app will open pry for all files
-
-#!/usr/bin/env ruby
-
-# require_relative '../config/environment'
-
-# require 'pry'
-
-# Pry.start

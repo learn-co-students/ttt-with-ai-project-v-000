@@ -23,6 +23,8 @@ def game_options
         game = Game.new(Computer.new("X"), Computer.new("O"))
         game.play
         play_again = puts "Would you like to play again? (y/n)"
+        game_start = gets.strip
+        player_choice(game_start)
     elsif player_options == 1.to_s       
         puts "Player 1 is X. You are Player 1 and the Computer is Player 2. Good luck!"
         puts ""
@@ -30,25 +32,17 @@ def game_options
         game = Game.new(Human.new("X"), Computer.new("O"))
         game.play
         play_again = puts "Would you like to play again? (y/n)"
+        game_start = gets.strip
+        player_choice(game_start)
     elsif player_options == 2.to_s
         puts "X goes first, then O goes. Player 1, type 1-9 to place your X on the board, 1 for the top left and 9 for the bottom right:"        
         board = Board.new 
-        board.display
         game = Game.new
         game.play
         play_again = puts "Would you like to play again? (y/n)"
+        game_start = gets.strip
+        player_choice(game_start)
     end
 end
         
 player_choice(game_start)
-
-
-
-
-
-# require 'pry'
-
-
-
-# Pry.start
-
