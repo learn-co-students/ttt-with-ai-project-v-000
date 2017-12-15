@@ -42,4 +42,5 @@ class TicTacToeCLI
 	end
 	puts "Goodbye!"
   end
+
 end
