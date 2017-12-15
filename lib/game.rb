@@ -23,7 +23,7 @@ class Game
   end
 
   def over?
-    won? || @board.cells.all?{|space| space != " "}
+    won? || draw?
   end
 
   def won?
@@ -34,7 +34,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    @board.full? && !won?
   end
 
   def winner
@@ -51,7 +51,7 @@ class Game
   end
 
   def play
-    while !self.won? && !self.draw?
+    while !over?
       turn
     end
 
