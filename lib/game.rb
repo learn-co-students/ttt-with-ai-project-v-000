@@ -23,7 +23,7 @@ class Game
   end
 
   def over?
-    @board.cells.all?{|space| space != " "}
+    won? || @board.cells.all?{|space| space != " "}
   end
 
   def won?
@@ -42,7 +42,6 @@ class Game
   end
 
   def turn
-    binding.pry
     player_move = current_player.move(@board.cells)
     if @board.valid_move?(player_move)
       @board.update(player_move, current_player)
@@ -50,6 +49,17 @@ class Game
       turn
     end
   end
-  
+
+  def play
+    while !self.won? && !self.draw?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end  
+  end
   
 end
