@@ -58,8 +58,8 @@ class Game
 
   def start
     puts "Welcome To Tic Tac Toe!"
-    puts "Players?  1p 2p or none"
-    input = gets.chomp
+    puts "how many Players??  1p 2p or none/0"
+    input = gets.strip
     case input
     when '1p', '1'
       Game.new(Players::Human.new('X'), Players::Computer.new('O')).play
@@ -67,6 +67,14 @@ class Game
       Game.new.play
     when 'none', '0p', '0'
       Game.new(Players::Computer.new('X'), Players::Computer.new('O')).play
+    end
+    puts "Play again??  Y/N"
+    play_again = gets.strip
+    case play_again
+    when 'Y', 'y', 'yes'
+      start
+    when 'N', 'n', 'no', 'exit'
+      exit
     end
   end
 

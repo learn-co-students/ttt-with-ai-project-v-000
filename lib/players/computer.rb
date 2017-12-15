@@ -5,6 +5,8 @@ module Players
     def move(board)
       if !board.taken?("5")
         "5"
+      elsif corners(board)
+        corners(board)
       else
       board.cells.collect.with_index do |v,i|
          (i+1).to_s if v == " "
@@ -29,8 +31,19 @@ module Players
      end
     end
 
+    def corners(board)
+    n = board.cells.collect.with_index{|v, i| i if v == " "}.select do |n|
+        n == 0 || n == 2 || n == 6 || n == 8
+      end.sample+1
+    end
+
   end
 end
+
+# a = [board.cells[0], board.cells[6], board.cells[8]].select{|p| p.strip.empty?}
+#
+# Game::WIN_COMBINATIONS.collect.with_index
+
 
 #  (f.select{|x| board.cells[x] != token}[0] + 1).to_s
 
