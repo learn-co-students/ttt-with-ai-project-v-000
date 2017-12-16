@@ -3,7 +3,7 @@ module Players
   class Computer < Player
 
     def move(board)
-      if has_tokens_choice(board)
+      if !has_tokens_choice(board).empty?
         has_tokens_choice(board)
       elsif !board.taken?("5")
         "5"
@@ -17,45 +17,48 @@ module Players
      end
     end
 
-    def combos(board)
-      Game::WIN_COMBINATIONS.select do |x|
-        x.any?{|i| board.cells[i] == token}
-       end
-    end
 
-    def best_choice(board)
-      unless combos(board).empty?
-      combos(board).select do |i|
-         if board.cells[i[0]] && board.cells[i[1]] == token || board.cells[i[0]] && board.cells[i[2]] == token || board.cells[i[1]] && board.cells[i[2]] == token
-            i
-         elsif board.cells[i[0]] == token
-         end
-       end
-     end
-    end
 
     def corners(board)
-    n = board.cells.collect.with_index{|v, i| i if v == " "}.select do |n|
-        n == 0 || n == 2 || n == 6 || n == 8
-      end.sample+1
+     board.cells.collect.with_index(1){|v, i| i if v == " "}.compact.select do |n|
+        n == 1 || n == 3 || n == 7 || n == 9
+      end.sample
     end
 
     def has_tokens(board)
       Game::WIN_COMBINATIONS.select do |x|
-        x.select{|i| board.cells[i] == self.token}.count > 1
+        x.select do |i|
+          board.cells[i] == self.token
+        end.count > 1
       end
     end
 
+    def a_one_m_s(m)
+      m[0]+1 unless m == nil
+    end
+
     def has_tokens_choice(board)
-      if !has_tokens(board).empty?
-        has_tokens(board).flatten.select{|x| board.cells[x] != token}[0]+1
+      unless has_tokens(board).empty? || has_tokens(board) == nil
+        has_tokens(board).flatten.select{|x| board.cells[x] == " "}
       end
     end
 
   end
 end
 
-
+  # def available_indices(board)
+  #   n = board.cells.collect.with_index{|v, i| i if v == " "}.compact
+  #   end
+  #
+  #   Game::WIN_COMBINATIONS.select do |c|
+  #     c.all?{|i| board.cells[i] != " "}
+  #   end
+  #
+  #
+  #
+  #   unless m.empty?
+  #     m.flatten.select{|x| board.cells[x] == " "}[0]+1
+  #   end.to_s
 # board.update(8, self)
 # board.update(5, self)
 # board.update(3, self)
