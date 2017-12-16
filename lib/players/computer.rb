@@ -21,3 +21,6 @@ module Players
         n == 1 || n == 3 || n == 7 || n == 9
       end.sample
     end
+
+  end
+end
