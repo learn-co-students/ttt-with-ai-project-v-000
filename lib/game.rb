@@ -12,8 +12,8 @@ class Game
       [2,4,6]
     ]
 
-    def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new) ## TEMPORARY - for debugging
-    # def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    # def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new) ## TEMPORARY - for debugging
+    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
       @player_1 = player_1
       @player_2 = player_2
       @board = board
@@ -43,11 +43,11 @@ class Game
     def turn
       player_move = self.current_player.move(@board)
       puts "#{current_player.token} chooses position #{player_move}"
-      sleep 1
+      # sleep 1
       self.board.cells[self.board.input_to_index(player_move)] = current_player.token
       self.board.turn_count
       self.board.display
-      sleep 1
+      # sleep 1
       puts "\n"
     end
 

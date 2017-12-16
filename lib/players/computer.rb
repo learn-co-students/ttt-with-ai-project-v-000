@@ -105,7 +105,8 @@ module Players
     end
 
     def available(board)
-      board.cells.each>with_index do | position, index |
+      @available = []
+      board.cells.each.with_index do | position, index |
         if board.valid_move?( index + 1 )
           @available << ( index + 1 ).to_s
         end
