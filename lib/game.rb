@@ -42,6 +42,8 @@ class Game
   end
 
   def turn
+    clear_screen
+
     player_move = current_player.move(@board)
     if @board.valid_move?(player_move)
       @board.update(player_move, current_player)
@@ -55,8 +57,16 @@ class Game
       turn
     end
 
+    clear_screen
+    @board.display
     message = won? && "Congratulations #{winner}!" || draw? && "Cat's Game!" 
     message && puts(message)
+  end
+
+  private
+
+  def clear_screen
+    puts "\e[H\e[2J"
   end
   
 end
