@@ -2,11 +2,11 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9, " ")
+    @cells = (1..9).map(&:to_s)
   end
 
   def reset!
-    @cells = Array.new(9, " ")
+    @cells = (1..9).map(&:to_s)
   end
 
   def display

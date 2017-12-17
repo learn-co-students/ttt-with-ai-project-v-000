@@ -23,14 +23,14 @@ describe "Board" do
     it 'sets the cells of the board to a 9 element array of " "' do
       board.cells = ["X"]
       board.reset!
-      expect(board.cells).to match_array(Array.new(9, " "))
+      expect(board.cells).to match_array((1..9).map(&:to_s))
     end
   end
-
+  
   describe '#initialize' do
     it 'sets the cells of the board to a 9 element array of " "' do
       board = Board.new
-      expect(board.cells).to match_array(Array.new(9, " "))
+      expect(board.cells).to match_array((1..9).map(&:to_s))
     end
   end
 
