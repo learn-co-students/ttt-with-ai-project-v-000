@@ -6,12 +6,7 @@ class GameController
     puts "\e[H\e[2J"
 
     puts "Welcome to Tic-Tac-Toe!"
-    @player_1 = Players::Human.new("X")
-    @player_2 = if should_make_computer?
-      Players::Computer.new("O")
-    else
-      Players::Human.new("O")
-    end
+    setup_players
     @board = Board.new
     @game = Game.new(@player_1, @player_2, @board)
   end
@@ -22,15 +17,25 @@ class GameController
 
   private
 
-  def should_make_computer?
+  def setup_players
     input = nil
     # Until user enters yes or no
-    until input =~ /y(es)?|no?/i do
-      puts "Would you like to play against the computer? (y/n)"
+    until input =~ /1|2|3/ do
+      puts "1. Play against the computer"
+      puts "2. Play against a friend"
+      puts "3. Computer versus computer"
+
       input = STDIN.getch
     end
-
-    input =~ /y(es)?/i
+    if input == "1"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Computer.new("O")
+    elsif input == "2"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Human.new("O")
+    elsif input == "3"
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+    end
   end
-
 end

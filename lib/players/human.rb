@@ -3,7 +3,7 @@ module Players
 
     def move(board)
       board.display
-      puts "Please enter a number (1-9):"
+      puts "Player #{self.token}, please enter a number (1-9):"
       user_input = gets.chomp
     end
   end
