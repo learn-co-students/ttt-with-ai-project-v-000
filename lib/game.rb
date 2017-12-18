@@ -60,7 +60,7 @@ class Game
     clear_screen
     @board.display
     message = won? && "Congratulations #{winner}!" || draw? && "Cat's Game!" 
-    message && puts(message)
+    puts message
   end
 
   private
