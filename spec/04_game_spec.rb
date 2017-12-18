@@ -62,7 +62,7 @@ describe 'Game' do
       expect(game.player_2).to be_a(Players::Human)
       expect(game.player_2.token).to eq("O")
 
-      expect(game.board.cells).to match_array(Array.new(9, " "))
+      expect(game.board.cells).to match_array((1..9).map(&:to_s))
     end
   end
 
@@ -234,7 +234,7 @@ describe 'Game' do
 
       game.play
 
-      expect(game.board.cells).to eq(["X", " ", " ", " ", " ", " ", " ", " ", " "])
+      expect(game.board.cells).to eq(["X", "2", "3", "4", "5", "6", "7", "8", "9"])
     end
 
     it 'plays the first few turns of the game' do
@@ -248,7 +248,7 @@ describe 'Game' do
 
       game.play
 
-      expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
+      expect(game.board.cells).to eq(["X", "X", "3", "O", "5", "6", "7", "8", "9"])
     end
 
     it 'checks if the game is won after every turn' do
