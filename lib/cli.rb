@@ -8,6 +8,7 @@ class CLI
       puts "To quit, type 'exit'."
       puts "Have fun!"
       input = gets.strip
+  end
 
   def call
     puts "Welcome to Tic Tac Toe!"
@@ -58,4 +59,4 @@ end
     end
     puts "Goodbye!"
   end
-  end
+end
