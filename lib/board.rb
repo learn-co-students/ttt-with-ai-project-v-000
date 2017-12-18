@@ -40,7 +40,7 @@ class Board
   def turn_count #counts occupied positions
     counter= 0
     @cells.each do |element|
-      if element== "X" || element== "O" #if_my_condition_is_met
+      if element== "X" || element== "O"
         counter +=1
       end
     end

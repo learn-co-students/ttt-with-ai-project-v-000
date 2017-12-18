@@ -1,4 +1,3 @@
-require 'pry'
 class Game
   attr_accessor :player_1, :player_2, :board
 
@@ -41,16 +40,10 @@ class Game
       @board.cells[won?[0]]
 
     end
-    #   if won? == player_1
-    #     "X"
-    #   elsif won? == player_2
-    #     "O"
-    #  end
   end
 #recursion - when a method calls itself
   def turn
     most_recent_move = current_player.move(@board)
-    # index = input_to_index(input)
     if !@board.valid_move?(most_recent_move)
       turn
     else
