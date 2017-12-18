@@ -1,14 +1,13 @@
 class Board
+  attr_accessor :cells
 
-	attr_accessor :cells
+  def initialize
+    reset!
+  end
 
-	def initialize
-	   @cells = [" "," "," "," "," "," "," "," "," "]
-	end
-
-	def reset!
-		@cells = [" "," "," "," "," "," "," "," "," "]
-	end
+  def reset!
+    @cells = Array.new(9, " ")
+  end
 
   def display
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
@@ -18,44 +17,35 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def full?
-    @cells.none?{|i| i==" "}
+  def position(user_input)
+    @cells[user_input.to_i - 1]
   end
 
-  def position(input)
-  	@cells[input.to_i - 1]
+  def full?
+    @cells.all? do |cell|
+      cell != " "
+    end
   end
 
   def turn_count
-  	count = 0
-  	@cells.each do |cell|
-  		if cell != " "
-  			count += 1
-  		end
-  	end
-  	return count
+
+    @cells.count{|cell| cell != " " }
   end
 
-  def taken?(input)
-  	if @cells[input.to_i - 1] != " "
-  		true
-  	else
-  		false
-  	end
+  def taken?(user_input)
+    position(user_input) != " "
   end
 
-
-  def valid_move?(input)
-  	if (input.to_i) < 1 ||  (input.to_i) > 9 || taken?(input)
-  		false
-  	else
-  		true
-  	end
+  def index_taken?(index)
+    @cells[index] != " "
   end
 
-  def update(input, player)
-  	ind = input.to_i - 1
-  	@cells[ind] = player.token
+  def valid_move?(user_input)
+    user_input.to_i.between?(1,9) && !taken?(user_input)
   end
-  
+
+  def update(user_input, player)
+    @cells[user_input.to_i - 1] = player.token
+  end
+
 end
