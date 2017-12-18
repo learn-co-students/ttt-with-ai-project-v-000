@@ -4,7 +4,7 @@ class Board
 attr_accessor :cells
 
   def initialize
-    @cells= [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def reset! #reset the state of the cells to what a board should look like at the start of a game
@@ -29,7 +29,7 @@ attr_accessor :cells
   end
 
   def taken?(move)
-    @cells[input_to_index(move)]== " " ? false : true
+    self.cells[input_to_index(move)]== " " ? false : true
   end
 
   def valid_move?(move)
@@ -38,11 +38,9 @@ attr_accessor :cells
 
   def turn_count
     count = 0
-    self.cells.each do |cell|
-      if cell != " "
-        count += 1
-      end
-    end
+    self.cells.each {|cell|
+      cell != " " ? count += 1 : nil
+    }
     count
   end
 
