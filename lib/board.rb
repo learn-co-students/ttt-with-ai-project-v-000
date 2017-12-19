@@ -4,11 +4,11 @@ class Board
 attr_accessor :cells
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def reset! #reset the state of the cells to what a board should look like at the start of a game
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def position(input) #takes in the user's input in the form of 1-9 strings
