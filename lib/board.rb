@@ -11,17 +11,12 @@ attr_accessor :cells
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
-  def input_to_index(input)
-    input.to_i - 1
-  end
-
   def position(input) #takes in the user's input in the form of 1-9 strings
-    index = input_to_index(input)
-    self.cells[index]
+    self.cells[input.to_i - 1]
   end
 
-  def update(move, player=X) #updating the board when a player makes a move
-    self.cells[input_to_index(move)] = player
+  def update(move, player) #updating the board when a player makes a move
+    self.cells[(move.to_i - 1)] = player.token
   end
 
   def full?
@@ -29,7 +24,7 @@ attr_accessor :cells
   end
 
   def taken?(move)
-    self.cells[input_to_index(move)]== " " ? false : true
+    position(move)!= " "
   end
 
   def valid_move?(move)
@@ -38,9 +33,7 @@ attr_accessor :cells
 
   def turn_count
     count = 0
-    self.cells.each {|cell|
-      cell != " " ? count += 1 : nil
-    }
+    self.cells.each {|cell|cell != " " ? count += 1 : nil}
     count
   end
 
