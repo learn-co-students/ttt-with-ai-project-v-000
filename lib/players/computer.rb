@@ -14,11 +14,10 @@ module Players
     ]
 
     def move(board)
-      if !board.taken?(5)           #aim for center spot first
+      if !board.taken?(5)      #choose middle spot if possible
         "5"
-      #  binding.pry
-    #  elsif !board.taken?(1) || !board.taken?(3) ||!board.taken?(7) ||!board.taken?(9)   #aim for corner spot next
-      #  "#{[1,3,7,9].sample}" #corners
+      else
+        [1,2,3,4,6,7,8,9].sample.to_s #then choose other spots
       end
     end
   end
