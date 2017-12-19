@@ -23,7 +23,7 @@ class Game
   end
 
   def over?
-    if full? == true || draw? == true || won? == true
+    if full? == true || draw? == true || won? != false
       return true
     else
       return false
@@ -63,14 +63,14 @@ class Game
   end
 
   def turn
-    player_token = @current_player.token
+    player_token = current_player.token
     puts "Player #{player_token}, please enter 1-9:"
-    user_input = gets.to_i
-    index = user_input - 1
+    user_input = current_player.move(@board)
+    index = user_input.to_i - 1
     while @board.valid_move?(user_input) == false && !@board.full?
       puts "Player #{player_token}, please enter 1-9:"
-      user_input = gets.to_i
-      index = user_input - 1
+      user_input = current_player.move(@board)
+      index = user_input.to_i - 1
     end
     @board.update(user_input, @current_player)
     swap_player
@@ -81,14 +81,18 @@ class Game
   end
 
   def play
-    # while !over?
-    #   @board.display()
-    #   turn
-    # end
-    #asks for players input on a turn of the game
-    #checks if the game is over after every turn
-    #congratulates the winner
-    #prints "Cat's Game!" on a draw
+    while !over?
+      @board.display()
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{self.winner}!"
+    end
+
+    if draw?
+      puts "Cat's Game!"
+    end
   end
 
   def move(board, input_to_index, player)
