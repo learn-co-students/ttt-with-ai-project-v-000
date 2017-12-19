@@ -1,5 +1,6 @@
 require './lib/player.rb'
 
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -66,13 +67,13 @@ class Game
   end
 
   def start
-    puts "- - - - - - - - - - - - "
-    puts "Welcome to Tic Tac Toe!"
-    puts "- - - - - - - - - - - - "
-    puts "Select Player Mode:"
-    puts "0 - Computer VS Computer"
-    puts "1 - Human VS Computer"
-    puts "2 - Human VS Human"
+    puts "- - - - - - - - - - - - ".colorize(:light_green)
+    puts "Welcome to Tic Tac Toe!".colorize(:white)
+    puts "- - - - - - - - - - - - ".colorize(:light_green)
+    puts "Select Player Mode:".colorize(:white)
+    puts "0 - Computer VS Computer".colorize(:green)
+    puts "1 - Human VS Computer".colorize(:cyan)
+    puts "2 - Human VS Human".colorize(:yellow)
 
     input = gets.strip.to_i
     if input == 0
