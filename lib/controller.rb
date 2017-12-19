@@ -15,11 +15,14 @@ class Controller
       player_2 = Players::Computer.new("O")
       game = Game.new(player_1, player_2)
       game.play
+      self.restart?
     when "2"
       self.play_first?
+      self.restart?
     when "3"
       game = Game.new
       game.play
+      self.restart?
     else
       self.start unless answer == "4"
     end
@@ -41,6 +44,19 @@ class Controller
       game.play
     else
       self.play_first?
+    end
+  end
+
+  def restart?
+    puts "Would you like to play again? (Y/N)"
+    answer = gets.strip
+    case answer
+    when "Y"
+      Controller.new.start
+    when "N"
+      exit
+    else
+      self.restart?
     end
   end
 end
