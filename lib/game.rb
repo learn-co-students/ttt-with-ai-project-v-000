@@ -57,8 +57,12 @@ class Game
   end
 
   def play
-    puts "Ready to play some Tic Tac Toe?"
-    turn until over?
+    turn until over? || draw?
+    if draw?
+      puts "Cat's Game!"
+    elsif over? && won?
+      puts "Congratulations #{winner}!"
+    end
   end
 
 end
