@@ -1,0 +1,31 @@
+
+[1mFrom:[0m /home/jamilyaramos-chapman-86588/code/labs/ttt-with-ai-project-v-000/lib/players/computer.rb @ line 42 Players::Computer#minmax:
+
+    [1;34m20[0m: [32mdef[0m [1;34mminmax[0m(board, current_player, depth=[1;34m0[0m)
+    [1;34m21[0m:   [32mif[0m [1;36mself[0m.token == [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m
+    [1;34m22[0m:     game = [1;34;4mGame[0m.new(current_player, @opponent, board)
+    [1;34m23[0m:   [32melse[0m
+    [1;34m24[0m:     game = [1;34;4mGame[0m.new(@opponent, current_player, board)
+    [1;34m25[0m:   [32mend[0m
+    [1;34m26[0m:   [32mif[0m game.over? || game.won?
+    [1;34m27[0m:     [32mreturn[0m [1;34m1[0m [32mif[0m game.winner == [1;36mself[0m.token
+    [1;34m28[0m:     [32mreturn[0m [1;34m-1[0m [32mif[0m game.won?
+    [1;34m29[0m:     [32mreturn[0m [1;34m0[0m
+    [1;34m30[0m:   [32mend[0m
+    [1;34m31[0m: 
+    [1;34m32[0m:   moves = {}
+    [1;34m33[0m: 
+    [1;34m34[0m:   [1;34m#temp_board = board.dup[0m
+    [1;34m35[0m: 
+    [1;34m36[0m:   board.available_moves.each { |move|
+    [1;34m37[0m:     temp_board = board.dup
+    [1;34m38[0m:     temp_board.update(move, current_player)
+    [1;34m39[0m:     moves[move] = minmax(temp_board, switch(current_player))
+    [1;34m40[0m:     board.undo(move)
+    [1;34m41[0m:   }
+ => [1;34m42[0m:   binding.pry
+    [1;34m43[0m:   @best_choice, best_score = best_move(current_player, moves)
+    [1;34m44[0m:   best_score
+    [1;34m45[0m: 
+    [1;34m46[0m: [32mend[0m
+
