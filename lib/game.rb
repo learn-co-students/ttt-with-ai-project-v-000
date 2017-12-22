@@ -87,7 +87,6 @@ class Game
     else
       puts "Hi player 1, you're X. Please enter a number 1-9!"
     end
-    #binding.pry
     play
   end
 end

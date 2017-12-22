@@ -1,4 +1,3 @@
-require 'pry'
 class Players::Computer < Player
   attr_accessor :opponent, :best_choice, :board
 
