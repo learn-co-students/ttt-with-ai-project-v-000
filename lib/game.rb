@@ -12,14 +12,14 @@ attr_accessor :board, :player_1, :player_2
     [0,4,8],
     [6,4,2]
   ]
-        def initialize(player_1 = "O", player_2 = "X", board = Board.new)
+        def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
           @player_1 = player_1
           @player_2 = player_2
           @board = board
         end
 
         def current_player
-          turn_count.even? ? "X" : "O"
+          @board.turn_count % 2 == 0 ? @player_1 : @player_2
           #returns the correct player, X, for the third move
         end
 
@@ -30,16 +30,28 @@ attr_accessor :board, :player_1, :player_2
           won? || draw?
         end
 
-        def won?
-          #returns false for a draw
-          #returns the correct winning combination in the case of a win
-          #returns false for an in-progress game
-          WIN_COMBINATIONS.any? do |combo|
-          if position_taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
-          return combo
-          end
-          end
-          end
+                  def play
+              while !over?
+                turn
+              end
+              if won?
+                puts "Congratulations #{winner}!"
+              elsif draw?
+                puts "Cat's Game!"
+              end
+            end
+
+            def won?
+            #returns false for a draw
+            #returns the correct winning combination in the case of a win
+            #returns false for an in-progress game
+            WIN_COMBINATIONS.detect do |combo|
+            @board.cells[combo[0]] == @board.cells[combo[1]] &&
+            @board.cells[combo[1]] == @board.cells[combo[2]] &&
+            @board.taken?(combo[0]+1)
+            end
+            end
+
 
           def draw
             #returns true for a draw
@@ -52,33 +64,32 @@ attr_accessor :board, :player_1, :player_2
             #returns X when X won
             #returns O when O won
             #returns nil when no winner
-            if combo = won?
-                  @board[combo[0]]
-                end
+            if winning_combo = won?
+              @winner = @board.cells[winning_combo.first]
+            end
           end
 
           def turn
           # makes valid moves
           #asks for input again after a failed validation
           #changes to player 2 after the first turn
-          puts "Please enter a number (1-9):"
-          user_input = gets.strip
-          index = input_to_index(user_input)
-          if valid_move?(index)
-            token = current_player
-            move(index, token)
-          else
-            turn
-          end
-          display_board
-          end
+          player = current_player
+      current_move = player.move(@board)
+      if !@board.valid_move?(current_move)
+        turn
+      else
+        puts "Turn: #{@board.turn_count+1}\n"
+        @board.display
+        @board.update(current_move, player)
+        puts "#{player.token} moved #{current_move}"
+        @board.display
+        puts "\n\n"
+      end
+    end
 
-          def play
-            turn until over?
-            puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
-            end
-  
-
+    def draw?
+        @board.full? && !won? #returns true for a draw, false otherwise
+      end
 
 
 end # end class
