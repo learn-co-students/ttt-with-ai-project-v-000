@@ -2,16 +2,28 @@
 
 require_relative '../config/environment'
 
-puts "How many players?"
-players = gets.chomp.to_i
 
-case players
-    when 0
-        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-    when 1
-        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-    when 2
-        game = Game.new()
-end
+
+def start
+    
+    puts "How many players?"
+    players = gets.chomp.to_i
+    
+    case players
+        when 0
+            game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        when 1
+            game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        when 2
+            game = Game.new()
+    end
 
 game.play
+
+puts "Would you like to play again?"
+start if gets.chomp =~ (/[y|yes]/i)
+
+end
+
+start
+
