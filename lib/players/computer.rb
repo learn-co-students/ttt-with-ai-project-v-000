@@ -15,6 +15,18 @@ module Players
           ]
 
           def move(board)
+
+            # how is token available to Board#update?
+            #why don't we need initalize method in Computer?
+
+            # human player 1 X moves
+            # computer O moves based on conditions of win_combinations
+
+            # 0 player 
+            # computer X moves randomly
+            # computer O moves based on conditions of win_combinations
+
+
             @i = 0
             random_spot(board)
             best_spots(board)
