@@ -38,7 +38,6 @@ class Board
     end
     
     def valid_move?(input)
-        # binding.pry
         !taken?(input) && input.to_i < 10 && input.to_i > 0
     end
     

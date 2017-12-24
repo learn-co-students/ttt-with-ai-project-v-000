@@ -2,28 +2,78 @@
 
 require_relative '../config/environment'
 
-
-
 def start
-    
+
     puts "How many players?"
-    players = gets.chomp.to_i
+    players = gets.chomp
     
     case players
-        when 0
+        when "0"
             game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-        when 1
+            game.play
+        when "1"
             game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-        when 2
+            game.play
+        when "2"
             game = Game.new()
-    end
-
-game.play
+            game.play
+        when /wargames/i
+            cats = 0
+            x = 0
+            o = 0
+            
+            100.times do 
+        
+                game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+                
+                case game.play
+                when "cats"
+                    cats += 1
+                when "X"
+                    x += 1
+                when "O"
+                    o += 1
+                end
+            
+            end
+            
+            puts "Cat's Game: #{cats} times"
+            puts "X won: #{x} times"
+            puts "O won: #{o} times"
+            
+            end
 
 puts "Would you like to play again?"
-start if gets.chomp =~ (/[y|yes]/i)
+start if gets.chomp =~ (/y|yes/i)
 
 end
 
 start
 
+
+##for testing AI refactor...or accidently wargames
+# def wargames
+#     cats = 0
+#     x = 0
+#     o = 0
+#     100.times do 
+
+#         game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        
+#         case game.play
+        
+#         when "cats"
+#             cats += 1
+#         when "X"
+#             x += 1
+#         when "O"
+#             o += 1
+#         end
+    
+#     end
+    
+#     puts "Cat's Game: #{cats} times"
+#     puts "X won: #{x} times"
+#     puts "O won: #{o} times"
+
+# end
