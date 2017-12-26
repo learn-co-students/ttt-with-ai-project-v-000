@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Welcome to Tic Tac Toe! To play, please select the amount of users (0, 1, or 2 players):"
 
-Game.new.play
+input = gets.strip
+Game.new.start(input)

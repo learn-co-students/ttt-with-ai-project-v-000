@@ -28,7 +28,8 @@ class Game
 
   def won?
     WIN_COMBINATIONS.any? do |combo|
-      if board.taken?(combo[0]) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+
+      if board.taken?(combo[0] + 1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
         return combo
       end
     end
@@ -62,6 +63,23 @@ class Game
       puts "Cat's Game!"
     elsif over? && won?
       puts "Congratulations #{winner}!"
+    end
+  end
+
+  def start(input)
+    if input == "0"
+      Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Computer.new('O'), board = Board.new).play
+    elsif input == "1"
+      puts "Would you like to go first? Yes or No"
+      player = gets.strip
+      if player == "Yes"
+        Game.new(player_1 = Players::Human.new('X'), player_2 = Players::Computer.new('O'), board = Board.new).play
+      elsif player == "No"
+        Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Human.new('O'), board = Board.new).play
+      end
+    elsif input == "2"
+      puts "Player X will always go first! Good luck."
+      Game.new.play
     end
   end
 
