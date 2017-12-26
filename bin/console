@@ -4,7 +4,7 @@ require 'irb'
 require_relative '../config/environment.rb'
 
 def reload!
-  load 'config/environment.rb'
+  load_all './lib'
 end
 
 IRB.start

@@ -4,7 +4,7 @@ module Players
     ## Can get rid of below????
     attr_accessor :diagonal_combo
 
-    @current_player = self.token
+#    @current_player = self.token
     CENTER = ["5"]
     CORNER = ["1","3","7","9"]
     EDGE = ["2","4","6","8"]
@@ -63,7 +63,7 @@ module Players
         end
         if check_board.count(" ") == 1 # 2 of the 3 positions in the combo have been played
           if check_board.count(self.token) == 2 # 2 were played by the current player
-            @winning_combo = combo
+            @winning_combo << combo
           elsif  check_board.count("X") == 2 || check_board.count("O") == 2 # 2 were played by the opponent
             @blocking_combo = combo
           elsif check_board.count("X") == 1 && check_board.count("O") == 1
@@ -124,18 +124,22 @@ module Players
     end
 
     def avoid_trap(potential_moves) ##REMOVE MOVES THAT RESULT IN THE PLAYER BEING TRAPPED FROM LIST OF POSSIBLES
-
+      ##Remove move from potential_moves
     end
 
     def simulate_game(board) ##RECURSIVE METHOD TO SIMULATE FUTURE GAME PLAY AND SELECT MOVE
       potential_moves = available(board)
-      potential_moves.each do | element |
+      @current_player = self.token
+      available(board).each do | element |
         temp_board = board
-        temp_board.cells[element.to_i - 1] = self.token
-        update_turn(temp_board)
+        temp_board.cells[element.to_i - 1] = @current_player
+        check_for_tictac(temp_board)
+        find_trap(temp_board)
+        ##if current token != self.token, avoid_trap
         #series of ifs here - check each move criterion and set computer_move based on priority
         #remove element from potential_moves if avoid_trap
         #else = simulate_game(temp_board)
+        update_turn(temp_board)
       end
     end
 
