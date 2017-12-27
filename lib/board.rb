@@ -43,25 +43,21 @@ class Board
     spaces_taken
   end
 
-  def taken?(spot)
-    if self.cells[spot.to_i-1] == "X" || self.cells[spot.to_i-1] == "O"
+  def taken?(input)
+    if self.cells[input.to_i-1] == "X" || self.cells[input.to_i-1] == "O"
       true
     else
       false
     end
   end
 
-  def valid_move?(spot)
-    spot.to_i.between?(1,9) &&
-    !taken?(spot)
+  def valid_move?(input)
+    input.to_i.between?(1,9) &&
+    !taken?(input)
   end
 
-  def update(spot, player)
-    self.cells[spot.to_i-1] = player.token
+  def update(input, player)
+    self.cells[input.to_i-1] = player.token
   end
-
-  # def draw?
-  #
-  # end
 
 end

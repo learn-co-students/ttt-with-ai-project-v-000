@@ -26,10 +26,11 @@ class Game
   end
 
   def over?
-      board.full?
+      self.won? || draw?
   end
 
   def won?
+    # binding.pry
     WIN_COMBINATIONS.detect do |match_array|
       @board.taken?(match_array[0]+1) &&
       @board.cells[match_array[0]] == @board.cells[match_array[1]] &&
@@ -38,7 +39,7 @@ class Game
   end
 
   def draw?
-    board.full? && !self.won?
+    @board.full? && !won?
   end
 
   def winner
@@ -49,30 +50,26 @@ class Game
   end
 
   def turn
+    print board.display
     puts "Please enter a number between 1-9"
-    input = current_player.move(input)
+    input = current_player.move(@board)
     if board.valid_move?(input)
       board.update(input, current_player)
-    elsif !board.valid_move?(input)
-      puts "Please enter a number between 1-9"
-      input = current_player.move(input)
     else
       turn
     end
+  end
 
-    def play
-      # binding.pry
-      while !over?
-        turn
-      end
-      if won?
-        puts "Congratulations #{winner}"
-      elsif draw?
-        prints "Cat\'s Game!"
+  def play
+    # binding.pry
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat\'s Game!"
     end
   end
-
-  end
-
 
 end
