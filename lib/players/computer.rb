@@ -10,7 +10,7 @@ module Players
         
     
         def move(board)
-            # board.cells = ["X","X", " ", " ", " ", " ", " ", " ", " "]
+            # board.cells = ["X","X", " ", " ", " ", " ", " ", " ", " "]   ##for testing
             x = almost_won?(board)
             
             ## if the next move will be a winning move do that else move to block current player's two in a row
@@ -35,10 +35,11 @@ module Players
             maybe_move = false
             
             Game::WIN_COMBINATIONS.each do |combo| 
+              
               c = combo_match(combo, board)
               return combo if c == self.token
-             
               maybe_move = combo if c != false
+            
             end
           maybe_move
         end
