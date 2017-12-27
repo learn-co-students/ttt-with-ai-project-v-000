@@ -30,13 +30,14 @@ module Players
         ##refactor to clean up
         
         ##check to see if there is a move for either player that will cause a win.
-        ##find a way to use fewer 'returns' less wrapping the code with return values
+        ##find a way to get rid of the return in the loop
         def almost_won?(board)
             maybe_move = false
             
             Game::WIN_COMBINATIONS.each do |combo| 
               c = combo_match(combo, board)
               return combo if c == self.token
+             
               maybe_move = combo if c != false
             end
           maybe_move
@@ -46,18 +47,19 @@ module Players
         ##check if two spots on a combo are taken and the same. Returns the index if there are two tokens in a row else false
         def combo_match(combo, board)
             toreturn = false
-            return false if combo.none? {|i| board.cells[i] == " "}
-          
-            if (match_two(board, combo[0], combo[1]) || match_two(board, combo[0], combo[2])) && board.cells[combo[0]] != " "
-                
-                toreturn = board.cells[combo[0]]
-          
-            elsif (match_two(board, combo[1], combo[2]) || match_two(board, combo[1], combo[0])) && board.cells[combo[1]] != " "
-                
-                toreturn = board.cells[combo[1]]
-            end
+            
+            #initially checks that there is a valid move available in the winning combo
+            if !combo.none? {|i| board.cells[i] == " "}
 
-         toreturn
+                if match_two_or(board, combo[0], combo[1], combo[2]) && board.cells[combo[0]] != " "
+                    toreturn = board.cells[combo[0]]
+              
+                elsif match_two_or(board, combo[1], combo[2], combo[0]) && board.cells[combo[1]] != " "
+                    toreturn = board.cells[combo[1]]
+                end
+
+            end
+            toreturn
         end
     end
 end

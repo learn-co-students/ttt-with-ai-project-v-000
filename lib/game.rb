@@ -23,12 +23,7 @@ class Game
     
     
     def won?
-        winner = false
-        
-        WIN_COMBINATIONS.detect {|combo|
-            winner = combo if match_two(combo[0], combo[1]) && match_two(combo[1], combo[2]) && board.cells[combo[0]] != " "
-        }
-        winner
+        WIN_COMBINATIONS.detect {|combo| combo if match_two_and(combo[0], combo[1], combo[2]) && board.cells[combo[0]] != " "}
     end
     
     

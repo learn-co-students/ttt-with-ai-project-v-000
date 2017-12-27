@@ -1,9 +1,15 @@
 module Matchable
     
-    ##takes in two spots and checks if they match
-    ##find a way to make this more effective to refactor the rest of the code
-   def match_two(board=self.board, x1, x2)
-       board.cells[x1] == board.cells[x2]
+#   def match_two(board=self.board, x1, x2)
+#       board.cells[x1] == board.cells[x2]
+#   end
+   
+   def match_two_and(board=self.board, i1, i2, i3)
+       board.cells[i1] == board.cells[i2] && board.cells[i1] == board.cells[i3]
+   end
+   
+   def match_two_or(board=self.board, i1, i2, i3)
+       board.cells[i1] == board.cells[i2] || board.cells[i1] == board.cells[i3]
    end
     
 end

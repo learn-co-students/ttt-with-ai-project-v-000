@@ -20,8 +20,7 @@ class Board
     end
     
     def position(input)
-        input = input.chomp.to_i - 1
-        cells[input]
+        cells[input.chomp.to_i - 1]
     end
     
     def full?
