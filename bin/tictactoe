@@ -8,16 +8,17 @@ puts "******************************"
 puts "~ Welcome to AI Tic Tac Toe! ~"
 puts "******************************"
 puts ""
-print "Would you like to match ~Tac~tics against another HUMAN or the AI?: "
+print "Would you like to match ~Tac~tics against another HUMAN or the AI, or watch WARGAMES?: "
 
 selected_mode = gets.chomp
 while (
     !selected_mode.upcase.eql?("HUMAN") && 
-    !selected_mode.upcase.eql?("AI")
+    !selected_mode.upcase.eql?("AI") &&
+    !selected_mode.upcase.eql?("WARGAMES")
 )
     puts ""
     puts "That is not a valid selection."
-    print "Please choose HUMAN or AI: "
+    print "Please choose HUMAN, AI, or WARGAMES: "
     selected_mode = gets.chomp
 end
 
@@ -26,6 +27,11 @@ if (selected_mode.upcase.eql?("HUMAN"))
 elsif (selected_mode.upcase.eql?("AI"))
     Game.new(
         Players::Human.new("X"),
+        Players::Computer.new("O")
+    ).play
+elsif (selected_mode.upcase.eql?("WARGAMES"))
+    Game.new(
+        Players::Computer.new("X"),
         Players::Computer.new("O")
     ).play
 end
