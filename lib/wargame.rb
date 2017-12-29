@@ -1,0 +1,2 @@
+class Wargame < Game
+end

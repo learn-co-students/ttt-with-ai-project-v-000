@@ -62,9 +62,76 @@ class Game
         end
         
         if (self.won?)
+            puts ""
+            puts "******************"
             puts "Congratulations #{self.winner}!"
+            puts "******************"
+            puts ""
         else
+            puts ""
             puts "Cat's Game!"
+            puts ""
+        end
+
+        if (Players::Human == player_1.class)
+            self.game_over_menu
+        end
+    end
+
+    def start
+        system "clear" or system "cls"
+        puts "THE PLAYERS INTRODUCE THEMSELVES!"
+        puts ""
+
+        if (Players::Human == player_1.class)
+            print "Player 1, enter your name: "
+            self..player_1.name = gets.chomp
+            puts ""
+            puts "You will be playing the X pieces, #{self.player_1.name}"
+            puts "Good luck!"
+            puts ""
+        else 
+            self.player_1.name = (Players::Computer::COMPUTER_NAMES).sample
+            puts "#{self.player_1.name} will be playing the X pieces!"
+        end
+
+        if (Players::Human == player_2.class)
+            print "Player 2, enter your name: "
+            self.player_2.name = gets.chomp
+            puts "You will be playing the O pieces, #{self.player_2.name}"
+            puts "Good luck!"
+            puts ""
+        else
+            self.player_2.name = (Players::Computer::COMPUTER_NAMES).sample
+            puts "#{self.player_2.name} will be playing the O pieces!"
+            puts ""
+        end
+
+        puts "LET'S GET READY TO RUMBLE!!!"
+        puts ""
+        puts ""
+
+        self.play
+    end
+
+    def game_over_menu
+        print "Would you like to PLAY this mode again, exit to the main MENU, or QUIT the game? "
+        player_choice = gets.chomp
+        if (player_choice.upcase.eql?("PLAY"))
+            system "clear" or system "cls"
+            self.board.reset!
+            self.play
+        elsif (player_choice.upcase.eql?("QUIT"))
+            puts ""
+            puts "....."
+            puts "...Oh. Ok....Well, bye. It was nice playing with you."
+            puts ""
+            exit
+        elsif (!player_choice.upcase.eql?("MENU"))
+            puts ""
+            puts "....."
+            puts "Let's try that again..."
+            self.game_over_menu
         end
     end
 end

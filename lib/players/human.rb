@@ -1,8 +1,13 @@
 module Players
     class Human < Player
+        attr_accessor :name
+
         def move(board)
+            puts ""
             board.display
-            puts "Enter a valid move (1-9): "
+            puts ""
+            puts "You are playing the #{self.token} pieces, #{self.name}."
+            print "Enter a valid move (1-9): "
             gets.chomp
         end
     end

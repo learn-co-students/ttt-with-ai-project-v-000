@@ -23,17 +23,17 @@ while (
 end
 
 if (selected_mode.upcase.eql?("HUMAN"))
-    Game.new.play
+    Game.new.start
 elsif (selected_mode.upcase.eql?("AI"))
     Game.new(
         Players::Human.new("X"),
         Players::Computer.new("O")
-    ).play
+    ).start
 elsif (selected_mode.upcase.eql?("WARGAMES"))
     Game.new(
         Players::Computer.new("X"),
         Players::Computer.new("O")
-    ).play
+    ).start
 end
 
 
