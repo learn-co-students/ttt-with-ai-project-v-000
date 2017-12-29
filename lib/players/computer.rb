@@ -1,11 +1,11 @@
 module Players
     class Computer < Player
 
-        def move(board)
+        def move(array)
             valid_moves = []
             i = 0
             until i > 8
-                if board.valid_move?(i) == true
+                if array.valid_move?(i) == true
                     valid_moves << i
                 end
                 i += 1
@@ -13,7 +13,7 @@ module Players
             valid_moves.sample.to_s
             end
         end
-    end
+end
         
             # class Computer::Easy < Player
 
