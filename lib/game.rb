@@ -22,6 +22,15 @@ class Game
         self.board = board
     end
 
+    def reset
+        self.board.reset!
+    end
+
+    def restart
+        self.reset
+        self.play
+    end
+
     def current_player
         0 == board.turn_count % 2 ? player_1 : player_2
     end
@@ -119,8 +128,7 @@ class Game
         player_choice = gets.chomp
         if (player_choice.upcase.eql?("PLAY"))
             system "clear" or system "cls"
-            self.board.reset!
-            self.play
+            self.restart
         elsif (player_choice.upcase.eql?("QUIT"))
             puts ""
             puts "....."

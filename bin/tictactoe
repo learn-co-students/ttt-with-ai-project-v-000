@@ -2,39 +2,53 @@
 
 require_relative '../config/environment'
 
-system "clear" or system "cls"
-puts ""
-puts "******************************"
-puts "~ Welcome to AI Tic Tac Toe! ~"
-puts "******************************"
-puts ""
-print "Would you like to match ~Tac~tics against another HUMAN or the AI, or watch WARGAMES?: "
-
-selected_mode = gets.chomp
-while (
-    !selected_mode.upcase.eql?("HUMAN") && 
-    !selected_mode.upcase.eql?("AI") &&
-    !selected_mode.upcase.eql?("WARGAMES")
-)
+def greet_player
+    system "clear" or system "cls"
     puts ""
-    puts "That is not a valid selection."
-    print "Please choose HUMAN, AI, or WARGAMES: "
-    selected_mode = gets.chomp
+    puts "******************************"
+    puts "~ Welcome to AI Tic Tac Toe! ~"
+    puts "******************************"
+    puts ""
 end
 
-if (selected_mode.upcase.eql?("HUMAN"))
-    Game.new.start
-elsif (selected_mode.upcase.eql?("AI"))
-    Game.new(
-        Players::Human.new("X"),
-        Players::Computer.new("O")
-    ).start
-elsif (selected_mode.upcase.eql?("WARGAMES"))
-    Game.new(
-        Players::Computer.new("X"),
-        Players::Computer.new("O")
-    ).start
+def ask_for_selection
+    print "Would you like to match ~Tac~tics against another HUMAN or the AI, watch WARGAMES, or QUIT?: "
+    gets.chomp
 end
+
+def program_should_quit(input)
+    input.upcase.eql?("QUIT")
+end
+
+greet_player
+selection = ask_for_selection
+
+while (!program_should_quit(selection))
+    if (selection.upcase.eql?("HUMAN"))
+        Game.new.start
+        system "clear" or system "cls"
+    elsif (selection.upcase.eql?("AI"))
+        Game.new(
+            Players::Human.new("X"),
+            Players::Computer.new("O")
+        ).start
+        system "clear" or system "cls"
+    elsif (selection.upcase.eql?("WARGAMES"))
+        Wargame.new().start
+        system "clear" or system "cls"
+    else
+        puts ""
+        puts "...That is not a valid selection :("
+        puts "Please try again - "
+    end
+
+    puts ""
+    selection = ask_for_selection
+end
+
+puts ""
+puts "GOOD BYE!"
+puts ""
 
 
 
