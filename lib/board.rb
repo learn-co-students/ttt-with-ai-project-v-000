@@ -55,9 +55,7 @@ class Board
     end
 
     def update(position_string, player)
-        if (valid_move?(position_string))
-            @cells[position_string.to_i - 1] = player.token
-        end
+        @cells[position_string.to_i - 1] = player.token
     end
 
     # utility methods
