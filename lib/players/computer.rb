@@ -23,27 +23,51 @@ module Players
 
         attr_accessor :name
 
-        def move(game_or_board)
-            board = nil
-            if (game_or_board.is_a?(Game))
-                board = game_or_board.board
-            else
-                board = game_or_board
+        def move(board, game = nil)
+            spot = nil
+
+            if (game)
+                # if a win is available, do that
+                (0..8).each do |cell_index|
+                    if (board.taken?("#{cell_index+1}"))
+                        next
+                    end
+
+                    board.cells[cell_index] = self.token
+                    
+                    move_would_win = game.won?
+
+                    board.cells[cell_index] = " "
+
+                    if (move_would_win)
+                        spot = "#{cell_index+1}"
+                        break
+                    end
+                end
             end
 
-            spot = nil
-            # move to center if center is available
-            if (spot = board.get_empty(Board::CENTER))
+            # ignore if we have already found a move...
+            if (nil == spot && game)
+                #if a move is required to prevent a loss, do that
+                
+                # go through all the slots
+                # if a slot is taken, move to the next
+                # 
+            end
+
+            # move to the center if the center is available
+            if (nil == spot && spot = board.get_empty(Board::CENTER))
                 spot
             # move to a corner if the center is taken
-            elsif (spot = board.get_empty(Board::CORNERS))
+            elsif (nil == spot && spot = board.get_empty(Board::CORNERS))
                 spot
             # move to a side if the center and all corners are taken
-            else
+            elsif (nil == spot)
                 spot = board.get_empty(Board::SIDES)
             end
             
             print "#{self.token}#{spot} "
+
             spot
         end
     end

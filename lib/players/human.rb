@@ -2,14 +2,7 @@ module Players
     class Human < Player
         attr_accessor :name
 
-        def move(game_or_board)
-            board = nil
-            if (game_or_board.is_a?(Game))
-                board = game_or_board.board
-            else
-                board = game_or_board
-            end
-
+        def move(board, game = nil)
             puts ""
             board.display
             puts ""

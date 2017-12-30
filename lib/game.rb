@@ -58,9 +58,9 @@ class Game
     end
 
     def turn
-        player_move = current_player.move(self)
+        player_move = current_player.move(self.board, self)
         while (!board.valid_move?(player_move))
-            player_move = current_player.move(self)
+            player_move = current_player.move(self.board, self)
         end
         board.update(player_move, current_player)
     end
