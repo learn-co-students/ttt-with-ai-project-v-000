@@ -31,12 +31,20 @@ module Players
                 board = game_or_board
             end
 
-            spot = 0
-            while (board.taken?("#{spot+1}"))
-                spot += 1
+            spot = nil
+            # move to center if center is available
+            if (spot = board.get_empty(Board::CENTER))
+                spot
+            # move to a corner if the center is taken
+            elsif (spot = board.get_empty(Board::CORNERS))
+                spot
+            # move to a side if the center and all corners are taken
+            else
+                spot = board.get_empty(Board::SIDES)
             end
-            print "#{self.token}-#{spot+1} "
-            "#{spot+1}"
+            
+            print "#{self.token}#{spot} "
+            spot
         end
     end
 end
