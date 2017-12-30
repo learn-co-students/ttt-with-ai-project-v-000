@@ -1,14 +1,12 @@
 =begin
 AI algorithm:
     - if there is a win move, do that
-    - if a move is required to prevent a loss, do that
-    - if a move will force a win on the next turn, do that <-- seems unnecessary ? 
-    - otherwise,
-        - move to center (highest value spot as it participates in 6 win combos)
-        - if center not open, move to a corner (next highest value location, participates in 3 win combos)
-            - prioritize any corner that could still participate in a win combo
-        - if no corners open, move to a side (lowest value location, only participates in 2 win combos)
-            - prioritize any side cell that could still participate in a win combo
+    - else if a move is required to prevent a loss, do that
+    - else if center cell is open, move there
+    - else if a corner cell is open, move there
+    - else move to a side cell
+
+    we prioritize center over corners over sides because they participate in 6 vs 3 vs 2 win combos, respectively
 =end
 
 module Players
