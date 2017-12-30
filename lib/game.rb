@@ -29,6 +29,9 @@ class Game
     def restart
         self.reset
         self.play
+        if (Players::Human == player_1.class)
+            self.game_over_menu
+        end
     end
 
     def current_player
@@ -116,11 +119,7 @@ class Game
         puts ""
         puts ""
 
-        self.play
-
-        if (Players::Human == player_1.class)
-            self.game_over_menu
-        end
+        self.restart
     end
 
     def game_over_menu

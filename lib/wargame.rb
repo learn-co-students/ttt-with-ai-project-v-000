@@ -57,6 +57,10 @@ class Wargame < Game
 
         print "How many rounds should the computers play? (1-100): "
         self.num_rounds = gets.chomp.to_i
+        while (self.num_rounds < 1 || self.num_rounds > 100)
+            print "Please enter a value between 1 and 100: "
+            self.num_rounds = gets.chomp.to_i
+        end
 
         puts ""
         puts "...."

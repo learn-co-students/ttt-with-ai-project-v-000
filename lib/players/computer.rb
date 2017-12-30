@@ -2,7 +2,7 @@
 AI algorithm:
     - if there is a win move, do that
     - if a move is required to prevent a loss, do that
-    - if a move will force a win on the next turn, do that
+    - if a move will force a win on the next turn, do that <-- seems unnecessary ? 
     - otherwise,
         - move to center (highest value spot as it participates in 6 win combos)
         - if center not open, move to a corner (next highest value location, participates in 3 win combos)
@@ -49,10 +49,27 @@ module Players
             # ignore if we have already found a move...
             if (nil == spot && game)
                 #if a move is required to prevent a loss, do that
-                
-                # go through all the slots
-                # if a slot is taken, move to the next
-                # 
+                opponent_token = "O"
+                if ("O" == self.token)
+                    opponent_token = "X"
+                end
+
+                (0..8).each do |cell_index|
+                    if (board.taken?("#{cell_index+1}"))
+                        next
+                    end
+
+                    board.cells[cell_index] = opponent_token
+
+                    opponent_move_would_win = game.won?
+
+                    board.cells[cell_index] = " "
+
+                    if (opponent_move_would_win)
+                        spot = "#{cell_index+1}"
+                        break
+                    end
+                end
             end
 
             # move to the center if the center is available
