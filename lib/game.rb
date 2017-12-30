@@ -58,9 +58,9 @@ class Game
     end
 
     def turn
-        player_move = current_player.move(board)
+        player_move = current_player.move(self)
         while (!board.valid_move?(player_move))
-            player_move = current_player.move(board)
+            player_move = current_player.move(self)
         end
         board.update(player_move, current_player)
     end
@@ -80,10 +80,6 @@ class Game
             puts ""
             puts "Cat's Game!"
             puts ""
-        end
-
-        if (Players::Human == player_1.class)
-            self.game_over_menu
         end
     end
 
@@ -121,6 +117,10 @@ class Game
         puts ""
 
         self.play
+
+        if (Players::Human == player_1.class)
+            self.game_over_menu
+        end
     end
 
     def game_over_menu

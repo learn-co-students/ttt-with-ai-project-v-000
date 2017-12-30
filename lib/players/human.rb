@@ -2,9 +2,11 @@ module Players
     class Human < Player
         attr_accessor :name
 
-        def move(board)
+        def move(game)
             puts ""
-            board.display
+            if (Game == game.class)
+                game.board.display
+            end
             puts ""
             puts "You are playing the #{self.token} pieces, #{self.name}."
             print "Enter a valid move (1-9): "
