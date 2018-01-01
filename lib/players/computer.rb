@@ -128,15 +128,20 @@ module Players
     end
 
     def recursion(board,temp_board,element,avoid_moves)
-      check_for_tictac(temp_board)
-      if !@tictac_combo[opponent(board)].empty?
-        avoid_moves << element
-      else
-        #update temp_board
-        #update player
-        #call simulate
-      end
-    end
+      while temp_board.count(" ") > 0
+        check_for_tictac(temp_board)
+        if !@tictac_combo[opponent(board)].empty?
+          avoid_moves << element
+        elsif
+          ##Add code here to check for set traps
+        else
+          #update temp_board
+          #update player
+          #call simulate
+        end # if/else
+      end # while
+    end # recursion
+
   end # Class Computer
 
 end # Module Players
