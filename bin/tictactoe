@@ -3,29 +3,20 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe."
-
-def players
-   puts "How many players would like to play? Please enter between 0 - 2. To exit, type \"exit\" :"
-   player_num = gets.strip
-   player_num_i = player_num.to_i
-   if !(0..2).include?(player_num_i)
-     players
-   end
- end
-
- def first_turn
-   puts "If you are playing against the computer, you are player number 1."
-   puts "Who should go first? This player will be the X. Please enter between 1 - 2. :"
-   first = gets.strip.to_i
-   if !(1..2).include?(first)
-     first_turn
-   end
- end
-
-until player_num = "exit"
-
-    players
-    first_turn
+ player_num = ""
+until player_num == "exit"
+  player_num_i = 9
+  until (0..2).include?(player_num_i)
+    puts "Please enter a number between 0-2 to determine how many players will be playing:"
+    player_num = gets.strip
+    player_num_i = player_num.to_i
+  end
+  first = 5
+    until (1..2).include?(first)
+      puts "If you are playing against the computer, you are player number 1."
+      puts "Who should go first? This player will be the X. Please enter between 1 - 2. :"
+      first = gets.strip.to_i
+    end
 
 
   if player_num_i == 0
@@ -59,6 +50,6 @@ until player_num = "exit"
     end
   end
 
-  Game.play
+  game.play
 
 end
