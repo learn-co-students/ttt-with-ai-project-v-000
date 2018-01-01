@@ -1,7 +1,6 @@
 module Players
   class Computer < Player
     attr_accessor :available, :combo, :winning_combo, :blocking_combo, :current_player
-    ## Can get rid of below????
     attr_accessor :diagonal_combo
 
 #    @current_player = self.token
@@ -19,28 +18,30 @@ module Players
           computer_move = play_position(CENTER,board)
         else
           computer_move = play_position(CORNER,board)
-        end
-      end
+        end # if/else
+      end # if
       ############## BEGIN REPLACE WITH SIMULATION??? #########################
       if (board.turn_count == 2) #X
-        if CORNER.include?(opponent(board))
-          computer_move = play_position(CORNER,BOARD)
+        binding.pry
+        if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) } ############ THIS NEEDS FIXED!!
+          computer_move = play_position(CORNER,board)
         elsif board.valid_move?("5")
           computer_move = play_position(CENTER,board)
         else
           check_for_tictac(board)                     # this should be the corner that forms a diagonal
-          if !diagonal_combo.empty?
+          if !@diagonal_combo.empty?
             play_win_or_block(diagonal_combo,board)
           else
             computer_move = play_position(CORNER,board)
-          end
-        end
-      end
+          end # if/else
+        end # if/elsif/else
+      end # if
       if (board.turn_count > 2)
         check_for_tictac(board)
+        binding.pry
         if !@winning_combo.empty?
           #play winning_combo
-          computer_move = play_win_or_block(winning_combo,board)
+          computer_move = play_win_or_block(winning_combo[0],board)
         elsif !@blocking_combo.empty?
           #play blocking_combo
           puts "Can't get that cheese by me, meat!"
@@ -48,7 +49,7 @@ module Players
         else
           computer_move = available(board).sample.to_s #Random move - fallback if all else fails
         end #if/elsif/else
-      end
+      end # if
       computer_move
     end # #move(board)
     ############## END REPLACE WITH SIMULATION??? #########################
@@ -66,39 +67,25 @@ module Players
             @winning_combo << combo
           elsif  check_board.count("X") == 2 || check_board.count("O") == 2 # 2 were played by the opponent
             @blocking_combo = combo
-          elsif check_board.count("X") == 1 && check_board.count("O") == 1
+          elsif (combo == [0,4,8] || combo == [2,4,6]) && check_board.count("X") == 1 && check_board.count("O") == 1
             @diagonal_combo = combo
           end #if/elsif
+          binding.pry
         end #if
       end #WIN_COMBINATIONS.each
     end #check_for_tictac
-
-    # def check_for_tictac(board)
-    #   @winning_combo = []
-    #   @blocking_combo = []
-    #   Game::WIN_COMBINATIONS.each do | combo |
-    #     check_board = []
-    #     combo.each do | slot |
-    #       check_board << board.cells[slot]
-    #     end
-    #     if check_board.count(" ") == 1 # 2 of the 3 positions in the combo have been played
-    #       if check_board.count(self.token) == 2 # 2 were played by the current player
-    #         @winning_combo = combo
-    #       elsif  check_board.count("X") == 2 || check_board.count("O") == 2 # 2 were played by the opponent
-    #         @blocking_combo = combo
-    #       elsif check_board.count("X") == 1 && check_board.count("O") == 1
-    #         @diagonal_combo = combo
-    #       end #if/elsif
-    #     end #if
-    #   end #WIN_COMBINATIONS.each
-    # end #check_for_tictac
 
     def update_turn(board)
       @current_player == "X" ? "O" : "X"
     end
 
+    def opponent(board)
+      board.turn_count.even? ? "O" : "X"
+    end
+
     def play_position(input,board)   ##STILL NEEDED???
       y = input.sample
+      binding.pry
       board.valid_move?(y) ? y : play_position(input,board)
     end
 
@@ -114,6 +101,7 @@ module Players
           @available << ( index + 1 ).to_s
         end
       end
+      @available
     end
 
     def find_trap(board)
