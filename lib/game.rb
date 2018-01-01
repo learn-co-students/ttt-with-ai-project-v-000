@@ -35,7 +35,9 @@ class Game
 
     def turn
       player = current_player
+      binding.pry
       input = player.move(self.board).to_i
+      binding.pry
       if valid_move?(input)
         self.board.update(input, player)
       else
@@ -70,7 +72,10 @@ class Game
     end
 
     def play
-    turn until over?
+      until over?
+        binding.pry
+        turn
+      end
       puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
     end
 

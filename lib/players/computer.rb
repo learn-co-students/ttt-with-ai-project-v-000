@@ -1,4 +1,5 @@
 require 'require_all'
+require 'pry'
 
 module Players
 class Computer < Player
@@ -37,20 +38,16 @@ class Computer < Player
   end
 
 
-
-
-
   #Checks to see if computer can win game, or if opponent is in position to win the game, and acts accordingly.
   def combo_check(board)
-
   WIN_COMBINATIONS.each do |combo|
-    if board.position(combo[0]) == board.position(combo[1])
+    if board.position(combo[0]) == board.position(combo[1]) && board.position(combo[0]) != " "
       spot = combo[2]
       return spot.to_s
-    elsif board.position(combo[1]) == board.position(combo[2])
+    elsif board.position(combo[1]) == board.position(combo[2]) && board.position(combo[1]) != " "
       spot = combo[0]
       return spot.to_s
-    elsif board.position(combo[0]) == board.position(combo[2])
+    elsif board.position(combo[0]) == board.position(combo[2]) && board.position(combo[0]) != " "
       spot = combo[1]
       return spot.to_s
     end
@@ -67,7 +64,7 @@ end
 
       # this checks each corner and increments to accomodate for the strange spacing.
       # x will be set to i before the check, and will be set to 9 if all spots are occupioed.
-      x = 10
+      x = 0
       until taken == false || x == 9
         x = i
         taken = board.taken?(i)
@@ -96,11 +93,14 @@ end
     def any_move(board)
       i = 0
       taken = true
-      until taken == false
+      x = 0
+      until taken == false || x == 10
         x = i
         taken = board.taken?(i)
         i += 1
+        binding.pry
       end
+      binding.pry
       x.to_s
     end
 
