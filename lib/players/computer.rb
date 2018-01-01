@@ -22,7 +22,7 @@ module Players
       end # if
       ############## BEGIN REPLACE WITH SIMULATION??? #########################
       if (board.turn_count == 2) #X
-        binding.pry
+        # binding.pry
         if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) } ############ THIS NEEDS FIXED!!
           computer_move = play_position(CORNER,board)
         elsif board.valid_move?("5")
@@ -30,7 +30,7 @@ module Players
         else
           check_for_tictac(board)                     # this should be the corner that forms a diagonal
           if !@diagonal_combo.empty?
-            play_win_or_block(diagonal_combo,board)
+            computer_move = play_win_or_block(diagonal_combo,board)
           else
             computer_move = play_position(CORNER,board)
           end # if/else
@@ -38,7 +38,7 @@ module Players
       end # if
       if (board.turn_count > 2)
         check_for_tictac(board)
-        binding.pry
+        # binding.pry
         if !@winning_combo.empty?
           #play winning_combo
           computer_move = play_win_or_block(winning_combo[0],board)
@@ -70,7 +70,6 @@ module Players
           elsif (combo == [0,4,8] || combo == [2,4,6]) && check_board.count("X") == 1 && check_board.count("O") == 1
             @diagonal_combo = combo
           end #if/elsif
-          binding.pry
         end #if
       end #WIN_COMBINATIONS.each
     end #check_for_tictac
@@ -83,9 +82,8 @@ module Players
       board.turn_count.even? ? "O" : "X"
     end
 
-    def play_position(input,board)   ##STILL NEEDED???
+    def play_position(input,board)
       y = input.sample
-      binding.pry
       board.valid_move?(y) ? y : play_position(input,board)
     end
 
