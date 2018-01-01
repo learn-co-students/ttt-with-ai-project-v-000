@@ -2,15 +2,13 @@ module Players
   class Computer < Player
     attr_accessor :available, :combo, :tictac_combo, :current_player
     attr_accessor :diagonal_combo
-    # attr_accessor :winning_combo, :blocking_combo
-#    @current_player = self.token
     CENTER = ["5"]
     CORNER = ["1","3","7","9"]
     EDGE = ["2","4","6","8"]
     NOT_EDGE = ["1","3","5","7","9"]
 
     def move(board)
-      computer_move = select_move(board) || computer_move = available(board).sample.to_s #Random move - fallback if select_move doesn't return a move
+      computer_move = select_move(board) ##|| computer_move = available(board).sample.to_s #Random move - fallback if select_move doesn't return a move
     end
 
     def select_move(board)
@@ -45,19 +43,15 @@ module Players
       if (board.turn_count > 2)
         check_for_tictac(board.cells)
         # binding.pry
-        # if !@winning_combo.empty?
         if !@tictac_combo[self.token].empty?
           #play winning_combo
-          # computer_move = play_toe(winning_combo[0],board)
           computer_move = play_toe(tictac_combo[self.token][0],board)
-        # elsif !@blocking_combo.empty?
-      elsif !@tictac_combo[opponent(board)].empty?
+        elsif !@tictac_combo[opponent(board)].empty?
           #play blocking_combo
           puts "Can't get that cheese by me, meat!"
-          # computer_move = play_toe(blocking_combo,board)
           computer_move = play_toe(tictac_combo[opponent(board)][0],board)
         else
-          potential_moves = avoid_trap(board)
+          potential_moves = simulate_game(board)
           computer_move = potential_moves.sample.to_s
         end #if/elsif/else
       end # if
@@ -67,8 +61,6 @@ module Players
     ### Helper Methods
 
     def check_for_tictac(cells)
-      # @winning_combo = []
-      # @blocking_combo = []
       @tictac_combo = {"X" => [], "O" => []}
       Game::WIN_COMBINATIONS.each do | combo |
         check_board = []
@@ -76,10 +68,6 @@ module Players
           check_board << cells[slot]
         end
         if check_board.count(" ") == 1 # 2 of the 3 positions in the combo have been played
-          # if check_board.count(self.token) == 2 # 2 were played by the current player
-          #   @winning_combo << combo
-          # elsif  check_board.count("X") == 2 || check_board.count("O") == 2 # 2 were played by the opponent
-          #   @blocking_combo = combo
           if check_board.count("X") == 2
             @tictac_combo["X"] << combo
           elsif check_board.count("O") == 2
@@ -119,43 +107,36 @@ module Players
       @available
     end
 
-    # def find_trap(board)
+    # def set_trap(board)
     #   check_for_tictac(board.cells)
     #   if winning_combo.count == 2 ## NEED TO CHANGE CHECK_TICTAC TO COUNT OCCURRENCES
     #     computer_move = element
     #   end
     # end
 
-    def avoid_trap(board) ##REMOVE MOVES THAT RESULT IN THE PLAYER BEING TRAPPED FROM LIST OF POSSIBLES
+    def simulate_game(board)
       avoid_moves = []
       potential_moves = available(board)
-      current_player = self.token
       potential_moves.each do | element |
         temp_board = []
         board.cells.each { | cell | temp_board << cell }
-        # check_move(temp_board,element)
         temp_board[element.to_i - 1] = @current_player
-        check_for_tictac(temp_board)
-        # binding.pry
-        # if !@blocking_combo.empty?
-        if !@tictac_combo[opponent(board)].empty?
-          avoid_moves << element
-        end #if/elsif/else
+        recursion(board,temp_board,element)
       end # each
       potential_moves = potential_moves - avoid_moves
       potential_moves
     end
 
-    # def check_move(board,element)
-    #   board[element.to_i - 1] = @current_player
-    #   check_for_tictac(board)
-    #   # binding.pry
-    #   # if !@blocking_combo.empty?
-    #   if !@tictac_combo[opponent(board)].empty?
-    #     avoid_moves << element
-    #   end #if/elsif/else
-    # end
-
+    def recursion(board,temp_board,element,avoid_moves)
+      check_for_tictac(temp_board)
+      if !@tictac_combo[opponent(board)].empty?
+        avoid_moves << element
+      else
+        #update temp_board
+        #update player
+        #call simulate
+      end
+    end
   end # Class Computer
 
 end # Module Players
