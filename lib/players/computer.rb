@@ -10,57 +10,65 @@ module Players
     NOT_EDGE = ["1","3","5","7","9"]
 
     def move(board)
+      computer_move = select_move(board) || computer_move = available(board).sample.to_s #Random move - fallback if select_move doesn't return a move
+    end
+
+    def select_move(board)
       if (board.turn_count == 0) #X
-        computer_move = play_position(NOT_EDGE,board)
+        computer_move = play_position(NOT_EDGE,board) ## Start by playing a corner or the center
       end
-      if (board.turn_count == 1) #O
+
+      if (board.turn_count == 1) #O # Play the center if it's available or a corner
         if board.valid_move?("5")
           computer_move = play_position(CENTER,board)
         else
           computer_move = play_position(CORNER,board)
         end # if/else
       end # if
-      ############## BEGIN REPLACE WITH SIMULATION??? #########################
+
       if (board.turn_count == 2) #X
         # binding.pry
-        if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) } ############ THIS NEEDS FIXED!!
+        if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) }
           computer_move = play_position(CORNER,board)
         elsif board.valid_move?("5")
           computer_move = play_position(CENTER,board)
         else
-          check_for_tictac(board)                     # this should be the corner that forms a diagonal
+          check_for_tictac(board.cells)
           if !@diagonal_combo.empty?
-            computer_move = play_win_or_block(diagonal_combo,board)
+            computer_move = play_toe(diagonal_combo,board)
           else
             computer_move = play_position(CORNER,board)
           end # if/else
         end # if/elsif/else
       end # if
+
       if (board.turn_count > 2)
-        check_for_tictac(board)
+        check_for_tictac(board.cells)
         # binding.pry
         if !@winning_combo.empty?
           #play winning_combo
-          computer_move = play_win_or_block(winning_combo[0],board)
+          computer_move = play_toe(winning_combo[0],board)
         elsif !@blocking_combo.empty?
           #play blocking_combo
           puts "Can't get that cheese by me, meat!"
-          computer_move = play_win_or_block(blocking_combo,board)
+          computer_move = play_toe(blocking_combo,board)
         else
-          computer_move = available(board).sample.to_s #Random move - fallback if all else fails
+          potential_moves = avoid_trap(board)
+          computer_move = potential_moves.sample.to_s
         end #if/elsif/else
       end # if
       computer_move
     end # #move(board)
-    ############## END REPLACE WITH SIMULATION??? #########################
 
-    def check_for_tictac(board)
+    ### Helper Methods
+
+    def check_for_tictac(cells)
       @winning_combo = []
       @blocking_combo = []
       Game::WIN_COMBINATIONS.each do | combo |
         check_board = []
         combo.each do | slot |
-          check_board << board.cells[slot]
+          check_board << cells[slot]
         end
         if check_board.count(" ") == 1 # 2 of the 3 positions in the combo have been played
           if check_board.count(self.token) == 2 # 2 were played by the current player
@@ -87,7 +95,7 @@ module Players
       board.valid_move?(y) ? y : play_position(input,board)
     end
 
-    def play_win_or_block(combo, board)
+    def play_toe(combo, board)
       computer_move = combo.detect { | board_index | board.valid_move?(board_index.to_i+1) }
       computer_move = computer_move.to_i+1
     end
@@ -102,31 +110,34 @@ module Players
       @available
     end
 
-    def find_trap(board)
-      check_for_tictac(board)
-      if winnable_combo.count == 2 ## NEED TO CHANGE CHECK_TICTAC TO COUNT OCCURRENCES
-        computer_move = element
-      end
-    end
+    # def find_trap(board)
+    #   check_for_tictac(board.cells)
+    #   if winning_combo.count == 2 ## NEED TO CHANGE CHECK_TICTAC TO COUNT OCCURRENCES
+    #     computer_move = element
+    #   end
+    # end
 
-    def avoid_trap(potential_moves) ##REMOVE MOVES THAT RESULT IN THE PLAYER BEING TRAPPED FROM LIST OF POSSIBLES
-      ##Remove move from potential_moves
-    end
-
-    def simulate_game(board) ##RECURSIVE METHOD TO SIMULATE FUTURE GAME PLAY AND SELECT MOVE
+    def avoid_trap(board) ##REMOVE MOVES THAT RESULT IN THE PLAYER BEING TRAPPED FROM LIST OF POSSIBLES
+      avoid_moves = []
       potential_moves = available(board)
-      @current_player = self.token
-      available(board).each do | element |
-        temp_board = board
-        temp_board.cells[element.to_i - 1] = @current_player
-        check_for_tictac(temp_board)
-        find_trap(temp_board)
-        ##if current token != self.token, avoid_trap
-        #series of ifs here - check each move criterion and set computer_move based on priority
-        #remove element from potential_moves if avoid_trap
-        #else = simulate_game(temp_board)
-        update_turn(temp_board)
-      end
+      current_player = self.token
+      potential_moves.each do | element |
+        temp_board = []
+        board.cells.each { | cell | temp_board << cell }
+        check_move(temp_board,element)
+      end # each
+      potential_moves = potential_moves - avoid_moves
+      binding.pry
+      potential_moves
+    end
+
+    def check_move(board,element)
+      board[element.to_i - 1] = current_player
+      check_for_tictac(board)
+      # binding.pry
+      if !@blocking_combo.empty?
+        avoid_moves << element
+      end #if/elsif/else
     end
 
   end # Class Computer
