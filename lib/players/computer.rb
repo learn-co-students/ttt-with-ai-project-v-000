@@ -8,17 +8,17 @@ class Computer < Player
     ############ Code for going first ##################
 
     # TURN ONE: takes the top left corner
-    if Game.turn_count == 0
+    if board.turn_count == 0
       "1"
     # TURN THREE: takes the bottom right corner, or the top right corner.
-    elsif Game.turn_count == 2
-      if Game.position_taken?(8)
+  elsif board.turn_count == 2
+      if board.taken?(8)
         "3"
       else
       "8"
       end
     #TURN FIVE: Checks to see if it can win, otherwise makes another move.
-    elsif Game.turn_count == 4
+  elsif board.turn_count == 4
      combo_check
      corner_check
      any_move
@@ -63,16 +63,16 @@ end
       # x will be set to i before the check, and will be set to 9 if all spots are occupioed.
       until taken == false || x == 9
         x = i
-        taken = Game.position_taken(i)
+        taken = board.taken?(i)
         i += 2
         x = i
-        taken = Game.position_taken(i)
+        taken = board.taken?(i)
         i += 4
         x = i
-        taken = Game.position_taken(i)
+        taken = board.taken?(i)
         i += 2
         x = i
-        taken = Game.position_taken(i)
+        taken = board.taken?(i)
         x = 9
       end
       # if no corners are available nil will be returned,
@@ -91,7 +91,7 @@ end
       taken = true
       until taken == false
         x = i
-        taken = Game.position_taken?(i)
+        taken = board.taken?(i)
         i += 1
       end
       x.to_s
