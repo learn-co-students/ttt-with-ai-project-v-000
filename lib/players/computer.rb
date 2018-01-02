@@ -74,15 +74,12 @@ class Computer < Player
 
 
     def any_move(board)
-      i = 1
-      taken = true
-      x = i
-      until taken == false || x == 10
-        x = i
-        taken = board.taken?(i)
-        i += 1
+      OTHERS.each do |other|
+        if !board.taken?(other)
+          return other.to_s
+        end
       end
-      x.to_s
+      nil
     end
 
   end
