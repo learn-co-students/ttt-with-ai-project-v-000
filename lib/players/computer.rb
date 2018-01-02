@@ -113,6 +113,7 @@ module Players
         board.cells.each_with_index { | cell, index | temp_board.cells[index] = cell }
         temp_board.cells[element.to_i - 1] = current_token #current player move
         check_for_tictac(temp_board)
+        binding.pry
         if !@tictac_combo[opponent(board)].empty?
           avoid_moves << element
         else
@@ -121,9 +122,8 @@ module Players
           next_potential_moves.each do | next_element |
             temp_board.cells[next_element.to_i - 1] = token
             check_for_tictac(temp_board)
-            if @tictac_combo[opponent(board)] == 2
-              avoid_moves << element
-            end
+            binding.pry
+            avoid_moves << element if @tictac_combo[opponent(board)] == 2
             temp_board.cells[next_element.to_i - 1] = " "
           end
         end
