@@ -3,11 +3,12 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe."
- player_num = ""
- player_num_i = nil
- first = nil
+   player_num = ""
+ until  player_num == "exit"
+   player_num_i = nil
+   first = nil
   until (0..2).include?(player_num_i) || player_num == "exit"
-    puts "Please enter a number between 0-2 to determine how many players will be playing:"
+    puts "Please enter a number between 0-2 to determine how many players will be playing. Or, type \"exit\" to exit:"
     player_num = gets.strip
     player_num_i = player_num.to_i
   end
@@ -52,4 +53,5 @@ puts "Welcome to Tic Tac Toe."
 
   game.play
 
+  end
 end
