@@ -31,11 +31,10 @@ class Computer < Player
     #TURN FIVE: Checks to see if it can win, otherwise makes another move.
 
     else
-      if combo_check(board) != nil
-        combo_check(board)
-      # if !(corner_check(board) == nil)
-      #   corner_check(board)
-      # else
+      # if combo_check(board) != nil
+      #   combo_check(board)
+      if !(corner_check(board) == nil)
+        corner_check(board)
       else
         any_move(board)
       end
@@ -46,51 +45,19 @@ class Computer < Player
 
   #Checks to see if computer can win game, or if opponent is in position to win the game, and acts accordingly.
   def combo_check(board)
-    spot = nil
-  WIN_COMBINATIONS.each do |combo|
-    if board.position(combo[0]) == board.position(combo[1]) && board.taken?(combo[0])
-      spot = combo[2]
-    elsif board.position(combo[1]) == board.position(combo[2]) && board.taken?(combo[1])
-      spot = combo[0]
-    elsif board.position(combo[0]) == board.position(combo[2]) && board.taken?(combo[0])
-      spot = combo[1]
-    end
+
   end
-  return spot
-end
 
 
 
     #checks if a corner is open if a combo isnt available
     def corner_check(board)
-      # i increments and taken states if the spot is occupied
-      i = 1
-      taken = true
-
-      # this checks each corner and increments to accomodate for the strange spacing.
-      # x will be set to i before the check, and will be set to 10 if all spots are occupioed.
-      x = 1
-      until taken == false
-        x = i
-        taken = board.taken?(i)
-        i += 2
-        x = i
-        taken = board.taken?(i)
-        i += 4
-        x = i
-        taken = board.taken?(i)
-        i += 2
-        x = i
-        taken = board.taken?(i)
+      CORNERS.each do |corner|
+        if !board.taken?(corner)
+          return corner
+        end
       end
-      # if no corners are available nil will be returned,
-      # otherwise the space will be returned as a string
-      if taken == true
-        nil
-      else
-        x.to_s
-      end
-
+      nil
     end
 
 
