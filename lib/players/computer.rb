@@ -19,30 +19,26 @@ class Computer < Player
     ############ Code for going first ##################
 
     # TURN ONE: takes the top left corner
-
-
     if board.turn_count == 0
       "1"
-
     # TURN THREE: takes the bottom right corner, or the top right corner.
-
     elsif board.turn_count == 2
       if board.taken?(9)
         "3"
       else
-      "9"
+        "9"
       end
-
     #TURN FIVE: Checks to see if it can win, otherwise makes another move.
 
     else
-      # if !(combo_check(board) == nil)
-      #   combo_check(board)
+      if combo_check(board) != nil
+        combo_check(board)
       # if !(corner_check(board) == nil)
       #   corner_check(board)
       # else
-      any_move(board)
-      # end
+      else
+        any_move(board)
+      end
     end
 
   end
@@ -52,11 +48,11 @@ class Computer < Player
   def combo_check(board)
     spot = nil
   WIN_COMBINATIONS.each do |combo|
-    if board.position(combo[0]) == board.position(combo[1]) && board.position(combo[0]) != " "
+    if board.position(combo[0]) == board.position(combo[1]) && board.taken?(combo[0])
       spot = combo[2]
-    elsif board.position(combo[1]) == board.position(combo[2]) && board.position(combo[1]) != " "
+    elsif board.position(combo[1]) == board.position(combo[2]) && board.taken?(combo[1])
       spot = combo[0]
-    elsif board.position(combo[0]) == board.position(combo[2]) && board.position(combo[0]) != " "
+    elsif board.position(combo[0]) == board.position(combo[2]) && board.taken?(combo[0])
       spot = combo[1]
     end
   end
