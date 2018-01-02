@@ -9,7 +9,6 @@ class Game
     ]
 
     attr_accessor :board, :player_1, :player_2
-    attr_reader :WIN_COMBINATIONS
 
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
       @player_1 = player_1
@@ -17,28 +16,14 @@ class Game
       self.board = board
     end
 
-    def position_taken?(index)
-      self.board.cells[index] != " "
-    end
-
-    def valid_move?(index)
-      !position_taken?(index) && index.between?(1,9)
-    end
-
-    def turn_count
-      self.board.cells.count{|square| square != " " }
-    end
-
     def current_player
-      turn_count.even? ? self.player_1 : self.player_2
+      @board.turn_count.even? ? self.player_1 : self.player_2
     end
 
     def turn
       player = current_player
-      binding.pry
       input = player.move(self.board).to_i
-      binding.pry
-      if valid_move?(input)
+      if @board.valid_move?(input)
         self.board.update(input, player)
       else
         turn
@@ -46,19 +31,14 @@ class Game
     end
 
     def won?
-      WIN_COMBINATIONS.any? do |combo|
-        if position_taken?(combo[0]) && self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]]
-          return combo
-        end
-      end
-    end
-
-    def full?
-      self.board.cells.all?{|spot| spot != " " }
-    end
+     WIN_COMBINATIONS.find do |combo|
+       @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] &&
+       @board.taken?(combo[0]+1)
+     end
+   end
 
     def draw?
-      full? && !won?
+      self.board.full? && !won?
     end
 
     def over?
@@ -66,19 +46,17 @@ class Game
     end
 
     def winner
-      if combo = won?
+      if won?
+        combo = won?
         self.board.cells[combo[0]]
       end
     end
 
     def play
       until over?
-        binding.pry
         turn
       end
       puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
     end
-
-
 
 end

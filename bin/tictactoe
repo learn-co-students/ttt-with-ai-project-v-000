@@ -4,14 +4,14 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe."
  player_num = ""
-until player_num == "exit"
-  player_num_i = 9
-  until (0..2).include?(player_num_i)
+ player_num_i = nil
+ first = nil
+  until (0..2).include?(player_num_i) || player_num == "exit"
     puts "Please enter a number between 0-2 to determine how many players will be playing:"
     player_num = gets.strip
     player_num_i = player_num.to_i
   end
-  first = 5
+  unless player_num == "exit"
     until (1..2).include?(first)
       puts "If you are playing against the computer, you are player number 1."
       puts "Who should go first? This player will be the X. Please enter between 1 - 2. :"
