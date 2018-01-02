@@ -118,37 +118,39 @@ module Players
       avoid_moves = []
       current_token = self.token
       potential_moves = available(board)
-      potential_moves.each do | element |
-        temp_board = Board.new
-        board.cells.each_with_index { | cell, index | temp_board.cells[index] = cell }
-        binding.pry
-        temp_board.cells[element.to_i - 1] = current_token
-        check_for_tictac(temp_board)
-        if !@tictac_combo[opponent(board)].empty?
-          avoid_moves << element
-        else
-          recursion(board,temp_board,element,avoid_moves,current_token)
-        end
-      end # each
+      while avoid_moves.empty?
+        potential_moves.each do | element |
+          temp_board = Board.new
+          board.cells.each_with_index { | cell, index | temp_board.cells[index] = cell }
+          temp_board.cells[element.to_i - 1] = current_token
+          check_for_tictac(temp_board)
+          if !@tictac_combo[opponent(board)].empty? && !avoid_moves.include?(element)
+            avoid_moves << element
+          else
+            recursion(board,temp_board,element,avoid_moves,current_token)
+          end
+        end # each
+      end # while
       potential_moves = potential_moves - avoid_moves
+      binding.pry
       potential_moves
     end
 
     def recursion(board,temp_board,element,avoid_moves,token)
       potential_moves = available(temp_board)
       potential_moves.each do | sub_element |
-        check_for_tictac(temp_board)
-        binding.pry
-        if !@tictac_combo[opponent(board)].empty?
-          avoid_moves << element
-        # elsif
-        #   ##Add code here to check for set traps
-        else
-          token = update_token(token)
-          temp_board.cells[sub_element.to_i - 1] = token
-          binding.pry
-          recursion(board,temp_board,element,avoid_moves,token)
-        end # if/else
+        while temp_board.cells.count(" ") > 0
+          check_for_tictac(temp_board)
+          if !@tictac_combo[opponent(board)].empty? && token == opponent(board) && !avoid_moves.include?(element)
+            avoid_moves << element
+          # elsif
+          #   ##Add code here to check for set traps
+          else
+            token = update_token(token)
+            temp_board.cells[sub_element.to_i - 1] = token
+            recursion(board,temp_board,element,avoid_moves,token)
+          end # if/else
+        end
       end # each
     end # recursion
 
