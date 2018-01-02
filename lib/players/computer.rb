@@ -31,7 +31,7 @@ module Players
         elsif board.valid_move?("5")
           computer_move = play_position(CENTER,board)
         else
-          check_for_tictac(board.cells)
+          check_for_tictac(board)
           if !@diagonal_combo.empty?
             computer_move = play_toe(diagonal_combo,board)
           else
@@ -41,7 +41,7 @@ module Players
       end # if
 
       if (board.turn_count > 2)
-        check_for_tictac(board.cells)
+        check_for_tictac(board)
         # binding.pry
         if !@tictac_combo[self.token].empty?
           #play winning_combo
@@ -60,12 +60,12 @@ module Players
 
     ### Helper Methods
 
-    def check_for_tictac(cells)
+    def check_for_tictac(board)
       @tictac_combo = {"X" => [], "O" => []}
       Game::WIN_COMBINATIONS.each do | combo |
         check_board = []
         combo.each do | slot |
-          check_board << cells[slot]
+          check_board << board.cells[slot]
         end
         if check_board.count(" ") == 1 # 2 of the 3 positions in the combo have been played
           if check_board.count("X") == 2
@@ -79,8 +79,8 @@ module Players
       end #WIN_COMBINATIONS.each
     end #check_for_tictac
 
-    def update_turn(board)
-      @current_player == "X" ? "O" : "X"
+    def update_token(token)
+      token == "X" ? "O" : "X"
     end
 
     def opponent(board)
@@ -108,7 +108,7 @@ module Players
     end
 
     # def set_trap(board)
-    #   check_for_tictac(board.cells)
+    #   check_for_tictac(board)
     #   if winning_combo.count == 2 ## NEED TO CHANGE CHECK_TICTAC TO COUNT OCCURRENCES
     #     computer_move = element
     #   end
@@ -116,30 +116,40 @@ module Players
 
     def simulate_game(board)
       avoid_moves = []
+      current_token = self.token
       potential_moves = available(board)
       potential_moves.each do | element |
-        temp_board = []
-        board.cells.each { | cell | temp_board << cell }
-        temp_board[element.to_i - 1] = @current_player
-        recursion(board,temp_board,element)
+        temp_board = Board.new
+        board.cells.each_with_index { | cell, index | temp_board.cells[index] = cell }
+        binding.pry
+        temp_board.cells[element.to_i - 1] = current_token
+        check_for_tictac(temp_board)
+        if !@tictac_combo[opponent(board)].empty?
+          avoid_moves << element
+        else
+          recursion(board,temp_board,element,avoid_moves,current_token)
+        end
       end # each
       potential_moves = potential_moves - avoid_moves
       potential_moves
     end
 
-    def recursion(board,temp_board,element,avoid_moves)
-      while temp_board.count(" ") > 0
+    def recursion(board,temp_board,element,avoid_moves,token)
+      potential_moves = available(temp_board)
+      potential_moves.each do | sub_element |
         check_for_tictac(temp_board)
+        binding.pry
         if !@tictac_combo[opponent(board)].empty?
           avoid_moves << element
-        elsif
-          ##Add code here to check for set traps
+        # elsif
+        #   ##Add code here to check for set traps
         else
-          #update temp_board
-          #update player
-          #call simulate
+          token = update_token(token)
+          temp_board.cells[sub_element.to_i - 1] = token
+          binding.pry
+          recursion(board,temp_board,element,avoid_moves,token)
         end # if/else
-      end # while
+      end # each
     end # recursion
 
   end # Class Computer
