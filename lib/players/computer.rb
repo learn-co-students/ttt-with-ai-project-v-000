@@ -45,7 +45,16 @@ class Computer < Player
 
   #Checks to see if computer can win game, or if opponent is in position to win the game, and acts accordingly.
   def combo_check(board)
-
+    WIN_COMBINATIONS.each do |combo|
+      if board.taken?(combo[0]) && board.position(combo[0]) == board.position(combo[1])
+        return combo[2]
+      elsif board.taken?(combo[1]) && board.position(combo[1]) == board.position(combo[2])
+        return combo[0]
+      elsif board.taken?(combo[2]) && board.position(combo[0]) == board.position(combo[2])
+        return combo[1]
+      end
+    end
+    nil
   end
 
 
