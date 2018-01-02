@@ -4,7 +4,7 @@ require 'pry'
 module Players
 class Computer < Player
 
-  WIN_COMBINATIONS = [
+  WIN_COMBINATIONS_2 = [
       [1, 2, 3], [4, 5, 6], [7, 8, 9],
       [1, 4, 7], [2, 5, 8], [3, 6, 9],
       [1, 5, 9], [3, 5, 7]
@@ -31,9 +31,9 @@ class Computer < Player
     #TURN FIVE: Checks to see if it can win, otherwise makes another move.
 
     else
-      # if combo_check(board) != nil
-      #   combo_check(board)
-      if !(corner_check(board) == nil)
+      if combo_check(board) != nil
+        combo_check(board)
+      elsif (corner_check(board) != nil)
         corner_check(board)
       else
         any_move(board)
@@ -45,13 +45,16 @@ class Computer < Player
 
   #Checks to see if computer can win game, or if opponent is in position to win the game, and acts accordingly.
   def combo_check(board)
-    WIN_COMBINATIONS.each do |combo|
+    WIN_COMBINATIONS_2.find do |combo|
       if board.taken?(combo[0]) && board.position(combo[0]) == board.position(combo[1])
-        return combo[2]
+        puts combo[2]
+        return combo[2].to_s
       elsif board.taken?(combo[1]) && board.position(combo[1]) == board.position(combo[2])
-        return combo[0]
+        puts combo[0]
+        return combo[0].to_s
       elsif board.taken?(combo[2]) && board.position(combo[0]) == board.position(combo[2])
-        return combo[1]
+        puts combo[1]
+        return combo[1].to_s
       end
     end
     nil
@@ -63,7 +66,7 @@ class Computer < Player
     def corner_check(board)
       CORNERS.each do |corner|
         if !board.taken?(corner)
-          return corner
+          return corner.to_s
         end
       end
       nil
