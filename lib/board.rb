@@ -38,8 +38,12 @@ class Board
     input.to_i.between?(1, 9) && taken?(input) == false ? true : false
   end
 
-  def update(input, token)
-    #position(input) = player.token
+  def update(input, player)
+    if valid_move?(input)
+      @cells[input.to_i - 1] = player.token
+    else
+      "Please enter a valid move"
+    end
   end
 
 end
