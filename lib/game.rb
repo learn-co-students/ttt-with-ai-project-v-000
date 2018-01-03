@@ -17,12 +17,13 @@ def current_player
    end
  end
 
-def won?
-  WIN_COMBINATIONS.any? {|combo| return combo if board.taken?(combo[0]) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]}
+ def won?
+  WIN_COMBINATIONS.detect {|combo| board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]}
 end
 
+
 def draw?
-  true if board.full? && !won?
+  board.full? && !won?
 end
 
 def over?
@@ -30,26 +31,29 @@ def over?
 end
 
 def winner
-  if combo = won?
-    board.cells[combo[0]]
+   if combo = won?
+     @board.cells[combo[0]]
+   end
   end
-end
 
 def turn
   player=current_player
   input=player.move(board)
   if board.valid_move?(input)
     board.update(input, player)
+    board.display
     else
     turn
   end
 end
 
 def play
-    turn until over?
-    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+  turn until over?
+
+if won?
+    puts "Congratulations #{winner}!"
+  elsif draw?
+     puts "Cat's Game!"
+    end
   end
-
-
-
 end

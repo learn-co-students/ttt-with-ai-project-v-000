@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def setup
+puts "What kind of game would you like to play? 0, 1, or 2 player?"
+input=gets.to_i
+
+if input==0
+  game=Game.new(player_1 =Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+
+elsif input == 1
+  game=Game.new(player_1 =Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+
+elsif input == 2
+  game=Game.new(player_1 =Players::Human.new("X"), player_2 = Players::Human.new("O"))
+end
+
+  game.play until game.over?
+  if game.over?
+  again?
+end
+end
+
+def again?
+  puts "would you like to play again? Y/N?"
+  input=gets.strip
+  if input =="Y"
+      setup
+      else
+        puts "Bye!"
+      end
+    end
+
+    puts "Welcome to TIC-TAC-TOE"
+    setup
