@@ -22,11 +22,28 @@ class Game
   end
 
   def current_player
-    
+    board.turn_count.odd? ? @player_2 : @player_1
+  end
+
+  def draw?
+    board.full? == true && board.cells.count("X") == board.cells.count("O") ? true : false
   end
 
   def won?
+    #false for a draw
+    #returns winning combo if a win
+    board.full? == true && self.draw? == false ? true : false
   end
+
+#  def over?
+#    if won? == true
+#      true
+#    elsif
+#      won? == false && draw == true
+#      true
+#    elsif
+
+#  end
 
   def winner
   end
@@ -41,5 +58,3 @@ class Game
   end
 
 end
-
-#(Array.new(9, " "))

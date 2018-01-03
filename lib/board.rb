@@ -39,11 +39,16 @@ class Board
   end
 
   def update(input, player)
+
     if valid_move?(input)
       @cells[input.to_i - 1] = player.token
-    else
+    elsif
       "Please enter a valid move"
+      position = player.token
+    else
+      nil
     end
+
   end
 
 end
