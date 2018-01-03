@@ -36,24 +36,24 @@ def winner
    end
   end
 
-def turn
-  current_p=current_player
-  input=current_p.move(board)
-  if board.valid_move?(input)
-    board.update(input, current_p)
-    board.display
-    else
-    turn
-  end
-end
-
-def play
-  turn until over?
-
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-       puts "Cat's Game!"
+  def turn
+    current_p=current_player
+    input=current_p.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_p)
+      board.display
+      else
+      turn
     end
   end
-end
+
+  def play
+    turn until over?
+
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+         puts "Cat's Game!"
+      end
+    end
+  end
