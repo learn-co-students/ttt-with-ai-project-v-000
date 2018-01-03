@@ -18,7 +18,7 @@ def current_player
  end
 
  def won?
-  WIN_COMBINATIONS.any? {|combo| board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]}
+  WIN_COMBINATIONS.detect {|combo| board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]}
 end
 
 
@@ -37,10 +37,10 @@ def winner
   end
 
 def turn
-  player=current_player
-  input=player.move(board)
+  current_p=current_player
+  input=current_p.move(board)
   if board.valid_move?(input)
-    board.update(input, player)
+    board.update(input, current_p)
     board.display
     else
     turn
