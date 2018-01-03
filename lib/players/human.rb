@@ -3,7 +3,7 @@ module Players
 
 
     def move(board)
-      puts "input between 1-9?"
+      puts "#{board.current_player},input between 1-9?"
       input=gets.strip
     end
 
