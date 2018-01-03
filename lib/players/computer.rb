@@ -3,13 +3,43 @@ module Players
 
 
     def move(board)
-      #rand(1..9).to_s
-    move=1 unless taken?(1)
-  elsif condition
-    rand(1..9).to_s
+      move=""
+
+      if !board.taken?(1)
+        move=1.to_s
+        #[0,1,2]
+      elsif board.taken?(1) && board.cells[0] == board.cells[1] && !board.taken?(3)
+        move=3.to_s
+      elsif board.taken?(2) && board.cells[1] == board.cells[2] && !board.taken?(1)
+        move=1.to_s
+      elsif board.taken?(1) && board.cells[0] == board.cells[2] && !board.taken?(2)
+        move=2.to_s
+
+        #[3,4,5]
+      elsif board.taken?(4) && board.cells[3] == board.cells[4] && !board.taken?(6)
+        move=6.to_s
+      elsif board.taken?(5) && board.cells[4] == board.cells[5] && !board.taken?(4)
+        move=4.to_s
+      elsif board.taken?(4) && board.cells[3] == board.cells[5] && !board.taken?(5)
+        move=5.to_s
+
+        #[6,7,8]
+      elsif board.taken?(7) && board.cells[6] == board.cells[7] && !board.taken?(9)
+        move=9.to_s
+      elsif board.taken?(8) && board.cells[7] == board.cells[8] && !board.taken?(7)
+        move=7.to_s
+      elsif board.taken?(7) && board.cells[6] == board.cells[8] && !board.taken?(8)
+        move=8.to_s
 
 
+        #still need to create [0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4,2]
+      else
+        move=rand(1..9).to_s
+
+      end
     end
+
+
 
 
   end
