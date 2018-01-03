@@ -26,13 +26,21 @@ class Game
   end
 
   def draw?
-    board.full? == true && board.cells.count("X") == board.cells.count("O") ? true : false
+    #board.full? == true && board.cells.count("X") == board.cells.count("O") ? true : false
   end
 
   def won?
-    #false for a draw
-    #returns winning combo if a win
-    board.full? == true && self.draw? == false ? true : false
+
+    WIN_COMBINATIONS.each do |combo|
+
+      position_1 = combo[0]
+      position_2 = combo[1]
+      position_3 = combo[2]
+
+      position_1 == position_2 && position_2 == position_3
+
+    end
+
   end
 
 #  def over?
