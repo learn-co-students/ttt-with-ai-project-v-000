@@ -18,7 +18,7 @@ def current_player
  end
 
  def won?
-  WIN_COMBINATIONS.detect {|combo| board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]}
+  WIN_COMBINATIONS.any? {|combo| board.taken?(combo[0]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]}
 end
 
 
