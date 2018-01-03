@@ -50,10 +50,10 @@ end
 def play
   turn until over?
 
-if won?
-    puts "Congratulations #{winner}!"
-  elsif draw?
-     puts "Cat's Game!"
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+       puts "Cat's Game!"
     end
   end
 end
