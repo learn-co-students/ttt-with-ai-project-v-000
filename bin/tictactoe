@@ -2,42 +2,4 @@
 
 require_relative '../config/environment'
 
-whos_first = nil
-how_many = nil
-
-
-puts "Welcome to Tic-Tac-Toe!"
-while how_many != "0" && how_many != "1" && how_many != "2" && how_many !="wargames"
-  puts "How many humans will be playing? (enter 0, 1, or 2)"
-  how_many = gets.chomp
-  if how_many == "0"
-    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-    game.play
-  elsif how_many == "1"
-    while whos_first != "c" && whos_first != "h"
-      puts "Who should go first? (enter c for computer, h for human)"
-      whos_first = gets.chomp
-      if whos_first == "c"
-        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-        game.play
-      else
-        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-        game.play
-      end
-    end
-  elsif how_many == "2"
-    #launch regular game
-    game = Game.new
-    game.play
-  elsif how_many == "wargames"
-    ties = 0
-    100.times do
-      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-      result = game.play
-      ties += 1 if result
-    end
-    puts "#{ties} ties out of 100 games"
-  else
-    puts "Please enter a valid option"
-  end
-end
+Game.start

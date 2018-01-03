@@ -5,7 +5,7 @@ class Board
   @cells = []
 
   def initialize
-    @cells = Array.new(9," ")
+    @cells = self.reset!
   end
 
   def reset!
@@ -29,11 +29,12 @@ class Board
   end
 
   def full?
-    self.cells.all? { | entry | entry == "X" || entry == "O" }
+    self.turn_count == 9
   end
 
   def turn_count
-    self.cells.count{ | x | x == "X" || x == "O" }
+    # self.cells.count{ | x | x == "X" || x == "O" }
+    self.cells.find_all.with_index(1) { | entry, position | taken?(position) }.count
   end
 
   def taken?(player_move)
@@ -41,7 +42,7 @@ class Board
   end
 
   def valid_move?(player_move)
-    input_to_index(player_move) >= 0 && input_to_index(player_move) <= 8 && self.position(player_move) == " "
+    input_to_index(player_move) >= 0 && input_to_index(player_move) <= 8 && !taken?(player_move)
   end
 
   def update(player_move, player)

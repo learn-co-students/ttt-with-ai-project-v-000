@@ -4,8 +4,7 @@ module Players
     attr_accessor :diagonal_combo
     CENTER = ["5"]
     CORNER = ["1","3","7","9"]
-    EDGE = ["2","4","6","8"]
-    NOT_EDGE = ["1","3","5","7","9"]
+    CENTER_OR_CORNER = CENTER + CORNER
 
     def move(board)
       computer_move = select_move(board)
@@ -14,7 +13,7 @@ module Players
     def select_move(board)
 
       if (board.turn_count == 0) #X
-        computer_move = play_position(NOT_EDGE,board) ## Start by playing a corner or the center
+        computer_move = play_position(CENTER_OR_CORNER,board) ## Start by playing a corner or the center
       end
 
       if (board.turn_count == 1) #O # Play the center if it's available or a corner

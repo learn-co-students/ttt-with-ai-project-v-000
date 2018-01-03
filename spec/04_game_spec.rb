@@ -323,7 +323,7 @@ describe 'Game' do
 
       allow($stdout).to receive(:puts)
 
-      expect($stdout).to receive(:puts).with("Cat's Game!")
+      expect($stdout).to receive(:puts).with("Winner: none".upcase)
 
       game.play
     end
