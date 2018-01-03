@@ -1,3 +1,19 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Araba's Tic-Tac-Toe!"
+puts "Which type of game would you like to play?"
+game_type = gets.strip
+puts "Who should go first?...X or O?"
+first_player = gets.strip
+if game_type == "0"
+
+elsif
+
+
+else
+
+
+end
+game.play
