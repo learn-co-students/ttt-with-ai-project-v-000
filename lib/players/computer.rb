@@ -15,46 +15,54 @@ module Players
       if self.how_smart == "d"
         computer_move = available(board).sample
       else
-
-        if (board.turn_count == 0) #X
-          computer_move = play_position(CENTER_OR_CORNER,board) ## Start by playing a corner or the center
-
-        elsif (board.turn_count == 1) #O # Play the center if it's available or a corner
-          board.valid_move?("5") ? computer_move = play_position(CENTER,board) : computer_move = play_position(CORNER,board)
-
-        elsif (board.turn_count == 2) #X
-          if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) }
-            computer_move = play_position(CORNER,board)
-          elsif board.valid_move?("5")
-            computer_move = play_position(CENTER,board)
-          else
-            check_for_tictac(board)
-            if !@diagonal_combo.empty?
-              computer_move = play_toe(diagonal_combo,board)
-            else
-              computer_move = play_position(CORNER,board)
-            end # if/else
-          end # if/elsif/else
-
+        if (board.turn_count == 0)
+          computer_move = first_turn(board)
+        elsif (board.turn_count == 1)
+          computer_move = second_turn(board)
+        elsif (board.turn_count == 2)
+          computer_move = third_turn(board)
         elsif (board.turn_count > 2)
-          check_for_tictac(board)
-          # binding.pry
-          if !@tictac_combo[self.token].empty?
-            #play winning_combo
-            computer_move = play_toe(tictac_combo[self.token][0],board)
-          elsif !@tictac_combo[opponent(board)].empty?
-            #play blocking_combo
-            computer_move = play_toe(tictac_combo[opponent(board)][0],board)
-          else
-            potential_moves = check_for_trap(board)
-            computer_move = potential_moves.sample.to_s
-          end #if/elsif/else
+          computer_move = after_third_turn(board)
         end # turn_count if statements
         computer_move
       end # how_smart if/else
     end #select_move
 
-    ### Helper Methods
+
+    def first_turn(board)
+      computer_move = play_position(CENTER_OR_CORNER,board) ## Start by playing a corner or the center
+    end
+
+    def second_turn(board)
+      board.valid_move?("5") ? computer_move = play_position(CENTER,board) : computer_move = play_position(CORNER,board)
+    end
+
+    def third_turn(board)
+      if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) }
+        computer_move = play_position(CORNER,board)
+      elsif board.valid_move?("5")
+        computer_move = play_position(CENTER,board)
+      else
+        check_for_tictac(board)
+        if !@diagonal_combo.empty?
+          computer_move = play_toe(diagonal_combo,board)
+        else
+          computer_move = play_position(CORNER,board)
+        end # if/else
+      end # if/elsif/else
+    end
+
+    def after_third_turn(board)
+      check_for_tictac(board)
+      if !@tictac_combo[self.token].empty?
+        computer_move = play_toe(tictac_combo[self.token][0],board)
+      elsif !@tictac_combo[opponent(board)].empty?
+        computer_move = play_toe(tictac_combo[opponent(board)][0],board)
+      else
+        potential_moves = check_for_trap(board)
+        computer_move = potential_moves.sample.to_s
+      end #if/elsif/else
+    end
 
     def check_for_tictac(board)
       @tictac_combo = {"X" => [], "O" => []}
@@ -110,9 +118,8 @@ module Players
       potential_moves.each do | element |
         temp_board = Board.new
         board.cells.each_with_index { | cell, index | temp_board.cells[index] = cell }
-        temp_board.cells[element.to_i - 1] = current_token #current player move
+        temp_board.cells[element.to_i - 1] = current_token
         check_for_tictac(temp_board)
-        # binding.pry
         if !@tictac_combo[opponent(board)].empty?
           avoid_moves << element
         else
@@ -122,7 +129,6 @@ module Players
             temp_board.cells[next_element.to_i - 1] = token
             check_for_tictac(temp_board)
             avoid_moves << element if @tictac_combo[opponent(board)].length == 2 && @tictac_combo[current_token].empty?
-            # binding.pry
             temp_board.cells[next_element.to_i - 1] = " "
           end
         end

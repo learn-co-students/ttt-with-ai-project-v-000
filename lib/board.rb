@@ -34,7 +34,6 @@ class Board
 
   def turn_count
     self.cells.count{ | x | x == "X" || x == "O" }
-    # self.cells.find_all.with_index(1) { | entry, position | taken?(position) }.count
   end
 
   def taken?(player_move)
