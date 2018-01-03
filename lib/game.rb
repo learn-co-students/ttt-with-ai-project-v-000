@@ -15,7 +15,7 @@ class Game
     def self.start
       whos_first = nil
       how_many = nil
-
+      how_smart = nil
 
       puts "Welcome to Tic-Tac-Toe!"
       while how_many != "0" && how_many != "1" && how_many != "2" && how_many !="wargames"
@@ -28,27 +28,38 @@ class Game
           while whos_first != "c" && whos_first != "h"
             puts "Who should go first? (enter c for computer, h for human)"
             whos_first = gets.chomp
-            if whos_first == "c"
-              game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-              game.play
-            else
-              game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-              game.play
-            end
-          end
+            while how_smart != "d" && how_smart != "u"
+              puts "How smart would you like your opponent to be? (enter d for dumb, u for unbeatable)"
+              how_smart = gets.chomp
+              if whos_first == "c"
+                if how_smart != "u"
+                  game = Game.new(Players::Computer.new("X","#{how_smart}"), Players::Human.new("O"))
+                else
+                  game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+                end
+              else
+                if how_smart != "u"
+                  game = Game.new(Players::Human.new("X"), Players::Computer.new("O","#{how_smart}"))
+                else
+                  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+                end
+              end
+            end # how_smart while
+            game.play
+          end # whos_first while
         elsif how_many == "2"
           #launch regular game
           game = Game.new
           game.play
         elsif how_many == "wargames"
-          ties = 0
+          wins = 0
           100.times do
             game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
             result = game.play
-            ties += 1 if result
+            wins += 1 if result
           end
           puts; puts "Number of games: 100"
-          puts "Number of wins: #{100-ties}"
+          puts "Number of wins: #{wins}"
           puts; puts "A strange game.\nThe only winning move is\nnot to play.".upcase
           puts; puts "How about a nice game of chess?".upcase
           input = gets.strip
@@ -106,13 +117,14 @@ class Game
     def play
       while !self.over? do
         self.turn
+        sleep 0.1
       end
       if self.won?
         puts "Congratulations #{self.winner}!"
+        "win"
       else
         puts "Winner: none".upcase
-        sleep 0.1
-        "tie"
+        nil
       end
     end
 

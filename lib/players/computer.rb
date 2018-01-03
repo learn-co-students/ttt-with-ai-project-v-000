@@ -1,6 +1,6 @@
 module Players
   class Computer < Player
-    attr_accessor :available, :combo, :tictac_combo, :current_player
+    attr_accessor :available, :combo, :tictac_combo, :current_player, :how_smart
     attr_accessor :diagonal_combo
     CENTER = ["5"]
     CORNER = ["1","3","7","9"]
@@ -12,45 +12,47 @@ module Players
 
     def select_move(board)
 
-      if (board.turn_count == 0) #X
-        computer_move = play_position(CENTER_OR_CORNER,board) ## Start by playing a corner or the center
-      end
+      if self.how_smart == "d"
+        computer_move = available(board).sample
+      else
 
-      if (board.turn_count == 1) #O # Play the center if it's available or a corner
-        board.valid_move?("5") ? computer_move = play_position(CENTER,board) : computer_move = play_position(CORNER,board)
-      end
+        if (board.turn_count == 0) #X
+          computer_move = play_position(CENTER_OR_CORNER,board) ## Start by playing a corner or the center
 
-      if (board.turn_count == 2) #X
-        if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) }
-          computer_move = play_position(CORNER,board)
-        elsif board.valid_move?("5")
-          computer_move = play_position(CENTER,board)
-        else
-          check_for_tictac(board)
-          if !@diagonal_combo.empty?
-            computer_move = play_toe(diagonal_combo,board)
-          else
+        elsif (board.turn_count == 1) #O # Play the center if it's available or a corner
+          board.valid_move?("5") ? computer_move = play_position(CENTER,board) : computer_move = play_position(CORNER,board)
+
+        elsif (board.turn_count == 2) #X
+          if CORNER.detect { | position | board.cells[position.to_i] == (opponent(board)) }
             computer_move = play_position(CORNER,board)
-          end # if/else
-        end # if/elsif/else
-      end # if
+          elsif board.valid_move?("5")
+            computer_move = play_position(CENTER,board)
+          else
+            check_for_tictac(board)
+            if !@diagonal_combo.empty?
+              computer_move = play_toe(diagonal_combo,board)
+            else
+              computer_move = play_position(CORNER,board)
+            end # if/else
+          end # if/elsif/else
 
-      if (board.turn_count > 2)
-        check_for_tictac(board)
-        # binding.pry
-        if !@tictac_combo[self.token].empty?
-          #play winning_combo
-          computer_move = play_toe(tictac_combo[self.token][0],board)
-        elsif !@tictac_combo[opponent(board)].empty?
-          #play blocking_combo
-          computer_move = play_toe(tictac_combo[opponent(board)][0],board)
-        else
-          potential_moves = check_for_trap(board)
-          computer_move = potential_moves.sample.to_s
-        end #if/elsif/else
-      end # if
-      computer_move
-    end # #move(board)
+        elsif (board.turn_count > 2)
+          check_for_tictac(board)
+          # binding.pry
+          if !@tictac_combo[self.token].empty?
+            #play winning_combo
+            computer_move = play_toe(tictac_combo[self.token][0],board)
+          elsif !@tictac_combo[opponent(board)].empty?
+            #play blocking_combo
+            computer_move = play_toe(tictac_combo[opponent(board)][0],board)
+          else
+            potential_moves = check_for_trap(board)
+            computer_move = potential_moves.sample.to_s
+          end #if/elsif/else
+        end # turn_count if statements
+        computer_move
+      end # how_smart if/else
+    end #select_move
 
     ### Helper Methods
 
