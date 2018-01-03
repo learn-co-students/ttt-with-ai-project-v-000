@@ -1,7 +1,8 @@
 module Players
   class Human < Player
 
-    def move(spot)
+
+    def move(board)
       puts "input between 1-9?"
       input=gets.strip
     end
