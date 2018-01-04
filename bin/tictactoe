@@ -9,10 +9,10 @@ until game.won?
 end
 
 play_again = ""
-until play_again.downcase == "n" || play_again.downcase == "no"
+until play_again == "no"
   puts "Would you like to play again?"
   play_again = gets.strip
-  play_again.downcase == "y" || play_again.downcase == "yes"
+  play_again ==  "yes"
   game = Game.new
   until game.won?
     game.play
