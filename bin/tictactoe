@@ -6,14 +6,17 @@ puts "Welcome to Araba's Tic-Tac-Toe!"
 puts "Which type of game would you like to play?"
 game_type = gets.strip
 puts "Who should go first?...X or O?"
-first_player = gets.strip
-if game_type == "0"
-
-elsif
-
-
+first_letter= gets.strip
+if first_letter== "X"
+  second_letter = "O"
 else
-
-
+  second_letter = "X"
+end
+if game_type == "0"
+  game.new(Players::Computer.new("#{first_letter}"), player_2 = Players::Computer.new(second_letter), board = Board.new))
+elsif game_type == "1"
+  game.new(Players::Human.new("#{first_letter}"), player_2 = Players::Computer.new(second_letter), board = Board.new))
+else
+  game.new(Players::Human.new("#{first_letter}"), player_2 = Players::Human.new(second_letter), board = Board.new))
 end
 game.play
