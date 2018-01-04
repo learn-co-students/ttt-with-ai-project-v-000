@@ -3,20 +3,19 @@
 require_relative '../config/environment'
 
 puts "Welcome to Araba's Tic-Tac-Toe!"
-puts "Which type of game would you like to play?"
-game_type = gets.strip
-puts "Who should go first?...X or O?"
-first_letter= gets.strip
-if first_letter== "X"
-  second_letter = "O"
-else
-  second_letter = "X"
+game = Game.new
+until game.won?
+  game.play
 end
-if game_type == "0"
-  game.new(Players::Computer.new("#{first_letter}"), player_2 = Players::Computer.new(second_letter), board = Board.new))
-elsif game_type == "1"
-  game.new(Players::Human.new("#{first_letter}"), player_2 = Players::Computer.new(second_letter), board = Board.new))
-else
-  game.new(Players::Human.new("#{first_letter}"), player_2 = Players::Human.new(second_letter), board = Board.new))
+
+play_again = ""
+until play_again.downcase == "n" || play_again.downcase == "no"
+  puts "Would you like to play again?"
+  play_again = gets.strip
+  play_again.downcase == "y" || play_again.downcase == "yes"
+  game = Game.new
+  until game.won?
+    game.play
+  end
+  exit
 end
-game.play
