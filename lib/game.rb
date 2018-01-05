@@ -75,7 +75,7 @@ class Game
   end
 
   def start
-    #### WHAT IS GOING ON????????????
+    ###Testing!!!
   end
 
   def play
