@@ -29,17 +29,35 @@ class Game
     #board.full? == true && board.cells.count("X") == board.cells.count("O") ? true : false
   end
 
+  #    returns the correct winning combination in the case of a win
+  #    Failure/Error: expect(game.won?).to contain_exactly(2, 5, 8)
+  #      expected a collection that can be converted to an array with `#to_ary` or `#to_a`, but got false
+
+  #    isn't hard-coded
+  #    Failure/Error: expect(game.won?).to contain_exactly(0, 1, 2)
+  #      expected a collection that can be converted to an array with `#to_ary` or `#to_a`, but got false
+
   def won?
 
-    WIN_COMBINATIONS.each do |combo|
+    cells = self.board.cells
 
-      position_1 = combo[0]
-      position_2 = combo[1]
-      position_3 = combo[2]
+    if self.board.full? != true
+      false
+
+    else
+    WIN_COMBINATIONS.detect do |combo|
+
+      position_1 = cells[combo[0]]
+      position_2 = cells[combo[1]]
+      position_3 = cells[combo[2]]
+
+      if
+        position_1 == "X" && position_2 == "X" && position_3 == "X" ||
+        position_1 ==
+
+      end
 
     end
-
-     self.board.cells
 
   end
 
