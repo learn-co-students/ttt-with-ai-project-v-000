@@ -5,12 +5,12 @@ module Players
   			return "5"
   		elsif !board.taken?("1")
   			return "1"
-  		elsif !board.taken?("3")
-  			return "3"
-  		elsif !board.taken?("7")
-  			return "7"
   		elsif !board.taken?("9")
   			return "9"
+  		elsif !board.taken?("7")
+  			return "7"
+  		elsif !board.taken?("3")
+  			return "3"
   		elsif !board.taken?("2")
   			return "2"
   		elsif !board.taken?("4")

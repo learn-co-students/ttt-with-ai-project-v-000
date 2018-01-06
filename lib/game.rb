@@ -22,7 +22,6 @@ class Game
 	end
 
 	def won?
-		#@board.cells.each_with_index do |cell, i|
 		WIN_COMBINATIONS.each do |win_combo|
 			if @board.cells[win_combo[0]] == "X" && @board.cells[win_combo[1]] == "X" && @board.cells[win_combo[2]] == "X"
 				return win_combo
