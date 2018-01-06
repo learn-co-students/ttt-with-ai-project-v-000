@@ -1,0 +1,12 @@
+won?
+
+if result != nil
+  result.each do |result|
+    print result
+  end
+
+else
+  false
+end
+
+#result = [[0, 4, 8], [2, 5, 8]]
