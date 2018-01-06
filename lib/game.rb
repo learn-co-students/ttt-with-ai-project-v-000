@@ -53,6 +53,12 @@ class Game
   end
 
   def winner
+    if won? != nil
+    @cells = self.board.cells
+    @cells[won?[0]]
+    else
+      nil
+    end
   end
 
   def start
