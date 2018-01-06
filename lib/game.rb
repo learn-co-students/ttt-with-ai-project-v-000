@@ -26,11 +26,7 @@ class Game
   end
 
   def draw?
-    if won? == nil && self.board.full? == true
-      true
-    else
-      false
-    end
+    won? == nil && self.board.full? == true ? true : false
   end
 
   def won?
