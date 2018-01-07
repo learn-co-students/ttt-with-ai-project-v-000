@@ -43,8 +43,8 @@ class Board
     if valid_move?(input)
       @cells[input.to_i - 1] = player.token
     elsif
-      puts "Please enter a valid move"
-      position = player.token
+      puts "Please enter a valid move, 1-9"
+      #position = player.token
     else
       nil
     end

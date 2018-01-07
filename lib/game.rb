@@ -2,7 +2,7 @@ class Game
 
   include Players
 
-  attr_accessor :player_1, :player_2, :players, :board
+  attr_accessor :player_1, :player_2, :board
 
   WIN_COMBINATIONS = [
     [0, 1, 2],
@@ -44,12 +44,7 @@ class Game
   end
 
   def over?
-    if won? !=nil
-      true
-    elsif
-      draw? == true
-      true
-    end
+    won? !=nil || draw? == true ? true : nil
   end
 
   def winner
@@ -61,13 +56,52 @@ class Game
     end
   end
 
-  def start
-  end
-
-  def play
-  end
 
   def turn
+
+    @player = current_player
+
+    puts "Your turn, #{@player.token}."
+
+    @input = @player.move(board).chomp
+
+    if self.board.valid_move?(@input) == true
+      self.board.update(@input, @player)
+    else
+      puts "Please enter a valid move."
+      @input = @player.move(board).chomp
+    end
+
+    @player = current_player
+
   end
+
+
+  def play # only congratulating the opposite player/token!
+
+    until over? == true
+      turn
+    end
+
+    if won? != nil
+      puts "Congratulations #{winner}!"
+    elsif draw? == true
+      puts "Cat's Game!"
+    else
+      nil
+    end
+
+  end
+
+
+  def start
+
+
+
+  end
+
+
+
+
 
 end
