@@ -77,7 +77,7 @@ class Game
   end
 
 
-  def play # still looking for "checks for won? after every turn"
+  def play
 
     until over? == true
       turn
@@ -85,10 +85,10 @@ class Game
 
     if won? != nil
       puts "Congratulations #{winner}!"
-    elsif draw? == true
+    end
+
+    if draw? == true
       puts "Cat's Game!"
-    else
-      nil
     end
 
   end
