@@ -77,7 +77,7 @@ class Game
   end
 
 
-  def play # only congratulating the opposite player/token!
+  def play # still looking for "checks for won? after every turn"
 
     until over? == true
       turn
