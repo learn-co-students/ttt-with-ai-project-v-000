@@ -2,6 +2,14 @@
 
 require_relative '../config/environment'
 
-require 'irb'
+new_game = Game.new
 
-IRB.start
+new_game.start
+
+
+
+
+
+#require 'irb'
+
+#IRB.start

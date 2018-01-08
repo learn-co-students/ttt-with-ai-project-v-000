@@ -67,8 +67,9 @@ class Game
 
     if self.board.valid_move?(@input) == true
       self.board.update(@input, @player)
+      self.board.display
     else
-      puts "Please enter a valid move."
+      puts "Please enter a valid move, 1-9."
       @input = @player.move(board).chomp
     end
 
@@ -93,15 +94,38 @@ class Game
 
   end
 
-
   def start
 
+    puts "Welcome to Tic Tac Toe!"
 
+    puts "---"
+
+    puts "Would you like to play a 0, 1, or 2-player game?"
+
+    game_input = gets.chomp
+
+    puts "The first player will be 'X'. Good luck!"
+
+    if game_input == "0"
+
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Computer.new("O")
+      self.play
+
+    elsif game_input == "1"
+
+      self.player_1 = Players::Human.new("X")
+      self.player_2 = Players::Computer.new("O")
+      self.play
+
+    elsif game_input == "2"
+
+      self.player_1 = Players::Human.new("X")
+      self.player_2 = Players::Human.new("O")
+      self.play
+
+    end
 
   end
-
-
-
-
 
 end

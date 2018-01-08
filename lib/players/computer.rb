@@ -11,9 +11,9 @@ module Players
         @value = value
       end
 
-      input = @valid_moves.sample
-      @board.update(input, self)
-      @valid_moves[@value.to_i - 1] = @value
+      player_move = @valid_moves.sample
+      @valid_moves[player_move.to_i - 1] = player_move
+      player_move
 
     end
 
