@@ -44,7 +44,6 @@ class Board
       @cells[input.to_i - 1] = player.token
     elsif
       puts "Please enter a valid move, 1-9"
-      #position = player.token
     else
       nil
     end
