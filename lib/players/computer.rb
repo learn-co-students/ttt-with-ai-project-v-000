@@ -15,6 +15,12 @@ module Players
       @valid_moves[player_move.to_i - 1] = player_move
       player_move
 
+      #strategy coming:
+      #if two next to each other, block/put next to
+      #if sandwich, place between
+      #if corner, put in center
+      #if center, put in corner
+
     end
 
   end
