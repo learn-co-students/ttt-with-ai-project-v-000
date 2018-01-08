@@ -1,3 +1,94 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+def main_menu
+    
+    input = nil
+    puts "Welcome to TicTacToe player!  Shall we begin?"
+    puts "Player vs Player"
+    puts "Player vs AI"
+    puts "AI vs AI"
+
+    input = gets.chomp
+
+    case input
+
+    when "Player vs Player"
+        player_vs_player
+    
+    when "Player vs AI"
+        player_vs_AI
+    
+    when "AI vs AI"
+        ai_vs_ai
+end 
+
+
+def player_vs_player
+    game = Game.new()
+    game.play
+end 
+
+def player_vs_AI
+    puts "Player 1 = X :"
+    puts "Human"
+    puts "AI"
+    input = nil
+    input = gets.chomp
+end
+
+case input
+    when "Human"
+        player_1 = Players::Human.new("X")
+    when "AI"
+        player_1 = Players::Computer.new("X")
+end 
+
+if input == "Human"
+    puts "Player 2 = O ::"
+    puts "AI"
+    player_2 = Players::Computer.new("O")
+end
+
+    game = Game.new(player_1, player_2)
+    game.play
+end
+
+
+def AI_vs_AI
+    puts "Player 1 = X :"
+    puts "Human"
+    puts "AI"
+    input = nil
+    input = gets.chomp
+end
+
+case input
+    when "Human"
+        player_1 = Players::Human.new("X")
+    when "AI"
+        player_1 = Players::Computer.new("X")
+end 
+
+if input == "AI"
+    puts "Player 2 = O ::"
+    puts "AI"
+    player_2 = Players::Computer.new("O")
+end
+
+game = Game.new(player_1, player_2)
+game.play
+end
+
+
+
+
+
+def game_over
+    
+    input = nil
+    if over? puts "Would you like to play another game?  If so, Would you like to watch the AI play, play an opponent, or play the computer?"end
+        
+    input = gets.chomp
+    main_menu
+end
