@@ -13,9 +13,7 @@ module Players
 
       input = @valid_moves.sample
       @board.update(input, self)
-      @board.cells
       @valid_moves[@value.to_i - 1] = @value
-      #expect(valid_moves).to include(computer_move)
 
     end
 
