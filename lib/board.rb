@@ -39,7 +39,7 @@ class Board
   end
 
   def valid_move?(position)
-    if position.to_i-1.between?(0,8) && !taken?(position)
+    if (position.to_i-1).between?(0,8) && !taken?(position)
       true
     else
       false
