@@ -11,9 +11,40 @@ module Players
         @value = value
       end
 
+      ### To be replaced by #strategy
       player_move = @valid_moves.sample
       @valid_moves[player_move.to_i - 1] = player_move
       player_move
+
+    end
+
+    def strategy(board)
+
+      #adjacent
+      horizontal_block_right = [[1, 2], [4, 5], [7, 8]]
+      horizontal_block_left = [[2, 3], [5, 6], [8, 9]]
+      vertical_block_below = [[1, 4], [2, 5], [3, 6]]
+      vertical_block_above = [[4, 7], [5, 8], [6, 9]]
+
+      #sandwich
+      horizontal_block_center = [[1, 3], [4, 6], [7, 9]]
+      vertical_block_center = [[1, 7], [2, 8], [3, 9]]
+      diagonal_block_center = [[1, 9], [3, 7]]
+
+      #first move corner
+        #if 1 || 3 || 7 || 9
+          #update in position 5
+
+
+      #first move center
+        #if 5
+          #update in positions 1 || 3 || 7 || 9
+
+      #else
+        #place adjacent to own first
+        #or corner if first move
+
+      end
 
     end
 
@@ -39,4 +70,4 @@ end
   # if center, put in corner (1 || 3 || 7 || 9)
     # 5
 
-  # else random or adjacent...
+  # else adjacent to own or corner...
