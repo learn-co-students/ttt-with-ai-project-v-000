@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells, :board
+  attr_accessor :cells, :board, :token
 
   def reset!
     @cells = Array.new(9, " ")
@@ -46,9 +46,7 @@ class Board
     end
   end
 
-  #def update
-    #player.token - player = double("player", :token => "X") <- sets mock player instance so that "player.token" can be "X" or "O"
-    #significant to define player (needs attr_accessor of token)
-    #test passes in arguemtns, one string of position, and one instance of player -> [board.update("1", player)]
-  #end
+  def update(position, player)
+    cells[position.to_i-1] = player.token
+  end
 end
