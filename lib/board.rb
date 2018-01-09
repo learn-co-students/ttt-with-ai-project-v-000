@@ -6,8 +6,7 @@ class Board
     end
     
     def reset!
-        self.cells.clear
-        initialize
+        @cells = [" "," "," "," "," "," "," "," "," "]
     end
     
     def display
