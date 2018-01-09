@@ -10,6 +10,52 @@ class Game
     @player_2 = player_2
   end
 
+  def self.main_menu
+  puts "If you want to play against a computer, please type 1"
+  puts "If you want to play against another person, please type 2"
+  puts "If you would like the computer to play itself, please type 0"
+  puts "If you would like to exit, please type 'exit'"
+
+  input = gets.strip
+
+
+  case input
+    when "1"
+      game_play_1
+    when "2"
+      game_play_2
+    when "0"
+      game_play_0
+    when "exit"
+      puts "Goodbye!"
+      exit
+    end
+  end
+
+    def self.game_play_1
+      puts "Do you want to go first and be 'X'?"
+      x_or_o = gets.strip.to_s
+      if x_or_o == "yes" || x_or_o == "y"
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        game.play
+      else
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        game.play
+      end
+    end
+
+
+    def self.game_play_2
+      puts "First player is X"
+      game = Game.new
+      game.play
+    end
+
+    def self.game_play_0
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        game.play
+    end
+
   def current_player
     board.turn_count % 2 == 0 ? player_1 : player_2
   end
@@ -42,10 +88,12 @@ class Game
       puts "You have made an invalid move!"
       turn
     else
+    puts "#{player.token} has moved to slot #{current_move}\n"
+    puts "Turn: #{@board.turn_count+1}"
     @board.turn_count+1
     @board.update(current_move,player)
-    puts "You have made a valid move."
     @board.display
+    puts "#{current_player.token}'s turn!\n"
   end
 end
 
