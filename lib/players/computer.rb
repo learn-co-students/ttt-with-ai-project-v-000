@@ -1,9 +1,36 @@
 module Players
     class Computer < Player
-    
+        attr_accessor :player_1, :player_2
+        
         def move(board)
-            valid = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-            valid.sample
+            if board.cells[4] == " "
+                return  "5"
+            end
+            if board.cells.select {|cell| cell == "X" || cell == "O"}.size == 1
+                return "1"
+            end
+            if board.cells.select {|cell| cell == "X" || cell == "O"}.size == 2  && board.cells[1] == " "
+                return "2"
+            end
+            if board.cells.select {|cell| cell == " "}.size == 6
+                return "8"
+            end
+            if board.cells.select {|cell| cell == " "}.size == 5
+                return "4"
+            end
+            if board.cells.select {|cell| cell == " "}.size == 4
+                return "6"
+            end
+            if board.cells.select {|cell| cell == " "}.size == 3
+                return "9"
+            end
+            if board.cells.select {|cell| cell == " "}.size == 2
+                return "3"
+            end
+            if board.cells.select {|cell| cell == " "}.size == 1
+                return "7"
+            end
         end
     end
+    
 end

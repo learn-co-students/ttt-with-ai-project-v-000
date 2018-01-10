@@ -1,4 +1,9 @@
 class TicTacToeCLI
+    attr_accessor :players
+    
+    def initialize
+        @players= []
+    end
     
     def begin_game
        welcome
@@ -13,19 +18,39 @@ class TicTacToeCLI
     
     def player_mode
         input = nil
-        while input != 'exit'
+        while input != "exit"
             puts "Would you like to play 0, 1, or 2 player?"
             input = gets.strip
             players = input.to_i
         if players == 0
-            Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play  
+            Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play 
         elsif players == 1
-            Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-        else
-            Game.new.play
+            players_h_vs_cpu
+        elsif players == 2
+            players_h_vs_h
         end
-        puts "Play again? (yes) or (exit)"
-        input = gets.strip
+            puts "Play again? Type (yes) or (exit)."
+            input = gets.strip
+        end
+    end
+    
+    def players_h_vs_cpu
+       puts "Would you like to go first and be 'X'? Y/N"
+       input = gets.strip
+        if input.upcase == "Y"
+           Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        else
+            Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+        end
+    end
+    
+    def players_h_vs_h
+       puts "Would you like to go first and be 'X'? Y/N"
+       input = gets.strip
+        if input.upcase == "Y"
+           Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+        else
+            Game.new(Players::Human.new("O"), Players::Human.new("X")).play
         end
     end
     

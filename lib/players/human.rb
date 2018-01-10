@@ -3,7 +3,7 @@ module Players
         
         def move(board)
             i = gets.strip
-            i
+                i
         end
     end
 end
