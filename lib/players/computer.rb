@@ -1,33 +1,93 @@
 module Players
   class Computer < Player
     def move(board)
-      move = nil
+      input = nil
 
-      if !board.taken?(5)
-        move = "5"
-      elsif board.turn_count == 1
-        move = "1"
-      elsif board.turn_count == 2
-        move = [1,3,7,9].detect{|i|!board.taken?(i)}.to_s
-      elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
-        move == "2"
-      else
-         Game::WIN_COMBINATIONS.detect do |combo|
-           #go through each of the winning combos.
-           #if there are atleast two tokens that are the same AND there is an empty slot, make that your next move.
-           #move equals an array that has an empty string. Then take the first value of the array, turn it into an integer, add 1 and turn it back to a string.
-           if combo.select{|i| board.position(i+1) == token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
-            move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-          #if you can make any winning moves, sabotage the human player by blocking their wins.
-          #go through each combo and and see if each cell is not equal to your token and if it's not equal to your token make sure it's also not an empty space. Since an empty space is also not equal to your token, you have to put these two conditions together. Last but not least, if there are a total of two, make your move equal to the empty space.
-        elsif combo.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-            move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+      #if you're going first, take one of the corner cells of the board.
+    if board.turn_count == 0
+      puts "First Move"
+      input = [1,3,7,9].sample.to_s
+      #If you went first, and the middle cell is not taken and the opponent has taken another cell, take another corner cell!
+    elsif board.turn_count == 2 && !board.taken?(5)
+      input = [1,3,7,9].detect{|i| !board.taken?(i)}.to_s
+      #if you didn't go first, then you will have occupied the middle cell. If the human selects this combo, select a non corner cell. Combos: 1:9 || 3:7
+    elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+      input = [2,4,6,8].detect{|i|!board.taken?(i)}.to_s
+
+      #If you went first, you selected a corner cell
+      #If the middle cell is not taken and the opponent has occupied another cell on turn 2
+      #You will have occupied another corner cell on turn 3
+      #You're lined up for a win. Check if it's still possible. If it is, go for it. If it isn't, go for the last corner cell and win it!
+    elsif board.turn_count == 3 && !board.taken?(5)
+      Game::WIN_COMBINATIONS.detect do |combo|
+        if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+          input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
+        else
+          input = [1,3,7,9].detect{|i|!board.taken?(i)}.to_s
         end
       end
-
-        move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
+      #if you're not going first, check if the middle cell is taken, if it isn't, take it, if it is, occupy a corner cell.
+    elsif board.turn_count == 1
+      if !board.taken?(5)
+      puts "I'm taking the middle cell because I didn't get to go first"
+        input = "5"
+      else
+        puts "Since I didn't get to go first, and you took the middle cell, I will occupy a corner cell"
+        input = [1,3,7,9].detect{|i| !board.taken?(i)}.to_s
       end
-      move
+      #if you didn't go first, and the middle cell is taken, you will have occupied a corner cell. The human will now try to win. Block them. If not, occupy another corner cell.
+    elsif board.turn_count == 3 && board.taken?(5)
+      Game::WIN_COMBINATIONS.detect do |combo|
+      if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+        input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
+      else
+        input = [1,3,7,9].detect{|i|!board.taken?(i)}.to_s
+      end
+    end
+      #If you've gotten this far, then it means your human isn't very smart. Make the next move your winning move.
+    elsif board.turn_count == 4
+      Game::WIN_COMBINATIONS.detect do |combo|
+        if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+          input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
+        else
+          if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+            input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
+          end
+        end
+      end
+    elsif board.turn_count == 5
+      Game::WIN_COMBINATIONS.detect do |combo|
+        if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+          input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
+        end
+      end
+      Game::WIN_COMBINATIONS.detect do |combo|
+        if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+          puts "I'm making the wrong move, fix me!"
+          input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
+        end
+      end
+      Game::WIN_COMBINATIONS.detect do |combo|
+        if input == nil
+          puts "I'm making the ultimate worse move ever, fix me!"
+          input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
+        end
+      end
+  elsif board.turn_count == 7
+    Game::WIN_COMBINATIONS.detect do |combo|
+      if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+        input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
+      end
+      if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+        input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
+      end
+      if input == nil
+        input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
+      end
+    end
+    else input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
+    end
+    input
     end
   end
 end
