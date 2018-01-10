@@ -63,14 +63,18 @@ class Game
 
     puts "Your turn, #{@player.token}."
 
-    @input = @player.move(board).chomp
+    @input = @player.move(board)
+    @input ||= ''
+    @input.chomp
 
     if self.board.valid_move?(@input) == true
       self.board.update(@input, @player)
       self.board.display
     else
       puts "Please enter a valid move, 1-9."
-      @input = @player.move(board).chomp
+      @input = @player.move(board)
+      @input ||= ''
+      @input.chomp
     end
 
     @player = current_player
@@ -93,7 +97,7 @@ class Game
     end
 
   end
-  
+
 
   def start
 
@@ -103,7 +107,9 @@ class Game
 
     puts "Would you like to play a 0, 1, or 2-player game?"
 
-    game_input = gets.chomp
+    game_input = gets
+    game_input ||= ''
+    game_input.chomp!
 
     puts "The first player will be 'X'. Good luck!"
 

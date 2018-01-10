@@ -1,12 +1,116 @@
-won?
+# strategy bstorm:
 
-if result != nil
-  result.each do |result|
-    print result
-  end
+  # if two next to each other, block/put adjecent to
+    # H [[1, 2]*, [4, 5]*, [7, 8]*, [2, 3], [5, 6], [8, 9]] (* place to right, else left) (rt = index[1] + 1, lft = index[0] - 1)
+    # V [[1, 4]*, [2, 5]*, [3, 6]*, [4, 7], [5, 8], [6, 9]] (* place beneath, else above) (blw = index[1] + 3, abv = index[0] - 3)
 
-else
-  false
-end
+  # if sandwich, place between
+    # H [[1, 3], [4, 6], [7, 9]] (index[1] + or - 1)
+    # V [[1, 7], [2, 8], [3, 9]] (index[1] - 3)
+    # D [[1, 9], [3, 7]] (position 5)
 
-#result = [[0, 4, 8], [2, 5, 8]]
+  # if corner, put in center (5)
+    # 1 || 3 || 7 || 9
+
+  # if center, put in corner (1 || 3 || 7 || 9)
+    # 5
+
+  # else adjacent to own or corner...
+
+  ########
+
+  #check for adjacent
+  # horizontal_block_right = [[1, 2], [4, 5], [7, 8]]
+  # horizontal_block_left = [[2, 3], [5, 6], [8, 9]]
+  # vertical_block_below = [[1, 4], [2, 5], [3, 6]]
+  # vertical_block_above = [[4, 7], [5, 8], [6, 9]]
+  # diagonal_block_up_rt = [[7, 5]] (3)
+  # diagonal_block_up_lft = [[9, 5]] (1)
+  # diagonal_block_low_rt = [[1, 5]] (9)
+  # diagonal_block_low_lft = [[3, 5]] (7)
+
+  #check for sandwich
+  # horizontal_block_center = [[1, 3], [4, 6], [7, 9]]
+  # vertical_block_center = [[1, 7], [2, 8], [3, 9]]
+  # diagonal_block_center = [[1, 9], [3, 7]]
+
+  ########
+
+
+        #horizontal_block_right.find do |combo|
+          #if each index in the combo is taken by same token
+            #player_move = horizontal_block_right[1] + 1
+
+          #elsif each index in the combo is taken by same token
+            #player_move = horizontal_block_left[0] - 3
+
+          #elsif
+          ########
+
+          # IF FIRST MOVE #
+
+        #check for first move corner
+          #if 1 || 3 || 7 || 9
+            #update in position 5
+
+
+        #check for first move center
+          #if 5
+            #update in positions 1 || 3 || 7 || 9
+
+        # ELSE #
+          #place adjacent to own first
+          #or corner if first move
+
+
+          ####################
+
+          block_combos = {
+
+            :block_rt => [[cells[0], cells[1]], [cells[3], cells[4]], [cells[6], cells[7]]],
+            :block_lft => [[cells[1], cells[2]], [cells[4], cells[5]], [cells[7], cells[8]]],
+            :block_blw => [[cells[0], cells[3]], [cells[1], cells[4]], [cells[2], cells[5]]],
+            :block_abv => [[cells[3], cells[6]], [cells[4], cells[7]], [cells[5], cells[8]]],
+            :hor_block_cntr => [[cells[0], cells[2]], [cells[3], cells[5]], [cells[6], cells[8]]],
+            :ver_block_cntr => [[cells[0], cells[6]], [cells[1], cells[7]], [cells[2], cells[8]]],
+            :diag_block_cntr => [[cells[0], cells[8]], [cells[2], cells[6]]]
+
+          }
+
+          diag_block_combos = {
+
+            :block_up_rt => [cells[6], cells[4]],
+            :block_up_lft => [cells[8], cells[4]],
+            :block_low_rt => [cells[0], cells[4]],
+            :block_low_lft => [cells[2], cells[4]]
+
+          }
+
+          #####################
+
+
+
+
+
+          #############################
+
+          # ORIGINAL MOVE SOLUTION
+
+          # @valid_moves.collect! do |value|
+          #   @board.valid_move?(value)
+          #   @value = value
+          # end
+          # #returns an array @valid_moves
+          #
+          # player_move = @valid_moves.sample
+          # @valid_moves[player_move.to_i - 1] = player_move
+          # player_move # => string digit
+
+          ##############################
+          ### To iterate down to individual cell values
+            # block_combos.each do |key, value|
+            #   value.each do |position|
+            #     puts position[0] "O"
+            #     puts position[1]"O"
+            #   end
+            # end

@@ -6,44 +6,71 @@ module Players
       @board = board
       @valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-      @valid_moves.collect! do |value|
-        @board.valid_move?(value)
-        @value = value
+      cells = @board.cells
+
+      block_combos = {
+
+        :block_rt => [[0, 1], [3, 4], [6, 7]],
+        :block_lft => [[1, 2], [4, 5], [7, 8]],
+        :block_blw => [[0, 3], [1, 4], [2, 5]],
+        :block_abv => [[3, 6], [4, 7], [5, 8]],
+        :hor_block_cntr => [[0, 2], [3, 5], [6, 8]],
+        :ver_block_cntr => [[0, 6], [1, 7], [2, 8]],
+        :diag_block_cntr => [[0, 8], [2, 6]]
+
+      }
+
+      diag_block_combos = {
+
+        :block_up_rt => [6, 4],
+        :block_up_lft => [8, 4],
+        :block_low_rt => [0, 4],
+        :block_low_lft => [2, 4]
+
+      }
+
+      # check block_combos against cells to pick ideal move
+      block_combos.each do |key, value|
+
+        value.each do |combo|
+
+          if cells[combo[0]] == "X" && cells[combo[1]] == "X" || cells[combo[0]] == "O" && cells[combo[1]] == "O"
+
+            # identify which block_combo
+            if key == :block_rt
+              @play_move = (combo[1] + 1) + 1
+            elsif key == :block_lft
+              @play_move = (combo[0] + 1) - 1
+            elsif key == :block_blw
+              @play_move = (combo[1] + 1) + 3
+            elsif key == :block_abv
+              @play_move = (combo[0] + 1) - 3
+            elsif key == :hor_block_cntr
+              @play_move = (combo[0] + 1) + 1
+            elsif key == :ver_block_cntr
+              @play_move = (combo[1] + 1) - 3
+            elsif key == :diag_block_cntr
+              @play_move = 5
+            else
+              choice = @valid_moves.sample
+              @play_move = @valid_moves[choice.to_i]
+              @play_move
+              # offense? => corner_move = [cells[0], cells[2], cells[6], cells[8]]
+              # offense? => center_move = cells[4]
+            end
+
+          else
+            choice = @valid_moves.sample
+            @play_move = @valid_moves[choice.to_i]
+            @play_move
+          end
+
+        end
+
       end
 
-      ### To be replaced by #strategy
-      player_move = @valid_moves.sample
-      @valid_moves[player_move.to_i - 1] = player_move
-      player_move
-
-    end
-
-    def strategy(board)
-
-      #adjacent
-      horizontal_block_right = [[1, 2], [4, 5], [7, 8]]
-      horizontal_block_left = [[2, 3], [5, 6], [8, 9]]
-      vertical_block_below = [[1, 4], [2, 5], [3, 6]]
-      vertical_block_above = [[4, 7], [5, 8], [6, 9]]
-
-      #sandwich
-      horizontal_block_center = [[1, 3], [4, 6], [7, 9]]
-      vertical_block_center = [[1, 7], [2, 8], [3, 9]]
-      diagonal_block_center = [[1, 9], [3, 7]]
-
-      #first move corner
-        #if 1 || 3 || 7 || 9
-          #update in position 5
-
-
-      #first move center
-        #if 5
-          #update in positions 1 || 3 || 7 || 9
-
-      #else
-        #place adjacent to own first
-        #or corner if first move
-
+      if @board.valid_move?(@play_move)
+        @play_move.to_s
       end
 
     end
@@ -52,22 +79,45 @@ module Players
 
 end
 
+# Crazy result! Why did this let me win? As soon as it saw two it when into .sample mode??? BLOCK ABOVE should have detected
 
-# strategy coming:
-
-  # if two next to each other, block/put adjecent to
-    # H [[1, 2]*, [4, 5]*, [7, 8]*, [2, 3], [5, 6], [8, 9]] (* place to right, else left) (rt = index[1] + 1, lft = index[0] - 1)
-    # V [[1, 4]*, [2, 5]*, [3, 6]*, [4, 7], [5, 8], [6, 9]] (* place beneath, else above) (blw = index[1] + 3, abv = index[0] - 3)
-
-  # if sandwich, place between
-    # H [[1, 3], [4, 6], [7, 9]] (index[1] + or - 1)
-    # V [[1, 7], [2, 8], [3, 9]] (index[1] - 3)
-    # D [[1, 9], [3, 7]] (position 5)
-
-  # if corner, put in center (5)
-    # 1 || 3 || 7 || 9
-
-  # if center, put in corner (1 || 3 || 7 || 9)
-    # 5
-
-  # else adjacent to own or corner...
+  # Your turn, O.
+  #  X |   |
+  # -----------
+  #    | X | O
+  # -----------
+  #  O | X | O
+  # Your turn, X.
+  # Please enter your move, 1-9
+  # 3
+  #  X |   | X
+  # -----------
+  #    | X | O
+  # -----------
+  #  O | X | O
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  # Please enter a valid move, 1-9.
+  # Your turn, O.
+  #  X |   | X
+  # -----------
+  #  O | X | O
+  # -----------
+  #  O | X | O
