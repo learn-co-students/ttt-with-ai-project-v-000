@@ -55,8 +55,6 @@ module Players
               choice = @valid_moves.sample
               @play_move = @valid_moves[choice.to_i]
               @play_move
-              # offense? => corner_move = [cells[0], cells[2], cells[6], cells[8]]
-              # offense? => center_move = cells[4]
             end
 
           else
@@ -79,7 +77,7 @@ module Players
 
 end
 
-# Crazy result! Why did this let me win? It should have detected BLOCK ABOVE 
+# Crazy result! Why did this let me win? It should have detected BLOCK ABOVE
 
   # Your turn, O.
   #  X |   |
