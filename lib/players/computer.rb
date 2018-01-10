@@ -46,82 +46,29 @@ module Players
         end
 
 
-    elsif board.turn_count == 4
-      Game::WIN_COMBINATIONS.detect do |combo|
-        if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-          input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
-        end
-      end
-      if input == nil
+      else
         Game::WIN_COMBINATIONS.detect do |combo|
-          if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-          input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
+          if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
+            input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
           end
         end
-      end
-      if input == nil
-        input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
-      end
-
-
-    elsif board.turn_count == 5
-      Game::WIN_COMBINATIONS.detect do |combo|
-        if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-          input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
-        end
-      end
-      if input == nil
-        Game::WIN_COMBINATIONS.detect do |combo|
-          if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-          input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
-          end
-        end
-      end
-      if input == nil
-        input = [1,3,7,9].detect{|i|!board.taken?(i)}.to_s
-        end
-
-
-  elsif  board.turn_count == 6
-    Game::WIN_COMBINATIONS.detect do |combo|
-      if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-          input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
-      end
-    end
-      if input == nil
-        Game::WIN_COMBINATIONS.detect do |combo|
-          if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-            puts "turn 6 fix me."
+        if input == nil
+          Game::WIN_COMBINATIONS.detect do |combo|
+            if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
             input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
+            end
           end
         end
-      end
-      if input == nil
-        input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
-      end
-
-
-  elsif board.turn_count == 7 
-    Game::WIN_COMBINATIONS.detect do |combo|
-      if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-        input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
-      end
-    end
-    if input == nil
-    Game::WIN_COMBINATIONS.detect do |combo|
-      if combo.select{|i|board.position(i+1) != token && board.position(i+1) != " "}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
-        input = combo.select{|i|!board.taken?(i+1)}.first.to_i.+(1).to_s
+        if board.turn_count == 4 && !board.taken?(5)
+          puts "Since no one wanted the middle cell, I will avoid it to trap you!"
+          input = [1,3,7,9].detect{|i|!board.taken?(i)}.to_s
+        end
+        if input == nil
+          puts "random insert"
+          input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
         end
       end
-    end
-    if input == nil
-      input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
-    end
-
-
-    else input = [1,2,3,4,5,6,7,8,9].detect{|i|!board.taken?(i)}.to_s
-    end
-    input
+        input
+      end
     end
   end
-end
