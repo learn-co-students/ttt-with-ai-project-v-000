@@ -24,10 +24,9 @@ class Board
     @cells[input - 1]
   end
 
-  def update
-  end
-
-  def token
+  def update(position,x)
+    input = position.to_i
+    @cells[input-1] = x.token
   end
 
   def full?
@@ -37,8 +36,12 @@ class Board
   end
 
   def taken?(space)
-    if space == "X" || "O"
-
+    cell = space.to_i
+    if @cells[cell-1] == "X" || @cells[cell-1] == "O"
+      return true
+    else @cells[cell-1] == nil || @cells[cell-1] == " "
+      return false
+    end
   end
 
   def valid_move?
