@@ -42,7 +42,9 @@ class Board
     end
   end
 
-  def taken?
+  def taken?(space)
+    if space == "X" || "O"
+
   end
 
   def valid_move?
