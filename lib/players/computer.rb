@@ -52,7 +52,7 @@ module Players
             elsif key == :diag_block_cntr
               @play_move = 5
             else
-              choice = @valid_moves.sample
+              choice = @valid_moves.sample # make this concrete...not random...
               @play_move = @valid_moves[choice.to_i]
               @play_move
             end
