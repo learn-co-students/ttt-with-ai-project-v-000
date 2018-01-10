@@ -36,7 +36,9 @@ class Board
   def turn_count
   end
 
-  def taken?
+  def taken?(space)
+    if space == "X" || "O"
+
   end
 
   def valid_move?
