@@ -79,7 +79,7 @@ module Players
 
 end
 
-# Crazy result! Why did this let me win? As soon as it saw two it when into .sample mode??? BLOCK ABOVE should have detected
+# Crazy result! Why did this let me win? It should have detected BLOCK ABOVE 
 
   # Your turn, O.
   #  X |   |
