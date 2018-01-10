@@ -101,7 +101,7 @@ module Players
       end
 
 
-  elsif board.turn_count == 7
+  elsif board.turn_count == 7 
     Game::WIN_COMBINATIONS.detect do |combo|
       if combo.select{|i|board.position(i+1) == token}.size == 2 && combo.any?{|i|board.position(i+1) == " "}
         input = combo.select{|i|board.position(i+1) == " "}.first.to_i.+(1).to_s
