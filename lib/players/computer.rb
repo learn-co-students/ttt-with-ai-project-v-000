@@ -77,7 +77,7 @@ module Players
 
 end
 
-# Crazy result! Why did this let me win? It should have detected BLOCK ABOVE
+# Crazy result! Why did this let me win? It should have detected BLOCK ABOVE. Offensive moves? No .sample?
 
   # Your turn, O.
   #  X |   |
