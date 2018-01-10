@@ -40,8 +40,8 @@ class Board
     input.to_i.between?(1, 9) && position(input) == " "
   end
 
-  def update(token, player)
-
+  def update(input, player)
+    self.cells[input.to_i - 1] = player.token
   end
-  
+
 end
