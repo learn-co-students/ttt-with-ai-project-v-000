@@ -1,0 +1,18 @@
+Version 1.2.0
+- Added changelog
+- Cleaned code and organized
+- Added Dry_Helpers class to help with some repeating code
+- Added Modes class to store game modes
+- Added play first? option
+- Added play again? option
+- Made AI A Little Faster
+
+Version 1.0.0
+- Added Game Modes 0/1/2
+- Added CLI Control Flow
+- Added Some Color Eye Candy To CLI Output
+- Added Some Sleep Methods For A More Realistic Interaction With AI
+
+
+Initial
+- Passed all tests
