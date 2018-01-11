@@ -1,4 +1,3 @@
-require 'pry'
 class Board
 
   attr_accessor :cells
@@ -20,16 +19,15 @@ class Board
   end
 
   def position(input)
-    i = input.to_i - 1
-    self.cells[i]
+    self.cells[input.to_i - 1]
   end
 
   def full?
-    @cells.all? {|token| token == "X" || token == "O"}
+    self.cells.all? {|t| t == "X" || t == "O"}
   end
 
   def turn_count
-    @cells.count{|token| token == "X" || token == "O"}
+    self.cells.count{|t| t == "X" || t == "O"}
   end
 
   def taken?(input)

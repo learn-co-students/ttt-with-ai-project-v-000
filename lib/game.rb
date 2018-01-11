@@ -1,4 +1,3 @@
-require 'pry'
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -46,7 +45,7 @@ class Game
     player = current_player
     board.display
     puts "It's #{player.token}'s move."
-    player_move = player.move(self.board.cells)
+    player_move = player.move(self.board)
 
     if board.valid_move?(player_move)
       board.update(player_move, player)
@@ -97,7 +96,7 @@ class Game
     end
 
     puts "Let's begin!"
-    Game.new(player_1, player_2, Board.new).play
+    new(player_1, player_2, Board.new).play
 
     puts "Would you like to play again? (Y/N)"
     play_again_input = gets.strip
