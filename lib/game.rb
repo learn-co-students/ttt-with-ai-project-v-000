@@ -23,7 +23,9 @@ class Game
     end
     
     def turn
+        puts " " * 20
         puts "Player #{current_player.token}, please enter 1-9:"
+        puts " " * 20
         move = current_player.move(board)
         if board.valid_move?(move)
             board.update(move, current_player)
