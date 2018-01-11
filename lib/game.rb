@@ -28,6 +28,7 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
     puts "Spectator:"+" 0".green
     puts "You vs Computer:"+" 1".green
     puts "Player vs Player:"+" 2".green
+    puts "TO GO NUCLEAR ENTER:".red+" 'war games'".yellow
     choose_mode
   end
 
@@ -41,6 +42,8 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
         self.vs_computer
       when "2"
         self.player_vs_player
+      when "war games"
+        self.wargames
       else
         self.mode_error!
       end
@@ -51,20 +54,42 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
     while !over? && !draw?; turn end
     if won? then puts "Congratulations #{winner}!".green
     elsif draw? then puts "It's A Draw!!".yellow end
-    play_again?
   end
-
-  def play_again?
-    puts "WOULD YOU LIKE TO PLAY AGAIN?".cyan
-    puts "Enter (y/n)".green
-    ans = gets.strip
-    case ans
-    when "y"
-      Game.start
-    when "n"
-    else
-      self.class.play_again_error!
-      play_again?
+#=====================================WAR GAMES=======================================  
+  def play_war
+    won = 0
+    games = 0
+    5.times do 
+      while !over? && !draw?; turn end
+      if won?
+        won += 1
+        board.reset!
+        games += 1
+        turn if games < 5
+      elsif draw? then 
+        board.reset!
+        games += 1
+        turn if games < 5
+      end
+    end
+    puts "GAME WAS WON #{won} TIMES!".green 
+  end
+#=====================================================================================
+  def self.play_again?
+    ans = nil
+    until ans == "n" do
+      puts "WOULD YOU LIKE TO PLAY AGAIN?".cyan
+      puts "Enter (y/n)".green
+      ans = gets.strip
+      case ans
+      when "y"
+        sleep(0.3)
+        start
+      when "n"
+        return puts "THANKS FOR PLAYING! COME BACK SOON!".green
+      else
+        play_again_error!
+      end
     end
   end
 #=====================================================================================

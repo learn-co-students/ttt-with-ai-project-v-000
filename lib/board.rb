@@ -19,8 +19,8 @@ class Board
   end
 
   def display
-    puts " #{board[0]} | #{board[1]} | #{board[2]} \n-----------"
-    puts " #{board[3]} | #{board[4]} | #{board[5]} \n-----------"
+    puts " #{board[0]} | #{board[1]} | #{board[2]} \n"+"-"*11
+    puts " #{board[3]} | #{board[4]} | #{board[5]} \n"+"-"*11
     puts " #{board[6]} | #{board[7]} | #{board[8]} \n"
   end
 
