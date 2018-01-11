@@ -1,3 +1,7 @@
+# Created by Naomi Dennis
+# Full Stack Web Development v3
+# Flatiron School
+# 1/11/2018
 module Players
 
   class Human < Player

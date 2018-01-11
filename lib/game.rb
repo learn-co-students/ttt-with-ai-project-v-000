@@ -1,4 +1,8 @@
 require "pry"
+# Created by Naomi Dennis
+# Full Stack Web Development v3
+# Flatiron School
+# 1/11/2018
 class Game
     attr_accessor :board, :player_1, :player_2
 
