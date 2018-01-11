@@ -26,14 +26,12 @@ class Computer < Player
         end
         n == 3
       end # end select
-      puts "AI: #{to_move}!"
-    #  binding.pry
       if to_move.empty?
         self.genRandomPosition(board)
       else
         moves = to_move[0].select { |cell_pos| cells[cell_pos] == " " }
-      #  binding.pry
-        moves[0] + 1
+        i = rand(moves.size)
+        moves[i] + 1
       end
 
     else #haven't made a first move
