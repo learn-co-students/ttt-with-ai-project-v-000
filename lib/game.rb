@@ -1,3 +1,4 @@
+require "pry"
 class Game
     attr_accessor :board, :player_1, :player_2
 
@@ -21,14 +22,12 @@ class Game
 
   def check_win_combo(player)
       token = player.token;
-      combos = Array.new
-	    combos =  WIN_COMBINATIONS.detect do | combo |
+	    WIN_COMBINATIONS.detect do | combo |
 	         pos_1 = @board.position(( combo[0] + 1).to_s)
 	         pos_2 = @board.position(( combo[1] + 1).to_s)
 	         pos_3 = @board.position(( combo[2] + 1).to_s)
-	        pos_1 == token && pos_2 == token && pos_3 == token
+	         pos_1 == token && pos_2 == token && pos_3 == token
       end
-    combos.nil? ? false : combos
   end
 
   def won?
@@ -46,7 +45,7 @@ class Game
 
 
   def draw?
-    !(self.won?.kind_of?(Array))
+    !(self.won?.kind_of?(Array)) && @board.full?
   end
 
   def winner
@@ -59,16 +58,16 @@ class Game
   end
 
   def over?
-
-    if self.won?
-      true
-    else
-        if @board.full?
-          true
-        else
-          false
-        end
-    end
+    self.won? || self.draw?
+    # if self.won?
+    #   true
+    # else
+    #     if @board.full?
+    #       true
+    #     else
+    #       false
+    #     end
+    # end
   end
 
   def turn
@@ -81,12 +80,13 @@ class Game
   end
 
   def play
-  #  system "clear"
-  #  @board.display
 
+   @board.display
   while !self.over? do
     self.turn
+     @board.display
   end
+
 	 if self.won?.kind_of?(Array)
   	#	  @board.display
   		puts "Congratulations #{self.winner}!"
@@ -96,4 +96,26 @@ class Game
 	   end
   end
 
+  def start
+    system "clear"
+    puts "Welcome to Tic Tac Toe!\n--------------------"
+    puts "1. 2 Players!"
+    puts "2. 1 Players"
+    puts "3. 0 Players"
+    puts "--------------------"
+    puts "Select Option: "
+    input = gets.strip
+    if input == "1"
+      self.play
+    elsif input == "2"
+      @player_2 = Players::Computer.new("O");
+      self.play
+    elsif input == "3"
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+      self.play
+    else
+      self.start
+    end
+  end
 end
