@@ -29,19 +29,16 @@ class TicTacToeCLI
         elsif players == 2
             players_h_vs_h
         end
+            puts "==" * 20
             puts "Play again? Type (yes) or (exit)."
             input = gets.strip
         end
     end
     
     def players_h_vs_cpu
-       puts "Would you like to go first and be 'X'? Y/N"
-       input = gets.strip
-        if input.upcase == "Y"
-           Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-        else
-            Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
-        end
+        puts "You'll be Player 2, 'O'."
+        puts "==" * 20
+           Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
     end
     
     def players_h_vs_h

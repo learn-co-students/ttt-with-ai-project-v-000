@@ -26,8 +26,12 @@ class Board
         self.cells.none? {|c| c == " "}  
     end 
     
+    def empty?
+       self.cells.all? {|c| c == " "}  
+    end
+    
     def turn_count
-        self.cells.count {|c| c == "X" || c == "O"}    
+        self.cells.count {|c| c == "X" || c == "O"}   
     end
     
     def taken?(move)

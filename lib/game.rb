@@ -29,17 +29,18 @@ class Game
             board.update(move, current_player)
             board.display
         else
+            puts "**" * 20
             puts "--Please enter a valid move--"
+            puts "**" *20
             turn
         end
     end
     
     def won?
-        combo = WIN_COMBINATIONS.detect do |c|
+        WIN_COMBINATIONS.detect do |c|
             board.cells[c[0]] == "X" && board.cells[c[1]] == "X" && board.cells[c[2]] == "X" || 
             board.cells[c[0]] == "O" && board.cells[c[1]] == "O" && board.cells[c[2]] == "O"
         end
-        combo
     end
     
     def draw?
