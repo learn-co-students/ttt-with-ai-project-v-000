@@ -14,7 +14,7 @@ class TicTacToeCLI
 
     def welcome
         puts "--" * 20
-        puts "Welcome to Tic Tac Toe!"  
+        puts " Welcome to Tic Tac Toe! ".colorize(color: :white, background: :blue)  
         puts "--" * 20
     end
     
@@ -24,8 +24,8 @@ class TicTacToeCLI
             puts "Please Enter Player Mode To Begin:"
             puts "  " * 20
             puts "Spectator:"+" 0".green
-            puts "You vs Computer:" "1".red
-            puts "Player vs Player:" "2".red
+            puts "You vs Computer:"+" 1".green
+            puts "Player vs Player:"+" 2".green
             input = gets.strip
             players = input.to_i
         if players == 0
@@ -36,13 +36,14 @@ class TicTacToeCLI
             players_h_vs_h
         end
             puts "==" * 20
-            puts "Play again? Type (yes) or (exit)."
+            puts "Play again? Type:"+"(yes) ".blue + "or" + " (exit)".blue
             input = gets.strip
         end
     end
     
     def players_h_vs_cpu
-        puts "You'll be Player 2, 'O'."
+        puts "  " * 20
+        puts "You'll be Player 2, 'O'.".green
         puts "==" * 20
            Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
     end

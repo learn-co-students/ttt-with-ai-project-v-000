@@ -24,7 +24,7 @@ class Game
     
     def turn
         puts " " * 20
-        puts "Player #{current_player.token}, please enter 1-9:"
+        puts "Player " + "#{current_player.token}".green + ", please enter 1-9:"
         puts " " * 20
         move = current_player.move(board)
         if board.valid_move?(move)
@@ -32,8 +32,8 @@ class Game
             board.display
         else
             puts "**" * 20
-            puts "--Please enter a valid move--"
-            puts "**" *20
+            puts "--Please enter a valid move--".red
+            puts "**" * 20
             turn
         end
     end
@@ -66,10 +66,10 @@ class Game
         end
         if won?
             puts "  " * 20
-            puts "Congratulations #{winner}!"
+            puts "Congratulations #{winner}!".yellow
             puts "  " * 20
         elsif draw?
-            puts "Cat's Game!"
+            puts "Cat's Game!".red
         end    
     end
     
