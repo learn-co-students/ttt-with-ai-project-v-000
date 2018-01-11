@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
-require 'colorize'
 require_relative '../config/environment'
 
+Game.start
 
-# WORKING ON MY CLI INTERACTION AND AI LOGIC SEPARATELY. COME BACK FOR FINISHED PRODUCT WHEN COMMIT WITH "COMPLETE"
