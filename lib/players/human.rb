@@ -1,10 +1,10 @@
 module Players
+  
   class Human < Player
-# call Human class as Players::Human
-    def move(cells)
+
+    def move(board)
       puts "Please enter your next move."
-      input = gets
-      #working but could change input name
+      input = gets.strip
     end
   end
 end
