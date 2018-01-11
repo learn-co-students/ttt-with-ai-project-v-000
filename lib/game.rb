@@ -36,19 +36,16 @@ class Game
   end
 
   def winner
-    if won?
-      board.cells[won?[0]]
-    end
+      board.cells[won?[0]] if won?
   end
 
   def turn
-    player = current_player
     board.display
-    puts "It's #{player.token}'s move."
-    player_move = player.move(self.board)
-
+    p = current_player
+    puts "It's #{p.token}'s move."
+    player_move = p.move(self.board)
     if board.valid_move?(player_move)
-      board.update(player_move, player)
+      board.update(player_move, p)
     else
       puts "Sorry, that move is not valid. Please enter another position."
       turn
