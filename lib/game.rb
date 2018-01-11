@@ -101,6 +101,8 @@ class Game
       start
     elsif play_again_input == "N"
       exit
+    else
+      puts "Invalid input. Exiting game."
     end
   end
 end
