@@ -1,3 +1,5 @@
+
+
 class TicTacToeCLI
     attr_accessor :players
     
@@ -19,7 +21,11 @@ class TicTacToeCLI
     def player_mode
         input = nil
         while input != "exit"
-            puts "Would you like to play 0, 1, or 2 player?"
+            puts "Please Enter Player Mode To Begin:"
+            puts "  " * 20
+            puts "Spectator:"+" 0".green
+            puts "You vs Computer:" "1".red
+            puts "Player vs Player:" "2".red
             input = gets.strip
             players = input.to_i
         if players == 0

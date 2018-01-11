@@ -65,7 +65,9 @@ class Game
             turn
         end
         if won?
+            puts "  " * 20
             puts "Congratulations #{winner}!"
+            puts "  " * 20
         elsif draw?
             puts "Cat's Game!"
         end    
