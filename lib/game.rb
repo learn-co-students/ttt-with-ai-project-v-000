@@ -64,10 +64,10 @@ class Game
   def start
     game_started = false
     puts "Welcome to the pinnacle of human achievement!"
-    puts "Are you weird, lonely, or committed?"
+    puts "How many players?"
     input = gets.strip.chomp
-    if input == "lonely"
-      puts "Okay, sad sack! You're gonna play the computer. Who goes first: you or the computer?"
+    if input == "1"
+      puts "Okay! You're gonna play the computer. Who goes first: you or the computer?"
       input_2 = gets.strip.chomp
       if input_2 == "human" || input_2 == "me"
         @player_1 = Players::Human.new("X")
@@ -78,20 +78,20 @@ class Game
         @player_2 = Players::Human.new("O")
         game_started = true
       elsif input_2 == "you"
-      puts "No, dummy. I'm not playing. START OVER."
+      puts "No, I'm not playing. START OVER."
       self.start
     else 
       puts "English is hard."
         self.start
       end
-    elsif input == "weird"
-    puts "Okay, weirdo! You're gonna watch two computers play. Type start to watch other people have fun, just like the rest of your life."
+    elsif input == "0"
+    puts "Okay! You're gonna watch two computers play."
     input = gets
       @player_1 = Players::Computer.new("X")
       @player_2 = Players::Computer.new("O")
       game_started = true
-    elsif input == "committed"
-      "Wow, way to rub it in our faces that someone loves you. Player 1, you go first because that's how games work."
+    elsif input == "2"
+      "Okay! Player 1, you go first."
       @player_1 = Players::Human.new("X")
       @player_2 = Players::Human.new("O")
       game_started = true
