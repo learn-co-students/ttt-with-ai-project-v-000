@@ -61,7 +61,9 @@ class Game
 
     @player = current_player
 
+    puts "---"
     puts "Your turn, #{@player.token}."
+    puts "---"
 
     @input = @player.move(board)
     @input ||= ''
@@ -112,6 +114,7 @@ class Game
     game_input.chomp!
 
     puts "The first player will be 'X'. Good luck!"
+    puts "---"
 
     if game_input == "0"
 

@@ -29,14 +29,9 @@ module Players
 
       }
 
-      # check block_combos against cells to pick ideal move
       block_combos.each do |key, value|
-
         value.each do |combo|
-
           if cells[combo[0]] == "X" && cells[combo[1]] == "X" || cells[combo[0]] == "O" && cells[combo[1]] == "O"
-
-            # identify which block_combo
             if key == :block_rt
               @play_move = (combo[1] + 1) + 1
             elsif key == :block_lft
@@ -51,21 +46,32 @@ module Players
               @play_move = (combo[1] + 1) - 3
             elsif key == :diag_block_cntr
               @play_move = 5
-            else
-              choice = @valid_moves.sample # make this concrete...not random...
-              @play_move = @valid_moves[choice.to_i]
-              @play_move
             end
-
-          else
-            choice = @valid_moves.sample
-            @play_move = @valid_moves[choice.to_i]
-            @play_move
           end
-
         end
-
       end
+
+
+      diag_block_combos.each do |key, value|
+        if cells[value[0]] == "X" && cells[value[1]] == "X" || cells[value[0]] == "O" && cells[value[1]] == "O"
+          if key == :block_up_rt
+            @play_move = 3
+          elsif key == :block_up_lft
+            @play_move = 1
+          elsif key == :block_low_rt
+            @play_move = 9
+          elsif key == :block_low_lft
+            @play_move = 7
+          else
+            ideal_moves = ["1", "3", "5", "7", "9"]
+            ideal_moves.collect! do |value|
+              @board.valid_move?(value)
+              @value = value
+            end
+            @play_move = ideal_moves.sample
+          end # close key check
+        end # close if statement
+      end # close iteration
 
       if @board.valid_move?(@play_move)
         @play_move.to_s
@@ -77,45 +83,48 @@ module Players
 
 end
 
-# Crazy result! Why did this let me win? It should have detected BLOCK ABOVE. Offensive moves? No .sample?
+# need to give "player_2" a starting move?
 
-  # Your turn, O.
-  #  X |   |
-  # -----------
-  #    | X | O
-  # -----------
-  #  O | X | O
-  # Your turn, X.
-  # Please enter your move, 1-9
-  # 3
-  #  X |   | X
-  # -----------
-  #    | X | O
-  # -----------
-  #  O | X | O
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  # Please enter a valid move, 1-9.
-  # Your turn, O.
-  #  X |   | X
-  # -----------
-  #  O | X | O
-  # -----------
-  #  O | X | O
+
+
+#########################
+
+# value.detect do |combo|
+#
+#   if cells[combo[0]] == "X" && cells[combo[1]] == "X" || cells[combo[0]] == "O" && cells[combo[1]] == "O"
+#
+#     if key == :block_rt
+#       @play_move = (combo[1] + 1) + 1
+#     elsif key == :block_lft
+#       @play_move = (combo[0] + 1) - 1
+#     elsif key == :block_blw
+#       @play_move = (combo[1] + 1) + 3
+#     elsif key == :block_abv
+#       @play_move = (combo[0] + 1) - 3
+#     elsif key == :hor_block_cntr
+#       @play_move = (combo[0] + 1) + 1
+#     elsif key == :ver_block_cntr
+#       @play_move = (combo[1] + 1) - 3
+#     elsif key == :diag_block_cntr
+#       @play_move = 5
+#     end
+#
+#   end
+#
+# end
+
+
+
+#   else
+#     @play_move = @valid_moves.sample
+#     # @play_move = @valid_moves[choice.to_i]
+#     # @play_move
+#   end
+#
+# end
+
+#end
+
+# if @board.valid_move?(@play_move)
+#   @play_move.to_s
+# end
