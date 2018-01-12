@@ -7,23 +7,28 @@ require_relative '../config/environment'
 # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
 # Give them the option to quit the game
 # return the user's choice
+def prompt
+end
 
 # 'two_player_mode' method
 # display the mode type and rules of the game
 # start a game with two human players
 # ask the user if they want to play again
-
-
+def two_player_mode
+end
 # 'one_player_mode' method
 # Ask the user for who should go first and be "X".
 # start a game with a human player vs a computer player
 # ask the user if they want to play again
-
+def one_player_mode
+end
 
 # 'zero_player_mode' method
 # display the mode type and rules of the game
 # start a game with 2 computer players
 # ask the user if they want to play again
+def zero_player_mode
+end
 
 #  'choose_game' method
 # Use the input to correctly initialize a Game with the appropriate player 
@@ -36,11 +41,15 @@ require_relative '../config/environment'
 
 # If the user chooses 0,
 # run zero_player_mode
+def choose_game
+end
 
 # 'run' method
 # get the game type from the user
 # Use the input to correctly initialize a Game with the appropriate player 
 # types and token values.
+def run
+end
 
 # When the game is over, the CLI should prompt the user if they would like 
 # to play again and allow them to choose a new configuration for the game as 
@@ -49,7 +58,9 @@ require_relative '../config/environment'
 # Ask the user if they'd like to play again
 # if yes, run another game.
 #If the user doesn't want to play again, exit the program.
-
+def play_again?
+end
 
 # Greet the user with a message.
-run()
+puts " Welcome to Tic Tac Toe!"
+# run()
