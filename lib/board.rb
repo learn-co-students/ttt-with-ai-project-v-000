@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   attr_accessor :cells
   def initialize
@@ -45,5 +46,6 @@ class Board
   
   def update(input, player)
     self.cells[input.strip.to_i - 1] = player 
+    binding.pry
   end
 end
