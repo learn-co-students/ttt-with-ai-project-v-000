@@ -62,6 +62,7 @@ class Game
 
 	def turn
 		self.board.update(self.current_player.move, current_player)
+		self.board.display
 	end
 
 	def play
