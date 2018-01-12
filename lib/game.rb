@@ -81,7 +81,7 @@ class Game
       puts "No, I'm not playing. START OVER."
       self.start
     else 
-      puts "English is hard."
+      puts "Sorry, I didn't recognize that. START OVER."
         self.start
       end
     elsif input == "0"
@@ -96,7 +96,7 @@ class Game
       @player_2 = Players::Human.new("O")
       game_started = true
     elsif game_started == false
-      puts "English is hard."
+      puts "Sorry, I didn't recognize that. START OVER."
       self.start
     end
     puts "Let's get started!"
