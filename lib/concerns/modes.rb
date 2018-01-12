@@ -6,7 +6,7 @@ module Modes
     self.mode = "valid"
     puts "COMPUTER vs COMPUTER... GAME STARTING IN 3..2..1!".cyan
     sleep(2)
-    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    Game.new(Players::Computer.new("X".red), Players::Computer.new("O".yellow)).play
   end
 #==========================================VS_COMPUTER=============================================
   def vs_computer
@@ -17,10 +17,10 @@ module Modes
     case ans
     when "y"
       vs_computer_start
-      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      Game.new(Players::Human.new("X".green), Players::Computer.new("O".red)).play
     when "n"
       vs_computer_start
-      Game.new(Players::Computer.new("O"), Players::Human.new("X")).play
+      Game.new(Players::Computer.new("X".red), Players::Human.new("O".green)).play
     else
       play_first!
     end
@@ -42,7 +42,7 @@ module Modes
     self.mode = "valid"
     puts "WAR GAMES!!!".red + " ☠" + " INITIATING IN 3..2..1!".red
     sleep(2)
-    Game.new(Players::Joshua.new("X"), Players::Joshua.new("O")).play_war
+    Game.new(Players::Joshua.new("X".red), Players::Joshua.new("O".red)).play_war
   end
 #=============================================ERRORS===============================================
   def mode_error!

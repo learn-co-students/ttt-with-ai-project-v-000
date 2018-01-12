@@ -1,7 +1,19 @@
+Version 1.3.1
+
+- added board.user_display 
+shows available positions as numbered cells in board on user turn
+
+- added player colors
+player char tokens now in 2 different colors to tell players apart 
+
+#==============================================
 Version 1.2.1
+
 - Small code clean up to pass tests with changes from 1.2.0
 
+#==============================================
 Version 1.2.0
+
 - Added changelog
 - Cleaned code and organized
 - Added Dry_Helpers class to help with some repeating code
@@ -10,12 +22,15 @@ Version 1.2.0
 - Added play again? option
 - Made AI A Little Faster
 
+#==============================================
 Version 1.0.0
+
 - Added Game Modes 0/1/2
 - Added CLI Control Flow
 - Added Some Color Eye Candy To CLI Output
 - Added Some Sleep Methods For A More Realistic Interaction With AI
 
-
+#==============================================
 Initial
-- Passed all tests
+
+- Coded logic for playing a full game of tic tac toe

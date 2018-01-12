@@ -2,10 +2,12 @@ module Players
 #====================human=====================
   class Human < Player
     def move(board)
-      board.display
-      puts "Your Move #{self.token}! (Enter 1-9)".yellow
+      board.user_display
+      puts "Your Move #{self.token}! (Enter 1-9)".cyan
       gets.strip
     end
   end
 #==============================================
 end
+
+

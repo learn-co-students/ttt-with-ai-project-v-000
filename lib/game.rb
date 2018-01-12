@@ -1,10 +1,11 @@
 class Game < Dry_Helpers
-#=====================================properties======================================
+#======================================modules========================================
   include Players
   extend Modes
+#=====================================properties======================================
   attr_accessor :player_1, :player_2, :board
 #=====================================intialize=======================================
-  def initialize(p1 = Players::Human.new("X"), p2 = Players::Human.new("O"), board = Board.new)
+  def initialize(p1 = Players::Human.new("X".green), p2 = Players::Human.new("O".red), board = Board.new)
     self.player_1 = p1; self.player_2 = p2; self.board = board
   end
 #====================================game_states======================================

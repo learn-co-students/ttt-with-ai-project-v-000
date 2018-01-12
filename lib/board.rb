@@ -23,6 +23,15 @@ class Board
     puts " #{board[3]} | #{board[4]} | #{board[5]} \n"+"-"*11
     puts " #{board[6]} | #{board[7]} | #{board[8]} \n"
   end
+  
+  def user_display
+    cells = board.each_with_index.map do |cell, i|
+            cell == " " ? cell = (i + 1).to_s : cell = cell
+            end
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} \n"+"-"*11
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} \n"+"-"*11
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} \n"
+  end
 
   def position(pos)
     board[tru(pos)]
