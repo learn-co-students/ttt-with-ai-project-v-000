@@ -37,15 +37,15 @@ class Board
  end
  
  def taken?(input)
-   self.cells[input.strip.to_i-1] != " "
+   self.cells[input.to_i-1] != " "
  end
  
  def valid_move?(input)
-  input.strip.to_i > 0 && input.strip.to_i < 10 && !self.taken?(input)
+  input.to_i > 0 && input.to_i < 10 && !self.taken?(input)
   end
   
   def update(input, player)
-    self.cells[input.strip.to_i - 1] = player 
-    binding.pry
+    hash = {one:"help"}
+    self.cells[input.strip.to_i - 1] = player.token 
   end
 end
