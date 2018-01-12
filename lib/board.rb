@@ -30,13 +30,13 @@ class Board
   end
 
   def full?
-    cells.all? do |cell_value| 
+    cells.all? do |cell_value|
         cell_value == 'X' || cell_value == 'O'
     end
   end
 
   def turn_count
-    cells.count do |cell_value| 
+    cells.count do |cell_value|
         cell_value == 'X' || cell_value == 'O'
     end
   end
@@ -50,7 +50,11 @@ class Board
     end
   end
 
-  def valid_move?
+  def valid_move?(input)
+    position = input.to_i
+    if position.between?(1, 9) && !taken?(position)
+      return true
+    end
   end
 
 end
