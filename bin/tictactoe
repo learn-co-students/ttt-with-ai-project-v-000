@@ -8,6 +8,7 @@ require_relative '../config/environment'
 # Give them the option to quit the game
 # return the user's choice
 def prompt
+    gets.strip
 end
 
 # 'two_player_mode' method
@@ -41,7 +42,26 @@ end
 
 # If the user chooses 0,
 # run zero_player_mode
-def choose_game
+def choose_game(type)
+    case(type)
+    when '2'
+        puts "This feature is not yet available. Please try again later."
+        # two_player_mode
+    when '1'
+        puts "This feature is not yet available. Please try again later."
+        # one_player_mode
+    when '0'
+        puts "This feature is not yet available. Please try again later."
+        # zero_player_mode
+    when 'q'
+        puts "Thanks for playing! Good bye."
+        exit
+    else
+        puts "You have not selected a valid option." 
+        puts "Please enter a number (0-2) or 'q' to quit."
+    end
+
+    choose_game(prompt)
 end
 
 # 'run' method
@@ -49,6 +69,7 @@ end
 # Use the input to correctly initialize a Game with the appropriate player 
 # types and token values.
 def run
+    choose_game(prompt)
 end
 
 # When the game is over, the CLI should prompt the user if they would like 
@@ -63,4 +84,4 @@ end
 
 # Greet the user with a message.
 puts " Welcome to Tic Tac Toe!"
-# run()
+run()
