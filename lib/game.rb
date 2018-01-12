@@ -25,4 +25,54 @@ class Game
 		end
 	end
 
+	def current_player
+		self.board.turn_count.even? ? player_1 : player_2
+	end
+
+	def over?
+		draw? || won?
+	end
+
+	def won?
+		won_combo = nil
+
+		WIN_COMBINATIONS.each do |combo|
+			position_1 = self.board.cells[combo[0]]
+			position_2 = self.board.cells[combo[1]]
+			position_3 = self.board.cells[combo[2]]
+
+			if position_1 == "X" && position_2 == "X" && position_3 == "X"
+				won_combo = combo
+				break
+			elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+				won_combo = combo
+				break
+			end
+		end
+		won_combo
+	end
+
+	def draw?
+		self.board.full? && !won?
+	end
+
+	def winner
+		won? ? self.board.cells[won?[0]] : nil
+	end
+
+	def turn
+		self.board.update(self.current_player.move, current_player)
+	end
+
+	def play
+		until over?
+			turn
+		end
+		if won?
+			puts "Congratulations #{winner}!"
+		elsif draw?
+			puts "Cat\'s Game!"
+		end
+	end
+
 end
