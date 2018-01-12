@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+game = Game.new
+game.start
+
+
+# NOTE : Using for testing Computer Intelligence
+# player = Players::Human.new("X")
+# computer = Players::Computer.new("O")
+# board = Board.new
+# board.cells = ["O", "X", " ", "X", "O", " ", "X", "O", " "]
+# result = computer.move(board)
+# puts "Board = #{board.cells}"
+# puts "Computer = #{result}"
+
+
+##Referenced Labs
+# All of the Tic Tac Toe (ttt) labs from "ttt-1-welcome-rb-v-000" to "ttt-game-status-v-000"
+# tic-tac-toe-rb-v-000
+
+##Test play
+# ruby bin/tictactoe
+
+##Specs
+# rspec spec/01_board_spec.rb
+# rspec spec/02_player_spec.rb
+# rspec spec/03_human_player_spec.rb
+# rspec spec/04_game_spec.rb
+# rspec spec/05_computer_player_spec.rb
