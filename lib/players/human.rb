@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 
 require 'pry'
 
+=======
+>>>>>>> 41acc11f4be1708d32cc2eebd7b841b8274d350c
 module Players
   class Human < Player
     # your code here

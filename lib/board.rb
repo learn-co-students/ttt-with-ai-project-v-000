@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 require 'pry'
 class Board
 
+=======
+>>>>>>> 41acc11f4be1708d32cc2eebd7b841b8274d350c
   attr_accessor :cells
 
   def initialize
