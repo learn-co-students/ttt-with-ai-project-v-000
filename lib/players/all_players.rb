@@ -13,7 +13,7 @@ module Players
     sleep(0.3)
     if board.valid_move?(move)
       board.update(move, current_player)
-    elsif current_player.class == Players::Computer || current_player.class == Players::Joshua
+    elsif current_player.class == Players::Joshua
       turn
     else move_error! end
     board.display

@@ -8,11 +8,12 @@ describe 'Players::Human' do
   describe '#move' do
     it 'asks the user for input and returns it' do
       human = Players::Human.new("X")
+      board = Board.new
       allow($stdout).to receive(:puts)
 
       expect(human).to receive(:gets).and_return("1")
 
-      expect(human.move([])).to eq("1")
+      expect(human.move(board)).to eq("1")
     end
   end
 end

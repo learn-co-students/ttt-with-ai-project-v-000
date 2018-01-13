@@ -6,7 +6,7 @@ module Modes
     self.mode = "valid"
     puts "COMPUTER vs COMPUTER... GAME STARTING IN 3..2..1!".cyan
     sleep(2)
-    Game.new(Players::Computer.new("X".red), Players::Computer.new("O".yellow)).play
+    Game.new(Players::Joshua.new("X".red), Players::Joshua.new("O".yellow)).play
   end
 #==========================================VS_COMPUTER=============================================
   def vs_computer
@@ -17,10 +17,10 @@ module Modes
     case ans
     when "y"
       vs_computer_start
-      Game.new(Players::Human.new("X".green), Players::Computer.new("O".red)).play
+      Game.new(Players::Human.new("X".green), Players::Joshua.new("O".red)).play
     when "n"
       vs_computer_start
-      Game.new(Players::Computer.new("X".red), Players::Human.new("O".green)).play
+      Game.new(Players::Joshua.new("X".red), Players::Human.new("O".green)).play
     else
       play_first!
     end

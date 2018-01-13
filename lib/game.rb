@@ -87,7 +87,7 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
         sleep(0.3)
         start
       when "n"
-        return puts "THANKS FOR PLAYING! COME BACK SOON!".green
+        return puts "THANKS FOR PLAYING! COME BACK SOON!".cyan
       else
         play_again_error!
       end
