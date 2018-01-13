@@ -10,7 +10,7 @@ module Players
   
   def turn
     move = current_player.move(board)
-    sleep(0.3)
+    # sleep(0.3)
     if board.valid_move?(move)
       board.update(move, current_player)
     elsif current_player.class == Players::Joshua

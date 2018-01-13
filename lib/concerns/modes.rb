@@ -28,21 +28,21 @@ module Modes
 
   def vs_computer_start
     puts "GAME STARTING... GOOD LUCK!".cyan
-    sleep(2)
+    sleep(3)
   end
 #========================================PLAYER_VS_PLAYER==========================================
   def player_vs_player
     self.mode = "valid"
     puts "PLAYER vs PLAYER... MAY THE BEST MAN WIN!".cyan
-    sleep(2.5)
+    sleep(3)
     Game.new.play
   end
 #============================================WARGAMES==============================================
   def wargames
     self.mode = "valid"
     puts "WAR GAMES!!!".red + " ☠" + " INITIATING IN 3..2..1!".red
-    sleep(2)
-    Game.new(Players::Joshua.new("X".red), Players::Joshua.new("O".red)).play_war
+    sleep(3)
+    Game.new(Players::Joshua_War.new("X".red), Players::Joshua_War.new("O".red)).play_war
   end
 #=============================================ERRORS===============================================
   def mode_error!
