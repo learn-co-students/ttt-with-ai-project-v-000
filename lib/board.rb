@@ -6,9 +6,11 @@ class Board
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
+
   def reset!
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
+
 
   def display
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
@@ -18,42 +20,36 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+
   def position(input)
     @cells[input.to_i - 1]
   end
+
 
   def full?
     @cells.all?{|cell| cell != " "}
   end
 
+
   def turn_count
     @cells.count{|cell| cell == "X" || cell == "O"}
   end
+
 
   def taken?(input)
     position(input) != " " ? true : false
   end
 
+
   def valid_move?(input)
     input.to_i.between?(1, 9) && taken?(input) == false ? true : false
   end
+
 
   def update(input, player)
     @cells[input.to_i - 1] = player.token
   end
 
-#end
-
-####
-
-  def first_moves
-    ideal_moves = ["1", "3", "5", "7", "9"]
-    ideal_moves.collect! do |value|
-      self.valid_move?(value)
-      @play_move = ideal_moves.sample
-    end
-    @play_move.to_i
-  end
 
   def check_block_combos
 
@@ -69,7 +65,7 @@ class Board
 
     }
 
-    @block_combos.each do |key, value|
+    @block_combos.detect do |key, value|
       value.each do |combo|
         if @cells[combo[0]] == "X" && @cells[combo[1]] == "X" || @cells[combo[0]] == "O" && @cells[combo[1]] == "O"
           if key == :block_rt
@@ -86,11 +82,7 @@ class Board
             @play_move = (combo[1] + 1) - 3
           elsif key == :diag_block_cntr
             @play_move = 5
-          else
-            nil
           end
-        else
-          nil
         end
       end
     end
@@ -109,7 +101,7 @@ class Board
 
     }
 
-    @diag_block_combos.each do |key, value| # ex. value == [4, 6]
+    @diag_block_combos.detect do |key, value| # ex. value == [4, 6]
 
       if @cells[value[0]] == "X" && @cells[value[1]] == "X" || @cells[value[0]] == "O" && @cells[value[1]] == "O"
 
@@ -121,14 +113,22 @@ class Board
           @play_move = 9
         elsif key == :block_low_lft
           @play_move = 7
-        else
-          nil
         end
-      else
-        nil
       end
     end
     @play_move
   end
 
 end
+
+#seems to glitch on turn 6
+
+#ex.
+# Your turn, O.
+#  O |   | X
+# -----------
+#  X | X | O
+# -----------
+#  O |   |
+
+#then indefinite loop after I placed a token in space 8
