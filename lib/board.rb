@@ -15,7 +15,7 @@ class Board
   end
 #=================instance=====================
   def reset!
-    self.cells = Array.new(9, " ")
+    self.cells = Array.new(9," ")
   end
 
   def display
@@ -25,7 +25,7 @@ class Board
   end
   
   def user_display
-    cells = board.each_with_index.map do |cell, i|
+    cells = board.each_with_index.map do |cell,i|
             cell == " " ? cell = (i + 1).to_s : cell = cell
             end
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} \n"+"-"*11

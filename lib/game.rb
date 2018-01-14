@@ -38,15 +38,15 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
     until self.mode == "valid"
       case self.mode
       when "0"
-        self.spectator
+        spectator
       when "1"
-        self.vs_computer
+        vs_computer
       when "2"
-        self.player_vs_player
+        player_vs_player
       when "war games"
-        self.wargames
+        wargames
       else
-        self.mode_error!
+        mode_error!
       end
     end
   end
@@ -60,29 +60,27 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4
   def play_war
     won = 0
     games = 0
-    100.times do 
+    5.times do 
       while !over? && !draw?; turn end
       if won?
         won += 1
         board.reset!
         games += 1
-        turn if games < 5
       elsif draw? then 
         board.reset!
         games += 1
-        turn if games < 5
       end
     end
-    puts "GAME WAS WON #{won} TIMES!".green 
+    puts "WAR GAMES RESULT:".red + " >> #{won} <<".green + " WINS".red 
   end
 #=====================================================================================
   def self.play_again?
-    ans = nil
-    until ans == "n" do
+    input = nil
+    until input == "n" do
       puts "WOULD YOU LIKE TO PLAY AGAIN?".cyan
       puts "Enter (y/n)".green
-      ans = gets.strip
-      case ans
+      input = gets.strip
+      case input
       when "y"
         sleep(0.3)
         start

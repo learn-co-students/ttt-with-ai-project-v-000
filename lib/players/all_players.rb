@@ -10,7 +10,6 @@ module Players
   
   def turn
     move = current_player.move(board)
-    # sleep(0.3)
     if board.valid_move?(move)
       board.update(move, current_player)
     elsif current_player.class == Players::Joshua
@@ -21,7 +20,7 @@ module Players
   end
 
   def move_error!
-    puts "\n Invalid Move Try Again \n".colorize(color: :white, background: :red)
+    puts "\n Invalid Move Try Again (Enter 1-9)\n".colorize(color: :white, background: :red)
     sleep(0.2)
     turn
   end
