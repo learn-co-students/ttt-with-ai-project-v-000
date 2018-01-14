@@ -16,8 +16,7 @@ class GameController
         selection = gets.strip
         case(selection)
         when '2'
-            puts "This feature is not yet available. Please try again later."
-            # two_player_mode
+            two_player_mode
         when '1'
             puts "This feature is not yet available. Please try again later."
             # one_player_mode
@@ -35,11 +34,12 @@ class GameController
     end
 
     def two_player_mode
-        # display the mode type and rules of the game
-        # start a game with two human players
-        # ask the user if they want to play again
-        # If yes, run another game.
-        #If the user doesn't want to play again, exit the program.
+        game = Game.new
+
+        puts "This is two player mode. The object of the game is to get three" 
+        puts "in a row either diagonally or horizontally. The game is done when a"
+        puts "player has won or all 9 squares are filled."
+        game.play
     end
 
     def one_player_mode
