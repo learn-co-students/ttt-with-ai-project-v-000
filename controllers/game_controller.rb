@@ -28,7 +28,6 @@ class GameController
             exit
         else
             puts "You have not selected a valid option."
-            puts "Please enter a number (0-2) or 'q' to quit."
             main_menu
         end
     end
@@ -40,6 +39,7 @@ class GameController
         puts "in a row either diagonally or horizontally. The game is done when a"
         puts "player has won or all 9 squares are filled."
         game.play
+        play_again?
     end
 
     def one_player_mode
