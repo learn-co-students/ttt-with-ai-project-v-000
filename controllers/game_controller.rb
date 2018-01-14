@@ -59,9 +59,14 @@ class GameController
     end
 
     def play_again?
-        # When the game is over, the CLI should prompt the user if they would like
-        # to play again and allow them to choose a new configuration for the game as
-        # described above.
+        puts "Do you want to play again? y/n "
+        selection = gets.strip.downcase
+        if selection == 'y' 
+            main_menu
+        else
+            puts "Thanks for playing! Good bye."
+            exit
+        end
     end
 
 end
