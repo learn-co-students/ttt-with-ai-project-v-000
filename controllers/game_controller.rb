@@ -8,11 +8,13 @@ def GameController
     end
 
     def main_menu
-        # List the kinds of game available
-        # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-        # Give them the option to quit the game
-        gets.strip
-        case(type)
+        puts "What kind of game would you like to play?"
+        puts "0  --Watch the computer play itself"
+        puts "1  --Play against the computer"
+        puts "2  --Play with a friend"
+        puts "Enter a number to start a game. Enter 'q' to exit."
+        selection = gets.strip
+        case(selection)
         when '2'
             puts "This feature is not yet available. Please try again later."
             # two_player_mode
@@ -37,7 +39,7 @@ def GameController
         # start a game with two human players
         # ask the user if they want to play again
         # If yes, run another game.
-        # If the user doesn't want to play again, exit the program.
+        #If the user doesn't want to play again, exit the program.
     end
 
     def one_player_mode
@@ -45,7 +47,7 @@ def GameController
         # start a game with a human player vs a computer player
         # ask the user if they want to play again
         # If yes, run another game.
-        # If the user doesn't want to play again, exit the program.
+        #If the user doesn't want to play again, exit the program.
     end
 
     def zero_player_mode
@@ -54,6 +56,13 @@ def GameController
         # ask the user if they want to play again
         # If yes, run another game.
         # If the user doesn't want to play again, exit the program.
+    end
+
+    
+    def play_again?
+        # When the game is over, the CLI should prompt the user if they would like
+        # to play again and allow them to choose a new configuration for the game as
+        # described above.
     end
 
 end
