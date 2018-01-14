@@ -18,11 +18,9 @@ class GameController
         when '2'
             two_player_mode
         when '1'
-            puts "This feature is not yet available. Please try again later."
-            # one_player_mode
-        when '0'
-            puts "This feature is not yet available. Please try again later."
-            # zero_player_mode
+            one_player_mode
+        when '0' 
+            zero_player_mode
         when 'q'
             puts "Thanks for playing! Good bye."
             exit
@@ -37,7 +35,7 @@ class GameController
 
         puts "This is two player mode. The object of the game is to get three" 
         puts "in a row either diagonally or horizontally. The game is done when a"
-        puts "player has won or all 9 squares are filled."
+        puts "player has won or all 9 squares are filled.\n"
         game.play
         play_again?
     end
@@ -48,6 +46,8 @@ class GameController
         # ask the user if they want to play again
         # If yes, run another game.
         #If the user doesn't want to play again, exit the program.
+        puts "This feature is not yet available. Please try again later.\n"
+        main_menu
     end
 
     def zero_player_mode
@@ -56,6 +56,8 @@ class GameController
         # ask the user if they want to play again
         # If yes, run another game.
         # If the user doesn't want to play again, exit the program.
+        puts "This feature is not yet available. Please try again later.\n"
+        main_menu
     end
 
     def play_again?
