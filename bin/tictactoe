@@ -5,4 +5,5 @@ require_relative '../config/environment'
 puts "Welcome to Tic Tac Toe!"
 
 game = Game.new
-game.start.play
+game.start
+game.play

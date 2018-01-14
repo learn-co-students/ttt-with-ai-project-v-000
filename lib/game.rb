@@ -61,28 +61,29 @@ class Game
       @player_1 = Players::Computer.new("X")
       @player_2 = Players::Computer.new("O")
     elsif init_input == "1"
-      puts "Would you like to go first? Y/N"
-      1p_input = gets.strip.capitalize
-      case 1p_input
-      when "Y"
-        @player_1 = Players::Human.new("X")
-        @player_2 = Players::Computer.new("O")
-      when "N"
-        @player_1 = Players::Computer.new("X")
-        @player_2 = Players::Human.new("O")
-      else
-        puts "I'm sorry, I'm not that smart."
-        puts "Please enter either Y or N."
-      end
+      # puts "Would you like to go first? Y/N"
+      # 1p_input = gets.strip.capitalize
+      # until 1p_input == ("Y" || "N")
+      #   case 1p_input
+      #   when "Y"
+          @player_1 = Players::Human.new("X")
+          @player_2 = Players::Computer.new("O")
+      #   when "N"
+      #     @player_1 = Players::Computer.new("X")
+      #     @player_2 = Players::Human.new("O")
+      #   else
+      #     puts "I'm sorry, I'm not that smart."
+      #     puts "Please enter either Y or N."
+      #     1p_input = gets.strip.capitalize
+      #   end
+      # end
     elsif init_input == "2"
       @player_1 = Players::Human.new("X")
       @player_2 = Players::Human.new("O")
-    else
     end
   end
 
   def play
-    puts "Please enter 1-9:"
     until over?
       turn
     end
