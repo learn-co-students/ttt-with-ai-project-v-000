@@ -61,6 +61,7 @@ class Game
       @player_1 = Players::Computer.new("X")
       @player_2 = Players::Computer.new("O")
     elsif init_input == "1"
+      # self.go_first?
       # puts "Would you like to go first? Y/N"
       # 1p_input = gets.strip.capitalize
       # until 1p_input == ("Y" || "N")
@@ -82,6 +83,23 @@ class Game
       @player_2 = Players::Human.new("O")
     end
   end
+
+  # def go_first?
+  #   puts "Would you like to go first? Y/N"
+  #   1p_input = gets.strip.capitalize
+  #   if 1p_input == "Y"
+  #     @player_1 = Players::Human.new("X")
+  #     @player_2 = Players::Computer.new("O")
+  #   elsif 1p_input == "N"
+  #     @player_1 = Players::Computer.new("X")
+  #     @player_2 = Players::Human.new("O")
+  #   else
+  #     puts "I'm sorry, I'm not that smart."
+  #     puts "Please enter either Y or N:"
+  #     go_first
+  #   end
+  # end
+
 
   def play
     until over?
