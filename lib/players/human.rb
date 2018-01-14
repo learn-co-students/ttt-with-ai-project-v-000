@@ -5,6 +5,11 @@ module Players
   
     def move(board)
     input = gets.strip  
+    while board.taken?(input)
+      puts "That spot is taken! Please pick another."
+      input = gets.strip
+    end
+    input
     end
     
   end

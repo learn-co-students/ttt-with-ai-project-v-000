@@ -85,13 +85,13 @@ class Game
         self.start
       end
     elsif input == "0"
-    puts "Okay! You're gonna watch two computers play."
+    puts "Okay! You're gonna watch two computers play. Type enter to begin."
     input = gets
       @player_1 = Players::Computer.new("X")
       @player_2 = Players::Computer.new("O")
       game_started = true
     elsif input == "2"
-      "Okay! Player 1, you go first."
+      puts "Okay! Player 1, you go first."
       @player_1 = Players::Human.new("X")
       @player_2 = Players::Human.new("O")
       game_started = true
