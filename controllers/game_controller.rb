@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
 
-def GameController
+class GameController
     def start
         puts " Welcome to Tic Tac Toe!"
         main_menu
@@ -58,7 +58,6 @@ def GameController
         # If the user doesn't want to play again, exit the program.
     end
 
-    
     def play_again?
         # When the game is over, the CLI should prompt the user if they would like
         # to play again and allow them to choose a new configuration for the game as
