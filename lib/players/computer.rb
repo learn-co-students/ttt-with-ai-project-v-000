@@ -21,7 +21,10 @@ module Players
         elsif @board.check_diag_combos != nil
           @play_move = @board.check_diag_combos
         else
-          nil
+          @valid_moves.collect do |move|
+            @board.valid_move?(move)
+          end
+          @play_move = @valid_moves.sample
         end
       end
 
@@ -45,6 +48,29 @@ end
 #  X | X | O
 # -----------
 #  O |   |
+
+
+###
+
+#Looked really great, until it had two options, it seems
+
+# Please enter your move, 1-9
+# 5
+#  X | O |
+# -----------
+#  X | X |
+# -----------
+#  O |   |
+# ---
+# Your turn, O.
+# ---
+# Please enter a valid move, 1-9.
+# ---
+# Your turn, O.
+# ---
+# Please enter a valid move, 1-9.
+# ---
+
 
 #then indefinite loop after I placed a token in space 8
 
