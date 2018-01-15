@@ -1,10 +1,11 @@
 class Board
   attr_accessor :cells, :player, :token
 
-  @cells = []
+
 
   def initialize(board = nil)
-    @cells = board || Array.new(9, " ")
+    @cells = Array.new(9, " ")
+    @board = board || @cells
   end
 
   def reset!
