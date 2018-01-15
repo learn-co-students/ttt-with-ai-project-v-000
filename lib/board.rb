@@ -1,5 +1,7 @@
 class Board
-  attr_accessor :board, :cells, :player, :token
+  attr_accessor :cells, :player, :token
+
+  @cells = []
 
   def initialize(board = nil)
     @cells = board || Array.new(9, " ")
@@ -44,8 +46,8 @@ class Board
     !taken?(index) && index.between?(1, 9) ? true : false
   end
 
-  def update(player, token)
-
+  def update(input, player)
+    @cells[input.to_i-1] = "#{player.token}"
   end
 
 end
