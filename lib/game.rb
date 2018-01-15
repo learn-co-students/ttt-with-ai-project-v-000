@@ -83,4 +83,124 @@ class Game
 		end
 	end
 
+	def self.start
+		input = nil
+		while input != 'exit'
+
+			puts "Welcome to Tic Tac Toe!"
+			puts "What kind of game would you like to play? 0,1, or 2 player: (0,1,2)"
+			puts "To quit, type 'exit'."
+			input = gets.strip
+
+			case input
+
+			when "0"
+				puts "You have selected a 2 computer players game of Tic Tac Toe"
+				puts "Who would you like to go first and be X? player 1, or player 2: (1,2)"
+				input = gets.strip
+				if input == "1"
+					player_1 = Players::Computer.new("X")
+					player_2 = Players::Computer.new("O")
+					board = Board.new
+					game = Game.new(player_1, player_2, board)
+					game.play
+					if game.over?
+						puts "Would you like to play again? yes or no: (y/n)"
+						input = gets.strip
+						if input == "y"
+							start
+						else
+							input = 'exit'
+						end
+					end
+				else
+					player_2 = Players::Computer.new("X")
+					player_1 = Players::Computer.new("O")
+					board = Board.new
+					game = Game.new(player_2, player_1, board)
+					game.play
+					if game.over?
+						puts "Would you like to play again? yes or no: (y/n)"
+						input = gets.strip
+						if input == "y"
+							start
+						else
+							input = 'exit'
+						end
+					end
+				end
+
+			when "1"
+				puts "You have selected a 1 human versus 1 computer game of Tic Tac Toe"
+				puts "Who would you like to go first and be X? human player 1, or computer player 2: (1,2)"
+				input = gets.strip
+				if input == "1"
+					player_1 = Players::Human.new("X")
+					player_2 = Players::Computer.new("O")
+					board = Board.new
+					game = Game.new(player_1, player_2, board)
+					game.play
+					if game.over?
+						puts "Would you like to play again? yes or no: (y/n)"
+						input = gets.strip
+						if input == "y"
+							start
+						else
+							input = 'exit'
+						end
+					end
+				else
+					player_2 = Players::Computer.new("X")
+					player_1 = Players::Human.new("O")
+					board = Board.new
+					game = Game.new(player_2, player_1, board)
+					game.play
+					if game.over?
+						puts "Would you like to play again? yes or no: (y/n)"
+						input = gets.strip
+						if input == "y"
+							start
+						else
+							input = 'exit'
+						end
+					end
+				end
+			when "2"
+				puts "You have selected a 1 human versus 1 human game of Tic Tac Toe"
+				puts "Who would you like to go first and be X? human player 1, or human player 2: (1,2)"
+				input = gets.strip
+				if input == "1"
+					player_1 = Players::Human.new("X")
+					player_2 = Players::Human.new("O")
+					board = Board.new
+					game = game.new(player_1, player_2, board)
+					game.play
+					if game.over?
+						puts "Would you like to play again? yes or no: (y/n)"
+						input = gets.strip
+						if input == "y"
+							start
+						else
+							input = 'exit'
+						end
+					end
+				else
+					player_2 = Players::Human.new("X")
+					player_1 = Players::Human.new("O")
+					board = Board.new
+					game = game.new(player_2, player_1, board)
+					game.play
+					if game.over?
+						puts "Would you like to play again? yes or no: (y/n)"
+						input = gets.strip
+						if input == "y"
+							start
+						else
+							input = 'exit'
+						end
+					end
+				end
+			end
+		end
+	end
 end

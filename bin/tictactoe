@@ -2,6 +2,10 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
+#A 0-player game has two computer players playing against each other with no interaction from the user.
+#A 1-player game has a human playing against a computer.
+#A 2-player game has two human players.
 
-Game.new.play
+Game.start
+
+

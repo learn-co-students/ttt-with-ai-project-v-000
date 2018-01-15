@@ -44,7 +44,8 @@ module Players
 					"5"
 				else
 					options = [0,2,6,8]
-					m = options[rand(options.length)] + 1.to_s
+					m = options[rand(options.length)] + 1
+					m.to_s
 				end
 
 			when 2 # i am X
@@ -63,7 +64,8 @@ module Players
 				currently_blocked_index = 8 - closed_indices[0]
 				#puts "currently blocked index is #{currently_blocked_index}"
 				available_cells.delete(currently_blocked_index)
-				m = available_cells[rand(available_cells.length)] + 1.to_s
+				m = available_cells[rand(available_cells.length)] + 1
+				m.to_s
 
 			when 3 # i am O
 				#puts "board turn count is:#{board.turn_count}"
@@ -82,7 +84,8 @@ module Players
             	if win_threat != nil
 					#puts "The win threat is:#{win_threat}"
 			    	#puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1.to_s
+			    	m = win_threat[2] + 1
+			    	m.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -90,7 +93,8 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1
+					m.to_s
 				end
 
 			when 4 # i am X
@@ -110,7 +114,8 @@ module Players
             	if win_threat != nil
 					#puts "The win threat is:#{win_threat}"
 			    	#puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1.to_s
+			    	m = win_threat[2] + 1
+			    	m.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -118,7 +123,8 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1
+					m.to_s
 				end
 
 			when 5 # i am O
@@ -138,7 +144,8 @@ module Players
             	if win_threat != nil
 					#puts "The win threat is:#{win_threat}"
 			    	#puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1.to_s
+			    	m = win_threat[2] + 1
+			    	m.to_s
 
 			    else
 					remaining_cells = []
@@ -147,7 +154,8 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1
+					m.to_s
 		    	end
 
 		    when 6 # i am X
@@ -167,7 +175,8 @@ module Players
             	if win_threat != nil
 					#puts "The win threat is:#{win_threat}"
 			    	#puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1.to_s
+			    	m = win_threat[2] + 1
+			    	m.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -175,7 +184,8 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1
+					m.to_s
 		    	end
 
 			when 7 # i am O
@@ -195,7 +205,8 @@ module Players
             	if win_threat != nil
 					#puts "The win threat is:#{win_threat}"
 			    	#puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1.to_s
+			    	m = win_threat[2] + 1
+			    	m.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -203,7 +214,8 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1
+					m.to_s
 		    	end
 
 		    when 8 #i am X
@@ -223,7 +235,8 @@ module Players
             	if win_threat != nil
 					#puts "The win threat is:#{win_threat}"
 			    	#puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1.to_s
+			    	m = win_threat[2] + 1
+			    	m.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -231,7 +244,8 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1
+					m.to_s
 				end
 			end
 		end
