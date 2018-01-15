@@ -61,8 +61,15 @@ class Game
 	end
 
 	def turn
-		self.board.update(self.current_player.move, current_player)
-		self.board.display
+		if self.current_player.class == Players::Human
+			puts "I'm a human player whose token is #{self.current_player.token}."
+			self.board.update(self.current_player.move, current_player)
+			self.board.display
+		elsif self.current_player.class == Players::Computer
+			puts "I'm a computer player whose token is #{self.current_player.token}."
+			self.board.update(self.current_player.move(self.board), current_player)
+			self.board.display
+		end
 	end
 
 	def play
