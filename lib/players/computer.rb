@@ -29,6 +29,7 @@ module Players
 		]
 
 		def move(board = nil)
+			board.display
 			#puts "#{board.cells}"
 
 			case board.turn_count

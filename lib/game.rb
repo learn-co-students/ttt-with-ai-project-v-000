@@ -63,12 +63,12 @@ class Game
 	def turn
 		if self.current_player.class == Players::Human
 			puts "I'm a human player whose token is #{self.current_player.token}."
-			self.board.update(self.current_player.move, current_player)
-			self.board.display
+			self.board.update(self.current_player.move(self.board), current_player)
+			#self.board.display
 		elsif self.current_player.class == Players::Computer
 			puts "I'm a computer player whose token is #{self.current_player.token}."
 			self.board.update(self.current_player.move(self.board), current_player)
-			self.board.display
+			#self.board.display
 		end
 	end
 
@@ -97,8 +97,8 @@ class Game
 			when "0"
 				puts "You have selected a 2 computer players game of Tic Tac Toe"
 				puts "Who would you like to go first and be X? player 1, or player 2: (1,2)"
-				input = gets.strip
-				if input == "1"
+				who_first = gets.strip
+				if who_first == "1"
 					player_1 = Players::Computer.new("X")
 					player_2 = Players::Computer.new("O")
 					board = Board.new
@@ -133,8 +133,8 @@ class Game
 			when "1"
 				puts "You have selected a 1 human versus 1 computer game of Tic Tac Toe"
 				puts "Who would you like to go first and be X? human player 1, or computer player 2: (1,2)"
-				input = gets.strip
-				if input == "1"
+				who_first = gets.strip
+				if who_first == "1"
 					player_1 = Players::Human.new("X")
 					player_2 = Players::Computer.new("O")
 					board = Board.new
@@ -168,12 +168,12 @@ class Game
 			when "2"
 				puts "You have selected a 1 human versus 1 human game of Tic Tac Toe"
 				puts "Who would you like to go first and be X? human player 1, or human player 2: (1,2)"
-				input = gets.strip
-				if input == "1"
+				who_first = gets.strip
+				if who_first == "1"
 					player_1 = Players::Human.new("X")
 					player_2 = Players::Human.new("O")
 					board = Board.new
-					game = game.new(player_1, player_2, board)
+					game = Game.new(player_1, player_2, board)
 					game.play
 					if game.over?
 						puts "Would you like to play again? yes or no: (y/n)"
@@ -188,7 +188,7 @@ class Game
 					player_2 = Players::Human.new("X")
 					player_1 = Players::Human.new("O")
 					board = Board.new
-					game = game.new(player_2, player_1, board)
+					game = Game.new(player_2, player_1, board)
 					game.play
 					if game.over?
 						puts "Would you like to play again? yes or no: (y/n)"
