@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :board, :cells
+  attr_accessor :board, :cells, :player, :token
 
   def initialize(board = nil)
     @cells = board || Array.new(9, " ")
@@ -22,18 +22,30 @@ class Board
     user_input.to_i-1
   end
 
-  def position(user_input)
-    # get user input and convert to an index for the @cells array, then return the value of that index
-    # input = gets.strip
-    # index = input_to_index(input)
-    # index
+  def position(input)
+    index = input_to_index(input)
+    @cells[index]
   end
 
+  def full?
+    @cells.any? {|i| i ==" "} ? false : true
+  end
 
+  def turn_count
+    @cells.count {|i| i == "X" || i == "O"}
+  end
 
+  def taken?(input)
+    position(input) == "X" || position(input) == "O" ? true : false
+  end
 
+  def valid_move?(input)
+    index = input.to_i
+    !taken?(index) && index.between?(1, 9) ? true : false
+  end
 
+  def update(player, token)
 
-
+  end
 
 end
