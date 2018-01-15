@@ -29,27 +29,26 @@ module Players
 		]
 
 		def move(board = nil)
-			puts "#{board.cells}"
+			#puts "#{board.cells}"
 
 			case board.turn_count
 
 			when 0 # i am X
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				"5"
 
 			when 1 # i am O
-				puts "board turn count is:#{board.turn_count}"
-				puts "i must move to an even numbered index, preferrably 4"
+				#puts "board turn count is:#{board.turn_count}"
+				#puts "i must move to an even numbered index, preferrably 4"
 				if board.cells[4] != "X"
 					"5"
 				else
 					options = [0,2,6,8]
-					m = options[rand(options.length)] + 1
-					m.to_s
+					m = options[rand(options.length)] + 1.to_s
 				end
 
 			when 2 # i am X
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				closed_indices = []
 				board.cells.each_with_index { |item, index|
  					if item == "X" || item == "O"
@@ -62,13 +61,12 @@ module Players
 				#isolate the first O index and remove from available_cells the index which the O currently blocks
 				closed_indices.delete(4)
 				currently_blocked_index = 8 - closed_indices[0]
-				puts "currently blocked index is #{currently_blocked_index}"
+				#puts "currently blocked index is #{currently_blocked_index}"
 				available_cells.delete(currently_blocked_index)
-				m = available_cells[rand(available_cells.length)] + 1
-				m.to_s
+				m = available_cells[rand(available_cells.length)] + 1.to_s
 
 			when 3 # i am O
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				win_threat = nil
 
 			    WIN_THREATS.each do |combo|
@@ -82,10 +80,9 @@ module Players
             	end
 
             	if win_threat != nil
-					puts "The win threat is:#{win_threat}"
-			    	puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1
-			    	m.to_s
+					#puts "The win threat is:#{win_threat}"
+			    	#puts "To block the threat fill index #{win_threat[2]}"
+			    	m = win_threat[2] + 1.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -93,12 +90,11 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1
-					m.to_s
-		    	end
+					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+				end
 
 			when 4 # i am X
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				win_threat = nil
 
 			    WIN_THREATS.each do |combo|
@@ -112,10 +108,9 @@ module Players
             	end
 
             	if win_threat != nil
-					puts "The win threat is:#{win_threat}"
-			    	puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1
-			    	m.to_s
+					#puts "The win threat is:#{win_threat}"
+			    	#puts "To block the threat fill index #{win_threat[2]}"
+			    	m = win_threat[2] + 1.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -123,12 +118,11 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1
-					m.to_s
-		    	end
+					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
+				end
 
 			when 5 # i am O
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				win_threat = nil
 
 			    WIN_THREATS.each do |combo|
@@ -142,10 +136,10 @@ module Players
             	end
 
             	if win_threat != nil
-					puts "The win threat is:#{win_threat}"
-			    	puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1
-			    	m.to_s
+					#puts "The win threat is:#{win_threat}"
+			    	#puts "To block the threat fill index #{win_threat[2]}"
+			    	m = win_threat[2] + 1.to_s
+
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -153,12 +147,11 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1
-					m.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
 		    	end
 
 		    when 6 # i am X
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				win_threat = nil
 
 			    WIN_THREATS.each do |combo|
@@ -172,10 +165,9 @@ module Players
             	end
 
             	if win_threat != nil
-					puts "The win threat is:#{win_threat}"
-			    	puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1
-			    	m.to_s
+					#puts "The win threat is:#{win_threat}"
+			    	#puts "To block the threat fill index #{win_threat[2]}"
+			    	m = win_threat[2] + 1.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -183,12 +175,11 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1
-					m.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
 		    	end
 
 			when 7 # i am O
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				win_threat = nil
 
 			    WIN_THREATS.each do |combo|
@@ -202,10 +193,9 @@ module Players
             	end
 
             	if win_threat != nil
-					puts "The win threat is:#{win_threat}"
-			    	puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1
-			    	m.to_s
+					#puts "The win threat is:#{win_threat}"
+			    	#puts "To block the threat fill index #{win_threat[2]}"
+			    	m = win_threat[2] + 1.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -213,12 +203,11 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1
-					m.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
 		    	end
 
 		    when 8 #i am X
-				puts "board turn count is:#{board.turn_count}"
+				#puts "board turn count is:#{board.turn_count}"
 				win_threat = nil
 
 			    WIN_THREATS.each do |combo|
@@ -232,10 +221,9 @@ module Players
             	end
 
             	if win_threat != nil
-					puts "The win threat is:#{win_threat}"
-			    	puts "To block the threat fill index #{win_threat[2]}"
-			    	m = win_threat[2] + 1
-			    	m.to_s
+					#puts "The win threat is:#{win_threat}"
+			    	#puts "To block the threat fill index #{win_threat[2]}"
+			    	m = win_threat[2] + 1.to_s
 			    else
 					remaining_cells = []
 					board.cells.each_with_index { |item, index|
@@ -243,8 +231,7 @@ module Players
     						remaining_cells << index
 						end
 					}
-					m = remaining_cells[rand(remaining_cells.length)] + 1
-					m.to_s
+					m = remaining_cells[rand(remaining_cells.length)] + 1.to_s
 				end
 			end
 		end
