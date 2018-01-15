@@ -65,8 +65,8 @@ class Board
 
     }
 
-    @block_combos.detect do |key, value|
-      value.each do |combo|
+    @block_combos.each do |key, value|
+      value.find do |combo|
         if @cells[combo[0]] == "X" && @cells[combo[1]] == "X" || @cells[combo[0]] == "O" && @cells[combo[1]] == "O"
           if key == :block_rt
             @play_move = (combo[1] + 1) + 1
@@ -101,10 +101,8 @@ class Board
 
     }
 
-    @diag_block_combos.detect do |key, value| # ex. value == [4, 6]
-
+    @diag_block_combos.each do |key, value| # ex. value == [4, 6]
       if @cells[value[0]] == "X" && @cells[value[1]] == "X" || @cells[value[0]] == "O" && @cells[value[1]] == "O"
-
         if key == :block_up_rt
           @play_move = 3
         elsif key == :block_up_lft
@@ -118,10 +116,10 @@ class Board
     end
     @play_move
   end
-
 end
 
 #seems to glitch on turn 6
+# -- the combos need to account for empty spaces! ex. :block_up_rt => [4, 6, 3] >> ... && @cells[value[2]] == " " ???
 
 #ex.
 # Your turn, O.
