@@ -2,4 +2,39 @@
 
 require_relative '../config/environment'
 
-Game.new(Players::Human.new("X"), Players::Computer.new("O")).start
+puts "WELCOME TO TIC-TAC-TOE!"
+puts "\nPlease select mode:"
+puts "0 player:   '0'"
+puts "1 player:   '1'"
+puts "2 players:  '2'"
+puts "Wargames:   'wargames'"
+user_input = gets.strip
+while user_input != "0" && user_input != "1" && user_input != "2" && user_input != "wargames"
+  puts "Invalid input. Please select mode:"
+  puts "0 player:   '0'"
+  puts "1 player:   '1'"
+  puts "2 players:  '2'"
+  puts "Wargames:   'wargames'"
+  user_input = gets.strip
+end
+
+if user_input == "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).start
+elsif user_input == "1"
+  Game.new(Players::Human.new("X"), Players::Computer.new("O")).start
+elsif user_input == "2"
+  Game.new.start
+elsif user_input == "wargames"
+  results = []
+  100.times do
+    result = Game.new(Players::Computer.new("X"), Players::Computer.new("O")).start
+    results << result
+  end
+  wins = 0
+  draws = 0
+  results.each do |result|
+    wins += 1 if result == "win"
+    draws += 1 if result == "draw"
+  end
+  puts "\n#{wins} wins & #{draws} draws!"
+end

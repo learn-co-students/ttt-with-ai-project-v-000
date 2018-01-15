@@ -2,7 +2,7 @@ module Players
   class Computer < Player
     def move(board)
       if board.turn_count == 0
-        return ["1", "2", "3", "4", "5", "6", "7", "8", "9"].sample
+        return ["1", "3", "5", "7", "9"].sample
       elsif board.turn_count == 1
         if board.taken?("5")
           return ["1", "3", "7", "9"].sample
@@ -36,7 +36,12 @@ module Players
             end
           end
         end
-        ["5", "1", "3", "7", "9", "2", "4", "6", "8"].each do |cell| # corners first
+        ["2", "4", "6", "8"].each do |cell| # put on an edge
+          if !board.taken?(cell)
+            return cell
+          end
+        end
+        ["5", "1", "3", "7", "9"].each do |cell| # put on a corner
           if !board.taken?(cell)
             return cell
           end

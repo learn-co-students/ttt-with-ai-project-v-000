@@ -73,8 +73,10 @@ class Game
     end
     if won?
       puts "Congratulations #{self.winner}!"
+      return "win"
     else
       puts "Cat's Game!"
+      return "draw"
     end
   end
 
