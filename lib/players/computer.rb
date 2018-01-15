@@ -14,32 +14,36 @@ module Players
 
     def move(board)
       new_move = nil
-      WIN_COMBINATIONS.each do |win_combo|
+      WIN_COMBINATIONS.detect do |win_combo|
         if (board.cells[win_combo[0]] == "X" && board.cells[win_combo[1]] == "X") || (board.cells[win_combo[0]] == "O" && board.cells[win_combo[1]] == "O")
-          new_move = win_combo[2].to_s
+          new_move = win_combo[2].to_s unless board.cells[win_combo[2]] != " "
         elsif (board.cells[win_combo[0]] == "X" && board.cells[win_combo[2]] == "X") || (board.cells[win_combo[0]] == "O" && board.cells[win_combo[2]] == "O")
-          new_move = win_combo[1].to_s
+          new_move = win_combo[1].to_s unless board.cells[win_combo[1]] != " "
         elsif (board.cells[win_combo[1]] == "X" && board.cells[win_combo[2]] == "X") || (board.cells[win_combo[1]] == "O" && board.cells[win_combo[2]] == "O")
-          new_move = win_combo[0].to_s
+          new_move = win_combo[0].to_s unless board.cells[win_combo[0]] != " "
         else
-          input = (Random.new.rand(9)).to_s
-          if board.valid_move?(input)
-            new_move = input
-          else
-            move(board)
-          end
+          new_move = last_ditch_move(board)
         end
       end
+      # if new_move.nil?
+      #   input = (Random.new.rand(9)).to_s
+      #   if board.valid_move?(input)
+      #     new_move = input
+      #   else
+      #     move(board)
+      #   end
+      # end
       new_move
     end
 
-    #   input = (Random.new.rand(9)).to_s
-    #   if board.valid_move?(input)
-    #     input
-    #   else
-    #     move(board)
-    #   end
-    # end
+    def last_ditch_move(board)
+      input = (Random.new.rand(9)).to_s
+      if board.valid_move?(input)
+        input
+      else
+        last_ditch_move(board)
+      end
+    end
 
   end
 end
