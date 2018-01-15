@@ -13,25 +13,33 @@ module Players
     ]
 
     def move(board)
-      blocking_move = []
+      new_move = nil
       WIN_COMBINATIONS.each do |win_combo|
         if (board.cells[win_combo[0]] == "X" && board.cells[win_combo[1]] == "X") || (board.cells[win_combo[0]] == "O" && board.cells[win_combo[1]] == "O")
-          blocking_move << win_combo[2].to_s
+          new_move = win_combo[2].to_s
         elsif (board.cells[win_combo[0]] == "X" && board.cells[win_combo[2]] == "X") || (board.cells[win_combo[0]] == "O" && board.cells[win_combo[2]] == "O")
-          blocking_move << win_combo[1].to_s
+          new_move = win_combo[1].to_s
         elsif (board.cells[win_combo[1]] == "X" && board.cells[win_combo[2]] == "X") || (board.cells[win_combo[1]] == "O" && board.cells[win_combo[2]] == "O")
-          blocking_move << win_combo[0].to_s
+          new_move = win_combo[0].to_s
+        else
+          input = (Random.new.rand(9)).to_s
+          if board.valid_move?(input)
+            new_move = input
+          else
+            move(board)
+          end
         end
       end
-      blocking_move[0]
-
-      input = (Random.new.rand(9)).to_s
-      if board.valid_move?(input)
-        input
-      else
-        move(board)
-      end
+      new_move
     end
+
+    #   input = (Random.new.rand(9)).to_s
+    #   if board.valid_move?(input)
+    #     input
+    #   else
+    #     move(board)
+    #   end
+    # end
 
   end
 end
