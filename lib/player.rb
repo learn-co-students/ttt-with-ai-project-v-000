@@ -4,9 +4,6 @@ class Player
 
   def initialize(token)
     @token = token
-    @spots = []
-    @opp_spots = []
-
   end
 
 end

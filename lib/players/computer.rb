@@ -1,24 +1,20 @@
 module Players
   class Computer < Player
-    attr_accessor :type, :opp_taken
+    attr_accessor :type
 
     def type
       @type = "Computer"
     end
 
     def move(board)
-      vacant = [*1..9]-(@spots + @opp_spots)
       index = nil
       puts "Please enter 1-9:"
       if (0..2).include?(board.turn_count)
         if board.valid_move?(5) #take middle spot first if open
           index = 5
         else
-          @opp_spots << 5
           index = [1,3,7,9].sample #otherwise, opp has middle so take a corner
-          @spots << index
         end
-      # elsif [2,3].include?(board.turn_count)
       else
         Game::WIN_COMBINATIONS.detect do |win_combo|
           # binding.pry
@@ -46,8 +42,8 @@ end
 
 
 
-if board.position(5) == self.token && [2,4,6,8].any?{|index| board.valid_move?(index)}
-  index = [2,4,6,8].sample #if you have the middle, take a side
+# if board.position(5) == self.token && [2,4,6,8].any?{|index| board.valid_move?(index)}
+  # index = [2,4,6,8].sample #if you have the middle, take a side
 # elsif board.position(5) != " " #if you are not in the middle, and the middle is not empty, opp has middle
 #   # binding.pry
 #   opp = ([*1..9]-@opp_spots).detect{|index|board.position(index) != self.token && board.position(index) != " "} #find opp last spot
