@@ -115,7 +115,7 @@ class Game
     game = self.new(player_1, player_2, Board.new)
     puts ""
     puts "--------------"
-    puts "Let's do this!"
+    puts "   GAME ON!"
     puts "--------------"
     puts ""
     game.board.display
