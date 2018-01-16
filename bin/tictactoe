@@ -9,6 +9,7 @@ require_relative '../config/environment'
 # return the user's choice
 def prompt
     gets.strip
+
 end
 
 # 'two_player_mode' method
@@ -16,6 +17,12 @@ end
 # start a game with two human players
 # ask the user if they want to play again
 def two_player_mode
+  game = Game.new
+  puts "This is two player mode.
+  The object of the game is to get three in a row either diagonally or horizontally. The game is done when a player has won or all 9 squares are filled."
+  #run()
+  game.play
+  puts "Do you want to play again?"
 end
 # 'one_player_mode' method
 # Ask the user for who should go first and be "X".
@@ -45,8 +52,8 @@ end
 def choose_game(type)
     case(type)
     when '2'
-        puts "This feature is not yet available. Please try again later."
-        # two_player_mode
+      #  puts "This feature is not yet available. Please try again later."
+        two_player_mode
     when '1'
         puts "This feature is not yet available. Please try again later."
         # one_player_mode
