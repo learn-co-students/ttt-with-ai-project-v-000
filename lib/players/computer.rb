@@ -17,7 +17,7 @@ module Players
           index = [1,3,7,9].sample #otherwise, opp has middle so take a corner
           @taken << index
         end
-      elsif board.turn_count == 2
+      elsif board.turn_count == 2 #on third move, prevent computer from wasting turn on blocked win combo
         opp = [*1..9].detect{|i| board.cells[i-1] != " " && board.cells[i-1] != self.token}
         @taken << opp
         waste = nil
