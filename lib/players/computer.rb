@@ -10,7 +10,7 @@ module Players
       vacant = [*1..9]-(@spots + @opp_spots)
       index = nil
       puts "Please enter 1-9:"
-      if [0,1].include?(board.turn_count)
+      if (0..2).include?(board.turn_count)
         if board.valid_move?(5) #take middle spot first if open
           index = 5
         else
@@ -46,8 +46,8 @@ end
 
 
 
-# if board.position(5) == self.token && [2,4,6,8].any?{|index| board.valid_move?(index)}
-#   index = [2,4,6,8].sample #if you have the middle, take a side
+if board.position(5) == self.token && [2,4,6,8].any?{|index| board.valid_move?(index)}
+  index = [2,4,6,8].sample #if you have the middle, take a side
 # elsif board.position(5) != " " #if you are not in the middle, and the middle is not empty, opp has middle
 #   # binding.pry
 #   opp = ([*1..9]-@opp_spots).detect{|index|board.position(index) != self.token && board.position(index) != " "} #find opp last spot
