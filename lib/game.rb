@@ -38,8 +38,10 @@ class Game
     WIN_COMBINATIONS.detect do |win_combo|
       check = win_combo.collect {|position| self.board.cells[position]}
       if check.all? {|token| token == player_1.token}
+        @@win_count += 1
         winner = win_combo
       elsif check.all? {|token| token == player_2.token}
+        @@win_count += 1
         winner = win_combo
       end
     end
@@ -72,7 +74,10 @@ class Game
       turn
     end
     if self.won?
+<<<<<<< HEAD
       @@win_count += 1
+=======
+>>>>>>> b5b8516a655816a68854f2ae53d7f852646b03d4
       puts "Congratulations #{self.winner}!"
     elsif self.draw?
       puts "Cat's Game!"
@@ -89,8 +94,13 @@ class Game
       player_count = gets.strip
     end
     if player_count == "0"
+<<<<<<< HEAD
       player_1 = Players::Computer.new("X")
       player_2 = Players::Computer.new("O")
+=======
+      player_1 = Player::Computer.new("X")
+      player_2 = Player::Computer.new("O")
+>>>>>>> b5b8516a655816a68854f2ae53d7f852646b03d4
     elsif player_count == "1"
       order = nil
       while !["1", "2"].include?(order)
@@ -108,7 +118,11 @@ class Game
     elsif player_count == "2"
       player_1 = Players::Human.new("X")
       player_2 = Players::Human.new("O")
+<<<<<<< HEAD
     elsif player_count == "wargames"
+=======
+    elsif player_count.downcase == "wargames"
+>>>>>>> b5b8516a655816a68854f2ae53d7f852646b03d4
       self.wargames
       exit!
     end
@@ -123,15 +137,25 @@ class Game
     game.again?
   end
 
+<<<<<<< HEAD
   def again?
+=======
+  def play_again?
+>>>>>>> b5b8516a655816a68854f2ae53d7f852646b03d4
     puts ""
     puts "Play again?"
     puts "(y) to play, (n) to exit"
     input = gets.strip.downcase
+<<<<<<< HEAD
     self.class.start if input == "y"
     puts "Thanks for playing!" if input == "n"
     self.again? if !["y", "n"].include?(input)
   end
+=======
+    self.play if input == "y"
+    exit! if input == "n"
+    self.play_again? if !["y", "n"].include(input)
+>>>>>>> b5b8516a655816a68854f2ae53d7f852646b03d4
 
   def self.wargames
     @@win_count = 0
@@ -141,6 +165,7 @@ class Game
     puts "--------------"
     puts ""
     puts "How many battles are about to take place?"
+<<<<<<< HEAD
     count = gets.strip.to_i
     if count >= 1
       count.times do
@@ -151,6 +176,13 @@ class Game
       end
       puts ""
       puts "~Recap~"
+=======
+    count = gets.strip
+    if count >= 1
+      count.times do
+        game.play
+      end
+>>>>>>> b5b8516a655816a68854f2ae53d7f852646b03d4
       puts "#{count} battles took place, and #{@@win_count} were won!"
     end
   end
