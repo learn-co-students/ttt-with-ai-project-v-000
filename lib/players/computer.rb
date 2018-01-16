@@ -50,7 +50,6 @@ module Players
         index = rand(1..9).to_s if index == nil #worst case scenario, just go for any spot
       end
       puts "Computer player #{self.token} chooses position #{index}"
-      # binding.pry
       index.to_s
     end
   end
