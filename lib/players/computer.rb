@@ -10,10 +10,14 @@ module Players
       index = nil
       puts "Please enter 1-9:"
       if [0,1].include?(board.turn_count)
-        index = 5 if board.valid_move?(5)
-        index = [1,3,7,9].sample
+        if board.valid_move?(5)
+          index = 5
+        else
+          index = [1,3,7,9].sample
+        end
       else
-      index = rand(1..9).to_s
+        index = rand(1..9).to_s
+      end
       # binding.pry
       puts "Computer player #{self.token} chooses position #{index}"
       index
