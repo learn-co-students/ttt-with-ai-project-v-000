@@ -62,8 +62,6 @@ class Game
       @player_2 = Players::Computer.new("O")
     elsif init_input == "1"
       go_first?
-      # @player_1 = Players::Human.new("X")
-      # @player_2 = Players::Computer.new("O")
     elsif init_input == "2"
       @player_1 = Players::Human.new("X")
       @player_2 = Players::Human.new("O")
