@@ -18,6 +18,9 @@ module Players
       elsif blocking_move(board)
         blocking_move(board)
       else
+        third_move if board.turn_count == 2
+        second_move if board.turn_count == 1
+        first_move if board.turn_count == 0
         last_ditch_move(board)
       end
     end
@@ -50,10 +53,32 @@ module Players
       new_move
     end
 
-    def second_move(board)
+    def third_move
+      if first_move == "1"
+        "2" if board.cell[1] == " "
+        "4" if board.cell[3] == " "
+        "5" if board.cell[4] == " "
+      elsif first_move == "3"
+        "2" if board.cell[1] == " "
+        "5" if board.cell[4] == " "
+        "6" if board.cell[5] == " "
+      elsif first_move == "7"
+        "4" if board.cell[3] == " "
+        "5" if board.cell[4] == " "
+        "8" if board.cell[7] == " "
+      elsif first_move == "9"
+        "5" if board.cell[4] == " "
+        "6" if board.cell[5] == " "
+        "8" if board.cell[7] == " "
+      end
     end
 
-    def first_move(board)
+    def second_move
+      ["2", "4", "5", "6", "8"].sample
+    end
+
+    def first_move
+      ["1", "3", "7", "9"].sample
     end
 
     def last_ditch_move(board)
