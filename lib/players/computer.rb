@@ -50,6 +50,12 @@ module Players
       new_move
     end
 
+    def second_move(board)
+    end
+
+    def first_move(board)
+    end
+
     def last_ditch_move(board)
       input = (Random.new.rand(9)).to_s
       if board.valid_move?(input)
