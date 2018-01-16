@@ -20,8 +20,12 @@ module Players
         end
       # elsif (2..9).include?(board.turn_count)
       else
-        if vacant.detect do |i|
-          game.won? if board.cells[i - 1] = self.token
+        Game::WIN_COMBINATIONS.detect do |win_combo|
+
+
+
+
+        end
         elsif board.position(5) == self.token && [2,4,6,8].any?{|index| board.valid_move?(index)}
           index = [2,4,6,8].sample #if you have the middle, take a side
         elsif board.position(5) != " " #if you are not in the middle, and the middle is not empty, opp has middle
