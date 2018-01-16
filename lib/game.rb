@@ -1,5 +1,3 @@
-require 'pry'
-
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -15,15 +13,11 @@ class Game
     [2,4,6]  # Backward diagonal
   ]
 
+  @@win_count = 0
+
   def board
     @board
   end
-
-  # def player_1
-  # end
-  #
-  # def player_2
-  # end
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
@@ -44,8 +38,10 @@ class Game
     WIN_COMBINATIONS.detect do |win_combo|
       check = win_combo.collect {|position| self.board.cells[position]}
       if check.all? {|token| token == player_1.token}
+        @@win_count += 1
         winner = win_combo
       elsif check.all? {|token| token == player_2.token}
+        @@win_count += 1
         winner = win_combo
       end
     end
@@ -62,7 +58,7 @@ class Game
   def turn
     player = current_player
     puts ""
-    puts "Player #{player.token} is up."
+    puts "#{player.type} player #{player.token} is up."
     move = player.move(@board)
     if !self.board.valid_move?(move)
       turn
@@ -78,7 +74,7 @@ class Game
       turn
     end
     if self.won?
-      puts "Congratulations Player #{self.winner}!"
+      puts "Congratulations #{self.winner}!"
     elsif self.draw?
       puts "Cat's Game!"
     end
@@ -86,17 +82,17 @@ class Game
   end
 
   def self.start
+    puts ""
     puts "Welcome to Tic-Tac-Toe with AI!"
     player_count = nil
     while !["0", "1", "2"].include?(player_count)
       puts "How many humans are playing?(Please Enter between 0 and 2)"
       player_count = gets.strip
     end
-    if player_count == 0
-      player_1 = Player::Computer.new("X")
-      player_2 = Player::Computer.new("O")
-    elsif player_count == 1
-      binding.pry
+    if player_count == "0"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+    elsif player_count == "1"
       order = nil
       while !["1", "2"].include?(order)
         puts "First player is 'X', and second player is 'O'"
@@ -110,9 +106,12 @@ class Game
         player_1 = Players::Computer.new("X")
         player_2 = Players::Human.new("O")
       end
-    else
+    elsif player_count == "2"
       player_1 = Players::Human.new("X")
       player_2 = Players::Human.new("O")
+    elsif player_count.downcase == "wargames"
+      self.wargames
+      exit!
     end
     game = self.new(player_1, player_2, Board.new)
     puts ""
@@ -122,5 +121,35 @@ class Game
     puts ""
     game.board.display
     game.play
+    game.again?
   end
+
+  def again?
+    puts ""
+    puts "Play again?"
+    puts "(y) to play, (n) to exit"
+    input = gets.strip.downcase
+    self.class.start if input == "y"
+    puts "Thanks for playing!" if input == "n"
+    self.again? if !["y", "n"].include?(input)
+  end
+
+  def self.wargames
+    @@win_count = 0
+    puts ""
+    puts "--------------"
+    puts "   WAR GAMES  "
+    puts "--------------"
+    puts ""
+    puts "How many battles are about to take place?"
+    count = gets.strip
+    if count >= 1
+      count.times do
+        game.play
+      end
+      puts "#{count} battles took place, and #{@@win_count} were won!"
+    end
+  end
+
+
 end
