@@ -68,4 +68,26 @@ class Game
     end
   end
 
+  def self.start
+    puts "Welcome to Tic Tac Toe!"
+    puts "Would you like to play 0, 1, or 2 player?"
+    player_count = gets.strip
+
+    if player_count == 0
+      player_1 = Player::Computer.new("X")
+      player_2 = Player::Computer.new("O")
+    elsif player_count == 1
+      player_1 = Player::Human.new("X")
+      player_2 = Player::Computer.new("O")
+    elsif player_count == 2
+      player_1 = Player::Human.new("X")
+      player_2 = Player::Human.new("O")
+    else
+      self.start
+    end
+    game = self.new(player_1, player_2, Board.new)
+    game.board.display
+    game.play
+  end
+
 end
