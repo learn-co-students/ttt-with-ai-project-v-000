@@ -7,28 +7,34 @@ require_relative '../config/environment'
 # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
 # Give them the option to quit the game
 # return the user's choice
+def prompt
+    gets.strip
+end
 
 # 'two_player_mode' method
 # display the mode type and rules of the game
 # start a game with two human players
 # ask the user if they want to play again
-
-
+def two_player_mode
+end
 # 'one_player_mode' method
 # Ask the user for who should go first and be "X".
 # start a game with a human player vs a computer player
 # ask the user if they want to play again
-
+def one_player_mode
+end
 
 # 'zero_player_mode' method
 # display the mode type and rules of the game
 # start a game with 2 computer players
 # ask the user if they want to play again
+def zero_player_mode
+end
 
 #  'choose_game' method
-# Use the input to correctly initialize a Game with the appropriate player 
+# Use the input to correctly initialize a Game with the appropriate player
 # types and token values.
-# If the user chooses 2, 
+# If the user chooses 2,
 # run two_player mode
 
 # If the user chooses 1,
@@ -36,20 +42,46 @@ require_relative '../config/environment'
 
 # If the user chooses 0,
 # run zero_player_mode
+def choose_game(type)
+    case(type)
+    when '2'
+        puts "This feature is not yet available. Please try again later."
+        # two_player_mode
+    when '1'
+        puts "This feature is not yet available. Please try again later."
+        # one_player_mode
+    when '0'
+        puts "This feature is not yet available. Please try again later."
+        # zero_player_mode
+    when 'q'
+        puts "Thanks for playing! Good bye."
+        exit
+    else
+        puts "You have not selected a valid option."
+        puts "Please enter a number (0-2) or 'q' to quit."
+    end
+
+    choose_game(prompt)
+end
 
 # 'run' method
 # get the game type from the user
-# Use the input to correctly initialize a Game with the appropriate player 
+# Use the input to correctly initialize a Game with the appropriate player
 # types and token values.
+def run
+    choose_game(prompt)
+end
 
-# When the game is over, the CLI should prompt the user if they would like 
-# to play again and allow them to choose a new configuration for the game as 
-# described above. 
+# When the game is over, the CLI should prompt the user if they would like
+# to play again and allow them to choose a new configuration for the game as
+# described above.
 # 'play_again?' method
 # Ask the user if they'd like to play again
 # if yes, run another game.
 #If the user doesn't want to play again, exit the program.
-
+def play_again?
+end
 
 # Greet the user with a message.
+puts " Welcome to Tic Tac Toe!"
 run()
