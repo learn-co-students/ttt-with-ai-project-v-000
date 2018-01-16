@@ -37,20 +37,17 @@ module Players
         index = ([*1..9]-@taken).sample
       else
         Game::WIN_COMBINATIONS.detect do |win_combo|
-          # binding.pry
-          if win_combo.find_all{|i| board.cells[i] == self.token}.size == 2 && win_combo.find_all{|i| board.cells[i] == " "}.size == 1
+          if win_combo.find_all{|i| board.cells[i] == self.token}.size == 2 && win_combo.find_all{|i| board.cells[i] == " "}.size == 1 #if computer has chance to win, go for it
             test1 = win_combo.find_all{|i| board.cells[i] == self.token}.size == 2
             test2 = win_combo.find_all{|i| board.cells[i] == " "}.size == 1
             index = (win_combo.detect{|i| board.cells[i] == " "}) + 1
-            # binding.pry
-          elsif win_combo.find_all{|i| board.cells[i] != self.token && board.cells[i] != " "}.size == 2 && win_combo.find_all{|i| board.cells[i] == " "}.size == 1
+          elsif win_combo.find_all{|i| board.cells[i] != self.token && board.cells[i] != " "}.size == 2 && win_combo.find_all{|i| board.cells[i] == " "}.size == 1 #if no chance to win, check for opp chance to win and block
             test1 = win_combo.find_all{|i| board.cells[i] != self.token}.size == 2
             test2 = win_combo.find_all{|i| board.cells[i] == " "}.size == 1
             index = (win_combo.detect{|i| board.cells[i] == " "}) + 1
-            # binding.pry
           end
         end
-        index = rand(1..9).to_s if index == nil
+        index = rand(1..9).to_s if index == nil #worst case scenario, just go for any spot
       end
       puts "Computer player #{self.token} chooses position #{index}"
       # binding.pry
