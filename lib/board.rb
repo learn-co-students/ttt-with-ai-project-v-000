@@ -41,7 +41,7 @@ class Board
   end
 
   def valid_move?(index)
-    (1..9).include?(index.to_i) && !self.taken?(index) ? true : false
+    (0..8).include?(index.to_i - 1) && !self.taken?(index) ? true : false
   end
 
   def update(index, player)
