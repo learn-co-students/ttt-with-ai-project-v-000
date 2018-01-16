@@ -13,49 +13,41 @@ module Players
     ]
 
     def move(board)
+      if winning_move(board)
+        winning_move(board)
+      elsif blocking_move(board)
+        blocking_move(board)
+      else
+        last_ditch_move(board)
+      end
+    end
+
+    def winning_move(board)
       new_move = nil
       WIN_COMBINATIONS.detect do |win_combo|
         if (board.cells[win_combo[0]] == self.token && board.cells[win_combo[1]] == self.token)
-          new_move = win_combo[2].to_s if board.cells[win_combo[2]] == " "
+          new_move = (win_combo[2] + 1).to_s if board.cells[win_combo[2]] == " "
         elsif (board.cells[win_combo[0]] == self.token && board.cells[win_combo[2]] == self.token)
-          new_move = win_combo[1].to_s if board.cells[win_combo[1]] == " "
+          new_move = (win_combo[1] + 1).to_s if board.cells[win_combo[1]] == " "
         elsif (board.cells[win_combo[1]] == self.token && board.cells[win_combo[2]] == self.token)
-          new_move = win_combo[0].to_s if board.cells[win_combo[0]] == " "
-        elsif (board.taken?(win_combo[0] + 1) && board.cells[win_combo[0]] != self.token) && (board.taken?(win_combo[1] + 1) && board.cells[win_combo[1]] != self.token)
-          new_move = win_combo[2].to_s if board.cells[win_combo[2]] == " "
-        elsif (board.taken?(win_combo[0] + 1) && board.cells[win_combo[0]] != self.token) && (board.taken?(win_combo[2] + 1) && board.cells[win_combo[2]] != self.token)
-          new_move = win_combo[1].to_s if board.cells[win_combo[1]] == " "
-        elsif (board.taken?(win_combo[1] + 1) && board.cells[win_combo[1]] != self.token) && (board.taken?(win_combo[2] + 1) && board.cells[win_combo[2]] != self.token)
-          new_move = win_combo[0].to_s if board.cells[win_combo[0]] == " "
-        else
-          new_move = last_ditch_move(board)
+          new_move = (win_combo[0] + 1).to_s if board.cells[win_combo[0]] == " "
         end
       end
       new_move
     end
 
-    def winning_move(board)
-      WIN_COMBINATIONS.detect do |win_combo|
-        if (board.cells[win_combo[0]] == self.token && board.cells[win_combo[1]] == self.token)
-          new_move = win_combo[2].to_s if board.cells[win_combo[2]] == " "
-        elsif (board.cells[win_combo[0]] == self.token && board.cells[win_combo[2]] == self.token)
-          new_move = win_combo[1].to_s if board.cells[win_combo[1]] == " "
-        elsif (board.cells[win_combo[1]] == self.token && board.cells[win_combo[2]] == self.token)
-          new_move = win_combo[0].to_s if board.cells[win_combo[0]] == " "
-        end
-      end
-    end
-
     def blocking_move(board)
+      new_move = nil
       WIN_COMBINATIONS.detect do |win_combo|
         if (board.taken?(win_combo[0] + 1) && board.cells[win_combo[0]] != self.token) && (board.taken?(win_combo[1] + 1) && board.cells[win_combo[1]] != self.token)
-          new_move = win_combo[2].to_s if board.cells[win_combo[2]] == " "
+          new_move = (win_combo[2] + 1).to_s if board.cells[win_combo[2]] == " "
         elsif (board.taken?(win_combo[0] + 1) && board.cells[win_combo[0]] != self.token) && (board.taken?(win_combo[2] + 1) && board.cells[win_combo[2]] != self.token)
-          new_move = win_combo[1].to_s if board.cells[win_combo[1]] == " "
+          new_move = (win_combo[1] + 1).to_s if board.cells[win_combo[1]] == " "
         elsif (board.taken?(win_combo[1] + 1) && board.cells[win_combo[1]] != self.token) && (board.taken?(win_combo[2] + 1) && board.cells[win_combo[2]] != self.token)
-          new_move = win_combo[0].to_s if board.cells[win_combo[0]] == " "
+          new_move = (win_combo[0] + 1).to_s if board.cells[win_combo[0]] == " "
         end
       end
+      new_move
     end
 
     def last_ditch_move(board)
