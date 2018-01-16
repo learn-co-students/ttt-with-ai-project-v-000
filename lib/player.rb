@@ -5,8 +5,8 @@ class Player
     @token = token
   end
 
-  def move(board)
-    input = gets.chomp
-    input
-  end
+    def move(board)
+      input = gets.chomp
+      input
+    end
 end
