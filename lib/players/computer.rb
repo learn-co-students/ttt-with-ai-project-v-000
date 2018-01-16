@@ -32,10 +32,8 @@ module Players
           waste = 6 if opp == 4
           waste = 8 if opp == 2
         end
-        binding.pry
         @taken << waste
         index = ([*1..9]-@taken).sample
-        binding.pry
       else
         Game::WIN_COMBINATIONS.detect do |win_combo|
           # binding.pry
