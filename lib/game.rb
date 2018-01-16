@@ -38,10 +38,8 @@ class Game
     WIN_COMBINATIONS.detect do |win_combo|
       check = win_combo.collect {|position| self.board.cells[position]}
       if check.all? {|token| token == player_1.token}
-        @@win_count += 1
         winner = win_combo
       elsif check.all? {|token| token == player_2.token}
-        @@win_count += 1
         winner = win_combo
       end
     end
@@ -74,6 +72,7 @@ class Game
       turn
     end
     if self.won?
+      @@win_count += 1
       puts "Congratulations #{self.winner}!"
     elsif self.draw?
       puts "Cat's Game!"
@@ -85,7 +84,7 @@ class Game
     puts ""
     puts "Welcome to Tic-Tac-Toe with AI!"
     player_count = nil
-    while !["0", "1", "2"].include?(player_count)
+    while !["0", "1", "2", "wargames"].include?(player_count)
       puts "How many humans are playing?(Please Enter between 0 and 2)"
       player_count = gets.strip
     end
@@ -109,7 +108,7 @@ class Game
     elsif player_count == "2"
       player_1 = Players::Human.new("X")
       player_2 = Players::Human.new("O")
-    elsif player_count.downcase == "wargames"
+    elsif player_count == "wargames"
       self.wargames
       exit!
     end
@@ -142,11 +141,16 @@ class Game
     puts "--------------"
     puts ""
     puts "How many battles are about to take place?"
-    count = gets.strip
+    count = gets.strip.to_i
     if count >= 1
       count.times do
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+        game = self.new(player_1, player_2, Board.new)
         game.play
       end
+      puts ""
+      puts "~Recap~"
       puts "#{count} battles took place, and #{@@win_count} were won!"
     end
   end
