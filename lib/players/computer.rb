@@ -18,7 +18,7 @@ module Players
           index = [1,3,7,9].sample #otherwise, opp has middle so take a corner
           @spots << index
         end
-      # elsif (2..9).include?(board.turn_count)
+      # elsif [2,3].include?(board.turn_count)
       else
         Game::WIN_COMBINATIONS.detect do |win_combo|
           # binding.pry
@@ -26,12 +26,12 @@ module Players
             test1 = win_combo.find_all{|i| board.cells[i] == self.token}.size == 2
             test2 = win_combo.find_all{|i| board.cells[i] == " "}.size == 1
             index = (win_combo.detect{|i| board.cells[i] == " "}) + 1
-            binding.pry
+            # binding.pry
           elsif win_combo.find_all{|i| board.cells[i] != self.token && board.cells[i] != " "}.size == 2 && win_combo.find_all{|i| board.cells[i] == " "}.size == 1
             test1 = win_combo.find_all{|i| board.cells[i] != self.token}.size == 2
             test2 = win_combo.find_all{|i| board.cells[i] == " "}.size == 1
             index = (win_combo.detect{|i| board.cells[i] == " "}) + 1
-            binding.pry
+            # binding.pry
           end
         end
         index = rand(1..9).to_s if index == nil
