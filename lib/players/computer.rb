@@ -18,7 +18,7 @@ module Players
       elsif blocking_move(board)
         blocking_move(board)
       else
-        third_move if board.turn_count == 2
+        third_move(board) if board.turn_count == 2
         second_move if board.turn_count == 1
         first_move if board.turn_count == 0
         last_ditch_move(board)
@@ -53,7 +53,7 @@ module Players
       new_move
     end
 
-    def third_move
+    def third_move(board)
       if first_move == "1"
         "2" if board.cell[1] == " "
         "4" if board.cell[3] == " "
