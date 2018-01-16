@@ -2,7 +2,8 @@
 
 require_relative '../config/environment'
 
-<<<<<<< HEAD
+GameController.new.start
+
 # 'prompt' method
 # List the kinds of game available
 # Prompt the user for what kind of game they want to play, 0,1, or 2 player.
@@ -93,6 +94,3 @@ end
 # Greet the user with a message.
 puts " Welcome to Tic Tac Toe!"
 run()
-=======
-GameController.new.start
->>>>>>> bce7a90018597c394cabcd1f3294b49087f5e719
