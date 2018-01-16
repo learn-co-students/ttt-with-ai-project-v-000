@@ -1,6 +1,6 @@
 module Players
   class Computer < Player
-    attr_accessor :type
+    attr_accessor :type, :opp_taken
 
     def type
       @type = "Computer"
@@ -13,13 +13,16 @@ module Players
         if board.valid_move?(5) #take middle spot first if open
           index = 5
         else
+          @opp_taken << 5
           index = [1,3,7,9].sample #otherwise, opp has middle so take a corner
         end
-      elsif [2,3].include?(board.turn_count)
+      elsif (2..9).include?(board.turn_count)
         if board.position(5) == self.token
           index = [2,4,6,8].sample #if you have the middle, take a side
         elsif board.position(5) != " " #if you are not in the middle, and the middle is not empty, opp has middle
-          opp = [*1..4,*6..9].detect{|index|board.position(index) != self.token && board.position(index) != " "} #find opp spot if they middle already
+          # binding.pry
+          opp = ([*1..9]-@opp_taken).detect{|index|board.position(index) != self.token && board.position(index) != " "} #find opp last spot
+          @opp_taken << opp
           # binding.pry
           if [1,3,7,9].include?(opp) #block opposite corner if opp has middle and corner
             index = 1 if opp == 9
