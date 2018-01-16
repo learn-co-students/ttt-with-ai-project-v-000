@@ -4,6 +4,7 @@ class Player
 
   def initialize(token)
     @token = token
+    @taken = []
   end
 
 end
