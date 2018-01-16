@@ -16,8 +16,9 @@ module Players
           @opp_taken << 5
           index = [1,3,7,9].sample #otherwise, opp has middle so take a corner
         end
-      elsif (2..9).include?(board.turn_count)
-        if board.position(5) == self.token
+      # elsif (2..9).include?(board.turn_count)
+      else
+        if board.position(5) == self.token && [2,4,6,8].any?{|index| board.valid_move?(index)}
           index = [2,4,6,8].sample #if you have the middle, take a side
         elsif board.position(5) != " " #if you are not in the middle, and the middle is not empty, opp has middle
           # binding.pry
@@ -45,8 +46,9 @@ module Players
             index = 3 if corner == 7
           end
         end
-      else
-        index = rand(1..9).to_s
+      # else
+      #   binding.pry
+      #   index = rand(1..9).to_s
       end
       # binding.pry
       puts "Computer player #{self.token} chooses position #{index}"
