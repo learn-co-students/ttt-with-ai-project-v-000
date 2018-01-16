@@ -1,3 +1,4 @@
+require_relative './players/human.rb'
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -16,6 +17,7 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+
   end
 
   def current_player
@@ -38,7 +40,7 @@ class Game
   end
 
   def draw?
-    self.board.turn_count == 9 && !self.won? ? true : false
+    self.board.full? && !won?
   end
 
   def winner
@@ -59,7 +61,7 @@ class Game
 
   def play
     while !over?
-      turn
+      self.turn
     end
     if won?
       puts "Congratulations #{self.winner}!"
@@ -70,18 +72,20 @@ class Game
 
   def self.start
     puts "Welcome to Tic Tac Toe!"
-    puts "Would you like to play 0, 1, or 2 player?"
-    player_count = gets.strip
-
-    if player_count == 0
-      player_1 = Player::Computer.new("X")
-      player_2 = Player::Computer.new("O")
-    elsif player_count == 1
-      player_1 = Player::Human.new("X")
-      player_2 = Player::Computer.new("O")
-    elsif player_count == 2
-      player_1 = Player::Human.new("X")
-      player_2 = Player::Human.new("O")
+    player_count = nil
+    while !["0", "1", "2"].include?(player_count)
+      puts "Would you like to play 0, 1, or 2 player?"
+      player_count = gets.strip
+    end
+    if player_count == "0"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+    elsif player_count == "1"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+    elsif player_count == "2"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Human.new("O")
     else
       self.start
     end
