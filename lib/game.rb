@@ -56,7 +56,11 @@ class Game
       turn
     else
       @board.update(move,current_player)
+      puts "// TIC TAC TOE //"
       board.display
+      puts ""
+      puts ""
+      puts ""
     end
   end
 
@@ -75,5 +79,8 @@ class Game
     puts "Welcome to Tic Tac Toe!"
     self.board.display
     self.play
+    puts ""
+    puts ""
+    puts ""
   end
 end
