@@ -35,6 +35,7 @@ class GameController
         puts "in a row either diagonally or horizontally. The game is done when a"
         puts "player has won or all 9 squares are filled.\n"
         game = Game.new
+        game.board.display
         game.play
         play_again?
     end
