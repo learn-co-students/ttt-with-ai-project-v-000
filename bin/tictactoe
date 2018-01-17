@@ -9,20 +9,23 @@ number_of_players = gets.strip
 
 
     if number_of_players == "0"
-      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
 
-      elsif number_of_players == "1"
-        puts "Who should go first and use the token X? Human or computer?"
-        first_player = gets.strip
-          if first_player == "human" || first_player == "Human"
-            Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    elsif number_of_players == "1"
+      puts "Who should go first and use the token X? Human or computer?"
+      first_player = gets.strip
+        if first_player == "human" || first_player == "Human"
+          new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
 
-          elsif first_player == "computer" || first_player == "Computer"
-              Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-          end
+        elsif first_player == "computer" || first_player == "Computer"
+          new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        end
 
-      elsif number_of_players == "2"
-          Game.new
+    elsif number_of_players == "2"
+        new_game = Game.new
+        puts "Welcome to Tic Tac Toe!"
+        new_game.board.display
+        new_game.play
     end
 
 
