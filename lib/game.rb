@@ -44,13 +44,13 @@ class Game
         win_index_2 = win_combination[1]
         win_index_3 = win_combination[2]
 
-        position_1 = @board[win_index_1]
-        position_2 = @board[win_index_2]
-        position_3 = @board[win_index_3]
+        position_1 = @board.cells[win_index_1]
+        position_2 = @board.cells[win_index_2]
+        position_3 = @board.cells[win_index_3]
 
-        if position_1 == @player_1 && position_2 == @player_1 && position_3 ==  @player_1
-          return win_combination
-        elsif position_1 == @player_2 && position_2 == @player_2 && position_3 == @player_2
+        if position_1 == @player_1.token && position_2 == @player_1.token && position_3 ==  @player_1.token
+          win_combination
+        elsif position_1 == @player_2.token && position_2 == @player_2.token && position_3 == @player_2.token
           win_combination
         else
           false
@@ -58,5 +58,27 @@ class Game
       end
     end
 
+    def winner
+      if won?
+        WIN_COMBINATIONS.detect do |combo|
+          if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]]
+            return @board.cells[combo[0]]
+          end
+        end
+      end
+    end
+
+    def turn
+     puts "Please enter 1-9:"
+     input = STDIN
+     index = @board.input_to_index(input)
+     if valid_move?(index)
+       @board.update(index, current_player)
+       @board.display
+     # else
+     #   puts "invalid"
+     #   turn
+     end
+    end
 
 end
