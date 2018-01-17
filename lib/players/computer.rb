@@ -4,10 +4,10 @@ module Players
   class Computer < Player
 
     def move(board)
-      corner = ["1","3","7","9"].sample
+      corners = ["1","3","7","9"]
       if !board.taken?(5)
         "5"
-      elsif !board.taken?("#{corner}")
+      elsif corners.each do |corner| !board.taken("#{corner}")
         "#{corner}"
       elsif board.cells[1] == self.token && board.cells[3] == self.token
         "2"
