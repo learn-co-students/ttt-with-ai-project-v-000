@@ -71,10 +71,11 @@ class Game
     def turn
      puts "Please enter 1-9:"
      input = STDIN
-     index = @board.input_to_index(input)
-     if valid_move?(index)
-       @board.update(index, current_player)
-       @board.display
+     index = board.input_to_index(input)
+     # binding.pry
+     if board.valid_move?(input)
+       board.update(input, current_player)
+       board.display
      # else
      #   puts "invalid"
      #   turn
