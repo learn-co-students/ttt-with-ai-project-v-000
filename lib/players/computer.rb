@@ -31,6 +31,9 @@ module Players
 
             move = (empty_sq + 1).to_s
           end
+        else
+          all_sq = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+          move = all_sq.delete_if { |sq| board.taken?(sq) }.sample
         end # case_end
       end # if_end
     end # move_end
