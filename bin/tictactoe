@@ -3,3 +3,33 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe."
+puts "What kind of game do you want to play?"
+puts "0, 1, or 2 player?"
+number_of_players = gets.strip
+
+
+    if number_of_players == "0"
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+
+      elsif number_of_players == "1"
+        puts "Who should go first and use the token X? Human or computer?"
+        first_player = gets.strip
+          if first_player == "human" || first_player == "Human"
+            Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+
+          elsif first_player == "computer" || first_player == "Computer"
+              Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+          end
+
+      elsif number_of_players == "2"
+          Game.new
+    end
+
+
+
+
+
+
+#start game
+#play game
+#allow user to restart a new match
