@@ -42,9 +42,9 @@ class GameController
     def one_player_mode
         puts "Who should go first to put X down? Enter 1 to go first or 0 for computer to go first."
         input = gets.strip
-        if input == 1
+        if input == '1'
           game = Game.new(Players::Human.new('X'),Players::Computer.new('O'))
-        elsif input == 0
+        elsif input == '0'
           game = Game.new(Players::Computer.new('X'),Players::Human.new('O'))
         end
         game.play
