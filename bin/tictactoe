@@ -34,6 +34,8 @@ number_of_players = gets.strip
             puts "Computer goes first this time."
             new_game.start
           end
+        else
+          puts "Invalid selection. Try again."
         end
 
       elsif number_of_players == "2"
