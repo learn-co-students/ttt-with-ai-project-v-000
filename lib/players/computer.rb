@@ -16,7 +16,7 @@ module Players
               board.cells[combo[1]], 
               board.cells[combo[2]]
             ]
-            tokens.count{ |token| token == self.token } > 1
+            tokens.count{ |token| token == self.token } > 1 && tokens.include?('O') == false
           end
           
           # Fill the missing square
