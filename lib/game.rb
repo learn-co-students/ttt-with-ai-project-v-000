@@ -70,4 +70,10 @@ class Game
       puts "Congratulations #{winner}!"
     end
   end
+
+  def start
+    puts "Welcome to Tic Tac Toe!"
+    self.board.display
+    self.play
+  end
 end
