@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+require 'pry'
 
 puts "Welcome to Tic Tac Toe."
 puts "What kind of game do you want to play?"
@@ -10,6 +10,9 @@ number_of_players = gets.strip
 
     if number_of_players == "0"
       new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      puts "Welcome to Tic Tac Toe!"
+      new_game.board.display
+      new_game.play
 
     elsif number_of_players == "1"
       puts "Who should go first and use the token X? Human or computer?"
