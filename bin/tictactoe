@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
-
+# bin/tictactoe
 require_relative '../config/environment'
+
+puts "Welcome to CLI Tic Tac Toe!"
+puts "Please select the number of players:"
+input = gets.strip
+# def select_game_type(input)
+  if input == "0"
+    # PLAYERS = input
+    newgame = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+  elsif input == "1"
+    # PLAYERS =  input
+    newgame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+  elsif input == "2"
+    # PLAYERS == 2
+    newgame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  else input == "WAR GAMES"
+    puts "WAR GAMES!!!!!"
+  end
+# newgame.play
