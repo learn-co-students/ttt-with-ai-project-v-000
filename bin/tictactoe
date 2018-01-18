@@ -1,3 +1,59 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/game.rb'
+
+loop do
+
+puts "Welcome to the game of TicTacToe!"
+puts "How many players? Enter 0, 1, or 2."
+
+# asks user to input number of players (0-2 allowed)
+player_count = gets.strip.to_i
+
+# loop checks for valid integer input
+loop do
+  # try again if number given isn't valid choice
+  puts "Sorry I didn't quite get that. Please try again, and enter either 0, 1, or 2." if player_count < 0 || player_count > 2
+  if player_count == 0 || player_count == 1 || player_count == 2
+    puts "#{player_count} player(s)? Sounds good! Let the game begin."
+    break
+  end
+end
+
+# time to play!
+case player_count
+  when 0
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  when 1
+    puts "Would you like to be X's or O's?"
+
+    loop do
+      letter_input = gets.strip
+      if letter_input == "X"
+        puts "Got it! X's go first."
+        game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+        break
+      elsif letter_input == "O"
+        puts "Got it! X's go first."
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        break
+      else
+        puts "Invalid input. Please enter either X or O."
+      end
+    end
+
+  when 2
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    puts "Got it! X's go first."
+
+  end
+
+  game.play
+  puts "Want to play again? Enter yes or no"
+  input = gets.strip
+  if input == "no"
+    puts "Come back and play another time!"
+    break
+  end
+end
