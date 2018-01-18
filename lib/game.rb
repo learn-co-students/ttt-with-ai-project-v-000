@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2, :token
+  attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
       [0,1,2],
       [3,4,5],
@@ -22,7 +22,7 @@ class Game
     end
 
     def current_player
-      board.turn_count%2 == 0 ? player_1 : player_2
+      @board.turn_count%2 == 0 ? @player_1 : @player_2
     end
 
     def full?
@@ -68,32 +68,18 @@ class Game
       end
     end
 
-    # def winner(board)
-    #   if won?(board)
-    #     winning_line = won?(board)
-    #     return board[winning_line[0]]
-    #   end
-    # end
-
     def turn
-      # puts "#{current_player}, Please enter 1-9:"
-      # input = gets.chomp.to_i-1
-      # if index <= 8
-      #   player.move(index)
-      #   board.display
-      # end
+     puts "Please enter 1-9:"
+     input = STDIN
+     index = board.input_to_index(input)
+     # binding.pry
+     if board.valid_move?(input)
+       board.update(input, current_player)
+       board.display
+     # else
+     #   puts "invalid"
+     #   turn
+     end
     end
-
-
-    #  puts "#{current_player}, Please enter 1-9:"
-    #  input = STDIN.gets.strip
-    #    if self.board.valid_move?(input)
-    #      self.board.update(input, current_player)
-    #      self.board.display
-    #  else
-    #    puts "invalid"
-    #   turn
-    #  end
-
 
 end
