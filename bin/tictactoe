@@ -1,3 +1,57 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Ruby Tic-Tac-Toe!"
+puts "How many players will be playing (0, 1, or 2)? "
+num_players = gets.strip
+
+until num_players == "0" || num_players == "1" || num_players == "2" || num_players == "exit"
+  puts "Please enter a valid number of players (0 - 2)"
+  num_players = gets.strip
+end
+
+case num_players
+when "0"
+  # Computer vs Computer
+  computer_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  computer_game.play
+when "1"
+  # Human vs Computer
+  puts "Team X or Team O?"
+  player_1_token = gets.strip.upcase
+
+  until player_1_token == "O" || player_1_token == "X"
+    puts "Please enter a valid team!"
+    player_1_token = gets.strip.upcase
+  end
+
+  player_2_token = "X"
+
+  if player_1_token == "X"
+    player_2_token = "O"
+  end
+
+  ai_game = Game.new(Players::Human.new("#{player_1_token}"), Players::Computer.new("#{player_2_token}"))
+  ai_game.play
+when "2"
+  # Human vs Human
+  puts "Player 1: Team X or Team O?"
+  player_1_token = gets.strip.upcase
+
+  until player_1_token == "O" || player_1_token == "X"
+    puts "Please enter a valid team!"
+    player_1_token = gets.strip.upcase
+  end
+
+  player_2_token = "X"
+
+  if player_1_token == "X"
+    player_2_token = "O"
+  end
+
+  human_game = Game.new(Players::Human.new("#{player_1_token}"), Players::Human.new("#{player_2_token}"))
+  human_game.play
+when "exit"
+  puts "Thank you for playing!"
+end
