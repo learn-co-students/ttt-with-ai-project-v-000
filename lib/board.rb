@@ -1,19 +1,19 @@
 class Board
-  attr_accessor :cells, :player, :token
+  attr_accessor :cells, :player, :token, :board
 
-
-
-  def initialize(board = nil)
-    @cells = Array.new(9, " ")
-    @board = board || @cells
+  def initialize
+    @cells = new_board
   end
 
   def reset!
-    @cells.clear
-    @cells = Array.new(9, " ")
+    @cells = new_board
   end
 
   def display
+    board
+  end
+
+  def board
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
@@ -27,15 +27,15 @@ class Board
 
   def position(input)
     index = input_to_index(input)
-    @cells[index]
+    cells[index]
   end
 
   def full?
-    @cells.any? {|i| i ==" "} ? false : true
+    !cells.include?(" ")
   end
 
   def turn_count
-    @cells.count {|i| i == "X" || i == "O"}
+    cells.count {|i| i != " "}
   end
 
   def taken?(input)
@@ -43,12 +43,23 @@ class Board
   end
 
   def valid_move?(input)
-    index = input.to_i
-    !taken?(index) && index.between?(1, 9) ? true : false
+    if input.match(/\D/)
+      then
+      return false
+    end
+      !taken?(input)
+    # index = input.to_i
+    # !taken?(index) && index.between?(1, 9) ? true : false
   end
 
   def update(input, player)
-    @cells[input_to_index(input)] = "#{player.token}"
+
+    @cells[input_to_index(input)] = player.token
+  end
+
+  private
+  def new_board
+    Array.new(9, " ")
   end
 
 end
