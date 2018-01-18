@@ -1,3 +1,96 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def welcome
+  puts "Welcome to Tic Tac Toe!"
+  puts "Would you like to play? (y or n)"
+  input = gets.chomp
+
+  if input == "y" || input == "Y"
+    game_selection
+  elsif input == "n" || input == "N"
+    farewell
+  end
+end
+
+def game_selection
+  puts "Would you like to play the game with 0, 1, or 2 Human Players?"
+  num_of_players = gets.chomp.to_i
+
+  if num_of_players == 0
+    computer_v_computer
+  elsif num_of_players == 1
+    human_v_computer
+  elsif num_of_players == 2
+    human_v_human
+  end
+  play_again?
+end
+
+def computer_v_computer
+  puts "Regular or Wargames?"
+  input = gets.chomp.downcase
+
+  if input == "regular"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
+  elsif input == "wargames"
+    games_won = 0
+    100.times do |game|
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      result = game.play
+      if result == "won"
+        games_won += 1
+      end
+    end
+    puts "The computer won #{games_won} out of 100 games."
+  end
+end
+
+def human_v_computer
+  puts "Who should go first human or the computer?"
+  input = gets.chomp.downcase
+
+  if input == 'human'
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    game.play
+  elsif input == 'computer'
+    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    game.play
+  end
+
+end
+
+def human_v_human
+  puts "Who wants to go first, Player 1 or Player 2? (1 or 2)"
+  input = gets.chomp.to_i
+
+  if input == 1
+    puts "Okay. Player 1 goes first..."
+    game = Game.new
+    game.play
+  elsif input == 2
+    puts "Okay. Player 2 goes first..."
+    game = Game.new
+    game.play
+  end
+
+end
+
+def play_again?
+  puts "Would you like to play again? (y or n)"
+  input = gets.chomp
+
+  if input == "y" || input == "Y"
+    game_selection
+  elsif input == "n" || input == "N"
+    farewell
+  end
+end
+
+def farewell
+  puts "Thanks for coming!"
+end
+
+welcome
