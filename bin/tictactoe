@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "\n----------------------------------"
+puts "Welcome to UNBEATABLE Tic Tac Toe!"
+puts "----------------------------------\n "
+
+
+CLI.new.start_game
