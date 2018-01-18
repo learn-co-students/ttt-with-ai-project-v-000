@@ -1,3 +1,10 @@
+
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#require_relative "../lib"
+
+require_all 'lib'
+#Game.new.start
+CLI.new.call
