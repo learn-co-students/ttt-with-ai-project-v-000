@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+puts 'Hi! Welcome to the wonderful world of Tic-Tac-Toe!'
+
+begin
+  print 'Would like a 0, 1, or 2 player game? '
+  game_type = gets.strip
+  case game_type
+  when '0'
+    game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'))
+    game.play
+  when '1'
+    print 'Will you go first [y/n]? '
+    if gets.strip == 'y'
+      game = Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+    else
+      game = Game.new(Players::Computer.new('X'), Players::Human.new('O'))
+    end
+    game.play
+  when '2'
+    game = Game.new(Players::Human.new('X'), Players::Human.new('O'))
+    game.play
+  else
+    puts 'Invalid input.'
+  end
+  print "\nPlay again [y/n]? "
+end until gets.strip.downcase != 'y'
+
+puts 'Thanks for playing. Goodbye!'
