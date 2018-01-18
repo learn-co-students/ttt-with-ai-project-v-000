@@ -88,7 +88,7 @@ class Game
       puts "Cat's Game!"
       @board.display
       puts "Would you like to play again? (y/n)"
-      answer = gets.chomp 
+      answer = gets.chomp
       if answer == "y"
         Game.start
       end
@@ -97,7 +97,7 @@ class Game
 
   def self.start
     puts "Welcome to Tic Tac Toe!"
-    puts "Would you like to play 0, 1 or 2 player?"
+    puts "Would you like to play a 0, 1 or 2 player game? Or would you like to play wargames?!"
     input = gets.chomp
     #binding.pry
     if input == "0"
@@ -115,9 +115,23 @@ class Game
        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
        game.play
      end
-    elsif input == 2
+   elsif input == "2"
      Game.new.play
-    else
+   elsif input == "wargames"
+     game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+     results = {}
+     count = 100
+     while count is > 0
+       game.play
+       count -= 1
+       if game.won?
+         results[won]+=1
+       elsif game.draw?
+         results[draw]+=1
+       end
+     end
+     puts "Out of 100 games, there were #{results[won]} wins and #{results[draw] tie games.}"
+   else
      puts "Invalid entry"
      start
     end
