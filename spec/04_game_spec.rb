@@ -183,6 +183,7 @@ describe 'Game' do
 
     it 'asks for input again after a failed validation' do
       game = Game.new
+      
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("invalid")
