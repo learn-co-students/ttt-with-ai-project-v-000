@@ -92,7 +92,7 @@ describe 'Game' do
 
     it 'returns false for an in-progress game' do
       game = Game.new
-      game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
+      game.board.cells = ["X", " ", " ", " ", "X", " ", "O", "O", " "]
 
       expect(game.over?).to be_falsey
     end
