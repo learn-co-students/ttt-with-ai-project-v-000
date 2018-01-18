@@ -1,3 +1,70 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+TicTacToe.new
+
+# BIN/TICTACTOE
+# The requirements of your CLI are as follows, free for you to implement
+#however you see fit as we provide no tests against the CLI.
+# Greet the user with a message.
+# Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+# Ask the user for who should go first and be "X".
+# Use the input to correctly initialize a Game with the appropriate player
+#types and token values.
+# When the game is over, the CLI should prompt the user if they would like
+#to play again and allow them to choose a new configuration for the game as
+# described above. If the user doesn't want to play again, exit the program.
+# You can implement this logic within the bin/tictactoe directly or encapsulate
+# it within Game via a method like #start and simply evoke that method in the CLI.
+# There is no wrong way to implement code that works.
+# If you'd like, implement a "wargames" game type. When asked what kind of game
+# they want to play or for the number of players, if the user types in "wargames",
+# have the computer play itself 100 times and report how many times the game was won.
+# This is not a requirement, it would just be fun. A perfect computer AI should
+# never be able to win, like in the case of thermonuclear war.
+# The rest is up to you and your team. Have fun, implement the spirit of the
+# project, meet the requirements as you interpret them, be creative, and don't
+# worry, there are no wrong answers with code.
+
+# puts "***********  Welcome to Tic Tac Toe! *********** \nWhat type of game would you like to play? \n
+#       Enter 0 for the computer to play itself. \n
+#       Enter 1 to play the computer. \n
+#       Enter 2 to play with a human friend."
+#
+# game_type = gets.strip
+# game_type = game_type.to_i
+# puts "************************************************"
+#
+# case game_type
+#   when 0
+#     puts "Great! Let's have the computer play Tic-Tac-Toe against itself!"
+#
+#   when 1
+#     puts "Great! You can play Tic-Tac-Toe against the computer!"
+#     puts "Input 1 to go first and use the \"X\" token or input 2 to have the computer go first and have the \"X\" token."
+#     player = gets.strip.to_i
+#     if player == 1
+#       player_1 = Player::Human.new("X")
+#       player_2 = Player::Computer.new("O")
+#       human_computer_game = Game.new(player_1, player_2)
+#     elsif player == 2
+#       player_1 = Player::Computer.new("X")
+#       player_2 = Player::Human.new("O")
+#       human_computer_game = Game.new(player_1, player_2)
+#     end
+#     human_computer_game.play
+#   when 2
+#     puts "Great! You can play Tic-Tac-Toe against another human friend!\n\n"
+#     puts "Please select the player who goes first and gets the \"X\" token. \n\nThe player going first should input \"start\" now to get start the game and select their first move.\nOr input \"help\" if you want more information about how to play Tic Tac Toe.\n\n"
+#     go = gets.strip.downcase
+#     puts "\n \n"
+#     player_1 = Player::Human.new("X")
+#     player_2 = Player::Human.new("O")
+#     human_human_game = Game.new(player_1, player_2)
+#     if go == "start"
+#       human_human_game.play
+#     else
+#       human_human_game.help
+#     end
+# end
