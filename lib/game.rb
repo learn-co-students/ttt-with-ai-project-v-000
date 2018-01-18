@@ -76,7 +76,14 @@ class Game
     # end
 
     def turn
-      
+      # puts "#{current_player}, Please enter 1-9:"
+      # input = gets.chomp.to_i-1
+      # if index <= 8
+      #   player.move(index)
+      #   board.display
+      # end
+    end
+
 
     #  puts "#{current_player}, Please enter 1-9:"
     #  input = STDIN.gets.strip
@@ -87,6 +94,6 @@ class Game
     #    puts "invalid"
     #   turn
     #  end
-    end
+
 
 end
