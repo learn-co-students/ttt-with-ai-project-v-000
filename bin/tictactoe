@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/TTT_Methods.rb'
+
+
+puts "Welcome to Tic Tac Toe!"
+TTT_Methods.players
+TTT_Methods.start
+
+
+## THANK YOU to all of the learn students and experts in the learn community who helped me complete this lab.
+# I wasn't able to find a partner to work with on this, but the learn community really helped. 
+# special thanks to @aturkewi2,  @AdamKing0126,  @ivalentine,  @jakebrady5, 
+# and especially to @karuna24s whose elegant, concise, effective and easy-to-read coding style 
+# was an inspiration in this lab and something I aspire to in my future coding! 
