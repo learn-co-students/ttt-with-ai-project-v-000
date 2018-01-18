@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#Welcome
+puts "\nWelcome to Tic-Tac-Toe!\n\n\""
+
+#Trigger to quit game after playing
+quit = false 
+
+until quit == true
+    #Choose gameplay mode (i.e. number of players)
+    puts "Please select game play mode ('0', '1' or '2' players)"
+    mode = gets.strip
+
+    #Create players based on gameplay mode chosen
+    case mode 
+        when "0"
+            player_1 = Players::Computer.new("X")
+            player_2 = Players::Computer.new("O")
+        when "1"
+            puts "Please select a player to go first and be 'X' (choose 'me' or 'computer')"
+            first = gets.strip
+            if first == "me"
+                player_1 = Players::Human.new("X")
+                player_2 = Players::Computer.new("O")
+            elsif first == "computer"
+                player_1 = Players::Computer.new("X")
+                player_2 = Players::Human.new("O")
+            end
+        when "2"
+            player_1 = Players::Human.new("X")
+            player_2 = Players::Human.new("O")
+        else
+    end
+
+    #Initialize and play game
+    game = Game.new(player_1, player_2)
+    game.play
+
+    #Ask user whether to play again
+    puts "Would you like to play again? (y/n)"
+    play_again = gets.strip
+    play_again == "y" ? quit = false : quit = true
+end
