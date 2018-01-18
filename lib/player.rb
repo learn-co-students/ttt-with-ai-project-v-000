@@ -1,8 +1,7 @@
-class Player::Human < Player		
+class Player		
+   attr_reader :token		
  		
-   def move(board)		
-     puts "Please enter 1-9:"		
-     gets.strip		
+   def initialize(token)		
+     @token = token		
    end		
- 		
  end
