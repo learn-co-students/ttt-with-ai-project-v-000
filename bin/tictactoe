@@ -1,3 +1,81 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+
+computer_players = 3
+until (computer_players.integer?) and (computer_players >= 0) and (computer_players <= 2)
+  puts "Number of computer players?: 0, 1 or 2"
+  s = gets.strip
+  computer_players = s.to_i
+end
+
+if computer_players == 1
+  first = 3
+  until (first.integer?) and (first >= 1) and (first <= 2)
+    puts "Who plays first?: Computer = 1, human = 2"
+    s = gets.strip
+    first = s.to_i
+  end
+end
+
+case computer_players
+when 0
+  game = Game.new
+when 1
+  case first
+  when 1
+    game = Game.new(Player::Computer.new("X"))
+  else
+    game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+  end
+else
+  game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+end
+
+until game.over?
+  game.play
+end
+
+puts "Would you like to play again?"
+play_again = gets.strip
+
+until play_again.downcase == "n" || play_again.downcase == "no"
+  computer_players = 3
+  until computer_players.integer? and computer_players >= 0 and computer_players <= 2
+    puts "Number of computer players?: 0, 1 or 2"
+    s = gets.strip
+    computer_players = s.to_i
+  end
+
+  if computer_players == 1
+    first = 3
+    until first.integer? and first >= 1 and first <= 2
+      puts "Who plays first?: Computer = 1, human = 2"
+      s = gets.strip
+      first = s.to_i
+    end
+  end
+
+  case computer_players
+  when 0
+    game = Game.new
+  when 1
+    case first
+    when 1
+      game = Game.new(Player::Computer.new("X"))
+    else
+      game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+    end
+  else
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+  end
+
+  until game.over?
+    game.play
+  end
+  puts "Would you like to play again?"
+  play_again = gets.strip
+
+end
