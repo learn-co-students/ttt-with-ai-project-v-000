@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to TTT"
+
+#Ask the user for who should go first and be "X".
+def request_new
+  while true
+    puts "Select players 0, 1 or 2"
+    players = gets.strip
+    case players
+      when "2"
+        player_1 = Players::Human.new('X')
+        player_2 = Players::Human.new('O')
+        break
+      when "1"
+        player_1 = Players::Human.new('X')
+        player_2 = Players::Computer.new('O')
+        break
+      when "0"
+        player_1 = Players::Computer.new('X')
+        player_2 = Players::Computer.new('O')
+        break
+    end
+  end
+  Game.new(player_1, player_2)
+end
+
+
+game = request_new
+game.first_player
+
+
+game.play
