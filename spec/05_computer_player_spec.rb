@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Players::Computer' do
   it 'inherits from Player' do
