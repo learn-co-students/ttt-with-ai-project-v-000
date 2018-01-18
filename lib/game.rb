@@ -38,48 +38,34 @@ class Game
     end
 
     def won?
-    WIN_COMBINATIONS.detect do |win_combination|
-
-        win_index_1 = win_combination[0]
-        win_index_2 = win_combination[1]
-        win_index_3 = win_combination[2]
-
-        position_1 = @board.cells[win_index_1]
-        position_2 = @board.cells[win_index_2]
-        position_3 = @board.cells[win_index_3]
-
-        if position_1 == @player_1.token && position_2 == @player_1.token && position_3 ==  @player_1.token
-          win_combination
-        elsif position_1 == @player_2.token && position_2 == @player_2.token && position_3 == @player_2.token
-          win_combination
-        else
-          false
+      WIN_COMBINATIONS.any? do |combo|
+        if board.cells[combo[0]] == player_1.token &&
+            board.cells[combo[1]] == player_1.token &&
+            board.cells[combo[2]] == player_1.token ||
+            board.cells[combo[0]] == player_2.token &&
+            board.cells[combo[1]] == player_2.token &&
+            board.cells[combo[2]] == player_2.token
+          return combo
         end
       end
     end
 
     def winner
-      if won?
-        WIN_COMBINATIONS.detect do |combo|
-          if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]]
-            return @board.cells[combo[0]]
-          end
-        end
+      if (won?)
+        board.cells[won?.first]
+      else
+        nil
       end
     end
 
     def turn
-     puts "Please enter 1-9:"
-     input = STDIN
-     index = board.input_to_index(input)
-     # binding.pry
-     if board.valid_move?(input)
-       board.update(input, current_player)
-       board.display
-     # else
-     #   puts "invalid"
-     #   turn
-     end
+      move = current_player.move(board)
+      board.valid_move?(move) ? board.update(move, current_player) : turn
     end
+
+    def play
+      
+    end
+
 
 end
