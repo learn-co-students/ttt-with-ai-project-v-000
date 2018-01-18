@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe AI"
+
+loop do
+puts "What kind of game do you want to play?"
+puts "0,1 or 2 players?"
+game_type = gets.strip
+
+  case game_type
+  when "0"
+    Game.create(Players::Computer.new("X"),Players::Computer.new("O"))
+  when "1"
+    puts "Would you like to go first and be the \"X\" player?"
+    puts "press y for yes, any key for no"
+    user_imput = gets.strip
+    if user_imput == "y"
+      Game.create(Players::Human.new("X"),Players::Computer.new("O"))
+    else
+      Game.create(Players::Computer.new("X"),Players::Human.new("O"))
+    end
+  when "2"
+    Game.create(Players::Human.new("X"),Players::Human.new("O"))
+  end
+
+  puts "Do you want to play again?"
+  puts "press y for yes, any key for no"
+  start = gets.strip
+  break if start != "y"
+end
