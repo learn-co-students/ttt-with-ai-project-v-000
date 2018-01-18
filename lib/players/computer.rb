@@ -11,6 +11,15 @@ module Players
       # Check to see if you have any chances to win
       # If you have no winning moves, play a move to block the opponent from WINNING_COMBINATIONS
   # If none of the WINNING_COMBINATIONS patterns have two squares taken by the same token and a third empty space, play the first open square, starting with corners and then sides
+        if board.cells[0] == nil
+           puts "5"
+         else
+           puts "1"
+        end
+
+      if board.cells[5] == "O"
+        puts "1" || "3"|| "7" || "9"
+      end
     end
   end
 end

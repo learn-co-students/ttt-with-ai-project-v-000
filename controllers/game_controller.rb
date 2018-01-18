@@ -31,6 +31,7 @@ class GameController
     end
 
     def two_player_mode
+        game = Game.new
         puts "This is two player mode. The object of the game is to get three"
         puts "in a row either diagonally or horizontally. The game is done when a"
         puts "player has won or all 9 squares are filled.\n"
@@ -40,6 +41,8 @@ class GameController
     end
 
     def one_player_mode
+        # Ask the user for who should go first and be "X"
+        game = Game.new
         puts "Who should go first to put X down? Enter 1 to go first or 0 for computer to go first."
         input = gets.strip
         if input == 1
@@ -52,11 +55,12 @@ class GameController
     end
 
     def zero_player_mode
+        # display the mode type and rules of the game
         puts "This is zero player mode where 2 computers play against each other."
         game = Game.new(Players::Computer.new('X'),Players::Computer.new('O'))
         game.play
         play_again?
-    end
+      end
 
     def play_again?
         puts "Do you want to play again? y/n "
@@ -68,5 +72,4 @@ class GameController
             exit
         end
     end
-
 end
