@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome!"
+puts "Intiating Tic-Tac-Toe..."
+puts "How many players will there be?"
+puts "Please select 1 or 2 players (or 0 for a fight!)"
+
+input = gets.chomp.to_i
+
+case input
+when 0
+  puts "Be Amazed"
+  Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+when 1
+  Game.new(Player::Human.new("X"), Player::Computer.new("O")).play
+when 2
+  Game.new(Player::Human.new("X"), Player::Human.new("O")).play
+end
