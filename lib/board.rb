@@ -1,3 +1,4 @@
+require "pry"
 class Board
   attr_accessor :cells
 
@@ -48,12 +49,14 @@ class Board
 
   def valid_move?(move)
     move = move.to_i
+    # binding.pry
     if (move > 0 && 10 > move)
-      if self.cells[move-1] == " "
+      if !taken?(move)
         return true
+      else
+        return false
       end
     end
-    false
   end
 
   def update(move, player)

@@ -1,3 +1,4 @@
+require "pry"
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -23,7 +24,7 @@ class Game
   end
 
   def over?
-    board.full? ? true : false
+    won? || draw?
   end
 
   def won?
@@ -49,7 +50,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
   end
 
   def winner
@@ -69,7 +70,7 @@ class Game
   end
 
   def play
-    until over? || won? || draw?
+    until over?
       turn
     end
     if won?
