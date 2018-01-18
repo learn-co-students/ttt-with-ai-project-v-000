@@ -1,3 +1,47 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def how_many
+  puts "How many human players are there (0-2)?"
+  gets.strip.to_i
+end
+
+def start
+  puts "Let's play tic-tac-toe!"
+  humans = how_many
+  until humans == 0 || humans == 1 || humans == 2
+    humans = how_many
+  end
+
+  if humans == 0
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    game.play
+  end
+
+  def one_player
+  puts "Would you like to go first? Y/n?"
+  answer = gets.strip
+    if answer == "Y"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+    elsif answer == "n"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    else
+      one_player
+    end
+  end
+
+  if humans == 1
+    one_player
+  end
+
+  if humans == 2
+    puts "Get ready, first player!"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+    game.play
+  end
+end
+
+start
