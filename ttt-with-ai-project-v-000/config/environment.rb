@@ -1,0 +1,6 @@
+require './lib/cli.rb'
+require './lib/board.rb'
+require './lib/game.rb'
+require './lib/player.rb'
+require './lib/players/computer.rb'
+require './lib/players/human.rb'

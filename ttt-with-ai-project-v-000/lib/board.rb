@@ -6,7 +6,7 @@ class Board
   end
 
   def initialize
-    reset!
+    self.reset!
   end
 
   def display
@@ -30,19 +30,15 @@ class Board
   end
 
   def taken?(user_input)
-    if position(user_input) == "X" || position(user_input) == "O"
-      true
-    else
-      false
-    end
+    position(user_input) == "X" || position(user_input) == "O"
   end
 
   def valid_move?(user_input)
-    if user_input.to_i.between?(1,9) && taken?(user_input) == false
-      true
-    else
-      false
-    end
+    user_input.to_i.between?(1,9) && taken?(user_input) == false
+  end
+
+  def valid_move?(user_input)
+    user_input.to_i.between?(1,9) && taken?(user_input) == false
   end
 
   def update(user_input, player)
