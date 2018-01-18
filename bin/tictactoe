@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# This CLI has been cleaned up nicely to allow 0, 1, or 2 player games.
+# The AI could use a lot more love. But for right now it follows a random strategy.
+
+puts "Hello and welcome to Tic-Tac-Toe!"
+Cli.new.run_game
