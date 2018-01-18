@@ -13,7 +13,7 @@ describe 'Game' do
       expect(Game::WIN_COMBINATIONS).to include_array([6,4,2])
     end
   end
-
+  
   describe '#board' do
     it 'provides access to the board' do
       game = Game.new
@@ -75,7 +75,7 @@ describe 'Game' do
     end
   end
 
-  describe '#over?' do
+   describe '#over?' do
     it 'returns true for a draw' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
@@ -93,7 +93,6 @@ describe 'Game' do
     it 'returns false for an in-progress game' do
       game = Game.new
       game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
-
       expect(game.over?).to be_falsey
     end
   end
@@ -247,7 +246,6 @@ describe 'Game' do
       allow(game).to receive(:over?).and_return(false, false, false, true)
 
       game.play
-
       expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
 
