@@ -1,3 +1,73 @@
 #!/usr/bin/env ruby
-
+#   ~~~HAVICK WAS HERE~~~
 require_relative '../config/environment'
+
+@count = 0
+@wins = 0
+@draw = 0
+def one_player
+game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+  until game.over?
+game.play
+  end
+  again?
+end
+
+def two_player
+  game = Game.new
+    until game.over?
+  game.play
+end
+    again?
+end
+
+def war
+  while @count <100
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+  until game.over?
+    game.play
+    @count +=1
+    @wins +=1 if game.won?
+    @draw +=1 if game.draw?
+  end
+end
+  puts "The computer won #{@wins} times, and stalemated #{@draw} times!"
+  again?
+end
+
+
+
+def welcome?
+welcome = ""
+puts "Welcome to Tic Tac Toe!"
+puts "We have 2 modes for you to choose from..."
+puts "Enter 1 to play the computer (he's not so terrible)"
+puts "Press 2 to pretend you have a friend (two player mode)"
+puts "Or Press 3 for a lonely computer (The computer plays alone)"
+welcome = gets.strip
+    if welcome == "1"
+        one_player
+      elsif welcome == "2"
+        two_player
+      elsif welcome == "3"
+        war
+      else
+        puts "Sorry, that wasn't an option"
+          welcome?
+      end
+end
+
+def again?
+play_again = ""
+  puts "Would you like to play again?"
+    play_again = gets.strip
+  if play_again.downcase == "y" || play_again.downcase == "yes"
+    welcome?
+  elsif play_again.downcase == "n" || play_again.downcase == "no"
+    puts "Thanks for playing!"
+  else
+    puts "Sorry, I didn't understand that, please enter: y, yes, n, or no"
+     again?
+  end
+end
+welcome?
