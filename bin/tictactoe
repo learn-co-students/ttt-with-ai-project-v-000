@@ -1,3 +1,76 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+def game_call(gameplayer_array)
+  puts "Hello HU-mon.  Do you wish to play a game?"
+  puts "  How about a nice game of Tic-Tac-Toe?"
+
+  Board.new.display
+
+  puts "How many HU-mon players? (0, 1, or 2)"
+  player_num = gets.chomp.to_i
+  gameplayer_array[0] = player_num
+
+
+  puts "What will the first players token be?  X or O:"
+  player_1_token = gets.strip
+  player_1_token.upcase!
+  until player_1_token == "X" || player_1_token == "O"
+    puts "Invalid token choice..try again"
+    player_1_token = gets.strip
+  player_1_token.upcase!
+  end
+  player_1_token == "X" ? player_2_token = "O" : player_2_token = "X"
+  gameplayer_array[1] = player_1_token
+  gameplayer_array[2] = player_2_token
+  gameplayer_array
+end
+  
+
+  
+def zero_humon_game(gameplayer_array)
+  player_1 = Player::Computer.new(gameplayer_array[1])
+  player_2 = Player::Computer.new(gameplayer_array[2])
+  new_game = Game.new(player_1, player_2)
+  new_game.play
+end
+
+def one_humon_game(gameplayer_array)
+  player_1 = Player::Human.new(gameplayer_array[1])
+  player_2 = Player::Computer.new(gameplayer_array[2])
+  new_game = Game.new(player_1, player_2)
+  new_game.play
+
+end
+
+def two_humon_game(gameplayer_array)
+  player_1 = Player::Human.new(gameplayer_array[1])
+  player_2 = Player::Human.new(gameplayer_array[2])
+  new_game = Game.new(player_1, player_2)
+  new_game.play
+end
+
+game_end = false
+
+
+while !game_end 
+  gameplayer_array = []
+  game_call(gameplayer_array)
+  zero_humon_game(gameplayer_array) if gameplayer_array[0] == 0
+  one_humon_game(gameplayer_array) if gameplayer_array[0] == 1
+  two_humon_game(gameplayer_array) if gameplayer_array[0] == 2
+  
+  decision = nil
+    until decision == "Y" || decision == "N"
+      puts "Do you wish to play again? (Y or N)"
+      decision = gets.strip
+      decision.upcase!
+    end
+
+  game_end = true if decision == "N"
+end
+
+
