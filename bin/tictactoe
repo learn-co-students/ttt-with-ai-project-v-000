@@ -1,3 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+game = Game.start
+
+if game.player_1.class == Players::Computer && game.player_2.class == Players::Computer
+  puts "Wargames? [y/n]"
+  gets.strip == 'y' ? game.wargames : game.play
+else
+  game.play
+end
