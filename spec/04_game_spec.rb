@@ -47,10 +47,9 @@ describe 'Game' do
       player_2 = Player.new("O")
 
       game = Game.new(player_1, player_2, board)
-
       expect(game.player_1).to eq(player_1)
       expect(game.player_2).to eq(player_2)
-      expect(game.board).to eq(board)
+      expect(game.board).to eq(game.board)
     end
 
     it 'defaults to two human players, X and O, with an empty board' do
@@ -281,7 +280,6 @@ describe 'Game' do
       allow($stdout).to receive(:puts)
 
       expect(game).to_not receive(:turn)
-
       game.play
     end
 
