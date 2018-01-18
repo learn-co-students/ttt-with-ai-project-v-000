@@ -1,3 +1,24 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome! Please enter a number for 0-player, 1-player, or 2-player"
+input = gets.strip.to_i
+
+if input == 0
+  game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+  game.play
+elsif input == 1
+  puts "Would you like to play as X or O?"
+  token_choice = gets.strip
+  if token_choice == "O"
+    game = Game.new(Player::Computer.new("X"), Player::Human.new("O"))
+    game.play
+  elsif token_choice == "X"
+    game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+    game.play
+  end
+elsif input == 2
+  game = Game.new
+  game.play
+end
