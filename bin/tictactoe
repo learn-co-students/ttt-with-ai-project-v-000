@@ -1,3 +1,13 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts " _   _      _             _             "
+puts "| | (_)    | |           | |            "
+puts "| |_ _  ___| |_ __ _  ___| |_ ___   ___ "
+puts "| __| |/ __| __/ _` |/ __| __/ _ \\ / _ \\"
+puts "| |_| | (__| || (_| | (__| || (_) |  __/"
+puts " \\__|_|\\___|\\__\\__,_|\\___|\\__\\___/ \\___|"
+puts "\nWelcome to Tic Tac Toe!"
+
+CLI.new.start
