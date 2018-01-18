@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+Game.start
+
+puts "Play again? y/n:"
+input = gets.strip.upcase
+while input != "N"
+  Game.start
+  puts "Play again? y/n:"
+  input = gets.strip.upcase
+end
+exit
