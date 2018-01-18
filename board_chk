@@ -1,0 +1,31 @@
+
+[1mFrom:[0m /home/MIKE-RANDELL/code/labs/ttt-with-ai-project-v-000/lib/player.rb @ line 20 Computer#move:
+
+    [1;34m17[0m: [32mdef[0m [1;34mmove[0m(board=[])
+    [1;34m18[0m: 
+    [1;34m19[0m:   board_chk = board.turn_count
+ => [1;34m20[0m:   binding.pry
+    [1;34m21[0m:   [32mcase[0m board_chk
+    [1;34m22[0m:   [32mwhen[0m board_chk == [1;34m0[0m
+    [1;34m23[0m:     [32mif[0m board.cells[[1;34m4[0m] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m
+    [1;34m24[0m:       [31m[1;31m"[0m[31m5[1;31m"[0m[31m[0m
+    [1;34m25[0m:     [32mend[0m
+    [1;34m26[0m:   [32mwhen[0m board_chk == [1;34m1[0m
+    [1;34m27[0m:     [32mif[0m board.cells[[1;34m4[0m] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m
+    [1;34m28[0m:       [31m[1;31m"[0m[31m5[1;31m"[0m[31m[0m
+    [1;34m29[0m:     [32melsif[0m board.cells[[1;34m0[0m] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m
+    [1;34m30[0m:       [31m[1;31m"[0m[31m1[1;31m"[0m[31m[0m
+    [1;34m31[0m:     [32melsif[0m board.cells[[1;34m2[0m] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m
+    [1;34m32[0m:       [31m[1;31m"[0m[31m3[1;31m"[0m[31m[0m
+    [1;34m33[0m:     [32melsif[0m board.cells[[1;34m6[0m] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m
+    [1;34m34[0m:       [31m[1;31m"[0m[31m7[1;31m"[0m[31m[0m
+    [1;34m35[0m:     [32melsif[0m board.cells[[1;34m8[0m] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m
+    [1;34m36[0m:       [31m[1;31m"[0m[31m9[1;31m"[0m[31m[0m
+    [1;34m37[0m:     [32mend[0m
+    [1;34m38[0m:   [32mwhen[0m board_chk == [1;34m2[0m
+    [1;34m39[0m: 
+    [1;34m40[0m:   [32mend[0m
+    [1;34m41[0m: 
+    [1;34m42[0m:   [1;34m#elsif[0m
+    [1;34m43[0m: [32mend[0m
+
