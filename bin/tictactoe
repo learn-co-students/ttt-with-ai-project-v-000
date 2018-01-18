@@ -1,3 +1,63 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def player_vs_computer
+  puts "Great! Would you like to go first, or would you like computer to go first? Type 1 to go first, type 2 to go second"
+
+  who_goes_first
+end
+
+  def who_goes_first
+    input_two = gets.chomp
+      if input_two == "1"
+        @new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      elsif input_two == "2"
+        @new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      else
+        puts "Come on, this is hard enough as it is. Please enter either 1 to go first, or 2 to go second"
+        who_goes_first
+      end
+  end
+
+  def take_input(input)
+    if input == "0"
+      @new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    elsif input == "1"
+      player_vs_computer
+    elsif input == "2"
+      @new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    end
+  end
+
+  def repeat_game
+  puts "Would you like to play again? Type 1 for yes, 2 for no"
+  repeat = gets.chomp
+    if repeat == "1"
+      game
+    elsif repeat == "2"
+      puts "Thanks for playing"
+    else
+      puts "......I said 1 for yes, 2 for no....please :)"
+      repeat_game
+    end
+  end
+
+
+
+
+
+
+def game
+puts "Welcome to Tic Tac Toe...Let's Hope This Works"
+puts "We're going to use 1-9 to delineate the positions on a tic-tac-toe board."
+puts "Firstly:"
+puts "Would you like to to play against computer (type 1), against another human (type 2), or would you like to watch two computers duke it out (type 0)?"
+input = gets.chomp
+
+take_input(input)
+@new_game.play
+end
+game
+repeat_game
