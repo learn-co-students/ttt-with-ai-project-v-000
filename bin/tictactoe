@@ -1,3 +1,55 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+#for purpose counting wins for wargame
+$x_wins = 0
+$y_wins = 0
+
+def play_game (player_1, player_2, w_g = false)
+	game = Game.new(player_1, player_2)
+	game.wargame = w_g
+	game.play
+	$x_wins += 1 if w_g && game.winner == "X"
+	$y_wins += 1 if w_g && game.winner == "O"
+end
+
+puts "Welcome to TicTacToe! How many players: 0, 1, 2, wargame?"
+setup = gets.strip.downcase
+case setup
+	when "0" #two computer players
+		puts "You've selected two computer players, let it roll!" 
+		play_game(Players::Computer.new("X", "AI_1"), Players::Computer.new("O", "AI_2"))
+
+	when "1" #one human
+		puts "You want to play against AI??? Good LUCK!!! Enter X to go first, O to go second"
+		order = gets.strip
+		puts "What's your name?"
+		name_human = gets.strip
+
+		if order.upcase == "X"
+			play_game(Players::Human.new("X", name_human), Players::Computer.new("O", "I_AM_UNBEATABLE"))
+		
+		elsif order.upcase == "O"
+			play_game(Players::Computer.new("X","I_AM_UNBEATABLE"), Players::Human.new("O", name_human))
+		
+		end
+
+	when "2" #two humans
+		puts "enter name for first player"
+		name1 = gets.strip
+		puts "Welcome, #{name1}"
+		puts "enter name for second player"
+		name2 = gets.strip
+		puts "Welcome, #{name2}"
+	
+		play_game(Players::Human.new("X", name1), Players::Human.new("O", name2))
+
+	when "wargame"
+		100.times {
+		play_game(Players::Computer.new("X", "AI_1"), Players::Computer.new("O", "AI_2"), true)
+		}
+		puts "game statistics : X won #{$x_wins} times, Y won #{$y_wins} times"
+	else
+		puts "Input invalid, restart game to play again"
+end
+
