@@ -1,3 +1,86 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def welcome
+  @number_of_players = nil
+  until @number_of_players == "0" || @number_of_players == "1" || @number_of_players == "2" || @number_of_players == "wargames"
+    puts "How many players will play?"
+    @number_of_players = gets.strip
+  end
+end
+
+def play
+  case @number_of_players
+  when "0"
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+    game.board.display
+    game.play
+
+  when "1"
+    player_x = nil
+    until player_x == "computer" || player_x == "player"
+      puts "Who will go first? The player or computer?"
+      player_x = gets.strip.downcase
+    end
+
+    if player_x == "player"
+      game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+      game.board.display
+      game.play
+    elsif player_x == "computer"
+      game = Game.new(Player::Computer.new("X"))
+      game.board.display
+      game.play
+    end
+
+  when "2"
+    game = Game.new()
+    game.board.display
+    game.play
+
+  when "wargames"
+    wargames
+  end
+end
+
+def wargames
+  x_wins = 0
+  y_wins = 0
+  draws = 0
+  100.times do
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+    game.board.display
+    game.play
+    if game.winner == "X"
+      x_wins += 1
+    elsif game.winner == "O"
+      y_wins += 1
+    else
+      draws += 1
+    end
+  end
+  puts "X won #{x_wins} times"
+  puts "Y won #{y_wins} times"
+  puts "And there were #{draws} draws"
+end
+
+def play_again?
+  puts ""
+  puts "Would you like to play again?"
+  again = gets.strip.downcase
+  if again == "yes" || again == "y"
+    welcome
+    play
+    play_again?
+  else
+    puts "Thank you for playing!"
+    puts "Goodbye!"
+  end
+end
+
+# Starts the Game
+puts "Welcome to Tic Tac Toe!"
+welcome
+play
+play_again?
