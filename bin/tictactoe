@@ -1,3 +1,59 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def play_again?
+  puts "Would you like to play again?"
+  play_again = gets.strip.downcase
+  if play_again == "yes" || play_again == "y"
+    num_players
+  elsif play_again == "no" || play_again == "n"
+    puts "Game exiting"
+  else
+    puts "Please enter a valid input"
+    play_again?
+  end
+end
+
+def who_first(num_players)
+  puts "Who should go first? Enter player or computer."
+    player_first = gets.strip.downcase
+    if num_players == 1 && (player_first == "player" || player_first == "p")
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      game.play
+      play_again?
+    elsif num_players == 1 && (player_first == "computer" || player_first == "c")
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      game.play
+      play_again?
+    else
+      puts "Please enter a valid input"
+      who_first(num_players)
+    end
+end
+
+def num_players
+  puts "What kind of game do you want to play? 0, 1, or 2 player?"
+  player_input = gets.strip
+  if player_input == "0"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+    play_again?
+  elsif player_input == "1"
+    who_first(1)
+    num_players
+    play_again?
+
+  elsif player_input == "2"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    game.play
+    play_again?
+  else
+    puts "Please enter a valid input"
+    num_players
+  end
+end
+
+puts "Welcome to Tic Tac Toe!"
+num_players
