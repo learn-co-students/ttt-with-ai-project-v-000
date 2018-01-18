@@ -1,3 +1,87 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#Greet the user. Ask if user wants to play a game.
+puts "\nHello, would you like to play a game of Tic Tac Toe? (Enter y or n)\n\n"
+start_input = gets.chomp
+
+# TESTING
+#Program will not continue until User enters either "y" or "n"
+# until "y".include?(start_input) || start_input == "n"
+# 	puts "\nWould you like to play a game of Tic Tac Toe? (Enter y or n)\n\n"
+# 	start_input = gets.chomp
+# end
+# TESTING END
+
+#Program will not continue until User enters either "y" or "n"
+until start_input == "y" || start_input == "n"
+	puts "\nWould you like to play a game of Tic Tac Toe? (Enter y or n)\n\n"
+	start_input = gets.chomp
+end
+
+#if n, then program ends
+if "n".include?(start_input)
+	puts "\nOk, goodbye!\n\n"
+
+#if y, then program continues
+elsif "y".include?(start_input)
+	puts "\nGreat!\n\n"
+
+
+
+	#Find out from the player who is playing
+	puts "\n Will player 1 be human or computer? (Enter h or c): \n\n"
+		player1_input = gets.chomp
+
+	until player1_input == "h" || player1_input == "c"
+		puts "\n Will player 1 be human or computer? (Enter h or c): \n\n"
+		player1_input = gets.chomp
+	end
+
+
+	puts "\n Will player 2 be human or computer? (Enter h or c): \n\n"
+		player2_input = gets.chomp
+
+	until player2_input == "h" || player2_input == "c"
+		puts "\n Will player 2 be human or computer? (Enter h or c): \n\n"
+		player2_input = gets.chomp
+	end
+
+
+
+	#sets the game up with inputted type of players. Either humans or computers.
+	if player1_input == "c" && player2_input == "c"
+		game = Game.new(player1_object = Players::Computer.new("X"), player2_object = Players::Computer.new("O"))
+
+	elsif player1_input == "c" && player2_input == "h"
+		game = Game.new(player1_object = Players::Computer.new("X"), player2_object = Players::Human.new("O"))
+
+	elsif player1_input == "h" && player2_input == "c"
+		game = Game.new(player1_object = Players::Human.new("X"), player2_object = Players::Computer.new("O"))
+
+	else
+		game = Game.new
+
+	end
+
+	#introduces players
+
+	puts "\n\n\n***********************"
+	puts "* Player 1 is a #{game.player_1.class.to_s.split("::")[1]} *"
+	puts "* Player 2 is a #{game.player_2.class.to_s.split("::")[1]} *"
+	puts "***********************"
+	puts "\n     Let's begin! \n\n"
+
+	# displays empty board and board position guide
+	puts "#{game.board.display_guide}\n"
+	puts "#{game.board.display}"
+
+	game.play
+
+	puts "Would you like to play again? (Enter y or n):"
+	if gets.chomp == "y"
+		game.board.reset!
+		game.play
+	end
+end
