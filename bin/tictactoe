@@ -1,3 +1,63 @@
 #!/usr/bin/env ruby
-
+#require 'pry'
 require_relative '../config/environment'
+
+x  = Players::Human.new("X")
+o  = Players::Human.new("O")
+cx = Players::Computer.new("X")
+co = Players::Computer.new("O")
+b  = Board.new
+
+
+  def player_count
+    num = gets.strip
+    num = num.to_i
+    if num == 0 || num == 1 || num == 2
+      num
+    else
+      puts "invalid entry"
+      count
+    end
+  end
+
+  def x_OR_o
+    selection  = gets.strip
+    if selection == "X" || selection == "x" || selection == "O" || selection == "o"
+      selection.upcase
+    else
+      puts "Invalid selection, try again"
+      x_OR_o
+    end
+  end
+
+
+
+
+  puts "Welcome to Tic Tac Toe."
+  puts "How many players will be playing: 0 1 or 2?"
+  count = player_count
+  if count != 0
+    puts "Player 1, choose X or O"
+    token = x_OR_o
+  end
+
+  if count == 0
+     computer = Game.new(cx,co,b)
+     computer.play
+
+  elsif count == 1 && token == "X"
+    one_player_X = Game.new(x,co,b)
+    one_player_X.play
+
+  elsif count == 1 && token == "O"
+    one_player_O = Game.new(o,cx,b)
+    one_player_O.play
+
+  elsif count == 2 && token == "X"
+    two_player_X = Game.new(x,o,b)
+    two_player_X.play
+
+  elsif count == 2 && token == "O"
+    two_player_O = Game.new(o,x,b)
+    two_player_O.play
+  end
