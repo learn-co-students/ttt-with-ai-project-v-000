@@ -1,3 +1,42 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome, would you like to play tic tac toe? Please enter Y or N"
+user_input = gets.strip
+
+if user_input == "Y"
+	# what objects do I need to bring into life and what methods do I trigger on them?
+	puts "what kind of game do you want to play, 0,1, or 2 player"
+	player_type = gets.strip
+	if player_type == "0"
+
+	elsif player_type == "1"
+		player_x = Players::Human.new("X")
+		player_o = Players::Computer.new("O")
+		#http://neverstopbuilding.com/minimax
+		game = Game.new(player_x, player_o)
+        game.play
+	elsif player_type == "2"
+		player_x = Players::Human.new("X")
+		player_o = Players::Human.new("O")
+		game = Game.new(player_x, player_o)
+		game.play
+		if game.over? 
+			puts "would you like to play again? enter 'Y' or 'N' "
+      		user_response = gets.strip
+      	end 
+      	if user_response == "Y"
+      		puts "User Entered Yes"
+      		game = Game.new(player_x, player_o)
+      		game.play# INSTEAD OF CALLING PLAY
+      	else 
+      		puts "WHAT?!!!"
+      	end# puts "2 player game started"
+      	#end
+	end 
+elsif user_input == "N"
+	puts "YOU TYPED IN N BYE"
+else
+	puts "WHAT?!?!"
+end

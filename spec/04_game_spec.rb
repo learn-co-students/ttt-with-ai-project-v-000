@@ -175,9 +175,7 @@ describe 'Game' do
     it 'makes valid moves' do
       game = Game.new
       allow($stdout).to receive(:puts)
-
       expect(game.player_1).to receive(:gets).and_return("1")
-
       game.turn
     end
 
@@ -208,9 +206,7 @@ describe 'Game' do
       game = Game.new
       allow($stdout).to receive(:puts)
       allow(game).to receive(:over?).and_return(false, true)
-
       expect(game.player_1).to receive(:gets).at_least(:once).and_return("1")
-
       game.play
     end
 

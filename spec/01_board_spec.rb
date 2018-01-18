@@ -119,10 +119,11 @@ describe "Board" do
 
   describe '#update' do
     it 'updates the cells in the board with the player token according to the input' do
-      player = double("player", :token => "X")
-
-      board.update("1", player)
-      expect(board.position("1")).to eq("X")
+      player = double("player", :token => "X")#player object is initialized by double
+      #mock object command && token "X" is argument
+      board.update("1", player)#player Object is 2nd argument here.
+      #binding.pry
+      expect(board.position("1")).to eq("X")#call position instance method to eq = X
     end
   end
 end

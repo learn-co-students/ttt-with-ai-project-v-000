@@ -1,0 +1,171 @@
+Skip to content
+codingincounterpoint
+Search for:
+Recent Posts
+
+Reflecting on the JSON Resume Parser challenge
+Tic-Tac-Toe with AI – Pseudocode
+Reflecting on the Tic-Tac-Toe challenge
+Recent Comments
+Archives
+
+April 2016
+Categories
+
+Uncategorized
+contrepoint21	in Uncategorized  April 15, 2016 1,050 Words
+Tic-Tac-Toe with AI – Pseudocode
+Challenge
+
+Write a tictactoe app with a computer player that never loses.
+Basic Setup
+
+Create a basic_setup branch on remote.
+git fetch && git checkout basic_setup
+Classes
+
+Game
+Sample Methods: game_over?, game_on!
+Board
+Sample Methods: initialize, show, full?, won?, tie?, mark_the_spot
+Player
+Sample Methods: pick_a_spot
+AI
+Inherits from Player since AI is a type of Player
+Overwrite the pick_a_spot method for the AI’s algorithm
+Additional Files
+
+tictactoe.rb
+Will be run in the command line – ruby tictactoe.rb
+require_relative the class files
+Initialize a new Game – game = Game.new
+2-Player TicTacToe
+
+game = Game.new
+
+A new Game will have a new board – Array.new(9) and an array of players – @players = []
+Ask the player to pick a marker (x or o)
+Initialize a Player and an AI with the appropriate markers
+Give the player a micro_tutorial
+Show the board so the tutorial can tell the player how to make a move
+Decide who starts
+@players.shuffle
+@player1 = @players[0]
+@player1 = @players[1]
+State the playing order
+game_on!
+game_on!
+
+Until game_over? == true
+@player1 makes a move. show the updated board
+@player2 makes a move. show the updated board
+If game_over? == true
+who_won?
+pick_a_spot
+
+If the player selects a spot between 0 and 8, check whether the spot is empty
+If it is (@board[location] == nil), save the player’s marker to that spot
+Else, say that the spot is already filled
+Else, say that they chose an invalid location and ask them to pick_a_spot again
+game_over?
+
+If board.won? || board.tie? returns true
+Return true
+Else
+Return false
+board.won?
+
+Check each tictactoe line (row, column, diagonal)
+Does it only have ‘x’ or ‘o’ elements?
+Set @b = @board so it is easier to define an array of lines (eg: b[0..2] instead of board[0..2])
+Create a winning_marker attribute for the board so that the game can identify which marker (and thus which player) won
+Create attribute_reader for @b, @board, @lines, @winning_marker
+If it does, set @winning_marker as that element
+Return true
+Else
+Return false
+board.tie?
+
+If the board is full (there is no nil in the board array)
+Set @winning_marker to nil
+who_won?
+
+If the winning marker is the player’s marker
+(@board.winning\_marker == @player.marker)
+Puts ‘player won’
+Elsif @board.winning_marker == @AI.marker
+Puts ‘AI won’
+Elsif @board.winning_marker == ‘none’
+Puts ‘It is a tie’
+Tic-Tac-Toe AI
+
+Overwrite the pick_a_spot player method
+The method only knows the AI’s marker. We need to let it know the opponent’s marker
+        if self.marker == 'x'
+            opponent_marker = 'o'
+        elsif self.marker == 'o'
+            opponent_marker = 'x'
+        end
+The method I used to code the AI is based on how a human would think if the human were to play a perfect tic-tac-toe game. I could probably use minimax or negamax for this but it will generate dozens of game states, which are not really necessary for tic-tac-toe (but are necessary for more complex games such as chess)
+If someone can win (will_someone_win == true) in the next turn
+Take the win (if AI will win)
+Block the win (if human will win)
+Either way, the AI will take the spot that will result in a win/loss
+If no one can win in the next turn, take the center
+If the center is already taken, defend opposing corners
+If there are no opposing corners to defend, defend the xox combination if it exists
+If that combination does not exist, take a corner
+If all corners are taken, take a empty cell
+will_someone_win?
+
+Check each line
+If each line has 2 of a marker AND has 1 nil, someone can win by placing their marker in that nil spot
+AI will place its marker in that spot to either claim a win or to block the opponent from winning on the next turn
+Return true
+Break from the .each loop because the AI has already made its move
+Otherwise, if there is more than one possible line that the AI can move to, the AI will move more than once. Alternatively, if this is the only possible line that returns true for will_someone_win, there is no need for the AI to do additional calculations.
+Unfortunately, the line does not have the original cell number
+Thus, I need to get the original cell number using a get_location(coordinates) method
+The coordinates will be (index_number_of_line, index_number_of_cell_in_line_with_nil)
+Eg: line 1 is the bottom 3 cells – board[3…5]
+If board[0…2] == [‘x’, ‘x’, nil]
+Coordinates will be (1, 2)
+0 because the line board[3…5] is at index 1 in the lines array
+2 because the nil cell has index 2 in the line 1 array
+In this case, get_location will return 5 (index of cell in the board), which the AI can then mark
+The coordinates and get_location part is complicated and is a lot of code. There is probably a better way to do this.
+take_the_center
+
+If the center is not taken – board[4] == nil – take it
+defend_opposite_corners
+
+Check each opposite corner pair
+If the opponent has a corner and the opposite corner is not taken, take it
+Define an opposite_corner_pairs method that is an array with 4 subarrays
+Each subarray has a corner, it’s opposite corner AND the board’s index of that opposite corner.
+Example subarray: [b[0], b[8], 8]
+The latter ensures I don’t need to do another get_location method for defend_opposite_corners
+defend_against_xox
+
+First, check whether the center has the AI’s marker.
+If it does, check each opposite corner pair
+If both corners in the pair have the opponent’s marker, check the lines that can be used to defend against xox
+If the lines are empty except for the center, the AI can force its opponent to defend (rather than setting up a double-trap) by taking one of the empty spots.
+take_corner
+
+Define a corner method for Board class that has all 4 corners and their respective index numbers
+If a corner is empty, take it
+fill_empty_cell
+
+If there is an empty cell, the AI will take it
+ 
+
+Share this:
+TwitterFacebookGoogle
+
+Post navigation
+Reflecting on the Tic-Tac-Toe challengeReflecting on the JSON Resume Parser challenge
+Leave a Reply
+
+
+Blog at WordPress.com.
