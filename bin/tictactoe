@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def gamestarter
+puts "Welcome to Tic Tac Toe!"
+puts "Please Select A Game Mode"
+puts "[1] 2 Player"
+puts "[2] 1 Player"
+puts "[3] Computer Vs Computer"
+game_mode = gets.strip.to_i
+
+if game_mode == 1
+  game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Human.new("O"),board=Board.new)
+elsif game_mode == 2
+  game = Game.new(player_1=Players::Human.new("X"),player_2=Players::Computer.new("O"),board=Board.new)
+elsif game_mode == 3
+  game = Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"),board=Board.new)
+else
+end
+
+while !game.over? == true
+  game.play
+end
+
+if game.over? == true
+  puts "Do you want to play again?[Y]es or [N]o?"
+  play_again = gets.strip
+  if play_again.upcase == "Y"
+    gamestarter
+  elsif play_again.upcase == "N"
+    exit
+  else
+    puts "invalid option exiting game"
+    exit
+  end
+end
+end
+
+gamestarter
