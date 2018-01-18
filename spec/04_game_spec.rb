@@ -153,6 +153,7 @@ describe 'Game' do
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
 
+      expect(game.won?).to be_truthy
       expect(game.winner).to eq("X")
     end
 

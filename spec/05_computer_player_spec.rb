@@ -16,5 +16,22 @@ describe 'Players::Computer' do
 
       expect(valid_moves).to include(computer_move)
     end
+
+    it 'enters the first move to cell 5' do
+      computer = Players::Computer.new("X")
+      board = Board.new
+      expect(computer.move(board)).to eq("5")
+    end
   end
+
+  describe '#opponent_token' do
+    it 'returns opponent\'s token' do
+      computer = Players::Computer.new("O")
+      player = "O"
+              
+        expect(computer.opponent_token(player)).to eq("X")
+    end
+  end
+
+
 end
