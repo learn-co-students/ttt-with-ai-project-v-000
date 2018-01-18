@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def welcome
+  puts "Would you like to play a game?"
+  input = gets.strip
+    if gets.strip == "Y"
+      players?
+    else
+      exit
+end
+
+def players?
+  puts "How many players? Please enter 0, 1, or 2:"
+  input = gets.chomp.to_i
+
+  case input
+  when 0
+    puts "The computer will play itself"
+    Game.new(Player::Computer.new("X"), Player::Computer.new("O")).start
+  when 1
+    puts "Your opponent will be the computer.  Courage!"
+    Game.new(Player::Human.new("X"), Player::Computer.new("O")).start
+  when 2
+    puts "May the best human win.  X will go first."
+    Game.new(Player::Human.new("X"), Player::Human.new("O")).start
+end
+
+game = TicTacToe.new
+game.play
