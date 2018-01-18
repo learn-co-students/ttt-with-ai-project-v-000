@@ -1,3 +1,54 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+
+#full loop
+running = true
+while running
+
+  #game type prompt loop
+  type_loop = true
+  while type_loop
+    print "Choose game type (0,1,2): "
+    game_type = gets.chomp
+    puts ""
+    type_loop = false if game_type == "0" || game_type == "1" || game_type == "2" || game_type == "wargames"
+  end
+
+  if game_type == "0"
+    game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+
+  elsif game_type == "1"
+    #prompt who starts
+    print "Choose player 1, who plays 'X' (me,comp): "
+    starts = gets.chomp
+
+    if starts == "me"
+      game = Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+    else
+      game = Game.new(Players::Computer.new("X"),Players::Human.new("O"))
+    end
+
+  #just runs comp vs comp x.times, my test for how bad the ai is
+  elsif game_type == "wargames"
+    20.times do
+      game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+      game.play
+    end
+
+  #human vs human mode
+  else
+    game = Game.new(Players::Human.new("X"),Players::Human.new("O"))
+  end
+
+  #run game
+  game.play
+
+  print "Do you want to play again? (y/n): "
+  again = gets.chomp
+  if again == 'n'
+    running = false
+  end
+end
