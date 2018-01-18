@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts  "   _______     ______          ______"
+puts  "  /_  __(_)___/_  __/___ _____/_  __/___  ___"
+puts  "   / / / / ___// / / __ `/ ___// / / __ \\/ _ \\"
+puts  "  / / / / /__ / / / /_/ / /__ / / / /_/ /  __/"
+puts " /_/ /_/\\___//_/  \\__,_/\\___//_/  \\____/\\___/"
+puts "Welcome to Tic Tac Toe!"
+
+game = Game.new
+game.config_players
+game.play until game.over?
+puts "Would you like to play again? (y/n)"
+system("bin/tictactoe") if gets.chomp == "y"
