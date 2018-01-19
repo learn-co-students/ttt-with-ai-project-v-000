@@ -79,18 +79,20 @@ class Game
     if won?
       puts "Congratulations #{winner}!"
       @board.display
-      puts "Would you like to play again? (y/n)"
-      answer = gets
-      if answer == "y"
-        Game.start
-      end
+      #puts "Would you like to play again? (y/n)"
+      #answer = gets
+      #if answer == "y"
+      #  Game.start
+      #end
     elsif draw?
       puts "Cat's Game!"
       @board.display
-      puts "Would you like to play again? (y/n)"
-      answer = gets.chomp
-      if answer == "y"
-        Game.start
+      if Players::Human === @player_1 || Players::Human === @player_2 
+        puts "Would you like to play again? (y/n)"
+        answer = gets.chomp
+        if answer == "y"
+          Game.start
+        end
       end
     end
   end
@@ -116,25 +118,34 @@ class Game
        game.play
      end
    elsif input == "2"
-     Game.new.play
+     game = Game.new.play
    elsif input == "wargames"
-     game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-     results = {}
-     count = 100
-     while count is > 0
-       game.play
-       count -= 1
-       if game.won?
-         results[won]+=1
-       elsif game.draw?
-         results[draw]+=1
-       end
-     end
-     puts "Out of 100 games, there were #{results[won]} wins and #{results[draw] tie games.}"
+     game = Game.new.wargames
    else
      puts "Invalid entry"
      start
     end
 
   end
+
+  def wargames
+    results = {won: 0, draw: 0}
+    count = 100
+    while count > 0
+      #binding.pry
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      game.play
+      count -= 1
+      if game.won?
+        results[:won]+=1
+        game.play
+      elsif game.draw?
+        results[:draw]+=1
+        #game.play
+      end
+
+    end
+    puts "Out of 100 games there were #{results[:won]} wins and #{results[:draw]} ties."
+  end
+
 end
