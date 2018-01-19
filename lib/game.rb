@@ -46,7 +46,7 @@ class Game
   end
 
   def turn
-    token = current_player
+    player = current_player
     move = player.move(board)
     if !@board.valid_move?(move)
       turn
