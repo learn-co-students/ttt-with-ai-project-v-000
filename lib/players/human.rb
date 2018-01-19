@@ -2,7 +2,7 @@ module Players
   class Human < Player
     attr_reader :move
 
-    def move(board)
+    def move(board = "Optional")
       puts "Please make a move!"
       @move=gets
       @move
