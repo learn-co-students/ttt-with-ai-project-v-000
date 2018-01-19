@@ -16,13 +16,13 @@ class Game
     end
 
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board= Board.new)
-      @player_1 = player_1
-      @player_2 = player_2
-      @board = board
+      self.player_1 = player_1
+      self.player_2 = player_2
+      self.board = board
     end
 
     def current_player
-      @board.turn_count%2 == 0 ? @player_1 : @player_2
+      board.turn_count%2 == 0 ? player_1 : player_2
     end
 
     def full?
@@ -74,9 +74,32 @@ class Game
       elsif draw?
         puts "Cat's Game!"
       end
-
-
     end
 
+    def start
+      puts "Welcome to TicTacToe!"
+      puts "What kind of game would you like to play? Put 1 for single-player, 2 for two-player, and 0 to watch the computer play itself."
+      choice
+    end
+
+
+    def choice
+      choice = gets.strip
+      until choice == "valid"
+      if choice == "1"
+        choice = "valid"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif choice == "2"
+        choice = "valid"
+        Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+      elsif choice == "3"
+        choice = "valid"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      else
+        puts "Nope, try again silly goose!"
+        self.start_game
+      end
+    end
+  end
 
 end
