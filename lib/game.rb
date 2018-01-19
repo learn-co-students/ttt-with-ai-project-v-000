@@ -59,8 +59,10 @@ class Game
     end
 
     def turn
+      puts "Please pick a position 1-9"
       move = current_player.move(board)
       board.valid_move?(move) ? board.update(move, current_player) : turn
+      board.display
     end
 
     def play
@@ -76,14 +78,14 @@ class Game
       end
     end
 
-    def start
+    def self.start
       puts "Welcome to TicTacToe!"
       puts "What kind of game would you like to play? Put 1 for single-player, 2 for two-player, and 0 to watch the computer play itself."
       choice
     end
 
 
-    def choice
+    def self.choice
       choice = gets.strip
       until choice == "valid"
       if choice == "1"
@@ -92,7 +94,7 @@ class Game
       elsif choice == "2"
         choice = "valid"
         Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-      elsif choice == "3"
+      elsif choice == "0"
         choice = "valid"
         Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
       else
