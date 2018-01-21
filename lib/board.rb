@@ -57,7 +57,11 @@ class Board
   def valid_move?(move)
     # returns true for user input between 1-9 that is not taken
     # If the posision taken comes back as false that means the position is empty and it's a valid move
-      self.taken?(move.to_i) == false ? true : false unless move.to_i.between?(1,9) == false
+    if move.to_i.between?(1,9) && !self.taken?(move.to_i)
+      true
+    else
+      false
+    end
   end
 
   def update(position, player)
