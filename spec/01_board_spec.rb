@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe "Board" do
   let(:board){Board.new}
@@ -23,6 +24,7 @@ describe "Board" do
     it 'sets the cells of the board to a 9 element array of " "' do
       board.cells = ["X"]
       board.reset!
+      # binding.pry
       expect(board.cells).to match_array(Array.new(9, " "))
     end
   end
