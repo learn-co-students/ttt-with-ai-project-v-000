@@ -30,7 +30,7 @@ PLATFORMS
 DEPENDENCIES
   pry
   require_all
-  rspec (= 3.7.0)
+  rspec
 
 BUNDLED WITH
    1.16.0

@@ -231,7 +231,6 @@ describe 'Game' do
       allow(game.player_1).to receive(:gets).and_return("1")
 
       allow(game).to receive(:over?).and_return(false, true)
-
       game.play
 
       expect(game.board.cells).to eq(["X", " ", " ", " ", " ", " ", " ", " ", " "])

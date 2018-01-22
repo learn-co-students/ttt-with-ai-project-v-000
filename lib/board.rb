@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9, ' ')
+    reset!
   end
 
   def reset!
@@ -21,16 +21,19 @@ class Board
     @cells[input.to_i - 1]
   end
 
-  def full? #boolean for if the board is full or not
-    !(@cells.include?(nil) || cells.include?(' '))
-  end
+  # def full? #boolean for if the board is full or not
+  #   !cells.any? { |cell| cell == ' ' }
+  # end
+  def full?
+    cells.all?{ |token| token == "X" || token == "O" }
+ end
 
   def turn_count #count how many turns have been made in an instance of game
-    @cells.delete_if { |token| token == ' ' }.count
+    @cells.count { |token| token != ' ' }
   end
 
   def taken?(input) #boolean to determine if the seleted location on the board is taken
-    @cells[input.to_i - 1] == 'X' || @cells[input.to_i - 1] == 'O'
+    position(input) == 'X' || position(input) == 'O'
   end
 
   def valid_move?(input) #boolean to determine if move is valid
