@@ -2,6 +2,122 @@
 
 require_relative '../config/environment'
 
-game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+play_again = "Y"
 
-game.play
+while play_again == "Y"
+
+  player_1_hash = {}
+  player_2_hash = {}
+
+  mode = ""
+
+  while !(1..4).include?(mode.to_i)
+    puts "Welcome to Tic-Tac-Toe! Please select from the following options:\n"
+    puts "  1) 0-player mode (computer plays itself)."
+    puts "  2) 1-player mode (human vs. AI)."
+    puts "  3) 2-player mode (human vs. human)."
+    puts "  4) exit"
+
+    mode = gets.strip
+
+    if (mode == "1")
+      num_games = 1
+      player_1_hash = {type: Players::Computer, token: "X"}
+      player_2_hash = {type: Players::Computer, token: "O"}
+
+    elsif (mode == "2")
+      num_games = 1
+
+      who_goes_first = ""
+
+      while who_goes_first != "1" && who_goes_first != "2"
+        puts "\nSelect who will go first:"
+        puts "  1) Human will go first."
+        puts "  2) AI will go first."
+
+        who_goes_first = gets.strip
+
+        if who_goes_first == "1"
+          player_1_hash[:type] = Players::Human
+          player_2_hash[:type] = Players::Computer
+        elsif who_goes_first == "2"
+          player_1_hash[:type] = Players::Computer
+          player_2_hash[:type] = Players::Human
+        else
+          puts "\nPlease enter either 1 or 2.\n\n\n"
+        end
+
+      end
+
+      who_is_x = ""
+
+      while who_is_x != "1" && who_is_x != "2"
+        puts "\nSelect who will play as X:"
+        puts "  1) Human will play as X."
+        puts "  2) AI will play as X."
+
+        who_is_x = gets.strip
+
+        if (who_is_x == who_goes_first)
+          player_1_hash[:token] = "X"
+          player_2_hash[:token] = "O"
+        elsif (who_is_x == "1" || who_is_x == "2")
+          player_1_hash[:token] = "O"
+          player_2_hash[:token] = "X"
+        else
+          puts "\nPlease enter either 1 or 2.\n\n\n"
+        end
+
+      end
+
+    elsif mode == "3"
+      num_games = 1
+
+      who_goes_first = ""
+
+      while who_goes_first != "1" && who_goes_first != "2"
+        puts "\nSelect who will go first:"
+        puts "  1) X will go first."
+        puts "  2) O will go first."
+
+        who_goes_first = gets.strip
+
+        if who_goes_first == "1"
+          player_1_hash = {type: Players::Human, token: "X"}
+          player_2_hash = {type: Players::Human, token: "O"}
+        elsif who_goes_first == "2"
+          player_1_hash = {type: Players::Human, token: "O"}
+          player_2_hash = {type: Players::Human, token: "X"}
+        else
+          puts "\nPlease enter either 1 or 2.\n\n\n"
+        end
+
+      end
+
+    else
+      puts "\nPlease enter either 1 through 4.\n\n\n"
+    end
+
+  end
+
+  player_1 = player_1_hash[:type].new(player_1_hash[:token])
+  player_2 = player_2_hash[:type].new(player_2_hash[:token])
+
+  game = Game.new(player_1, player_2, Board.new)
+  game.play
+
+  loop do
+    puts "\nDo you want to play again? \"Y\" for yes, \"N\" for no."
+
+    play_again = gets.strip.upcase
+
+    if play_again == "Y" || play_again == "N"
+      break
+    end
+
+    puts "\nPlease enter \"Y\" or \"N.\""
+  end
+
+end
+
+puts "Thanks for playing. Goodbye!"
