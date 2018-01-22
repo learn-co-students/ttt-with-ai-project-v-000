@@ -25,19 +25,24 @@ class Game
   end
 
   def draw?
-    board.full? && !won?
+    !won? && board.full?
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
+    WIN_COMBINATIONS.detect do |win_combination|
+      win_index_1 = win_combination[0]
+      win_index_2 = win_combination[1]
+      win_index_3 = win_combination[2]
+      position_1 = @board.cells[win_index_1]
+      position_2 = @board.cells[win_index_2]
+      position_3 = @board.cells[win_index_3]
+
+      position_1 == position_2 && position_2 == position_3 && @board.taken?(win_index_1 + 1)
     end
   end
 
   def winner
-    @board.cells[won?.first] == " " ? nil : @board.cells[won?.first]
+    @board.cells[won?.first] if won?
   end
 
   def turn
@@ -53,10 +58,8 @@ class Game
 
   def play
     until over?
-      #binding.pry
       turn
     end
-    #binding.pry
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
