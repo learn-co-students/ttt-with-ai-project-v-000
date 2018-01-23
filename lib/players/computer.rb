@@ -40,12 +40,12 @@ module Players
       WIN_COMBINATIONS.detect do |win|
         if move != nil
           break
-        elsif (board.position("#{win[0] + 1}") == board.position("#{win[1] + 1}") && !board.taken?("#{win[2] + 1}")
+        elsif (board.position("#{win[0] + 1}")) == board.position("#{win[1] + 1}") && !board.taken?("#{win[2] + 1}")
           move = "#{win[2] + 1}"
           #binding.pry
-        elsif (board.position("#{win[0] + 1}") == board.position("#{win[2] + 1}") && !board.taken?("#{win[1] + 1}")
+        elsif (board.position("#{win[0] + 1}")) == board.position("#{win[2] + 1}") && !board.taken?("#{win[1] + 1}")
           move = "#{win[1] + 1}"
-        elsif (board.position("#{win[1] + 1}") == board.position("#{win[2] + 1}") && !board.taken?("#{win[0] + 1}")
+        elsif (board.position("#{win[1] + 1}")) == board.position("#{win[2] + 1}") && !board.taken?("#{win[0] + 1}")
           move = "#{win[0] + 1}"
           end
         end
