@@ -1,4 +1,5 @@
 require 'pry'
+<<<<<<< HEAD
 def to_index(input)
   input.to_i - 1
 end
@@ -48,3 +49,28 @@ class Board
   end
 
 end
+=======
+class Board
+  attr_accessor :cells
+
+  def initialize
+
+  end
+
+  def reset!
+    cells = Array.new(9, " ")
+  end
+
+  def display
+   puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+   puts "-----------"
+   puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+   puts "-----------"
+   puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+ end
+end
+
+
+ board1 = Board.new
+ board1.display
+>>>>>>> 8847d638c3387c2aaa2274e54ab62337020a3f45
