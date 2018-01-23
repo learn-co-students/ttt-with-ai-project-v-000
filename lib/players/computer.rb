@@ -29,7 +29,7 @@ module Players
    ]
 
    def move(board)
-     #sleep(0.15)
+
      move = nil
 
     if !board.taken?(5)
