@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+puts "Hello! Welcome to Tic-Tac-Toe!"
+puts "Type 'exit' to leave."
+input = ""
+
+while input != "exit"
+  puts "Would you like to play a game with 0, 1, or 2 human players?"
+  num_players = gets.strip
+  case num_players
+  when "0"
+    player_1 = Computer.new("X")
+    player_2 = Computer.new("O")
+    game = Game.new(player_1, player_2)
+    game.play
+  when "1"
+    puts "Who will be first (X)? Computer or Human?"
+    first_player = gets.strip.downcase
+    if first_player == "computer"
+      player_1 = Computer.new("X")
+      player_2 = Human.new("O")
+    else
+      player_1 = Human.new("X")
+      player_2 = Computer.new("O")
+    end
+    game = Game.new(player_1, player_2)
+    game.play
+  when "2"
+    player_1 = Human.new("X")
+    player_2 = Human.new("O")
+    game = Game.new(player_1, player_2)
+    game.play
+  end
+
+  puts "Would you like to play another game or exit?"
+  input = gets.strip
+end
