@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def one_player
+  puts "Would you like to play as X or O?"
+  x_or_o = gets.strip
+  if x_or_o.upcase == "X"
+    new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    new_game.play
+  elsif x_or_o.upcase == "O"
+    new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    new_game.play
+  else
+    puts "You didn't type X or O! Try again!"
+    one_player
+  end
+end
+
+def two_player
+  puts "Great! Two humans playing! That's wonderful!"
+  puts "X will go first, so decide who's who now!"
+  new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  new_game.play
+end
+
+def new_game_protocol
+  puts "HI! Welcome to TIC TAC TOE!!"
+  puts "How many players are there? 0, 1, or 2"
+  number_of_players = gets.strip
+  number_of_players = number_of_players.to_i
+  if number_of_players == 0
+    new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    new_game.play
+  elsif number_of_players == 1
+    one_player
+  elsif number_of_players == 2
+    two_player
+  else
+    puts "I'm sorry, I only know how to recognize 0, 1, or 2. Please try again."
+    new_game_protocol
+  end
+end
+
+new_game_protocol
