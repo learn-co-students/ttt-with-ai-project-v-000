@@ -28,31 +28,23 @@ module Players
       if board.turn_count == 1 && !board.cells.include?(self.token) && !board.taken?(5)
         return "5"
 
-      # on turn 3, if player has 2 tokens in the corner, play an edge
+      # on turn 3, if player has 2 tokens in corners, play an edge
       elsif board.turn_count == 3 && board.cells.count(self.token) == 1 && CORNERS.include?(player_occupied_cells[0]) && CORNERS.include?(player_occupied_cells[1])
-          return "2"
+        return "2"
 
       # otherwise, check if we can win or are in danger of losing
+      elsif check_win_lose_combos(board) != nil
+        return check_win_lose_combos(board).to_s
+
+      # if not in danger of losing or able to win at the moment check -
+      # does the list of empty positions contain any corner spaces? if so, return the first one
+      elsif find_empty_positions(board).detect {|position| [1, 3, 7, 9].include?(position)} != nil
+         return find_empty_positions(board).detect {|position| [1, 3, 7, 9].include?(position)}.to_s
+
+      # if there are no empty corners, return the first empty space on the board
       else
-        can_win_or_lose = check_win_lose_combos(board)
-
-        # if not in danger of losing or able to win at the moment, go for the corners, if empty
-        if can_win_or_lose != nil
-          can_win_or_lose.to_s
-        else
-
-          # does the list of empty positions contain any corner spaces? if so, return the first one
-          empty_corner = find_empty_positions(board).detect {|position| [1, 3, 7, 9].include?(position) }
-
-          #  if free corner spaces, return the first free one
-          if empty_corner != nil
-           empty_corner.to_s
-          else # if there are no empty corners, return the first empty space on the board
-           find_empty_positions[0].to_s
-          end
-        end
-      end # end first turn check
-
+         return find_empty_positions[0].to_s
+      end
     end # End Move
 
     # Find the empty spaces and return them as an array
