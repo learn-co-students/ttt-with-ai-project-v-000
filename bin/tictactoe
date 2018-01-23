@@ -18,7 +18,7 @@ until play_again.downcase == "n"
   puts "  2 - Player v. Player"
 
   game_type = gets.strip
-  until game_type == "0" || game_type == "1" || game_type == "2"
+  until game_type == "0" || game_type == "1" || game_type == "2" || game_type == "wargames"
     puts "Please enter a valid game type."
     game_type = gets.strip
   end
@@ -43,6 +43,13 @@ until play_again.downcase == "n"
       end
     when "2"
       Game.new.play
+    when "wargames"
+      won_count = 0
+
+      100.times do
+        won_count += Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      end
+      puts "The game was won #{won_count} times."
     else
       "Error"
   end

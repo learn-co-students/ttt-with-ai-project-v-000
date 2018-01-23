@@ -7,5 +7,5 @@ module Players
       puts "Where would you like to move? (1-9) Your token is #{self.token}."
       input = gets.strip
     end
-  end
-end
+  end # end class Human
+end # end module Players
