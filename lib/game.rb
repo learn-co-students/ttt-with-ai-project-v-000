@@ -74,7 +74,7 @@ class Game
     # uses the player class move method to input their move (and return their input), check if they're making a valid move
     # and update the board. If an invalid move is put in, it runs the method over again.
     @board.display
-    user_input = self.current_player.move(@board.cells)
+    user_input = self.current_player.move(@board)
     @board.valid_move?(user_input) ? @board.update(user_input.to_i, self.current_player) : self.turn
   end
 
