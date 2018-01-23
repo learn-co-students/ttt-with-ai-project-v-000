@@ -17,25 +17,23 @@ module Players
     # Contains the Tic Tac Toe AI logic.
     def move(board)
 
+      player_occupied_cells = []
+      board.cells.each_with_index do |cell, i|
+        if cell == get_player_token
+          player_occupied_cells << i
+        end
+      end
+
       # if player goes first and goes in a corner, play the center space
-      if board.turn_count == 1 && !board.cells.include?(self.token)
+      if board.turn_count == 1 && !board.cells.include?(self.token) && !board.taken?(5)
         return "5"
 
-      elsif board.turn_count == 3 && board.cells.count(self.token) == 1
-        player_occupied_cells = []
-
-        # if player has 2 tokens in the corner, play an edge
-        board.cells.each_with_index do |cell, i|
-          if cell == get_player_token
-            player_occupied_cells << i
-          end
-        end
-
-        if CORNERS.include?(player_occupied_cells[0]) && CORNERS.include?(player_occupied_cells[1])
+      # on turn 3, if player has 2 tokens in the corner, play an edge
+      elsif board.turn_count == 3 && board.cells.count(self.token) == 1 && CORNERS.include?(player_occupied_cells[0]) && CORNERS.include?(player_occupied_cells[1])
           return "2"
-        end
 
-      else # otherwise, check if we can win or are in danger of losing
+      # otherwise, check if we can win or are in danger of losing
+      else
         can_win_or_lose = check_win_lose_combos(board)
 
         # if not in danger of losing or able to win at the moment, go for the corners, if empty
