@@ -35,17 +35,17 @@ module Players
     if !board.taken?(5)
       move = "5"
     elsif board.taken?(5) && board.turn_count == 1
-      move = "1"
+      move = ["1", "3", "7", "9"].sample
     else
       WIN_COMBINATIONS.detect do |win|
         if move != nil
           break
-        elsif (board.position("#{win[0] + 1}") == board.position("#{win[1] + 1}")) && board.taken?("#{win[0] + 1}") && !board.taken?("#{win[2] + 1}")
+        elsif (board.position("#{win[0] + 1}") == board.position("#{win[1] + 1}")) && !board.taken?("#{win[2] + 1}")
           move = "#{win[2] + 1}"
-          binding.pry
-        elsif (board.position(win[0] + 1) == board.position(win[2] + 1)) && board.taken?("#{win[0] + 1}") && !board.taken?("#{win[1] + 1}")
+          #binding.pry
+        elsif (board.position(win[0] + 1) == board.position(win[2] + 1)) && !board.taken?("#{win[1] + 1}")
          move = "#{win[1] + 1}"
-        elsif (board.position(win[1] + 1) == board.position(win[2] + 1)) && board.taken?("#{win[1] + 1}") && !board.taken?("#{win[0] + 1}")
+        elsif (board.position(win[1] + 1) == board.position(win[2] + 1)) && !board.taken?("#{win[0] + 1}")
             move = "#{win[0] + 1}"
           end
         end
@@ -56,3 +56,13 @@ module Players
 
   end #class
 end #module
+
+
+#---------- if above code breaks, use the code below in the WIN_COMBINATIONS block ----------- #
+
+      #elsif (board.position("#{win[0] + 1}") == board.position("#{win[1] + 1}")) && board.taken?("#{win[0] + 1}") && !board.taken?("#{win[2] + 1}")
+      #    move = "#{win[2] + 1}"
+      #elsif (board.position(win[0] + 1) == board.position(win[2] + 1)) && board.taken?("#{win[0] + 1}") && !board.taken?("#{win[1] + 1}")
+      #    move = "#{win[1] + 1}"
+      #elsif (board.position(win[1] + 1) == board.position(win[2] + 1)) && board.taken?("#{win[1] + 1}") && !board.taken?("#{win[0] + 1}")
+      #    move = "#{win[0] + 1}"
