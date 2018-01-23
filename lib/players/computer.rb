@@ -2,20 +2,20 @@ require 'pry'
 module Players
   class Computer < Player
 
-    def move(board)
+  #  def move(board)
 
-      move = nil
+  #    move = nil
 
-      if !board.taken?(5)
-        move = "5"
-      elsif board.turn_count == 1
-        "1"
-      elsif board.turn_count == 3
-        ["3", "7", "9"].sample
-      else
-        ["1", "2", "3", "4", "6", "7", "8", "9"].sample
-      end
-    end #move
+  #    if !board.taken?(5)
+  #      move = "5"
+  #    elsif board.turn_count == 1
+  #      "1"
+  #    elsif board.turn_count == 3
+  #      ["3", "7", "9"].sample
+  #    else
+  #      ["1", "2", "3", "4", "6", "7", "8", "9"].sample
+  #    end
+  #  end #move
 
     WIN_COMBINATIONS = [
      [0, 1, 2],
