@@ -18,27 +18,36 @@ class Game
     @board.turn_count.even? ? @player_1 : @player_2
   end
 
-  def last_player
-    @board.turn_count.even? ? @player_2 : @player_1
-  end
-
   def over?
     draw? || won?
   end
 
   def won?
 
-    potential_winner_token = last_player.token
-    binding.pry
-    position_taken = []
+    position_taken_x = []
     @board.cells.each_with_index do |cell, i|
-       position_taken << i if cell == potential_winner_token
+       position_taken_x << i if cell == "X"
      end
-     winning_combo = false
+     position_taken_o = []
+     @board.cells.each_with_index do |cell, i|
+        position_taken_o << i if cell == "O"
+      end
+     winning_combo_x = false
      WIN_COMBINATIONS.each do |combo|
-       winning_combo = combo if (combo - position_taken).empty? # if combo is included in position_taken
+       winning_combo_x = combo if (combo - position_taken_x).empty? # if combo is included in position_taken
      end
-     winning_combo
+     winning_combo_o = false
+     WIN_COMBINATIONS.each do |combo|
+       winning_combo_o = combo if (combo - position_taken_o).empty? # if combo is included in position_taken
+     end
+
+     if winning_combo_x != false
+       return winning_combo_x
+     elsif  winning_combo_o != false
+       return winning_combo_o
+     else
+       return false
+     end
   end
 
   def draw?
@@ -51,8 +60,7 @@ class Game
       #binding.pry
       nil
     else
-      #binding.pry
-      last_player.token
+      @board.cells[won?[0]]
     end
 
     #won? ? last_player.token : nil

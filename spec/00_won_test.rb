@@ -9,7 +9,9 @@ describe '#won?' do
     expect(game.won?).to contain_exactly(1, 4, 7)
   end
 
-# PROBLEM
+
+
+# PROBLEM: doesn't work if O starts:
 # 1. current_player and last_player are reversed
 
 end
