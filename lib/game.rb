@@ -9,15 +9,14 @@ class Game
   end
 
   WIN_COMBINATIONS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8]
-
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [6,4,2]
   ]
 
   def current_player
@@ -44,4 +43,13 @@ class Game
     @board.full? && !won?
   end
 
+  def winner
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
+  end
+
+  def turn
+
+  end
 end
