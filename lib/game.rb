@@ -14,16 +14,12 @@ class Game
     @board = board
   end
 
-  def current_player
-    @board.turn_count.odd? ? @player_2 : @player_1
+  def current_player #i.e. to next player to play
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
-  # if turn count = odd
-  #   current player = O
-
   def last_player
-    @board.turn_count.odd? ? @player_1 : @player_2
-    #turn count = 2 =>
+    @board.turn_count.even? ? @player_2 : @player_1
   end
 
   def over?
@@ -31,40 +27,36 @@ class Game
   end
 
   def won?
+
     potential_winner_token = last_player.token
+    binding.pry
     position_taken = []
     @board.cells.each_with_index do |cell, i|
        position_taken << i if cell == potential_winner_token
      end
-     winning_combo = []
+     winning_combo = false
      WIN_COMBINATIONS.each do |combo|
        winning_combo = combo if (combo - position_taken).empty? # if combo is included in position_taken
      end
-    
-     if winning_combo == []
-       return false
-     else
-       return winning_combo
-     end
-     #winning_combo != [] ? winning_combo : false
+     winning_combo
   end
 
   def draw?
     @board.full? && !won?
   end
 
-    def winner
+  def winner
+    #binding.pry
+    if won? == false
       #binding.pry
-      if won? == false
-        #binding.pry
-        nil
-      else
-        #binding.pry
-        last_player.token
-      end
-
-      #won? ? last_player.token : nil
+      nil
+    else
+      #binding.pry
+      last_player.token
     end
+
+    #won? ? last_player.token : nil
+  end
 
 
 

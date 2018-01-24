@@ -29,13 +29,7 @@ class Board
   end
 
   def turn_count
-    @cells.inject(0) do |acc, cell|
-      if cell == "O" || cell == "X"
-        acc = acc + 1
-      else
-        acc
-      end
-    end
+    @cells.count {|token| token =="O" || token == "X"}
   end
 
   def taken?(user_input)
