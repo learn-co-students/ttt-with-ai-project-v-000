@@ -55,17 +55,32 @@ class Game
   end
 
   def winner
-    #binding.pry
     if won? == false
-      #binding.pry
       nil
     else
       @board.cells[won?[0]]
     end
-
-    #won? ? last_player.token : nil
   end
 
+  def turn
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+      @board.display
+    else
+      turn
+    end
+  end
 
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 
 end
