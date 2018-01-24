@@ -20,6 +20,13 @@ class Game
 
   ]
 
+  def current_player
+    if board.turn_count.to_i.odd?
+      @player_2
+    else
+      @player_1
+    end
+  end
 
 
 end
