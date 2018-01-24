@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# puts "Welcome to Tic Tac Toe!"
+# game = Game.new(Players::Human.new('X'), Players::Computer.new('O'))
+# until game.won?
+#   game.play
+# end
+
+puts "Welcome to Tic Tac Toe!"
+puts "There are 3 game modes: CPU vs CPU (0), Player vs CPU (1), and Player vs Player (2)"
+puts "Enter the corrosonding number to pick a game:"
+game_type = gets.strip
+  case game_type.to_i
+  when 0
+        player_one = Players::Computer.new("X")
+        player_two = Players::Computer.new("O")
+  when 1
+    puts "Would you like to go first or second? (First is always X"
+    turn = gets.strip
+      if turn == "1" or turn.downcase == "one" or turn.downcase == "first"
+        player_one = Players::Human.new("X")
+        player_two = Players::Computer.new("O")
+      elsif turn == "2" or turn.downcase == "two" or turn.downcase == "second"
+        player_one = Players::Computer.new("X")
+        player_two = Players::Human.new("O")
+      end
+  when 2
+    puts "Would you like to go first or second? (First is always X"
+    turn = gets.strip
+      if turn == "1" or turn.downcase == "one" or turn.downcase == "first"
+        player_one = Players::Human.new("X")
+        player_two = Players::Computer.new("O")
+      elsif turn == "2" or turn.downcase == "two" or turn.downcase == "second"
+        player_one = Players::Computer.new("X")
+        player_two = Players::Human.new("O")
+      end
+  end
+game = Game.new(player_one, player_two)
+until game.over?
+  game.play
+end
+
+"#{}"

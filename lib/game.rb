@@ -28,16 +28,16 @@ class Game
     !won? && board.full?
   end
 
-  def won?
+  def won?(board = @board)
     WIN_COMBINATIONS.detect do |win_combination|
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
       win_index_3 = win_combination[2]
-      position_1 = @board.cells[win_index_1]
-      position_2 = @board.cells[win_index_2]
-      position_3 = @board.cells[win_index_3]
+      position_1 = board.cells[win_index_1]
+      position_2 = board.cells[win_index_2]
+      position_3 = board.cells[win_index_3]
 
-      position_1 == position_2 && position_2 == position_3 && @board.taken?(win_index_1 + 1)
+      position_1 == position_2 && position_2 == position_3 && board.taken?(win_index_1 + 1)
     end
   end
 
@@ -49,10 +49,12 @@ class Game
     player = current_player
     move = player.move(board)
     if !@board.valid_move?(move)
+      puts "Invalid Move"
       turn
     else
-      @board.display
       @board.update(move, player)
+      puts "#{player.token} made turn #{@board.turn_count}"
+      @board.display
     end
   end
 

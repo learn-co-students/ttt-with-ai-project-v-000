@@ -10,20 +10,20 @@ class Board
   end
 
   def display
-    print " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
-    print "-----------"
-    print " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
-    print "-----------"
-    print " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts "-----------"
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts "-----------"
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
   def position(input)
     @cells[input.to_i - 1]
   end
 
-  # def full? #boolean for if the board is full or not
-  #   !cells.any? { |cell| cell == ' ' }
-  # end
+#   # def full? #boolean for if the board is full or not
+#   #   !cells.any? { |cell| cell == ' ' }
+#   # end
   def full?
     cells.all?{ |token| token == "X" || token == "O" }
  end
@@ -33,7 +33,7 @@ class Board
   end
 
   def taken?(input) #boolean to determine if the seleted location on the board is taken
-    position(input) == 'X' || position(input) == 'O'
+    position(input) == 'X' || position(input) == 'O'  #check input value
   end
 
   def valid_move?(input) #boolean to determine if move is valid
@@ -42,5 +42,13 @@ class Board
 
   def update(input, player) #update to next player
     @cells[input.to_i - 1] = player.token
+  end
+
+  def available_moves
+    available = []
+    @cells.each_with_index do |cell, index| 
+      available << index if cell == " "
+    end
+    available
   end
 end
