@@ -18,7 +18,7 @@ def play_defense
     @board.cells.each_with_index do |cell, i|
       available << (i+1).to_s if cell == " "
     end
-      binding.pry
+      
     available.sample
   end
 end
@@ -32,7 +32,7 @@ end
         if @board.turn_count == 0
           @my_last = "5"
         elsif @board.turn_count == 2
-          binding.pry
+          #binding.pry
             if @board.last_move.to_i.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
               if @board.last_move == "2" || @board.last_move == "8"
                 @my_last = "1" # REFACTOR: CAN ALSO BE 4, 7, 3,6,9
