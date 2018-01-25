@@ -1,7 +1,7 @@
 module Players
   class Computer < Player
 
-  attr_accessor :my_last, :center_play
+  attr_accessor :my_last, :center_play, :defense_mode
   attr_reader :token
 
   def initialize(token)
@@ -9,6 +9,7 @@ module Players
     @my_last = nil
     @center_play = false
   end
+
 
 def play_defense
   if opponent_has_2?
@@ -23,6 +24,8 @@ def play_defense
 end
 
   def move(board)
+
+
     if @token == "X"
       puts "Computer X, block position: #{opponent_has_2?}"
         #////////////// CENTER CASE //////////////
@@ -40,7 +43,7 @@ end
               end
             else #opponent plays corner: DEFENSE MODE
               puts "defense triggered"
-
+              @defense_mode = true
               play_defense
             end
 
@@ -81,6 +84,8 @@ end
                 puts "defense triggered"
               play_defense
             end
+          else
+            play_defense
           end
         end
       end #//center_play end
