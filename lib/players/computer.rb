@@ -68,11 +68,18 @@ module Players
         end
 
         elsif board.turn_count == 6
-          if board.last_move == "6"
-            @my_last = "9"
-          else
-            @my_last = "6"
-          end
+          if @my_last == "7"
+            if board.last_move == "3"
+              @my_last = "4"
+            else
+              @my_last = "3"
+            end
+          elsif @my_last == "1"
+            if board.last_move == "2"
+              @my_last = "7"
+            else
+              @my_last = "2"
+            end
         end
       end
 
