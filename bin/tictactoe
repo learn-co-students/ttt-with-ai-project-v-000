@@ -5,7 +5,7 @@ require_relative '../config/environment'
 puts "How many players?"
 input = gets.strip
 if input == "1"
-  new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  new_game = Game.new(Players::Computer.new("O"), Players::Human.new("X"))
   new_game.play
 elsif input == "2"
   new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"))

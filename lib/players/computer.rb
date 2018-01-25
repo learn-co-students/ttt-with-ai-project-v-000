@@ -8,91 +8,75 @@ module Players
     super
     @my_last = nil
     @center_play = false
+    @defense_mode = false
   end
 
-
-def play_defense
-  if opponent_has_2?
-    opponent_has_2?
-  else
-    available = []
-    @board.cells.each_with_index do |cell, i|
-      available << (i+1).to_s if cell == " "
+  def play_defense
+    if opponent_has_2?
+      opponent_has_2?
+    else
+      available = []
+      @board.cells.each_with_index do |cell, i|
+        available << (i+1).to_s if cell == " "
+      end
+      available.sample
     end
-    available.sample
   end
-end
 
   def move(board)
-
-
     if @token == "X"
       puts "Computer X, block position: #{opponent_has_2?}"
         #////////////// CENTER CASE //////////////
-      @center_play = true
-      if @center_play
+      if !@defense_mode
+      # START: OFFENSE MODE
         if @board.turn_count == 0
           @my_last = "5"
         elsif @board.turn_count == 2
-          #binding.pry
             if @board.last_move.to_i.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
               if @board.last_move == "2" || @board.last_move == "8"
                 @my_last = "1" # REFACTOR: CAN ALSO BE 4, 7, 3,6,9
               elsif @board.last_move == "4" || @board.last_move == "6"
                 @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
               end
-            # else #opponent plays corner: DEFENSE MODE
-            #   puts "defense triggered"
-            #   @defense_mode = true
-            #   play_defense
+            else
+              @defense_mode = true
             end
-
-          elsif @board.turn_count == 4
-            if @my_last == "1"
-              if @board.last_move == "9"
-                @my_last = "7"
-              else
-                @my_last = "9" # WON!
-              end
-
-            elsif @my_last == "3"
-              if @board.last_move == "7"
-                @my_last = "1"
-              else
-                @my_last = "7" # WON!
-              end
-
-            # else
-            #     puts "defense triggered"
-            #   play_defense
+        elsif @board.turn_count == 4
+          if @my_last == "1"
+            if @board.last_move == "9"
+              @my_last = "7"
+            else
+              @my_last = "9" # WON!
             end
-
-          elsif @board.turn_count == 6
-            if @my_last == "7"
-              if @board.last_move == "3"
-                @my_last = "4"
-              else
-                @my_last = "3"
-              end
-            elsif @my_last == "1"
-              if @board.last_move == "2"
-                @my_last = "7"
-              else
-                @my_last = "2"
-              end
-            # else
-            #     puts "defense triggered"
-            #   play_defense
+          elsif @my_last == "3"
+            if @board.last_move == "7"
+              @my_last = "1"
+            else
+              @my_last = "7" # WON!
             end
-          else
-            play_defense
+          end
+        elsif @board.turn_count == 6
+          if @my_last == "7"
+            if @board.last_move == "3"
+              @my_last = "4"
+            else
+              @my_last = "3"
+            end
+          elsif @my_last == "1"
+            if @board.last_move == "2"
+              @my_last = "7"
+            else
+              @my_last = "2"
+            end
           end
         end
-      end #//center_play end
-    else
-      play_defense
+        #// END OFFENSE MODE
+      else
+        play_defense
+      end #end if !defense_mode
     end #// first_play end
   end
+  # END DEF MOVE
 end
 
 
