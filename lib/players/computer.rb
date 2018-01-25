@@ -1,39 +1,15 @@
 module Players
   class Computer < Player
 
-    attr_accessor :my_last
-    def initialize(token)
-      super
-      @my_last = nil
-    end
+  attr_accessor :my_last
+  def initialize(token)
+    super
+    @my_last = nil
+  end
 
-    def move(board)
-      if @token == "X"
-#////////////// EDGE CASE //////////////
-        # if board.turn_count == 0
-        #    @my_last = "4"
-        #
-        # elsif board.turn_count == 2 && @my_last == "4"
-        #   if board.last_move == "2" || board.last_move == "3"
-        #     @my_last = "1"
-        #   elsif board.last_move == "8" || board.last_move == "9"
-        #     @my_last = "7"
-        #   end
-        #
-        # elsif board.turn_count == 4
-        #   if board.last_move == "7"
-        #     @my_last = "5"
-        #   end
-        #
-        # elsif board.turn_count == 6
-        #   if board.last_move == "6"
-        #     @my_last = "9"
-        #   else
-        #     @my_last = "6"
-        #   end
-        # end
+  def move(board)
+    if @token == "X"
         #////////////// CENTER CASE //////////////
-
         if board.turn_count == 0
           center_play = true
            @my_last = "5"
@@ -83,35 +59,33 @@ module Players
               end
             end
           end
-
+        end
       end #//center_play end
-
     end #// first_play end
-  end 
+  end
 end
 
 
-
+#////////////// EDGE CASE IN TOKEN = X //////////////
+        # if board.turn_count == 0
+        #    @my_last = "4"
         #
-        # case 1: EDGE
-        #   ##################
-        #   play 4
-        #
-        #   if player_2: 2/3
-        #     play 1 then play 5
-        #       if player_2 plays 9, play 8
-        #           else play 9
+        # elsif board.turn_count == 2 && @my_last == "4"
+        #   if board.last_move == "2" || board.last_move == "3"
+        #     @my_last = "1"
+        #   elsif board.last_move == "8" || board.last_move == "9"
+        #     @my_last = "7"
         #   end
         #
-        #   if player_2: 8/9
-        #     play 7 then play 5
-        #       play player_2 plays 3, play 6
-        #           else play 3
+        # elsif board.turn_count == 4
+        #   if board.last_move == "7"
+        #     @my_last = "5"
         #   end
         #
-        #   if player_2 plays anything else
-        #     just follows
+        # elsif board.turn_count == 6
+        #   if board.last_move == "6"
+        #     @my_last = "9"
+        #   else
+        #     @my_last = "6"
         #   end
-
-
-          #####################
+        # end
