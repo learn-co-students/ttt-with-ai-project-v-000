@@ -1,3 +1,4 @@
+require 'pry'
 module Players
   class Computer < Player
 
@@ -7,7 +8,6 @@ module Players
   def initialize(token)
     super
     @my_last = nil
-    @center_play = false
     @defense_mode = false
   end
 
@@ -40,6 +40,7 @@ module Players
               end
             else
               @defense_mode = true
+              play_defense
             end
         elsif @board.turn_count == 4
           if @my_last == "1"
@@ -72,11 +73,13 @@ module Players
         end
         #// END OFFENSE MODE
       else
+        binding.pry
         play_defense
       end #end if !defense_mode
     end #// first_play end
   end
   # END DEF MOVE
+end
 end
 
 
