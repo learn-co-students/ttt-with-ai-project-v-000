@@ -58,6 +58,9 @@ class Game
   def winner
     if combo = won?
       @board.cells[combo[0]
+      if !over? || draw?
+        return nil
+      end
     end
   end
 
