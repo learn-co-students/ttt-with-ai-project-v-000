@@ -25,31 +25,45 @@ end
   end
 
   def won?
-    position_taken_x = []
-    @board.cells.each_with_index do |cell, i|
-       position_taken_x << i if cell == "X"
-     end
-     position_taken_o = []
-     @board.cells.each_with_index do |cell, i|
-        position_taken_o << i if cell == "O"
-      end
-     winning_combo_x = false
-     WIN_COMBINATIONS.each do |combo|
-       winning_combo_x = combo if (combo - position_taken_x).empty? # if combo is included in position_taken
-     end
-     winning_combo_o = false
-     WIN_COMBINATIONS.each do |combo|
-       winning_combo_o = combo if (combo - position_taken_o).empty? # if combo is included in position_taken
-     end
 
-     if winning_combo_x != false
-       return winning_combo_x
-     elsif  winning_combo_o != false
-       return winning_combo_o
-     else
-       return false
-     end
-  end
+position_taken = [[],[]]
+@board.cells.each_with_index do |cell, i|
+   position_taken[0] << i if cell == "X"
+   position_taken[1] << i if cell == "O"
+ end
+
+ winning_combo = false
+ WIN_COMBINATIONS.each do |combo|
+   winning_combo = combo if (combo - position_taken[0]).empty? || (combo - position_taken[1]).empty? # if combo is included in position_taken
+ end
+
+winning_combo
+end
+  #   position_taken_x = []
+  #   @board.cells.each_with_index do |cell, i|
+  #      position_taken_x << i if cell == "X"
+  #    end
+  #    position_taken_o = []
+  #    @board.cells.each_with_index do |cell, i|
+  #       position_taken_o << i if cell == "O"
+  #     end
+  #    winning_combo_x = false
+  #    WIN_COMBINATIONS.each do |combo|
+  #      winning_combo_x = combo if (combo - position_taken_x).empty? # if combo is included in position_taken
+  #    end
+  #    winning_combo_o = false
+  #    WIN_COMBINATIONS.each do |combo|
+  #      winning_combo_o = combo if (combo - position_taken_o).empty? # if combo is included in position_taken
+  #    end
+  #
+  #    if winning_combo_x != false
+  #      return winning_combo_x
+  #    elsif  winning_combo_o != false
+  #      return winning_combo_o
+  #    else
+  #      return false
+  #    end
+  # end
 
   def draw?
     @board.full? && !won?
