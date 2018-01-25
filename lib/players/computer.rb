@@ -11,15 +11,15 @@ module Players
   def move(board)
     if @token == "X"
         #////////////// CENTER CASE //////////////
+        @center_play = true
+        if @center_play
+
         if board.turn_count == 0
-          @center_play = true
-
           @my_last = "5"
-         end
 
-         if @center_play
-           binding.pry
-          if board.turn_count == 2 && @my_last == "5"
+binding.pry
+        elsif board.turn_count == 2 #&& @my_last == "5"
+          #  binding.pry
             if board.last_move.to_i.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
               if board.last_move == "2" || board.last_move == "8"
                 @my_last = "1" # REFACTOR: CAN ALSO BE 4, 7, 3,6,9
