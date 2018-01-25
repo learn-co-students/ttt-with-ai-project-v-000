@@ -41,10 +41,10 @@ end
               elsif @board.last_move == "4" || @board.last_move == "6"
                 @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
               end
-            else #opponent plays corner: DEFENSE MODE
-              puts "defense triggered"
-              @defense_mode = true
-              play_defense
+            # else #opponent plays corner: DEFENSE MODE
+            #   puts "defense triggered"
+            #   @defense_mode = true
+            #   play_defense
             end
 
           elsif @board.turn_count == 4
@@ -62,9 +62,9 @@ end
                 @my_last = "7" # WON!
               end
 
-            else
-                puts "defense triggered"
-              play_defense
+            # else
+            #     puts "defense triggered"
+            #   play_defense
             end
 
           elsif @board.turn_count == 6
@@ -80,15 +80,17 @@ end
               else
                 @my_last = "2"
               end
-            else
-                puts "defense triggered"
-              play_defense
+            # else
+            #     puts "defense triggered"
+            #   play_defense
             end
           else
             play_defense
           end
         end
       end #//center_play end
+    else
+      play_defense
     end #// first_play end
   end
 end
