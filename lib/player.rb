@@ -23,15 +23,16 @@ end
     board.cells.each_with_index do |cell, i|
        opponent_positions_taken << (i+1) if cell == opponent_token
      end
-     possible_win_combo = []
+
      WIN_COMBINATIONS_PLAYER.each do |combo|
+       possible_win_combo = []
        combo.each do |position|
          if opponent_positions_taken.include?(position)
            possible_win_combo << position
          end
        end
        if possible_win_combo.count == 2
-         binding.pry
+        # binding.pry
          position_to_block = combo - possible_win_combo
        end
      end
