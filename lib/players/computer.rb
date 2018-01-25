@@ -22,7 +22,7 @@ module Players
 
   def opponent_has_2?(board)
     opponent_position_taken = []
-    @board.cells.each_with_index do |cell, i|
+    board.cells.each_with_index do |cell, i|
        opponent_position_taken << i if cell == opponent_token
      end
   #    two_out_of_three = false
@@ -36,7 +36,7 @@ module Players
 
   def move(board)
     if @token == "X"
-      puts "Positions taken by oppenent are: #{opponent_has_2?}"
+      puts "Positions taken by oppenent are: #{opponent_has_2?(board)}"
         #////////////// CENTER CASE //////////////
       @center_play = true
       if @center_play
