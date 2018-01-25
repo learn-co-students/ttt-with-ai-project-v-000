@@ -37,7 +37,6 @@ end
        end
      end
      position_to_block
+
   end
-
-
 end

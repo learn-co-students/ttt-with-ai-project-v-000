@@ -4,15 +4,16 @@ module Players
 
   attr_accessor :my_last, :center_play
   attr_reader :token
+
   def initialize(token)
     super
     @my_last = nil
     @center_play = false
-
   end
 
-
-
+def play_defense(board)
+  opponent_has_2?(board)
+end
 
   def move(board)
     if @token == "X"
@@ -30,11 +31,10 @@ module Players
                 @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
               end
             else #opponent plays corner: DEFENSE MODE
-              @my_last = "8"  #A IMPLEMENTER
+              #PLAY_DEFENSE
             end
 
           elsif board.turn_count == 4
-
             if @my_last == "1"
               if board.last_move == "9"
                 @my_last = "7"
