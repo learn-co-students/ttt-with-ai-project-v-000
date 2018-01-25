@@ -41,26 +41,26 @@ end
 
 
 
-
-        case 1: EDGE
-          ##################
-          play 4
-
-          if player_2: 2/3
-            play 1 then play 5
-              if player_2 plays 9, play 8
-                  else play 9
-          end
-
-          if player_2: 8/9
-            play 7 then play 5
-              play player_2 plays 3, play 6
-                  else play 3
-          end
-
-          if player_2 plays anything else
-            just follows
-          end
+        #
+        # case 1: EDGE
+        #   ##################
+        #   play 4
+        #
+        #   if player_2: 2/3
+        #     play 1 then play 5
+        #       if player_2 plays 9, play 8
+        #           else play 9
+        #   end
+        #
+        #   if player_2: 8/9
+        #     play 7 then play 5
+        #       play player_2 plays 3, play 6
+        #           else play 3
+        #   end
+        #
+        #   if player_2 plays anything else
+        #     just follows
+        #   end
 
 
           #####################
