@@ -1,7 +1,7 @@
 require 'pry'
 class Board
 
-  attr_accessor :cells
+  attr_accessor :cells, :last_move
 
   def initialize
     @cells = reset!

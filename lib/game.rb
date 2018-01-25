@@ -55,7 +55,7 @@ end
     if @board.valid_move?(input)
       @board.update(input, current_player)
       @board.display
-
+      @board.last_move = input
     else
       turn
     end
