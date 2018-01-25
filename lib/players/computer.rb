@@ -18,7 +18,6 @@ def play_defense
     @board.cells.each_with_index do |cell, i|
       available << (i+1).to_s if cell == " "
     end
-      
     available.sample
   end
 end
@@ -58,8 +57,8 @@ end
                 @my_last = "7" # WON!
               end
 
-            elsif @my_last == "8"
-              @my_last == "1"
+            else
+              play_defense
             end
 
           elsif @board.turn_count == 6
@@ -75,6 +74,8 @@ end
               else
                 @my_last = "2"
               end
+            else
+              play_defense
             end
           end
         end
