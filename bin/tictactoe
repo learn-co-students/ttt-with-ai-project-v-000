@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+# 
+# puts "How many players?"
+# input = gets.strip
+# if input.to_i == 1
+#   new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+#   new_game.play
+# end

@@ -5,6 +5,7 @@ class Board
 
   def initialize
     @cells = reset!
+    @last_move = nil
   end
 
   def reset!

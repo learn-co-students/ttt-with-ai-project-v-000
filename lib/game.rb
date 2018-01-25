@@ -8,11 +8,13 @@ class Game
   ]
   attr_accessor :board, :player_1, :player_2
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    @player_1 = player_1
-    @player_2 = player_2
-    @board = board
-  end
+
+def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  @player_1 = player_1
+  @player_2 = player_2
+  @board = board
+end
+
 
   def current_player #i.e. to next player to play
     @board.turn_count.even? ? @player_1 : @player_2
@@ -23,7 +25,6 @@ class Game
   end
 
   def won?
-
     position_taken_x = []
     @board.cells.each_with_index do |cell, i|
        position_taken_x << i if cell == "X"
@@ -67,6 +68,7 @@ class Game
     if @board.valid_move?(input)
       @board.update(input, current_player)
       @board.display
+
     else
       turn
     end
