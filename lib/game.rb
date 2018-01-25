@@ -52,7 +52,9 @@ end
 
   def turn
     input = current_player.move(@board)
-    current_player.opponent_has_2?(@board)
+    if current_player.class == Players::Computer
+      current_player.opponent_has_2?(@board)
+    end
     if @board.valid_move?(input)
       @board.update(input, current_player)
       @board.display
