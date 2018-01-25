@@ -14,7 +14,7 @@ end
   def opponent_has_2?(board)
     opponent_position_taken = []
     board.cells.each_with_index do |cell, i|
-       opponent_position_taken << i if cell == opponent_token
+       opponent_position_taken << (i+1) if cell == opponent_token
      end
   #    two_out_of_three = false
   #   WIN_COMBINATIONS.each do |combo|
