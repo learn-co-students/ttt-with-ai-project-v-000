@@ -13,6 +13,7 @@ module Players
 def play_defense
   if opponent_has_2?
     opponent_has_2?
+    binding.pry
   else
     available = []
     @board.cells.each_with_index do |cell, i|
@@ -39,7 +40,7 @@ end
                 @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
               end
             else #opponent plays corner: DEFENSE MODE
-
+              play_defense
             end
 
           elsif @board.turn_count == 4
