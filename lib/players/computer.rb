@@ -16,7 +16,7 @@ module Players
 
   def move(board)
     if @token == "X"
-      puts "Computer X, positions taken by your oppenent O are: #{opponent_has_2?(board)}"
+      puts "Computer X, block position: #{opponent_has_2?(board)}"
         #////////////// CENTER CASE //////////////
       @center_play = true
       if @center_play
