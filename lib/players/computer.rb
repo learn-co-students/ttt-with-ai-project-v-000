@@ -39,6 +39,8 @@ end
                 @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
               end
             else #opponent plays corner: DEFENSE MODE
+              puts "defense triggered"
+
               play_defense
             end
 
@@ -58,6 +60,7 @@ end
               end
 
             else
+                puts "defense triggered"
               play_defense
             end
 
@@ -75,6 +78,7 @@ end
                 @my_last = "2"
               end
             else
+                puts "defense triggered"
               play_defense
             end
           end
