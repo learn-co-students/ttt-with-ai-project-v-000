@@ -72,8 +72,9 @@ class Game
     if self.board.valid_move?(@input) == true
       self.board.update(@input, @player)
       self.board.display
+      puts
     else
-      puts "Please enter a valid move, 1-9."
+      puts "Invalid position. Please enter a valid move, 1-9."
       @input = @player.move(board)
       @input ||= ''
       @input.chomp

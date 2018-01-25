@@ -4,32 +4,47 @@ module Players
 
     def move(board)
 
-      @board = board
+      move = nil
 
-      @valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      # ** if first or second move center or corner ** #
+      if board.turn_count == 0 || board.turn_count == 1
 
-
-      if @board.turn_count == 0 || @board.turn_count == 1
-        @valid_moves.collect do |move|
-          @board.valid_move?(move)
-        end
-          @play_move = @valid_moves.sample
-
-      else
-        if @board.check_block_combos != nil
-          @play_move = @board.check_block_combos
-        elsif @board.check_diag_combos != nil
-          @play_move = @board.check_diag_combos
-        else
-          @valid_moves.collect do |move|
-            @board.valid_move?(move)
+        if board.cells[4] == " "
+          move = "5"
+        else ## ** BROKEN HERE ** ##
+          [0, 2, 6, 8].detect do |val|
+            if board.taken?[val] == false
+            move = "#{val}"
+            end
           end
-          @play_move = @valid_moves.sample
         end
-      end
 
-      @valid_moves[@play_move.to_i - 1] = self.token
-      @play_move.to_s
+      # # ** else run through win_combos ** #
+      else Game::WIN_COMBINATIONS.detect do |combo|
+
+          if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " "
+            move = "#{combo[2]}"
+
+          elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " "
+            move = "#{combo[1]}"
+
+          elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " "
+            move = "#{combo[0]}"
+          end
+        end
+
+       end
+
+      # # if neither above, sample from array below
+      # if move == nil
+      #   board.cells.each_with_index do |val, index|
+      #     if val == " "
+      #       move == index.to_s
+      #     end
+      #   end
+      # end
+
+      move
 
     end
 
@@ -37,42 +52,31 @@ module Players
 
 end
 
-#seems to glitch on turn 6
 
-# the board below presents a problem: have I told the program what to do if none of the block conditions exist?
+#######
 
-#ex.
-# Your turn, O.
-#  O |   | X
-# -----------
-#  X | X | O
-# -----------
-#  O |   |
-
-
-###
-
-#Looked really great, until it had two options, it seems
-
+# Last Error
+#
+# Your turn, X.
+# ---
 # Please enter your move, 1-9
+#
 # 5
-#  X | O |
+#    |   |
 # -----------
-#  X | X |
+#    | X |
 # -----------
-#  O |   |
+#    |   |
+#
 # ---
 # Your turn, O.
 # ---
-# Please enter a valid move, 1-9.
-# ---
-# Your turn, O.
-# ---
-# Please enter a valid move, 1-9.
-# ---
-
-
-#then indefinite loop after I placed a token in space 8
-
-
-#when comp against comp, first player begins loop immediately
+# /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/board.rb:39:in `taken?': wrong number of arguments (given 0, expected 1) (ArgumentError)
+# 	from /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/players/computer.rb:16:in `block in move'
+# 	from /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/players/computer.rb:15:in `each'
+# 	from /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/players/computer.rb:15:in `detect'
+# 	from /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/players/computer.rb:15:in `move'
+# 	from /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/game.rb:68:in `turn'
+# 	from /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/game.rb:91:in `play'
+# 	from /Users/lauratrager/Development/code/ttt-with-ai-project-v-000/lib/game.rb:130:in `start'
+	# from ./bin/tictactoe:7:in `<main>'
