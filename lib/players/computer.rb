@@ -13,12 +13,12 @@ module Players
 def play_defense
   if opponent_has_2?
     opponent_has_2?
-    binding.pry
   else
     available = []
     @board.cells.each_with_index do |cell, i|
       available << (i+1).to_s if cell == " "
     end
+      binding.pry
     available.sample
   end
 end
