@@ -1,7 +1,6 @@
 module Players
   class Computer < Player
 
-
   attr_accessor :my_last, :center_play
   attr_reader :token
 
@@ -11,21 +10,7 @@ module Players
     @center_play = false
   end
 
-
-  def won?
-    position_taken = [[],[]]
-    @board.cells.each_with_index do |cell, i|
-       position_taken[0] << i if cell == "X"
-       position_taken[1] << i if cell == "O"
-     end
-     winning_combo = false
-    WIN_COMBINATIONS.each do |combo|
-     winning_combo = combo if (combo - position_taken[0]).empty? || (combo - position_taken[1]).empty? # if combo is included in position_taken
-    end
-    winning_combo
-  end
-
-def play_defense(board)
+def play_defense
   if opponent_has_2?(board)
     opponent_has_2?(board)
   else
@@ -35,9 +20,6 @@ def play_defense(board)
     end
     available.sample
   end
-
-
-
 end
 
   def move(board)
@@ -56,7 +38,7 @@ end
                 @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
               end
             else #opponent plays corner: DEFENSE MODE
-              #PLAY_DEFENSE
+          
             end
 
           elsif board.turn_count == 4
