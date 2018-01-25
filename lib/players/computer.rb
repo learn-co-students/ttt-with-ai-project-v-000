@@ -10,83 +10,84 @@ module Players
     def move(board)
       if @token == "X"
 #////////////// EDGE CASE //////////////
-        if board.turn_count == 0
-           @my_last = "4"
-
-        elsif board.turn_count == 2 && @my_last == "4"
-          if board.last_move == "2" || board.last_move == "3"
-            @my_last = "1"
-          elsif board.last_move == "8" || board.last_move == "9"
-            @my_last = "7"
-          end
-
-        elsif board.turn_count == 4
-          if board.last_move == "7"
-            @my_last = "5"
-          end
-
-        elsif board.turn_count == 6
-          if board.last_move == "6"
-            @my_last = "9"
-          else
-            @my_last = "6"
-          end
-        end
+        # if board.turn_count == 0
+        #    @my_last = "4"
+        #
+        # elsif board.turn_count == 2 && @my_last == "4"
+        #   if board.last_move == "2" || board.last_move == "3"
+        #     @my_last = "1"
+        #   elsif board.last_move == "8" || board.last_move == "9"
+        #     @my_last = "7"
+        #   end
+        #
+        # elsif board.turn_count == 4
+        #   if board.last_move == "7"
+        #     @my_last = "5"
+        #   end
+        #
+        # elsif board.turn_count == 6
+        #   if board.last_move == "6"
+        #     @my_last = "9"
+        #   else
+        #     @my_last = "6"
+        #   end
+        # end
         #////////////// CENTER CASE //////////////
 
         if board.turn_count == 0
+          center_play = true
            @my_last = "5"
+         end
 
-        elsif board.turn_count == 2 && @my_last == "4"
-          if board.last_move.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
-            if board.last_move == "2" || board.last_move == "8"
-              @my_last = "1" # REFACTOR: CAN ALSO BE 4, 7, 3,6,9
-            elsif board.last_move == "4" || board.last_move == "6"
-              @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
+         if center_play
+          if board.turn_count == 2 && @my_last == "4"
+            if board.last_move.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
+              if board.last_move == "2" || board.last_move == "8"
+                @my_last = "1" # REFACTOR: CAN ALSO BE 4, 7, 3,6,9
+              elsif board.last_move == "4" || board.last_move == "6"
+                @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
+              end
+            else #opponent plays corner: DEFENSE MODE
+              @my_last = "7"  #A IMPLEMENTER
             end
-          else #opponent plays corner: DEFENSE MODE
-            @my_last = "7"  #A IMPLEMENTER
+
+          elsif board.turn_count == 4
+
+            if @my_last == "1"
+              if board.last_move == "9"
+                @my_last = "7"
+              else
+                @my_last = "9" # WON!
+              end
+
+            elsif @my_last == "3"
+              if board.last_move == "7"
+                @my_last = "1"
+              else
+                @my_last = "7" # WON!
+              end
+            end
+
+          elsif board.turn_count == 6
+            if @my_last == "7"
+              if board.last_move == "3"
+                @my_last = "4"
+              else
+                @my_last = "3"
+              end
+            elsif @my_last == "1"
+              if board.last_move == "2"
+                @my_last = "7"
+              else
+                @my_last = "2"
+              end
+            end
           end
 
-        elsif board.turn_count == 4
+      end #//center_play end
 
-          if @my_last == "1"
-            if board.last_move == "9"
-              @my_last = "7"
-            else
-              @my_last = "9" # WON!
-            end
-          end
-          if @my_last == "3"
-            if board.last_move == "7"
-              @my_last = "1"
-            else
-              @my_last = "7" # WON!
-            end
-          end
-
-        end
-
-        elsif board.turn_count == 6
-          if @my_last == "7"
-            if board.last_move == "3"
-              @my_last = "4"
-            else
-              @my_last = "3"
-            end
-          elsif @my_last == "1"
-            if board.last_move == "2"
-              @my_last = "7"
-            else
-              @my_last = "2"
-            end
-        end
-      end
-
-
-
-    end
-  end
+    end #// first_play end
+  end 
 end
 
 
