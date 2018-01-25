@@ -2,23 +2,39 @@ module Players
   class Computer < Player
 
   attr_accessor :my_last, :center_play
+  attr_reader :token
   def initialize(token)
     super
     @my_last = nil
     @center_play = false
+
   end
+
+  def opponent_token
+    token == "X" ? "O" : "X"
+  end
+
+  def opponent_has_2?
+    opponent_position_taken = []
+    @board.cells.each_with_index do |cell, i|
+       opponent_position_taken << i if cell == opponent_token
+     end
+     two_out_of_three = false
+    WIN_COMBINATIONS.each do |combo|
+     winning_combo = combo if (combo - position_taken[0]).empty? || (combo - position_taken[1]).empty? # if combo is included in position_taken
+    end
+    winning_combo
+  end
+
 
   def move(board)
     if @token == "X"
         #////////////// CENTER CASE //////////////
-        @center_play = true
-        if @center_play
-
+      @center_play = true
+      if @center_play
         if board.turn_count == 0
           @my_last = "5"
-
-        elsif board.turn_count == 2 #&& @my_last == "5"
-          #  binding.pry
+        elsif board.turn_count == 2
             if board.last_move.to_i.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
               if board.last_move == "2" || board.last_move == "8"
                 @my_last = "1" # REFACTOR: CAN ALSO BE 4, 7, 3,6,9
