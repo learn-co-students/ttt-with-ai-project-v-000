@@ -73,7 +73,6 @@ module Players
         end
         #// END OFFENSE MODE
       else
-        binding.pry
         play_defense
       end #end if !defense_mode
     end #// first_play end
