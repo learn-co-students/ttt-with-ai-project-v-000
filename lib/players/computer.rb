@@ -1,21 +1,23 @@
 module Players
   class Computer < Player
 
-  attr_accessor :my_last
+  attr_accessor :my_last, :center_play
   def initialize(token)
     super
     @my_last = nil
+    @center_play = false
   end
 
   def move(board)
     if @token == "X"
         #////////////// CENTER CASE //////////////
         if board.turn_count == 0
-          center_play = true
-           @my_last = "5"
-         end
+          @center_play = true
 
-         if center_play
+          @my_last = "5"
+         end
+binding.pry
+         if @center_play
           if board.turn_count == 2 && @my_last == "4"
             if board.last_move.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
               if board.last_move == "2" || board.last_move == "8"
