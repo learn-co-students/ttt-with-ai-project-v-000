@@ -28,5 +28,32 @@ class Board
   end
 
   def turn_count
+    count = 0
+    @cells.each do |index|
+      if index != "" && index != " " && index != nil
+        count +=1
+      end
+    end
+    return count
   end
+
+  def taken?(index)
+    index = index.to_i - 1
+    if @cells[index] == "" || @cells[index] == " " || @cells[index] == nil
+      return false
+    else
+      return true
+    end
+  end
+
+  def valid_move?(index)
+    index = index.to_i
+    index.between?(1,9) && !self.taken?(index)
+  end
+
+  def update(index, value)
+    index = index.to_i
+    @cells[index]= value
+  end
+
 end
