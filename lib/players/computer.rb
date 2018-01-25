@@ -17,7 +17,6 @@ module Players
         if board.turn_count == 0
           @my_last = "5"
 
-
         elsif board.turn_count == 2 #&& @my_last == "5"
           #  binding.pry
             if board.last_move.to_i.even? #if opponent plays 2, 4, 6, 8 => EDGE: OFFENSE MODE
