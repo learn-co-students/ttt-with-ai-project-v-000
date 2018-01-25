@@ -13,6 +13,9 @@ def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new
   @player_1 = player_1
   @player_2 = player_2
   @board = board
+  @player_1.board = @board
+  @player_2.board = @board
+
 end
 
 

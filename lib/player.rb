@@ -5,7 +5,7 @@ class Player
         [1,5,9], [3,5,7],
         [1,4,7], [2,5,8], [3,6,9]
       ]
-
+  attr_accessor :board
   attr_reader :token
   def initialize(token)
     @token = token
@@ -17,10 +17,10 @@ def opponent_token
   token == "X" ? "O" : "X"
 end
 
-  def opponent_has_2?(board)
+  def opponent_has_2?
     position_to_block = nil
     opponent_positions_taken = []
-    board.cells.each_with_index do |cell, i|
+    @board.cells.each_with_index do |cell, i|
        opponent_positions_taken << (i+1) if cell == opponent_token
      end
 
