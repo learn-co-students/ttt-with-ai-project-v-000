@@ -30,7 +30,7 @@ module Players
                 @my_last = "3" # REFACTOR: CAN ALSO BE 1,2, 7,8,9
               end
             else #opponent plays corner: DEFENSE MODE
-              @my_last = "7"  #A IMPLEMENTER
+              @my_last = "8"  #A IMPLEMENTER
             end
 
           elsif board.turn_count == 4
@@ -48,6 +48,9 @@ module Players
               else
                 @my_last = "7" # WON!
               end
+
+            elsif @my_last == "8"
+              @my_last == "1"
             end
 
           elsif board.turn_count == 6

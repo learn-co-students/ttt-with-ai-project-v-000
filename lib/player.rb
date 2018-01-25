@@ -33,7 +33,7 @@ end
        end
        if possible_win_combo.count == 2
         # binding.pry
-         position_to_block = combo - possible_win_combo
+         position_to_block = (combo - possible_win_combo).first.to_s
        end
      end
      position_to_block
