@@ -5,7 +5,11 @@ class Player
     @token = token
   end
 
-# HOW TO HAVE IT ONLY FOR COMPUTER?
+# HOW TO HAVE THESE 2 METHODS ONLY FOR COMPUTER?
+
+def opponent_token
+  token == "X" ? "O" : "X"
+end
 
   def opponent_has_2?(board)
     opponent_position_taken = []
