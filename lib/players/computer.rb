@@ -75,6 +75,7 @@ module Players
 
     def second_move
       ["2", "4", "5", "6", "8"].sample
+      # see Tic Tac Toe notes
     end
 
     def first_move
