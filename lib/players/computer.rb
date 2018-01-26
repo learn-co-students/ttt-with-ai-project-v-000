@@ -96,11 +96,24 @@ module Players
       else
         play_defense
       end #end if !defense_mode
-    else
-      play_defense
-    end #// first_play end
-  end
-  # END DEF MOVE
+    else # PLAY SECOND
+      if  @board.turn_count == 1
+        if @board.last_move == "5"
+          @my_last = ["1", "3", "7", "9"].sample
+        elsif ["1", "3", "7", "9"].include?(@board.last_move
+          @my_last = "5"
+        elsif @board.last_move == "2"#edge case 1: 2
+          @my_last = ["1", "3", "5","8"].sample
+        elsif @board.last_move == "4"
+          @my_last = ["1","5","6", "7"].sample
+        elsif @board.last_move == "6"
+          @my_last = ["3","4","5","9"].sample
+        end
+      else # turn_count >=3
+        play_defense
+      end
+    end
+  end # END DEF MOVE
 end
 end
 
