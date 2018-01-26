@@ -56,11 +56,36 @@ class Game
   end
 
   def winner
-    if combo = won?
-      @board.cells[combo[0]
-      if !over? || draw?
-        return nil
-      end
+    if !over? || draw?
+      return nil
+    elsif combo = won?
+      @board.cells[combo[0]]
+    end
+  end
+
+  # def turn
+  #   puts "Please enter a number (1-9):"
+  #   index = gets.strip
+  #   if @board.valid_move?(index)
+  #     if turn_count.even?
+  #       @player_1.move(index)
+  #     else
+  #       @player_2.move(index)
+  #     end
+  #   else
+  #     return "invalid"
+  #     turn
+  #   end
+  # end
+
+  def turn
+    puts "Please enter a number (1-9):"
+    index = current_player.move(@board)
+
+    if @board.valid_move?(index)
+      @board.update(index,current_player.token)
+    else
+      turn
     end
   end
 
