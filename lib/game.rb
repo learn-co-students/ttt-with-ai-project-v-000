@@ -13,9 +13,8 @@ def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new
   @player_1 = player_1
   @player_2 = player_2
   @board = board
-  @player_1.board = @board
-  @player_2.board = @board
-
+  @player_1.board = board
+  @player_2.board = board
 end
 
 
@@ -54,10 +53,7 @@ end
   end
 
   def turn
-    input = current_player.move(@board)
-    # if current_player.class == Players::Computer
-    #   current_player.opponent_has_2?(@board)
-    # end
+    input = current_player.move
     if @board.valid_move?(input)
       @board.update(input, current_player)
       @board.display
