@@ -56,6 +56,7 @@ module Players
   end #class
 end #module
 
+# use min-max algo to make computer unbeatable
 
 #---------- if above code breaks, use the code below in the WIN_COMBINATIONS block ----------- #
 
