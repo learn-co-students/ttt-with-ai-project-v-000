@@ -100,7 +100,7 @@ module Players
       if  @board.turn_count == 1
         if @board.last_move == "5"
           @my_last = ["1", "3", "7", "9"].sample
-        elsif ["1", "3", "7", "9"].include?(@board.last_move
+        elsif ["1", "3", "7", "9"].include?(@board.last_move)
           @my_last = "5"
         elsif @board.last_move == "2"#edge case 1: 2
           @my_last = ["1", "3", "5","8"].sample
