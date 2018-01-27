@@ -78,6 +78,8 @@ class Game
 
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
+
     else
       turn
     end
