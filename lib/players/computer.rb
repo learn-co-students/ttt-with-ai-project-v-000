@@ -1,7 +1,7 @@
+require 'pry'
 module Players
   class Computer < Player
 
-    move = nil
 
     def move(board)
       position = Random.rand(9).to_s

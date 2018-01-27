@@ -14,10 +14,11 @@ class Board
   def reset!
     # #reset! method can reset the state of the cells to what a board should look like at start of game
     # an array with 9 " " elements
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    @cells = Array.new(9," ")
 
   end
 
+  #displays the board in the window
   def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
