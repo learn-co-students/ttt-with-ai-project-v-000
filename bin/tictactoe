@@ -5,7 +5,7 @@ require_relative '../config/environment'
 puts "Welcome to Tic-Tac-Toe!"
 puts "How many players? Enter 0, 1 or 2."
 
-input = gets.strip
+input = gets.strip.to_i
 
 case input
 when 0
