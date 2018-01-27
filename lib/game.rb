@@ -53,28 +53,26 @@ class Game
   end
 
   def winner
-    if won? != nil
-      @winner
+    won? ? board.cells[won?[0]] : nil
+  end
+
+  #grabts the current players board selection and store in input
+  #if the move is valid, it updates the board with the move and player token.
+  def turn
+    input = current_player.move(board)
+
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      turn
     end
+  end
 
-    #grabts the current players board selection and store in input
-    #if the move is valid, it updates the board with the move and player token.
-    def turn
-      input = current_player.move(board)
-
-      if board.valid_move?(input)
-        board.update(input, current_player)
-      else
-        turn
-      end
+  def play
+    while !over?
+      turn
     end
+    won? ? (puts "Congratulations #{@winner}!") : (puts "Cat's Game!")
 
-    def play
-      while !over?
-        turn
-      end
-      won? ? (puts "Congratulations #{winner}!") : (puts "Cat's Game!")
-
-    end
   end
 end

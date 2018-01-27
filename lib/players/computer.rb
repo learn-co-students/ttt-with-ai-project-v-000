@@ -1,10 +1,12 @@
 module Players
   class Computer < Player
 
+    move = nil
+
     def move(board)
-      num = rand(1..9)
-      return
-      "#{num}"
+      position = Random.rand(9).to_s
+      !board.valid_move?(position) ? position = Random.rand(9) : position
     end
+
   end
 end
