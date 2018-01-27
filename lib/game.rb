@@ -56,26 +56,25 @@ class Game
     if won? != nil
       @winner
     end
-  end
 
-  def turn
-    #makes valid move
-    #asks for input after 2 failed validation
-    #changes to player 2 after player 1 makes move
+    #grabts the current players board selection and store in input
+    #if the move is valid, it updates the board with the move and player token.
+    def turn
+      input = current_player.move(board)
 
+      if board.valid_move?(input)
+        board.update(input, current_player)
+      else
+        turn
+      end
+    end
 
-  end
+    def play
+      while !over?
+        turn
+      end
+      won? ? (puts "Congratulations #{winner}!") : (puts "Cat's Game!")
 
-  def play
-
-    #asks for players input on a turn of the game
-    #checks if the game is over or won or draw after every turn
-    #plays the first turn of the game
-    #plays the first few turns of the game
-    #congratulates X or O as winner
-    #prints "Cat's Game" on draw
-    #plays through entire game
-
-
+    end
   end
 end
