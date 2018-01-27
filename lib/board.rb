@@ -6,11 +6,11 @@ class Board
     @cells = Array.new(9, " ")
   end
   
-  def initialize
+  def initialize()
     reset!
   end
   
-   def display
+  def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
@@ -18,13 +18,13 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
   
-  def position(input) #returns the value of the board cell 
+  def position(input) #returns the value of the board cell based on player input
     cells[input.to_i - 1]
   end
   
-   def full?
+  def full?
     cells.none? do |token| #none? returns true if the block returns false for all of cells
-      token == " "
+      token == " " || token.nil?
     end
   end
   
@@ -47,7 +47,7 @@ class Board
   end
 
   def update(input, player)
-    cells[input.to_i-1] = player.token
+    cells[input.to_i - 1] = player.token
   end
 
 end

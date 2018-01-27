@@ -1,6 +1,6 @@
 class Game
   
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner
 
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[6,4,2]]
   
@@ -19,11 +19,12 @@ class Game
   end
   
   def won?
-    WIN_COMBINATIONS.any? do |combo|
-      if @board.taken?(combo[0]) && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
-        return combo
+    #previous code used .each to enumerate, but we really needed to use . detect so that it would stop the firts time the code finds that example
+    WIN_COMBINATIONS.detect do |win_combo|
+      @board.cells[win_combo[0]] == @board.cells[win_combo[1]] &&
+      @board.cells[win_combo[1]] == @board.cells[win_combo[2]] &&
+      @board.taken?(win_combo[0]+1)
       end
-    end
   end
   
   def draw?
@@ -41,32 +42,34 @@ class Game
   end
   
   def turn
-    player = current_player
-    current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
-      turn
-    else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts"\n\n"
+    
+    player = self.current_player #returns player_1 or player_2 object instance 
+    
+    cell_choice = player.move("")#return the cell # the player is choosing
+    
+    if @board.valid_move?(cell_choice) == false
+      
+      while @board.valid_move?(cell_choice) == false
+        puts "try again"
+        cell_choice = player.move("")
+      end
     end
+    @board.update(cell_choice, player)
+    @board.display
   end
   
   def play
-    until self.over? == true || self.won? == true || self.draw? == true
-         self.turn
-       end
-         if self.won? == true
-           puts "Congratulations #{@winner}!"
-         end
-         if self.draw? == true
-           puts "Cat's Game!"
-         end
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 end
+ 
    
 
 
-end
