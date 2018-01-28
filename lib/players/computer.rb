@@ -28,7 +28,7 @@ module Players
     	
       WIN_COMBINATIONS.detect do |win_combo|
       	
-        if 1 == 1 #move != nil
+        if move != nil
           break#break and dont do any of this code block if move has a value
           elsif (board.position(win_combo[0] + 1) == board.position(win_combo[1] + 1)) && board.taken?(win_combo[0] + 1) && !board.taken?(win_combo[2] + 1)
               move = "#{win_combo[2] + 1}"#if there are two in a row and they are not empty then go in the next space in that win combo
@@ -41,7 +41,7 @@ module Players
               #binding.pry
           end
         end
-         move = rand(1..9) #if move == nil
+         move = rand(1..9) if move == nil
           
        end
        move#skip to here after break
