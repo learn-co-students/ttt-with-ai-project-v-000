@@ -4,6 +4,10 @@ class Game
     
     attr_accessor :board, :player_1, :player_2
     
+    @@x_is_winner = 0
+    @@o_is_winner = 0
+    @@draw = 0
+    
     WIN_COMBINATIONS = [
         [0, 1, 2],
         [3, 4, 5],
@@ -48,7 +52,6 @@ class Game
     
     def turn
         self.board.display
-#        binding.pry
         if self.current_player.instance_of?(Players::Computer) == true
             puts "It's the Computer's move..."
             board = self.board
@@ -59,7 +62,6 @@ class Game
             elsif self.board.valid_move?(input) == true
                 self.board.update(input, self.current_player)
             end
-            sleep(2)
         else
             input = self.current_player.move(input)
             if self.board.valid_move?(input) == false
@@ -76,6 +78,9 @@ class Game
             self.turn
         end
         self.board.display
+        @@x_is_winner += 1 if self.winner == "X"
+        @@o_is_winner += 1 if self.winner == "O"
+        @@draw += 1 if self.draw? == true
         puts "Congratulations #{self.winner}!" if self.won? != false
         puts "Cat's Game!" if self.draw? == true
     end
@@ -83,7 +88,7 @@ class Game
     def self.start
         puts "Welcome to mother-fucking Tic-Tac-Toe!"
 
-        puts "Would you like to play a 0, 1, or 2 player game?"
+        puts "Would you like to play a 0, 1, or 2 player game or would you rather play Wargames?"
 
         user_input = gets.strip
         p1 = nil
@@ -108,6 +113,8 @@ class Game
         elsif user_input == "0"
             p1 = Players::Computer.new("X")
             p2 = Players::Computer.new("O")
+        elsif user_input == "Wargames" || user_input == "wargames" || user_input == "wargame"
+            self.wargame
         end
 
         Game.new(p1, p2, board).play
@@ -124,6 +131,21 @@ class Game
                 exit
             end
         end
+    end
+    
+    def self.wargame
+        
+        100.times do
+            p1 = Players::Computer.new("X")
+            p2 = Players::Computer.new("O")
+            board = Board.new
+            Game.new(p1, p2, board).play
+        end
+        
+        puts "X has won #{@@x_is_winner} times."
+        puts "O has won #{@@o_is_winner} times."
+        puts "There were #{@@draw} draws."
+        Game.restart
     end
     
 end
