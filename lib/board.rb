@@ -42,7 +42,11 @@ class Board
     i.between?(1,9) && !taken?(i)
   end
 
-  def update
+  def update(input, token)
+    i = input.to_i - 1
+    binding.pry
+    cells[i] = token # I don't understand player = double("player", :token => "X")
+                    # how to access the token of x? > pry shows me token = #<Double "player">
   end
 
 end
