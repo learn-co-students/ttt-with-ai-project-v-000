@@ -1,4 +1,5 @@
 require 'pry'
+require_relative './players/computer.rb'
 class Game
     
     attr_accessor :board, :player_1, :player_2
@@ -46,12 +47,27 @@ class Game
     end
     
     def turn
-        input = self.current_player.move(input = nil)
-        if self.board.valid_move?(input) == false
-            turn
-        end
-        if self.board.valid_move?(input) == true
-            self.board.update(input, self.current_player)
+        self.board.display
+#        binding.pry
+        if self.current_player.instance_of?(Players::Computer) == true
+            puts "It's the Computer's move..."
+            board = self.board
+            input = self.current_player.move(board)
+            if self.board.valid_move?(input) == false
+                puts "Invalid move."
+                turn
+            elsif self.board.valid_move?(input) == true
+                self.board.update(input, self.current_player)
+            end
+            sleep(2)
+        else
+            input = self.current_player.move(input)
+            if self.board.valid_move?(input) == false
+                turn
+            end
+            if self.board.valid_move?(input) == true
+                self.board.update(input, self.current_player)
+            end
         end
     end
     
@@ -59,8 +75,55 @@ class Game
         until self.over? == true
             self.turn
         end
+        self.board.display
         puts "Congratulations #{self.winner}!" if self.won? != false
         puts "Cat's Game!" if self.draw? == true
+    end
+    
+    def self.start
+        puts "Welcome to mother-fucking Tic-Tac-Toe!"
+
+        puts "Would you like to play a 0, 1, or 2 player game?"
+
+        user_input = gets.strip
+        p1 = nil
+        p2 = nil
+        board = Board.new
+        
+        if user_input == "2"
+            puts "Who wants to go first and be X? Player 1, reply with 'me'."
+            user_input2 = gets.strip
+            p1 = Players::Human.new("X")
+            p2 = Players::Human.new("O")
+        elsif user_input == "1"
+            puts "Do you want to go first (and be X) or do you want the computer to go first?"
+            user_input2 = gets.strip
+            if user_input2 == "computer" 
+                p1 = Players::Computer.new("X")
+                p2 = Players::Human.new("O")
+            else
+                p1 = Players::Human.new("X")
+                p2 = Players::Computer.new("O")
+            end
+        elsif user_input == "0"
+            p1 = Players::Computer.new("X")
+            p2 = Players::Computer.new("O")
+        end
+
+        Game.new(p1, p2, board).play
+        
+     end
+    
+    def self.restart
+        loop do
+            puts "Would you like to play again?"
+            user_input3 = gets.strip
+            if user_input3 == "yes" || user_input3 == "Yes"
+                self.start
+            elsif user_input3 == "no" || user_input3 == "No"
+                exit
+            end
+        end
     end
     
 end
