@@ -84,6 +84,7 @@ class Game
     end
   end
 
+
   #if the game isn't over, keep taking turns
   #over method verifies if the gave has been won or is a draw
   #after every turn verify if it's a won game or a draw game
