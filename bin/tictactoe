@@ -11,13 +11,20 @@ def start
 	puts "To play a 2 player game, enter '2 player'."
 	input = gets.strip
 
-
 	case input
 	  when "0 players"
 	    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 	    game.play
 	  when "1 player"
-	    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+	  	first_player = rand(1..2)
+	    if first_player == 1 
+	    	player_a = Players::Computer.new("X")
+	    	player_b = Players::Human.new("O")
+	    else 
+	    	player_b = Players::Computer.new("X")
+	    	player_a = Players::Human.new("O")
+	    end
+	    game = Game.new(player_a, player_b)
 	    game.play
 	  when "2 player"
 	    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))

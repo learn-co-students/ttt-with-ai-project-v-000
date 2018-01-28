@@ -50,6 +50,7 @@ class Game
   	if @board.valid_move?(current_move)
   	  @board.update(current_move, current_player)
   	  @board.display
+  	  puts "What'll you do now?!?"
   	 else
   	   turn
   	end
