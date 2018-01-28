@@ -42,6 +42,7 @@ class Board
     i.between?(1,9) && !taken?(i)
   end
 
-
+  def update
+  end
 
 end
