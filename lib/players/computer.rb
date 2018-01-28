@@ -28,6 +28,15 @@ module Players
 	      	board.cells[i[1]] == self.token && board.cells[i[2]] == self.token && board.cells[i[0]] == " "
 	        position = i[0]
 	      	final_position = (position + 1).to_s
+	      elsif board.cells[i[0]] == self.token && board.cells[i[1]] == " " && board.cells[i[2]] == " "
+            position_index = rand(1)
+            position_index == 1 ? final_position = (i[2]+1).to_s : final_position = (i[1]+1).to_s
+          elsif board.cells[i[0]] == " " && board.cells[i[1]]  == self.token && board.cells[i[2]] == " " 
+          	position_index = rand(1)
+            position_index == 1 ? final_position = (i[2]+1).to_s : final_position = (i[0]+1).to_s
+           elsif board.cells[i[0]] == " " && board.cells[i[1]]  == " " && board.cells[i[2]] == self.token
+          	position_index = rand(1)
+            position_index == 1 ? final_position = (i[1]+1).to_s : final_position = (i[0]+1).to_s
 	      end
 	    end 
 	    if final_position != nil
