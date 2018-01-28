@@ -47,5 +47,5 @@ module Players
        move#skip to here after break
     end
 
-  end #class
-end #module
+  end 
+end 
