@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
 
 puts "Hello, Welcome to Tic Tac Toe!"
@@ -12,7 +11,7 @@ if input == "yes"
     until game.won? || game.draw?? || board.full?
       game.play
     end
-    if game.won? || game.draw?? || board.full?
+   when game.won? || game.draw?? || board.full?
       puts "Do you want to play again?"
       input
       if input == "yes"
