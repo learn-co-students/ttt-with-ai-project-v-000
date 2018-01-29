@@ -63,23 +63,7 @@ class Game
     end
   end
 
-  # def turn
-  #   puts "Please enter a number (1-9):"
-  #   index = gets.strip
-  #   if @board.valid_move?(index)
-  #     if turn_count.even?
-  #       @player_1.move(index)
-  #     else
-  #       @player_2.move(index)
-  #     end
-  #   else
-  #     return "invalid"
-  #     turn
-  #   end
-  # end
-
   def turn
-    puts "Please enter a number (1-9):"
     index = current_player.move(@board)
 
     if @board.valid_move?(index)
@@ -88,5 +72,15 @@ class Game
       turn
     end
   end
+
+  def play
+    if !over?
+      turn
+    elsif won?
+      puts "Congratulations #{current_player.token}"
+    elsif draw?
+    end
+  end
+
 
 end
