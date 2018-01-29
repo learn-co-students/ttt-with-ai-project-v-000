@@ -78,6 +78,7 @@ class Game
 
       def turn
         player_1.move(board)
+        binding.pry
         # return "1"
       end
 
