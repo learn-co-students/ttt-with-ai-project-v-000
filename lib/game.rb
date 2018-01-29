@@ -59,13 +59,12 @@ class Game
     if !over? || draw?
       return nil
     elsif combo = won?
-      @board.cells[combo[0]]
+      @board.position(combo.first)
     end
   end
 
   def turn
     index = current_player.move(@board)
-
     if @board.valid_move?(index)
       @board.update(index,current_player.token)
     else
@@ -73,12 +72,25 @@ class Game
     end
   end
 
+  # def play
+  #   while !over? && !draw?
+  #     turn
+  #   end
+  #   if won?
+  #     puts "Congratulations #{winner}!"
+  #   elsif draw?
+  #     puts "Cat\'s Game!"
+  #   end
+  # end
+
   def play
-    if !over?
+    while !over?
       turn
-    elsif won?
-      puts "Congratulations #{current_player.token}"
+    end
+    if won?
+      puts "Congratulations #{winner}!"
     elsif draw?
+      puts "Cat's Game!"
     end
   end
 
