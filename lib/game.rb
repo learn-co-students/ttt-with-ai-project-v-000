@@ -69,12 +69,12 @@ class Game
       end
 
       def winner
-        binding.pry
         if won?
-          return won[0]
+          return board.cells[won?[1]]
         end
       end
 
-
+      def turn
+      end
 
 end
