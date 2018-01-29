@@ -34,7 +34,47 @@ class Game
     end
 
     def current_player
+      if 9 - board.cells.count(" ") == 2 #board is an object and I need to access the array
+      player_1
+      end
     end
+
+    def over?
+      draw? || won?
+    end
+
+    def draw?
+      full? && !won?
+    end
+
+    def full?
+      board.cells.all? {|spot| spot != " "}
+    end
+
+    def won?
+      WIN_COMBINATIONS.each do |win_combination|
+        win_index_1 = win_combination[0]
+        win_index_2 = win_combination[1]
+        win_index_3 = win_combination[2]
+        position_1 = board.cells[win_index_1] # load the value of the board at win_index_1
+        position_2 = board.cells[win_index_2] # load the value of the board at win_index_2
+        position_3 = board.cells[win_index_3] # load the value of the board at win_index_3
+          if position_1 == "X" && position_2 == "X" && position_3 == "X"
+            return win_combination # return the win_combination indexes that won.
+          elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+            return win_combination # return the win_combination indexes that won.
+          end
+        end
+        return false
+      end
+
+      def winner
+        binding.pry
+        if won?
+          return won[0]
+        end
+      end
+
 
 
 end
