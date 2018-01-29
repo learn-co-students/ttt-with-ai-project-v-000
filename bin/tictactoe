@@ -2,35 +2,4 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-
-  def start
-    game = Game.new
-  puts "How many players wish to play?"
-  puts "0, 1, 2"
-
-  input = gets.strip
-    case input
-      when "0"
-        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-      when "1"
-        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-      when "2"
-        Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-    end
-    rematch
-  end
-
-def rematch
-  puts "Would you like to play again?"
-  puts "y/n"
-    play_again = ""
-    play_again = gets.strip
-      case play_again
-      when "y"
-        start
-      when "n"
-        puts "Thanks for playing!"
-      end
-    end
-start
+Game.new.call

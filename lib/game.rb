@@ -11,6 +11,41 @@ class Game < Board
     [6,4,2]
   ]
 
+  def call
+    puts "Welcome to Tic Tac Toe!"
+    start
+  end
+
+  def start
+    game = Game.new
+    puts "How many players wish to play?"
+    puts "0, 1, 2"
+
+    input = gets.strip
+      case input
+        when "0"
+          Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+        when "1"
+          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        when "2"
+          Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+        end
+        rematch
+      end
+
+  def rematch
+    puts "Would you like to play again?"
+    puts "y/n"
+      play_again = ""
+      play_again = gets.strip
+        case play_again
+        when "y"
+          start
+        when "n"
+          puts "Thanks for playing!"
+        end
+  end
+
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
      @board = board
      @player_1 = player_1
