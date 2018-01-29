@@ -47,12 +47,11 @@ class Board
   end
 
   def valid_move?(index)
-    index = index.to_i
-    index.between?(1,9) && !self.taken?(index)
+    index.to_i.between?(1,9) && !self.taken?(index)
   end
 
   def update(index, value)
-    index = index.to_i
+    index = index.to_i - 1
     @cells[index]= value
   end
 
