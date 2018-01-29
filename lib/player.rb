@@ -11,7 +11,7 @@ end
 class Players
   class Human < Player
 
-    def move(input)
+    def move(board)
       input = gets.strip
       return "#{input}"
     end

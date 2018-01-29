@@ -27,6 +27,8 @@ class Game
 
     def player_1
       @player_1
+      # input = gets.strip
+      # return input
     end
 
     def player_2
@@ -62,7 +64,7 @@ class Game
           if position_1 == "X" && position_2 == "X" && position_3 == "X"
             return win_combination # return the win_combination indexes that won.
           elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
-            return win_combination # return the win_combination indexes that won.
+            return win_combination # return the win_combination indexes (array) that won.
           end
         end
         return false
@@ -75,6 +77,8 @@ class Game
       end
 
       def turn
+        player_1.move(board)
+        # return "1"
       end
 
 end
