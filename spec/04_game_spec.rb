@@ -53,17 +53,17 @@ describe 'Game' do
       expect(game.board).to eq(board)
     end
 
-    # it 'defaults to two human players, X and O, with an empty board' do
-    #   game = Game.new
-    #
-    #   expect(game.player_1).to be_a(Players::Human)
-    #   expect(game.player_1.token).to eq("X")
-    #
-    #   expect(game.player_2).to be_a(Players::Human)
-    #   expect(game.player_2.token).to eq("O")
-    #
-    #   expect(game.board.cells).to match_array(Array.new(9, " "))
-    # end
+    it 'defaults to two human players, X and O, with an empty board' do
+      game = Game.new
+    
+      expect(game.player_1).to be_a(Players::Human)
+      expect(game.player_1.token).to eq("X")
+    
+      expect(game.player_2).to be_a(Players::Human)
+      expect(game.player_2.token).to eq("O")
+    
+      expect(game.board.cells).to match_array(Array.new(9, " "))
+    end
   end
 
   describe '#current_player' do
