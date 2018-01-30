@@ -1,6 +1,6 @@
 require 'pry'
 class Board
-#checking git k
+#checking git 
   attr_accessor :cells
 
   @cells = []
