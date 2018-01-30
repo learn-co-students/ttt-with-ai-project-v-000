@@ -79,11 +79,16 @@ class Game
       end
 
       def play
-        player = current_player
-        if !over?
-          then player.move(board)
+        player = current_player #sets player to current player (1 or 2)
+        until over?
+          # then player.move(board) # user will be asked for input
            turn
-        end
       end
+        if won?
+          puts "Congratulations #{winner}!"
+        else
+          puts "Cat's Game!"
+        end
+    end
 
 end
