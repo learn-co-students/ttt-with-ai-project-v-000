@@ -21,23 +21,11 @@ class Game
       [2,4,6]
     ]
 
-    def board
-      @board
-    end
-
-    def player_1
-      @player_1
-      # input = gets.strip
-      # return input
-    end
-
-    def player_2
-      @player_2
-    end
-
     def current_player
-      if 9 - board.cells.count(" ") == 2 #board is an object and I need to access the array
-      player_1
+      if board.turn_count.even? # shouldn't this be odd??
+        player_1
+      else
+        player_2
       end
     end
 
@@ -77,9 +65,25 @@ class Game
       end
 
       def turn
-        player_1.move(board)
-        binding.pry
-        # return "1"
+        player = current_player # 1 or 2 (object, x or o)
+        current_move = player.move(@board) #this returns a string "1", which is what was entered by human
+        #  binding.pry
+          if board.valid_move?(current_move) # checks if "1" is a valid move choice, if so, updates the board
+            board.update(current_move, player)
+            puts "Player #{player.token} moved to #{current_move}:"
+            board.display
+            # current_player > is this not needed as a return?
+          else
+            turn #otherwise ask for input again
+         end
+      end
+
+      def play
+        player = current_player
+        if !over?
+          then player.move(board)
+           turn
+        end
       end
 
 end
