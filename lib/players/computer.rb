@@ -4,7 +4,7 @@ module Players
     def move(board)
       move = nil
 
-      if !.board.taken?(5)
+      if !board.taken?(5)
         move = "5"
 
       elsif  board.turn_count == 1
@@ -12,7 +12,6 @@ module Players
 
       elsif board.turn_count == 2
         move = [1, 2, 7, 9]
-
 
       end
 
