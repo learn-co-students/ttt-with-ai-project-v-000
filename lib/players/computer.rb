@@ -20,7 +20,7 @@ module Players
         elsif @board.position.taken?("5") #check if the existing 2 moves by opponents is in the winning combo
           current_position = [1..9].select {|a|@game.board.taken?(a.to_s)}
           current_position = current_position.collect {|a|a.to_s}
-          current_position = current_position.delete_if{|s|@game.board.positiion(s) == self.token} #current player's position index array
+          current_position = current_position.delete_if{|s|@game.board.positiion(s) == token} #current player's position index array
           Game::WIN_COMBINATIONS.detect do |cmb|
             if current_position.to_set.subset?(cmb.to_set) #opponent has 2 of the 3 winning positions - need to block
               a = cmb.detect {|a|!@game.board.taken?(a)}
@@ -29,8 +29,17 @@ module Players
             end
           end
         end
-
-
+      else # 4 moves and beyond: check if computer has winning move, if not, then check if opponent has winning move.
+        current_computer_array = [1..9].select {|a|@game.board.position(a.to_s) == token}
+        current_computer_array = current_computer_array.collect{|a|a.to_s}
+        current_opponent_array = [1..9].select {|a|@game.board.position(a.to_s) != token && @game.board.taken?(a.to_s)}
+        current_opponent_array = current_opponent_array.collect{|a|a.to_s}
+        Game::WIN_COMBINATIONS.detect do |cmb|
+          if current_computer_array.to_set.subset?(cmb.to_set) #opponent has 2 of the 3 winning positions - need to block
+            a = cmb.detect {|a|!@game.board.taken?(a)}
+          elsif current_opponent_array.to_set.subset?(cmb.to_set)
+            a = cmb.detect {|a|!@game.board.taken?(a)}
+          end
         end
       end
     end
