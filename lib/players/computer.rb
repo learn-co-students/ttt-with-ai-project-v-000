@@ -19,30 +19,17 @@ module Players
           a = "5"
         elsif @board.position.taken?("5") #check if the existing 2 moves by opponents is in the winning combo
           current_position = [1..9].select {|a|@game.board.taken?(a.to_s)}
+          current_position = current_position.collect {|a|a.to_s}
           current_position = current_position.delete_if{|s|@game.board.positiion(s) == self.token} #current player's position index array
           Game::WIN_COMBINATIONS.detect do |cmb|
             if current_position.to_set.subset?(cmb.to_set) #opponent has 2 of the 3 winning positions - need to block
-              a = cmb.detect {|a|}
+              a = cmb.detect {|a|!@game.board.taken?(a)}
+            else
+              a = ["1","3","7","9"].detect{|a|!@game.board.taken?(a)}
             end
           end
         end
-        index_array = [1..9].select {|a|@game.board.taken?(a.to_s) && @game.board.}
-        difference = index_array[1] - index_array[0]
-        if difference % 4 == 0 #if opponent's move is 2 positions diagonal to the left or right
-          new_index = index_array.min - 4
-          if @game.board.valid_move?(new_index.to_s)
-            a = new_index.to_s
-          end
-          new_index = index_array.max + 4
-          if @game.board.valid_move?(new_index.to_s)
-            a = new_index.to_s
-          end
-          a = ["1","3","7","9"][rand(0..3)] #in the case that opponent is not occupying a corner (next step will be to win)
-        elsif difference % 2 == 0
-          new_index = index_array.min - 2
-          if @game.board.valid_move?(new_index.to_s)
-            a = new_index.to_s
-          end
+
 
         end
       end
