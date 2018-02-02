@@ -64,9 +64,11 @@ class Game
   end
 
   def turn
+    @board.display
     index = current_player.move(@board)
     if @board.valid_move?(index)
       @board.update(index,current_player.token)
+      @board.display
     else
       turn
     end
@@ -81,6 +83,38 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
+  end
+
+  def self.start(input)
+    if input == "0"
+      new_game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"),Board.new)
+      new_game.play
+    elsif input == "1"
+      puts "Who would you like to go first? Enter A for human player, B for computer player."
+      input_2 = gets.strip
+      if input_2 == "A"
+        new_game = Game.new(Player::Human.new("X"), Player::Computer.new("O"),Board.new)
+        new_game.play
+      elsif input_2 == "B"
+        new_game = Game.new(Player::Computer.new("X"), Player::Human.new("O"),Board.new)
+        new_game.play
+      else
+        puts "Input not valid."
+      end
+    elsif input == "2"
+      new_game = Game.new
+      new_game.play
+    else
+      puts "Input not valid."
+    end
+
+    if new_game.over?
+       puts "Would you like to play again? Y/N"
+       input_3 = gets.strip
+       if input_3 == "Y"
+         new_game.play
+       end
+     end
   end
 
 
