@@ -62,4 +62,9 @@ class Game
       end
 
     end
+
+    def start
+      puts "Welcome to tic tac toe!"
+
+    end
 end
