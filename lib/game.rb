@@ -45,15 +45,17 @@ class Game
          @board.update(res, player)
          current_player
       else
+         puts "Invalid move! Try again, #{current_player.token}."
          turn
       end
    end
    
    def play
-      # turn while !over?
-      # binding.pry
+
       while !over?
+         puts "It's your move, #{current_player.token}!"
          turn
+         puts "#{@board.display}"
       end
       if draw?
          puts "Cat's Game!"
@@ -63,8 +65,25 @@ class Game
 
     end
 
-    def start
-      puts "Welcome to tic tac toe!"
+    
+    def endGame
+      puts "Would you like to play again? (y or n)"
+      answer = gets.chomp
+      if answer == "y"
+         @board.reset!
+         start
+      elsif answer == "n"
+         puts "Thanks for playing!"
+      elsif answer != "y" || answer != "n"
+         puts "Please enter y or n"
+         endGame
+      end
+   end
+   
+   def start
+     
+     play
+     endGame
+  end
 
-    end
 end

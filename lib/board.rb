@@ -2,7 +2,8 @@ require 'pry'
 class Board
    attr_accessor :cells
    def initialize
-      @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      @cells = []
+      reset!
    end
 
    def reset!

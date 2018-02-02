@@ -2,5 +2,62 @@
 # require 'pry'
 require_relative '../config/environment'
 
-game = Game.new
-game.start
+def zero_player_game
+end
+
+def one_player_game
+   p1 = "X"
+   p2 = "O"
+   puts "Who would you like to go first? (H for human, T for Terminator)."
+   answer = gets.chomp
+   if answer == "H"
+      game = Game.new(Players::Human.new(p1), Players::Computer.new(p2))
+      game.start
+   elsif answer == "T"
+      game = Game.new(Players::Human.new(p2), Players::Computer.new(p1))
+   elsif answer != "H" || "T"
+      puts "Invalid.  Let's try this again."
+      one_player_game
+   end
+      
+end
+
+def two_player_game
+   puts "Who would like to go first? (X or O)"
+   p1 = gets.chomp
+   p2 = ""
+   if p1 == "X"
+      p2 = "O"
+      game = Game.new
+      game.start
+   elsif p1 == "O"
+      p2 = "X"
+      game = Game.new(Players::Human.new(p1), Players::Human.new(p2))
+      game.start
+   elsif p1 != "X" || p1 != "X"
+      puts "Invalid.  Let's try this again."
+      two_player_game
+   end
+end
+
+
+
+
+
+puts "Welcome to tic tac toe!"
+puts "How many players? (0, 1, or 2)"
+playerNumber = gets.chomp
+
+if playerNumber == "0"
+   zero_player_game
+elsif playerNumber == "1"
+   one_player_game
+elsif playerNumber == "2"
+   two_player_game
+end
+
+
+
+
+
+
