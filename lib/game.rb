@@ -87,16 +87,16 @@ class Game
 
   def self.start(input)
     if input == "0"
-      new_game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"),Board.new)
+      new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
       new_game.play
     elsif input == "1"
       puts "Who would you like to go first? Enter A for human player, B for computer player."
       input_2 = gets.strip
       if input_2 == "A"
-        new_game = Game.new(Player::Human.new("X"), Player::Computer.new("O"),Board.new)
+        new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"),Board.new)
         new_game.play
       elsif input_2 == "B"
-        new_game = Game.new(Player::Computer.new("X"), Player::Human.new("O"),Board.new)
+        new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"),Board.new)
         new_game.play
       else
         puts "Input not valid."
