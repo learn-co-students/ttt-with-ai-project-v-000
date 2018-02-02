@@ -1,6 +1,6 @@
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2, :cells, :token
+  attr_accessor :board, :player_1, :player_2, :cells
   include Players  
   
   @board = []
@@ -62,13 +62,22 @@ class Game
       current_player.move(@board) 
     end 
     @board.update(move, current_player)
+    @board.display
+
   end 
   
   def play
-    turn
-    over?
+    @board.display
+    turn until over?
+    puts "Congratulations #{winner}!" if won? 
+    puts "Cat's Game!" if draw? 
     
   end 
-
+  
+  def start
+    puts "Welcome to TTT"
+    puts "Select number of players:" 
+    input = gets.strip
+  end 
   
 end
