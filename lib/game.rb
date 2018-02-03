@@ -30,7 +30,7 @@ WIN_COMBINATIONS = [
   end
 
   def over?
-    @board.turn_count == 9
+    draw? || won?
   end
 
   def won?
@@ -42,10 +42,11 @@ WIN_COMBINATIONS = [
   end
 
   def draw?
-    !won? && over?
+    !won? && @board.turn_count == 9
   end
 
   def winner
+    @board.cells.won?[0]
   end
 
   #Managing a game
