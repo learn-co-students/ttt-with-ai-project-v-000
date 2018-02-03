@@ -47,7 +47,6 @@ class Board
     individual_position.to_i.between?(1, 9)
   end
 
-
   def reset!
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
