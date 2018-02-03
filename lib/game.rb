@@ -16,10 +16,6 @@ class Game
     [6,4,2]
   ]
 
-  def start
-
-  end
-
   def current_player
     @board.turn_count % 2 == 0 ? player_1 : player_2
   end
@@ -76,6 +72,7 @@ class Game
       @board.display
       puts "Congratulations #{winner}!"
     elsif draw?
+      @board.display
       puts "Cat's Game!"
     end
   end
