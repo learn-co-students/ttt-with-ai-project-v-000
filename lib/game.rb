@@ -47,8 +47,7 @@ class Game
   end
 
   def turn
-    #2 player mode
-    if @player_1.class == Players::Human && @player_2.class == Players::Human
+    @board.display
       if current_player == player_1
         #call Player.move
         input = @player_1.move(@board)
@@ -67,7 +66,6 @@ class Game
           turn
         end
       end
-    end
   end
 
   def play
@@ -75,7 +73,7 @@ class Game
       turn
     end
     if won?
-      #winner = winner(@board)
+      @board.display
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"

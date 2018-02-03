@@ -6,7 +6,7 @@ module Players
     # end
 
     def move(board)
-      puts "Please enter your move, 1-9: "
+      puts "(#{self.token}), Please enter your move, 1-9: "
       input = gets.chomp
     end
 
