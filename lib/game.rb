@@ -59,10 +59,15 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    binding.pry
-    puts "Please enter your move!"
-    move = gets.strip
-    #@board.valid_move?(input)
+    @player_1.move(@board)
+    if !@board.valid_move?(@player_1.move(@board))
+      @player_1.move(@board)
+    else
+      @player_2.move(@board)
+      if !@board.valid_move?(@player_1.move(@board))
+        @player_1.move(@board)
+      end
+    end
   end
 
 
