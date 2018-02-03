@@ -37,7 +37,7 @@ WIN_COMBINATIONS = [
     WIN_COMBINATIONS.detect do |combination|
       @board.cells[combination[0]] == @board.cells[combination[1]] &&
       @board.cells[combination[1]] == @board.cells[combination[2]] &&
-      @board.cells[combination[0]] != 0
+      @board.cells[combination[0]] != " "
     end
   end
 
@@ -46,7 +46,9 @@ WIN_COMBINATIONS = [
   end
 
   def winner
-    @board.cells.won?[0]
+    if over? && !draw?
+      @board.cells[won?[0]]
+    end
   end
 
   #Managing a game
@@ -57,6 +59,10 @@ WIN_COMBINATIONS = [
   end
 
   def turn
+    binding.pry
+    puts "Please enter your move!"
+    move = gets.strip
+    #@board.valid_move?(input)
   end
 
 
