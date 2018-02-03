@@ -22,14 +22,27 @@ WIN_COMBINATIONS = [
 
   #State of the current game
   def current_player
-    if @board.turn_count.odd?
+    if @board.turn_count.even?
       @player_1
     else
       @player_2
     end
   end
 
+  def over?
+    @board.turn_count == 9
+  end
+
   def won?
+    WIN_COMBINATIONS.detect do |combination|
+      @board.cells[combination[0]] == @board.cells[combination[1]] &&
+      @board.cells[combination[1]] == @board.cells[combination[2]] &&
+      @board.cells[combination[0]] != 0
+    end
+  end
+
+  def draw?
+    !won? && over?
   end
 
   def winner

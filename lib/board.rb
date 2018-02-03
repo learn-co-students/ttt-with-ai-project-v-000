@@ -29,7 +29,7 @@ class Board
   end
 
   def turn_count
-    counter = 1
+    counter = 0
     @cells.each do |cell|
       if cell != " "
         counter += 1
