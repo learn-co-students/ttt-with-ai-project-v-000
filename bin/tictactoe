@@ -3,6 +3,8 @@
 require_relative '../config/environment'
 
 def zero_player_game
+   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+   game.play
 end
 
 def one_player_game
@@ -12,9 +14,10 @@ def one_player_game
    answer = gets.chomp
    if answer == "H"
       game = Game.new(Players::Human.new(p1), Players::Computer.new(p2))
-      game.start
+      game.play
    elsif answer == "T"
-      game = Game.new(Players::Human.new(p2), Players::Computer.new(p1))
+      game = Game.new(Players::Computer.new(p2), Players::Human.new(p1))
+      game.play
    elsif answer != "H" || "T"
       puts "Invalid.  Let's try this again."
       one_player_game
@@ -29,11 +32,11 @@ def two_player_game
    if p1 == "X"
       p2 = "O"
       game = Game.new
-      game.start
+      game.play
    elsif p1 == "O"
       p2 = "X"
       game = Game.new(Players::Human.new(p1), Players::Human.new(p2))
-      game.start
+      game.play
    elsif p1 != "X" || p1 != "X"
       puts "Invalid.  Let's try this again."
       two_player_game
@@ -43,18 +46,32 @@ end
 
 
 
+def welcome_screen
+   puts "Welcome to tic tac toe!"
+   puts "How many players? (0, 1, or 2)"
+   playerNumber = gets.chomp
 
-puts "Welcome to tic tac toe!"
-puts "How many players? (0, 1, or 2)"
-playerNumber = gets.chomp
-
-if playerNumber == "0"
-   zero_player_game
-elsif playerNumber == "1"
-   one_player_game
-elsif playerNumber == "2"
-   two_player_game
+   if playerNumber == "0"
+      zero_player_game
+   elsif playerNumber == "1"
+      one_player_game
+   elsif playerNumber == "2"
+      two_player_game
+   end      
+   puts "Would you like to play again? (y or n)"
+   answer = gets.chomp
+   if answer == "y"
+      welcome_screen
+   elsif answer == "n"
+      puts "Thanks for playing!"
+   elsif answer != "y" || answer != "n"
+      puts "Please enter y or n"
+   end
 end
+
+welcome_screen
+
+
 
 
 

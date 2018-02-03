@@ -37,7 +37,6 @@ class Game
        end
    end
 
-   #look here for potential bug
    def turn
       player = current_player
       res = player.move(@board)
@@ -59,31 +58,31 @@ class Game
       end
       if draw?
          puts "Cat's Game!"
+         @board.reset!
       elsif won?
          puts "Congratulations #{winner}!"
+         @board.reset!
       end
 
     end
 
     
-    def endGame
-      puts "Would you like to play again? (y or n)"
-      answer = gets.chomp
-      if answer == "y"
-         @board.reset!
-         start
-      elsif answer == "n"
-         puts "Thanks for playing!"
-      elsif answer != "y" || answer != "n"
-         puts "Please enter y or n"
-         endGame
-      end
-   end
+   #  def endGame
+   #    puts "Would you like to play again? (y or n)"
+   #    answer = gets.chomp
+   #    if answer == "y"
+   #       start
+   #    elsif answer == "n"
+   #       puts "Thanks for playing!"
+   #    elsif answer != "y" || answer != "n"
+   #       puts "Please enter y or n"
+   #       endGame
+   #    end
+   # end
    
-   def start
-     
-     play
-     endGame
-  end
+#    def start
+#      play
+#      endGame
+#   end
 
 end
