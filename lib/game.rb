@@ -59,9 +59,10 @@ WIN_COMBINATIONS = [
   def turn
     move_location = current_player.move(@board)
       if !@board.valid_move?(move_location)
-        current_player.move(@board)
+        move_location = current_player.move(@board)
       end
     @board.update(move_location, current_player)
+    @board.display
   end
 
   def play
