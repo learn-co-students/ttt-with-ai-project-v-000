@@ -30,7 +30,7 @@ class Board
   end
   
   def turn_count
-    self.cells.count {|x| x == "X" || x == "O" }
+    cells.count {|x| x == "X" || x == "O" }
   end 
   
   def taken?(input)

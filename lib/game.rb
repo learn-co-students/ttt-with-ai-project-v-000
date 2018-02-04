@@ -55,6 +55,7 @@ class Game
   end 
   
   def turn
+    @board.display
     move = current_player.move(@board)
     if @board.valid_move?(move)
       move
@@ -62,22 +63,14 @@ class Game
       current_player.move(@board) 
     end 
     @board.update(move, current_player)
-    @board.display
 
   end 
   
   def play
-    @board.display
     turn until over?
     puts "Congratulations #{winner}!" if won? 
     puts "Cat's Game!" if draw? 
-    
   end 
   
-  def start
-    puts "Welcome to TTT"
-    puts "Select number of players:" 
-    input = gets.strip
-  end 
   
 end
