@@ -65,12 +65,15 @@ WIN_COMBINATIONS = [
   end
 
   def play
-    binding.pry
+    #binding.pry
     while !over?
       turn
-      if draw?
-        puts "Cat's Game!"
-      else won?
+    end
+
+    if draw?
+      puts "Cat's Game!"
+    else
+      if won? != nil
         puts "Congratulations #{winner}!"
       end
     end
@@ -79,3 +82,14 @@ WIN_COMBINATIONS = [
 
 
 end
+
+# while !over?
+#   turn
+#   if draw?
+#     puts "Cat's Game!"
+#   else
+#     if won? != nil
+#       puts "Congratulations #{winner}!"
+#     end
+#   end
+# end
