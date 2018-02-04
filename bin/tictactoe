@@ -12,20 +12,16 @@ number_of_players = gets.strip
 
 if number_of_players == "0"
   Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-
 elsif number_of_players == "1"
-
-  until like_to_be_first_and_x != "yes" || like_to_be_first_and_x != "no"
+  until like_to_be_first_and_x == "yes" || like_to_be_first_and_x == "no"
     puts "Would you like to go first and be 'X'?('yes' or 'no')"
     like_to_be_first_and_x = gets.strip
   end
-
-  if like_to_be_first_and_x == "yes"
-    Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-  elsif like_to_be_first_and_x == "no"
-    Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
-  end
-
+      if like_to_be_first_and_x == "yes"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif like_to_be_first_and_x == "no"
+        Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      end
 elsif number_of_players == "2"
     Game.new(Players::Human.new("X"), Players::Human.new("O")).play
 end
