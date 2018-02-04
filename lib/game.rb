@@ -104,6 +104,8 @@ class Game
           # If 2, ask for input using Human every turn
       if input == "2" #ONLY WORKS FIRST TIME IT IS ENTERED / CASE??
         two_player
+      elsif input == "1"
+        one_player
       else
         puts "Please enter 0 for a computer match, 1 for 1-player, and 2 for 2-player:"
         input = gets.strip
@@ -117,11 +119,23 @@ class Game
     end
 
     def one_player
+      input = ""
       puts "~~~~~~"
+      while input != "human" || "computer"
       puts "Choose who will go first and be X. Please enter 'human' or 'computer':"
-        #if human >  game = Game.new(player_2 = Players::Computer.new("O"))
-        #if computer > game = Game.new(player_1 = Players::Computer.new("X"))
 
+        input = gets.strip
+        case input
+        when "human"
+          game = Game.new(player_2 = Players::Computer.new("O"))
+          play
+          new_game?
+        when "computer"
+          game = Game.new(player_1 = Players::Computer.new("X"))
+          play
+          new_game?
+        end
+      end
 
     end
 
@@ -130,30 +144,24 @@ class Game
       puts "Decide who is going first. They will be playing for X." #they can choose a number, will be rand. generated, to decide who is first
       game = Game.new
       play
-      input = ""
-      while input != "yes" || "no"
-        puts "Do you want to play again? Enter 'yes' or 'no'."
-
-        input = gets.strip
-        case input
-        when "yes"
-          board.reset! #make sure to refresh the board first!
-          start
-        when "no"
-          exit
-        end
+      new_game?
       end
-    #   ask = "Do you want to play again? If yes, enter 'yes', otherwise enter 'no'." #can I do this?
-    #   input = gets.strip
-    #   if input == "yes" #NOT WORKING
-    #     board.reset!
-    #     start #start the method again from the top, doesn't reset board!!
-    #   elsif input == "no"
-    #     exit
-    #   else
-    #     puts "#{ask}" # NOT WORKING, extra space and then quits game
-    #   end
      end
+
+     def new_game? #separate method to reduce space in method above!
+       input = ""
+       while input != "yes" || "no"
+         puts "Do you want to play again? Enter 'yes' or 'no'." #can this line be equal to a variable?
+
+         input = gets.strip
+         case input
+         when "yes"
+           board.reset! #make sure to refresh the board first!
+           start
+         when "no"
+           exit
+         end
+       end
 
 end
 
