@@ -53,9 +53,7 @@ WIN_COMBINATIONS = [
 
   #Managing a game
   def start
-  end
 
-  def play
   end
 
   def turn
@@ -67,7 +65,15 @@ WIN_COMBINATIONS = [
   end
 
   def play
-
+    binding.pry
+    while !over?
+      turn
+      if draw?
+        puts "Cat's Game!"
+      else won?
+        puts "Congratulations #{winner}!"
+      end
+    end
   end
 
 
