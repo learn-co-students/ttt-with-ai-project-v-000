@@ -2,14 +2,28 @@
 
 require_relative '../config/environment'
 
+puts "Welcome to Tic Tac Toe!" 
+sleep(1.5) 
+puts "Please select desired game mode:" 
+sleep(1.5) 
+puts "Please type (p) for player vs. player." 
+sleep(1.5) 
+puts "Please type (c) player vs. computer."
+sleep(1.5)
+puts "Please type (d) for demo mode."
+sleep(1.5)
+print "Please make your selection: "
+play_mode = gets.strip 
 
+if play_mode == "p" 
+  ng = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  elsif play_mode == "c"
+  ng = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  else 
+  puts "I'm still working on that one! bye!!!!"
+  end 
 
-
-
-
-ng = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new) 
-
-ng.start 
+ng.play
 
 
 
