@@ -63,8 +63,12 @@ WIN_COMBINATIONS = [
       if !@board.valid_move?(move_location)
         current_player.move(@board)
       end
+    @board.update(move_location, current_player)
   end
 
+  def play
+
+  end
 
 
 
