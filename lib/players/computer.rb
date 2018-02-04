@@ -2,10 +2,8 @@ module Players
   class Computer < Player
 
     def move(board)
-      if board.valid_move?("4")
-          "4"
     #Top row, prevent win
-      elsif board.cells[0] != self.token && board.cells[0] != " " && board.cells[1] != self.token && board.cells[1] != " "
+      if board.cells[0] != self.token && board.cells[0] != " " && board.cells[1] != self.token && board.cells[1] != " "
           "2"
       elsif board.cells[1] != self.token && board.cells[1] != " " && board.cells[2] != self.token && board.cells[2] != " "
           "0"
@@ -60,9 +58,24 @@ module Players
           "2"
       elsif board.cells[2] != self.token && board.cells[2] != " " && board.cells[8] != self.token && board.cells[8] != " "
           "5"
-
-
-
+      elsif board.valid_move?("4")
+         "4"
+      elsif board.valid_move?("0")
+         "0"
+      elsif board.valid_move?("2")
+         "2"
+      elsif board.valid_move?("6")
+         "6"
+      elsif board.valid_move?("8")
+         "8"
+      elsif board.valid_move?("1")
+         "1"
+      elsif board.valid_move?("3")
+         "3"
+      elsif board.valid_move?("5")
+         "5"
+      elsif board.valid_move?("7")
+         "7"
 
       end
     end
@@ -70,23 +83,3 @@ module Players
   end
 
 end
-
-# if board.valid_move?("4")
-#    "4"
-# elsif board.valid_move?("0")
-#    "0"
-# elsif board.valid_move?("2")
-#    "2"
-# elsif board.valid_move?("6")
-#    "6"
-# elsif board.valid_move?("8")
-#    "8"
-# elsif board.valid_move?("1")
-#    "1"
-# elsif board.valid_move?("3")
-#    "3"
-# elsif board.valid_move?("5")
-#    "5"
-# elsif board.valid_move?("7")
-#    "7"
-# end
