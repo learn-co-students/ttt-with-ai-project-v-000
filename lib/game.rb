@@ -69,7 +69,7 @@ class Game
         current_move = player.move(@board) #this returns a string "1", which is what was entered by human
           if board.valid_move?(current_move) # checks if "1" is a valid move choice, if so, updates the board
             board.update(current_move, player)
-            puts "Player #{player.token} moved to #{current_move}:"
+            puts "Player #{player.token} moved to spot #{current_move}:"
             board.display
             # current_player > is this not needed as a return?
           else
@@ -94,16 +94,20 @@ class Game
     def start #evoke this in bin/tictactoe
       # 1. Greet user
       puts "Welcome to Tic Tac Toe! The fight to the death between X and O."
-      puts "------"
+      puts "~~~~~~"
       # 2. Ask if they want 0, 1, or 2 player
       puts "Please enter 0 for a computer match, 1 for 1-player, and 2 for 2-player:"
       input = gets.strip
       # 3. Ask who is going first, they will be X
-      puts "Choose who is going first! They will be playing for X." #they can choose a number, will be rand. generated, to decide who is first
           # If 0, then.... computer simulation
           # If 1, use Human and Computer classes to play
           # If 2, ask for input using Human every turn
-
+      if input == "2" #ONLY WORKS FIRST TIME IT IS ENTERED / CASE??
+        two_player
+      else
+        puts "Please enter 0 for a computer match, 1 for 1-player, and 2 for 2-player:"
+        input = gets.strip
+      end
       # 4. Initialize game with player 1 and play through the Game
 
       # 5. When over, ask if they want to play again, otherwise exit
@@ -113,20 +117,45 @@ class Game
     end
 
     def one_player
+      puts "~~~~~~"
+      puts "Choose who will go first and be X. Please enter 'human' or 'computer':"
+        #if human >  game = Game.new(player_2 = Players::Computer.new("O"))
+        #if computer > game = Game.new(player_1 = Players::Computer.new("X"))
+
+
     end
 
     def two_player
-      game = Game.new #create new game instance
-      play #asks for number input of where to move
-      ask = puts "Do you want to play again? If yes, enter 'yes', otherwise enter 'no'." #can I do this?
-      input = gets.strip
-      if input == "yes"
-        two_player #start the method again from the top, might be a better way of doin this
-      elsif input == "no"
-        exit #how to exit the game?
-      else
-        ask
+      puts "~~~~~~"
+      puts "Decide who is going first. They will be playing for X." #they can choose a number, will be rand. generated, to decide who is first
+      game = Game.new
+      play
+      input = ""
+      while input != "yes" || "no"
+        puts "Do you want to play again? Enter 'yes' or 'no'."
+
+        input = gets.strip
+        case input
+        when "yes"
+          board.reset! #make sure to refresh the board first!
+          start
+        when "no"
+          exit
+        end
       end
-    end
+    #   ask = "Do you want to play again? If yes, enter 'yes', otherwise enter 'no'." #can I do this?
+    #   input = gets.strip
+    #   if input == "yes" #NOT WORKING
+    #     board.reset!
+    #     start #start the method again from the top, doesn't reset board!!
+    #   elsif input == "no"
+    #     exit
+    #   else
+    #     puts "#{ask}" # NOT WORKING, extra space and then quits game
+    #   end
+     end
 
 end
+
+
+# //Notes:
