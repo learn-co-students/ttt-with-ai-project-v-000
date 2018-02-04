@@ -30,3 +30,12 @@ end
 
 
 game.play
+
+puts "Would you like to replay? (y/n)"
+input = gets.chomp
+until input.upcase != "Y"
+  game.board.reset!
+  game.play
+  puts "Would you like to replay? (y/n)"
+  input = gets.chomp
+end
