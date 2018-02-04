@@ -118,20 +118,22 @@ class Game
     def computer_game
     end
 
-    def one_player
+    def one_player #plays like normal game!
       input = ""
       puts "~~~~~~"
       while input != "human" || "computer"
       puts "Choose who will go first and be X. Please enter 'human' or 'computer':"
 
         input = gets.strip
+        # binding.pry
+
         case input
         when "human"
-          game = Game.new(player_2 = Players::Computer.new("O"))
+          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
           play
           new_game?
         when "computer"
-          game = Game.new(player_1 = Players::Computer.new("X"))
+          game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
           play
           new_game?
         end
