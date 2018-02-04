@@ -82,14 +82,3 @@ WIN_COMBINATIONS = [
 
 
 end
-
-# while !over?
-#   turn
-#   if draw?
-#     puts "Cat's Game!"
-#   else
-#     if won? != nil
-#       puts "Congratulations #{winner}!"
-#     end
-#   end
-# end
