@@ -36,10 +36,15 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |combo|
+    win_combo = WIN_COMBINATIONS.detect do |combo|
        @board.cells[combo[0]] == @board.cells[combo[1]] &&
        @board.cells[combo[1]] == @board.cells[combo[2]] &&
        @board.taken?(combo[0]+1)
+     end
+     if win_combo == nil
+       false
+     else
+       win_combo
      end
   end
 
