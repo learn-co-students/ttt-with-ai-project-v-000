@@ -6,7 +6,7 @@ module Players
     end
 
       def move(board)
-        puts "Computer is making a move."
+        puts "Computer is making a move..."
         n = random_num #pick a random number
         # binding.pry
         if board.valid_move?(n) #check that it is a valid move (position)

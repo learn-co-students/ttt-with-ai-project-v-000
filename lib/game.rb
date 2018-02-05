@@ -138,15 +138,10 @@ class Game
           # play
           new_game?
         when "computer"
-          # player_2 = Players::Human.new("X")
-          # player_1 = Players::Computer.new("O")
-          # game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-          Game.new(Players::Computer.new("O"), Players::Human.new("X")).play
-          # play
+          Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
           new_game?
         end
       end
-
     end
 
     def two_player
@@ -154,7 +149,6 @@ class Game
       puts "Decide who is going first. They will be playing for X." #they can choose a number, will be rand. generated, to decide who is first
       Game.new.play
       new_game?
-      end
      end
 
      def new_game? #separate method to reduce space in method above!
@@ -171,8 +165,6 @@ class Game
            exit
          end
        end
+    end
 
-end
-
-
-# //Notes:
+  end
