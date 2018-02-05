@@ -50,9 +50,9 @@ class Board
     index.to_i.between?(1,9) && !self.taken?(index)
   end
 
-  def update(index, value)
+  def update(index, player)
     index = index.to_i - 1
-    @cells[index]= value
+    @cells[index]= player.token
   end
 
 end

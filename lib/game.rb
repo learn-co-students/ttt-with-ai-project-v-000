@@ -56,21 +56,22 @@ class Game
   end
 
   def winner
-    if !over? || draw?
-      return nil
-    elsif combo = won?
-      @board.position(combo.first)
+    # if !over? || draw?
+    #   return nil
+    # elsif
+    if combo = won?
+      @board.cells[combo.first]
     end
   end
 
   def turn
     @board.display
     index = current_player.move(@board)
-    if @board.valid_move?(index)
-      @board.update(index,current_player.token)
-      @board.display
-    else
+    if !@board.valid_move?(index)
       turn
+    else
+      @board.update(index,current_player)
+      @board.display
     end
   end
 
@@ -112,6 +113,7 @@ class Game
        puts "Would you like to play again? Y/N"
        input_3 = gets.strip
        if input_3 == "Y"
+         new_game = Game.new
          new_game.play
        end
      end
