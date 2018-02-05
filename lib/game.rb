@@ -91,7 +91,7 @@ class Game
 
 
 
-### CLI
+###### CLI  #######
     def start #evoke this in bin/tictactoe
       # 1. Greet user
       puts "Welcome to Tic Tac Toe! The fight to the death between X and O."
@@ -103,7 +103,7 @@ class Game
           # If 0, then.... computer simulation
           # If 1, use Human and Computer classes to play
           # If 2, ask for input using Human every turn
-      if input == "2" #ONLY WORKS FIRST TIME IT IS ENTERED / CASE??
+      if input == "2"
         two_player
       elsif input == "1"
         one_player
@@ -113,15 +113,14 @@ class Game
         puts "Please enter 0 for a computer match, 1 for 1-player, and 2 for 2-player:"
         input = gets.strip
       end
-      # 4. Initialize game with player 1 and play through the Game
-
-      # 5. When over, ask if they want to play again, otherwise exit
     end
 
-    def computer_game
+    def computer_game # code so computer never lets you win??
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+      new_game?
     end
 
-    def one_player #plays like normal game! doesn't make first move for computer
+    def one_player 
       input = ""
       puts "~~~~~~"
       while input != "human" || input != "computer"
@@ -151,10 +150,10 @@ class Game
       new_game?
      end
 
-     def new_game? #separate method to reduce space in method above!
+     def new_game?
        input = ""
        while input != "yes" || input != "no"
-         puts "Do you want to play again? Enter 'yes' or 'no'." #can this line be equal to a variable?
+         puts "Do you want to play again? Enter 'yes' or 'no'."
 
          input = gets.strip
          case input

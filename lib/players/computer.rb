@@ -8,13 +8,11 @@ module Players
       def move(board)
         puts "Computer is making a move..."
         n = random_num #pick a random number
-        # binding.pry
         if board.valid_move?(n) #check that it is a valid move (position)
            n #return the valid position
          else
            random_num
         end
-      # figure out to find a valid move for the computer (1-9)
       end
 
     end
