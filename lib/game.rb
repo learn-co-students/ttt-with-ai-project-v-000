@@ -4,7 +4,6 @@ class Game
   attr_accessor :board, :player_1, :player_2
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  # def initialize
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -78,7 +77,7 @@ class Game
       end
 
       def play
-        player = current_player #sets player to current player (1 or 2)
+        # player = current_player #sets player to current player (1 or 2)
         until over?
           # then player.move(board) # user will be asked for input
            turn
@@ -91,6 +90,8 @@ class Game
     end
 
 
+
+### CLI
     def start #evoke this in bin/tictactoe
       # 1. Greet user
       puts "Welcome to Tic Tac Toe! The fight to the death between X and O."
@@ -106,6 +107,8 @@ class Game
         two_player
       elsif input == "1"
         one_player
+      elsif input == "0"
+        computer_game
       else
         puts "Please enter 0 for a computer match, 1 for 1-player, and 2 for 2-player:"
         input = gets.strip
@@ -118,23 +121,28 @@ class Game
     def computer_game
     end
 
-    def one_player #plays like normal game!
+    def one_player #plays like normal game! doesn't make first move for computer
       input = ""
       puts "~~~~~~"
-      while input != "human" || "computer"
+      while input != "human" || input != "computer"
       puts "Choose who will go first and be X. Please enter 'human' or 'computer':"
 
         input = gets.strip
-        # binding.pry
 
         case input
         when "human"
-          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
-          play
+          # player_1 = Players::Human.new("X")
+          # player_2 = Players::Computer.new("O")
+          # game = Game.new(player_1, player_2) >>This was creating a new game but not actually playing on it!
+          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+          # play
           new_game?
         when "computer"
-          game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-          play
+          # player_2 = Players::Human.new("X")
+          # player_1 = Players::Computer.new("O")
+          # game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+          Game.new(Players::Computer.new("O"), Players::Human.new("X")).play
+          # play
           new_game?
         end
       end
@@ -144,15 +152,14 @@ class Game
     def two_player
       puts "~~~~~~"
       puts "Decide who is going first. They will be playing for X." #they can choose a number, will be rand. generated, to decide who is first
-      game = Game.new
-      play
+      Game.new.play
       new_game?
       end
      end
 
      def new_game? #separate method to reduce space in method above!
        input = ""
-       while input != "yes" || "no"
+       while input != "yes" || input != "no"
          puts "Do you want to play again? Enter 'yes' or 'no'." #can this line be equal to a variable?
 
          input = gets.strip
