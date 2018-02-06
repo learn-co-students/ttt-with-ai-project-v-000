@@ -48,7 +48,7 @@ module Players
           a+=1
           board.position(a.to_s) != token && board.taken?(a.to_s)
         end
-        c_cmb = Game::WIN_COMBINATIONS.detect {|cmb| current_computer_array.to_set.subset?(cmb.to_set) && } #first check if computer has winning chance
+        c_cmb = Game::WIN_COMBINATIONS.detect {|cmb| current_computer_array.to_set.subset?(cmb.to_set)} #first check if computer has winning chance
         o_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_opponent_array.to_set.subset?(cmb.to_set)} #second check if opponent has winning chance, if yes then block
         if c_cmb != nil #if computer winning combo is occupied
           t_1 = c_cmb.any? do |c| #check if computer can win (is there unoccupied cells in the winning combo?)
