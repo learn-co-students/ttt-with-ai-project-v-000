@@ -48,33 +48,35 @@ module Players
           a+=1
           board.position(a.to_s) != token && board.taken?(a.to_s)
         end
-        c_cmb = Game::WIN_COMBINATIONS.detect {|cmb| current_computer_array.to_set.subset?(cmb.to_set)} #first check if computer has winning chance
-        o_cmb = Game::WIN_COMBINATIONS.detect {|cmb| current_opponent_array.to_set.subset?(cmb.to_set)} #second check if opponent has winning chance, if yes then block
-        if c_cmb != nil #if computer winning combo is occupied
-          t_1 = c_cmb.any? do |c| #check if computer can win (is there unoccupied cells in the winning combo?)
-            d = c+1
-            !board.taken?(d.to_s)
-          end
-          if t_1 #if there is, make winning move
-            m = c_cmb.detect do |i|
+        c_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_computer_array.to_set.subset?(cmb.to_set)}
+        o_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_opponent_array.to_set.subset?(cmb.to_set)}
+        if c_cmb != nil #first check if computer has winning chance
+           c_win = c_cmb.detect do |c| #check if computer can win (is there a winning combo occupied that has vacant cells?)
+             c.any? do |c1|
+               c2 = c1 + 1
+               !board.taken?(c2.to_s)
+             end
+           end
+           if c_win != nil
+             m = c_win.detect do |i|
+               h= i +1
+               !board.taken?(h.to_s)
+             end
+             m += 1
+             m.to_s
+          elsif o _cmb != nil
+            o_win = o_cmb.detect do |o| #check if computer can win (is there a winning combo occupied that has vacant cells?)
+              o.any? do |o1|
+                o2 = o1 + 1
+                !board.taken?(o2.to_s)
+              end
+            end
+            m = o_win.detect do |i|
               h= i +1
               !board.taken?(h.to_s)
             end
             m += 1
             m.to_s
-          elsif o_cmb != nil #if there isn't, check if opponent has winning move
-            t_2 = o_cmb.any? do |o|
-              p = o + 1
-              !board.taken?(p.to_s)
-            end
-            if t_2 #block opponent winning move
-              m = o_cmb.detect do |i|
-                h = i+1
-                !board.taken?(h.to_s)
-              end
-              m += 1
-              m.to_s
-            end
           else #if neither has winning move, occupy a random available cell and move on to next turn
             un_array = all_array.select do |a|
               a+=1
