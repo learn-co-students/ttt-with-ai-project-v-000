@@ -2,44 +2,49 @@ module Players
   
   class Computer < Player
     
+    CORNERS = ["1","3","7","9"]
+    EDGES   = ["2","4","6","8"]
+    
     WIN_COMBINATIONS = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8],
-      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-      [0, 4, 8], [2, 4, 6]
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], # row
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], # col
+      [0, 4, 8], [2, 4, 6]             # diag
       ]
     
     def move(board)
       
-      pos = board.positions(self)
+      # logic below leaves simulator vulnerable to "forking"
+      
+      # grab board positions for self and opponent
+      pos = board.positions(self.token)
       opp_token = ( self.token=="X" ? "O" : "X" )
-      opp = board.cells.collect.with_index{|tok,i| i if tok==opp_token}.compact
+      opp = board.positions(opp_token)
       
-      #0.(a) opening move
+      # opening move (random corner)
       if ( pos.empty? && opp.empty? )
-        return ( ["1","3","5","7","9"][rand(0..4)] )
+        return ( CORNERS[rand(0..3)] )
       end
       
-      #0.(b) opening response
+      # opening response (center or random corner)
       if ( pos.empty? && opp.size==1 )
-        return ( opp[0]==4 ? ["1","3","7","9"][rand(0..3)] : "5" )
+        return ( opp[0]==4 ? CORNERS[rand(0..3)] : "5" )
       end
       
-      #1. obtain tic-tac-toe
+      # winning move for tic-tac-toe
       mov = WIN_COMBINATIONS.select{|win| win-pos if (win-pos).size==1}.flatten
-      mov.each{|i| return (i+1).to_s if board.valid_move?((i+1).to_s)} if !mov.empty?
+      unless mov.empty?
+        mov.each{|i| return (i+1).to_s if board.valid_move?((i+1).to_s)}
+      end
       
-      #2. prevent tic-tac-toe
+      # block opponent's tic-tac-toe
       blk = WIN_COMBINATIONS.select{|win| win-opp if (win-opp).size==1}.flatten
-      blk.each{|i| return (i+1).to_s if board.valid_move?((i+1).to_s)} if !blk.empty?
+      unless blk.empty?
+        blk.each{|i| return (i+1).to_s if board.valid_move?((i+1).to_s)}
+      end
       
-      #3. corners
-      ["1","3","7","9"].shuffle.each{|s| return s if board.valid_move?(s)}
-      
-      #4. center
-      return "5" if board.valid_move?("5")
-      
-      #5. rand
-      rand(1..9).to_s
+      # prioritize center then corners then edges
+      priority_arr = ["5"] + CORNERS.shuffle + EDGES.shuffle
+      priority_arr.each{|s| return s if board.valid_move?(s)}
       
     end
   end

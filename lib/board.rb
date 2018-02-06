@@ -29,8 +29,8 @@ class Board
     @cells[usr_input.to_i-1]
   end
   
-  def positions(player)
-    @cells.collect.with_index{|tok,i| i if tok==player.token}.compact
+  def positions(token)
+    @cells.collect.with_index{|tok,i| i if tok==token}.compact
   end
   
   def taken?(usr_input)
@@ -41,7 +41,7 @@ class Board
     @cells.count{|c| ["X","O"].include?(c)}
   end
   
-  def update(usr_input,player)
+  def update(usr_input, player)
     @cells[usr_input.to_i-1] = player.token
   end
   

@@ -2,9 +2,9 @@ class Game
   attr_accessor :player_1, :player_2, :board
   
   WIN_COMBINATIONS = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8],
-    [0, 3, 6], [1, 4, 7], [2, 5, 8],
-    [0, 4, 8], [2, 4, 6]
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], # row
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], # col
+    [0, 4, 8], [2, 4, 6]             # diag
     ]
   
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
@@ -17,10 +17,6 @@ class Game
     board.turn_count.even? ? player_1 : player_2
   end
   
-  def divide_turns
-    puts "\n=================================\n\n"
-  end
-  
   def draw?
     board.full? && !won?
   end
@@ -31,7 +27,7 @@ class Game
   
   def play
     until over?
-      divide_turns
+      turn_divider
       turn
     end
     puts
@@ -85,15 +81,21 @@ class Game
     board.display
   end
   
+  def turn_divider
+    puts
+    puts "================================="
+    puts
+  end
+  
   def winner
     if won?
-      (won?-board.positions(player_1)).empty? ? player_1.token : player_2.token
+      (won?-board.positions(player_1.token)).empty? ? player_1.token : player_2.token
     end
   end
   
   def won?
-    p1 = board.positions(player_1)
-    p2 = board.positions(player_2)
+    p1 = board.positions(player_1.token)
+    p2 = board.positions(player_2.token)
     win = WIN_COMBINATIONS.select do |win|
       win if ( (win-p1).empty? || (win-p2).empty? )
     end
