@@ -79,11 +79,7 @@ class Game
   def turn
     usr_input = nil
     until board.valid_move?(usr_input)
-      if current_player.class == Players::Computer
-        usr_input = current_player.move(board,current_player)
-      else
-        usr_input = current_player.move(board)
-      end
+      usr_input = current_player.move(board)
     end
     board.update(usr_input,current_player)
     board.display

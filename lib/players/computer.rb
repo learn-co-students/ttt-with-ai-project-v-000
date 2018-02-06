@@ -8,10 +8,10 @@ module Players
       [0, 4, 8], [2, 4, 6]
       ]
     
-    def move(board, player=nil)
+    def move(board)
       
-      pos = board.positions(player)
-      opp_token = ( player.token=="X" ? "O" : "X" )
+      pos = board.positions(self)
+      opp_token = ( self.token=="X" ? "O" : "X" )
       opp = board.cells.collect.with_index{|tok,i| i if tok==opp_token}.compact
       
       #0.(a) opening move
