@@ -1,6 +1,6 @@
 class Board
-  include
-  attr_accessor :cells
+
+  attr_accessor :cells, :game
   def initialize
     reset!
   end
