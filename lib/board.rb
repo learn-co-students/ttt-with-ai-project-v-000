@@ -1,6 +1,6 @@
 class Board
-  attr_accessor :cells, :token
-
+  include
+  attr_accessor :cells
   def initialize
     reset!
   end
