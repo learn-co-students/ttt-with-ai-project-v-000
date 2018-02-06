@@ -20,12 +20,19 @@ module Players
           all_array = [0,1,2,3,4,5,6,7,8]
           current_position = all_array.select do |a|
             b=a+1
-            board.taken?(b.to_s)}
+            board.taken?(b.to_s)
           end
-          current_position = current_position.delete_if{|s| b = s+1 board.position(b.to_s) == token} #current opponent's position index array
+          current_position = current_position.delete_if do |s| #current opponent's position index array
+            b = s+1
+            board.position(b.to_s) == token
+          end
           Game::WIN_COMBINATIONS.detect do |cmb|
             if current_position.to_set.subset?(cmb.to_set) #opponent has 2 of the 3 winning positions - need to block
-              b = cmb.detect {|a| b = a+1 !board.taken?(b.to_s)}
+              binding.pry
+              b = cmb.detect do |a|
+                b = a+1
+                !board.taken?(b.to_s)
+              end
               b = b+1
               b.to_s
             else
@@ -35,15 +42,27 @@ module Players
         end
       else # 4 moves and beyond: check if computer has winning move, if not, then check if opponent has winning move.
         all_array = [0,1,2,3,4,5,6,7,8]
-        current_computer_array = all_array.select {|a|a+=1 board.position(a.to_s) == token}
-        current_opponent_array = all_array.select {|a|a+=1 board.position(a.to_s) != token && board.taken?(a.to_s)}
+        current_computer_array = all_array.select do |a|
+          a+=1
+          board.position(a.to_s) == token
+        end
+        current_opponent_array = all_array.select do |a|
+          a+=1
+          board.position(a.to_s) != token && board.taken?(a.to_s)
+        end
         Game::WIN_COMBINATIONS.detect do |cmb|
           if current_computer_array.to_set.subset?(cmb.to_set) #first check if computer has winning chance
-            a = cmb.detect {|i|h= i +1 !board.taken?(h.to_s)}
+            a = cmb.detect do |i|
+              h= i +1
+              !board.taken?(h.to_s)
+            end
             a = a +1
             a.to_s
           elsif current_opponent_array.to_set.subset?(cmb.to_set) #second check if opponent has winning chance, if yes then block
-            a = cmb.detect {|i|h = i+1 !board.taken?(h.to_s)}
+            a = cmb.detect do |i|
+              h = i+1
+              !board.taken?(h.to_s)
+            end
             a = a+1
             a.to_s
           end
