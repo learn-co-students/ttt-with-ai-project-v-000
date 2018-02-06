@@ -39,7 +39,9 @@ class Game
       divide_turns
       turn
     end
+    puts
     draw? ? puts("Cat's Game!") : puts("Congratulations #{winner}!")
+    puts
   end
   
   def start
@@ -66,11 +68,13 @@ class Game
       end
       simulator==1 ? self.player_1 = Players::Computer.new("X") : self.player_2 = Players::Computer.new("O")
       puts "Let's play!"
+      puts
       board.display_reference
       play
       
     when 2
       puts "Let's play!"
+      puts
       board.display_reference
       play
     end
@@ -78,10 +82,12 @@ class Game
   end
   
   def turn
-    board.display
-    usr_input = current_player.move(board)
-    turn if !board.valid_move?(usr_input)
+    usr_input = nil
+    until board.valid_move?(usr_input)
+      usr_input = current_player.move(board)
+    end
     board.update(usr_input,current_player)
+    board.display
   end
   
   def winner
