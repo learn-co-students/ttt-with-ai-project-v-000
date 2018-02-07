@@ -33,7 +33,7 @@ class Board
   end
   
   def taken?(pos)
-    if @cells[pos.to_i - 1] != " "
+    if @cells[pos.to_i - 1] != " " # - 1
       return true
     else 
       return false 

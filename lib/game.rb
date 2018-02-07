@@ -82,8 +82,12 @@ class Game
     while self.over? == false && self.draw? == false
       self.turn
     end
-      self.over?
-      self.draw?
+      if self.over? == true && self.winner != nil
+        #binding.pry
+        puts "Congratulations #{self.winner}!"
+      elsif self.draw? == true
+        return puts "Cat's Game!"
+      end
     #end
   end
 end
