@@ -24,7 +24,12 @@ class Game
   end
   
   def over?
-    self.board.full? || self.won?
+    if self.won? || self.draw?
+     return true
+   elsif self.board.full? == false
+     return false
+   end
+    #self.board.full? || self.winner
   end
   
   def won?
@@ -78,6 +83,7 @@ class Game
       self.turn
     end
       self.over?
+      self.draw?
     #end
   end
 end
