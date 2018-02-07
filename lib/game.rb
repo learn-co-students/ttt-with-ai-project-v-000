@@ -63,8 +63,8 @@ class Game
   
   def turn
     puts "#{self.current_player} choose your next move:"
-    #binding.pry
-    self.current_player.move(@board)
+    binding.pry
+    if self.current_player.move(@board)
     #self.player_1.position(gets.strip)
   end
 end
