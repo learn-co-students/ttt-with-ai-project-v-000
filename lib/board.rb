@@ -39,4 +39,17 @@ class Board
       return false 
     end
   end
+  
+  def valid_move?(pos)
+    #false if pos > 9 || pos < 1 else true
+    if pos.to_i < 10 && pos.to_i > 0 && self.taken?(pos) == false
+      return true
+    else
+      return false
+    end
+  end
+  
+  def update(pos, player)
+    @cells[pos.to_i - 1] = player
+  end
 end
