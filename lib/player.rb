@@ -12,11 +12,11 @@ module Players
   class Human < Player
 
     def move(board)
-      puts "Please enter an integer between 0-9 to make a move"
+      puts "Please enter an integer between 1-9 to make a move"
       input = gets.chomp
     end
 
-    
+
 
   end
 

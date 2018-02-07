@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+def intro
+  puts "Let's play Tic-Tac-Toe!"
+  puts "Would you like to play with zero, one or two players? Please enter 0, 1 or 2"
+  players_val = gets.strip
+  puts "Who would like to go first and be token X? Type 1 to go first, or 2 for the opponent to start"
+  first_player = gets.strip
+
+    if (players_val == "0") && (first_player == "1")
+      #binding.pry
+      Game.new(Players::Computer.new("X"),Players::Computer.new("O"), board = Board.new ).play
+    elsif (players_val == "0") && (first_player == "2")
+      Game.new(Players::Computer.new("X"),Players::Computer.new("O"), board = Board.new ).play
+    elsif (players_val == "1") && (first_player == "1")
+        Game.new(Players::Human.new("X"),Players::Computer.new("O"), board = Board.new ).play
+    elsif (players_val == "1") && (first_player == "2")
+      Game.new(Players::Computer.new("X"),Players::Human.new("O"), board = Board.new ).play
+    elsif (players_val == "2") && (first_player == "1")
+      Game.new(Players::Human.new("X"),Players::Human.new("O"), board = Board.new ).play
+    elsif (players_val == "2") && (first_player == "2")
+      Game.new(Players::Human.new("X"),Players::Human.new("O"), board = Board.new ).play
+    end
+
+
+  puts "Would you like to play again? Enter y or n"
+  again = gets.strip
+    if again == "y"
+        intro
+    else
+      exit
+    end
+end
+
+
+intro

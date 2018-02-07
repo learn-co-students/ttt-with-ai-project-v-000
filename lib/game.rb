@@ -7,7 +7,10 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+
   end
+
+
 
   WIN_COMBINATIONS = [
     [0,1,2], #top_row_win
@@ -75,8 +78,10 @@ class Game
     #binding.pry
     if board.valid_move?(input) == true
       board.update(input, current_player)
-      board.turn_count
+      sleep 1
+      board.display
     else
+      "The move is invalid"
       turn
     end
   end
