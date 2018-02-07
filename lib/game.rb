@@ -55,7 +55,6 @@ class Game
   def play
     until over? || won?
       turn
-      turn
     end
     winner
   end
