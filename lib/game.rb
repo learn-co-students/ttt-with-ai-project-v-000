@@ -15,7 +15,7 @@ class Game
   end
 
   def over?
-    self.board.full? || won? != false
+    self.board.full?
   end
 
   def won?
@@ -54,6 +54,7 @@ class Game
 
   def play
     turn until over? || won?
+    
   end
 
 end
