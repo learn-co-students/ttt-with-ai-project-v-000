@@ -50,6 +50,7 @@ class Board
   end
   
   def update(pos, player)
-    @cells[pos.to_i - 1] = player
+    #binding.pry
+    @cells[pos.to_i - 1] = player.token
   end
 end
