@@ -53,7 +53,7 @@ class Game
   end
 
   def play
-    turn until over? || won?
+    turn until draw? || won?
     if winner
       puts "Congratulations #{winner}!"
     else

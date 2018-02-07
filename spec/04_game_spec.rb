@@ -251,7 +251,7 @@ describe 'Game' do
       expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
 
-    xit 'checks if the game is won after every turn' do
+    it 'checks if the game is won after every turn' do
       game = Game.new
       allow($stdout).to receive(:puts)
       allow(game.player_1).to receive(:gets).and_return("1", "2", "3")
@@ -263,7 +263,7 @@ describe 'Game' do
       game.play
     end
 
-    xit 'checks if the game is a draw after every turn' do
+    it 'checks if the game is a draw after every turn' do
       game = Game.new
       allow($stdout).to receive(:puts)
       allow(game.player_1).to receive(:gets).and_return("1", "2")
