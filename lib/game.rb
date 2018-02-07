@@ -3,7 +3,6 @@ class Game
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2] ]
   
-  #binding.pry
   
   def initialize (player_1=Players::Human.new("X"),player_2=Players::Human.new("O"),board=Board.new) 
     #need to set the default of each player to a Players::Human
@@ -25,7 +24,7 @@ class Game
   end
   
   def over?
-    self.board.full?
+    self.board.full? || self.won?
   end
   
   def won?
@@ -74,8 +73,11 @@ class Game
   end
   
   def play
-    while self.winner == nil
+    #while self.winner == nil
+    while self.over? == false && self.draw? == false
       self.turn
     end
+      self.over?
+    #end
   end
 end
