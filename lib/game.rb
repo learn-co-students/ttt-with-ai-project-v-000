@@ -26,11 +26,6 @@ class Game
   
   def over?
     self.board.full?
-    #if won?(board) || draw?(board)
-     #return true
-    #elsif !(full?(board))
-    # return false
-    #end
   end
   
   def won?
@@ -48,5 +43,21 @@ class Game
   end
   
   def draw?
+    if self.board.full? == true && self.won? == false 
+      return true
+    else
+     return false
+    end
+  end
+  
+  def winner
+    #binding.pry
+    if draw? == false && won?.kind_of?(Array)
+      return self.board.cells[self.won?[0]]
+    else
+      return nil
+      #binding.pry
+    end
+    #expect(game.won?).to contain_exactly(2, 5, 8)
   end
 end
