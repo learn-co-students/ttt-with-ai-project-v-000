@@ -31,4 +31,12 @@ class Board
   def turn_count
     @cells.count{|i| i != " "}
   end
+  
+  def taken?(pos)
+    if @cells[pos.to_i - 1] != " "
+      return true
+    else 
+      return false 
+    end
+  end
 end
