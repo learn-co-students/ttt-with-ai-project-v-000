@@ -107,7 +107,7 @@ Define a class `Human` that inherits from `Player`. This class should be namespa
 
 The human player must implement a `#move` method that takes in a `board` argument and allows a human player to enter a move via the CLI. The method should return the value the user enters. Even though the method accepts a `board` argument, it does not need to use it.
 
->Note on name spacing: You'll notice here that we do `Players::Human < Player` does not work because the `Players` module is not yet defined. So to do this, we'll need to do:
+>Note on namespacing: You'll notice here that if we do `Players::Human < Player` our inheritance won't function properly. This is because the `Players` module is not yet defined. So to do this, we'll need to do:
 ```ruby
 module Players
   class Human < Player
