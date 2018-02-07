@@ -255,7 +255,7 @@ describe 'Game' do
       game = Game.new
       allow($stdout).to receive(:puts)
       allow(game.player_1).to receive(:gets).and_return("1", "2", "3")
-      allow(game.player_2).to receive(:gets).and_return("4", "5")
+      allow(game.player_2).to receive(:gets).and_return("4", "5", "6")
       allow(game).to receive(:winner).and_return("X")
 
       expect(game).to receive(:won?).at_least(:twice).and_return(false, false, true)
