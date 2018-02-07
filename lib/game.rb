@@ -54,7 +54,11 @@ class Game
 
   def play
     turn until over? || won?
-    winner
+    if winner
+      puts "Congratulations #{winner}"
+    else
+      puts "Cat's Game!"
+    end
   end
 
 end
