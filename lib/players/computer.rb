@@ -49,7 +49,8 @@ module Players
           board.position(a.to_s) != token && board.taken?(a.to_s)
         end
         c_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_computer_array.to_set.subset?(cmb.to_set)}
-        o_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_opponent_array.to_set.subset?(cmb.to_set)}
+        o_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_opponent_array.to_set.subset?(cmb.to_set)} # need to fix
+        binding.pry
         if c_cmb != nil #first check if computer has winning chance
            c_win = c_cmb.detect do |c| #check if computer can win (is there a winning combo occupied that has vacant cells?)
              c.any? do |c1|
@@ -64,19 +65,27 @@ module Players
              end
              m += 1
              m.to_s
-          elsif o _cmb != nil
+          elsif o_cmb != nil
             o_win = o_cmb.detect do |o| #check if computer can win (is there a winning combo occupied that has vacant cells?)
               o.any? do |o1|
                 o2 = o1 + 1
                 !board.taken?(o2.to_s)
               end
             end
-            m = o_win.detect do |i|
-              h= i +1
-              !board.taken?(h.to_s)
+            if o_win != nil
+              m = o_win.detect do |i|
+                h= i +1
+                !board.taken?(h.to_s)
+              end
+              m += 1
+              m.to_s
+            else
+              un_array = all_array.select do |a|
+                a+=1
+                !board.taken?(a.to_s)
+              end
+              un_array[rand(un_array.length-1)]
             end
-            m += 1
-            m.to_s
           else #if neither has winning move, occupy a random available cell and move on to next turn
             un_array = all_array.select do |a|
               a+=1
