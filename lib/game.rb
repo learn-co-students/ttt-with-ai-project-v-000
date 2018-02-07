@@ -1,3 +1,4 @@
+require 'pry'
 class Game
     attr_accessor :player_1, :player_2, :board, :token
       #attr_reader :player_1, :player_2,
@@ -20,7 +21,7 @@ class Game
   ]
 
   def current_player
-    if board.cells.count % 2 == 0
+    if board.cells.count {|value| value == "X" || value == "O"}.odd?
       player_2
     else
       player_1
@@ -70,11 +71,11 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    input = gets.strip
+    input = current_player.move(board)
+    #binding.pry
     if board.valid_move?(input) == true
-      board.update(input, token)
-      board.display
+      board.update(input, current_player)
+      board.turn_count
     else
       turn
     end
