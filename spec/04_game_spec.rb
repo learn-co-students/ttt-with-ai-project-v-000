@@ -108,8 +108,8 @@ describe 'Game' do
 
     it 'returns the correct winning combination in the case of a win' do
       game = Game.new
-      game.board.cells = ["X", "O", "X",
-                          "O", "X", "X",
+      game.board.cells = ["X", "O", "O",
+                          "O", "O", "X",
                           "O", "O", "X"]
 
       expect(game.won?).to contain_exactly(2, 5, 8)
