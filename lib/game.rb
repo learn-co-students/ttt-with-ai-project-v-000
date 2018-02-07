@@ -72,4 +72,10 @@ class Game
     return choice
     #Game turn changes to player 2 after first turn
   end
+  
+  def play
+    while self.winner == nil
+      self.turn
+    end
+  end
 end
