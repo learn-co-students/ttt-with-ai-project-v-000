@@ -54,10 +54,11 @@ class Game
               move = current_player.move(board)
               #binding.pry
               board.valid_move?(move) ? board.update(move, current_player) : turn
+              board.display
         end
 
         def play 
-            "#{current_player}, choose a space from 1-9:"
+            puts "#{current_player}, choose a space from 1-9:"
             until over?
                 turn 
             end
