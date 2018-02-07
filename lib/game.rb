@@ -63,8 +63,13 @@ class Game
   
   def turn
     puts "#{self.current_player} choose your next move:"
-    binding.pry
-    if self.current_player.move(@board)
-    #self.player_1.position(gets.strip)
+    #binding.pry
+    choice = self.current_player.move(@board)
+    while self.board.taken?(choice) == true || self.board.valid_move?(choice) == false
+      choice = self.current_player.move(@board)
+    end
+    self.board.update(choice, self.current_player)
+    return choice
+    #Game turn changes to player 2 after first turn
   end
 end
