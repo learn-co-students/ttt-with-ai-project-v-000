@@ -108,7 +108,7 @@ describe 'Game' do
 
     it 'returns the correct winning combination in the case of a win' do
       game = Game.new
-      game.board.cells = ["X", "O", "O",
+      game.board.cells = ["X", "O", "X",
                           "O", "O", "X",
                           "O", "O", "X"]
 
