@@ -30,18 +30,18 @@ class Game
    WIN_COMBINATIONS.detect do |combo|
      @board.cells[combo[0]] == @board.cells[combo[1]] &&
      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-     @board.taken?(combo[0])
+     @board.taken?(combo[0]+1)
    end
  end
 
  def draw?
-   !won? && @board.full?
+  !won? && @board.full?
  end
 
  def winner
-    if winning_combo = won?
-      @board.cells[winning_combo.first]
-    end
+  if won?
+    @board.cells[won?.first]
+  end
  end
 
  def turn

@@ -18,15 +18,16 @@ class Board
   end
 
   def position(input)
-    cells[input.to_i - 1]
+    @cells[input.to_i-1]
   end
 
   def full?
-    cells.all?{|token| token == "X" || token == "O"}
+    @cells.all?{|token| token == "X" || token == "O"}
+    # @cells.none?{|cell| cell == " "}
   end
 
   def turn_count
-    cells.count{|token| token == "X" || token == "O"}
+    @cells.count{|token| token == "X" || token == "O"}
   end
 
   def taken?(input)
@@ -38,6 +39,6 @@ class Board
   end
 
   def update(input, player)
-    cells[input.to_i - 1] = player.token
+    @cells[input.to_i-1] = player.token
   end
 end
