@@ -37,7 +37,7 @@ class Game
      return false
    else
      WIN_COMBINATIONS.any?{|combo|
-       if self.board.taken?(combo[0])
+       if self.board.taken?(combo[0]+ 1)
          if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[0]] == self.board.cells[combo[2]]
            return combo
          end

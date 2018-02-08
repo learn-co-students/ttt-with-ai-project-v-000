@@ -33,10 +33,10 @@ class Board
   end
   
   def taken?(pos)
-    if @cells[pos.to_i] == "X" || @cells[pos.to_i] == "O" # - 1
-      return true
+    if @cells[pos.to_i - 1] != " " #] == "X" || @cells[pos.to_i] == "O" # - 1
+      return false
     else 
-      return false 
+      return true
     end
   end
   
