@@ -33,17 +33,16 @@ class Game
   end
   
   def won?
-   if self.board.cells == [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-     return false
-   else
-     WIN_COMBINATIONS.any?{|combo|
-       if self.board.taken?(combo[0]+ 1)
-         if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[0]] == self.board.cells[combo[2]]
-           return combo
-         end
+   WIN_COMBINATIONS.any?{|combo|
+     #if self.board.taken?(combo[0]) #need to check if each item at each location from combo are taken? in the board
+     if combo.all?{|i| self.board.taken?(i) == true}
+       if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[0]] == self.board.cells[combo[2]]
+         return combo
        end
-       }
-   end
+     end
+     #end
+     }
+    return false
   end
   
   def draw?
@@ -56,7 +55,7 @@ class Game
   
   def winner
     #binding.pry
-    if draw? == false && won?.kind_of?(Array)
+    if draw? == false && won? != false
       return self.board.cells[self.won?[0]]
     else
       return nil
@@ -84,7 +83,8 @@ class Game
     end
       if self.won?.kind_of?(Array)
         #binding.pry
-        puts "Congratulations #{self.winner}!"
+        puts "Congratulations #{self.winner}!" 
+        # won? method doesn't seem to be working right even though it's passing the tests
       elsif self.draw? == true
         return puts "Cat's Game!"
       end
