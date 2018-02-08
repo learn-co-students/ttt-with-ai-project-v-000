@@ -40,17 +40,22 @@ module Players
         end
       else # 4 moves and beyond: check if computer has winning move, if not, then check if opponent has winning move.
         all_array = [0,1,2,3,4,5,6,7,8]
-        current_computer_array = all_array.select do |a|
+        current_computer_array = all_array.select do |a| #array of occupied cells by computer
           a+=1
           board.position(a.to_s) == token
         end
+        current_computer_array = current_computer_array.product(current_computer_array).delete_if {|array| array[0] == array [1]} #array of arrays
         current_opponent_array = all_array.select do |a|
           a+=1
           board.position(a.to_s) != token && board.taken?(a.to_s)
         end
-        c_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_computer_array.to_set.subset?(cmb.to_set)}
-        o_cmb = Game::WIN_COMBINATIONS.select {|cmb| current_opponent_array.to_set.subset?(cmb.to_set)} # need to fix
-        binding.pry
+        current_opponent_array = current_opponent_array.product(current_opponent_array).delete_if {|array| array[0] == array [1]}
+        c_cmb = Game::WIN_COMBINATIONS.select do |cmb|
+          current_computer_array.detect {|array| array.to_set.subset?(cmb.to_set)}
+        end
+        o_cmb = Game::WIN_COMBINATIONS.select do |cmb|
+          current_opponent_array.detect {|array| array.to_set.subset?(cmb.to_set)}
+        end
         if c_cmb != nil #first check if computer has winning chance
            c_win = c_cmb.detect do |c| #check if computer can win (is there a winning combo occupied that has vacant cells?)
              c.any? do |c1|
