@@ -77,18 +77,22 @@ class Game
   
   def self.start
     choice = gets.strip
-    if choice == 0
+    if choice == "0"
       ai = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
-      while over? == false
+      #binding.pry
+      while ai.over? == false
         ai.play
-        board.display_board
+        ai.board.display
+      end
+
+    elsif choice == "1"
+      one = Game.new
+      one.player_2 = Players::Computer.new("O")
+      while one.over? == false
+        one.play
+        one.board.display
       end
       
-    elsif choice == 1
-      one = Game.new
-      one.player_2 = Computer.new("O")
-      one.board.display
-      one.play
     else
       two = Game.new
       two.board.display

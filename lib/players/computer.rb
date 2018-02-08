@@ -1,3 +1,4 @@
+require 'pry'
 module Players
   class Computer < Player
     def move(ary)
@@ -6,6 +7,7 @@ module Players
       val = valid_moves[pos]
       valid_moves.delete(val)
       val
+      #binding.pry
       #pos = (rand(8) + 1)
     end
   end
