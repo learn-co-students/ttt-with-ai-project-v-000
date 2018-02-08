@@ -33,16 +33,23 @@ class Game
   end
   
   def won?
-   WIN_COMBINATIONS.any?{|combo|
-     #if self.board.taken?(combo[0]) #need to check if each item at each location from combo are taken? in the board
-     if combo.all?{|i| self.board.taken?(i) == true}
-       if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[0]] == self.board.cells[combo[2]]
-         return combo
-       end
-     end
-     #end
-     }
-    return false
+   #if self.board.cells == [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    # return false
+   #else
+     cell = self.board.cells
+     brd = self.board
+     WIN_COMBINATIONS.any?{|combo|
+       #if self.board.taken?(combo[0])
+         #if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[0]] == self.board.cells[combo[2]]
+         if (brd.taken?(combo[0] + 1) && brd.taken?(combo[1] + 1) && brd.taken?(combo[2] + 1)) && (cell[combo[0]] == cell[combo[1]]) && (cell[combo[0]] == cell[combo[2]])
+           return combo
+         end
+         #end
+       #end
+       
+       }
+   #end
+   return false
   end
   
   def draw?
@@ -55,7 +62,8 @@ class Game
   
   def winner
     #binding.pry
-    if draw? == false && won? != false
+    if self.draw? == false && self.won? != false
+      #game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
       return self.board.cells[self.won?[0]]
     else
       return nil
@@ -83,8 +91,7 @@ class Game
     end
       if self.won?.kind_of?(Array)
         #binding.pry
-        puts "Congratulations #{self.winner}!" 
-        # won? method doesn't seem to be working right even though it's passing the tests
+        puts "Congratulations #{self.winner}!"
       elsif self.draw? == true
         return puts "Cat's Game!"
       end
