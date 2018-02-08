@@ -82,7 +82,7 @@ class Game
     while self.over? == false && self.draw? == false
       self.turn
     end
-      if self.over? == true && self.winner != nil
+      if self.won?.kind_of?(Array)
         #binding.pry
         puts "Congratulations #{self.winner}!"
       elsif self.draw? == true
