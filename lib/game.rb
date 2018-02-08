@@ -73,7 +73,7 @@ class Game
   end
   
   def turn
-    puts "#{self.current_player} choose your next move:"
+    puts "#{current_player.token} choose your next move:"
     #binding.pry
     choice = self.current_player.move(@board)
     while self.board.taken?(choice) == true || self.board.valid_move?(choice) == false

@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Hi there! Let's play Tic-Tac-Toe."
+puts "How many players do you want to play with? Choose a number 0, 1, or 2"
+choice = gets.strip
+if choice == 0
+  Game.new(Players::Computer.new, Players::Computer.new,Board.new).play
+  board.display_board
+elsif choice == 1
+  one = Game.new
+  one.player_2 = Computer.new
+  one.board.display
+  one.play
+  one.board.display
+else
+  two = Game.new
+  two.board.display
+  two.play
+  two.board.display
+end
