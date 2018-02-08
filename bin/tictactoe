@@ -2,9 +2,45 @@
 
 require_relative '../config/environment'
 
-game = Game.new
-puts "Welcome To Tic Tac Toe!"
-game.board.display
-  while !game.over?
-    game.play
-  end
+ def menu
+   puts "Select which game you want to play"
+   puts "1. Human vs AI"
+   puts "2. Human vs Human"
+   puts "3. AI vs AI"
+   puts "4. Exit game"
+   input = gets.strip
+
+   if input == "1"
+     puts "Who should go first and be X?"
+     puts "1. Player 1"
+     puts "2. Computer"
+     input = gets.strip
+     if input == "1"
+       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+       game.play
+     elsif input == "2"
+       game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+       game.play
+     end
+
+    elsif input == "2"
+      puts "Who should go first and be X?"
+      puts "1. Player 1"
+      puts "2. Player 2"
+      input = gets.strip
+      if input == "1"
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+        game.play
+      elsif input == "2"
+        game = Game.new(player_2 = Players::Human.new("X"), player_1 = Players::Human.new("O"))
+        game.play
+      end
+
+    elsif input == "3"
+     game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+     game.play
+    elsif input == "4"
+   end
+ end
+
+menu

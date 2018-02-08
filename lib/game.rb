@@ -49,8 +49,9 @@ class Game
   end
 
   def turn
-    puts "Its player #{current_player.token}'s turn"
+    @board.display
     player = current_player
+    puts "Its #{player.token}'s turn"
     input = player.move(@board)
     if !@board.valid_move?(input)
       puts "Invalid move!"
@@ -62,6 +63,7 @@ class Game
   end
 
   def play
+    puts "Welcome to Tic Tac Toe!"
     while !over?
       turn
     end
