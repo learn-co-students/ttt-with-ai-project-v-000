@@ -75,6 +75,7 @@ class Game
   def turn
     puts "#{current_player.token} choose your next move:"
     #binding.pry
+    
     choice = self.current_player.move(@board)
     while self.board.taken?(choice) == true || self.board.valid_move?(choice) == false
       choice = self.current_player.move(@board)
@@ -88,6 +89,7 @@ class Game
     #while self.winner == nil
     while self.over? == false && self.draw? == false
       self.turn
+      self.board.display
     end
       if self.won?.kind_of?(Array)
         #binding.pry
@@ -96,5 +98,26 @@ class Game
         return puts "Cat's Game!"
       end
     #end
+  end
+  
+  def self.start
+    choice = gets.strip
+    if choice == 0
+      ai = Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"))
+      while over? == false
+        ai.play
+        board.display_board
+      end
+      
+    elsif choice == 1
+      one = Game.new
+      one.player_2 = Computer.new("O")
+      one.board.display
+      one.play
+    else
+      two = Game.new
+      two.board.display
+      two.play
+    end
   end
 end
