@@ -47,15 +47,20 @@ class Game
   def turn
     position = -1
     until self.board.valid_move?(position)
-      position = current_player.move
+      position = current_player.move(board)
     end
     self.board.update(position, current_player)
   end
 
   def play
-    turn until draw? || won?
+    until draw? || won?
+      board.display
+      turn
+    end
+
     if winner
       puts "Congratulations #{winner}!"
+      board.display
     else
       puts "Cat's Game!"
     end

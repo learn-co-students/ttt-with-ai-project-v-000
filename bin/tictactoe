@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Would you like to play:"
+puts "1. Player vs Player."
+puts "2. Player vs Computer."
+puts "3. Computer vs Computer."
+
+mode = gets.chomp.to_i
+if mode == 1
+  game = Game.new
+elsif mode == 2
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+elsif mode == 3
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+else
+  puts "You must choose 1 to 3. Relaunch the program to try again."
+  exit
+end
+
+game.play
