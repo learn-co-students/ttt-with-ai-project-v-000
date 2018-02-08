@@ -30,44 +30,45 @@ class Game
 
 
   def over?
-    @board.cells != WIN_COMBINATIONS && @board.full?
+    won? || draw?
   end
 
   def won?
-    WIN_COMBINATIONS.detect {|i| @board.cells[i[0]] == @board.cells[i[1]] && @board.cells[i[1]] == @board.cells[i[2]] && @board.taken?(i[0])}
+    WIN_COMBINATIONS.detect {|i| @board.cells[i[0]] == @board.cells[i[1]] && @board.cells[i[1]] == @board.cells[i[2]] && @board.taken?(i[0]+1)}
 
   end
 
   def draw?
-    over? && !won?
+    @board.full? && !won?
   end
 
   def winner
-    if @board.cells[won?[0]] == "X" || @board.cells[won?[0]] == "O"
-      @board.cells[won?[0]]
-    else
-      nil
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
     end
   end
 
   def turn
+    puts "Its player #{current_player.token}'s turn"
     player = current_player
     input = player.move(@board)
     if !@board.valid_move?(input)
+      puts "Invalid move!"
       turn
     elsif @board.valid_move?(input)
       @board.update(input, player)
+      @board.display
     end
   end
 
   def play
     while !over?
       turn
-        if won?
-          puts "Congratulations #{winner}!"
-        elsif draw?
-          puts "Cat's Game!"
-        end
+    end
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
       end
     end
 

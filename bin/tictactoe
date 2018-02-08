@@ -2,4 +2,9 @@
 
 require_relative '../config/environment'
 
-play
+game = Game.new
+puts "Welcome To Tic Tac Toe!"
+game.board.display
+  while !game.over?
+    game.play
+  end
