@@ -51,7 +51,7 @@ class Game
   def turn
     @board.display
     player = current_player
-    puts "Its #{player.token}'s turn"
+    puts "Its #{self.player}'s turn"
     input = player.move(@board)
     if !@board.valid_move?(input)
       puts "Invalid move!"
