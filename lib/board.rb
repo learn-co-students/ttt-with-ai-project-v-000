@@ -1,7 +1,6 @@
 class Board
-  attr_accessor :cells, :turn_count, :token
-  def initialize(tkn)
-    @token = tkn
+  attr_accessor :cells, :turn_count
+  def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
   def reset!
