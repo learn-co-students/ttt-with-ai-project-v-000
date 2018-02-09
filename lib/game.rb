@@ -43,22 +43,21 @@ class Game
   end
 
   def winner
-    if winning_combo = won?
-      @winner = @board.cells[winning_combo.first]
+    if won?
+      champ = won?
+      board.position(champ[0]+1)
     end
   end
 
   def turn
     @board.display
-    player = current_player
-    puts "Its #{self.player}'s turn"
-    input = player.move(@board)
+    puts "Its #{current_player}'s turn"
+    input = current_player.move(@board)
     if !@board.valid_move?(input)
       puts "Invalid move!"
       turn
     elsif @board.valid_move?(input)
-      @board.update(input, player)
-      @board.display
+      @board.update(input, current_player)
     end
   end
 
@@ -73,5 +72,7 @@ class Game
         puts "Cat's Game!"
       end
     end
+
+
 
 end

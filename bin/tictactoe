@@ -2,6 +2,7 @@
 
 require_relative '../config/environment'
 
+<<<<<<< HEAD
  def menu
    puts "Select which game you want to play"
    puts "1. Human vs AI"
@@ -12,7 +13,7 @@ require_relative '../config/environment'
 
    if input == "1"
      puts "Player 1 name?"
-     p1 = gets.
+     p1 = gets.strip
      puts "Who should go first and be X?"
      puts "1. #{p1}"
      puts "2. Computer"
@@ -34,7 +35,7 @@ require_relative '../config/environment'
         game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
         game.play
       elsif input == "2"
-        game = Game.new(player_2 = Players::Human.new("X"), player_1 = Players::Human.new("O"))
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
         game.play
       end
 
@@ -46,3 +47,11 @@ require_relative '../config/environment'
  end
 
 menu
+=======
+game = Game.new
+puts "Welcome To Tic Tac Toe!"
+game.board.display
+  while !game.over?
+    game.play
+  end
+>>>>>>> aef9984d39157b6de75d14118cdfdd3403ed4883
