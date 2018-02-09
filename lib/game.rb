@@ -54,7 +54,7 @@ class Game
     puts "Its #{current_player}'s turn"
     input = current_player.move(@board)
     if !@board.valid_move?(input)
-      puts "Invalid move!"
+      puts "!! #{input} Invalid move!"
       turn
     elsif @board.valid_move?(input)
       @board.update(input, current_player)
@@ -73,6 +73,24 @@ class Game
       end
     end
 
+    def win_predictor
+      # WIN_COMBINATIONS.detect do |combo|
+      #   combo.select {|i| @board.position(i) == current_player.token}.count == 2
+      #     combo.select {|i| move = !@board.taken?(i)}
+      #     end
+        end
+
+
+
+        # def win_predictor
+        #   current_board = ["X", "X", " ", " ", "O", " ", " ", " ", " "]
+        #   WIN_COMBINATIONS.detect do |combo|
+        #     combo.select {|i| @board.position(i+1) == current_player.token}.count == 2
+        #       binding.pry
+        #       combo.select {|i| move = !@board.cells.taken?(i)}
+        #         move
+        #       end
+        #     end
 
 
 end
