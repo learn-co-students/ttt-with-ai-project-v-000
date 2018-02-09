@@ -6,48 +6,63 @@ module Players
 
     def move(board)
       @board = board
+      if o_cells.empty? && empty_cells.include?(5)
+        return "5"
+      end
       # Only include empty cells on the array feeding in to the freq table
       valid_selection = weighted_selection.flatten.select do |ws|
         empty_cells.include?(ws)
       end
       freq_table = valid_selection.flatten.inject(Hash.new(0)) do |k, v|
-        k[v] += 1; k
+        k[v] += 1
+        k
       end
-      choice = weighted_selection.flatten.max_by { |v| freq_table[v] }
+      choice = valid_selection.flatten.max_by { |v| freq_table[v] }
       choice.to_s
     end
 
     def empty_cells
       result = []
-      @board.cells.each_with_index { |c, i| res << i + 1 if c == " " }
+      @board.cells.each_with_index { |c, i| result << i + 1 if c == " " }
       result
     end
 
     def x_cells
       result = []
-      @board.cells.each_with_index { |c, i| res << i + 1 if c == "X" }
+      @board.cells.each_with_index { |c, i| result << i + 1 if c == "X" }
       result
     end
 
     def o_cells
       result = []
-      @board.cells.each_with_index { |c, i| res << i + 1 if c == "O" }
+      @board.cells.each_with_index { |c, i| result << i + 1 if c == "O" }
       result
     end
 
     def win_weightings
       # Add one to weighting of win for each number that's still on the board.
-      res = Array.new(8, 0)
+      result = Array.new(8, 0)
       WIN_COMBINATIONS.each_with_index do |win, win_no|
-        win.each { |w| res[win_no] += 1 if empty_cells.include?(w) }
+        win.each { |w| result[win_no] += 1 if empty_cells.include?(w) }
       end
-      res
+      result
+    end
+
+    def opponent_weightings
+      result = Array.new(8, 0)
+      WIN_COMBINATIONS.each_with_index do |win, win_no|
+        remaining = win - (x_cells + o_cells)
+        if remaining.length > 0
+          win.each { |w| result[win_no] -= 3 if x_cells.include?(w) }
+        end
+      end
+      result
     end
 
     def weighted_selection
-      lowest = 4
+      lowest = 0
       selection = []
-      win_weightings.each_with_index do |weight, i|
+      opponent_weightings.each_with_index do |weight, i|
         if weight < lowest
           selection = [i]
           lowest = weight
