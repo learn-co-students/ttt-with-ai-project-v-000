@@ -39,15 +39,6 @@ module Players
       result
     end
 
-    def win_weightings
-      # Add one to weighting of win for each number that's still on the board.
-      result = Array.new(8, 0)
-      WIN_COMBINATIONS.each_with_index do |win, win_no|
-        win.each { |w| result[win_no] += 1 if empty_cells.include?(w) }
-      end
-      result
-    end
-
     def opponent_weightings
       result = Array.new(8, 0)
       WIN_COMBINATIONS.each_with_index do |win, win_no|
