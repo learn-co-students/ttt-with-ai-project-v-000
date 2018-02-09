@@ -51,10 +51,11 @@ class Game
 
   def turn
     @board.display
-    puts "Its #{current_player}'s turn"
     input = current_player.move(@board)
+    binding.pry
+    puts "Its #{current_player}'s turn"
     if !@board.valid_move?(input)
-      puts "!! #{input} Invalid move!"
+      puts "#{input} Invalid move!"
       turn
     elsif @board.valid_move?(input)
       @board.update(input, current_player)
@@ -68,6 +69,7 @@ class Game
     end
       if won?
         puts "Congratulations #{winner}!"
+        @board.display
       elsif draw?
         puts "Cat's Game!"
       end
