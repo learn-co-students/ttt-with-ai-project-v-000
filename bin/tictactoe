@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe!"
+puts "Select the number of desired game type"
+puts "1. One human player"
+puts "2. Two human players"
+puts "3. Computer showdown"
+user_input = gets.chomp
+case user_input
+when "1"
+  puts "Do you want to go first? (y/n)"
+  go_first = gets.chomp
+  puts "Select 'X' or 'O'"
+  which_token = gets.chomp.upcase
+  if go_first == "y"
+    game = Game.new(player_1=Players::Human.new(which_token), player_2=Players::Computer.new(which_token == "X" ? "O" : "X"), board=Board.new)
+    game.play
+  else
+    game = Game.new(player_1=Players::Computer.new(which_token == "X" ? "O" : "X"), player_2=Players::Human.new(which_token), board=Board.new)
+    game.play
+  end
+when "2"
+  puts "Who wants to go first? Select 'X' or 'O'"
+    go_first = gets.chomp.upcase
+    game = Game.new(player_1=Players::Human.new(go_first), player_2=Players::Human.new(go_first == "X" ? "O" : "X"), board=Board.new)
+    game.play
+else
+  game = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+  game.play
+end
+puts "Play again? (y/n)"
+play_again = gets.chomp
+  if play_again == "y"
+    game.board.reset!
+    game.play 
+  else puts "Thanks for playing! See ya!"
+  end
