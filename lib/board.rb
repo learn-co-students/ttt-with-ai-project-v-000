@@ -24,13 +24,13 @@ class Board
   end
 
   def full?
-    cells.all? {|position| position == "X" || position == "O"}
+    cells.all? {|spot| spot == "X" || spot == "O"}
   end
 
   def turn_count
   counter = 0
-  cells.each do |position|
-    if position == "X" || position == "O"
+  cells.each do |spot|
+    if spot == "X" || spot == "O"
       counter += 1
       end
     end
@@ -38,8 +38,8 @@ class Board
   end
 
   def taken?(input)
-    position = input.to_i - 1
-    if cells[position] == "X" || cells[position] == "O"
+    spot = input.to_i - 1
+    if cells[spot] == "X" || cells[spot] == "O"
       true
     else
       false
@@ -57,6 +57,7 @@ class Board
   def update(input, player)
     cells[input.to_i - 1] = player.token
   end
+
 
 
 end
