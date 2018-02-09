@@ -1,3 +1,48 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+loop do
+  puts "Welcome to Tic Tac Toe!"
+  number_of_players = nil
+  first_player_token = nil
+  second_player_token = nil
+    
+  until ["0", "1", "2", "wargames"].include?(number_of_players) do
+    puts "Would you like to play with 0, 1 or 2 players?"
+    number_of_players = gets.strip
+  end
+    
+  until ["X", "O"].include?(first_player_token) do
+    puts "Should Player 1 play 'X' or 'O'?"
+    first_player_token = gets.upcase.strip
+  end
+    
+  first_player_token == "X" ? second_player_token = "O" : second_player_token = "X"
+  
+  case number_of_players
+  when "0"
+    game = Game.new(player_1 = Players::Computer.new(first_player_token), player_2 = Players::Computer.new(second_player_token))
+  when "1"
+    game = Game.new(player_1 = Players::Human.new(first_player_token), player_2 = Players::Computer.new(second_player_token))
+  when "2"
+    game = Game.new(player_1 = Players::Human.new(first_player_token), player_2 = Players::Human.new(second_player_token))
+  when "wargames"
+    Game.wargames(first_player_token, second_player_token)
+    break
+  end
+    
+  game.play
+    
+  if game.over?
+    selection = nil
+    until ["yes", "y", "no", "n"].include?(selection) do
+      puts "Would you like to play again?"
+      selection = gets.downcase.strip
+    end
+    if ["no", "n"].include?(selection)
+      exit
+    end
+  end
+end
+  
