@@ -25,37 +25,50 @@ class Game
     end
   end
   def over?
-    if self.board.turn_count == 9
-      return true
-    end
+    won? || draw?
   end
   def won?
-    WIN_COMBINATIONS.each_with_index do |wcombo|
-      a = wcombo.collect {|space| self.board.cells[space]}
-      if a.uniq.size == 1
+    WIN_COMBINATIONS.each do |wcombo|
+      a = [ @board.cells[wcombo[0]], @board.cells[wcombo[1]], @board.cells[wcombo[2]] ]
+      if a == [ "X", "X", "X" ]
         return wcombo
       end
     end
-    return false
+    WIN_COMBINATIONS.each do |wcombo|
+      a = [ @board.cells[wcombo[0]], @board.cells[wcombo[1]], @board.cells[wcombo[2]] ]
+      if a == [ "O", "O", "O" ]
+        return wcombo
+      end
+    end
+    return nil
   end
   def draw?
-    if won?
-      return false
-    elsif over?
-      return true
-    else
-      binding.pry
-      return true
-    end
+    @board.full? && !won?
   end
   def winner
     a = won?
-    self.board.cells[a[0]] == " " ? nil : self.board.cells[a[0]]
+    if a == nil
+      return a
+    else
+      self.board.cells[a[0]]
+    end
   end
   def turn
-    binding.pry
-    if self.board.valid_move?(self.current_player.move(@board))
-      self.board.update(self.current_player.move(@board), current_player)
+    a = current_player.move(@board)
+    if self.board.valid_move?(a)
+      self.board.update(a, current_player)
+    else
+      current_player.move(@board)
+    end
+  end
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      return puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 end
