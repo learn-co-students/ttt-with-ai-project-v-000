@@ -1,7 +1,9 @@
 module Players
   class Computer < Player
     def move(board)
-      rand(9).to_s
+      a = rand(9)
+      a -= 1
+      a.to_s
     end
   end
 end
