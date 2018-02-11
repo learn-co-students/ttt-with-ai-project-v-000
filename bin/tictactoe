@@ -5,6 +5,7 @@ require_relative '../config/environment'
 puts "Welcome to Tic-Tac-Toe"
 puts "how many human player?"
 players = gets.strip
+
 while ![ "2", "1", "0", "wargames"].include?(players)
   puts "invalid answer try 0, 1, or 2: *cough wargames cough*"
   players = gets.strip
