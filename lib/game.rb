@@ -71,9 +71,11 @@ class Game
       turn
     end
     if won?
-      return puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner}!"
+      return winner
     elsif draw?
       puts "Cat's Game!"
+      return "Cat"
     end
   end
 end
