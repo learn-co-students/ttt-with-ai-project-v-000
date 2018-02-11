@@ -54,21 +54,17 @@ class Game
     end
   end
   def turn
-    puts "no A"
+    puts "#{current_player.token}'s turn"
     a = current_player.move(@board)
-    binding.pry
-    puts "sets A"
-    if self.board.valid_move?(a)
-      self.board.update(a, current_player)
+    while self.board.valid_move?(a) == false
       self.board.display
-      puts "looks good"
-    else
-      current_player.move(@board)
-      self.board.display
-      puts "invalid move"
-
+      puts "invalid_move"
+      a = current_player.move(@board)
     end
+    self.board.update(a, current_player)
     self.board.turn_count += 1
+    self.board.display
+    puts "move passed"
   end
   def play
     while !over?
