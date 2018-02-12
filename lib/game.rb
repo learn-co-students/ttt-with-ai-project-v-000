@@ -1,5 +1,5 @@
 class Game
-include Players
+  include Players
 
 attr_accessor :board, :player_1, :player_2
 
@@ -83,6 +83,7 @@ WIN_COMBINATIONS = [
   def play
     while !self.over?
       self.turn
+      self.board.display
     end
     if self.won?
       if self.winner == "X"
@@ -96,4 +97,37 @@ WIN_COMBINATIONS = [
     end
   end
 
+  def start
+    puts "Welcome to Tic Tac Toe!"
+    puts "How do you want to play?
+    0-player game has two computer players playing against each other with no interaction from the user.
+    1-player game has a human playing against a computer.
+    2-player game has two human players.
+    exit - exit the game."
+    input = gets.strip
+    case input
+    when "0"
+      player_1 = Computer.new("X")
+      player_2 = Computer.new("O")
+      board = Board.new
+      game = Game.new(player_1, player_2, board)
+      game.play
+    when "1"
+      puts "Who starts first with 'X' - human(H) or computer(C)?"
+      input = gets.strip
+      case input
+      when "H"
+        game = Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"), board = Board.new)
+        game.play
+      when "C"
+        game = Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"), board = Board.new)
+        game.play
+      end
+    when "2"
+      game = Game.new
+      game.play
+    when "exit"
+      exit!
+    end
+  end
 end
