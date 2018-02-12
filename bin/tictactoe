@@ -16,6 +16,7 @@ if game.over?
   replay = gets.strip
   if replay.upcase == "Y"
     game = Game.new
+    game.start
     until game.won?
       game.play
     end
