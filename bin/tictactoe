@@ -37,7 +37,9 @@ def player_vs_AI
     input = gets.chomp
 end
 
+
 case input
+
     when "Human"
         player_1 = Players::Human.new("X")
     when "AI"
@@ -64,6 +66,7 @@ def AI_vs_AI
 end
 
 case input
+
     when "Human"
         player_1 = Players::Human.new("X")
     when "AI"
@@ -78,7 +81,7 @@ end
 
 game = Game.new(player_1, player_2)
 game.play
-end
+
 
 
 
@@ -87,8 +90,9 @@ end
 def game_over
     
     input = nil
-    if over? puts "Would you like to play another game?  If so, Would you like to watch the AI play, play an opponent, or play the computer?"end
+    if over? puts "Would you like to play another game?  If so, Would you like to watch the AI play, play an opponent, or play the computer?"
         
     input = gets.chomp
     main_menu
+    end
 end
