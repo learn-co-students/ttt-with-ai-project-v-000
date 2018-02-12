@@ -1,3 +1,69 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TIC TAC TOE!"
+
+# MAKES SURE TO ASK AFTER COMPLETING A GAME IF USER WANTS TO PLAY AGAIN
+one_more_time = "y"
+until one_more_time == "n"
+  puts "What kind of game do you want to play? 0, 1, or 2 players?"
+  puts "(Please enter 0, 1 or 2)"
+  game_players = gets.strip
+
+  # MAKE SURE CORRECT NUMBER OF PLAYERS ENTERED
+  until game_players == "0" || game_players == "1" || game_players == "2"
+    puts "You entered an invalid number or letter. Please try again."
+    puts "(0, 1 or 2)"
+    game_players = gets.strip
+  end
+
+  # WHO GOES FIRST? USER OR COMPUTER?  USER DECIDES
+  if game_players == "1"
+    puts "Player_1 is 'X' and Player_2 is 'O'. Would you like to be Player_1 or Player_2?"
+    puts "(Please enter 1 or 2)"
+    player_choice = gets.strip
+    until player_choice == "1" || player_choice == "2"
+      puts "You entered an invalid number or letter. Please try again."
+      puts "(1 or 2)"
+      player_choice = gets.strip
+    end
+    if player_choice == "1"
+      puts "Good Luck!"
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+    elsif player_choice == "2"
+      puts "Good Luck!"
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+    end
+
+  # 2 PLAYER GAME
+  elsif game_players == "2"
+    puts "How nice to have a friend!"
+    sleep(1)
+    puts "Decide between yourselves who will be Player_1, 'X', and who will be Player_2, 'O'. Good Luck!"
+    sleep(3)
+    puts "Player_1, you're up!"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+
+  # WATCH THE COMPUTER PLAY ITSELF
+  elsif game_players == "0"
+    puts "Machine"
+    sleep(2)
+    puts "vs."
+    sleep(2)
+    puts "MACHINE!"
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+  end
+
+  # PLAY ONE MORE TIME?
+  puts "Would you like to play one more time? y / n"
+  one_more_time = gets.strip.downcase
+  until one_more_time == "y" || one_more_time == "n"
+    puts "You entered an invalid response.\n Would you like to play one more time? y / n"
+    one_more_time = gets.strip
+  end
+
+  if one_more_time == "n"
+  puts "Thanks for playing!"
+  end
+end # ORIGINAL UNTIL CONDITION
