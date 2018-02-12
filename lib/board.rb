@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
 
   attr_accessor :cells, :board
@@ -29,10 +31,21 @@ class Board
   end
 
   def turn_count
-    Board.position.cells
-
+    @cells.count {|cell| cell != " "}
   end
 
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
+  end
 
+  def valid_move?(input)
+    input = input.to_i
+    input.between?(1, 9) && !taken?(input)
+  end
+
+  def update(input, player)
+    input = input.to_i
+    cells[input -1] = player.token
+  end
 
 end
