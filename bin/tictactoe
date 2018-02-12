@@ -5,5 +5,19 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
 
-game = TicTacToe.new
-game.play
+game = Game.new
+game.start
+until game.over?
+  game.play
+end
+
+if game.over?
+  puts "Would you like to play again (Y/N)?"
+  replay = gets.strip
+  if replay.upcase == "Y"
+    game = Game.new
+    until game.won?
+      game.play
+    end
+  end
+end

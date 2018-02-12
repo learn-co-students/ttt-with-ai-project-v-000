@@ -67,6 +67,32 @@ class Game
  end
 
  def start
-
+   puts "How many player(s)? Please enter 0-2:"
+   player_count = gets.strip
+   if player_count == "0"
+     @player_1 = Players::Computer.new("X")
+     @player_2 = Players::Computer.new("O")
+     play
+   elsif player_count == "1"
+     puts "Please choose your token (X/O):"
+     token = gets.strip
+     if token.upcase == "X"
+       @player_1 = Players::Human.new("X")
+       @player_2 = Players::Computer.new("O")
+       play
+     elsif token.upcase == "O"
+       @player_1 = Players::Computer.new("X")
+       @player_2 = Players::Human.new("O")
+       play
+     end
+   elsif player_count == "2"
+     puts "Player 1 is X, Player 2 is O."
+     @player_1 = Players::Human.new("X")
+     @player_2 = Players::Human.new("O")
+     play
+   else
+     puts "Please reenter your response (0-2):"
+     start
+   end
  end
 end
