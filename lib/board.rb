@@ -26,20 +26,20 @@ class Board
   end
 
   def turn_count
-    @cells.count {|position| position == "X" || position == "O"}
+    @cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   def taken?(input)
     position(input) == "X" || position(input) == "O"
   end
 
-  def valid_move?(position)
-    position.to_i.between?(1, 9) && !taken?(position)
+  def valid_move?(input)
+    input.to_i.between?(1, 9) && !taken?(input)
   end
 
-  def update(position, player)
-    if valid_move?(position)
-      @cells[position.to_i - 1] = player.token
+  def update(input, player)
+    if valid_move?(input)
+      @cells[input.to_i - 1] = player.token
     end
   end
 

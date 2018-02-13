@@ -48,9 +48,9 @@ class Game
   end
 
   def turn
-    position = current_player.move(@board)
-    if @board.valid_move?(position)
-      @board.update(position, current_player)
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
     else
       turn
     end
@@ -59,8 +59,10 @@ class Game
   def play
     turn until over?
     if won?
+      @board.display
       puts "Congratulations #{self.winner}!"
     else
+      @board.display
       puts "Cat's Game!"
     end
     #binding.pry
