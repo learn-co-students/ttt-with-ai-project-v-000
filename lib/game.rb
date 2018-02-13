@@ -15,10 +15,39 @@ class Game
     [6,4,2]
   ]
 
-  def initialize(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"), board = board.new)
-    @player_1 = player_1
-    @player_2 = player_2
-    @board = board
+
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    #binding.pry
+      @board = board
+      @player_1 = player_1
+      @player_2 = player_2
+    end
+
+  def current_player
+
   end
+
+  def over?
+
+  end
+
+  def draw?
+
+  end
+
+  def winner
+
+  end
+
+  def turn
+
+  end
+
+  def play
+
+  end
+
+
+
 
 end
