@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+def game_play
+  puts "How many humans will be participating?"
+  input = gets.strip
+  if input.to_i == 0
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+  elsif input.to_i == 1
+    puts "Who will be going first(myself or computer)?"
+    input = gets.strip
+    if input == "computer"
+      Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+    else input == "myself"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    end
+  else input.to_i == 2
+      Game.new.play
+  end
+end
+
+puts "Welcome to triple T! TIC-TAC-TOE!!!"
+game_play
+puts "Would you like to play again?"
+input = gets.strip
+if input == "yes"
+  game_play
+else
+  exit
+end
