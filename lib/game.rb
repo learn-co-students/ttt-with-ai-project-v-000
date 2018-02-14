@@ -49,9 +49,10 @@ class Game
   end
 
   def play
+    board.display
     until over?
       turn
-      board.display if board.turn_count.even?
+      board.display
     end
 
     if won?
@@ -64,7 +65,7 @@ class Game
   def self.start
     puts 'Welcome to Tic Tac Toe'
     loop do
-      player_1 = Players::Human.new('X')
+      player_1 = Players::Computer.new('X')
       player_2 = Players::Computer.new('O')
       game = Game.new(player_1, player_2)
       game.play

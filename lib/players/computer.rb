@@ -30,14 +30,13 @@ module Players
     end
 
     def o_move
-      if turn_count == 1
-        return cells[4] != 'X' ? '5' : %w[1 3 7 9].sample
-      end
+      return cells[4] != 'X' ? '5' : %w[1 3 7 9].sample if turn_count == 1
 
       if turn_count == 3
         d = cells.map { |value| value == 'X' }
         m = CORNER_SITUATIONS.find { |a, b, c| d[a] && d[b] }
         return i2m(m[2]) if m
+        return '4' if (d[0] && d[8]) || (d[2] && d[6])
       end
 
       # check if there is a winning move
