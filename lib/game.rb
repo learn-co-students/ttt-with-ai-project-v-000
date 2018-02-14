@@ -73,12 +73,12 @@ class Game
     loop do
       puts 'Number of players? [0/1/2]'
       n = nil
-      unless [0, 1, 2].include?(n)
+      until [0, 1, 2].include?(n)
         n = gets.strip.to_i
       end
 
       first = nil
-      unless %w[me computer comp].include?(first)
+      until %w[me computer comp].include?(first)
         first = gets.strip
       end
 
