@@ -44,8 +44,13 @@ class Game
   end
 
   def turn
-    input = current_player.move(board)
-    board.valid_move?(input) ? board.update(input, current_player) : turn
+    loop do
+      input = current_player.move(board)
+      if board.valid_move?(input)
+        board.update(input, current_player)
+        break
+      end
+    end
   end
 
   def play
@@ -70,9 +75,8 @@ class Game
       player_2 = Players::Computer.new('O')
       game = Game.new(player_1, player_2)
       w = game.play
-      # puts 'Play again? [Y/n]'
-      # break if %w[n no N NO].include?(gets.strip)
-      break if w == 'O'
+      puts 'Play again? [Y/n]'
+      break if %w[n no N NO].include?(gets.strip)
     end
   end
 end
