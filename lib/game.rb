@@ -1,6 +1,6 @@
 
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :name
 
   WIN_COMBINATIONS = [
 [0,1,2],
@@ -13,7 +13,8 @@ class Game
 [2,4,6]
 ]
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+
+  def initialize(player_1, player_2, board)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
@@ -22,9 +23,9 @@ class Game
 
   def current_player
     if @board.turn_count.even?
-      player_1
+      @player_1
     elsif @board.turn_count.odd?
-      player_2
+      @player_2
     end
   end
 
@@ -35,7 +36,6 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect {|i| @board.cells[i[0]] == @board.cells[i[1]] && @board.cells[i[1]] == @board.cells[i[2]] && @board.taken?(i[0]+1)}
-
   end
 
   def draw?
@@ -50,9 +50,9 @@ class Game
   end
 
   def turn
+    puts "Its #{current_player}'s turn"
     @board.display
     input = current_player.move(@board)
-    puts "Its #{current_player}'s turn"
     if !@board.valid_move?(input)
       puts "#{input} Invalid move!"
       turn
@@ -65,7 +65,6 @@ class Game
     puts "Welcome to Tic Tac Toe!"
     while !over?
       turn
-    end
       if won?
         puts "Congratulations #{winner}!"
         @board.display
@@ -74,25 +73,7 @@ class Game
         @board.display
       end
     end
-
-    def win_predictor
-      # WIN_COMBINATIONS.detect do |combo|
-      #   combo.select {|i| @board.position(i) == current_player.token}.count == 2
-      #     combo.select {|i| move = !@board.taken?(i)}
-      #     end
-        end
-
-
-
-        # def win_predictor
-        #   current_board = ["X", "X", " ", " ", "O", " ", " ", " ", " "]
-        #   WIN_COMBINATIONS.detect do |combo|
-        #     combo.select {|i| @board.position(i+1) == current_player.token}.count == 2
-        #       binding.pry
-        #       combo.select {|i| move = !@board.cells.taken?(i)}
-        #         move
-        #       end
-        #     end
+    end
 
 
 end

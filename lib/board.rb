@@ -2,6 +2,18 @@ class Board
 
   attr_accessor :cells
 
+  def solutions(board)
+    if board.cells[0] == "O" && board.cells[1] == "O" && board.cells[2] == " "
+      "3"
+    elsif board.cells[0] == " " && board.cells[3] == "O" && board.cells[6] == "O"
+      "1"
+    elsif board.cells[0] == "O" && board.cells[3] == " " && board.cells[6] == "O"
+      "4"
+    elsif board.cells[0] == "O" && board.cells[3] == "O" && board.cells[6] == " "
+      "7"
+    end
+  end
+
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
@@ -57,6 +69,7 @@ class Board
   def update(input, player)
     cells[input.to_i - 1] = player.token
   end
+
 
 
 
