@@ -52,7 +52,7 @@ class Game
     board.display
     until over?
       turn
-      board.display
+      board.display if board.turn_count.even?
     end
 
     if won?
@@ -60,6 +60,7 @@ class Game
     else
       puts "Cat's Game!"
     end
+    winner
   end
 
   def self.start
@@ -68,9 +69,10 @@ class Game
       player_1 = Players::Computer.new('X')
       player_2 = Players::Computer.new('O')
       game = Game.new(player_1, player_2)
-      game.play
-      puts 'Play again? [Y/n]'
-      break if %w[n no N NO].include?(gets.strip)
+      w = game.play
+      # puts 'Play again? [Y/n]'
+      # break if %w[n no N NO].include?(gets.strip)
+      break if w == 'O'
     end
   end
 end

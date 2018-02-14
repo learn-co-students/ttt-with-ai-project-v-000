@@ -20,13 +20,26 @@ module Players
       [8, 1, 2], [8, 3, 6]
     ].freeze
 
+    TURN_TWO_X =       [
+            [0, 2, 1, 6, 3],
+            [2, 0, 1, 8, 5],
+            [6, 0, 3, 8, 7],
+            [8, 6, 7, 2, 5]
+          ].freeze
+
     attr_accessor :cells, :composition, :turn_count, :fi
 
     def move(board)
       self.cells = board.cells
       self.composition = board_composition
       self.turn_count = board.turn_count
+      return new_o if self.token == 'O'
       return self.token == 'X' ? x_move : o_move
+    end
+
+    def new_o
+      m = check_for_comp(0, 2, 1)
+      m ? m : %w[1 2 3 4 5 6 7 8 9].sample
     end
 
     def o_move
@@ -51,8 +64,8 @@ module Players
     end
 
     def x_move
-      m = rand_corner if [0, 2].include?(turn_count)
-      return m if m
+      return rand_corner if turn_count == 0
+      return turn_two if turn_count == 2
 
       # check if there is a winning move
       m = check_for_comp(2, 0, 1)
@@ -62,7 +75,7 @@ module Players
       m = check_for_comp(0, 2, 1)
       return m if m
 
-      m = rand_corner
+      m = turn_two
       return m if m
 
       %w[1 2 3 4 5 6 7 8 9].sample
@@ -70,6 +83,15 @@ module Players
 
     def rand_corner
       i = [0, 2, 6, 8].find_all { |e| cells[e] == ' ' }.sample
+      i2m(i) if i
+    end
+
+    def turn_two
+      result = []
+      TURN_TWO_X.each do |a, b, c, d, e|
+        result << a unless (cells[b] == 'X' && cells[c] == 'O') || (cells[d] == 'x' && cells[e] == 'O')
+      end
+      i = result.sample
       i2m(i) if i
     end
 
