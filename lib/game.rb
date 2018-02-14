@@ -69,10 +69,36 @@ class Game
   end
 
   def self.start
-    puts 'Welcome to Tic Tac Toe'
+    puts 'Welcome to Tic Tac Toe!'
     loop do
-      player_1 = Players::Computer.new('X')
-      player_2 = Players::Computer.new('O')
+      puts 'Number of players? [0/1/2]'
+      n = nil
+      unless [0, 1, 2].include?(n)
+        n = gets.strip.to_i
+      end
+
+      first = nil
+      unless %w[me computer comp].include?(first)
+        first = gets.strip
+      end
+
+      case n
+      when 0
+        player_1 = Players::Computer.new('X')
+        player_2 = Players::Computer.new('O')
+      when 1
+        if first == 'me'
+          player_1 = Players::Human.new('X')
+          player_2 = Players::Computer.new('O')
+        else
+          player_1 = Players::Computer.new('X')
+          player_2 = Players::Human.new('O')
+        end
+      else
+        player_1 = Players::Human.new('X')
+        player_2 = Players::Human.new('O')
+      end
+
       game = Game.new(player_1, player_2)
       w = game.play
       puts 'Play again? [Y/n]'

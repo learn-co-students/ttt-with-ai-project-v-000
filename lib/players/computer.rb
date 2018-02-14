@@ -20,7 +20,7 @@ module Players
       [8, 1, 2], [8, 3, 6]
     ].freeze
 
-    TURN_TWO_X = [
+    BETTER_CORNER_CONDITIONS = [
       [0, 2, 1, 6, 3],
       [2, 0, 1, 8, 5],
       [6, 0, 3, 8, 7],
@@ -90,7 +90,7 @@ module Players
 
     def better_corner
       result = []
-      TURN_TWO_X.each do |a, b, c, d, e|
+      BETTER_CORNER_CONDITIONS.each do |a, b, c, d, e|
         result << a unless (cells[b] == 'X' && cells[c] == 'O') || (cells[d] == 'X' && cells[e] == 'O')
       end
       i = result.find_all { |e| cells[e] == ' ' }.sample
