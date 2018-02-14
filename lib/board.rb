@@ -24,7 +24,7 @@ class  Board
          self.cells[input.to_i - 1]
       end
 
-      
+
       def full?
         cells.all? do |element|  #element could be anything
           element == "X" || element == "O"
@@ -32,7 +32,7 @@ class  Board
 
       end
 
-      def turn_count
+     def turn_count
         turn_count = 0
         cells.each do |cell|
         "number of turns played is #{cells}"

@@ -4,6 +4,7 @@ class Player
     def initialize(token)
       #token "x" or "o"
       @token = token
-
     end
+
+
 end
