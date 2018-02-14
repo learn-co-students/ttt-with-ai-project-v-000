@@ -68,6 +68,8 @@ class Game
       player_2 = Players::Computer.new('O')
       game = Game.new(player_1, player_2)
       game.play
+      puts 'Play again? [Y/n]'
+      break if %w[n no N NO].include?(gets.strip)
     end
   end
 end
