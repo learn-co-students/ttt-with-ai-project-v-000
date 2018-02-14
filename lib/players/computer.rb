@@ -1,5 +1,3 @@
-require 'pry'
-
 module Players
   class Computer < Player
     WIN_COMBINATIONS = [
@@ -20,11 +18,7 @@ module Players
       [8, 1, 2], [8, 3, 6]
     ].freeze
 
-<<<<<<< HEAD
     BETTER_CORNER_CONDITIONS = [
-=======
-    TURN_TWO_X = [
->>>>>>> edc398010cec736ce6e4bd9a2344111d5e692741
       [0, 2, 1, 6, 3],
       [2, 0, 1, 8, 5],
       [6, 0, 3, 8, 7],
@@ -94,11 +88,7 @@ module Players
 
     def better_corner
       result = []
-<<<<<<< HEAD
       BETTER_CORNER_CONDITIONS.each do |a, b, c, d, e|
-=======
-      TURN_TWO_X.each do |a, b, c, d, e|
->>>>>>> edc398010cec736ce6e4bd9a2344111d5e692741
         result << a unless (cells[b] == 'X' && cells[c] == 'O') || (cells[d] == 'X' && cells[e] == 'O')
       end
       i = result.find_all { |e| cells[e] == ' ' }.sample

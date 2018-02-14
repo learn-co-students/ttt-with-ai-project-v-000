@@ -78,31 +78,29 @@ class Game
       end
 
       first = nil
-      until %w[me computer comp].include?(first)
-        first = gets.strip
+      if n == 1
+        puts 'Who goes first? [me/computer]'
+        until %w[me computer comp].include?(first)
+          first = gets.strip
+        end
       end
 
-      case n
-      when 0
-        player_1 = Players::Computer.new('X')
-        player_2 = Players::Computer.new('O')
-      when 1
-        if first == 'me'
-          player_1 = Players::Human.new('X')
-          player_2 = Players::Computer.new('O')
-        else
-          player_1 = Players::Computer.new('X')
-          player_2 = Players::Human.new('O')
-        end
-      else
-        player_1 = Players::Human.new('X')
-        player_2 = Players::Human.new('O')
-      end
+      player_1, player_2 = generate_players(n, first)
 
       game = Game.new(player_1, player_2)
       w = game.play
       puts 'Play again? [Y/n]'
       break if %w[n no N NO].include?(gets.strip)
     end
+  end
+
+  def self.generate_players(n, first)
+    one = n == 0 || (n == 1 && first != 'me')
+    player_1 = one ? Players::Computer.new('X') : Players::Human.new('X')
+
+    two = n == 0 || (n == 1 && first == 'me')
+    player_2 = two ? Players::Computer.new('O') : Players::Human.new('O')
+
+    [player_1, player_2]
   end
 end
