@@ -67,13 +67,13 @@ class Game
   def self.start
     puts 'Welcome to Tic Tac Toe!'
     loop do
-      puts 'Number of players? [0/1/2]'
+      puts 'Number of players? [ 0 / 1 / 2 ]'
       n = nil
       n = gets.strip.to_i until [0, 1, 2].include?(n)
 
       first = nil
       if n == 1
-        puts 'Who goes first? [me/computer]'
+        puts 'Who goes first? [ me / computer ]'
         first = gets.strip until %w[me computer comp].include?(first)
       end
 
@@ -81,8 +81,8 @@ class Game
 
       game = Game.new(player_1, player_2)
       w = game.play
-      puts 'Play again? [Y/n]'
-      break if %w[n no N NO].include?(gets.strip)
+      puts 'Play again? [ y / N ]'
+      break if ['n', 'no', 'N', 'NO', ''].include?(gets.strip)
     end
   end
 
