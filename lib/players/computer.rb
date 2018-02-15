@@ -25,18 +25,19 @@ module Players
       [8, 6, 7, 2, 5]
     ].freeze
 
-    attr_accessor :cells, :composition, :turn_count
+    attr_accessor :cells, :composition, :turn_count, :board
 
     def move(board)
       self.cells = board.cells
       self.composition = board_composition
       self.turn_count = board.turn_count
+      self.board = board
       return self.token == 'X' ? x_move : o_move
     end
 
     def random_move
       m = check_for_comp(0, 2, 1)
-      m ? m : %w[1 2 3 4 5 6 7 8 9].sample
+      m ? m : random_space
     end
 
     def o_move
@@ -60,7 +61,7 @@ module Players
       m = rand_corner
       return m if m
 
-      %w[1 2 3 4 5 6 7 8 9].sample
+      random_space
     end
 
     def x_move
@@ -78,7 +79,7 @@ module Players
       m = better_corner
       return m if m
 
-      %w[1 2 3 4 5 6 7 8 9].sample
+      random_space
     end
 
     def rand_corner
@@ -129,6 +130,10 @@ module Players
 
     def i2m(i)
       (i + 1).to_s
+    end
+
+    def random_space
+      %w[1 2 3 4 5 6 7 8 9].reject { |e| board.taken?(e) }.sample
     end
   end
 end
