@@ -32,7 +32,8 @@ module Players
       self.composition = board_composition
       self.turn_count = board.turn_count
       self.board = board
-      return self.token == 'X' ? x_move : o_move
+
+      token == 'X' ? x_move : o_move
     end
 
     def random_move
