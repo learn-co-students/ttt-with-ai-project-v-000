@@ -2,15 +2,15 @@ class Game
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [2,5,8],
-    [1,4,7],
-    [0,4,8],
-    [6,4,2],
-  ]
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [2, 5, 8],
+    [1, 4, 7],
+    [0, 4, 8],
+    [6, 4, 2]
+  ].freeze
 
   def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
     self.board = board
@@ -73,16 +73,12 @@ class Game
     loop do
       puts 'Number of players? [0/1/2]'
       n = nil
-      until [0, 1, 2].include?(n)
-        n = gets.strip.to_i
-      end
+      n = gets.strip.to_i until [0, 1, 2].include?(n)
 
       first = nil
       if n == 1
         puts 'Who goes first? [me/computer]'
-        until %w[me computer comp].include?(first)
-          first = gets.strip
-        end
+        first = gets.strip until %w[me computer comp].include?(first)
       end
 
       player_1, player_2 = generate_players(n, first)
