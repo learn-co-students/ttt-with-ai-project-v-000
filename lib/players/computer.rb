@@ -4,7 +4,7 @@ module Players
 
 
     def move(board)
-      sleep 0.5
+      sleep 0.03
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       corner_moves = ["1", "3", "7", "9"]
       cross_moves = ["2", "4", "6", "8"]

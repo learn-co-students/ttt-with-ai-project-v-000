@@ -9,7 +9,8 @@ require_relative '../config/environment'
    puts "1. Human vs AI"
    puts "2. Human vs Human"
    puts "3. AI vs AI"
-   puts "4. Exit game"
+   puts "4. War Games!"
+   puts "5. Exit game"
    input = gets.strip
 
    if input == "1"
@@ -41,11 +42,26 @@ require_relative '../config/environment'
     elsif input == "3"
      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
      game.play
-     sleep 2
-      count += 1
-  
-    elsif input == "4"
-   end
- end
 
+    elsif input == "4"
+     count = 0
+     wins = 0
+     draws = 0
+     until count == 1000
+       sleep 0.3
+       game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+       game.play
+       count+=1
+       if game.draw?
+         draws+=1
+       elsif game.won?
+         wins+=1
+       end
+       board.display
+       puts "Wins = #{wins}"
+       puts "Draws = #{draws}"
+      end
+    elsif input == "5"
+    end
+  end
 menu
