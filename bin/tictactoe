@@ -64,4 +64,5 @@ require_relative '../config/environment'
     elsif input == "5"
     end
   end
-menu
+
+  menu

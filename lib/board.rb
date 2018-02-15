@@ -28,13 +28,13 @@ class Board
   end
 
   def turn_count
-  counter = 0
-  cells.each do |spot|
-    if spot == "X" || spot == "O"
-      counter += 1
+    counter = 0
+    cells.each do |spot|
+      if spot == "X" || spot == "O"
+        counter += 1
+        end
       end
-    end
-  counter
+    counter
   end
 
   def taken?(input)
@@ -57,8 +57,5 @@ class Board
   def update(input, player)
     cells[input.to_i - 1] = player.token
   end
-
-
-
 
 end
