@@ -28,13 +28,13 @@ module Players
               end
             end
 
-          # elsif opp_tokens == 2 && empty_space == 1
-          #   combo.detect do |i|
-          #     if board.position(i+1) == " "
-          #       spot = i+1
-          #       return spot.to_s
-          #     end
-          #   end
+          elsif opp_tokens == 2 && empty_space == 1
+            combo.detect do |i|
+              if board.position(i+1) == " "
+                spot = i+1
+                return spot.to_s
+              end
+            end
          end
         end
       elsif board.turn_count > 2
