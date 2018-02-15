@@ -42,14 +42,10 @@ module Players
     end
 
     def o_move
-      return cells[4] != 'X' ? '5' : %w[1 3 7 9].sample if turn_count == 1
+      return middle_or_corner if turn_count == 1
 
-      if turn_count == 3
-        d = cells.map { |value| value == 'X' }
-        m = CORNER_SITUATIONS.find { |a, b, c| d[a] && d[b] }
-        return i2m(m[2]) if m
-        return '4' if (d[0] && d[8]) || (d[2] && d[6])
-      end
+      m = o_turn_three if turn_count == 3
+      return m if m
 
       # check if there is a winning move
       m = check_for_comp(0, 2, 1)
@@ -63,6 +59,17 @@ module Players
       return m if m
 
       random_space
+    end
+
+    def middle_or_corner
+      cells[4] != 'X' ? '5' : %w[1 3 7 9].sample
+    end
+
+    def o_turn_three
+      d = cells.map { |value| value == 'X' }
+      m = CORNER_SITUATIONS.find { |a, b, c| d[a] && d[b] }
+      return i2m(m[2]) if m
+      '4' if (d[0] && d[8]) || (d[2] && d[6])
     end
 
     def x_move
