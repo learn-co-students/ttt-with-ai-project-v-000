@@ -53,7 +53,6 @@ class Game
     @board.display
     input = current_player.move(@board)
     if !@board.valid_move?(input)
-      binding.pry
       puts "#{input} Invalid move!"
       turn
     elsif @board.valid_move?(input)
@@ -62,18 +61,17 @@ class Game
   end
 
   def play
-    puts "Welcome to Tic Tac Toe!"
-    while !over?
+    until over?
       turn
-      if won?
-        puts "Congratulations #{winner}!"
-        @board.display
-      elsif draw?
-        puts "Cat's Game!"
-        @board.display
-      end
     end
+    if won?
+      puts "Congratulations #{winner}!"
+      @board.display
+    elsif draw?
+      puts "Cat's Game!"
+      @board.display
     end
+  end
 
 
 end

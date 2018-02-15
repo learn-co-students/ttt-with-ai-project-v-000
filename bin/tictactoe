@@ -4,6 +4,7 @@ require_relative '../config/environment'
 
 
  def menu
+   puts "Welcome to Tic Tac Toe!"
    puts "Select which game you want to play"
    puts "1. Human vs AI"
    puts "2. Human vs Human"
@@ -13,8 +14,6 @@ require_relative '../config/environment'
 
    if input == "1"
      puts "Who should go first and be X?"
-     #puts "Player 1's name is?"
-     #player_1 = gets.strip
      puts "1. Human"
      puts "2. Computer"
      input = gets.strip
@@ -40,13 +39,11 @@ require_relative '../config/environment'
       end
 
     elsif input == "3"
-      count = 0
-      while count < 10 do
      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
      game.play
      sleep 2
       count += 1
-    end
+  
     elsif input == "4"
    end
  end
