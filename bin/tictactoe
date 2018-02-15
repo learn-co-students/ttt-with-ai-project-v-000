@@ -40,8 +40,13 @@ require_relative '../config/environment'
       end
 
     elsif input == "3"
+      count = 0
+      while count < 10 do
      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
      game.play
+     sleep 2
+      count += 1
+    end
     elsif input == "4"
    end
  end
