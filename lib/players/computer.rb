@@ -14,11 +14,12 @@ module Players
       elsif board.turn_count >= 3
         winning_moves(board)
       end
-   
+    end
   
       
   def winning_moves(board)
-        Game::WIN_COMBINATIONS.detect do |win_combinations|
+        position = ""
+        Game::WIN_COMBINATIONS.each do |win_combinations|
           # win_combinations == [3,4,5]
           index_1 = win_combinations[0] # 3
           index_2 = win_combinations[1] # 4
@@ -27,16 +28,16 @@ module Players
           position_1 = board.cells[index_1] 
           position_2 = board.cells[index_2]
           position_3 = board.cells[index_3]
-          
-          if position_1 == position_2 && board.taken?(position_1) 
-            position_3
-          elsif position_1 == position_3 && board.taken?(position_1) 
-            position_2
-          elsif position_2 == position_3 && board.taken?(position_2) 
-            position_1  
-        end 
+          #binding.pry
+          if position_1 == position_2 && board.taken?(index_1) 
+            position = index_3
+          elsif position_1 == position_3 && board.taken?(index_1) 
+            position = index_2
+          elsif position_2 == position_3 && board.taken?(index_2) 
+            position = index_1  
+          end
       end
-   end 
-  end 
-end
+      position
+    end 
+  end
 end
