@@ -19,7 +19,6 @@ class Game
   end
   
   def current_player
-  binding.pry
     if board.turn_count.even?
       @player_1
     elsif board.turn_count.odd?
@@ -33,6 +32,11 @@ class Game
   
   def over?
     draw? || won?
+  end 
+  
+  
+  def draw?
+    board.cells.all?{|space| space =="X"|| space =="O"}
   end
   
   def won?
@@ -66,13 +70,21 @@ class Game
     input = player.move(board)
     if board.valid_move?(input)
       board.update(input, player)
+      board.display
     else
       turn
     end
   end  
   
   def play 
-    turn until over?
+    while !over?
+      turn
+    end 
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end 
   end 
-   
+  
 end 
