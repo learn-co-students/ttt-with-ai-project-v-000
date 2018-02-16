@@ -1,6 +1,6 @@
 class Game
   attr_accessor :board, :player_1, :player_2
-  attr_reader
+  attr_reader :players
 
   WIN_COMBINATIONS = [
     [2,5,8],
@@ -44,22 +44,60 @@ class Game
 
   def turn
     move = current_player.move(board)
-    turn if !board.valid_move?(move)
-    board.update(move, current_player)
-
-  end
-
-  def play
-    turn until over?
-
-    if won?
-      puts "Congratulations #{winner}!"
+    if !board.valid_move?(move)
+      turn
     else
-      puts "Cat's Game!"
+      board.update(move, current_player)
+      board.display
     end
   end
 
-  def start
+  def play
+    board.display
+    turn until over?
+    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
 
+
+    puts "Would you like to play again? (Y/n)"
+    input = gets.strip.downcase
+
+    start unless input == "n"
+  end
+
+  def start
+    puts "What kind of game would you like to play? (0/1/2)-player"    # /s can be converted to 0 with to_i
+    @players = gets.strip
+    start unless ["0", "1", "2"].include?(players)
+    call_start_player
+  end
+
+  def call_start_player
+     case players
+     when "0"
+       p1_name = "Computer 1"
+       p2_name = "Computer 2"
+       p1 = Players::Computer.new("X")
+       p2 = Players::Computer.new("0")
+     when "1"
+       p1_name = "Player"
+       p2_name = "Computer"
+       p1 = Players::Human.new("X")
+       p2 = Players::Computer.new("0")
+     when "2"
+       p1_name = "Player 1"
+       p2_name = "Player 2"
+       p1 = Players::Human.new("X")
+       p2 = Players::Human.new("0")
+     end
+
+     p1.name = p1_name
+     p2.name = p2_name
+
+    puts "Who should go first and be \"X\"? #{p1.name}(1) or #{p2.name}(2)?"
+    start_player = gets.strip.to_i
+    call_start_player unless [1,2].include?(start_player)
+
+    puts start_player == 1 ? "#{p1.name} is starting against #{p2.name}." : "#{p2.name} is starting against #{p1.name}."
+    start_player == 1 ? Game.new(p1, p2).play : Game.new(p2, p1).play
   end
 end
