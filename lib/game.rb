@@ -11,41 +11,45 @@ class Game
       @player_1 = player_1
       @player_2 = player_2
       @board = board
-    end
-
-    def turn_count
-      self.board.cells.count{|square| square != " " }
+      @win = []
     end
 
     def current_player
-      turn_count.even? ? self.player_1 : self.player_2
+      board.turn_count.even? ? self.player_1 : self.player_2
     end
 
     def won?
-      WIN_COMBINATIONS.any? do |combo|
-        if board.position(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
-          return combo
-        end
+      WIN_COMBINATIONS.detect do |combo|
+         @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
       end
     end
 
-  def draw?
-    board.full? && !won?
-  end
+    def draw?
+      board.full? && !won?
+    end
 
-  def over?
-    won? || draw?
-  end
+    def over?
+      won? || draw?
+    end
 
-  def winner
-      if combo = won?
-        @board[combo[0]]
-      end
+    def winner
+      win = won?
+      self.board.cells[win[0]] == " " ? nil : self.board.cells[win[0]]
+    end
+
+    def turn
+      input = current_player.move(board)
+      board.valid_move?(input) ? board.update(input, current_player) : turn
     end
 
     def play
       turn until over?
-      puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+      #binding.pry
+      if winner == nil
+        puts "Cat's Game!"
+      else
+        puts "Congratulations #{winner}!"
+      end
     end
 
 end
