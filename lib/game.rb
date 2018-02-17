@@ -56,11 +56,13 @@ class Game
     board.display
     turn until over?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+    replay  # breaks the 04_game_spec test if it's not removed
+  end
 
-
+  def replay
     puts "Would you like to play again? (Y/n)"
     input = gets.strip.downcase
-
+    replay unless ["y","n"].include?(input)
     start unless input == "n"
   end
 
@@ -68,36 +70,52 @@ class Game
     puts "What kind of game would you like to play? (0/1/2)-player"    # /s can be converted to 0 with to_i
     @players = gets.strip
     start unless ["0", "1", "2"].include?(players)
+    player_names
     call_start_player
   end
 
-  def call_start_player
+  def player_names
      case players
      when "0"
-       p1_name = "Computer 1"
-       p2_name = "Computer 2"
-       p1 = Players::Computer.new("X")
-       p2 = Players::Computer.new("0")
+       ["Computer 1", "Computer 2"]
      when "1"
-       p1_name = "Player"
-       p2_name = "Computer"
-       p1 = Players::Human.new("X")
-       p2 = Players::Computer.new("0")
+       ["Player", "Computer"]
      when "2"
-       p1_name = "Player 1"
-       p2_name = "Player 2"
-       p1 = Players::Human.new("X")
-       p2 = Players::Human.new("0")
+       ["Player 1", "Player 2"]
      end
+   end
 
-     p1.name = p1_name
-     p2.name = p2_name
-
-    puts "Who should go first and be \"X\"? #{p1.name}(1) or #{p2.name}(2)?"
+  def call_start_player
+    puts "Who should go first and be \"X\"? #{player_names[0]}(1) or #{player_names[1]}(2)?"
     start_player = gets.strip.to_i
     call_start_player unless [1,2].include?(start_player)
 
-    puts start_player == 1 ? "#{p1.name} is starting against #{p2.name}." : "#{p2.name} is starting against #{p1.name}."
-    start_player == 1 ? Game.new(p1, p2).play : Game.new(p2, p1).play
+    case players
+    when "0"
+      p1 = Players::Computer.new("X")
+      p2 = Players::Computer.new("0")
+    when "1"
+      if start_player == 1
+        p1 = Players::Human.new("X")
+        p2 = Players::Computer.new("0")
+      else
+        p1 = Players::Computer.new("X")
+        p2 = Players::Human.new("0")
+      end
+    when "2"
+      p1 = Players::Human.new("X")
+      p2 = Players::Human.new("0")
+    end
+
+   if start_player == 1
+     p1.name = player_names[0]
+     p2.name = player_names[1]
+   else
+     p1.name = player_names[1]
+     p2.name = player_names[0]
+   end
+
+    puts "#{p1.name} is starting against #{p2.name}."
+    Game.new(p1, p2).play
   end
 end
