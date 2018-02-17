@@ -3,9 +3,10 @@ module Players
     def move(board)
       # When going first, take the middle square. When going second, take the middle square if it isn't yet taken.
        if !board.taken?(5)
-         move= "5"
+         move = "5"
       # If going second and the middle square is taken, take the upper-left corner square.
-
+      elsif board.turn_count == 1
+        move = "1"
       # If you went first (and took the middle), take a corner square with your second move.
 
       # If you went second (and took the middle) and the other player has occupied opposing corner squares, blow up the attempted trap by taking a side square.
