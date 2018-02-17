@@ -36,7 +36,7 @@ module Players
 
 
 
-      # winning_move(board, self.token)  #work on advanced later
+      winning_move(board, self.token)  #work on advanced later
       center_move(board) ||
       corner_move(board, opponent) ||
       side_move(board)
@@ -70,12 +70,11 @@ module Players
          if board.valid_move?(move)
            board_cells[move.to_i-1] = player_token
 
-           win = WIN_COMBINATIONS.detect do |combo|
+            WIN_COMBINATIONS.detect do |combo|
             board_cells[combo[0]] ==board_cells[combo[1]] &&
             board_cells[combo[1]] ==board_cells[combo[2]]
            end
 
-           win.size > 0
          end
        end
     end
