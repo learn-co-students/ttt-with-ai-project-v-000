@@ -11,5 +11,6 @@ if input == "1"
 elsif input == "2"
   Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O")).play
 elsif input == "3"
-  Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O")).play
-end 
+  game_1 = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O")).play
+  game_1
+  end 
