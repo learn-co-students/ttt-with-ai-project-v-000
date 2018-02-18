@@ -3,21 +3,21 @@ module Players
     #attr_accessor :game
 
     def move(board)
-      rand(1..9).to_s
-      #optimal_moves = [5,1,7,3,9, @game.board.cells.index(" " + 1)]
-      #if almost_won != nil
-      #  win_or_block + 1
-      #else
-      #  optimal_moves.detect{ |move| @game.board.valid_move?(move)}
-      #end
+      move = nil
 
-      #def other_token
-      #  if self.token == @game.player_2.token
-      #    @game.player_1.token
-      #  else
-      #    @game.player_2.token
-      #  end
-      #end
+      if !board.taken?(5)
+        move = "5"
+      elsif board.turn_count >= 2
+        move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}.to_s
+      else
+        Game::WIN_COMBINATIONS.detect do |combo|
+          if combo.select{|i| board.position(i+1) == token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
+            move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+          elsif combo.select{|i| !board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
+            move = combo.select{|i| !board.taken?(i+1)}.first.to_i+(1).to_s
+          end
+        end
+      end 
 
       #def almost_won
       #  @game.win_indexes.index{|index| index == ["#{self.token}","#{self.token}", " "] ||
