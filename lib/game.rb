@@ -57,13 +57,6 @@ class Game
         else
           puts "Cat's Game!"
         end
-        puts "Would you like to play again? (Y/N)"
-        again = gets.chomp
-        if again == "Y" || again == "y"
-          self.start
-        else
-          puts "Good-bye"
-        end
       end
     end
 
@@ -90,6 +83,13 @@ class Game
           game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
           game.play
         else
+          puts "Not a valid choice."
+      end
+      puts "Would you like to play again?  Press Y/y for yes.)"
+      again = gets.chomp
+      if again == "Y" || again == "y"
+        self.start
+      else
         puts "Good-bye"
       end
     end
