@@ -19,7 +19,4 @@ else play.downcase == "y" || play.downcase == "yes"
   else play == 0
     Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
   end
-  until game.won?
-    game.play
-  end
 end
