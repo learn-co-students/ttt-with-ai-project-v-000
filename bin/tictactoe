@@ -4,11 +4,11 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
 play = ""
-until play_again.downcase == "n" || play.downcase == "no"
+until play.downcase == "n" || play.downcase == "no"
   puts "Would you like to play? Enter yes (y) or no (n):"
   play = gets.strip
   play.downcase == "y" || play.downcase == "yes"
-  game = Game.new
+    game = Game.new
   until game.won?
     game.play
   end
