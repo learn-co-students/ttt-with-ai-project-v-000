@@ -41,12 +41,15 @@ class Game
     end
 
     def turn
+      board.display
+      puts " "
       input = current_player.move(board)
       board.valid_move?(input) ? board.update(input, current_player) : turn
     end
 
     def play
       turn until over?
+      board.display
       if over?
         if won?
           who = winner
@@ -54,6 +57,40 @@ class Game
         else
           puts "Cat's Game!"
         end
+        puts "Would you like to play again? (Y/N)"
+        again = gets.chomp
+        if again == "Y" || again == "y"
+          self.start
+        else
+          puts "Good-bye"
+        end
+      end
+    end
+
+    def start
+      puts "Welcome to Tic-tac-toe"
+      puts "Would you like to play:"
+      puts "0 - Zero player Tic-tac-toe"
+      puts "1 - One player Tic-tac-toe"
+      puts "2 -  Two player Tic-tac-toe"
+      puts "Enter 0, 1 or 2"
+      game_preference = gets.chomp
+      case game_preference
+        when "0"
+          puts "Begin computer Tic-tac-toe"
+          game = Game.new(Players::Computer.new("X"), Players::Computer.new("0"))
+          game.play
+        when "1"
+          puts "Begin one player Tic-tac-toe"
+          game = Game.new(Players::Human.new("X"), Players::Computer.new("0"))
+          game.play
+        when "2"
+          puts "Begin two player Tic-tac-toe"
+          puts "Choose a player to go first as X and enter a move (1-9)"
+          game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+          game.play
+        else
+        puts "Good-bye"
       end
     end
 
