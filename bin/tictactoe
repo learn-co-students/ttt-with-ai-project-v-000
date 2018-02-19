@@ -13,10 +13,10 @@ else play.downcase == "y" || play.downcase == "yes"
   puts "Would you like to play two player (2), single player (1) or be a spectator (0)?"
   play = gets.strip
   if play == 2
-    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
   elsif play == 1
-    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
   else play == 0
-    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
   end
 end
