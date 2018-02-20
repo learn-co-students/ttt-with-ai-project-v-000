@@ -14,8 +14,9 @@ module Players
     def move(board)
       puts "#{self.name} as #{self.token} is moving."
 
-      winning_move(board, self.token) ||  #work on advanced later
-      blocking_move(board, opponent.token) ||
+      best_move(board) ||
+      #winning_move(board, self.token) ||  #work on advanced later
+      #blocking_move(board, opponent.token) ||
       center_move(board) ||
       corner_move(board, opponent.token) ||
       side_move(board)
@@ -80,6 +81,42 @@ module Players
 
   end
 end
+
+def best_move(board)
+  valid_moves = {}
+
+  {"1", "2", "3", "4", "5", "6", "7", "8", "9"}.each{|move| valid_moves[move] = 0 if board.valid_move?(move)}
+
+  valid_moves.each do |move, score|
+    board.update(move, self)
+    WIN_COMBINATIONS.each do |combo|
+      self_moves = combo.count{|cell| cell == self.token}
+      opponent_moves = combo.count{|cell| cell == opponent.token}
+      valid_moves = combo.count.{|cell| cell == " "}
+
+      if self_moves == 2 && valid_moves == 1
+      score += 100
+      else
+      score += self_moves * 10
+      end
+
+      if opponent_moves == 2 && valid moves == 1
+      score -= 100
+      else
+     score -= opponent_moves * 10
+      end
+
+      valid_moves[move] += score
+    end
+    board.reset_cell!(move)
+  end
+
+  valid_moves.max_by{|move, score| score}.key
+end
+
+
+
+
 
 # stage 0 random valid move
 # stage 1 simplest computer strategy is move in this order: the center, one of the four corners, one of the four sides
