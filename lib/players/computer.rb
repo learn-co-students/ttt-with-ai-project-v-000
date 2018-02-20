@@ -1,29 +1,19 @@
 module Players
 
   class Computer < Player
-    WIN_COMBINATIONS = [
-      [2,5,8],
-      [0,1,2],
-      [3,4,5],
-      [6,7,8],
-      [0,3,6],
-      [1,4,7],
-      [0,4,8],
-      [6,4,2]]
 
     def move(board)
       puts "#{self.name} as #{self.token} is moving."
 
-      best_move(board) ||
-      #winning_move(board, self.token) ||  #work on advanced later
-      #blocking_move(board, opponent.token) ||
+      win_or_block_move(board, self.token) ||
+      win_or_block_move(board, opponent_token) ||
       center_move(board) ||
-      corner_move(board, opponent.token) ||
+      corner_move(board, opponent_token) ||  #best move in this case
       side_move(board)
     end
 
-    def opponent
-      Player.all.detect {|player| player != self}
+    def opponent_token
+      self.token == "X" ? "O" : "X"
     end
 
     def center_move(board)
@@ -51,71 +41,18 @@ module Players
       ["2", "4" ,"6", "8"].select{|move| board.valid_move?(move)}.sample
     end
 
-    def winning_move(board, player_token)
-      puts "winning move cleared"
-       ["1", "2", "3", "4", "5", "6", "7", "8", "9"].select{|move| board.valid_move?(move)}.detect do |move|
-           board.update(move, self)
-           winning = won?(board, player_token)
-           board.reset_cell!(move)
-           puts "winning move play" if winning
-           winning
-       end
+   def win_or_block_move(board, player_token)
+     puts "win or block move cleared"
+     win = Game::WIN_COMBINATIONS.detect do |combo|
+       self_moves = combo.count{|cell| board.cells[cell] == player_token}
+       valid_moves = combo.count{|cell| board.cells[cell] == " "}
+       self_moves == 2 && valid_moves == 1  ? true : false
+     end
+      puts "#{win}"
+      win.detect{|cell| board.cells[cell] == " "} + 1 if win
     end
-
-    def blocking_move(board, player_token)
-      puts "blocking move cleared"
-       ["1", "2", "3", "4", "5", "6", "7", "8", "9"].select{|move| board.valid_move?(move)}.detect do |move|
-           board.update(move, opponent)
-           blocking = won?(board, player_token)
-           board.reset_cell!(move)
-           puts "blocking move play" if blocking
-           blocking
-       end
-    end
-
-    def won?(board, player_token)
-      WIN_COMBINATIONS.detect do |combo|
-        combo.all? {|cell| board.cells[cell]== player_token}
-      end
-    end
-
-  end
-end
-
-def best_move(board)
-  valid_moves = {}
-
-  {"1", "2", "3", "4", "5", "6", "7", "8", "9"}.each{|move| valid_moves[move] = 0 if board.valid_move?(move)}
-
-  valid_moves.each do |move, score|
-    board.update(move, self)
-    WIN_COMBINATIONS.each do |combo|
-      self_moves = combo.count{|cell| cell == self.token}
-      opponent_moves = combo.count{|cell| cell == opponent.token}
-      valid_moves = combo.count.{|cell| cell == " "}
-
-      if self_moves == 2 && valid_moves == 1
-      score += 100
-      else
-      score += self_moves * 10
-      end
-
-      if opponent_moves == 2 && valid moves == 1
-      score -= 100
-      else
-     score -= opponent_moves * 10
-      end
-
-      valid_moves[move] += score
-    end
-    board.reset_cell!(move)
-  end
-
-  valid_moves.max_by{|move, score| score}.key
-end
-
-
-
+  end #class
+end #module
 
 
 # stage 0 random valid move

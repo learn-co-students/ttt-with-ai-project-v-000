@@ -97,18 +97,18 @@ class Game
     case players
     when "0"
       p1 = Players::Computer.new("X")
-      p2 = Players::Computer.new("0")
+      p2 = Players::Computer.new("O")
     when "1"
       if start_player == 1
         p1 = Players::Human.new("X")
-        p2 = Players::Computer.new("0")
+        p2 = Players::Computer.new("O")
       else
         p1 = Players::Computer.new("X")
-        p2 = Players::Human.new("0")
+        p2 = Players::Human.new("O")
       end
     when "2"
       p1 = Players::Human.new("X")
-      p2 = Players::Human.new("0")
+      p2 = Players::Human.new("O")
     end
 
    if start_player == 1
