@@ -41,4 +41,8 @@ attr_accessor :cells
   def update(input, player)
     @cells[input.to_i-1] = player.token
   end
+
+  def reset_cell!(input)
+    @cells[input.to_i-1] = " "
+  end
 end

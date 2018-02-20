@@ -1,6 +1,6 @@
 class Game
   attr_accessor :board, :player_1, :player_2
-  attr_reader :players
+  attr_reader :players, :start_player
 
   WIN_COMBINATIONS = [
     [2,5,8],
@@ -70,8 +70,10 @@ class Game
     puts "What kind of game would you like to play? (0/1/2)-player"    # /s can be converted to 0 with to_i
     @players = gets.strip
     start unless ["0", "1", "2"].include?(players)
+
     player_names
-    call_start_player
+    starting_player
+    game_setup
   end
 
   def player_names
@@ -85,11 +87,13 @@ class Game
      end
    end
 
-  def call_start_player
+  def starting_player
     puts "Who should go first and be \"X\"? #{player_names[0]}(1) or #{player_names[1]}(2)?"
-    start_player = gets.strip.to_i
-    call_start_player unless [1,2].include?(start_player)
+    @start_player = gets.strip.to_i
+    starting_player unless [1,2].include?(start_player)
+  end
 
+  def game_setup
     case players
     when "0"
       p1 = Players::Computer.new("X")

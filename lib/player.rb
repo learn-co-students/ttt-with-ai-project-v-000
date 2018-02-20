@@ -4,14 +4,14 @@ class Player
 
   def initialize(token)
     @token = token
+    @@all << self
   end
 
   def name=(name)
     @name = name
-    @@all << self
   end
 
-  def self.find_by_token(token)
-    @@all.detect {|player| player.token == token}
+  def self.all
+    @@all
   end
 end
