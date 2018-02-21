@@ -21,16 +21,19 @@ module Players
       "5" if board.valid_move?("5")
     end
 
-    def corner_move(board, opponent)
+    def corner_move(board, opponent)                                       # "X" has two opposite corners and "O" has the center, "O" must not play a corner in order to win. (Playing a corner in this scenario creates a fork for "X" to win.)
       puts "corner move cleared"
-      if board.cells[0] == opponent && board.valid_move?("9")              # Opposite corner: If the opponent is in the corner, the player plays the opposite corner.
-        "9"
-      elsif board.cells[2] == opponent && board.valid_move?("7")
-        "7"
-      elsif board.cells[6] == opponent && board.valid_move?("3")
-        "3"
-      elsif board.cells[8] == opponent && board.valid_move?("1")
-        "1"
+      side_move(board) if board.cells[0] == oppponent && board.cells[8] == opponent || board.cells[2] == oppponent && board.cells[6] == opponent
+
+
+      if board.cells[0] == opponent                              # Opposite corner: If the opponent is in the corner, the player plays the opposite corner.
+        "9" if board.valid_move?("9")
+      elsif board.cells[2] == opponent
+        "7" if board.valid_move?("7")
+      elsif board.cells[6] == opponent
+        "3" if board.valid_move?("3")
+      elsif board.cells[8] == opponent
+        "1" if board.valid_move?("1")
       else
         ["1", "3", "7", "9"].select{|move| board.valid_move?(move)}.sample  # Empty corner: The player plays in a corner square.
       end
@@ -51,8 +54,66 @@ module Players
       puts "#{win}"
       win.detect{|cell| board.cells[cell] == " "} + 1 if win
     end
+<<<<<<< HEAD
   end #class
 end #module
+=======
+
+    def blocking_move(board, player_token)
+      puts "blocking move cleared"
+       ["1", "2", "3", "4", "5", "6", "7", "8", "9"].select{|move| board.valid_move?(move)}.detect do |move|
+           board.update(move, opponent)
+           blocking = won?(board, player_token)
+           board.reset_cell!(move)
+           puts "blocking move play" if blocking
+           blocking
+       end
+    end
+
+    def won?(board, player_token)
+      WIN_COMBINATIONS.detect do |combo|
+        combo.all? {|cell| board.cells[cell]== player_token}
+      end
+    end
+
+  end
+end
+
+def best_move(board)
+  valid_moves = {}
+
+  ["1", "2", "3", "4", "5", "6", "7", "8", "9"].each{|move| valid_moves[move] = 0 if board.valid_move?(move)}
+
+  valid_moves.each do |move, score|
+    board.update(move, self)
+    WIN_COMBINATIONS.each do |combo|
+      self_moves = combo.count{|cell| cell == self.token}
+      opponent_moves = combo.count{|cell| cell == opponent.token}
+      #valid_moves = combo.count.{|cell| cell == " "}
+
+      if self_moves == 2 && valid_moves == 1
+        score += 100
+      else
+        score += self_moves * 10
+      end
+
+      if opponent_moves == 2 && valid moves == 1
+        score -= 100
+      else
+        score -= opponent_moves * 10
+      end
+
+      valid_moves[move] += score
+    end
+      board.reset_cell!(move)
+  end
+
+    valid_moves.max_by{|move, score| score}.key
+end
+
+
+
+>>>>>>> 50a3cb810557262cec7f55adebf3489dcaf918a7
 
 
 # stage 0 random valid move
