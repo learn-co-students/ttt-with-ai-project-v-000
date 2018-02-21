@@ -4,29 +4,34 @@ attr_accessor :player
 
   def initialized(token)
     Player.new=self
-    @token
+     @token
   end
 
   def move(board)
-    position = gets.strip
-    if valid_move? (board, position)
-      move(board, position, current_player)
+    if !board.taken?("5")
+      "5"
     else
-      turn(board)
+      next_move(board) + 1
     end
   end
 
+  def next_move
+    win(board) || corner(board)
+  end
+
+  def corner(board)
+    binding.pry
+    [0,2,6,8].detect do|cell|
+      !cell.board.taken?(cell + 1)
+    end
+  end
+
+  def winning_combo?(board, token)
+      Game::WIN_COMBINATIONS.detect do |combo|
+        ((board.cells[combo[0]] == token && board.cells[combo[1]] == token) && !board.taken?(combo[2]+1)) ||
+        ((board.cells[combo[1]] == token && board.cells[combo[2]] == token) && !board.taken?(combo[0]+1)) ||
+        ((board.cells[combo[0]] == token && board.cells[combo[2]] == token) && !board.taken?(combo[1]+1))
+      end
+   end
+
 end
-  #  computer.move(board) == valid_move
-
-
-  #    describe '#move' do
-  #      it 'returns a valid position for the computer to move' do
-  #        computer = Players::Computer.new("X")
-  #        board = Board.new
-#
-#          valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-#
-#          computer_move = computer.move(board)
-#
-#          expect(valid_moves).to include(computer_move)
