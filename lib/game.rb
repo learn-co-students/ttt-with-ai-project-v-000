@@ -12,6 +12,20 @@ class Game
     [0,4,8],
     [6,4,2]]
 
+  @@results = []
+
+  def self.results
+     @@results
+  end
+
+  def save
+    Game.results << winner
+  end
+
+  def self.war
+    @@war
+  end
+
   def initialize(p1 = Players::Human.new("X"), p2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = p1
@@ -48,7 +62,7 @@ class Game
       turn
     else
       board.update(move, current_player)
-      board.display
+      board.display if !Game.war
     end
   end
 
@@ -56,24 +70,46 @@ class Game
     board.display
     turn until over?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
-    replay  # breaks the 04_game_spec test if it's not removed
+    replay   # breaks the 04_game_spec test if it's not removed
   end
 
   def replay
     puts "Would you like to play again? (Y/n)"
     input = gets.strip.downcase
     replay unless ["y","n"].include?(input)
-    start unless input == "n"
+    input == "y" ? start : exit
   end
 
   def start
+    @@war = false
     puts "What kind of game would you like to play? (0/1/2)-player"    # /s can be converted to 0 with to_i
     @players = gets.strip
+    wargames if players == "wargames"
     start unless ["0", "1", "2"].include?(players)
-
     player_names
     starting_player
     game_setup
+  end
+
+  def war_play
+    turn until over?
+    save
+  end
+
+  def wargames
+    @@war = true
+
+    Game.new(Players::Computer.new("X"), p2 = Players::Computer.new("O")).war_play until Game.results.length == 100
+
+    x_wins = Game.results.count("X")
+    o_wins = Game.results.count("O")
+    draws = Game.results.count(nil)
+
+    x_wins = "no" if x_wins = 0
+    o_wins = "no" if o_wins = 0
+
+    puts "There were #{x_wins} \"X\" wins, #{o_wins} \"O\" wins, and #{draws} draws out of #{Game.results.length} game(s)."
+    replay
   end
 
   def player_names
@@ -111,15 +147,7 @@ class Game
       p2 = Players::Human.new("O")
     end
 
-   if start_player == 1
-     p1.name = player_names[0]
-     p2.name = player_names[1]
-   else
-     p1.name = player_names[1]
-     p2.name = player_names[0]
-   end
-
-    puts "#{p1.name} is starting against #{p2.name}."
+    puts start_player == 1 ? "#{player_names[0]} is starting against #{player_names[1]}." : "#{player_names[1]} is starting against #{player_names[0]}."
     Game.new(p1, p2).play
   end
 end
