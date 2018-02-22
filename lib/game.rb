@@ -35,7 +35,7 @@ class Game
             end
     case winner.count
     when 0
-      nil
+      false
     when 1
       winner.flatten
     else
@@ -59,7 +59,9 @@ class Game
   end
 
   def play
-    turn unless over?
+    until over?
+      turn
+    end
   end
 
   def turn
