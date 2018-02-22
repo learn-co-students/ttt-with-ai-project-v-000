@@ -24,6 +24,15 @@ class Game
 
   def over?
     board.full?
-  end 
+  end
 
+  def won?
+  end
+
+  def draw?
+    !board.won? && board.full?
+  end
+
+  def winner?
+  end
 end
