@@ -26,7 +26,7 @@ module Players
       [6,0,2]
     ]
 
-    def move(board)
+    def move(board = Board.new)
       if win(board)
         return win(board)
       elsif block(board)
@@ -36,7 +36,7 @@ module Players
       elsif block_bifurcate(board)
         return block_bifurcate(board)
       elsif center(board)
-        return center
+        return center(board)
       elsif opposite_corner(board)
         return opposite_corner(board)
       elsif corner(board)
@@ -133,9 +133,9 @@ module Players
               end
       if block_bifurcate
         block_bifurcate[2] + 1
-      elsif bifurcate2
+      elsif block_bifurcate2
         block_bifurcate[0] + 1
-      elsif bifurcate3
+      elsif block_bifurcate3
         block_bifurcate[1] + 1
       else
         false
@@ -195,4 +195,5 @@ module Players
         false
       end
     end
+  end
 end
