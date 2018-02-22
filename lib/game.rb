@@ -23,11 +23,10 @@ class Game
   end
 
   def won?
-
     WIN_COMBINATIONS.detect do |win_combination|
       if @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
          @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-         @board.taken?(win_combination[0]) == true
+         @board.taken?(win_combination[0]+1) == true
        elsif @board.full?
           false
       end
