@@ -40,7 +40,7 @@ class Game
     when 1
       winner.flatten
     else
-      winner.detect{|combo| combo[0] == "X"}
+      winner.detect{|combo| board.combo[0] == "X"}
     end
   end
 
