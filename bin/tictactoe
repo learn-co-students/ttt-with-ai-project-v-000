@@ -2,50 +2,5 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-
-again = ""
-
-def computer_game
-  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-  board.display
-  game.play
-end
-
-def one_player_game
-  puts "Who should go first? For You Enter [1], For Computer Enter [2] :"
-  first = gets.strip
-  if first == "1"
-    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    board.display
-    game.play
-  elsif first == "2"
-    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
-    board.display
-    game.play
-  else
-    one_player_game
-  end
-end
-
-unless again[0] = "n" || again[0] = "N"
-  puts "Would you like to play with 0, 1, or 2 Players? (Enter any integer [0-2]) :"
-  input = gets.strip
-
-  if input == "0"
-    computer_game
-    puts "Would you like to play again? (Y/N) :"
-    again = gets.strip
-  elsif input == "1"
-    one_player_game
-    puts "Would you like to play again? (Y/N) :"
-    again = gets.strip
-  else
-    puts "Whoever's playing X goes first!"
-    game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-    board.display
-    game.play
-    puts "Would you like to play again? (Y/N) :"
-    again = gets.strip
-  end
-end
+game = Game.new
+game.start

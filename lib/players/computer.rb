@@ -26,7 +26,7 @@ module Players
       [6,0,2]
     ]
 
-    def move(board = Board.new)
+    def move(board)
       if win(board)
         return win(board)
       elsif block(board)
@@ -51,13 +51,13 @@ module Players
     end
 
     def opposite_corner(board)
-      if board.cell[0] != current_player.token && !board.taken?(9)
+      if board.cells[0] != game.current_player.token && !board.taken?(9)
         "9"
-      elsif board.cell[2] != current_player.token && !board.taken?(7)
+      elsif board.cells[2] != game.current_player.token && !board.taken?(7)
         "7"
-      elsif board.cell[6] != current_player.token && !board.taken?(3)
+      elsif board.cells[6] != game.current_player.token && !board.taken?(3)
         "3"
-      elsif board.cell[8] != current_player.token && !board.taken?(1)
+      elsif board.cells[8] != game.current_player.token && !board.taken?(1)
         "1"
       else
         false
@@ -92,17 +92,17 @@ module Players
       bifurcate = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = current_player.token
+                board.cells[combo[0]] = game.current_player.token
               end
       bifurcate2 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[1]] == board.cells[combo[2]] &&
                 board.taken?(combo[1] + 1) &&
-                board.cells[combo[1]] = current_player.token
+                board.cells[combo[1]] = game.current_player.token
               end
       bifurcate3 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[2]] == board.cells[combo[0]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = current_player.token
+                board.cells[combo[0]] = game.current_player.token
               end
       if bifurcate
         bifurcate[2] + 1
@@ -119,17 +119,17 @@ module Players
       block_bifurcate = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] != current_player.token
+                board.cells[combo[0]] != game.current_player.token
               end
       block_bifurcate2 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[1]] == board.cells[combo[2]] &&
                 board.taken?(combo[1] + 1) &&
-                board.cells[combo[1]] != current_player.token
+                board.cells[combo[1]] != game.current_player.token
               end
       block_bifurcate3 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[2]] == board.cells[combo[0]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] != current_player.token
+                board.cells[combo[0]] != game.current_player.token
               end
       if block_bifurcate
         block_bifurcate[2] + 1
@@ -146,17 +146,17 @@ module Players
       block = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] != current_player.token
+                board.cells[combo[0]] != game.current_player.token
               end
       block2 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[1]] == board.cells[combo[2]] &&
                 board.taken?(combo[1] + 1) &&
-                board.cells[combo[1]] != current_player.token
+                board.cells[combo[1]] != game.current_player.token
               end
       block3 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[2]] == board.cells[combo[0]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] != current_player.token
+                board.cells[combo[0]] != game.current_player.token
               end
       if block
         block[2] + 1
@@ -173,17 +173,17 @@ module Players
       winner = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = current_player.token
+                board.cells[combo[0]] = game.current_player.token
               end
       winner2 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[1]] == board.cells[combo[2]] &&
                 board.taken?(combo[1] + 1) &&
-                board.cells[combo[1]] = current_player.token
+                board.cells[combo[1]] = game.current_player.token
               end
       winner3 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[2]] == board.cells[combo[0]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = current_player.token
+                board.cells[combo[0]] = game.current_player.token
               end
       if winner
         winner[2] + 1
