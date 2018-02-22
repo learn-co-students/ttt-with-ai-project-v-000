@@ -62,6 +62,11 @@ class Game
     until over?
       turn
     end
+    if won?
+      puts "Congratulations #{current_player}!"
+    else
+      puts "Cat's Game!"
+    end
   end
 
   def turn
