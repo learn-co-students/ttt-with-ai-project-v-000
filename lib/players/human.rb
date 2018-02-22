@@ -6,5 +6,5 @@ module Players
       input = gets.chomp
     end
   end
-  
+
 end
