@@ -33,19 +33,25 @@ class Game
               board.cells[combo[1]] == board.cells[combo[2]] &&
               board.taken?(combo[0])
             end
-    binding.pry
     case winner.count
     when 0
       nil
     when 1
       winner.flatten
     else
-      winner.detect{|combo| board.combo[0] == "X"}
+      winner.detect{|combo| board.cells[combo[0]] == "X"}
     end
   end
 
-  def winner
+  def draw?
+    over? && !won?
+  end
 
+  def winner
+    if won?
+      winner = won?
+      board.cells[winner[0]]
+    end
   end
 
   def start
