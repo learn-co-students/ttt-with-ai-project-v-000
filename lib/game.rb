@@ -63,7 +63,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{current_player.token}!"
+      puts "Congratulations #{winner}!"
     else
       puts "Cat's Game!"
     end
