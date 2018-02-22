@@ -35,9 +35,10 @@ class Game
       end
     end
 
-    if winner.count == 0
-      false
-    elsif winner.count == 1
+    case winner.count
+    when 0
+      nil
+    when 1
       winner.flatten
     else
       winner.detect{|combo| combo[0] == "X"}
