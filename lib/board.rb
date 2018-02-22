@@ -42,7 +42,7 @@ class Board
   def update(input, player)
     index = input.to_i - 1
     if valid_move?(input)
-      turn_count.even? ? cells[index] = "X" : cells[index] = "O"
+      cells[index] = player.token#turn_count.even? ? cells[index] = "X" : cells[index] = "O"
     end
   end
 end
