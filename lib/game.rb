@@ -71,6 +71,36 @@ class Game
       else
         puts "Congratulations #{winner}!"
       end
+      reset
     end
+
+    def reset
+      puts "Want to play again? (y/n)"
+      again = gets.strip.downcase
+      reset unless ["y", "n"].include?(again)
+      if again =="y"
+        puts "Please enter a number to select game type:"
+        puts "0: Spectator \n1: Single Player \n2: Two Player"
+        type = gets.strip
+        receive_input(type)
+      else
+        exit
+      end
+    end
+
+    def receive_input(type)
+      if type == "2"
+        Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+      elsif type == "1"
+        Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+      elsif type == "0"
+        Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+      else
+        puts "Please enter a valid game type:"
+        type = gets.strip
+        receive_input(type)
+      end
+    end
+
 
 end
