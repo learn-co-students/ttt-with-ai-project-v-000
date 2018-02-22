@@ -55,7 +55,7 @@ class Game
   end
 
   def start
-
+    
   end
 
   def play
