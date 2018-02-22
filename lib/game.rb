@@ -63,7 +63,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{current_player}!"
+      puts "Congratulations #{current_player.token}!"
     else
       puts "Cat's Game!"
     end
@@ -73,7 +73,6 @@ class Game
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
-      board.display
     else
       turn
     end
