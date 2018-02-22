@@ -31,7 +31,7 @@ class Game
     winner = WIN_COMBINATIONS.select do |combo|
               board.cells[combo[0]] == board.cells[combo[1]] &&
               board.cells[combo[1]] == board.cells[combo[2]] &&
-              board.taken?(combo[0])
+              board.taken?(combo[0] + 1)
             end
     case winner.count
     when 0
@@ -39,7 +39,7 @@ class Game
     when 1
       winner.flatten
     else
-      winner.detect{|combo| board.cells[combo[0]] == "X"}
+      winner.detect{|combo| board.cells[combo[0]] == player_1.token}
     end
   end
 
@@ -63,7 +63,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{current_player.token}!"
+      puts "Congratulations #{board.cells[won?[0]]}!"
     else
       puts "Cat's Game!"
     end

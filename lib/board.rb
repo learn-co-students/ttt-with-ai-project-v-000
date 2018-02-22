@@ -40,9 +40,9 @@ class Board
   end
 
   def update(input, player)
-    index = input.to_i - 1
     if valid_move?(input)
-      cells[index] = player.token#turn_count.even? ? cells[index] = "X" : cells[index] = "O"
+      index = input.to_i - 1
+      cells[index] = player.token
     end
   end
 end
