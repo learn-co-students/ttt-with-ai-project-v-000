@@ -1,3 +1,47 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "\e[H\e[2J"
+puts "\n\nWelcome to Hooper's Tic Tac Toe.\n\n\n"
+puts "You can choose to play with 0, 1 or 2 human players.  A computer will fill in as needed.\n\n"
+puts "How many human players will play?"
+human_players = gets.chomp.to_i
+if human_players == 1 then 
+  first_player = ""
+  until first_player == "c" || first_player == "h" do
+    puts "\n\nWho should go first, human(h) or computer(c)?"
+    first_player = gets.chomp[0]
+  end
+  if first_player == "c" then
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Human.new("O")
+  else
+    player_2 = Players::Computer.new("O")
+    player_1 = Players::Human.new("X")
+  end
+  game = Game.new(player_1, player_2)
+  puts "\e[H\e[2J"
+  puts "Welcome to your new game. \n\nX goes first. Here is the board:\n\n"
+  game.board.display
+  game.play
+end
+
+if human_players == 2 then
+  game = Game.new
+  game.board.display
+  game.play
+
+end
+
+if human_players == 0 then
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
+  game = Game.new(player_1, player_2)
+  game.board.display
+  game.play
+
+end
+
+
+
