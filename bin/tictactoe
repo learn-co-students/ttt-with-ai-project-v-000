@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'irb'
+
+puts "Welcome to tic-tac-toe!"
+puts "What kind of game would you like to play?"
+puts "Enter 0, 1, or 2 player"
+players = gets.strip
+
+#implement some firstplayer logic for 1 player games
+if players == '1'
+  first = nil
+  until first == 'h' || first == 'c'
+    puts "Which player should go first and be 'X'? Human or Computer: (h/c):"
+    first = gets.strip.downcase
+    if first != 'h' && first != 'c'
+      puts "thats not right. please enter h or c. try again: (h/c)"
+    end
+  end
+
+  if first == 'h'
+    player_1=Players::Human.new('X')
+    player_2=Players::Computer.new('O')
+  else #implicity first = 'c'
+    player_1=Players::Computer.new('X')
+    player_2=Players::Human.new('O')
+  end
+end
+
+case players
+when '0'
+  game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
+  game.play
+when '1'
+  game = Game.new(player_1, player_2)
+  game.play
+when '2'
+  game = Game.new(player_1=Players::Human.new('X'), player_2=Players::Human.new('O'))
+  game.play
+end
