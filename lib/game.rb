@@ -24,7 +24,7 @@ class Game
   end
 
   def over?
-    board.full?
+    draw? || won?
   end
 
   def won?
@@ -44,7 +44,7 @@ class Game
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
   end
 
   def winner
@@ -59,18 +59,17 @@ class Game
   end
 
   def play
-
+    turn unless over?
   end
 
   def turn
-    puts "Please enter a number [1-9]:"
-    input = gets
-    #if board.valid_move?(input)
-    #  update(input, current_player)
-    #  board.display
-  #  else
-    #  turn
-    #end
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      turn
+    end
   end
 
 end
