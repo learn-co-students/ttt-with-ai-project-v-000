@@ -11,22 +11,128 @@ module Players
       [6,4,2]
     ]
 
+    BIFURCATE_COMBINATIONS = [
+      [0,1,3],
+      [1,2,5],
+      [3,6,7],
+      [7,5,8],
+      [0,4,6],
+      [2,4,8],
+      [0,4,2],
+      [6,4,8],
+      [0,2,8],
+      [2,8,6],
+      [8,6,0],
+      [6,0,2]
+    ]
+
     def move(board)
-      win(board)
-      block(board)
-      if board.cells[4] == " "
-        "4"
-      block = WIN_COMBINATIONS.detect do |combo|
-                board.cells[combo[0]] == board.cells[combo[1]] ||
-                board.cells[combo[1]] == board.cells[combo[2]] &&
-                board.taken?(combo[0] + 1) && board.cells[combo[0]] != current_player.token
-              end
-      if block
-
-
+      if win(board)
+        return win(board)
+      elsif block(board)
+        return block(board)
+      elsif bifurcate(board)
+        return bifurcate(board)
+      elsif block_bifurcate(board)
+        return block_bifurcate(board)
+      elsif center(board)
+        return center
+      elsif opposite_corner(board)
+        return opposite_corner(board)
+      elsif corner(board)
+        return corner(board)
+      else
+        side(board)
+      end
     end
 
-    def block
+    def center(board)
+      board.taken?(5) ? false : "5"
+    end
+
+    def opposite_corner(board)
+      if board.cell[0] != current_player.token && !board.taken?(9)
+        "9"
+      elsif board.cell[2] != current_player.token && !board.taken?(7)
+        "7"
+      elsif board.cell[6] != current_player.token && !board.taken?(3)
+        "3"
+      elsif board.cell[8] != current_player.token && !board.taken?(1)
+        "1"
+      else
+        false
+      end
+    end
+
+    def corner(board)
+      if !board.taken?(1)
+        "1"
+      elsif !board.taken?(3)
+        "3"
+      elsif !board.taken?(7)
+        "7"
+      elsif !board.taken?(9)
+        "9"
+      end
+    end
+
+    def side(board)
+
+    def bifurcate(board)
+      bifurcate = WIN_COMBINATIONS.detect do |combo|
+                board.cells[combo[0]] == board.cells[combo[1]] &&
+                board.taken?(combo[0] + 1) &&
+                board.cells[combo[0]] = current_player.token
+              end
+      bifurcate2 = WIN_COMBINATIONS.detect do |combo|
+                board.cells[combo[1]] == board.cells[combo[2]] &&
+                board.taken?(combo[1] + 1) &&
+                board.cells[combo[1]] = current_player.token
+              end
+      bifurcate3 = WIN_COMBINATIONS.detect do |combo|
+                board.cells[combo[2]] == board.cells[combo[0]] &&
+                board.taken?(combo[0] + 1) &&
+                board.cells[combo[0]] = current_player.token
+              end
+      if bifurcate
+        bifurcate[2] + 1
+      elsif bifurcate2
+        bifurcate[0] + 1
+      elsif bifurcate3
+        bifurcate[1] + 1
+      else
+        false
+      end
+    end
+
+    def block_bifurcate(board)
+      block_bifurcate = WIN_COMBINATIONS.detect do |combo|
+                board.cells[combo[0]] == board.cells[combo[1]] &&
+                board.taken?(combo[0] + 1) &&
+                board.cells[combo[0]] != current_player.token
+              end
+      block_bifurcate2 = WIN_COMBINATIONS.detect do |combo|
+                board.cells[combo[1]] == board.cells[combo[2]] &&
+                board.taken?(combo[1] + 1) &&
+                board.cells[combo[1]] != current_player.token
+              end
+      block_bifurcate3 = WIN_COMBINATIONS.detect do |combo|
+                board.cells[combo[2]] == board.cells[combo[0]] &&
+                board.taken?(combo[0] + 1) &&
+                board.cells[combo[0]] != current_player.token
+              end
+      if block_bifurcate
+        block_bifurcate[2] + 1
+      elsif bifurcate2
+        block_bifurcate[0] + 1
+      elsif bifurcate3
+        block_bifurcate[1] + 1
+      else
+        false
+      end
+    end
+
+    def block(board)
       block = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
@@ -49,7 +155,7 @@ module Players
       elsif block3
         block[1] + 1
       else
-        nil
+        false
       end
     end
 
@@ -76,7 +182,7 @@ module Players
       elsif winner3
         winner[1] + 1
       else
-        nil
+        false
       end
     end
 end
