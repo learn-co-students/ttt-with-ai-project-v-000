@@ -6,23 +6,42 @@ class Game
   [0,1,2],
   [3,4,5],
   [6,7,8],
-  [0,3,6]
+  [0,3,6],
   [1,4,7],
   [2,5,8],
   [0,4,8],
   [6,4,2]
 ]
 
-  def initialize
-    #stupid IDE
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
   end
 
   def current_player
+    board.turn_count.even? ? player_1 : player_2
+  end
 
+  def over?
+    board.full?
   end
 
   def won?
+    winner = WIN_COMBINATIONS.select do |combo|
+      if board.cells[combo[0]] == board.cells[combo[1]] &&
+        board.cells[combo[1]] == board.cells[combo[2]] &&
+        board.taken?[combo[0]]
+      end
+    end
 
+    if winner.count == 0
+      nil
+    elsif winner.count == 1
+      winner.flatten
+    else
+      winner.detect{|combo| combo[0] == "X"}
+    end
   end
 
   def winner

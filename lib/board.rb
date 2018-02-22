@@ -41,6 +41,8 @@ class Board
 
   def update(input, player)
     index = input.to_i - 1
-    index.even? ? cells[index] = "X" : cells[index] = "O"
+    if valid_move?(input)
+      turn_count.even? ? cells[index] = "X" : cells[index] = "O"
+    end
   end
 end
