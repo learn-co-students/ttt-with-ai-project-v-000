@@ -63,7 +63,7 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{board.cells[won?[0]]}!"
+      puts "Congratulations #{current_player.token}!"
     else
       puts "Cat's Game!"
     end
