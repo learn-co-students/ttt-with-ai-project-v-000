@@ -77,6 +77,16 @@ module Players
     end
 
     def side(board)
+      if !board.taken?(2)
+        "2"
+      elsif !board.taken?(4)
+        "4"
+      elsif !board.taken?(6)
+        "6"
+      elsif !board.taken?(8)
+        "8"
+      end
+    end
 
     def bifurcate(board)
       bifurcate = WIN_COMBINATIONS.detect do |combo|
