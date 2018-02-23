@@ -89,6 +89,7 @@ class Game
   end
 
   def two_player_game
+    puts "Whoever's playing X goes first!"
     self.player_1 = Players::Human.new("X")
     self.player_2 = Players::Human.new("O")
     self.board = Board.new
@@ -104,22 +105,18 @@ class Game
       puts "Would you like to play with 0, 1, or 2 Players? :"
       input = gets.strip
 
-      if input == "0"
+      case input
+      when "0"
         computer_game
-        puts "Would you like to play again? (Y/N) :"
-        again = gets.strip
-      elsif input == "1"
+      when "1"
         one_player_game
-        puts "Would you like to play again? (Y/N) :"
-        again = gets.strip
-      elsif input == "2"
-        puts "Whoever's playing X goes first!"
+      when "2"
         two_player_game
-        puts "Would you like to play again? (Y/N) :"
-        again = gets.strip
       else
         again = "Y"
       end
+      puts "Would you like to play again? (Y/N) :"
+      again = gets.strip
     end
   end
 
