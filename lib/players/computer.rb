@@ -1,6 +1,8 @@
 require 'pry'
 module Players
   class Computer < Player
+    attr_reader :board
+
     WIN_COMBINATIONS = [
       [0,1,2],
       [3,4,5],
@@ -28,30 +30,31 @@ module Players
     ]
 
     def move(board)
-      if win(board)
-        return win(board)
-      elsif block(board)
-        return block(board)
-      elsif bifurcate(board)
-        return bifurcate(board)
-      elsif block_bifurcate(board)
-        return block_bifurcate(board)
-      elsif center(board)
-        return center(board)
-      elsif opposite_corner(board)
-        return opposite_corner(board)
-      elsif corner(board)
-        return corner(board)
+      @board = board
+      if win
+        return win
+      elsif block
+        return block
+      elsif bifurcate
+        return bifurcate
+      elsif block_bifurcate
+        return block_bifurcate
+      elsif center
+        return center
+      elsif opposite_corner
+        return opposite_corner
+      elsif corner
+        return corner
       else
-        side(board)
+        side
       end
     end
 
-    def center(board)
+    def center
       board.taken?(5) ? false : "5"
     end
 
-    def opposite_corner(board)
+    def opposite_corner
       if board.cells[0] != token && !board.taken?(9)
         "9"
       elsif board.cells[2] != token && !board.taken?(7)
@@ -65,7 +68,7 @@ module Players
       end
     end
 
-    def corner(board)
+    def corner
       if !board.taken?(1)
         "1"
       elsif !board.taken?(3)
@@ -77,7 +80,7 @@ module Players
       end
     end
 
-    def side(board)
+    def side
       if !board.taken?(2)
         "2"
       elsif !board.taken?(4)
@@ -89,21 +92,21 @@ module Players
       end
     end
 
-    def bifurcate(board)
+    def bifurcate
       bifurcate = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = token
+                board.cells[combo[0]] == token
               end
       bifurcate2 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[1]] == board.cells[combo[2]] &&
                 board.taken?(combo[1] + 1) &&
-                board.cells[combo[1]] = token
+                board.cells[combo[1]] == token
               end
       bifurcate3 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[2]] == board.cells[combo[0]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = token
+                board.cells[combo[0]] == token
               end
       if bifurcate
         bifurcate[2] + 1
@@ -116,7 +119,7 @@ module Players
       end
     end
 
-    def block_bifurcate(board)
+    def block_bifurcate
       block_bifurcate = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
@@ -143,7 +146,7 @@ module Players
       end
     end
 
-    def block(board)
+    def block
       block = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
@@ -170,21 +173,21 @@ module Players
       end
     end
 
-    def win(board)
+    def win
       winner = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[0]] == board.cells[combo[1]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = token
+                board.cells[combo[0]] == token
               end
       winner2 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[1]] == board.cells[combo[2]] &&
                 board.taken?(combo[1] + 1) &&
-                board.cells[combo[1]] = token
+                board.cells[combo[1]] == token
               end
       winner3 = WIN_COMBINATIONS.detect do |combo|
                 board.cells[combo[2]] == board.cells[combo[0]] &&
                 board.taken?(combo[0] + 1) &&
-                board.cells[combo[0]] = token
+                board.cells[combo[0]] == token
               end
       if winner
         winner[2] + 1

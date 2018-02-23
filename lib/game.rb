@@ -101,7 +101,7 @@ class Game
     puts "Welcome to Tic Tac Toe!"
     again = ""
 
-    unless again[0] == "n" || again[0] == "N"
+    while again[0] != "n" || again[0] != "N"
       puts "Would you like to play with 0, 1, or 2 Players? :"
       input = gets.strip
 
@@ -112,8 +112,6 @@ class Game
         one_player_game
       when "2"
         two_player_game
-      else
-        again = "Y"
       end
       puts "Would you like to play again? (Y/N) :"
       again = gets.strip
