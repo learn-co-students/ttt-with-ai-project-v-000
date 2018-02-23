@@ -33,10 +33,9 @@ class Game
               board.taken?(combo[0] + 1)
             end
 
-    case winner.count
-    when 0
+    if winner.count == 0
       false
-    when 1
+    elsif winner.count == 1
       winner.flatten
     else
       if winner[0][0] == winner[1][0]
@@ -81,7 +80,6 @@ class Game
       self.player_1 = Players::Computer.new("X")
       self.player_2 = Players::Human.new("O")
       self.board = Board.new
-      board.display
       play
     else
       one_player_game
