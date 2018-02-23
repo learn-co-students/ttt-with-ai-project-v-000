@@ -38,4 +38,9 @@ class Game
     !self.won? && board.full?
   end
   
+  def winner
+    winning_token = won?
+    won? && @board[winning_token[0]]
+  end
+  
 end
