@@ -1,3 +1,4 @@
+require 'pry'
 module Players
   class Computer < Player
     WIN_COMBINATIONS = [
@@ -107,9 +108,9 @@ module Players
       if bifurcate
         bifurcate[2] + 1
       elsif bifurcate2
-        bifurcate[0] + 1
+        bifurcate2[0] + 1
       elsif bifurcate3
-        bifurcate[1] + 1
+        bifurcate3[1] + 1
       else
         false
       end
@@ -134,9 +135,9 @@ module Players
       if block_bifurcate
         block_bifurcate[2] + 1
       elsif block_bifurcate2
-        block_bifurcate[0] + 1
+        block_bifurcate2[0] + 1
       elsif block_bifurcate3
-        block_bifurcate[1] + 1
+        block_bifurcate3[1] + 1
       else
         false
       end
@@ -161,9 +162,9 @@ module Players
       if block
         block[2] + 1
       elsif block2
-        block[0] + 1
+        block2[0] + 1
       elsif block3
-        block[1] + 1
+        block3[1] + 1
       else
         false
       end
@@ -188,9 +189,9 @@ module Players
       if winner
         winner[2] + 1
       elsif winner2
-        winner[0] + 1
+        winner2[0] + 1
       elsif winner3
-        winner[1] + 1
+        winner3[1] + 1
       else
         false
       end
