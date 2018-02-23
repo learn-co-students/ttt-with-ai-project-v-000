@@ -77,6 +77,8 @@ module Players
         "7"
       elsif !board.taken?(9)
         "9"
+      else
+        false
       end
     end
 
@@ -89,6 +91,8 @@ module Players
         "6"
       elsif !board.taken?(8)
         "8"
+      else
+        false
       end
     end
 
