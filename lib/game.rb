@@ -67,38 +67,4 @@ class Game
     end
   end
   
-  
-  def select_players
-    puts "Select number of players: 0, 1, or 2"
-    input = gets.strip.to_i
-    if input == 0
-      @player_a = Players::Computer
-      @player_b = Players::Computer
-    elsif input == 1
-      @a = Players::Human
-      @b = Players::Computer
-      select_token
-    elsif input == 2
-      @a = Players::Human
-      @b = Players::Human
-      select_token
-    else
-      select_players
-    end
-  end
-
-def select_token
-  puts "Which player should go first (X), 1 or 2?"
-  input = gets.strip.to_i
-  if input == 1
-    @player_a = @a
-    @player_b = @b
-  elsif input == 2
-    @player_a = @b
-    @player_b = @a
-  else
-    select_token
-  end
-end
-  
 end
