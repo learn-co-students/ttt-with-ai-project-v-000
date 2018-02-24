@@ -4,6 +4,8 @@ class Board
     reset!
   end
 
+############################ BOARD PROPERITES ##################################
+
   def cells
     @cells
   end
@@ -25,9 +27,10 @@ class Board
   end
 
   def position(input)
-    index = input.to_i - 1
-    cells[index]
+    cells[input.to_i - 1]
   end
+
+############################ BOARD STATES ######################################
 
   def full?
     cells.none? {|cell| cell == " "}
@@ -43,15 +46,14 @@ class Board
     position(input) == "X" || position(input) == "O"
   end
 
-
-  def valid_move?(position)
-    i = position.to_i - 1
-    i.between?(0,8) && !taken?(position)
+  def valid_move?(input)
+    i = input.to_i - 1
+    i.between?(0,8) && !taken?(input)
   end
 
-
+######################## BOARD METHODS #######################################
   def update(input, player)
    cells[input.to_i - 1] = player.token
- end
+  end
 
 end

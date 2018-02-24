@@ -1,6 +1,8 @@
 require 'pry'
 class Game
+#####################  GAME PROPERITES #######################################
   attr_accessor :board, :player_1, :player_2
+
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -19,6 +21,7 @@ class Game
     @board = board
   end
 
+#######################  GAME STATUS #########################################
   def current_player
     board.turn_count.even? ? player_1 : player_2
   end
@@ -44,12 +47,18 @@ class Game
     won? && board.cells[winning_token[0]]
   end
 
+############################## PLAY GAME #####################################
+
+
+
   def turn
     input = current_player.move
     if board.valid_move?(input)
+      puts "#{current_player.token} moved to cell #{input}"
       board.update(input,current_player)
+      board.display
     else
-      puts "That move is invalid!"
+      puts "Oops.That move is invalid!"
         turn
     end
   end
@@ -61,8 +70,11 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
+      puts "You've won the game!"
+      play_again?
     else draw?
       puts "Cat's Game!"
+      play_again?
     end
   end
 

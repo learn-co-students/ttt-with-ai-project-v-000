@@ -2,8 +2,9 @@ module Players
   class Human < Player
 
     def move(board = nil)
-      puts "You're up! Where would you like to move? Please pick a valid position from 1-9."
-      position = gets.chomp
+      board.display
+      puts "Your Move #{self.token}! Please choose a valid position from 1-9."
+      gets.chomp
     end
   end
 end
