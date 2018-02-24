@@ -39,10 +39,15 @@ class Board
     turn_count
   end
 
-  def taken?(position)
-    i = position.to_i - 1
-    @cells[i] == "X" || @cells[i] == "O"
+  # def taken?(position)
+  #   i = position.to_i - 1
+  #   @cells[i] == "X" || @cells[i] == "O"
+  # end
+
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
   end
+
 
   def valid_move?(position)
     i = position.to_i - 1

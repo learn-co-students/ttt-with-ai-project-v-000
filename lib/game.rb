@@ -49,6 +49,7 @@ class Game
     if board.valid_move?(input)
       board.cells[input.to_i-1] << current_player.token
     else
+      puts "That move is invalid! Please choose a valid position from 1-9"
       turn
     end
   end
