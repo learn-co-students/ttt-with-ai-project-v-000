@@ -47,4 +47,9 @@ attr_accessor :cells
     @cells[user_input.to_i - 1] = player.token
   end
 
+  def winning_board?(board)
+    AI_game = Game.new
+    won?(board)
+  end
+
 end

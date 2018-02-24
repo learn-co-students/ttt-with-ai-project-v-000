@@ -57,11 +57,11 @@ class Game
     end
   end
 
-  def won?
+  def won?(board = @board)
     WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
+      board.cells[combo[0]] == board.cells[combo[1]] &&
+      board.cells[combo[1]] == board.cells[combo[2]] &&
+      board.taken?(combo[0]+1)
     end
   end
 
