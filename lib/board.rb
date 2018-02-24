@@ -39,11 +39,6 @@ class Board
     turn_count
   end
 
-  # def taken?(position)
-  #   i = position.to_i - 1
-  #   @cells[i] == "X" || @cells[i] == "O"
-  # end
-
   def taken?(input)
     position(input) == "X" || position(input) == "O"
   end
@@ -54,10 +49,7 @@ class Board
     i.between?(0,8) && !taken?(position)
   end
 
-  # def update(position, player)
-  #   i = position.to_i - 1
-  #   @cells.insert( i, player.token)
-  # end
+
   def update(input, player)
    cells[input.to_i - 1] = player.token
  end
