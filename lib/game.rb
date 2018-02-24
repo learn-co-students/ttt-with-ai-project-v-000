@@ -36,7 +36,7 @@ class Game
   end
 
   def draw?
-    !self.won? && board.full?
+    !won? && board.full?
   end
 
   def winner
@@ -59,5 +59,12 @@ class Game
     until over?
       turn
     end
+    if won?
+      puts "Congratulations #{winner}!"
+    else draw?
+      puts "Cat's Game!"
+    end
   end
+
+
 end
