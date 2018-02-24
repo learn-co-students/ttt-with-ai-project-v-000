@@ -27,16 +27,12 @@ class Board
   
   def turn_count
     turns = 0
-    cells.each do |token|
-      if token == "X" || token == "O"
-        turns += 1
-      end
-    end
+    cells.each {|cell| if cell != " " then turns +=1 end }
     turns
   end
   
   def taken?(input)
-    position(input) != "" && position(input) != " " && position(input) != nil
+    position(input) == "X" || position(input) == "O"
   end
   
   def valid_move?(input)

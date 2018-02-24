@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2
   
@@ -23,7 +25,7 @@ class Game
   end
 
   def over?
-    board.full?
+    won? || draw?
   end
 
   def won?
@@ -33,14 +35,36 @@ class Game
       board.cells[combo[1]] == board.cells[combo[2]]
     end
   end
-
+  
   def draw?
-    !self.won? && board.full?
+    !won? && board.full?
   end
   
   def winner
     winning_token = won?
-    won? && @board[winning_token[0]]
+    won? && board.cells[winning_token[0]]
+  end
+  
+  def turn
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      puts "That move is invalid!"
+      turn
+    end
+  end
+  
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
   
 end
