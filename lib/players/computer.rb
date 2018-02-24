@@ -9,9 +9,13 @@ module Players
     def move(board = Board.new)
       # binding.pry
       if self.game != nil
-        move_index = self.game.board.cells.collect.with_index{|pos, i| i + 1 if pos == " "}.sample
+        positions = self.game.board.cells
+        if self.game.board.cells[4] == " "
+          positions[4] = self.token
+        else
+          move_index = self.game.board.cells.collect.with_index{|pos, i| i + 1 if pos == " "}.sample
+       end
       else
-        @board = board
         move_index = board.cells.collect.with_index{|pos, i| i + 1 if pos == " "}.sample
       end
       move_num = move_index.to_s
