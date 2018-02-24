@@ -2,6 +2,43 @@
 
 require_relative '../config/environment'
 
+
+def start_game
+  puts "Welcome to Tic Tac Toe!"
+  puts "Please Select The Number of Players:"
+  puts "Enter '0' for Computer Vs. Computer Mode."
+  puts "Enter '1' to Play against The Computer."
+  puts "Enter '2' to Play against a Friend."
+
+  selected_players = gets.strip.to_i
+
+  if selected_players == 2
+    puts "You VS a Friend. Player X will move first."
+    game = Game.new
+    game.play
+
+  elsif selected_players == 1
+    puts "You VS Computer."
+    puts "Choose a Token: X or O. X moves first."
+    selected_token = gets.strip.to_s.capitalize
+
+      if selected_token == "X"
+        game = Game.new(player_1 =Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        game.play
+      elsif selected_token =="O"
+        game = Game.new(player_1 =Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        game.play
+      else
+        puts "Not a valid token!"
+        start_game
+      end
+
+  else selected_players ==0
+    #####        NEEDS WERRRKK    ##########
+    puts "Computer VS Computer"
+  end
+end
+
 def play_again?
   input = ''
   puts "Would you like to play again?"
@@ -18,38 +55,5 @@ def play_again?
   end
 end
 
-def start_game
-  puts "Welcome to Tic Tac Toe!"
-  puts "Please Select The Number of Players:"
-  puts "Enter '0' to Watch Computer Vs. Computer"
-  puts "Enter '1' to Play against The Computer"
-  puts "Enter '2' to Play against a Friend"
-
-  selected_players = gets.strip.to_i
-
-    if selected_players == 2
-      puts "You VS a Friend. Player X will move first."
-      game = Game.new
-      game.play
-    elsif selected_players == 1
-      puts "You VS Computer."
-      puts "Choose a Token: X or O. X moves first."
-      selected_token = gets.strip.to_s.capitalize
-      if selected_token == "X"
-        game = Game.new(player_1 =Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-        game.play
-      elsif selected_token =="O"
-        game = Game.new(player_1 =Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-        game.play
-      else
-        puts "Not a valid token!"
-        start_game
-      end
-
-    else selected_players ==0
-      puts "Computer VS Computer"
-    end
-
-end
 
 start_game
