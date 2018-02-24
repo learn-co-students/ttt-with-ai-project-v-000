@@ -47,4 +47,3 @@ until current_game.won?
 end
 
 
-
