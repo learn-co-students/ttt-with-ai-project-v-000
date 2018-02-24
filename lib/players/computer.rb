@@ -1,10 +1,14 @@
+require 'pry'
 module Players
   class Computer < Player
+
     def move(board)
-      move = "0"
-      while !board.valid_move?(move)
-        computer_move = rand(9).to_s
+      computer_move = "0"
+      while !board.valid_move?(computer_move)
+        computer_move = (rand(9)+1).to_s
       end
+      computer_move
     end
+#binding.pry
   end
 end

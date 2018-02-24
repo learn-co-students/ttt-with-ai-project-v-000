@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+def start_game
+  puts "Welcome, what king of game do you want to play?"
+  puts "0,1 of 2 players?"
+  user_input = gets.strip
+  while !user_input == "0" || !user_input == "1"|| !user_input == "2"
+    puts "Please enter a valid input"
+    puts "0,1 of 2 players?"
+    user_input = gets.strip
+  end
+  #binding.pry
+
+case user_input
+when "0"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    #puts"full comp"
+  when "1"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+    #puts"half comp"
+  when "2"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Human.new("O")
+      #puts"no comp"
+  end
+new_game = Game.new(player_1, player_2)
+new_game.play
+end
+
+
+start_game
