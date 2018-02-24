@@ -9,6 +9,9 @@ attr_accessor :cells
 
   def reset!
     @cells = Array.new(9," ")
+    #@cells= ["X","O","O",
+    #         "O","X","X",
+    #         "X","O"," "]
   end
 
   def display
@@ -32,6 +35,7 @@ attr_accessor :cells
   end
 
   def taken?(user_input)
+
     @cells[user_input.to_i - 1].include?(" ") ? false:true
   end
 
@@ -47,9 +51,25 @@ attr_accessor :cells
     @cells[user_input.to_i - 1] = player.token
   end
 
-  def winning_board?(board)
-    AI_game = Game.new
-    won?(board)
+  def winning_board?
+    ai_game = Game.new(Players::Human.new("X"),Players::Human.new("O"),self)
+    ai_game.won?
   end
+
+  def game_winner?
+    ai_game = Game.new(Players::Human.new("X"),Players::Human.new("O"),self)
+    ai_game.winner
+  end
+
+  def game_player?
+    ai_game = Game.new(Players::Human.new("X"),Players::Human.new("O"),self)
+    ai_game.current_player
+  end
+
+  def game_over?
+    ai_game = Game.new(Players::Human.new("X"),Players::Human.new("O"),self)
+    ai_game.over?
+  end
+
 
 end

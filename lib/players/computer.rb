@@ -3,25 +3,19 @@ module Players
   class Computer < Player
 
     def move(board)
-      computer_move = "0"
+      # We initialize the score_list
+      scores = []
+      # We identify the best move to make by assigning it a score. If the computer's next move gives him a win, he get 1 points
+      #If it gives it a loss, he gets -1 point and if nothing, 0
       possible_moves = available_moves(board)
-      board_copy = board
-      possible_moves.each_with_index do |move,index|
-        #binding.pry
-        board_copy.cells[move] = self.token
-        if board_copy.cells.winning_board?
-          move
-        else
-          move(board_copy)
-        end
-      end
 
-      #while !board.valid_move?(computer_move)
-      #  computer_move = (rand(9)+1).to_s
-      #end
-      computer_move
+      scores = possible_moves.collect do |user_input|
+        score = 0
+        best_possible_move(board,user_input,self,score)
+      end
     end
 
+    #We define the list of available moves to iterarte over them and get a score out of it
     def available_moves(board)
       available_moves =[]
       board.cells.each_with_index do |cell, index|
@@ -32,7 +26,36 @@ module Players
       available_moves
     end
 
+    def best_possible_move(board, move, player, score)
 
-#end class & module
-  end
+        #We copy the board we are received to not modify the original objects
+        board_copy= Marshal.load(Marshal.dump(board))
+
+        #We execute the move
+        binding.pry
+        board_copy.cells[move] = self.token
+        #We assess if the move executed give the computer a winning combination
+        if board_copy.winning_board? && board.game_winner? == self.token
+          #case 1: it does and the computer gets one point
+
+          score += 1
+        elsif board_copy.winning_board? && board.game_winner? != self.token
+          #case 2, it does not and the computer loses one point
+          score -= 1
+        elsif board_copy.game_over?
+          #case 3, the game is over, draw or win, or loose. We return the score associated with the move tried
+          score
+        else
+          #case 4, the game is not over and we iterate to the next move and we change the player
+          player = board_copy.game_player?.token == "X" ? "O" : "X"
+
+          list_of_moves = available_moves(board_copy)
+
+          list_of_moves.each do |new_move|
+            best_possible_move(board_copy, new_move, player, score)
+          end
+        end
+      end
+      #end class & module
+    end
 end

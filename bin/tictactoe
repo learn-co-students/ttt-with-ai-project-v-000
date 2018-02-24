@@ -28,7 +28,10 @@ when "0"
       player_2 = Players::Human.new("O")
       #puts"no comp"
   end
-new_game = Game.new(player_1, player_2)
+new_board = Board.new
+new_game = Game.new(player_1, player_2, new_board)
+new_board.display
+puts "#{new_game.current_player.token}, your turn"
 new_game.play
 end
 
