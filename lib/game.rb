@@ -24,7 +24,7 @@ class Game
   end
 
   def over?
-    board.full?
+    won? || board.full? || draw?
   end
 
   def won?
@@ -39,6 +39,24 @@ class Game
     !self.won? && board.full?
   end
 
-  def winner?
+  def winner
+    winning_token = won?
+    won? && board.cells[winning_token[0]]
+  end
+
+  def turn
+    input = current_player.move
+    if board.valid_move?(input)
+      board.cells[input.to_i-1] << current_player.token
+    else
+      turn
+    end
+  end
+
+  def play
+    board.display
+    until over?
+      turn
+    end
   end
 end
