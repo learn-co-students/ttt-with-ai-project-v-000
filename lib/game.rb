@@ -47,10 +47,10 @@ class Game
   def turn
     input = current_player.move
     if board.valid_move?(input)
-      board.cells[input.to_i-1] << current_player.token
+      board.update(input,current_player)
     else
-      puts "That move is invalid! Please choose a valid position from 1-9"
-      turn
+      puts "That move is invalid!"
+        turn
     end
   end
 
