@@ -30,6 +30,7 @@ class Board
 
   def update(input, player)     # player here is the player object, not player name.
     self.cells[input.to_i - 1] = player.token
+    display
   end
 
   def full?

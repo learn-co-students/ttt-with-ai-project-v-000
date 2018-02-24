@@ -1,3 +1,48 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+game = ""
+puts "What type of game would you like to play?"
+puts "  Enter '1' to play against the computer"
+puts "  Enter '2' for a 2 Player game"
+puts "  Enter '3' to watch AI play itself"
+
+game_type_input = gets.strip.to_s
+
+if game_type_input == '1'
+
+  puts "Player 1, choose 'X' or 'O'?"
+
+  player_1_token = gets.strip.to_s.upcase
+  player_2_token = ""
+  if player_1_token == 'X'
+    player_2_token = 'O'
+  elsif player_1_token == 'O'
+    player_2_token = 'X'
+  end
+  game = Game.new(player_1 = Players::Human.new(player_1_token), player_2 = Players::Computer.new(player_2_token), board = Board.new)
+
+elsif game_type_input == '2'
+
+  puts "Player 1, choose 'X' or 'O'?"
+
+  player_1_token = gets.strip.to_s.upcase
+
+  player_2_token = ""
+  if player_1_token == 'X'
+    player_2_token = 'O'
+  elsif player_1_token == 'O'
+    player_2_token = 'X'
+  end
+
+  game = Game.new(player_1 = Players::Human.new(player_1_token), player_2 = Players::Human.new(player_2_token), board = Board.new)
+
+elsif game_type_input == '3'
+
+  game = Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Computer.new("0"), board = Board.new)
+
+end
+
+game.play

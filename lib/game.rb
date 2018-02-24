@@ -9,7 +9,9 @@ class Game
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
+    self.player_1.game = self if player_1.class == Players::Computer
     @player_2 = player_2
+    self.player_2.game = self if player_2.class == Players::Computer
   end
 
   def current_player
@@ -43,7 +45,6 @@ class Game
   def play
     until over? do
       turn
-    
     end
 
     if won?
