@@ -1,3 +1,12 @@
+# (self.board.cells[0] == self.board.cells[1]  && self.board.cells[1] == self.board.cells[2] ||
+#  self.board.cells[3] == self.board.cells[4]  && self.board.cells[4] == self.board.cells[5] ||
+#  self.board.cells[6] == self.board.cells[7]  && self.board.cells[7] == self.board.cells[8] ||
+#  self.board.cells[0] == self.board.cells[3]  && self.board.cells[3] == self.board.cells[6] ||
+#  self.board.cells[1] == self.board.cells[4]  && self.board.cells[4] == self.board.cells[7] ||
+#  self.board.cells[2] == self.board.cells[5]  && self.board.cells[5] == self.board.cells[8] ||
+#  self.board.cells[0] == self.board.cells[4]  && self.board.cells[4] == self.board.cells[8] ||
+#  self.board.cells[6] == self.board.cells[4]  && self.board.cells[4] == self.board.cells[2])
+
 # Tic-tac-toe with AI
 
 ## Objectives
