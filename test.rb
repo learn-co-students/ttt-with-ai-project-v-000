@@ -1,13 +1,11 @@
-#!/usr/bin/env ruby
+puts "Welcome to Tic Tac Toe!"
 
-require_relative '../config/environment'
-
-def select_players
+  def select_players
     puts "Select number of players: 0, 1, or 2"
     input = gets.strip.to_i
     if input == 0
-      @player_a = Players::Computer
-      @player_b = Players::Computer
+      @player_a = Players::Computer("X")
+      @player_b = Players::Computer("O")
     elsif input == 1
       @a = Players::Human
       @b = Players::Computer
@@ -25,26 +23,18 @@ def select_token
   puts "Which player should go first (X), 1 or 2?"
   input = gets.strip.to_i
   if input == 1
-    @player_a = @a
-    @player_b = @b
+    @player_a = @a("X")
+    @player_b = @b("O")
   elsif input == 2
-    @player_a = @b
-    @player_b = @a
+    @player_a = @b("X")
+    @player_b = @a("O")
   else
     select_token
   end
 end
 
-
-puts "Welcome to Tic Tac Toe!"
-select_players
-
-
-current_game = Game.new(player_1 = @player_a.new("X"), player_2 = @player_b.new("O"), board = Board.new)
+current_game = Game.new(player_1 = @player_a, player_2 = @player_b, board = Board.new)
 
 until current_game.won?
   current_game.play
 end
-
-
-
