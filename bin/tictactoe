@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-## Player & Token Selection ##
+## Player, Token, & Replay Selection ##
 def select_players
     puts "Select number of players: 0, 1, or 2"
     input = gets.strip.to_i
@@ -23,7 +23,7 @@ def select_players
   end
 
 def select_token
-  puts "Which player should go first (X), 1 or 2?"
+  puts "Which player should go first (X), 1 or 2? (If 1 player game vs computer, you are Player 1)"
   input = gets.strip.to_i
   if input == 1
     @player_a = @a
@@ -36,13 +36,30 @@ def select_token
   end
 end
 
+def new_game
+  game = Game.new(player_1 = @player_a.new("X"), player_2 = @player_b.new("O"), board = Board.new)
+  until game.won?
+    game.play
+  end
+end
+
+def play_again?
+  input = ''
+    
+  until input == 'N' || input == 'NO' || input == 'no' || input == 'n'
+    puts "Would you like to play again?"
+    puts "Enter 'Y' or 'N'"
+    input = gets.strip.to_s
+    input == 'Y' || input == 'YES' || input == 'yes' || input == 'y'
+    select_players
+    new_game
+  end
+  puts "Thanks for playing. Come back soon!"
+end
+
+
 ## Game Run ##
 puts "Welcome to Tic Tac Toe!"
 select_players
-
-current_game = Game.new(player_1 = @player_a.new("X"), player_2 = @player_b.new("O"), board = Board.new)
-
-until current_game.won?
-  current_game.play
-end
-
+new_game
+play_again?
