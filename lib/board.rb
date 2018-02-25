@@ -9,9 +9,9 @@ attr_accessor :cells
 
   def reset!
     @cells = Array.new(9," ")
-    #@cells= ["X","O","O",
-    #         "O","X","X",
-    #         "X","O"," "]
+    @cells= ["X","X","O",
+             "O","X","X",
+             "O","O"," "]
   end
 
   def display
