@@ -5,6 +5,9 @@ require_relative '../config/environment'
 ## Player, Token, & Replay Selection ##
 def select_players
     puts "Select number of players: 0, 1, or 2"
+    puts "0 = Computer vs Computer"
+    puts "1 = Human vs Computer"
+    puts "2 = Human vs Human"
     input = gets.strip.to_i
     if input == 0
       @player_a = Players::Computer
@@ -23,7 +26,8 @@ def select_players
   end
 
 def select_token
-  puts "Which player should go first (X), 1 or 2? (If 1 player game vs computer, you are Player 1)"
+  puts "Which player would like to be X and go first, 1 or 2?" 
+  puts "  (If Human vs Computer, you are Player 1)"
   input = gets.strip.to_i
   if input == 1
     @player_a = @a
