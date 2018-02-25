@@ -50,9 +50,10 @@ def play_again?
     puts "Would you like to play again?"
     puts "Enter 'Y' or 'N'"
     input = gets.strip.to_s
-    input == 'Y' || input == 'YES' || input == 'yes' || input == 'y'
-    select_players
-    new_game
+    if input == 'Y' || input == 'YES' || input == 'yes' || input == 'y'
+      select_players
+      new_game
+    end
   end
   puts "Thanks for playing. Come back soon!"
 end
