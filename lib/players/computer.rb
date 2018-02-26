@@ -1,6 +1,6 @@
 module Players
   class Computer < Player
-    
+
     def move(board)
       computer_move = nil
 
@@ -30,3 +30,26 @@ module Players
 
   end
 end
+
+
+#The following code allows the computer to move more erratically for future games
+# module Players
+#   class Computer < Player
+#
+#
+#     def move(board)
+#       sleep (1)
+#       computer_move = nil
+#       open_moves=[]
+#       board.cells.each_with_index do |cell, i|
+#         if cell == " "
+#           open_moves << i
+#         end
+#       end
+#       computer_move = (open_moves.sample+1).to_s
+#     end
+#
+#
+#
+#   end
+# end
