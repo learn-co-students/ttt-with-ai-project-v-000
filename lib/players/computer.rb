@@ -1,14 +1,3 @@
-# module Players
-#   class Computer < Player
-#
-#     def move(board = Board.new)
-#       free_positions = board.cells.each_with_index.find {|cell, i| cell == " "}
-#       (free_positions[1] +1).to_s
-#     end
-#
-#   end
-# end
-
 module Players
   class Computer < Player
 

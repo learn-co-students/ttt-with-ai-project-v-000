@@ -47,16 +47,16 @@ class Game
     won? && board.cells[winning_token[0]]
   end
 
-############################## PLAY GAME #####################################
+############################## TURN AND PLAY #####################################
 
 
 
   def turn
-    input = current_player.move
+    input = current_player.move(board)
     if board.valid_move?(input)
       puts "#{current_player.token} moved to cell #{input}"
       board.update(input,current_player)
-      board.display
+      #board.display
     else
       puts "Oops.That move is invalid!"
         turn
@@ -64,19 +64,15 @@ class Game
   end
 
   def play
-    board.display
     until over?
       turn
     end
     if won?
       puts "Congratulations #{winner}!"
       puts "You've won the game!"
-      play_again?
     else draw?
       puts "Cat's Game!"
-      play_again?
     end
   end
-
 
 end
