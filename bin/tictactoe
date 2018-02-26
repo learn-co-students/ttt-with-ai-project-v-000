@@ -19,19 +19,7 @@ def start_game
 
   elsif selected_players == 1
     puts "You VS Computer."
-    puts "Choose a Token: X or O. X moves first."
-    selected_token = gets.strip.to_s.capitalize
-
-      if selected_token == "X"
-        game = Game.new(player_1 =Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-        game.play
-      elsif selected_token =="O"
-        game = Game.new(player_1 =Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-        game.play
-      else
-        puts "Not a valid token!"
-        start_game
-      end
+    select_token
 
   else selected_players ==0
 
@@ -41,14 +29,30 @@ def start_game
   end
 end
 
+def select_token
+  puts "Choose a Token: X or O. X moves first."
+  selected_token = gets.strip.to_s.capitalize
+
+    if selected_token == "X"
+      game = Game.new(player_1 =Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      game.play
+    elsif selected_token =="O"
+      game = Game.new(player_1 =Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      game.play
+    else
+      puts "Not a valid token!"
+      selected_token
+    end
+end
+
 def play_again?
   input = ''
   puts "Would you like to play again?"
   puts "Enter 'Y' or 'N'"
   input = gets.strip.to_s.capitalize
-  if input == 'Y' || input == 'yes' || input == 'y'
+  if input == 'Y' || input == 'YES'
     start_game
-  elsif input == 'N' || input == 'NO' || input == 'no' || input == 'n'
+  elsif input == 'N' || input == 'NO'
     puts "Thanks for playing. Come back soon!"
     exit
   else
@@ -60,4 +64,6 @@ end
 ########################## CALL ###########################################
 
 start_game
-play_again?
+loop do
+  play_again?
+end

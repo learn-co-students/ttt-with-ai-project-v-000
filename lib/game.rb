@@ -56,7 +56,7 @@ class Game
     if board.valid_move?(input)
       puts "#{current_player.token} moved to cell #{input}"
       board.update(input,current_player)
-      #board.display
+      board.display
     else
       puts "Oops.That move is invalid!"
         turn

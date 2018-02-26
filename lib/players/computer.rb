@@ -23,7 +23,9 @@ module Players
       else
         computer_move = "2"
       end
+      sleep(1)
       computer_move
+
     end
 
   end
