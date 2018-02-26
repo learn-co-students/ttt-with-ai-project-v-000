@@ -54,11 +54,11 @@ class Game
   def turn
     input = current_player.move(board)
     if board.valid_move?(input)
-      puts "#{current_player.token} moved to cell #{input}"
+      puts "#{current_player.token} moved to cell #{input}".cyan
       board.update(input,current_player)
       board.display
     else
-      puts "Oops.That move is invalid!"
+      puts "Oops.That move is invalid!".red
         turn
     end
   end
@@ -69,10 +69,11 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
-      puts "You've won the game!"
+      puts "You've won the game!".blue
     else draw?
       puts "Cat's Game!"
     end
   end
+  #colorizing line 71 and 74 causes specs to fail
 
 end

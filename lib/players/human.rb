@@ -5,7 +5,7 @@ module Players
       if board.turn_count == 0
         board.display
       end
-      puts "Your Move #{self.token}! Please choose a valid position from 1-9."
+      puts "Your Move #{self.token}! Please choose a valid position from 1-9.".cyan
       gets.chomp
     end
   end
