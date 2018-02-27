@@ -20,7 +20,7 @@ class Game
     @board.turn_count.even? ? @player_1 : @player_2
   end
   def over?
-    @board.full?
+      won? || draw?
   end
   def won?
     WIN_COMBINATIONS.detect do |win_array|
@@ -29,9 +29,9 @@ class Game
      @board.cells[win_array[0]] != " "
     end
   end
- def draw?
-   @board.full? && !won? ? true : false
- end
+  def draw?
+    !won? && @board.full?
+  end
  def winner
    won? ? @board.cells[won?.first] : nil
  end
@@ -45,16 +45,14 @@ class Game
    end
    @board.display
   end
-def play
-  counter = 0
-     while !draw? && !over?
-       turn
-       counter += 1
-     end
-     if draw? || over?
-       puts "Cat's Game!"
-     else
-       puts "Congratulations #{winner}!"
-     end
-   end
+  def play
+    until over? || draw?
+      turn
+    end
+    if draw?
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
+  end
  end
