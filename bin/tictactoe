@@ -1,3 +1,71 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+############################  START, SELECT, PLAY AGAIN ########################
+def start_game
+  puts "Welcome to Tic Tac Toe!".blue
+  puts "Please Select The Number of Players:".blue
+  puts "Enter '0' for Computer Vs. Computer Mode.".blue
+  puts "Enter '1' to Play against The Computer.".blue
+  puts "Enter '2' to Play against a Friend.".blue
+
+  selected_players = gets.strip.to_i
+
+  if selected_players == 2
+    puts "You VS a Friend. Player X will move first.".cyan
+    game = Game.new
+    game.play
+
+  elsif selected_players == 1
+    puts "You VS Computer.".cyan
+    select_token
+
+  else selected_players ==0
+
+    puts "Computer VS Computer".cyan
+    game = Game.new(player_1 =Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+  end
+end
+
+def select_token
+  puts "Choose a Token: X or O. X moves first.".cyan
+  selected_token = gets.strip.to_s.capitalize
+
+    if selected_token == "X"
+      puts "You are player X".green
+      game = Game.new(player_1 =Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      game.play
+    elsif selected_token =="O"
+      puts "You are player O".magenta
+      game = Game.new(player_1 =Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+      game.play
+    else
+      puts "Not a valid token!".red
+      selected_token
+    end
+end
+
+def play_again?
+  input = ''
+  puts "Would you like to play again?".blue
+  puts "Enter 'Y' or 'N'".blue
+  input = gets.strip.to_s.capitalize
+  if input == 'Y' || input == 'YES'
+    start_game
+  elsif input == 'N' || input == 'NO'|| input == 'no'
+    puts "Thanks for playing. Come back soon!".cyan
+    exit
+  else
+    puts "That isn't valid input!".red
+    play_again?
+  end
+end
+
+########################## PLAY ME ###########################################
+
+start_game
+loop do
+  play_again?
+end
