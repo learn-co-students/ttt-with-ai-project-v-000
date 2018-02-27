@@ -1,7 +1,6 @@
 module Players
   class Computer < Player
   
-  
     def move(board)
       computer_move = nil
       open_moves=[]
@@ -25,7 +24,6 @@ module Players
       sleep(1)
       computer_move
     end
-    
     
   end
 end
