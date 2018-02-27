@@ -1,3 +1,41 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe!"
+
+num_players = nil
+until ["0", "1", "2"].include? num_players do
+  puts "Would you like to play with 0, 1, or 2 players?: "
+  num_players = gets.chomp
+end
+
+case
+  when num_players == "1"
+    team = nil
+    until team == "X" || team == "O" do
+      puts "Would you like to play as (X) or (O)? Team (X) will always go first: "
+      team = gets.chomp.upcase
+    end
+    if team.upcase == "X"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    elsif team.upcase == "O"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    end
+  when num_players == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  when num_players == "2"
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+end
+
+
+game.play
+
+puts "Would you like to replay? (y/n)"
+input = gets.chomp
+until input.upcase != "Y"
+  game.board.reset!
+  game.play
+  puts "Would you like to replay? (y/n)"
+  input = gets.chomp
+end
