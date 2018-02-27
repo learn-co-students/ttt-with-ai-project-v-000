@@ -4,6 +4,7 @@ module Players
     def move(board)
       computer_move = nil
       
+      
       if !board.taken?(5)
         computer_move = "5"
       elsif !board.taken?(7)
@@ -23,6 +24,7 @@ module Players
       else
         computer_move = "2"
       end
+      sleep(1)
       computer_move
     end
   
