@@ -1,3 +1,26 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Hello user"
+  puts "Please select one of the playing modes 0, 1 or 2"
+  puts "if press (0) means two humans playing against each other"
+  puts "if press (1) means one human against computer"
+  puts "if press (2) means the computer playing alone and you just watching"
+  puts "if (wargame) playing wargames (computer plays 100 times)"
+  puts "press any other number to exit the game"
+  input = gets.strip
+  if input == "0"
+    Game.new.play
+  elsif input == "1"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+  elsif input == "2"
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+  elsif input == "wargame"
+    puts "Playing wargame"
+    100.times do |game|
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play.score_tracking
+    end
+  else
+    puts "Exit the game"
+    exit
+  end
