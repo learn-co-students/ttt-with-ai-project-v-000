@@ -52,7 +52,7 @@ end
 
 def update(input, player)
 # binding.pry
- cells[input.to_i] << player.token
+ cells[input.to_i] = player.token
 end
 
 end
