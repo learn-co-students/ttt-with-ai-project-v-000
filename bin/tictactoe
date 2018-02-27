@@ -1,3 +1,70 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+## Player, Token, & Replay Selection ##
+def select_players
+    puts "Select number of players: 0, 1, or 2"
+    puts "0 = Computer vs Computer"
+    puts "1 = Human vs Computer"
+    puts "2 = Human vs Human"
+    input = gets.strip.to_i
+    if input == 0
+      @player_a = Players::Computer
+      @player_b = Players::Computer
+    elsif input == 1
+      @a = Players::Human
+      @b = Players::Computer
+      select_token
+    elsif input == 2
+      @a = Players::Human
+      @b = Players::Human
+      select_token
+    else
+      select_players
+    end
+  end
+
+def select_token
+  puts "Which player would like to be X and go first, 1 or 2?" 
+  puts "  (If Human vs Computer, you are Player 1)"
+  input = gets.strip.to_i
+  if input == 1
+    @player_a = @a
+    @player_b = @b
+  elsif input == 2
+    @player_a = @b
+    @player_b = @a
+  else
+    select_token
+  end
+end
+
+def new_game
+  game = Game.new(player_1 = @player_a.new("X"), player_2 = @player_b.new("O"), board = Board.new)
+  until game.won? || game.draw?
+    game.play
+  end
+end
+
+def play_again?
+  input = ''
+    
+  until input == 'N' || input == 'NO' || input == 'no' || input == 'n'
+    puts "Would you like to play again?"
+    puts "Enter 'Y' or 'N'"
+    input = gets.strip.to_s
+    if input == 'Y' || input == 'YES' || input == 'yes' || input == 'y'
+      select_players
+      new_game
+    end
+  end
+  puts "Thanks for playing. Come back soon!"
+end
+
+
+## Game Run ##
+puts "Welcome to Tic Tac Toe!"
+select_players
+new_game
+play_again?
