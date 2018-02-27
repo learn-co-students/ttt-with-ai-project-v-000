@@ -25,9 +25,9 @@ module Players
         elsif self.game.board.turn_count == 1 && @positions[4] == " "
           @move_ind = 4
         elsif self.game.board.turn_count == 1 && @positions[4] != " "
-          @move_ind = corner.last
-        elsif self.game.board.turn_count == 2
           @move_ind = corners.last
+        elsif self.game.board.turn_count == 2
+          @move_ind = corners[1]
         elsif find_win
           find_win
         end
