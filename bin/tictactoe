@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-##########################CLI METHODS ########################################
+############################  START, SELECT, PLAY AGAIN ########################
 def start_game
   puts "Welcome to Tic Tac Toe!".blue
   puts "Please Select The Number of Players:".blue
@@ -54,7 +54,7 @@ def play_again?
   input = gets.strip.to_s.capitalize
   if input == 'Y' || input == 'YES'
     start_game
-  elsif input == 'N' || input == 'NO'
+  elsif input == 'N' || input == 'NO'|| input == 'no'
     puts "Thanks for playing. Come back soon!".cyan
     exit
   else
@@ -63,7 +63,7 @@ def play_again?
   end
 end
 
-########################## CALL ###########################################
+########################## PLAY ME ###########################################
 
 start_game
 loop do

@@ -3,6 +3,7 @@ module Players
 
     def move(board)
       computer_move = nil
+      open_moves=[]
 
       if !board.taken?(5)
         computer_move = "5"
@@ -12,44 +13,17 @@ module Players
         computer_move = "1"
       elsif !board.taken?(9)
         computer_move = "9"
-      elsif !board.taken?(4)
-        computer_move = "4"
-      elsif !board.taken?(8)
-        computer_move = "8"
-      elsif !board.taken?(3)
-        computer_move = "3"
-      elsif !board.taken?(6)
-        computer_move = "6"
       else
-        computer_move = "2"
+        board.cells.each_with_index do |cell, i|
+          if cell == " "
+            open_moves << i
+          end
+        end
+        computer_move = (open_moves.sample+1).to_s
       end
       sleep(1)
       computer_move
-
     end
 
   end
 end
-
-
-#The following code allows the computer to move more erratically for future games
-# module Players
-#   class Computer < Player
-#
-#
-#     def move(board)
-#       sleep (1)
-#       computer_move = nil
-#       open_moves=[]
-#       board.cells.each_with_index do |cell, i|
-#         if cell == " "
-#           open_moves << i
-#         end
-#       end
-#       computer_move = (open_moves.sample+1).to_s
-#     end
-#
-#
-#
-#   end
-# end

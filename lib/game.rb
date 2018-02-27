@@ -27,7 +27,7 @@ class Game
   end
 
   def over?
-    won? || board.full? || draw?
+    won? || draw?
   end
 
   def won?
@@ -68,8 +68,8 @@ class Game
       turn
     end
     if won?
-      puts "Congratulations #{winner}!"
-      puts "You've won the game!".blue
+      puts "Congratulations #{winner}!" 
+      puts "You've won the game!"
     else draw?
       puts "Cat's Game!"
     end
