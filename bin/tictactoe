@@ -13,7 +13,7 @@ if game_type == "0"
   Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
 elsif
   game_type == "1"
-  Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+  choose_token
 elsif
   game_type == "2"
   Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
@@ -33,6 +33,18 @@ def play_again?
     start_game(game_type)
   else
     puts "Thanks for playing!"
+  end
+end
+
+def choose_token
+  puts "Would you like to be X and go first? (y) or (n)"
+  input = gets.strip
+  if input == "y"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+  elsif input == "n"
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+  else
+    choose_token
   end
 end
 
