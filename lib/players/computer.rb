@@ -3,7 +3,7 @@ module Players
     def move(board)
       computer_move = nil
 
-      if !@board.taken?(5)
+      if !board.taken?(5)
         computer_move = "5"
       elsif !board.taken?(7)
         computer_move = "7"
