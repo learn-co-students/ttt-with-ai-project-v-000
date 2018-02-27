@@ -108,7 +108,7 @@ end
     puts "Would you like to play again?"
     puts "Enter '1' to quit, press any other key to play again"
 
-    reload = gets.strip.upcase
+    reload = gets.strip.to_s
 
     if reload == '2'
       puts "Goodbye!"
