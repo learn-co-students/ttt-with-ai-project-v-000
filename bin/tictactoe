@@ -42,7 +42,7 @@ end
 
 def new_game
   game = Game.new(player_1 = @player_a.new("X"), player_2 = @player_b.new("O"), board = Board.new)
-  until game.won?
+  until game.won? || game.draw?
     game.play
   end
 end
