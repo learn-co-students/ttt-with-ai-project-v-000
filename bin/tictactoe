@@ -65,7 +65,7 @@ end
 
   elsif game_type_input == '3'
 
-    game = Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Computer.new("0"), board = Board.new)
+    game = Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Computer.new("O"), board = Board.new)
     game.play
 
 
