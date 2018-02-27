@@ -3,9 +3,9 @@
 require_relative '../config/environment'
 
 
-reload = '1'
+reload = '2'
 
-until reload == '2' do
+until reload == '1' do
 
   game = ""
   game_type_input = ""
@@ -74,6 +74,7 @@ end
     o_record = 0
     draw = 0
     counter = 0
+
     100.times do
       if counter.even?
         game = Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Computer.new("O"), board = Board.new)
@@ -82,12 +83,15 @@ end
       end
         game.play
 
-      if game.winner == 'X'
-        x_record += 1
-      elsif game.winner == 'O'
-        o_record += 1
-      elsif game.winner != 'X' && game.winner != 'O'
+
+      if game.draw?
         draw += 1
+      elsif game.won?
+        if game.winner == 'X'
+          x_record += 1
+        elsif game.winner == 'O'
+          o_record += 1
+        end
       end
 
       counter += 1
@@ -100,13 +104,15 @@ end
 
   end
 
-  puts "Would you like to play again?"
-  puts "Enter '1' to play again, or '2' to quit"
+  
+    puts "Would you like to play again?"
+    puts "Enter '1' to quit, press any other key to play again"
 
-  reload = gets.strip.upcase
+    reload = gets.strip.upcase
 
-  if reload == '2'
-    puts "Goodbye!"
-  end
+    if reload == '2'
+      puts "Goodbye!"
+    end
 
-end     
+
+end
