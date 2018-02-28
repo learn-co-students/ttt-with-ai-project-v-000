@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe!"
+puts "Is player 1 a human? (y/n)"
+gets.chomp == "y" ? player_1 = Players::Human.new("X") : player_1 = Players::Computer.new("X")
+puts "Is player 2 a human? (y/n)"
+gets.chomp == "y" ? player_2 = Players::Human.new("O") : player_2 = Players::Computer.new("O")
+Game.new(player_1, player_2).play

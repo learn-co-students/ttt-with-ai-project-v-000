@@ -44,10 +44,12 @@ class Game
 
   def turn
     player = current_player
+    board.display
     user_input = player.move(board)
     if board.valid_move?(user_input)
       board.update(user_input, player)
     else
+      puts "Invalid move!"
       turn
     end
   end
@@ -56,6 +58,9 @@ class Game
     while !over?
       turn
     end
+    puts "***********"
+    board.display
+    puts "***********"
     puts "Congratulations #{winner}!" if winner
     puts "Cat's Game!" if !winner
   end
