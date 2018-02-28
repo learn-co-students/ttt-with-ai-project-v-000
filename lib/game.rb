@@ -28,10 +28,9 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      pos_1 = combo[0]
-      pos_2 = combo[1]
-      pos_3 = comno[3]
-      return true if @board.cells[pos_1] == @board.cells[pos_2] && @board.cells[pos_1] == @board.cells[pos_3]
+      if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]]
+        puts combo
+      end
     end
     false
   end
