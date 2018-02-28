@@ -51,8 +51,8 @@ def valid_move?(input)
 end
 
 def update(input, player)
-# binding.pry
- cells[input.to_i] = player.token
+ #binding.pry
+ cells[input.to_i - 1] = player.token
 end
 
 end
