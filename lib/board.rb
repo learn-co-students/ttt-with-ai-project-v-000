@@ -35,8 +35,12 @@ class Board
   end
 
   def valid_move?(pos)
-    return false if [1..9].include?(pos) == false
-    @cells[pos.to_i] == " "
+    return false if (0..8).include?(pos.to_i - 1) == false
+    @cells[pos.to_i - 1] == " "
+  end
+
+  def update(pos, player)
+    @cells[pos.to_i - 1] = player.token
   end
 
 end
