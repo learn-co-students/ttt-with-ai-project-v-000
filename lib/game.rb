@@ -34,5 +34,10 @@ class Game
    @board.full?
  end
 
+ def won?
+   binding.pry
+
+ end
+
 
 end
