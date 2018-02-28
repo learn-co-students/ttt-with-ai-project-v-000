@@ -25,4 +25,14 @@ class Game
   def over?
     @board.full?
   end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      pos_1 = combo[0]
+      pos_2 = combo[1]
+      pos_3 = comno[3]
+      return true if @board.cells[pos_1] == @board.cells[pos_2] && @board.cells[pos_1] == @board.cells[pos_3]
+    end
+    false
+  end
 end
