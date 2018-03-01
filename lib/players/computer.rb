@@ -14,6 +14,7 @@ module Players
     end
     
     def move(board)
+      sleep 1
       if board.turn_count > 3
         initial_move(board)
       else
