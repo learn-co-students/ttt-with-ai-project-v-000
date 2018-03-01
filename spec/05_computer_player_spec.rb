@@ -17,4 +17,36 @@ describe 'Players::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+
+  describe 'AI' do
+    it 'blocks X from winning' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = ["X", "X", " ", "O", " ", " ", " ", " ", " "]
+
+      computer_move = computer.move(board)
+
+      expect(computer_move).to eq("3")
+    end
+
+    it 'blocks O from winning' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = [" ", " ", "X", " ", "X", " ", "O", "O", " "]
+
+      computer_move = computer.move(board)
+
+      expect(computer_move).to eq("9")
+    end
+
+    it 'first move is always the center' do
+      computer = Player::Computer.new("X")
+      board = Board.new
+      board.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
+      computer_move = computer.move(board)
+
+      expect(computer_move).to eq("5")
+    end
+  end
 end

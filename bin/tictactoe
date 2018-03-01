@@ -1,3 +1,57 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def player_mode
+  valid_players = ["0","1","2"]
+  puts "Choose player mode:"
+  puts "0 - Computer v. Computer"
+  puts "1 - Human v. Computer"
+  puts "2 - Human v. Human"
+  @num_players = gets.chomp
+  if !valid_players.include?(@num_players)
+    player_mode
+  end
+end
+
+def play_game
+  case @num_players
+  when "0"
+    game = Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"), board = Board.new)
+    game.board.display
+    game.play
+    play_again?
+  when "1"
+    puts "Please choose X or O:"
+    token_choice = gets.chomp.upcase
+    token_choice == "X" ? computer_token = "O" : computer_token = "X"
+    game = Game.new(player_1 = Human.new(token_choice), player_2 = Computer.new(computer_token), board = Board.new)  
+    game.board.display
+    game.play
+    play_again?
+  when "2"
+    puts "Player 1, please choose X or O:"
+    p1_token = gets.chomp.upcase
+    p1_token == "X" ? p2_token = "O" : p2_token = "X"
+    puts "Player 2, you are #{p2_token}."
+    game = Game.new(player_1 = Human.new(p1_token), player_2 = Human.new(p2_token), board = Board.new)  
+    game.board.display
+    game.play
+    play_again?
+  end
+end
+
+def play_again?
+  puts "Would you like to play again? (Y/N)"
+  input = gets.chomp.upcase
+  if input == "Y"
+    player_mode
+    play_game
+  elsif input != "N"
+    play_again?
+  end
+end
+
+"Welcome to Tic Tac Toe!"
+player_mode
+play_game

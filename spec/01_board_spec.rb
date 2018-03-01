@@ -125,4 +125,37 @@ describe "Board" do
       expect(board.position("1")).to eq("X")
     end
   end
+
+  describe '#available_moves' do
+    it 'returns an array of possible moves to be made' do
+      board = Board.new
+      board.cells = ["X", "X", " ", "O", " ", " ", " ", " ", " "]
+
+      expect(board.available_moves).to match_array(["3", "5", "6", "7", "8", "9"])
+    end
+  end
+
+  describe '#about_to_win?' do
+    it 'returns true if a player is one move away from winning' do
+      board = Board.new
+      board.cells = ["X", "X", " ", " ", "O", " ", " ", " ", " "]
+
+      expect(board.about_to_win?).to be_truthy
+    end
+
+    it 'returns false if no player is one move away from winning' do
+      board = Board.new
+      board.cells = ["X", " ", " ", " ", "O", " ", " ", " ", " "]
+
+      expect(board.about_to_win?).to be_falsey
+    end
+
+    it 'returns false if a player was about to win, but was blocked' do
+      board = Board.new
+      board.cells = ["X", "X", "O", "O", " ", " ", " ", " ", " "]
+
+      expect(board.about_to_win?).to be_falsey
+    end
+
+  end
 end
