@@ -34,7 +34,7 @@ class Game
   end
 
   def won?
-     WIN_COMBINATIONS.detect do |w|
+        WIN_COMBINATIONS.detect do |w|
         win_index_1 = w[0]
         win_index_2 = w[1]
         win_index_3 = w[2]
@@ -50,6 +50,26 @@ class Game
     end
 
     def winner
-      won?.detect
+      if won?
+        board.cells[won?[0]]
     end
+  end
+
+  def turn
+      i = current_player.move(board)
+      if board.valid_move?(i)
+      board.update(i, current_player)
+    else turn
+
+      end
+    end
+
+    def play
+       turn until over? || draw?
+
+       puts "Congratulations #{winner}!"
+       
+    end
+
+
 end
