@@ -40,4 +40,8 @@ class Board
   def taken?(input)
     !(position(input) == " " || position(input) == "")
   end
+  
+  def cells
+    @cells
+  end
 end

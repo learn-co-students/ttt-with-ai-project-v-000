@@ -49,8 +49,6 @@ class Game
     if !@board.valid_move?(current_move)
       turn
     else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
       @board.update(current_move, player)
       puts "#{player.token} moved #{current_move}"
       @board.display
