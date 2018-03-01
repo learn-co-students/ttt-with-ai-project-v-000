@@ -23,6 +23,8 @@ module Players
       end
     end
     
+    #equality principle - iterate through win combo, if win combo[0] == win combo[1]
+    
     #def move(board)
     #  sleep(1)
     #  i = rand(10)
@@ -34,40 +36,21 @@ module Players
       if board.turn_count < 3 #first three moves, the computer plays randomly
         initial_move(board)
       else
-        move = check_priority(board)
+        position_priority(board)
       #else #if not one space from winning, play a random space
       #  i = rand(10)
       #  i.to_s
        end
     end
     
-    def check_priority(board) # artificial intelligence logic comes here
-
-      x_mark = "X"
-      o_mark = "O"
-
-      o_position = position_priority(board, o_mark) # O's position should check first.
-
-      if !o_position.nil?
-        return o_position
-      end
-
-      x_position = position_priority(board, x_mark)
-
-      if !x_position.nil?
-        return x_position
-      end
-    end
-      
-    
-    def position_priority(board, token)
+    def position_priority(board)
       WIN_COMBINATIONS.each do |win_combo|
         position_priority = [[0, 1, 2], [0, 2, 1], [1, 2, 0]]
         position_priority.each do |priority|
-          if board.cells[win_combo[priority[0]]] == token &&
-             board.cells[win_combo[priority[1]]] == token
+          if board.cells[win_combo[priority[0]]] == "X" &&
+             board.cells[win_combo[priority[1]]] == "X"
               if board.cells[win_combo[priority[2]]] == " "
-                return win_combo[priority[2]]
+                 win_combo[priority[2]]
               end
             end
           end
