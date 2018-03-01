@@ -12,21 +12,82 @@ module Players
       [6,4,2]
     ]
     
-    def move(board)
-      sleep(1)
-      WIN_COMBINATIONS.select do |win_combo|
-        played_tokens = win_combo.count{|space| board.cells[space] == "X"}
-        if played_tokens == 2
-         #need to find out which space in array is empty.
-          i_array = win_combo.grep(" ")
-          i = i_array[0]
-        end
-        
-        if board.valid_move?(i)
-          i.to_s
-        end
+    def initial_move(board)
+      first_moves ||= WIN_COMBINATIONS.sample #pick a random win_combo to play through
+      i = first_moves.sample
+      if board.cells[i] == " "
+        move = i + 1
+        move.to_s
+      else
+        initial_move(board)
       end
     end
+    
+    #def move(board)
+    #  sleep(1)
+    #  i = rand(10)
+    #  i.to_s
+    #end
+    
+    def move(board)
+      sleep(1)
+      if board.turn_count < 3 #first three moves, the computer plays randomly
+        initial_move(board)
+      else
+        move = check_priority(board)
+      #else #if not one space from winning, play a random space
+      #  i = rand(10)
+      #  i.to_s
+       end
+    end
+    
+    def check_priority(board) # artificial intelligence logic comes here
+
+      x_mark = "X"
+      o_mark = "O"
+
+      o_position = position_priority(board, o_mark) # O's position should check first.
+
+      if !o_position.nil?
+        return o_position
+      end
+
+      x_position = position_priority(board, x_mark)
+
+      if !x_position.nil?
+        return x_position
+      end
+    end
+      
+    
+    def position_priority(board, token)
+      WIN_COMBINATIONS.each do |win_combo|
+        position_priority = [[0, 1, 2], [0, 2, 1], [1, 2, 0]]
+        position_priority.each do |priority|
+          if board.cells[win_combo[priority[0]]] == token &&
+             board.cells[win_combo[priority[1]]] == token
+              if board.cells[win_combo[priority[2]]] == " "
+                return win_combo[priority[2]]
+              end
+            end
+          end
+        end
+      end
+    
+    #def move(board)
+    #  sleep(1)
+    #  close_to_winning_combo = WIN_COMBINATIONS.detect do |win_combo|
+    #    played_tokens = win_combo.count{|space| board.cells[space] == "X"}
+    #    played_tokens == 2
+    #  end
+    #  
+    #  close_to_winning_combo.each do |arr_index|
+    #    if board.cells[arr_index] == " "
+    #      move = arr_index + 1
+    #      move.to_s
+    #    end
+    #  end
+    #end
   end
 end  
 
