@@ -15,11 +15,11 @@ class Game < Player
   end
 
   def board=(board)
-    @board = []
+    @board = board #[]
   end
 
   def current_player
-    if self.board.turn_count.even?
+    if self.board.turn_count.even? #cells
       player_1
     else
       player_2
@@ -27,23 +27,25 @@ class Game < Player
   end
 
   def over?
-    self.board.full? ? true : false #seems wrong - DOUBLE CHECK through personal research
+    won? || draw?
   end
 
-  def won? #DOUBLE CHECK!!
+  def won?
     WIN_COMBINATIONS.detect do |combo|
         board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && self.board.taken?(board.cells[combo[0]])
     end #detect iteration
   end
 
   def draw?
-    WIN_COMBINATIONS.detect do |combo|
-      if board.cells[combo[0]] != board.cells[combo[1]] && board.cells[combo[1]] != board.cells[combo[2]] && self.board.full?
-        true
-      elsif board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && self.board.taken?(board.cells[combo[0]])
-        return false
-      end
-    end #detect iteration
+    self.board.full? && !won?
+
+    # WIN_COMBINATIONS.detect do |combo|
+    #   if board.cells[combo[0]] != board.cells[combo[1]] && board.cells[combo[1]] != board.cells[combo[2]] && self.board.full?
+    #     true
+    #   elsif board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && self.board.taken?(board.cells[combo[0]])
+    #     return false
+    #   end
+    # end #detect iteration
   end
 
   def winner
@@ -59,30 +61,19 @@ class Game < Player
   def turn
     player = self.current_player
     board_position = self.current_player.move(board)
-    if self.board.valid_move?(board_position.to_i)
-      self.board.update(board_position.to_i, player)
+    if self.board.valid_move?(board_position)
+      self.board.update(board_position, player)
     else
       turn
     end
   end
 
   def play
-    while over? == false
-      turn
-      over?
-      self.board.turn_count
-      break if self.board.turn_count >= 8
-    end
+      while !over?
+        turn
+      end
   end
 
-  # def play
-  #   while over? == false
-  #     turn
-  #     over?
-  #     self.board.turn_count
-  #   break if self.board.turn_count >= 8
-  #   end
-  # end
 
   def player_1=(player_1)
     @player_1 = player_1

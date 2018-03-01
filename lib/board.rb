@@ -22,11 +22,11 @@ class Board
   end
 
   def full?
-    @cells.each_with_index do |cell, index|
-      if @cells[index] != " "
+    @cells.all? do |cell|
+      if cell != " "
         true
       else
-        return false
+        false
       end #if statement
     end #each iteration
   end
@@ -45,10 +45,6 @@ class Board
   new_input = user_input.to_i - 1
       if @cells[new_input] == " " && user_input.to_i >= 1 && user_input.to_i <= 9
         true
-      elsif @cells[new_input] == "X"
-        false
-      elsif @cells[new_input] == "O"
-        false
       else
         false
       end
