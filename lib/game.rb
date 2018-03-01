@@ -1,5 +1,3 @@
-require 'pry'
-
 class Game
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
@@ -48,7 +46,6 @@ class Game
   def turn
     player = current_player
     current_move = player.move(@board)
-    binding.pry
     if !@board.valid_move?(current_move)
       turn
     else
