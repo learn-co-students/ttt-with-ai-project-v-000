@@ -91,10 +91,38 @@ class Game
    end
    
    def zero_player
-     game = Game.new(Computer.new("X"), Computer.new("O"), Board.new)
-     game.play
-     play_again
-   end  
+     puts "Would you like to play war games? yes or no"
+     input = gets.strip
+     if input == "yes"
+       war_games
+     elsif input == "no"
+       game = Game.new(Computer.new("X"), Computer.new("O"), Board.new)
+       game.play
+       play_again
+     end
+   end
+    
+   
+   def war_games
+     player_X_wins = []
+     player_O_wins = []
+     cats_games = []
+     puts "Pop, BANG, Pow!! It's time fer fightin'!!!"
+     sleep(2)
+     100.times do
+       game = Game.new(Computer.new("X"), Computer.new("O"), Board.new)
+       game.play
+       if game.winner == "X"
+         player_X_wins << self 
+       elsif game.winner == "O"
+         player_O_wins << self
+       else
+         cats_games << self 
+       end
+     end
+     puts "Player X won #{player_X_wins.length} times, Player O won #{player_O_wins.length} times, and there were #{cats_games.length} tied games."
+       play_again
+   end
    
    def one_player
      puts "Who should go first, computer or human?"
@@ -124,9 +152,10 @@ class Game
      puts "Would you like to play again? yes or no"
        input = gets.strip
        if input == "yes"
+         puts "Here we go!"
          start
        elsif input == "no"
-         puts "So long and thanks for all the fish."
+         puts "So long and thanks for all the fish!"
        else
          puts "Sorry, I didn't hear that!"
          play_again
