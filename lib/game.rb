@@ -68,7 +68,7 @@ class Game
        turn until over? || draw?
 
        puts "Congratulations #{winner}!"
-       
+       binding.pry
     end
 
 
