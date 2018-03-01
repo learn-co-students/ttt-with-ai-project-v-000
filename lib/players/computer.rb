@@ -17,8 +17,7 @@ module Players
       if board.turn_count > 3
         initial_move(board)
       else
-        i = rand(10)
-        i.to_s
+        rand(10).to_s
       end
     end    
   end
