@@ -1,19 +1,6 @@
 module Players
   class Computer < Player
 
-    WIN_COMBINATIONS = [
-     [0,1,2],
-     [3,4,5],
-     [6,7,8],
-     [0,3,6],
-     [1,4,7],
-     [2,5,8],  #<---- you can call this with Game::WIN_COMBINATIONS
-     [6,4,2],
-     [0,4,8]
-    ]
-
-
-
   def move(board)
     move = nil
 
@@ -28,10 +15,20 @@ module Players
             move = "0" else move "8"
 
 #second move ---------
+    #if first player, top left corner, if taken, top right or bottom left
+  elsif board.turn_count == 3
+      if !board.taken(0)
+        move = "0" else move = "2"
+
+    #if second player, bottom middle or right middle
+  elsif board.turn_count == 4
+      if !board.taken(5)
+        move = "5" else move = "7"
+#third move ----------
 
 
-
-
+    #iterate through WIN_COMBINATIONS and see if any of the combos have at least two spaces filled
+  elsif Game::WIN_COMBINATIONS.map {|i| if }
 
     end
   end
