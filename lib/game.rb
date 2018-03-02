@@ -13,6 +13,7 @@ class Game
     ]
     @@x_wins = 0
     @@o_wins = 0
+    @@wins_count = 0
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
@@ -36,15 +37,7 @@ class Game
   end
  def winner
    won? ? @board.cells[won?.first] : nil
- end
- def winner_counter
-   counter = 0
-   if won?
-     counter += 1
-   else
-     puts "no winner"
-   end
-   counter
+   # binding.pry
  end
  def turn
    puts "Please enter 1-9:"
@@ -56,24 +49,32 @@ class Game
    end
    @board.display
   end
+
   def play
     until over? || draw?
+      sleep(1)
       turn
     end
     if draw?
       puts "Cat's Game!"
     else
       puts "Congratulations #{winner}!"
-      self
+      # self
     end
   end
   def score_tracking
     if winner == "X"
-      @@x_wins += 1
+      @@x_wins = 1
+      @@o_wins = 0
     else winner == "O"
-      @@o_wins += 1
+      
+      @@o_wins =
+       1
+      @@x_wins = 0
     end
-    puts "X wins: #{@@x_wins}, O wins: #{@@o_wins}"
-    self
+    @@wins_count = @@x_wins + @@o_wins
+    puts "X wins: #{@@x_wins}, O wins: #{@@o_wins}, wins count: #{@@wins_count}"
+    # self
   end
+
  end

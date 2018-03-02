@@ -8,11 +8,11 @@ class Board
     @cells = Array.new(9, " ")
   end
   def display
-    puts (" #{cells[0]} | #{cells[1]} | #{cells[2]} ")
-    puts ("-----------")
-    puts (" #{cells[3]} | #{cells[4]} | #{cells[5]} ")
-    puts ("-----------")
-    puts (" #{cells[6]} | #{cells[7]} | #{cells[8]} ")
+    puts ("1| [#{cells[0]}] |2| [#{cells[1]}] |3| [#{cells[2]}] ")
+    puts ("----------------------")
+    puts ("4| [#{cells[3]}] |5| [#{cells[4]}] |6| [#{cells[5]}] ")
+    puts ("----------------------")
+    puts ("7| [#{cells[6]}] |8| [#{cells[7]}] |9| [#{cells[8]}] ")
   end
 
   def position(input)
@@ -38,4 +38,5 @@ class Board
     index = position.to_i - 1
     @cells[index] = player.token
   end
+
 end

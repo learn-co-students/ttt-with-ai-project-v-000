@@ -10,15 +10,25 @@ puts "Hello user"
   puts "press any other number to exit the game"
   input = gets.strip
   if input == "0"
+    Board.new.display
     Game.new.play
   elsif input == "1"
-    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+    Board.new.display
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+    game.play
   elsif input == "2"
-    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+    Board.new.display
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    game.play
+    score = game.score_tracking
   elsif input == "wargame"
     puts "Playing wargame"
+    Board.new.display
     100.times do |game|
-      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play.score_tracking
+      # binding.pry
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+      game.play
+      score = game.score_tracking
     end
   else
     puts "Exit the game"
