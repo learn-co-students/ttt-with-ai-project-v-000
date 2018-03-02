@@ -16,8 +16,21 @@ module Players
 
   def move(board)
     move = nil
+
+#first move--------
+    #if first player, bottom right corner
       if !board.taken?(8)
         move = "8"
+
+    #if second player, either bottom right, or top left
+      elsif board.turn_count == 1
+          if board.taken?(8)
+            move = "0" else move "8"
+
+#second move ---------
+
+
+
 
 
     end
