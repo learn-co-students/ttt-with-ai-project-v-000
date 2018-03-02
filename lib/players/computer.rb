@@ -7,7 +7,7 @@ module Players
      [6,7,8],
      [0,3,6],
      [1,4,7],
-     [2,5,8],
+     [2,5,8],  #<---- you can call this with Game::WIN_COMBINATIONS
      [6,4,2],
      [0,4,8]
     ]
@@ -15,7 +15,10 @@ module Players
 
 
   def move(board)
-    WIN_COMBINATIONS.map do |a| a.sample.to_s
+    move = nil
+      if !board.taken?(8)
+        move = "8"
+
 
     end
   end
