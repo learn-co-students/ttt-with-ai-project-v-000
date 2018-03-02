@@ -39,8 +39,7 @@ end
 
 def win_test(board)
   Game::WIN_COMBINATIONS.detect do |test|
-    cells = [8
-
+    cells = [
       board.cells[test[0]],
       board.cells[test[1]],
       board.cells[test[2]]
