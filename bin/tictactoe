@@ -1,3 +1,69 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello peasant, welcome to MY TicTacToe, I am a gladiator, who doth dare defy me? (please enter your name)"
+
+    peasant_name = gets.strip
+
+puts "Well, #{peasant_name}, to whom would you like to loose today, whether against me or another adversary, surely you shall not prevail!
+
+...or perhaps, you are scared and would like to observe a dual?
+
+(please enter either: 'gladiator', 'another adversary' or 'observe a dual')"
+
+  input = gets.strip
+
+    if input == "gladiator"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+    puts "You shall have the 'X' token"
+  end #<--- end one_player game
+
+    if input == "another adversary"
+      puts "Choose your weapon (Please enter 'X' or 'O')"
+        token_input = gets.strip
+
+          if token_input == "X"
+            player_one_token = "X"
+            player_two_token = "O"
+          elsif token_input == "O"
+            player_one_token = "O"
+            player_two_token = "X"
+          elsif token_input != "X" || token_input != "O"
+            "Please enter 'X' or 'O'"
+          end
+
+        game = Game.new(player_1 = Players::Human.new(player_one_token), player_2 = Players::Human.new(player_two_token))
+        game.play
+      end #<--- end two_player
+
+    if input == "observe a dual"
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+        game.play
+    end #<-- end computer_game
+      game.play until game.over?
+          puts "Would you like to play again? (Please enter 'yea' or 'nay')"
+          input_2 = gets.strip
+          if input_2 == "yes"
+            game = game.new
+
+          elsif input_2 == "no"
+            puts "Have a pleasant day, peasant!"
+            exit
+      end
+
+
+
+
+# Greet the user with a message.
+#
+# Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+#
+# Ask the user for who should go first and be "X".
+#
+# Use the input to correctly initialize a Game with the appropriate player types and token values.
+#
+# When the game is over, the CLI should prompt the user
+# if they would like to play again and allow them to choose a
+# new configuration for the game as described above.
+# If the user doesn't want to play again, exit the program.
