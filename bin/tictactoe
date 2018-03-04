@@ -12,46 +12,63 @@ puts "Well, #{peasant_name}, to whom would you like to loose today, whether agai
 
 (please enter either: 'gladiator', 'another adversary' or 'observe a dual')"
 
+
+def play_game
   input = gets.strip
+ #if input is equal to anything except:'gladiator', 'another adversary' or 'observe a dual' ask again.
 
-    if input == "gladiator"
-        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+  if input == "gladiator"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
     puts "You shall have the 'X' token"
-  end #<--- end one_player game
+    game.play
 
-    if input == "another adversary"
-      puts "Choose your weapon (Please enter 'X' or 'O')"
-        token_input = gets.strip
+  elsif input == "another adversary"
 
-          if token_input == "X"
-            player_one_token = "X"
-            player_two_token = "O"
-          elsif token_input == "O"
-            player_one_token = "O"
-            player_two_token = "X"
-          elsif token_input != "X" || token_input != "O"
-            "Please enter 'X' or 'O'"
-          end
+    puts "Choose your weapon (Please enter 'X' or 'O')"
+      token_input = gets.strip
 
-        game = Game.new(player_1 = Players::Human.new(player_one_token), player_2 = Players::Human.new(player_two_token))
-        game.play
-      end #<--- end two_player
+      if token_input == "X"
+             player_one_token = "X"
+             player_two_token = "O"
+           elsif token_input == "O"
+             player_one_token = "O"
+             player_two_token = "X"
+           elsif token_input != "X" || token_input != "O"
+             "Please enter 'X' or 'O'"
+           end
+    game = Game.new(player_1 = Players::Human.new(player_one_token), player_2 = Players::Human.new(player_two_token))
+    game.play
 
-    if input == "observe a dual"
-        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-        game.play
-    end #<-- end computer_game
-      game.play until game.over?
-          puts "Would you like to play again? (Please enter 'yea' or 'nay')"
-          input_2 = gets.strip
-          if input_2 == "yes"
-            game = game.new
+  elsif input == "observe a dual"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    game.play
 
-          elsif input_2 == "no"
-            puts "Have a pleasant day, peasant!"
-            exit
-      end
+  else
+    puts "**invalid input** (Please select 'gladiator', 'another adversary' or 'observe a dual')"
+    play_game
+ end
+end
+play_game
 
+    #
+    #
+    #
+    #
+    #    #<--- end two_player
+    #
+    # elsif input == "observe a dual"
+    #     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    #     game.play
+    # end #<-- end computer_game
+    #   game.play until game.over?
+    #       puts "Would you like to play again? (Please enter 'yea' or 'nay')"
+    #       input_2 = gets.strip
+    #       if input_2 == "yes"
+    #         game = game.new
+    #
+    #   elsif input_2 == "no"
+    #       puts "Have a pleasant day, peasant!"
+    #       exit
 
 
 
