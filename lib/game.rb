@@ -37,4 +37,9 @@ class Game
   def draw?
     !won? && @board.full?
   end
+
+  def winner
+    winner = @board.cells[won?.first]
+    winner
+  end
 end
