@@ -72,15 +72,18 @@ class Game
     if player_number.to_i == 0
       game = self.new(Players::Computer.new("X"), Players::Computer.new("O"))
       game.play
+      game.game_over_message
     elsif player_number.to_i == 1
       puts "Do you want to be X or O?"
       input = gets.strip
       if input == "X" ||  input == "x"
         game = self.new(Players::Human.new("X"), Players::Computer.new("O"))
         game.play
+        game.game_over_message
       elsif input == "O" || input == "o"
         game = self.new(Players::Computer.new("X"), Players::Human.new("O"))
         game.play
+        game.game_over_message
       else
         puts "Enter X or O silly!"
       end
@@ -88,12 +91,24 @@ class Game
       puts "X moves first!"
       game = self.new
       game.play
+      game.game_over_message
     else
       puts "Tic Tac Toe is only for up to 2 people, Alan!"
       sleep(1)
       self.start
     end
   end
+    
+  def game_over_message
+    if self.over?
+      puts "Would you like to play again? y/n"
+      ans = gets.strip
+      if ans == "y" || ans == "Y"
+        Game.start
+      end
+    end
+  end
+
   
   def self.start
     puts "Welcome to Tic Tac Toe!"
