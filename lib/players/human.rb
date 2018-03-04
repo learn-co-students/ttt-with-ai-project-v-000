@@ -1,5 +1,5 @@
 require_relative '..\player.rb'
 
-class human < Player
+class Human < Player
 
 end
