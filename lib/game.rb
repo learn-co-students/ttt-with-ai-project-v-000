@@ -33,4 +33,8 @@ class Game
         @board.cells[combo[0]] != " "
     end
   end
+
+  def draw?
+    !won? && @board.full?
+  end
 end
