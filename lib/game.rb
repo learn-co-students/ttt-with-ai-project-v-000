@@ -39,7 +39,12 @@ class Game
   end
 
   def winner
-    winner = @board.cells[won?.first]
+    winner = nil
+    winner = @board.cells[won?.first] if won?
     winner
+  end
+
+  def turn
+    @board.turn_count % 2 == 0: "X" | "O"
   end
 end
