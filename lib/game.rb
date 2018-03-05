@@ -56,19 +56,31 @@ class Game
         puts "Cat's Game!"
       end
   end
-  def start
-    @board.display
-    self.play
-    puts "Would you like to play another game?"
-    puts "Type Y for yes, N for no"
-    input = gets.strip
-    if input == "Y".downcase
-      Game.new.start
-    elsif input == "N".downcase
-      puts "Good-bye. See you soon!"
-    end
-  end
-
-
-
+  # def start
+    # input = gets.strip
+    #   if input == 1
+    #     game = Game.new(player_1= Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    #     game.play
+    #   elsif input == 2
+    #     puts "Who would you like to go first and be X? For Player 1, type 1. For Player 2, type 2."
+    #     player = gets.strip
+    #       if player == 1
+    #         game = Game.new(player_1= Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+    #         game.play
+    #       elsif player == 2
+    #         game = Game.new(player_1= Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+    #         game.play
+    #       end
+    #   elsif input == 3
+    #     puts "Who would you like to go first and be X? For Player 1, type 1. For Player 2, type 2."
+    #     player = gets.strip
+    #       if player == 1
+    #         game = Game.new(player_1= Players::Human.new("X"), player_2 = Players::Human.new("O"))
+    #         game.play
+    #       elsif player == 2
+    #         game = Game.new(player_1= Players::Human.new("O"), player_2 = Players::Human.new("X"))
+    #         game.play
+    #       end
+    #     end
+    #   end
 end
