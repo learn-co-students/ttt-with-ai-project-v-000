@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hi there! Welcome to the awesome world of Tic-Tac-Toe"
+
+puts "Let's play a game!"
+
+# puts "What kind would you like to play?
+#   Option 1:  0 player
+#   For Option 1, type 1.
+#       OR
+#   Option 2: 1 player
+#   For Option 2, type 2.
+#       OR
+#   Option 3: 2 - players
+#   For Option 3, type 3."
+# input = gets.strip
+# puts "Who would you like to go first and be X? For Player 1, type 1. For Player 2, type 2."
+# player = gets.strip
+Game.new.start
+# if input == 1 && player == 1
+#     game = Game.new(player_1= Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+#     game.play
+# elsif input == 1 && player == 2
+#     game = Game.new(player_2= Players::Computer.new("X"), player_1 = Players::Computer.new("O"))
+#     game.play
+# elsif input == 2 && player == 1
+#     game = Game.new(player_1= Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+#     game.play
+# elsif input == 2 && player == 2
+#     game = Game.new(player_1= Players::Human.new("O"), player_2 = Players::Computer.new("X"))
+#     game.play
+# elsif input == 3 && player == 1
+#     game = Game.new(player_1= Players::Human.new("X"), player_2 = Players::Human.new("O"))
+#     game.play
+# elsif input == 3 && player == 2
+#     game = Game.new(player_2= Players::Human.new("X"), player_1 = Players::Human.new("O"))
+#     game.play
+# end
