@@ -47,16 +47,20 @@ class Game
       end
   end
   def play
-    # counter = 1
-    # while counter <10
-      turn unless won? || draw? || over?
+    until over?
+      turn
       if winner
         puts "Congratulations #{winner}!"
       elsif draw?
         puts "Cat's Game!"
       end
-      # counter +=1
-    # end
+    end
+      # counter += 1
+      # if winner
+      #   puts "Congratulations #{winner}!"
+      # elsif draw?
+      #   puts "Cat's Game!"
+      # end
   end
   def start
     @board.display
