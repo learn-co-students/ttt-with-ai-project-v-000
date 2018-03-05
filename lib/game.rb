@@ -18,7 +18,7 @@ class Game
     (@board.turn_count%2 == 0)? @player_1: @player_2
   end
   def over?
-    @board.full?
+    won? || draw?
   end
   def won?
     WIN_COMBINATIONS.find do |win_combination|
@@ -30,7 +30,7 @@ class Game
       end
     end
   def draw?
-    !won? && over?
+    !won? && @board.full?
   end
   def winner
     (won?)? @board.cells[won?[0]]: nil
@@ -49,26 +49,24 @@ class Game
   def play
     until over?
       turn
+    end
       if winner
         puts "Congratulations #{winner}!"
       elsif draw?
         puts "Cat's Game!"
       end
-    end
-      # counter += 1
-      # if winner
-      #   puts "Congratulations #{winner}!"
-      # elsif draw?
-      #   puts "Cat's Game!"
-      # end
   end
   def start
     @board.display
     self.play
-    # puts "Would you like to play another game?"
-    # puts "Type Y for yes, N for no"
-    # input = gets.strip
-    # self.start unless input == "N".downcase
+    puts "Would you like to play another game?"
+    puts "Type Y for yes, N for no"
+    input = gets.strip
+    if input == "Y".downcase
+      Game.new.start
+    elsif input == "N".downcase
+      puts "Good-bye. See you soon!"
+    end
   end
 
 

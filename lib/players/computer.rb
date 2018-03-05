@@ -10,7 +10,7 @@ module Players
         end
       end
       valid_moves.find{|valid_move| valid_move}
-      binding.pry
+      # binding.pry
     end
     # binding.pry
   end
