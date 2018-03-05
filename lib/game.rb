@@ -55,16 +55,19 @@ class Game
       end
     end
 
-    def turn
-      i = current_player.move(board)
-      if board.valid_move?(i)
-      board.update(i, current_player)
-    else turn
-    end
-     board.display
 
-    end
+        def turn
 
+            puts "#{current_player.token} it's your turn!"
+            input = current_player.move(board)
+            if board.valid_move?(input)
+              board.update(input, current_player)
+            else
+              self.turn
+          end
+          board.display
+
+        end
 
     def play
       turn until over?

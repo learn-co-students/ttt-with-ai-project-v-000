@@ -10,11 +10,11 @@ puts "Well, #{peasant_name}, to whom would you like to loose today, whether agai
 
 ...or perhaps, you are scared and would like to observe a dual?
 
-(please enter either: 'gladiator', 'another adversary' or 'observe a dual')"
+(please enter either: 'gladiator', 'another adversary' or 'duel')"
 
 
 def play_game
-  input = gets.strip
+  input = gets.strip.downcase
  #if input is equal to anything except:'gladiator', 'another adversary' or 'observe a dual' ask again.
 
   if input == "gladiator"
@@ -27,10 +27,10 @@ def play_game
     puts "Choose your weapon (Please enter 'X' or 'O')"
       token_input = gets.strip
 
-      if token_input == "X"
+      if token_input == "X" || token_input == "x"
              player_one_token = "X"
              player_two_token = "O"
-           elsif token_input == "O"
+           elsif token_input == "O" || token_input == "o"
              player_one_token = "O"
              player_two_token = "X"
            elsif token_input != "X" || token_input != "O"
@@ -39,16 +39,29 @@ def play_game
     game = Game.new(player_1 = Players::Human.new(player_one_token), player_2 = Players::Human.new(player_two_token))
     game.play
 
-  elsif input == "observe a dual"
+  elsif input == "duel"
     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
     game.play
 
   else
-    puts "**invalid input** (Please select 'gladiator', 'another adversary' or 'observe a dual')"
+    puts "**invalid input** (Please select 'gladiator', 'another adversary' or 'duel')"
     play_game
  end
+  puts "Would you like to play again? (Please enter 'yes' or 'no')"
+  input_2 = gets.strip
+        if input_2 == "yes"
+          puts "(please enter either: 'gladiator', 'another adversary' or 'duel')"
+          play_game
+         elsif input_2 == "no"
+           puts "Have a pleasant day, peasant!"
+
+    end
 end
 play_game
+
+
+
+
 
     #
     #
