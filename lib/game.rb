@@ -1,3 +1,4 @@
+
 class Game
   attr_reader :board, :player_1, :player_2
 
@@ -35,16 +36,49 @@ class Game
   end
 
   def over?
-    @board.cells.include?(" ") ? false : true
+    won? || draw?
   end
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
       @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0])
+      @board.taken?(combo[0] + 1)
     end
   end
 
+  def draw?
+    @board.full? && !won?
+  end
+
+  def winner
+    if !self.won?
+      nil
+    elsif @board.cells[self.won?[0]] == "X"
+      "X"
+    else
+      "O"
+    end
+  end
+
+  def turn
+    current_move = current_player.move(@board)
+    if @board.valid_move?(current_move)
+      @board.update(current_move, current_player)
+    else
+      turn
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 
 end
