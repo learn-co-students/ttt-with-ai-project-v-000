@@ -6,5 +6,15 @@ puts "Welcome to Tic-Tac-Toe with AI!"
 
 Game.new.start
 
+again = "Y"
+
+until again != "Y"
+  puts "Do you want to play again? Enter 'Y' for yes"
+  again = gets.strip
+
+  if again == "Y" || again == "y"
+    Game.new.start
+  end
+end
 
     
