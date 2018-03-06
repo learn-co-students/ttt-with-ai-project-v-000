@@ -51,14 +51,21 @@ class Game
     if !@board.valid_move?(current_move)
       turn
     else
-      puts "Turn #{@board.turn_count + 1}"
+      # puts "Turn #{@board.turn_count + 1}"
       @board.update(current_move,player)
       @board.display
-      puts "\n\n"
+      puts "\n\n\n"
     end
   end
 
   def play
+
+    until over? || won? || draw?
+      turn
+    end
+
+    puts "Congratulations #{winner}!" if won?
+    puts "Cat's Game!" if draw?
 
   end
 end
