@@ -22,38 +22,53 @@ class Game
  end
 
  def current_player
-#binding.pry
-   if @board.turn_count.even?
-     @player_1
-   else
-     @player_2
-
-   end
- end
+   board.turn_count.even? ? @player_1 : @player_2
+  end
 
  def over?
-   @board.full?
+   #binding.pry
+   draw? || !!won?
  end
 
  def won?
-  WIN_COMBINATIONS.detect {|win| board.taken?(win[0]) && board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == board.cells[win[0]]}
+   #binding.pry
+  WIN_COMBINATIONS.detect do |win|
+    #binding.pry
+    board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == board.cells[win[0]] && (board.cells[win[1]] == "X" || board.cells[win[1]] == "O")
+  end
  end
 
  def draw?
-  over? && !won?
+   #binding.pry
+  @board.full? && won? == nil
  end
 
  def winner
-  if won?
-     board.cells[won?[0]]
-   end
+   #binding.pry
+  if combo = won?
+    board.cells[combo[0]]
+    #binding.pry
+  end
  end
 
  def turn
-   #binding.pry
-    board.valid_move?("1")
-
+   input = current_player.move(board)
+   board.valid_move?(input) ? input : turn
+   board.update(input, current_player)
  end
+
+ def play
+   while !over?
+    turn
+  end
+ if won?
+    puts "Congratulations #{winner}!"
+  end
+ if draw?
+   puts "Cat's Game!"
+ end
+end
+
 
 
 end

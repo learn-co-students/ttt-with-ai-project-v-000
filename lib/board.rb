@@ -25,7 +25,7 @@ end
 
 def full?
   #binding.pry
-   cells.all? {|cell| cell == "X" || cell == "O"}
+   @cells.all? {|cell| cell == "X" || cell == "O"}
 end
 
 def turn_count
@@ -39,15 +39,15 @@ def turn_count
   count
 end
 
-def taken?(position)
-#  binding.pry
-  cells[position.to_i - 1].include?("X") || cells[position.to_i - 1].include?("O")
+def taken?(input)
+  #binding.pry
+  !(position(input) == " " || position(input) == "")
 end
 
 def valid_move?(input)
   #binding.pry
   i = input.to_i
-  i.between?(1,9) && !taken?(i)
+  i.between?(1, 9) && !taken?(i)
 end
 
 def update(input, player)
