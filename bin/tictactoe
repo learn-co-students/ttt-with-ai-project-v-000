@@ -15,7 +15,4 @@ puts "Option 3: 2 - players"
 puts "For Option 3, type 3."
 
 # Game.new.start
-game = Game.new
-game.start
-"I am executing"
-Game.new.replay
+Game.new.start

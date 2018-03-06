@@ -61,7 +61,13 @@ class Game
   def start
     input = gets.strip.to_i
 
-      if input == 1
+    # unless input==1||2||3
+    #   puts "Invalid entry. Try entering the given option numbers - 1, 2 or 3."
+    #   start
+    # end
+
+
+    if input == 1
         puts "You have chosen Option 1: 2 Computer players."
         puts "Let the game begin!!"
         Board.new.display
@@ -111,27 +117,19 @@ class Game
             game.play
           end
         end
+
+        # puts "Invalid entry. Try entering the given option numbers - 1, 2 or 3."
+        # start
+      # end
           #//////////////START ANOTHER GAME//////////////////
-          puts "Would you like to play another game?"
-          puts "Type Y for YES, N for NO"
-          replay = gets.strip.downcase
-          if replay == "y"
-            Game.new.start
-          elsif replay == "n"
-            puts "Good-bye. See you soon!"
-          end
+          # puts "Would you like to play another game?"
+          # puts "Type Y for YES, N for NO"
+          # replay = gets.strip.downcase
+          # if replay == "y"
+          #   Game.new.start
+          # elsif replay == "n"
+          #   puts "Good-bye. See you soon!"
+          # end
     end
-
-    # def replay
-    #   puts "Would you like to play another game?"
-    #   puts "Type Y for YES, N for NO"
-    #   input = gets.strip.to_s.downcase
-    #   if input == "y"
-    #     Game.new.start
-    #   elsif input == "n"
-    #     puts "Good-bye. See you soon!"
-    #   end
-    # end
-
 
 end
