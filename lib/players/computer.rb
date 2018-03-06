@@ -10,6 +10,8 @@ module Players
         end
       end
       valid_moves.sample.to_s
+      # valid_moves.find{|move|@board.cells[move] == " "}.to_s
+      # binding.pry
     end
   end
 end

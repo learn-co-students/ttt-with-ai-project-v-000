@@ -40,7 +40,7 @@ class Game
         @board.update(input, current_player)
         @board.display
       else
-        puts "invalid"
+        puts "Invalid. The cell is either taken or your entry is not a number between 1-9."
         turn
       end
   end
