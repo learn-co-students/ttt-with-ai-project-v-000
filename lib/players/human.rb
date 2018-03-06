@@ -1,9 +1,9 @@
 require 'pry'
 module Players
   class Human < Player
-    def move(board)
+    def move(board=nil)
       puts "Please enter a board position to play: "
-      input = gets.chomp
+      input = gets.strip
     end
   end
 end

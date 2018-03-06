@@ -23,7 +23,7 @@ class Board
   end
   
   def full?
-    if @cells.any? { |string| string == " " }
+    if turn_count != 9 #@cells.any? { |string| string == " " }
       false
     else
       true
