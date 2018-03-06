@@ -7,8 +7,9 @@ class Game
     [3,4,5],
     [6,7,8],
     [0,3,6],
-    [1,4,7],
     [2,5,8],
+    [1,4,7],
+
     [0,4,8],
     [6,4,2]
   ]
@@ -35,7 +36,22 @@ class Game
  end
 
  def won?
-   binding.pry
+  WIN_COMBINATIONS.detect {|win| board.taken?(win[0]) && board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == board.cells[win[0]]}
+ end
+
+ def draw?
+  over? && !won?
+ end
+
+ def winner
+  if won?
+     board.cells[won?[0]]
+   end
+ end
+
+ def turn
+   #binding.pry
+    board.valid_move?("1")
 
  end
 
