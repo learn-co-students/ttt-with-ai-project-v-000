@@ -45,6 +45,20 @@ class Game
   end
 
   def turn
-    @board.turn_count % 2 == 0: "X" | "O"
+    player = current_player
+    current_move = player.move(@board)
+
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "Turn #{@board.turn_count + 1}"
+      @board.update(current_move,player)
+      @board.display
+      puts "\n\n"
+    end
+  end
+
+  def play
+
   end
 end
