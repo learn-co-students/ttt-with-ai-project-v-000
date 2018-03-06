@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   attr_accessor :cells
 
@@ -17,6 +18,7 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+
   def position(input)
     position = input.to_i - 1
     @cells[position]
@@ -35,14 +37,12 @@ class Board
   end
 
   def valid_move?(input)
-    input = input.to_i
-    !(taken?(input)) && input.between?(1,9)
+    !(taken?(input)) && input.to_i.between?(1,9)
   end
 
 
   def update(input, player)
-    position = input.to_i - 1
-    @cells[position] = player.token
+    @cells[input.to_i - 1] = player.token
   end
 
 
