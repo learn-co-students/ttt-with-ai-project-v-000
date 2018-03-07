@@ -7,5 +7,9 @@ module Players
         input = gets.strip
       end
 
+      def input
+        input = gets.strip
+      end
+
   end
 end
