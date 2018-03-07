@@ -31,7 +31,7 @@ class Game
   end
 
   def over?
-    board.full? && board.turn_count > 0
+    won? || draw?
   end
 
   def won?
@@ -66,7 +66,10 @@ class Game
   def play
     puts "Please enter 1-9:"
     turn while !over?
-
+    won?
+      puts "Congratulations #{winner}!"
+    draw?
+      puts "Cat's game!"
   end
 
 end
