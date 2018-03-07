@@ -65,9 +65,8 @@ class Game
 
   def play
     puts "Please enter 1-9:"
-    turn
-    won?
-binding.pry
+    turn while !over?
+
   end
 
 end
