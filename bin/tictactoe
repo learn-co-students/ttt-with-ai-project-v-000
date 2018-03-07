@@ -19,7 +19,6 @@ def game
           if  input == 1
               puts "You have chosen Option 1: 2 Computer players."
               puts "Let the game begin!!"
-              Board.new.display
               game = Game.new(player_1= Players::Computer.new("X"), player_2= Players::Computer.new("O"))
               game.play
               break
@@ -30,7 +29,6 @@ def game
               puts "Would you like to be X or O?"
               token = gets.strip.downcase
               puts "Let the game begin!!"
-              Board.new.display
                 if turn == 1 && token == "x"
                   game = Game.new(player_1= Players::Human.new("X"), player_2= Players::Computer.new("O"))
                   game.play
@@ -52,7 +50,6 @@ def game
               puts "Would you like to be X or O?"
               token = gets.strip.downcase
               puts "Let the game begin!!"
-              Board.new.display
                 if turn == 1&& token == "x"
                   game = Game.new(player_1= Players::Human.new("X"), player_2= Players::Human.new("O"))
                   game.play
