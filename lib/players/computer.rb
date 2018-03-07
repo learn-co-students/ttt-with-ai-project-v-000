@@ -11,61 +11,58 @@ module Players
       end
       valid_moves.sample.to_s
       # valid_moves.find{|move|@board.cells[move] == " "}.to_s
-      # binding.pry
+      binding.pry
     end
   end
 end
+    #////////////AS PLAYER_1//////////////////////
+    def corner_move(board)
+      #first move
+      first_move = [1,3,7,9].sample.to_s
+      first_move
+    end
 
+    def opposite_corner(board)
+      #second move
+     if @board.position(1) == self.token
+       "9"
+     elsif @board.position(3) == self.token
+       "7"
+     elsif @board.position(7) == self.token
+       "3"
+     elsif @board.position(9) == self.token
+       "1"
+     end
+   end
+   #<<<<<<<<<<<block_move>>>>>>>>>>>>>>
+   def center_move(board)
+     if !@board.taken?(5)
+       "5"
+     end
+   end
+   #<<<<<<<<<<<block_move>>>>>>>>>>>>>>
+   def edge_move(board)
+     #possibly third move
+     if !@board.taken(3) && !@board.taken(7)
+       #if 3 and 7 are available choose 1
+       third_move = [3,7].sample.to_s
+       third_move
+     elsif @board.taken(3)
+      #if 3 is taken move to 7
+       "7"
+     elsif @board.taken(7)
+       #if 7 is taken move to 3
+       "3"
+     end
+   end
+   #<<<<<<<<<<<block_move>>>>>>>>>>>>>>
+   def fourth_move(board)
+     WIN_COMBINATIONS.find do |d|
+       d[0] = i_1
+       d[1] = i_2
+       d[2] = i_3
+       i_1
+       i_2
+       i_3
 
-    # def center_move(board)
-    #   #if center is available always make this move
-    #   if !@board.taken?(5)
-    #     @board.update(5)
-    #   end
-    # end
-    #
-    # def corner_move(board)
-    #   #else make this one of the corner moves
-    #   corner_move = [1,3,7,9].sample
-    #   if valid_move?(corner_move)
-    #     @board.update(corner_move)
-    #   end
-    # end
-    # def block_move(board)
-    #
-    # end
-    # def opposite_corner(board)
-    #   if @board.position(1) == token && valid_move?(9)
-    #     @board.update(9,token)
-    #   elsif @board.position(9) == token && valid_move?(1)
-    #     @board.update(1,token)
-    #   elsif @board.position(3) == token && valid_move?(7)
-    #     @board.update(7,token)
-    #   elsif @board.position(7) == token && valid_move?(3)
-    #     @board.update(3,token)
-    #   end
-    # end
-    # def win_move(board)
-    #   center_move(board) ||
-    #   if !@board.taken?(7)
-    #     @board.update(7,token)
-    #   elsif !@board.taken?(3)
-    #     @board.update(7,token)
-    #   end
-    #
-    #   if
-    #
-    #
-    #   end
-    # end
-    # def move(board)
-    #   corner_move(board)
-    #   # if valid_move?(5) center_move(board)
-    #
-    #   win_move(board)
-    # end
-
-      # ||edge_move(board)||win_move(board)
-#     end
-#
-# end
+   end
