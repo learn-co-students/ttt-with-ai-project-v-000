@@ -51,24 +51,27 @@ end
   end
 
   def turn
-    puts "Please enter a number: 1-9"
-      move = current_player.move(board)
-      if @board.valid_move?(move)
-        @board.update(move, current_player)
+      puts "Please enter 1-9:"
+      input = current_player.move(@board)
+
+      if @board.valid_move?(input)
+      @board.update(input, current_player)
+      @board.display
       else
         turn
       end
   end
 
   def play
-    while !over?
+    until over?
       turn
     end
+
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
-    end
+  end
 
 end

@@ -2,35 +2,40 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-puts "What kind of game would you like to play, 0, 1, or 2 player?"
+def start
+puts "Hi there, welcome to Tic Tac Toe!"
+puts "What type of game would you like to play: 0, 1, or 2 player?"
+puts "Please enter the type of game you would like to play, or enter 'exit' to leave the game."
+
 input = gets.strip
-  if input = "0"
-    Game.new(Computer.new("X"), Computer.new("O"), Board.new)
 
-  elsif input = "1"
-    Game.new(Human.new("X"), Computer.new("O"), Board.new)
+unless input == "exit"
 
-  else input = "2"
-    Game.new(Human.new("X"), Human.new("O"), Board.new)
-  end
-  game = Game.new
-  until game.won?
-    game.play
-  end
+puts "The first player will be player 'X'"
+  if input == "0"
+    new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      new_game.play
+      game_over
 
-  play_again = " "
-  until play_again == "N"
-  puts "Would you like to play again?"
-  play_again = gets.strip
-  puts "Would you like to play again?"
-  puts "Y for yes, N for N"
+  elsif input == "1"
+    new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      new_game.play
+      game_over
 
-   if input = "Y"
-     game = Game.new
-      until game.won?
-        game.play
-    else
-      puts "Thanks for Playing Tic Tac Toe!"
-  end
+    elsif input == "2"
+      new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        new_game.play
+        game_over
+      end
+    end
 end
+
+def game_over
+  puts "Would you like to play another game? Enter 'y' for yes and 'n' for no:"
+  input = gets.strip
+
+    if input =="y"
+      start
+    end
+end
+start
