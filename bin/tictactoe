@@ -1,3 +1,32 @@
-#!/usr/bin/env ruby
-
-require_relative '../config/environment'
+# #!/usr/bin/env ruby
+#
+# require_relative '../config/environment'
+#
+#   puts "Welcome to Tic Tac Toe!"
+#   puts " "
+#   puts "Please choose player mode:"
+#   puts "0 Computer Vs Computer"
+#   puts "1 Player Vs. Computer"
+#   puts "2 Player Vs. Player"
+#
+#   player_mode = gets.strip
+#   # binding.pry
+#
+#   if player_mode == "1"
+#     puts "Whould you like to go first? [y/n]"
+#     choice = gets.strip
+#     if choice == "y"
+#       Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+#     else
+#       Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+#     end
+#
+#   if player_mode == "0"
+#       Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+#
+#   if player_mode == "2"
+#     Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+#   end
+#
+#   puts "Would you like to play again? [y/n]"
+#   # game_start until gets.strip == "n"
