@@ -28,5 +28,5 @@
 #     Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
 #   end
 #
-#   puts "Would you like to play again? [y/n]"
-#   # game_start until gets.strip == "n"
+puts "Would you like to play again? [y/n]"
+game_start until gets.strip == "n"
