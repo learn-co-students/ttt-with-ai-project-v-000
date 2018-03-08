@@ -6,9 +6,9 @@ puts "Welcome to Tic-Tac-Toe with AI!"
 
 Game.new.start
 
-again = "Y"
+again = "y"
 
-until again != "Y"
+while again == "Y"|| again == "y"
   puts "Do you want to play again? Enter 'Y' for yes"
   again = gets.strip
 
