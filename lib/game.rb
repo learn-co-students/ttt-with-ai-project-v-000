@@ -59,9 +59,11 @@ class Game
   end
   
   def turn
-    pos = current_player.move
-    until pos.to_i > 0 && pos.to_i < 10 && @board.valid_move?(pos)
-      pos = current_player.move
+    pos = current_player.move(self.board)
+
+    until @board.valid_move?(pos)
+      pos = current_player.move(self.board)
+
     end
 
     @board.update(pos, current_player)

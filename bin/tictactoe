@@ -16,5 +16,3 @@ until again != "Y"
     Game.new.start
   end
 end
-
-    
