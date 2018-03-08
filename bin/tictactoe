@@ -22,6 +22,17 @@ require_relative '../config/environment'
       Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
     end
 
+  elsif choice == "wargames"
+    count = 0
+    while count <= 10
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+        count =+ 1
+        x_wins = 0
+        o_wins = 0
+        binding.pry
+    end
+
+
   elsif player_mode == "2"
       Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
   else
