@@ -46,8 +46,4 @@ class Board
       @cells[i] = player.token
     end
   end
-
-
-
-
 end

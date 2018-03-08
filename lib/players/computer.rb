@@ -2,14 +2,9 @@ require 'pry'
 module Players
 
   class Computer < Player
-    WIN_COMBINATIONS = [
-      [0,1,2], [3,4,5], [6,7,8],
-      [0,3,6], [1,4,7], [2,5,8],
-      [0,4,8], [2,4,6]
-    ]
+    WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8],[0,3,6], [1,4,7], [2,5,8],[0,4,8], [2,4,6]]
     def corner_move(board)
-      first_move = [1,3,7,9].sample.to_s
-      first_move
+      [1,3,7,9].sample.to_s
     end
     def opposite_corner(board)
      if board.position(1) == self.token
@@ -26,24 +21,17 @@ module Players
        ["1","9"].sample
      end
    end
-   #<<<<<<<<<<<block_move>>>>>>>>>>>>>>
    def center_move(board)
      if !board.taken?(5)
        "5"
      end
    end
-   #<<<<<<<<<<<block_move>>>>>>>>>>>>>>
    def edge_move(board)
-     #possibly third move
      if !board.taken?(3) && !board.taken?(7)
-       #if 3 and 7 are available choose 1
-       third_move = [3,7].sample.to_s
-       third_move
+       [3,7].sample.to_s
      elsif board.taken?(3)
-      #if 3 is taken move to 7
        "7"
      elsif board.taken?(7)
-       #if 7 is taken move to 3
        "3"
      end
    end
@@ -74,17 +62,47 @@ module Players
        	    (win_3.detect{|i| board.cells[i]==" "}+1).to_s
        end
     end
-    def other_move(board)
-      other_move = board.cells.map.with_index(1) do |v, i|
+    def defend(board)
+      defend_1 = WIN_COMBINATIONS.detect do |combo|
+                input_1 = combo[0]
+                input_2 = combo[1]
+                input_3 = combo[2]
+                board.cells[input_1] != self.token && board.cells[input_1] != " " && board.cells[input_2] != self.token && board.cells[input_2] != " " && board.cells[input_3] == " "
+             end
+      defend_2 = WIN_COMBINATIONS.detect do |combo|
+                input_1 = combo[0]
+                input_2 = combo[1]
+                input_3 = combo[2]
+                board.cells[input_2] != self.token && board.cells[input_2] != " " && board.cells[input_3] != self.token && board.cells[input_3] != " " && board.cells[input_1] == " "
+             end
+     defend_3 = WIN_COMBINATIONS.detect do |combo|
+              input_1 = combo[0]
+              input_2 = combo[1]
+              input_3 = combo[2]
+              board.cells[input_1] != self.token && board.cells[input_1] != " " && board.cells[input_3] != self.token && board.cells[input_3] != " " && board.cells[input_2] == " "
+             end
+        if defend_1
+             (defend_1.detect{|i| board.cells[i]==" "}+1).to_s
+        elsif defend_2
+             (defend_2.detect{|i| board.cells[i]==" "}+1).to_s
+        elsif defend_3
+             (defend_3.detect{|i| board.cells[i]==" "}+1).to_s
+        end
+     end
+    def valid_move(board)
+      valid_moves = []
+      board.cells.map.with_index(1) do |v, i|
           if v == " "
-            i.to_s
+            valid_moves << i.to_s
           end
         end
+        valid_moves.sample
       end
     def move(board)
         if board.turn_count == 0
           corner_move(board)
         elsif board.turn_count == 1
+          sleep(1)
           if !board.taken?("5")
             center_move(board)
           else
@@ -93,27 +111,26 @@ module Players
         elsif board.turn_count == 2
           opposite_corner(board)
         elsif board.turn_count == 3
-          if win_move(board)
-            win_move(board)
-          elsif !board.taken?(8)
+          sleep(1)
+          defend(board) || win_move(board) ||
+          if !board.taken?(8)
             "8"
           elsif !board.taken?(2)
             "2"
           end
         elsif board.turn_count == 4
-          win_move(board) || other_move(board)
+          defend(board) || win_move(board) || valid_move(board)
         elsif board.turn_count == 5
-          if win_move(board)
-            win_move(board)
-          elsif !board.taken?(3)
+          sleep(1)
+          defend(board) || win_move(board) ||
+          if !board.taken?(3)
             "3"
           elsif !board.taken?(7)
             "7"
           end
-        elsif board.turn_count == 6
-          win_move(board) || other_move(board)
-        elsif board.turn_count == 7
-          win_move(board) || other_move(board)
+        else
+          sleep(1)
+          defend(board) || win_move(board) || valid_move(board)
         end
     end
   end
