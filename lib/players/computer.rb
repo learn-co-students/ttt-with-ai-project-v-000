@@ -7,12 +7,10 @@ module Players
       [0,3,6], [1,4,7], [2,5,8],
       [0,4,8], [2,4,6]
     ]
-    #////////////AS PLAYER_1//////////////////////
     def corner_move(board)
       first_move = [1,3,7,9].sample.to_s
       first_move
     end
-
     def opposite_corner(board)
      if board.position(1) == self.token
        "9" unless (board.position(9) != self.token && board.taken?(9))
@@ -76,8 +74,8 @@ module Players
        	    (win_3.detect{|i| board.cells[i]==" "}+1).to_s
        end
     end
-    def valid_move(board)
-      valid_move = board.cells.map.with_index(1) do |v, i|
+    def other_move(board)
+      other_move = board.cells.map.with_index(1) do |v, i|
           if v == " "
             i.to_s
           end
@@ -87,26 +85,35 @@ module Players
         if board.turn_count == 0
           corner_move(board)
         elsif board.turn_count == 1
-          corner_move(board) || center_move(board)
+          if !board.taken?("5")
+            center_move(board)
+          else
+            corner_move(board)
+          end
         elsif board.turn_count == 2
           opposite_corner(board)
         elsif board.turn_count == 3
-          "8" unless board.taken?(8) || "2" unless board.taken?(2)
+          if win_move(board)
+            win_move(board)
+          elsif !board.taken?(8)
+            "8"
+          elsif !board.taken?(2)
+            "2"
+          end
         elsif board.turn_count == 4
-          moves = [win_move(board),edge_move(board),valid_move(board)]
-          # binding.pry
-          moves.find{|move| board.valid_move?(move)}
+          win_move(board) || other_move(board)
         elsif board.turn_count == 5
-          "3" unless board.taken?(3) || "7" unless board.taken?(7)
+          if win_move(board)
+            win_move(board)
+          elsif !board.taken?(3)
+            "3"
+          elsif !board.taken?(7)
+            "7"
+          end
         elsif board.turn_count == 6
-          binding.pry
-          win_move(board) unless board.valid_move?(win_move(board)) ||
-          valid_move(board) unless board.valid_move?(valid_move(board))
+          win_move(board) || other_move(board)
         elsif board.turn_count == 7
-          "3" unless board.taken?(3) || "7" unless board.taken?(7)
-        else
-          win_move(board) unless board.valid_move?(win_move(board)) ||
-          valid_move(board) unless board.valid_move?(valid_move(board))
+          win_move(board) || other_move(board)
         end
     end
   end

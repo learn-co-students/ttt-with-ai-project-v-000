@@ -4,7 +4,6 @@ require_relative '../config/environment'
 
 def game
   puts "Hi there! Welcome to the awesome world of Tic-Tac-Toe"
-  sleep(0.5)
   puts "What kind of game would you like to play?"
   sleep(0.5)
   puts "Option 1:  Computer v. Computer"
@@ -21,12 +20,11 @@ def game
               puts "You have chosen Option 1: Computer v. Computer."
               sleep(0.5)
               puts "Let the game begin!!"
-              sprint "1               "
-              sleep(1.5)
+              print "1               "
+              sleep(1)
               print "2               "
-              sleep(1.5)
+              sleep(1)
               puts "3               "
-              sleep(1.5)
               game = Game.new(player_1= Players::Computer.new("X"), player_2= Players::Computer.new("O"))
               game.play
               break
@@ -38,11 +36,10 @@ def game
               token = gets.strip.downcase
               puts "Let the game begin!!"
               print "1               "
-              sleep(1.5)
+              sleep(1)
               print "2               "
-              sleep(1.5)
+              sleep(1)
               puts "3               "
-              sleep(1.5)
                 if turn == 1 && token == "x"
                   game = Game.new(player_1= Players::Human.new("X"), player_2= Players::Computer.new("O"))
                   game.board.display
@@ -69,11 +66,10 @@ def game
               token = gets.strip.downcase
               puts "Let the game begin!!"
               print "1               "
-              sleep(1.5)
+              sleep(1)
               print "2               "
-              sleep(1.5)
+              sleep(1)
               puts "3               "
-              sleep(1.5)
                 if turn == 1&& token == "x"
                   game = Game.new(player_1= Players::Human.new("X"), player_2= Players::Human.new("O"))
                   game.board.display
