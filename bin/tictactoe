@@ -4,36 +4,54 @@ require_relative '../config/environment'
 
 def game
   puts "Hi there! Welcome to the awesome world of Tic-Tac-Toe"
-
+  sleep(0.5)
   puts "What kind of game would you like to play?"
-  puts "Option 1:  0 player"
+  sleep(0.5)
+  puts "Option 1:  Computer v. Computer"
   puts "For Option 1, type 1"
   puts "-----------OR---------"
-  puts "Option 2: 1 player"
+  puts "Option 2: You v. Computer"
   puts "For Option 2, type 2"
   puts "-----------OR---------"
-  puts "Option 3: 2 - players"
+  puts "Option 3: You v. a friend"
   puts "For Option 3, type 3."
   input = gets.strip.to_i
     while input == 1||2||3
           if  input == 1
-              puts "You have chosen Option 1: 2 Computer players."
+              puts "You have chosen Option 1: Computer v. Computer."
+              sleep(0.5)
               puts "Let the game begin!!"
+              sprint "1               "
+              sleep(1.5)
+              print "2               "
+              sleep(1.5)
+              puts "3               "
+              sleep(1.5)
               game = Game.new(player_1= Players::Computer.new("X"), player_2= Players::Computer.new("O"))
               game.play
               break
             elsif input == 2
-              puts "You have chosen Option 2: 1 player."
+              puts "You have chosen Option 2: You v. Computer."
               puts "Who would you like to go first - you or the computer? For yourself, type 1. For computer, type 2."
               turn = gets.strip.to_i
               puts "Would you like to be X or O?"
               token = gets.strip.downcase
               puts "Let the game begin!!"
+              print "1               "
+              sleep(1.5)
+              print "2               "
+              sleep(1.5)
+              puts "3               "
+              sleep(1.5)
                 if turn == 1 && token == "x"
                   game = Game.new(player_1= Players::Human.new("X"), player_2= Players::Computer.new("O"))
+                  game.board.display
+                  puts "Go!"
                   game.play
                 elsif turn == 1 && token == "o"
                   game = Game.new(player_1= Players::Human.new("O"), player_2= Players::Computer.new("X"))
+                  game.board.display
+                  puts "Go!"
                   game.play
                 elsif turn == 2 && token == "x"
                   game = Game.new(player_1= Players::Computer.new("O"), player_2= Players::Human.new("X"))
@@ -44,23 +62,37 @@ def game
                 end
                 break
             elsif input == 3
-              puts "You have chosen Option 3: 2 Human players."
+              puts "You have chosen Option 3: You v. a friend."
               puts "Would you like to be Player 1 or 2? For Player 1, type 1. For Player 2, type 2."
               turn = gets.strip.to_i
               puts "Would you like to be X or O?"
               token = gets.strip.downcase
               puts "Let the game begin!!"
+              print "1               "
+              sleep(1.5)
+              print "2               "
+              sleep(1.5)
+              puts "3               "
+              sleep(1.5)
                 if turn == 1&& token == "x"
                   game = Game.new(player_1= Players::Human.new("X"), player_2= Players::Human.new("O"))
+                  game.board.display
+                  puts "Go!"
                   game.play
                 elsif turn == 1 && token == "o"
                   game = Game.new(player_1= Players::Human.new("O"), player_2= Players::Human.new("X"))
+                  game.board.display
+                  puts "Go!"
                   game.play
                 elsif turn == 2 && token == "x"
                   game = Game.new(player_1= Players::Human.new("O"), player_2= Players::Human.new("X"))
+                  game.board.display
+                  puts "Go!"
                   game.play
                 elsif turn == 2 && token == "o"
                   game = Game.new(player_1= Players::Human.new("X"), player_2= Players::Human.new("O"))
+                  game.board.display
+                  puts "Go!"
                   game.play
                 end
                 break
