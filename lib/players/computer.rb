@@ -8,6 +8,10 @@ module Players
       count = 0
       my_move = ""
       
+      # Working logic so far: Takes middle square first, if possible, takes corner squares next if possible.
+      
+      # Not working yet: exiting each loop once the matching if/elsifs are found and blocking successfully
+      
       WINS.each do |combo|
 
         if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] != " "
