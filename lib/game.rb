@@ -58,6 +58,7 @@ class Game
       board.update(input, current_player)
       board.turn_count
       current_player
+      board.display
     else
       current_player.move(board)
     end
