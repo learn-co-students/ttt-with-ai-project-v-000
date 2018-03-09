@@ -1,7 +1,5 @@
-require 'pry'
 class Board
   attr_accessor :cells, :player
-
   def initialize
     self.reset!
     self
@@ -28,7 +26,7 @@ class Board
   end
   def taken?(input)
     i = input.to_i
-    i = i-1
+    i -=1
     if @cells[i]=="X"|| @cells[i]=="O"
        true
     else
