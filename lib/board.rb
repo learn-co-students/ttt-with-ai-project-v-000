@@ -43,12 +43,12 @@ class Board
 
   def valid_move?(user_input)
   new_input = user_input.to_i - 1
-      if @cells[new_input] == " " && user_input.to_i >= 1 && user_input.to_i <= 9
+      if (@cells[new_input] == " " || @cells[new_input] == "") && user_input.to_i >= 1 && user_input.to_i <= 9
         true
       else
         false
       end
-end
+  end
 
   def update(token, player)
     new_token = token.to_i - 1

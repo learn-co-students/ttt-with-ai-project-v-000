@@ -10,16 +10,16 @@ class Game < Player
 
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
-    @player_1 = player_1 #player_1 #Player.new("X") #Player.token("X")
-    @player_2 = player_2 #Player.new("O")
+    @player_1 = player_1
+    @player_2 = player_2
   end
 
   def board=(board)
-    @board = board #[]
+    @board = board
   end
 
   def current_player
-    if self.board.turn_count.even? #cells
+    if self.board.turn_count.even?
       player_1
     else
       player_2
@@ -38,14 +38,6 @@ class Game < Player
 
   def draw?
     self.board.full? && !won?
-
-    # WIN_COMBINATIONS.detect do |combo|
-    #   if board.cells[combo[0]] != board.cells[combo[1]] && board.cells[combo[1]] != board.cells[combo[2]] && self.board.full?
-    #     true
-    #   elsif board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && self.board.taken?(board.cells[combo[0]])
-    #     return false
-    #   end
-    # end #detect iteration
   end
 
   def winner
@@ -61,16 +53,21 @@ class Game < Player
   def turn
     player = self.current_player
     board_position = self.current_player.move(board)
-    if self.board.valid_move?(board_position)
-      self.board.update(board_position, player)
-    else
+    if !self.board.valid_move?(board_position)
       turn
+    else
+      self.board.update(board_position, player)
     end
   end
 
   def play
-      while !over?
-        turn
+    until over?
+      turn
+    end
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
       end
   end
 
