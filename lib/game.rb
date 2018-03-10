@@ -1,3 +1,6 @@
+class Game
+  attr_accessor :board
+
 def start
     input = gets.strip.to_i
 
@@ -61,3 +64,4 @@ def start
             puts "Good-bye. See you soon!"
           end
     end
+end

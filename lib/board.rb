@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells, :pos
+  attr_accessor :cells
 
   def initialize
     reset!
@@ -29,9 +29,13 @@ class Board
     @cells.count{|token| token == "X" || token == "O"}
   end
 
-  def taken?(position)
-    p = position
+  def taken?(user_input)
+    p = position(user_input)
     p == "X" || p == "O"
+  end
+
+  def valid_move?(user_input)
+    user_input.to_i.between?(1,9) && !taken?(user_input)
   end
 
 ###################################
@@ -44,7 +48,4 @@ class Board
 
   end
 
-  def valid_move
-
-  end
 end
