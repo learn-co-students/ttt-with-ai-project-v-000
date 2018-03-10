@@ -30,7 +30,8 @@ class Board
   end
 
   def taken?(position)
-    position == "X" || position == "O"
+    p = position
+    p == "X" || p == "O"
   end
 
 ###################################
