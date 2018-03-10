@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :pos
 
   def initialize
     reset!
@@ -17,16 +17,8 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position
-
-  end
-
-  def update(position, token)
-
-  end
-
-  def token
-
+  def position(user_input)
+    @cells[user_input.to_i - 1]
   end
 
   def full?
@@ -34,6 +26,20 @@ class Board
   end
 
   def turn_count
+    @cells.count{|token| token == "X" || token == "O"}
+  end
+
+  def taken?(position)
+    position == "X" || position == "O"
+  end
+
+###################################
+
+  def update(position, token)
+
+  end
+
+  def token
 
   end
 
