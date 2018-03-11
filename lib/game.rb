@@ -68,4 +68,47 @@ class Game
     puts "Cat's Game!"
   end
  end
-end
+
+ def start
+   puts "Welcome to Tic-tac-toe."
+   puts "How many players would you like?"
+   input = gets.strip
+
+   if input == "2"
+     Game.new.play
+   elsif input == "1"
+     puts "Do you want to be X or O?"
+     input2 = gets.strip
+     if input2 == "X"
+       Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+     elsif
+       Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+
+   else input == "0"
+     Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+   end
+     count = 0
+     win_count = 0
+     loss_count = 0
+       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+       if game
+       win_count += 1
+       else
+         loss_count += 1
+       end
+     count += 1
+     puts win_count
+     puts loss_count
+     end
+
+
+    puts "Play again? (Y/N)"
+    input3 = gets.strip
+
+   if input3 == "Y"
+     Game.new.start
+   else input3 == "N"
+     puts "Thanks for playing!"
+   end
+ end
+ end
