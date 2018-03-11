@@ -15,7 +15,6 @@ class Game
   ]
 
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    #binding.pry
     @board = board
    @player_1 = player_1
    @player_2 = player_2
@@ -26,36 +25,33 @@ class Game
   end
 
  def over?
-   #binding.pry
    draw? || !!won?
  end
 
  def won?
-   #binding.pry
-  WIN_COMBINATIONS.detect do |win|
-    #binding.pry
+   WIN_COMBINATIONS.detect do |win|
     board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == board.cells[win[0]] && (board.cells[win[1]] == "X" || board.cells[win[1]] == "O")
   end
  end
 
  def draw?
-   #binding.pry
-  @board.full? && won? == nil
+   @board.full? && won? == nil
  end
 
  def winner
-   #binding.pry
   if combo = won?
     board.cells[combo[0]]
-    #binding.pry
-  end
+   end
  end
 
  def turn
    input = current_player.move(board)
    board.valid_move?(input) ? input : turn
    board.update(input, current_player)
+   board.display
+   #binding.pry
  end
+
 
  def play
    while !over?
@@ -69,6 +65,21 @@ class Game
  end
 end
 
+def start
+  puts "Welcome to Tic Tac Toe!"
+  puts "How Many Players (0, 1, 2)"
+  input = gets.strip
+  if input == "2"
+    game = Game.new
+  elsif input == "1"
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  elsif input == "0"
+    game = Game.new(Players.Computer.new("X"), Players::Computer.new("O"))
+  end
+  @board.display
+  play
+
+end
 
 
 end
