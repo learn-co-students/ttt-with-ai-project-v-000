@@ -5,7 +5,7 @@ class Board
     attr_accessor :cells
 
     def initialize
-        @cells = Array.new(9, " ")
+        reset!
     end
 
     def reset!
@@ -21,8 +21,8 @@ class Board
     end
 
     def position(input)
-        number = input.to_i
-        pos = number - 1
+        int = input.to_i
+        pos = int - 1
         @cells[pos]
     end
 
@@ -35,15 +35,17 @@ class Board
     end
 
     def taken?(input)
-        number = input.to_i
-        pos = number - 1
-        @cells[pos] != " " ? true : false
+        self.position(input) != " " ? true : false
     end
 
     def valid_move?(input)
         int = input.to_i
-        int =< 9 && int >= 1 && taken(input) ? true : false
+        int <= 9 && int >= 1 && !taken?(input) ? true : false
+    end
 
-
+    def update(input, player)
+        int = input.to_i
+        pos = int - 1
+        @cells[pos] = player.token
     end
 end
