@@ -62,6 +62,7 @@ This project is supported by Bundler and includes a `Gemfile`.
 
 Run `bundle install` before getting started on the project.
 
+
 As this project has quite a few files, an `environment.rb` is included that loads all the code in your project along with Bundler. You do not ever need to edit this file. When you see `require_relative '../config/environment'`, as in `bin/tictactoe`, that is how your environment and code are loaded.
 
 #### `lib` - Tic-tac-toe models
