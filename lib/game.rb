@@ -26,24 +26,66 @@ class Game
     end
 
     def over?
-        @board.full? && @board.turn_count == 9
+        if won? != false
+            return true
+        end
+        if draw?
+            return true
+        end
+         return false
         #binding.pry
     end
 
     def won?
-        # if over?
-        #     false
-        # else
-        WIN_COMBINATIONS.each do |combo|
-            # binding.pry
-                # if combo.all?{ |a| a == @board.cells[a].include?("X")}
-                #     true
-                # elsif combo.all?{ |a| a == "0"}
-                #     true
-                # end
-            end
-        # end
+
+        win = WIN_COMBINATIONS.find do |combo|
+             @board.cells.values_at(combo[0],combo[1],combo[2]).all?{|v| v == "X"}  || @board.cells.values_at(combo[0],combo[1],combo[2]).all?{|v| v == "O"}
+         end
+          if win == nil
+              return false
+          elsif win != nil
+              win
+          end
+
     end
 
+    def draw?
+        @board.full? && won? == false ? true : false
+    end
+
+    def winner
+        #binding.pry
+        won? == false ? nil : @board.cells[won?[0]]
+    end
+
+    def turn
+        move = current_player.move(@board)
+
+        if @board.valid_move?(move)
+            @board.update(move, current_player)
+        end
+        #binding.pry
+    end
+
+     def play
+         #binding.pry
+         until over?
+             turn
+             won?
+             draw?
+        end
+        if won? != false
+            if winner == "X"
+                puts "Congratulations X!"
+                #binding.pry
+            else
+                puts "Congratulations O!"
+                #sbinding.pry
+            end
+        end
+        if draw?
+           puts "Cat's Game!"
+        end
+    end
 
 end

@@ -6,9 +6,13 @@ class Players
 
         def move(board)
             input = gets
-            # board.update(input, self.token)
-            # board.turn_count.to_s
+            if input.match(/^(\d)+$/)
             input
+        else 
+            puts "invalid"
+            input = gets
+            input
+        end
         end
     end
 
