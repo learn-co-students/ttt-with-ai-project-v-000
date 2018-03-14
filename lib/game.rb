@@ -54,21 +54,17 @@ class Game
     end
 
     def winner
-        #binding.pry
         won? == false ? nil : @board.cells[won?[0]]
     end
 
     def turn
         move = current_player.move(@board)
-
         if @board.valid_move?(move)
             @board.update(move, current_player)
         end
-        #binding.pry
     end
 
      def play
-         #binding.pry
          until over?
              turn
              won?
@@ -77,10 +73,8 @@ class Game
         if won? != false
             if winner == "X"
                 puts "Congratulations X!"
-                #binding.pry
             else
                 puts "Congratulations O!"
-                #sbinding.pry
             end
         end
         if draw?
