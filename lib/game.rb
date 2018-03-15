@@ -71,37 +71,74 @@ class Game
     end
   end
 
-#  def start
-#    puts "Let's play Tic-Tac-Toe!"
-#    puts "Please select the number of players: 0, 1, or 2:"
-#    answer = gets.strip
-#      until answer == "0" || answer == "1" || answer == "2"
-#        puts "Please select the number of players: 0, 1, or 2:"
-#      end
-#    puts "Who should go first and be token X? Please enter 'me' or 'friend' or 'computer':"
-#      reply = gets.strip
-#      until reply == "me" || reply == "friend" || reply == "computer"
-#        puts "Who should go first and be token X? Please enter 'me' or 'friend' or 'computer':"
-#      end
-#    if (reply == "me" || reply == "friend") && answer == "2"
-  #    game = self.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  #  elsif reply == "me" && answer == "1"
-  #    game = self.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  #  elsif reply == "computer" && answer == "1"
-  #    game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  #  elsif answer == "0"
-  #    game = self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  #  end
-#
-  #  play
-#
-  #  over?
-  #    puts "Would you like to play again? y/n:"
-  #    response = gets.strip
-  #    if response == "y"
-  #      start
-  #    else
-  #      puts "Thanks for playing!"
-  #    end
-  #end
+  def play_again
+    puts "Would you like to play again? y/n:"
+      response = gets.strip
+    if response == "n"
+      puts "Thanks for playing!"
+    elsif response == "y"
+      puts "Please select the number of players: 0, 1, or 2:"
+      answer = gets.strip
+        until answer == "0" || answer == "1" || answer == "2"
+          puts "Please select the number of players: 0, 1, or 2:"
+        end
+        if answer == "0"
+          game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+          game.play
+        else
+          puts "Who should go first and be token X? Please enter 'me' or 'friend' or 'computer':"
+          reply = gets.strip
+          until reply == "me" || reply == "friend" || reply == "computer"
+            puts "Who should go first and be token X? Please enter 'me' or 'friend' or 'computer':"
+          end
+          if (reply == "me" || reply == "friend") && answer == "2"
+            game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+          elsif reply == "me" && answer == "1"
+            game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+          elsif reply == "computer" && answer == "1"
+            game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+          end
+        game.play
+        end
+        game.play_again
+    end
+  end
+
+  def start
+    puts "Please select the number of players: 0, 1, or 2:"
+    answer = gets.strip
+      until answer == "0" || answer == "1" || answer == "2"
+        puts "Please select the number of players: 0, 1, or 2:"
+      end
+      if answer == "0"
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        play
+      else
+        puts "Who should go first and be token X? Please enter 'me' or 'friend' or 'computer':"
+        reply = gets.strip
+        until reply == "me" || reply == "friend" || reply == "computer"
+          puts "Who should go first and be token X? Please enter 'me' or 'friend' or 'computer':"
+        end
+        if (reply == "me" || reply == "friend") && answer == "2"
+          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        elsif reply == "me" && answer == "1"
+          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        elsif reply == "computer" && answer == "1"
+          game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        end
+        play
+        end
+
+    over?
+      puts "Would you like to play again? y/n:"
+      response = gets.strip
+      if response == "n"
+        puts "Thanks for playing!"
+      elsif response == "y"
+        start
+      end
+    end
+
+
+
 end
