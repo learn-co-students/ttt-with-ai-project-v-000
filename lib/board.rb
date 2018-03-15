@@ -41,7 +41,7 @@ class Board
           counter += 1
         end
       i += 1
-    end
+      end
     return counter
   end
 
@@ -51,7 +51,7 @@ class Board
      else
        false
      end
-   end
+  end
 
   def valid_move?(num)
 
