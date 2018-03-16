@@ -22,7 +22,7 @@ class Game
     end
 
     def current_player
-       @board.turn_count % 2 == 0 ? @player_1 : @player_2 # Can change based on player_1 and player_2 tokens on initialize
+       @board.turn_count % 2 == 0 ? @player_1 : @player_2
     end
 
     def over?
@@ -33,7 +33,6 @@ class Game
             return true
         end
          return false
-        #binding.pry
     end
 
     def won?
@@ -45,7 +44,6 @@ class Game
           elsif win != nil
               win
           end
-
     end
 
     def draw?
@@ -58,11 +56,13 @@ class Game
 
     def turn
         @board.display
-        move = current_player.move(@board)
+        move = current_player.move(@board, WIN_COMBINATIONS)
         if @board.valid_move?(move)
             @board.update(move, current_player)
+
         end
     end
+
 
      def play
          until over?
