@@ -37,7 +37,6 @@ class Game
     end
 
     def won?
-
         win = WIN_COMBINATIONS.find do |combo|
              @board.cells.values_at(combo[0],combo[1],combo[2]).all?{|v| v == "X"}  || @board.cells.values_at(combo[0],combo[1],combo[2]).all?{|v| v == "O"}
          end
@@ -58,6 +57,7 @@ class Game
     end
 
     def turn
+        @board.display
         move = current_player.move(@board)
         if @board.valid_move?(move)
             @board.update(move, current_player)
@@ -72,8 +72,11 @@ class Game
         end
         if won? != false
             if winner == "X"
+                @board.display
                 puts "Congratulations X!"
+
             else
+                @board.display
                 puts "Congratulations O!"
             end
         end
