@@ -9,7 +9,7 @@ class Players
 
         def move(board, win_combos)
             puts "AI is thinking....."
-            sleep 3
+            sleep 3                                     #put valid move to stop method rerunning
              if board.turn_count >= 4
                  winning_square(board, win_combos)
              else
@@ -41,11 +41,18 @@ class Players
         end
 
         def winning_square(board, win_combos)
-            winning_place = quickest_win_combo(board, win_combos).find do |int|
-                binding.pry
-                #!int.include?(@places_of_tokens)
+            winning_place = quickest_win_combo(board, win_combos)
+
+                #binding.pry
+                #@places_of_tokens is an array of 2 and `int` is array of 3
+                #unless int.include?(@places_of_tokens)
+                    val = winning_place.select do |i|
+                        !@places_of_tokens.include?(i)
+                        #binding.pry
             end
-            w_i_n = winning_place + 1
+
+            #binding.pry
+            w_i_n = val[0] + 1
             w_i_n.to_s
         end
 
