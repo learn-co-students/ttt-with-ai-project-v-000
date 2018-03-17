@@ -1,4 +1,4 @@
-# Tic-tac-toe with AI
+l# Tic-tac-toe with AI
 
 ## Objectives
 1. Build a command-line interface (CLI).
