@@ -108,11 +108,11 @@ describe 'Game' do
 
     it 'returns the correct winning combination in the case of a win' do
       game = Game.new
-      game.board.cells = ["X", "O", "X",
-                          "O", "O", "X",
-                          "O", "O", "X"]
+      game.board.cells = ["X", "X", "O",
+                          "O", "X", "O",
+                          "O", "X", "X"]
 
-      expect(game.won?).to contain_exactly(2, 5, 8)
+      expect(game.won?).to contain_exactly(1, 4, 7)
     end
 
     it "isn't hard-coded" do
