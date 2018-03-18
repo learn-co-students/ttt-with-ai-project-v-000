@@ -16,7 +16,7 @@ end
 menu
 
 # Substantiate New Game
-game = Game.new
+
 
 # Get Player Input
 input = gets.strip
@@ -24,13 +24,22 @@ input = gets.strip
 case input
 when "0"
   #start AI deathmatch
+  game = Game3.new
+  until game.won?
+    game.play
+  end
   puts "You selected #{input}"
 when "1"
   #start 1-player game
+  game = Game2.new
+  until game.won?
+    game.play
+  end
   puts "You selected #{input}"
 when "2"
   #start 2-player hotseat game
   puts "You selected #{input}"
+  game = Game.new
   until game.won?
     game.play
   end
