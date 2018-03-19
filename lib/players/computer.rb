@@ -17,9 +17,6 @@ class Players
             end
 
         end
-        ##find_quickest_win checks win combinataions and current board to find the first match with the most taken spaces
-        # 1. Get the current board cells and WIN_COMBINATIONS from Game instance
-
 
         def quickest_win_combo(board, win_combos)
             places_of_tokens = board.cells.each_index.select do|i|
@@ -41,17 +38,10 @@ class Players
         end
 
         def winning_square(board, win_combos)
-            winning_place = quickest_win_combo(board, win_combos)
-
-                #binding.pry
-                #@places_of_tokens is an array of 2 and `int` is array of 3
-                #unless int.include?(@places_of_tokens)
-                    val = winning_place.select do |i|
-                        !@places_of_tokens.include?(i)
-                        #binding.pry
-            end
-
-            #binding.pry
+            winning_place = quickest_win_combo(board, win_combo)
+                val = winning_place.select do |i|
+                    !@places_of_tokens.include?(i)
+                end
             w_i_n = val[0] + 1
             w_i_n.to_s
         end
