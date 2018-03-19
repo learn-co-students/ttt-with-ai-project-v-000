@@ -53,12 +53,8 @@ end
 def turn
 player = current_player
 current_move = player.move(board)
-
   if board.valid_move?(current_move)
-    # binding.pry
     board.update(current_move, player_1)
-
-  # player_2.move(board)
   else
      player.move(board)
   end
@@ -66,6 +62,10 @@ current_move = player.move(board)
 end
 
 def play
+  player = current_player
+  player.move(board)
+
+  puts "Congratulations #{winner}!
 end
 
 end
