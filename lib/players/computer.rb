@@ -45,25 +45,6 @@ module Players
       # binding.pry
       return w if w != nil
       
-      # game = Game.new
-      
-      # m = i.find do |j|
-      #   board.cells = dboard
-      #   board.cells[j-1] = token
-      #   won?(board)
-      # end
-      # return m.to_s if won?(board)
-      
-      # board.turn_count.even? ? opp = "O" : opp ="X"
-      # m = i.find do |j|
-      #   board.cells = dboard
-      #   board.cells[j-1] = opp
-      #   won?(board)
-      # end
-      # return m.to_s if won?(board)
-      
-      # board.cells = dboard
-      
       return "5" if i.include?(5)
       
       if i.find{|j| j == 1 || j == 3 || j == 7 || j == 9}
@@ -72,14 +53,5 @@ module Players
         i.sample.to_s
       end
     end
-    
-    # def won?(board)
-    #   win_comp = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [2,5,8], [1,4,7], [0,4,8], [2,4,6]]
-    #   a = comb.find do |i|
-    #     b = [board.cells[i[0]], board.cells[i[1]], board.cells[i[2]]]
-    #     b.all?{|x| x=="X"} || b.all?{|x| x=="O"}
-    #   end
-    #   a.class == Array ? true : false
-    # end
   end
 end
