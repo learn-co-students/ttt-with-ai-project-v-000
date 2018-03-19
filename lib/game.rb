@@ -76,6 +76,14 @@ class Game
         self.turn
       end
 
+      if self.won?
+        puts "Congratulations #{winner}!"
+      elsif self.draw?
+        puts "Cat's Game!"
+      end
+
+
+      # binding.pry
 
     end
 
