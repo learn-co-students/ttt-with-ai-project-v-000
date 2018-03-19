@@ -3,7 +3,9 @@ module Players
 
     def move(board)
       puts "Please enter your selection (1-9)"
-      gets.strip
+
+      # board[input.to_i - 1] = token
+        input =gets.strip
     end
 
   end

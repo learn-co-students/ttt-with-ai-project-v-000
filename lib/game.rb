@@ -1,5 +1,7 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :input
+
+  # @board = []
 
 WIN_COMBINATIONS = [
     [0,1,2],
@@ -12,10 +14,14 @@ WIN_COMBINATIONS = [
     [2,4,6]
 ]
 
-def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board)
+def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
   @board = board
-  @player_1 = player _1
+  @player_1 = player_1
   @player_2 = player_2
+end
+
+def board
+  @board
 end
 
 def current_player
@@ -23,11 +29,12 @@ def current_player
 end
 
 def won?
-  WIN_COMBINATIONS.detect do |winner|
-    @board.cells[winner[0]] == @board.cells[winner[1]] &&
-    @board.cells[winner[1]] == @board.cells[winner[2]]
+    WIN_COMBINATIONS.detect do |winner|
+   @board.cells[winner[0]] == "X" && @board.cells[winner[1]] == "X" && @board.cells[winner[2]] == "X" ||
+   @board.cells[winner[0]] == "O" && @board.cells[winner[1]] == "O" && @board.cells[winner[2]] == "O"
   end
 end
+
 
 def draw?
   @board.full? && !won?
@@ -38,10 +45,27 @@ def over?
 end
 
 def winner
-  if winning_combo = won?
-  @winner = @board.cells[winning_combo.first]
-  (@board.cells[winner[0]] =="X" || @board.cells[winner[0]] =="0")
+  if  won?
+  winner = @board.cells[won?[0]]
   end
+end
+
+def turn
+player = current_player
+current_move = player.move(board)
+
+  if board.valid_move?(current_move)
+    # binding.pry
+    board.update(current_move, player_1)
+
+  # player_2.move(board)
+  else
+     player.move(board)
+  end
+
+end
+
+def play
 end
 
 end
