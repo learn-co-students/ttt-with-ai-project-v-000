@@ -54,18 +54,22 @@ def turn
 player = current_player
 current_move = player.move(board)
   if board.valid_move?(current_move)
-    board.update(current_move, player_1)
+    board.update(current_move, player)
   else
      player.move(board)
   end
-
 end
 
 def play
-  player = current_player
-  player.move(board)
+  until  over?
+    turn
+  end
 
-  puts "Congratulations #{winner}!
-end
+  if won?
+    puts "Congratulations #{winner}!"
+  else
+    puts "Cat's Game!"
+  end
+  end
 
 end
