@@ -55,21 +55,21 @@ module Players
 
     def third_move(board)
       if first_move == "1"
-        "2" if board.cell[1] == " "
-        "4" if board.cell[3] == " "
-        "5" if board.cell[4] == " "
+        "2" if board.cells[1] == " "
+        "4" if board.cells[3] == " "
+        "5" if board.cells[4] == " "
       elsif first_move == "3"
-        "2" if board.cell[1] == " "
-        "5" if board.cell[4] == " "
-        "6" if board.cell[5] == " "
+        "2" if board.cells[1] == " "
+        "5" if board.cells[4] == " "
+        "6" if board.cells[5] == " "
       elsif first_move == "7"
-        "4" if board.cell[3] == " "
-        "5" if board.cell[4] == " "
-        "8" if board.cell[7] == " "
+        "4" if board.cells[3] == " "
+        "5" if board.cells[4] == " "
+        "8" if board.cells[7] == " "
       elsif first_move == "9"
-        "5" if board.cell[4] == " "
-        "6" if board.cell[5] == " "
-        "8" if board.cell[7] == " "
+        "5" if board.cells[4] == " "
+        "6" if board.cells[5] == " "
+        "8" if board.cells[7] == " "
       end
     end
 
