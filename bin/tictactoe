@@ -8,11 +8,11 @@ puts "To play against another player press 1"
 puts "To play against the computer press 2"
 puts "To watch the computer play itself press 3"
 
-#if against another player:
+#1) if against another player:
   # player 1 = x and player 2 = 0
   # later on ask if they want to be player 1 or 2
-# if against the computer
+#2) if against the computer
   #player goes first and x
   #if I have time ask if player wants to go first or second
-# if player wants to watch computer game then create 2 board objects
+#3) if player wants to watch computer game then create 2 board objects
   # and assign each one a token and then let them play
