@@ -5,7 +5,7 @@ require 'pry'
 
 # ```##
 # 2. Ai has gets stuck when win combo has less than 2 tokens
-# 3. players pick who goes first "X" starts 
+# 3. players pick who goes first "X" starts
 # 4. Once game is over ask for new players to choose game and tokens
 
  # ```
@@ -21,7 +21,7 @@ def game_start(input)
             game_p_vs_ai.board.reset!
 
         elsif input == "0"
-            game_ai_vs_ai = Game.new(Players::Computer.new("X"),Players::Computer.new("O"), Board.new)
+            game_ai_vs_ai = Game.new(Players::Computer.new("X"),Players::Computer.new("0"), Board.new)
             game_ai_vs_ai.play
             game_ai_vs_ai.board.reset!
 
