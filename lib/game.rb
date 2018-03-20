@@ -59,6 +59,9 @@ class Game
     def turn
       # player going
       playing_now = self.current_player
+      puts self.board.display
+      puts "#{playing_now.token}'s turn:"
+
       # player's move
       player_move = playing_now.move(board)
 
@@ -67,6 +70,7 @@ class Game
       else
         self.board.update(player_move, playing_now)
       end
+
 
     end
 

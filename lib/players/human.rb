@@ -6,7 +6,6 @@ module Players
     def move(board)
       puts "Enter move:"
       @input = gets.strip
-      input
     end
 
 
