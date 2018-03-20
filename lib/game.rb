@@ -1,7 +1,7 @@
 require 'pry'
 
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :winner_token
   
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -25,28 +25,52 @@ class Game
   end
   
   def over?
-    winning = []
-    WIN_COMBINATIONS.detect do |combo|
-      if @board.cells[combo[0]] == "X" && @board.cells[combo[1]]  == "X" && @board.cells[combo[2]] == "X" 
-        winning << combo
-      elsif @board.cells[combo[0]] == "0" && @board.cells[combo[1]] == "0" && @board.cells[combo[2]] == "0"
-        winning << combo
-      end
-    end
-   winning.flatten != [] || @board.full? == true ? true : false
-  # binding.pry
+    won? || draw?
   end
 
   def won?
-    winning = []
     WIN_COMBINATIONS.detect do |combo|
-      if @board.cells[combo[0]] == "X" && @board.cells[combo[1]]  == "X" && @board.cells[combo[2]] == "X" 
-        winning << combo
-      elsif @board.cells[combo[0]] == "0" && @board.cells[combo[1]] == "0" && @board.cells[combo[2]] == "0"
-        winning << combo
-      end
+    # make sure all combo element matches (all X | O)
+    @board.cells[combo[0]] == @board.cells[combo[1]] &&
+    @board.cells[combo[1]] == @board.cells[combo[2]] && 
+    # make sure it is not empty
+    @board.taken?(combo[0] + 1)
     end
-    winning.flatten != [] && @board.full? == true ? winning.flatten : false
   end
 
-end
+  def winner
+    won? ? board.cells[won?.first] : nil
+  end
+ 
+  def draw?
+    !won? && @board.full? 
+  end
+  
+  def winner
+   won? ? @board.cells[won?[0]] : nil
+  end
+  
+  def turn
+    the_move = current_player.move(@board)
+    if !@board.valid_move?(the_move)
+      puts "invalid"
+      turn
+     else 
+      @board.update(the_move, current_player)
+    end
+  end
+  
+  def play
+    until over?
+      turn
+    end
+    
+    if won? != nil
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+
+  end 
+  
+end 

@@ -43,11 +43,11 @@ class Board
   end
   
   def valid_move?(spot)
-    spot.to_i.between?(1,9) && self.position(spot) == " " ? true : false
+    spot.to_i.between?(1,9) && !taken?(spot)
   end 
   
   def update(spot, player)
     self.cells[spot.to_i-1] = player.token
   end
 end
-# binding.pry
+
