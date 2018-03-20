@@ -59,8 +59,6 @@ class Game
         move = current_player.move(@board, WIN_COMBINATIONS)
         if @board.valid_move?(move)
             @board.update(move, current_player)
-            binding.pry
-
         end
     end
 

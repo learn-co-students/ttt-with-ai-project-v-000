@@ -3,22 +3,29 @@
 require_relative '../config/environment'
 require 'pry'
 
-# ```##
-# 2. Ai has gets stuck when win combo has less than 2 tokens
-# 3. players pick who goes first "X" starts
-# 4. Once game is over ask for new players to choose game and tokens
 
- # ```
+# 1. Ai has gets stuck and prints all "O"'s
 def game_start(input)
     if input == "0" || input == "1" || input == "2"
+
         if input == "2"
             game = Game.new
             game.play
             game.board.reset!
+
         elsif input == "1"
-            game_p_vs_ai = Game.new(Players::Human.new("X"),Players::Computer.new("O"), Board.new)
-            game_p_vs_ai.play
-            game_p_vs_ai.board.reset!
+            puts "Would like to go first?(y/n)"
+            input = gets.strip
+            if input == "y"
+                game_p_vs_ai = Game.new(Players::Human.new("X"),Players::Computer.new("O"), Board.new)
+                game_p_vs_ai.play
+                game_p_vs_ai.board.reset!
+            elsif input == "n"
+                game_p_vs_ai = Game.new(Players::Computer.new("X"),Players::Human.new("O"), Board.new)
+                game_p_vs_ai.play
+                game_p_vs_ai.board.reset!
+            end
+
 
         elsif input == "0"
             game_ai_vs_ai = Game.new(Players::Computer.new("X"),Players::Computer.new("0"), Board.new)

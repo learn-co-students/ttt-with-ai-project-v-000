@@ -9,9 +9,9 @@ class Players
 
         def move(board, win_combos)
             puts "AI is thinking....."
-            sleep 3                                     #put valid move to stop method rerunning
+            sleep 3
              if board.turn_count >= 4
-                 winning_square(board, win_combos)
+                 winning_square(board, win_combos) ##can't make turn for some reason
              else
                 rand(1..9).to_s
             end
@@ -29,12 +29,16 @@ class Players
                     elements == combos[0] || elements == combos[1] || elements == combos[2]
                 end
             end
-                #I think it's recognizing both tokens qui
 
+                #reactor that on the first turn each player chooses the either corners
+                #I think it's recognizing both tokens qui
+                # it freezes, It has no where to go. add else
+                #could be in winning_square statment that takes next closest
+                #keeps printing "O"
             combos_most_tokens = win_combo_match.find do |best_combo|
-                # best_combo.include?(places_of_tokens[0] && places_of_tokens[1])
-                var = best_combo - (@places_of_tokens[0]..@places_of_tokens[1]).to_a
-                var
+                best_combo.include?(places_of_tokens[0] && places_of_tokens[1])
+                # var = best_combo - (@places_of_tokens[0]..@places_of_tokens[1]).to_a
+                # var
             end
             combos_most_tokens
             #binding.pry
