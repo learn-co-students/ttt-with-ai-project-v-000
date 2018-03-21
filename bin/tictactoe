@@ -54,6 +54,22 @@ def start
 
 end
 
+play_again = true
 start
-binding.pry
+
+until play_again == false
+	puts "Play Again? (Y/N)"
+
+	again = gets.strip.downcase
+
+	if again == "n" || again == "no"
+		play_again = false
+		puts "Thank you for playing!"
+	else
+		start
+	end
+end
+
+
+
 # * When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
