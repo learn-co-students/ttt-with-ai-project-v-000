@@ -1,6 +1,6 @@
 require 'pry'
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :free_corner
 
   def initialize
     @cells = Array.new(9, " ")
@@ -61,5 +61,25 @@ class Board
   def update(input, player)
     cells[idx(input)] = player.token
   end
+
+
+  # def free_corner
+  #   corner = []
+  #   corner_cells = [1,3,7,9]
+  #
+  #   self.cells.each_with_index do |token, idx|
+  #     if corner_cells.include?(idx)
+  #       if !self.taken?(idx)
+  #         corner << idx
+  #       end
+  #     else
+  #       next
+  #     end
+  #     corner
+  #   end
+  #   @free_corner = corner
+  # end
+  #
+  # binding.pry
 
 end

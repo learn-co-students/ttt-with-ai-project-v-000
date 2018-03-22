@@ -18,7 +18,7 @@ def start
   # * Use the input to correctly initialize a `Game` with the appropriate player types and token values.
   if game_mode == "2"
     game = Game.new
-    game.play
+    # game.play
 
   end
 
@@ -34,24 +34,32 @@ def start
   if game_mode == "1"
     puts "Enter X to go first, O to go second: "
     puts "Your choice: "
-    turn_choice = gets.strip
+    turn_choice = gets.strip.downcase
+
+    until turn_choice == "x" || turn_choice == "o"
+      puts "Enter X to go first, O to go second: "
+      puts "Your choice: "
+      turn_choice = gets.strip.downcase
+    end
   # end
 
     # if game_mode == "1" && turn_choice.downcase == "x"
-    if turn_choice.downcase == "x"
+    if turn_choice == "x"
+      # if turn_choice.downcase == "x"
       player_1 = Players::Human.new("X")
       player_2 = Players::Computer.new("O")
       # game = Game.new(player_1, player_2)
     # elsif game_mode == "1" && turn_choice.downcase == "o"
-    elsif turn_choice.downcase == "o"
+    elsif turn_choice == "o"
+      # elsif turn_choice.downcase == "o"
       player_1 = Players::Computer.new("X")
       player_2 = Players::Human.new("O")
       # game = Game.new(player_1, player_2)
     end
     game = Game.new(player_1, player_2)
-    game.play
+    # game.play
   end
-
+  game.play
 end
 
 play_again = true
@@ -62,12 +70,19 @@ until play_again == false
 
 	again = gets.strip.downcase
 
-	if again == "n" || again == "no"
+	# if again == "n" || again == "no"
+	# 	play_again = false
+	# 	puts "Thank you for playing!"
+	# else
+	# 	start
+	# end
+
+  if again == "n" || again == "no"
 		play_again = false
 		puts "Thank you for playing!"
-	else
+	elsif again == "y" || again == "yes"
 		start
-	end
+  end
 end
 
 

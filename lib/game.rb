@@ -59,11 +59,15 @@ class Game
     def turn
       # player going
       playing_now = self.current_player
-      puts self.board.display
+
       puts "#{playing_now.token}'s turn:"
+      puts self.board.display
 
       # player's move
       player_move = playing_now.move(board)
+
+      # added this to quit midway for testing
+      exit if player_move == "qw"
 
       if !self.board.valid_move?(player_move)
         turn
@@ -81,6 +85,7 @@ class Game
       end
 
       if self.won?
+        puts self.board.display
         puts "Congratulations #{winner}!"
       elsif self.draw?
         puts "Cat's Game!"
