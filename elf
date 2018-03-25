@@ -1,0 +1,31 @@
+
+[1mFrom:[0m /home/zacwillmington/ttt-with-ai-project-v-000/lib/players/computer.rb @ line 65 Players::Computer#quickest_win_combo:
+
+    [1;34m64[0m: [32mdef[0m [1;34mquickest_win_combo[0m(board, win_combos)
+ => [1;34m65[0m:     binding.pry
+    [1;34m66[0m:             [32mif[0m @final_combo == [1;36mnil[0m
+    [1;34m67[0m:             	second_best_options = @combos_available.find_all [32mdo[0m |b|
+    [1;34m68[0m:             	  !b.any?{|e| @challenger_places.include?(e)}
+    [1;34m69[0m:             	 [32mend[0m
+    [1;34m70[0m:                  binding.pry
+    [1;34m71[0m:             	 next_move = second_best_options[[1;34m0[0m]
+    [1;34m72[0m:                  [32mif[0m next_move == @places_of_tokens[[1;34m0[0m] || next_move == @challenger_places[[1;34m0[0m]
+    [1;34m73[0m:                      next_move = second_best_options[[1;34m1[0m]
+    [1;34m74[0m:                  [32mend[0m
+    [1;34m75[0m:                  [32mif[0m next_move == @challenger_places[[1;34m0[0m] || next_move == @places_of_tokens[[1;34m0[0m]
+    [1;34m76[0m:                      next_move = second_best_options[[1;34m2[0m]
+    [1;34m77[0m:                  [32mend[0m
+    [1;34m78[0m:                  binding.pry
+    [1;34m79[0m:                  convert_index = next_move + [1;34m1[0m
+    [1;34m80[0m:                  convert_index.to_s
+    [1;34m81[0m:             [32melse[0m
+    [1;34m82[0m:                 best_option = final_combo.reject [32mdo[0m |i|
+    [1;34m83[0m:                     @places_of_tokens.include?(i)
+    [1;34m84[0m:                 [32mend[0m
+    [1;34m85[0m: 
+    [1;34m86[0m:               final_place = best_option[[1;34m0[0m] + [1;34m1[0m
+    [1;34m87[0m:               final_place.to_s
+    [1;34m88[0m:             [32mend[0m
+    [1;34m89[0m: 
+    [1;34m90[0m: [32mend[0m
+
