@@ -83,4 +83,46 @@ class Game
            puts "Cat's Game!"
         end
     end
+
+    def self.game_start(input)
+        if input == "0" || input == "1" || input == "2"
+            if input == "2"
+                game = Game.new
+                game.play
+                game.board.reset!
+
+            elsif input == "1"
+                puts "Would like to go first?(y/n)"
+                input = gets.strip
+                if input == "y"
+                    game_p_vs_ai = Game.new(Players::Human.new("X"),Players::Computer.new("O"), Board.new)
+                    game_p_vs_ai.play
+                    game_p_vs_ai.board.reset!
+                elsif input == "n"
+                    game_p_vs_ai = Game.new(Players::Computer.new("X"),Players::Human.new("O"), Board.new)
+                    game_p_vs_ai.play
+                    game_p_vs_ai.board.reset!
+                 end
+
+
+            elsif input == "0"
+                game_ai_vs_ai = Game.new(Players::Computer.new("X"),Players::Computer.new("O"), Board.new)
+                game_ai_vs_ai.play
+                game_ai_vs_ai.board.reset!
+
+            end
+        end
+    end
+
+    def self.game_replay
+        puts "Would you like to play again? (y/n)"
+        play_again = gets.strip
+         if play_again == "y" || play_again == "Y"
+             puts "Which player mode?"
+             input = gets.strip
+             game_start(input)
+         else
+             nil
+         end
+     end
 end
