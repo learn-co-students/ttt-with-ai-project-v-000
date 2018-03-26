@@ -1,3 +1,4 @@
+require 'colorize'
 class Game
   attr_accessor :board, :player_1, :player_2
   attr_reader :token
@@ -39,6 +40,7 @@ class Game
       if @board.valid_move?(input)
         @board.update(input, current_player)
         @board.display
+        puts "*********************************".yellow
       else
         puts "Invalid. The cell is either taken or your entry is not a number between 1-9."
         turn
@@ -49,9 +51,9 @@ class Game
       turn
     end
       if winner
-        puts "Congratulations #{winner}!"
+        puts "Congratulations #{winner}!".green
       elsif draw?
-        puts "Cat's Game!"
+        puts "Cat's Game!".green
       end
   end
 end

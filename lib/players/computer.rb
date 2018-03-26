@@ -1,5 +1,4 @@
 module Players
-require 'pry'
   class Computer < Player
     WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8],[0,3,6], [1,4,7], [2,5,8],[0,4,8], [2,4,6]]
     def corner_move(board)
@@ -127,11 +126,6 @@ require 'pry'
             opposite_corner(board)
           elsif board.turn_count == 3
             sleep(1)
-            # defend(board) || win_move(board) ||
-            # if !board.taken?(8)
-            #   "8"
-            # elsif !board.taken?(2)
-            #   "2"
             [corner_move(board), edge_move(board)].sample
           elsif board.turn_count == 4
             defend(board) || win_move(board) || valid_move(board)
