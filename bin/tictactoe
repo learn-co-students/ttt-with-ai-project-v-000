@@ -1,3 +1,28 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "Please select an option:"
+puts "1. Human vs. Human"
+puts "2. Human vs. Computer"
+puts "3. Computer vs. Computer"
+
+game_mode = gets.strip.to_i # Gets user input to select module
+
+until [1,2,3].include?(game_mode) # Validates input
+  puts "Invalid input! Try again!"
+  game_mode = gets.strip.to_i
+end
+
+case game_mode
+when 1
+  game = Game.new
+  game.play
+when 2
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+when 3
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+end
