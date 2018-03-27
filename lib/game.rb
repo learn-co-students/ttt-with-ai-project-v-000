@@ -19,12 +19,20 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] != " "
     end
   end
 
   def draw?
-    self.over && !self.won?
+    self.over? && !self.won?
+  end
+
+  def winner
+    if self.won?
+      board.cells[self.won?[0]]
+    else
+      nil
+    end
   end
 
 end
