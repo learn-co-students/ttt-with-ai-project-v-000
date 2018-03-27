@@ -30,6 +30,7 @@ class Game
     over? && !won?
   end
 
+##NOT WORKING
   def winner
     won? ? board.cells[won?[0]] : nil
   end
