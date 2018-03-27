@@ -46,16 +46,23 @@ class Game
 
   def play
     while !over?
-      board.display
+      3.times {puts ""}
+      puts "-----------"
+      puts " #{current_player.token}'s turn"
+      puts "-----------"
       puts ""
-      puts "#{current_player.token}'s turn"
+      board.display
       turn
     end
     if won?
-      board.display
+      4.times {puts ""}
+      puts "Game over!"
       puts "Congratulations #{winner}!"
+      3.times {puts ""}
     elsif draw?
+      4.times {puts ""}
       puts "Cat's Game!"
+      3.times {puts ""}
     end
   end
 
