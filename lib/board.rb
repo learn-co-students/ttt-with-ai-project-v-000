@@ -39,7 +39,7 @@ class Board
   end
 
   def update(position, player)
-    cells[position.to_i - 1] = player.token
+    cells[position.to_i - 1] = player.token if valid_move?(position)
   end
 
 end

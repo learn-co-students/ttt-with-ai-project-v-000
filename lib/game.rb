@@ -28,7 +28,8 @@ class Game
   def won?
     WIN_COMBINATIONS.find do |win_combination|
       board.cells[win_combination[0]] == board.cells[win_combination[1]] &&
-      board.cells[win_combination[1]] == board.cells[win_combination[2]]
+      board.cells[win_combination[1]] == board.cells[win_combination[2]] &&
+      board.taken?(win_combination[0] + 1)
     end
   end
 
@@ -37,7 +38,30 @@ class Game
   end
 
   def over?
-    won? || draw?
+    (won? || draw?) ? true : false
+  end
+
+  def winner
+    won? ? board.cells[won?[0]] : nil
+  end
+
+  def turn
+    player = current_player
+    current_move = player.move(board)
+    if !board.valid_move?(current_move)
+      turn
+    else
+      board.update(current_move, player)
+      board.display
+      puts # creates a line of blank space between each turn's board state for easier readability
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    puts (draw? ? "Cat's Game!" : "Congratulations #{winner}!")
   end
 
 end
