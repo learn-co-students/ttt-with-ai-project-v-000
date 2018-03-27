@@ -59,7 +59,9 @@ class Board
       end
     end
 
-    def update 
+    def update(board_position, token)
+      index = board_position.to_i - 1
+      token = @cells[index]
     end
 
 
