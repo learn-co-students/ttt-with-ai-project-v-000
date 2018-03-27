@@ -25,7 +25,7 @@ class CLI
       3.times{puts''}
       x_wins = winners.find_all{ |winner| winner == 'X'}
       o_wins = winners.find_all{ |winner| winner == 'O'}
-      puts "X won #{x_wins.length} times and O won #{o_wins.length} times."
+      puts "X won #{x_wins.length} times and O won #{o_wins.length} times and there were #{100 - o_wins.length - x_wins.length} draws."
     else
       puts 'sorry, what was that?'
     end
