@@ -16,26 +16,44 @@ class Game
   end
 
   def over?
-    board.full? || won?
+    draw? || won?
   end
-  #
-  # OUR METHOD UPDATED TO REJECT MATCHING BLANK SPACES AS A WIN (WORKING)
+
   def won?
     WIN_COMBINATIONS.find do |wincombo|
       board.cells[wincombo[0]] == board.cells[wincombo[1]] &&
-      board.cells[wincombo[1]] == board.cells[wincombo[2]]
-      # &&
-      # board.cells[wincombo[0]] != " "
+      board.cells[wincombo[1]] == board.cells[wincombo[2]] &&
+      board.cells[wincombo[0]] != " "
     end
   end
 
   def draw?
-    over? && !won?
+    board.full? && !won?
+    # over? && !won?
   end
 
-##NOT WORKING
   def winner
-    # binding.pry
     won? ? board.cells[won?[0]] : nil
   end
+
+  def turn
+    move = ""
+    while !board.valid_move?(move)
+      move = current_player.move
+    end
+    board.update(move, current_player)
+  end
+
+  def play
+    while !over?
+      board.display
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+
 end
