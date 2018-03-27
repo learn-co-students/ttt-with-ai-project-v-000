@@ -59,9 +59,9 @@ class Board
       end
     end
 
-    def update(board_position, token)
+    def update(board_position, player)
       index = board_position.to_i - 1
-      token = @cells[index]
+      @cells[index] = player.token
     end
 
 
