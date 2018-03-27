@@ -24,9 +24,8 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |winner|
-      @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[1]] == @board.cells[winner[2]] &&
-      @board.cells[winner[0]] != " "
+      @board.cells[winner[0]] == "X" && @board.cells[winner[1]] == "X" && @board.cells[winner[2]] == "X" ||
+      @board.cells[winner[0]] == "O" && @board.cells[winner[1]] == "O" && @board.cells[winner[2]] == "O"
     end
   end
 
@@ -44,4 +43,25 @@ class Game
     end
   end
 
+  def turn
+    player = current_player
+    current_move = player.move(board)
+      if board.valid_move?(current_move)
+        board.update(current_move, player)
+      else
+        player.move(board)
+      end
+    end
+
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
 end
