@@ -1,3 +1,91 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greetings and Number of Players
+puts "Welcome to Tic-Tac-Toe! What's your name?"
+name = gets.strip
+puts "Hello, #{name}! How many players will be playing Tic-Tac-Toe?"
+number_of_players = gets.chomp.to_i
+valid_number_of_players = [0, 1, 2]
+while !valid_number_of_players.include?(number_of_players) || nil do
+  puts "Invalid entry. Please enter 0, 1, or 2 for how many players you would like."
+  number_of_players = gets.chomp.to_i
+end
+
+# Who will go first?
+if number_of_players == 0
+  first_player = "Computer"
+elsif number_of_players == 1
+  puts "Who should go first? Player1 or Computer?"
+  first_player = gets.strip
+  while !["Player1", "Computer"].include?(first_player) || nil do
+    puts "Invalid entry. Who should go first? Player1, Player2, or Computer?"
+    first_player = gets.strip
+  end
+elsif number_of_players == 2
+  puts "Who should go first? Player1 or Player2?"
+  first_player = gets.strip
+  while !["Player1", "Player2"].include?(first_player) || nil do
+    puts "Invalid entry. Who should go first? Player1 or Player2?"
+    first_player = gets.strip
+  end
+end
+
+# First Player chooses X or O
+valid_tokens = ["X", "O"]
+first_player_token = "X"
+if first_player == "Player1" || first_player == "Player2"
+  puts "#{first_player} will go first."
+  puts "#{first_player}, would you like to be X or O?"
+  first_player_token = gets.strip
+  while !valid_tokens.include?(first_player_token) || nil do
+    puts "Invalid entry. Would the first player like to be X or O?"
+    first_player_token = gets.strip
+  end
+end
+
+if first_player_token == "X"
+  second_player_token = "O"
+else
+  second_player_token = "X"
+end
+
+# Start game with assigned first player and token
+if number_of_players == 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+elsif number_of_players == 1 && first_player == "Player1"
+  game = Game.new(Players::Human.new(first_player_token), Players::Computer.new(second_player_token))
+elsif number_of_players == 1 && first_player == "Computer"
+  game = Game.new(Players::Computer.new(first_player_token), Players::Human.new(second_player_token))
+elsif number_of_players == 2
+  game = Game.new(Players::Human.new(first_player_token), Players::Human.new(second_player_token))
+end
+
+puts "#{first_player}, #{game.player_1.token}, "
+puts "#{game.player_2.token}"
+
+
+
+# Play game until over
+until game.over?
+  game.play
+end
+
+# Play again
+play_again_valid_responses = ["n", "N", "y", "Y"]
+play_again = ""
+until play_again == "n" do
+  until play_again_valid_responses.include?(play_again) do
+    puts " "
+    puts "Would you like to play again (y/n)?"
+    play_again = gets.strip.downcase
+  end
+  if play_again == "y"
+    puts " "
+    game = Game.new
+  end
+  until game.over?
+    game.play
+  end
+end
