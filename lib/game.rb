@@ -23,4 +23,8 @@ class Game
     end
   end
 
+  def draw?
+    self.over && !self.won?
+  end
+
 end
