@@ -14,7 +14,7 @@ class Game
   end
 
   def over?
-    !board.cells.any? {|c| c == " "}
+    self.draw? || self.won?
   end
 
   def won?
@@ -24,7 +24,7 @@ class Game
   end
 
   def draw?
-    self.over? && !self.won?
+    !board.cells.any? {|c| c == " "} && !self.won?
   end
 
   def winner
@@ -33,6 +33,22 @@ class Game
     else
       nil
     end
+  end
+
+  def turn
+    current_move = current_player.move(@board)
+    if @board.valid_move?(current_move)
+      puts "#{@board.turn_count+1}"
+      @board.update(current_move, current_player)
+    else
+      turn
+    end
+  end
+
+  def play
+    turn until over?
+    puts "Congratulations #{winner}!" if won?
+    puts "Cat's Game!" if draw?
   end
 
 end
