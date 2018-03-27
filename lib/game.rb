@@ -19,12 +19,22 @@ class Game
     board.full? || won?
   end
 
+  # def won?
+  #   WIN_COMBINATIONS.find do |wincombo|
+  #     # binding.pry
+  #     board.cells[wincombo[0]] == board.cells[wincombo[1]] && board.cells[wincombo[1]] == board.cells[wincombo[2]]
+  #   end
+  # end
+
   def won?
-    WIN_COMBINATIONS.find do |wincombo|
-      # binding.pry
-      board.cells[wincombo[0]] == board.cells[wincombo[1]] && board.cells[wincombo[1]] == board.cells[wincombo[2]]
-    end
-  end
+     WIN_COMBINATIONS.each do |wincombo|
+       result = wincombo.collect {|cell| board.cells[cell]}
+       if result == ["X", "X", "X"] || result == ["O", "O", "O"]
+         return wincombo
+       end
+     end
+     false
+   end
 
   def draw?
     over? && !won?
