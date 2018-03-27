@@ -126,20 +126,16 @@ module Players
             opposite_corner(board)
           elsif board.turn_count == 3
             sleep(1)
-            [corner_move(board), edge_move(board)].sample
-          elsif board.turn_count == 4
-            defend(board) || win_move(board) || valid_move(board)
-          elsif board.turn_count == 5
-            sleep(1)
-            defend(board) || win_move(board) ||
-            if !board.taken?(3)
-              "3"
-            elsif !board.taken?(7)
-              "7"
-            end
+            defend(board) || edge_move(board)
           else
             sleep(1)
-            defend(board) || win_move(board) || valid_move(board)
+            win_move(board) || defend(board) || valid_move(board)
+          # elsif board.turn_count == 5
+          #   sleep(1)
+          #   win_move(board) || defend(board) || valid_move(board)
+          # else
+          #   sleep(1)
+          #   win_move(board) || defend(board) || valid_move(board)
           end
         end
     end
