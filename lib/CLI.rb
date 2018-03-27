@@ -50,33 +50,33 @@ class CLI
         puts "Sorry, what did you say?"
         continue
     end
-    # interpret(user_input)
+    interpret(user_input)
   end
 
-  # def self.interpret(user_input)
-  #   case user_input.downcase
-  #     when "1"
-  #       Game.new().play
-  #       again_again?
-  #     when "2"
-  #       Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-  #       again_again?
-  #     when "3"
-  #       Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-  #       again_again?
-  #     when /winter is coming/
-  #       wargames
-  #       Game.play_again?
-  #     when /bye/
-  #       puts "See you next time!"
-  #       sleep 1
-  #       exit!
-  #     else
-  #       2.times{puts ""}
-  #       puts "Sorry, what did you say?"
-  #       continue
-  #   end
-  # end
+  def self.interpret(user_input)
+    case user_input.downcase
+      when "1"
+        Game.new().play
+        again_again?
+      when "2"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        again_again?
+      when "3"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+        again_again?
+      when /winter is coming/
+        wargames
+        Game.play_again?
+      when /bye/
+        puts "See you next time!"
+        sleep 1
+        exit!
+      else
+        2.times{puts ""}
+        puts "Sorry, what did you say?"
+        continue
+    end
+  end
 
   def self.wargames
     winners = []
