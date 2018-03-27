@@ -37,19 +37,22 @@ class Game
   end
 
   def turn
-    move = ""
-    while !board.valid_move?(move)
-      move = current_player.move
+    input = ""
+    while !board.valid_move?(input)
+      input = current_player.move(board)
     end
-    board.update(move, current_player)
+    board.update(input, current_player)
   end
 
   def play
     while !over?
       board.display
+      puts ""
+      puts "#{current_player.token}'s turn"
       turn
     end
     if won?
+      board.display
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
