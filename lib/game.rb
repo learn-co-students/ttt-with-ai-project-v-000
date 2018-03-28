@@ -31,10 +31,6 @@ class Game
 
   def over?
     if board.cells == WIN_COMBINATIONS #Somehow, I need to convert these arrays into a recognizable source of data to the game.
-      false
-    elsif (@board.cells.any? == " " || "") && != WIN_COMBINATIONS
-      false
-    else
       true
     end
   end
