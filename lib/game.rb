@@ -1,4 +1,4 @@
-
+require 'pry'
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -29,11 +29,61 @@ class Game
     end
   end
 
-  def over?
-    if board.cells == WIN_COMBINATIONS #Somehow, I need to convert these arrays into a recognizable source of data to the game.
+
+  def won?
+    WIN_COMBINATIONS.find do |combo|
+     if @board.cells[combo[0]] == "X" && @board.cells[combo[1]] == "X" && @board.cells[combo[2]] == "X"
+       true
+     elsif @board.cells[combo[0]] == "O" && @board.cells[combo[1]] == "O" && @board.cells[combo[2]] == "O"
+       true
+     else
+       false
+     end
+   end
+ end
+
+  def draw?
+    if @board.full? && !won?
       true
     end
   end
+
+  def over?
+    if draw?
+      true
+    elsif won?
+      true
+    end
+  end
+
+  def winner
+    if won?
+      @board.cells[won?[0]]
+    end
+  end
+
+  def turn
+  player = current_player
+  potential_move = player.move(@board)
+    if !@board.valid_move?(potential_move)
+      turn
+    elsif @board.valid_move?(potential_move)
+     @board.update(potential_move, player)
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{self.winner}!"
+    end
+    if draw?
+      puts "Cat's Game!"
+    end 
+  end
+
 
 
 end
