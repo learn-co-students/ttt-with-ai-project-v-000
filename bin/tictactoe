@@ -114,6 +114,10 @@ def new_game
       setup_4.play
       play_again?
     end
+    
+  else
+    invalid_input
+    new_game
   end
 end
 
