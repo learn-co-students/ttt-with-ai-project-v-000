@@ -58,16 +58,9 @@ class Game
   end
 
   def won?
-<<<<<<< HEAD
     WIN_COMBINATIONS.detect do |combo| combo
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
       @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
-=======
-    WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      # @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      # @board.taken?(combo[0]+1)
->>>>>>> 9aa06989de30bc13f339da67814d963fb5c5d051
     end
   end
 
