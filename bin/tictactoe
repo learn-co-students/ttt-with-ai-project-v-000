@@ -43,6 +43,7 @@ def new_game
   if input == 0.to_s
     sleep 0.5
     puts "OK, I'll play against myself!"
+    puts
     sleep 1
     until setup_1.over?
       setup_1.play
