@@ -3,13 +3,27 @@ require_relative '../config/environment'
 
 def coin_flip
   sleep 1.5
-  puts "Flipping...call it in the air!"
-  sleep 3
-  coin_flip = rand(1..2)
-  if coin_flip == 1
-    puts "Heads!"
-  elsif coin_flip == 2
-    puts "Tails!"
+  puts "Would you like me to flip a coin? (Y or N)"
+  input = gets.strip
+  if input.downcase == "y" || input.downcase == "yes"
+    sleep 1.5
+    puts "Flipping...call it in the air!"
+    sleep 1.5
+    puts "(I promise there's actually a coin)"
+    sleep 1.5
+    coin_flip = rand(1..2)
+    if coin_flip == 1
+      puts "Heads!"
+    elsif coin_flip == 2
+      puts "Tails!"
+    end
+  elsif input.downcase == "n" || input.downcase == "no"
+    sleep 0.5
+    puts "Alright...but no fighting, you two!"
+  else
+    invalid_input
+    sleep 1.5
+    puts "Oh well...on to the game!"
   end
 end
 
@@ -27,6 +41,10 @@ def sample_board
   sleep 1.5
   puts "All you have to do is enter the number to move to the corresponding space!"
   sleep 2
+end
+
+def invalid_input
+  puts "Sorry, that's not a valid command!"
 end
 
 def new_game
@@ -78,6 +96,10 @@ def new_game
         setup_3.play
         play_again?
       end
+
+    else
+      invalid_input
+      new_game
     end
 
   elsif input == 2.to_s
@@ -89,20 +111,17 @@ def new_game
     puts "Whoever goes first will play as X...I'll leave it up to you two to decide whom that will be."
     sleep 1.5
     puts "...".each_char { |c| putc c ; sleep 0.25 ; $stdout.flush }
-    puts "...or I could flip a coin for you! Would you like me to do that? (Y or N)"
-
-    input = gets.strip
-    if input.downcase == "y" || input.downcase == "yes"
-      coin_flip
-    elsif input.downcase == "n" || input.downcase == "no"
-      sleep 0.5
-      puts "Alright...but no fighting, you two!"
-    end
+    puts "...or I could flip a coin for you!"
+    coin_flip
     sample_board
     until setup_4.over?
       setup_4.play
       play_again?
     end
+
+  else
+    invalid_input
+    new_game
   end
 end
 
@@ -112,9 +131,12 @@ def play_again?
   input = gets.strip
   if input.downcase == "y" || input.downcase == "yes"
     new_game
-  else
+  elsif input.downcase == "n" || input.downcase == "no"
     sleep 1
     puts "Alright, until next time!"
+  else
+    invalid_input
+    play_again?
   end
 end
 
