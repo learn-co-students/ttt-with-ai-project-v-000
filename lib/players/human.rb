@@ -6,7 +6,7 @@ module Players
     def move(input)
       input = gets.chomp
     end
-    
+
   end
 
 end
