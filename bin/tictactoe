@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
 
 def coin_flip
@@ -9,7 +8,7 @@ def coin_flip
   coin_flip = rand(1..2)
   if coin_flip == 1
     puts "Heads!"
-  else
+  elsif coin_flip == 2
     puts "Tails!"
   end
 end
@@ -32,7 +31,7 @@ end
 
 def new_game
   sleep 1.5
-  puts "How many human players do we have today: 0, 1, or 2?"
+  puts "How many human players do we have for this round: 0, 1, or 2?"
 
   setup_1 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
   setup_2 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
@@ -43,7 +42,7 @@ def new_game
 
   if input == 0.to_s
     sleep 0.5
-    puts "OK, the computer will play against itself!"
+    puts "OK, I'll play against myself!"
     sleep 1
     until setup_1.over?
       setup_1.play
@@ -52,7 +51,7 @@ def new_game
 
   elsif input == 1.to_s
     sleep 0.5
-    puts "OK, you'll be playing against the computer!"
+    puts "OK, you'll be playing against me!"
     sleep 1.5
     puts "Would you like to go first and play as X ? (Y or N)"
 
@@ -68,11 +67,11 @@ def new_game
 
     elsif input.downcase == "n" || input.downcase == "no"
       sleep 0.5
-      puts "Sounds good!  The computer will go first."
+      puts "Sounds good! I'll go first."
       sleep 1
       puts "...but before we begin..."
       sample_board
-      puts "Looks like the computer is ready to play!"
+      puts "Ready when you are!"
       puts
       until setup_3.over?
         setup_3.play
@@ -82,14 +81,15 @@ def new_game
 
   elsif input == 2.to_s
     sleep 0.5
-    puts "Great, I'm so glad you found a friend to play against!"
+    puts "Great, I'm so glad you found a real friend to play against!"
+    sleep 1.5
+    puts "I was starting to worry that you might not have any...."
     sleep 1.5
     puts "Whoever goes first will play as X...I'll leave it up to you two to decide whom that will be."
     sleep 1.5
-    puts "......"
-    sleep 1.5
+    puts "...".each_char { |c| putc c ; sleep 0.25 ; $stdout.flush }
     puts "...or I could flip a coin for you! Would you like me to do that? (Y or N)"
-    
+
     input = gets.strip
     if input.downcase == "y" || input.downcase == "yes"
       coin_flip
@@ -112,7 +112,7 @@ def play_again?
   if input.downcase == "y" || input.downcase == "yes"
     new_game
   else
-    sleep 1.5
+    sleep 1
     puts "Alright, until next time!"
   end
 end
