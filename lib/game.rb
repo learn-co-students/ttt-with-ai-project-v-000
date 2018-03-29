@@ -61,6 +61,7 @@ class Game
     until over?
       turn
     end
+    sleep 0.5
     puts (draw? ? "Cat's Game!" : "Congratulations #{winner}!")
   end
 

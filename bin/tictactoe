@@ -2,49 +2,120 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-puts "How many human players do we have today: 0, 1, or 2?"
-
-setup_1 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-setup_2 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
-setup_3 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-setup_4 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
-
-input = gets.strip
-
-if input == 0.to_s
-  puts "OK, the computer will play against itself!"
-  sleep 1
-  until setup_1.over?
-    setup_1.play
+def coin_flip
+  sleep 1.5
+  puts "Flipping...call it in the air!"
+  sleep 3
+  coin_flip = rand(1..2)
+  if coin_flip == 1
+    puts "Heads!"
+  else
+    puts "Tails!"
   end
+end
 
-elsif input == 1.to_s
-  puts "OK, you'll be playing against the computer!"
+def sample_board
   sleep 1
-  puts "Would you like to go first and play as X ? (Y or N)"
+  puts "Here's a sample board:"
+  sleep 1.5
+  puts
+  puts "| 1 | 2 | 3 |"
+  puts " ----------- "
+  puts "| 4 | 5 | 6 |"
+  puts " ----------- "
+  puts "| 7 | 8 | 9 |"
+  puts
+  sleep 1.5
+  puts "All you have to do is enter the number to move to the corresponding space!"
+  sleep 2
+end
+
+def new_game
+  sleep 1.5
+  puts "How many human players do we have today: 0, 1, or 2?"
+
+  setup_1 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+  setup_2 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+  setup_3 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+  setup_4 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
 
   input = gets.strip
-  if input.downcase == "y" || input.downcase == "yes"
-    puts "Excellent! Game on!"
-    until setup_2.over?
-      setup_2.play
-    end
 
-  elsif input.downcase == "n" || input.downcase == "no"
-    puts "Sounds good!  The computer will go first."
+  if input == 0.to_s
+    sleep 0.5
+    puts "OK, the computer will play against itself!"
     sleep 1
-    until setup_3.over?
-      setup_3.play
+    until setup_1.over?
+      setup_1.play
+      play_again?
+    end
+
+  elsif input == 1.to_s
+    sleep 0.5
+    puts "OK, you'll be playing against the computer!"
+    sleep 1.5
+    puts "Would you like to go first and play as X ? (Y or N)"
+
+    input = gets.strip
+    if input.downcase == "y" || input.downcase == "yes"
+      sleep 0.5
+      puts "Excellent! Game on!"
+      sample_board
+      until setup_2.over?
+        setup_2.play
+        play_again?
+      end
+
+    elsif input.downcase == "n" || input.downcase == "no"
+      sleep 0.5
+      puts "Sounds good!  The computer will go first."
+      sleep 1
+      puts "...but before we begin..."
+      sample_board
+      puts "Looks like the computer is ready to play!"
+      puts
+      until setup_3.over?
+        setup_3.play
+        play_again?
+      end
+    end
+
+  elsif input == 2.to_s
+    sleep 0.5
+    puts "Great, I'm so glad you found a friend to play against!"
+    sleep 1.5
+    puts "Whoever goes first will play as X...I'll leave it up to you two to decide whom that will be."
+    sleep 1.5
+    puts "......"
+    sleep 1.5
+    puts "...or I could flip a coin for you! Would you like me to do that? (Y or N)"
+    
+    input = gets.strip
+    if input.downcase == "y" || input.downcase == "yes"
+      coin_flip
+    elsif input.downcase == "n" || input.downcase == "no"
+      sleep 0.5
+      puts "Alright...but no fighting, you two!"
+    end
+    sample_board
+    until setup_4.over?
+      setup_4.play
+      play_again?
     end
   end
-
-elsif input == 2.to_s
-  puts "Great, I'm glad you've found a friend to play against!"
-  sleep 1
-  puts "Whoever goes first will play as X...I'll let you two duke it out!"
-  until setup_4.over?
-    setup_4.play
-  end
-
 end
+
+def play_again?
+  sleep 1.5
+  puts "Would you like to play again? (Y or N)"
+  input = gets.strip
+  if input.downcase == "y" || input.downcase == "yes"
+    new_game
+  else
+    sleep 1.5
+    puts "Alright, until next time!"
+  end
+end
+
+puts "Welcome to Tic Tac Toe!"
+new_game
