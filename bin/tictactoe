@@ -29,6 +29,10 @@ def sample_board
   sleep 2
 end
 
+def invalid_input
+  puts "Sorry, that's not a valid command! Please enter Y or N:"
+end
+
 def new_game
   sleep 1.5
   puts "How many human players do we have for this round: 0, 1, or 2?"
@@ -78,6 +82,9 @@ def new_game
         setup_3.play
         play_again?
       end
+    
+    else
+      invalid_input
     end
 
   elsif input == 2.to_s
@@ -97,6 +104,8 @@ def new_game
     elsif input.downcase == "n" || input.downcase == "no"
       sleep 0.5
       puts "Alright...but no fighting, you two!"
+    else
+      invalid_input
     end
     sample_board
     until setup_4.over?
@@ -112,9 +121,11 @@ def play_again?
   input = gets.strip
   if input.downcase == "y" || input.downcase == "yes"
     new_game
-  else
+  elsif input.downcase == "n" || input.downcase == "no"
     sleep 1
     puts "Alright, until next time!"
+  else
+    invalid_input
   end
 end
 
