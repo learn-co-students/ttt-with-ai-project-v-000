@@ -1,6 +1,7 @@
 class Board
   attr_accessor :cells
 
+
   def initialize()
     reset!
   end
@@ -41,3 +42,5 @@ class Board
     !(position(input) == " " || position(input) == "")
   end
 end 
+
+
