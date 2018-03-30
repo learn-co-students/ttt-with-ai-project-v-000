@@ -1,3 +1,34 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello and welcome to Tic Tac Toe!"
+puts "What version of TTO would you like to play?"
+puts "Type: '0', '1', or '2' to indicate the number of human players."
+
+selection = gets.strip
+
+if selection == "1"
+  puts "You chose 1 Player vs Computer"
+  puts "You will be player X."
+  player_1 = Players::Human.new("X")
+  player_2 = Players::Computer.new("O")
+  puts "Make your first move on the board by typing a number 1 through 9."
+
+elsif selection == "2"
+  puts "You chose 2 Players!"
+  puts "The first player to move will be 'X'. Second player will be 'O'!"
+  player_1 = Players::Human.new("X")
+  player_2 = Players::Human.new("O")
+  puts "Where will Player 1 move first? Alternate your selections."
+elsif selection == "0"
+  puts "You chose Computer Simulation!"
+  player_1 = Players::Computer.new("O")
+  player_2 = Players::Computer.new("X")
+
+else
+  "Not a valid selection"
+end
+
+game = Game.new(player_1, player_2)
+game.play

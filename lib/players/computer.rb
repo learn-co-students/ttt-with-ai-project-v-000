@@ -6,7 +6,7 @@ module Players
 
     def initialize(token)
       @token = token
-      @move_array = [2,4,6,8,1,3,5,7,9]
+      @move_array = [2,4,6,8,1,3,7,5,9] #if solo playing, will never win against self.
     end
 
 
