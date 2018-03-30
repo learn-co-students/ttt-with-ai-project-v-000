@@ -1,6 +1,6 @@
 class Players
   class Computer < Player
-    
+
     WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [2,5,8], [1,4,7], [0,4,8], [6,4,2]]
 
     def move(board)
@@ -30,7 +30,6 @@ class Players
             end
           end
         end
-      end
       #Move 7:
       win if board.turn_count == 6
     end
@@ -54,6 +53,6 @@ class Players
         end
       end
     end
-    
+
   end
 end
