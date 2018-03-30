@@ -1,61 +1,66 @@
 require 'pry'
+
 class Board
+
   attr_accessor :cells
 
   def initialize
     @cells = Array.new(9, " ")
   end
 
-  def cells
-    @cells
-  end
-
   def reset!
     cells.clear
-    self.cells = Array.new(9, " ")
+    @cells = Array.new(9, " ")
   end
 
   def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
   def position(num)
-    self.cells[num.to_i - 1]
+    cells[num.to_i-1]
   end
 
   def full?
-    cells.all? do |token|
-      token == "X" || token == "O"
+    if cells.include?(" ")
+      return false
+    else
+      return true
     end
   end
 
   def turn_count
-    i = 0
-    counter= 0
-      while i < cells.count
-        if cells[i] == "X" || cells[i] == "O"
-          counter += 1
-        end
-      i += 1
+    count = 0
+    cells.each do |cell|
+      if cell == "X" || cell == "O"
+        count += 1
       end
-    return counter
+    end
+    count
   end
 
   def taken?(num)
-     if position(num) == "X" || position(num) == "O"
-       true
-     else
-       false
-     end
+    if position(num.to_i) == "X" || position(num.to_i) == "O"
+      return true
+    else
+      return false
+    end
   end
 
   def valid_move?(num)
-
+    if (1..9).include?(num.to_i) && taken?(num) == false
+      return true
+    else
+      return false
+    end
   end
 
+  def update(num, player)
+      cells[num.to_i - 1] = player.token
+  end
 
 end

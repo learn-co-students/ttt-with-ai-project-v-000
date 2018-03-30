@@ -1,3 +1,63 @@
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def start
+
+
+
+puts "Welcome to Tic-tac-toe"
+puts "Would like like to play 0, 1 or 2 players?"
+  input = gets.strip.to_i
+
+
+  if input == 2
+      game = Game.new
+      game.play
+  end
+
+  if input == 0
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      game = Game.new(player_1, player_2)
+      game.play
+  end
+
+if input == 1
+  puts "Would you like to go first and be X? (y/n)"
+    input_2 = gets.strip
+
+        if input_2 == "yes" || input_2 == "y"
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Computer.new("O")
+          game = Game.new(player_1, player_2)
+          game.play
+        else
+          player_1 = Players::Computer.new("X")
+          player_2 = Players::Human.new("O")
+          game = Game.new(player_1, player_2)
+          game.play
+        end
+end
+
+
+end
+
+
+play_again = true
+
+start
+
+  until play_again == false
+  	puts "Would you like to play again? (y/n)"
+
+  	again = gets.strip.downcase
+
+    if again == "n" || again == "no"
+  		play_again = false
+  		puts "Thanks for playing!"
+  	elsif again == "y" || again == "yes"
+  		start
+    end
+  end
