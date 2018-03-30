@@ -39,12 +39,12 @@ class Board
     !taken?(spot) && spot.to_i.between?(1,9)
   end
 
-  def update(spot, token)
+  def update(spot, current_player)
     if valid_move?(spot)
       if turn_count%2 == 0
-        @cells[spot.to_i-1] = "X"
+        @cells[spot.to_i-1] = current_player.token
       else
-        @cells[spot.to_i-1] = "O"
+        @cells[spot.to_i-1] = current_player.token
       end
       display
     else

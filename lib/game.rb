@@ -54,6 +54,7 @@ class Game
   end
 
   def turn
+    puts "Please choose a cell, 1-9: Cells are numbered 1 | 2 | 3 and the second row begins at 4."
     input = current_player.move(board) until @board.valid_move?(input)
     @board.update(input, current_player)
   end
