@@ -26,10 +26,10 @@ class Players
         # If player in center and opponent does not block win in lower right corner, WIN
         else
           WIN_COMBINATIONS.each |combo|
-            if combo.count(self.token) == 2
+            if if [board.cells.values_at(combo_values.at(0,1,2)].count(self.token) == 2
               @best_move = 9 if board.cells[combo[8]] == " "
         # If opponent blocking win and opponent can win, block win
-            elsif combo.count(opp_token) == 2
+            elsif if [board.cells.values_at(combo_values.at(0,1,2)].count(opp_token) == 2 == 2
               block_win
         # If opponent blocking win and can't win, setup two way win
             else
@@ -37,10 +37,10 @@ class Players
             end
           end
         end
-#      #Move 7:
-#      win if board.turn_count == 6
+      #Move 7:
+      win if board.turn_count == 6
       #Best move or random
-#      if best_move < 10
+      if best_move < 10
         best_move
 #      else
 #        [1,2,3,4,5,6,7,8,9].sample
@@ -49,7 +49,7 @@ class Players
 
     def win
       WIN_COMBINATIONS.each do |combo|
-        if combo.count(self_token) == 2
+        if [board.cells.values_at(combo_values.at(0,1,2)].count(self.token) == 2
           @best_move = 1 if board.cells[combo[0]] == " "
           @best_move = 2 if board.cells[combo[1]] == " "
           @best_move = 3 if board.cells[combo[2]] == " "
@@ -59,7 +59,7 @@ class Players
 
     def block_win
       WIN_COMBINATIONS.each do |combo|
-        if combo.count(opp_token) == 2
+        if [board.cells.values_at(combo_values.at(0,1,2)].count(opp_token) == 2
           @best_move = 1 if board.cells[combo[0]] == " "
           @best_move = 2 if board.cells[combo[1]] == " "
           @best_move = 3 if board.cells[combo[2]] == " "
