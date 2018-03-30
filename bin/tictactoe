@@ -3,13 +3,15 @@
 require_relative '../config/environment'
 
 # Greetings and Number of Players
-puts "Welcome to Tic-Tac-Toe! What's your name?"
-name = gets.strip
-puts "Hello, #{name}! How many players will be playing Tic-Tac-Toe?"
+puts "Welcome to Tic-Tac-Toe!"
+puts "Enter '0' for Computer vs Computer"
+puts "Enter '1' for Player vs Computer"
+puts "Enter '2' for Player vs Player"
+puts "Enter '3' for Wargames (Computer vs Computer 'X' number of times)"
 number_of_players = gets.chomp.to_i
-valid_number_of_players = [0, 1, 2]
+valid_number_of_players = [0, 1, 2, 3]
 while !valid_number_of_players.include?(number_of_players) || nil do
-  puts "Invalid entry. Please enter 0, 1, or 2 for how many players you would like."
+  puts "Invalid entry. Please enter a number from 0 to 3."
   number_of_players = gets.chomp.to_i
 end
 
@@ -17,65 +19,59 @@ end
 if number_of_players == 0
   first_player = "Computer"
 elsif number_of_players == 1
-  puts "Who should go first? Player1 or Computer?"
+  puts "Who should go first? Player or Computer?"
   first_player = gets.strip
-  while !["Player1", "Computer"].include?(first_player) || nil do
-    puts "Invalid entry. Who should go first? Player1, Player2, or Computer?"
+  while !["Player", "Computer"].include?(first_player) || nil do
+    puts "Invalid entry. Who should go first? Player or Computer?"
     first_player = gets.strip
   end
-elsif number_of_players == 2
-  puts "Who should go first? Player1 or Player2?"
-  first_player = gets.strip
-  while !["Player1", "Player2"].include?(first_player) || nil do
-    puts "Invalid entry. Who should go first? Player1 or Player2?"
-    first_player = gets.strip
+elsif number_of_players == 3
+  puts "How many times would you like the Computer to play itself (up to 100)?"
+  number_of_games = gets.chomp.to_i
+  valid_number_of_games = (1..100).to_a
+  while !valid_number_of_games.include?(number_of_games) || nil do
+    puts "Invalid entry. Please enter a number from 0 to 100."
+    number_of_players = gets.chomp.to_i
   end
 end
 
-# First Player chooses X or O
-valid_tokens = ["X", "O"]
-first_player_token = "X"
-if first_player == "Player1" || first_player == "Player2"
-  puts "#{first_player} will go first."
-  puts "#{first_player}, would you like to be X or O?"
-  first_player_token = gets.strip
-  while !valid_tokens.include?(first_player_token) || nil do
-    puts "Invalid entry. Would the first player like to be X or O?"
-    first_player_token = gets.strip
-  end
-end
-
-if first_player_token == "X"
-  second_player_token = "O"
-else
-  second_player_token = "X"
-end
-
-# Start game with assigned first player and token
-if number_of_players == 0
+# Start game with assigned first player
+if number_of_players ==
   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-elsif number_of_players == 1 && first_player == "Player1"
-  game = Game.new(Players::Human.new(first_player_token), Players::Computer.new(second_player_token))
-elsif number_of_players == 1 && first_player == "Computer"
-  game = Game.new(Players::Computer.new(first_player_token), Players::Human.new(second_player_token))
+  puts "The game will be Computer 'X' vs Computer 'O'."
 elsif number_of_players == 2
-  game = Game.new(Players::Human.new(first_player_token), Players::Human.new(second_player_token))
+  game = Game.new
+  puts "The game will be Player 1 'X' vs Player 2 'O'."
+elsif number_of_players == 1 && first_player == "Computer"
+  game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  puts "The game will be Computer 'X' vs Player 'O'."
+elsif number_of_players == 1 && first_player == "Player"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  puts "The game will be Player 'X' vs Computer 'O'."
 end
-
-puts "#{first_player}, #{game.player_1.token}, "
-puts "#{game.player_2.token}"
-
-
 
 # Play game until over
-until game.over?
-  game.play
+if number_of_players == 3
+  puts "The Computer will be playing itself '#{number_of_games}' times."
+  x_count = 0
+  o_count = 0
+  number_of_games.times {
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play until game.over?
+    game.winner == "X" ? x_count += 1 : o_count += 1
+  }
+  puts "'X' won #{x_count} times and 'O' won #{o_count} times."
+else
+  until game.over?
+    game.play
+  end
 end
 
 # Play again
 play_again_valid_responses = ["n", "N", "y", "Y"]
 play_again = ""
 until play_again == "n" do
+  play_again = ""
   until play_again_valid_responses.include?(play_again) do
     puts " "
     puts "Would you like to play again (y/n)?"
@@ -83,9 +79,33 @@ until play_again == "n" do
   end
   if play_again == "y"
     puts " "
-    game = Game.new
-  end
-  until game.over?
-    game.play
+    if number_of_players ==
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      puts "The game will be Computer 'X' vs Computer 'O'."
+    elsif number_of_players == 2
+      game = Game.new
+      puts "The game will be Player 1 'X' vs Player 2 'O'."
+    elsif number_of_players == 1 && first_player == "Computer"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      puts "The game will be Computer 'X' vs Player 'O'."
+    elsif number_of_players == 1 && first_player == "Player"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      puts "The game will be Player 'X' vs Computer 'O'."
+    end
+    if number_of_players == 3
+      puts "The Computer will be playing itself '#{number_of_games}' times."
+      x_count = 0
+      o_count = 0
+      number_of_games.times {
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        game.play until game.over?
+        game.winner == "X" ? x_count += 1 : o_count += 1
+      }
+      puts "'X' won #{x_count} times and 'O' won #{o_count} times."
+    else
+      until game.over?
+        game.play
+      end
+    end
   end
 end
