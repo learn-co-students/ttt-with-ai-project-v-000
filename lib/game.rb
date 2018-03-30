@@ -63,4 +63,15 @@ class Game
     puts (draw? ? "Cat's Game!" : "Congratulations #{winner}!")
   end
 
+  def wargames
+    win_counter = 0
+    draw_counter = 0
+    100.times do
+      play
+      draw_counter += 1 if draw?
+      win_counter += 1 if winner == "X" || winner == "O"
+    end
+    puts "Out of 100 games played, #{win_counter} were wins and #{draw_counter} were draws."
+  end
+
 end

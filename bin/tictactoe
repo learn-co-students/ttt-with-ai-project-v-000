@@ -119,6 +119,10 @@ def new_game
       play_again?
     end
 
+  elsif input == "wargames".downcase
+    setup_1.wargames
+    play_again?
+
   else
     invalid_input
     new_game
