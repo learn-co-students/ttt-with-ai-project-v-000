@@ -29,9 +29,9 @@ elsif number_of_players == 3
   puts "How many times would you like the Computer to play itself (up to 100)?"
   number_of_games = gets.chomp.to_i
   valid_number_of_games = (1..100).to_a
-  while !valid_number_of_games.include?(number_of_games) || nil do
+  until valid_number_of_games.include?(number_of_games) do
     puts "Invalid entry. Please enter a number from 0 to 100."
-    number_of_players = gets.chomp.to_i
+    number_of_games = gets.chomp.to_i
   end
 end
 
@@ -55,12 +55,20 @@ if number_of_players == 3
   puts "The Computer will be playing itself '#{number_of_games}' times."
   x_count = 0
   o_count = 0
+  draw_count = 0
   number_of_games.times {
     game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
     game.play until game.over?
-    game.winner == "X" ? x_count += 1 : o_count += 1
+    if game.winner == "X"
+      x_count += 1
+    elsif game.winner == "O"
+      o_count += 1
+    elsif game.winner == nil
+      draw_count += 1
+    end
   }
   puts "'X' won #{x_count} times and 'O' won #{o_count} times."
+  puts "The game ended in a draw #{draw_count} times."
 else
   until game.over?
     game.play
@@ -93,15 +101,30 @@ until play_again == "n" do
       puts "The game will be Player 'X' vs Computer 'O'."
     end
     if number_of_players == 3
+      puts "How many times would you like the Computer to play itself (up to 100)?"
+      number_of_games = gets.chomp.to_i
+      valid_number_of_games = (1..100).to_a
+      until valid_number_of_games.include?(number_of_games) do
+        puts "Invalid entry. Please enter a number from 0 to 100."
+        number_of_games = gets.chomp.to_i
+      end
       puts "The Computer will be playing itself '#{number_of_games}' times."
       x_count = 0
       o_count = 0
+      draw_count = 0
       number_of_games.times {
         game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
         game.play until game.over?
-        game.winner == "X" ? x_count += 1 : o_count += 1
+        if game.winner == "X"
+          x_count += 1
+        elsif game.winner == "O"
+          o_count += 1
+        elsif game.winner == nil
+          draw_count += 1
+        end
       }
       puts "'X' won #{x_count} times and 'O' won #{o_count} times."
+      puts "The game ended in a draw #{draw_count} times."
     else
       until game.over?
         game.play

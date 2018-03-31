@@ -40,13 +40,6 @@ class Game
     puts " "
     if @board.valid_move?(current_move)
       @board.update(current_move, current_player)
-      if current_player == player_1
-        puts "#{player_1.token}'s move"
-        puts " "
-      else
-        puts "#{player_2.token}'s move"
-        puts " "
-      end
       board.display
       puts " "
     else
@@ -58,6 +51,7 @@ class Game
     turn until over?
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
+    puts " "
   end
 
 end

@@ -58,10 +58,8 @@ class Players
       # If opponent controls the center
       if board.turn_count == 3
         block_win(current_board)
-        if current_board[4] == opp_token
-          own_the_diagoanl_row(current_board)
-        else
-          own_the_middle_row
+        if best_move == 10
+          current_board[4] == opp_token ? own_the_diagnal_row(current_board) : own_the_middle_row(current_board)
         end
       end
 
