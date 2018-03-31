@@ -8,7 +8,6 @@ class Players
       @best_move = 10
       current_board = board.cells
       self.token == "X" ? @opp_token = "O" : @opp_token = "X"
-
       # FIRST PLAYER
       # Move 1: Top left corner
       @best_move = 1 if board.turn_count == 0
@@ -24,7 +23,7 @@ class Players
         # If opponent in center, block win
         if current_board[4] == opp_token
           block_win(current_board)
-        # If occupy center and opponent does not block win in lower right corner, WIN
+        # If player in center and opponent does not block win in lower right corner, WIN
         else
           WIN_COMBINATIONS.each do |combo|
             if [current_board[combo[0]], current_board[combo[1]], current_board[combo[2]]].count(self.token) == 2
@@ -38,38 +37,16 @@ class Players
           @best_move = 3 if best_move == 10
         end
       end
-      #Move 7-9:
-      if board.turn_count >= 6
-        win(current_board)
-        block_win(current_board)
-      end
-
-      #SECOND Player
-      # Move 2: Center or Top Left Corner
-      if board.turn_count == 1
-        if current_board[4] == " "
-          @best_move = 5
-        else
-          @best_move = 1
-        end
-      end
-      # Move 4
-      # If occupy center
-      if board.turn_count == 3
-        block_win(current_board)
-        if current_board[5] == opp_token || current_board[]
-
-
-      end
-
-
-      #Best move
+      #Move 7:
+      win(current_board) if board.turn_count == 6
+      #Best move or random
       if best_move < 10
         best_move
-      else
-        [1,2,3,4,5,6,7,8,9].sample
+#      else
+#        [1,2,3,4,5,6,7,8,9].sample
       end
     end
+
 
     def win(current_board)
       WIN_COMBINATIONS.each do |combo|
