@@ -38,10 +38,11 @@ class Players
           @best_move = 3 if best_move == 10
         end
       end
-      #Move 7-9:
-      if board.turn_count >= 6
+      #Move 6-9:
+      if board.turn_count >= 5
         win(current_board)
-        block_win(current_board)
+        block_win(current_board) if best_move == 10
+        [1,2,3,4,5,6,7,8,9].sample
       end
 
       #SECOND Player
@@ -54,20 +55,21 @@ class Players
         end
       end
       # Move 4
-      # If occupy center
+      # If opponent controls the center
       if board.turn_count == 3
         block_win(current_board)
-        if current_board[5] == opp_token || current_board[]
-
-
+        if current_board[4] == opp_token
+          own_the_diagoanl_row(current_board)
+        else
+          own_the_middle_row
+        end
       end
-
 
       #Best move
       if best_move < 10
         best_move
       else
-        [1,2,3,4,5,6,7,8,9].sample
+        [1,2,3,4,5,6,7,8,9].sample if best_move == 10
       end
     end
 
@@ -87,6 +89,26 @@ class Players
           @best_move = combo[0]+1 if current_board[combo[0]] == " "
           @best_move = combo[1]+1 if current_board[combo[1]] == " "
           @best_move = combo[2]+1 if current_board[combo[2]] == " "
+        end
+      end
+    end
+
+    def own_the_diagonal_row(current_board)
+      WIN_COMBINATIONS.each do |combo|
+        if ![current_board[combo[0]], current_board[combo[1]], current_board[combo[2]]].include?(opp_token)
+          @best_move = combo[0]+1 if current_board[combo[0]] == " " && combo[0].even?
+          @best_move = combo[1]+1 if current_board[combo[1]] == " " && combo[1].even?
+          @best_move = combo[2]+1 if current_board[combo[2]] == " " && combo[2].even?
+        end
+      end
+    end
+
+    def own_the_middle_row(current_board)
+      WIN_COMBINATIONS.each do |combo|
+        if ![current_board[combo[0]], current_board[combo[1]], current_board[combo[2]]].include?(opp_token)
+          @best_move = combo[0]+1 if current_board[combo[0]] == " " && combo[0].odd?
+          @best_move = combo[1]+1 if current_board[combo[1]] == " " && combo[1].odd?
+          @best_move = combo[2]+1 if current_board[combo[2]] == " " && combo[2].odd?
         end
       end
     end
