@@ -59,7 +59,7 @@ class Players
       if board.turn_count == 3
         block_win(current_board)
         if best_move == 10
-          current_board[4] == opp_token ? own_the_diagnal_row(current_board) : own_the_middle_row(current_board)
+          current_board[4] == opp_token ? own_the_middle_row(current_board) :own_the_diagonal_row(current_board)
         end
       end
 
