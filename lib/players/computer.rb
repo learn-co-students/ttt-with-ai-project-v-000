@@ -1,6 +1,6 @@
 class Players
   class Computer < Player
-    attr_accessor :opp_token, :best_move
+#    attr_accessor :opp_token, :best_move
 
     WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [2,5,8], [1,4,7], [0,4,8], [6,4,2]]
 
