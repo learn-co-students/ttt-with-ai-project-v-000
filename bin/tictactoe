@@ -17,11 +17,11 @@ end
 
 # Who will go first?
 if number_of_players == 0
-  first_player = "Computer"
+  first_player = "computer"
 elsif number_of_players == 1
   puts "Who should go first? Player or Computer?"
-  first_player = gets.strip
-  while !["Player", "Computer"].include?(first_player) || nil do
+  first_player = gets.strip.downcase
+  while !["player", "computer"].include?(first_player) || nil do
     puts "Invalid entry. Who should go first? Player or Computer?"
     first_player = gets.strip
   end
@@ -42,10 +42,10 @@ if number_of_players ==
 elsif number_of_players == 2
   game = Game.new
   puts "The game will be Player 1 'X' vs Player 2 'O'."
-elsif number_of_players == 1 && first_player == "Computer"
+elsif number_of_players == 1 && first_player == "computer"
   game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
   puts "The game will be Computer 'X' vs Player 'O'."
-elsif number_of_players == 1 && first_player == "Player"
+elsif number_of_players == 1 && first_player == "player"
   game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
   puts "The game will be Player 'X' vs Computer 'O'."
 end
@@ -93,10 +93,10 @@ until play_again == "n" do
     elsif number_of_players == 2
       game = Game.new
       puts "The game will be Player 1 'X' vs Player 2 'O'."
-    elsif number_of_players == 1 && first_player == "Computer"
+    elsif number_of_players == 1 && first_player == "computer"
       game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
       puts "The game will be Computer 'X' vs Player 'O'."
-    elsif number_of_players == 1 && first_player == "Player"
+    elsif number_of_players == 1 && first_player == "player"
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
       puts "The game will be Player 'X' vs Computer 'O'."
     end

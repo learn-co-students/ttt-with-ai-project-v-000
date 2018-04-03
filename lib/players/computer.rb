@@ -55,11 +55,17 @@ class Players
         end
       end
       # Move 4
-      # If opponent controls the center
+
       if board.turn_count == 3
         block_win(current_board)
         if best_move == 10
-          current_board[4] == opp_token ? own_the_middle_row(current_board) : own_the_diagonal_row(current_board)
+          # If opponent occupies two center edges and can win two ways by playing the corner
+          if win_position(current_board)
+            win_position(current_board)
+          # If opponent controls the center or not
+          else
+            current_board[4] == opp_token ? own_the_diagonal_row(current_board) : own_the_middle_row(current_board)
+          end
         end
       end
 
@@ -72,6 +78,7 @@ class Players
     end
 
     def win(current_board)
+      winning_moves = []
       WIN_COMBINATIONS.each do |combo|
         if [current_board[combo[0]], current_board[combo[1]], current_board[combo[2]]].count(self.token) == 2
           @best_move = combo[0]+1 if current_board[combo[0]] == " "
@@ -80,6 +87,20 @@ class Players
         end
       end
     end
+
+    def win_position(current_board)
+      winning_moves = []
+      WIN_COMBINATIONS.each do |combo|
+        if current_board[combo[1]] == opp_token
+          if [current_board[combo[0]], current_board[combo[2]]].count(" ") == 2
+            winning_moves << combo[0]+1
+            winning_moves << combo[2]+1
+          end
+        end
+      end
+      @best_move = winning_moves.uniq.max_by{|i| winning_moves.count(i)}
+    end
+
 
     def block_win(current_board)
       WIN_COMBINATIONS.each do |combo|
