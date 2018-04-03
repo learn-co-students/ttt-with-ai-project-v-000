@@ -1,5 +1,6 @@
 class Player
 
+<<<<<<< HEAD
   attr_reader :token
 
   def initialize (token)
@@ -17,4 +18,6 @@ class Player
   class Move
   end
 
+=======
+>>>>>>> 39d58095c14df3b2a2c51956675407c3d69fd8c2
 end
