@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :turn_count
   #@cells = []
 def initialize
   @cells = Array.new(9, " ")
@@ -64,9 +64,9 @@ end
    end
 end
 
-def update
-  
-
+def update(move, player)
+  move_taken = move.to_i - 1
+  @cells[move_taken] = player.token
 end
 
 
