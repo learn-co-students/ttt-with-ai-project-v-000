@@ -16,8 +16,8 @@ def initialize(player_1 = Players::Human.new("X") , player_2 = Players::Human.ne
 end
 
 def current_player
-return @player_1 if board.turn_count.even?
-else
+ return @player_1 if board.turn_count.even?
+  else
   @player_2
 end
 
@@ -56,6 +56,15 @@ def won?
         user_input
     end
 
+    def start
+        puts " 1 | 2 | 3 "
+        puts "-----------"
+        puts " 4 | 5 | 6 "
+        puts "-----------"
+        puts " 7 | 8 | 9 "
+        play
+      end
+      
     def play
         until self.over?
             self.turn
