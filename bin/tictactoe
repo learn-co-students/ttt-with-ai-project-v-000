@@ -1,3 +1,61 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Choose amount of players
+puts "Welcome to Tic Tac Toe! Choose the amount of players:"
+player_amount = gets.chomp.to_i
+valid_player = [0, 1, 2]
+
+if !valid_player.include?(player_amount) || nil
+  puts "Please, enter a valid number of players between 0 and 2:"
+  player_amount = gets.chomp.to_i
+end
+
+# Computer vs Computer
+if player_amount.to_i == 0
+  player1 = Players::Computer.new("X")
+  player2 = Players::Computer.new("O")
+
+# Human vs Computer
+# If playing against computer, who goes first?
+elsif player_amount.to_i == 1
+  puts "Enter '1' if you'd like to go first and be 'X' or '2' if you'd like to go second and be 'O':"
+  player_turn = gets.chomp.to_i
+  valid_turn = [1, 2]
+
+  if !valid_turn.include?(player_turn) || nil
+    puts "Please, enter a valid number of 1 or 2:"
+    player_turn = gets.chomp.to_i
+  end
+
+  # Human goes first
+  if player_turn.to_i == 1
+    player1 = Players::Computer.new("O")
+    player2 = Players::Human.new("X")
+  # Computer goes first
+  elsif player_turn.to_i == 2
+    player1 = Players::Computer.new("X")
+    player2 = Players::Human.new("O")
+  end
+
+# Human vs Human
+elsif player_amount.to_i == 2
+  player1 = Players::Human.new("X")
+  player2 = Players::Human.new("O")
+end
+
+game = Game.new(player1, player2, board = Board.new)
+game.play
+
+
+puts "Wanna play again?(Y or N)"
+play_again = gets.strip
+
+if play_again.downcase == "y" || play_again.downcase == "yes"
+  game = Game.new(player1, player2, board = Board.new)
+  game.play
+
+elsif play_again.downcase == "n" || play_again.downcase == "n"
+  puts "GAME OVER. Thanks for playing!"
+end
