@@ -4,13 +4,13 @@ class Board
   attr_accessor :cells, :the_player
 
   def initialize
-    @cells = Array.new(9, " ")
+    self.reset!
   end
 
   def reset!
     @cells = Array.new(9, " ")
   end
-  
+
   def display
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
@@ -22,32 +22,26 @@ class Board
   def position(input)
     @cells[input.to_i - 1]
   end
-  
+
   def full?
-    @cells.include?(" ") ? false : true
+    cells.all? {|cell| cell != " "}
   end
-  
+
+
   def turn_count
-    turns = 0 
-    @cells.each do |cell| 
-      if cell != " " 
-        turns += 1 #counting number of input
-      end 
-    end
-    turns
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
-  
+
   def taken?(spot)
     self.position(spot) == " " ? false : true
     #line 21 for #position
   end
-  
+
   def valid_move?(spot)
     spot.to_i.between?(1,9) && !taken?(spot)
-  end 
-  
+  end
+
   def update(spot, player)
     self.cells[spot.to_i-1] = player.token
   end
 end
-

@@ -2,7 +2,7 @@ require 'pry'
 
 class Game
   attr_accessor :board, :player_1, :player_2, :winner_token
-  
+
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -23,7 +23,7 @@ class Game
   def current_player
     self.board.turn_count.even? ? @player_1 : @player_2
   end
-  
+
   def over?
     won? || draw?
   end
@@ -32,45 +32,47 @@ class Game
     WIN_COMBINATIONS.detect do |combo|
     # make sure all combo element matches (all X | O)
     @board.cells[combo[0]] == @board.cells[combo[1]] &&
-    @board.cells[combo[1]] == @board.cells[combo[2]] && 
+    @board.cells[combo[1]] == @board.cells[combo[2]] &&
     # make sure it is not empty
     @board.taken?(combo[0] + 1)
     end
   end
 
   def winner
-    won? ? board.cells[won?.first] : nil
-  end
- 
+    if won = won?
+      board.cells[won.first]
+   end
+ end
+
   def draw?
-    !won? && @board.full? 
+    !won? && @board.full?
   end
-  
+
   def winner
    won? ? @board.cells[won?[0]] : nil
   end
-  
+
   def turn
     the_move = current_player.move(@board)
     if !@board.valid_move?(the_move)
       puts "invalid"
       turn
-     else 
+     else
       @board.update(the_move, current_player)
     end
   end
-  
+
   def play
     until over?
       turn
     end
-    
+
     if won? != nil
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
 
-  end 
-  
-end 
+  end
+
+end
