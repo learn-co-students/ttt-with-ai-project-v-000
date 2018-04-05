@@ -1,37 +1,31 @@
 class Board
   attr_accessor :cells, :turn_count
   #@cells = []
-def initialize
-  @cells = Array.new(9, " ")
-end
+  def initialize
+    @cells = cells
+    reset!
+  end
 
-def cells
-  @cells
-end
+  def cells
+    @cells
+  end
 
-def reset!
-  self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-end
+  def reset!
+    self.cells = Array.new(9, " ")
+  end
 
-def display
+  def display
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-end
+  end
 
-#def input_to_index(input)
-  #input.to_i - 1
-#end
-#def position(input)
-  #@cells[input_to_index(input)]
-#end
-
-def position(input)
-  position = input.to_i - 1
-  @cells[position]
-end
+  def position(input)
+    position = input.to_i - 1
+    @cells[position]
+  end
 
   def full?
     @cells.none? do |space|
@@ -40,20 +34,20 @@ end
       else
         false
       end #ends if/else
-  end #ends block code
-end #ends full? method
+    end #ends block code
+  end #ends full? method
 
-def turn_count
-  @cells.count {|c| c == "X" || c == "O"}
-end
-
-def taken?(move)
-  if @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
-    true
-  else
-    false
+  def turn_count
+    @cells.count {|c| c == "X" || c == "O"}
   end
-end
+
+  def taken?(move)
+    if @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
+      true
+    else
+      false
+    end
+  end
 
   def valid_move?(move)
     move_taken = move.to_i
@@ -62,13 +56,12 @@ end
    else
      false
    end
-end
+  end
 
-def update(move, player)
-  move_taken = move.to_i - 1
-  @cells[move_taken] = player.token
-end
-
-
+  def update(move, player)
+    move_taken = move.to_i - 1
+    @cells[move_taken] = player.token
+    display
+  end
 
 end

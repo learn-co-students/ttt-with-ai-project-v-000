@@ -1,11 +1,11 @@
-class Players
-
+module Players
   class Computer < Player
 
-    attr_reader :token, :index
+    attr_reader :token, :index, :name
 
     def initialize(token)
       @token = token
+      @name = "Computer"
     end
 
     def move(board)
@@ -48,9 +48,16 @@ class Players
   #   # if best_moves == [] us available moves
   # end
 
-  def best_possible (board, game.WIN_COMBINATIONS)
-    best_moves = []
-    WIN_COMBINATIONS.each do |combo|
-
+  # def best_possible (board, game.WIN_COMBINATIONS)
+  #   best_moves = []
+  #   WIN_COMBINATIONS.each do |combo|
+  #       if cell == " "
+  #         available_moves << (index + 1).to_s
+  #       end
+  #     end
+  #     board.cells[available_moves.sample.to_i] = @token
+  #     board.display
+  #   end
+  # end
 
 end
