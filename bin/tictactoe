@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+puts "Welcome To Tic Tac Toe!"
+puts "How would you like to play?"
+puts "Press 0 for computer vs. computer"
+puts "Press 1 for you vs. computer"
+puts "Press 2 for you vs. a friend"
+
+input = gets.strip
+
+Game.game_start(input)
+
+Game.game_replay until Game.game_replay == nil
