@@ -11,10 +11,13 @@ module Players
     def move(board)
       available_moves = []
       board.cells.each_with_index do |cell, index|
+        # binding.pry
         if cell == " "
           available_moves << (index + 1).to_s
+          # binding.pry
         end
       end
+      # binding.pry
       available_moves.sample
     end
 

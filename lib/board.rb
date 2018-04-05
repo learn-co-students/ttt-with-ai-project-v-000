@@ -62,6 +62,8 @@ class Board
     move_taken = move.to_i - 1
     @cells[move_taken] = player.token
     display
+    puts "#{player.token} chose #{move}"
+    puts ""
   end
 
 end

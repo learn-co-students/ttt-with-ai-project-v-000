@@ -86,9 +86,10 @@ def won?
   end
 
   def turn
-    if self.current_player.name == "Computer"
-      self.current_player.move(self.board)
-    else
+    # if self.current_player.name == "Computer"
+    #   self.current_player.move(self.board)
+    #   binding.pry
+    # else
       user_input = self.current_player.move(self.board)
       if !self.board.valid_move?(user_input)
           self.current_player.move(self.board)
@@ -96,7 +97,7 @@ def won?
           self.board.update(user_input, self.current_player)
       end
       user_input
-    end
+    # end
   end
 
   def play
