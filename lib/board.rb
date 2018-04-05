@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :cells, :turn_count
+  attr_accessor :cells, :turn_count, :WIN_COMBINATIONS
   #@cells = []
   def initialize
     @cells = cells
@@ -38,6 +38,7 @@ class Board
   end #ends full? method
 
   def turn_count
+    # binding.pry
     @cells.count {|c| c == "X" || c == "O"}
   end
 
