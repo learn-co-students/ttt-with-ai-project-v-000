@@ -1,7 +1,7 @@
 module Players
   class Computer < Player
 
-    attr_reader :token, :index, :name
+    attr_reader :token, :index, :name, :turn_count
 
     WIN_COMBINATIONS = [
   [0, 1, 2], [3, 4, 5],
@@ -36,22 +36,22 @@ module Players
       @block_moves = []
       WIN_COMBINATIONS.each do |combo|
         if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] != " "
-          # if board.cells[combo[1]] == self.token
+          if board.cells[combo[1]] == self.token
             return (combo[2] + 1).to_s
-          # elsif board.cells[combo[2]] == " "
-          #   @block_moves << (combo[2] + 1).to_s
+          elsif board.cells[combo[2]] == " "
+            @block_moves << (combo[2] + 1).to_s
           end #of if
         elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[2]] != " "
-          # if board.cells[combo[2]] == self.token
+          if board.cells[combo[2]] == self.token
             return (combo[1] + 1).to_s
-          # elsif board.cells[combo[1]] == " "
-          #   @block_moves << (combo[1] + 1).to_s
+          elsif board.cells[combo[1]] == " "
+            @block_moves << (combo[1] + 1).to_s
           end #of if
         elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[2]] != " "
-          # if board.cells[combo[2]] == self.token
+          if board.cells[combo[2]] == self.token
             return (combo[0] + 1).to_s
-          # elsif board.cells[combo[0]] == " "
-          #   @block_moves << (combo[0] + 1).to_s
+          elsif board.cells[combo[0]] == " "
+            @block_moves << (combo[0] + 1).to_s
           end #of if
         end # of if/elsif
       end #of do
