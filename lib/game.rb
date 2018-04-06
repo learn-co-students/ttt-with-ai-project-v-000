@@ -12,43 +12,43 @@ class Game
   ]
   
    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    @board = board
     @player_1 = player_1
     @player_2 = player_2
-  end
+    @board = board
+   end
 
   def over?
     won? || draw?
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2
+   board.turn_count.even? ? player_1 : player_2
   end
 
   def winner
-   won? ? board.cells[won?.first] : nil
+   board.cells[won?[0]] if won?
   end
 
   def turn
-    player = current_player
-    current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
-      turn
-    else
-      puts "Turn: #{@board.turn_count+1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts "\n\n"
-    end
+    puts "It is now #{current_player.token}'s' turn."
+    input = current_player.move(board).to_i
+    if board.valid_move?(input.to_s)
+      board.update(input, current_player)
+    elsif input.between?(1, 9) == false
+    puts "Invalid move"
+    turn
+  else
+    puts "Position taken."
+    turn
+  end
   end
 
   def play
-    while !over?
+    until over?
       turn
     end
-    if won?
+    self.board.display
+    if winner
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
@@ -56,13 +56,14 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |combo| combo
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0]+1)
+    WIN_COMBINATIONS.detect do |cmb|
+    board.cells[cmb[0]] == board.cells[cmb[1]] &&
+    board.cells[cmb[1]] == board.cells[cmb[2]] &&
+    board.cells[cmb[0]] != " "
     end
   end
 
   def draw?
-    @board.full? && !won?
+    board.full? && !won?
   end
 end 
