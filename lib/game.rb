@@ -28,7 +28,7 @@ class Game
   end
 
   def over?
-    board.full?
+    board.full? || won? || draw?
   end
 
   def won?
