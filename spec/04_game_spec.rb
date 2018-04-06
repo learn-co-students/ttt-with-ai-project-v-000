@@ -46,7 +46,7 @@ describe 'Game' do
       player_1 = Player.new("X")
       player_2 = Player.new("O")
 
-      game = Game.new(player_1, player_2, board)
+      game = Game.new(player_1, player_2, board = Board.new)
 
       expect(game.player_1).to eq(player_1)
       expect(game.player_2).to eq(player_2)
