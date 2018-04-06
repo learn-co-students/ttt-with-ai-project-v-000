@@ -23,8 +23,8 @@ class Board
   end
 
   def position(input)
-    position = input.to_i - 1
-    @cells[position]
+    # position = input.to_i - 1
+    @cells[input.to_i - 1]
   end
 
   def full?
@@ -43,11 +43,12 @@ class Board
   end
 
   def taken?(move)
-    if @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
-      true
-    else
-      false
-    end
+    @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
+    # if @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
+    #   true
+    # else
+    #   false
+    # end
   end
 
   def valid_move?(move)

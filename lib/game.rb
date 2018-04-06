@@ -86,31 +86,26 @@ def won?
   end
 
   def turn
-    # if self.current_player.name == "Computer"
-    #   self.current_player.move(self.board)
-    #   binding.pry
-    # else
-      user_input = self.current_player.move(self.board)
-      if !self.board.valid_move?(user_input)
-          self.current_player.move(self.board)
+      user_input = current_player.move(board)
+      if !board.valid_move?(user_input)
+          turn
       else
-          self.board.update(user_input, self.current_player)
+        board.update(user_input, current_player)
       end
-      user_input
-    # end
+      board
   end
 
   def play
     until self.over?
-      # binding.pry
-        self.turn
+      self.turn
     end
     if self.won?
       puts "Congratulations #{winner}!"
+      board.reset!
     elsif self.draw?
       puts "Cat's Game!"
+      board.reset!
     end
-    board.reset!
   end
 
 end
