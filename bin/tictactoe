@@ -9,16 +9,16 @@ require_relative '../config/environment'
       puts "Nice try, dumbass.  Enter a number from 0 - 2"
       game_logic
     elsif input.to_i == 0
-      game = Game.new(player_1 = Players::Computer.new("X".yellow), player_2 = Players::Computer.new("O".blue))
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
       game.play
     elsif input.to_i == 1
       puts "Guess you couldn't find any friends willing to play with you. Wah Wah.  Would you like to play as X or O?"
       player_input = gets.strip
       if player_input == "X"
-        game = Game.new(player_1 = Players::Human.new(player_input.yellow), player_2 = Players::Computer.new("O".blue))
+        game = Game.new(player_1 = Players::Human.new(player_input), player_2 = Players::Computer.new("O"))
         game.play
       elsif player_input == "O"
-        game = Game.new(player_1 = Players::Human.new(player_input.yellow), player_2 = Players::Computer.new("X".blue))
+        game = Game.new(player_1 = Players::Human.new(player_input), player_2 = Players::Computer.new("X"))
         game.play
       end
     elsif input.to_i == 2
