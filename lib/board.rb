@@ -24,8 +24,10 @@ class Board
   end
   
   def full?
-    if cells.detect {|cell| cell == " " }; false
-    else true
+		if cells.detect {|cell| cell == " " }
+			false
+		else 
+			true
     end
   end
 

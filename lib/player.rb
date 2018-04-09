@@ -8,5 +8,4 @@ class Player
   def token
     @token.freeze
   end
-
 end
