@@ -58,8 +58,8 @@ class Board
   def update(move, player)
    if valid_move?(move)
      move = move.to_i
-     binding.pry
-    @cells[move - 1] = "#{player}"
+    # binding.pry
+     @cells[move - 1] = "#{player.token}"
     end  
   end
     
