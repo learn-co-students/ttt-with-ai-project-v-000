@@ -2,6 +2,17 @@ module Players
 
   class Computer < Player
 
+    WIN_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [6,4,2]
+    ]
+
     def move(board)
       if self.token == "X"
         other_player = "O"
@@ -13,11 +24,10 @@ module Players
         "5"
       #defines first move if computer is Player 2
       elsif board.cells.count(" ") == 8
-        binding.pry
-        if !board.taken?(board.cells[0])
+        if board.position(1) != other_player
           "1"
         else
-          "3"
+          "5"
         end
       #defines computer's second move
 
