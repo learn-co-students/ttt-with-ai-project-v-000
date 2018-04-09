@@ -1,5 +1,5 @@
 class Board
-    attr_accessor :cells
+    attr_accessor :cells, :token
   
   def initialize
     @cells = [' ', ' ', ' ', ' ', ' ', ' ',' ', ' ',' ']
@@ -13,18 +13,17 @@ class Board
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]}  \n-----------\n #{cells[3]} | #{cells[4]} | #{cells[5]}  \n-----------\n #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
   
-  def position(user_input)
-    pos = user_input.to_i 
+  def position(input)
+    pos = input.to_i 
     pos -= 1
     @cells[pos]
   end  
   
   def full?
-    # binding.pry
     if @cells.find { |i| i == ' '}
       false
-    # else
-    #   true
+    else
+      true
     end 
   end  
   
@@ -40,7 +39,29 @@ class Board
   
   
   def taken?(input)
-    if positiion(input) == ' '
+    if position(input) == ' ' #|| position(input) == ''
       false
+    else 
+      true
+    end  
   end
+  
+  def valid_move?(pos)
+    pos = pos.to_i
+    if pos > 0 && pos < 10 && !taken?(pos)
+      true
+    else 
+      false
+    end
+  end 
+  
+  def update(move, player)
+   if valid_move?(move)
+     move = move.to_i
+     binding.pry
+    @cells[move - 1] = "#{player}"
+    end  
+  end
+    
+
 end
