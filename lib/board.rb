@@ -23,8 +23,8 @@ class Board
     # binding.pry
     if @cells.find { |i| i == ' '}
       false
-    else
-      true
+    # else
+    #   true
     end 
   end  
   
@@ -36,5 +36,11 @@ class Board
     end
   end
     count
+  end
+  
+  
+  def taken?(input)
+    if positiion(input) == ' '
+      false
   end
 end
