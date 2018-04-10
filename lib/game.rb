@@ -12,11 +12,33 @@ WIN_COMBINATIONS = [
   [2,4,6]
   ]
   
-  def initialize(a,b,c)
-    binding.pry
-    # @player_1 = player_1
-    # @player_2 = player_2
-    # @board = board
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
   end
+  
+  def current_player
+    turn = 0
+     @board.cells.each do |play|
+      if play == "X" || play == 'O'
+        turn += 1
+      end
+    end
+    turn.odd? ?  player_2 :  player_1
+  end 
+  
+  def over?
+    @board.cells.all? { |cell| cell != ' '} ? true : false
+  end  
+  
+  def won?
+     answer = WIN_COMBINATIONS.find do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+      end.join(',')
+      # binding.pry
+      # answer.join
+      
+  end  
   
 end
