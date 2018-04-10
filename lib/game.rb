@@ -46,4 +46,8 @@ WIN_COMBINATIONS = [
     won? ? @board.cells[won?[0]] : nil
   end   
   
+  def turn
+    
+  end
+  
 end
