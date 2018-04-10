@@ -1,4 +1,4 @@
-class Board
+  class Board
     attr_accessor :cells, :token
   
   def initialize
@@ -58,7 +58,6 @@ class Board
   def update(move, player)
    if valid_move?(move)
      move = move.to_i
-    # binding.pry
      @cells[move - 1] = "#{player.token}"
     end  
   end

@@ -33,12 +33,17 @@ WIN_COMBINATIONS = [
   end  
   
   def won?
-     answer = WIN_COMBINATIONS.find do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
-      end.join(',')
-      # binding.pry
-      # answer.join
-      
-  end  
+       WIN_COMBINATIONS.find do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && (@board.cells[combo[0]] == "X" || @board.cells[combo[0]] == "O")
+      end
+  end 
+  
+  def draw?
+    !won? && over? ? true : false
+  end
+  
+  def winner
+    won? ? @board.cells[won?[0]] : nil
+  end   
   
 end
