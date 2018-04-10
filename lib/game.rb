@@ -19,7 +19,6 @@ class Game
   end
 
   def current_player
-    current_player = nil
     if board.turn_count % 2 == 0
       @player_1
     else
@@ -50,12 +49,13 @@ class Game
   end
 
   def turn
-    board.display
     input = current_player.move(board)
     if board.valid_move?(input.to_i)
       board.update(input.to_i, current_player)
+      board.display
     else
       turn
+      puts "Invalid entry.  Please try again."
     end
   end
 
@@ -69,15 +69,7 @@ class Game
     elsif draw?
       puts "Cat's Game!"
     end
-
-    puts "Would you like to play again? y/n"
-    input = gets.strip
-    if input == "y"
-      puts "Please enter the number of human players below, from 0 - 2."
-      game_logic
-    else
-      puts "Goodbye!"
-    end
+    
   end
 
 end

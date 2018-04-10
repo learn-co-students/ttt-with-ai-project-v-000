@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-
+=begin
   def game_logic
     input = gets.strip
 
@@ -34,3 +34,5 @@ require_relative '../config/environment'
   puts "If you're spectacularly bored, you can even watch two AI players duke it out."
   puts "Please enter the number of human players below, from 0 - 2."
   game_logic
+=end
+TicTacToeCLI.new

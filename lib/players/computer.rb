@@ -31,22 +31,21 @@ module Players
         end
       #defines computer's second move
 
-      elsif board.cells.count(" ") < 8
+    elsif board.cells.count(" ") > 1 && board.cells.count(" ") < 8
         examined_row = []
+        win_combination_array = nil
         WIN_COMBINATIONS.each do |win_combination|
-
+          win_combination_array = win_combination
           win_combination.each do |board_position|
             examined_row << board.cells[board_position]
           end
-
           if examined_row.include?(self.token) && !examined_row.include?(other_player)
             empty_cell = examined_row.index(" ")
-            "#{[win_combination[empty_cell]]}"
-            break
+            "#{win_combination_array[empty_cell]}"
           else
             examined_row.clear
           end
-       end
+        end
      end
    end
 
