@@ -50,12 +50,13 @@ class Game
 
   def turn
     input = current_player.move(board)
-    if board.valid_move?(input.to_i)
+    puts input
+
+    if board.valid_move?(input)
       board.update(input.to_i, current_player)
       board.display
     else
       turn
-      puts "Invalid entry.  Please try again."
     end
   end
 
@@ -65,11 +66,11 @@ class Game
     end
 
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations,".blue + " #{winner}!".red
     elsif draw?
       puts "Cat's Game!"
     end
-    
+
   end
 
 end

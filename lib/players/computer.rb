@@ -19,6 +19,7 @@ module Players
       else
         other_player = "X"
       end
+
       #defines first move if computer is Player 1
       if board.cells.all? {|cell| cell == " "}
         "5"
@@ -29,23 +30,45 @@ module Players
         else
           "5"
         end
-      #defines computer's second move
+      #defines all of computer's subsequent moves
+      elsif board.cells.count(" ") > 1 && board.cells.count(" ") < 8
+        #var below is what the board looks like at given win combination coordinates
+        row_in_play = []                                        #ex: [" ", "X", " "]
+        #var below saves the board coordinates for row_in_play
+        saved_win_combination = nil                                    #ex: [3, 4, 5]
+        #var below returns a computer move
+        computer_selected_move = nil
 
-    elsif board.cells.count(" ") > 1 && board.cells.count(" ") < 8
-        examined_row = []
-        win_combination_array = nil
+        #.each iterates through all possible win combinations
         WIN_COMBINATIONS.each do |win_combination|
-          win_combination_array = win_combination
-          win_combination.each do |board_position|
-            examined_row << board.cells[board_position]
-          end
-          if examined_row.include?(self.token) && !examined_row.include?(other_player)
-            empty_cell = examined_row.index(" ")
-            "#{win_combination_array[empty_cell]}"
+          saved_win_combination = win_combination
+
+            #.each takes a snapshot of the board in play at one set of win_combination coordinates
+            win_combination.each do |board_position|
+              row_in_play << board.cells[board_position]
+            end
+
+
+          if row_in_play.count(other_player) == 2 && row_in_play.count(" ") == 1
+            empty_cell = row_in_play.index(" ")
+            computer_selected_move = "#{saved_win_combination[empty_cell]+1}"
+            return computer_selected_move
+          elsif row_in_play.count(self.token) == 2 && row_in_play.count(" ") == 1
+            empty_cell = row_in_play.index(" ")
+            computer_selected_move = "#{saved_win_combination[empty_cell]+1}"
+            return computer_selected_move
+          elsif row_in_play.include?(self.token) && !row_in_play.include?(other_player)
+            empty_cell = row_in_play.index(" ")
+            computer_selected_move = "#{saved_win_combination[empty_cell]+1}"
+            return computer_selected_move
+          elsif row_in_play.count(self.token) == 1 && row_in_play.count(other_player) == 1
+            next
+
           else
-            examined_row.clear
+            row_in_play.clear
           end
         end
+        computer_selected_move
      end
    end
 
