@@ -163,11 +163,11 @@ def self.war_games
     wargames.play
      if wargames.winner == "X"
       x_array << wargames.winner
-     puts "Player 1 (X) won #{x_array.count} games!"
      elsif wargames.winner == "O"
       x_array << wargames.winner
-     puts "Player 2 (O) won #{x_array.count} games!"
       end
+      puts "Player 1 (X) won #{x_array.count} games!"
+      puts "Player 2 (O) won #{x_array.count} games!"
     counter += 1
   end 
 end
