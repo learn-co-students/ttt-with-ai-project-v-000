@@ -104,10 +104,11 @@ def end_of_game
   game_end = gets.chomp 
   case game_end
     when "replay"
-      self.class.zero_player
+      caller[0][/`([^']*)'/, 1]
+     # self.class.zero_player
     when "new game"
-      self.class.intro 
-      self.class.start
+     # self.class.intro 
+      #self.class.start
     when "exit"
       return
   end
