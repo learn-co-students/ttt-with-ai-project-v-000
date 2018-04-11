@@ -89,5 +89,49 @@ def play
 end
 end
 
+def self.intro 
+  puts "Welcome to TicTacToe!"
+  puts "If you would like to play a 0 player game, please enter 0."
+  puts "If you would like to play a 1 player game, please enter 1."
+  puts "If you would like to play a 2 player game, please enter 2."
+end
+
+def end_of_game
+  puts "Would you like to keep playing TicTacToe?"
+  puts "If you would like to replay the game that you just completed, please enter 'replay'."
+  puts "If you would like to change the players and start a new game, please enter 'new game'."
+  puts "If you would like to exit the program, please enter 'exit'."
+  game_end = gets.chomp 
+  case game_end
+    when "replay"
+      self.class.zero_player
+    when "new game"
+      self.class.intro 
+      self.class.start
+    when "exit"
+      return
+  end
+end
+
+def self.zero_player
+  puts "The computer will be Player 1 and Player 2. Player 1 will use the X token. Player 2 will use the O token."
+  zero_player = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    zero_player.play
+    zero_player.end_of_game
+end
+
+def self.start 
+  input = gets.chomp
+  if input == "0"
+    self.class.zero_player
+  elsif input == "1" 
+  puts "Player 1 will use the X token and Player 2 will use the O token."
+  puts "If you would like to be Player 1, please enter 1."
+  puts "If you would like to be Player 2, please enter 2."
+  player_input = gets.chomp
+  end
+end
+  
+
 
 end

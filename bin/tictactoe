@@ -2,3 +2,5 @@
 
 require_relative '../config/environment'
 
+Game.intro
+Game.start
