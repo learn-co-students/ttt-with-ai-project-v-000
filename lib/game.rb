@@ -13,9 +13,9 @@ class Game
   
   def current_player
     if self.board.turn_count.even? == true 
-      @player_1
+      self.player_1
     else 
-      @player_2
+      self.player_2
     end
   end
   
@@ -66,15 +66,19 @@ end
 end
 
 def turn 
+  puts "Please enter 1-9:"
   input = self.current_player.move(board)
   if self.board.valid_move?(input) 
      self.board.update(input, current_player)
+     self.board.display
   elsif !self.board.valid_move?(input)
-    self.current_player.move(board)
+  puts "That position is already taken." 
+    self.turn
   end
 end
 
 def play 
+  self.board.display
   until self.over?
   self.turn 
   end
