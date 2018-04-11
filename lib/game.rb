@@ -84,10 +84,10 @@ def play
   until self.over?
   self.turn 
   end
-  if self.winner !=nil
-  puts "Congratulations #{winner}!\n\n"
+  if self.winner 
+  puts "Congratulations #{winner}!"
   elsif self.draw?
-  puts "Cat's Game!\n\n"
+  puts "Cat's Game!"
 end
 end
 
