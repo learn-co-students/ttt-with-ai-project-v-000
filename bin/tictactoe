@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe!"
+puts "If you would like to play a 0 player game, please enter 0. If you would like to play a 1 player game, please enter 1. If you would like to play a 2 player game, please enter 2."
+
+case gets.chomp
+when 0
+Game.new
+when 1 
+Game.new
+when 2
+Game.new
