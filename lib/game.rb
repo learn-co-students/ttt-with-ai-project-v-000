@@ -96,6 +96,8 @@ def self.intro
   puts "If you would like to play a 2 player game, please enter 2."
 end
 
+
+
 def end_of_game
   puts "Would you like to keep playing TicTacToe?"
   puts "If you would like to replay the game that you just completed, please enter 'replay'."
@@ -104,11 +106,20 @@ def end_of_game
   game_end = gets.chomp 
   case game_end
     when "replay"
-      caller[0][/`([^']*)'/, 1]
-     # self.class.zero_player
+       caller_method = caller_locations.first.label
+       case caller_method  
+        when 'zero_player'
+         self.class.zero_player
+        when 'one_player_1' 
+          self.class.one_player_1
+        when 'one_player_2'
+          self.class.one_player_2
+        when 'two_player'
+          self.class.two_player
+        end
     when "new game"
-     # self.class.intro 
-      #self.class.start
+      self.class.intro 
+      self.class.start
     when "exit"
       return
   end
@@ -144,7 +155,7 @@ end
 def self.start 
   input = gets.chomp
   if input == "0"
-    self.class.zero_player
+    self.zero_player
   elsif input == "1" 
     puts "Player 1 will use the X token and Player 2 will use the O token."
     puts "If you would like to be Player 1, please enter 1."
