@@ -2,33 +2,3 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to TicTacToe!"
-
-puts "If you would like to play a 0 player game, please enter 0."
-puts "If you would like to play a 1 player game, please enter 1."
-puts "If you would like to play a 2 player game, please enter 2."
-
-input = gets.chomp
-
-if input == "0"
-  puts "The computer will be Player 1 and Player 2. Player 1 will use the X token. Player 2 will use the O token."
-  zero_player = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-    zero_player.play 
-elsif input == "1" 
-  puts "Player 1 will use the X token and Player 2 will use the O token."
-  puts "If you would like to be Player 1, please enter 1."
-  puts "If you would like to be Player 2, please enter 2."
-  player_input = gets.chomp
-    if player_input == "1"
-      one_player_1 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-      one_player_1.play
-    elsif player_input == "2"
-      one_player_2 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-      one_player_2.play
-    end
-elsif input == "2"
-    puts "Player 1 will use the X token. Player 2 will use the O token."
-    two_player = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    two_player.play
-end
-
