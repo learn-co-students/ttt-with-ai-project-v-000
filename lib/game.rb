@@ -120,15 +120,36 @@ def self.zero_player
     zero_player.end_of_game
 end
 
+def self.one_player_1
+  one_player_1 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  one_player_1.play
+  one_player_1.end_of_game
+end
+
+def self.one_player_2
+  one_player_2 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  one_player_2.play
+  one_player_2.end_of_game
+end
+
+
+
 def self.start 
   input = gets.chomp
   if input == "0"
     self.class.zero_player
   elsif input == "1" 
-  puts "Player 1 will use the X token and Player 2 will use the O token."
-  puts "If you would like to be Player 1, please enter 1."
-  puts "If you would like to be Player 2, please enter 2."
-  player_input = gets.chomp
+    puts "Player 1 will use the X token and Player 2 will use the O token."
+    puts "If you would like to be Player 1, please enter 1."
+    puts "If you would like to be Player 2, please enter 2."
+    player_input = gets.chomp
+    if player_input == "1"
+      self.class.one_player_1
+    elsif player_input == "2"
+      self.class.one_player_2
+    end
+  elsif input == "2"
+    self.class.two_player
   end
 end
   
