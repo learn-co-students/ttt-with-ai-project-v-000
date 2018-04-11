@@ -132,6 +132,12 @@ def self.one_player_2
   one_player_2.end_of_game
 end
 
+def self.two_player
+   puts "Player 1 will use the X token. Player 2 will use the O token."
+  two_player = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  two_player.play
+  two_player.end_of_game
+end
 
 
 def self.start 
