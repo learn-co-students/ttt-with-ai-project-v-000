@@ -28,13 +28,17 @@ class Game
     won? || draw?
   end
 
-  def won?
-    WIN_COMBINATIONS.detect do |winner|
-      @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[1]] == @board.cells[winner[2]] &&
-      (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
-    end
-  end
+ def won?
+   matches = WIN_COMBINATIONS.select do |combo|
+    tokens = combo.map {|cell| @board.cells[cell]}
+    tokens.uniq.size == 1 && tokens.none? { |token| token == " " }
+   end
+   if matches.size > 1
+     @board.cells[matches[0][0]] == player_1.token ? matches[0] : matches[1]
+   else
+     matches[0]
+   end
+ end
 
   def draw?
     @board.full? && !won?
