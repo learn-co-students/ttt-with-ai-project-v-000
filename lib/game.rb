@@ -158,18 +158,20 @@ end
 def self.war_games
   counter = 0
   x_array = []
+  o_array = []
   until counter == 100
   wargames = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
     wargames.play
      if wargames.winner == "X"
       x_array << wargames.winner
      elsif wargames.winner == "O"
-      x_array << wargames.winner
+      o_array << wargames.winner
       end
-      puts "Player 1 (X) won #{x_array.count} games!"
-      puts "Player 2 (O) won #{x_array.count} games!"
     counter += 1
   end 
+  puts "Player 1 (X) won #{x_array.count} games!"
+  puts "Player 2 (O) won #{o_array.count} games!"
+  puts "There were #{100 - (x_array.count.to_i + o_array.count.to_i)} Cat's Games!"
 end
 
 
