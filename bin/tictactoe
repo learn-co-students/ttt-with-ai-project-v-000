@@ -19,7 +19,7 @@ else
 end
 
 #binding.pry
-while game.over? 
+while game.over? == false
   puts "It's your turn player #{game.current_player.token}"
   game.turn
 end  
