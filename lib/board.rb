@@ -39,7 +39,7 @@
   
   
   def taken?(input)
-    if position(input) == ' ' #|| position(input) == ''
+    if position(input) == ' '
       false
     else 
       true

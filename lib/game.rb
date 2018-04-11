@@ -29,17 +29,18 @@ WIN_COMBINATIONS = [
   end 
   
   def over?
-    @board.cells.all? { |cell| cell != ' '} ? true : false
+    won? || draw?
   end  
   
   def won?
-       WIN_COMBINATIONS.find do |combo|
+     answer = WIN_COMBINATIONS.find do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && (@board.cells[combo[0]] == "X" || @board.cells[combo[0]] == "O")
       end
+      # binding.pry
   end 
   
   def draw?
-    !won? && over? ? true : false
+    !won? && board.full? ? true : false
   end
   
   def winner
@@ -47,7 +48,25 @@ WIN_COMBINATIONS = [
   end   
   
   def turn
-    
+    current_move =  current_player.move(board)
+      # binding.pry
+      if board.valid_move?(current_move)
+        
+        board.update(current_move, current_player)
+      else 
+        turn
+      end   
+  end 
+  
+  def play
+  while over? == false 
+      turn
+    end
+    if won? 
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
   end
   
 end
