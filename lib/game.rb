@@ -66,7 +66,7 @@ end
 end
 
 def turn 
-    puts "Please enter 1-9:"
+   puts "Please enter 1-9:"
   input = self.current_player.move(board)
   if self.board.valid_move?(input) 
      self.board.update(input, current_player)
