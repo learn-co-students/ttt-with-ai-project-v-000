@@ -82,7 +82,7 @@ def play
   until self.over?
   self.turn 
   end
-  if self.winner
+  if self.winner !=nil
   puts "Congratulations #{winner}!"
   elsif self.draw?
   puts "Cat's Game!"
@@ -90,10 +90,10 @@ end
 end
 
 def self.intro 
-  puts "Welcome to TicTacToe!"
-  puts "If you would like to play a 0 player game, please enter 0."
-  puts "If you would like to play a 1 player game, please enter 1."
-  puts "If you would like to play a 2 player game, please enter 2."
+  puts "Welcome to TicTacToe!\n"
+  puts "If you would like to play a 0 player game, please enter 0.\n"
+  puts "If you would like to play a 1 player game, please enter 1.\n"
+  puts "If you would like to play a 2 player game, please enter 2.\n"
 end
 
 
@@ -162,12 +162,12 @@ def self.start
     puts "If you would like to be Player 2, please enter 2."
     player_input = gets.chomp
     if player_input == "1"
-      self.class.one_player_1
+      self.one_player_1
     elsif player_input == "2"
-      self.class.one_player_2
+      self.one_player_2
     end
   elsif input == "2"
-    self.class.two_player
+    self.two_player
   end
 end
   
