@@ -66,13 +66,17 @@ end
 end
 
 def turn 
-  puts "Please enter 1-9:"
+  if self.current_player.class == Players::Human
+    puts "Please enter 1-9:"
+  end
   input = self.current_player.move(board)
   if self.board.valid_move?(input) 
      self.board.update(input, current_player)
      self.board.display
   elsif !self.board.valid_move?(input)
-  puts "That position is already taken." 
+      if self.current_player.class == Players::Human
+      puts "That position is already taken." 
+    end
     self.turn
   end
 end
@@ -90,19 +94,19 @@ end
 end
 
 def self.intro 
-  puts "Welcome to TicTacToe!\n"
-  puts "If you would like to play a 0 player game, please enter 0.\n"
-  puts "If you would like to play a 1 player game, please enter 1.\n"
-  puts "If you would like to play a 2 player game, please enter 2.\n"
+  puts "Welcome to TicTacToe!\n\n"
+  puts "If you would like to play a 0 player game, please enter '0'.\n\n"
+  puts "If you would like to play a 1 player game, please enter '1'.\n\n"
+  puts "If you would like to play a 2 player game, please enter '2'.\n\n"
+  puts "If you would like for the computer to play itself 100 times and report how many times the game was won and by whom, please enter 'wargames'."
 end
 
 
-
 def end_of_game
-  puts "Would you like to keep playing TicTacToe?"
-  puts "If you would like to replay the game that you just completed, please enter 'replay'."
-  puts "If you would like to change the players and start a new game, please enter 'new game'."
-  puts "If you would like to exit the program, please enter 'exit'."
+  puts "Would you like to keep playing TicTacToe?\n\n"
+  puts "If you would like to replay the game that you just completed, please enter 'replay'.\n\n"
+  puts "If you would like to change the players and start a new game, please enter 'new game'.\n\n"
+  puts "If you would like to exit the program, please enter 'exit'.\n\n"
   game_end = gets.chomp 
   case game_end
     when "replay"
@@ -151,15 +155,32 @@ def self.two_player
   two_player.end_of_game
 end
 
+def self.war_games
+  counter = 0
+  x_array = []
+  until counter == 100
+  wargames = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    wargames.play
+     if wargames.winner == "X"
+      x_array << wargames.winner
+     puts "Player 1 (X) won #{x_array.count} games!"
+     elsif wargames.winner == "O"
+      x_array << wargames.winner
+     puts "Player 2 (O) won #{x_array.count} games!"
+      end
+    counter += 1
+  end 
+end
+
 
 def self.start 
   input = gets.chomp
   if input == "0"
     self.zero_player
   elsif input == "1" 
-    puts "Player 1 will use the X token and Player 2 will use the O token."
-    puts "If you would like to be Player 1, please enter 1."
-    puts "If you would like to be Player 2, please enter 2."
+    puts "Player 1 will use the X token and Player 2 will use the O token.\n\n"
+    puts "If you would like to be Player 1, please enter 1.\n\n"
+    puts "If you would like to be Player 2, please enter 2.\n\n"
     player_input = gets.chomp
     if player_input == "1"
       self.one_player_1
@@ -168,6 +189,8 @@ def self.start
     end
   elsif input == "2"
     self.two_player
+  elsif input == "wargames"
+    self.war_games
   end
 end
   
