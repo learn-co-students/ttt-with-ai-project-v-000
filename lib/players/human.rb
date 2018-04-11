@@ -3,6 +3,7 @@ module Players
     
     
     def move(board)
+      puts "Enter # 1-9"
       input = gets
       input
     end

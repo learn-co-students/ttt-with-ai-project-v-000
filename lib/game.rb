@@ -18,6 +18,8 @@ WIN_COMBINATIONS = [
     @board = board
   end
   
+  
+  
   def current_player
     turn = 0
      @board.cells.each do |play|
@@ -49,9 +51,7 @@ WIN_COMBINATIONS = [
   
   def turn
     current_move =  current_player.move(board)
-      # binding.pry
       if board.valid_move?(current_move)
-        
         board.update(current_move, current_player)
       else 
         turn

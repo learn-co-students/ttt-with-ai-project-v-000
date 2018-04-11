@@ -59,6 +59,7 @@
    if valid_move?(move)
      move = move.to_i
      @cells[move - 1] = "#{player.token}"
+     display
     end  
   end
     
