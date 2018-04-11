@@ -66,9 +66,7 @@ end
 end
 
 def turn 
-  if self.current_player.class == Players::Human
     puts "Please enter 1-9:"
-  end
   input = self.current_player.move(board)
   if self.board.valid_move?(input) 
      self.board.update(input, current_player)
@@ -76,7 +74,7 @@ def turn
   elsif !self.board.valid_move?(input)
       if self.current_player.class == Players::Human
       puts "That position is already taken." 
-    end
+      end
     self.turn
   end
 end
@@ -87,9 +85,9 @@ def play
   self.turn 
   end
   if self.winner !=nil
-  puts "Congratulations #{winner}!"
+  puts "Congratulations #{winner}!\n\n"
   elsif self.draw?
-  puts "Cat's Game!"
+  puts "Cat's Game!\n\n"
 end
 end
 
@@ -120,6 +118,8 @@ def end_of_game
           self.class.one_player_2
         when 'two_player'
           self.class.two_player
+        when 'war_games'
+          self.class.war_games
         end
     when "new game"
       self.class.intro 
@@ -169,9 +169,11 @@ def self.war_games
       end
     counter += 1
   end 
+  puts "The final counts are:"
   puts "Player 1 (X) won #{x_array.count} games!"
   puts "Player 2 (O) won #{o_array.count} games!"
   puts "There were #{100 - (x_array.count.to_i + o_array.count.to_i)} Cat's Games!"
+  wargames.end_of_game
 end
 
 
