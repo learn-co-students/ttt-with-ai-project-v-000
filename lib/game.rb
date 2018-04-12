@@ -54,17 +54,19 @@ class Game
     end
   end
 
-  def turn
-    input = ""
-    until @board.valid_move?(input)
-      puts "Pick your space (1-9)."
-      input = gets.strip
-    end
-    @board.update(input, current_player)
+ def turn
+  input = ""
+  until @board.valid_move?(input)
+    input = current_player.move(@board)
   end
+  @board.update(input, current_player)
+ end
+
+ def play
+   until over?
+     turn
+   end
+   puts draw? ? "Cat's Game!" : "Congratulations #{winner}!"
+ end
 
 end
-
-game = Game.new
-game.turn
-game.board
