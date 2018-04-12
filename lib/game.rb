@@ -57,17 +57,9 @@ end
 
 def won?
   WIN_COMBINATIONS.detect { |win_combination|
-<<<<<<< HEAD
     @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
     @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
     @board.taken?(win_combination[0]+1)}
-
-=======
-    binding.pry
-          @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
-          @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
-          @board.taken?(win_combination[0]+1)}
->>>>>>> dc4b7bc1e0e22f77a365c814387005bf6be04990
   end
 
   def draw?
