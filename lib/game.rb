@@ -18,11 +18,24 @@ class Game
     [2, 4, 6]
   ]
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    @board = board
-    @player_1 = player_1
-    @player_2 = player_2
+  def initialize
+    @board = Board.new
   end
+
+  def game_type(input)
+    case input
+    when "0"
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+    when "1"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Computer.new("O")
+    when "2"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Human.new("O")
+    end
+  end
+
 
   def current_player
     @board.turn_count % 2 == 0 ? player_1 : player_2
@@ -65,12 +78,14 @@ class Game
  def start
   puts "Welcome! 0, 1, or 2 player game?"
   input = ""
-    until (0..2).include?(input.to_i)
+    until %w(0 1 2).include?(input)
+      input = gets.strip
     end
+  input
   end
- end
 
  def play
+   game_type(start)
    until over?
     @board.display
     turn
