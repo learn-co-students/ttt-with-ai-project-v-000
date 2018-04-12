@@ -18,8 +18,10 @@ class Game
     [2, 4, 6]
   ]
 
-  def initialize
-    @board = Board.new
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
   end
 
   def game_type(input)
@@ -50,6 +52,7 @@ class Game
     tokens = combo.map {|cell| @board.cells[cell]}
     tokens.uniq.size == 1 && tokens.none? { |token| token == " " }
    end
+
    if matches.size > 1
      @board.cells[matches[0][0]] == player_1.token ? matches[0] : matches[1]
    else
@@ -75,17 +78,16 @@ class Game
   @board.update(input, current_player)
  end
 
- def start
-  puts "Welcome! 0, 1, or 2 player game?"
-  input = ""
-    until %w(0 1 2).include?(input)
-      input = gets.strip
-    end
-  input
-  end
+ # def start
+ #  puts "Welcome! 0, 1, or 2 player game?"
+ #  input = ""
+ #    until %w(0 1 2).include?(input)
+ #      input = gets.strip
+ #    end
+ #  input
+ #  end
 
  def play
-   game_type(start)
    until over?
     @board.display
     turn
