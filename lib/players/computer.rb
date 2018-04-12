@@ -31,7 +31,6 @@ module Players
     	winning_combo = WIN_COMBINATIONS.find do |combo|
     		tokens = combo.map { |space| board.cells[space] }
     		tokens.count { |token| token == self.token } == 2
-
     	end
       if winning_combo
       	winning_combo.find do |space|
