@@ -1,4 +1,8 @@
 require 'pry'
+require_relative 'player.rb'
+require_relative 'board.rb'
+require_relative 'players/computer.rb'
+require_relative 'players/human.rb'
 
 class Game
   attr_accessor :board, :player_1, :player_2
@@ -51,7 +55,16 @@ class Game
   end
 
   def turn
-  
+    input = ""
+    until @board.valid_move?(input)
+      puts "Pick your space (1-9)."
+      input = gets.strip
+    end
+    @board.update(input, current_player)
   end
 
 end
+
+game = Game.new
+game.turn
+game.board
