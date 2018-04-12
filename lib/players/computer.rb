@@ -15,12 +15,13 @@ module Players
 
     def move(board)
     	square = ""
-    	until board.valid_move?(square)
-    		if self.two_in_combo?(board)
-    			square = self.two_in_combo?(board)
-    		elsif board.cells[4] == " "
-    			square = "5"
-    		else
+    	winning_square = self.two_in_combo?(board)
+    	if winning_square
+    		square = winning_square
+    	elsif board.cells[4] == " "
+    		square = "5"
+    	else
+    		until board.valid_move?(square)
       			square = (1..9).to_a.sample
       		end
       	end
@@ -28,15 +29,16 @@ module Players
     end
 
     def two_in_combo?(board)
+    	square = ""
     	winning_combo = WIN_COMBINATIONS.find do |combo|
     		tokens = combo.map { |space| board.cells[space] }
     		tokens.count { |token| token == self.token } == 2
-
     	end
-      if winning_combo
-      	winning_combo.find do |space|
-    		  board.cells[space] == " "
-    	  end
+      	if winning_combo
+      		square = winning_combo.find do |space|
+    			  board.cells[space] == " "
+    	  	end
+    	square + 1
       end
     end
 
