@@ -62,10 +62,20 @@ class Game
   @board.update(input, current_player)
  end
 
+ def start
+  puts "Welcome! 0, 1, or 2 player game?"
+  input = ""
+    until (0..2).include?(input.to_i)
+    end
+  end
+ end
+
  def play
    until over?
-     turn
+    @board.display
+    turn
    end
+   @board.display
    puts draw? ? "Cat's Game!" : "Congratulations #{winner}!"
  end
 
