@@ -1,9 +1,4 @@
-require_relative '../lib/players/computer.rb'
-
 class Game
-
-extend Players
-include Players
 
 attr_accessor :player_1, :player_2, :board
 
@@ -86,18 +81,17 @@ def won?
   end
 
   def turn
-      user_input = current_player.move(board)
-      if !board.valid_move?(user_input)
-          turn
-      else
-        board.update(user_input, current_player)
-      end
-      board
+    user_input = current_player.move(board)
+    if !board.valid_move?(user_input)
+      turn
+    end
+    board.update(user_input, current_player)
+    board
   end
 
   def play
     until self.over?
-      self.turn
+      turn
     end
     if self.won?
       puts "Congratulations #{winner}!"

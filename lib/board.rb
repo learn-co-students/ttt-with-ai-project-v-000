@@ -1,6 +1,5 @@
 class Board
   attr_accessor :cells, :turn_count, :WIN_COMBINATIONS
-  #@cells = []
   def initialize
     @cells = cells
     reset!
@@ -23,7 +22,6 @@ class Board
   end
 
   def position(input)
-    # position = input.to_i - 1
     @cells[input.to_i - 1]
   end
 
@@ -38,26 +36,20 @@ class Board
   end #ends full? method
 
   def turn_count
-    # binding.pry
     @cells.count {|c| c == "X" || c == "O"}
   end
 
   def taken?(move)
     @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
-    # if @cells[move.to_i - 1] == "X" || @cells[move.to_i - 1] == "O"
-    #   true
-    # else
-    #   false
-    # end
   end
 
   def valid_move?(move)
     move_taken = move.to_i
     if move_taken.between?(1, 9) && taken?(move_taken) == false
      true
-   else
-     false
-   end
+    else
+      false
+    end
   end
 
   def update(move, player)

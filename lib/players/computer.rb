@@ -3,80 +3,69 @@ module Players
 
     attr_reader :token, :index, :name
 
-    WIN_COMBINATIONS = [
-  [0, 1, 2], [3, 4, 5],
-  [6, 7, 8], [0, 4, 8],
-  [2, 4, 6], [0, 3, 6],
-  [1, 4, 7], [2, 5, 8],
-  ]
-
     def initialize(token)
       @token = token
       @name = "Computer"
     end
 
     def move(board)
-      cell_move = ""
-      available_moves = []
-      cell_move = for_the_win(board)
-      # binding.pry
-      if cell_move == []
-        board.cells.each_with_index do |cell, index|
-          if cell == " "
-            available_moves << (index + 1).to_s
-          end
+      if !board.taken?(5)
+        this_move = "5"
+      elsif board.turn_count == 1
+        this_move = "1"
+      elsif board.turn_count == 2
+        this_move = [1, 3, 7, 9].detect{|square| !board.taken?(square)}.to_s
+      elsif board.turn_count == 3
+        if board.cells[0] == board.cells[8] || board.cells[2] == board.cells[6]
+          this_move = "2"
+        else
+          this_move = for_the_win(board)[0]
+          this_move
         end
-        cell_move = available_moves.sample
-      # elsif cell_move == ""
-      else
-        cell_move = @block_moves.sample
+      elsif board.turn_count > 3
+          this_move = for_the_win(board)[0]
+          this_move
       end
-      cell_move
+      until !board.taken?(this_move)
+        move(board)
+      end
+      this_move
     end
 
     def for_the_win (board)
-      # binding.pry
       @block_moves = []
-      WIN_COMBINATIONS.each do |combo|
+      Game::WIN_COMBINATIONS.each do |combo|
         if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] != " "
-          if board.cells[combo[1]] == self.token
+          if !board.taken?(combo[2] + 1)
             return (combo[2] + 1).to_s
-          elsif board.cells[combo[2]] == " "
-            @block_moves << (combo[2] + 1).to_s
-            binding.pry
+          end # if
+        end # of combo check
+        if board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[2]] != " "
+          if !board.taken?(combo[1] + 1)
+          return (combo[1] + 1).to_s
           end #of if
-        elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[2]] != " "
-          if board.cells[combo[2]] == self.token
-            return (combo[1] + 1).to_s
-          elsif board.cells[combo[2]] == " "
-            @block_moves << (combo[1] + 1).to_s
-            binding.pry
-          end #of if
-        elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[2]] != " "
-          if board.cells[combo[2]] == self.token
+        end
+        if board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[2]] != " "
+          if !board.taken?(combo[0] + 1)
             return (combo[0] + 1).to_s
-          elsif board.cells[combo[2]] == " "
-            @block_moves << (combo[0] + 1).to_s
-            binding.pry
           end #of if
-        end # of if/elsif
+        end #of combo check
       end #of do
-      @block_moves
-    end #of for_the_win
-  end #of class
-end #of move
 
-  # def best_possible (board, game.WIN_COMBINATIONS)
-  #   best_moves = []
-  #   WIN_COMBINATIONS.each do |combo|
-  #       if cell == " "
-  #         available_moves << (index + 1).to_s
-  #       end
-  #     end
-  #     board.cells[available_moves.sample.to_i] = @token
-  #     board.display
-  #   end
-  # end
-# end #of class
-#
-# end #of module
+      empty_cells(board)
+
+    end #of for_the_win
+
+    def empty_cells(board)
+      left_over = []
+      [2, 3, 4, 6, 7, 8, 9].each do |num|
+        if !board.taken?(num)
+          left_over << num
+        end #of if
+      end#of do
+      @block_moves = left_over.sample.to_s
+      @block_moves
+    end #of empty_cells
+    
+  end #of class
+end #of module
