@@ -1,3 +1,4 @@
+require 'pry'
 module Players
   class Computer < Player
 
@@ -30,10 +31,13 @@ module Players
     	winning_combo = WIN_COMBINATIONS.find do |combo|
     		tokens = combo.map { |space| board.cells[space] }
     		tokens.count { |token| token == self.token } == 2
+
     	end
-    	winning_combo.find do |space|
-    		board.cells[space] == " "
-    	end
+      if winning_combo
+      	winning_combo.find do |space|
+    		  board.cells[space] == " "
+    	  end
+      end
     end
 
   end
@@ -44,4 +48,3 @@ end
 # first for it's own tokens
 # then opponents
 # AI picks empty square in the row
-
