@@ -35,7 +35,7 @@ class Board
   end 
   
   def valid_move?(input)
-    self.taken?(input) == false && input.strip.to_i > 0 && input.strip.to_i < 10 
+    self.taken?(input) == false && input.to_i > 0 && input.to_i < 10 
   end 
   
   def update(input, player)

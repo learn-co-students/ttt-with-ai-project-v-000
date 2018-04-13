@@ -2,15 +2,14 @@ require 'pry'
 
 class Game
   attr_accessor :player_1, :player_2, :board
-  attr_reader :winner
-
+  
   WIN_COMBINATIONS = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
   [0,3,6],
-  [2,5,8],
   [1,4,7],
+  [2,5,8],
   [0,4,8],
   [2,4,6]
   ]
@@ -20,7 +19,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @winner = nil
   end 
   
   def current_player
@@ -32,31 +30,42 @@ class Game
   end
   
   def won?
-    #winning_combo = false 
-    WIN_COMBINATIONS.each do |current_combo|if @board.cells[current_combo[0]] == "O"  && @board.cells[current_combo[1]] == "O" && @board.cells[current_combo[2]] == "O"
-            @winner = "O"
+    winning_combo = false 
+    WIN_COMBINATIONS.each do |current_combo|
+      if @board.cells[current_combo[0]] == "X"  && @board.cells[current_combo[1]] == "X" && @board.cells[current_combo[2]] == "X"
             winning_combo = current_combo
-      end 
-   end
-   WIN_COMBINATIONS.each do |current_combo|if @board.cells[current_combo[0]] == "X"  && @board.cells[current_combo[1]] == "X" && @board.cells[current_combo[2]] == "X"
-            @winner = "X"
+     elsif @board.cells[current_combo[0]] == "O"  && @board.cells[current_combo[1]] == "O" && @board.cells[current_combo[2]] == "O"
             winning_combo = current_combo
           end 
         end
      winning_combo
   end 
   
+  def winner
+    winner = nil
+    WIN_COMBINATIONS.each do |current_combo|
+      if @board.cells[current_combo[0]] == "X"  && @board.cells[current_combo[1]] == "X" && @board.cells[current_combo[2]] == "X"
+            winner = "X"
+         elsif @board.cells[current_combo[0]] == "O"  && @board.cells[current_combo[1]] == "O" && @board.cells[current_combo[2]] == "O"
+            winner = "O"
+          end 
+        end
+     winner
+  end 
+  
   def over?
     @board.full?
   end 
-  
-  def winner?
-    self.won?
-    @winner 
-  end 
-  
+
   def draw?
     @board.full? && self.won? == false
+  end 
+  
+  def turn
+    move = gets.strip.to_i
+    if @board.valid_move?(move)
+      @board.cells[move] = self.current_player.token
+    end
   end 
   
 end 
