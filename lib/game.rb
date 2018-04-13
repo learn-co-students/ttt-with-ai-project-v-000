@@ -20,6 +20,7 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    @winner = nil
   end 
   
   def current_player
@@ -31,7 +32,7 @@ class Game
   end
   
   def won?
-    winning_combo = false 
+    #winning_combo = false 
     WIN_COMBINATIONS.each do |current_combo|if @board.cells[current_combo[0]] == "O"  && @board.cells[current_combo[1]] == "O" && @board.cells[current_combo[2]] == "O"
             @winner = "O"
             winning_combo = current_combo
