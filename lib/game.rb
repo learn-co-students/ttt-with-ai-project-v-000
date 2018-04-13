@@ -33,18 +33,12 @@ class Game
   def won?
     winning_combo = false 
     WIN_COMBINATIONS.each do |current_combo|
-      if @board.cells[current_combo[0]] == "X" && @board.cells[current_combo[1]] == "X" && @board.cells[current_combo[2]] == "X"
-        @winner = "X"
-        winning_combo = current_combo
+      if @board.cells[current_combo[0]] == self.current_player.token  && @board.cells[current_combo[1]] == self.current_player.token && @board.cells[current_combo[2]] == self.current_player.token
+            @winner = self.current_player.token
+            winning_combo = current_combo
       end 
     end
-   WIN_COMBINATIONS.each do |current_combo|
-     if @board.cells[current_combo[0]] == "O" && @board.cells[current_combo[1]] == "O" && @board.cells[current_combo[2]] == "O"
-        @winner = "O"
-        winning_combo = current_combo
-      end 
-    end
-    #binding.pry
+  
     winning_combo
   end 
   
