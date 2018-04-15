@@ -27,7 +27,7 @@ class Game
   end
 
   def over?
-    self.board.full? ? true : false
+    (self.draw? || self.won?) ? true : false
   end
 
   def won?
@@ -51,14 +51,11 @@ class Game
   end
 
   def draw?
-    # if self.won? || !self.board.full?
-    #   binding.pry
-    #   false
-    # else
-    #   binding.pry
-    #   true
-    # end
-    self.board.full? && !self.won?
+    if self.won? || !self.board.full?
+      false
+    else
+      true
+    end
   end
 
   def winner
@@ -81,15 +78,16 @@ class Game
 
   def play
     while !self.over?
-      if self.won?
-        puts "Congratulations #{self.winner}!"
-        break
-      end
+      # if self.won?
+      #   puts "Congratulations #{self.winner}!"
+      #   break
+      # end
       self.turn
     end
-    # binding.pry
     if self.draw?
       puts "Cat's Game!"
+    elsif self.won?
+      puts "Congratulations #{self.winner}!"
     end
   end
 
