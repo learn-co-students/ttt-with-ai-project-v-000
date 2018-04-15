@@ -66,22 +66,27 @@ class Game
 
   def turn
     current_player = self.current_player
+
+    puts "#{current_player.token}'s turn"
+    self.board.display
+
     user_input = current_player.move(self.board)
+
     while !self.board.valid_move?(user_input)
       "invalid"
+      puts "invalid move!"
       user_input = current_player.move(self.board)
-      # self.turn
     end
+
     self.board.update(user_input, current_player)
+
+    self.board.display
+
     user_input
   end
 
   def play
     while !self.over?
-      # if self.won?
-      #   puts "Congratulations #{self.winner}!"
-      #   break
-      # end
       self.turn
     end
     if self.draw?
@@ -92,6 +97,35 @@ class Game
   end
 
   def start
+    puts "Welcome to Tic Tac Toe with AI!"
+    puts "Please select what kind of game do you want to play, input number of players (0 or 1 or 2): "
+
+    number_of_player = gets.strip.to_i
+
+    while !number_of_player.between?(0, 2)
+      puts "Please select what kind of game do you want to play, input number of players (0 or 1 or 2):"
+      number_of_player = gets.strip.to_i
+    end
+
+    if number_of_player == 0
+      self.player_1 = Players::Computer.new("X")
+      self.player_2 = Players::Computer.new("O")
+      self.play
+    elsif number_of_player == 1
+      puts "Who should go first and be 'X', player 1 is human player, player 2 is computer player, input player number (1 or 2)"
+      first_player = gets.strip
+      if first_player == "1"
+        self.player_1 = Players::Human.new("X")
+        self.player_2 = Players::Computer.new("O")
+        self.play
+      elsif first_player == "2"
+        self.player_1 = Players::Computer.new("X")
+        self.player_2 = Players::Human.new("O")
+        self.play
+      end
+    elsif number_of_player == 2
+      self.play
+    end
   end
 
 end
