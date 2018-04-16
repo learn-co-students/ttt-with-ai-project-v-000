@@ -3,7 +3,7 @@ module Players
 
     def move(board)
       computer_move = nil
-      open_moves=[]
+      open_cells=[]
 
       if !board.taken?(5)
         computer_move = "5"
@@ -16,10 +16,10 @@ module Players
       else
         board.cells.each_with_index do |cell, i|
           if cell == " "
-            open_moves << i
+            open_cells << i
           end
         end
-        computer_move = (open_moves.sample+1).to_s
+        computer_move = (open_cells.sample+1).to_s
       end
       computer_move
     end
