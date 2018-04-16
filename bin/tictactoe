@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#ugh, i detest these ttt games 
+
+puts "Welcome to Tic Tac Toe!"
+puts "Ready to Play? y/n"
+
+input1 = gets.chomp.downcase
+
+while input1 = "y"
+#make a new game 
+	game = Game.new
+
+# keep it playing 
+ 	game.play until game.won?
+end
+
+#play again, yes y/n  .. downcase
+# play_again = ""
+
+# until play_again.downcase == "n" || play_again.downcase == "no"
+#   puts "Would you like to play again?"
+#   play_again = gets.strip
+#   play_again.downcase == "y" || play_again.downcase == "yes"
+#   game = Game.new
+#   until game.won?
+#     game.play
+#   end
+# end
+
+puts "Play again? y/n"
+
+play_again = gets.chomp 
+
+	until play_again = n
+		game = Game.new
+		game.play until game.won? 
+  end 
+
+# add here -- want to play against the computer? against yourself? with a friend? 
+
+
+
