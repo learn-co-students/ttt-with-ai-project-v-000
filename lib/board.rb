@@ -1,11 +1,13 @@
+require 'pry'
+
 class Board
 
 
 attr_accessor :cells
 
 
-def initalize
-  @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " ",]
+def initialize
+  @cells = Array.new(9, " ")
   reset!
 end
 
@@ -30,7 +32,7 @@ def full?
   end
 
 def taken?(input)
- !(position(input)== " " || position(input)== " ")
+ !(position(input)== " "|| position(input)== " ")
 end
 
 def turn_count
