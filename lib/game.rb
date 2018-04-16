@@ -40,11 +40,12 @@ WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [2,5,8], [1,4,7], [0,4,8
   end
 
   def play
-    @board.display
     until over?
+     @board.display
+     puts " "
       turn
     end
-    puts won? ? "Congratulations #{winner}!" : "Cat\'s Game!"
+    puts won? ? "Congratulations #{winner}!" : "Cat's Game!"
     end
 
 end
