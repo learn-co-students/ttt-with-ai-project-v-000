@@ -35,7 +35,7 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.reverse.find do |combo|
+    WIN_COMBINATIONS.find do |combo|
       streak = @board.cells[combo[0]] + @board.cells[combo[1]] + @board.cells[combo[2]]
       streak == "XXX" || streak == "OOO"
     end
@@ -75,16 +75,19 @@ class Game
 
   def setup
     print "Choose number of human players: "
-    num_players = gets.strip.to_i
+    player_num_input = gets.strip
     print "Will player 1 or player 2 go first? "
-    first_player = gets.strip.to_i
+    player_order_input = gets.strip
 
-    if [0, 1, 2].include?(num_players) && [1, 2].include?(first_player)
+    if player_num_input =~ /[0-2]/ && player_order_input =~ /[1-2]/
+      num_players = player_num_input.to_i
+      first_player = player_order_input.to_i
+
       if num_players == 2 && first_player == 2
         @player_1 = Players::Human.new("O")
         @player_2 = Players::Human.new("X")
       elsif num_players == 1 && first_player == 1
-        @player_1 = Players::Computer.new("X")
+        @player_2 = Players::Computer.new("O")
       elsif num_players == 1 && first_player == 2
         @player_1 = Players::Human.new("O")
         @player_2 = Players::Computer.new("X")

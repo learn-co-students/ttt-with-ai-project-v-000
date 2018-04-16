@@ -11,11 +11,17 @@ class Board
   end
 
   def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    c = Array.new(9, " ")
+
+    for i in 0..9
+      c[i] = @cells[i] == " " ? "#{i+1}" : @cells[i]
+    end
+
+    puts " #{c[0]} | #{c[1]} | #{c[2]} "
     puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts " #{c[3]} | #{c[4]} | #{c[5]} "
     puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts " #{c[6]} | #{c[7]} | #{c[8]} "
   end
 
   def position(input)
