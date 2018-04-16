@@ -42,7 +42,6 @@ class Game
       @board.update(current_move, player)
       puts "#{player.token} moved #{current_move}"
       @board.display
-      puts "\n\n"
     end
   end
 
@@ -61,7 +60,7 @@ class Game
     WIN_COMBINATIONS.detect do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
       @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
+      @board.cells[combo[2]] == "X" || @board.cells[combo[2]] == "O"
     end
   end
 
