@@ -18,10 +18,6 @@ class Game
     @cells = Array.new(9, " ")
   end
 
-  def turn_count
-    cells.count{|char| char=="X" || char == "O"}
-  end
-
   def current_player(board)
     @board.turn_count % 2 == 0 ? player_1 : player_2
   end
