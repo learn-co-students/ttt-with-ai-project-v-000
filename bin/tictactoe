@@ -1,3 +1,22 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+require 'pry'
+
+puts "Hello! What kind of game do you want to play?"
+puts "0 player, 1 player, or 2 player"
+input = gets.strip
+index = input.to_i
+if index == 0
+  newGame = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+elsif index == 1
+  puts "Would you like to go first? If yes, type 'X'."
+  response = gets.strip
+  if response == 'X' || response == 'x'
+    newGame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  else
+      newGame = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    end
+  else
+  newGame = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  end
+  newGame.play
