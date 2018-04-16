@@ -23,7 +23,7 @@ class Board
 
   def full?
     if cells.detect {|c| c == " " || c == ""}
-      return false
+      false
     else
       true
     end
@@ -36,17 +36,16 @@ class Board
 
   def taken?(input)
     if cells[input.to_i-1] == " " || cells[input.to_i-1] == ""
-      return false
+      false
     else
-      return true
+      true
     end
   end
 
   def valid_move?(input)
     if input.to_i.between?(1,9) && !taken?(input)
-      return true
     else
-      return false
+     false
     end
   end
 
