@@ -23,18 +23,47 @@ class Game
     @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
-  def over?
-    won? || draw?
-  end
-
   def won?
-    WIN_COMBINATIONS.detect do |winner|
-      @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[1]] == @board.cells[winner[2]] && @board.taken?(winner[0]+1)
+    # binding.pry
+    WIN_COMBINATIONS.detect do |win|
+      @board.taken?(win[0]+1) && @board.cells[win[0]] == @board.cells[win[1]] &&
+      @board.cells[win[1]] == @board.cells[win[2]]
     end
   end
 
   def draw?
     @board.full? && !won?
   end
+
+  def over?
+    won? || draw?
+  end
+
+  def winner
+    if win_combo = won? #setting win_combo variable equal to won? if won? is true
+      @winner = @board.cells[win_combo.first]
+    end
+  end
+
+  def turn
+    current_move = current_player.move(@board) #takes in a number 1-9
+    if !@board.valid_move?(current_move)
+      puts "Invalid move."
+      turn
+    else
+      @board.update(current_move, current_player)
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else draw?
+      puts "Cat's Game!"
+    end
+  end
+
 end
