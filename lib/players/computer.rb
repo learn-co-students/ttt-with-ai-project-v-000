@@ -13,7 +13,6 @@ class Computer < Player
     [2, 4, 6]
   ]
 
-
   def available_moves(cells)
     moves = []
 
@@ -26,11 +25,9 @@ class Computer < Player
     moves
   end
 
-
   def full?(cells)
     cells.none? {|cell| cell == " "}
   end
-
 
   def won?(cells)
     WIN_COMBINATIONS.find do |combo|
@@ -39,18 +36,14 @@ class Computer < Player
     end
   end
 
-
   def over?(cells)
     full?(cells) || won?(cells)
   end
 
-
   def winner(cells)
     win_combo = won?(cells)
-
     win_combo ? cells[win_combo[0]] : nil
   end
-
 
   def score(cells)
     if winner(cells) == @token
@@ -62,21 +55,17 @@ class Computer < Player
     end
   end
 
-
   def turn_count(cells)
     cells.count {|cell| cell != " "}
   end
-
 
   def current_token(cells)
     turn_count(cells) % 2 == 0 ? "X" : "O"
   end
 
-
   def generate_state(move, cells)
     cells.map.with_index {|cell, i| i == move.to_i ? current_token(cells) : cell}
   end
-
 
   def minimax(cells)
     return score(cells) if over?(cells)
@@ -100,7 +89,6 @@ class Computer < Player
       scores[min_score_index]
     end
   end
-
 
   def move(board)
     if turn_count(board.cells) == 0
