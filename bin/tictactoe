@@ -41,7 +41,7 @@ class Tictactoe
       exit
     else
       puts "Hmm...that doesn't sound quite right."
-      play_again
+      self.play_again
     end
   end
   Tictactoe.welcome
