@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9, " ")
+    reset!
   end
 
   def reset!
@@ -35,7 +35,7 @@ class Board
   end
 
   def taken?(input)
-    if cells[input.to_i-1] == " "
+    if cells[input.to_i-1] == " " || cells[input.to_i-1] == ""
       return false
     else
       return true
@@ -43,7 +43,7 @@ class Board
   end
 
   def valid_move?(input)
-    if input.to_i == (1..9)
+    if input.to_i.between?(1,9) && !taken?(input)
       return true
     else
       return false

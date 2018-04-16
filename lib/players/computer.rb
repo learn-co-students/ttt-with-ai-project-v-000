@@ -1,7 +1,7 @@
 module Players
   class Computer < Player
-    def move(input)
-      input = gets.chomp
+    def move(board)
+      "1"
     end
   end
 end
