@@ -1,3 +1,43 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def get_number_players
+  puts "We can play:"
+  puts "  0 = 0 human players.  Computer players will play each other"
+  puts "  1 = human player plays computer player."
+  puts "  2 = 2 human players"
+  puts "Choose option (0,1,2)"
+  number_players = gets.strip.to_i
+end
+
+puts "Welcome to Tic-tac-toe!"
+again ="Y"
+while again=="Y"
+  number_players = get_number_players
+
+  case number_players
+  when 0
+    player1 = Players::Computer.new("X")
+    player2 = Players::Computer.new("O")
+  when 1
+    puts "X will go first. Choose token for Human player (X or O)"
+    token_select=""
+    until ["X","O"].include?( token_select) do
+      token_select = gets.strip.upcase
+    end
+    # note: Game will make sure that the correct player goes first
+    # so player1 vs player2 doesn't matter
+    player1 = Players::Human.new(token_select)
+    player2 = Players::Computer.new(token_select=="X" ? "O" : "X")
+  when 2
+    player1 = Players::Human.new("X")
+    player2 = Players::Human.new("O")
+  end
+
+  Game.new(player1, player2).play
+  puts "Play again (Y or N)?"
+  again = gets.strip.upcase
+end
+
+puts "Thanks for playing!"

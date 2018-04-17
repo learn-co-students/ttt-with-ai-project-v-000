@@ -21,6 +21,9 @@ describe "Board" do
       expect(board.cells).to_not match_array(["X"])
     end
     it 'sets the cells of the board to a 9 element array of " "' do
+      # THIS TEST IS INVALID.   "client" should not be able to change board.cells to a 1 elment array
+      # This forces the implementation of reset! to recreate the array again.  A valid reset! implementation
+      # could also be to cells.map! to " "
       board.cells = ["X"]
       board.reset!
       expect(board.cells).to match_array(Array.new(9, " "))
