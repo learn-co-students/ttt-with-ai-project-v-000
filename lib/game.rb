@@ -18,10 +18,7 @@ class Game
   end
 
   def over?
-    if won? || draw?
-    else
-      false
-    end
+    won? || draw?
   end
 
   def current_player
@@ -42,7 +39,7 @@ class Game
 
   def winner
     if won? != nil
-      @board.cells[won?[0]]
+    @winner = @board.cells[won?[0]]
     end
   end
 
@@ -51,6 +48,7 @@ class Game
     moves = player.move(@board)
     if !@board.valid_move?(moves)
       puts "Stop fooling around, you!"
+      moves = player.move(@board)
     else
       @board.display
       @board.update(moves, player)
