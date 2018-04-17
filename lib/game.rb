@@ -16,17 +16,17 @@ class Game
 
 
 def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-@board = board
-@player_1 = player_1
-@player_2 = player_2
+  @board = board
+  @player_1 = player_1
+  @player_2 = player_2
 end
 
 
 def won?
     WIN_COMBINATIONS.detect do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
   end
 
@@ -52,13 +52,13 @@ def won?
       player = current_player
       current_move = player.move(@board)
       if !@board.valid_move?(current_move)
-        turn
+          turn
       else
-        puts "Turn: #{@board.turn_count+1}"
-        @board.display
-        @board.update(current_move, player)
-        puts "#{player.token} moved #{current_move}"
-        @board.display
+          puts "Turn: #{@board.turn_count+1}"
+          @board.display
+          @board.update(current_move, player)
+          puts "#{player.token} moved #{current_move}"
+          @board.display
       end
     end
 
