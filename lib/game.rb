@@ -45,26 +45,24 @@ class Game
 
   def turn
     player = current_player
-    moves = player.move(@board)
-    if !@board.valid_move?(moves)
-      puts "Stop fooling around, you!"
-      moves = player.move(@board)
+    moving = player.move(@board)
+    if !@board.valid_move?(moving)
+      turn
     else
       @board.display
-      @board.update(moves, player)
+      @board.update(moving, player)
       @board.display
     end
   end
 
   def play
-    while !over?
-      turn
-    end
-    if won?
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      puts "Cat's Game!"
-    end
-  end
-
+   until over?
+     turn
+   end
+   if won?
+     puts "Congratulations #{winner}!"
+   elsif draw?
+     puts "Cat's Game!"
+   end
+ end
 end

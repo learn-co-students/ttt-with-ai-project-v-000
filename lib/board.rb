@@ -22,11 +22,8 @@ class Board
   end
 
   def full?
-    if cells.detect {|c| c == " " || c == ""}
-      false
-    else
-      true
-    end
+    cells.detect {|c| c == " " || c == ""} ? false : true
+
   end
 
   def turn_count
@@ -35,18 +32,18 @@ class Board
   end
 
   def taken?(input)
-    if cells[input.to_i-1] == " " || cells[input.to_i-1] == ""
-      false
+    if cells[input.to_i-1] == " "
+      return false
     else
-      true
+      return true
     end
   end
 
   def valid_move?(input)
-    if (input.to_i == [1..9]) && !taken?
-      true
+    if input.to_i.between?(1,9) && !taken?(input)
+      return true
     else
-     false
+      return false
     end
   end
 
