@@ -2,6 +2,7 @@ require 'pry'
 require_relative 'player'
 require_relative 'players/human'
 require_relative 'board'
+require_relative 'players/computer'
 
 
 class Game
@@ -66,6 +67,7 @@ class Game
   end 
   
   def turn
+    @board.display
     chosen_space = self.current_player.move(@board)
     if @board.valid_move?(chosen_space)
      @board.update(chosen_space, self.current_player)
@@ -86,3 +88,5 @@ class Game
    end 
   
 end
+
+Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
