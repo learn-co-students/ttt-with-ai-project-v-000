@@ -81,12 +81,14 @@ class Game
       self.turn
       end
     if self.won?
+      @board.display
       puts "Congratulations #{self.winner}!"
     elsif self.draw?
+    @board.display
       puts "Cat's Game!"
     end 
    end 
   
 end
 
-Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+#Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
