@@ -91,11 +91,7 @@ class Computer < Player
   end
 
   def move(board)
-    if turn_count(board.cells) == 0
-      @input = 4
-    else
-      minimax(board.cells)
-    end
+    minimax(board.cells)
 
     puts "#{@token} has chosen: #{@input + 1}"
     board.cells[@input] = @token
