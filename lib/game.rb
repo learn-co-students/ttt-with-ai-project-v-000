@@ -1,4 +1,8 @@
 require 'pry'
+require_relative 'player'
+require_relative 'players/human'
+require_relative 'board'
+
 
 class Game
   attr_accessor :player_1, :player_2, :board
@@ -62,10 +66,24 @@ class Game
   end 
   
   def turn
-    move = gets.strip.to_i
-    if @board.valid_move?(move)
-      @board.cells[move] = self.current_player.token
-    end
-  end 
+    chosen_space = self.current_player.move(@board)
+    if @board.valid_move?(chosen_space)
+     @board.update(chosen_space, self.current_player)
+     else
+      turn
+    end 
+   end 
+   
+   def play
+     @board.display
+     self.turn
+     if self.won?
+      puts "Congratulations #{self.winner}!"
+     elsif self.over?
+       puts "Cat's Game!"
+    else
+     self.play
+     end 
+   end 
   
-end 
+end

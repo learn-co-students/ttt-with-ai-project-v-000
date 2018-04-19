@@ -40,7 +40,7 @@ class Board
   
   def update(input, player)
     if valid_move?(input)
-      @cells.insert((input.strip.to_i - 1), player.token)
+      @cells[input.to_i - 1] = player.token
     end 
   end 
   
