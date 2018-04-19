@@ -8,6 +8,7 @@ class Human < Player
   end 
   
 def move(board)
+    puts "Please select a square:"
     input = gets.strip
     input
    end 
