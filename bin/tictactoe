@@ -1,3 +1,48 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+class Tictactoe
+  def self.welcome
+    puts "Welcome to Tic-Tac-Toe!"
+    puts "If you would like to play against me, enter 1."
+    puts "If you would like to play against a friend, enter 2."
+    puts "Want to see what happens when I play against myself? Enter 0."
+    start_game
+  end
+
+  def self.start_game
+    input = gets.strip
+
+    if input == "1"
+      puts "Do you have what it takes to beat me at Tic-Tac-Toe?"
+      puts "Your token is X, player one!"
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+    elsif input == "2"
+      puts "Player one will be X. May the best player win!"
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+    elsif input == "0"
+      puts "All I do is win, win, win no matter what! Just watch and see."
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+    else
+      puts "Hmm...that doesn't sound quite right. Try picking one of the options given: 1, 2, or 0."
+    end
+    self.play_again
+    self.welcome
+  end
+
+  def self.play_again
+    puts "Want to play again? y/n"
+    input = gets.strip.to_s
+    if input == "y"
+      self.welcome
+    elsif input == "n"
+      puts "Ok, see you next time!"
+      exit
+    else
+      puts "Hmm...that doesn't sound quite right."
+      self.play_again
+    end
+  end
+  Tictactoe.welcome
+end
