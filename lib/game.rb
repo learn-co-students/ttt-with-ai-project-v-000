@@ -87,8 +87,8 @@ class Game
     @board.display
       puts "Cat's Game!"
     end 
-   end 
-  
+  end 
+
 end
 
-#Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+Game.new(Players::Human.new("X"), Players::Computer.new("O")).play

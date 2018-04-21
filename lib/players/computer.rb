@@ -47,7 +47,6 @@ module Players
 def spaces(board)
   @own_spaces = []
   @opponents_spaces = []
-    binding.pry
     counter = 0
     board.cells.each do |space| 
       if space == @token
@@ -57,7 +56,6 @@ def spaces(board)
       end
       counter += 1
     end 
-    binding.pry
   end 
 
 def play_winning_move(board)
@@ -70,7 +68,7 @@ def play_winning_move(board)
       if @own_spaces.include?(space_number)
         own_token_in_rows += 1
       end 
-      if own_token_in_rows <= 2 
+      if own_token_in_rows >= 2 
         winning_array.each do |space_number|
           if !@own_spaces.include?(space_number) && board.cells[space_number] == " "
             move_to_make = space_number
@@ -91,7 +89,7 @@ def block_opponent_win(board)
       if @opponents_spaces.include?(space_number)
         their_token_in_rows += 1
       end 
-      if their_token_in_rows <= 2 
+      if their_token_in_rows >= 2 
         winning_array.each do |space_number|
           if !@opponents_spaces.include?(space_number) && board.cells[space_number] == " "
             move_to_make = space_number
