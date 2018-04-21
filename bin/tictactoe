@@ -5,13 +5,13 @@ require_relative '../config/environment'
 def player_entry
 puts "How many human players?"
 puts "Please enter 0, 1, or 2:"
-players_number = gets.strip.to_i
+players_number = gets.strip.downcase
 
-if players_number == 0
+if players_number == "0" || players_number == "zero" || players_number == "z"
  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-elsif players_number == 1
+elsif players_number == "1" || players_number == "one" || players_number == "o"
   one_human_game
-elsif players_number == 2
+elsif players_number == "2" || players_number == "two" || players_number == "t"
   two_human_game
 else 
  player_entry
@@ -22,7 +22,7 @@ end_of_game
  def player_first_or_second
  puts "Would you like to go first or second?"
  entry = gets.strip.downcase
- if entry == "first" || entry == "f" || gets.strip.downcase == "1" || entry == "1st"
+ if entry == "first" || entry == "f" || entry == "1" || entry == "1st"
  player_turn = "first"
  elsif entry == "second" || entry == "s" || entry == "2" || entry == "2nd"
  player_turn = "second"
