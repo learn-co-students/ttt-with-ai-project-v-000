@@ -3,7 +3,6 @@
 require_relative '../config/environment'
 
 def player_entry
-puts "Welcome to Tic Tac Toe!"
 puts "How many human players?"
 puts "Please enter 0, 1, or 2:"
 players_number = gets.strip.to_i
@@ -22,9 +21,10 @@ end_of_game
  
  def player_first_or_second
  puts "Would you like to go first or second?"
- if gets.strip.downcase == "first" || gets.strip.downcase == "f" || gets.strip.downcase == "1" || gets.strip.downcase == "1st"
+ entry = gets.strip.downcase
+ if entry == "first" || entry == "f" || gets.strip.downcase == "1" || entry == "1st"
  player_turn = "first"
- elsif gets.strip.downcase == "second" || gets.strip.downcase == "s" || gets.strip.downcase == "2" || gets.strip.downcase == "2nd"
+ elsif entry == "second" || entry == "s" || entry == "2" || entry == "2nd"
  player_turn = "second"
  else
   player_first_or_second 
@@ -33,9 +33,10 @@ end_of_game
  
  def player_x_or_o
  puts "Would you like to be X or O?"
- if gets.strip.downcase == "x"
+ choice = gets.strip.downcase
+ if choice == "x"
    human_token = "X"
- elsif gets.strip.downcase == "o"
+ elsif choice == "o"
    human_token = "O"
  else 
    player_x_or_o
@@ -59,10 +60,10 @@ end_of_game
  
  def two_human_game
    puts "Who goes first?  Please enter X or O."
-   answer = gets.strip 
-   if answer == "X"
+   answer = gets.strip.downcase
+   if answer == "x"
    Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-   elsif answer == "O"
+   elsif answer == "o"
 Game.new(Players::Human.new("O"), Players::Human.new("X")).play
    else
   two_human_game
@@ -81,4 +82,5 @@ Game.new(Players::Human.new("O"), Players::Human.new("X")).play
  end 
  end
 
+puts "Welcome to Tic Tac Toe!"
 player_entry

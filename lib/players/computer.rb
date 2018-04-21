@@ -31,7 +31,9 @@ module Players
   
   def move(board)
     self.spaces(board)
-    if play_winning_move(board)
+    if @opponents_spaces == [0] || @opponents_spaces == [2] ||@opponents_spaces == [6] || @opponents_spaces == [8]
+      "5"
+    elsif play_winning_move(board)
       play_winning_move(board).to_s
     elsif block_opponent_win(board)
       block_opponent_win(board).to_s
