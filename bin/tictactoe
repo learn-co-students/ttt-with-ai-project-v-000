@@ -1,3 +1,86 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def player_entry
+puts "How many human players?"
+puts "Please enter 0, 1, or 2:"
+players_number = gets.strip.downcase
+
+if players_number == "0" || players_number == "zero" || players_number == "z"
+ Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+elsif players_number == "1" || players_number == "one" || players_number == "o"
+  one_human_game
+elsif players_number == "2" || players_number == "two" || players_number == "t"
+  two_human_game
+else 
+ player_entry
+ end
+end_of_game
+ end 
+ 
+ def player_first_or_second
+ puts "Would you like to go first or second?"
+ entry = gets.strip.downcase
+ if entry == "first" || entry == "f" || entry == "1" || entry == "1st"
+ player_turn = "first"
+ elsif entry == "second" || entry == "s" || entry == "2" || entry == "2nd"
+ player_turn = "second"
+ else
+  player_first_or_second 
+  end
+ end 
+ 
+ def player_x_or_o
+ puts "Would you like to be X or O?"
+ choice = gets.strip.downcase
+ if choice == "x"
+   human_token = "X"
+ elsif choice == "o"
+   human_token = "O"
+ else 
+   player_x_or_o
+ end
+ end
+ 
+ def one_human_game
+ turn_time = player_first_or_second
+ player_token_choice = player_x_or_o
+  if player_token_choice == "X"
+    computer_token = "O"
+   else
+   computer_token = "X"
+   end 
+ if turn_time == "first"
+   Game.new(Players::Human.new(player_token_choice), Players::Computer.new(computer_token)).play
+  else
+  Game.new(Players::Computer.new(computer_token), Players::Human.new(player_token_choice)).play
+  end
+  end
+ 
+ def two_human_game
+   puts "Who goes first?  Please enter X or O."
+   answer = gets.strip.downcase
+   if answer == "x"
+   Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+   elsif answer == "o"
+Game.new(Players::Human.new("O"), Players::Human.new("X")).play
+   else
+  two_human_game
+  end
+ end
+ 
+ def end_of_game
+ puts "Thank you for playing! Would you like to play again?"
+ answer = gets.strip.downcase
+ if answer == "no" || answer == "n"
+ puts "Goodbye!"
+ elsif answer == "yes" || answer == "y"
+ player_entry
+ else 
+ end_of_game
+ end 
+ end
+
+puts "Welcome to Tic Tac Toe!"
+player_entry
