@@ -72,6 +72,7 @@ def play_winning_move(board)
         winning_array.each do |space_number|
           if board.cells[space_number] == " "
             move_to_make = space_number + 1
+            return move_to_make
           end
         end 
       end 
@@ -93,6 +94,7 @@ def block_opponent_win(board)
         winning_array.each do |space_number|
           if board.cells[space_number] == " "
             move_to_make = space_number + 1
+            return move_to_make
           end
         end 
       end 

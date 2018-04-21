@@ -90,5 +90,3 @@ class Game
   end 
 
 end
-
-Game.new(Players::Human.new("X"), Players::Computer.new("O")).play

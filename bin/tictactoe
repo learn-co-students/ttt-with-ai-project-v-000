@@ -1,3 +1,65 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def player_entry
+puts "How many human players?"
+puts "Please enter 0, 1, or 2:"
+players_number = gets.strip.to_i
+
+if players_number == 0
+ Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+elsif players_number == 1
+  one_human_game
+  Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+elsif players_number == 2
+  two_human_game
+ Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+else 
+ player_entry
+ end
+ end 
+ 
+ def player_first_or_second
+ puts "Would you like to go first or second?"
+ if gets.strip.downcase == "first" || gets.strip.downcase == "f" || gets.strip.downcase == "1" || gets.strip.downcase == "1st"
+ player_turn == "first"
+ elsif gets.strip.downcase == "second" || gets.strip.downcase == "s" || gets.strip.downcase == "2" || gets.strip.downcase == "2nd"
+ player_turn == "second"
+ else
+  player_first_or_second 
+  end
+ end 
+ 
+ def player_x_or_o
+ puts "Would you like to be X or O?
+ if gets.strip.downcase == "x"
+   human.token == "X"
+ elsif gets.strip.downcase == "o"
+   human.token == "O"
+   end 
+ end
+ 
+ def one_human_game
+ 
+ 
+ end 
+ 
+ def two_human_game
+ end
+ 
+ def end_of_game
+ puts "Thank you for playing! Would you like to play again?"
+ answer = gets.strip.downcase
+ if answer == "no" || answer == "n"
+ puts "Goodbye!"
+ elsif answer == "yes" || answer == "y"
+ player_entry
+ else 
+ end_of_game
+ end 
+ end
+
+puts "Welcome to Tic Tac Toe!"
+player_entry
+
