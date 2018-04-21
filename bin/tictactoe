@@ -3,6 +3,7 @@
 require_relative '../config/environment'
 
 def player_entry
+puts "Welcome to Tic Tac Toe!"
 puts "How many human players?"
 puts "Please enter 0, 1, or 2:"
 players_number = gets.strip.to_i
@@ -16,39 +17,40 @@ elsif players_number == 2
 else 
  player_entry
  end
+end_of_game
  end 
  
  def player_first_or_second
  puts "Would you like to go first or second?"
  if gets.strip.downcase == "first" || gets.strip.downcase == "f" || gets.strip.downcase == "1" || gets.strip.downcase == "1st"
- player_turn == "first"
+ player_turn = "first"
  elsif gets.strip.downcase == "second" || gets.strip.downcase == "s" || gets.strip.downcase == "2" || gets.strip.downcase == "2nd"
- player_turn == "second"
+ player_turn = "second"
  else
   player_first_or_second 
   end
  end 
  
  def player_x_or_o
- puts "Would you like to be X or O?
+ puts "Would you like to be X or O?"
  if gets.strip.downcase == "x"
-   human.token = "X"
+   human_token = "X"
  elsif gets.strip.downcase == "o"
-   human.token ="O"
-   end
+   human_token = "O"
  else 
-   def player_x_or_o
-   end
+   player_x_or_o
+ end
  end
  
  def one_human_game
  turn_time = player_first_or_second
  player_token_choice = player_x_or_o
-  if player_token_choice = "X"
+  if player_token_choice == "X"
     computer_token = "O"
    else
-   computer_token= "X"
- if turn_time = "first"
+   computer_token = "X"
+   end 
+ if turn_time == "first"
    Game.new(Players::Human.new(player_token_choice), Players::Computer.new(computer_token)).play
   else
   Game.new(Players::Computer.new(computer_token), Players::Human.new(player_token_choice)).play
@@ -63,7 +65,7 @@ else
    elsif answer == "O"
 Game.new(Players::Human.new("O"), Players::Human.new("X")).play
    else
-     two_human_game
+  two_human_game
   end
  end
  
@@ -79,6 +81,4 @@ Game.new(Players::Human.new("O"), Players::Human.new("X")).play
  end 
  end
 
-puts "Welcome to Tic Tac Toe!"
 player_entry
-
