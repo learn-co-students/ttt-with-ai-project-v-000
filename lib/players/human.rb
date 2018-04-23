@@ -7,7 +7,9 @@ module Players
       super
     end
 
-    def move
+    def move(board)
+      board.display
+
       puts "Please select a cell (1 though 9)."
       rtn = gets.strip
       rtn
