@@ -43,7 +43,7 @@ class Board
   def taken?(location)
     c = self.cells
 
-    c[location - 1].strip != ""
+    c[location].strip != ""
   end
 
 end
