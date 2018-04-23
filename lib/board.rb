@@ -29,9 +29,18 @@ class Board
     c[location.to_i - 1]
   end
 
-  def full?
+  def turn_count
     c = self.cells
 
-    (c.select{|e| e.strip == ""}.size) == 0
+    c.select{|e| e.strip <> ""}.size
   end
+
+  def full?
+    count = self.turn_count
+    count == 9
+  end
+
+  private
+
+
 end
