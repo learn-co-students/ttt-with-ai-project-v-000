@@ -1,6 +1,7 @@
 require_relative '../player.rb'
 
-class Player::Human < Player
+class Human
+  extend Player
 
 
   def initialize
