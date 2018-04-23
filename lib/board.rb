@@ -32,6 +32,6 @@ class Board
   def full?
     c = self.cells
 
-    c.grep(/" "/).size == 0
+    (c.select{|e| e.strip == ""}.size) == 0
   end
 end
