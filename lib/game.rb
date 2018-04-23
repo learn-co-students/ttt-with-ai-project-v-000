@@ -41,7 +41,7 @@ class Game
   def winner
     w = won?
 
-    puts "this is w |" + w[0] + "|"
+    puts "this is w |" + w[0].to_s + "|"
 
     return nil if !!! w
 
