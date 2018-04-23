@@ -14,12 +14,12 @@ class Board
   def display
     d = self.cells
 
-    puts "---------"
+    puts "-----------"
     puts " #{d[0]} | #{d[1]} | #{d[2]} "
-    puts "---------"
+    puts "-----------"
     puts " #{d[3]} | #{d[4]} | #{d[5]} "
-    puts "---------"
+    puts "-----------"
     puts " #{d[6]} | #{d[7]} | #{d[8]} "
-    puts "---------"
+    puts "-----------"
   end
 end
