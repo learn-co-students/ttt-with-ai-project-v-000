@@ -33,4 +33,8 @@ class Game
   def draw?
     board.turn_count > 8 && !won?
   end
+
+  def over?
+    draw? || won?
+  end
 end
