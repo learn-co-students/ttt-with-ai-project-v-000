@@ -22,12 +22,12 @@ class Game
     puts "----"
     puts c
     puts "---"
-    
-    w = WIN_COMBINATIONS
 
-    ret = (0..7).any? do |idx|
+    w = WIN_COMBINATIONS
+    retn = false
+    ret = (0..7).each do |idx|
       e = w[idx]
-      ((c[e[1]] == c[e[2]]) && (c[e[2]] == c[e[3]]))
+      rtn = true if ((c[e[1]] == c[e[2]]) && (c[e[2]] == c[e[3]]))
     end
 
     ret
