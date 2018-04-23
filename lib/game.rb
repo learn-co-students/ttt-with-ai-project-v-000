@@ -19,15 +19,12 @@ class Game
 
   def won?
     c = self.board.cells
-    puts "----"
-    puts c
-    puts "---"
 
     w = WIN_COMBINATIONS
     retn = false
     ret = (0..7).each do |idx|
       e = w[idx]
-      rtn = true if ((c[e[1]] == c[e[2]]) && (c[e[2]] == c[e[3]]))
+      rtn = true if ((c[e[1]].to_s == c[e[2]].to_s) && (c[e[2]].to_s == c[e[3]].to_s))
     end
 
     ret
