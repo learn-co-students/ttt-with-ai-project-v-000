@@ -46,4 +46,11 @@ class Board
     c[location.to_i - 1].strip != ""
   end
 
+  def valid_move?(location)
+    idx = location.to_i - 1
+
+    return false if idx < 0 || idx > 8
+
+    c = self.cells
+    c[idx].strip == ""
 end
