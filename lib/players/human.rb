@@ -1,11 +1,9 @@
-require_relative '../player.rb'
-
-class Human
-  extend Player
 
 
-  def initialize
-  end
+class Player::Human < Player
+
+  # def initialize
+  # end
 
   def move
     puts "where would you like to move to?"
