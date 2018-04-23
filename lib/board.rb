@@ -32,7 +32,7 @@ class Board
   def turn_count
     c = self.cells
 
-    c.select{|e| e.strip <> ""}.size
+    c.select{|e| e.strip != ""}.size
   end
 
   def full?
