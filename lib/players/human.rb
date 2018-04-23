@@ -15,5 +15,8 @@ module Players
       rtn
     end
 
+    def token
+      super
+    end
   end
 end
