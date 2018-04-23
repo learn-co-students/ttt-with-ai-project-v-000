@@ -29,4 +29,8 @@ class Game
 
     rtn
   end
+
+  def draw?
+    board.turn_count > 9
+  end
 end
