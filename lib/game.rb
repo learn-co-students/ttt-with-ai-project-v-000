@@ -24,7 +24,7 @@ class Game
     retn = false
     ret = (0..7).each do |idx|
       e = w[idx]
-      rtn = true if ((c[e[1]].to_s == c[e[2]].to_s) && (c[e[2]].to_s == c[e[3]].to_s))
+      rtn = true if ((c[e[0]].to_s == c[e[1]].to_s) && (c[e[1]].to_s == c[e[2]].to_s))
     end
 
     ret
