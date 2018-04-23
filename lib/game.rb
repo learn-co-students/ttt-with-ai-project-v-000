@@ -19,10 +19,10 @@ class Game
 
   def won?
     c = self.board.cells
-
     w = WIN_COMBINATIONS
+
     rtn = nil
-    ret = (0..7).each do |idx|
+    (0..7).each do |idx|
       e = w[idx]
       rtn = e if ((c[e[0]] == c[e[1]]) && (c[e[1]] == c[e[2]]))
     end
@@ -41,8 +41,10 @@ class Game
   def winner
     w = won?
 
+    puts "this is w |" + w + "|"
+
     return nil if !!! w
 
-    return self.board.cells[w[0]]
+    self.board.cells[w[0]]
   end
 end
