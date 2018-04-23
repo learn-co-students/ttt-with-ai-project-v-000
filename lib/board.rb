@@ -2,12 +2,12 @@
 class Board
   attr_accessor :cells
 
-  def initialized
+  def initialize
     self.reset!
 
   end
 
   def reset!
-    self.cells = Array.new(9, " ")
+    self.cells = [" "] * 9
   end
 end
