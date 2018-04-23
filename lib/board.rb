@@ -26,6 +26,6 @@ class Board
   def position(location)
     c = self.cells
 
-    c[location-1]
+    c[location.to_i - 1]
   end
 end
