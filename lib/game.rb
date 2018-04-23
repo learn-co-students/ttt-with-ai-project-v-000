@@ -19,6 +19,10 @@ class Game
 
   def won?
     c = self.board.cells
+    puts "----"
+    puts c
+    puts "---"
+    
     w = WIN_COMBINATIONS
 
     ret = (0..7).any? do |idx|
