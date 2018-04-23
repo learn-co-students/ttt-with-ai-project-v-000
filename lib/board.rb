@@ -61,6 +61,6 @@ class Board
 
     idx = location.to_i - 1
 
-    puts "This is the token: " + player.token
+    c[idx] = player.token
   end
 end
