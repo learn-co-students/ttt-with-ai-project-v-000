@@ -32,6 +32,6 @@ class Board
   def full
     c = self.cells
 
-    c.grep(/" "/)length == 0
+    c.grep(/" "/).size == 0
   end
 end
