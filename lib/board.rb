@@ -55,12 +55,12 @@ class Board
     c[idx].strip == ""
   end
 
-  def update(location, token)
+  def update(location, player)
     c = self.cells
     return nil if !valid_move?(location)
 
     idx = location.to_i - 1
 
-    puts "This is the token: " + token.to_s
+    puts "This is the token: " + player.token
   end
 end
