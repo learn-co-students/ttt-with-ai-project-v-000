@@ -39,6 +39,6 @@ class Game
   end
 
   def winner
-    self.board.turn_count % 2 == 0 ? "O" : "X"
+    self.board.turn_count % 2 == 0 ? "X" : "O"
   end
 end
