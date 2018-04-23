@@ -14,6 +14,6 @@ class Game
     b = self.board
     t = b.turn_count
 
-    t % 2 ? p2.token : p1.token
+    t % 2 ? player_2.token : player_1.token
   end
 end
