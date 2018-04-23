@@ -24,7 +24,7 @@ class Game
     rtn = nil
     (0..7).each do |idx|
       e = w[idx]
-      rtn = e if ((c[e[0]] == c[e[1]]) && (c[e[1]] == c[e[2]]))
+      rtn = e if ((c[e[0]] == c[e[1]]) && (c[e[1]] == c[e[2]]) && (c[e[0]].strip != ""))
     end
 
     rtn
@@ -40,8 +40,6 @@ class Game
 
   def winner
     w = won?
-
-    puts "this is w |" + w[0].to_s + "|"
 
     return nil if !!! w
 
