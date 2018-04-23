@@ -53,4 +53,5 @@ class Board
 
     c = self.cells
     c[idx].strip == ""
+  end
 end
