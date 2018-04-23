@@ -39,6 +39,10 @@ class Game
   end
 
   def winner
-    self.board.turn_count % 2 == 0 ? "X" : "O"
+    w = won?
+
+    return nil if !!! w
+
+    return self.board.cells[w[0]]
   end
 end
