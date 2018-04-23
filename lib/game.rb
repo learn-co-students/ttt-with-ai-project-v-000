@@ -10,5 +10,10 @@ class Game
     self.player_2 = p2
   end
 
+  def current_player
+    b = self.board
+    t = b.turn_count
 
+    t % 2 ? p2.token : p1.token
+  end
 end
