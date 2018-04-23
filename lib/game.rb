@@ -16,4 +16,10 @@ class Game
 
     t % 2 ? player_1 : player_2
   end
+
+  def won?
+    c = self.board.cells
+    ret = WIN_COMBINATIONS.any { |e| ((c[e[1]] == c[e[2]]) && (c[e[2]] == c[e[3]])) }
+    ret
+  end
 end
