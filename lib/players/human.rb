@@ -1,5 +1,5 @@
 
-class Human < Players
+class Players::Human < Player
 
   def initialize(token)
     super
