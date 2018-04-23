@@ -40,7 +40,10 @@ class Board
     count == 9
   end
 
-  private
+  def taken?(location)
+    c = self.cells
 
+    c[location - 1].strip != ""
+  end
 
 end
