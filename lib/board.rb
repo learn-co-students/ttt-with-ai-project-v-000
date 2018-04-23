@@ -28,4 +28,10 @@ class Board
 
     c[location.to_i - 1]
   end
+
+  def full
+    c = self.cells
+
+    c.grep(/" "/)length == 0
+  end
 end
