@@ -19,10 +19,13 @@ class Game
 
   def won?
     c = self.board.cells
-    puts WIN_COMBINATIONS[0]
-    puts "--"
-    puts "--"
-    ret = WIN_COMBINATIONS.any? { |e| puts e } #((c[e[1]] == c[e[2]]) && (c[e[2]] == c[e[3]])) }
-    !!ret
+    w = WIN_COMBINATIONS
+
+    ret = (0..7).any? do |idx|
+      e = w[idx]
+      ((c[e[1]] == c[e[2]]) && (c[e[2]] == c[e[3]]))
+    end
+
+    ret
   end
 end
