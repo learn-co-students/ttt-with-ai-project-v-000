@@ -21,10 +21,10 @@ class Game
     c = self.board.cells
 
     w = WIN_COMBINATIONS
-    rtn = false
+    rtn = nil
     ret = (0..7).each do |idx|
       e = w[idx]
-      rtn = true if ((c[e[0]] == c[e[1]]) && (c[e[1]] == c[e[2]]))
+      rtn = e if ((c[e[0]] == c[e[1]]) && (c[e[1]] == c[e[2]]))
     end
 
     rtn
