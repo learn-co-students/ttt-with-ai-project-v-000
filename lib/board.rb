@@ -22,4 +22,10 @@ class Board
     puts " #{d[6]} | #{d[7]} | #{d[8]} "
     puts "-----------"
   end
+
+  def position(location)
+    c = self.cells
+
+    c[location-1]
+  end
 end
