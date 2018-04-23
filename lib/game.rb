@@ -31,6 +31,6 @@ class Game
   end
 
   def draw?
-    board.turn_count > 9
+    board.turn_count > 8 && !won?
   end
 end
