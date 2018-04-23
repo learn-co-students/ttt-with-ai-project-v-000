@@ -14,7 +14,7 @@ class Game
     b = self.board
     t = b.turn_count
 
-    t % 2 ? player_1 : player_2
+    t % 2 == 0 ? player_1 : player_2
   end
 
   def won?
@@ -31,10 +31,14 @@ class Game
   end
 
   def draw?
-    board.turn_count > 8 && !won?
+    self.board.turn_count > 8 && !won?
   end
 
   def over?
     draw? || won?
+  end
+
+  def winner?
+    self.board.turn_count % 2 == 0 ? "O" : "X" 
   end
 end
