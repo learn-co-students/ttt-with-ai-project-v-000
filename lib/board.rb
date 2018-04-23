@@ -29,7 +29,7 @@ class Board
     c[location.to_i - 1]
   end
 
-  def full
+  def full?
     c = self.cells
 
     c.grep(/" "/).size == 0
