@@ -52,6 +52,7 @@ WIN_COMBINATIONS = [
       self.turn
     end
     @board.update(input, self.current_player)
+    @board.display
   end
 
   def play
@@ -59,5 +60,48 @@ WIN_COMBINATIONS = [
       self.turn
     end
     won? ? (puts "Congratulations #{self.winner}!") : (puts "Cat's Game!")
+  end
+
+  def play_again?
+    puts "Would you like to play again (Y/N):"
+    input = gets.strip.upcase
+    if input == "Y" || input == "YES"
+      Game.start
+    else
+      puts "Thanks for playing!!!"
+    end
+  end
+
+  def self.start
+    puts "Welcome to Tic-Tac-Toe!"
+    puts "How many players? (0-2):"
+    player_count = gets.strip.to_i
+
+    case player_count
+    when 0
+      first_player = Players::Computer.new("X")
+      second_player = Players::Computer.new("O")
+      board = Board.new
+      game = Game.new(first_player, second_player, board)
+      board.display
+      game.play
+      game.play_again?
+    when 1
+      first_player = Players::Human.new("X")
+      second_player = Players::Computer.new("O")
+      board = Board.new
+      game = Game.new(first_player, second_player, board)
+      board.display
+      game.play
+      game.play_again?
+    when 2
+      first_player = Players::Human.new("X")
+      second_player = Players::Human.new("O")
+      board = Board.new
+      game = Game.new(first_player, second_player, board)
+      board.display
+      game.play
+      game.play_again?
+    end
   end
 end
