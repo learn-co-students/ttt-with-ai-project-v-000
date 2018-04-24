@@ -27,8 +27,25 @@ class Board
     end
 
     def turn_count
-
+      turns = 0
+      @cells.each do |token|
+        if token == "X" || token =="O"
+          turns += 1
+        end
+      end
+      turns
     end
 
+    def taken?(input)
+      position(input)=="X" || position(input)=="O"
+    end
+
+    def valid_move?(input)
+      input.to_i.between?(1,9) && !taken?(input)
+    end
+
+    def update
+
+    end
 
 end
