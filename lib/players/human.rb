@@ -1,11 +1,11 @@
 
 
-class Player::Human < Player
+module Players
+  class Human < Player
 
-  # def initialize
-  # end
-
-  def move
-    puts "where would you like to move to?"
+    def move(board)
+      puts "Please enter 1-9:"
+      gets.strip
+    end
   end
 end
