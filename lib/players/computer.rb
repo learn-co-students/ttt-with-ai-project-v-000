@@ -1,8 +1,8 @@
-module Players
-  class Computer < Players
+#module Players
+#  class Computer < Players
 
 
 
 
-  end
-end
+#  end
+#end

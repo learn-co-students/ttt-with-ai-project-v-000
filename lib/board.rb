@@ -3,12 +3,11 @@ class Board
   attr_accessor :cells
 
     def reset!
-      @cells.clear
       @cells = Array.new(9, " ")
     end
 
     def initialize
-      @cells = Array.new(9, " ")
+      reset!
     end
 
     def display
@@ -20,7 +19,15 @@ class Board
     end
 
     def position(input)
-      binding.pry
+      cells[input.to_i-1]
+    end
+
+    def full?
+      @cells.all?{|token| token == "X" || token == "O"}
+    end
+
+    def turn_count
+
     end
 
 

@@ -1,8 +1,8 @@
-module Players
-  class Human < Players
+#module Players
+#  class Human < Players
 
 
 
 
-  end
-end
+#  end
+#end
