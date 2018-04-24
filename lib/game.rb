@@ -10,5 +10,7 @@ class Game
     [0,4,8], #<- Left-Diagnal Win
     [6,4,2]] #<- Right-Diagnal Win
 
+    def board
 
+    end
 end
