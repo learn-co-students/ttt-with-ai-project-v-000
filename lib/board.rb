@@ -24,8 +24,4 @@ class Board
     end
 
 
-
-
-
-
 end
