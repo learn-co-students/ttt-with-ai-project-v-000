@@ -32,7 +32,7 @@ module Players
 
   private
       def win_weight(new_board)
-        winners = win_combo
+        winners = self.win_combo
 
         win_weight = []
         winners.each do |e|
