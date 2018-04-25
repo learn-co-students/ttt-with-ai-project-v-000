@@ -44,7 +44,7 @@ module Players
 
           win_weight << val**2
         end
-
+        win_weight
       end
 
       def position_value(occupant)
