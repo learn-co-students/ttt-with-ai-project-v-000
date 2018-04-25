@@ -60,12 +60,11 @@ class Game
   end
 
   def play
-    puts "Please enter your moves corresponding to cells 1 through 9."
-
-    while !won?
+    while !over?
       turn
     end
   end
+
 private
 
   def one_turn
