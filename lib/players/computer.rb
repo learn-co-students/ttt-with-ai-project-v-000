@@ -10,6 +10,8 @@ module Players
     end
 
     def move(board)
-      
+
     end
+    
+  end
 end
