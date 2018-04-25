@@ -18,7 +18,7 @@ class Game
     end
 
     def current_player
-      @board.turn_count % 2 == 0? player_1 : player_2
+      @board.turn_count % 2 == 0? @player_1 : @player_2
     end
 
 
@@ -45,7 +45,21 @@ class Game
     end
 
     def turn
-      
+      player = current_player
+      current_move = player.move(@board)
+
+      if !@board.valid_move?(current_move)
+        turn
+      else
+       @board.update(current_move, player)
+       @board.display
+       puts "#{player.token} moved to #{current_move}"
+      end
     end
+
+    def play
+
+    end
+    
 
 end
