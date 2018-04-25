@@ -59,6 +59,10 @@ class Game
     inp
   end
 
+  def play
+    puts "Please enter your move corresponding to cells 1 through 9."
+    
+  end
 private
 
   def one_turn
