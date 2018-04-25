@@ -1,4 +1,5 @@
 class Game
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2], #<- Top-Row Win
@@ -10,7 +11,5 @@ class Game
     [0,4,8], #<- Left-Diagnal Win
     [6,4,2]] #<- Right-Diagnal Win
 
-    def board
 
-    end
 end
