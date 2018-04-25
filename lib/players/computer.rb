@@ -21,7 +21,10 @@ module Players
         tmp_board = board.cells
         tmp_board[e] = self.token if tmp_board[e].strip == ""
         w_w = win_weight(tmp_board)
-        max_win = [e, w_w] if w_w > max_win[1]
+
+        sum_ww = 0
+        w_w.each { |f| sum_ww += f }
+        max_win = [e, sum_ww] if sum_ww > max_win[1]
       end
 
       (max_win[1] + 1).to_s
@@ -29,8 +32,7 @@ module Players
 
   private
       def win_weight(new_board)
-        t = self.token
-        winners = self.win_combo
+        winners = win_combo
 
         win_weight = []
         winners.each do |e|
@@ -40,7 +42,7 @@ module Players
 
           val = e0 + e1 + e2
 
-          win_weight << val / val * val^2 #keep the sign square the value
+          win_weight << val^2
         end
 
       end
