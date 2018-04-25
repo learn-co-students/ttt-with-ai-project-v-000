@@ -42,7 +42,7 @@ module Players
 
           val = e0 + e1 + e2
 
-          win_weight << val^2
+          win_weight << val**2
         end
 
       end
