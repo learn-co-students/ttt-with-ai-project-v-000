@@ -38,5 +38,10 @@ class Board
     counter
   end
 
+  def taken?(position)
+    index  = input_to_index(position)
+    !(self.cells[index].nil? || self.cells[index] == " ")
+  end
+
 
 end
