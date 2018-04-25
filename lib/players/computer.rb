@@ -37,7 +37,7 @@ module Players
       def win_weight(new_board)
         winners = self.win_combo
 
-        win_wei = []
+        win_wei = 0
         winners.each do |e|
           e0 = position_value(new_board[e[0]])
           e1 = position_value(new_board[e[1]])
