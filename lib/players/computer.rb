@@ -30,7 +30,7 @@ module Players
         max_win = [e, w_w] if w_w > max_win[1]
       end
 
-      return (max_win[1] + 1).to_s
+      return (max_win[0] + 1).to_s
     end
 
   private
