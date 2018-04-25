@@ -26,4 +26,8 @@ class Board
     self.cells[i]
   end
 
+  def full?
+    !@cells.include?(" ")
+  end
+
 end
