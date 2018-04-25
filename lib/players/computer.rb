@@ -24,9 +24,10 @@ module Players
         tmp_board[e] = self.token if tmp_board[e].strip == ""
         w_w = win_weight(tmp_board)
 
-        sum_ww = 0
-        w_w.each { |f| sum_ww += f }
-        max_win = [e, sum_ww] if sum_ww > max_win[1]
+        #sum_ww = 0
+        #w_w.each { |f| sum_ww += f }
+        #max_win = [e, sum_ww] if sum_ww > max_win[1]
+        max_win = [e, w_w] if w_w > max_win[1]
       end
 
       (max_win[1] + 1).to_s
@@ -36,7 +37,7 @@ module Players
       def win_weight(new_board)
         winners = self.win_combo
 
-        win_weight = []
+        win_wei = []
         winners.each do |e|
           e0 = position_value(new_board[e[0]])
           e1 = position_value(new_board[e[1]])
@@ -44,9 +45,9 @@ module Players
 
           val = e0 + e1 + e2
 
-          win_weight << val**2
+          win_wei += val**2
         end
-        win_weight
+        win_wei
       end
 
       def position_value(occupant)
