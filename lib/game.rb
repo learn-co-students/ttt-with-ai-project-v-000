@@ -71,6 +71,10 @@ class Game
     end
   end
 
+  def win_combo
+    WIN_COMBINATIONS
+  end
+
 private
 
   def one_turn

@@ -5,7 +5,7 @@ module Players
     def initialize(token)
       super
 
-      @win_combo = Game.new.WIN_COMBINATIONS
+      @win_combo = Game.new.win_combo
     end
 
     def token
@@ -26,7 +26,7 @@ module Players
 
       (max_win[1] + 1).to_s
     end
-    
+
   private
       def win_weight(new_board)
         t = self.token
