@@ -13,7 +13,7 @@ module Players
     end
 
     def move(board)
-      return "4" if board.turn_count == 0
+      return "5" if board.turn_count == 0
 
       #find max win_weight
       max_win = [-1, -1]
