@@ -47,6 +47,8 @@ class Board
   end
 
   def valid_move?(location)
+    return location.strip.upcase == "EXIT"
+
     idx = location.to_i - 1
 
     return false if idx < 0 || idx > 8
