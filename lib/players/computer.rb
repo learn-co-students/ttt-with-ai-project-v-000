@@ -30,7 +30,7 @@ module Players
         max_win = [e, w_w] if w_w > max_win[1]
       end
 
-      (max_win[1] + 1).to_s
+      return (max_win[1] + 1).to_s
     end
 
   private
@@ -45,7 +45,7 @@ module Players
           e2 = position_value(new_board[e[2]])
 
           puts "#{e0} #{e1} #{e2}"
-          
+
           val = e0 + e1 + e2
 
           win_wei += val**2
