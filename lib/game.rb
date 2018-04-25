@@ -45,4 +45,24 @@ class Game
 
     self.board.cells[w[0]]
   end
+
+  def turn
+    b = self.board
+
+    need_input = true
+    while need_input do
+      b.display
+      inp = gets.strip
+      return nil if inp.downcase == "exit"
+
+      inp = inp.to_i
+
+      if b.cells[inp].strip == ""
+        b.cells[inp] = current_player.token
+        need_input = false
+      end
+    end
+    inp
+  end
+
 end
