@@ -1,5 +1,15 @@
 module Players
   class Computer < Player
-    
-  end
+
+    def initialize(token)
+      super
+    end
+
+    def token
+      super
+    end
+
+    def move(board)
+      
+    end
 end
