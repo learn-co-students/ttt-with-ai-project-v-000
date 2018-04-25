@@ -62,7 +62,7 @@ class Game
   def play
     puts "Please enter your moves corresponding to cells 1 through 9."
 
-    while !self.won?
+    while !won?
       turn
     end
   end
