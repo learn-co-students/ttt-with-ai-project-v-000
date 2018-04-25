@@ -55,7 +55,33 @@ def won?
     if self.won?
       index = won?[0]
       self.board.cells[index]
-
     end
   end
+
+  def turn
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "turn: #{@board.turn_count + 1}"
+      @board.display
+      @board.update(current_move, player)
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+
+
+
 end
