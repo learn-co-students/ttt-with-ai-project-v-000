@@ -36,7 +36,7 @@ module Players
   private
       def win_weight(new_board)
         winners = self.win_combo
-        return puts winners
+        puts "---"
 
         win_wei = 0
         winners.each do |e|
@@ -44,6 +44,8 @@ module Players
           e1 = position_value(new_board[e[1]])
           e2 = position_value(new_board[e[2]])
 
+          puts "#{e0} #{e1} #{e2}"
+          
           val = e0 + e1 + e2
 
           win_wei += val**2
