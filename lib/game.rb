@@ -81,7 +81,7 @@ private
     b = self.board
 
     inp = current_player.move(b)
-
+    puts "Player Input: " + inp
     return "invalid" if !b.valid_move?(inp)
     b.cells[inp.to_i - 1] = current_player.token
   end

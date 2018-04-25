@@ -19,7 +19,7 @@ module Players
       #find max win_weight
       max_win = [-1, -1]
       (0..8).each do |e|
-        puts "Board spot: " + e.to_s
+        #puts "Board spot: " + e.to_s
 
         tmp_board = []
         tmp_board.replace(board.cells)
@@ -27,9 +27,6 @@ module Players
         tmp_board[e] = self.token if tmp_board[e].strip == ""
         w_w = win_weight(tmp_board)
 
-        #sum_ww = 0
-        #w_w.each { |f| sum_ww += f }
-        #max_win = [e, sum_ww] if sum_ww > max_win[1]
         max_win = [e, w_w] if w_w > max_win[1]
       end
 
