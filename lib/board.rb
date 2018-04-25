@@ -30,4 +30,13 @@ class Board
     !@cells.include?(" ")
   end
 
+  def turn_count
+    counter = 0
+    self.cells.each do |space|
+        counter += 1 if space == "X" || space == "O"
+    end
+    counter
+  end
+
+
 end
