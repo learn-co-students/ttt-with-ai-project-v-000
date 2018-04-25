@@ -13,7 +13,6 @@ module Players
       puts "Please select a cell (1 though 9)."
       rtn = gets.strip
 
-      #return "invalid" if board.valid_move?(rtn)
       rtn
     end
 

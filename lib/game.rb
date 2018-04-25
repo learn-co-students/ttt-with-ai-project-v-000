@@ -53,19 +53,10 @@ class Game
     need_input = true
     while need_input do
       inp = one_turn
-
-      if inp.strip.upcase == "EXIT"
-        ret = "exit"
-      elsif !inp == "invalid"
-        inp = inp.to_i
-
-        b.cells[inp] = current_player.token
-        need_input = false
-        ret = inp
-      end
+      need_input = (inp == "invalid")
     end
 
-    ret
+    inp
   end
 
 private
@@ -76,7 +67,7 @@ private
     inp = current_player.move(b)
 
     return "invalid" if !b.valid_move?(inp)
-    inp
+    b.cells[inp.to_i - 1] = current_player.token
   end
 
 end
