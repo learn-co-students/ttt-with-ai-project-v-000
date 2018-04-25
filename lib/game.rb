@@ -25,8 +25,8 @@ class Game
     def won?
       WIN_COMBINATIONS.find do |combination|
       board.cells[combination[0]] == board.cells[combination[1]] &&
-      board.cells[combination[1]] == board.cells[combination[2]]
-      #board.postion_taken?(combination[0])
+      board.cells[combination[1]] == board.cells[combination[2]] &&
+      (board.cells[combination[0]]== "X" || board.cells[combination[0]]== "O" )
       end
     end
 
@@ -36,6 +36,16 @@ class Game
 
     def draw?
       !won? && @board.full?
+    end
+
+    def winner
+      if winning_combo = won?
+        @board.cells[winning_combo.first]
+      end
+    end
+
+    def turn
+      
     end
 
 end
