@@ -47,12 +47,11 @@ class Board
   end
 
   def valid_move?(location)
-    return location.strip.upcase == "EXIT"
+    possible = location.strip.scan(/^[1-9]$/).length > 0
 
-    idx = location.to_i - 1
+    return nil if !possible
 
-    return false if idx < 0 || idx > 8
-
+    idx = location.strip.to_i - 1
     c = self.cells
     c[idx].strip == ""
   end
