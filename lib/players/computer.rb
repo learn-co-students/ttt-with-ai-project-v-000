@@ -18,7 +18,7 @@ module Players
       #find max win_weight
       max_win = [-1, -1]
       (0..8).each do |e|
-        tmp_board = board.cells
+        tmp_board = board.cells.to_a
         tmp_board[e] = self.token if tmp_board[e].strip == ""
         w_w = win_weight(tmp_board)
 
