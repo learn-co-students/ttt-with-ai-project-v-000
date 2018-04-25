@@ -49,19 +49,31 @@ class Game
   def turn
     b = self.board
 
+    ret = nil
     need_input = true
     while need_input do
-      inp = current_player.move(b)
+      inp = one_turn
 
-      return nil if inp.downcase == "exit"
+      if !inp == "invalid"
+        inp = inp.to_i
 
-      inp = inp.to_i
-
-      if b.cells[inp].strip == ""
         b.cells[inp] = current_player.token
         need_input = false
+        ret = inp
       end
     end
+
+    ret
+  end
+
+private
+
+  def one_turn
+    b = self.board
+
+    inp = current_player.move(b)
+
+    return "invalid" if !b.valid_move?(inp)
     inp
   end
 
