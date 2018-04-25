@@ -51,8 +51,8 @@ class Game
 
     need_input = true
     while need_input do
-      inp = current_player.move
-      
+      inp = current_player.move(b)
+
       return nil if inp.downcase == "exit"
 
       inp = inp.to_i
