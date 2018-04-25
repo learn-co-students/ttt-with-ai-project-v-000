@@ -15,12 +15,12 @@ end
 
 case p_count
 when 0
-  g = Game.new(Board.new, Players::Computer.new("X"), Players::Computer.new("O"))
+  g = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 when 1
   if x_player == "C"
-    g = Game.new(Board.new, Players::Computer.new("X"), Players::Human.new("O"))
+    g = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
   else
-    g = Game.new(Board.new, Players::Human.new("X"), Players::Computer.new("O"))
+    g = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
   end
 when 2
   g = Game.new
