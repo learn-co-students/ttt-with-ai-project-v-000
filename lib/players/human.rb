@@ -2,7 +2,7 @@ module Players
 
   class Human < Player
 
-    def move(input)
+    def move(board)
       puts "Please input a selection."
       input = gets.strip
     end

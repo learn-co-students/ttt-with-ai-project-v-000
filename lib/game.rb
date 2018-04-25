@@ -11,7 +11,7 @@ class Game
     [0,4,8], #<- Left-Diagnal Win
     [6,4,2]] #<- Right-Diagnal Win
 
-    def initialize(player_1, player_2)
+    def initialize(player_1 = Players::Human, player_2 = Players::Human, board)
       @player_1 = player_1
       @player_2 = player_2
     end
