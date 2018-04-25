@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic-Tac-Toe with AI!"
-puts "You can play a 0, 1, or 2 player game."
+puts "You can play with 0, 1, or 2 players."
 puts "Please enter the number of players."
 p_count = gets.strip.to_i
 
@@ -15,12 +15,12 @@ end
 
 case p_count
 when 0
-  g = Game.new(Board.new, Players::Computer.new, Players::Computer.new)
+  g = Game.new(Board.new, Players::Computer.new("X"), Players::Computer.new("O"))
 when 1
-  if x_player = "C"
-    g = Game.new(Board.new, Players::Computer.new, Players::Human.new)
+  if x_player == "C"
+    g = Game.new(Board.new, Players::Computer.new("X"), Players::Human.new("O"))
   else
-    g = Game.new(Board.new, Players::Human.new, Players::Computer.new)
+    g = Game.new(Board.new, Players::Human.new("X"), Players::Computer.new("O"))
   end
 when 2
   g = Game.new
