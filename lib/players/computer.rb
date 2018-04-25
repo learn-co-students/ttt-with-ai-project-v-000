@@ -5,7 +5,8 @@ module Players
     def initialize(token)
       super
 
-      @win_combo = Game.new.win_combo
+      @win_combo = []
+      @win_combo.replace(Game.new.win_combo)
     end
 
     def token
@@ -18,6 +19,8 @@ module Players
       #find max win_weight
       max_win = [-1, -1]
       (0..8).each do |e|
+        puts "Board spot: " + e.to_s
+
         tmp_board = []
         tmp_board.replace(board.cells)
         #tmp_board = board.cells
