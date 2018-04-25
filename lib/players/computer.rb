@@ -1,6 +1,6 @@
 module Players
   class Computer < Player
-    attr_reader = :win_combo
+    attr_reader :win_combo
 
     def initialize(token)
       super
