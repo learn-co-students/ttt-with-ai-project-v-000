@@ -60,8 +60,11 @@ class Game
   end
 
   def play
-    puts "Please enter your move corresponding to cells 1 through 9."
-    
+    puts "Please enter your moves corresponding to cells 1 through 9."
+
+    while !self.won?
+      turn
+    end
   end
 private
 
