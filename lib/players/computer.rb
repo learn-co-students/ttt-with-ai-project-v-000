@@ -2,8 +2,12 @@ module Players
   class Computer < Player
 
     def move(board)
-      board.valid_move? == true
+      
+     opening = board.cells.index(" ") + 1
+    if board.valid_move?(opening) == true
+      return opening.to_s
     end
+  end
 
   end
 end
