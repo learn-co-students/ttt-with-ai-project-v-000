@@ -40,7 +40,7 @@ module Players
 
           val = e0 + e1 + e2
 
-          win_weight << val^2
+          win_weight << val / val * val^2 #keep the sign square the value
         end
 
       end
