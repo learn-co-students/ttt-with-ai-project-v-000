@@ -22,11 +22,13 @@ module Players
 
         tmp_board = []
         tmp_board.replace(board.cells)
-        #tmp_board = board.cells
-        tmp_board[e] = self.token if tmp_board[e].strip == ""
-        w_w = win_weight(tmp_board)
 
-        max_win = [e, w_w] if w_w > max_win[1]
+        if tmp_board[e].strip == ""
+          tmp_board[e] = self.token
+          w_w = win_weight(tmp_board)
+
+          max_win = [e, w_w] if w_w > max_win[1]
+        end
       end
 
       return (max_win[0] + 1).to_s
