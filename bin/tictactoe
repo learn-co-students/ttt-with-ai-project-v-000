@@ -42,4 +42,4 @@ ctr = 0
   ctr += 1 if msg != "Cat's Game!"
 end
 
-puts "Out of #{trials} trials, there were #{ctr} wins recorded."
+puts "Out of #{trials} trial(s), there were #{ctr} win(s) recorded."
