@@ -4,11 +4,12 @@ require_relative '../config/environment'
 
 def start
   input = ' '
-    puts "Welcome to Console Tic-Tac-Toe!\n Please make a selection from bellow using your keybord:\n
+    puts "Welcome to Console Tic-Tac-Toe!\n
+    Please make a selection from bellow using your keybord:\n
         Changes your mind? Please type 'exit'\n
         Enter 1 to play vs. Computer.\n
         Enter 2 to play vs. a buddy\n
-        Enter 3 for AI vs. AI"
+        Enter 3 for AI vs. AI\n"
 
     input = gets.strip
 
@@ -29,6 +30,17 @@ def single_player
   else
     Game.new(Players::Computer.new('X'), Players::Human.new('O'), Board.new).play
   end
+  play_again?
 end
+
+def play_again?
+  puts "Would you like to play again? Y/N"
+    input = gets.strip
+    if input == 'y'
+      start
+    else
+      puts "Good game Goodbye"
+    end
+  end
 
 start
