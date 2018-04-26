@@ -6,7 +6,7 @@ puts "Welcome to Tic-Tac-Toe with AI!"
 puts "You can play with 0, 1, or 2 players."
 puts "Please enter the number of players.  Entering 'W'"
 puts "will put the game in wargames mode.  Wargames mode"
-puts "will simulate 100 tic-tac-toe games and return a win count."
+puts "will simulate 1000 tic-tac-toe games and return a win count."
 
 inp = gets.strip.upcase
 if inp == "W"
