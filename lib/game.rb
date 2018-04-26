@@ -30,10 +30,10 @@ WIN_COMBINATIONS = [
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |winner|
-      @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[2]] == @board.cells[winner[1]] &&
-      (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
+    WIN_COMBINATIONS.detect do |win|
+      @board.cells[win[0]] == @board.cells[win[1]] &&
+      @board.cells[win[2]] == @board.cells[win[1]] &&
+      (@board.cells[win[0]] == "X" || @board.cells[win[0]] == "O")
 
     end
 
@@ -56,7 +56,7 @@ WIN_COMBINATIONS = [
     board.update(cp, current_player)
     board.display
   else
-    !board.valid_move?(cp)
+  #  !board.valid_move?(cp)
     puts "invalid"
     turn
   end
