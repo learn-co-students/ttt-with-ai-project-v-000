@@ -2,26 +2,35 @@
 
 require_relative '../config/environment'
 
-def start_game
-    input = " "
-puts "Welcome to Console Tic-Tac-Toe!\n Please make a selection from bellow using your keybord:\n
-    Changes your mind? Please type 'exit'\n
-    Enter 1 to play vs. Computer.\n
-    Enter 2 to play vs. a buddy\n
-    Enter 3 for AI vs. AI"
-        
+def start
+  input = ' '
+  until input != 'exit'
+    puts "Welcome to Console Tic-Tac-Toe!\n Please make a selection from bellow using your keybord:\n
+        Changes your mind? Please type 'exit'\n
+        Enter 1 to play vs. Computer.\n
+        Enter 2 to play vs. a buddy\n
+        Enter 3 for AI vs. AI"
+
     input = gets.strip
 
     case input
-    when "1"
-      Game.new Players::Human.new("X"), Players::Computer.new("O"),board = Board.new).play
-    when "2"
-        Game.new Players::Human.new("X"), Players::Human.new("O"), board = Board.new).play
-    when "3"
-        Game.new Players::Computer.new("X"), Players::Computer.new("O"),board = Board.new).play
+    when '1'
+      single_player
+    when '2'
+      Game.new(Players::Human.new('X'), Players::Human.new('O'), Board.new).play
+    when '3'
+      Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new).play
     end
-    puts "Would you like to play again? y/n?"
+  end
 end
 
-start_game until gets.strip == "n" || "exit"
-    
+def single_player
+  puts "Would you like to go first\n Y/N"
+  if gets.strip == 'y'
+    Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new).play
+  else
+    Game.new(Players::Computer.new('X'), Players::Human.new('O'), Board.new).play
+  end
+end
+
+start
