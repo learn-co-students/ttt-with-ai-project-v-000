@@ -71,12 +71,6 @@ WIN_COMBINATIONS = [
        else
          puts "Cat's Game!"
        end
-     
-  end
-
-
-
-
-
+     end
 
 end
