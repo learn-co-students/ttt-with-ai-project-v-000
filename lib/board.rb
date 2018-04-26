@@ -43,5 +43,15 @@ class Board
     !(self.cells[index].nil? || self.cells[index] == " ")
   end
 
+  def valid_move?(position)
+    index = input_to_index(position)
+    index.between?(0,8) && !taken?(position)
+  end
+
+  def update(position, player)
+    # binding.pry
+    i =  input_to_index(position)
+    self.cells[i] = player.token
+  end
 
 end
