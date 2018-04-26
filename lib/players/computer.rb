@@ -43,18 +43,21 @@ module Players
           e2 = position_value(new_board[e[2]])
 
           if (e0 == e1) && (e1 == e2) && (e0 != 0)
-            win_wei = 32 #Winner
+            path_val = 32 #Winner
           elsif (e0 + e1 + e2 == 4) && (e0 != 0) && (e1 != 0) && (e2 != 0)
-            win_wei = 16 #Need to block opponent
+            path_val = 16 #Need to block opponent
           elsif (e0 + e1 + e2 == 5) && (e0 != 0) && (e1 != 0) && (e2 != 0)
-            win_wei = 0 #Blocked path
+            path_val = 0 #Blocked path
           elsif (e0 + e1 + e2 == 3) && (e0 != e1) && (e1 != e2) && (e2 != e0)
-            win_wei = 4 #One and One - blocked opponent
+            path_val = 4 #One and One - blocked opponent
           elsif (e0 + e1 + e2 == 4) && (e0 != 1) && (e1 != 1) && (e2 != 1)
-            win_wei = 8 #Two of ours and an open space - has potential
+            path_val = 8 #Two of ours and an open space - has potential
           else
-            win_wei = 0 #No value here.
+            path_val = 0 #No value here.
           end
+
+          win_wei += path_val
+        end
         win_wei
       end
 
