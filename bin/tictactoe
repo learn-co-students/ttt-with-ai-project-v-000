@@ -4,8 +4,18 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic-Tac-Toe with AI!"
 puts "You can play with 0, 1, or 2 players."
-puts "Please enter the number of players."
-p_count = gets.strip.to_i
+puts "Please enter the number of players.  Entering 'W'"
+puts "will put the game in wargames mode.  Wargames mode"
+puts "will simulate 100 tic-tac-toe games and return a win count."
+
+inp = gets.strip.upcase
+if inp == "W"
+  trials = 1000
+  p_count = 0
+else
+  p_count = inp.to_i
+  trials = 1
+end
 
 x_player = "H"
 if p_count == 1
@@ -26,4 +36,10 @@ when 2
   g = Game.new
 end
 
-g.play
+ctr = 0
+(1..trials).each do
+  msg = g.play
+  ctr += 1 if msg != "Cat's Game!"
+end
+
+puts "Out of #{trials} trials, there were #{ctr} wins recorded."
