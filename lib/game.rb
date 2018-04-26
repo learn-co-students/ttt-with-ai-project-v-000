@@ -65,10 +65,13 @@ class Game
     end
 
     if won?
-      puts "Congratulations #{winner}!"
+      msg = "Congratulations #{winner}!"
     else
-      puts "Cat's Game!"
+      msg = "Cat's Game!"
     end
+
+    puts msg
+    msg
   end
 
   def win_combo
