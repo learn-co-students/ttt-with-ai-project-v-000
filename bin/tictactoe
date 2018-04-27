@@ -1,3 +1,54 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+def start
+  puts "WELCOME TO TIC TAC TOE!"
+  puts ""
+  puts " Press Enter to Start  "
+  enter = gets
+  while enter != "\n"
+    enter = gets
+  end
+  puts "   Choose Game Mode    "
+  puts "   [0] Computers Only  "
+  puts "   [1] Single Player   "
+  puts "   [2] Two Players     "
+
+  mode = gets.strip
+  case mode
+  when "0"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    puts "You've selected Computers Only"
+    game.play
+  when "1"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+    puts "You've selected Single Player"
+    game.play
+  when "2"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+    puts "You've selected Two Players"
+    game.play
+  end
+
+end
+
+def play_again?
+  puts "Would you like to play again (y/n)?"
+  key = gets.strip
+  while key != "y" && key != "n"
+    puts "Would you like to play again (y/n)?"
+    key = gets.strip
+  end
+  if key == "y"
+    true
+  else
+    false
+  end
+end
+
+
+start
+while play_again?
+  start
+end
+puts "Thanks for playing, goodbye!"
