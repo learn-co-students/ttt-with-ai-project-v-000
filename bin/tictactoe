@@ -1,3 +1,18 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome! 0, 1, or 2 player game?"
+ input = ""
+   until %w(0 1 2).include?(input)
+     input = gets.strip
+   end
+ input
+
+
+ 
+game = Game.new
+
+game.game_type(input)
+
+game.play
