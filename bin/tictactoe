@@ -9,7 +9,7 @@ input = gets.strip
 
 case input
   when "0"
-    Game.new(Player::Computer.new("X"), Player::Computer.new("O")).play
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
     puts "Would you like to play again?"
     new_game
   else
