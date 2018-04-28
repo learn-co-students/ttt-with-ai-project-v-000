@@ -1,6 +1,10 @@
 class TicTacToeCLI
   attr_accessor :player, :players, :stats, :computer
     
+    def initialize
+      call
+    end
+    
     def call 
       puts "Welcome to Tic Tac Toe"
       puts "Pick player mode: 0,1 or 2 players?"
@@ -19,7 +23,8 @@ class TicTacToeCLI
       if how_many == 0 
         computer_computer
       end
-    
+    end
+  
   def computer_computer
     game = Game.new(player_1= Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
     game.board.display
@@ -45,9 +50,8 @@ class TicTacToeCLI
     
     if answer == "y"
       call
-    if answer == "n"
+    elsif answer == "n"
       puts "Goodbye"
     end
   end
-end
 end
