@@ -4,16 +4,18 @@ module Players
   class Computer < Player
     
     def move(board)
-      puts board.display
-      puts "no spot" if board.full?
-        
+      if board.turn_count == 0 
+        return "4"
+      elsif board.update("1", "X")
+      elsif board.update("3", "X")
+      elsif board.update("7", "X")
+      elsif board.update("9", "X")
+      elsif board.update("2", "X")
+      elsif board.update("4", "X")
+      elsif board.update("5", "X")
+      elsif board.update("6", "X")
+      
       end
-      if board.turn_count == 1 
-        board.update(@board.cells[4], "X")
-      else
-        return "no spot"
-      end
-  
     end
     
   
