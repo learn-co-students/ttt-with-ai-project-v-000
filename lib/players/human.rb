@@ -1,15 +1,12 @@
 require "pry"
 module Players
+  attr_accessor :board, :game, :player
   class Human < Player
     
-    def move(input)
-      puts "Provide input"
-      #binding.pry
-      user_input = input
-      puts "#{user_input}"
+    def move(board)
+      puts "Enter move:"
+      user_input = gets.chomp
+      user_input
     end
-    
   end
-  
-  
 end
