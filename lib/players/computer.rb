@@ -4,23 +4,24 @@ module Players
   class Computer < Player
     
     def move(board)
-      if board.turn_count == 0 
-        return "4"
-      elsif board.update("1", "X")
-      elsif board.update("3", "X")
-      elsif board.update("7", "X")
-      elsif board.update("9", "X")
-      elsif board.update("2", "X")
-      elsif board.update("4", "X")
-      elsif board.update("5", "X")
-      elsif board.update("6", "X")
-      
+      puts board
+      if board.cells[4] == " "
+        "4"
+      elsif board.cells[0] == " "
+        "0"
+      elsif board.cells[2] == " "
+        "2"
+      elsif board.cells[6] == " "
+        "6"
+      elsif board.cells[8] == " "
+        "8"
+      else
+        board.detect do |cell| 
+          if cell.empty?
+            return board.index(cell)
+          end
+        end
       end
     end
-    
-  
-  
-  
-  
   end
 end

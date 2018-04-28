@@ -40,9 +40,8 @@ class Game
       return win_combo
     end
   end
-    else
-      false
-  end
+  false
+end
   
   def full?
     @board.cells.all? do |box|
@@ -101,7 +100,12 @@ class Game
     if draw? == true
       puts "Cat's Game!"
     end
-end
+  end
+  
 
+    
+    
+
+  
  
 end
