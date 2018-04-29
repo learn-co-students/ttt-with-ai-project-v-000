@@ -78,6 +78,7 @@ end
   def turn
     player = current_player
     input = player.move(@board)
+    #binding.pry
     if @board.valid_move?(input)
       @board.update(input, current_player)
       @board.display

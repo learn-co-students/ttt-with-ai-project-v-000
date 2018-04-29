@@ -46,8 +46,8 @@ class Board
   end
   
   def valid_move?(index)
-    index = index.to_s
-    if taken?(index) == false && index.between?("1","9") == true
+    index = index.to_i
+    if taken?(index) == false && index.between?(1, 9) == true
       return true
     else
       return false

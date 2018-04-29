@@ -4,21 +4,22 @@ module Players
   class Computer < Player
     
     def move(board)
-      puts board
+      #puts board
       if board.cells[4] == " "
-        "4"
+        "5"
       elsif board.cells[0] == " "
-        "0"
+        "1"
       elsif board.cells[2] == " "
-        "2"
+        "3"
       elsif board.cells[6] == " "
-        "6"
+        "7"
       elsif board.cells[8] == " "
-        "8"
+        "9"
       else
-        board.detect do |cell| 
-          if cell.empty?
-            return board.index(cell)
+        board.cells.each_with_index do |cell, index| 
+          #binding.pry           
+          if cell == " "
+            return index+1   
           end
         end
       end
