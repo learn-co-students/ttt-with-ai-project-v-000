@@ -1,3 +1,5 @@
+require "pry"
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -42,6 +44,12 @@ class Game
     if winning_combo = won?
     @winner = @board.cells[winning_combo.first]
     end
+  end
+
+  def turn
+    puts "Please enter 1-9:"
+    player_1
+
   end
 
 end
