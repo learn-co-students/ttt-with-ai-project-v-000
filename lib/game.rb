@@ -47,8 +47,7 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    player_1
+    binding.pry
 
   end
 
