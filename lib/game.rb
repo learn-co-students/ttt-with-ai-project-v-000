@@ -47,7 +47,12 @@ class Game
   end
 
   def turn
-    binding.pry
+    player = current_player
+    if player.move(board)
+      @board.turn_count
+    else
+      player 
+    end
 
   end
 
