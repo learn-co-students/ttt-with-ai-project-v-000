@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+
+  puts "Welcome to Tic-tac-toe!"
+  Game.game_assign
+  Game.play_again?
