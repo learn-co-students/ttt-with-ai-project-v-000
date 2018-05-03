@@ -18,10 +18,13 @@
             end
 
             #when occupying middle space, and opponent has opposite corners, choose side position in 4th move
+            #(will not execute if blocking of opponents win required)
             if (board.turn_count == 3 && board.cells[4] == "#{token}")
-                return move = [2, 4, 6, 8].detect{|i| board.cells[i-1] == " "}
+                sides = [2,4,6,8].select{|position| board.cells[position] == " "}
+                return move = sides.shuffle.first
             end
 
+            #if no special cases exist, prefer to take middle space, or one of the corners
             if move ==  nil
               return move = [5, 1, 3, 7, 9, 2, 4, 6, 8].detect{|i| board.cells[i-1] == " "}
             end
