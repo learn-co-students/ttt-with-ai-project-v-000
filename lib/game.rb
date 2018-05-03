@@ -38,7 +38,7 @@ class Game
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
       game.play
     elsif input == "2"
-      game.play
+      game.play  # two human players is the default
     elsif input.upcase == "WAR"
       draws = 0
       100.times do
@@ -64,6 +64,10 @@ class Game
 
   def current_player
     @board.turn_count.even? ? @player_1 : @player_2
+  end
+
+  def opponent
+    @board.turn_count.odd? ? @player_1 : @player_2
   end
 
   def won?

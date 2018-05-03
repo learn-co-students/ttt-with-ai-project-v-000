@@ -3,6 +3,7 @@
           def move(board)
             move = nil
 
+            #if two of three spaces in any winning combination are taken, moves to the third spot to block or win
             Game::WIN_COMBINATIONS.each do |combo|
 
               checkArray = [board.cells[combo[0]].to_s, board.cells[combo[1]].to_s, board.cells[combo[2]].to_s]
@@ -14,6 +15,11 @@
                 target = checkArray.index(" ")
                 return move = (combo[target].to_i + 1)
               end
+            end
+
+            #when occupying middle space, and opponent has opposite corners, choose side position in 4th move
+            if (board.turn_count == 3 && board.cells[4] == "#{token}")
+                return move = [2, 4, 6, 8].detect{|i| board.cells[i-1] == " "}
             end
 
             if move ==  nil
