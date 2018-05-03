@@ -26,7 +26,7 @@
                 return move = opensides.sample.to_i #unless opensides.length == 0
             end
 
-            #if no special cases exist, prefer to take middle space, or one of the corners
+            #if no special cases exist, prefer to take middle space, or randomly select one of the corners.  IF all taken, randomly select side.
             if board.cells[4] == " "
               return move = 5
             elsif opencorners.length != 0
