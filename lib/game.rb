@@ -55,12 +55,24 @@ class Game
   end
 
   def turn
-    input = gets.strip
-
-    if valid_move? input
-      move(input, current_player)
+    input = current_player.move(board)
+    if board.valid_move? input
+      board.turn_count
+      board.update(input, current_player)
     else
       turn
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 

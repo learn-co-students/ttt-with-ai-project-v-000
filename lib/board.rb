@@ -32,8 +32,8 @@ class Board
 
   def turn_count
     turn_number = 0
-    @cells.each do |space|
-      if space == "X" || space == "O"
+    @cells.each do |cell|
+      if cell == "X" || cell == "O"
         turn_number += 1
       end
     end
@@ -50,10 +50,10 @@ class Board
     user_index.between?(0,8) && !taken?(user_input)
   end
 
-  def update(user_input, player = "X")
+  def update(user_input, player)
     if valid_move?(user_input)
       user_index = input_to_index(user_input)
-      @cells[user_index] = "X"
+      @cells[user_index] = player.token
     end
   end
 
