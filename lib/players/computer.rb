@@ -1,9 +1,5 @@
-
-
-
-      module Players
+  module Players
         class Computer < Player
-
           def move(board)
             move = nil
 
@@ -18,16 +14,12 @@
                 target = checkArray.index(" ")
                 return move = (combo[target].to_i + 1)
               end
-
-
             end
 
             if move ==  nil
               return move = [5, 1, 3, 7, 9, 2, 4, 6, 8].detect{|i| board.cells[i-1] == " "}
             end
 
-
           end
-
       end
-      end
+    end
