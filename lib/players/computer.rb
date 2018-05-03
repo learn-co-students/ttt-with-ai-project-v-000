@@ -23,7 +23,7 @@
             #when occupying middle space, and opponent has opposite corners, choose random side position in 4th move
             #(will not execute if blocking of opponents win required)
             if (board.turn_count == 3 && board.cells[4] == "#{@token}")
-                return move = opensides.sample.to_i #unless opensides.length == 0
+                return move = opensides.sample.to_i
             end
 
             #if no special cases exist, prefer to take middle space, or randomly select one of the corners.  IF all taken, randomly select side.
