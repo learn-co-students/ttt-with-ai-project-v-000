@@ -17,11 +17,11 @@
               end
             end
 
-            #when occupying middle space, and opponent has opposite corners, choose side position in 4th move
+            #when occupying middle space, and opponent has opposite corners, choose random side position in 4th move
             #(will not execute if blocking of opponents win required)
             if (board.turn_count == 3 && board.cells[4] == "#{token}")
-                sides = [2,4,6,8].select{|position| board.cells[position] == " "}
-                return move = sides.shuffle.first
+                sides = [2,4,6,8].select{|i| board.cells[i-1] == " "}
+                return move = sides.sample
             end
 
             #if no special cases exist, prefer to take middle space, or one of the corners
