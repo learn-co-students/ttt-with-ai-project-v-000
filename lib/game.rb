@@ -20,11 +20,11 @@ class Game
   end
 
   def start
-    puts "Welcome to Tic-tac-toe"
+    puts "Welcome to Tic-tac-toe!"
     puts "How many players?"
-    puts "Enter 0 for game between two computer players"
-    puts "Enter 1 for human player vs. computer player"
-    puts "Enter 2 for 2 human player game"
+    puts "Enter 0 to simulate a game between two computer players."
+    puts "Enter 1 for a game between a human player and computer player."
+    puts "Enter 2 for a 2 game between two human players."
     puts "Enter WAR to simulate 100 computer vs. computer games."
 
     input = gets.strip
@@ -46,7 +46,7 @@ class Game
         game.play
         draws +=1 if game.draw?
           end
-      puts "Out of 100 games, there were #{draws} draws!"
+      puts "Out of 100 simulated games, there were #{draws} draws!"
     else
       puts "Invalid Input.  Please try again."
       game.start
