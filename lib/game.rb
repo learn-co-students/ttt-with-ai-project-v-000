@@ -41,7 +41,6 @@ WIN_COMBINATIONS =   [
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
       game.play
     elsif input == "2"
-      game = Game.new
       game.play
     elsif input.upcase == "WAR"
       draws = 0
