@@ -22,9 +22,7 @@ class Game
   end
   
   def current_player
-    if board.cells.compact == ["X", "O"] || ["O", "X"]
-      player_1
-    end
+    board.turn_count.even? ? player_1 : player_2
   end
   
   def won?
@@ -67,14 +65,25 @@ class Game
   end
   
   def turn
-    puts "Please enter 1-9:"
-    user_input = gets.strip
-    index_number = board.position(user_input)
-    if board.valid_move?(index_number) 
-      board.update(user_input, current_player)
+    input = current_player.move(board)
+    if board.valid_move?(input) 
+      board.update(input, current_player)
       board.cells
     else 
-      user_input = gets.strip
+      turn
+    end
+  end
+  
+  def play
+    until over?
+      turn
+    end
+    if winner == "O"
+      puts "Congratulations O!"
+    elsif winner == "X"
+      puts "Congratulations X!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
     
