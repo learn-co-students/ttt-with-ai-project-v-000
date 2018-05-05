@@ -1,6 +1,6 @@
 class Board
   
-  attr_accessor :cells, :player
+  attr_accessor :cells, :player, :game
   
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -47,10 +47,8 @@ class Board
     index_number.between?(1, 9) && !(taken?(index_number))
   end
   
-  def update(cell_number, token)
-    token = player.token
-    position(cell_number) == token
-    #binding.pry
+  def update(input, player)
+    @cells[input.to_i - 1] = player.token
   end
   
 end
