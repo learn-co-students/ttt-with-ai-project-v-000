@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+require 'pry'
+
+
+def start
+puts "Welcome to Tic Tac Toe!"
+
+puts "What kind of game would you like to place?"
+
+puts "For Person VS. Person type pvp"
+puts "For Person VS. Computer type pvc"
+puts "For Computer VS. Computer type cvc"
+
+input = gets.strip
+
+puts "Would you like to go first?"
+input_2 = gets.strip unless input != "pvc"
+
+  if input == "pvp"
+  new_game =  Game.new
+elsif input == "pvc" && input_2 == "yes"
+  new_game = Game.new(player_2= Players::Computer.new("O"))
+elsif input == "pvc" && input_2 == "no"
+  new_game = Game.new(player_1= Players::Computer.new("X"))
+elsif input == "cvc"
+  new_game = Game.new(player_1= Players::Computer.new("X"), player_2= Players::Computer.new("O"))
+  end
+  new_game.board.display
+  new_game.play
+
+end
+
+
+
+
+
+start
