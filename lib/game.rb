@@ -65,6 +65,7 @@ class Game
   end
   
   def turn
+    #binding.pry
     input = current_player.move(board)
     if board.valid_move?(input) 
       board.update(input, current_player)
@@ -86,6 +87,42 @@ class Game
       puts "Cat's Game!"
     end
   end
-    
   
+# if number_of_players == 0 && first_player == 0
+#   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+# elsif number_of_players == 1 && first_player == 0
+#   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+# elsif number_of_players == 1 && first_player == 1
+#   game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+# elsif number_of_players == 2 && first_player == 1
+#   game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+# elsif number_of_players == 2 && first_player == 2
+#   game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"))
+# end
+  
+  def start
+    puts "Hello! Welcome to Tic-Tac-Toe with AI!"
+  
+    puts "Would you like to play a 0, 1, or 2 player game?"
+    
+    number_of_players = gets.strip
+    
+    puts "Which player should go first? You can enter 0, 1, or 2."
+    
+    first_player = gets.strip
+    
+    if number_of_players == 0 && first_player == 0
+      player_1 = Players::Computer.new("X") && player_2 = Players::Computer.new("O")
+    elsif number_of_players == 1 && first_player == 0
+      player_1 = Players::Computer.new("X") && player_2 = Players::Human.new("O")
+    elsif number_of_players == 1 && first_player == 1
+      player_1 = Players::Human.new("X") && player_2 = Players::Computer.new("O")
+    elsif number_of_players == 2 && first_player == 1
+      player_1 = Players::Human.new("X") && player_2 = Players::Human.new("O")
+    elsif number_of_players == 2 && first_player == 2
+      player_1 = Players::Human.new("O") && player_2 = Players::Human.new("X")
+    end
+    Game.new(player_1, player_2)
+  end
+
 end
