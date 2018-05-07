@@ -13,6 +13,13 @@ class Game
     [2,4,6]
     ]
 
+  def self.new_by_player_count(int)
+    players =  []
+    players[0] = int > 0 ? Players::Human.new("X") : Players::Computer.new("X")
+    players[1] = int > 1 ? Players::Human.new("O") : Players::Computer.new("O")
+    self.new(*players)
+  end
+
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
@@ -55,11 +62,14 @@ class Game
   end
 
   def turn
+
     input = current_player.move(board)
     if board.valid_move? input
       board.turn_count
       board.update(input, current_player)
+      board.display
     else
+      puts "Invalid" if current_player.kind_of?(Players::Human)
       turn
     end
   end
