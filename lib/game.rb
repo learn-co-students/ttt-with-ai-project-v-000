@@ -27,7 +27,7 @@ class Game
     WIN_COMBINATIONS.find do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] &&
       @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      (@board.cells[combo[0]] == "X" || @board.cells[combo[0]] == "O")
+      (@board.cells[combo[0]] != " "
     end
   end
 
