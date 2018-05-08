@@ -1,7 +1,3 @@
-#!/usr/bin/env ruby
-
-require_relative '../config/environment'
-
 class TicTacToeCLI
   def initialize
     puts "Hey, welcome to Tic-Tac-Toe!"
@@ -41,13 +37,23 @@ class TicTacToeCLI
 
 
   def play_again?
-    puts "Would you like to play again? Enter y/n"
-    input = gets.chomp
-      if input == "y"
-        self.start
-      elsif input == "n"
-        puts "Thanks for playing! Come back soon."
+  puts "Would you like to play again? Enter y/n or 'wargames' to see the computer vs. computer showdown."
+  input = gets.chomp
+  if input == "y"
+    self.start
+  elsif input == "n"
+    puts "Thanks for playing! Come back soon."
+  elsif input == "wargames"
+    won_games = 0
+    100.times do |game|
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+      if game == "won"
+        won_games += 1
       end
+    end
+    puts "The computer beat the computer #{won_games} times out of 100! Quite the battle."
+    play_again?
+  end
   end
 
 end
