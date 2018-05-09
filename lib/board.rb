@@ -53,4 +53,16 @@ class Board
     end
   end
 
+  def space_available?(cell)
+     self.cells[cell].nil?
+   end
+
+   def available_spaces
+     available = []
+     self.cells.each_index do |cell|
+       available << i if space_available?(cell)
+     end
+     available
+   end
+
 end

@@ -1,3 +1,24 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Hello, how's it going! Ready to play?!"
+
+puts "What game would like to play?"
+puts "Enter '0', '1', or '2' player"
+input = gets.chomp
+
+if input.to_i == 0
+  game = Game.new(Computer.new("X"), Computer.new("O"))
+end
+
+if input.to_i == 1
+  puts "Who should go first and be X?"
+  input = gets.chomp
+  if input.to_i == 1
+    game = Game.new(Human.new("X"), Computer.new("O"))
+  else
+    game = Game.new(Computer.new("X"), Human.new("X"))
+  end
+end
