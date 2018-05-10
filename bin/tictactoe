@@ -7,18 +7,26 @@ puts "Hello, how's it going! Ready to play?!"
 
 puts "What game would like to play?"
 puts "Enter '0', '1', or '2' player"
-input = gets.chomp
+input = gets.chomp.to_i
 
-if input.to_i == 0
+if input == 0
   game = Game.new(Computer.new("X"), Computer.new("O"))
+  puts "Computers get Ready, Set, -- oh, your done."
 end
 
-if input.to_i == 1
+if input == 1
   puts "Who should go first and be X?"
   input = gets.chomp
-  if input.to_i == 1
+  if input == 1
     game = Game.new(Human.new("X"), Computer.new("O"))
+    puts "Great show the computer who's boss!"
   else
-    game = Game.new(Computer.new("X"), Human.new("X"))
+    game = Game.new(Computer.new("X"), Human.new("O"))
+    puts "Ooh! How nice of you!"
   end
+end
+
+if input == 2
+  game = Game.new(Human.new("X"), Human.new("O"))
+  puts "Alright, for the Glory, GOO!!"
 end

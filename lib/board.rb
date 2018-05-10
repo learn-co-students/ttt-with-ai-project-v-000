@@ -1,7 +1,7 @@
 
 
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :game
 
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -49,20 +49,38 @@ class Board
 
   def update(pos_num, player)
     if self.valid_move?(pos_num)
-      @cells[pos_num.to_i-1] = player.token
+      if player.class == String
+        @cells[pos_num.to_i-1] = player
+      else
+        @cells[pos_num.to_i-1] = player.token
+      end
+      @pos_num =  pos_num.to_i
     end
   end
 
-  def space_available?(cell)
-     self.cells[cell].nil?
-   end
+
+#  def space_available?(pos_num)
+     #if self.cells[pos_num.to_i-1] == " "
+      # true
+
+     #else
+    #   false
+    # end
+   #end
 
    def available_spaces
      available = []
-     self.cells.each_index do |cell|
-       available << i if space_available?(cell)
+     i = 1
+     self.cells.each do |cell|
+       if cell == " "
+         available << i
+       end
+       i+=1
      end
      available
    end
+
+
+
 
 end
