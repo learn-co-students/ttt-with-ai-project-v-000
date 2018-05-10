@@ -33,6 +33,9 @@ class Game
     #  @board.cells[combo[0]]==@board.cells[combo[1]]&&
     #  @board.cells[combo[0]]==@board.cells[combo[2]]
     #end
+    # Another alternative implementation for case where there are
+    # 2 wins and we want the "X" win to take precedence is to call detect
+    # twice - 1st for X win and if X doesn't win, then for O win.
     winners = WIN_COMBINATIONS.select do | combo |
       @board.cells[combo[0]]!=" " &&
       @board.cells[combo[0]]==@board.cells[combo[1]]&&
@@ -47,7 +50,7 @@ class Game
 
   def winner
     win = won?
-    win ? @board.cells[win[0]] : nil
+    win ? @board.cells[win.first] : nil
   end
 
   def turn
