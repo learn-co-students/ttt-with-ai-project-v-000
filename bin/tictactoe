@@ -42,5 +42,22 @@ if input == 2
   puts "Alright, go for Glory!!"
 end
 
-game.board.display
-game.play
+if input == 3
+  puts "You have selected War Games!"
+  puts "Stand back!!!"
+  puts "In 1"
+  puts "2"
+  puts "3"
+  puts "GO!"
+  100.times {
+    Game.new(Computer.new("X"), Computer.new("O")).play
+    puts "#{Game.draw_count}"
+  }
+end
+
+
+if input != 3
+  until game.won?
+    game.play
+  end
+end

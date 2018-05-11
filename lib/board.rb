@@ -1,11 +1,10 @@
 
-
 class Board
   attr_accessor :cells
-  ::WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
+  #::WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    reset!
   end
 
   def reset!
@@ -21,7 +20,7 @@ class Board
   end
 
   def position(pos_num)
-    value_in_cell = @cells[pos_num.to_i-1] if pos_num.to_i != 0
+    @cells[pos_num.to_i-1] if pos_num.to_i != 0
   end
 
   def full?
@@ -33,15 +32,15 @@ class Board
   end
 
   def taken?(pos_num)
-    if self.position(pos_num) == "X" or self.position(pos_num) == "O" and pos_num.to_i != 0
-      true
-    else
+    if position(pos_num) == " " or position(pos_num) == ""
       false
+    else
+      true
     end
   end
 
   def valid_move?(pos_num)
-    if self.taken?(pos_num) == false and pos_num.to_i.between?(1,9) == true
+    if taken?(pos_num) == false and pos_num.to_i.between?(1,9) == true
       true
     else
       false
@@ -49,39 +48,21 @@ class Board
   end
 
   def update(pos_num, player)
-    if self.valid_move?(pos_num)
-      if player.class == String
-        @cells[pos_num.to_i-1] = player
-      else
-        @cells[pos_num.to_i-1] = player.token
-      end
-      @pos_num =  pos_num.to_i
+    if valid_move?(pos_num)
+      @cells[pos_num.to_i-1] = player.token
     end
   end
 
-   def available_spaces
-     available = []
-     i = 1
-     self.cells.each do |cell|
-       if cell == " "
-         available << i
-       end
-       i+=1
-     end
-     available
-   end
+   #def available_spaces
+    # available = []
+     #i = 1
+     #@cells.each do |cell|
+    #   if cell == " "
+    #     available << i
+    #   end
+    #   i+=1
+     #end
+     #available
+   #end
 
-   def won?
-       winning_combination = ::WIN_COMBINATIONS.find do |combination|
-                               self.position(combination[0]+1) == self.position(combination[1]+1) and
-                               self.position(combination[0]+1) == self.position(combination[2]+1) and
-                               self.position(combination[0]+1) != " "
-                              end
-
-       winning_combination if winning_combination != nil
-   end
-
-   def winner
-     self.cells[self.won?[0]] if self.won? != nil
-   end
 end

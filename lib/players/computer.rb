@@ -2,68 +2,34 @@ require 'pry'
 
 module Players
   class Computer < Player
+    def move(board)
+      move = nil
 
-    attr_reader :best_choice
+      if !board.taken?(5)
+        move = "5"
 
+      elsif board.turn_count == 1
+        move = "1"
 
-      def move(board)
-        pos_num = self.minmax(board, self)
-        @best_choice[0].to_s
-      end
+      elsif board.turn_count == 2
+        move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}.to_s
 
-      def minmax(board, current_player)
-        if board.won? != nil or board.full? == true
-          return score(board)
-        end
+      elsif board.turn_count == 3 && (board.position(1) == board.position(9) or board.position(3) == board.position(7))
+        move = "2"
 
-        scores = {}     #{ :position_number => }
+      else
+        Game::WIN_COMBINATIONS.detect do |combination|
+          if combination.select{|i| board.position(i+1) == token}.size == 2 and combination.any?{|i| board.position(i+1) == " "}
+            move = combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
 
-        board.available_spaces.each do |pos_num|
-          potential_board = board.dup
-          potential_board.update(pos_num, current_player)
-
-          scores[pos_num] = self.minmax(potential_board, self.switch(current_player))
-        end
-
-        @best_choice, best_score = self.best_move(current_player, scores)
-        best_score
-      end
-
-      def best_move(current_player, scores)
-        if current_player.class == String
-          if current_player == self.token
-            scores.max_by { |_k, v| v }
-
-          else
-            scores.min_by { |_k, v| v }
-          end
-        else
-          if
-            current_player.token == self.token
-            scores.max_by { |_k, v| v }
-          else
-            scores.min_by { |_k, v| v }
+        elsif combination.select{|i| board.position(i+1) != " " and board.position(i+1) != token}.size == 2 and combination.any?{|i| board.position(i+1) == " "}
+            move = combination.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
           end
         end
+
+        move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
       end
-
-      def score(board)
-        if board.winner == self.token
-          10
-        elsif board.winner == self.switch(self)
-          -10
-        end
-        0
-      end
-
-      def switch(current_player)
-        if current_player.class == String
-          current_player == 'X' ? 'O' : 'X'
-        else
-          current_player.token == 'X' ? 'O' : 'X'
-        end
-      end
-
-
+      move
+    end
   end
 end
