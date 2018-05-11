@@ -42,10 +42,13 @@ class Game
 
   def turn
     pos_num = self.current_player.move(self.board)
-    until self.board.valid_move?(pos_num) == true
-      pos_num = self.current_player.move(self.board)
+    if current_player.class == Human
+      until self.board.valid_move?(pos_num) == true
+        pos_num = self.current_player.move(self.board)
+      end
     end
     self.board.update(pos_num, self.current_player)
+    self.board.display
   end
 
   def play

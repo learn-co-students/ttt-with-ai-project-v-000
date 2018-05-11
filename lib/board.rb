@@ -1,7 +1,8 @@
 
 
 class Board
-  attr_accessor :cells, :game
+  attr_accessor :cells
+  ::WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -58,16 +59,6 @@ class Board
     end
   end
 
-
-#  def space_available?(pos_num)
-     #if self.cells[pos_num.to_i-1] == " "
-      # true
-
-     #else
-    #   false
-    # end
-   #end
-
    def available_spaces
      available = []
      i = 1
@@ -80,7 +71,17 @@ class Board
      available
    end
 
+   def won?
+       winning_combination = ::WIN_COMBINATIONS.find do |combination|
+                               self.position(combination[0]+1) == self.position(combination[1]+1) and
+                               self.position(combination[0]+1) == self.position(combination[2]+1) and
+                               self.position(combination[0]+1) != " "
+                              end
 
+       winning_combination if winning_combination != nil
+   end
 
-
+   def winner
+     self.cells[self.won?[0]] if self.won? != nil
+   end
 end

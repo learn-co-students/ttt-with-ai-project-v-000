@@ -1,6 +1,17 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+include Players
+
+        puts %q[
+        ___________ .__        __
+        \__    ___/ |__| _____/  |______    ____
+           |    |   |  |/ ___\   __\__  \ _/ ___\
+           |    |   |  \  \___|  |  / __ \  \___
+           |____|   |__|\___  >__| (____  /\___  >
+                            \/          \/     \/]
+        puts "Lets play Tic Tac Toe!"
+
 
 
 puts "Hello, how's it going! Ready to play?!"
@@ -17,7 +28,7 @@ end
 if input == 1
   puts "Who should go first and be X?"
   input = gets.chomp
-  if input == 1
+  if input.to_i == 1
     game = Game.new(Human.new("X"), Computer.new("O"))
     puts "Great show the computer who's boss!"
   else
@@ -27,6 +38,9 @@ if input == 1
 end
 
 if input == 2
-  game = Game.new(Human.new("X"), Human.new("O"))
-  puts "Alright, for the Glory, GOO!!"
+  game = Game.new
+  puts "Alright, go for Glory!!"
 end
+
+game.board.display
+game.play
