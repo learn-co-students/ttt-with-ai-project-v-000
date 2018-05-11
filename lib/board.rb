@@ -1,7 +1,6 @@
 
 class Board
   attr_accessor :cells
-  #::WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
 
   def initialize
     reset!
@@ -52,17 +51,5 @@ class Board
       @cells[pos_num.to_i-1] = player.token
     end
   end
-
-   #def available_spaces
-    # available = []
-     #i = 1
-     #@cells.each do |cell|
-    #   if cell == " "
-    #     available << i
-    #   end
-    #   i+=1
-     #end
-     #available
-   #end
 
 end
