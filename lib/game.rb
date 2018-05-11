@@ -48,12 +48,27 @@ class Game
 
   def turn
     player = current_player
-    if player.move(board)
-      @board.turn_count
+    current_move = player.move(board)
+    # binding.pry
+    if !@board.valid_move?(current_move)
+      turn
     else
-      player 
+      # binding.pry
+      # @board.turn_count + 1
+      @board.update(current_move, player)
     end
+  end
 
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+      # binding.pry
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
 
 end
