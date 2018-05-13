@@ -24,5 +24,16 @@ class Game
     board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
+  def won?
+    WIN_COMBINATIONS.find do |winning_combo|
+      place_1 = board.cells[winning_combo[0]]
+      place_2 = board.cells[winning_combo[1]]
+      place_3 = board.cells[winning_combo[2]]
+
+      if place_1 != " " && place_1 == place_2 && place_2 == place_3
+        return winning_combo
+      end
+    end
+  end
 
 end
