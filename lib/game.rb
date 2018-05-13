@@ -16,7 +16,11 @@ class Game
     @board = []
   end
 
+<<<<<<< HEAD
   def initialize(player_1 = Players::Human.new("X"))
+=======
+  def initialize(player_1)
+>>>>>>> 2fe0c6bfc807b77b2826ac8ed8201fbc5b6005bd
     @player_1 = player_1
   end
 
