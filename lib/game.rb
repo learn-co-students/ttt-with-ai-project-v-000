@@ -12,8 +12,6 @@ class Game
     [2,4,6]
     ]
 
-
-
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -59,7 +57,7 @@ class Game
       board.display
     else
       puts "Invalid"
-      current_player.move(board)
+      turn
     end
   end
 
