@@ -5,6 +5,7 @@ module Players
       puts "Enter your move?"
       input = gets.chomp
       puts = "trying something"
+      puts "trying something else"
     end
 
   end
