@@ -56,9 +56,10 @@ class Game
     if board.valid_move?(input)
       board.turn_count
       board.update(input, current_player)
+      board.display
     else
-      puts "Invalid" if current_player.instance_of(Players::Human)
-      turn
+      puts "Invalid"
+      current_player.move(board)
     end
   end
 
@@ -68,7 +69,7 @@ class Game
     end
 
     if won?
-      puts "Congratulation #{winner}!"
+      puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
