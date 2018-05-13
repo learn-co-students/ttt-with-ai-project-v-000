@@ -50,4 +50,27 @@ class Game
     end
   end
 
+  def turn
+    input = current_player.move(board)
+
+    if board.valid_move?(input)
+      board.turn_count
+      board.update(input, current_player)
+    else
+      puts "Invalid" if current_player.instance_of(Players::Human)
+      turn
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulation #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 end
