@@ -20,5 +20,9 @@ class Game
     @board = board
   end
 
+  def current_player
+
+  end
+
 
 end
