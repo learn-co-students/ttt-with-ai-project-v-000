@@ -16,8 +16,8 @@ class Game
     @board = []
   end
 
-  def player_1
-    @player_1 = Players::Human.new("X")
+  def initialize(player_1 = Players::Human.new("X"))
+    @player_1 = player_1
   end
 
 
