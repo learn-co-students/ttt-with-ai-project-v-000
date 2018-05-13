@@ -22,5 +22,53 @@ class Game
   end
 
 
+  def won?
+    WIN_COMBINATIONS.find do |winning_combo|
+      place_1 = board.cells[winning_combo[0]]
+      place_2 = board.cells[winning_combo[1]]
+      place_3 = board.cells[winning_combo[2]]
 
+      if place_1 != " " && place_1 == place_2 && place_2 == place_3
+        return winning_combo
+      end
+    end
+  end
+
+  def draw?
+    !won? && @board.full?
+  end
+
+  def over?
+    won? || draw?
+  end
+
+  def winner
+    if winning_combo = won?
+      board.cells[winning_combo[0]]
+    end
+  end
+
+  def turn
+    input = current_player.move(board)
+
+    if board.valid_move?(input)
+      board.turn_count
+      board.update(input, current_player)
+    else
+      puts "Invalid" if current_player.instance_of(Players::Human)
+      turn
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+
+    if won?
+      puts "Congratulation #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 end

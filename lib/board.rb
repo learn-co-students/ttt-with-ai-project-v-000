@@ -15,7 +15,6 @@ class Board
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
-    puts "maybe this will work"
   end
 
   def position(space)
@@ -24,7 +23,7 @@ class Board
   end
 
   def full?
-    return true if !@cells.include?(" ")
+    !@cells.include?(" ")
   end
 
   def turn_count
@@ -49,14 +48,15 @@ class Board
     end
   end
 
+  def input_to_index(space)
+    space.to_i - 1
+  end
+
   def update(space, player)
-    input = space.to_i - 1
-    if player == "player"
-      token = "O"
-    else
-      token = "X"
+    if valid_move?(space)
+      space_index = input_to_index(space)
+      @cells[space_index] = player.token
     end
-    cells[input] = token
   end
 
 
