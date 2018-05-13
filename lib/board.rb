@@ -24,7 +24,7 @@ class Board
   end
 
   def full?
-    return true if !@cells.include?(" ")
+    !@cells.include?(" ")
   end
 
   def turn_count
