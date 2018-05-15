@@ -48,20 +48,33 @@ def winner
 end
 
 def turn
- puts "Please enter 1-9:"
- input = gets.strip
+# ask user to enter no between 1-9
+# player_1 shall get his turn
+# if invalid no ask player_1 to play again
+# after valid player_1 turn
+# change to player_2 for his turn
+#
 
- index = input.to_i - 1
- if(@board.valid_move?(index))
-   move(@board)
-   display
- else
-   # turn board
- end
+puts "Please enter a number 1-9:"
+  @user_input = current_player.move(@board)
+  if @board.valid_move?(@user_input)
+    @board.update(@user_input, current_player)
+  else
+    puts "Please enter a number 1-9:"
+    @board.display
+    turn
+  end
+  @board.display
 
 end
 
 def play
+  turn until over?
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
 end
 
 
