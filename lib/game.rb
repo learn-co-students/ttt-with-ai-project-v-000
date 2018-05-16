@@ -1,3 +1,4 @@
+
 require 'pry'
 
 class Game
@@ -44,13 +45,27 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "Turn: #{@board.turn_count + 1}"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{player}"
+      @board.display
+    end
   end
 
-
-
-
-
-
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
 end
