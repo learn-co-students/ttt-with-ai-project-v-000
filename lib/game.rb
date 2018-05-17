@@ -32,7 +32,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+      @board.cells[combo[0]] != " " && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
     end
   end
 
@@ -45,15 +45,16 @@ class Game
   end
 
   def winner
-  end
-
-  def start
-  end
-
-  def play
+    if winning_combo = won?
+      @board.cells[winning_combo.first]
+    end
   end
 
   def turn
+    current_player = self.current_player
+
+
+    @board.valid_move?(input)
   end
 
 end
