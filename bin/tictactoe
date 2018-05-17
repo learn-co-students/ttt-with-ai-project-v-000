@@ -5,7 +5,7 @@ def game_start
   puts "\nWelcome to Tic Tac Toe!"
   puts "\nWhat type of game would you like to play, 0 - 1 - or 2 player?"
   puts "\nEnter '0', '1', or '2' : "
-  game_type = gets
+  game_type = gets.strip
 
   if game_type == "1"
     puts "\nWould you like to be 'X' and take the first turn?"
