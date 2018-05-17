@@ -2,6 +2,7 @@
 class Board
 
   attr_accessor :cells
+  attr_reader :token
 
   def initialize
     @cells = Array.new(9) {" "}
@@ -23,10 +24,28 @@ class Board
     @cells[input.to_i - 1]
   end
 
-  def full
-
-
+  def full?
+    @cells.all? {|el| el == "X" || el == "O" }
   end
 
+  def turn_count
+    count = 0
+    @cells.each do |play|
+      count += 1 if play == "X" ||play =="O"
+    end
+    count
+  end
+
+  def taken? (position)
+    @cells[position.to_i - 1] == "X" || @cells[position.to_i - 1] == "O"
+  end
+
+  def valid_move? (input)
+    !taken?(input) && ('1'...'9').include?(input)
+  end
+
+  def update (position, player)
+    @cells[position.to_i - 1] = player.token
+  end
 
 end
