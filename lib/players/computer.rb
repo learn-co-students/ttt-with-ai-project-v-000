@@ -11,7 +11,7 @@ module Players
     if @board.valid_move?(input)
       input
     elsif !@board.valid_move?(input)
-      move
+      move(board)
     else @board.full?
       nil
     end
