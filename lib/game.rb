@@ -52,11 +52,17 @@ class Game
 
   def turn
     player = current_player
+    token = current_player.token
+    puts "Your turn #{token}. Where would you like to go?"
+    @board.display
     current_move = player.move(@board)
     if !@board.valid_move?(current_move)
       turn
     else
+      puts "Turn: #{@board.turn_count+1}\n"
       @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
     end
   end
 
@@ -66,8 +72,10 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
+      @board.display
     elsif draw?
       puts "Cat's Game!"
+      @board.display
     end
   end
 
