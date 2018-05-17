@@ -48,5 +48,20 @@ class Board
     value
   end
 
+  def valid_move?(input)
+    value = false
+    index = input.to_i
+    if index.between?(1,9) && !taken?(index)
+    value = true
+    end
+    value
+  end
+
+  def update(input, player)
+    index = input.to_i - 1
+    if valid_move?(input)
+      @cells[index] = player.token
+    end
+  end
 
 end
