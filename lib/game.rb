@@ -49,6 +49,7 @@ class Game
     player = current_player
     current_move = player.move(board)
     if !@board.valid_move?(current_move)
+      puts "this is not a valid move, please choose again"
       turn
     else
       @board.update(current_move, player)
