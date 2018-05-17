@@ -1,3 +1,28 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+def game_start
+  puts "\nWelcome to Tic Tac Toe!"
+  puts "\nWhat type of game would you like to play, 0 - 1 - or 2 player?"
+  puts "\nEnter '0', '1', or '2' : "
+  game_type = gets
+
+  if game_type == "1"
+    puts "\nWould you like to be 'X' and take the first turn?"
+    puts "\nEnter 'y' or 'n' : "
+    if gets == "y"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+  elsif game_type == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+  elsif game_type == "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  end
+  puts "Play again? Enter 'y' or 'n': "
+
+end
+
+game_start until gets == "n"
