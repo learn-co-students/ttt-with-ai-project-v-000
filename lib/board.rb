@@ -31,7 +31,7 @@ class Board
   def turn_count
     count = 0
     @cells.each do |play|
-      count += 1 if play == "X" ||play =="O"
+      count += 1 if play == "X" || play =="O"
     end
     count
   end
@@ -41,7 +41,8 @@ class Board
   end
 
   def valid_move? (input)
-    !taken?(input) && ('1'...'9').include?(input)
+    input = input.to_i
+    !taken?(input) && (1...10).include?(input)
   end
 
   def update (position, player)
