@@ -51,10 +51,30 @@ class Game
   end
 
   def start
+    input = ""
+    while input != "exit"
     puts "Welcome to Tic-Tac-Toe!"
     puts "What kind of game do you want to play? 0, 1 or 2 player"
     input = gets.strip
+    case input
+      when "0"
+        player = Players::Computer.new(input)
+      when "1"
+        player_1 = Players::Human.new
+        player_2 = Players::Computer.new(input)
+      when "2"
+        player_1 = Players::Human.new
+        player_2 = Players::Human.new
+      end
     puts "Who would like to go first and be the X player?"
+      input = gets.strip
+      case input
+      when "X"
+        player_1
+      when "0"
+        player_2
+      end
+
 
 
   end
