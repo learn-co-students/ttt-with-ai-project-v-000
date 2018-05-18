@@ -43,7 +43,7 @@ def taken?(input)
 end
 
 def valid_move?(input)
-  (input.to_i - 1).between?(1,9) && !taken?(input)
+  self.cells[input.to_i - 1].between?(1,9) && !taken?(input)
 end
 
 end
