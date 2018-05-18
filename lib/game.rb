@@ -78,7 +78,7 @@ class Game
       self.board.display
       player = current_player
       input = player.move(@board)
-      self.board.update(input,player) ? self.board.update(input,player) : input = player.move(@board) && self.board.update(input,player)
+      self.board.update(input,player) ? self.board.update(input,player) : input = player.move(@board)
     end
 
     def play
