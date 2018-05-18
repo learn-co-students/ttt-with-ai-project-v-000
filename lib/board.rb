@@ -38,9 +38,12 @@ class Board
   end
   
   def update(num, player)
-    @cells.fi
-    @cells[num.to_i - 1]   
+    occupied = @cells.select {|c| c != " "}
+    if occupied.size.even?
+      token = "X"
+    else 
+      token = "O"
+    end
+    @cells[num.to_i - 1] = token   
   end
 end 
-
-# learn --fail-fast
