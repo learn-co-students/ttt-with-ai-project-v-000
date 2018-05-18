@@ -1,8 +1,8 @@
-class Computer < Player
+module Players
+    class Computer < Player
 
-    def move(user_input)
-
-
+    def move(board)
+      "1"
     end
-
+  end
 end

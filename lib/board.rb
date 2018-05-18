@@ -41,6 +41,7 @@ class Board
 
   def valid_move?(user_input)
     user_input.to_i.between?(1, 9) && !taken?(user_input)
+
   end
 
   def update(position, player)

@@ -25,7 +25,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.cells[combo[0]] != " "
     end
   end
 
@@ -39,44 +39,67 @@ class Game
   end
 
   def winner
-    if won? == nil
-      nil
-    else combo = won?
-      @board.cells[combo[0]]
-    end
-  end
-
-  def turn
-
+    @board.cells[won?[0]] if won?
   end
 
   def start
     input = ""
     while input != "exit"
-    puts "Welcome to Tic-Tac-Toe!"
-    puts "What kind of game do you want to play? 0, 1 or 2 player"
-    input = gets.strip
-    case input
-      when "0"
-        player = Players::Computer.new(input)
-      when "1"
-        player_1 = Players::Human.new
-        player_2 = Players::Computer.new(input)
-      when "2"
-        player_1 = Players::Human.new
-        player_2 = Players::Human.new
-      end
-    puts "Who would like to go first and be the X player?"
+      puts "Welcome to Tic-Tac-Toe!"
+      puts "What kind of game do you want to play? 0, 1 or 2 player"
       input = gets.strip
       case input
-      when "X"
-        player_1
-      when "0"
-        player_2
+        when "0"
+          player = Players::Computer.new(input)
+        when "1"
+          player_1 = Players::Human.new
+          player_2 = Players::Computer.new(input)
+        when "2"
+          player_1 = Players::Human.new
+          player_2 = Players::Human.new
       end
-
-
-
+      puts "Who would like to go first and be the X player?"
+        input = gets.strip
+      case input
+        when "X"
+          player_1
+        when "0"
+          player_2
+      end
+    end
   end
 
+  def turn
+    puts "It's #{current_player} turn. Please enter a number from 1 - 9."
+    input = current_player.move(board).to_i
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+      @board.display
+    else input.between?(1, 9) == false
+      puts "OOPs. Please try again. That is an invalid move."
+      turn
+    end
+    @board.display
+  end
+
+  def play
+    turn until over?
+    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+  end
 end
+
+
+
+=begin
+def turn
+  puts "Please enter a number from 1 - 9"
+  input = gets.strip
+  position(input)
+  if valid_move?(input)
+    update(input, player)
+  else
+    turn
+  end
+end
+end
+=end
