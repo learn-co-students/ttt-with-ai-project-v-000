@@ -43,7 +43,11 @@ def taken?(input)
 end
 
 def valid_move?(input)
-  self.cells[input.to_i - 1].between?(1,9) && !taken?(input)
+  (input.to_i).between?(1,9) && !taken?(input)
+end
+
+def update(input, player = "X")
+  self.cells[input.to_i - 1 ] = player.token
 end
 
 end
