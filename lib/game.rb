@@ -53,7 +53,7 @@ class Game
     current_move = player.move(@board)
     if @board.valid_move?(current_move)
       @board.update(current_move, player)
-      #@board.display
+      @board.display
     else
       turn
     end
@@ -67,6 +67,7 @@ class Game
         puts "Congratulations #{winner}!"
       elsif draw?
         puts "Cat's Game!"
+        exit
       end
   end
 
