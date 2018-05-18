@@ -12,12 +12,14 @@ module Players
   class Computer < Player
 
     def move(board)
-      moves = board.cells.reject {|space| space == "X" || space == "O"}
       valid_moves = []
-      moves.each_with_index do |space, index|
-        valid_moves << "#{space = index + 1}"
+      board.cells.each_with_index do |space,index|
+        if space != "X" || space != "O"
+          valid_moves << space = "#{index + 1}"
+        end
       end
-        valid_moves.sample
+      valid_moves.sample
     end
+
   end
 end

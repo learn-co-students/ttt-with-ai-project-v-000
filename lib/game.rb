@@ -75,9 +75,10 @@ class Game
     end
 
     def turn
+      self.board.display
       player = current_player
       input = player.move(@board)
-      self.board.update(input,player) ? self.board.update(input,player) : input = player.move(@board)
+      self.board.update(input,player) ? self.board.update(input,player) : input = player.move(@board) && self.board.update(input,player)
     end
 
     def play
@@ -85,10 +86,29 @@ class Game
        turn
       end
         if won?
+          self.board.display
           puts "Congratulations #{self.winner}!"
         elsif draw?
+          self.board.display
           puts "Cat's Game!"
-        end
+      end
     end
+
+    def self.start
+      answer = " "
+      until answer == 'exit'
+        puts "ELLO"
+        puts "WOT GAME YOU WANNA PLAY: JUS' PEWTERS('0'), UN' PLAY'R' ('1'), TWOO PLAY'R' ('2')"
+        puts "IF NO WAN' PLAY, GET OUT('exit')"
+        answer = gets.strip
+          if answer == '0'
+            Game.new(player_1=Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+          elsif answer == '1'
+            Game.new(player_1=Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+          elsif answer == '2'
+            Game.new(player_1=Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+          end
+        end
+      end
 
 end

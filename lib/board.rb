@@ -12,6 +12,7 @@ class Board
   end
 
   def display
+    puts "                                            "
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
@@ -24,7 +25,7 @@ class Board
   end
 
   def position(input)
-    self.cells[index(input)] if input.to_i.between?(1,9)
+    self.cells[index(input)]
   end
 
   def full?
@@ -51,11 +52,9 @@ class Board
 
   def valid_move?(input)
     true if input.to_i.between?(1,9) && taken?(input) == false
-
   end
 
   def update(input,player)
-
     if valid_move?(input)
       self.cells[index(input)] = player.token
     end
