@@ -30,16 +30,65 @@ end
 end
 
 def won?
-  WIN_COMBINATIONS.each do |combo|
-    if board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X"
-    combo
-  elsif board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O"
-    combo
-  else
-    false
+  WIN_COMBINATIONS.find do |combo|
+    board.cells[combo[0]] == board.cells[combo[1]] &&
+    board.cells[combo[1]] == board.cells[combo[2]] &&
+    board.taken?(combo[0])
   end
-  end
+end
+
+def draw?
+  if !won? && board.full?
+true
+else
+false
+end
+end
+
+def over?
+  if won? || draw?
+    true
+else
   false
 end
+end
+
+def winner
+  WIN_COMBINATIONS.each do |combo|
+    if board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X"
+    return "X"
+  elsif board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O"
+    return "O"
+  end
+  end
+  return nil
+end
+
+def turn
+  puts "Please enter 1-9:"
+  input = current_player.move(@board)
+  new_input = input.to_i
+  if board.valid_move?(new_input)
+    board.update(new_input, current_player)
+    current_player
+  else
+    turn
+  end
+  board.display
+end
+
+def play
+board.display
+ until over?
+   turn
+   draw?
+ end
+ if winner
+   puts "Congratulations #{winner}!"
+ else draw?
+   puts "Cat's Game!"
+ end
+end
+
 
 end
