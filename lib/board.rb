@@ -30,7 +30,7 @@ class Board
   end
   
   def taken?(num)
-    @cells[num.to_i - 1] != " "
+    position(num) != " "
   end 
   
   def valid_move?(num)
@@ -38,12 +38,7 @@ class Board
   end
   
   def update(num, player)
-    occupied = @cells.select {|c| c != " "}
-    if occupied.size.even?
-      token = "X"
-    else 
-      token = "O"
-    end
-    @cells[num.to_i - 1] = token   
-  end
-end 
+    @cells[num.to_i - 1] = player.token
+  end 
+  
+end

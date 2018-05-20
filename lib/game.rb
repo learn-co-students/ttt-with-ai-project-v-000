@@ -46,11 +46,14 @@ WIN_COMBINATIONS = [
     board.cells[won?[0]] if won? 
   end
   
-  def turn 
-    num = gets
-    #move(num) if valid_move?(num)
-    #num
+  def turn
+    n = gets
+   board.update(n, current_player)
   end
+  
+  def play 
+    
+  end 
 end 
 
 

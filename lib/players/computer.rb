@@ -1,3 +1,3 @@
-class Computer 
+class Computer < Player
   
 end 
