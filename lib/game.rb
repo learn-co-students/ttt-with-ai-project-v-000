@@ -17,6 +17,18 @@ WIN_COMBINATIONS = [
     @player_2 = p2
   end
   
+  def self.setup(num_of_players)
+    if num_of_players.to_i == 2
+      game = Game.new
+    elsif num_of_players.to_i == 1 
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    else num_of_players.to_i == 0
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    end
+    game
+  end 
+    
+  
   def current_player
     if board.turn_count.even?
       @player_1 
@@ -52,6 +64,7 @@ WIN_COMBINATIONS = [
         num = current_player.move(board)
     end 
     board.update(num, current_player)
+    board.display
   end
   
   def play
