@@ -45,15 +45,21 @@ WIN_COMBINATIONS = [
   def winner 
     board.cells[won?[0]] if won? 
   end
-  
+
   def turn
-    n = gets
-   board.update(n, current_player)
+    num = gets.strip
+    #update(gets, current_player) if board.valid_move?(gets)
   end
   
-  def play 
-    
-  end 
+  #def play
+    #until over?
+      #puts "Please enter 1-9"
+      #turn
+    #end 
+    #puts "Cat's Game!" if draw?
+    #puts "Congratulations #{winner}!" if won?
+  #end
+
 end 
 
 
