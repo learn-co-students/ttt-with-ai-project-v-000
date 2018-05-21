@@ -54,14 +54,13 @@ WIN_COMBINATIONS = [
     board.update(num, current_player)
   end
   
-  #def play
-    #until over?
-      #puts "Please enter 1-9"
-      #turn
-    #end 
-    #puts "Cat's Game!" if draw?
-    #puts "Congratulations #{winner}!" if won?
-  #end
+  def play
+    until over?
+      turn
+    end 
+    puts "Cat's Game!" if draw?
+    puts "Congratulations #{winner}!" if won?
+  end
 
 end 
 
