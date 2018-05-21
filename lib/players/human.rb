@@ -1,5 +1,5 @@
 class Human < Player 
-   def move
+  def move(board)
   end 
 
 end 
