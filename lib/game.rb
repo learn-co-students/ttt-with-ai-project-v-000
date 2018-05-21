@@ -47,8 +47,11 @@ WIN_COMBINATIONS = [
   end
 
   def turn
-    num = gets.strip
-    #update(gets, current_player) if board.valid_move?(gets)
+    num = nil
+    until board.valid_move?(num)
+        num = current_player.move(board)
+    end 
+    board.update(num, current_player)
   end
   
   #def play
