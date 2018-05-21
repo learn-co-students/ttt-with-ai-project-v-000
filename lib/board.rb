@@ -5,6 +5,7 @@ class Board
   
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
   end
   
   def reset!
@@ -41,9 +42,12 @@ class Board
   index.to_i.between?(1,9) && !taken?(index) ? true : false  
   end
   
+
   def update(index,player)
     index = index.to_i - 1
-    
     @cells[index] = player.token
   end
+
+  
+  
 end
