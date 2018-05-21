@@ -1,3 +1,67 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+
+puts "Would you like a 0, 1, 2 player game?"
+players = gets.strip
+
+if players == "0"
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  game.play
+  puts "Would you like to play again? y for yes (enter anything else to quit)"
+  answer = gets.strip
+  
+  if ["Y","y"].include?(answer)
+  puts start
+  end
+end
+
+if players == "1"
+  puts "Who should go first (token X) ? Pick c for computer"
+  first_player = gets.strip
+  
+  if first_player == "c"
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  game.play
+  puts "Would you like to play again? y for yes (enter anything else to quit)"
+  answer = gets.strip
+    if ["Y","y"].include?(answer)
+    puts start
+    end
+    
+  else
+  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  game.play
+  puts "Would you like to play again? y for yes (enter anything else to quit)"
+  answer = gets.strip
+    if ["Y","y"].include?(answer)
+    puts start
+    end
+  end
+end
+  
+if players == "2"
+  puts "Who should go first (token X) ?"
+  first_player = gets.strip
+  
+  puts "#{first_player} begins."
+  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  game.play
+  
+  puts "Would you like to play again? y for yes (enter anything else to quit)"
+  answer = gets.strip
+    if ["Y","y"].include?(answer)
+    puts start
+    end
+end  
+  
+end
+  
+  
+
+
+puts "Welcome to Tic Tac Toe!"
+puts start
+
