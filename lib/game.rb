@@ -1,0 +1,88 @@
+require 'pry'
+
+class Game
+  attr_accessor :board, :player_1, :player_2
+  
+  def current_player
+    turn_count % 2 == 0 ? @player_1 : @player_2
+  end
+  
+  def play
+    until over?
+      turn
+    end
+    if draw?
+      puts "Cat's Game!"
+    elsif won?
+      puts "Congratulations #{winner}!"
+    end
+  end
+  
+  def turn
+    player = self.current_player
+    user_input = player.move(board)
+   # if user_input.to_i < 1 || user_input.to_i > 9 || #user_input.to_s.include?(/\D/)
+     # puts "Invalid. Please enter a number between 1 and 9."
+    if @board.valid_move?(user_input) == false
+      puts "Invalid Move"
+      turn
+    else
+      @board.update(user_input, player)
+      @board.display
+    end
+  end
+  
+  
+  def winner
+    if won?
+      @board.cells[won?[0]]
+    end
+  end
+  
+  def won?
+    WIN_COMBINATIONS.detect do |win_combo|
+      @board.cells[win_combo[0]] == @board.cells[win_combo[1]] && @board.cells[win_combo[0]] == @board.cells[win_combo[2]] && position_taken?(win_combo[0])
+    end
+  end
+  
+  def position_taken?(index)
+    !(@board.cells[index].nil? || @board.cells[index] == " ")
+  end
+  
+  
+  
+  def turn_count
+    @board.cells.count {|token| token == "X" || token == "O"}
+  end
+  
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @player_1 = player_1 #Player.new("X")
+    @player_2 = player_2 #Player.new("O")
+    @board = board
+  end
+  
+  
+  def draw?
+    won? == nil && full? == true
+  end
+
+  def full?
+    @board.cells.all? {|cell| cell == "X" || cell == "O"}
+  end
+
+  def over?
+    won? || draw? || full?
+  end
+
+  WIN_COMBINATIONS = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [2,5,8],
+  [0,4,8],
+  [2,4,6]
+  ]
+  
+end
