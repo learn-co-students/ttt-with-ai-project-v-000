@@ -38,8 +38,14 @@ class Game
   def winner
     @board.cells[self.won?.first] if self.won?
   end 
-  def turn 
-    input = gets.strip
+  def turn
+    choice = current_player.move(board)
+    if @board.valid_move?(choice)
+      @board.update(choice, current_player)
+    else
+      turn
+    end
+
   end 
     
   
