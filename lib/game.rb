@@ -18,12 +18,12 @@ class Game
     @player_2 = player_2
   end 
   def current_player 
-    if @board.turn_count.even?
-      @player_1
-    else 
-      @player_2
-    end 
+    @board.turn_count.even? ? @player_1 : @player_2
   end 
   def won?
-  end 
+    #binding.pry
+    WIN_COMBINATIONS.find do |combo| 
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0] + 1)
+    end 
+  end
 end 
