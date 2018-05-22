@@ -13,7 +13,9 @@ class Board
     puts "-----------"
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
-    print " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts "                                            "
+    puts "                                            "
   end 
   
   def position(input)
@@ -23,7 +25,6 @@ class Board
   
   def update(input,player_token)
     @cells[input.to_i - 1] = player_token.token
-    #self.position(input) = player_token.token
   end 
   
   def taken?(input)

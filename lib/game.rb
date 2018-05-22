@@ -16,6 +16,8 @@ class Game
     @board = board 
     @player_1 = player_1
     @player_2 = player_2
+    #@board.display
+    
   end 
   def current_player 
     @board.turn_count.even? ? @player_1 : @player_2
@@ -40,12 +42,17 @@ class Game
   end 
   def turn
     choice = current_player.move(board)
+    #binding.pry
     if @board.valid_move?(choice)
       @board.update(choice, current_player)
+      @board.display
+      
     else
       turn
+      
     end
   end 
+  
   def play 
     while !over? && !won? && !draw?
       turn 
@@ -56,25 +63,27 @@ class Game
       puts "Cat's Game!"
     end
   end 
+  
   def start 
     puts " Welcome to TICTACTOE AI version "
     puts " Please select 1 Player /type 1  , 2 Player/ type 2 or 0 Player / type 0 "
-    input_1 = gets.strip.to_i
+    input = gets.strip
 
     puts " Player 1 will be assigned X: and Player_2 will be assigned O:"
-
-    Board.display
-      case input 
-        when  "1"
+      
+      case input.to_i
+        when 1
           Game.new(player_1 = Players::Human.new("X"),player_1 = Players::Computer.new("O"),Board.new)
-        when "2" 
+        when 2 
           Game.new(player_1 = Players::Human.new("X"),player_1 = Players::Human.new("O"),Board.new)
-        when "0"
+        when 0
           Game.new(player_1 = Players::Computer.new("X"),player_1 = Players::Computer.new("O"),Board.new)
       else
         puts "You just making it up!"
       end
     
     
+
   end 
 end 
+
