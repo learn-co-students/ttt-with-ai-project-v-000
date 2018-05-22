@@ -17,4 +17,11 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
   end 
+  def current_player 
+    if @board.turn_count.even?
+      @player_1
+    else 
+      @player_2
+    end 
+  end 
 end 
