@@ -24,4 +24,6 @@ class Game
       @player_2
     end 
   end 
+  def won?
+  end 
 end 
