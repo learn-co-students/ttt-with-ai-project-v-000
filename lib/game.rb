@@ -86,10 +86,10 @@ class Game
   def turn
     puts "It's #{current_player.token} turn. Please enter a number from 1 - 9."
     input = current_player.move(board).to_i
-    if valid_move?(input)
+    if @board.valid_move?(input)
       @board.update(input, current_player)
       @board.display
-    elsif valid_move?(input) == false
+    elsif @board.valid_move?(input) == false
       puts "OOPs. Please try again. That is an invalid move."
       turn
     else
