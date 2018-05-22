@@ -21,17 +21,26 @@ class Game
     @board.turn_count.even? ? @player_1 : @player_2
   end 
   def won?
-    #binding.pry
     WIN_COMBINATIONS.find do |combo| 
       @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0] + 1)
+      #binding.pry
     end 
   end
+  
   def draw? 
     !self.won? &&  @board.full? ? true : false
-  end 
+  end
+  
   def over?
     self.won? || @board.full? ? true : false 
   end 
-  def winner 
+   
+  def winner
+    @board.cells[self.won?.first] if self.won?
   end 
+  def turn 
+    input = gets.strip
+  end 
+    
+  
 end 
