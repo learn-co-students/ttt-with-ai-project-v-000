@@ -67,7 +67,9 @@ class Game
   def start 
     puts " Welcome to TICTACTOE AI version "
     puts " Please select 1 Player /type 1  , 2 Player/ type 2 or 0 Player / type 0 "
+    puts @board.display
     input = gets.strip
+    puts @board.display
 
     puts " Player 1 will be assigned X: and Player_2 will be assigned O:"
       
