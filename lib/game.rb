@@ -27,5 +27,11 @@ class Game
     end 
   end
   def draw? 
+    !self.won? &&  @board.full? ? true : false
+  end 
+  def over?
+    self.won? || @board.full? ? true : false 
+  end 
+  def winner 
   end 
 end 
