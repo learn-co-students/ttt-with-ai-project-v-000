@@ -106,7 +106,6 @@ class Game
 
   def turn
     puts "It's #{current_player.token} turn. Please enter a number from 1 - 9."
-    #binding.pry
     input = current_player.move(board).to_i
     if @board.valid_move?(input)
       @board.update(input, current_player)
@@ -119,17 +118,6 @@ class Game
       turn
     end
   end
-    #input = ""
-    #puts "Please enter number 1- 9"
-    #input = gets.strip
-    #if @board.valid_move?(input)
-    #  @board.update(input, player)
-    #  @board.current_player
-    #else
-    #  turn
-    #end
-  #  @board.display
-
 
   def play
     turn until over?
