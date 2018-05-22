@@ -28,6 +28,11 @@ class Game
       @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.cells[combo[0]] != " "
     end
   end
+    #WIN_COMBINATIONS.any? do |combo|
+    #  if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+    #     combo
+    #  end
+
 
 
   def draw?
@@ -40,6 +45,9 @@ class Game
 
   def winner
     @board.cells[won?[0]] if won?
+    if combo = won?
+      @board[combo[0]]
+    end
   end
 
   def start
@@ -77,6 +85,14 @@ class Game
       @board.display
     else input.between?(1, 9) == false
       puts "OOPs. Please try again. That is an invalid move."
+
+    input = ""
+    puts "Please enter number 1- 9"
+    input = gets.strip
+    if @board.valid_move?(input)
+      @board.update(input, player)
+      @board.current_player
+    else
       turn
     end
     @board.display
@@ -87,8 +103,6 @@ class Game
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
 end
-
-
 
 =begin
 def turn
