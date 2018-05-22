@@ -22,12 +22,8 @@ class Board
   end 
   
   def update(input,player_token)
-    
-    #@cells[input.to_i - 1] = player_token.token
-    position(input) = player_token.token
-  end 
-  
-  def token 
+    @cells[input.to_i - 1] = player_token.token
+    #self.position(input) = player_token.token
   end 
   
   def taken?(input)

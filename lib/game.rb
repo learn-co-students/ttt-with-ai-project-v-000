@@ -56,6 +56,25 @@ class Game
       puts "Cat's Game!"
     end
   end 
+  def start 
+    puts " Welcome to TICTACTOE AI version "
+    puts " Please select 1 Player /type 1  , 2 Player/ type 2 or 0 Player / type 0 "
+    input_1 = gets.strip.to_i
+
+    puts " Player 1 will be assigned X: and Player_2 will be assigned O : Type X for player 1 and type O for player 2  "
+
+    Board.display
+      case input 
+        when  "1"
+          Game.new(player_1 = Players::Human.new("X"),player_1 = Players::Computer.new("O"),Board.new)
+        when "2" 
+          Game.new(player_1 = Players::Human.new("X"),player_1 = Players::Human.new("O"),Board.new)
+        when "0"
+          Game.new(player_1 = Players::Computer.new("X"),player_1 = Players::Computer.new("O"),Board.new)
+      else
+        puts "You just making it up!"
+      end
     
     
   end 
+end 
