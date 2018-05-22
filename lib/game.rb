@@ -61,7 +61,7 @@ class Game
     puts " Please select 1 Player /type 1  , 2 Player/ type 2 or 0 Player / type 0 "
     input_1 = gets.strip.to_i
 
-    puts " Player 1 will be assigned X: and Player_2 will be assigned O : Type X for player 1 and type O for player 2  "
+    puts " Player 1 will be assigned X: and Player_2 will be assigned O:"
 
     Board.display
       case input 
