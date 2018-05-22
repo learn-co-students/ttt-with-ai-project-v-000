@@ -1,3 +1,4 @@
+require 'pry'
 class Game 
   
   
@@ -9,7 +10,7 @@ class Game
     @board = board
   end
   
-   WIN_COMBINATIONS = [
+  WIN_COMBINATIONS = [
   [0,1,2],
   [3,4,5],
   [6,7,8],
@@ -24,49 +25,51 @@ class Game
     @board.turn_count % 2 == 0 ? player_1 : player_2
   end
  
-  def turn 
-    puts "It's #{current_player.token}'s turn."
-    input = current_player.move(board).to_i 
-  if @board.valid_move?(input)
-    @board.update(input, current_player)
-    @board.display
-  elsif
-    input.between?(1,9) == false 
-    puts "That is an invalid move."
-    turn 
-  else
-    puts "Looks like that position is already taken."
-    turn
-  end
-  end
-   
   def won?
     WIN_COMBINATIONS.find do |win_array|
-     @board.cells[win_array[0]] == @board.cells[win_array[1]] && @board.cells[win_array[0]] == @board.cells[win_array[2]] && @board.taken?(win_array[0])
+    @board.cells[win_array[0]] == @board.cells[win_array[1]] && @board.cells[win_array[0]] == @board.cells[win_array[2]] && @board.taken?(win_array[0] + 1)
     end
-   end
   end
-
+  
   def winner
-   @board.cells[won?[0]]  if won? 
+    if won?
+      @board.cells[won?[0]] 
+    end  
   end
   
   def draw?
-   @board.full? && !won? 
+    @board.full? && !won? 
   end
 
   def over?
-   draw? || won?
+    draw? || won?
+  end
+  
+  def turn 
+    puts "It's #{current_player.token}'s turn."
+    input = current_player.move(board).to_i 
+      if @board.valid_move?(input)
+      @board.update(input, current_player)
+      @board.display
+    elsif
+      input.between?(1,9) == false 
+      puts "That is an invalid move."
+      turn 
+    else
+      puts "Looks like that position is already taken."
+      turn
+    end
   end
   
   def play
-   until over?
-   turn
-   if draw?
-    puts "Cat's Game!"
-   else won?
-    puts "Congratulations #{winner}!"
-   end
+    until over? 
+      turn
+    end
+      if draw?
+        puts "Cat's Game!"
+      else won?
+        puts "Congratulations #{winner}!"
+      end
   end
 end
 
