@@ -21,19 +21,17 @@ def start
       new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
       new_game.play
       play_again?
-    end
-  end
-
-  if input == "wargames"
-    games_won = 0
-    100.times do
-      new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-      new_game.play
-      if new_game.won?
-        games_won += 1
+    elsif input == "wargames"
+      games_won = 0
+      100.times do
+        new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+        new_game.play
+        if new_game.won?
+          games_won += 1
+        end
       end
+      puts "There was #{games_won} win(s)!"
     end
-    puts "There was #{games_won} win(s)!"
   end
 end
 
