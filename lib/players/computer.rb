@@ -22,7 +22,9 @@ module Players
     #     move = "5"
     #   end
 
-    # if win_combinations is possible, 1 move off --> not sure how to state this in code
+    # if win_combinations is possible, i.e. 1 move off --> not sure how to state this in code
     #   move = index of open move to win  --> to either win or block
+
+    # will need to incorporate win_combinations somehow
   end
 end
