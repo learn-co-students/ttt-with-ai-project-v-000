@@ -15,28 +15,47 @@ module Players
     CORNERS = [0, 2, 6, 8]
 
     def move(board)
-      "1"
+      if board.cells[4] == " "
+         "5"
+       elsif board.cells[0] == " "
+         "1"
+       elsif board.cells[2] == " "
+         "3"
+       elsif board.cells[6] == " "
+         "7"
+       elsif board.cells[8] == " "
+         "9"
+       elsif board.cells[1] == " "
+         "2"
+       elsif board.cells[3] == " "
+         "4"
+       elsif board.cells[5] == " "
+         "6"
+       elsif board.cells[7] == " "
+         "8"
+      end
     end
-  end
 
-  def win_moves
-    #define win for the computer
-  end
+    def win_moves
+      #define win for the computer
+    end
 
-  def corners
-    #define corner moves
-  end
+    def corners
+      #define corner moves
+      CORNERS.shuffle!
+    end
 
-  def block
+    def block
 
-  end
+    end
 
-  def tie
+    def tie
 
-  end
+    end
 
-  def center_move
+    def center_move
 
+    end
   end
 end
 
