@@ -50,26 +50,6 @@ module Players
       sleep(6)
     end
 
-    def win_moves
-      #define win for the computer
-    end
-
-    def corners
-      #define corner moves
-      CORNERS.shuffle!
-    end
-
-    def block
-
-    end
-
-    def tie
-
-    end
-
-    def center_move
-
-    end
   end
 end
 
