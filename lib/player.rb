@@ -6,5 +6,9 @@ class Player
       @token = token
     end
 
+    def move
+      input = gets.strip
+    end
+
 
 end
