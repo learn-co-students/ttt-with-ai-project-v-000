@@ -1,3 +1,72 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+def new_game(message, player1, player2)
+  puts message
+  game = Game.new(player1, player2)
+  game.play
+  play_again?
+end
+
+def start
+
+  computer_player_X = Players::Computer.new("X")
+  human_player_X = Players::Human.new("X")
+  computer_player_O = Players::Computer.new("O")
+  human_player_O = Players::Human.new("O")
+
+  puts "Let's play Tic Tac Toe!!"
+  puts "How many players will be participating: 0, 1, or 2?"
+  puts "Or if you want to watch the computer play 100 times, please enter 'wargames'."
+  input = gets.strip
+  index = input.to_i
+
+  unless input == "exit"
+    if input == "wargames"
+      puts "You are playing War Games Mode. The computer will play itself 100 times and report number of wins."
+      games_won = 0
+      100.times do
+        new_game = Game.new(player_1 = computer_player_X, player_2 = computer_player_O)
+        new_game.play
+        games_won+=1 if new_game.won?
+      end
+      puts "There were #{games_won} win(s)!"
+      play_again?
+    else
+      if index == 0
+        message = "You are watching a game where the computer plays itself."
+        new_game(message, player_1 = computer_player_X, player_2 = computer_player_O)
+      elsif index == 1
+        while true
+          puts "Who will go first? First player will be 'X'. Please enter 'M' for you or 'C' for computer:"
+          first_player = gets.strip
+          if first_player == "M" || first_player == "m" || first_player == "c" || first_player == "C"
+            break
+          else
+            puts "Not a valid input. Try again."
+          end
+        end
+        if first_player == "M"
+          new_game = Game.new(player_1 = human_player_X, player_2 = computer_player_O)
+        else
+          new_game = Game.new(player_1 = computer_player_X, player_2 = human_player_O)
+        end
+        new_game.play
+        play_again?
+      elsif index == 2
+        message = "Two of you will be playing the game. Please decide who will be Player 1 ('X') and who will be Player 2 ('O')."
+        new_game(message, player_1 = human_player_X, player_2 = human_player_O)
+      end
+    end
+  end
+end
+
+def play_again?
+  puts "Would you like to play again? Please enter 'y' or 'n':"
+  input = gets.strip
+  start if input.upcase == "Y"
+end
+
+start
