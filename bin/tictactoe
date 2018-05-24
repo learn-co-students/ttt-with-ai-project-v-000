@@ -19,21 +19,13 @@ def start
 
   puts "Let's play Tic Tac Toe!!"
   puts "How many players will be participating: 0, 1, or 2?"
-<<<<<<< HEAD
   puts "Or if you want to watch the computer play 100 times, please enter 'wargames'."
-=======
-  puts "Or if you want to watch the computer play 100 times, please enter 'wargames': "
->>>>>>> e4e142faa1ed5dabafda9a69fb14a14ddf288d6d
   input = gets.strip
   index = input.to_i
 
   unless input == "exit"
     if input == "wargames"
-<<<<<<< HEAD
       puts "You are playing War Games Mode. The computer will play itself 100 times and report number of wins."
-=======
-      puts "You are playing War Games Mode. The computer will play itself 100 times and report number of wins and losses."
->>>>>>> e4e142faa1ed5dabafda9a69fb14a14ddf288d6d
       games_won = 0
       100.times do
         new_game = Game.new(player_1 = computer_player_X, player_2 = computer_player_O)
@@ -48,13 +40,9 @@ def start
         new_game(message, player_1 = computer_player_X, player_2 = computer_player_O)
       elsif index == 1
         while true
-<<<<<<< HEAD
           puts "Who will go first? First player will be 'X'. Please enter 'M' for you or 'C' for computer:"
-=======
-          puts "Who will go first? First player will be 'X' Please enter 'M' for you or 'C' for computer:"
->>>>>>> e4e142faa1ed5dabafda9a69fb14a14ddf288d6d
           first_player = gets.strip
-          if first_player == "M" || first_player == "C"
+          if first_player == "M" || first_player == "m" || first_player == "c" || first_player == "C"
             break
           else
             puts "Not a valid input. Try again."
@@ -68,12 +56,7 @@ def start
         new_game.play
         play_again?
       elsif index == 2
-<<<<<<< HEAD
         message = "Two of you will be playing the game. Please decide who will be Player 1 ('X') and who will be Player 2 ('O')."
-=======
-        message = "Two of you will be playing the game. First Player will be X"
-        message += "Please choose who will be Player 1 and who will be Player 2."
->>>>>>> e4e142faa1ed5dabafda9a69fb14a14ddf288d6d
         new_game(message, player_1 = human_player_X, player_2 = human_player_O)
       end
     end
