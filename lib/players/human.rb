@@ -3,7 +3,7 @@ module Players
     # your code here
 
     def move(board)
-      puts "Please pick a position:"
+      puts "Please select a position:"
       user_input = gets
       user_input
     end

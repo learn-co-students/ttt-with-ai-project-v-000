@@ -19,19 +19,36 @@ class Game
      @board = new_board
    end
 
-   def current_player
-     counter = 0
-     @board.cells.each do |letter|
-       if letter == "X" || letter == "O"
-         counter += 1
-       end
-     end
-     if counter % 2 == 0
-       Player.new("X")
-     else
-       Player.new("O")
-     end
-   end
+  #  def current_player
+  #    counter = 0
+  #    @board.cells.each do |letter|
+  #      if letter == "X" || letter == "O"
+  #        counter += 1
+  #      end
+  #    end
+  #    binding.pry
+  #    if counter % 2 == 0
+  #      @player_1
+  #    else
+  #      @player_2
+  #    end
+  #  end
+
+  def turn_count
+    count = 0
+    @board.cells.each do |letter|
+      if letter == "X" || letter == "O"
+        count += 1
+      else
+        count += 0
+      end
+    end
+    count
+  end
+
+  def current_player
+    turn_count % 2 == 0 ? @player_1 : @player_2
+  end
 
    def won?
      board_test = @board.cells.all? {|letter| letter == " "}
@@ -115,27 +132,36 @@ class Game
   #   end
   # end
 
+  # def turn
+  #   if current_player.token == "X"
+  #     selection = @player_1.move(@board)
+  #     choice = selection.to_i
+  #     if @board.valid_move?(choice)
+  #       @board.update(selection, @player_1)
+  #     else
+  #       @player_1.move(@board)
+  #     end
+  #   else
+  #     selection_two = @player_2.move(@board)
+  #     choice_two = selection.to_i
+  #     if @board.valid_move?(choice_two)
+  #       @board.update(selection_two, @player_2)
+  #     else
+  #       @player_2.move(@board)
+  #     end
+  #   end
+  # end
+
   def turn
-    current = current_player
-    if current_player.token == "X"
-      selection = @player_1.move(@board)
-      choice = selection.to_i
-      if @board.valid_move?(choice)
-        @board.update(selection, @player_1)
-        binding.pry
-      else
-        @player_1.move(@board)
-      end
+    selection = current_player.move(@board)
+    player_choice = selection.to_i
+    if @board.valid_move?(player_choice)
+      @board.update(player_choice, current_player)
     else
-      selection_two = @player_2.move(@board)
-      choice_two = selection.to_i
-      if @board.valid_move?(choice_two)
-        @board.update(selection_two, @player_2)
-      else
-        @player_2.move(@board)
-      end
+      selection = current_player.move(@board)
     end
   end
+
 
   def play
     until over? || full?
