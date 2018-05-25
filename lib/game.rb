@@ -126,7 +126,7 @@ class Game
       else
         @player_1.move(@board)
       end
-    else
+    elsif current_player.token == "O"
       selection_two = @player_2.move(@board)
       choice_two = selection.to_i
       if @board.valid_move?(choice_two)
