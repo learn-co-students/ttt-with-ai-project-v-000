@@ -19,21 +19,6 @@ class Game
      @board = new_board
    end
 
-  #  def current_player
-  #    counter = 0
-  #    @board.cells.each do |letter|
-  #      if letter == "X" || letter == "O"
-  #        counter += 1
-  #      end
-  #    end
-  #    binding.pry
-  #    if counter % 2 == 0
-  #      @player_1
-  #    else
-  #      @player_2
-  #    end
-  #  end
-
   def turn_count
     count = 0
     @board.cells.each do |letter|
@@ -119,39 +104,6 @@ class Game
     end
   end
 
-  # def turn
-  #   if @board.turn_count % 2 == 0
-  #     selection = @player_1.move(@board)
-  #     if !@board.valid_move?(selection)
-  #       @player_1.move(selection)
-  #     else
-  #       @board.update(selection, @player_1)
-  #     end
-  #   elsif @board.turn_count % 2 != 0
-  #     selection_two = @player_2.move(@board)
-  #   end
-  # end
-
-  # def turn
-  #   if current_player.token == "X"
-  #     selection = @player_1.move(@board)
-  #     choice = selection.to_i
-  #     if @board.valid_move?(choice)
-  #       @board.update(selection, @player_1)
-  #     else
-  #       @player_1.move(@board)
-  #     end
-  #   else
-  #     selection_two = @player_2.move(@board)
-  #     choice_two = selection.to_i
-  #     if @board.valid_move?(choice_two)
-  #       @board.update(selection_two, @player_2)
-  #     else
-  #       @player_2.move(@board)
-  #     end
-  #   end
-  # end
-
   def turn
     selection = current_player.move(@board)
     player_choice = selection.to_i
@@ -165,14 +117,18 @@ class Game
 
   def play
     until over? || full?
+      @board.display
       turn
     end
 
     if winner == "X"
+      @board.display
       puts "Congratulations X!"
     elsif winner == "O"
+      @board.display
       puts "Congratulations O!"
     else
+      @board.display
       puts "Cat's Game!"
     end
   end

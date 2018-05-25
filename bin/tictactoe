@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+puts "Welcome to Tic Tac Toe!"
+puts "Please select a game type: "
+puts "For Solo Play, select '1'"
+puts "For Dual Play, select '2'"
+puts "For Computer Play, select '0'"
+
+def game_choice
+user_selection = gets.strip
+
+  if user_selection == "1"
+    puts "You have selected Solo Play"
+    new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    new_game.play
+  elsif user_selection == "2"
+    puts "You have selected Dual Play"
+    new_game = Game.new
+    new_game.play
+  elsif user_selection == "0"
+    puts "You have selected Computer Play"
+    new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    new_game.play
+  else
+    puts "Sorry, that is not an available selection"
+  end
+end
+
+game_choice
