@@ -3,8 +3,7 @@ module Players
     # your code here
 
     def move(board)
-      puts "Please select a position:"
-      user_input = gets
+      (rand() * 9).floor.to_s
     end
 
   end
