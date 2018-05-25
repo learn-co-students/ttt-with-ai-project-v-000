@@ -19,8 +19,15 @@ user_selection = gets.strip
     new_game.play
   elsif user_selection == "2"
     puts "You have selected Dual Play"
-    new_game = Game.new
-    new_game.play
+    puts "Which player will go first? 'X' or 'O'"
+    first_player = gets.strip
+    if first_player == "X"
+      new_game = Game.new
+      new_game.play
+    else
+      new_game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new)
+      new_game.play
+    end
   elsif user_selection == "0"
     puts "You have selected Computer Play"
     new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
