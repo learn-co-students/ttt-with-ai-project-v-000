@@ -5,7 +5,7 @@ class Board
   attr_accessor :cells
 
   def initialize
-    self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   def reset!
@@ -73,6 +73,11 @@ class Board
     else
       return false
     end
+  end
+
+  def update(index, player)
+    user_index = index.to_i - 1
+    cells[user_index] = "X"
   end
 
 end
