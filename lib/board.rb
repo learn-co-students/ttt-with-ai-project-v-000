@@ -64,7 +64,7 @@ class Board
   def valid_move?(index)
    user_index = index.to_i - 1
    if user_index.between?(0, 8)
-     if @cells[user_index] == " " || @cells[user_index] == "" || @cells[user_index] == nil
+     if @cells[user_index] == " "
        return true
      else
        return false
@@ -76,7 +76,7 @@ class Board
 
   def update(index, player)
    user_index = index.to_i - 1
-   cells[user_index] = "X"
+   cells[user_index] = player.token
   end
 
 end
