@@ -12,6 +12,7 @@ module Players
         elsif !board.taken?("6")
           input = "6"
         elsif !board.taken?("2")
+          input = "2"
 
       end
         input
