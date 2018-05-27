@@ -48,9 +48,35 @@ module Players
     
     def move(board)
       binding.pry
-      if board.turn_count == 1
-        @center unless !corners_taken?(board)
+      if board.turn_count == 0 || (board.turn_count == 1 && board.taken?("5"))
+        "7"
+      elsif board.turn_count == 1
+        "5"
+      elsif nearly_won?(board)
+        nearly_won?(board)
+      elsif nearly_lost?(board)
+        nearly_lost?(board)
+      elsif corners_taken?(board)
+        corners_taken?(board)
+      else
+        random_number(board)
       end
+    end
+    
+    def random_number(board)
+      a = @random.rand(1..9)
+      b = @random.rand(1..9)
+      c = @random.rand(1..9)
+      d = @random.rand(1..9)
+      e = @random.rand(1..9)
+      f = @random.rand(1..9)
+      g = @random.rand(1..9)
+      h = @random.rand(1..9)
+      i = @random.rand(1..9)
+      
+      random_numbers = ["#{a}", "#{b}", "#{c}", "#{d}", "#{e}", "#{f}", "#{g}", "#{h}", "#{i}", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
+      
+      random_numbers.detect{|a| board.taken?(a) == false}
     end
   
     def corners_taken?(board)
