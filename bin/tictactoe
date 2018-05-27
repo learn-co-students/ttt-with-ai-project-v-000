@@ -2,3 +2,70 @@
 
 require_relative '../config/environment'
 
+def start 
+  until input == 0 || input == 1 || input == 2 
+    puts "Welcome to Tic Tac Toe!" 
+    puts "Would you like to play a 0-, 1-, or 2-player game?"
+    puts "Please enter 0, 1, or 2" 
+    raw_input = gets.strip 
+    input = raw_input.to_i
+  end
+  
+  if input == 0 
+    new_zero_player_game
+  elsif input == 1
+    new_one_player_game
+  elsif input == 2 
+    new_two_player_game
+  end
+end
+
+def new_zero_player_game
+  player_1 = Players::Computer.new("X") 
+  player_2 = Players::Computer.new("O")
+  new_game = Game.new(player_1, player_2)
+  new_game.play
+  play_again?
+end
+
+def new_one_player_game
+  until input == 1 || input == 2
+    puts "Would you like to go first or second?
+    puts "Please enter 1 to go first, or 2 to go second." 
+    raw_input = gets.strip 
+    input = raw_input.to_i
+  end 
+  
+  if input == 1
+    player_1 = Players::Human.new("X") 
+    player_2 = Players::Computer.new("O")
+    new_game = Game.new(player_1, player_2)
+    new_game.play
+    play_again?
+  elsif input == 2 
+    player_1 = Players::Computer.new("X") 
+    player_2 = Players::Human.new("O")
+    new_game = Game.new(player_1, player_2)
+    new_game.play
+    play_again?
+  end
+end
+
+def new_two_player_game 
+  player_1 = Players::Human.new("X") 
+  player_2 = Players::Human.new("O")
+  new_game = Game.new(player_1, player_2)
+  new_game.play 
+  play_again?
+end
+
+def play_again? 
+  puts "Would you like to play again?" 
+  puts "Y/N" 
+  input = gets.strip
+  if input.downcase == "y" || input.downcase == "yes"
+    start 
+  else
+    exit 
+  end
+end
