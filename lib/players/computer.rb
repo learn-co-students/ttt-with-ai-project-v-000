@@ -2,8 +2,8 @@ require 'pry'
 
 module Players
   class Computer < Player 
-    attr_reader :corners, :center, :middles, :random
-    DEFENSIVE = [2, 0, 1, 5, 3, 4, 8, 6, 7, 6, 0, 3, 7, 1, 4, 8, 2, 5, 8, 0, 4, 6, 2, 4]
+    
+    attr_reader :corners, :center, :middles, :random, :opponent_token
     
     NEAR_WIN_COMBINATIONS = [
       [0, 1],
@@ -32,52 +32,80 @@ module Players
       [2, 6]
     ]
     
+    FINAL_WIN_COMBINATION = [2, 0, 1, 5, 3, 4, 8, 6, 7, 6, 0, 3, 7, 1, 4, 8, 2, 5, 8, 0, 4, 6, 2, 4]
+    
+    # FINAL_WIN_COMBINATION is the corresponding missing index for each NEAR_WIN_COMBINATIONS to make a full WIN_COMBINATION. 
+    
     def initialize(token)
       super
       @corners = ["1", "3", "7", "9"]
       @center = "5"
       @middles = ["2", "4", "6", "8"]
       @random = Random.new
+      @opponent_token = "X" unless self.token == "X"
+      @opponent_token = "O" unless self.token == "O"
     end
     
     def move(board)
-      if board.turn_count == 1
-        @center unless corners_taken?(board)
-      end
       binding.pry
+      if board.turn_count == 1
+        @center unless !corners_taken?(board)
+      end
     end
   
     def corners_taken?(board)
       @corners.detect{|c| board.taken?(c)} 
     end
     
-    def opponent_danger(board)
+    def nearly_lost?(board)
+      nearly_lost_combinations = []
       
-    end
-    
-    def nearly_won?(board)
-      nearly_won_combinations = []
       NEAR_WIN_COMBINATIONS.each do |win_combination|
         win_index_1 = win_combination[0]
         win_index_2 = win_combination[1]
         position_1 = board.cells[win_index_1]
         position_2 = board.cells[win_index_2]
-        if (position_1 == "X" && position_2 == "X") || (position_1 == "O" && position_2 == "O")
-          nearly_won_combinations << win_combination
+        if position_1 == @opponent_token && position_2 == @opponent_token
+          nearly_lost_combinations << win_combination
         end
       end
       
       defensive_move = nil
       
-      nearly_won_combinations.each do |combination|
-        index = find it in NEAR_WIN_COMBINATIONS
-        block = DEFENSIVE[index]
-        if !block.taken? then defensive_move = block
+      nearly_lost_combinations.each do |combination|
+        index = NEAR_WIN_COMBINATIONS.index(combination)
+        block = FINAL_WIN_COMBINATION[index] + 1
+        if !board.taken?(block) 
+          defensive_move = block
+        end
       end
       defensive_move
     end
     
-    
+    def nearly_won?(board)
+      nearly_won_combinations = []
+      
+      NEAR_WIN_COMBINATIONS.each do |win_combination|
+        win_index_1 = win_combination[0]
+        win_index_2 = win_combination[1]
+        position_1 = board.cells[win_index_1]
+        position_2 = board.cells[win_index_2]
+        if position_1 == @token && position_2 == @token
+          nearly_won_combinations << win_combination
+        end
+      end
+      
+      winning_move = nil
+      
+      nearly_won_combinations.each do |combination|
+        index = NEAR_WIN_COMBINATIONS.index(combination)
+        move = FINAL_WIN_COMBINATION[index] + 1
+        if !board.taken?(move) 
+          winning_move = move
+        end
+      end
+      winning_move
+    end
     
     
   end
