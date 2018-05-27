@@ -66,11 +66,16 @@ end
 def wargames 
   player_1 = Players::Computer.new("X") 
   player_2 = Players::Computer.new("O")
-  new_game = Game.new(player_1, player_2)
-  100.times {new_game.wargames_play}
-  puts "Player 1 won #{new_game.player_1_wins} times." 
-  puts "Player 2 won #{new_game.player_2_wins} times."
-  puts "The cat won #{new_game.catsgames} times."
+  Game.reset_counters
+  counter = 0
+  until counter == 100 do 
+    g = Game.new(player_1, player_2)
+    g.wargames_play
+    counter += 1
+  end
+  puts "Player 1 won #{Game.player_1_wins} times." 
+  puts "Player 2 won #{Game.player_2_wins} times."
+  puts "The cat won #{Game.catsgames} times."
   play_again? 
 end
 

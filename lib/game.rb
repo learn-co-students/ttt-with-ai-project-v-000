@@ -1,7 +1,7 @@
 require 'pry'
 
 class Game 
-  attr_accessor :board, :player_1, :player_2, :player_1_wins, :player_2_wins, :catsgames
+  attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
       [0, 1, 2], 
       [3, 4, 5], 
@@ -12,14 +12,15 @@ class Game
       [0, 4, 8], 
       [2, 4, 6]
     ]
-    
+  
+  @@player_1_wins = 0
+  @@player_2_wins = 0
+  @@catsgames = 0
+  
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    @player_1_wins = 0 
-    @player_2_wins = 0
-    @catsgames = 0
   end
   
   def current_player
@@ -97,13 +98,33 @@ class Game
     end
     if won? == "X"
       puts "Congratulations #{winner}!"
-      @player_1_wins += 1
+      @@player_1_wins += 1
     elsif won? == "O"
       puts "Congratulations #{winner}!"
-      @player_2_wins += 1
-    else
+      @@player_2_wins += 1
+    elsif draw?
       puts "Cat's Game!"
-      @catsgames += 1
+      @@catsgames += 1
+    else
     end
   end
+  
+  def self.reset_counters
+    @@player_1_wins = 0 
+    @@player_2_wins = 0 
+    @@catsgames = 0 
+  end
+  
+  def self.player_1_wins
+    @@player_1_wins
+  end
+  
+  def self.player_2_wins
+    @@player_2_wins
+  end
+  
+  def self.catsgames
+    @@catsgames
+  end
+    
 end
