@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -81,6 +82,7 @@ describe 'Game' do
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
 
       expect(game.won?).to be_falsey
+      #binding.pry
     end
 
     it 'returns the correct winning combination in the case of a win' do
