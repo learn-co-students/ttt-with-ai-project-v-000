@@ -1,7 +1,7 @@
 require 'pry'
 
 class Game 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :player_1_wins, :player_2_wins, :catsgames
   WIN_COMBINATIONS = [
       [0, 1, 2], 
       [3, 4, 5], 
@@ -17,6 +17,9 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    @player_1_wins = 0 
+    @player_2_wins = 0
+    @catsgames = 0
   end
   
   def current_player
@@ -84,6 +87,23 @@ class Game
       puts "Congratulations #{winner}!"
     else 
       puts "Cat's Game!"
+    end
+  end
+  
+  def wargames_play
+    until over?
+      puts "Please enter 1-9:"
+      turn
+    end
+    if won? == "X"
+      puts "Congratulations #{winner}!"
+      @player_1_wins += 1
+    elsif won? == "O"
+      puts "Congratulations #{winner}!"
+      @player_2_wins += 1
+    else
+      puts "Cat's Game!"
+      @catsgames += 1
     end
   end
 end

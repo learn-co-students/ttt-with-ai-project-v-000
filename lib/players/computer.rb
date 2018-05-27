@@ -48,15 +48,16 @@ module Players
     
     def move(board)
       if board.turn_count == 0 || (board.turn_count == 1 && board.taken?("5"))
-        "7"
+        index = @random.rand(3)
+        @corners[index]
       elsif board.turn_count == 1
         "5"
       elsif nearly_won?(board)
         nearly_won?(board)
       elsif nearly_lost?(board)
         nearly_lost?(board)
-      elsif corners_taken?(board)
-        corners_taken?(board)
+      elsif corners_free?(board)
+        corners_free?(board)
       else
         random_number(board)
       end
@@ -78,8 +79,8 @@ module Players
       random_numbers.detect{|a| board.taken?(a) == false}
     end
   
-    def corners_taken?(board)
-      @corners.detect{|c| board.taken?(c)} 
+    def corners_free?(board)
+      @corners.detect{|c| board.taken?(c) == false}
     end
     
     def nearly_lost?(board)

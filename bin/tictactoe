@@ -2,21 +2,24 @@
 
 require_relative '../config/environment'
 
+
 def start 
-  until input == 0 || input == 1 || input == 2 
+  input = nil
+  until input == "0" || input == "1" || input == "2" || input == "wargames" 
     puts "Welcome to Tic Tac Toe!" 
     puts "Would you like to play a 0-, 1-, or 2-player game?"
-    puts "Please enter 0, 1, or 2" 
-    raw_input = gets.strip 
-    input = raw_input.to_i
+    puts "Please enter 0, 1, 2, or 'wargames'." 
+    input = gets.strip 
   end
   
-  if input == 0 
+  if input == "0"
     new_zero_player_game
-  elsif input == 1
+  elsif input == "1"
     new_one_player_game
-  elsif input == 2 
+  elsif input == "2" 
     new_two_player_game
+  elsif input == "wargames" 
+    wargames
   end
 end
 
@@ -29,8 +32,9 @@ def new_zero_player_game
 end
 
 def new_one_player_game
+  input = nil
   until input == 1 || input == 2
-    puts "Would you like to go first or second?
+    puts "Would you like to go first or second?"
     puts "Please enter 1 to go first, or 2 to go second." 
     raw_input = gets.strip 
     input = raw_input.to_i
@@ -59,13 +63,30 @@ def new_two_player_game
   play_again?
 end
 
+def wargames 
+  player_1 = Players::Computer.new("X") 
+  player_2 = Players::Computer.new("O")
+  new_game = Game.new(player_1, player_2)
+  100.times {new_game.wargames_play}
+  puts "Player 1 won #{new_game.player_1_wins} times." 
+  puts "Player 2 won #{new_game.player_2_wins} times."
+  puts "The cat won #{new_game.catsgames} times."
+  play_again? 
+end
+
 def play_again? 
-  puts "Would you like to play again?" 
-  puts "Y/N" 
-  input = gets.strip
+  input = "input"
+  until input.downcase == "y" || input.downcase == "yes" || input.downcase == "n" || input.downcase == "no"
+    puts "Would you like to play again?" 
+    puts "Y/N" 
+    input = gets.strip
+  end 
+  
   if input.downcase == "y" || input.downcase == "yes"
     start 
   else
     exit 
   end
 end
+
+start
