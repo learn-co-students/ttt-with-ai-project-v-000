@@ -29,12 +29,12 @@ class Game
   
   def won? 
     WIN_COMBINATIONS.detect do |win_combination|
-     win_index_1 = win_combination[0]
-     win_index_2 = win_combination[1]
-     win_index_3 = win_combination[2]
-     position_1 = @board.cells[win_index_1]
-     position_2 = @board.cells[win_index_2]
-     position_3 = @board.cells[win_index_3]
+      win_index_1 = win_combination[0]
+      win_index_2 = win_combination[1]
+      win_index_3 = win_combination[2]
+      position_1 = @board.cells[win_index_1]
+      position_2 = @board.cells[win_index_2]
+      position_3 = @board.cells[win_index_3]
       (position_1 == "X" && position_2 == "X" && position_3 == "X") || (position_1 == "O" && position_2 == "O" && position_3 == "O")
     end
   end
@@ -50,7 +50,7 @@ class Game
   end
   
   def over?
-    !!won? || !!draw?
+    won? || draw?
   end
   
   def winner
@@ -72,6 +72,21 @@ class Game
       @board.display
     else
       turn
+    end
+  end
+  
+  def play
+    puts "Please enter 1-9:"
+    self.turn
+    if self.over? 
+      if self.won? 
+        self.winner
+      else 
+        puts "It's a draw"
+      end
+    else
+      binding.pry
+      # self.play
     end
   end
   
