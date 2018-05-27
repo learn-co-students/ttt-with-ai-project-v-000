@@ -76,18 +76,14 @@ class Game
   end
   
   def play
-    puts "Please enter 1-9:"
-    self.turn
-    if self.over? 
-      if self.won? 
-        self.winner
-      else 
-        puts "It's a draw"
-      end
-    else
-      binding.pry
-      # self.play
+    until over?
+      puts "Please enter 1-9:"
+      turn
+    end
+    if won? 
+      puts "Congratulations #{winner}!"
+    else 
+      puts "Cat's Game!"
     end
   end
-  
 end
