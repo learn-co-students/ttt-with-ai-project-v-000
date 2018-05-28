@@ -20,7 +20,7 @@ def start
       puts "That was fun! Would you like to play again?"
       loop_around
     when "wargames"
-      Game.new(Player::Computer.new("X"), Player::Computer.new("O"), true).wargames
+      Game.new(Player::Computer.new("X"), Player::Computer.new("O"), Board.new, true).wargames
       puts "That was fun! Would you like to play again?"
       loop_around
     else

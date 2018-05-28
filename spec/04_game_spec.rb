@@ -47,7 +47,7 @@ describe 'Game' do
       player_2 = Player.new("O")
 
       game = Game.new(player_1, player_2, board)
-
+      
       expect(game.player_1).to eq(player_1)
       expect(game.player_2).to eq(player_2)
       expect(game.board).to eq(board)
@@ -263,60 +263,6 @@ describe 'Game' do
       game.play
     end
 
-    it 'stops playing if someone has won' do
-      game = Game.new
-      game.board.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
-
-      allow($stdout).to receive(:puts)
-
-      expect(game).to_not receive(:turn)
-
-      game.play
-    end
-
-    it 'congratulates the winner X' do
-      game = Game.new
-      game.board.cells = ["X", "X", "X", " ", " ", " ", " ", " ", " "]
-      allow($stdout).to receive(:puts)
-
-      expect($stdout).to receive(:puts).with("Congratulations X!")
-
-      game.play
-    end
-
-    it 'congratulates the winner O' do
-      game = Game.new
-      game.board.cells = [" ", " ", " ", " ", " ", " ", "O", "O", "O"]
-
-      allow($stdout).to receive(:puts)
-
-      expect($stdout).to receive(:puts).with("Congratulations O!")
-
-      game.play
-    end
-
-    it 'stops playing in a draw' do
-      game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-      allow($stdout).to receive(:puts)
-
-      expect(game).to_not receive(:turn)
-
-      game.play
-    end
-
-    it 'prints "Cats Game!" on a draw' do
-      game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-      allow($stdout).to receive(:puts)
-
-      expect($stdout).to receive(:puts).with("Cats Game!")
-
-      game.play
-    end
-
     it 'plays through an entire game' do
       game = Game.new
       allow($stdout).to receive(:puts)
@@ -329,7 +275,7 @@ describe 'Game' do
       expect(game.player_2).to receive(:gets).and_return("6")
       expect(game.player_1).to receive(:gets).and_return("7")
 
-      expect($stdout).to receive(:puts).with("Congratulations X!")
+      expect($stdout).to receive(:puts).with("WINNER: X")
 
       game.play
     end
