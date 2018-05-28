@@ -5,8 +5,8 @@ WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[6,4,2],[0,4
 
   def move(board)
     position = random(board)
-  end
-
+	end
+	
   def random(board)
     position = rand(1..9).to_s
     board.valid_move?(position) ? position : random(board)

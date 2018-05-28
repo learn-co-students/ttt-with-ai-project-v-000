@@ -18,16 +18,15 @@ class TicTacToeCLI
     num_players = gets.to_s.strip
      
     if num_players == "0"; computer_vs_computer
-    elsif num_players == "1"; human_vs_computer
-    elsif num_players == "2"; human_vs_human
-    elsif num_players == "wargames"; 
-      wargames
-      stats
-    else
-    end
+			elsif num_players == "1"; human_vs_computer
+			elsif num_players == "2"; human_vs_human
+			elsif num_players == "wargames"; 
+				wargames
+				stats
+			else
+			end
+		end
   end
-  end
-
 
   def computer_vs_computer
     puts "Ok, here goes the battle between Eniac and Hal...."

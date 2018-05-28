@@ -1,3 +1,4 @@
+
 class Human < Player
   attr_accessor :input
   
@@ -8,5 +9,4 @@ class Human < Player
     input = gets.to_s.strip
     input
   end
-
 end
