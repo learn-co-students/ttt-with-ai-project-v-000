@@ -14,7 +14,11 @@ There are 4 game modes: 0 Player, 1 Player, 2 Player and Wargames mode.
 
 ## Instructions
 
-To play, clone this repository run `bundle istall` and then run `bin/tictactoe` in your command line from the root directory.
+To play, clone this repository run `bundle istall` and then run `ruby bin/tictactoe` in your command line from the root directory.
+
+## Development
+
+This game has a test suite in the `/spec` directory. To run the test suite just run `rspec` in your terminal. To run only 1 of the files run `rspec spec/[file_to_run]`.
 
 ------------
 
