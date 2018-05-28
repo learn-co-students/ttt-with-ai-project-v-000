@@ -31,17 +31,21 @@ while input != "exit"
     elsif input_two.downcase == "no"
       game = Game.new(computerX, playerO, board)
     end
+    game.play
+    game_completed = true
     #start game with human player as X if yes as O if no
   when "2"
     puts "Two players selected. X goes first"
     #start game with 2 human players
     game = Game.new(playerX, playerO, board)
     game.play
+    game_completed = true
 
   when "0"
     puts "Watch and learn. Computer Mode selected"
     game = Game.new(computerX, computerO, board)
     game.play
+    game_completed = true
     #start game with 2 computer players
   when "war games"
     #Plays game then refrences war games
@@ -63,11 +67,11 @@ while input != "exit"
     end
     puts "X wins:#{xwins} O wins:#{owins} Draws:#{draws}"
     puts "Strange game, the only winning move is not to play"
+    game_completed = true
   end
   if game_completed == true
     puts "play again?"
     game_completed= false
-    puts "Invalid Selection please chose again"
     puts "Please enter your game mode"
     puts "'1' for Single Player, '2' for Versus, '0' for Computer, or 'war games' for a 100 game simulation between 2 computers"
   end
