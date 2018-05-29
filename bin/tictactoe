@@ -3,4 +3,27 @@
 require_relative '../config/environment'
 require 'pry'
 
-binding.pry
+puts "Welcome to TicTacToe! Now with AI!"
+puts "What kind of game would you like play, 0, 1, or 2 player?"
+x = gets.strip
+case x
+when "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+when "1"
+  puts "Who should go first and use token x?"
+  puts "Type -me- if you want to go first or type -computer- if you want the computer to go first."
+  y = gets.strip
+  case y
+  when "me"
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    game.play
+  when "computer"
+    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+    game.play
+  end
+when "2"
+  puts "Whoever goes first will use token x."
+  game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+  game.play
+end
