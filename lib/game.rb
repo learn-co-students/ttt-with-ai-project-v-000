@@ -66,12 +66,11 @@ class Game
 
   def turn
     player = self.current_player
-    move = player.move(self.board)
-    if self.board.valid_move?(move) == false
-      turn
-    else
-      self.board.update(move, player)
-      self.board.display
+    move = 0
+    until self.board.valid_move?(move) == true
+      move = player.move(self.board)
     end
+    self.board.update(move, player)
+    self.board.display
   end 
 end
