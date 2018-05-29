@@ -6,6 +6,7 @@ module Players
     end
 
     def move(board)
+      board.display
       puts "Please enter 1-9:"
       input = " "
       until board.valid_move?(input)
