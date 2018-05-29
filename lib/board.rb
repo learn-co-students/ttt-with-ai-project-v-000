@@ -42,7 +42,7 @@ class Board
 
   def update(user_input, player)
     cells[user_input.to_i - 1] = player.token
+    # player and token are defined in the test
   end
-
 
 end
