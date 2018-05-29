@@ -1,4 +1,3 @@
-require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -58,17 +57,17 @@ class Game
   def turn
     input = ""
     player = self.current_player
+
     until self.board.valid_move?(input)
       input = player.move(self.board)
     end
     self.board.update(input, player)
-
+    board.display
     return input
   end
 
   def play
-    puts "Please enter 1-9:"
-
+    board.display
     while !self.over?
       self.turn
     end
@@ -78,6 +77,27 @@ class Game
     else
       winner = self.winner
       puts "Congratulations #{winner}!"
+      puts "Final board:"
+      board.display
     end
+  end
+
+  def self.start(players, first_player)
+    if players == "0"
+      player_1 = Players::Computer.new('X')
+      player_2 = Players::Computer.new('O')
+    elsif players == "1"
+      if first_player == "opponent" || first_player == "Opponent"
+        player_1 = Players::Computer.new('X')
+        player_2 = Players::Human.new('O')
+      elsif first_player == "me" || first_player == "Me"
+        player_1 = Players::Human.new('X')
+        player_2 = Players::Computer.new('O')
+      end
+    elsif players == "2"
+      player_1 = Players::Human.new('X')
+      player_2 = Players::Human.new('O')
+    end
+    new_game = Game.new(player_1, player_2)
   end
 end
