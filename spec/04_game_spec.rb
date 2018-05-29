@@ -43,6 +43,7 @@ describe 'Game' do
   describe 'initialize' do
     it 'accepts 2 players and a board' do
       board = Board.new
+      # binding.pry
       player_1 = Player.new("X")
       player_2 = Player.new("O")
 
@@ -324,7 +325,7 @@ describe 'Game' do
       allow($stdout).to receive(:puts)
 
       expect($stdout).to receive(:puts).with("Cat's Game!")
-
+      
       game.play
     end
 

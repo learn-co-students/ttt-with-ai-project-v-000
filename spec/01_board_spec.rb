@@ -119,6 +119,7 @@ describe "Board" do
 
   describe '#update' do
     it 'updates the cells in the board with the player token according to the input' do
+      # binding.pry
       player = double("player", :token => "X")
 
       board.update("1", player)
