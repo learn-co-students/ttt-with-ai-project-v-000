@@ -42,7 +42,7 @@ class Game
 
   def winner
     if won?
-      @board.cells[self.won?.pop.to_i]
+      @board.cells[self.won?.first]
     else
       nil 
     end
@@ -51,7 +51,6 @@ class Game
   def turn
     player = current_player
     move = player.move(self.board)
-    binding.pry
     if !@board.valid_move?(move)
       move = player.move(self.board)
     else
