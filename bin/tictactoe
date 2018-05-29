@@ -2,19 +2,19 @@
 
 require_relative '../config/environment'
 
-puts "Hello! Welcome to TicTacToe!"
+def new
+  puts "Let's play TicTacToe!"
 
-puts "0, 1 or 2 players?"
-players = gets.strip
+  start_game = Game.start
+  start_game.play
 
-if players == "0"
-  first_player = "computer"
-elsif players == "1"
-  puts "Who will be 'X' and go first? Type 'Me' or 'Opponent'?"
-  first_player = gets.strip
-elsif players == "2"
-  first_player == "human"
+  puts "Would you like to play again? Y/N"
+  play_game = gets.strip
+  return play_game
 end
 
-start_game = Game.start(players, first_player)
-start_game.play
+play_game = "Y"
+
+while play_game == "Y" || play_game == 'y'
+  play_game = new
+end

@@ -74,6 +74,7 @@ class Game
 
     if draw?
       puts "Cat's Game!"
+      board.display
     else
       winner = self.winner
       puts "Congratulations #{winner}!"
@@ -82,7 +83,19 @@ class Game
     end
   end
 
-  def self.start(players, first_player)
+  def self.start
+    puts "0, 1 or 2 players?"
+    players = gets.strip
+
+    if players == "0"
+      first_player = "computer"
+    elsif players == "1"
+      puts "Who will be 'X' and go first? Type 'Me' or 'Opponent'?"
+      first_player = gets.strip
+    elsif players == "2"
+      first_player == "human"
+    end
+
     if players == "0"
       player_1 = Players::Computer.new('X')
       player_2 = Players::Computer.new('O')
