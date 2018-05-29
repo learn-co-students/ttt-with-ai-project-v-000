@@ -6,13 +6,10 @@ class Board
 
   def initialize
     reset!
-    # @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def reset!
     @cells = Array.new(9, " ")
-    # self.cells.clear
-    # self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def display
@@ -31,7 +28,21 @@ class Board
     cells.none? { |space| space == " " }
   end
 
+  def turn_count
+    cells.count{ |token| token == "X" || token =="O"}
+  end
 
+  def taken?(user_input)
+    position(user_input) == "X" || position(user_input) == "O"
+  end
+
+  def valid_move?(user_input)
+    user_input.to_i.between?(1, 9) && !taken?(user_input)
+  end
+
+  def update(user_input, player)
+    cells[user_input.to_i - 1] = player.token
+  end
 
 
 end
