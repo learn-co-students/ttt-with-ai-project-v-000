@@ -4,12 +4,12 @@ module Players
 
     def initialize(token)
       super
-      @name = "Human"
+      @name = name
     end
 
     def move(board)
       puts "Enter a number 1 - 9"
-      gets.strip
+      input = gets.strip
     end
   end
 
