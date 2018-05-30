@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -320,7 +321,7 @@ describe 'Game' do
     it 'prints "Cat\'s Game!" on a draw' do
       game = Game.new
       game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
+      
       allow($stdout).to receive(:puts)
 
       expect($stdout).to receive(:puts).with("Cat's Game!")
