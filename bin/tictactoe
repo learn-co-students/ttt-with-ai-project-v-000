@@ -2,12 +2,14 @@
 require_relative '../config/environment'
 
 def game_start
+  new_game = Game.new_game
   puts "\nWelcome to Tic Tac Toe!"
   puts "\nWhat type of game would you like to play, 0 - 1 - or 2 player?"
   puts "\nEnter '0', '1', or '2' : "
   game_type = gets.strip
 
-  if game_type == "1"
+  case game_type
+  when 1 then
     puts "\nWould you like to be 'X' and take the first turn?"
     puts "\nEnter 'y' or 'n' : "
     if gets.strip == "y"
@@ -15,14 +17,16 @@ def game_start
     else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
     end
 
-  elsif game_type == "0"
+  when 0 then
     Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
 
-  elsif game_type == "2"
+  when 2 then
     Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
   end
+
   puts "Play again? Enter 'y' or 'n': "
+  play_again = gets.strip
 
 end
 
-game_start until gets.strip == "n"
+game_start until play_again == "n"
