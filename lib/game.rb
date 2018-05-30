@@ -93,7 +93,7 @@ class Game
     if players == "0"
       first_player = "computer"
     elsif players == "1"
-      puts "Who will be 'X' and go first? Type 'Me' or 'Opponent'?"
+      puts "Do you want to be 'X' or 'O'? Type X or O."
       first_player = gets.strip
     elsif players == "2"
       first_player == "human"
@@ -103,10 +103,10 @@ class Game
       player_1 = Players::Computer.new('X')
       player_2 = Players::Computer.new('O')
     elsif players == "1"
-      if first_player == "opponent" || first_player == "Opponent"
+      if first_player == "O" || first_player == "o"
         player_1 = Players::Computer.new('X')
         player_2 = Players::Human.new('O')
-      elsif first_player == "me" || first_player == "Me"
+      elsif first_player == "X" || first_player == "x"
         player_1 = Players::Human.new('X')
         player_2 = Players::Computer.new('O')
       end
