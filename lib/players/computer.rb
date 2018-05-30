@@ -12,7 +12,7 @@ module Players
         move = [1,3,7,9].detect {|x| !board.taken?(x)}.to_s #return first untaken corner
        #if we went 2nd and got middle square check if other player has 2 oppossing squares and stop their trap by taking side
 
-      elsif board.turn_count == 3 || board.position("1") == board.position("9") || board.position("3") == board.position("7")
+     elsif board.turn_count == 3 && (board.position("1") == board.position("9") || board.position("3") == board.position("7"))
         move = "2"
 
       else #next iterate through WIN_COMBINATIONS and win if possible or stop opponent from winning or move in empty square
