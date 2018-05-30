@@ -83,13 +83,13 @@ class Game
      game_type = gets.strip
 
      case game_type
-     when 1 then
+     when 1 then (
        puts "\nWould you like to be 'X' and take the first turn?"
        puts "\nEnter 'y' or 'n' : "
        if gets.strip == "y"
          Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
        else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
-       end
+       end)
 
      when 0 then
        Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
