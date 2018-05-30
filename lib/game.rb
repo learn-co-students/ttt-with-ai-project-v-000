@@ -84,8 +84,11 @@ class Game
   end
 
   def self.start
-    puts "0, 1 or 2 players?"
-    players = gets.strip
+    players = ""
+    until players == "0" || players == "1" || players == "2"
+      puts "0, 1 or 2 players?"
+      players = gets.strip
+    end
 
     if players == "0"
       first_player = "computer"

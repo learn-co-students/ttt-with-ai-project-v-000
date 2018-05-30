@@ -347,32 +347,5 @@ describe 'Game' do
   end
 
   describe 'start' do
-    it 'starts a game with zero human players' do
-      game = Game.start("0", "computer")
-
-      expect(game.player_1.token).to eq('X')
-      expect(game.player_2.token).to eq('O')
-    end
-
-    it 'starts a game with one human players, computer starting first' do
-      game = Game.start("1", "opponent")
-
-      expect(game.player_1.token).to eql('X')
-      expect(game.player_2.token).to eql('O')
-    end
-
-    it 'starts a game with one human players, human starting first' do
-      game = Game.start("1", "me")
-
-      expect(game.player_1.token).to eql('X')
-      expect(game.player_2.token).to eql('O')
-    end
-
-    it 'starts a game with two human players' do
-      game = Game.start("1", "me")
-
-      expect(game.player_1.token).to eql('X')
-      expect(game.player_2.token).to eql('O')
-    end
   end
 end
