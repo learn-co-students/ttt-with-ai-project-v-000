@@ -3,11 +3,10 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    reset!
   end
 
   def reset!
-    @cells.clear
     @cells = [" "," "," "," "," "," "," "," "," "]
   end
 
@@ -25,14 +24,16 @@ class Board
   end
 
   def full?
-    if cells.none? {|cell| cell == " "}
-      true
-    end
+    cells.none? {|cell| cell == " "}
   end
 
   def turn_count
   cells.count{|token| token == "X" || token == "O"}
-end
+    the_count = cells.count {|cell| cell == " "}
+    turn = 9 - the_count
+    turn
+  end
+
 
   def taken?(input)
     if cells[input.to_i - 1] == "X" || cells[input.to_i - 1] == "O"
@@ -43,9 +44,7 @@ end
   end
 
   def valid_move?(input)
-    if taken?(input) == false && input.to_i.between?(1, 9)
-      true
-    end
+    taken?(input) == false && input.to_i.between?(1, 9)
   end
 
   def update (input, player)
