@@ -51,7 +51,10 @@ class Game
   end
 
   def play
-    turn until over?  
+    until over?
+      turn
+      board.display
+    end
     puts won? ? "Congratulations #{winner}!" : "Cat's Game!"
   end
 
