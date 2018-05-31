@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -18,5 +20,56 @@ class Game
     @player_2 = player_2
     @board = board
   end
+
+  def current_player
+    @board.turn_count.even? ? player_1 : player_2
+    # Because you have access to the Board class, you can include the
+    # turn_count method in your current_player method.
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |win|
+      @board.cells[win[0]] == @board.cells[win[1]] &&
+      @board.cells[win[1]] == @board.cells[win[2]] &&
+      @board.taken?(win[0] + 1)
+      # (@board.cells[win[0]] == "X" || @board.cells[win[0]] == "O")
+    end
+  end
+
+  def draw?
+    @board.full? && !won?
+  end
+
+  def over?
+    won? || draw?
+  end
+
+  def winner
+    if win_combo = won?
+      @winner = @board.cells[win_combo.first]
+    end
+  end
+
+  def turn
+    player = current_player
+    current_move = player.move(board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      @board.update(current_move, player)
+    end
+  end
+
+  def play
+    until over?
+      turn
+      end
+    if draw?
+      puts "Cat's Game!"
+    else won?
+      puts "Congratulations #{winner}!"
+     end
+   end
+
 
 end
