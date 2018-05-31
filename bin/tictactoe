@@ -2,4 +2,4 @@
 
 require_relative '../config/environment'
 
-TicTacToeCLI.new.call
+TTTCLI.new.call

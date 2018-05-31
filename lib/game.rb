@@ -21,12 +21,6 @@ class Game
     @board = board
   end
 
-  def start
-    puts "Welcome to Tic Tac Toe."
-    play
-    @board.display
-  end
-
   def current_player
     @board.turn_count.even? ? player_1 : player_2
     # Because you have access to the Board class, you can include the
@@ -67,15 +61,13 @@ class Game
   end
 
   def play
-    until over?
-      turn
-      end
+    board.display
+    turn until over?
     if draw?
       puts "Cat's Game!"
-    else won?
+    elsif won?
       puts "Congratulations #{winner}!"
      end
    end
-
-
+   
 end

@@ -3,8 +3,10 @@ module Players
 
     def move(board)
       puts "Please make your selection."
-      gets.strip
+        board.display
+        input = gets
+        input
+      end
     end
-  end
-  
+    
 end
