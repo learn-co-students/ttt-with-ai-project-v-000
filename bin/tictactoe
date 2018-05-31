@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def new
+  puts "Let's play TicTacToe!"
+
+  start_game = Game.start
+  start_game.play
+
+  puts "Would you like to play again? Y/N"
+  play_game = gets.strip
+  return play_game
+end
+
+play_game = "Y"
+
+while play_game == "Y" || play_game == 'y'
+  play_game = new
+end
