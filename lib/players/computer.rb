@@ -18,26 +18,36 @@ module Players
           if  board.valid_move?(num)
             board.valid_move?(num) ? num.to_s : move(board)
           elsif win_array_check(board)
-          
-            win_array_check(board).each do |num|
-              binding.pry
-              board.valid_move?(num) ? num.to_s : move(board)
-            end
+            output = ''
+                win_array_check(board).each do |num|
+                  if board.valid_move?(num+1) then output = (num+1).to_s end
+                end
+              output
           else
+            corner_check(board)
+            # binding.pry
             num = 1 + rand(9) 
-            board.valid_move?(num) ? (num-1).to_s : move(board)
+            board.valid_move?(num) ? num.to_s : move(board)
           end
-    end
+      end
+
     
 
-
+    def corner_check(board)
+       corner = [0,2,6,8]
+        corner.find do |num| 
+          board.cells[num] == " "
+          # binding.pry
+          (num+1).to_s
+        end
+    end        
+  
+  
+    
     def win_array_check(board)
      WIN_COMBO.find do |combo|
-        #binding.pry
         (board.cells[combo[0]] == board.cells[combo[1]] || board.cells[combo[1]] == board.cells[combo[2]] || board.cells[combo[0]] == board.cells[combo[2]]) && ([board.cells[combo[0]], board.cells[combo[1]], board.cells[combo[2]]].select { |a| a == " "}.length == 1)
-            
       end
-   
     end  
     
     
