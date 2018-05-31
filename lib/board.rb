@@ -33,11 +33,11 @@ class Board
     count
   end 
   
-  def taken?(num)
-    self.position(num).include?("X") || self.position(num).include?("O")
+  def taken?(index)
+    self.position(num) != " " || self.position(num) != ""
   end 
   
-  def valid_move?(num)
+  def valid_move?(index)
     num.to_i <= 9 && num.to_i >= 1 && !taken?(num) ? true : false
   end 
   
