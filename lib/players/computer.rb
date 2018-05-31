@@ -6,5 +6,5 @@ module Players
       valid_moves.detect{|move|board.valid_move?(move)}
     end
   end
-  
+
 end

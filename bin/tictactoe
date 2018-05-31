@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+TicTacToeCLI.new.call
+
+
+#
+# class TicTacToeCLI
+#
+#   def initialize
+#   end
+#
+#   def call
+#     input = ""
+#     while input != "exit"
+#       puts "hello"
+#
+#       input = gets.strip
+#     end
+#   end
