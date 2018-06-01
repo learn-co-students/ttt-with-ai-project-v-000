@@ -1,35 +1,5 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-require 'pry'
 
-puts "Hello Player"
-
-puts "1, 2, or 0 players?"
-response = gets.chomp
-
-puts "Ok." + response
-
-if response == '0'
-  computerX = Players::Computer.new("X")
-  computerY = Players::Computer.new("O")
-  game0 = Game.new(computerX, computerY)
-  puts "Who should go first and be player X?"
-  game0.play
-
-elsif response == '1'
-  computer = Players::Computer.new("O")
-  game1 = Game.new(Players::Human.new("X"), computer)
-
-  puts "Who should go first and be player X?"
-
-  game1.play
-
-elsif response == '2'
-  game2 = Game.new
-  puts "Who should go first and be player X?"
-    game2.play
-
-else
-  puts "Option not available."
-end
+TicTacToeCLI.new.call

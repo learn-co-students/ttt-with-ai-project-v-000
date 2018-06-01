@@ -20,11 +20,7 @@ class Game
 
   #state remembered interactions
   def current_player(board= @board)
-    if @board.turn_count % 2 == 0
-      player_1
-    else
-      player_2
-    end
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def won?
