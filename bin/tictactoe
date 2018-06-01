@@ -3,7 +3,6 @@
 require_relative '../config/environment'
 
 
-
 def start 
   input = nil
   until input == "0" || input == "1" || input == "2" || input == "wargames" 
