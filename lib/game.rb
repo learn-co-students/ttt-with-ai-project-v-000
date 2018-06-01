@@ -91,6 +91,12 @@ class Game
     end
   end
   
+  def self.reset_counters
+    @@player_1_wins = 0 
+    @@player_2_wins = 0 
+    @@catsgames = 0 
+  end
+  
   def wargames_play
     until over?
       puts "Please enter 1-9:"

@@ -76,6 +76,10 @@ def wargames
   puts "Player 1 won #{Game.player_1_wins} times." 
   puts "Player 2 won #{Game.player_2_wins} times."
   puts "The cat won #{Game.catsgames} times."
+  end
+  puts "Player 1 won #{new_game.player_1_wins} times." 
+  puts "Player 2 won #{new_game.player_2_wins} times."
+  puts "The cat won #{new_game.catsgames} times."
   play_again? 
 end
 
