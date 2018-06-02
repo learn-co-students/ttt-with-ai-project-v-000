@@ -89,16 +89,16 @@ def play
   turn until over?
   puts "Congratulations #{winner}!" if winner
   puts "Cat's Game!" if draw?
-  #puts "Would you like to play again (yes or no)?"
-  #play_again = gets.strip until play_again == "yes" || play_again == "no"
-  #play_again == "yes" ? Game.start : "Goodbye"
+  puts "Would you like to play again (yes or no)?"
+  play_again = gets.strip until play_again == "yes" || play_again == "no"
+  play_again == "yes" ? Game.start : "Goodbye"
 end
 
 def self.start 
   puts "WELCOME TO TIC-TAC-TOE!!!"
   puts "Would you like to play a 0, 1, or 2 player game?"
   input = gets.strip until input == "0" ||  input == "1" || input == "2" || input == "wargames"
-  if input != "wargames"
+  if input != "wargames" && input != "0"
     puts "Great! Who goes first? 1 or 2?"
     p1 = gets.strip until p1 == "1" || p1 == "2"
   end
