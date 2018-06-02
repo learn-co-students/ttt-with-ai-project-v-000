@@ -11,7 +11,13 @@ module Players
     def move(board)
       identify_tokens
       @board = board.cells
-      win_combos
+      
+      if @board.all?{|cell| cell == " "}
+        "5"
+      else 
+        win_combos
+      end
+      
     end
     
     
@@ -24,14 +30,12 @@ module Players
       end
     end
       
-      
-      
+    
     def win_combos
       offense = []
       defense = []
       win = nil
       block = nil
-      move = "5"
       
       WIN_COMBOS.each do |combo|
         wc = @board[combo[0]],@board[combo[1]],@board[combo[2]]
@@ -43,25 +47,21 @@ module Players
           block = wc.index(" ").to_s
           
         elsif wc.none?{|cell| cell == @opp_token}
-          offense << combo.index(" ")
+          offense << combo.select{|cell| cell == " "}
           
         elsif wc.none?{|cell| cell == @comp_token}
-          defense << combo.index(" ")
+          defense << combo.select{|cell| cell == " "}
         end
       end
       
-      # if win
-      #   win
-      # elsif block
-      #   block
-      # else 
-      #   off_and_def = offense.flatten & defense.flatten
-      #   return rand(1,off_and_def)
-      #   move
-      # end
-      
-      
-      move
+      if win
+        return win
+      elsif block
+        return block
+      else 
+        off_and_def = offense.flatten & defense.flatten
+        return rand(1..off_and_def.length + 1).to_s
+      end
     end
     
     
