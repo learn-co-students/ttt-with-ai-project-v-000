@@ -6,7 +6,6 @@ attr_reader :token
   end
   
   def move(board) 
-    #binding.pry
     puts "Select A Move: "
     input = gets.strip
   end 

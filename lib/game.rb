@@ -60,7 +60,6 @@ class Game
   end
 
   def over?
-    #binding.pry 
     won? || draw?
   end
 
@@ -78,7 +77,6 @@ def turn
   valid = FALSE
   while valid == FALSE 
     move = self.current_player.move(self.board.cells)
-    #binding.pry 
     if self.board.valid_move?(move)
       self.board.update(move, self.current_player)
       valid = TRUE
@@ -91,9 +89,9 @@ def play
   turn until over?
   puts "Congratulations #{winner}!" if winner
   puts "Cat's Game!" if draw?
-  puts "Would you like to play again (yes or no)?"
-  play_again = gets.strip until play_again == "yes" || play_again == "no"
-  play_again == "yes" ? Game.start : "Goodbye"
+  #puts "Would you like to play again (yes or no)?"
+  #play_again = gets.strip until play_again == "yes" || play_again == "no"
+  #play_again == "yes" ? Game.start : "Goodbye"
 end
 
 def self.start 
