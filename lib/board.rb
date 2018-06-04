@@ -3,11 +3,11 @@ class Board
   attr_accessor :cells
   
   def reset!
-    self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    self.cells = Array.new(9, " ")
   end
   
   def initialize
-    self.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    self.cells = Array.new(9, " ")
   end
   
   def display
@@ -24,20 +24,20 @@ class Board
   end
   
   def full?
-    self.cells.all? {|c| c != " "}
+    self.cells.all? {|c| c != " " && c != ""}
   end 
   
   def turn_count
     count = 0 
-    self.cells.each {|c| if c != " "; count +=1 end}
+    self.cells.each {|c| if c != " " && c != ""; count +=1 end}
     count
   end 
   
   def taken?(index)
-    self.position(num) != " " || self.position(num) != ""
+    self.position(index) != " " && self.position(index) != ""
   end 
   
-  def valid_move?(index)
+  def valid_move?(num)
     num.to_i <= 9 && num.to_i >= 1 && !taken?(num) ? true : false
   end 
   
