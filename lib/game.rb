@@ -16,15 +16,18 @@ class Game
   [2,4,6]
   ]
   
+  
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
   end
   
+  
   def board
     @board
   end
+  
   
   def current_player
     count = @board.turn_count
@@ -65,7 +68,7 @@ class Game
   
   
   def winner
-  
+    
     if won?
       xs = @board.cells.count("X")
       os = @board.cells.count("O")
@@ -83,13 +86,13 @@ class Game
   end
   
   
-  
   def turn 
     puts "Please enter 1-9:"
     input = current_player.move(@board)
     if @board.valid_move?(input)
+      puts "move valid #{input}"
       @board.update(input,current_player)
-      display
+      @board.display
     else
       turn
     end
@@ -97,8 +100,7 @@ class Game
     
   
   def play
-    puts "Welcome to Tic Tac Toe!"
-    display
+    @board.display
 
     until over? == true
       turn
@@ -108,15 +110,55 @@ class Game
 
   end
   
+ 
+    
+  def start  
+    puts "Welcome to ttt"
+    setup
+  end
+  
+  def setup
+    puts "How many humans will be playing? (0,1,2)"
+    num_humans = gets.strip
+    
+    puts "Are you making the first move (Yn)?"
+    first = gets.strip.downcase
+    
+    game_type(num_humans, first)
+    
+    puts "Would you like to play again? (Yn)"
+    replay = gets.strip.downcase
+    setup if replay == "y"
+  end
   
   
+  def game_type(num_humans, first)
+    
+    comp_x = Players::Computer.new("X")
+    comp_o = Players::Computer.new("O")
+    hum_x = Players::Human.new("X")
+    hum_o = Players::Human.new("O")
+    
+    case num_humans
+    
+    when "0"
+      Game.new(player_1=comp_x, player_2=comp_o).play
+      
+    when "1"
+      if first == 'y'
+        Game.new(player_1=hum_x, player_2=comp_o).play
+      else 
+        Game.new(player_1=comp_x, player_2=hum_o).play
+      end
   
+    when "2"
+      Game.new(player_1=hum_x, player_2=hum_o).play
+      
+    else
+      setup
+    end
+    
+  end
 
-  
-  
-  
-  
-  
-  
   
 end
