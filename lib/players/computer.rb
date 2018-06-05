@@ -4,7 +4,9 @@ module Players
   
   class Computer < Player
     
+
     attr_accessor :offense, :defense, :comp_token, :opp_token, :board, :win, :block, :combo
+
     
     WIN_COMBOS = Game::WIN_COMBINATIONS
     
@@ -43,6 +45,7 @@ module Players
       WIN_COMBOS.each do |combo|
         wc = @board[combo[0]],@board[combo[1]],@board[combo[2]]
         
+
         if wc.count(comp_token) == 2 && wc.count(opp_token) == 0
           blank = wc.index(" ")
           @win = combo[blank]
@@ -76,7 +79,8 @@ module Players
           @combo << i
         end
       end
-      
+
+
       if @win != nil
         move = @win
         
@@ -104,5 +108,7 @@ module Players
       end
       (move.to_i + 1).to_s
     end
+
+    
   end
 end
