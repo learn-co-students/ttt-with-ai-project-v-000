@@ -39,4 +39,8 @@ class Board #represents the data and logic of a Tic-tac-toe game board
     !taken?(position) && position.to_i.between?(1,9)
   end
 
+  def update(position, player)
+      @cells[position.to_i-1] = player.token
+  end
+
 end
