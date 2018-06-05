@@ -19,12 +19,16 @@ class Board #represents the data and logic of a Tic-tac-toe game board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  #display method - a board can print its current state
+  def position(user_input)
+    @cells[user_input.to_i-1]
+  end
 
-  #position method - takes in the user's input in the form of 1-9 strings
-  #like "2" or "9" and looks up the value of the cells at the correct index
-  #from the array's perspective.
-  #All other methods will take input in the user's perspective of 1-9 strings
-  #and use #position to look up the value according to the cells' array index.
+  def full?
+    @cells.all? {|cell| cell == "X" || cell == "O"}
+  end
+
+  def turn_count
+    @cells.count {|cell| cell == "X" || cell == "O"}
+  end
 
 end
