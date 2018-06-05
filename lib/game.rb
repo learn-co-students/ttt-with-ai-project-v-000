@@ -118,13 +118,10 @@ class Game
   end
   
   def setup
-    puts "How many humans will be playing? (0,1,2)"
+    puts "How many humans will be playing? (0,1,2, wargame)"
     num_humans = gets.strip
     
-    puts "Are you making the first move (Yn)?"
-    first = gets.strip.downcase
-    
-    game_type(num_humans, first)
+    game_type(num_humans)
     
     puts "Would you like to play again? (Yn)"
     replay = gets.strip.downcase
@@ -132,7 +129,7 @@ class Game
   end
   
   
-  def game_type(num_humans, first)
+  def game_type(num_humans)
     
     comp_x = Players::Computer.new("X")
     comp_o = Players::Computer.new("O")
@@ -145,6 +142,9 @@ class Game
       Game.new(player_1=comp_x, player_2=comp_o).play
       
     when "1"
+      puts "Are you making the first move (Yn)?"
+      first = gets.strip.downcase
+      
       if first == 'y'
         Game.new(player_1=hum_x, player_2=comp_o).play
       else 
@@ -154,6 +154,10 @@ class Game
     when "2"
       Game.new(player_1=hum_x, player_2=hum_o).play
       
+    when "wargame"
+      100.times do 
+        Game.new(player_1=comp_x, player_2=comp_o).play
+      end
     else
       setup
     end
