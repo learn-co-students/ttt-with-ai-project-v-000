@@ -8,7 +8,6 @@ class Board
     @cells = [" "] * 9
   end
   
-  
   def display
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
@@ -48,9 +47,5 @@ class Board
     position = input.to_i - 1
     @cells[position] = player.token
   end
-  
-  
-  
-  
   
 end

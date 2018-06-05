@@ -4,20 +4,18 @@ module Players
   
   class Computer < Player
     
-
     attr_accessor :offense, :defense, :comp_token, :opp_token, :board, :win, :block, :combo
 
-    
     WIN_COMBOS = Game::WIN_COMBINATIONS
     
     def move(board)
       sleep(1)
       identify_tokens
       @board = board.cells
+      
       off_and_def_combos
       find_best_move
     end
-    
     
     def identify_tokens
       @comp_token = self.token
@@ -45,7 +43,6 @@ module Players
       WIN_COMBOS.each do |combo|
         wc = @board[combo[0]],@board[combo[1]],@board[combo[2]]
         
-
         if wc.count(comp_token) == 2 && wc.count(opp_token) == 0
           blank = wc.index(" ")
           @win = combo[blank]
@@ -80,7 +77,6 @@ module Players
         end
       end
 
-
       if @win != nil
         move = @win
         
@@ -105,10 +101,10 @@ module Players
         
       else
         move = @board.index(" ")
+        
       end
+      
       (move.to_i + 1).to_s
     end
-
-    
   end
 end

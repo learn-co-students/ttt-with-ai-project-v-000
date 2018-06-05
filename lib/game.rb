@@ -48,16 +48,16 @@ class Game
         return combo
       end
     end
-    return false
+    false
   end
   
   
   def draw?
     if (won? == false && @board.full? == true)
       puts "Cat\'s Game!"
-      return true
+      true
     else
-      return false
+      false
     end
   end
   
@@ -89,6 +89,7 @@ class Game
   def turn 
     puts "Please enter 1-9:"
     input = current_player.move(@board)
+    
     if @board.valid_move?(input)
       puts "move valid #{input}"
       @board.update(input,current_player)
@@ -107,11 +108,9 @@ class Game
     end
     winner
     draw?
-
   end
   
  
-    
   def start  
     puts "Welcome to ttt"
     setup
@@ -120,7 +119,6 @@ class Game
   def setup
     puts "How many humans will be playing? (0,1,2, wargame)"
     num_humans = gets.strip
-    
     game_type(num_humans)
     
     puts "Would you like to play again? (Yn)"
@@ -163,6 +161,4 @@ class Game
     end
     
   end
-
-  
 end
