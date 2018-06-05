@@ -11,8 +11,13 @@ class Board #represents the data and logic of a Tic-tac-toe game board
     self.cells = Array.new(9, " ")
   end
 
-  #reset! method can reset the state of the cells to a what a board should look
-  #like at the start of a game, an array with 9 " " elements.
+  def display
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
+    puts "------------"
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts "------------"
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+  end
 
   #display method - a board can print its current state
 
