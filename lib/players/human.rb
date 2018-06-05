@@ -3,6 +3,7 @@ class Players
     attr_accessor :board
 
     def move(board)
+      puts "Enter your move."
       gets.strip
     end
   end
