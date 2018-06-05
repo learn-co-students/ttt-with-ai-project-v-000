@@ -31,4 +31,12 @@ class Board #represents the data and logic of a Tic-tac-toe game board
     @cells.count {|cell| cell == "X" || cell == "O"}
   end
 
+  def taken?(position)
+    @cells[(position.to_i)-1] != " "
+  end
+
+  def valid_move?(position)
+    !taken?(position) && position.to_i.between?(1,9)
+  end
+
 end
