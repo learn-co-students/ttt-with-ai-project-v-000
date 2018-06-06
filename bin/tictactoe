@@ -1,3 +1,63 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+include Players
+
+        puts %q[
+        ___________ .__        __
+        \__    ___/ |__| _____/  |______    ____
+           |    |   |  |/ ___\   __\__  \ _/ ___\
+           |    |   |  \  \___|  |  / __ \  \___
+           |____|   |__|\___  >__| (____  /\___  >
+                            \/          \/     \/]
+        puts "Lets play Tic Tac Toe!"
+
+
+
+puts "Hello, how's it going! Ready to play?!"
+
+puts "What game would like to play?"
+puts "Enter '0', '1', or '2' player"
+input = gets.chomp.to_i
+
+if input == 0
+  game = Game.new(Computer.new("X"), Computer.new("O"))
+  puts "Computers get Ready, Set, -- oh, your done."
+end
+
+if input == 1
+  puts "Who should go first and be X?"
+  input = gets.chomp
+  if input.to_i == 1
+    game = Game.new(Human.new("X"), Computer.new("O"))
+    puts "Great show the computer who's boss!"
+  else
+    game = Game.new(Computer.new("X"), Human.new("O"))
+    puts "Ooh! How nice of you!"
+  end
+end
+
+if input == 2
+  game = Game.new
+  puts "Alright, go for Glory!!"
+end
+
+if input == 3
+  puts "You have selected War Games!"
+  puts "Stand back!!!"
+  puts "In 1"
+  puts "2"
+  puts "3"
+  puts "GO!"
+  100.times {
+    Game.new(Computer.new("X"), Computer.new("O")).play
+    puts "#{Game.draw_count}"
+  }
+end
+
+
+if input != 3
+  until game.won?
+    game.play
+  end
+end
