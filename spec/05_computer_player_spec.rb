@@ -17,4 +17,28 @@ describe 'Players::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+
+  describe '#guess' do
+    it 'returns a first position for the computer to move' do
+      computer = Players::Computer.new("X")
+      board = Board.new
+
+      computer_move = computer.guess(board)
+
+      expect(0..8).to cover(computer_move)
+    end
+
+    it.skip 'takes an obvious finishing move' do
+      computer = Players::Computer.new("X")
+      board = Board.new
+      board.update("1", computer)
+      board.update("2", computer)
+
+      computer_move = computer.guess(board)
+
+      expect(computer_move).to eq(2)
+
+    end
+  end
+
 end
