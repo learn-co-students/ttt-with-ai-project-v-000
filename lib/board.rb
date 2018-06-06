@@ -23,13 +23,13 @@ class Board
   end
   
   def full?
-    self.cells.all? do |spot|
+    cells.all? do |spot|
       spot.strip != ''
     end
   end
   
   def turn_count
-    self.cells.count { |chip| chip.strip != '' }
+    cells.count { |chip| chip.strip != '' }
   end
   
   def taken?(num)

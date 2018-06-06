@@ -16,7 +16,37 @@ class Game
   end
   
   def won?
-    
+    result = false
+    WIN_COMBINATIONS.each do |set|
+      if board.cells[set[0]] == "X" && board.cells[set[1]] == "X" && board.cells[set[2]] == "X"
+        result = set
+        break
+      elsif board.cells[set[0]] == "O" && board.cells[set[1]] == "O" && board.cells[set[2]] == "O"
+        result = set
+        break
+      end
+    end
+    result
+  end
+  
+  def draw?
+    won? == false && board.full?
+  end
+  
+  def over?
+    won? != false || draw?
+  end
+  
+  def winner
+    outcome = won?
+    if outcome != false
+      board.cells[outcome[0]]
+    else
+      nil
+    end
   end
   
 end
+
+
+
