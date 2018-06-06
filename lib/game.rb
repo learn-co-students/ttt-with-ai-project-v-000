@@ -11,6 +11,12 @@ class Game
     self.player_1 = p1
   end
   
+  def current_player
+    board.turn_count.even? ? player_1 : player_2
+  end
   
+  def won?
+    
+  end
   
 end
