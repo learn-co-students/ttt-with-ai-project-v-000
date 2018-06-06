@@ -6,7 +6,6 @@ class Board
 
   def initialize
     @cells =  [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    #binding.pry
   end
 
   def reset!
@@ -23,9 +22,8 @@ class Board
   end
 
   def position(input)
-    input = input.to_i - 1
-    @cells[input]
-    #binding.pry
+    index = input.to_i - 1
+    @cells[index]
   end
 
   def full?
@@ -37,8 +35,8 @@ class Board
   end
 
   def taken?(input)
-    input = input.to_i - 1
-    @cells[input] != " "
+    index = input.to_i - 1
+    @cells[index] != " "
   end
 
   def valid_move?(input)
@@ -47,10 +45,8 @@ class Board
   end
 
   def update(input, player)
-    input = input.to_i
-    @cells[input] = player
-
-  binding.pry
+    index = input.to_i
+    @cells[index] = player.token
   end
 
 end
