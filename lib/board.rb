@@ -29,7 +29,7 @@ class Board
   end
   
   def turn_count
-    self.cells.count{ |chip| chip.strip != '' }
+    self.cells.count { |chip| chip.strip != '' }
   end
   
   def taken?(num)
