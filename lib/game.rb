@@ -16,16 +16,10 @@ class Game
   end
 
   def won?
-    result = false
-    WIN_COMBINATIONS.each do |set|
-      if board.cells[set[0]] == "X" && board.cells[set[1]] == "X" && board.cells[set[2]] == "X"
-        result = set
-        break
-      elsif board.cells[set[0]] == "O" && board.cells[set[1]] == "O" && board.cells[set[2]] == "O"
-        result = set
-        break
-      end
-    end
+    result = WIN_COMBINATIONS.detect { |set|
+      board.cells[set[0]] != ' ' && board.cells[set[0]] == board.cells[set[1]] && board.cells[set[1]] == board.cells[set[2]]
+    }
+    result = false unless result
     result
   end
 
@@ -42,9 +36,9 @@ class Game
   end
   
   def turn
-    move = current_player.move(board)
-    if board.valid_move?(move)
-      board.update(move, current_player)
+    selection = current_player.move(board)
+    if board.valid_move?(selection)
+      board.update(selection, current_player)
       board.display
     else
       turn

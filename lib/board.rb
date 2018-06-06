@@ -24,16 +24,16 @@ class Board
   
   def full?
     cells.all? do |spot|
-      spot.strip != ''
+      spot != ' '
     end
   end
   
   def turn_count
-    cells.count { |chip| chip.strip != '' }
+    cells.count { |chip| chip != ' ' }
   end
   
   def taken?(num)
-    position(num).strip != ''
+    position(num) != ' '
   end
   
   def valid_move?(num)
