@@ -47,14 +47,10 @@ class Board
   end
 
   def update(input, player)
-    puts "Please enter 1-9:"
-    input = gets.strip.to_i
-    player = "X" || "O"
-    if valid_move?(input)
-        input == player
-        puts input
-    end
-    display
+    input = input.to_i
+    @cells[input] = player
+
+  binding.pry
   end
 
 end
