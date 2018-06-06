@@ -38,12 +38,12 @@ class Game
   end
     
   def turn
-    board.display
     num = current_player.move(board)
     while !board.valid_move?(num)
       num = current_player.move(board)
     end
     board.update(num, current_player)
+    board.display
   end
     
   def play 
@@ -69,9 +69,9 @@ class Game
     
       if players == '0'
         comp_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-        comp_game.board.display
         puts "The computer will now play itself!"
         #0 player game logic
+        comp_game.play
       end
     
       if players == '1'
@@ -90,17 +90,19 @@ class Game
         else first_player == "computer"
           one_player_game = Game.new(Players::Computer.new("X"), player_2 = Players::Human.new("O"))
         end
-      
-        one_player_game.board.display
-      
-        #1 player logic
+        
+        board.display
+        
+        one_player_game.play
      end
     
      if players == '2'
        puts "Player one will be 'X'."
       
        two_player_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
-      
+       
+       board.display
+       
        two_player_game.play
       end
       

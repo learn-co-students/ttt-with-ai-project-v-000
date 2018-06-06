@@ -33,8 +33,8 @@ class Board
     count
   end 
   
-  def taken?(index)
-    self.position(index) != " " && self.position(index) != ""
+  def taken?(num)
+    self.position(num) != " " && self.position(num) != ""
   end 
   
   def valid_move?(num)
