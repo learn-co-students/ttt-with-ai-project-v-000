@@ -42,11 +42,11 @@ class Game
   end
 
   def draw?
-    board.cells.none? {|token| token == " "} && !won?
+    board.full? && !won?
   end
 
   def over?
-    draw? || won? != nil
+    draw? || won?
   end
 
   def winner
@@ -65,27 +65,22 @@ class Game
 
   def play
     # binding.pry
-    if over? == false && !won?
+    #call turn - Using the Human class it will prompt the user for input via the move method. Will also check to insure the move is valid and if so, will execute the move.
+    # check if the game is over? after each move
+    # check if the game is won? after each move
+    # check if the game is a draw? after each move
+    # congratulate the winner
+    # binding.pry
+    while over? == false
       turn
-      # if won? == true
-      #   puts "Congratulations #{winner}!"
-      # end
+      if won? != nil
+        winner
+        puts "Congratulations #{winner}!"
+      else draw? == true
+         puts "Cat's Game!"
+      end
     end
-    # counter = 0
-    # while counter < 9
-    #   turn
-    #   if over? != true
-    #     turn
-    #     counter += 1
-    #   else won?
-    #     winner
-    #     puts "Congratulations #{winner}!"
-    #   end
-    # end
 
-    # while over? != true
-    #   turn
-    # end
   end
 
 end
