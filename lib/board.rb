@@ -1,20 +1,46 @@
 
 class Board
-  attr_accessor cells
+  attr_accessor :cells
   
   def initialize
-    
+    reset!
   end
   
-  def reset!(board)
-    board = Array.new(9, ' ')
+  def reset!
+   self.cells = Array.new(9, ' ')
   end
   
   def display
-    puts " #{board[0]} | #{board[1]} | #{board[2]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
-    puts " #{board[3]} | #{board[4]} | #{board[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{board[6]} | #{board[7]} | #{board[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+  end
+
+  def position(num)
+    cells[num.to_i - 1]
+  end
+  
+  def full?
+    self.cells.all? do |spot|
+      spot.strip != ''
+    end
+  end
+  
+  def turn_count
+    self.cells.count{ |chip| chip.strip != '' }
+  end
+  
+  def taken?(num)
+    position(num).strip != ''
+  end
+  
+  def valid_move?(num)
+    num.to_i.between?(1, 9) && !taken?(num)
+  end
+
+  def update(num, player)
+    cells[num.to_i - 1] = player.token
   end
 end
