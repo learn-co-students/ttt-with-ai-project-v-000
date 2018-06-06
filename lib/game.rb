@@ -40,4 +40,13 @@ class Game
     #if draw is true, game is over is true
   end
 
+  def winner
+    if winning_combo = won?
+      @board.cells[winning_combo.first]
+    end
+  end
+
+  def turn
+  end
+
 end
