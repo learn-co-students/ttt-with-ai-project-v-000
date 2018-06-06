@@ -14,21 +14,27 @@ class Game
   def current_player
     board.turn_count.even? ? player_1 : player_2
   end
-  
+
   def won?
-    result = false
-    WIN_COMBINATIONS.each do |set|
+          #&&  #= 'X' || board.cells[set[0]] == 'O'
+      
+        
+=begin
+      result = false
       if board.cells[set[0]] == "X" && board.cells[set[1]] == "X" && board.cells[set[2]] == "X"
         result = set
-        break
       elsif board.cells[set[0]] == "O" && board.cells[set[1]] == "O" && board.cells[set[2]] == "O"
         result = set
-        break
       end
+      result
+=end
+    
+    WIN_COMBINATIONS.detect do |set|
+      board.cells[set[0]] != '' && board.cells[set[0]] == board.cells[set[1]] && board.cells[set[1]] == board.cells[set[2]]
     end
-    result
+    
   end
-  
+
   def draw?
     won? == false && board.full?
   end
@@ -43,6 +49,29 @@ class Game
       board.cells[outcome[0]]
     else
       nil
+    end
+  end
+  
+  # board.update
+  def turn
+    playing = current_player
+    move = playing.move(board)
+    if board.valid_move?(move)
+      board.cells[move.to_i - 1] = playing.token
+      board.display
+    else
+      turn
+    end
+  end
+  
+  def play
+    turn until over?
+
+    letter = winner
+    if letter != nil
+      puts "Congratulations #{letter}!"
+    else
+      puts "Cat's Game!"
     end
   end
   
