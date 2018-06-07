@@ -7,7 +7,7 @@ module Players
       if board.turn_count < 4
         
         if board.position("6") != ' '
-          # prioritizecenter
+          # prioritize center
           "6"
         elsif 
         end
