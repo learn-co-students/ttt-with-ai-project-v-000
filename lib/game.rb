@@ -64,22 +64,36 @@ class Game
   end
 
   def play
-    # binding.pry
-    #call turn - Using the Human class it will prompt the user for input via the move method. Will also check to insure the move is valid and if so, will execute the move.
+    # call turn - Using the Human class it will prompt the user for input via the move method. Will also check to insure the move is valid and if so, will execute the move.
     # check if the game is over? after each move
     # check if the game is won? after each move
     # check if the game is a draw? after each move
     # congratulate the winner
     # binding.pry
-    while over? == false
+    counter = 0
+    while counter < 9
       turn
-      if won? != nil
+      counter += 1
+      if over? == false
+        turn
+      elsif won? != nil
         winner
         puts "Congratulations #{winner}!"
       else draw? == true
-         puts "Cat's Game!"
+        puts "Cat's Game!"
       end
     end
+
+
+    # while over? == false
+    #   turn
+    #   if won? != nil
+    #     winner
+    #     puts "Congratulations #{winner}!"
+    #   elsif draw? == true
+    #      puts "Cat's Game!"
+    #   end
+    # end
 
   end
 

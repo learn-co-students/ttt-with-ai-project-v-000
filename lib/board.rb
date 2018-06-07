@@ -7,12 +7,12 @@ class Board
     @cells = Array.new(9, " ")
   end
 
-  def reset! #reset the state of the cells to what a board should look like at the start of a game
+  def reset!
     @cells.clear
     @cells = Array.new(9, " ")
   end
 
-  def display #prints the current state of the board
+  def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
@@ -47,7 +47,7 @@ class Board
     end
   end
 
-  def valid_move?(index) # need to handle "invalid" input as index
+  def valid_move?(index)
     if index.length != 1
       false
     else
@@ -56,9 +56,9 @@ class Board
     end
   end
 
-  def update(input, token)
+  def update(input, current_player)
     input = input.to_i - 1
-    cells[input] = token.token
+    cells[input] = current_player.token
   end
 
 end
