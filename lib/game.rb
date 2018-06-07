@@ -16,11 +16,9 @@ class Game
   end
 
   def won?
-    result = WIN_COMBINATIONS.detect { |set|
+    WIN_COMBINATIONS.detect { |set|
       board.cells[set[0]] != ' ' && board.cells[set[0]] == board.cells[set[1]] && board.cells[set[1]] == board.cells[set[2]]
-    }
-    result = false unless result
-    result
+    }.tap { |result| return false unless result }
   end
 
   def draw?
