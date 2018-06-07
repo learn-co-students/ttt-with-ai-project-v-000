@@ -3,7 +3,7 @@ module Players
   class Computer < Player
     attr_reader :urgent_move
     
-    def win_or_block(board)
+    def win_or_block?(board)
       Game.win_combinations.any? { |set|
         if board.cells[set[0]] != ' ' && board.cells[set[0]] == board.cells[set[1]] && board.cells[set[2]] == ' '
           @urgent_move = "#{set[2] + 1}"
@@ -20,7 +20,7 @@ module Players
       edges = ['2','4','6','8']
       enemy = token == 'O' ? 'X' : 'O'
     
-      if win_or_block(board) # win / block
+      if win_or_block?(board) # win / block
         urgent_move
       # elsif # (block)fork - this one may require a giant array of adjacent spots
       elsif board.position('6') == ' ' # center
