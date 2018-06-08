@@ -21,8 +21,8 @@ class Board
   end
 
   def position(input)
-    input = input.to_i - 1
-    cells[input]
+    index = input.to_i - 1
+    cells[index]
   end
 
   def full?
@@ -57,8 +57,8 @@ class Board
   end
 
   def update(input, current_player)
-    input = input.to_i - 1
-    cells[input] = current_player.token
+    index = input.to_i - 1
+    cells[index] = current_player.token
   end
 
 end
