@@ -18,6 +18,28 @@ module Players
       }
     end
     
+    def fork_found?(board)
+      dupe = board
+      board.cells.each_with_index { |cell, index|
+        if cell == ' '
+          dupe.cells[index] = 'X'
+          if win_or_block?(dupe)
+            @fork_move = "#{index + 1}"
+            break
+          else
+            dupe.cells[index] = 'O'
+            if win_or_block?(tester)
+              @fork_move = "#{index + 1}"
+              break
+            else
+              dupe.cells[index] = ' '
+            end
+          end
+        end
+      }
+      fork_move ? true : false
+    end
+    
     def counter_corner?(board)
       enemy = token == 'O' ? 'X' : 'O'
       
