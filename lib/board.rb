@@ -39,8 +39,8 @@ class Board
     counter
   end
   
-  def taken?
-    
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
   end
   
 end
