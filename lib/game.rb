@@ -49,7 +49,7 @@ class Game
   
   def play
     turn until over?
-    winner ? puts("Congratulations #{winner}!") : puts("Cat's Game!")
+    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
   
 end
