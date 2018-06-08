@@ -1,7 +1,7 @@
 
 module Players
   class Computer < Player
-    attr_reader :urgent_move, :corner_move
+    attr_reader :urgent_move, :corner_move, :fork_move
     
     def win_or_block?(board)
       Game.win_combinations.any? { |set|
@@ -20,6 +20,7 @@ module Players
     
     def fork_found?(board)
       dupe = board
+    
       board.cells.each_with_index { |cell, index|
         if cell == ' '
           dupe.cells[index] = 'X'
@@ -28,7 +29,7 @@ module Players
             break
           else
             dupe.cells[index] = 'O'
-            if win_or_block?(tester)
+            if win_or_block?(dupe)
               @fork_move = "#{index + 1}"
               break
             else
@@ -37,6 +38,7 @@ module Players
           end
         end
       }
+    
       fork_move ? true : false
     end
     
@@ -65,6 +67,8 @@ module Players
     
       if win_or_block?(board)
         urgent_move
+      elsif fork_found?(board)
+        fork_move
       elsif board.position('5') == ' ' # center
         '5'
       elsif counter_corner?(board)
