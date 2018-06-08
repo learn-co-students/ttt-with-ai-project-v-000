@@ -31,6 +31,7 @@ class Game
   end
 
   def current_player
+    binding.pry
   end
 
   def won?
