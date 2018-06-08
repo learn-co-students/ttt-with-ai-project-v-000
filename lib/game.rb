@@ -29,10 +29,11 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |i|
       board[i[0]] == board[i[1]] && board [i[0]] == board[i[2]] && taken?(board, i[0])
+    end
   end
   
   def draw?
-    
+    @board.full? && !won?
   end
   
   def over?
