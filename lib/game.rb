@@ -18,11 +18,11 @@ class Game
     @player_2 = player_2
   end
   
-  def current_player(token)
-    if turn_count(token) % 2 == 0
-      "X"
+  def current_player
+    if @board.turn_count % 2 == 0
+      player_1
     else
-      "O"
+      player_2
     end
   end
   
