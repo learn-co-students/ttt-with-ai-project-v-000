@@ -17,7 +17,7 @@ class Game
   end
 
   def player_2=(player_2)
-    @player_2 = player_2
+    @player_2 = Player.player_2
   end
 
   def board=(board)
