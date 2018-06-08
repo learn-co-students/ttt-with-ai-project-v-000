@@ -31,6 +31,7 @@ module Players
         @corner_move = '3'
         true
       end
+      false
     end
     
     def move(board)
