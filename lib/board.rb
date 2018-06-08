@@ -26,6 +26,22 @@ class Board
   end
 
   def full?
-    @cells.none? |cell| cell == " " || cell == nil
+    @cells.none? {|cell| cell == " " || cell == nil}
+  end
+
+  def turn_count
+    @cells.count {|cell| cell == "X" || cell == "O"}
+  end
+
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
+  end
+
+  def valid_move?(input)
+   input.to_i.between?(1,9) && !(taken?(input))
+  end
+
+  def update(position, player)
+    @cells[position.to_i - 1] = player.token
   end
 end
