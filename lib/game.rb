@@ -53,6 +53,7 @@ class Game
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
     else
       turn
     end
@@ -68,6 +69,24 @@ class Game
       puts "Congratulations O!"
     elsif draw?
       puts "Cat's Game!"
+    end
+  end
+
+  def self.start
+    puts "How many players?"
+    players = gets.strip
+      # if players == 0
+      #   Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
+      #   play
+    if players == "1"
+      game = self.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new)
+      game.play
+    elsif players == "2"
+      game = self.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
+      game.play
+    else
+      puts "Please enter 1 or 2."
+      start
     end
   end
 
