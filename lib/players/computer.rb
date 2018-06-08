@@ -12,7 +12,7 @@ module Players
     end
 
     def next_best_move(board)
-      win(board,token) || block(board) || corner(board) || valid_sample_array
+      win(board,token) || block(board,token) || corner(board) || valid_sample_array
     end
 
     def win(board,token)
