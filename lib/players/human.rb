@@ -1,9 +1,9 @@
 module Players
   class Human < Player
 
-    def move(input)
+    def move(board)
       puts "What is your move?"
-      response = gets.strip
+      gets.strip
     end
 
   end
