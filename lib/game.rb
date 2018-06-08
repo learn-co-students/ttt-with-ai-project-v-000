@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_reader :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -11,9 +11,23 @@ class Game
     [0,4,8],
     [6,4,2]
   ]
-  def initialize()
-    binding.pry
 
+  def player_1=(player_1)
+    @player_1 = player_1
+  end
+
+  def player_2=(player_2)
+    @player_2 = player_2
+  end
+
+  def board=(board)
+    @board = []
+  end
+
+  def initialize(player_1=nil, player_2=nil, board=nil)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
   end
 
   def current_player
