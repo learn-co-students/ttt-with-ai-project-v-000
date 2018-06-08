@@ -1,15 +1,15 @@
 
 class Board
   attr_accessor :cells
-  
+
   def initialize
     reset!
   end
-  
+
   def reset!
    self.cells = Array.new(9, ' ')
   end
-  
+
   def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
@@ -21,21 +21,21 @@ class Board
   def position(num)
     cells[num.to_i - 1]
   end
-  
+
   def full?
     cells.all? do |spot|
       spot != ' '
     end
   end
-  
+
   def turn_count
-    cells.count { |chip| chip != ' ' }
+    cells.count { |chip| chip != ' ' }.tap { |amount| return 0 unless amount }
   end
-  
+
   def taken?(num)
     position(num) != ' '
   end
-  
+
   def valid_move?(num)
     num.to_i.between?(1, 9) && !taken?(num)
   end
