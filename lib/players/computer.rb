@@ -11,6 +11,9 @@ module Players
         elsif board.cells[set[1]] != ' ' && board.cells[set[1]] == board.cells[set[2]] && board.cells[set[0]] == ' '
           @urgent_move = "#{set[0] + 1}"
           true
+        elsif board.cells[set[2]] != ' ' && board.cells[set[2]] == board.cells[set[0]] && board.cells[set[1]] == ' '
+          @urgent_move = "#{set[1] + 1}"
+          true
         end
       }
     end
