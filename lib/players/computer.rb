@@ -79,9 +79,9 @@ it creates 2+ ways to win
       if win_or_block?(board)
         puts 'w/b'
         urgent_move
-      elsif fork_found?(board)
-        puts 'f'
-        fork_move
+      #elsif fork_found?(board)
+        #puts 'f'
+        #fork_move
       elsif board.position('5') == ' '
         '5'
       elsif counter_corner?(board)
