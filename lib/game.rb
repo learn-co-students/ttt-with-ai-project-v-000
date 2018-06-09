@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2, :num_players
 
@@ -22,7 +23,11 @@ class Game
   # This method asks the first player which token he would like and assigns both player tokens
   ##
   def define_players
+    puts "How many players want to play? (0, 1, or 2)"
+    @num_players = gets.strip.to_i
+
     get_player_input = "Would you like to be 'X's or 'O's?";
+    #binding.pry
     case @num_players
       when 0
         self.new(Players::Computer.new("X"), Players::Computer.new("O"));
@@ -30,23 +35,23 @@ class Game
         puts get_player_input;
         input = gets.strip;
 
-        input == "X" || input == "x" ? self.new(Players::Human("X"), Players::Computer("O")) :
-                                       self.new(Players::Human("O"), Players::Computer("X"));
+        input == "X" || input == "x" ? self.new(Players::Human.new("X"), Players::Computer.new("O")) :
+                                       self.new(Players::Human.new("O"), Players::Computer.new("X"));
       when 2
         puts get_player_input;
         input = gets.strip;
-        input == "X" || input == "x" ? self.new(Players::Human("X"), Players::Human("O")) :
-                                       self.new(Players::Human("O"), Players::Human("X"));
+        input == "X" || input == "x" ? self.new(Players::Human.new("X"), Players::Human.new("O")) :
+                                       self.new(Players::Human.new("O"), Players::Human.new("X"));
       else
         puts "Invalid input, please select a valid option.";
-        define_players(@num_players);
+        define_players;
       end
   end #end #define_players
 
 
   def replay
     puts "Would you like to play again?";
-    input = gets.strip #I need to ask about this method.
+    input = gets #I need to ask about this method.
     input == "yes" || input == "Yes" ? start : puts("Goodbye!")
   end
 
@@ -118,8 +123,6 @@ class Game
   def start
     puts "Welcome to Tic Tac Toe!"
     puts ""
-    puts "How many players want to play? (0, 1, or 2)"
-    @num_players = gets.strip
     define_players
     play
   end
