@@ -31,10 +31,15 @@ class Game
   end
 
   def current_player
-    binding.pry
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def won?
+    WIN_COMBINATIONS.any? do |combo|
+      if taken?(combo[0]) && @board[combo[0]] == @board[combo[1]] && @board[combo[1]] == @board[combo[2]]
+        return combo
+      end
+    end
   end
 
   def draw?
