@@ -1,67 +1,66 @@
-require 'pry'
 class Board
 
-  attr_accessor :cells
+	attr_accessor :cells
 
-  def initialize
-    @cells = [" "," "," "," "," "," "," "," "," "]
-  end
+	def initialize
+		reset!
+	end
 
-  def display
-    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
-    puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
-    puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-  end
+	def reset!
+		@cells = Array.new(9, " ")
+	end
 
-  def position(user_input)
-    new_input = user_input.to_i
-    new_input -= 1
-    @cells[new_input]
-  end
+	def display
+		puts " #{cells[0]} | #{cells[1]} | #{@cells[2]} "
+		puts "-----------"
+		puts " #{cells[3]} | #{cells[4]} | #{@cells[5]} "
+		puts "-----------"
+		puts " #{cells[6]} | #{cells[7]} | #{@cells[8]} "
+	end
 
-  def full?
-    @cells.all? do |cell|
-      if cell != " "
-        true
-      else
-        false
-      end #if statement
-    end #each iteration
-  end
+	def position(input)
+		@cells[(input.to_i - 1)]
+	end
 
-  def turn_count
-    count = @cells.count("O") + @cells.count("X")
-    count
-  end
+	def full?
+		if @cells.include?(" ")
+			false
+		else
+			true
+		end
+	end
 
-  def taken?(position)
-      new_position = position.to_i - 1
-      @cells[new_position] == "X" || @cells[new_position] == "O" ? true : false
-  end
+	def turn_count
+		#cells.count { |position| position.include?("X" || "O")}
+		count = 1
+		@cells.each do |turn|
+			if turn == " "
+				count +=  1
+			end
+		end
+		10 - count
+	end
 
-  def valid_move?(user_input)
-  new_input = user_input.to_i - 1
-      if (@cells[new_input] == " " || @cells[new_input] == "") && user_input.to_i >= 1 && user_input.to_i <= 9
-        true
-      else
-        false
-      end
-  end
+	def taken?(index)
+		index  = index.to_i - 1
+		if @cells[index].include?(" ")
+			false
+		else
+			true
+		end
+	end
 
-  def update(token, player)
-    new_token = token.to_i - 1
-    @cells[new_token] = player.token
-  end
+	def valid_move?(input)
+		!taken?(input) && input.to_i.between?(1, 9)
+	end
 
-  def cells
-    @cells
-  end
-
-  def reset!
-    @cells = [" "," "," "," "," "," "," "," "," "]
-  end
+	def update(input, player)
+		input = input.to_i - 1
+		@cells[input] = player.token
+		self.display
+	end
 
 
-end
+
+
+end 

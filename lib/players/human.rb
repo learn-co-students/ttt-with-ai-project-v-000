@@ -1,11 +1,10 @@
 module Players
+	class Human < Player
 
-  class Human < Player
+		def move(board)
+			puts "Please enter a number between 1 and 9"
+			input = gets.chomp
+		end
 
-    def move(board)
-      user_input = gets.chomp
-    end
-
-  end
-
-end
+	end
+end  

@@ -1,17 +1,25 @@
 require 'pry'
 
-class Game < Player
+class Game
 
-  attr_accessor :board
+	attr_accessor :player_1, :player_2, :board
 
-  attr_reader :player_1, :player_2
+  WIN_COMBINATIONS = [
+    [0,1,2], # Top row
+    [3,4,5],  # Middle row
+    [6,7,8],  # bottom row
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [2,4,6],
+    [0,4,8]
 
-  WIN_COMBINATIONS = [[2,5,8], [0,1,2], [3,4,5], [6,7,8], [1,4,7], [0,3,6], [0,4,8], [6,4,2]]
+  ]
 
-  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-    @board = board
-    @player_1 = player_1
-    @player_2 = player_2
+  def initialize (player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  	@player_1 = player_1
+  	@player_2 = player_2
+  	@board = board
   end
 
   def board=(board)
@@ -19,65 +27,53 @@ class Game < Player
   end
 
   def current_player
-    if self.board.turn_count.even?
-      player_1
-    else
-      player_2
-    end
+  	board.turn_count.odd? ? player_2 : player_1
   end
 
   def over?
-    won? || draw?
-  end
-
-  def won?
-    WIN_COMBINATIONS.detect do |combo|
-        board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && self.board.taken?(board.cells[combo[0]])
-    end #detect iteration
+  	draw? || won?
   end
 
   def draw?
-    self.board.full? && !won?
+  	board.full? && !won?
+  end
+
+  # def won?
+  #   WIN_COMBINATIONS.detect do |combo|
+  #     @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.cells[combo[0]] != " "
+  #   end
+  # end
+
+  def won?
+    WIN_COMBINATIONS.detect do |win_combination|
+      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] && @board.cells[win_combination[0]] == @board.cells[win_combination[2]] && @board.cells[win_combination[1]] != " "
+    end
   end
 
   def winner
-    WIN_COMBINATIONS.detect do |combo|
-        if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == "X" && self.board.taken?(board.cells[combo[0]])
-          return "X"
-        elsif board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == "O" && self.board.taken?(board.cells[combo[0]])
-          return "O"
-        end #if statement
-    end #detect iteration
+  	board.cells[won?.first] if won?
   end
 
   def turn
-    player = self.current_player
-    board_position = self.current_player.move(board)
-    if !self.board.valid_move?(board_position)
-      turn
-    else
-      self.board.update(board_position, player)
-    end
+ 	puts "Enter your move player #{current_player.token}"
+ 	move = current_player.move(board)
+   	if board.valid_move?(move)
+   		board.update(move, current_player)
+   	else
+   		puts "invalid input, please try again"
+   		turn
+   	end
   end
 
   def play
-    until over?
-      turn
-    end
-      if won?
-        puts "Congratulations #{winner}!"
-      elsif draw?
-        puts "Cat's Game!"
-      end
+  	until over?
+  		turn
+  	end
+  	if won?
+  		puts "Congratulations #{winner}!"
+  	elsif draw?
+  		puts "Cat's Game!"
+  	end
   end
 
-
-  def player_1=(player_1)
-    @player_1 = player_1
-  end
-
-  def player_2=(player_2)
-    @player_2 = player_2
-  end
-
-end
+end 
