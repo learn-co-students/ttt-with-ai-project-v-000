@@ -2,6 +2,15 @@
 
 require_relative '../config/environment'
 
-#trial = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
+=begin
+iFork = Board.new
+iFork.cells = ['O', ' ', ' ', ' ', 'O', 'X', ' ', 'X', ' ']
 
-#binding.pry
+tester = Game.new(Players::Human.new('X'), Players::Computer.new('O'), iFork)
+
+result = tester.player_2.fork_found?(tester.board)
+=end
+
+tester = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
+
+binding.pry

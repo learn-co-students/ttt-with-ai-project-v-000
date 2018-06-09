@@ -2,6 +2,7 @@
 class Game
   include Players
 
+  # remove invalid_moves after AI is done
   attr_accessor :player_1, :player_2, :board, :invalid_moves
   WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
 
@@ -9,7 +10,7 @@ class Game
     self.player_1 = p1
     self.player_2 = p2
     self.board = board
-
+    # remove invalid_moves after AI is done
     self.invalid_moves = 0
   end
 
@@ -23,11 +24,11 @@ class Game
 
   def won?
     self.class.win_combinations.detect { |set|
-      board.cells[set[0]] != ' ' && 
-      board.cells[set[0]] == board.cells[set[1]] && 
+      board.cells[set[0]] != ' ' &&
+      board.cells[set[0]] == board.cells[set[1]] &&
       board.cells[set[1]] == board.cells[set[2]]
-    }.tap { |result| 
-      return false unless result 
+    }.tap { |result|
+      return false unless result
     }
   end
 
@@ -44,12 +45,12 @@ class Game
   end
 
   def turn
-    pl = current_player
-    choice = pl.move(board)
+    choice = current_player.move(board)
     if board.valid_move?(choice)
-      board.update(choice, pl)
+      board.update(choice, current_player)
       board.display
     else
+      # remove invalid_moves after AI is done
       self.invalid_moves = self.invalid_moves + 1
       puts "invalid move"
       self.invalid_moves < 11 ? turn : exit

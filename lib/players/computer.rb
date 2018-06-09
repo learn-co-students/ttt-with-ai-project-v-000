@@ -6,18 +6,18 @@ module Players
     def win_or_block?(board)
       if board.turn_count.between?(2, 7)
         Game.win_combinations.any? { |set|
-          if board.cells[set[0]] != ' ' && 
+          if board.cells[set[0]] != ' ' &&
              board.cells[set[0]] == board.cells[set[1]] &&
              board.cells[set[2]] == ' '
             @urgent_move = "#{set[2] + 1}"
             true
-          elsif board.cells[set[1]] != ' ' && 
-                board.cells[set[1]] == board.cells[set[2]] && 
+          elsif board.cells[set[1]] != ' ' &&
+                board.cells[set[1]] == board.cells[set[2]] &&
                 board.cells[set[0]] == ' '
             @urgent_move = "#{set[0] + 1}"
             true
-          elsif board.cells[set[2]] != ' ' && 
-                board.cells[set[2]] == board.cells[set[0]] && 
+          elsif board.cells[set[2]] != ' ' &&
+                board.cells[set[2]] == board.cells[set[0]] &&
                 board.cells[set[1]] == ' '
             @urgent_move = "#{set[1] + 1}"
             true
@@ -30,12 +30,12 @@ module Players
       fraud = sham.dup
       total_wins = 0
       Game.win_combinations.each { |combo|
-        if fraud[combo[0]] != ' ' && 
+        if fraud[combo[0]] != ' ' &&
            fraud[combo[0]] == fraud[combo[1]] &&
            fraud[combo[2]] == ' '
           total_wins += 1
         elsif fraud[combo[1]] != ' ' &&
-              fraud[combo[1]] == fraud[combo[2]] && 
+              fraud[combo[1]] == fraud[combo[2]] &&
               fraud[combo[0]] == ' '
           total_wins += 1
         elsif fraud[combo[2]] != ' ' &&
@@ -44,7 +44,7 @@ module Players
           total_wins += 1
         end
       }
-      total_wins >= 2 ? true : false
+      total_wins > 1 ? true : false
     end
 
     def fork_threat?(phony)
@@ -53,14 +53,15 @@ module Players
         if area == ' '
           clone[index] = 'X'
           if fork_win?(clone)
-            true
+            return true
+          else
+            clone[index] = 'O'
+            if fork_win?(clone)
+              return true
+            else
+              clone[index] = ' '
+            end
           end
-
-          clone[index] = 'O'
-          if fork_win?(clone)
-            true
-          end
-          clone[index] = ' '
         end
       }
       false
@@ -74,15 +75,16 @@ module Players
             fake[index] = 'X'
             if fork_threat?(fake)
               @fork_move = "#{index + 1}"
-              true
+              return true
+            else
+              fake[index] = 'O'
+              if fork_threat?(fake)
+                @fork_move = "#{index + 1}"
+                return true
+              else
+                fake[index] = ' '
+              end
             end
-
-            fake[index] = 'O'
-            if fork_threat?(fake)
-              @fork_move = "#{index + 1}"
-              true
-            end
-            fake[index] = ' '
           end
         }
         false
@@ -100,11 +102,11 @@ module Players
               board.position('1') == ' '
           @corner_move = '1'
           true
-        elsif board.position('3') == enemy && 
+        elsif board.position('3') == enemy &&
               board.position('7') == ' '
           @corner_move = '7'
           true
-        elsif board.position('7') == enemy && 
+        elsif board.position('7') == enemy &&
               board.position('3') == ' '
           @corner_move = '3'
           true
@@ -117,6 +119,7 @@ module Players
       corners = ['1','3','7','9']
       edges = ['2','4','6','8']
 
+# remove puts statements after getting AI working
       if win_or_block?(board)
         puts 'w/b'
         urgent_move
@@ -130,7 +133,11 @@ module Players
         corner_move
       else
         puts 'e/c'
-        corners.detect { |area| board.position(area) == ' ' } || edges.detect { |area| board.position(area) == ' ' }
+        corners.detect { |area|
+          board.position(area) == ' '
+        } || edges.detect { |area|
+          board.position(area) == ' '
+        }
       end
     end
 
