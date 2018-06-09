@@ -133,9 +133,9 @@ module Players
         corner_move
       else
         puts 'e/c'
-        corners.detect { |area|
+        corners.shuffle.detect { |area|
           board.position(area) == ' '
-        } || edges.detect { |area|
+        } || edges.shuffle.detect { |area|
           board.position(area) == ' '
         }
       end

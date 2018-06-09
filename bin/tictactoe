@@ -3,14 +3,19 @@
 require_relative '../config/environment'
 
 =begin
+# fork test
 iFork = Board.new
 iFork.cells = ['O', ' ', ' ', ' ', 'O', 'X', ' ', 'X', ' ']
-
 tester = Game.new(Players::Human.new('X'), Players::Computer.new('O'), iFork)
 
 result = tester.player_2.fork_found?(tester.board)
+binding.pry
 =end
 
+=begin
+# gameplay test
 tester = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
-
 binding.pry
+=end
+
+
