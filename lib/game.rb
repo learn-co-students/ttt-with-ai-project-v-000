@@ -41,7 +41,7 @@ class Game
   end
 
   def winner
-    if won = won? then board.cells[won[0]] end
+    if combo = won? then board.cells[combo[0]] end
   end
 
   def turn
