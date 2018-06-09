@@ -30,18 +30,19 @@ class Game
     #binding.pry
     case @num_players
       when 0
-        self.new(Players::Computer.new("X"), Players::Computer.new("O"));
+          @player_1 = Players::Computer.new("X")
+          @player_2 = Players::Computer.new("O")
       when 1
         puts get_player_input;
         input = gets.strip;
 
-        input == "X" || input == "x" ? self.new(Players::Human.new("X"), Players::Computer.new("O")) :
-                                       self.new(Players::Human.new("O"), Players::Computer.new("X"));
+        input == "O" || input == "o" ? @player_1.token = "O" && @player_2 = Players::Computer.new("X") : @player_2 = Players::Computer.new("O")
       when 2
         puts get_player_input;
         input = gets.strip;
-        input == "X" || input == "x" ? self.new(Players::Human.new("X"), Players::Human.new("O")) :
-                                       self.new(Players::Human.new("O"), Players::Human.new("X"));
+        if input == "O" || input == "o"
+          @player_1.token = "O" && @player_2.token = "X"
+        end
       else
         puts "Invalid input, please select a valid option.";
         define_players;
