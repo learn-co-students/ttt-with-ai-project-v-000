@@ -6,13 +6,19 @@ module Players
     def win_or_block?(board)
       if board.turn_count.between?(2, 7)
         Game.win_combinations.any? { |set|
-          if board.cells[set[0]] != ' ' && board.cells[set[0]] == board.cells[set[1]] && board.cells[set[2]] == ' '
+          if board.cells[set[0]] != ' ' && 
+             board.cells[set[0]] == board.cells[set[1]] &&
+             board.cells[set[2]] == ' '
             @urgent_move = "#{set[2] + 1}"
             true
-          elsif board.cells[set[1]] != ' ' && board.cells[set[1]] == board.cells[set[2]] && board.cells[set[0]] == ' '
+          elsif board.cells[set[1]] != ' ' && 
+                board.cells[set[1]] == board.cells[set[2]] && 
+                board.cells[set[0]] == ' '
             @urgent_move = "#{set[0] + 1}"
             true
-          elsif board.cells[set[2]] != ' ' && board.cells[set[2]] == board.cells[set[0]] && board.cells[set[1]] == ' '
+          elsif board.cells[set[2]] != ' ' && 
+                board.cells[set[2]] == board.cells[set[0]] && 
+                board.cells[set[1]] == ' '
             @urgent_move = "#{set[1] + 1}"
             true
           end
@@ -24,11 +30,17 @@ module Players
       fraud = sham.dup
       total_wins = 0
       Game.win_combinations.each { |combo|
-        if fraud[combo[0]] != ' ' && fraud[combo[0]] == fraud[combo[1]] && fraud[combo[2]] == ' '
+        if fraud[combo[0]] != ' ' && 
+           fraud[combo[0]] == fraud[combo[1]] &&
+           fraud[combo[2]] == ' '
           total_wins += 1
-        elsif fraud[combo[1]] != ' ' && fraud[combo[1]] == fraud[combo[2]] && fraud[combo[0]] == ' '
+        elsif fraud[combo[1]] != ' ' &&
+              fraud[combo[1]] == fraud[combo[2]] && 
+              fraud[combo[0]] == ' '
           total_wins += 1
-        elsif fraud[combo[2]] != ' ' && fraud[combo[2]] == fraud[combo[0]] && fraud[combo[1]] == ' '
+        elsif fraud[combo[2]] != ' ' &&
+              fraud[combo[2]] == fraud[combo[0]] &&
+              fraud[combo[1]] == ' '
           total_wins += 1
         end
       }
@@ -80,16 +92,20 @@ module Players
     def counter_corner?(board)
       if board.turn_count.between?(0, 6)
         enemy = token == 'O' ? 'X' : 'O'
-        if board.position('1') == enemy && board.position('9') == ' '
+        if board.position('1') == enemy &&
+           board.position('9') == ' '
           @corner_move = '9'
           true
-        elsif board.position('9') == enemy && board.position('1') == ' '
+        elsif board.position('9') == enemy &&
+              board.position('1') == ' '
           @corner_move = '1'
           true
-        elsif board.position('3') == enemy && board.position('7') == ' '
+        elsif board.position('3') == enemy && 
+              board.position('7') == ' '
           @corner_move = '7'
           true
-        elsif board.position('7') == enemy && board.position('3') == ' '
+        elsif board.position('7') == enemy && 
+              board.position('3') == ' '
           @corner_move = '3'
           true
         end

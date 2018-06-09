@@ -23,8 +23,12 @@ class Game
 
   def won?
     self.class.win_combinations.detect { |set|
-      board.cells[set[0]] != ' ' && board.cells[set[0]] == board.cells[set[1]] && board.cells[set[1]] == board.cells[set[2]]
-    }.tap { |result| return false unless result }
+      board.cells[set[0]] != ' ' && 
+      board.cells[set[0]] == board.cells[set[1]] && 
+      board.cells[set[1]] == board.cells[set[2]]
+    }.tap { |result| 
+      return false unless result 
+    }
   end
 
   def draw?
@@ -36,7 +40,7 @@ class Game
   end
 
   def winner
-    board.cells[won[0]] if won = won?
+    if won = won? then board.cells[won[0]] end
   end
 
   def turn
