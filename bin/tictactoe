@@ -22,17 +22,18 @@ def start
           Game.new(Players::Computer.new("O"), Players::Human.new("X"), board = Board.new).play
         else
           Game.new(Players::Computer.new("X"), Players::Human.new("O"), board = Board.new).play
-        end
-      end
+       end
+    end
 
   elsif input == "0"
-    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new).play
 
   elsif input == "2"
     puts "Player One is X and Player Two is O"
-    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new).play
   end
 
-  puts "Would you like to play again? (Y/N)"
-
+  puts "Would you like to play again? (y/n)"
 end
+
+start until gets.strip.downcase == "n"
