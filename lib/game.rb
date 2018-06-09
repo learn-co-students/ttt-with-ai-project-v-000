@@ -31,8 +31,9 @@ WIN_COMBINATIONS = [
   def won?
     WIN_COMBINATIONS.detect do |winner|
       @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[1]] == @board.cells[winner[2]]
-      
+      @board.cells[winner[1]] == @board.cells[winner[2]] &&
+     (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
+
    end
   end
 
@@ -42,7 +43,7 @@ WIN_COMBINATIONS = [
 
   def winner
     if winning_combo = won?
-      @board.cells[winning_combo.first]
+      @winner = @board.cells[winning_combo.first]
    end
   end
 
