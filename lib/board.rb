@@ -23,15 +23,11 @@ class Board
   end
 
   def full?
-    cells.all? do |spot|
-      spot != ' '
-    end
+    cells.all? { |spot| spot != ' ' }
   end
 
   def turn_count
-    cells.count { |chip| 
-      chip != ' ' 
-    }.tap { |amount| 
+    cells.count { |chip| chip != ' ' }.tap { |amount| 
       return 0 unless amount 
     }
   end
