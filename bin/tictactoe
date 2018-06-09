@@ -2,6 +2,6 @@
 
 require_relative '../config/environment'
 
-trial = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
+#trial = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
 
-binding.pry
+#binding.pry
