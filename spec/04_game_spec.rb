@@ -100,6 +100,16 @@ describe 'Game' do
 
       expect(game.won?).to contain_exactly(0, 1, 2)
     end
+
+    # ***TEST ADDED***
+    it 'returns false for an in-progress game' do
+      game = Game.new
+      game.board.cells = ["X", " ", "X",
+                          " ", " ", " ",
+                          "O", "O", " "]
+
+      expect(game.won?).to be_falsey
+    end
   end
 
   describe '#draw?' do
