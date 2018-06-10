@@ -5,6 +5,7 @@ module Players
     def win_or_block(board)
       if board.turn_count.between?(2, 7)
         move = nil
+
         Game.win_combinations.each { |set|
           if board.cells[set[0]] != ' ' &&
              board.cells[set[0]] == board.cells[set[1]] &&
@@ -23,6 +24,7 @@ module Players
             break
           end
         }
+        
         move
       end
     end
@@ -33,17 +35,14 @@ module Players
 
     def counter_corner(board)
       enemy = token == 'O' ? 'X' : 'O'
-      if board.position('1') == enemy &&
-         board.position('9') == ' '
+
+      if board.position('1') == enemy && board.position('9') == ' '
         '9'
-      elsif board.position('9') == enemy &&
-            board.position('1') == ' '
+      elsif board.position('9') == enemy && board.position('1') == ' '
         '1'
-      elsif board.position('3') == enemy &&
-            board.position('7') == ' '
+      elsif board.position('3') == enemy && board.position('7') == ' '
         '7'
-      elsif board.position('7') == enemy &&
-            board.position('3') == ' '
+      elsif board.position('7') == enemy && board.position('3') == ' '
         '3'
       end
     end
@@ -52,11 +51,8 @@ module Players
       corners = ['1','3','7','9']
       edges = ['2','4','6','8']
 
-      corners.shuffle.detect { |area|
-        board.position(area) == ' '
-      } || edges.shuffle.detect { |area|
-        board.position(area) == ' '
-      }
+      corners.shuffle.detect { |area| board.position(area) == ' ' } || +
+      edges.shuffle.detect { |area| board.position(area) == ' ' }
     end
 
     def move(board)
