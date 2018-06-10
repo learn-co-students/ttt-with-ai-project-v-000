@@ -27,6 +27,10 @@ module Players
       end
     end
 
+    def center(board)
+      '5' if board.position('5') == ' '
+    end
+
     def counter_corner(board)
       enemy = token == 'O' ? 'X' : 'O'
       if board.position('1') == enemy &&
@@ -42,10 +46,6 @@ module Players
             board.position('3') == ' '
         '3'
       end
-    end
-
-    def center(board)
-      '5' if board.position('5') == ' '
     end
 
     def corners_or_edges(board)
