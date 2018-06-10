@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe."
+Game.start
+puts "Would you like to play again?"
+input = gets.strip
+Game.start unless input == "no" || input == "n"
