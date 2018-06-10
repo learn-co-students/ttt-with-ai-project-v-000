@@ -1,144 +1,67 @@
 
 module Players
   class Computer < Player
-    attr_reader :urgent_move, :corner_move, :fork_move
 
-    def win_or_block?(board)
+    def win_or_block(board)
       if board.turn_count.between?(2, 7)
-        Game.win_combinations.any? { |set|
+        move = nil
+        Game.win_combinations.each { |set|
           if board.cells[set[0]] != ' ' &&
              board.cells[set[0]] == board.cells[set[1]] &&
              board.cells[set[2]] == ' '
-            @urgent_move = "#{set[2] + 1}"
-            true
+            move = "#{set[2] + 1}"
+            break
           elsif board.cells[set[1]] != ' ' &&
                 board.cells[set[1]] == board.cells[set[2]] &&
                 board.cells[set[0]] == ' '
-            @urgent_move = "#{set[0] + 1}"
-            true
+            move = "#{set[0] + 1}"
+            break
           elsif board.cells[set[2]] != ' ' &&
                 board.cells[set[2]] == board.cells[set[0]] &&
                 board.cells[set[1]] == ' '
-            @urgent_move = "#{set[1] + 1}"
-            true
+            move = "#{set[1] + 1}"
+            break
           end
         }
+        move
       end
     end
 
-    def fork_win?(sham)
-      fraud = sham.dup
-      total_wins = 0
-      Game.win_combinations.each { |combo|
-        if fraud[combo[0]] != ' ' &&
-           fraud[combo[0]] == fraud[combo[1]] &&
-           fraud[combo[2]] == ' '
-          total_wins += 1
-        elsif fraud[combo[1]] != ' ' &&
-              fraud[combo[1]] == fraud[combo[2]] &&
-              fraud[combo[0]] == ' '
-          total_wins += 1
-        elsif fraud[combo[2]] != ' ' &&
-              fraud[combo[2]] == fraud[combo[0]] &&
-              fraud[combo[1]] == ' '
-          total_wins += 1
-        end
-      }
-      total_wins > 1 ? true : false
-    end
-
-    def fork_threat?(phony)
-      clone = phony.dup
-      clone.each_with_index { |area, index|
-        if area == ' '
-          clone[index] = 'X'
-          if fork_win?(clone)
-            return true
-          else
-            clone[index] = 'O'
-            if fork_win?(clone)
-              return true
-            else
-              clone[index] = ' '
-            end
-          end
-        end
-      }
-      false
-    end
-
-    def fork_found?(board)
-      if board.turn_count.between?(1, 6)
-        fake = board.cells.dup
-        fake.each_with_index { |spot, index|
-          if spot == ' '
-            fake[index] = 'X'
-            if fork_threat?(fake)
-              @fork_move = "#{index + 1}"
-              return true
-            else
-              fake[index] = 'O'
-              if fork_threat?(fake)
-                @fork_move = "#{index + 1}"
-                return true
-              else
-                fake[index] = ' '
-              end
-            end
-          end
-        }
-        false
+    def counter_corner(board)
+      enemy = token == 'O' ? 'X' : 'O'
+      if board.position('1') == enemy &&
+         board.position('9') == ' '
+        '9'
+      elsif board.position('9') == enemy &&
+            board.position('1') == ' '
+        '1'
+      elsif board.position('3') == enemy &&
+            board.position('7') == ' '
+        '7'
+      elsif board.position('7') == enemy &&
+            board.position('3') == ' '
+        '3'
       end
     end
 
-    def counter_corner?(board)
-      if board.turn_count.between?(0, 6)
-        enemy = token == 'O' ? 'X' : 'O'
-        if board.position('1') == enemy &&
-           board.position('9') == ' '
-          @corner_move = '9'
-          true
-        elsif board.position('9') == enemy &&
-              board.position('1') == ' '
-          @corner_move = '1'
-          true
-        elsif board.position('3') == enemy &&
-              board.position('7') == ' '
-          @corner_move = '7'
-          true
-        elsif board.position('7') == enemy &&
-              board.position('3') == ' '
-          @corner_move = '3'
-          true
-        end
-        false
-      end
+    def center(board)
+      '5' if board.position('5') == ' '
     end
 
-    def move(board)
+    def corners_or_edges(board)
       corners = ['1','3','7','9']
       edges = ['2','4','6','8']
 
-# remove puts statements after getting AI working
-      if win_or_block?(board)
-        puts 'w/b'
-        urgent_move
-      #elsif fork_found?(board)
-        #puts 'f'
-        #fork_move
-      elsif board.position('5') == ' '
-        '5'
-      elsif counter_corner?(board)
-        puts 'c'
-        corner_move
-      else
-        puts 'e/c'
-        corners.shuffle.detect { |area|
-          board.position(area) == ' '
-        } || edges.shuffle.detect { |area|
-          board.position(area) == ' '
-        }
-      end
+      corners.shuffle.detect { |area|
+        board.position(area) == ' '
+      } || edges.shuffle.detect { |area|
+        board.position(area) == ' '
+      }
+    end
+
+    def move(board)
+      win_or_block(board) || center(board) || counter_corner(board) ||
+      corners_or_edges(board)
     end
 
   end
