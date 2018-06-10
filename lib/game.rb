@@ -56,9 +56,11 @@ class Game
   end
 
   def turn
-    input = current_player.move(board)
-    if board.valid_move?(input)
-      board.update(input, current_player)
+    puts "Where would you like to go?"
+    board.display
+    index = current_player.move(board)
+    if board.valid_move?(index)
+      board.update(index, current_player)
       board.display
     else puts "Invalid move."
       turn

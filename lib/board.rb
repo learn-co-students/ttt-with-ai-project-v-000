@@ -52,12 +52,12 @@ class Board
       false
     else
       index = index.to_i
-      index.between?(0, 8) && !self.taken?(index)
+      index.between?(0, 9) && !self.taken?(index)
     end
   end
 
-  def update(input, current_player)
-    index = input.to_i - 1
+  def update(index, current_player)
+    index = index.to_i - 1
     cells[index] = current_player.token
   end
 
