@@ -14,8 +14,6 @@ binding.pry
 
 =begin
 # gameplay test
-tester = Game.new(Players::Human.new('X'), Players::Computer.new('O'), Board.new)
+tester = Game.new(Players::Computer.new('X'), Players::Human.new('O'), Board.new)
 binding.pry
 =end
-
-

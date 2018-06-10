@@ -18,8 +18,8 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def position(num)
-    cells[num.to_i - 1]
+  def position(input)
+    cells[input.to_i - 1]
   end
 
   def full?
@@ -28,21 +28,21 @@ class Board
 
   def turn_count
     cells.count { |chip|
-      chip != ' ' 
+      chip != ' '
     }.tap { |amount|
       return 0 unless amount
     }
   end
 
-  def taken?(num)
-    position(num) != ' '
+  def taken?(input)
+    position(input) != ' '
   end
 
-  def valid_move?(num)
-    num.to_i.between?(1, 9) && !taken?(num)
+  def valid_move?(input)
+    input.to_i.between?(1, 9) && !taken?(input)
   end
 
-  def update(num, player)
-    cells[num.to_i - 1] = player.token
+  def update(input, player)
+    cells[input.to_i - 1] = player.token
   end
 end
