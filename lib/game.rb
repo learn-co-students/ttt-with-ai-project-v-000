@@ -43,34 +43,33 @@ class Game
   end
 
   def winner
-    # binding.pry
     if self.won?
       self.board.cells[self.won?[0]]
     end
   end
 
-  # describe '#winner' do
-  #   it 'returns X when X won' do
+  def turn
+  end
+
+  # describe 'turn' do
+  #   it 'makes valid moves' do
   #     game = Game.new
-  #     game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
+  #     allow($stdout).to receive(:puts)
   #
-  #     expect(game.winner).to eq("X")
+  #     expect(game.player_1).to receive(:gets).and_return("1")
+  #
+  #     game.turn
   #   end
   #
-  #   it 'returns O when O won' do
+  #   it 'asks for input again after a failed validation' do
   #     game = Game.new
-  #     game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
+  #     allow($stdout).to receive(:puts)
   #
-  #     expect(game.winner).to eq("O")
+  #     expect(game.player_1).to receive(:gets).and_return("invalid")
+  #     expect(game.player_1).to receive(:gets).and_return("1")
+  #
+  #     game.turn
   #   end
-  #
-  #   it 'returns nil when no winner' do
-  #     game = Game.new
-  #     game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
-  #
-  #     expect(game.winner).to be_nil
-  #   end
-  # end
 
 
 
