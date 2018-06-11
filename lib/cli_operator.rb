@@ -145,8 +145,7 @@ minimize false positives
 # revised wargames message and moved it all here
     puts "WARGAMES"
     puts "Greetings Professor Falken."
-    puts "A strange game. The only winning move is not to play. How about a
-     nice game of chess?"
+    puts "A strange game. The only winning move is not to play. How about a nice game of chess?"
     answer = gets.strip.upcase
 # I like having the robot poorly validate input, what do you think?
     if answer == 'Y'
