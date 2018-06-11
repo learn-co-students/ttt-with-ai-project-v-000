@@ -81,22 +81,25 @@ class TicTacToe
         puts "-----------"
         puts " 7 | 8 | 9 "
         puts "           "
-        w = 0
-        d = 0
+
+        x_wins = 0
+        o_wins = 0
+        draws = 0
+
         100.times do |i|
           puts "Game #{i + 1}."
           war = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
           war.play
-        #  binding.pry
-        #  if war.won?
-        #    puts "Win #{w + 1}"
-        #    w += 1
-        #    war = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
-        #  elsif war.draw?
-        #    puts "Draw #{d + 1}"
-        #    d += 1
-        #    war = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
-        #  end
+          result = war.winner
+          case result
+          when 'X'
+            x_wins += 1
+          when 'O'
+            o_wins += 1
+          else
+            draws += 1
+          end
+          puts "X has won #{x_wins} times, O has won #{o_wins} times, and there have been #{draws} draws"
         end
         puts "Greetings Professor Falken"
         puts "A strange game."
