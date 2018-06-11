@@ -2,8 +2,6 @@
 
 require_relative '../config/environment'
 
-#=begin
-# cli starter
 TicTacToe.new
 puts "Would you like to play a game of Tic Tac Toe? 'Y' or 'W'?"
 g = gets.strip
@@ -15,10 +13,3 @@ else
   puts "Invalid input"
   g = gets.strip
 end
-#=end
-
-=begin
-# gameplay test
-tester = Game.new(Players::Human.new('X'), Players::Human.new('O'), Board.new)
-binding.pry
-=end

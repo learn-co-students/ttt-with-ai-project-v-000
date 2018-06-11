@@ -24,7 +24,7 @@ module Players
             break
           end
         }
-        
+
         move
       end
     end
@@ -51,7 +51,7 @@ module Players
       corners = ['1','3','7','9']
       edges = ['2','4','6','8']
 
-      corners.shuffle.detect { |area| board.position(area) == ' ' } || +
+      corners.shuffle.detect { |area| board.position(area) == ' ' } ||
       edges.shuffle.detect { |area| board.position(area) == ' ' }
     end
 

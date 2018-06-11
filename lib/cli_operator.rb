@@ -81,11 +81,9 @@ class TicTacToe
         puts "-----------"
         puts " 7 | 8 | 9 "
         puts "           "
-
         x_wins = 0
         o_wins = 0
         draws = 0
-
         100.times do |i|
           puts "Game #{i + 1}."
           war = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
