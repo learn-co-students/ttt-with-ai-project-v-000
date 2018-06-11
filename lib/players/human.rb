@@ -4,10 +4,13 @@ module Players
     def move(board)
       puts "Please enter 1-9:"
       input = gets.strip
-      index = input.to_i - 1
+      until %w(1 2 3 4 5 6 7 8 9).include?(input)
+        puts "Sorry, that's an invalid entry."
+        puts "Please enter 1-9:"
+        input = gets.strip
+      end
       input
     end
 
   end
-
 end

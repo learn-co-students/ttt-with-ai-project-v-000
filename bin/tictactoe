@@ -3,16 +3,4 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
-game = Game.new
-until game.won?
-  game.play
-end
-
-puts "Would you like to play again?"
-if gets.strip.downcase == "y" || 'yes'
-  game.Game.new
-  until game.won?
-    game.play
-  end
-else
-end
+TicTacToe.new
