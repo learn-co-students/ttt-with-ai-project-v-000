@@ -9,7 +9,7 @@
   something like returning a freezed copy to a varaibles getter function or
   adding the instance variable to a collection if its below a certain value to
   its getter we'd have to find every usage of said variable and adjust as
-  needed. Was this wordy enough?
+  needed. Could this be more wordy?
 =end
 
 class TicTacToe
