@@ -2,14 +2,22 @@
 
 require_relative '../config/environment'
 
-TicTacToe.new
-puts "Would you like to play a game of Tic Tac Toe? 'Y' or 'W'?"
-g = gets.strip
+=begin
+  remove TicTacToe.new, since its not being saved to a variable and may not be needed
+  added no option as it was unclear how to exit, and clarification of wargames mode
+=end
+puts "Would you like to play a game of Tic Tac Toe? 'Y', 'N' or 'W'?
+W is for Wargames mode, which is the computer playing itself 100 times."
+# added upcase to give users a marginally easier time
+g = gets.strip.upcase
 if g == 'Y'
   TicTacToe.new.play_tic_tac_toe
 elsif g == 'W'
   TicTacToe.new.wargames
 else
-  puts "Invalid input"
-  g = gets.strip
+  puts "Received N or invalid input"
+=begin
+  removed saving user input at this stage as it wasn't being used for anything
+  and this would have to be reworked to allow the user to change their mind
+=end
 end
