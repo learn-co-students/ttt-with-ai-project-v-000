@@ -21,18 +21,20 @@ class Game
   end
 
   def won?
-=begin
+
     self.class.win_combinations.detect { |set|
       board.cells[set[0]] != ' ' &&
       board.cells[set[0]] == board.cells[set[1]] &&
       board.cells[set[1]] == board.cells[set[2]]
-    }.tap { |result| return false unless result }
-=end
+    } #.tap { |result| return false unless result }
 
+
+=begin
     WIN_COMBINATIONS.detect do |win_combination|
       board.cells[win_combination[0]] == board.cells[win_combination[1]] &&
       board.cells[win_combination[1]] == board.cells[win_combination[2]] &&
       board.cells[win_combination[0]] != " "
+=end
     end
 
   end
