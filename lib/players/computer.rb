@@ -13,7 +13,7 @@ module Players
     end
 
     def next_best_move(board)
-      win(board) || block(board) || corner(board) || open_cells(board)
+      win(board) || block(board) || corner(board) || open_cells(board) # win and block need to be fixed
     end
 
     def win(board)
