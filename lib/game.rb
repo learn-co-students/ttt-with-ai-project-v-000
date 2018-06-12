@@ -30,6 +30,18 @@ class Game
     end
   end
 
+  def turn
+    puts "Please enter 1-9:"
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      puts "invalid"
+      turn
+      board.display
+    end
+  end
+
   def draw?
       !won? && board.full?
   end
@@ -39,25 +51,22 @@ class Game
   end
 
   def play
-    turn until over?
-    puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
+   until over?
+     turn
+   end
+   if draw?
+     puts "Cat's Game!"
+   elsif winner
+     puts "Congratulations #{winner}!"
+     #binding.pry
+   end
   end
 
   def winner
    if combo = won?
      @board.cells[combo[0]]
-   end
-  end
-
-  def turn
-    puts "Please enter 1-9:"
-    user_input = gets.strip
-    input = current_player
-    if valid_move?(input)
-      board.position(user_input)
-      turn
-    else
-      display
     end
   end
+
+
 end
