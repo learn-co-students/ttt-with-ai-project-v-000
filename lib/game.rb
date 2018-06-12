@@ -1,3 +1,4 @@
+require "pry"
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -47,9 +48,9 @@ class Game
     puts "Please take your turn."
     input = current_player.move(input).to_i
     if board.valid_move?(input.to_s)
-      board.update(input, current_player)
+       board.update(input, current_player)
        system('clear')
-      board.display
+       board.display
     elsif !input.between?(1, 9)
       puts "That is an invalid move."
       turn
@@ -62,13 +63,16 @@ class Game
   def play
     puts "Please take your turn."
     input = current_player.move(input).to_i
-
-    if draw? == true
+     board.valid_move?(input.to_s)
+      board.update(input, current_player)
+        # system('clear')
+      board.display
+    #  turn
+      # end
+     if draw?
         puts "Cat's Game!"
      elsif won?
         puts "Congratulations #{winner}!"
-      else won?
-        puts "Congratulations #{winner(board)}!"
       end
   end
-end
+end 
