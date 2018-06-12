@@ -24,10 +24,6 @@ class Game
   end
 
   def won?
-
-  end
-
-  def won?
     WIN_COMBINATIONS.find do |win|
       board.cells[win[0]] == board.cells[win[1]] &&
       board.cells[win[1]] == board.cells[win[2]] &&
@@ -48,4 +44,15 @@ class Game
       winner = board.cells[win_combo.first]
     end
   end
+
+  def turn
+    puts "Please make your move boss."
+    if valid_move?(input) && taken?(input) == true
+      make move
+    else
+    puts "That is not a valid move boss dog, please make a valid move."
+  end
+    if turn_count == 1
+      player_2 move
+    end
 end
