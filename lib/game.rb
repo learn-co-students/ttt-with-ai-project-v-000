@@ -66,7 +66,7 @@ class Game
      board.valid_move?(input.to_s)
       board.update(input, current_player)
         # system('clear')
-      board.display
+      # board.display
     #  turn
       # end
      if draw?
@@ -75,4 +75,4 @@ class Game
         puts "Congratulations #{winner}!"
       end
   end
-end 
+end
