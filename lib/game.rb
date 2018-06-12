@@ -62,10 +62,13 @@ class Game
   def play
     puts "Please take your turn."
     input = current_player.move(input).to_i
-    won?
-    turn
+
+    if draw? == true
+        puts "Cat's Game!"
+     elsif won?
+        puts "Congratulations #{winner}!"
+      else won?
+        puts "Congratulations #{winner(board)}!"
+      end
   end
-
-
-
 end
