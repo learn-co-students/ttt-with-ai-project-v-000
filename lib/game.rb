@@ -40,19 +40,32 @@ class Game
   end
 
   def winner
-    if win_combo = won?
-      winner = board.cells[win_combo.first]
-    end
+    board.cells[won?[0]] if won?
   end
 
   def turn
-    puts "Please make your move boss."
-    if valid_move?(input) && taken?(input) == true
-      make move
+    puts "Please take your turn."
+    input = current_player.move(input).to_i
+    if board.valid_move?(input.to_s)
+      board.update(input, current_player)
+       system('clear')
+      board.display
+    elsif !input.between?(1, 9)
+      puts "That is an invalid move."
+      turn
     else
-    puts "That is not a valid move boss dog, please make a valid move."
-  end
-    if turn_count == 1
-      player_2 move
+      puts "That position is taken, please try again."
+      turn
     end
+  end
+
+  def play
+    puts "Please take your turn."
+    input = current_player.move(input).to_i
+    won?
+    turn
+  end
+
+
+
 end
