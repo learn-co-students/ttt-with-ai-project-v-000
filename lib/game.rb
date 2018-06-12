@@ -60,7 +60,8 @@ class Game
 
   def play
     puts "Please take your turn."
-    input = current_player.move(input).to_i
+    if input = current_player.move(input).to_i
+    else input = current_player.move(input).to_i == false
     until over? || won?
       turn
     end
