@@ -45,4 +45,10 @@ class Game
     @board.cells[won?[0]] if won?
   end
   
+  def turn
+    #makes valid moves
+    #asks for input again after a failed validation
+    #changes to player 2 after the first turn
+  end
+  
 end
