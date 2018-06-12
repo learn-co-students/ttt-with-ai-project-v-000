@@ -17,10 +17,18 @@ WIN_COMBINATIONS = [
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-
   end
 
+  # def initialize(player_1 = "X", player_2 = "O", board= Board.new)
+  #   @board = board
+  #   @player_1 = player_1
+  #   @player_2 = player_2
+  # end
+
   def current
+  end
+
+  def current_player
     @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
@@ -29,9 +37,25 @@ WIN_COMBINATIONS = [
   end
 
   def won?
+
   end
 
   def draw?
+
+    WIN_COMBINATIONS.detect do |winner|
+      @board.cells[winner[0]] == @board.cells[winner[1]] &&
+      @board.cells[winner[1]] == @board.cells[winner[2]] &&
+     (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
+    end
   end
 
+  def draw?
+    @board.full? && !won?
   end
+
+  def winner
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
+  end
+end
