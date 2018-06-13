@@ -45,7 +45,7 @@ class Game
     @board.cells[won?[0]] if won?
   end
   
-  def turn
+  def self.turn
     if @board.current_player.move(board) == valid_move?(current_player)
       @board.display
     end 
