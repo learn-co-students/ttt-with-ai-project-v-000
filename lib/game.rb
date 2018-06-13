@@ -46,6 +46,9 @@ class Game
   end
   
   def turn
+    if @board.current_player.move(board) == valid_move?(current_player)
+      @board.display
+    end 
     #makes valid moves
     #asks for input again after a failed validation
     #changes to player 2 after the first turn
