@@ -72,7 +72,7 @@ class Game
      else won?
         puts "Congratulations #{winner}!"
       end
-      over?
-    end
+      # over?
+    # end
   end
-end 
+end
