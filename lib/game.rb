@@ -1,4 +1,3 @@
-require 'pry'
 ##
 # => Game handles the functionality of the Tic-Tac-Toe game
 ##
@@ -61,33 +60,38 @@ class Game
   # => This figures out who's turn it is
   ##
   def current_player
-    @board.turn_count % 2 == 0 ? @player_1 : @player_2;
+    @board.turn_count.even? ? @player_1 : @player_2;
   end
 
   ##
   # => This checks if somebody has won the game or not
   ##
   def won?
-    x = "X";
-    o = "O";
-
-    WIN_COMBINATIONS.each do |win_combination|
-      win_index_1 = win_combination[0];
-      win_index_2 = win_combination[1];
-      win_index_3 = win_combination[2];
-
-      position_1 = @board.cells[win_index_1];
-      position_2 = @board.cells[win_index_2];
-      position_3 = @board.cells[win_index_3];
-
-      if ((position_1 == x && position_2 == x && position_3 == x) ||
-        (position_1 == o && position_2 == o && position_3 == o))
-          return win_combination;
-        else
-          false;
-      end
-    end
-    false; #explicitly tell ruby to return false if we've cycled through the board and no win combinations can be found
+    WIN_COMBINATIONS.detect { |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
+    }
+    # x = "X";
+    # o = "O";
+    #
+    # WIN_COMBINATIONS.each do |win_combination|
+    #   win_index_1 = win_combination[0];
+    #   win_index_2 = win_combination[1];
+    #   win_index_3 = win_combination[2];
+    #
+    #   position_1 = @board.cells[win_index_1];
+    #   position_2 = @board.cells[win_index_2];
+    #   position_3 = @board.cells[win_index_3];
+    #
+    #   if ((position_1 == x && position_2 == x && position_3 == x) ||
+    #     (position_1 == o && position_2 == o && position_3 == o))
+    #       return win_combination;
+    #     else
+    #       false;
+    #   end
+    # end
+    # false; #explicitly tell ruby to return false if we've cycled through the board and no win combinations can be found
   end
 
   ##
@@ -108,8 +112,10 @@ class Game
   # => This determines who the winner is based on the winning combo
   ##
   def winner
-    winner = won?;
-    won? == false ? nil : @board.cells[winner[0]];
+    if won = won?
+      board.cells[won.first]
+    end
+    #won? == false ? nil : @board.cells[winner[0]];
   end
 
   ##

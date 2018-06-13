@@ -17,7 +17,7 @@ class Board
   # => Creates a fresh grid for a board
   ##
   def reset!
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = Array.new(9, " ")
   end
 
   ##
@@ -72,6 +72,6 @@ class Board
   # => This checks whether or not a given move is valid
   ##
   def valid_move?(input)
-    input.to_i >= 1 && input.to_i <= 9 && !taken?(input);
+    input.to_i.between?(1,9) && !taken?(input);
   end
 end
