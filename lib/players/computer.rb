@@ -4,8 +4,6 @@ module Players
 
     def move(board)
 "4"
-
-
-end
+    end
   end
 end

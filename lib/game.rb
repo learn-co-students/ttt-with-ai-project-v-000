@@ -61,14 +61,12 @@ class Game
   def play
     puts "Please take your turn."
     if input = current_player.move(input).to_i
-    else input = current_player.move(input).to_i == false
     until over? || won?
       turn
     end
      if board.valid_move?(input.to_s)
       board.update(input, current_player)
       turn
-
       elsif draw?
         puts "Cat's Game!"
      else won?
@@ -77,4 +75,4 @@ class Game
       over?
     end
   end
-# end
+end 
