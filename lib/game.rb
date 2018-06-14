@@ -19,7 +19,7 @@ class Game
   end
 
   def current_player
-  @board.turn_count % 2 == 0 ? @player_1 : @player_1
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
 
   def won?
@@ -33,7 +33,7 @@ class Game
   end
 
   def over?
-    won? || self.board.full?
+    won? || draw?
   end
 
   def winner
@@ -52,4 +52,30 @@ class Game
       end
     end
 
+    def play
+      until over?
+        self.turn
+      end
+        if won?
+          self.board.display
+          puts "Congratulations #{self.winner}!"
+        elsif draw?
+          self.board.display
+          puts "Cat's Game!"
+        end
+      end
+
+      def start_game
+        puts "Do you want to do a 0, 1, or 2 player game?"
+        choice = gets.strip
+        if choice == "0"
+          game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+          game.play
+        elsif choice == "1"
+          game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+          game.play
+        elsif choice == "2"
+          game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+        end
+      end
 end
