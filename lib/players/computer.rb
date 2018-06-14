@@ -5,7 +5,10 @@ module Players
 
 
 def move(board)
-if board.cells == " "
+position = ["1", "2", "3", "4", "5", "6", "7", "8", "9"].sample
+if board.valid_move?(position)
+  position
+end
 end
 
 
