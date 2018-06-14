@@ -56,20 +56,10 @@ class Game
   end
 
   def play
-    # turn
     until over?
       turn
     end
-    # binding.pry
-      if board.valid_move?(input.to_s)
-         board.update(input, current_player)
-         turn
-      elsif won?
-        puts "Congratulations #{winner}!"
-        # turn
-      elsif draw?
-        puts "Cat's Game!"
-      else over?
-    end
+    puts "Congratulations #{winner}!" if won?
+    puts "Cat's Game!" if draw?
   end
 end
