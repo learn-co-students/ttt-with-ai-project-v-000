@@ -46,33 +46,30 @@ class Game
 
   def turn
     puts "Please take your turn."
-    input = current_player.move(input).to_i
-    if board.valid_move?(input.to_s)
+    input = current_player.move(input)
+    if board.valid_move?(input)
        board.update(input, current_player)
-       board.display
-    elsif !input.between?(1, 9)
-      puts "That is an invalid move."
-      turn
     else
-      puts "That position is taken, please try again."
+      puts "That is an invalid move."
+       turn
     end
   end
 
   def play
-    puts "Please take your turn."
-    if input = current_player.move(input).to_i
-    until over? || won?
+    # turn
+    until over?
       turn
     end
-     if board.valid_move?(input.to_s)
-      board.update(input, current_player)
-      turn
+    # binding.pry
+      if board.valid_move?(input.to_s)
+         board.update(input, current_player)
+         turn
+      elsif won?
+        puts "Congratulations #{winner}!"
+        # turn
       elsif draw?
         puts "Cat's Game!"
-     else won?
-        puts "Congratulations #{winner}!"
-      end
-      # over?
-    # end
+      else over?
+    end
   end
 end
