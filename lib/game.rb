@@ -57,13 +57,17 @@ class Game
     if board.valid_move?(input)
       board.update(input, current_player)
     else
-      "Please try again."
+      puts "Please try again."
       turn
     end
   end
 
   def play
-
+    until over?
+      turn
+    end
+    puts "Congratulations #{winner}!" if won?
+    puts "Cat's Game!" if draw?
   end
 
 end
