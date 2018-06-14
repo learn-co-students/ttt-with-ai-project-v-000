@@ -66,7 +66,7 @@ class Game
       end
 
       def start_game
-        puts "Do you want to do a 0, 1, or 2 player game?"
+        puts "Do you want to do a 0, 1, or 2 player game? Or wargames?"
         choice = gets.strip
         if choice == "0"
           game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
@@ -76,6 +76,21 @@ class Game
           game.play
         elsif choice == "2"
           game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+          game.play
+        elsif choice == "wargames"
+          @x_wins = []
+          @y_wins = []
+          100.times do
+            game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+            game.play
+            if self.winner == "X"
+              @x_wins << self.winner
+            elsif self.winner == "Y"
+              @y_wins << self.winner
+            end
+          end
+          puts "X won #{@x_wins.length} times"
+          puts "Y won #{@y_wins.length} times"
         end
       end
 end
