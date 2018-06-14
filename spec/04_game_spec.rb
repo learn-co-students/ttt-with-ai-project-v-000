@@ -101,7 +101,7 @@ describe 'Game' do
       expect(game.won?).to contain_exactly(0, 1, 2)
     end
 
-    # ***TEST ADDED***
+    # ***TEST ADDED (was having trouble with #winner and wanted to make sure this wasn't the cause)***
     it 'returns false for an in-progress game' do
       game = Game.new
       game.board.cells = ["X", " ", "X",

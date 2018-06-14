@@ -1,7 +1,6 @@
 require 'pry'
 
 class Game
-  # extend Players
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -35,7 +34,7 @@ class Game
   end
 
   def draw?
-    self.won? == false || self.won? == nil && board.full?
+    !self.won? && board.full?
   end
 
   def over?
@@ -49,28 +48,34 @@ class Game
   end
 
   def turn
+    puts "Please enter 1-9:"
+    # How does this know to move to player 2?
+    input = current_player.move(self.board)
+    if self.board.valid_move?(input)
+      self.board.update(input, current_player)
+    else
+      puts "Your move was not valid. Try again!"
+      self.turn
+    end
+    self.board.display
   end
 
-  # describe 'turn' do
-  #   it 'makes valid moves' do
-  #     game = Game.new
-  #     allow($stdout).to receive(:puts)
-  #
-  #     expect(game.player_1).to receive(:gets).and_return("1")
-  #
-  #     game.turn
-  #   end
-  #
-  #   it 'asks for input again after a failed validation' do
-  #     game = Game.new
-  #     allow($stdout).to receive(:puts)
-  #
-  #     expect(game.player_1).to receive(:gets).and_return("invalid")
-  #     expect(game.player_1).to receive(:gets).and_return("1")
-  #
-  #     game.turn
-  #   end
+  def play
+    # Tried using while self.board.turn_count < 9, but didn't work. Gave error that I don't understand:
+      # Failure/Error: game.play
+        # Errno::ENOENT:
+        # No such file or directory @ rb_sysopen - documentation
+    while !self.over?
+      self.turn
+    end
 
+    if self.won?
+      puts "Congratulations #{winner}!"
+    end
 
+    if self.draw?
+      puts "Cat's Game!"
+    end
+  end
 
 end
