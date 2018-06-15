@@ -87,4 +87,12 @@ class Board
     end
   end
 
+  def valid_move?(cell_number)
+    if cell_number.to_i.between?(1,9)
+      unless taken?(cell_number)
+        true
+      end
+    end
+  end
+
 end
