@@ -57,15 +57,33 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position(cell)
-    position = nil
-    cell = cell.to_i - 1
-    @cells.each_with_index do |c,i|
-      if cell == i
-        position = c
-      end
+  def position(cell_number)
+    cell_index = cell_number.to_i - 1
+
+    position = @cells.detect.with_index do |cell,index|
+      cell_index == index
     end
+
     position
   end
+
+  def full?
+    if @cells.any? { |cell| cell == " " }
+      return false
+    elsif @cells.all? { |cell| cell == "X" || cell == "O" }
+      return true
+    end
+  end
+
+  def turn_count
+    @cells.count("X") + @cells.count("O")
+  end
+
+  # def taken?(cell_number)
+  #   cell_index = cell_number.to_i - 1
+  #
+  #
+  #
+  # end
 
 end
