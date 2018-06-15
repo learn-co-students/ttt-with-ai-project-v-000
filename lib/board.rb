@@ -79,11 +79,12 @@ class Board
     @cells.count("X") + @cells.count("O")
   end
 
-  # def taken?(cell_number)
-  #   cell_index = cell_number.to_i - 1
-  #
-  #
-  #
-  # end
+  def taken?(cell_number)
+    if position(cell_number) == "X" || position(cell_number) == "O"
+      true
+    elsif position(cell_number) == " "
+      false
+    end
+  end
 
 end
