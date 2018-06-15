@@ -6,6 +6,7 @@ class Board
 
   def initialize
     @cells =  [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
   end
 
   def reset!
@@ -22,6 +23,7 @@ class Board
   end
 
   def position(input)
+
     index = input.to_i - 1
     @cells[index]
   end
@@ -35,6 +37,7 @@ class Board
   end
 
   def taken?(input)
+
     index = input.to_i - 1
     @cells[index] != " "
   end
@@ -45,6 +48,7 @@ class Board
   end
 
   def update(input, player)
+
     index = input.to_i - 1
     @cells[index] = player.token
   end
