@@ -62,4 +62,8 @@ class Game
     puts "Cat's Game!" if draw?
   end
 
+  def start
+    play
+  end
+
 end
