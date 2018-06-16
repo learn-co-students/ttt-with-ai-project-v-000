@@ -1,4 +1,5 @@
 require_relative "../lib/players/human.rb"
+require_relative "../lib/players/computer.rb"
 require_relative "../lib/board.rb"
 
 class Game
@@ -54,14 +55,14 @@ class Game
   end
 
   def turn
-    current_move = current_player.move(board)
+    player = current_player
+    current_move = player.move(board)
 
     if board.valid_move?(current_move)
       puts "Turn: #{@board.turn_count + 1}"
-      board.display
       puts "Please enter 1-9:"
-      board.update(current_move, current_player)
-      puts "#{current_player.token} moved #{current_move}"
+      board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
       board.display
     else
       turn
