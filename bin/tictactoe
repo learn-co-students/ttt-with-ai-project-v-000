@@ -9,7 +9,7 @@ loop do
 
   puts "Would you like to play 0, 1, or 2 player?"
   num_players_raw = gets.strip
-
+  play_again = "n"
   if ! /\A[0-2]\z/.match(num_players_raw)
     puts "Invalid entry. Goodbye"
   else
