@@ -95,7 +95,7 @@ module Players
             next_move = (block_move + 1).to_s
           else
             opponent_potential(board)
-            no_strategy(board)
+            #no_strategy(board)
           end
         end
       end
@@ -209,10 +209,40 @@ module Players
       hash_empty_cells.each { |cell_index, potential| highest_potential_cells << cell_index if potential == hash_empty_cells.values.max }
       puts "#{highest_potential_cells}"
 
-      if highest_potential_cells.count > 1
-        new_attempt = highest_potential_cells[0] + 1
-        return new_attempt.to_s
+      if highest_potential_cells.count > 1 && hash_empty_cells.values.max > 1
+        #need to figure out which (if any) to use
+        #create a board with the next move to see if opponent will need to block in the cell that's tied for potential
+        # test_board = Board.new(board.cells)
+        # test_player = Player.new(self.token)
+        # test_board.update(highest_potential_cells[0].to_s, test_player)
+        # puts " Your move means #{self.op_token} will have to block here: #{can_i_win?(test_board)}"
+        # op_next_move = can_i_win?(test_board) - 1
+        # new_attempt = highest_potential_cells[0] + 1
+        # return new_attempt.to_s
 
+        #is there a winning combination that includes the highest_potential_cells?
+        new_attempt = -1
+        highest_potential_cells.each do |cell_index|
+          cells = board.cells.dup
+          cells[cell_index] = self.token
+          puts "Board cells: #{board.cells}"
+          puts "Test cells: #{cells}"
+          winning_cell_index = will_block_be_required_by_opponent?(cells, self.token)
+          puts "I would force a block here: #{winning_cell_index}"
+          if ! highest_potential_cells.include?(winning_cell_index) && winning_cell_index != -1
+            new_attempt = cell_index
+          end
+        end #do
+        if new_attempt == -1
+            hash_empty_cells.each do |cell_index, potential|
+              if potential != hash_empty_cells.values.max
+                new_attempt = cell_index
+              end
+              break if new_attempt != -1
+            end #do
+        end
+        new_attempt = new_attempt + 1
+        return new_attempt.to_s
       else
         new_attempt = highest_potential_cells[0] + 1
         return new_attempt.to_s
@@ -220,6 +250,41 @@ module Players
 
     end #opponent_potential
 
+    def test_for_high_priority_winning_combo (cell_list)
+      third_cell = -1
+      WIN_COMBINATIONS.each do |combo|
+        if combo[0]==cell_list[0] || combo[0]==cell_list[1]
+          if combo[1]==cell_list[0] || combo[1]==cell_list[1]
+            third_cell = combo[2]
+          elsif combo[2]==cell_list[0] || combo[2]==cell_list[1]
+            third_cell = combo[1]
+          end
+        elsif combo[1]==cell_list[0] || combo[1]==cell_list[1]
+            if combo[2]==cell_list[0] || combo[2]==cell_list[1]
+              third_cell = combo[0]
+            end
+        end
+        break if third_cell != -1
+      end
+      third_cell
+    end
+
+    def will_block_be_required_by_opponent?(cells, mytoken)
+      cellnum = -1
+      WIN_COMBINATIONS.each do |combo|
+        if cells[combo[0]] == cells[combo[1]] && cells[combo[1]] == mytoken && cells[combo[2]] == " "
+          cellnum = combo[2]
+          return cellnum
+        elsif cells[combo[1]] == cells[combo[2]] && cells[combo[2]] == mytoken && cells[combo[0]] == " "
+          cellnum = combo[0]
+          return cellnum
+        elsif cells[combo[0]] == cells[combo[2]] && cells[combo[2]] == mytoken && cells[combo[1]] == " "
+          cellnum = combo[1]
+          return cellnum
+        end #ifs
+      end #do
+      return cellnum
+    end #def
 
   end #end class Computer
 end #end Module Players

@@ -2,10 +2,10 @@ class Board
 
   attr_accessor :cells
 
-  def initialize
+  def initialize(cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "])
 
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
+    #@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = cells
   end
 
   def reset!

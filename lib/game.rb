@@ -57,10 +57,11 @@ class Game
 
   def play
     while !over? do
+      puts "#{current_player.token}'s turn:"
       @board.display
       turn
     end
-
+    puts "Game Complete:"
     @board.display
     puts "Congratulations #{winner}!" unless !won?
     puts "Cat's Game!" unless !draw?
