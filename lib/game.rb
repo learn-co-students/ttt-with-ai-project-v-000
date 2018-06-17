@@ -1,5 +1,6 @@
 class Game
   attr_accessor :board, :player_1, :player_2
+  
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -17,6 +18,8 @@ class Game
     @player_2 = player_2
     @board = board
     end
+    
+    
 
   def current_player
     board.turn_count % 2 == 0 ? player_1 : player_2
