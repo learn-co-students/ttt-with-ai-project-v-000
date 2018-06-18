@@ -85,7 +85,6 @@ module Players
             break
           end
         end
-        #puts "Player #{self.op_token} went here: #{op_cell_details[0]}, type is #{op_cell_details[1]}"
         op_first_move_details
     end
 
@@ -131,11 +130,8 @@ module Players
             priority_set[1].each do |cell_index|
               cells = board.cells.dup
               cells[cell_index] = self.token
-              puts "Board cells: #{board.cells}"
-              puts "Test cells: #{cells}"
               #if I make the move, will I win my next turn (ie will opponent be forced to block me)
               winning_cell_index = can_someone_win_next_turn?(cells, self.token)
-              puts "I would force a block here: #{winning_cell_index}"
               if ! priority_set[1].include?(winning_cell_index) && winning_cell_index != -1
                 #if I don't force a block on a cell that's helpful for the opponent, make the move
                 new_attempt = cell_index + 1
@@ -151,14 +147,11 @@ module Players
       end
     end #opponent_potential
 
-    # ------------------ GOOD! -----------------------------
-
     def pick_move_without_thought(board)
       cellnum = 1
       while board.taken?(cellnum.to_s)
         cellnum = cellnum + 1
       end
-      puts "It doesn't matter anymore. There is no potential to win anywhere. So I pick: #{cellnum}"
       cellnum.to_s
     end
 
@@ -175,7 +168,6 @@ module Players
         end
       end
       potential_combos.each do |combo|
-        puts "Potential combo for #{winner_token}: #{combo[0]}, #{combo[1]}, #{combo[2]}"
       end
       potential_combos
     end
@@ -190,7 +182,6 @@ module Players
           end
         end
       end
-      puts "Empty Cells with potential: #{empty_cells_with_potential}"
       empty_cells_with_potential.sort!
     end
 
@@ -208,11 +199,7 @@ module Players
       empty_cells_with_potential_for_opponent_to_win.each do |cell_index|
         potential_array[cell_index][1] = potential_array[cell_index][1] + 1
       end
-
-      puts "Potential array: #{potential_array}"
-
       potential_array
-
     end
 
     def get_priority_sets_with_cell_indices (board, potential_combos_for_me_to_win, potential_combos_for_opponent_to_win)
@@ -246,7 +233,6 @@ module Players
           potential_array_with_cell_indices << [priority_set, cells_with_priority_set]
         end
       end
-      puts "Here's the priority_set with cells: #{potential_array_with_cell_indices}"
       potential_array_with_cell_indices
     end
 
