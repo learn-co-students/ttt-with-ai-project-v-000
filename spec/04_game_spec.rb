@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -27,6 +28,7 @@ describe 'Game' do
       game = Game.new
       player_1 = Player.new("X")
       game.player_1 = player_1
+
       expect(game.player_1).to eq(player_1)
     end
   end

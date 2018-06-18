@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe with AI."
+
+play_again = 'y'
+
+while play_again == 'y'
+
+  puts "How many human players? (0-2)"
+  number_of_players = gets.strip 
+  
+  if ["0", "1", "2", "wargames"].count(number_of_players) == 0  
+    puts "Invalid input. Exiting Tic Tac Toe."
+  else 
+    case number_of_players
+    when "0" 
+      puts "AI vs AI."
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+      game.play  
+    when "1" 
+      puts "Would you like to be 'X' or 'O'? 'X' goes first. (x/o)"
+      token_choice = gets.strip 
+      while !['x', 'o'].include?(token_choice)
+        puts "Would you like to be 'X' or 'O' ? 'X' goes first. (x/o)"
+        token_choice = gets.strip 
+      end 
+      if token_choice == 'x'
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+        game.play 
+      else 
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+        game.play 
+      end 
+    when "2" 
+      puts "An all human game is about to start. 'X' will go first."
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+      game.play 
+    when "wargames"
+      puts "Welcome to WarGames. The AI will play itself 100 times." 
+      puts "Press enter to start."
+      foo = gets
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+      game.wargames
+    end 
+    
+    puts "Would you like to play again? (y/n)"
+    play_again = gets.strip 
+  
+  end 
+
+end
