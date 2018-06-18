@@ -1,7 +1,71 @@
 class Game
   attr_accessor :board, :player_1, :player_2
   
+def play_game
+  puts "Welcome! Let's play Tic Tac Toe!"
+  puts "What kind of game would you like to play: 0, 1-, 2-player or wargames?"
+  puts "Please press '0' for 0 player, '1' for 1 player,'2' for 2 player or 'W' for wargames."
+  
+  #binding.pry
+end
 
+def start
+  play_game
+  
+input = gets.chomp
+  
+  if input == "0"
+    board = Board.new
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+    play
+   elsif input == "1"
+      board = Board.new
+      puts" Would you like to play first? 'Y' for yes, 'N' for no"
+      new_input = gets.chomp
+      
+    if new_input == "Y"
+      puts "Let's go!"
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+      board.display
+      play
+      
+      elsif  new_input == "N"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+        board.display
+        play
+        else
+        start
+      end
+        elsif input == "2"
+          board = Board.new
+          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+          puts "Let's go!"
+          board.display
+          play
+          elsif input == "w"
+            board = Board.new
+            game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+            100.times.collect { play }
+            binding.pry
+            puts "The game was won #{play.length.won?} times."
+          else
+            start
+          end
+end
+  
+    def end_game
+      
+      while game.over?
+       puts "Would you like to play again?"
+      new_input = gets.strip
+      if new_input = "Y" || "yes"
+        Game.new
+      else
+        exit
+        end
+      end
+    end
+ 
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -38,6 +102,7 @@ class Game
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
     else
       puts "invalid"
       turn
@@ -48,6 +113,7 @@ class Game
   def draw?
       !won? && board.full?
   end
+
 
   def over?
     won? || draw?
@@ -61,7 +127,7 @@ class Game
      puts "Cat's Game!"
    elsif won?
      puts "Congratulations #{winner}!"
-     
+     board.display
    end
   end
 
