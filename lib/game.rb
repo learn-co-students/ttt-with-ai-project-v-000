@@ -88,6 +88,7 @@ class Game
       move = current_player.move(@board)
     end
     @board.update(move, current_player)
+    @board.display
   end
   
   def play
@@ -101,4 +102,41 @@ class Game
       puts "Congratulations #{winner}!"
     end
   end
+  
+  
+  def start
+    puts "Welcome to Tic-Tac-Toe"
+    puts "0, 1, or 2 Players?"
+    number_of_players = gets.strip.to_i
+    
+    puts "Who should go first?"
+    first_player = gets.strip
+    
+    case first_player
+    when "Human"
+      case number_of_players
+      when 0
+        @player_1 = Computer.new("X")
+        @player_2 = Computer.new("O")
+      when 1
+        @player_2 = Computer.new("O")
+      when 2
+        
+      end
+    when "Computer"
+      case number_of_players
+      when 0
+        @player_1 = Computer.new("X")
+        @player_2 = Computer.new("O")
+      when 1
+        @player_1 = Computer.new("X")
+      when 2
+        
+      end
+    end
+    
+    play
+  end
+  
+  
 end
