@@ -56,6 +56,7 @@ class Game
     input = current_player.move(input)
     if board.valid_move?(input)
       board.update(input, current_player)
+      board.display
     else
       puts "Please try again."
       turn
@@ -68,6 +69,54 @@ class Game
     end
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
+  end
+
+  def self.new_game
+    puts "Welcome to Tic Tac Toe!"
+    player_number
+    @this_game.play
+    if @this_game.over?
+      puts "Would you like to play again? (yes or no)"
+      user_response = gets.strip
+      if user_response == "yes"
+        new_game
+      else
+        puts "Thank you for playing!"
+      end
+    end
+  end
+
+  def self.player_number
+    puts "How many players? (0, 1, 2)"
+    user_input = gets.strip
+    if user_input == "0"
+      @this_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    elsif user_input == "1"
+      if player_choice == "yes"
+        @this_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      else
+        @this_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      end
+    elsif user_input == "2"
+      puts "Player 1 will be X"
+      @this_game = Game.new
+    else
+      puts "Please enter a valid number (0, 1, 2)"
+      player_number
+    end
+  end
+
+  def self.player_choice
+    puts "Would you like to go first and be X? (yes or no)"
+    new_input = gets.strip
+    if new_input == "yes"
+      "yes"
+    elsif new_input == "no"
+      "no"
+    else
+      "Please enter yes or no."
+      player_choice
+    end
   end
 
 end
