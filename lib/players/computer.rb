@@ -63,7 +63,7 @@ module Players
           if block_move > -1
             next_move = (block_move + 1).to_s
           else
-            opponent_potential(board) #if no winning move, and no blocking move required, time to get more complicated
+            think_harder(board) #if no winning move, and no blocking move required, time to get more complicated
           end
         end
       end
@@ -105,7 +105,7 @@ module Players
       return cell_index
     end #def
 
-    def opponent_potential(board)
+    def think_harder(board)
       # remember if I'm using this method, it's becuase I can't win immdiately and there's no block immdiately required
 
       potential_combos_for_opponent_to_win = get_combos_with_potential_for_a_certain_player_to_win(board, self.op_token, self.token)
@@ -145,7 +145,7 @@ module Players
           end
         end #do
       end
-    end #opponent_potential
+    end #think_harder
 
     def pick_move_without_thought(board)
       cellnum = 1

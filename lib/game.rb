@@ -65,6 +65,11 @@ class Game
     @board.display
     puts "Congratulations #{winner}!" unless !won?
     puts "Cat's Game!" unless !draw?
+    if won?
+      return winner
+    else
+      return "cats"
+    end
   end
 
 end
