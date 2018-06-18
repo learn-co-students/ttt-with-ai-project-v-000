@@ -13,6 +13,16 @@ module Players
                       [6,4,2]
                     ]
 
+    PRIORITY_ORDER = [
+                      [2,1],
+                      [2,0],
+                      [1,2],
+                      [1,1],
+                      [0,2],
+                      [1,0],
+                      [0,1]
+                    ]
+
     def move(board)
       ai_move(board)
     end
@@ -94,101 +104,151 @@ module Players
         end #ifs
       end #do
       return cell_index
-    end #def  
+    end #def
 
     def opponent_potential(board)
+      # remember if I'm using this method, it's becuase I can't win immdiately and there's no block immdiately required
 
+      potential_combos_for_opponent_to_win = get_combos_with_potential_for_a_certain_player_to_win(board, self.op_token, self.token)
+      potential_combos_for_me_to_win = get_combos_with_potential_for_a_certain_player_to_win(board, self.token, self.op_token)
+
+      if potential_combos_for_opponent_to_win.length == 0 && potential_combos_for_me_to_win.length == 0
+        #there's no way anyone can win. Just pick a cell without thought to fill up board and finish game
+        next_move = pick_move_without_thought(board)
+        return next_move
+      else
+
+        potential_array_with_cell_indices = get_priority_sets_with_cell_indices(board, potential_combos_for_me_to_win, potential_combos_for_opponent_to_win)
+        # e.g [[[1, 2], [2, 6]], [[1, 1], [1, 3]], [[0, 2], [5, 7]]]
+
+        potential_array_with_cell_indices.each do |priority_set|
+          # priority_set e.g [[1, 2], [2, 6]]
+          if priority_set[0][0] == 1 && priority_set[0][1] == 2 #my potential is 1, opponent's potential is 2
+            #I want to put my token in a high impact cell to stop my opponent
+            #But I need to be careful not to force my opponent to block me on their next turn in a cell that
+            # is actually very helpful for them
+            new_attempt = -1
+            priority_set[1].each do |cell_index|
+              cells = board.cells.dup
+              cells[cell_index] = self.token
+              puts "Board cells: #{board.cells}"
+              puts "Test cells: #{cells}"
+              #if I make the move, will I win my next turn (ie will opponent be forced to block me)
+              winning_cell_index = can_someone_win_next_turn?(cells, self.token)
+              puts "I would force a block here: #{winning_cell_index}"
+              if ! priority_set[1].include?(winning_cell_index) && winning_cell_index != -1
+                #if I don't force a block on a cell that's helpful for the opponent, make the move
+                new_attempt = cell_index + 1
+                return new_attempt.to_s
+              end
+            end #do
+          else
+            #there's no worry, just pick first cell in set
+            new_attempt = priority_set[1][0] + 1
+            return new_attempt.to_s
+          end
+        end #do
+      end
+    end #opponent_potential
+
+    # ------------------ GOOD! -----------------------------
+
+    def pick_move_without_thought(board)
+      cellnum = 1
+      while board.taken?(cellnum.to_s)
+        cellnum = cellnum + 1
+      end
+      puts "It doesn't matter anymore. There is no potential to win anywhere. So I pick: #{cellnum}"
+      cellnum.to_s
+    end
+
+
+    def get_combos_with_potential_for_a_certain_player_to_win(board, winner_token, opponent_token)
       potential_combos=[]
       WIN_COMBINATIONS.each do |combo|
-        if board.cells[combo[0]] != self.token && board.cells[combo[1]] != self.token && board.cells[combo[2]] != self.token
-          if board.cells[combo[0]] == self.op_token || board.cells[combo[1]] == self.op_token || board.cells[combo[2]] == self.op_token
-            #combo has none of my tokens and at least 1 of opponent's tokens.
-            #this combo has potential for oppponent to win
+        if board.cells[combo[0]] != opponent_token && board.cells[combo[1]] != opponent_token && board.cells[combo[2]] != opponent_token
+          if board.cells[combo[0]] == winner_token || board.cells[combo[1]] == winner_token || board.cells[combo[2]] == winner_token
+            #combo has none of opponent's tokens and at least 1 of winner's tokens.
+            #this combo has potential for winner_token player to win
             potential_combos << combo
           end
         end
       end
+      potential_combos.each do |combo|
+        puts "Potential combo for #{winner_token}: #{combo[0]}, #{combo[1]}, #{combo[2]}"
+      end
+      potential_combos
+    end
 
-      if potential_combos.length >0
+    def get_empty_cells_with_potential_for_a_certain_player_to_win(board, potential_combos)
 
-        potential_combos.each do |combo|
-          puts "Potential combo for #{self.op_token}: #{combo[0]}, #{combo[1]}, #{combo[2]}"
-        end
-
-        #now that i know which ways have potential for opponent to win, find cells still available for opponent
-        empty_cells_with_op_potential = []
-        potential_combos.each do |combo|
-          combo.each do |cell_index|
-            if board.cells[cell_index] == " "
-              empty_cells_with_op_potential << cell_index
-            end
+      empty_cells_with_potential = []
+      potential_combos.each do |combo|
+        combo.each do |cell_index|
+          if board.cells[cell_index] == " "
+            empty_cells_with_potential << cell_index
           end
         end
-        empty_cells_with_op_potential.sort!
-        puts "Empty Cells with potential: #{empty_cells_with_op_potential}"
-        #the cells that appear multple times are high impact
-        #I want to put my token in a high impact cell to stop my opponent
-        #But I need to be careful not to force my opponent to block me on their next turn in a cell that
-        # is actually very helpful for them
+      end
+      puts "Empty Cells with potential: #{empty_cells_with_potential}"
+      empty_cells_with_potential.sort!
+    end
 
-        hash_empty_cells = Hash.new
-        empty_cells_with_op_potential.each do |cell_index|
-          if hash_empty_cells[cell_index] == nil
-            hash_empty_cells[cell_index] = 1
-          else
-            hash_empty_cells[cell_index] += 1
-          end
-        end
-        hash_empty_cells.each do |cell_index, potential|
-          puts "#{cell_index} appears #{potential} times"
-        end
-        highest_potential_cells=[]
-        hash_empty_cells.each { |cell_index, potential| highest_potential_cells << cell_index if potential == hash_empty_cells.values.max }
-        puts "#{highest_potential_cells}"
+    def build_potential_array (empty_cells_with_potential_for_me_to_win, empty_cells_with_potential_for_opponent_to_win)
 
-        if highest_potential_cells.count > 1 && hash_empty_cells.values.max > 1
-          new_attempt = -1
-          highest_potential_cells.each do |cell_index|
-            cells = board.cells.dup
-            cells[cell_index] = self.token
-            puts "Board cells: #{board.cells}"
-            puts "Test cells: #{cells}"
-            #if I make the move, will I win my next turn (ie will opponent be forece to block me)
-            winning_cell_index = can_someone_win_next_turn?(cells, self.token)
-            puts "I would force a block here: #{winning_cell_index}"
-            if ! highest_potential_cells.include?(winning_cell_index) && winning_cell_index != -1
-              new_attempt = cell_index
-            end
-          end #do
-          if new_attempt == -1
-              hash_empty_cells.each do |cell_index, potential|
-                if potential != hash_empty_cells.values.max
-                  new_attempt = cell_index
-                end
-                break if new_attempt != -1
-              end #do
-          end
-          new_attempt = new_attempt + 1
-          return new_attempt.to_s
-        else
-          new_attempt = highest_potential_cells[0] + 1
-          return new_attempt.to_s
-        end
-      else
-        cellnum = 1
-        while board.taken?(cellnum.to_s)
-          cellnum = cellnum + 1
-        end
-        puts "It doesn't matter anymore. There is no potential to win anywhere. So I pick: #{cellnum}"
-        cellnum.to_s
+      potential_array =[[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+      # array[cell_index][0] = my potential at cell_index
+      # array[cell_index][1] = opponent's potential at cell_index
+      # 0 potential if cell is already taken, or no way I can win using that cell
 
+      empty_cells_with_potential_for_me_to_win.each do |cell_index|
+        potential_array[cell_index][0] = potential_array[cell_index][0] + 1
       end
 
-    end #opponent_potential
+      empty_cells_with_potential_for_opponent_to_win.each do |cell_index|
+        potential_array[cell_index][1] = potential_array[cell_index][1] + 1
+      end
+
+      puts "Potential array: #{potential_array}"
+
+      potential_array
+
+    end
+
+    def get_priority_sets_with_cell_indices (board, potential_combos_for_me_to_win, potential_combos_for_opponent_to_win)
+
+      #now that i know which ways have potential for me to win, find cells still available for taking
+      #the cells that appear multple times are high impact - they have high potential for me
+      # a cell can have a certain potential for me to win, and a certain potential for my opponent to win
+      # this makes a set [my potential at a cell, my opponent's potential at the same cell]
+      #find this information for me and my opponent
+
+      empty_cells_with_potential_for_me_to_win = get_empty_cells_with_potential_for_a_certain_player_to_win(board, potential_combos_for_me_to_win)
+      empty_cells_with_potential_for_opponent_to_win = get_empty_cells_with_potential_for_a_certain_player_to_win(board, potential_combos_for_opponent_to_win)
+      potential_array = build_potential_array(empty_cells_with_potential_for_me_to_win, empty_cells_with_potential_for_opponent_to_win)
+
+      # the potential_array holds the the set [my potential, my opponent's potential] for each cell index
+      # after the frist few moves, there are only a handful of possible sets
+      # how I prioritize these sets is stored in the constant PRIORITY_ORDER
+      # it is the heart of the balance between offence and defence
+
+      # restructure the potential_array so that it shows only the sets that exist on the current board and in the order that matches the constant PRIORITY_ORDER
+      # with each set, store the cells with those potentials
+      # this way, I'll have the cells stored in order of priority, and know their potentials too
+
+      potential_array_with_cell_indices = []
 
 
+      PRIORITY_ORDER.each do |priority_set|
 
-
+        cells_with_priority_set = potential_array.each_index.select{|i| potential_array[i] == priority_set}
+        if cells_with_priority_set.length > 0
+          potential_array_with_cell_indices << [priority_set, cells_with_priority_set]
+        end
+      end
+      puts "Here's the priority_set with cells: #{potential_array_with_cell_indices}"
+      potential_array_with_cell_indices
+    end
 
   end #end class Computer
 end #end Module Players
