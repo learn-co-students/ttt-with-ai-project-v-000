@@ -41,6 +41,9 @@ class Game
   end
 
   def over?
+    if won?
+      @wins = @wins + 1
+    end
     if won? || draw?
       true
     end
@@ -48,13 +51,13 @@ class Game
 
   def winner
     if won?
-      wins += 1
       board.cells[won?[0]]
     end
   end
 
   def turn
-    puts "Please take your turn."
+    board.display
+    puts "Please take your turn and choose square 1-9."
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
@@ -105,9 +108,8 @@ class Game
       @this_game = Game.new
     elsif user_input == "wargames"
       @this_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-      5.times do @this_game.play end
-      binding.pry
-      puts @this_game.wins
+      100.times do @this_game.play end
+      puts "The game was won #{@this_game.wins} times!"
     else
       puts "Please enter a valid number (0, 1, 2)"
       player_number
