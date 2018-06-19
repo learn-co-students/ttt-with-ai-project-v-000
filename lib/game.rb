@@ -113,7 +113,7 @@ class Game
       end
     elsif number == "2"
     else
-      puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
+      puts "I'm sorry, #{name}, I didn't catch that. Please enter a valid number between 0 and 2."
     end
   end
 
