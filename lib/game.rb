@@ -61,7 +61,6 @@ class Game
     input = current_player.move(board)
     if board.valid_move?(input)
       board.update(input, current_player)
-      board.display
     else
       puts "Please try again."
       turn
