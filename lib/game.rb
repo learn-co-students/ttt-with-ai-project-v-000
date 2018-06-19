@@ -109,6 +109,7 @@ class Game
         game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
         game.play
       else
+        # Needs to loop back to beginning of "if number == 1"
         puts "I'm sorry, #{name}, the player you entered is invalid. Please enter 'me' or 'computer'."
       end
     elsif number == "2"
