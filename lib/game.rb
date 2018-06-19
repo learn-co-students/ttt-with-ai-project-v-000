@@ -92,27 +92,30 @@ class Game
     number = gets.strip
 
     if number == "0"
+      puts "Enjoy the show!"
+      sleep(1.5)
       game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
       game.play
-    elsif number == "1"
-      # Game isn't stopping after it's been won
-      puts "Great! You'll be playing against the computer. What is your name?"
-      name = gets.strip.capitalize
-
-      puts "Nice to meet you, #{name}! Who should go first? Enter 'me' or 'computer'."
-      first_player = gets.strip
-
-      if first_player == "me"
-        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
-        game.play
-      elsif first_player == 'computer'
-        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-        game.play
-      else
-        # Needs to loop back to beginning of "if number == 1"
-        puts "I'm sorry, #{name}, the player you entered is invalid. Please enter 'me' or 'computer'."
-      end
-    elsif number == "2"
+    # elsif number == "1"
+    #   # Game isn't stopping after it's been won
+    #   puts "Great! You'll be playing against the computer. What is your name?"
+    #   name = gets.strip.capitalize
+    #
+    #   puts "Nice to meet you, #{name}! Who should go first? Enter 'me' or 'computer'."
+    #   first_player = gets.strip
+    #
+    #   if first_player == "me"
+    #     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+    #     game.play
+    #   elsif first_player == 'computer'
+    #     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+    #     game.play
+    #   else
+    #     # Needs to loop back to beginning of "if number == 1"
+    #     puts "I'm sorry, #{name}, the player you entered is invalid. Please enter 'me' or 'computer'."
+    #     first_player
+    #   end
+    # elsif number == "2"
     else
       puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
     end
