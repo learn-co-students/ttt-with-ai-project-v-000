@@ -2,7 +2,7 @@ require "pry"
 
 class Game
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :wins
 
   WIN_COMBINATIONS = [
     [0, 1, 2],
@@ -19,6 +19,7 @@ class Game
     @board = board
     @player_1 = player_1
     @player_2 = player_2
+    @wins = 0
   end
 
   def current_player
@@ -47,6 +48,7 @@ class Game
 
   def winner
     if won?
+      wins += 1
       board.cells[won?[0]]
     end
   end
@@ -62,6 +64,7 @@ class Game
       turn
     end
   end
+
 
   def play
     until over?
@@ -87,7 +90,7 @@ class Game
   end
 
   def self.player_number
-    puts "How many players? (0, 1, 2)"
+    puts "How many players? (0, 1, 2, wargames)"
     user_input = gets.strip
     if user_input == "0"
       @this_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
@@ -100,6 +103,11 @@ class Game
     elsif user_input == "2"
       puts "Player 1 will be X"
       @this_game = Game.new
+    elsif user_input == "wargames"
+      @this_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      5.times do @this_game.play end
+      binding.pry
+      puts @this_game.wins
     else
       puts "Please enter a valid number (0, 1, 2)"
       player_number
