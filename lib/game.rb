@@ -48,16 +48,23 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-    # How does this know to move to player 2?
+    if current_player.class == Players::Human
+      puts "It's your turn. Please enter 1-9:"
+    elsif current_player.class == Players::Computer
+      puts "The computer is planning its next move..."
+    end
     input = current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
+      sleep(1.5)
+      self.board.display
     else
       puts "Your move was not valid. Try again!"
-      self.turn
     end
-    self.board.display
+
+    sleep(1.5)
+    self.turn
+
   end
 
   def play
@@ -75,6 +82,38 @@ class Game
 
     if self.draw?
       puts "Cat's Game!"
+    end
+  end
+
+  def start
+    # Want to remove "Please enter 1-9" for the computer turns
+    puts "Welcome to Tic Tac Toe!"
+    puts "How many players are there?"
+    number = gets.strip
+
+    if number == "0"
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+      game.play
+    elsif number == "1"
+      # Game isn't stopping after it's been won
+      puts "Great! You'll be playing against the computer. What is your name?"
+      name = gets.strip.capitalize
+
+      puts "Nice to meet you, #{name}! Who should go first? Enter 'me' or 'computer'."
+      first_player = gets.strip
+
+      if first_player == "me"
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+        game.play
+      elsif first_player == 'computer'
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+        game.play
+      else
+        puts "I'm sorry, the player you entered is invalid. Please enter 'me' or 'computer'."
+      end
+    elsif number == "2"
+    else
+      puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
     end
   end
 
