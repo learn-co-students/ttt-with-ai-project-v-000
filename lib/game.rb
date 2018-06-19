@@ -109,11 +109,11 @@ class Game
         game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
         game.play
       else
-        puts "I'm sorry, the player you entered is invalid. Please enter 'me' or 'computer'."
+        puts "I'm sorry, #{name}, the player you entered is invalid. Please enter 'me' or 'computer'."
       end
     elsif number == "2"
     else
-      puts "I'm sorry, #{name}, I didn't catch that. Please enter a valid number between 0 and 2."
+      puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
     end
   end
 
