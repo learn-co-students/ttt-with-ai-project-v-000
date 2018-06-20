@@ -1,8 +1,8 @@
 module Players
   class Computer < Player
 
-    def move(arg)
-      binding.pry
+    def move(board)
+      
       "1"
     end
 
