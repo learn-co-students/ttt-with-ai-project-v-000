@@ -2,20 +2,5 @@
 
 require_relative '../config/environment'
 
-puts "Hello, let's play Tic-Tac-Toe!"
-puts "Would you like to play a simulation, single player, or two player?"
-a = gets.strip
-if a == "simulation"
-  new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-  new_game.play
-end
-if a == "single player"
-  new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-  new_game.play
-end
-if a == "two player"
-  new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-  new_game.play
-end
-# puts "Who would like to go first and be 'X'?"
-# gets.strip
+
+Game.start_game

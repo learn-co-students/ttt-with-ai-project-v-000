@@ -78,5 +78,33 @@ WIN_COMBINATIONS.each do |win_combination|
   end
   end
 
+  def self.start_game
+    puts "Hello, let's play Tic-Tac-Toe!"
+    puts "Would you like to play a 'simulation', 'single player', or 'two player'?"
+    a = gets.strip
+    if a == "simulation"
+      new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      new_game.play
+
+    elsif a == "single player"
+      puts "Who would like to go first and be 'X'?"
+      puts "Enter 'me' or 'computer'"
+    b = gets.strip
+    if b == "me"
+      new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      new_game.play
+    elsif b == "computer"
+      new_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+      new_game.play
+    end
+
+    elsif a == "two player"
+      new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      new_game.play
+    else
+      Game.start_game
+    end
+  end
+
 
 end
