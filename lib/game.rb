@@ -64,6 +64,11 @@ WIN_COMBINATIONS.each do |win_combination|
     board.display
   else
     turn
+  end
+    if !board.valid_move?(num.to_i)
+      turn
+    else
+      board.update(num, player_1)
     end
   end
 
