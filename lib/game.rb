@@ -42,7 +42,7 @@ WIN_COMBINATIONS.each do |win_combination|
   end
 
   def draw?
-    if won? == false || won? == nil
+    if won? == false || won? == nil && board.full?
       true
     else
       false
@@ -54,10 +54,20 @@ WIN_COMBINATIONS.each do |win_combination|
         true
       elsif board.full? == true
         true
-      elsif !won?
+      else
         false
       end
     end
+
+  def winner
+    if index = won?
+    board.cells[index[0]]
+  end
+  end
+
+  def turn
+
+  end
 
 
 
