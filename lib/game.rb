@@ -56,6 +56,8 @@ class Game
     input = current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
+      # Only puts input to test
+      puts input
       sleep(1.5)
       self.board.display
     else
