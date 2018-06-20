@@ -79,11 +79,10 @@ WIN_COMBINATIONS.each do |win_combination|
     while !over?
       turn
     end
-    if !won? == "X" || won? == "O"
-      turn
-    else won?
-      won?
+  if won?
+    puts "hi"
   end
+
 end
 
 
