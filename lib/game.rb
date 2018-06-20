@@ -67,10 +67,10 @@ WIN_COMBINATIONS.each do |win_combination|
 
   def turn
     num = player_1.move(board)
-    if board.valid_move?(num.to_i)
-      board.update(num, player_1.token)
-    else
-      turn
+    if board.valid_move?(num) == true
+    board.update(num, player_1.token)
+  elsif board.valid_move?(num) == false
+    turn
     end
   end
 
