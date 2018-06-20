@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+  puts "Welcome to Tic Tac Toe! Let's see who wins!"
+  puts "How many players(0-2)? "
+  puts "Who is going first(X)? "
