@@ -23,14 +23,13 @@ WIN_COMBINATIONS = [[0,1,2],
 
   def won?
 WIN_COMBINATIONS.each do |win_combination|
-  binding.pry
     win_index_1 = win_combination[0]
     win_index_2 = win_combination[1]
     win_index_3 = win_combination[2]
 
-    position_1 = @board[win_index_1]
-    position_2 = @board[win_index_2]
-    position_3 = @board[win_index_3]
+    position_1 = @board.cells[win_index_1]
+    position_2 = @board.cells[win_index_2]
+    position_3 = @board.cells[win_index_3]
     if position_1 == "X" && position_2 == "X" && position_3 == "X"
       return win_combination
     elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
@@ -39,7 +38,27 @@ WIN_COMBINATIONS.each do |win_combination|
       false
     end
   end
-  nil
-end
+    nil
+  end
+
+  def draw?
+    if won? == false || won? == nil
+      true
+    else
+      false
+    end
+  end
+
+    def over?
+      if draw? == true
+        true
+      elsif board.full? == true
+        true
+      elsif !won?
+        false
+      end
+    end
+
+
 
 end

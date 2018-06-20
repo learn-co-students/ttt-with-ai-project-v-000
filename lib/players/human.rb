@@ -5,8 +5,9 @@ module Players
     puts "what is your move?"
     a = gets.strip
     a
-
   end
+
+  
 
   end
 end
