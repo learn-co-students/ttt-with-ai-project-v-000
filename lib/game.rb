@@ -34,15 +34,13 @@ WIN_COMBINATIONS.each do |win_combination|
       return win_combination
     elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
       return win_combination
-    else
-      false
     end
   end
-    nil
+  false
   end
 
   def draw?
-    if won? == false || won? == nil && board.full?
+    if won? == false && board.full?
       true
     else
       false
@@ -50,13 +48,7 @@ WIN_COMBINATIONS.each do |win_combination|
   end
 
     def over?
-      if draw? == true
-        true
-      elsif board.full? == true
-        true
-      else
-        false
-      end
+      draw? || won?
     end
 
   def winner
@@ -80,10 +72,11 @@ WIN_COMBINATIONS.each do |win_combination|
       turn
     end
   if won?
-    puts "hi"
+    puts "Congratulations #{winner}!"
+  elsif draw?
+    puts "Cat's Game!"
   end
-
-end
+  end
 
 
 end
