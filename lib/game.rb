@@ -66,8 +66,14 @@ WIN_COMBINATIONS.each do |win_combination|
   end
 
   def turn
-
+    num = player_1.move(board)
+    if board.valid_move?(num.to_i)
+      board.update(num, player_1.token)
+    else
+      turn
+    end
   end
+
 
 
 
