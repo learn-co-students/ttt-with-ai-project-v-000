@@ -49,6 +49,8 @@ class Board
   def valid_move?(position)
     if position.to_i.between?(1,9)
       !self.taken?(position)
+    else
+      position.to_i.between?(1,9)
     end
   end
 

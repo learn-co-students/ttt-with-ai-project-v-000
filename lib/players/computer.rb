@@ -3,11 +3,14 @@ module Players
 
     def move(board)
       num = rand(1..9)
-      num.to_s
-    end
-
+      if board.valid_move?(num)
+        num.to_s
+      else
+        move(board)
+      end
+    num.to_s
   end
 
 
-
+end
 end
