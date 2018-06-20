@@ -110,33 +110,133 @@ end
     if @board.valid_move?(input)
       @board.update(input, player)
       @board.display
+    elsif input == "exit"
+      quit
+    elsif input == "instructions"
+      instructions
     else
       turn
     end
   end
-  def play
-    # asks for players input on a turn of the game
-    # checks if the game is over after every turn
-    # plays the first turn of the game
-    # plays the first few turns of the game
-    # checks if the game is won after every turn
-    # checks if the game is a draw after every turn
-    # stops playing if someone has won
-    # congratulates the winner X
-    # congratulates the winner O
-    # stops playing in a draw
-    # prints "Cat's Game!" on a draw
-    # plays through an entire game
 
+  # def play
+  #   @board.display
+  #   until over?
+  #     turn
+  #   end
+  #   if won?
+  #     puts "Congratulations #{winner}!"
+  #   elsif draw?
+  #     puts "Cat's Game!"
+  #   end
+  # end
+
+  def play
+    instructions
+    puts "New Game:"
+    puts
     @board.display
+    puts
     until over?
+      if turn_count.even?
+        player_number = "1"
+      else
+        player_number = "2"
+      end
+      puts "Player #{player_number}'s turn"
+      puts
       turn
+      puts
     end
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
+    end_game
   end
-  
+
+  def end_game
+    puts
+    puts "Would you like to play again? Y or N?"
+    reply = gets.chomp
+    if reply.upcase == "Y"
+      config
+    else
+      puts
+      puts "Thank you for playing Tic Tac Toe!"
+      exit
+    end
+  end
+
+  def self.welcome
+    puts "Welcome to Tic Tac Toe!"
+    puts
+  end
+
+  def instructions
+    puts
+    puts "To play, please enter a number between 1-9 when prompted to place your token in the cells in the area numbered on the board below:"
+    puts
+    puts " 1 | 2 | 3 "
+    puts "-----------"
+    puts " 4 | 5 | 6 "
+    puts "-----------"
+    puts " 7 | 8 | 9 "
+    puts
+    puts "To ask for instructions anytime, type 'instructions,' or to exit, type 'exit.'"
+    puts
+  end
+
+  def self.start
+    welcome
+    puts "To begin, please select 0, 1, or 2 players:"
+    number = gets.chomp
+    if number == "0"
+      Game.new(Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+    elsif number == "1"
+      puts "Do you want to go first as 'X'? Y or N."
+      ans = gets.chomp
+      if ans.downcase == "yes" || ans.downcase == "y"
+        puts "You are Player 1."
+        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+      elsif ans.downcase == "n" || ans.downcase == "no"
+        puts "You are Player 2."
+        Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+      end
+    elsif number == "2"
+      puts "Thank you."
+      puts
+      puts "Player 1, please go first."
+      Game.new(Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+    else
+      Game.start
+    end
+  end
+
+  def quit
+    puts
+    puts "Are you sure you want to end game? Y or N."
+    ans = gets.chomp
+    if ans.downcase == "yes" || ans.downcase == "y"
+      puts "You lose."
+      end_game
+    elsif ans.downcase == "n" || ans.downcase == "no"
+    else
+      quit
+    end
+  end
+
+  def config
+  puts "Do you need a new configuration? Y or N"
+  ans = gets.chomp
+    if ans.upcase == "Y"
+      Game.start
+    elsif ans.upcase == "N"
+      @board.reset!
+      play
+    else
+      config
+    end
+  end
 end
