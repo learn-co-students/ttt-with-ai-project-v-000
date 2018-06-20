@@ -11,10 +11,8 @@ module Players
       end
     end
 
-    def speak
-      print "Computer says: "
-      puts AI_RESPONSES.sample
-      puts
-    end
+    #AI
+
+    
   end
 end
