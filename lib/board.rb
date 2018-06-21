@@ -21,6 +21,10 @@ class Board
     @cells[input.to_i - 1]
   end
 
+  def input_to_index(input)
+    input.to_i - 1
+  end
+
   def turn_count
     count = 9 - @cells.count(" ")
   end
@@ -38,7 +42,7 @@ class Board
   end
 
   def update(input, player)
-    @cells[input.to_i] = player.token
+    index = input_to_index(input)
+    @cells[index] = player.token
   end
-
 end

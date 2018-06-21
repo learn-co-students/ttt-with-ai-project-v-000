@@ -12,58 +12,70 @@ class Game
     [2, 4, 6]
   ];
 
-  def initialize(player_1, player_2, board)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
-    @plater_2 = player_2
+    @player_2 = player_2
     @board = board
   end
 
-  def setup
-    puts "How many players? (1 or 2) \n"
-    @number_of_players = get.strip.to_i
+  def board
+    @board
+  end
 
-    case @number_of_players
-      when 1
-        puts "You have picked 1 player, you will now play against the computer.\n"
-        puts "Would you like to be X's or O's?\n"
-        input = gets.strip.to_lower
-        if input == "o"
-          @player_1.token = "O" && @player_2 = Players::Computer.new("X")
-        elsif input == "x"
-          @player_1.token = "X" && player_2 = Players::Computer.new("O")
-        else
-          puts "invalid input, please select a valid one. \n"
-          setup
-        end
+  def current_player
+    if board.turn_count.even?
+      @player_1
+    else
+      @player_2
+    end
+  end
 
-      when 2
-        puts "You've picked 2 players, you will now play against eachother.\n"
-        puts "Would player 1 like to be X's or O's?\n"
-        input = gets.strip.to_lower
-        if input == "o"
-          @player_1.token = "O" && @player_2.token = "X"
-        elsif input == "x"
-          @player_1.token = "X" && @player_2.token ="O"
-        else
-          puts "invalid input, please select a valid one. \n"
-          setup
-        end
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
+    end
+  end
 
-      else
-        puts "Your input is invalid. Please try again. \n"
-        setup
-      end
+  def draw?
+    !won? && board.full? ? true : false
+  end
+
+  def over?
+    won? || draw? ? true : false
+  end
+
+  def winner
+    if won = won?
+      board.cells[won.first]
+    end
+  end
+
+  def turn
+    puts "It is Player #{current_player.token}'s turn\n"
+    puts "Pick an available position between 1-9: \n"
+    board.display
+    input = current_player.move(board)
+
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      puts "Invalid number. Try again!"
+      turn
+    end
+  end
+
+  def play
+    until over?
+      turn
     end
 
-  end
-
-  def start
-    puts "Welcome to Tic Tac Toe!\n"
-    setup
-    # play
-  end
-
-  def replay
-    @board.reset!
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+    board.display
   end
 end
