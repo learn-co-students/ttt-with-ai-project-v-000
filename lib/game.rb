@@ -22,6 +22,41 @@ class Game
     @board
   end
 
+  def setup
+    puts "How many players? (0, 1, 2)\n"
+    @number_of_players = gets.strip.to_i
+
+    case @number_of_players
+      when 0
+        @player_1 = Players::Computer.new("X")
+        @player_2 = Players::Computer.new("O")
+      when 1
+        puts "Would you like to be X's or O's? \n"
+        input = gets.strip.upcase
+        if input == "X"
+          @player_1.token = "X" && @player_2 = Players::Computer.new("O")
+        elsif input == "O"
+          @player_1.token = "O" && @player_2 = Players::Computer.new("X")
+        else
+          puts "Invalid input. Please try again. \n"
+        end
+      when 2
+        puts "Would player 1 like to be X's or O's? \n"
+        input = gets.strip.upcase
+        if input == "X"
+          @player_1.token = "X" && @player_2.token = "O"
+        elsif input == "O"
+          @player_1.token = "O" && @player_2.token = "X"
+        else
+          puts "Invalid input. Please try again. \n"
+        end
+      else
+        puts "Invalid input. Please try again. \n"
+        setup
+      end
+
+  end
+
   def current_player
     if board.turn_count.even?
       @player_1
@@ -53,8 +88,8 @@ class Game
   end
 
   def turn
-    puts "It is Player #{current_player.token}'s turn\n"
-    puts "Pick an available position between 1-9: \n"
+    puts "\nIt is Player #{current_player.token}'s turn.\n"
+    puts "Pick an available position between 1-9: \n\n"
     board.display
     input = current_player.move(board)
 
@@ -72,10 +107,16 @@ class Game
     end
 
     if won?
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner}!\n"
     elsif draw?
       puts "Cat's Game!"
     end
     board.display
+  end
+
+  def start
+    puts "Welcome to Tic Tac Toe!!!!\n"
+    setup
+    play
   end
 end
