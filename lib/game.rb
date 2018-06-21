@@ -11,6 +11,13 @@ class Game
     [2,4,6]
   ]
 
+  TRAPS = [
+    [0,4,2],
+    [0,4,8],
+    [2,4,8],
+    [4,6,8],
+  ]
+
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     # accepts 2 players and a board
     # defaults to two human players, X and O, with an empty board
