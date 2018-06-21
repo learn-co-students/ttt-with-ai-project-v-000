@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :board, :number_of_players, :player_1, :player_2
 
@@ -34,24 +35,36 @@ class Game
         puts "Would you like to be X's or O's? \n"
         input = gets.strip.upcase
         if input == "X"
-          @player_1.token = "X" && @player_2 = Players::Computer.new("O")
+          @player_1 = Players::Human.new("X")
+          @player_2 = Players::Computer.new("O")
         elsif input == "O"
-          @player_1.token = "O" && @player_2 = Players::Computer.new("X")
+          @player_1 = Players::Human.new("O")
+          @player_2 = Players::Computer.new("X")
         else
+          puts "--------------------------------\n"
           puts "Invalid input. Please try again. \n"
+          puts "--------------------------------\n"
+          setup
         end
       when 2
         puts "Would player 1 like to be X's or O's? \n"
         input = gets.strip.upcase
         if input == "X"
-          @player_1.token = "X" && @player_2.token = "O"
+          @player_1 = Players::Human.new("X")
+          @player_2 = Players::Human.new("O")
         elsif input == "O"
-          @player_1.token = "O" && @player_2.token = "X"
+          @player_1 = Players::Human.new("O")
+          @player_2 = Players::Human.new("X")
         else
+          puts "--------------------------------\n"
           puts "Invalid input. Please try again. \n"
+          puts "--------------------------------\n"
+          setup
         end
       else
+        puts "--------------------------------\n"
         puts "Invalid input. Please try again. \n"
+        puts "--------------------------------\n"
         setup
       end
 
@@ -115,7 +128,7 @@ class Game
   end
 
   def start
-    puts "Welcome to Tic Tac Toe!!!!\n"
+    puts "Welcome to Tic Tac Toe!\n\n"
     setup
     play
   end
