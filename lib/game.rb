@@ -33,22 +33,15 @@ class Game
   end
   
   def current_player
-    if @board.turn_count % 2 == 0
-      return @player_1
-    else
-      return @player_2
-    end
+    @board.turn_count.even? ? @player_1 : @player_2
   end
   
   def won?
-    WIN_COMBINATIONS.each do |combination|
-      if (@board.cells[combination[0]] == "X" && @board.cells[combination[1]] == "X" && @board.cells[combination[2]] == "X") || (@board.cells[combination[0]] == "O" && @board.cells[combination[1]] == "O" && @board.cells[combination[2]] == "O")
-        return combination
-      else
-        
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[0]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0] + 1)
     end
-    return false
   end
   
   def draw?
