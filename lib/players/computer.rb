@@ -4,60 +4,53 @@ module Players
 
     def win_or_block(board)
       if board.turn_count.between?(2, 7)
-        move = nil
+        wob_move = nil
 
         Game.win_combinations.each { |set|
-          if board.cells[set[0]] != ' ' &&
-             board.cells[set[0]] == board.cells[set[1]] &&
-             board.cells[set[2]] == ' '
-            move = "#{set[2] + 1}"
-            break
-          elsif board.cells[set[1]] != ' ' &&
-                board.cells[set[1]] == board.cells[set[2]] &&
-                board.cells[set[0]] == ' '
-            move = "#{set[0] + 1}"
-            break
-          elsif board.cells[set[2]] != ' ' &&
-                board.cells[set[2]] == board.cells[set[0]] &&
-                board.cells[set[1]] == ' '
-            move = "#{set[1] + 1}"
-            break
+          return wob_move if wob_move
+
+          trio = [board.cells[set[0]], board.cells[set[1]], board.cells[set[2]]]
+
+          if trio.sort == [' ', 'X', 'X'] || trio.sort == [' ', 'O', 'O']
+            trio.each_with_index { |area, index|
+              if area == ' '
+                wob_move = "#{set[index] + 1}"
+                break
+              end
+            }
           end
         }
 
-        move
+        wob_move
       end
-    end
-
-    def center(board)
-      '5' if board.position('5') == ' '
     end
 
     def counter_corner(board)
+      opposite_corners = [ ['1', '9'], ['9', '1'], ['3', '7'], ['7', '3'] ]
       enemy = token == 'O' ? 'X' : 'O'
+      corner_move = nil
 
-      if board.position('1') == enemy && board.position('9') == ' '
-        '9'
-      elsif board.position('9') == enemy && board.position('1') == ' '
-        '1'
-      elsif board.position('3') == enemy && board.position('7') == ' '
-        '7'
-      elsif board.position('7') == enemy && board.position('3') == ' '
-        '3'
-      end
+      opposite_corners.each { |pair|
+        if board.position(pair[0]) == enemy && !board.taken?(pair[1])
+          corner_move = pair[1]
+          break
+        end
+      }
+
+      corner_move
     end
 
     def corners_or_edges(board)
       corners = ['1','3','7','9']
       edges = ['2','4','6','8']
 
-      corners.shuffle.detect { |area| board.position(area) == ' ' } ||
-      edges.shuffle.detect { |area| board.position(area) == ' ' }
+      corners.shuffle.detect { |spot| !board.taken?(spot) } ||
+      edges.shuffle.detect { |space| !board.taken?(space) }
     end
 
     def move(board)
-      win_or_block(board) || center(board) || counter_corner(board) ||
-      corners_or_edges(board)
+      win_or_block(board) || if !board.taken?('5') then '5' end ||
+      counter_corner(board) || corners_or_edges(board)
     end
 
   end

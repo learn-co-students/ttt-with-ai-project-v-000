@@ -105,7 +105,9 @@ class TicTacToe
     end
     puts "WARGAMES"
     puts "Greetings Professor Falken."
-    puts "A strange game. The only winning move is not to play. How about a nice game of chess?"
+    puts "A strange game."
+    puts 'The only winning move is not to play.'
+    puts 'How about a nice game of chess?'
     answer = gets.strip.upcase
     if answer == 'Y'
       puts "Wise choice, but I don't know how to play chess yet."
