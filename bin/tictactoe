@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def play_again?
+  play_again = ""
+
+  puts "Would you like to play again? (y or n)"
+  play_again = gets.strip
+
+  if play_again.downcase == "y" || play_again.downcase == "yes"
+    game_start
+  elsif play_again.downcase == "n" || play_again.downcase == "no"
+      puts "Thanks 4 Playing. Goodbye!" 
+  else
+    puts "Sorry, I dont understand your answer..."
+    play_again?
+  end
+end
+
+def game_start
+  num = ""
+  puts "How many players? (0, 1, or 2)"
+  num = gets.strip
+
+  if num.to_i == 0
+    game = Game.new(player_1 = Player::Computer.new("X"), player_2 = Player::Computer.new("O"))
+    game.play
+  elsif num.to_i == 1
+    game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Computer.new("O"))
+    game.play
+  elsif num.to_i == 2
+    game = Game.new(player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+    game.play
+  else
+    puts "Sorry, I dont understand your answer..."
+    game_start
+  end
+  play_again?
+end
+
+puts "Welcome to Tic Tac Toe!"
+game_start
