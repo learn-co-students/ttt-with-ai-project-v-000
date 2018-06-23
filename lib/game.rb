@@ -2,6 +2,7 @@ require 'pry'
 
 class Game
   attr_accessor :board, :player_1, :player_2
+  attr_reader :first_player, :second_player
 
   WIN_COMBINATIONS = [
     [0,1,2], # top row
@@ -27,7 +28,7 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |combo|
       if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]] && self.board.cells[combo[0]] != " "
-      # Why doesn't this work with: self.board.taken?(board.cells[combo[0]]) instead of self.board.cells[combo[0]] != " "? Something is wrong with #taken?
+      # Why doesn't this work with: self.board.taken?(board.cells[combo[0]]) instead of self.board.cells[combo[0]] != " "? Something is wrong with #taken? #won? works, but #winner doesn't
         combo
       end
     end
@@ -48,25 +49,24 @@ class Game
   end
 
   def turn
-    if current_player.class == Players::Human
-      puts "It's your turn. Please enter 1-9:"
-    elsif current_player.class == Players::Computer
+    if self.current_player.class == Players::Human
+      # Tried creating separate methods to pull in players' names, but couldn't get it to work.
+      sleep(0.5)
+      puts "#{self.current_player.token}, it's your turn. Please enter 1-9:"
+    elsif self.current_player.class == Players::Computer
+      sleep(0.5)
       puts "The computer is planning its next move..."
     end
-    input = current_player.move(self.board)
+    input = self.current_player.move(self.board)
     if self.board.valid_move?(input)
       self.board.update(input, current_player)
-      # Only puts input to test
-      puts input
-      sleep(1.5)
+      sleep(0.5)
       self.board.display
     else
       puts "Your move was not valid. Try again!"
+      # Why does it make a difference putting self.turn here vs. putting it after the conditional?
+      self.turn
     end
-
-    sleep(1.5)
-    self.turn
-
   end
 
   def play
@@ -74,23 +74,19 @@ class Game
       # Failure/Error: game.play
         # Errno::ENOENT:
         # No such file or directory @ rb_sysopen - documentation
-    while !self.over?
+    if !self.over?
       self.turn
-    end
-
-    if self.won?
+      self.play
+    elsif self.won?
+      sleep(0.5)
       puts "Congratulations #{winner}!"
-    end
-
-    if self.draw?
+    elsif self.draw?
+      sleep(0.5)
       puts "Cat's Game!"
     end
   end
 
   def start
-    # Want to remove "Please enter 1-9" for the computer turns
-    puts "Welcome to Tic Tac Toe!"
-    puts "How many players are there?"
     number = gets.strip
 
     if number == "0"
@@ -117,9 +113,21 @@ class Game
     #     puts "I'm sorry, #{name}, the player you entered is invalid. Please enter 'me' or 'computer'."
     #     first_player
     #   end
-    # elsif number == "2"
+    elsif number == "2"
+      puts "Great! Who will be player 1?"
+      first_player = gets.strip.capitalize
+      puts "OK! #{first_player}, you will be X."
+      sleep(0.5)
+      puts "And who will be player 2?"
+      second_player = gets.strip.capitalize
+      puts "Great! #{second_player}, you will be O."
+      sleep(0.5)
+      puts "Good luck to you both!"
+      game = Game.new
+      game.play
     else
       puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
+      self.start
     end
   end
 
