@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+play_again = ""
+until play_again == "stop" || play_again =="Stop"
+
+  puts "Time to play some Tic Tac Toe!"
+  puts "Choose a number: 0-2"
+  puts "Player 1 = X, Player 2 = O"
+  num_player = gets.chomp
+
+  until num_player == "2" || num_player == "1" || num_player == "0"
+    num_player = gets.chomp
+  end
+
+  if num_player == "2"
+    game = Game.new
+  elsif num_player == "1"
+    game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+  else num_player == "0"
+    puts "Fine, I'll play myself..."
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+  end
+
+  game.play
+
+  puts "Care for another game?"
+  puts "If you're done, enter 'stop'."
+
+play_again = gets.chomp
+end
