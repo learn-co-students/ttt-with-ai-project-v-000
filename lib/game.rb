@@ -28,7 +28,6 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |combo|
       if self.board.cells[combo[0]] == self.board.cells[combo[1]] && self.board.cells[combo[1]] == self.board.cells[combo[2]] && self.board.cells[combo[0]] != " "
-      # Why doesn't this work with: self.board.taken?(board.cells[combo[0]]) instead of self.board.cells[combo[0]] != " "? Something is wrong with #taken? #won? works, but #winner doesn't
         combo
       end
     end
@@ -86,49 +85,65 @@ class Game
     end
   end
 
+  def zero_player_game
+    puts "Enjoy the show!"
+    sleep(1.5)
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+    game.play
+  end
+
+  def one_player_game
+    puts "Great! You'll be playing against the computer. What is your name?"
+    name = gets.strip.capitalize
+
+    puts "Nice to meet you, #{name}! Who should go first? Enter 'me' or 'computer'."
+    first_player = ""
+
+    while first_player == ""
+      first_player = gets.strip
+      if first_player == "me"
+        puts "OK, #{name}! You'll be X."
+        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+        game.play
+      elsif first_player == 'computer'
+        puts "OK, #{name}! You'll be O."
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+        game.play
+      else
+        puts "I'm sorry, #{name}, the player you entered is invalid. Please enter 'me' or 'computer'."
+        first_player = ""
+      end
+    end
+  end
+
+  def two_player_game
+    puts "Great! Who will be player 1?"
+    first_player = gets.strip.capitalize
+    puts "OK! #{first_player}, you will be X."
+    sleep(0.5)
+    puts "And who will be player 2?"
+    second_player = gets.strip.capitalize
+    puts "Great! #{second_player}, you will be O."
+    sleep(0.5)
+    puts "Good luck to you both!"
+    game = Game.new
+    game.play
+  end
+
   def start
     number = gets.strip
 
     if number == "0"
-      puts "Enjoy the show!"
-      sleep(1.5)
-      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
-      game.play
-    # elsif number == "1"
-    #   # Game isn't stopping after it's been won
-    #   puts "Great! You'll be playing against the computer. What is your name?"
-    #   name = gets.strip.capitalize
-    #
-    #   puts "Nice to meet you, #{name}! Who should go first? Enter 'me' or 'computer'."
-    #   first_player = gets.strip
-    #
-    #   if first_player == "me"
-    #     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
-    #     game.play
-    #   elsif first_player == 'computer'
-    #     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
-    #     game.play
-    #   else
-    #     # Needs to loop back to beginning of "if number == 1"
-    #     puts "I'm sorry, #{name}, the player you entered is invalid. Please enter 'me' or 'computer'."
-    #     first_player
-    #   end
+      self.zero_player_game
+    elsif number == "1"
+      self.one_player_game
     elsif number == "2"
-      puts "Great! Who will be player 1?"
-      first_player = gets.strip.capitalize
-      puts "OK! #{first_player}, you will be X."
-      sleep(0.5)
-      puts "And who will be player 2?"
-      second_player = gets.strip.capitalize
-      puts "Great! #{second_player}, you will be O."
-      sleep(0.5)
-      puts "Good luck to you both!"
-      game = Game.new
-      game.play
+      self.two_player_game
     else
       puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
       self.start
     end
+    
   end
 
 end
