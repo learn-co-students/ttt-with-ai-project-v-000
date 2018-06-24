@@ -23,29 +23,25 @@ class Board
     self.cells[input.to_i-1]
   end
 
-  # SHOULD ALL BELOW METHODS BE USING #POSITION?
-
   def full?
-    self.cells.all? { |i| i == "X" || i == "O" }
+    self.cells.all? { |i| i != " " }
   end
 
   def turn_count
-    self.cells.count { |i| i == "X" || i == "O" }
+    self.cells.count { |i| i != " " }
   end
 
   def taken?(input)
-    self.position(input) == "X" || self.position(input) == "O"
+    self.position(input) != " "
   end
 
   def valid_move?(input)
-    input.to_i.between?(1, 9) && self.taken?(input) == false
+    input.to_i.between?(1, 9) && !self.taken?(input)
   end
 
   def update(input, player)
     if valid_move?(input)
       self.cells[input.to_i-1] = player.token
-      # WHY DOESN'T THE BELOW WORK?
-      # self.position(input) = player.token
     end
   end
 
