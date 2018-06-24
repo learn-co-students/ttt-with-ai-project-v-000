@@ -56,7 +56,7 @@ class TicTacToeCLI
             # don't display board
             game.play
           elsif turn == 2 && token == "O"
-            game = Game.new(player_1 == Players::Computer.new("X"), player_2 = Players::Human.new(O))
+            game = Game.new(player_1 == Players::Computer.new("X"), player_2 = Players::Human.new("O"))
             game.play
           end
 
