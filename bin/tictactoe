@@ -1,3 +1,57 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Welcome Screen and Game Menu
+def menu
+  puts "Welcome to Tic-Tac-Toe - Now w/ ADVANCED *cough* AI!\n"
+  puts "Please select the desired game mode:\n"
+  puts "Enter '0' - To watch the AI battle to the death!,\n"
+  puts "Enter '1' - To play against our state of the art AI!\n"
+  puts "Enter '2' - To play against your friend in a hotseat game!\n"
+  puts "Enter 'q' - To quit! You fretful little pansy.\n"
+end
+
+# Display Game menu
+menu
+
+# Substantiate New Game
+
+
+# Get Player Input
+input = gets.strip
+
+case input
+when "0"
+  #start AI deathmatch
+  game = Game3.new
+  until game.won?
+    game.play
+  end
+  puts "You selected #{input}"
+when "1"
+  #start 1-player game
+  game = Game2.new
+  until game.won?
+    game.play
+  end
+  puts "You selected #{input}"
+when "2"
+  #start 2-player hotseat game
+  puts "You selected #{input}"
+  game = Game.new
+  until game.won?
+    game.play
+  end
+end
+play_again = ""
+until play_again.downcase == "n" || play_again.downcase == "no"
+  puts "Would you like to play again?"
+  play_again = gets.strip
+  if play_again.downcase == "y" || play_again.downcase == "yes"
+    game = Game.new
+    until game.won?
+      game.play
+    end
+  end
+end
