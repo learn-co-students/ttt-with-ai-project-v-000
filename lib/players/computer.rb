@@ -15,7 +15,6 @@ module Players
             trio.each_with_index do |area, index|
               if area == ' '
                 wob_move = "#{set[index] + 1}"
-                break
               end
             end
           end
@@ -33,7 +32,6 @@ module Players
       opposite_corners.each do |pair|
         if board.position(pair[0]) == enemy && !board.taken?(pair[1])
           corner_move = pair[1]
-          break
         end
       end
 

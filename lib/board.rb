@@ -27,7 +27,7 @@ class Board
   end
 
   def turn_count
-    cells.count { |chip| chip != ' ' }.tap { |amount| return 0 unless amount }
+    cells.count { |chip| chip != ' ' }
   end
 
   def taken?(input)
