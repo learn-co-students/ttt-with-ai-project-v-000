@@ -21,11 +21,11 @@ class Game
   end
 
   def won?
-    self.class.win_combinations.detect { |set|
+    self.class.win_combinations.detect do |set|
       board.cells[set[0]] != ' ' &&
       board.cells[set[0]] == board.cells[set[1]] &&
       board.cells[set[1]] == board.cells[set[2]]
-    }
+    end
   end
 
   def draw?

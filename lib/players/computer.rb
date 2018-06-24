@@ -6,20 +6,20 @@ module Players
       if board.turn_count.between?(2, 7)
         wob_move = nil
 
-        Game.win_combinations.each { |set|
+        Game.win_combinations.each do |set|
           return wob_move if wob_move
 
           trio = [board.cells[set[0]], board.cells[set[1]], board.cells[set[2]]]
 
           if trio.sort == [' ', 'X', 'X'] || trio.sort == [' ', 'O', 'O']
-            trio.each_with_index { |area, index|
+            trio.each_with_index do |area, index|
               if area == ' '
                 wob_move = "#{set[index] + 1}"
                 break
               end
-            }
+            end
           end
-        }
+        end
 
         wob_move
       end
@@ -30,12 +30,12 @@ module Players
       enemy = token == 'O' ? 'X' : 'O'
       corner_move = nil
 
-      opposite_corners.each { |pair|
+      opposite_corners.each do |pair|
         if board.position(pair[0]) == enemy && !board.taken?(pair[1])
           corner_move = pair[1]
           break
         end
-      }
+      end
 
       corner_move
     end
@@ -44,8 +44,8 @@ module Players
       corners = ['1','3','7','9']
       edges = ['2','4','6','8']
 
-      corners.shuffle.detect { |spot| !board.taken?(spot) } ||
-      edges.shuffle.detect { |space| !board.taken?(space) }
+      corners.shuffle.detect do |spot| !board.taken?(spot) end ||
+      edges.shuffle.detect do |space| !board.taken?(space) end
     end
 
     def move(board)
