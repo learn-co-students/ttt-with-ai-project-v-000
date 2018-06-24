@@ -1,3 +1,60 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello! Welcome to TicTacToe"
+puts "TicTacToe is a 2-player game but you choose who plays!"
+puts "You can play with 1 player, 2 players, or just watch a computer play itself."
+puts "How many (human) players are playing this round? (0, 1, or 2)"
+response = gets.strip
+
+while response != "0" && response != "1" && response != "2"
+  puts "Okay.. #{response} is not an option."
+  puts "You have to actually pick a number: 0, 1, or 2 players please. :)"
+  response = gets.strip
+end
+
+puts "Great! Let's get going with #{response} player(s)."
+board = Board.new #new board
+
+# PLAY WITH COMPUTER
+if response == "1"
+  puts "Do you want to go first? (Y/n)"
+  res = gets.strip
+
+  while res.upcase != "Y" && res.upcase != "N"
+    puts "Okay.. #{res} is not an option."
+    puts "Who's first? Please enter 'Y' for you to go first or 'n' for the computer to go first."
+    res = gets.strip
+  end
+
+  if res == "Y"
+    p1 = Players::Human.new("X")
+    p2 = Players::Computer.new("O")
+    game = Game.new(p1, p2, board)
+  else
+    p1 = Players::Computer.new("O")
+    p2 = Players::Human.new("X")
+    game = Game.new(p1, p2, board)
+  end
+  board.display # show board
+  game.play #game begins!
+
+elsif response == "0"
+  # COMPUTER VS COMPUTER
+
+  puts "The first player is 'X'. Watch and learn!"
+  p1 = Players::Computer.new("X")
+  p2 = Players::Computer.new("O")
+  game = Game.new(p1, p2, board)
+  board.display # show board
+  game.play #start game!
+else
+
+  # PLAY WITH TWO PEOPLE
+  puts "The first player will be 'X'. You choose who goes first!"
+
+  game = Game.new
+  board.display # show board
+  game.play # start game!
+end
