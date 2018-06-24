@@ -1,3 +1,90 @@
 #!/usr/bin/env ruby
+require 'pry'
 
 require_relative '../config/environment'
+
+def start
+  # * Greet the user with a message.
+  puts "Welcome to Tic Tac Toe"
+  puts ""
+
+  # * Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+  puts "Enter 0 for Computer vs Computer"
+  puts "Enter 1 for Human vs Computer"
+  puts "Enter 2 for Human vs Human"
+  puts "Your choice: "
+  game_mode = gets.strip
+
+  # * Use the input to correctly initialize a `Game` with the appropriate player types and token values.
+  if game_mode == "2"
+    game = Game.new
+    # game.play
+
+  end
+
+  if game_mode == "0"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    game = Game.new(player_1, player_2)
+    # game.play
+
+  end
+
+  # * Ask the user for who should go first and be "X".
+  if game_mode == "1"
+    puts "Enter X to go first, O to go second: "
+    puts "Your choice: "
+    turn_choice = gets.strip.downcase
+
+    until turn_choice == "x" || turn_choice == "o"
+      puts "Enter X to go first, O to go second: "
+      puts "Your choice: "
+      turn_choice = gets.strip.downcase
+    end
+  # end
+
+    # if game_mode == "1" && turn_choice.downcase == "x"
+    if turn_choice == "x"
+      # if turn_choice.downcase == "x"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+      # game = Game.new(player_1, player_2)
+    # elsif game_mode == "1" && turn_choice.downcase == "o"
+    elsif turn_choice == "o"
+      # elsif turn_choice.downcase == "o"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+      # game = Game.new(player_1, player_2)
+    end
+    game = Game.new(player_1, player_2)
+    # game.play
+  end
+  game.play
+end
+
+play_again = true
+start
+
+until play_again == false
+	puts "Play Again? (Y/N)"
+
+	again = gets.strip.downcase
+
+	# if again == "n" || again == "no"
+	# 	play_again = false
+	# 	puts "Thank you for playing!"
+	# else
+	# 	start
+	# end
+
+  if again == "n" || again == "no"
+		play_again = false
+		puts "Thank you for playing!"
+	elsif again == "y" || again == "yes"
+		start
+  end
+end
+
+
+
+# * When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
