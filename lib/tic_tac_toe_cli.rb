@@ -83,7 +83,7 @@ class TicTacToeCLI
           game.board.display
           game.play
         elsif turn == 2 && token == "O"
-          game = Game.new(player_1 == Players::Human.new("X"), player_2 = Players::Human.new(O))
+          game = Game.new(player_1 == Players::Human.new("X"), player_2 = Players::Human.new("O"))
           game.board.display
           game.play
         end
@@ -97,7 +97,7 @@ class TicTacToeCLI
   def rematch(input)
     input = gets.strip
     if input == "Y" || "y"
-      call
+      game
     elsif input == "N" || "n"
       puts "Good games! Bye."
     end
