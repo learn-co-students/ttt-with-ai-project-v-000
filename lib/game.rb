@@ -113,14 +113,14 @@ class Game
 
   def two_player_game
     puts "Great! Who will be player 1?"
-    first_player = gets.strip.capitalize
+    player_1 = gets.strip.capitalize
     sleep(0.5)
-    puts "OK! #{first_player}, you will be X."
+    puts "OK! #{player_1}, you will be X."
     sleep(0.5)
     puts "And who will be player 2?"
-    second_player = gets.strip.capitalize
+    player_2 = gets.strip.capitalize
     sleep(0.5)
-    puts "Great! #{second_player}, you will be O."
+    puts "Great! #{player_2}, you will be O."
     sleep(0.5)
     puts "Let the games begin!"
     game = Game.new
@@ -160,6 +160,22 @@ class Game
     else
       puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
       self.start
+    end
+
+    sleep(0.5)
+    puts "Would you like to play again? Type 'yes' or 'no'."
+    input = gets.strip
+    if input == "yes"
+      sleep(0.5)
+      puts "Wonderful! How many players are there?"
+      game = Game.new
+      game.start
+    elsif input == "no"
+      sleep(0.5)
+      puts "Well this was fun. Goodbye!"
+      exit
+    else
+      puts "I didn't catch that. Would you like to play again? Type 'yes' or 'no'."
     end
   end
 
