@@ -61,7 +61,7 @@ class Game
       sleep(0.5)
       self.board.display
     else
-      puts "Your move was not valid. Try again!"
+      puts "Your move was not valid. Let's try this again..."
       self.turn
     end
   end
@@ -72,7 +72,7 @@ class Game
       self.play
     elsif self.won?
       sleep(0.75)
-      puts "Congratulations #{winner}!"
+      puts "Congratulations #{self.winner}!"
     elsif self.draw?
       sleep(0.75)
       puts "Cat's Game!"
@@ -128,13 +128,26 @@ class Game
   end
 
   def wargames
-    # 100.times { self.zero_player_game }
-    self.won?.count
+    won_games = 0
+    puts "Y'all ready for this?!"
+    sleep(0.5)
+    100.times do
+      # Tried to get this to work by calling self.zero_player_game, but couldn't.
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+      game.play
+      if game.won?
+        won_games += 1
+      end
+    end
+    if won_games == 1
+      puts "#{won_games} game was won."
+    else
+      puts "#{won_games} games were won."
+    end
   end
 
   def start
     number = gets.strip
-
     sleep(0.5)
     if number == "0"
       self.zero_player_game
@@ -148,9 +161,6 @@ class Game
       puts "I'm sorry, I didn't catch that. Please enter a valid number between 0 and 2."
       self.start
     end
-
   end
 
 end
-
-# If you'd like, implement a "wargames" game type. When asked what kind of game they want to play or for the number of players, if the user types in "wargames", have the computer play itself 100 times and report how many times the game was won. This is not a requirement, it would just be fun. A perfect computer AI should never be able to win, like in the case of thermonuclear war.
