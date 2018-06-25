@@ -1,3 +1,35 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-tac-toe!"
+puts "What kind of game do you want to play, 0,1 or 2 players?"
+input = gets.strip
+puts "Player_1 = X and goes first.  Player_2 = O.  Please enter X for player_1 or O for player_2."
+token = gets.strip
+
+case input
+when "0"
+  puts "The computer will play itself."
+  game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"),Board.new)
+        game.play
+
+
+when "1"
+  game = Game.new(Player::Human.new("X"), Player::Computer.new("O"),Board.new)
+        game.play
+    puts "Do you want the computer to win or random response?"
+    puts "Enter 1 for random and 2 for computer wins."
+
+
+when  "2"
+  Game.new(Player::Human.new("X"), Player::Human.new("O"),Board.new)
+else
+end
+
+
+
+
+
+  puts "Do you want to play again?"
+  play_again = gets.strip
