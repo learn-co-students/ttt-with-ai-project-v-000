@@ -8,21 +8,24 @@ input = gets.strip
 puts "Player_1 = X and goes first.  Player_2 = O.  Please enter X for player_1 or O for player_2."
 token = gets.strip
 
-when input == "0"
+case input
+when "0"
   puts "The computer will play itself."
-  game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+  game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"),Board.new)
+        game.play
 
 
-when input == "1"
-  game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+when "1"
+  game = Game.new(Player::Human.new("X"), Player::Computer.new("O"),Board.new)
         game.play
     puts "Do you want the computer to win or random response?"
     puts "Enter 1 for random and 2 for computer wins."
 
 
-when input == "2"
-  Game.new(Player::Human.new("X"), Player::Human.new("O"))
-  
+when  "2"
+  Game.new(Player::Human.new("X"), Player::Human.new("O"),Board.new)
+else
+end
 
 
 
