@@ -3,6 +3,7 @@ class Board
   #git add .
   #git commit -m "message"
   #git push
+  #https://itzsaga.github.io/post/one-way-to-pair-program/
 
   attr_accessor :cells
 
