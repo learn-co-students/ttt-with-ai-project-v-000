@@ -40,10 +40,18 @@ class Board
      turn
   end
 
-  def taken?
-    position[input]=="X" || position[input]=="O"
+  def taken?(input)
+    position(input)=="X" || position(input)=="O"
   end
 
+  def valid_move?(input)
+    if input.to_i.between?(1,9) && !taken?(input)
+      true
+    end
+  end
 
+  def update(input, player)
+    cells[input.to_i - 1] = player.token
+  end
 
 end
