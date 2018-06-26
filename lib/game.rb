@@ -19,19 +19,22 @@ class Game
   end
 
   def turn
-    if self.current_player == @player_1
-      @player_1.move(@board)
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
     else
-      @player_2.move(@board)
+      @board.update(current_move, player)
+      @board.display
+      puts ""
+      puts ""
     end
   end
 
   def play
-    while !self.over?
-      self.turn
-      break if self.draw?
+    while !over?
+      turn
     end
-    #binding.pry
     puts "Congratulations #{self.winner}!" if self.won?
     puts "Cat's Game!" if self.draw?
   end
@@ -45,27 +48,23 @@ class Game
   end
 
   def won?
-    winner = WIN_COMBINATIONS.find do |combo|
+    WIN_COMBINATIONS.find do |combo|
       @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[0]] == @board.cells[combo[2]] && (@board.cells[combo[0]] == "X" || @board.cells[combo[0]] == "O")
         #winner = "#{combo[0]}, #{combo[1]}, #{combo[2]}"
-      end
-      #binding.pry
-    winner
+    end
   end
 
   def draw?
-    @board.full? && !self.won?
+    @board.full? && !won?
   end
 
   def over?
-    self.draw? || self.won?
+    draw? || won?
   end
 
   def winner
-    if !self.won?
-      return nil
-    else
-      return @board.cells[self.won?[0]]
+    if won = won?
+      @board.cells[won.first]
     end
   end
 
