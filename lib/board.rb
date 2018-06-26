@@ -1,4 +1,8 @@
 class Board
+  #git status
+  #git add .
+  #git commit -m "message"
+  #git push
 
   attr_accessor :cells
 
