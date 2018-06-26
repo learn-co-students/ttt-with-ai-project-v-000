@@ -1,12 +1,5 @@
 class Board
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
 
-
-=======
-=======
->>>>>>> 1838d640454a45b68e38fd18b40d9f164675b2fc
   attr_accessor :cells
 
   def reset!
@@ -51,8 +44,5 @@ class Board
   def valid_move?(position)
     position.to_i.between?(0, 8) && !taken?(position)
   end
-<<<<<<< HEAD
->>>>>>> 1838d640454a45b68e38fd18b40d9f164675b2fc
-=======
->>>>>>> 1838d640454a45b68e38fd18b40d9f164675b2fc
+
 end
