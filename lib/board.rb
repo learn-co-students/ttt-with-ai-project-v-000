@@ -5,11 +5,10 @@ class Board
   attr_accessor :cells
 
   def initialize
-    @cells =  Array.new(9, " ")
+    self.reset!
   end
 
   def reset!
-    self.cells.clear
     self.cells = Array.new(9, " ")
   end
 
@@ -26,7 +25,7 @@ class Board
   end
 
   def full?
-    !cells.include?(" ") ? true : false
+    cells.all? {|cell| cell != " "}
   end
 
   def turn_count

@@ -37,13 +37,14 @@ class Game
   def draw?
     !board.cells.include?(" ") && !won?
   end
-
   def over?
     won? || draw?
   end
 
   def winner
-    won? ? board.cells[won?[0]] : nil
+    if won = won?
+      board.cells[won.first]
+    end
   end
 
   def turn
