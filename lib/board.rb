@@ -41,6 +41,7 @@ class Board
   end
 
   def valid_move?(position)
+    binding.pry
     position.to_i.between?(0, 8) && !taken?(position)
   end
 end
