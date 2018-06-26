@@ -1,4 +1,10 @@
 class Board
+  #git status
+  #git add .
+  #git commit -m "message"
+  #git push
+  #https://itzsaga.github.io/post/one-way-to-pair-program/
+
   attr_accessor :cells
 
   def reset!
@@ -44,4 +50,5 @@ class Board
     binding.pry
     position.to_i.between?(0, 8) && !taken?(position)
   end
+
 end
