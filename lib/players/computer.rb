@@ -1,6 +1,7 @@
 class Players::Computer < Player
-  def move(board)
 
+
+  def move(board)
     if !board.taken?(5)
       "5"
       elsif board.cells[1] == " "
@@ -20,6 +21,5 @@ class Players::Computer < Player
       elsif board.cells[8] == " "
       "8"
     end
-        #until over?
   end
 end

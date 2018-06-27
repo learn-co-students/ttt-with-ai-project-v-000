@@ -6,15 +6,15 @@ class Board
   end
 
   def reset!
-    self.cells = Array.new(9, " " )
+    @cells = Array.new(9, " " )
   end
 
   def display
-    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
-    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
-    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
   def position(input)
@@ -22,11 +22,11 @@ class Board
   end
 
   def full?
-    cells.all? {|position| position == "X" || position == "O"} #looks through all cells, iterates through each. does the character equal X? or O? if not, returns false. If there is a character then it returns true.
+    @cells.all? {|position| position == "X" || position == "O"} #looks through all cells, iterates through each. does the character equal X? or O? if not, returns false. If there is a character then it returns true.
   end
 
   def turn_count
-    cells.count {|item| item == "X" || item == "O"}
+    @cells.count {|item| item != " "}
   end
 
   def taken?(input)
