@@ -20,6 +20,6 @@ puts "Welcome to Tic Tac Toe! Let's see who wins!"
     return game = Game.new(Players::Human.new("X"), Players::Human.new("O")).play
   end
 
-  until game.over?
+  while !game.over?
     game.play
   end
