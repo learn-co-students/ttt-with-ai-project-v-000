@@ -3,8 +3,9 @@ module Players
 
     attr_accessor :move
 
-    def move(input)
-      self.move = gets
+    def move(board)
+      puts "Please enter your selection."
+      gets.strip
     end
 
   end
