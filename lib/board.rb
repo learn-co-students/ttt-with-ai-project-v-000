@@ -47,8 +47,11 @@ class Board
   end
 
   def valid_move?(position)
-    binding.pry
-    position.to_i.between?(0, 8) && !taken?(position)
+    position.to_i.between?(1, 9) && !taken?(position)
   end
 
+  def update(position, player)
+    index = position.to_i - 1
+    cells[index] = player.token
+  end
 end
