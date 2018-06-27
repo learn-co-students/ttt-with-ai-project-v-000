@@ -2,8 +2,8 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
+puts "Welcome to the wonderful game of TIC TAC TOE"
 game = Game.new
-until game.won?
+while !game.won?
   game.play
 end
