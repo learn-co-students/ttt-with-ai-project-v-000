@@ -19,6 +19,14 @@ def current_player
 end
 
 def won?
+  WIN_COMBINATIONS.detect do |win|
+  # @cells = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
+  board.cells[win[0]] == board.cells[win[1]] && board.cells[win[1]] == board.cells[win[2]] && board.taken?(win[0] + 1)
+end
+end
+
+def draw?
+  WIN_COMBINATIONS.detect do |win|
 end
 
 end
