@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -19,7 +20,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? player_1 : player_2
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
@@ -27,20 +28,113 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |winner|
-      @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[1]] == @board.cells[winner[2]] &&
-      (@board.cells[winner[0]] == 'X') ||   (@board.cells[winner[0]] == 'O')
-    end
+      WIN_COMBINATIONS.each do |combination|
+        @index1 = combination[0]
+        @index2 = combination[1]
+        @index3 = combination[2]
+        @position_1 = self.board.cells[@index1]
+        @position_2 = self.board.cells[@index2]
+        @position_3 = self.board.cells[@index3]
+        if @position_1 == "X" && @position_2 == "X" && @position_3 == "X"
+          return combination # return the win_combination indexes that won.
+        elsif @position_1 == "O" && @position_2 == "O" && @position_3 == "O"
+          return combination
+        end
+      end
+      false
   end
 
   def draw?
-    @board.full? && !won?
+    self.board.full? && !won?
+  end
+
+  def full?
+      if board.cells[0] == " "
+        false
+      elsif board.cells[1] == " "
+        false
+      elsif board.cells[2] == " "
+        false
+      elsif board.cells[3] == " "
+        false
+      elsif board.cells[4] == " "
+        false
+      elsif board.cells[5] == " "
+        false
+      elsif board.cells[6] == " "
+        false
+      elsif board.cells[7] == " "
+        false
+      elsif board.cells[8] == " "
+        false
+      else
+        true
+      end
+  end
+
+
+  def draw?
+    !won? && full?
+   end
+
+  def over?
+    if draw?
+      return true
+    elsif won? && full?
+      return true
+    elsif won? && !full?
+      return true
+    else
+      return false
+    end
   end
 
   def winner
-    if a win_combination = won?
-      @winner = @board.cells[winning_combo.first]
+     won?
+     if won?
+      (won?).each do |position|
+        @position = position
+        board.cells[@position]
+        if board.cells[@position] == "X"
+          return "X"
+        elsif self.board.cells[@position] == "O"
+          return "O"
+        end
+      end
+    else
+      nil
     end
   end
+
+
+
+  def turn
+    puts "Please enter 1-9:"
+    input = current_player.move(board) #gets an input
+    position = (input.to_i - 1)
+
+    if board.valid_move?(input)
+      board.update(position.to_s,current_player)
+      board.display
+    else
+      turn
+    end
+  end
+
+  def turn_count
+  board.cells.count{|token| token == "X" || token == "O"}
+  end
+
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+
 end
