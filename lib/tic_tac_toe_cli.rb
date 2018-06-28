@@ -1,5 +1,3 @@
-require 'pry'
-
 class TicTacToeCLI
   attr_accessor :game
 
