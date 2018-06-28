@@ -80,7 +80,7 @@ class Game
   def over?
     if draw?
       return true
-    elsif won? && full?
+    elsif won?
       return true
     elsif won? && !full?
       return true
@@ -110,11 +110,13 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
+
     input = current_player.move(board) #gets an input
-    position = (input.to_i - 1)
+    position = input.to_i
 
     if board.valid_move?(input)
-      board.update(position.to_s,current_player)
+      #^THIS WORKS WITHOUT CALLING
+      board.update(position,current_player)
       board.display
     else
       turn
@@ -124,7 +126,6 @@ class Game
   def turn_count
   board.cells.count{|token| token == "X" || token == "O"}
   end
-
 
   def play
     until over?
@@ -136,5 +137,4 @@ class Game
       puts "Cat's Game!"
     end
   end
-
 end
