@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -19,7 +21,7 @@ class Game
   end
 
   def current_player
-    board.turn_count % 2 == 0 ? player_1 : player_2
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def won?
@@ -37,7 +39,9 @@ class Game
   end
 
   def winner
-    won? ? board.position(won?[0] + 1) : nil
+    if won = won?
+      board.position(won.first + 1)
+    end
   end
 
   def turn
