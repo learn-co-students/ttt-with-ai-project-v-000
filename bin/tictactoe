@@ -2,34 +2,5 @@
 
 require_relative '../config/environment'
 
-  prompt = puts "｡*.⋆✧˚ ░W░E░L░C░O░M░E░ 𝕥𝕠 𝕋𝕀ℂ-𝕋𝔸ℂ-𝕋𝕆𝔼 ｡*.⋆✧˚\n
-  Please make your selection as follows:\n
-    ⭑ Enter 0 for AI Mode (Machine vs. Machine)\n
-    ⭑ Enter 1 for 1-Player Mode (Human vs. Machine)\n
-    ⭑ Enter 2 for 2-Player Mode (Human vs. Human)\n
-    ⭑ Enter 'q' to quit"
 
-input = gets.strip
-game = Game.new
-game.board.display
-
-while input != "0" || "1" || "2" || "q" || game.over? == true
-  prompt
-
-  if input == "q" || game.over? == true
-    break
-  elsif input == "0"
-    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-    game.play
-  elsif input == "1"
-    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    game.play
-  elsif input == "2"
-    game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-    game.play
-  else
-    puts "To begin a game, you must first select a mode. \n
-          Please enter 0, 1, 2, or 'q'."
-    input = gets.strip
-  end
-end
+TicTacToeCLI.new.call

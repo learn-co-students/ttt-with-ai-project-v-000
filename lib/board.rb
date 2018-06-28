@@ -6,7 +6,7 @@ class Board
   end
 
   def reset!
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    @cells = Array.new(9, " ")
   end
 
   def display
