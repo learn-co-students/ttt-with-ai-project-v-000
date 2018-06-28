@@ -111,10 +111,10 @@ class Game
   def turn
     puts "Please enter 1-9:"
     input = current_player.move(board) #gets an input
-    position = board.position(input)
+    position = (input.to_i - 1)
+
     if board.valid_move?(input)
-      #^THIS WORKS WITHOUT CALLING
-      board.update(position,current_player)
+      board.update(position.to_s,current_player)
       board.display
     else
       turn
