@@ -53,7 +53,7 @@ class Board
   end
 
   def update(position, player)
-    index = position.to_i #update expects a string. removed - 1 due to error creating [-1] input
+    index = position.to_i - 1 #update expects a string. removed - 1 due to error creating [-1] input
     cells[index] = player.token #and a player.
   end
 end

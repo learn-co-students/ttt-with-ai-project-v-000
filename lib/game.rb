@@ -110,12 +110,10 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    input = current_player.move(board) #gets an input
-    position = (input.to_i - 1)
 
-    if board.valid_move?(input)
-      board.update(position.to_s,current_player)
-    position = board.position(input)
+    input = current_player.move(board) #gets an input
+    position = input.to_i
+
     if board.valid_move?(input)
       #^THIS WORKS WITHOUT CALLING
       board.update(position,current_player)
@@ -130,7 +128,6 @@ class Game
   end
 
   def play
-    binding.pry
     until over?
       turn
     end
@@ -140,5 +137,4 @@ class Game
       puts "Cat's Game!"
     end
   end
-
 end
