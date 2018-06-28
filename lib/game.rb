@@ -11,10 +11,14 @@ def initialize(player_1 = Players::Human.new("X") , player_2 =Players::Human.new
 end
 
 def current_player
-
+  if board.cells.count("X").even?
+    player_2
+  else
+    player_1
+  end
 end
 
-def token
+def won?
 end
 
 end
