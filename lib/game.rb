@@ -111,17 +111,14 @@ class Game
   def turn
     puts "Please enter 1-9:"
     input = current_player.move(board) #gets an input
-<<<<<<< HEAD
     position = (input.to_i - 1)
 
     if board.valid_move?(input)
       board.update(position.to_s,current_player)
-=======
     position = board.position(input)
     if board.valid_move?(input)
       #^THIS WORKS WITHOUT CALLING
       board.update(position,current_player)
->>>>>>> d03ae9fc237b268514f73e4d2a62ccd8860d94af
       board.display
     else
       turn
@@ -132,10 +129,6 @@ class Game
   board.cells.count{|token| token == "X" || token == "O"}
   end
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d03ae9fc237b268514f73e4d2a62ccd8860d94af
   def play
     binding.pry
     until over?
