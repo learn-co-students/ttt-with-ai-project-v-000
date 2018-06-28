@@ -5,4 +5,5 @@ class Player
     @token = token
   end
 
+
 end
