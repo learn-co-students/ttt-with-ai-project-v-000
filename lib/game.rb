@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -19,7 +20,7 @@ class Game
   end
 
   def current_player
-    self.board.turn_count % 2 == 0 ? player_1 : player_2
+    board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def over?
@@ -44,27 +45,27 @@ class Game
   end
 
   def draw?
-    @board.full? && !won?
+    self.board.full? && !won?
   end
 
   def full?
-      if self.board.cells[0] == " "
+      if board.cells[0] == " "
         false
-      elsif self.board.cells[1] == " "
+      elsif board.cells[1] == " "
         false
-      elsif self.board.cells[2] == " "
+      elsif board.cells[2] == " "
         false
-      elsif self.board.cells[3] == " "
+      elsif board.cells[3] == " "
         false
-      elsif self.board.cells[4] == " "
+      elsif board.cells[4] == " "
         false
-      elsif self.board.cells[5] == " "
+      elsif board.cells[5] == " "
         false
-      elsif self.board.cells[6] == " "
+      elsif board.cells[6] == " "
         false
-      elsif self.board.cells[7] == " "
+      elsif board.cells[7] == " "
         false
-      elsif self.board.cells[8] == " "
+      elsif board.cells[8] == " "
         false
       else
         true
@@ -77,10 +78,6 @@ class Game
    end
 
   def over?
-    won?
-    draw?
-    full?
-
     if draw?
       return true
     elsif won? && full?
@@ -97,8 +94,8 @@ class Game
      if won?
       (won?).each do |position|
         @position = position
-        self.board.cells[@position]
-        if self.board.cells[@position] == "X"
+        board.cells[@position]
+        if board.cells[@position] == "X"
           return "X"
         elsif self.board.cells[@position] == "O"
           return "O"
@@ -109,31 +106,35 @@ class Game
     end
   end
 
+
+
+  def turn
+    puts "Please enter 1-9:"
+    input = current_player.move(board) #gets an input
+    position = board.position(input)
+    if board.valid_move?(input)
+      #^THIS WORKS WITHOUT CALLING
+      board.update(position,current_player)
+      board.display
+    else
+      turn
+    end
+  end
+
+  def turn_count
+  board.cells.count{|token| token == "X" || token == "O"}
+  end
+
+
   def play
     until over?
       turn
-      turn_count
     end
-    won?
     if won?
-      winner
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
   end
 
-  def turn
-    puts "Please enter 1-9:"
-    input = gets.strip
-    index = input_to_index(input)
-    if valid_move?(index)
-      #^THIS WORKS WITHOUT CALLING
-      move(index,current_player)
-      display_board
-    else
-      turn
-    end
-  end
-  
 end
