@@ -2,6 +2,8 @@ class Game
   attr_accessor :board, :player_1, :player_2
   #:board = provides access to the board
   #:game = provides access to player_1
+
+
       WIN_COMBINATIONS = [
         [0,1,2], #top_row_win
         [3,4,5], #middle_row_win
@@ -17,16 +19,14 @@ class Game
       def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         @player_1 = player_1
         @player_2 = player_2
-          @board = board
+        @board = board
       end
 
-      def board
-        @board
-      end
+
 
       def current_player
-          board.turn_count % 2 == 0 ? player_1 : player_2 #if turn count number % 2 has a
-            #zero remainder then it is going to be player 1's turn if not it is going to be player 2's turn
+          @board.turn_count % 2 == 0 ? player_1 : player_2 #if turn count number % 2 has a
+            #zero remainder then it is going to be plahyer 1's turn if not it is going to be player 2's turn
       end
 
       def won?
@@ -47,29 +47,30 @@ class Game
 
       def winner
         if winning_combo = won? #if winning combo is true
+          #@winner =
           @board.cells[winning_combo.first] #Then winner is the char in the first cell
         end
       end
 
       def turn
-        binding.pry
-        input = current_player.move(board)
-        if @board.valid_move?(input)
-          board.update(input, current_player)
-          board.display
-        else @board.valid_move?(input) == false
+        index = current_player.move(board)
+        if @board.valid_move?(index)
+           @board.update(index, current_player)
+        else
           turn
         end
+          board.display
       end
 
       def play
-        while !over?
+        until over?
           turn
         end
         if won?
           puts "Congratulations #{winner}!"
         else
           puts "Cat's Game!"
+
         end
       end
     end

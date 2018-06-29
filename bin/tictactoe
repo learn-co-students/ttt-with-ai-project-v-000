@@ -6,19 +6,20 @@ puts "Welcome to Tic Tac Toe! Let's see who wins!"
  puts "How many players(0-2)"
   number_of_players = gets.strip
 
-  if number_of_players == 0
-    return game = Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
-  elsif number_of_players == 1
-    puts "Enter 'X' if you want to go first"
-    user_response = gets.strip
-   if user_response == "X" || user_response == "x"
-    return game = Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-   else
-    return game = Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
-   end
-  else
-    return game = Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-  end
+#  if number_of_players == 0
+#    #binding.pry
+#    return game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+#  elsif number_of_players == 1
+#    puts "Enter 'X' if you want to go first"
+#    user_response = gets.strip
+  # if user_response == "X" || user_response == "x"
+  #  return game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  # else
+  #  return game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  # end
+#  else
+  #   game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  #end
 
   while !game.over?
     game.play

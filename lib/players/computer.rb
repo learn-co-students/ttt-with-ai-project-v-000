@@ -1,5 +1,5 @@
-class Players::Computer < Player
-
+module Players
+  class Computer < Player
 
   def move(board)
     if !board.taken?(5)
@@ -22,4 +22,5 @@ class Players::Computer < Player
       "8"
     end
   end
+end
 end
