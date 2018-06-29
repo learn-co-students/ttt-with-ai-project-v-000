@@ -40,7 +40,7 @@ def over?
 end
 
 def winner
-  
+  binding.pry
 end
 
 end
