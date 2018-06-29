@@ -26,7 +26,8 @@ class Board
   end
 
   def turn_count
-    @cells.count {|item| item == "X" || item == "O"}
+    #binding.pry
+    cells.count {|item| item == "X" || item == "O"}
   end
 
   def taken?(input)

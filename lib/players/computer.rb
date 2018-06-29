@@ -2,25 +2,30 @@ module Players
   class Computer < Player
 
   def move(board)
-    if !board.taken?(5)
-      "5"
+    #binding.pry
+    m = nil
+    if !board.taken?(6)
+      m = "6"
       elsif board.cells[1] == " "
-      "1"
+      m = "2"
       elsif board.cells[3] == " "
-      "3"
+      m = "4"
       elsif board.cells[7] == " "
-      "7"
-      elsif board.cells[9] == " "
-      "9"
+      m = "8"
+      elsif board.cells[0] == " "
+      m = "1"
       elsif board.cells[2] == " "
-      "2"
+      m = "3"
       elsif board.cells[4] == " "
-      "4"
+      m = "5"
       elsif board.cells[6] == " "
-      "6"
+      m = "7"
       elsif board.cells[8] == " "
-      "8"
+      m = "9"
     end
+    puts "Computer is thinking..."
+    puts m
+    m
   end
 end
 end

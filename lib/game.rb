@@ -54,6 +54,7 @@ class Game
 
       def turn
         index = current_player.move(board)
+        #binding.pry
         if @board.valid_move?(index)
            @board.update(index, current_player)
         else
