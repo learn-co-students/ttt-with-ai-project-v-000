@@ -27,6 +27,20 @@ end
 
 def draw?
   WIN_COMBINATIONS.detect do |win|
+    board.cells[win[0]] != board.cells[win[1]] && board.cells[win[1]] != board.cells[win[2]] && board.taken?(win[0] + 1) unless won?
+end
+end
+
+def over?
+  if !board.full?
+    false
+  elsif draw? || won?
+    true
+  end
+end
+
+def winner
+  
 end
 
 end
