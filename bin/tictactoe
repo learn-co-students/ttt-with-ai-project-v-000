@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hi. Please enter a number."
+input = gets.strip
+game = Game.new
+game.play
