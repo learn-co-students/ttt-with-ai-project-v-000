@@ -43,8 +43,8 @@ class Board
   end
   
   def valid_move?(move)
-    index = self.position(move)
-    ((0..8) === index && self.taken?(index) == false) ? true : false
+    index = move.to_i - 1
+    ((0..8) === index && self.taken?(move) == false) ? true : false
   end
       
 end
