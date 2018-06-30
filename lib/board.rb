@@ -11,18 +11,20 @@ class Board
   end
   
   def display
-    puts " #{self[0]} | #{self[1]} | #{self[2]} "
-    puts " #{self[3]} | #{self[4]} | #{self[5]} "
-    puts " #{self[6]} | #{self[7]} | #{self[8]} "
+    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts "-----------"
+    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts "-----------"
+    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
   end
   
   def position(move)
-    index = self.cells[move - 1]
-    index
+    content = self.cells[move.to_i - 1]
+    content
   end
   
   def update(move, player)
-    index = self.position(move)
+    index = move.to_i - 1
     self.cells[index] = player.token
   end
   
@@ -35,8 +37,8 @@ class Board
     count
   end
   
-  def taken?(move)
-    index = self.position(move)
+  def taken?(cell)
+    index = cell.to_i - 1
     self.cells[index] == " " ? false : true
   end
   
