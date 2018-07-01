@@ -24,6 +24,7 @@ def start
         # end
         
     when 2
+        Game.new.turn
     else
         # please enter valid input
     end
@@ -41,3 +42,5 @@ def play_again?
         false
     end
 end
+
+start
