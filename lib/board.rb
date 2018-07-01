@@ -43,11 +43,11 @@ class Board
     position(input) == "X" || position(input) == "O"
   end
 
-  def valid_move?(index)
-    index.to_i.between?(1,9) && !taken?(index)
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input)
   end
 
-  def update(index, current_player)
-    @cells[index.to_i-1] = current_player.token
+  def update(input, current_player)
+    @cells[input.to_i-1] = current_player.token
   end
 end

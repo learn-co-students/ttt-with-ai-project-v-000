@@ -16,8 +16,8 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |array|
-      @board.cells[array[0]] == @board.cells[array[1]] && @board.cells[array[1]] == @board.cells[array[2]] && (@board.cells[array[0]] == "X" || @board.cells[array[0]] == "O")
+    WIN_COMBINATIONS.detect do |winner|
+      @board.cells[winner[0]] == @board.cells[winner[1]] && @board.cells[winner[1]] == @board.cells[winner[2]] && @board.taken?(winner[0]+1) #board.cells[winner[0]] != " "
     end
   end
 
@@ -40,17 +40,28 @@ class Game
   end
 
   def turn
-    Player.move(@board)
-    #puts "Please enter 1-9:"
-    #input = gets.strip
-    index = input.to_i - 1
-    if @board.valid_move?(index)
-      move(index, current_player)
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
       @board.display
+    elsif input.to_i.between?(1,9). == false
+      puts "Sorry, invalid move...try again"
+      turn
     else
+      puts "Seat's taken...try again"
       turn
     end
   end
 
+  def play
+    until over?
+      turn
+    end
 
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
 end
