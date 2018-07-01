@@ -13,8 +13,8 @@ def start
     case player_count
     when 0
     when 1
-        # puts "Who should go first"
-        # puts "you, or the computer"
+        # puts "Who should go first?"
+        # puts "you, or the computer? (you, computer)"
         # player_order = gets.strip
         # case player_order
         # when 'me'
@@ -24,12 +24,20 @@ def start
         # end
         
     when 2
+    else
+        # please enter valid input
     end
-    if [1, 2].include?(player_count)
-        # ask the user who should go first and be x??
-        # player_1 = 
-        # player_2 =
-        # board =
-        # Game.new(board, player_1, player_2)
+
+    start if play_again?
+end
+
+def play_again?
+    puts "Would you like to play again? (Y or N)"
+    choice = gets.strip
+    case choice
+    when 'Y'
+        true
+    when 'N'
+        false
     end
 end
