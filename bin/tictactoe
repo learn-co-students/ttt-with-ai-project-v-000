@@ -12,19 +12,19 @@ def start
 
     case player_count
     when 0
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
     when 1
-        # puts "Who should go first?"
-        # puts "you, or the computer? (you, computer)"
-        # player_order = gets.strip
-        # case player_order
-        # when 'me'
-        # when 'computer'
-        #   Game.new(Players::AI.new("X"), Players::Human.new("O"), board)
-        # else
-        # end
-        
+        puts "Who should go first?"
+        puts "you, or the computer? (me, computer)"
+        player_order = gets.strip
+        case player_order
+        when 'me'
+            Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        when 'computer'
+            Game.new(Players::AI.new("X"), Players::Human.new("O")).play
+        end        
     when 2
-        Game.new.turn
+        Game.new.play
     else
         # please enter valid input
     end

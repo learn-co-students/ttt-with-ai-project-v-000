@@ -21,6 +21,11 @@ class Board
     def input_to_index(user_input)
         user_input.to_i - 1
     end
+
+    # use this to make AI moves look like human input
+    def index_to_input(index)
+        (index + 1).to_s
+    end
     
     # @param [String] e.g. "2", the user input
     # @retrun [Int] e.g. "X", located at index 1

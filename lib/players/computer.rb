@@ -1,3 +1,5 @@
+require 'pry'
+
 module Players
     class Computer < Player
         # take the first available position
@@ -6,8 +8,8 @@ module Players
             player_move = ""
 
             while i < board.cells.length
-                if !board.taken?(board.cells[i])
-                    player_move = (i + 1).to_s
+                player_move = board.index_to_input(i)
+                if !board.taken?(player_move)
                     return player_move
                 else
                     i += 1

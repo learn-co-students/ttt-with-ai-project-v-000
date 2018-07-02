@@ -71,12 +71,15 @@ class Game
 
     def play
         if !self.over?
+            self.board.display
             turn
             play
         else
             if won?
+                self.board.display
                 puts "Congratulations #{winner}!"
             elsif draw?
+                self.board.display
                 puts "Cat's Game!"
             else
                 puts "Something has gone wrong!"
