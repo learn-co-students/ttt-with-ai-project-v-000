@@ -5,6 +5,7 @@ require_relative '../config/environment'
 puts "Would you like to play a game of Tic Tac Toe? 'Y', 'N' or 'W'?
 W is for Wargames mode, which is the computer playing itself 100 times."
 g = gets.strip.upcase
+
 if g == 'Y'
   TicTacToe.new.play_tic_tac_toe
 elsif g == 'W'

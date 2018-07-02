@@ -42,8 +42,12 @@ module Players
       corners = ['1','3','7','9']
       edges = ['2','4','6','8']
 
-      corners.shuffle.detect do |spot| !board.taken?(spot) end ||
-      edges.shuffle.detect do |space| !board.taken?(space) end
+      corners.shuffle.detect do |spot|
+        !board.taken?(spot)
+      end ||
+      edges.shuffle.detect do |space|
+        !board.taken?(space)
+      end
     end
 
     def move(board)
