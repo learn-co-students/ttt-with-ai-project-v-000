@@ -1,7 +1,7 @@
 class Board
   attr_accessor :cells
 
-  def initialize()
+  def initialize
     reset!
   end
 
@@ -22,15 +22,15 @@ class Board
   end
 
   def full?
-    cells.all? {|box| box == "X" || box == "O"}
+    cells.all? {|character| character == "X" || character == "O"}
   end
 
   def turn_count
-    cells.count {|box| box == "X" || box == "O"}
+    cells.count {|character| character == "X" || character == "O"}
   end
 
   def taken?(input)
-    position(input) == "X" || position(input) == "O" ? true : false
+    position(input) == "X" || position(input) == "O"
   end
 
   def valid_move?(input)
