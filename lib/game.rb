@@ -68,4 +68,19 @@ class Game
             turn
         end
     end
+
+    def play
+        if !self.over?
+            turn
+            play
+        else
+            if won?
+                puts "Congratulations #{winner}!"
+            elsif draw?
+                puts "Cat's Game!"
+            else
+                puts "Something has gone wrong!"
+            end
+        end 
+    end
 end
