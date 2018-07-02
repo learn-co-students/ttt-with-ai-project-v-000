@@ -21,10 +21,10 @@ class Game
   end
 
   def won?
-    self.class.win_combinations.detect do |set|
-      board.cells[set[0]] != ' ' &&
-      board.cells[set[0]] == board.cells[set[1]] &&
-      board.cells[set[1]] == board.cells[set[2]]
+    result = self.class.win_combinations.detect do |set|
+      trinity = [board.cells[set[0]], board.cells[set[1]], board.cells[set[2]]]
+
+      trinity == ['X', 'X', 'X'] || trinity == ['O', 'O', 'O']
     end
   end
 

@@ -1,6 +1,7 @@
 
 module Players
   class Computer < Player
+    attr_reader :enemy
 
     def win_or_block(board)
       if board.turn_count.between?(2, 7)
@@ -11,7 +12,7 @@ module Players
 
           trio = [board.cells[set[0]], board.cells[set[1]], board.cells[set[2]]]
 
-          if trio.sort == [' ', 'X', 'X'] || trio.sort == [' ', 'O', 'O']
+          if trio.sort == [' ', token, token] || trio.sort == [' ', enemy, enemy]
             trio.each_with_index do |area, index|
               if area == ' '
                 wob_move = "#{set[index] + 1}"
@@ -26,7 +27,6 @@ module Players
 
     def counter_corner(board)
       opposite_corners = [ ['1', '9'], ['9', '1'], ['3', '7'], ['7', '3'] ]
-      enemy = token == 'O' ? 'X' : 'O'
       corner_move = nil
 
       opposite_corners.each do |pair|
@@ -51,6 +51,8 @@ module Players
     end
 
     def move(board)
+      @enemy = token == 'O' ? 'X' : 'O'
+
       win_or_block(board) || if !board.taken?('5') then '5' end ||
       counter_corner(board) || corners_or_edges(board)
     end
