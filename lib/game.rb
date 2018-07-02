@@ -22,7 +22,8 @@ class Game
 
   def won?
     result = self.class.win_combinations.detect do |set|
-      trinity = [board.cells[set[0]], board.cells[set[1]], board.cells[set[2]]]
+      trinity = [ board.cells[ set[0] ], board.cells[ set[1] ],
+      board.cells[ set[2] ] ]
 
       trinity == ['X', 'X', 'X'] || trinity == ['O', 'O', 'O']
     end
@@ -37,7 +38,7 @@ class Game
   end
 
   def winner
-    if combo = won? then board.cells[combo[0]] end
+    if combo = won? then board.cells[ combo[0] ] end
   end
 
   def turn
@@ -55,4 +56,5 @@ class Game
     turn until over?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
+  
 end

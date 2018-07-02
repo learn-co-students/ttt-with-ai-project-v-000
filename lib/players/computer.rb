@@ -4,25 +4,24 @@ module Players
     attr_reader :enemy
 
     def win_or_block(board)
-      if board.turn_count.between?(2, 7)
-        wob_move = nil
+      wob_move = nil
 
-        Game.win_combinations.each do |set|
-          return wob_move if wob_move
+      Game.win_combinations.each do |set|
+        return wob_move if wob_move
 
-          trio = [board.cells[set[0]], board.cells[set[1]], board.cells[set[2]]]
+        trio = [ board.cells[ set[0] ], board.cells[ set[1] ],
+        board.cells[ set[2] ] ]
 
-          if trio.sort == [' ', token, token] || trio.sort == [' ', enemy, enemy]
-            trio.each_with_index do |area, index|
-              if area == ' '
-                wob_move = "#{set[index] + 1}"
-              end
+        if trio.sort == [' ', token, token] || trio.sort == [' ', enemy, enemy]
+          trio.each_with_index do |area, index|
+            if area == ' '
+              wob_move = "#{set[index] + 1}"
             end
           end
         end
-
-        wob_move
       end
+
+      wob_move
     end
 
     def counter_corner(board)
