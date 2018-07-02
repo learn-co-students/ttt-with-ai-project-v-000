@@ -11,10 +11,10 @@ def initialize(player_1 = Players::Human.new("X") , player_2 =Players::Human.new
 end
 
 def current_player
-  if board.cells.count("X").even?
-    player_2
-  else
+  if (board.cells.count("X") + board.cells.count("O")).even?
     player_1
+  else
+    player_2
   end
 end
 
@@ -26,21 +26,52 @@ end
 end
 
 def draw?
-  WIN_COMBINATIONS.detect do |win|
-    board.cells[win[0]] != board.cells[win[1]] && board.cells[win[1]] != board.cells[win[2]] && board.taken?(win[0] + 1) unless won?
+if board.full? && !won?
+  true
+else
+  false
 end
 end
 
 def over?
-  if !board.full?
-    false
-  elsif draw? || won?
+  if won? || draw?
     true
+  else
+    false
   end
 end
 
 def winner
-  binding.pry
+  combo = won?
+  if !combo
+    nil
+  else
+    board.cells[combo[0]]
+  end
 end
+
+
+def turn
+  desired_move = current_player.move(board)
+  if board.valid_move?(desired_move)
+    board.update(desired_move,current_player)
+    board.display
+  else
+    turn
+  end
+end
+
+def play
+  until over?
+    turn
+  end
+  puts "Congratulations #{winner}!"
+  if draw?
+    puts "Cat's Game!"
+  else
+  end
+end
+
+
 
 end
