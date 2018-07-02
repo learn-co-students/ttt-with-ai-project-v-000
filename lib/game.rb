@@ -18,4 +18,26 @@ class Game
     @board = board
   end
 
+  def current_player
+    if board.turn_count.odd?
+      @player_2
+    else
+      @player_1
+    end
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |combo|
+      (board.taken?(combo[0]) && board.taken?(combo[1]) && board.taken?(combo[2])) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+    end
+  end
+
+  def draw?
+   board.full? && !won?
+  end
+
+  def over?
+    draw? || won?
+  end
+
 end
