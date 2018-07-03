@@ -100,6 +100,16 @@ describe 'Game' do
 
       expect(game.won?).to contain_exactly(0, 1, 2)
     end
+
+    # ***TEST ADDED (was having trouble with #winner and wanted to make sure this wasn't the cause)***
+    it 'returns false for an in-progress game' do
+      game = Game.new
+      game.board.cells = ["X", " ", "X",
+                          " ", " ", " ",
+                          "O", "O", " "]
+
+      expect(game.won?).to be_falsey
+    end
   end
 
   describe '#draw?' do
@@ -119,7 +129,13 @@ describe 'Game' do
 
     it 'returns false for an in-progress game' do
       game = Game.new
-      game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", "X"]
+      # Updated game.board.cells because original array was a won game ([0, 4, 8]):
+      # ["X", " ", "X",
+      #  " ", "X", " ",
+      #  "O", "O", "X"]
+      game.board.cells = ["X", " ", "X",
+                          " ", "X", " ",
+                          "O", "O", " "]
 
       expect(game.draw?).to be_falsey
     end
@@ -128,21 +144,27 @@ describe 'Game' do
   describe '#over?' do
     it 'returns true for a draw' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      game.board.cells = ["X", "O", "X",
+                          "O", "X", "X",
+                          "O", "X", "O"]
 
       expect(game.over?).to be_truthy
     end
 
     it 'returns true for a won game' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      game.board.cells = ["X", "O", "X",
+                          "O", "X", "X",
+                          "O", "O", "X"]
 
       expect(game.over?).to be_truthy
     end
 
     it 'returns false for an in-progress game' do
       game = Game.new
-      game.board.cells = ["X", " ", "X", " ", "X", " ", "O", "O", " "]
+      game.board.cells = ["X", " ", "X",
+                          " ", "X", " ",
+                          "O", "O", " "]
 
       expect(game.over?).to be_falsey
     end
