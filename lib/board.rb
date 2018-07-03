@@ -36,7 +36,7 @@ class Board
   end
 
   def taken?(space)
-    position(space) == "X" || position(space) == "O"
+    position(space) != " "
   end
 
   def valid_move?(space)

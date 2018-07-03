@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
   [0,1,2],
@@ -28,7 +28,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      (board.taken?(combo[0]) && board.taken?(combo[1]) && board.taken?(combo[2])) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+      board.taken?(combo[1]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
     end
   end
 
@@ -39,5 +39,36 @@ class Game
   def over?
     draw? || won?
   end
+
+  def winner
+    if won?
+      board.cells[won?[0]]
+    else
+      nil
+    end
+  end
+
+  def turn
+    input = current_player.move(board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      input = current_player.move(board)
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+      if draw?
+        puts "Cat's Game!"
+      end
+      if won?
+        puts "Congratulations #{winner}!"
+      end
+  end
+
 
 end
