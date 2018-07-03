@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to TicTacToe!"
+puts "what kind of game would you like to play: Enter 0,1 or 2"
+response = gets.strip
 game = Game.new
 game.turn
