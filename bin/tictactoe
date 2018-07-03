@@ -12,7 +12,7 @@ input = gets.chomp
       if second_input == "you"
         game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
       elsif second_input == "computer"
-        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+        game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
       end
   elsif input == "no player"
     game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new)
