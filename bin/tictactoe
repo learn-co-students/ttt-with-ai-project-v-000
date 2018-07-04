@@ -3,7 +3,15 @@
 require_relative '../config/environment'
 
 puts "Welcome to TicTacToe!"
-puts "what kind of game would you like to play: Enter 0,1 or 2"
-response = gets.strip
-game = Game.new
+puts "What kind of game would you like to play: Enter 0,1 or 2"
+@response = gets.strip
+puts "Who should go first as token X"
+@response_2 = gets.strip
+if @reponse == "1"
+  game = Game.new
+while !game.over?
 game.turn
+computer.move
+binding.pry
+end
+end
