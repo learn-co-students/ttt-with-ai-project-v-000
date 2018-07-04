@@ -7,7 +7,6 @@ module Players
       input = (1..9).to_a.sample.to_s
       if !board.taken?(input.to_i)
         input
-        #binding.pry
       else
         move(board)
       end

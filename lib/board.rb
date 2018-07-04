@@ -6,10 +6,11 @@ class Board
 
   def initialize
     reset!
+    display
   end
 
   def reset!
-    @cells = [" " , " ", " ", " ", " ", " ", " ", " ", " "]
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def display
