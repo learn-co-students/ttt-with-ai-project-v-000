@@ -1,9 +1,9 @@
 module Players
   class Human < Player
 
-    def move(input)
+    def move(board)
       puts "Your turn, Slick"
-      gets.chomp
+      gets.strip
     end
   end
 end
