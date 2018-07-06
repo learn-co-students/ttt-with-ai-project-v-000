@@ -7,7 +7,6 @@ play = "Y"
 puts "Let's play Tic Tac Toe!"
 
 until play == "N"
-
   puts "How many human players?"
   players = gets.chomp.to_i
   case players
@@ -25,14 +24,10 @@ until play == "N"
       player_2 = Players::Human.new("O")
     end
   when 2
-      player_1 = Players::Human.new("X")
-      player_2 = Players::Human.new("O")
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
   end
-  game = Game.new(player_1, player_2)
-
-  game.play
-  
+  Game.new(player_1, player_2).play
   puts "Would you like to play again? (Y/N)"
   play = gets.chomp
-
 end

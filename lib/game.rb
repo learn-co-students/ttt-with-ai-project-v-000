@@ -64,4 +64,5 @@ class Game
     puts "Congratulations #{self.winner}!" if self.won?
     puts "Cat's Game!" if self.draw?
   end
+
 end
