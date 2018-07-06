@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "Would you like to play a 0, 1, or 2-player game?"
+puts "  Type 0 for an AI game."
+puts "  Type 1 to play against the computer."
+puts "  Type 2 to play against a human friend."
+game_type = gets.chomp
+
+case game_type
+when "0"
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+when "1"
+  game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+when "2"
+  game = Game.new
+end
+game.play
