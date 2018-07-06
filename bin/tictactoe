@@ -4,11 +4,24 @@ require_relative '../config/environment'
 
 puts "Welcome to TicTacToe!"
 puts "What kind of game would you like to play: Enter 0,1 or 2"
-@response = gets.strip
-puts "Which player should go first as X"
-@response_2 = gets.strip
-if @reponse == "1"
-while !game.over?
-game.play 
+response = gets.strip
+if response == "1"
+  puts "Would you like to go first?"
+  response_2 = gets.strip
+  if response_2 == "yes"
+    new_game = Game.new(Players::Human.new("X") , Players::Computer.new("O"), Board.new)
+  else
+    new_game = Game.new(Players::Computer.new("X") , Players::Computer.new("O"), Board.new)
+  end
+  new_game.play
+elsif resonse == "2"
+  puts "Would you like to go first?"
+  response_3 == gets.strip
+  if response_3 == "yes"
+    new_game_2 = Game.new(Players::Human.new("X") , Players::Human.new("O"), Board.new)
+  else
+    new_game_2 = Game.new(Players::Human.new("O") , Players::Computer.new("X"), Board.new)
+  end
+  new_game_2.play
 end
 end
