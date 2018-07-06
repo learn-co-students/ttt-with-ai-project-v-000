@@ -1,3 +1,4 @@
+require './config/environment.rb'
 class Board
   
   attr_accessor :cells

@@ -1,4 +1,4 @@
-
+require './config/environment.rb'
 class Players::Computer < Player
 
   def move(board)
@@ -23,12 +23,12 @@ class Players::Computer < Player
   end
   
   def is_pair(pair, board)
-    pair.each{|mark| mark = board.cells[board.position(mark)]}
+    pair.each{|mark| mark = board.cells[mark - 1]}
     (pair.count("X") || pair.count("O") == 2) ? true : false
   end
   
   def is_token(pair, board)
-    pair.each{|mark| mark = board.cells[board.position(mark)]}
+    pair.each{|mark| mark = board.cells[mark - 1]}
     (pair.count(self.token) == 2) ? true : false
   end
   
@@ -44,43 +44,43 @@ class Players::Computer < Player
     angle = [[1, 5], [3, 5], [7, 5], [9, 5]]
     
    h_right.each do |pair|
-      if (self.is_pair(pair, board) && !(board.taken(pair[1] + 1)))
+      if (self.is_pair(pair, board) && !(board.taken?(pair[1] + 1)))
         (cell = pair[1] + 1)
         return cell if self.is_token(pair, board)
       end
     end
     h_left.each do |pair|   
-      if (self.is_pair(pair, board) && !(board.taken(pair[1] - 1)))
+      if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 1)))
         (cell = pair[1] - 1)
         return cell if self.is_token(pair, board)
       end
     end
     h_gap.each do |pair| 
-      if (self.is_pair(pair, board) && !(board.taken(pair[1] - 1)))
+      if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 1)))
         (cell = pair[1] - 1)
         return cell if self.is_token(pair, board)
       end
     end
     v_down.each do |pair|  
-      if (self.is_pair(pair, board) && !(board.taken(pair[1] + 3)))
+      if (self.is_pair(pair, board) && !(board.taken?(pair[1] + 3)))
         (cell = pair[1] + 3)
         return cell if self.is_token(pair, board)
       end
     end
     v_up.each do |pair|   
-      if (self.is_pair(pair, board) && !(board.taken(pair[1] - 3)))
+      if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 3)))
         (cell = pair[1] - 3) 
         return cell if self.is_token(pair, board)
       end
     end
     v_gap.each do |pair|  
-      if (self.is_pair(pair, board) && !(board.taken(pair[1] - 3)))
+      if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 3)))
         (cell = pair[1] - 3) 
         return cell if self.is_token(pair, board)
       end
     end
     angle.each do |pair|
-      if (self.is_pair(pair, board) && !(board.taken(10 - pair[0])))
+      if (self.is_pair(pair, board) && !(board.taken?(10 - pair[0])))
         (cell = 10 - pair[0])  
         return cell if self.is_token(pair, board)
       end

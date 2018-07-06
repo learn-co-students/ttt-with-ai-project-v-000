@@ -1,3 +1,4 @@
+require './config/environment.rb'
 class Player
   
   attr_reader :token
