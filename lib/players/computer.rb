@@ -22,8 +22,8 @@ class Players::Computer < Player
     when 5
       cell = self.pair(board)
       if cell == nil
-        cell = 4 if (board.cells[1] == self.token || board.cells[7] = self.token)
-        cell = 2 if (board.cells[3] == self.token || board.cells[5] = self.token)
+        cell = 4 if (board.cells[1] == self.token || board.cells[7] == self.token)
+        cell = 2 if (board.cells[3] == self.token || board.cells[5] == self.token)
         cell = 3 if board.cells[0] == self.token
         cell = 1 if board.cells[2] == self.token
       end
