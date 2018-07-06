@@ -39,7 +39,7 @@ class Players::Computer < Player
     pair.each_with_index{|cell, i| marks[i] = board.cells[cell - 1]}
     marks
   end
-  
+
   def is_pair(pair, board)
     (self.marks(pair, board).count("X") == 2 || self.marks(pair, board).count("O") == 2) ? true : false
   end
