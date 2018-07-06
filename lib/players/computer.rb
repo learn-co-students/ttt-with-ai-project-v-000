@@ -16,20 +16,37 @@ class Players::Computer < Player
         cell = 1 if (board.cells[2] == other_token || board.cells[3] == other_token || board.cells[6] == other_token || board.cells[1] == other_token)
         cell = 3 if (board.cells[0] == other_token || board.cells[5] == other_token || board.cells[8] == other_token || board.cells[4] == other_token)
       end
+    when 5
+      cell = self.pair(board)
+    when 7
+      cell = self.pair(board)
     when 0 
       cell = 1
+    when 2
+      board.taken?(5) ? cell = 3 : cell = 5
+    when 4
+      cell = self.pair(board)
+    when 6
+      cell = self.pair(board)
+    when 8
+      cell = self.pair(board)
     end
     cell
   end
-  
+  def marks(pair, board)
+    marks = []
+    pair.each_with_index{|cell, i| marks[i] = board.cells[cell - 1]}
+    marks
+  end
   def is_pair(pair, board)
-    pair.each{|mark| mark = board.cells[mark - 1]}
-    (pair.count("X") || pair.count("O") == 2) ? true : false
+    set = nil
+    (self.marks(pair, board).count("X") == 2 || self.marks(pair, board).count("O") == 2) ? set = true : set = false
+    puts set
+    set
   end
   
   def is_token(pair, board)
-    pair.each{|mark| mark = board.cells[mark - 1]}
-    (pair.count(self.token) == 2) ? true : false
+    (self.marks(pair, board).count(self.token) == 2) ? true : false
   end
   
   def pair(board)
@@ -46,45 +63,53 @@ class Players::Computer < Player
    h_right.each do |pair|
       if (self.is_pair(pair, board) && !(board.taken?(pair[1] + 1)))
         (cell = pair[1] + 1)
+        puts cell
         return cell if self.is_token(pair, board)
       end
     end
     h_left.each do |pair|   
       if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 1)))
         (cell = pair[1] - 1)
+        puts cell
         return cell if self.is_token(pair, board)
       end
     end
     h_gap.each do |pair| 
       if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 1)))
         (cell = pair[1] - 1)
+        puts cell
         return cell if self.is_token(pair, board)
       end
     end
     v_down.each do |pair|  
       if (self.is_pair(pair, board) && !(board.taken?(pair[1] + 3)))
         (cell = pair[1] + 3)
+        puts cell
         return cell if self.is_token(pair, board)
       end
     end
     v_up.each do |pair|   
       if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 3)))
-        (cell = pair[1] - 3) 
+        (cell = pair[1] - 3)
+        puts cell
         return cell if self.is_token(pair, board)
       end
     end
     v_gap.each do |pair|  
       if (self.is_pair(pair, board) && !(board.taken?(pair[1] - 3)))
-        (cell = pair[1] - 3) 
+        (cell = pair[1] - 3)
+        puts cell
         return cell if self.is_token(pair, board)
       end
     end
     angle.each do |pair|
       if (self.is_pair(pair, board) && !(board.taken?(10 - pair[0])))
-        (cell = 10 - pair[0])  
+        (cell = 10 - pair[0])
+        puts cell
         return cell if self.is_token(pair, board)
       end
     end
+    puts cell
     cell
   end
 end
