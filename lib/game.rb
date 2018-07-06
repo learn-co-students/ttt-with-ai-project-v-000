@@ -58,11 +58,9 @@ class Game
   end
   
   def play
-    over = false
-    until over == true
-      self.turn
-      over = self.over?
-    end
+      until self.over?
+        self.turn
+      end
     puts "Congratulations #{self.winner}!" if self.won?
     puts "Cat's Game!" if self.draw?
   end
