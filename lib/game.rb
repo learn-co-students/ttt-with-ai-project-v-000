@@ -66,34 +66,36 @@ class Game
   end
 
   def start
-    puts "Which type of game would you like to play, 0, 1 or 2 player?"
-    input.gets.strip
-    if 0
-      game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-      game.turn
-    elsif 1
+    puts "Which type of game would you like to play, 0, 1 or 2 player...or wargames?"
+    input = gets.strip
+    if input == "wargames" || input == "Wargames" || input == "wg"
+    elsif input == 0
+      @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      @game.turn
+    elsif input == 1
       puts "Who should play first, Human or Computer?"
-      input.gets.strip
-      if input == "Human"
-        game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-        game.turn
+      input = gets.strip
+      if input == "Human" || input == "human" || input == "h"
+        @game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        @game.turn
       else
-        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-        game.turn
+        @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+        @game.turn
       end
-    elsif 2
-      game = Game.new
-      game.turn
+    elsif input == 2
+      @game = Game.new
+      @game.turn
     else
       start
     end
 
     if @game.over == true
       puts "Would you like to play again?"
-      input.gets.strip
+      input = gets.strip
       if input == "yes"
         start
       else
+        puts "Later gator!"
         exit
       end
     end
