@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+class TicTacToeCLI
+
+  def call
+    board = Board.new
+
+    puts "======================="
+    puts "Welcome to Tic Tac Toe!"
+    puts "======================="
+
+    board.display
+    
+    puts ""
+    puts "======================="
+
+    puts "How many players(0-2)"
+    number_of_players = gets.strip
+    
+    case number_of_players
+    when "2"
+      game = Game.new
+    when "1"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+      game = Game.new(player_1, player_2)
+    when "0"
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      game = Game.new(player_1, player_2)
+    else
+      puts "Enter between 0-2"
+    end
+      
+    game.play
+
+  end
+
+end
+
+TicTacToeCLI.new.call
+
