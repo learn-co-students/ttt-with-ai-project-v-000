@@ -69,6 +69,13 @@ class Game
     puts "Which type of game would you like to play, 0, 1 or 2 player...or wargames?"
     input = gets.strip
     if input == "wargames" || input == "Wargames" || input == "wg"
+      @games_won = 0
+      100.times do
+        if @game.won?
+          @games_wons += 1
+        end
+      end
+      puts "Woo hoo! The game has been won #{@games_wons} times!"
     elsif input == 0
       @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       @game.turn
@@ -77,7 +84,7 @@ class Game
       input = gets.strip
       if input == "Human" || input == "human" || input == "h"
         @game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-        @game.turn
+        #@game.turn
       else
         @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         @game.turn
