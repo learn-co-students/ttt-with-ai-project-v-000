@@ -12,7 +12,7 @@ module Players
    end 
    i +=1 
  end 
- array 
+  position 
    end 
  end 
  
