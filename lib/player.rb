@@ -1,7 +1,9 @@
 class Player 
   
-def initialize
-  #set token property
+  attr_reader :token 
+  
+def initialize(token)
+  @token = token 
 end 
 
 def move

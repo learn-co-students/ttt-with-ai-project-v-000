@@ -1,17 +1,17 @@
+require 'pry'
+
 class Board 
   
-  attr_accessor :cells 
+  attr_accessor :cells
   
-def initialize(cells = [" "," "," "," "," "," "," "," "," "])
-  @cells = cells
+def initialize
+  @cells = [" "," "," "," "," "," "," "," "," "]
 end 
   
-  def cells
-    @cells = []
-  end 
   
 def reset! 
     @cells = [" "," "," "," "," "," "," "," "," "]
+    #binding.pry 
 end 
 
 def display
@@ -22,20 +22,34 @@ def display
   puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
 end 
 
-def position
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = index.to_i 
-  index -= 1
-
-  if self.valid_move?(index+1)
-    cells[index] = "X"
-    self.display
-  end 
+def position(input)
+  input = input.to_i 
+  index = input - 1
+  @cells[index]
+ # if turn_count % 2 == 0
+  #  signature = "X"
+ # else
+   # signature = "O"
+ # end
+ #binding.pry 
+  #if valid_move?(input)
+  #  @cells[index] = signature
+ # end 
 end
 
-def update
+def update(input, player)
+  input = input.to_i 
+  index = input - 1
 
+  if turn_count % 2 == 0
+    signature = "X"
+  else
+    signature = "O"
+  end
+ #binding.pry 
+  if valid_move?(input)
+    @cells[index] = signature
+  end 
 end 
 
 def full?
@@ -54,16 +68,16 @@ def turn_count
   counter 
 end 
 
-def taken?(index)
-  index = index.to_i
-  index -=1 
+def taken?(input)
+  input = input.to_i
+  index = input - 1 
   !(@cells[index].nil? || @cells[index] == " ")
 end 
 
-def valid_move?(index)
-    index = index.to_i
-    index -=1 
-    index.between?(0,8) && !self.taken?(index+1)
+def valid_move?(input)
+    input = input.to_i
+    index = input - 1
+    index.between?(0,8) && !self.taken?(input)
 end 
 
 end 
