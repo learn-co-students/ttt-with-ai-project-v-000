@@ -27,7 +27,7 @@ def position
   input = gets.strip
   index = index.to_i 
   index -= 1
-current_player = current_player(board)
+
   if self.valid_move?(index+1)
     cells[index] = "X"
     self.display
