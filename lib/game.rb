@@ -1,7 +1,7 @@
 require 'pry'
 class Game 
   
-  attr_accessor :board, :player_1, :player_2, :move_count
+  attr_accessor :board, :player_1, :player_2
   
   WIN_COMBINATIONS = [
   [0,1,2],
@@ -63,7 +63,23 @@ class Game
   end 
   
   def turn 
-    
+    input = current_player.move(board)
+    if board.valid_move?(input.to_i)
+      board.update(input, current_player)
+    elsif
+      turn 
+    end 
+  end 
+  
+  def play 
+    until over?
+      turn 
+    end 
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end 
   end 
   
 end 
