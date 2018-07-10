@@ -53,8 +53,10 @@ class Game
         end
     end
 
-    def start
-        puts "Let's play Tic Tac Toe"
-        puts "Which mode would you like to play?"
-    end
+    # def start
+    #     puts "Hey, Let's play Tic Tac Toe"
+    #     puts "Which mode would you like to play?"
+    #     puts "1 player mode. Type: 1\n 2 players mode. Type: 2\n 3 players mode. Type: 3"
+    #     input = gets.strip
+    # end
 end

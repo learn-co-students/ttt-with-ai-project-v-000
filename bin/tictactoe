@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Hey, Let's play Tic Tac Toe"
+puts "Which mode would you like to play?"
+puts "0 player mode. Type: 0"
+puts "1 player mode. Type: 1"
+puts "2 players mode. Type: 2"
+
+input = gets.strip.to_i
+
+board = Board.new
+game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board) if input == 0
+game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board) if input == 1
+game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board) if input == 2
+game.play
