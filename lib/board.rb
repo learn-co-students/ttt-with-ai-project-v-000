@@ -44,7 +44,7 @@ class Board
     if position(value) == "X" || position(value) == "O"
       true 
     elsif position(value) == " " || position(value) == nil 
-    false
+      false
     end 
   end 
   
