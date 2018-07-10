@@ -1,3 +1,58 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  puts "Welcome to Tic Tac Toe!"
+  puts "Please select type of game:"
+  puts "Enter 0   Computer vs Computer Game"
+  puts "Enter 1   Player vs Computer Game"
+  puts "Enter 2   2 Player Game"
+
+  input = gets.chomp
+
+    case input
+      when "0"
+        #computer vs computer
+        Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+      when "1"
+        #player vs computer
+        puts "X goes first, do you want to go first? (y/n)"
+        first_move = gets.chomp.downcase
+        if first_move == "y"
+          Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+        elsif first_move == "n"
+          Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+        else
+          puts "Please enter y or n\nRestarting..."
+          puts
+          start
+        end
+      when '2'
+        #2 player game
+        Game.new.play
+      else
+        puts "Invalid input\nPlease enter 0, 1 or 2"
+        puts
+        start
+    end
+
+    start if play_again?
+end
+
+def play_again?
+  puts "Do you want to play again? (y/n)"
+  input = gets.chomp.downcase
+
+  if input == "y"
+    start
+  elsif input == "n"
+    puts "Goodbye"
+  else
+    puts "Please enter y or n"
+    puts
+    play_again?
+  end
+end
+
+start
