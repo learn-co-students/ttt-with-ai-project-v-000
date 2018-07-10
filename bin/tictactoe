@@ -25,9 +25,7 @@ elsif response == "2"
   new_game_2.play
   elsif response == "0"
   new_game_3 = Game.new(Players::Computer.new("X") , Players::Computer.new("O"), Board.new)
-  new_game_3.player_2
-  else
-  new_game_3 = Game.new(Players::Computer.new("O") , Players::Computer.new("X"), Board.new)
   new_game_3.play
- 
+
+
 end
