@@ -3,21 +3,14 @@ module Players
     class Computer < Player
         def move(board)
             # binding.pry
-            # valid_moves = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-            # #board.checkindex(player_1) = [0,1]
-            # #WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
-            # ["X", "X", "O", " ", " ", " ", " ", " ", " "]
-            # # valid_moves.detect {|index| board.valid_move?(index)}
-            # # moves = Game::WIN_COMBINATIONS.delete_if {|wincomb| wincomb.include?(board.checkindex.sample)}
-            # Game::WIN_COMBINATIONS.delete_if {|wincomb| (wincomb&board.checkindex).size < 6}
-            # # moves.sample.detect {|index| board.valid_move?(index)}
-            # moves.detect {|combo| board.valid_move?(index)}
+            valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            valid_moves.detect {|index| board.valid_move?(index)}
             # currenttoken = ""
             # currenttoken = "X" if self.token == "0"
             # currenttoken = "O" if self.token == "X"
             # moves1 = Game::WIN_COMBINATIONS.select {|wincomb| (wincomb&board.checkindex(currenttoken)).size == 0}
             # moves2 = Game::WIN_COMBINATIONS.select {|wincomb| (wincomb&board.checkindex(currenttoken)).size != 0}
-            # 0   |1  |2 X    #if 1,,2,3,4,6,7,8,9 choose  5
+            # 0   |1  |2 X    #if 1,2,3,4,6,7,8,9 choose  5
             # -------------
             # 3   |4 O  |5 X
             # -------------
@@ -26,42 +19,41 @@ module Players
             #     move = "5"
             # move1 = [[0,1,2], [6,7,8], [0,3,6], [2,5,8]]
             # moves2 = [[3,4,5], [1,4,7], [0,4,8], [6,4,2]]
-            move = nil
-
-            # When going first, take the middle square. When going second, take the middle square if it isn't yet taken.
-            if !board.taken?(5)
-                move = "5"
-
-                # If going second and the middle square is taken, take the upper-left corner square.
-            elsif board.turn_count == 1
-                move = "1"
-
-                # If you went first (and took the middle), take a corner square with your second move.
-            elsif board.turn_count == 2
-                move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}.to_s
-
-                # If you went second (and took the middle) and the other player has occupied opposing corner squares, blow up the attempted trap by taking a side square.
-            elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
-                move = "2"
-
-                # From here on, run through the WIN_COMBINATIONS array, checking whether any of the combinations have two squares filled with the same token and a third, empty square.
-            else
-                Game::WIN_COMBINATIONS.detect do |cmb|
-
-                    # First, check whether you have any chances to win, since it doesn't matter whether the opponent has a chance to win if you can win first.
-                    if cmb.select{|i| board.position(i+1) == token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
-                        move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-
-                        # If you can't play any winning moves, play a move to block the opponent from winning.
-                    elsif cmb.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
-                        move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-                    end
-                end
-
-                # If none of the WIN_COMBINATIONS patterns have two squares taken by the same token and a third empty square, play into the first open square you find, first checking corners and then checking sides.
-                move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
-            end
-            move
+            # move = nil
+            # # When going first, take the middle square. When going second, take the middle square if it isn't yet taken.
+            # if !board.taken?(5)
+            #     move = "5"
+            #
+            #     # If going second and the middle square is taken, take the upper-left corner square.
+            # elsif board.turn_count == 1
+            #     move = "1"
+            #
+            #     # If you went first (and took the middle), take a corner square with your second move.
+            # elsif board.turn_count == 2
+            #     move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}.to_s
+            #
+            #     # If you went second (and took the middle) and the other player has occupied opposing corner squares, blow up the attempted trap by taking a side square.
+            # elsif board.turn_count == 3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+            #     move = "2"
+            #
+            #     # From here on, run through the WIN_COMBINATIONS array, checking whether any of the combinations have two squares filled with the same token and a third, empty square.
+            # else
+            #     Game::WIN_COMBINATIONS.detect do |cmb|
+            #
+            #         # First, check whether you have any chances to win, since it doesn't matter whether the opponent has a chance to win if you can win first.
+            #         if cmb.select{|i| board.position(i+1) == token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
+            #             move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+            #
+            #             # If you can't play any winning moves, play a move to block the opponent from winning.
+            #         elsif cmb.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
+            #             move = cmb.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+            #         end
+            #     end
+            #
+            #     # If none of the WIN_COMBINATIONS patterns have two squares taken by the same token and a third empty square, play into the first open square you find, first checking corners and then checking sides.
+            #     move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
+            # end
+            # move
         end
     end
 end
