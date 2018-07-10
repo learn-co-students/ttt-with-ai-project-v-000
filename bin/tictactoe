@@ -14,7 +14,7 @@ if response == "1"
     new_game = Game.new(Players::Computer.new("X") , Players::Computer.new("O"), Board.new)
   end
   new_game.play
-elsif resonse == "2"
+elsif response == "2"
   puts "Would you like to go first?"
   response_3 == gets.strip
   if response_3 == "yes"
@@ -23,5 +23,11 @@ elsif resonse == "2"
     new_game_2 = Game.new(Players::Human.new("O") , Players::Computer.new("X"), Board.new)
   end
   new_game_2.play
-end
+  elsif response == "0"
+  new_game_3 = Game.new(Players::Computer.new("X") , Players::Computer.new("O"), Board.new)
+  new_game_3.player_2
+  else
+  new_game_3 = Game.new(Players::Computer.new("O") , Players::Computer.new("X"), Board.new)
+  new_game_3.play
+ 
 end

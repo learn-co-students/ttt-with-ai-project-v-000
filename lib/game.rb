@@ -52,6 +52,7 @@ end
 
 
 def turn
+  binding.pry
   desired_move = current_player.move(board)
   if board.valid_move?(desired_move)
     board.update(desired_move,current_player)
