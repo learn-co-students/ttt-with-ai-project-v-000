@@ -175,6 +175,7 @@ class Game
       puts "Well this was fun. Goodbye!"
       exit
     else
+      # ***Need to fix this - automatically exits after puts
       puts "I didn't catch that. Would you like to play again? Type 'yes' or 'no'."
     end
   end

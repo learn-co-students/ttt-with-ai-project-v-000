@@ -18,33 +18,63 @@ module Players
     def move(board)
       # Computer will first look to see if there any of the winning combinations can be completed on the next move.
       # Didn't attempt to have computer choose to win vs. block. Computer will complete the first winning combination, regardless of token.
-
+      space = ""
       WIN_COMBINATIONS.detect do |combo|
-        # Why doesn't this work without "return"?
         if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] != " " && board.cells[combo[2]] == " "
-          return (combo[2]+1).to_s
+           space = (combo[2]+1).to_s
         elsif board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[0]] != " " && board.cells[combo[1]] == " "
-          return (combo[1]+1).to_s
+          space = (combo[1]+1).to_s
         elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[1]] != " " && board.cells[combo[0]] == " "
-          return (combo[0]+1).to_s
+          space = (combo[0]+1).to_s
         end
+        space
       end
 
+
+      # WIN_COMBINATIONS.detect do |combo|
+      #   if self.token == "X" && board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == " "
+      #     space = (combo[2]+1).to_s
+      #   elsif self.token == "X" && board.cells[combo[0]] == "O" && board.cells[combo[2]] == "O" && board.cells[combo[1]] == " "
+      #     space = (combo[1]+1).to_s
+      #   elsif self.token == "X" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O" && board.cells[combo[0]] == " "
+      #     space = (combo[0]+1).to_s
+      #   elsif self.token == "X" && board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == " "
+      #     space = (combo[2]+1).to_s
+      #   elsif self.token == "X" && board.cells[combo[0]] == "X" && board.cells[combo[2]] == "X" && board.cells[combo[1]] == " "
+      #     space = (combo[1]+1).to_s
+      #   elsif self.token == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X" && board.cells[combo[0]] == " "
+      #     space = (combo[0]+1).to_s
+      #   elsif self.token == "O" && board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == " "
+      #     space = (combo[2]+1).to_s
+      #   elsif self.token == "O" && board.cells[combo[0]] == "X" && board.cells[combo[2]] == "X" && board.cells[combo[1]] == " "
+      #     space = (combo[1]+1).to_s
+      #   elsif self.token == "O" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X" && board.cells[combo[0]] == " "
+      #     space = (combo[0]+1).to_s
+      #   elsif self.token == "O" && board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == " "
+      #     space = (combo[2]+1).to_s
+      #   elsif self.token == "O" && board.cells[combo[0]] == "O" && board.cells[combo[2]] == "O" && board.cells[combo[1]] == " "
+      #     space = (combo[1]+1).to_s
+      #   elsif self.token == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O" && board.cells[combo[0]] == " "
+      #     space = (combo[0]+1).to_s
+      #   end
+      # end
+
       if !board.taken?("5")
-        "5"
+        space = "5"
       elsif !board.taken?("1")
-        "1"
+        space = "1"
       elsif !board.taken?("3")
-        "3"
+        space = "3"
       elsif !board.full?
         board.cells.each_with_index do |cell, i|
           if cell == " "
-            # Why doesn't this work without "return"?
-            return (i+1).to_s
+            space = (i+1).to_s
           end
         end
       end
+      space
     end
+
   end
 
 end
