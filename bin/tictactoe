@@ -16,7 +16,7 @@ if response == "1"
   new_game.play
 elsif response == "2"
   puts "Would you like to go first?"
-  response_3 == gets.strip
+  response_3 = gets.strip
   if response_3 == "yes"
     new_game_2 = Game.new(Players::Human.new("X") , Players::Human.new("O"), Board.new)
   else
@@ -26,6 +26,4 @@ elsif response == "2"
   elsif response == "0"
   new_game_3 = Game.new(Players::Computer.new("X") , Players::Computer.new("O"), Board.new)
   new_game_3.play
-
-
-end
+  end
