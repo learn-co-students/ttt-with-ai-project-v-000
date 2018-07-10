@@ -39,6 +39,12 @@ class Board
     end
 
     def update(input, player)
+        # binding.pry
         cells[input.to_i - 1] = player.token
     end
+
+    # def checkindex(token)
+    #     # binding.pry
+    #     cells.each_with_index.map{|i,e| e if i == token}.compact
+    # end
 end
