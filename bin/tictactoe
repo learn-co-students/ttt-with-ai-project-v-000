@@ -2,29 +2,49 @@
 
 require_relative '../config/environment'
 
-puts "Welcome! Please enter which kind of game you want to play. Your choices are: 0, 1, or 2 player."
-input = gets.strip.to_i 
-if input == 2 
-  puts "Player 1, please enter X"
-  player_1 = gets.strip 
-  puts "Player 2, please enter O"
-  player_2 = gets.strip 
-  new_game = Game.new(Players::Human.new(player_1), Players::Human.new(player_2))
-  new_game.play 
-elsif input == 1 
-  puts "Player 1, please enter either X or O"
-  player_1 = gets.strip
-    if player_1 == "X"
-      player_2 = "O" 
-    elsif player_1 == "O"
-      player_2 = "X"
-    end 
-  new_game = Game.new(Players::Human.new(player_1), Players::Computer.new(player_2))
-  new_game.play 
-elsif input == 0 
-  puts "Please enjoy two computers playing Tic Tac Toe"
-  new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-  new_game.play
+def play_game
+  puts "Welcome! Please enter which kind of game you want to play. Your choices are: 0, 1, or 2 player."
+  input = gets.strip.to_i 
+  if input == 2 
+    puts "Player 1, please enter X"
+    player_1 = gets.strip 
+    puts "Player 2, please enter O"
+    player_2 = gets.strip 
+    new_game = Game.new(Players::Human.new(player_1), Players::Human.new(player_2))
+    new_game.play
+    play_again?
+  elsif input == 1 
+    puts "Player 1, please enter either X or O"
+    player_1 = gets.strip
+      if player_1 == "X"
+        player_2 = "O" 
+      elsif player_1 == "O"
+        player_2 = "X"
+      end 
+    new_game = Game.new(Players::Human.new(player_1), Players::Computer.new(player_2))
+    new_game.play
+    play_again?
+  elsif input == 0 
+    puts "Please enjoy two computers playing Tic Tac Toe"
+    new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    new_game.play
+    play_again?
+  end 
 end 
+
+def play_again?
+  puts "Would you like to play again?"
+  new_input = gets.strip
+  if new_input == "yes" || new_input == "Yes"
+    play_game 
+  elsif new_input == "no" || new_input == "No" || new_input == "exit"
+    puts "Goodbye!"
+  end
+end
+
+play_game 
+
+
+    
   
   
