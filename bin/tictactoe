@@ -2,8 +2,4 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-sleep(0.5)
-puts "How many players are there?"
-game = Game.new
-game.start
+TicTacToeCLI.new.call

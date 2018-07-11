@@ -41,9 +41,12 @@ class Game
   end
 
   def winner
-    if self.won?
-      self.board.cells[self.won?[0]]
+    if won = won?
+      board.cells[won.first]
     end
+    # if self.won?
+    #   self.board.cells[self.won?[0]]
+    # end
   end
 
   def turn
@@ -163,6 +166,10 @@ class Game
     end
 
     sleep(0.5)
+    self.play_again?
+  end
+
+  def play_again?
     puts "Would you like to play again? Type 'yes' or 'no'."
     input = gets.strip
     if input == "yes"
@@ -172,12 +179,13 @@ class Game
       game.start
     elsif input == "no"
       sleep(0.5)
-      puts "Well this was fun. Goodbye!"
+      puts "Well, this was fun. Goodbye!"
       exit
     else
-      # ***Need to fix this - automatically exits after puts
-      puts "I didn't catch that. Would you like to play again? Type 'yes' or 'no'."
+      puts "Sorry, I didn't catch that."
+      sleep(0.5)
+      self.play_again?
     end
   end
-
+  
 end
