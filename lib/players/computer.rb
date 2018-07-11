@@ -41,7 +41,7 @@ module Players
         input = blocking_move + 1
       when center = " "
         input = 5
-      when opposite_corner != nil && !@board.cells.taken?(opposite_corner)
+      when opposite_corner != nil && @board.taken?(opposite_corner) == false
         input = opposite_corner
       when corner
         input = corner + 1
@@ -68,7 +68,7 @@ module Players
 
     def blocking_move
       winning_row = WIN_COMBINATIONS.find do |combo|
-        (@board.cells[combo[0]] == opponent && @board.cells[combo[1]] == opponent && @board.cells[combo[2]] == " ") || (@board.cells[combo[2]] == opponent && @board.cells[combo[1]] == opponent && @board.cells[combo[0]] == " ") || (@board.cells[combo[0]] == opponent && @board.cells[combo[2]] == opponent && @board.cells[combo[1]] == " ")
+        (@board.cells[combo[0]] == opponent && @board.cells[combo[1]] == opponent && @board.cells[combo[2]] == " ") || (@board.cells[combo[1]] == opponent && @board.cells[combo[2]] == opponent && @board.cells[combo[0]] == " ") || (@board.cells[combo[2]] == opponent && @board.cells[combo[0]] == opponent && @board.cells[combo[1]] == " ")
       end
       if winning_row != nil
         winning_cell = winning_row.find {|cell| @board.cells[cell] == " "}

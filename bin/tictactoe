@@ -23,7 +23,6 @@ def start
       #  @game.play
       #end
     end
-    #binding.pry
     puts "Woo hoo! The game has been won #{@times_won.length} times!"
   elsif input == "0"
     @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
@@ -52,6 +51,7 @@ def start
       start
     else
       puts "Later gator!"
+      exit
     end
   end
 end
