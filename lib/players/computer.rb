@@ -27,7 +27,6 @@ module Players
         elsif board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[1]] != " " && board.cells[combo[0]] == " "
           space = (combo[0]+1).to_s
         end
-        space
       end
 
 
@@ -59,13 +58,13 @@ module Players
       #   end
       # end
 
-      if !board.taken?("5")
+      if space == "" && !board.taken?("5")
         space = "5"
-      elsif !board.taken?("1")
+      elsif space == "" && !board.taken?("1")
         space = "1"
-      elsif !board.taken?("3")
+      elsif space == "" && !board.taken?("3")
         space = "3"
-      elsif !board.full?
+      elsif space == "" && !board.full?
         board.cells.each_with_index do |cell, i|
           if cell == " "
             space = (i+1).to_s
