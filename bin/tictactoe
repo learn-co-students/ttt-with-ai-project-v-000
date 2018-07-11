@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
+require_relative '../lib/board.rb'
+require_relative '../lib/game.rb'
+require_relative '../lib/player.rb'
+require_relative '../lib/players/computer.rb'
+require_relative '../lib/players/human.rb'
 require_relative '../config/environment'
+exit = false
+while exit == false
+  puts "Welcome to Tic Tac Toe!"
+  puts "Would you like to play with 0, 1 or 2 players?"
+  input = gets.strip
+  while input != "0" && input != "1" && input != "2"
+    puts "I'm sorry I didn't catch that. Would you like to play with 0, 1 or 2 players? enter: 0 or 1 or 2"
+    input = gets.strip
+  end
+  if input == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  elsif input == "1"
+    puts "Would you like to be X or O?"
+    input = gets.strip
+    while input != "X" && input != "O"
+      puts "I'm sorry I didn't catch that. Would you like to be X or O? enter: X or O"
+      input = gets.strip
+    end
+    if input == "X"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    else
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    end
+  else
+    puts "Which player would like to be X and go first? (Enter any character)"
+    input = gets.strip
+    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  end
+  game.play
+  puts "Would you like to play again (Enter Yes/No)"
+  input = gets.strip
+  while input != "Yes" && input != "No"
+    puts "Would you like to play again (Enter Yes/No)"
+    input = gets.strip
+  end
+  if input == "Yes"
+    exit = false
+  else
+    exit = true
+  end
+end
