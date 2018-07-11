@@ -41,7 +41,7 @@ module Players
         input = blocking_move + 1
       when center = " "
         input = 5
-      when opposite_corner != nil && @board.taken?(opposite_corner) == false
+      when opposite_corner != nil && !(@board.taken?(opposite_corner))
         input = opposite_corner
       when corner
         input = corner + 1
