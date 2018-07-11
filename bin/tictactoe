@@ -5,7 +5,7 @@
 #Ask the user for who should go first and be "X".
 #Use the input to correctly initialize a Game with the appropriate player types and token values.
 #When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
-
+#require 'pry'
 require_relative '../config/environment'
 puts "Welcome to Tic Tac Toe!"
 
@@ -13,20 +13,25 @@ def start
   puts "Which type of game would you like to play: 0, 1 or 2 player...or wargames?"
   input = gets.strip
   if input == "wargames" || input == "Wargames" || input == "wg"
-    @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-    @times_won = 0
+    @times_won = []
     100.times do
+      @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       @game.play
-      #@times_won += 1 if @game.won? == true
+      @times_won << "y" if @game.won? != nil
+      #if @game.draw? == true
+      #  @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      #  @game.play
+      #end
     end
-    puts "Woo hoo! The game has been won #{@times_won} times!"
+    #binding.pry
+    puts "Woo hoo! The game has been won #{@times_won.length} times!"
   elsif input == "0"
     @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
     @game.play
   elsif input == "1"
     puts "Who should play first, Human or Computer?"
     input_type = gets.strip
-    if input_type == "Human" || input_type == "human"
+    if input_type == "h" || input_type == "Human" || input_type == "human"
       @game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       @game.play
     else

@@ -44,7 +44,7 @@ class Game
     if @board.valid_move?(input)
       @board.update(input, current_player)
       @board.display
-    elsif input.to_i.between?(1,9). == false
+    elsif input.to_i.between?(1,9) == false
       puts "Sorry, invalid move...try again"
       turn
     else
@@ -77,30 +77,31 @@ class Game
         end
       end
       puts "Woo hoo! The game has been won #{@games_won} times!"
+
     elsif input == 0
       @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-      @game.turn
+      @game.play
     elsif input == 1
       puts "Who should play first, Human or Computer?"
       input = gets.strip
       if input == "Human" || input == "human" || input == "h"
         @game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-        #@game.turn
+        @game.play
       else
         @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-        @game.turn
+        @game.play
       end
     elsif input == 2
       @game = Game.new
-      @game.turn
+      @game.play
     else
       start
     end
 
     if @game.over == true
       puts "Would you like to play again?"
-      input = gets.strip
-      if input == "yes"
+      input_go = gets.strip
+      if input_go == "yes" || input_go == "y"
         start
       else
         puts "Later gator!"
