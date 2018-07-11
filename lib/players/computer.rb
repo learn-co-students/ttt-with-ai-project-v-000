@@ -62,7 +62,7 @@ module Players
         (@board.cells[combo[0]] == token && @board.cells[combo[1]] == token && @board.cells[combo[2]] == " ") || (@board.cells[combo[2]] == token && @board.cells[combo[1]] == token && @board.cells[combo[0]] == " ") || (@board.cells[combo[0]] == token && @board.cells[combo[2]] == token && @board.cells[combo[1]] == " ")
       end
       if winning_row != nil
-        winning_cell = winning_row.find {|cell| @board.cells(cell) == " "}
+        winning_cell = winning_row.find {|cell| @board.cells[cell] == " "}
       end
     end
 
@@ -71,12 +71,12 @@ module Players
         (@board.cells[combo[0]] == opponent && @board.cells[combo[1]] == opponent && @board.cells[combo[2]] == " ") || (@board.cells[combo[2]] == opponent && @board.cells[combo[1]] == opponent && @board.cells[combo[0]] == " ") || (@board.cells[combo[0]] == opponent && @board.cells[combo[2]] == opponent && @board.cells[combo[1]] == " ")
       end
       if winning_row != nil
-        winning_cell = winning_row.find {|cell| @board.cells(cell) == " "}
+        winning_cell = winning_row.find {|cell| @board.cells[cell] == " "}
       end
     end
 
     def center
-      @board.cells[4]
+      @board.cells[4] == " "
     end
 
     def opposite_corner
