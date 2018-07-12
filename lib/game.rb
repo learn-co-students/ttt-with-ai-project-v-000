@@ -26,6 +26,7 @@ class Game
     end
   end
 
+  #returns the first win combination that has all three of the items in the array filled
   def won?
     WIN_COMBINATIONS.detect do |combo|
       board.taken?(combo[1]+1) && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
@@ -40,9 +41,10 @@ class Game
     draw? || won?
   end
 
+  #changed from original code to eliminate calling methods when unncessesary and slowing down programs
   def winner
-    if won?
-      board.cells[won?[0]]
+    if won = won?
+      board.cells[won.first]
     else
       nil
     end
