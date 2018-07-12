@@ -1,3 +1,69 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def get_players
+  puts "How many players?"
+  num = gets.strip.to_i
+  while num < 0 || num > 2
+    puts "You man only have 0, 1, or 2 players"
+    num = gets.strip.to_i
+  end
+  case num
+  when 0
+    puts "Watch two computers battle."
+  when 1
+    puts "Man vs. Machine"
+  when 2
+    puts "Man vs. Man"
+  end
+  num
+end
+
+def assign_x
+  puts "Which player moves first as X? (human/computer)"
+  player = gets.strip.downcase
+  case player
+  when "human"
+    puts "Human will go first as Player X"
+  when "computer"
+    puts "Computer will go first as Player X"
+  else
+    puts "You must type human or computer"
+    player = assign_x
+  end
+  player
+end
+
+
+puts "Welcome..."
+
+num = get_players.to_i
+p1 = nil
+p2 = nil
+case num
+when 0
+  puts "Loading intelligence..."
+  p1 = Players::Computer.new("X")
+  p2 = Players::Computer.new("O")
+when 1
+  player_x = assign_x
+  if player_x == "computer"
+    puts "Loading intelligence..."
+    p1 = Players::Computer.new("X")
+    p2 = Players::Human.new("O")
+  else
+    puts "Loading intelligence..."
+    p1 = Players::Human.new("X")
+    p2 = Players::Computer.new("O")
+  end
+when 2
+  p1 = Players::Human.new("X")
+  p2 = Players::Human.new("O")
+end
+
+
+puts "Game time."
+game = Game.new(p1, p2)
+game.play
