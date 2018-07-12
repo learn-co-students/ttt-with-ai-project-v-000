@@ -13,11 +13,7 @@ module Players
     def move(board)
       sleep(1)
       ai_board = translate_board(board)
-<<<<<<< HEAD
       move = self.game_tree.get_minimax_move(ai_board)
-=======
-      move = self.game_tree.get_move(ai_board)
->>>>>>> 0c2006c8eebfdc544514995f134e0adbd23d68b3
       if move.nil?
         move = self.game_tree.available_moves(translate_board(board))[0]
       end
