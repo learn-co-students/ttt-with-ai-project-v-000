@@ -45,7 +45,7 @@ class Game
       @board.update(input, current_player)
       @board.display
     elsif input.to_i.between?(1,9) == false
-      puts "Sorry, invalid move...try again"
+      puts "Sorry, that won't do...try again"
       turn
     else
       puts "Seat's taken...try again"
@@ -99,13 +99,15 @@ class Game
     end
 
     if @game.over == true
-      puts "Would you like to play again?"
+      puts "Another round?"
       input_go = gets.strip
       if input_go == "yes" || input_go == "y"
         start
-      else
-        puts "Later gator!"
+      elsif input_go == "no" || input_go == "n"
+        puts "That was fun. Later gator!"
         exit
+      else
+        puts "Sorry, what was that...?"
       end
     end
   end

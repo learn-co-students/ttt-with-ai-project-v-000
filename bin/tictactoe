@@ -18,7 +18,7 @@ def start
       @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       @game.play
       @times_won << "y" if @game.won? != nil
-      #if @game.draw? == true
+      #while @game.draw?
       #  @game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
       #  @game.play
       #end

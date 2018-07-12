@@ -15,22 +15,21 @@ module Players
     CORNERS = [0, 2, 8, 6]
 
     #winning move?
-    #a. iterate over winning combos and see if any of them have 2 cells that equal current_player.token and one valid_move?
+    #a. iterate over winning combos and see if any of them have 2 cells that equal current's player token and one valid move?
     #b. winning move
     #block?
-    #a. iterate over winning combos and see if any of them have 2 cells that equal other_player.token and one valid_move?
+    #a. iterate over winning combos and see if any of them have 2 cells that equal opponent's token and one valid move?
     #b. blocking move
     #center?
-    #a. check if board.cells[4] is a valid move
+    #a. check if cell 5 is a valid move
     #b. take center
     #corners?
-    #a. iterate over the corners and see if any of them == other_player.token
+    #a. iterate over the corners and see if any of them are taken
     #b. if yes take the opposite corner
-    #c. if no iterate over the corners and see if any of them == current_player.token
-    #d. if yes take the opposite corner
-    #e. if no take any corner
+    #c. if no take any corner
     #random
     #a. make random move
+
     def move(board)
       @board = board
 
@@ -39,9 +38,9 @@ module Players
         input = winning_move + 1
       when blocking_move != nil
         input = blocking_move + 1
-      when center = " "
+      when center
         input = 5
-      when opposite_corner != nil && !(@board.taken?(opposite_corner))
+      when opposite_corner != nil && !@board.taken?(opposite_corner)
         input = opposite_corner
       when corner
         input = corner + 1
@@ -70,6 +69,7 @@ module Players
       winning_row = WIN_COMBINATIONS.find do |combo|
         (@board.cells[combo[0]] == opponent && @board.cells[combo[1]] == opponent && @board.cells[combo[2]] == " ") || (@board.cells[combo[1]] == opponent && @board.cells[combo[2]] == opponent && @board.cells[combo[0]] == " ") || (@board.cells[combo[2]] == opponent && @board.cells[combo[0]] == opponent && @board.cells[combo[1]] == " ")
       end
+      #binding.pry
       if winning_row != nil
         winning_cell = winning_row.find {|cell| @board.cells[cell] == " "}
       end
@@ -94,8 +94,12 @@ module Players
       end
     end
 
-    def corner
+    def corners
       CORNERS.shuffle!
+    end
+
+    def corner
+    corners.find {|corner| @board.cells[corner] == " "}
     end
   end
 end
