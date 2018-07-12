@@ -1,7 +1,21 @@
+=begin
+  - make center a method again, called take_center
+  - split corners_or_edges into different methods, named take_open_corner or take_open_edge
+  - split win_or_block into seperate methods, winning_move and blocking_move
+=end
 
 module Players
   class Computer < Player
     attr_reader :enemy
+
+    def move(board)
+      @enemy = token == 'O' ? 'X' : 'O'
+
+      win_or_block(board) ||
+      center(board) ||
+      counter_corner(board) ||
+      corners_or_edges(board)
+    end
 
     def win_or_block(board)
       wob_move = nil
@@ -22,6 +36,10 @@ module Players
       end
 
       wob_move
+    end
+
+    def center(board)
+      '5' if !board.taken?('5')
     end
 
     def counter_corner(board)
@@ -47,13 +65,6 @@ module Players
       edges.shuffle.detect do |space|
         !board.taken?(space)
       end
-    end
-
-    def move(board)
-      @enemy = token == 'O' ? 'X' : 'O'
-
-      win_or_block(board) || if !board.taken?('5') then '5' end ||
-      counter_corner(board) || corners_or_edges(board)
     end
 
   end
