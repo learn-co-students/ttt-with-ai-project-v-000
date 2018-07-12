@@ -37,7 +37,7 @@ class Board
   end
 
   def valid_move?(space)
-    space.to_i < 10 && space.to_i > 0 && taken?(space) == false
+    space.to_i.between?(1,9) && !taken?(space)
   end
 
   def update(space, player)
