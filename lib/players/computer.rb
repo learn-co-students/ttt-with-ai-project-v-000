@@ -29,7 +29,6 @@ module Players
     #c. if no take any corner
     #random
     #a. make random move
-
     def move(board)
       @board = board
 
