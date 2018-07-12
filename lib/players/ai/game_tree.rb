@@ -1,3 +1,4 @@
+
 class TicTacToeTree < Tree
 
     WIN_COMBINATIONS = [
@@ -30,7 +31,6 @@ class TicTacToeTree < Tree
 
         construct_tree(true)
         self.assign_minimax_score
-       # @opponent_tree = opponent.nil? ? opponentTicTacToeTree.new(!first, self) : opponent
 
     end
 
@@ -69,12 +69,11 @@ class TicTacToeTree < Tree
                         #get their next possilbe move, and evaluate for a loss
                         their_temp_board[their_move] = Type.opponent
                         if win?(opponent_spaces(their_temp_board))
-                            ############################TESTING DIDLOSE###############
                             # assume the opponent will take the winning move
                             their_moves.clear
                             their_moves << {{move: my_avail_move, score: nil} => {board: Type.lose, score: -10}}
                         else
-                            # their_moves << {my_avail_move => their_temp_board} unless did_lose
+                            # their_moves << {my_avail_move => their_temp_board}
                             their_moves << {{move: my_avail_move, score: nil} => {board: their_temp_board, score: nil}}
                         end
                     end
@@ -241,18 +240,6 @@ class TicTacToeTree < Tree
         min
     end
 
-    # def reverse_player_board(board)
-    #     board.map do |cell|
-    #         if cell == 1
-    #             0
-    #         elsif cell == 0
-    #             1
-    #         else
-    #             cell
-    #         end
-    #     end
-    # end
-
 
     def get_score(node = self.root_node)
         return_data = []
@@ -321,6 +308,7 @@ class TicTacToeTree < Tree
                 hash[v.data[:move]] << v
             else
                 hash[v.data[:move]] = [v]
+
             end
         end
         hash
