@@ -2,7 +2,7 @@ class Board
   attr_accessor :cells, :player
 
   def initialize
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    @cells = self.reset!
   end
 
   def display
@@ -13,26 +13,23 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+  #cleaner than writing out and array with 9 spaces
   def reset!
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    @cells = Array.new(9, " ")
   end
 
   def position(space)
     @cells[space.to_i - 1]
   end
 
+  #as soon as cell does not equal " ", the method will return false.
   def full?
-   !@cells.include?(" ")
+   cells.all? {|cell| cell != " "}
   end
 
+  #using count instead of a counter reduces the lines of code needed
   def turn_count
-    counter = 0
-    @cells.each do |cell|
-      if cell != " "
-        counter += 1
-      end
-    end
-    counter
+    cells.count {|cell| cell == "X" || cell == "O"}
   end
 
   def taken?(space)
