@@ -1,3 +1,4 @@
+require 'pry'
 class Game 
 
 attr_accessor :board, :player_1, :player_2, :timer 
@@ -13,16 +14,16 @@ WIN_COMBINATIONS = [
   [6, 4, 2]
   ]
 
-  def initialize(player_1,player_2,board = Board.new)
+  def initialize(board = Board.new, player_1 = Player::Human.new("X"), player_2 = Player::Human.new("O"))
+    binding.pry 
+    @Board = board 
     @player_1 = player_1
     @player_2 = player_2
-    @board = board
-    @timer = timer 
+ 
   end 
  
- def board(board)
-   board = Board
-end 
+
 
 
 end 
+
