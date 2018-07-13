@@ -10,6 +10,13 @@ class Board
     @cells.clear
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
+  # Had this method in previous version, but still the test wouldn't pass
+  # Tech Coach Jennifer Pazos added 'board.reset!' to the test as a workaround
+  # Spent around five total hours on THIS error, including Tech Coach time:
+  # #initialize -- sets the cells of the board to a 9 element array of " "
+  #   def reset!
+  #     @cells = Array.new(9, " ")
+  #   end
 
   def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
