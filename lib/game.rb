@@ -23,6 +23,30 @@ def initialize (player_1 = Players::Human.new("X") , player_2 = Players::Human.n
 
 end
 
+  def current_player 
+  board.turn_count.even? ?  player_1 : player_2
+  end 
+
+
+def won?
+    WIN_COMBINATIONS.find do |smack_down|
+      board.cells[smack_down[0]] == board.cells[smack_down[1]] && board.cells[smack_down[1]] == board.cells[smack_down[2]] && board.cells[smack_down[0]]  != " "
+  end
+  end 
+
+
+def draw? 
+  board.full? && !won?
+end 
+
+def over? 
+  board.full?
+end 
+
+
+ def winner
+    board.cells[won?[0]] || board.cells[won?[1]] if won?
+  end
 
 
 
