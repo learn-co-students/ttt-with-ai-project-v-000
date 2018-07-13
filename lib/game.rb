@@ -20,6 +20,9 @@ WIN_COMBINATIONS = [
     @timer = timer 
   end 
  
+ def board(board)
+   board = Board
+end 
 
 
 end 
