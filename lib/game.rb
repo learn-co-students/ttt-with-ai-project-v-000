@@ -71,4 +71,34 @@ class Game
   end
 
 
+  def start
+    input = ""
+    while input != "exit"
+      puts "Welcome to Tic Tac Toe! Enter 'Hi!' to display the board."
+      puts "Choose how many players this game: Enter '0', '1', or '2'."
+      puts "Choose Player X and Player O. Enter 'X' or 'O'."
+      puts "Good luck! Enter 'start'."
+      puts "If you want to play again, enter 'Y'."
+      puts "To quit, type 'exit'."
+
+
+      input = gets.strip
+
+      case input
+
+        when "Hi!","Y"
+          @board.display
+        when "0", "1", "2"
+          initialize(player_1, player_2, board)
+        when "X", "O"
+          current_player
+        when "start"
+          play
+        when "exit"
+          over?
+      end
+    end
+  end
+
+
 end
