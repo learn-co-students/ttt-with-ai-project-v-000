@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   attr_accessor :cells
 
@@ -27,6 +28,7 @@ class Board
 
   def turn_count
     cells.count {|token| token == "X" || token == "O"}
+    
   end
 
   def taken?(user_input)
