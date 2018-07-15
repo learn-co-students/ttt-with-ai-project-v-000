@@ -10,11 +10,36 @@ class Board
   end
 
   def initialize
-    @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    reset!
   end
 
-  def display_board
-    print "@cells"
+  def display_board(cells)
+    prints " #{cells[0]} | #{cells[1]} | #{cells[2]} \n-----------\n #{cells[3]} | #{cells[4]} | #{cells[5]} \n-----------\n #{cells[6]} | #{cells[7]} | #{cells[8]} \n"
   end
+
+  def position(user_input)
+    @cells[user_input.to_i - 1]
+  end
+
+  def full?
+    cells.all?{|token| token == "X" || token == "O"}
+  end
+
+  def turn_count
+    cells.count {|token| token == "X" || token == "O"}
+  end
+
+  def taken?(user_input)
+    position(user_input) == "X" || position(user_input) == "O"
+  end
+
+  def valid_move?(user_input)
+    (user_input.to_i).between?(1, 9) && !taken?(user_input)
+  end
+
+  def update
+  end
+
+
 
 end
