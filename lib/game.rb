@@ -46,6 +46,10 @@ class Game
     !won? && board.full?
   end
 
+  def over?
+    won? || draw?
+  end
+
 
 
 end
