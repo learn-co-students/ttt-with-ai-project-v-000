@@ -187,5 +187,5 @@ class Game
       self.play_again?
     end
   end
-  
+
 end
