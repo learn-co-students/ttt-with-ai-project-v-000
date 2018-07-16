@@ -1,7 +1,7 @@
 require 'pry'
 class Game
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :token
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -17,17 +17,18 @@ class Game
   #def board
   #  @board
   #end
-  def initialize(player_1 = Player.new("X"), player_2 = Player.new("O"), board = Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    @token = token
   end
 
   def current_player
     if board.turn_count.even?
-      "X"
+      player_1
     elsif board.turn_count.odd?
-      "O"
+      player_2
     end
   end
 
@@ -57,15 +58,17 @@ class Game
     end
   end
 
-  #def turn
-  #  puts "Please enter 1-9:"
-  #  user_input = gets.strip
-  #  if board.valid_move?(user_input)
-  #    board.position(user_input)
-  #  else
-  #    puts "Please enter 1-9:"
-  #  end
-  #end
+
+
+  def turn
+    puts "Please enter 1-9:"
+    
+    if board.valid_move?(user_input)
+      board.position(user_input)
+    else
+      puts "Please enter 1-9:"
+    end
+  end
 
 
 
