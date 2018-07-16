@@ -14,9 +14,7 @@ class Game
     [6,4,2]
   ]
 
-  #def board
-  #  @board
-  #end
+
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -60,11 +58,10 @@ class Game
 
 
 
-  def turn
-    puts "Please enter 1-9:"
-    
+  def turn(user_input)
     if board.valid_move?(user_input)
       board.position(user_input)
+
     else
       puts "Please enter 1-9:"
     end
