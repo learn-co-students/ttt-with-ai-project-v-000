@@ -21,6 +21,7 @@ class Board
   def position(user_input)
     @cells[user_input.to_i - 1]
 
+
   end
 
   def full?
@@ -29,7 +30,6 @@ class Board
 
   def turn_count
     cells.count {|token| token == "X" || token == "O"}
-
   end
 
   def taken?(user_input)
@@ -40,10 +40,11 @@ class Board
     (user_input.to_i).between?(1, 9) && !taken?(user_input)
   end
 
-  def update(position, current_player)
-    
-
+  def update(user_input, player)
+    @cells[user_input.to_i - 1] = player.token
+    display
   end
+
 
 
 
