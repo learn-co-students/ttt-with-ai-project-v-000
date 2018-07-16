@@ -25,9 +25,9 @@ class Game
 
   def current_player
     if board.turn_count.even?
-      token = "X"
+      "X"
     elsif board.turn_count.odd?
-      token = "O"
+      "O"
     end
   end
 
