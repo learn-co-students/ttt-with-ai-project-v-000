@@ -14,12 +14,13 @@ class Board
     reset!
   end
 
-  def display_board(cells)
-    prints " #{cells[0]} | #{cells[1]} | #{cells[2]} \n-----------\n #{cells[3]} | #{cells[4]} | #{cells[5]} \n-----------\n #{cells[6]} | #{cells[7]} | #{cells[8]} \n"
+  def display
+    print " #{cells[0]} | #{cells[1]} | #{cells[2]} \n-----------\n #{cells[3]} | #{cells[4]} | #{cells[5]} \n-----------\n #{cells[6]} | #{cells[7]} | #{cells[8]} \n"
   end
 
   def position(user_input)
     @cells[user_input.to_i - 1]
+
   end
 
   def full?
@@ -28,7 +29,7 @@ class Board
 
   def turn_count
     cells.count {|token| token == "X" || token == "O"}
-    
+
   end
 
   def taken?(user_input)
@@ -39,7 +40,9 @@ class Board
     (user_input.to_i).between?(1, 9) && !taken?(user_input)
   end
 
-  def update(user_input, player)
+  def update(position, current_player)
+    
+
   end
 
 

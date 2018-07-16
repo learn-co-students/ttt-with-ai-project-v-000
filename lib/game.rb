@@ -50,6 +50,22 @@ class Game
     won? || draw?
   end
 
+  def winner
+    if winning_combo = won?
+      board.cells[winning_combo.first]
+    end
+  end
+
+  #def turn
+  #  puts "Please enter 1-9:"
+  #  user_input = gets.strip
+  #  if board.valid_move?(user_input)
+  #    board.position(user_input)
+  #  else
+  #    puts "Please enter 1-9:"
+  #  end
+  #end
+
 
 
 end
