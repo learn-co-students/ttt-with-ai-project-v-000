@@ -27,6 +27,19 @@ class Board
   end
 
   def full?
-
+    self.cells.find{|p| p == " "} ? false : true
   end
+
+  def turn_count
+    self.cells.select{|p| p != " "}.length
+  end
+
+  def taken?(position)
+    self.cells[position.strip.to_i-1] == " " ? false : true
+  end
+
+  def valid_move?(position)
+    position.strip.to_i <= 9 && position.strip.to_i >= 1 && !taken?(position)
+  end
+
 end
