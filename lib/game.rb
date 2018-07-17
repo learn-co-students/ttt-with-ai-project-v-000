@@ -23,33 +23,31 @@ def initialize (player_1 = Players::Human.new("X") , player_2 = Players::Human.n
 
 end
 
-  def current_player 
+def current_player 
   board.turn_count.even? ?  player_1 : player_2
-  end 
+end 
   
   
-
-
 def won?
     WIN_COMBINATIONS.find do |smack_down|
       board.cells[smack_down[0]] == board.cells[smack_down[1]] && board.cells[smack_down[1]] == board.cells[smack_down[2]] && board.cells[smack_down[0]]  != " "
-  end
-  end 
+end
+end 
 
 
 def draw? 
   board.full? && !won?
 end 
 
-def over? 
-  board.full?
-end 
+def over?
+     (won? || draw?) ? true : false
+     
+end
 
 
- def winner
+def winner
     board.cells[won?[0]] || board.cells[won?[1]] if won?
-  end
-
+end
 
 
 def turn
@@ -60,7 +58,7 @@ def turn
   else puts "Please enter a number 1-9:"
     board.display 
     turn 
-  end 
+end 
   board.display
 end 
   
@@ -69,17 +67,11 @@ end
 def play 
   turn until over? 
   if won? 
-    puts "Congrats #{winner}"
+    puts "Congratulations #{winner}!"
   else draw? 
-    puts "better luck next time"
-  end 
+    puts "Cat's Game!"
 end 
-
-
-
-
-
-
+end 
 
 
 end 
