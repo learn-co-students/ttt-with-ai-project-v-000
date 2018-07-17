@@ -76,17 +76,71 @@ class Game
     end
 
     def turn
-      puts "Please enter 1-9:"
-      input =  gets.strip  #STDIN.gets.strip crashes #looks like i'm not receiving anything though but test suite should be
-      #binding.pry
-      index = input.to_i
-      if @board.valid_move?(index)
-        @board.update(index, current_player)
-        @board.display
+      choice = current_player.move(board) #wasn't working with gets, this goes back and gets the players input through move
+      choice = choice.to_i
+      if board.valid_move?(choice)
+        board.update(choice, current_player)
+        board.display
       else
         turn
       end
-  end
+    end
+
+    def play
+      until over?
+        turn
+      end
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
+    end
+
+  def start
+
+      puts "Welcome to Tic Tac Toe!"
+
+      puts "How many players? 0, 1, or 2?"
+
+      input = gets.strip.to_i
+
+    if input == 0
+        player_uno = Players::Computer.new
+        player_dos = Players::Computer.new
+          puts "Which Computer should go first? 1 or 2?"
+          answer = gets.strip.to_i
+            if answer == 1
+              game = Game.new(player_uno("X"), player_dos("O"))
+            else
+              game = Game.new(player_dos("X"), player_uno("O"))
+            end
+    elsif input == 1
+        player_uno = Players::Computer.new
+        player_dos = Players::Human.new
+          puts "Which should go first? Computer or human?"
+            answer = gets.strip
+          if answer == "Computer"
+            game = Game.new(player_uno("X"), player_dos("O"))
+          else
+            game = Game.new(player_dos("X"), player_uno("O"))
+          end
+
+    elsif input == 2
+      player_uno = Players::Human.new
+      player_dos = Players::Human.new
+        puts "Which player should go first? 1 or 2?"
+        answer = gets.strip.to_i
+          if answer == 1
+            game = Game.new(player_uno("X"), player_dos("O"))
+          else
+            game = Game.new(player_dos("X"), player_uno("O"))
+          end
+    end
+    end
+
+    
+
 
 
 
