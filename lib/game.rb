@@ -31,10 +31,18 @@ class Game
   end
 
   def draw?
+    self.board.full? && !self.won?
+  end
 
+  def over?
+    self.draw? || self.won?
   end
 
   def winner
+    self.board.cells[self.won?[0]] if self.won?
+  end
+
+  def turn
   end
 
   def start
@@ -43,8 +51,7 @@ class Game
   def play
   end
 
-  def turn
-  end
+
 
 
 end
