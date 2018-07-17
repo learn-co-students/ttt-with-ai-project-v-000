@@ -26,6 +26,8 @@ end
   def current_player 
   board.turn_count.even? ?  player_1 : player_2
   end 
+  
+  
 
 
 def won?
@@ -50,6 +52,36 @@ end
 
 
 
+def turn
+  puts "Lets play!" 
+  input_move = current_player.move(board)
+  if board.valid_move?(input_move)
+    board.update(input_move, current_player)
+  else puts "Please enter a number 1-9:"
+    board.display 
+    turn 
+  end 
+  board.display
+end 
+  
+ 
+
+def play 
+  turn until over? 
+  if won? 
+    puts "Congrats #{winner}"
+  else draw? 
+    puts "better luck next time"
+  end 
+end 
+
+
+
+
+
+
+
 
 end 
+
 
