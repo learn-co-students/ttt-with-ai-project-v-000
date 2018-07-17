@@ -17,6 +17,12 @@ class TicTacToe
     play_again?
   end
 
+  def game_welcome
+    puts "What kind of game would you like to play: '0', '1', or '2' players?"
+    self.game_kind = gets.strip
+    valid_game_kind
+  end
+
   def valid_game_kind
     options = ['0', '1', '2']
 
@@ -25,19 +31,6 @@ class TicTacToe
     else
       puts 'invalid game type'
       game_welcome
-    end
-  end
-
-  def game_welcome
-    puts "What kind of game would you like to play: '0', '1', or '2' players?"
-    self.game_kind = gets.strip
-    valid_game_kind
-  end
-
-  def valid_first_player
-    unless self.first_player == 'HUMAN' || self.first_player == 'COMPUTER'
-      puts 'invalid answer as to who goes first'
-      goes_first
     end
   end
 
@@ -52,6 +45,13 @@ class TicTacToe
         puts "You or Friend?"
         self.first_player = gets.strip
       end
+    end
+  end
+
+  def valid_first_player
+    unless self.first_player == 'HUMAN' || self.first_player == 'COMPUTER'
+      puts 'invalid answer as to who goes first'
+      goes_first
     end
   end
 

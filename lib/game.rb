@@ -21,11 +21,11 @@ class Game
   end
 
   def won?
-    result = self.class.win_combinations.detect do |set|
-      trinity = [ board.cells[ set[0] ], board.cells[ set[1] ],
-      board.cells[ set[2] ] ]
+    result = self.class.win_combinations.detect do |combo|
+      three_connected_spots = [ board.cells[ combo[0] ], board.cells[ combo[1] ],
+      board.cells[ combo[2] ] ]
 
-      trinity == ['X', 'X', 'X'] || trinity == ['O', 'O', 'O']
+      three_connected_spots == ['X', 'X', 'X'] || three_connected_spots == ['O', 'O', 'O']
     end
   end
 
@@ -43,6 +43,7 @@ class Game
 
   def turn
     choice = current_player.move(board)
+    
     if board.valid_move?(choice)
       board.update(choice, current_player)
       board.display
@@ -56,5 +57,5 @@ class Game
     turn until over?
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
-  
+
 end

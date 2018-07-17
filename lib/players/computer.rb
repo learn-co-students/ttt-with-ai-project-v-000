@@ -1,8 +1,3 @@
-=begin
-  - make center a method again, called take_center
-  - split corners_or_edges into different methods, named take_open_corner or take_open_edge
-  - split win_or_block into seperate methods, winning_move and blocking_move
-=end
 
 module Players
   class Computer < Player
@@ -11,38 +6,47 @@ module Players
     def move(board)
       @enemy = token == 'O' ? 'X' : 'O'
 
-      win_or_block(board) ||
-      center(board) ||
-      counter_corner(board) ||
-      corners_or_edges(board)
+      winning_move(board) ||
+      block_winning_move(board) ||
+      take_center(board) ||
+      take_opposite_corner(board) ||
+      take_open_corner(board) ||
+      take_open_edge(board)
     end
 
-    def win_or_block(board)
-      wob_move = nil
+    def winning_move(board)
+      find_win_threat(board, token)
+    end
 
-      Game.win_combinations.each do |set|
-        return wob_move if wob_move
+    def block_winning_move(board)
+      find_win_threat(board, enemy)
+    end
 
-        trio = [ board.cells[ set[0] ], board.cells[ set[1] ],
-        board.cells[ set[2] ] ]
+    def find_win_threat(board, player_piece)
+      critical_move = nil
 
-        if trio.sort == [' ', token, token] || trio.sort == [' ', enemy, enemy]
-          trio.each_with_index do |area, index|
-            if area == ' '
-              wob_move = "#{set[index] + 1}"
-            end
+      Game.win_combinations.each do |combo|
+        return "#{critical_move + 1}" if critical_move
+
+        three_connected_spots = [ board.cells[ combo[0] ],
+                                  board.cells[ combo[1] ],
+                                  board.cells[ combo[2] ] ]
+
+        if three_connected_spots.sort == [' ', player_piece, player_piece]
+          three_connected_spots.each_with_index do |spot, index|
+            critical_move = combo[index] if spot == ' '
           end
         end
       end
 
-      wob_move
+      critical_move
     end
 
-    def center(board)
+    def take_center(board)
       '5' if !board.taken?('5')
     end
 
-    def counter_corner(board)
+    def take_opposite_corner(board)
       opposite_corners = [ ['1', '9'], ['9', '1'], ['3', '7'], ['7', '3'] ]
       corner_move = nil
 
@@ -55,16 +59,16 @@ module Players
       corner_move
     end
 
-    def corners_or_edges(board)
+    def take_open_corner(board)
       corners = ['1','3','7','9']
+
+      corners.shuffle.detect { |spot| !board.taken?(spot) }
+    end
+
+    def take_open_edge(board)
       edges = ['2','4','6','8']
 
-      corners.shuffle.detect do |spot|
-        !board.taken?(spot)
-      end ||
-      edges.shuffle.detect do |space|
-        !board.taken?(space)
-      end
+      edges.shuffle.detect { |spot| !board.taken?(spot) }
     end
 
   end
