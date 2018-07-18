@@ -43,6 +43,14 @@ class Game
   end
 
   def turn
+    puts "Please enter 1-9:"
+    pos = self.current_player.move(self.board)
+
+    if board.valid_move?(pos)
+      board.update(pos, self.current_player)
+      board.display
+      else turn
+    end
   end
 
   def start

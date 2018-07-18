@@ -1,3 +1,6 @@
+
+require 'pry'
+
 class Board
 
   attr_accessor :cells
@@ -19,11 +22,11 @@ class Board
   end
 
   def position(p = gets)
-    self.cells[p.strip.to_i-1]
+    self.cells[p.to_i-1]
   end
 
   def update(position, player)
-    self.cells[position.strip.to_i-1] = player.token
+    self.cells[position.to_i-1] = player.token
   end
 
   def full?
@@ -35,11 +38,12 @@ class Board
   end
 
   def taken?(position)
-    self.cells[position.strip.to_i-1] == " " ? false : true
+    #self.cells[position.strip.to_i-1] == " " ? false : true
+    self.position(position) == " " ? false : true
   end
 
   def valid_move?(position)
-    position.strip.to_i <= 9 && position.strip.to_i >= 1 && !taken?(position)
+    position.to_i <= 9 && position.to_i >= 1 && !taken?(position.to_i)
   end
 
 end
