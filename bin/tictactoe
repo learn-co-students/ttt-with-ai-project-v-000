@@ -11,7 +11,7 @@ def call
   if players == "1"
     puts "Who would you like to go first and be 'X', you (1) or the computer (2)?"
     player_x = gets.to_i
-      if player_x == "1"
+      if player_x == 1
         player_1 = Players::Human.new("X")
         player_2 = Players::Computer.new("O")
       else
