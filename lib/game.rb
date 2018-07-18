@@ -43,6 +43,7 @@ class Game
   end
 
   def turn
+    puts "It is #{self.current_player.token}'s turn!"
     puts "Please enter 1-9:"
     pos = self.current_player.move(self.board)
 
@@ -54,6 +55,7 @@ class Game
   end
 
   def play
+    # self.board.cells=["X", "X", " ", " ", " ", " ", " ", " ", "O"]
     while !self.over?
       turn
     end
