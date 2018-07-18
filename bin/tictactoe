@@ -3,26 +3,50 @@
 require_relative '../config/environment'
 
 
-  puts "Welcome to Tic-Tac-Toe!"
-  puts "What kind of game do you want to play? 0, 1 or 2 players? (enter 0, 1 or 2)"
-  players = gets.to_i
 
-  if players == 1
+def call
+  puts "What kind of game do you want to play? 0, 1 or 2 players or wargames? (enter 0, 1, 2 or wargames)"
+  players = gets.strip
+
+  if players == "1"
     puts "Who would you like to go first and be 'X', you (1) or the computer (2)?"
     player_x = gets.to_i
-      if player_x == 1
+      if player_x == "1"
         player_1 = Players::Human.new("X")
         player_2 = Players::Computer.new("O")
       else
         player_1 = Players::Computer.new("X")
         player_2 = Players::Human.new("O")
       end
-  elsif players == 2
+
+      Game.new(player_1, player_2, Board.new).play
+  elsif players == "2"
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
-  else
+
+    Game.new(player_1, player_2, Board.new).play
+  elsif players == "0"
     player_1 = Players::Computer.new("X")
     player_2 = Players::Computer.new("O")
-  end
 
-  Game.new(player_1, player_2, Board.new).play
+    Game.new(player_1, player_2, Board.new).play
+  else
+      results=[]
+      count = 0
+      100.times do
+        results<<Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+        count +=1
+        puts results.uniq
+        puts count
+        end
+      end
+
+end
+
+puts "Welcome to Tic-Tac-Toe!"
+  call
+puts "Would you like to play again? (y/N)"
+  input= gets.strip.downcase
+  if input == "y"
+    call
+  end

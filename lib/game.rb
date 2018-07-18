@@ -55,18 +55,16 @@ class Game
   end
 
   def play
-    # self.board.cells=["X", "X", " ", " ", " ", " ", " ", " ", "O"]
     while !self.over?
       turn
     end
     if self.won?
       puts "Congratulations #{self.winner}!"
+      self.winner
     elsif self.draw?
       puts "Cat's Game!"
+      "Cat's Game!"
     end
-  end
-
-  def start
   end
 
 end
