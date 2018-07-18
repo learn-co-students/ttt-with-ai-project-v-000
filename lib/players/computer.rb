@@ -1,20 +1,29 @@
 module Players
   class Computer < Player
+    attr_accessor :board
 
     def move(board)
-      array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        #binding.pry
-      if board.turn_count == 1
+      if !board.taken?(5)
+        choice = 5
+      elsif !board.taken?(1)
+        choice = 1
+      elsif !board.taken?(3)
+        choice = 3
+      elsif !board.taken?(7)
+        choice = 7
+      elsif !board.taken?(9)
+        choice = 9
+      elsif !board.taken?(2)
+        choice = 2
+      elsif !board.taken?(4)
         choice = 4
-      elsif board.valid_move?(choice = rand(1...9))
-        choice
-      else
-        array = array - choice 
-        move 
-      end 
-      "#{choice}" 
+      elsif !board.taken?(6)
+        choice = 6
+      elsif !board.taken?(8)
+        choice = 8
+      end
+      "#{choice}"
     end
 
   end
 end
-

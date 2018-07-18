@@ -2,16 +2,16 @@
 
 require_relative '../config/environment'
 
-Game.start
-Game.play
+ceeli = CLI.new
 
-if game.over?
-  puts "Would you like to play again? Y/n"
-  answer = gets.strip
+  if ceeli.game.over? #going into instance of game via CLI...calling here so that you're checking constantly whether game is over
+    puts "Would you like to play again? Y/n"
+    answer = gets.strip
+  end
+
   if answer == "Y"
-    Game.start
+    ceeli = CLI.new
   else
     puts "Later!"
     exit
   end
-end

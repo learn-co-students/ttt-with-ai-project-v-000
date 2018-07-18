@@ -54,19 +54,11 @@ class Game
     #can't call @board[0]because it's not an array, it's an object...call board.cells
 
     def draw?
-      if won? == false && @board.full? == true
-        true
-      else
-        false
-      end
+      !won? && @board.full?
     end
 
     def over?
-      if won? || @board.full? || draw?
-        true
-      else
-        false
-      end
+      won? || draw?
     end
 
     def winner
@@ -76,7 +68,7 @@ class Game
     end
 
     def turn
-      choice = current_player.move(board) #wasn't working with gets, this goes back and gets the players input through move
+      choice = current_player.move(board) #wasn't working with gets b/c nothing was passed in, this goes back and gets the players input through move
       choice = choice.to_i
       if board.valid_move?(choice)
         board.update(choice, current_player)
@@ -96,52 +88,6 @@ class Game
         puts "Cat's Game!"
       end
     end
-
-  def start
-
-      puts "Welcome to Tic Tac Toe!"
-
-      puts "How many players? 0, 1, or 2?"
-
-      input = gets.strip.to_i
-
-    if input == 0
-        player_uno = Players::Computer.new
-        player_dos = Players::Computer.new
-          puts "Which Computer should go first? 1 or 2?"
-          answer = gets.strip.to_i
-            if answer == 1
-              game = Game.new(player_uno("X"), player_dos("O"))
-            else
-              game = Game.new(player_dos("X"), player_uno("O"))
-            end
-    elsif input == 1
-        player_uno = Players::Computer.new
-        player_dos = Players::Human.new
-          puts "Which should go first? Computer or human?"
-            answer = gets.strip
-          if answer == "Computer"
-            game = Game.new(player_uno("X"), player_dos("O"))
-          else
-            game = Game.new(player_dos("X"), player_uno("O"))
-          end
-
-    elsif input == 2
-      player_uno = Players::Human.new
-      player_dos = Players::Human.new
-        puts "Which player should go first? 1 or 2?"
-        answer = gets.strip.to_i
-          if answer == 1
-            game = Game.new(player_uno("X"), player_dos("O"))
-          else
-            game = Game.new(player_dos("X"), player_uno("O"))
-          end
-    end
-    end
-
-    
-
-
 
 
 end
