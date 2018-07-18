@@ -49,6 +49,19 @@ module Players
         (board.cells[win_combo[1]] == board.cells[win_combo[2]] && board.cells[win_combo[0]] == " " && board.cells[win_combo[1]] != " ") ||
         (board.cells[win_combo[0]] == board.cells[win_combo[2]] && board.cells[win_combo[1]] == " " && board.cells[win_combo[0]] != " ")
       end
+
+      #Intereting way to rewrite this per solution
+
+      # Game::WIN_COMBINATIONS.find do |win_combo|
+      #   if win_combo.select{|i| board.cells[i]==token}.size == 2 && win_combo.any?{|i| board.cells[i] == " "}
+      #     block_cell = block_move.find {|blank| board.cells[blank] == " "}
+      #     block_cell+1
+      #   elsif win_combo.select{|i| board.cells[i]!=token and board.cells[i]!= " "}.size == 2 && win_combo.any?{|i| board.cells[i] == " "}
+      #     block_cell = block_move.find {|blank| board.cells[blank] == " "}
+      #     block_cell+1
+      #   end
+      # end
+
       #moves to try and gain a win
       make_move = Game::WIN_COMBINATIONS.select do |win_combo|
         (board.cells[win_combo[0]] == self.token && board.cells[win_combo[1]] == " " && board.cells[win_combo[2]] == " ") ||
