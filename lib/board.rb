@@ -32,4 +32,9 @@ class Board
   def taken?(input)
     @cells[input.to_i-1] != " "
   end
+  
+  def valid_move?(input)
+    !taken?(input.to_i-1) && input.to_i-1.between?(0,8)
+  end
+    
 end
