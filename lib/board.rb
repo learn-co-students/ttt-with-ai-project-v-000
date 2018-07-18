@@ -17,4 +17,19 @@ class Board
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
   
+  def position(input)
+    cells[input.to_i-1]
+  end
+  
+  def full?
+    @cells.all?{|square| square != " " }
+  end
+  
+  def turn_count
+    @cells.count{|square| square != " " }
+  end
+  
+  def taken?(input)
+    @cells[input.to_i-1] != " "
+  end
 end
