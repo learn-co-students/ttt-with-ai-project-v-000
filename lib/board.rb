@@ -34,7 +34,10 @@ class Board
   end
   
   def valid_move?(input)
-    !taken?(input.to_i-1) && input.to_i-1.between?(0,8)
+    !taken?(input) && input.to_i.between?(1,9)
+  end
+  
+  def update
   end
     
 end
