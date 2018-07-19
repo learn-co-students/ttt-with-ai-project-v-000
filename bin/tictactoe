@@ -32,12 +32,10 @@ def call
     Game.new(player_1, player_2, Board.new).play
   else
       results=[]
-      count = 0
-      100.times do
+        100.times do
         results<<Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
-        count +=1
-        puts results.uniq
-        puts count
+        puts "Wins: #{results.uniq}"
+        puts "Times played: #{results.length}"
         end
       end
 
