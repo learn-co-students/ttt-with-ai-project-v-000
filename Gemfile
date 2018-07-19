@@ -2,6 +2,12 @@
 source "https://rubygems.org"
 
 # gem "rails"
-gem 'rspec'
-gem 'pry'
 gem 'require_all'
+
+group :test do
+  gem 'rspec'
+end
+
+group :test, :development do
+  gem 'pry'
+end

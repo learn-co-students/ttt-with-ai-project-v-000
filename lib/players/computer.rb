@@ -28,13 +28,13 @@ module Players
       Game.win_combinations.each do |combo|
         return "#{critical_move + 1}" if critical_move
 
-        three_connected_spots = [ board.cells[ combo[0] ],
+        tokens_at_win_combo = [ board.cells[ combo[0] ],
                                   board.cells[ combo[1] ],
                                   board.cells[ combo[2] ] ]
 
-        if three_connected_spots.sort == [' ', player_piece, player_piece]
-          three_connected_spots.each_with_index do |spot, index|
-            critical_move = combo[index] if spot == ' '
+        if tokens_at_win_combo.sort == [' ', player_piece, player_piece]
+          critical_move = combo.detect do |index|
+            board.cells[index] == ' '
           end
         end
       end
