@@ -61,6 +61,7 @@ class Game
     #makes valid moves
     #asks for input again after a failed validation
     #changes to player 2 after the first turn
+    board.display
     player = current_player
     index = player.move(board)
     
@@ -77,6 +78,13 @@ class Game
     end
     puts "Congratulations #{winner}!" if won?
     puts "Cat's Game!" if draw?
+  end
+
+  def list_game_modes
+    puts "Pick a game mode."
+    puts "1. Computer vs Computer"
+    puts "2. Human vs Computer"
+    puts "3. Human vs Computer"  
   end
   
 end
