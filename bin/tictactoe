@@ -3,4 +3,4 @@
 require_relative '../config/environment'
 
 
-# Game.new
+Game.new.start
