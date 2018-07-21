@@ -63,10 +63,9 @@ class Game
   def turn
     @board.display
     puts "Please enter 1-9:"
-    input = gets
-    binding.pry
+    input = gets.chomp
     if !@board.valid_move?(input)
-    #  self.turn
+     self.turn
     end
     @board.update(input, self.current_player)
     @board.display
