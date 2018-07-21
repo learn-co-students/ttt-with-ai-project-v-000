@@ -60,15 +60,16 @@ class Game
     end
   end
 
-  def turn
-    @board.display
-    puts "Please enter 1-9:"
-    input = gets.chomp
-    if !@board.valid_move?(input)
-     self.turn
-    end
-    @board.update(input, self.current_player)
-    @board.display
-  end
-
+  #def turn
+  #  @board.display
+    #puts "Please enter 1-9:"
+    #input = gets.strip
+    #binding.pry
+  #  if !@board.valid_move?(input)
+     #self.turn
+  #   puts "turn"
+  #  end
+  #  @board.update(input, self.current_player)
+  #  @board.display
+  #end
 end
