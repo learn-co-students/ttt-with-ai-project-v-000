@@ -25,9 +25,51 @@ class Game
   def won?
     #binding.pry
     WIN_COMBINATIONS.detect do |combo|
-      @board.position(combo[0]) == @board.position(combo[1]) &&
-      @board.position(combo[1]) == @board.position(combo[2]) &&
-      @board.taken?(combo[0])
+      @board.position(combo[0]+1) == @board.position(combo[1]+1) &&
+      @board.position(combo[1]+1) == @board.position(combo[2]+1) &&
+      @board.taken?(combo[0]+1)
     end
   end
+
+  def draw?
+    !self.won? && @board.cells.all?{|token| token == "X" || token == "O"}
+  end
+
+  def full?
+    @board.cells.all?{|token| token == "X" || token == "O"}
+  end
+
+  def over?
+    self.won? || self.draw?
+  end
+
+  def winner
+    if winning_combo = won?
+      @winner = @board.position(winning_combo.first+1)
+    end
+  end
+
+  def play
+    while !self.over?
+      self.turn
+    end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw?
+      puts "Cats Game!"
+    end
+  end
+
+  def turn
+    @board.display
+    puts "Please enter 1-9:"
+    input = gets
+    binding.pry
+    if !@board.valid_move?(input)
+    #  self.turn
+    end
+    @board.update(input, self.current_player)
+    @board.display
+  end
+
 end
