@@ -22,13 +22,17 @@ elsif input == "1"
   end
 elsif input == "2"
   puts "Player 1 goes first as X"
-    game = Game.new(Players::Human.new("X"),Players::Computer.new("O"))
+    game = Game.new(Players::Human.new("X"),Players::Human.new("O"))
 end
   game.play until game.won?
 
-if won?
+if game.won?
   puts "Would you like to play again? Y or N?"
   play_again = gets.strip
   if play_again == "Y"
       play_tictactoe
+    end
+  end
 end
+
+play_tictactoe

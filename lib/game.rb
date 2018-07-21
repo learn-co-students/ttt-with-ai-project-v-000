@@ -72,7 +72,9 @@ class Game #Board and Player do not directly relate to the Game but do collabora
     if !board.valid_move?(current_move)
       turn
     else
+      board.display
       board.update(current_move, current_player)
+      board.display
     end
   end
 
