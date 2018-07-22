@@ -24,7 +24,8 @@ class Game
   def won?
     WIN_COMBINATIONS.detect do |combo|
     @board.cells[combo[0]] == @board.cells[combo[1]] &&
-    @board.cells[combo[1]] == @board.cells[combo[2]] 
+    @board.cells[combo[1]] == @board.cells[combo[2]] &&
+    (@board.cells[combo[0]] == "X" || @board.cells[combo[0]] == "O")
     end
   end
   
@@ -37,5 +38,8 @@ class Game
   end
   
   def winner
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
   end
 end
