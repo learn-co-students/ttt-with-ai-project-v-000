@@ -50,26 +50,26 @@ class Game
   end
 
   def play
-    while !self.over?
+   while !self.over?
       self.turn
     end
     if self.won?
       puts "Congratulations #{self.winner}!"
     elsif self.draw?
-      puts "Cats Game!"
+      puts "Cat's Game!"
     end
   end
 
-  #def turn
-  #  @board.display
-    #puts "Please enter 1-9:"
-    #input = gets.strip
-    #binding.pry
-  #  if !@board.valid_move?(input)
-     #self.turn
-  #   puts "turn"
-  #  end
-  #  @board.update(input, self.current_player)
-  #  @board.display
-  #end
+  def turn
+    cur_player = current_player
+    current_move = cur_player.move(@board)
+    if !@board.valid_move?(current_move)
+      self.turn
+    end
+    @board.display
+    puts "Turn Count = #{@board.turn_count+1}"
+    @board.update(current_move, cur_player)
+    puts "#{cur_player.token} now moved to #{current_move}"
+    @board.display
+  end
 end
