@@ -72,4 +72,38 @@ class Game
     puts "#{cur_player.token} now moved to #{current_move}"
     @board.display
   end
+
+  def start
+    puts "What kind of game would you like to play?"
+    puts "Enter 0 for 0 Players, 1 for 1 Player, 2 for 2 Players"
+    players = gets.chomp
+
+    @player_1 = Players::Computer.new("X")
+    @player_2 = Players::Computer.new("O")
+    if players == "1"
+      puts "Who should go first? Enter Human or Computer"
+      input = gets.chomp
+      puts "What token should the #{input} use? Enter X or O"
+      token = gets.chomp
+      if token == "X"
+        token_2 = "O"
+      else
+        token_2 = "X"
+      end
+      if input == "Human"
+        @player_1 = Players::Human.new(token)
+        @player_2 = Players::Human.new(token_2)
+      end
+    elsif players== "2"
+      puts "Select token for Player 1"
+      token = gets.chomp
+      if token == "X"
+        token_2 = "O"
+      else
+        token_2 = "X"
+      end
+      @player_1 = Players::Human.new(token)
+      @player2 = Players::Human.new(token_2)
+    end
+end
 end
