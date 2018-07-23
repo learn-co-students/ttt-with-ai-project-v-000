@@ -9,6 +9,7 @@ module Players
       elsif board.turn_count ==2
         move = [1, 3, 7, 9].detect {|i| !board.taken?(i)}
       elsif board.turn_count ==3 && (board.position(1) == board.position(9) || board.position(3) == board.position(7))
+        move = "2"
       else
       Game::WIN_COMBINATIONS.detect do |cmb|
         if cmb.select{|i| board.position(i+1) == token}.size == 2 && cmb.any?{|i| board.position(i+1) == " "}
