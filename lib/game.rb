@@ -41,19 +41,41 @@ class Game
   end
 
   def over?
-
+    if draw? || won?
+      true
+    else
+      false
+    end
   end
 
   def play
-
+    until over?
+      @board.display
+      turn
+    end
+    the_winner = self.winner
+    if the_winner == nil
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{the_winner}!"
+    end
   end
 
   def turn
-
+    if current_player == @player_1
+      @player_1.move(@board)
+    else
+      @player_2.move(@board)
+    end
   end
 
   def winner
-
+    winning_combo = won?
+    if winning_combo == nil
+      nil
+    else
+      @board.cells[winning_combo[0]]
+    end
   end
 
   def won?
