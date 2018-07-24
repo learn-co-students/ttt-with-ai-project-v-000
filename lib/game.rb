@@ -18,6 +18,16 @@ class Game
     @player_2 = player_2
   end
 
+  def start
+    puts "Welcome to a game of Tic-Tac-Toe! - Developed by Jonathan Hong"
+    puts "We have three game modes:"
+    puts "(1) 0 player - Computer vs. Computer"
+    puts "(2) 1 player - Human vs. Computer"
+    puts "(3) 2 player - Human vs. Human"
+    puts "Which game mode would you like to play? ([1][2][3])"
+    input = gets.strip
+  end
+
   def current_player
     count = 0
     @board.cells.each do |position|
@@ -63,10 +73,11 @@ class Game
 
   def turn
     if current_player == @player_1
-      @player_1.move(@board)
+      next_move = @player_1.move(@board)
     else
-      @player_2.move(@board)
+      next_move = @player_2.move(@board)
     end
+    board.update(next_move, current_player)
   end
 
   def winner

@@ -7,7 +7,7 @@ module Players
         puts "Input a valid position (1-9): "
         input = gets.strip
       end
-      board.update(input,self)
+      input
     end
   end
 end

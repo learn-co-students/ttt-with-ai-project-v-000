@@ -1,3 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  puts "Welcome to a game of Tic-Tac-Toe! - Developed by Jonathan Hong"
+  puts "We have three game modes."
+  puts "Which game mode would you like to play?"
+  puts "(1) 0 player - Computer vs. Computer"
+  puts "(2) 1 player - Human vs. Computer"
+  puts "(3) 2 player - Human vs. Human"
+  mode = gets.strip
+  until mode == 1 || mode == 2 || mode == 3
+    puts "Sorry, please enter 1 2 or 3 to pick a proper game mode."
+    mode = gets.strip
+  end
+  case mode
+  when 1
+  when 2
+  when 3
+  end
