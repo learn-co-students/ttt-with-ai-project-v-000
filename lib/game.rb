@@ -24,8 +24,7 @@ class Game
   end
 
   def initialize
-    #accepts 2 players and a board
-    #defaults to 2 human players, X and O, with an empty board
+    #accepts 2 players and a board; defaults to 2 human players, X and O, with an empty board
   end
 
   def current_player
@@ -33,28 +32,33 @@ class Game
   end
 
   def won?
-    #returns false for a draw
-    #returns false for a won game
-    #isn't hard-coded
-  end
+    #returns false for a draw; returns false for a won game; isn't hard-coded
+    WIN_COMBINATIONS.each do |win_combination|
+        if ((self.cells[win_combination[0]] == "X" || self.cells[win_combination[0]] == "O") &&
+          (self.cells[win_combination[0]] == self.cells[win_combination[1]]) &&
+          (self.cells[win_combination[1]] == self.cells[win_combination[2]]) &&
+          (self.cells[win_combination[2]] == self.cells[win_combination[0]]))
+          @win_combination = win_combination
+        end
+          puts win_combination
+      end
+        false
+      end
 
   def draw?
-    #returns true for a draw
-    #returns false for a won game
-    #returns false for an in-progress game
+    #returns true for a draw; returns false for a won game; returns false for an in-progress game
   end
 
   def over?
-    #returns true for a draw
-    #returns true for a won game
-    #returns false for an in-progress game
+    #returns true for a draw; returns true for a won game; returns false for an in-progress game
     draw? || won? || full?
   end
 
   def winner
-    #returns X when X won
-    #returns O when O won
-    #returns false for an in-progress game
+    #returns X when X won; returns O when O won; returns false for an in-progress game
+    if won?
+      "X"
+
   end
 
   def turn
