@@ -3,7 +3,6 @@ class Players
 
   def move
     #asks the user for input and returns it.
-    player_x = gets.chomp
-    player_o = gets.chomp
+    player = gets.chomp
   end
 end
