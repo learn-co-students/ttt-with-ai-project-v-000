@@ -1,5 +1,4 @@
 class Game
-  include Board
   #defines a constant WIN_COMBINATIONS with arrays for each win combination
   WIN_COMBINATIONS = [
     [0, 1, 2],

@@ -1,17 +1,20 @@
 class Board
-  attr_accessor :board, :cells
+  attr_accessor :cells
     #has an attribute to store the cells of the board
 
-  @@cells = Array.new(9, " ")
+  def cells
+    @cells = []
+  end
 
   def reset!
     #can reset the state of the cells in the board
     #sets the cells of the board to a 9 element array of " "
-    cells.clear
+    self.cells.clear
+    self.cells = Array.new(9, " ")
   end
 
   def initialize
-    self.cells
+    reset!
     #sets the cells of the board to a 9 element array of " "
   end
 
@@ -26,7 +29,7 @@ class Board
 
   def position
     #takes in user input and returns the value of the board cell
-    index = gets.chomp.to_1 - 1 
+    self.cells[gets.chomp.to_1 - 1]
   end
 
   def full?
