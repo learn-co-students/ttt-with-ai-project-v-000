@@ -1,4 +1,5 @@
 class Game
+  include Board
   #defines a constant WIN_COMBINATIONS with arrays for each win combination
   WIN_COMBINATIONS = [
     [0, 1, 2],
@@ -48,7 +49,7 @@ class Game
     #returns true for a draw
     #returns true for a won game
     #returns false for an in-progress game
-    draw? || won?
+    draw? || won? || full?
   end
 
   def winner
