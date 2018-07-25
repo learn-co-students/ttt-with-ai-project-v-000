@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+game = TicTacToe.new
+game.play
+
+def computer_vs_computer
+  @player_1 = Players::Computer.new("X")
+  @player_2 = Players::Computer.new("O")
+  self.play
+end
+
+def human_vs_computer
+  puts "Pick X or O"
+  user_input = gets.chomp
+    if user_input == "O"
+      @player_2 = Computer.new("X")
+    elsif user_input == "X"
+      @player_1 = Computer.new("O")
+    else
+      puts "invalid input"
+      self.start
+    end
+  self.play
+end
+
+def human_vs_human
+  self.play
+end
+
+def start
+  puts "Choose the number of players between 0 and 2"
+  players = gets.chomp
+
+  if players == "0"
+    computer_vs_computer
+
+  elsif players == "1"
+    human_vs_computer
+
+  elsif players == "2"
+    human_vs_human
+  else
+    puts "Please choose 0, 1, or 2 players"
+  end
+
+end
+
+Game.new.start
