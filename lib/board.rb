@@ -2,14 +2,11 @@ class Board
   attr_accessor :cells
     #has an attribute to store the cells of the board
 
-  def cells
     @cells = []
-  end
 
   def reset!
     #can reset the state of the cells in the board
     #sets the cells of the board to a 9 element array of " "
-    self.cells.clear
     self.cells = Array.new(9, " ")
   end
 
@@ -27,28 +24,26 @@ class Board
     puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} \n"
   end
 
-  def position
+  def position(input)
     #takes in user input and returns the value of the board cell
-    self.cells[gets.chomp.to_1 - 1]
+    self.cells[input.to_i - 1]
   end
 
   def full?
     #returns true for a full board
     #returns false if the position is empty or blank
+    self.cells.all? {|cell| cell == "X" || cell == "O"}
   end
 
   def turn_count
     #returns the amount of turns based on cell value
+    self.cells.count {|c| c == "X" || c == "O"}
   end
 
-  def taken?
+  def taken?(index)
     #returns true if the position is X or O
     #returns false if the position is empty or blank
-    if board[index] == " " || board[index] == "" || board[index] == nil
-      return false
-    else board[index] == "X" || board[index] == "O"
-      return true
-    end
+    self.cells[index.to_i] == "X" || self.cells[index.to_i] == "O" ? true : false
   end
 
   def valid_move?

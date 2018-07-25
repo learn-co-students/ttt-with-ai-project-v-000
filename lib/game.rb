@@ -34,16 +34,17 @@ class Game
   def won?
     #returns false for a draw; returns false for a won game; isn't hard-coded
     WIN_COMBINATIONS.each do |win_combination|
-        if ((self.cells[win_combination[0]] == "X" || self.cells[win_combination[0]] == "O") &&
-          (self.cells[win_combination[0]] == self.cells[win_combination[1]]) &&
-          (self.cells[win_combination[1]] == self.cells[win_combination[2]]) &&
-          (self.cells[win_combination[2]] == self.cells[win_combination[0]]))
-          @win_combination = win_combination
-        end
-          puts win_combination
+      @win_combination = win_combination
+      if ((self.cells[win_combination[0]] == "X" || self.cells[win_combination[0]] == "O") &&
+        (self.cells[win_combination[0]] == self.cells[win_combination[1]]) &&
+        (self.cells[win_combination[1]] == self.cells[win_combination[2]]) &&
+        (self.cells[win_combination[2]] == self.cells[win_combination[0]]))
+      puts win_combination[0]
       end
-        false
+      false
       end
+    end
+  end
 
   def draw?
     #returns true for a draw; returns false for a won game; returns false for an in-progress game
