@@ -44,3 +44,14 @@ end
 def human_vs_human
   self.play
 end 
+
+if !game.over
+  game.play
+else
+  puts "Would you like to play again? Y/N"
+  again = gets.strip
+  if again == "Y" 
+    board.reset!
+    game.play
+  end
+end
