@@ -3,7 +3,7 @@ require 'pry'
 class Board
   def cells=(cells)
     @cells = cells
-    @cells = []
+    #@cells = []
   end
 
   def cells
