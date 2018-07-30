@@ -69,7 +69,7 @@ def turn
     end
   end
 
-  def play
+def play
     until over? == true
       turn
     end
@@ -80,5 +80,27 @@ def turn
     end
   end
 
+  def start
+    puts "Welcome to Tic-Tac-Toe!"
+    puts "To play against the computer, enter 'computer'."
+    puts "To play against your friend, enter 'friend'."
+    puts "To watch the computer play each other, enter 'break the computer'."
+    puts "To quit, type 'exit'."
+    puts "What would you like to do?"
+    input = gets.strip
+    if input == 'computer'
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+    elsif input == 'friend'
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+      game.play
+    elsif input == 'break the computer'
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      game.play
+    elsif input != 'exit'
+      self.call
+    else input == 'exit'
+    end
+  end
 
 end
