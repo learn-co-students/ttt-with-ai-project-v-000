@@ -3,6 +3,8 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
+game = Game.new
+until game.over?
 puts "What kinda game you wanna play? 0, 1 or 2 player?"
 game_type = gets.strip.to_i
 case game_type
@@ -11,7 +13,7 @@ case game_type
     player_2 = Players::Computer.new("O")
   when 1
     puts "Who goes first, human player (1) or computer (2)?"
-    first = gets.strip.to_1
+    first = gets.strip.to_i
     if first == 1
       player_1 = Players::Human.new("X")
       player_2 = Players::Computer.new("O")
@@ -23,33 +25,37 @@ case game_type
     player_1 = Players::Human.new("X")
     player_2 = Players::Human.new("O")
   end
+
+#game = Game.new(player_1 = player_1, player_2 = player_2, board = Board.new)
+game.player_1 = player_1
+game.player_2 = player_2
+board = Board.new
+game.play
 end
-game = Game.new(player_1 = player_1, player_2 = player_2, board = Board.new)
-game.play
 
-=begin
-puts "Welcome to Tic Tac Toe!"
-puts "What kinda game you wanna play? 0,1, or 2 player?"
-input = gets.strip.to_i
-  if input == 2
-    game = Game.new(player_1 = Players::Human.new("X"),
-      player_2 = Players::Human.new("O"),
-      board = Board.new)
-  elsif input == 1
-      game = Game.new(player_1 = Players::Human.new("X"),
-        player_2 = Players::Computer.new("O"),
-        board = Board.new)
-  else
-        game = Game.new(player_1 = Players::Computer.new("X"),
-        player_2 = Players::Computer.new("O"),
-        board = Board.new)
-      end
-
-game.play
-=end
+  game.won? || game.over?
+  play_again=""
+  until play_again == "N"
+  puts "Would you like to play again? Y or N?"
+  play_again = gets.strip
+  case play_again
+    when play_again == "Y"
+      game = Game.new(player_1 = player_1, player_2 = player_2, board = Board.new)
+      game.play
+    when play_again == "N"
+      puts "bye!"
+      return nil
+    end
+end
 
 
-#Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-#Ask the user for who should go first and be "X".
-#Use the input to correctly initialize a Game with the appropriate player types and token values.
-#When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
+
+
+
+
+
+
+
+#When the game is over, the CLI should prompt the user if they would like to play again
+#and allow them to choose a new configuration for the game as described above.
+#If the user doesn't want to play again, exit the program.

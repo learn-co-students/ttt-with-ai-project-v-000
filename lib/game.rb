@@ -73,8 +73,9 @@ end
       if board.valid_move?(output)
         board.update(output,current_player)#you have to turn the state of the board because that is the only way current_player switches
         output#you don't need to loop around again - the test has turn method called twice and current_player is abstract enough
+        board.display
       else
-        puts "invalid"
+        puts "Invalid move - try again:"
         turn
       end
     end
@@ -87,7 +88,7 @@ end
    if won?
      puts "Congratulations #{winner}!"
    else
-     puts "Cat's Game!"
+     puts "#{current_player}'s Game!"
    end
  end
 
