@@ -36,7 +36,8 @@ class Board
   end
   
   def taken?(position) 
-    @cells.any? {|e| e == "X" or e == "O"}
+    !(@cells[position] ==  " " || @cells[position] == "" || @cells[position] == nil) ?
+    false : true
   end 
   
   def valid_move?(position)
