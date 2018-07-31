@@ -24,7 +24,8 @@ class Board
   end
   
   def update(position, player)
-    @cells[position] = player.token 
+    i = position.to_i - 1
+    @cells[i] = player.token 
   end
   
   def full?
@@ -36,12 +37,13 @@ class Board
   end
   
   def taken?(position) 
-    !(@cells[position] ==  " " || @cells[position] == "" || @cells[position] == nil) ?
-    false : true
+    i = position.to_i - 1
+    !(@cells[i] ==  " " || @cells[i] == "" || @cells[i] == nil) ?
+    true : false
   end 
   
   def valid_move?(position)
-    !taken(position) && postion.between?(1, 9)
+    !taken?(position) && position.to_i.between?(1, 9)
   end
 end
   
