@@ -2,6 +2,7 @@ class Board
   attr_accessor :cells
   
   def initialize 
+    @cells = []
     self.reset! 
   end 
   
@@ -10,29 +11,32 @@ class Board
   end 
   
   def display 
-    puts " #{@cell[0]} | #{@cell[1]} | #{@cell[2]} " 
-    puts " #{@cell[3]} | #{@cell[4]} | #{@cell[5]} " 
-    puts " #{@cell[6]} | #{@cell[7]} | #{@cell[8]} " 
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} " 
+    puts "-----------"
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+    puts "-----------"
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} " 
   end 
   
-  def position(user_input)
-    i = user_imput.to_i - 1 
+  def position(user)
+    i = user.to_i - 1 
+    @cells[i]
   end
   
   def update(position, player)
-    @cell[position] = player.token 
+    @cells[position] = player.token 
   end
   
   def full?
-    @cell.all? {|e| e == "X" or e == "O"}
+    @cells.all? {|e| e == "X" or e == "O"}
   end 
   
   def turn_count 
-    cell.count {|e| e == "X" or e == "O"}
+    @cells.count {|e| e == "X" or e == "O"}
   end
   
   def taken?(position) 
-    @cell.any? {|e| e == "X" or e == "O"}
+    @cells.any? {|e| e == "X" or e == "O"}
   end 
   
   def valid_move?(position)
