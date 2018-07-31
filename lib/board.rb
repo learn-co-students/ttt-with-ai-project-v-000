@@ -59,7 +59,7 @@ class Board
     index.to_i.between?(1, 9) && !taken?(index)
   end
 
-  def update(player, token = "X")
+  def update()
     
   end
 end
