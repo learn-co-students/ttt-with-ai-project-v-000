@@ -48,8 +48,14 @@ class Board
   end
 
   def taken?(index)
-    if self.position(user_input) == "X" || self.postion(user_input) == "O"
+    if self.position(index) == "X" || self.position(index) == "O"
       true
+    else
+      false
     end
+  end
+
+  def valid_move?(index)
+    index.between?(0,8) && !taken?(index)
   end
 end
