@@ -60,5 +60,6 @@ class Board
   end
 
   def update(player, token = "X")
+    
   end
 end
