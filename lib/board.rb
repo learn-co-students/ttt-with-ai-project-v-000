@@ -29,10 +29,27 @@ class Board
     @cells[user_input.to_i - 1]
   end
 
-  def full
-    @cells.all? do |cell|
+  def full?
+     cells.all? do |cell|
       if cell != " "
+        true
+      end
+    end
+  end
 
+  def turn_count
+    count = 0
+    cells.each do |cell|
+      if cell == "X" || cell == "O"
+      count += 1
+      end
+    end
+    count
+  end
+
+  def taken?(index)
+    if self.position(user_input) == "X" || self.postion(user_input) == "O"
+      true
     end
   end
 end
