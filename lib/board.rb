@@ -19,10 +19,6 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def user_input
-    input = ""
-    input = gets.strip.to_i - 1
-  end
 
 
   def position(i)
@@ -43,8 +39,8 @@ class Board
   def turn_count
     cells.count {|position| position !=" "}
   end
-  
 
+#evaluates player next move position and returns true if the position is X or O'
   def taken?(a)
     index = a.to_i - 1
     !(@cells[index].nil? || @cells[index] == " ")
@@ -60,6 +56,7 @@ class Board
     index = a.to_i - 1
     @cells[index] = player.token
   end
+
 
 
 end
