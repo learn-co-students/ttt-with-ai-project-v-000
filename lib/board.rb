@@ -1,6 +1,7 @@
 require 'pry'
 
 class Board
+
   def cells=(cells)
     @cells = cells
   end
@@ -59,7 +60,8 @@ class Board
     index.to_i.between?(1, 9) && !taken?(index)
   end
 
-  def update()
-    
+  def update(input, player)
+    index = input.to_i - 1  #Input that was passes in, it comes in as a string, and not between 0-8.  Saved it to index.
+    cells[index] = player.token  #Array, grabbing the index, and assigning it the token of the player.
   end
 end
