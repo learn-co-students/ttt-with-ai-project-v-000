@@ -1,3 +1,5 @@
+require 'pry'
+
 class Game
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -31,18 +33,28 @@ class Game
       win_index_1 = win_combination[0]
       win_index_2 = win_combination[1]
       win_index_3 = win_combination[2]
-      position_1 = cells[win_index_1]
-      position_2 = cells[win_index_2]
-      position_3 = cells[win_index_3]
+      position_1 = @board.cells[win_index_1]
+      position_2 = @board.cells[win_index_2]
+      position_3 = @board.cells[win_index_3]
       x_wins = position_1 == "X" && position_2 == "X" && position_3 == "X"
       y_wins = position_1 == "O" && position_2 == "O" && position_3 == "O"
        if x_wins || y_wins
          win_combination
        elsif board.full? && !win_combination
          false
-       #elsif board.!full? && !win_combination
      end
-   end 
+   end
   end
 
+  def draw?
+    board.full? && !won?
+  end
+
+  def over?
+    if draw?
+      true
+    elsif won?
+      true  
+    end
+  end
 end
