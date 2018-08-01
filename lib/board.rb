@@ -27,12 +27,12 @@ class Board
   end
 
   def turn_count
-    turn_count = 0
+    count = 0
     @cells.each do |value|
-      turn_count += 1 if value.include?('X') || value.include?('O')
+      count += 1 if value.include?('X') || value.include?('O')
     end
 
-    turn_count
+    count
   end
 
   def taken?(input)

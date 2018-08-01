@@ -1,3 +1,5 @@
+require "pry"
+
 class Game
   attr_accessor :board, :player_1, :player_2, :token
 
@@ -15,32 +17,16 @@ class Game
     [1, 4, 7], [2, 5, 8], [0, 4, 8], [6, 4, 2]
   ]
 
-  def turn_count
-    turn_count = 0
-
-    @board.cells.each do |value|
-      turn_count += 1 if value.include?('X') || value.include?('O')
-    end
-
-    turn_count
-  end
-
   def current_player
-    @player_1 if turn_count.even? || @player_2
+    @board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
-    WIN_COMBINATIONS.each do |win_combination|
-      win_index_1 = win_combination[0]
-      win_index_2 = win_combination[1]
-      win_index_3 = win_combination[2]
-      position_1 = @board.cells[win_index_1]
-      position_2 = @board.cells[win_index_2]
-      position_3 = @board.cells[win_index_3]
-
-      return win_combination if @board.taken?(win_index_1) && position_1 == position_2 && position_2 == position_3
+    WIN_COMBINATIONS.detect do |win_combination|
+      @board.cells[win_combination[0]] == @board.cells[win_combination[1]] &&
+      @board.cells[win_combination[1]] == @board.cells[win_combination[2]] &&
+      @board.taken?(win_combination[0]+1)
     end
-    false
   end
 
   def draw?
@@ -48,11 +34,11 @@ class Game
   end
 
   def over?
-    won? || draw?
+    draw? || won?
   end
 
   def winner
-    nil || @board.cells[won?.first] if won? != false
+    @board.cells[won?.first] if won?
   end
 
   def turn
@@ -66,5 +52,8 @@ class Game
   end
 
   def play
+    turn until over?
+    puts "Congratulations #{winner}!" if won?
+    puts 'Cat\'s Game!' if draw?
   end
 end
