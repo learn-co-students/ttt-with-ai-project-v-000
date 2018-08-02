@@ -15,7 +15,7 @@ class Players
 
     def defense(board)
       ALMOST_WIN.detect do |combo|
-        if @board.taken?(combo[0]+1) && @board.taken?(combo[1]+1)
+        if board.taken?(combo[0]+1) && board.taken?(combo[1]+1)
           game.WIN_COMBINATIONS.detect do |win_combo|
             win_combo.sort && combo.sort
             if win_combo[0] == combo[0] && win_combo[1] == combo[1]
@@ -28,13 +28,11 @@ class Players
     end
 
     def offense(board)
-      '5' unless board.taken?(5)
-      '1' unless board.taken?(1)
-      '3' unless board.taken?(1)
-      '7' unless board.taken?(1)
-      '9' unless board.taken?(1)
-      computer_move = [1, 3, 5, 7].shuffle
-      computer_move[0].to_s unless board.taken?(computer_move[0]+1)
+      '5' unless board.taken?('5')
+      corners = %w[1 3 7 9].shuffle
+      corners.each { |corner| return corner unless board.taken?(corner) }
+      middles = %w[2 4 6 8].shuffle
+      middles.each { |middle| return middle unless board.taken?(middle) }
     end
   end
 end
