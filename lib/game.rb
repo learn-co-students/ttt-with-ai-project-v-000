@@ -1,7 +1,7 @@
 require 'pry'
 
 class Game
-  include Players::InstanceMethods
+
 
   WIN_COMBINATIONS = [
      [0,1,2],
@@ -26,7 +26,7 @@ class Game
      if board.turn_count % 2 == 0
        @player_1
      else
-       @player2
+       @player_2
      end
    end
 
@@ -67,10 +67,12 @@ class Game
   end
 
   def turn
-    user_input = gets.strip
-    input = @board.position(user_input)
-      @board.valid_move?(input)
-         move(user_input)
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+    else
+      turn
+    end
   end
 
 end
