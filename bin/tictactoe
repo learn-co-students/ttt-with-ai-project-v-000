@@ -1,3 +1,84 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+game = Game.new
+
+def start_game
+
+  puts "What kind of game do you want play? "
+  puts  "0 = Computer vs. Computer"
+  puts  "1 = Human vs. Computer"
+  puts  "2 = Human vs. Human"
+  game_selected = " "
+  game_selected = gets.strip
+  
+  
+  case game_selected
+  
+  when "0"
+    puts "Game Selected is 0 = Computer vs. Computer"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+    Game.new(player_1, player_2).play
+  
+  when "1"
+    puts "Game Selected is 1 = Human vs. Computer"
+    puts "Who should go first and be 'X', human player (enter 1) or computer (enter 2)?"
+    first = gets.strip.to_i
+    
+    if first == 1
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+      Game.new(player_1, player_2).play
+    elsif
+      first == 2 
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+      Game.new(player_1, player_2).play
+    else
+      puts "Invalid Entry, please try again."
+      puts "---------------------------------"
+      start_game
+    end
+  
+  when "2" 
+     puts "Game Selected is 2 = Human vs. Human"
+     player_1 = Players::Human.new("X")
+     player_2 = Players::Human.new("O")
+     Game.new(player_1, player_2).play
+     
+  else
+  
+    puts "Invalid Entry, please try again."
+    puts "---------------------------------"
+    start_game 
+     
+  end
+
+end #end start_game 
+
+def play_again?
+  
+  play_again = ""
+  
+  until play_again == "n" || play_again == "no" 
+  
+  puts "Do you want to play again? Please enter y or n."
+  play_again = gets.strip.downcase
+  
+    if play_again == "y" || play_again == "yes"
+      start_game
+    elsif
+      play_again == "n" || play_again == "no" 
+      puts "Thank you for playing - Good Day!"
+    else
+      puts "Invalid Entry - please enter y or n."
+    end
+  end  
+
+end
+
+start_game
+play_again?
