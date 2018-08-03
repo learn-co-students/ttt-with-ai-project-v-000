@@ -54,7 +54,22 @@ class Game
     if draw?
       true
     elsif won?
-      true  
+      true
     end
   end
+
+ def winner
+   if won?
+     @board.cells[won?[0]]
+   end
+ end
+
+ def turn
+   user_input = gets.strip
+   input = @board.position(user_input)
+     if @board.valid_move?(input)
+       @board.update(input, player)
+    end
+ end
+
 end
