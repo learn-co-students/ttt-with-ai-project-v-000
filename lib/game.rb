@@ -67,12 +67,18 @@ class Game
   end
 
   def turn
-    input = current_player.move(@board)
-    if @board.valid_move?(input)
-      @board.update(input, current_player)
+    input = current_player.move(@board) #move takes care of getting the input from the players.  input = gets.strip
+    if @board.valid_move?(input)  #if the input is a valid move.
+      @board.update(input, current_player)  #It updates the board.
     else
-      turn
+      turn  #else, it takes another turn
     end
   end
 
+  def play
+    until over?
+      turn
+    end  
+
+  end
 end
