@@ -33,10 +33,10 @@ class Board
   end
   def update(user_input,player)
        index = user_input.to_i-1
-       if valid_move?(user_input)
+      #  if valid_move?(user_input)
          @cells[index] = player.token
-       else
-       end
+      #  else
+      #  end
   end
 
 end
