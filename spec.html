@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd .duration {
+  padding-left: 5px;
+  text-align: right;
+  right: 0px;
+  float:right;
+}
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox"  name="passed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox"  name="failed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&#160;</p>
+    <p id="duration">&#160;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">Board</dt>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_2" class="passed">#cells</dt>
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('div_group_2');</script>
+    <script type="text/javascript">makeRed('example_group_2');</script>
+    <script type="text/javascript">moveProgressBar('1.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">has an attribute to store the cells of the board</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:8:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_3" class="passed">#reset!</dt>
+    <script type="text/javascript">makeRed('div_group_3');</script>
+    <script type="text/javascript">makeRed('example_group_3');</script>
+    <script type="text/javascript">moveProgressBar('3.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">can reset the state of the cells in the board</span>
+      <span class="duration">0.00022s</span>
+      <div class="failure" id="failure_2">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:18:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('5.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">sets the cells of the board to a 9 element array of &quot; &quot;</span>
+      <span class="duration">0.00026s</span>
+      <div class="failure" id="failure_3">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:24:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_4" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_4');</script>
+    <script type="text/javascript">makeRed('example_group_4');</script>
+    <script type="text/javascript">moveProgressBar('7.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">sets the cells of the board to a 9 element array of &quot; &quot;</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_4">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:32:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">30</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#initialize</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">31</span>    it <span class="string"><span class="delimiter">'</span><span class="content">sets the cells of the board to a 9 element array of &quot; &quot;</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">32</span>      board = <span class="constant">Board</span>.new</span>
+<span class="linenum">33</span>      expect(board.cells).to match_array(<span class="constant">Array</span>.new(<span class="integer">9</span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>))
+<span class="linenum">34</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_5" class="passed">#display</dt>
+    <script type="text/javascript">makeRed('div_group_5');</script>
+    <script type="text/javascript">makeRed('example_group_5');</script>
+    <script type="text/javascript">moveProgressBar('9.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prints the board</span>
+      <span class="duration">0.00020s</span>
+      <div class="failure" id="failure_5">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:39:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_6" class="passed">#position</dt>
+    <script type="text/javascript">makeRed('div_group_6');</script>
+    <script type="text/javascript">makeRed('example_group_6');</script>
+    <script type="text/javascript">moveProgressBar('11.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">takes in user input and returns the value of the board cell</span>
+      <span class="duration">0.00018s</span>
+      <div class="failure" id="failure_6">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:64:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_7" class="passed">#full?</dt>
+    <script type="text/javascript">makeRed('div_group_7');</script>
+    <script type="text/javascript">makeRed('example_group_7');</script>
+    <script type="text/javascript">moveProgressBar('13.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns true for a full board</span>
+      <span class="duration">0.00020s</span>
+      <div class="failure" id="failure_7">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:74:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('15.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns false for an in-progress game</span>
+      <span class="duration">0.00019s</span>
+      <div class="failure" id="failure_8">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:80:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_8" class="passed">#turn_count</dt>
+    <script type="text/javascript">makeRed('div_group_8');</script>
+    <script type="text/javascript">makeRed('example_group_8');</script>
+    <script type="text/javascript">moveProgressBar('16.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns the amount of turns based on cell value</span>
+      <span class="duration">0.00019s</span>
+      <div class="failure" id="failure_9">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:88:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_9" class="passed">#taken?</dt>
+    <script type="text/javascript">makeRed('div_group_9');</script>
+    <script type="text/javascript">makeRed('example_group_9');</script>
+    <script type="text/javascript">moveProgressBar('18.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns true if the position is X or O</span>
+      <span class="duration">0.00021s</span>
+      <div class="failure" id="failure_10">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:96:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('20.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns false if the position is empty or blank</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_11">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:103:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_10" class="passed">#valid_move?</dt>
+    <script type="text/javascript">makeRed('div_group_10');</script>
+    <script type="text/javascript">makeRed('example_group_10');</script>
+    <script type="text/javascript">moveProgressBar('22.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns true for user input between 1-9 that is not taken</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_12">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:112:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_11" class="passed">#update</dt>
+    <script type="text/javascript">makeRed('div_group_11');</script>
+    <script type="text/javascript">makeRed('example_group_11');</script>
+    <script type="text/javascript">moveProgressBar('24.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">updates the cells in the board with the player token according to the input</span>
+      <span class="duration">0.00023s</span>
+      <div class="failure" id="failure_13">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/01_board_spec.rb:4:in `block (2 levels) in &lt;top (required)&gt;&#39;
+./spec/01_board_spec.rb:124:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">2</span>
+<span class="linenum">3</span>describe <span class="string"><span class="delimiter">&quot;</span><span class="content">Board</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">4</span>  let(<span class="symbol">:board</span>){<span class="constant">Board</span>.new}</span>
+<span class="linenum">5</span>
+<span class="linenum">6</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#cells</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_12" class="passed">Player</dt>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_13" class="passed">#initialize</dt>
+    <script type="text/javascript">makeRed('div_group_13');</script>
+    <script type="text/javascript">makeRed('example_group_13');</script>
+    <script type="text/javascript">moveProgressBar('26.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">accepts a token to assign</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_14">
+        <div class="message"><pre>uninitialized constant Player</pre></div>
+        <div class="backtrace"><pre>./spec/02_player_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">5</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#initialize</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">6</span>    it <span class="string"><span class="delimiter">'</span><span class="content">accepts a token to assign</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">7</span>      player = <span class="constant">Player</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">8</span>      expect(player.token).to eq(<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">9</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_14" class="passed">#token</dt>
+    <script type="text/javascript">makeRed('div_group_14');</script>
+    <script type="text/javascript">makeRed('example_group_14');</script>
+    <script type="text/javascript">moveProgressBar('28.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">cannot be changed once assigned in initialize</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_15">
+        <div class="message"><pre>uninitialized constant Player</pre></div>
+        <div class="backtrace"><pre>./spec/02_player_spec.rb:14:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">12</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#token</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">13</span>    it <span class="string"><span class="delimiter">'</span><span class="content">cannot be changed once assigned in initialize</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">14</span>      player = <span class="constant">Player</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">15</span>      expect(player.token).to eq(<span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_15" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_15" class="passed">Players::Human</dt>
+    <script type="text/javascript">makeRed('div_group_15');</script>
+    <script type="text/javascript">makeRed('example_group_15');</script>
+    <script type="text/javascript">moveProgressBar('30.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">inherits from Player</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_16">
+        <div class="message"><pre>uninitialized constant Players</pre></div>
+        <div class="backtrace"><pre>./spec/03_human_player_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">3</span>describe <span class="string"><span class="delimiter">'</span><span class="content">Players::Human</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">4</span>  it <span class="string"><span class="delimiter">'</span><span class="content">inherits from Player</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">5</span>    expect(<span class="constant">Players</span>::<span class="constant">Human</span>.ancestors).to include(<span class="constant">Player</span>)</span>
+<span class="linenum">6</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_16" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_16" class="passed">#move</dt>
+    <script type="text/javascript">makeRed('div_group_16');</script>
+    <script type="text/javascript">makeRed('example_group_16');</script>
+    <script type="text/javascript">moveProgressBar('32.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">asks the user for input and returns it</span>
+      <span class="duration">0.00019s</span>
+      <div class="failure" id="failure_17">
+        <div class="message"><pre>uninitialized constant Players</pre></div>
+        <div class="backtrace"><pre>./spec/03_human_player_spec.rb:10:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">8</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#move</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">9</span>    it <span class="string"><span class="delimiter">'</span><span class="content">asks the user for input and returns it</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">10</span>      human = <span class="constant">Players</span>::<span class="constant">Human</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">11</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_17" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_17" class="passed">Game</dt>
+  </dl>
+</div>
+<div id="div_group_18" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_18" class="passed">::WIN_COMBINATIONS</dt>
+    <script type="text/javascript">makeRed('div_group_18');</script>
+    <script type="text/javascript">makeRed('example_group_18');</script>
+    <script type="text/javascript">moveProgressBar('33.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">defines a constant WIN_COMBINATIONS with arrays for each win combination</span>
+      <span class="duration">0.00014s</span>
+      <div class="failure" id="failure_18">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:6:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">4</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">::WIN_COMBINATIONS</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">5</span>    it <span class="string"><span class="delimiter">'</span><span class="content">defines a constant WIN_COMBINATIONS with arrays for each win combination</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">6</span>      expect(<span class="constant">Game</span>::<span class="constant">WIN_COMBINATIONS</span>).to include_array([<span class="integer">0</span>,<span class="integer">1</span>,<span class="integer">2</span>])</span>
+<span class="linenum">7</span>      expect(<span class="constant">Game</span>::<span class="constant">WIN_COMBINATIONS</span>).to include_array([<span class="integer">3</span>,<span class="integer">4</span>,<span class="integer">5</span>])
+<span class="linenum">8</span>      expect(<span class="constant">Game</span>::<span class="constant">WIN_COMBINATIONS</span>).to include_array([<span class="integer">6</span>,<span class="integer">7</span>,<span class="integer">8</span>])</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_19" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_19" class="passed">#board</dt>
+    <script type="text/javascript">makeRed('div_group_19');</script>
+    <script type="text/javascript">makeRed('example_group_19');</script>
+    <script type="text/javascript">moveProgressBar('35.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">provides access to the board</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_19">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:19:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">17</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#board</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">18</span>    it <span class="string"><span class="delimiter">'</span><span class="content">provides access to the board</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">19</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">20</span>      game.board = []
+<span class="linenum">21</span>      expect(game.board).to eq([])</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_20" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_20" class="passed">#player_1</dt>
+    <script type="text/javascript">makeRed('div_group_20');</script>
+    <script type="text/javascript">makeRed('example_group_20');</script>
+    <script type="text/javascript">moveProgressBar('37.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">provides access to player_1</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_20">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:27:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">25</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#player_1</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">26</span>    it <span class="string"><span class="delimiter">'</span><span class="content">provides access to player_1</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">27</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">28</span>      player_1 = <span class="constant">Player</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">29</span>      game.player_1 = player_1</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_21" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_21" class="passed">#player_2</dt>
+    <script type="text/javascript">makeRed('div_group_21');</script>
+    <script type="text/javascript">makeRed('example_group_21');</script>
+    <script type="text/javascript">moveProgressBar('39.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">provides access to player_2</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_21">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:36:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">34</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#player_2</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">35</span>    it <span class="string"><span class="delimiter">'</span><span class="content">provides access to player_2</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">36</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">37</span>      player_2 = <span class="constant">Player</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">38</span>      game.player_2 = player_2</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_22" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_22" class="passed">initialize</dt>
+    <script type="text/javascript">makeRed('div_group_22');</script>
+    <script type="text/javascript">makeRed('example_group_22');</script>
+    <script type="text/javascript">moveProgressBar('41.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">accepts 2 players and a board</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_22">
+        <div class="message"><pre>uninitialized constant Board</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:45:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">43</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">initialize</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">44</span>    it <span class="string"><span class="delimiter">'</span><span class="content">accepts 2 players and a board</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">45</span>      board = <span class="constant">Board</span>.new</span>
+<span class="linenum">46</span>      player_1 = <span class="constant">Player</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">47</span>      player_2 = <span class="constant">Player</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('43.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">defaults to two human players, X and O, with an empty board</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_23">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:57:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">55</span>
+<span class="linenum">56</span>    it <span class="string"><span class="delimiter">'</span><span class="content">defaults to two human players, X and O, with an empty board</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">57</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">58</span>
+<span class="linenum">59</span>      expect(game.player_1).to be_a(<span class="constant">Players</span>::<span class="constant">Human</span>)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_23" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_23" class="passed">#current_player</dt>
+    <script type="text/javascript">makeRed('div_group_23');</script>
+    <script type="text/javascript">makeRed('example_group_23');</script>
+    <script type="text/javascript">moveProgressBar('45.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns the correct player, X, for the third move</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_24">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:71:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">69</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#current_player</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">70</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns the correct player, X, for the third move</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">71</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">72</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_24" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_24" class="passed">#won?</dt>
+    <script type="text/javascript">makeRed('div_group_24');</script>
+    <script type="text/javascript">makeRed('example_group_24');</script>
+    <script type="text/javascript">moveProgressBar('47.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns false for a draw</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_25">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:80:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">78</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#won?</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">79</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns false for a draw</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">80</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">81</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('49.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns the correct winning combination in the case of a win</span>
+      <span class="duration">0.00018s</span>
+      <div class="failure" id="failure_26">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:87:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">85</span>
+<span class="linenum">86</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns the correct winning combination in the case of a win</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">87</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">88</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>,
+<span class="linenum">89</span>                          <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>,</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('50.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">isn&#39;t hard-coded</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_27">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:96:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">94</span>
+<span class="linenum">95</span>    it <span class="string"><span class="delimiter">&quot;</span><span class="content">isn't hard-coded</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">96</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">97</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>,
+<span class="linenum">98</span>                          <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>,</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_25" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_25" class="passed">#draw?</dt>
+    <script type="text/javascript">makeRed('div_group_25');</script>
+    <script type="text/javascript">makeRed('example_group_25');</script>
+    <script type="text/javascript">moveProgressBar('52.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns true for a draw</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_28">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:107:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">105</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#draw?</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">106</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns true for a draw</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">107</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">108</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('54.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns false for a won game</span>
+      <span class="duration">0.00014s</span>
+      <div class="failure" id="failure_29">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:114:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">112</span>
+<span class="linenum">113</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns false for a won game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">114</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">115</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('56.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns false for an in-progress game</span>
+      <span class="duration">0.00018s</span>
+      <div class="failure" id="failure_30">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:121:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">119</span>
+<span class="linenum">120</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns false for an in-progress game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">121</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">122</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_26" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_26" class="passed">#over?</dt>
+    <script type="text/javascript">makeRed('div_group_26');</script>
+    <script type="text/javascript">makeRed('example_group_26');</script>
+    <script type="text/javascript">moveProgressBar('58.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns true for a draw</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_31">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:130:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">128</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#over?</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">129</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns true for a draw</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">130</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">131</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('60.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns true for a won game</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_32">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:137:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">135</span>
+<span class="linenum">136</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns true for a won game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">137</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">138</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('62.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns false for an in-progress game</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_33">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:144:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">142</span>
+<span class="linenum">143</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns false for an in-progress game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">144</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">145</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_27" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_27" class="passed">#winner</dt>
+    <script type="text/javascript">makeRed('div_group_27');</script>
+    <script type="text/javascript">makeRed('example_group_27');</script>
+    <script type="text/javascript">moveProgressBar('64.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns X when X won</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_34">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:153:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">151</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#winner</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">152</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns X when X won</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">153</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">154</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('66.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns O when O won</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_35">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:160:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">158</span>
+<span class="linenum">159</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns O when O won</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">160</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">161</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('67.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns nil when no winner</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_36">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:167:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">165</span>
+<span class="linenum">166</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns nil when no winner</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">167</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">168</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_28" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_28" class="passed">turn</dt>
+    <script type="text/javascript">makeRed('div_group_28');</script>
+    <script type="text/javascript">makeRed('example_group_28');</script>
+    <script type="text/javascript">moveProgressBar('69.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">makes valid moves</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_37">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:176:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">174</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">turn</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">175</span>    it <span class="string"><span class="delimiter">'</span><span class="content">makes valid moves</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">176</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">177</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('71.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">asks for input again after a failed validation</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_38">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:185:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">183</span>
+<span class="linenum">184</span>    it <span class="string"><span class="delimiter">'</span><span class="content">asks for input again after a failed validation</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">185</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">186</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('73.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">changes to player 2 after the first turn</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_39">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:195:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">193</span>
+<span class="linenum">194</span>    it <span class="string"><span class="delimiter">'</span><span class="content">changes to player 2 after the first turn</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">195</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">196</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_29" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_29" class="passed">play</dt>
+    <script type="text/javascript">makeRed('div_group_29');</script>
+    <script type="text/javascript">makeRed('example_group_29');</script>
+    <script type="text/javascript">moveProgressBar('75.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">asks for players input on a turn of the game</span>
+      <span class="duration">0.00017s</span>
+      <div class="failure" id="failure_40">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:208:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">206</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">play</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">207</span>    it <span class="string"><span class="delimiter">'</span><span class="content">asks for players input on a turn of the game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">208</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">209</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)
+<span class="linenum">210</span>      allow(game).to receive(<span class="symbol">:over?</span>).and_return(<span class="predefined-constant">false</span>, <span class="predefined-constant">true</span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('77.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">checks if the game is over after every turn</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_41">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:218:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">216</span>
+<span class="linenum">217</span>    it <span class="string"><span class="delimiter">'</span><span class="content">checks if the game is over after every turn</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">218</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">219</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)
+<span class="linenum">220</span>      allow(game.player_1).to receive(<span class="symbol">:gets</span>).and_return(<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('79.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">plays the first turn of the game</span>
+      <span class="duration">0.00014s</span>
+      <div class="failure" id="failure_42">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:229:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">227</span>
+<span class="linenum">228</span>    it <span class="string"><span class="delimiter">'</span><span class="content">plays the first turn of the game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">229</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">230</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)
+<span class="linenum">231</span>      allow(game.player_1).to receive(<span class="symbol">:gets</span>).and_return(<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('81.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">plays the first few turns of the game</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_43">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:241:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">239</span>
+<span class="linenum">240</span>    it <span class="string"><span class="delimiter">'</span><span class="content">plays the first few turns of the game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">241</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">242</span>
+<span class="linenum">243</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('83.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">checks if the game is won after every turn</span>
+      <span class="duration">0.00013s</span>
+      <div class="failure" id="failure_44">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:255:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">253</span>
+<span class="linenum">254</span>    it <span class="string"><span class="delimiter">'</span><span class="content">checks if the game is won after every turn</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">255</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">256</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)
+<span class="linenum">257</span>      allow(game.player_1).to receive(<span class="symbol">:gets</span>).and_return(<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">3</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('84.9');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">checks if the game is a draw after every turn</span>
+      <span class="duration">0.00023s</span>
+      <div class="failure" id="failure_45">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:267:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">265</span>
+<span class="linenum">266</span>    it <span class="string"><span class="delimiter">'</span><span class="content">checks if the game is a draw after every turn</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">267</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">268</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)
+<span class="linenum">269</span>      allow(game.player_1).to receive(<span class="symbol">:gets</span>).and_return(<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('86.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">stops playing if someone has won</span>
+      <span class="duration">0.00012s</span>
+      <div class="failure" id="failure_46">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:278:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">276</span>
+<span class="linenum">277</span>    it <span class="string"><span class="delimiter">'</span><span class="content">stops playing if someone has won</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">278</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">279</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('88.6');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">congratulates the winner X</span>
+      <span class="duration">0.00014s</span>
+      <div class="failure" id="failure_47">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:289:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">287</span>
+<span class="linenum">288</span>    it <span class="string"><span class="delimiter">'</span><span class="content">congratulates the winner X</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">289</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">290</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>]
+<span class="linenum">291</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('90.5');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">congratulates the winner O</span>
+      <span class="duration">0.00016s</span>
+      <div class="failure" id="failure_48">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:299:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">297</span>
+<span class="linenum">298</span>    it <span class="string"><span class="delimiter">'</span><span class="content">congratulates the winner O</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">299</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">300</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content"> </span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('92.4');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">stops playing in a draw</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_49">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:310:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">308</span>
+<span class="linenum">309</span>    it <span class="string"><span class="delimiter">'</span><span class="content">stops playing in a draw</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">310</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">311</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('94.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">prints &quot;Cat&#39;s Game!&quot; on a draw</span>
+      <span class="duration">0.00011s</span>
+      <div class="failure" id="failure_50">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:321:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">319</span>
+<span class="linenum">320</span>    it <span class="string"><span class="delimiter">'</span><span class="content">prints &quot;Cat</span><span class="char">\'</span><span class="content">s Game!&quot; on a draw</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">321</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">322</span>      game.board.cells = [<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">O</span><span class="delimiter">&quot;</span></span>]</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('96.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">plays through an entire game</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_51">
+        <div class="message"><pre>uninitialized constant Game</pre></div>
+        <div class="backtrace"><pre>./spec/04_game_spec.rb:332:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">330</span>
+<span class="linenum">331</span>    it <span class="string"><span class="delimiter">'</span><span class="content">plays through an entire game</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">332</span>      game = <span class="constant">Game</span>.new</span>
+<span class="linenum">333</span>      allow(<span class="global-variable">$stdout</span>).to receive(<span class="symbol">:puts</span>)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_30" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_30" class="passed">Players::Computer</dt>
+    <script type="text/javascript">makeRed('div_group_30');</script>
+    <script type="text/javascript">makeRed('example_group_30');</script>
+    <script type="text/javascript">moveProgressBar('98.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">inherits from Player</span>
+      <span class="duration">0.00015s</span>
+      <div class="failure" id="failure_52">
+        <div class="message"><pre>uninitialized constant Players</pre></div>
+        <div class="backtrace"><pre>./spec/05_computer_player_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">3</span>describe <span class="string"><span class="delimiter">'</span><span class="content">Players::Computer</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">4</span>  it <span class="string"><span class="delimiter">'</span><span class="content">inherits from Player</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">5</span>    expect(<span class="constant">Players</span>::<span class="constant">Computer</span>.ancestors).to include(<span class="constant">Player</span>)</span>
+<span class="linenum">6</span>  <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_31" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_31" class="passed">#move</dt>
+    <script type="text/javascript">makeRed('div_group_31');</script>
+    <script type="text/javascript">makeRed('example_group_31');</script>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">returns a valid position for the computer to move</span>
+      <span class="duration">0.00021s</span>
+      <div class="failure" id="failure_53">
+        <div class="message"><pre>uninitialized constant Players</pre></div>
+        <div class="backtrace"><pre>./spec/05_computer_player_spec.rb:10:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">8</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">#move</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">9</span>    it <span class="string"><span class="delimiter">'</span><span class="content">returns a valid position for the computer to move</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="offending"><span class="linenum">10</span>      computer = <span class="constant">Players</span>::<span class="constant">Computer</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">X</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">11</span>      board = <span class="constant">Board</span>.new</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.26030 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "53 examples, 53 failures";</script>
+</div>
+</div>
+</body>
+</html>
