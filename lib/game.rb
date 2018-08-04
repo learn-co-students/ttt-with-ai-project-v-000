@@ -9,5 +9,12 @@ class Game
     @board= board
    end
    def current_player
-   end
+     counter = board.turn_count
+       if counter.odd?
+         player = "O"
+       else
+         player = "X"
+       end
+       return player
+       end
 end
