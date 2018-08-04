@@ -1,3 +1,61 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+game = Game.new
+until game.over?
+puts "What kinda game you wanna play? 0, 1 or 2 player?"
+game_type = gets.strip.to_i
+case game_type
+  when 0
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+  when 1
+    puts "Who goes first, human player (1) or computer (2)?"
+    first = gets.strip.to_i
+    if first == 1
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+    else
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+    end
+  else
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+  end
+
+#game = Game.new(player_1 = player_1, player_2 = player_2, board = Board.new)
+game.player_1 = player_1
+game.player_2 = player_2
+board = Board.new
+game.play
+end
+
+  game.won? || game.over?
+  play_again=""
+  until play_again == "N"
+  puts "Would you like to play again? Y or N?"
+  play_again = gets.strip
+  case play_again
+    when play_again == "Y"
+      game = Game.new(player_1 = player_1, player_2 = player_2, board = Board.new)
+      game.play
+    when play_again == "N"
+      puts "bye!"
+      return nil
+    end
+end
+
+
+
+
+
+
+
+
+
+#When the game is over, the CLI should prompt the user if they would like to play again
+#and allow them to choose a new configuration for the game as described above.
+#If the user doesn't want to play again, exit the program.
