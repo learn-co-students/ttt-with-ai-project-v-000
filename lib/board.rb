@@ -30,8 +30,8 @@ class Board
     print " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
-  def input_to_index(input)
-    input.to_i - 1
+      def input_to_index(input)
+      input.to_i - 1
   end
 
   def move(index, token)
@@ -100,11 +100,12 @@ class Board
 
   def position(cells)
     puts "Please enter a number 1 - 9"
-    input = gets.strip
-    index = input_to_index(input)
-      if valid_move(index, cells)
+      input = STDIN.gets.strip
+      index = input_to_index(input)
+      if valid_move?(index, cells)
         move(index, current_player)
         display
+        #puts "#{cells[index]}"
       else
         puts "try again."
       end
