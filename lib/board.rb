@@ -37,7 +37,7 @@ class Board
   def user_input
     puts "Please enter a number 1 - 9"
     input = STDIN.gets.strip
-    index = input_to_index(input)
+    @index = input_to_index(input)
   end
 
   def move(index, token)
@@ -45,22 +45,22 @@ class Board
     token
   end
 
-  def taken?(index)
-     position(index) == "X" || position(index) == "O"
-  # !(cells[index].nil? || cells[index] == " ")
+  def taken?(cells = @cells, index)
+    position(index) == "X" || position(index) == "O"
+  #!(cells[index].nil? || cells[index] == " ")
   end
 
   def valid_move?(index)
     binding.pry
-    index.between?(0, 8) && !taken?(index)
+    @index.between?(0, 8) && taken?(current_move)
   end
 
   def turn_count
-  @cells.count {|position| position != " "}
+    @cells.count {|position| position != " "}
   end
 
   def current_player
-  turn_count % 2 == 0 ? "X" : "O"
+    turn_count % 2 == 0 ? "X" : "O"
   end
 
 
@@ -69,11 +69,14 @@ class Board
     cells[board_space]
   end
 
+  def full?
+    @cells.all? do|space|
+    space == "X" || space == "O"
+    end
+  end
+
   def turn
     position(user_input)
-    # puts "Please enter a number 1 - 9"
-    # input = STDIN.gets.strip
-    # index = input_to_index(input)
       if valid_move?(index, cells = @cells)
         move(index, current_player)
 
@@ -82,47 +85,41 @@ class Board
       end
   end
 
-  def won?
-   WIN_COMBINATIONS.detect do |win_index|
+  # def won?
+  #  WIN_COMBINATIONS.detect do |win_index|
+  #
+  #  position_1 = @board [win_index[0]]
+  #  position_2 = @board [win_index[1]]
+  #  position_3 = @board [win_index[2]]
+  #
+  #
+  #  position_1 == "X" && position_2 == "X" && position_3 == "X" ||
+  #  position_1 == "O" && position_2 == "O" && position_3 == "O"
+  #
+  #  end
+  # end
+  #
+  # def draw?
+  #  !won? && full?
+  # end
+  #
+  # def over?
+  #   draw? || won?
+  # end
+  #
+  # def winner
+  #     won? && @cells[won?[0]]
+  # end
 
-   position_1 = @board [win_index[0]]
-   position_2 = @board [win_index[1]]
-   position_3 = @board [win_index[2]]
-
-
-   position_1 == "X" && position_2 == "X" && position_3 == "X" ||
-   position_1 == "O" && position_2 == "O" && position_3 == "O"
-
-   end
-  end
-
-  def full?
-    @cells.all? do|space|
-    space == "X" || space == "O"
-  end
-  end
-
-  def draw?
-   !won? && full?
-  end
-
-  def over?
-    draw? || won?
-  end
-
-  def winner
-      won? && @cells[won?[0]]
-  end
-
-  def play
-    until over?
-      position
-    end
-      if won?
-        puts "Congratulations #{winner}!"
-      end
-      if draw?
-        puts "Cat's Game!"
-      end
-  end
+  # def play
+  #   until over?
+  #     position
+  #   end
+  #     if won?
+  #       puts "Congratulations #{winner}!"
+  #     end
+  #     if draw?
+  #       puts "Cat's Game!"
+  #     end
+  # end
 end
