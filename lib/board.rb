@@ -36,14 +36,16 @@ class Board
 
   def move(index, token)
     @cells[index] = token
+    token
   end
 
-  def position_taken?(cells, index)
-  !(cells[index].nil? || cells[index] == " ")
+  def taken?(index)
+     position(index) == "X" || position(index) == "O"
+  # !(cells[index].nil? || cells[index] == " ")
   end
 
-  def valid_move?(index, cells)
-    index.between?(0, 8) && !position_taken?(cells, index)
+  def valid_move?(index)
+    index.between?(0, 8) && taken?(index)
   end
 
   def turn_count
@@ -52,6 +54,30 @@ class Board
 
   def current_player
   turn_count % 2 == 0 ? "X" : "O"
+  end
+
+  def user_input
+    puts "Please enter a number 1 - 9"
+    input = STDIN.gets.strip
+    index = input_to_index(input)
+  end
+
+  def position(space)
+    board_space = input_to_index(space)
+    cells[board_space]
+  end
+
+  def turn
+    position(user_input)
+    # puts "Please enter a number 1 - 9"
+    # input = STDIN.gets.strip
+    # index = input_to_index(input)
+      if valid_move?(index, cells = @cells)
+        move(index, current_player)
+
+      else
+        puts "try again."
+      end
   end
 
   def won?
@@ -97,19 +123,4 @@ class Board
         puts "Cat's Game!"
       end
   end
-
-  def position(cells)
-    puts "Please enter a number 1 - 9"
-      input = STDIN.gets.strip
-      index = input_to_index(input)
-      if valid_move?(index, cells)
-        move(index, current_player)
-        display
-        #puts "#{cells[index]}"
-      else
-        puts "try again."
-      end
-  end
-
-
 end
