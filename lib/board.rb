@@ -51,7 +51,8 @@ class Board
   end
 
   def valid_move?(index)
-    index.between?(0, 8) && taken?(index)
+    binding.pry
+    index.between?(0, 8) && !taken?(index)
   end
 
   def turn_count
