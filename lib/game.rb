@@ -54,7 +54,7 @@ class Game
   end
 
   def winner
-    result = self.won?(board)
+    result = self.won?
     if result
       if board.cells[result[0]] == "X"
         return "X"
