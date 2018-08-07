@@ -72,7 +72,7 @@ class Board
 
   def update(index, player)
     current_player == player
-    @cells[(index.to_i - 1)].strip << current_player
+    @cells[(index.to_i - 1)] = current_player
 
   end
 
