@@ -25,5 +25,13 @@ class Board
     @cells[position_number]
   end
 
+  def full?
+    if !@cells.include?(" ")
+      true
+    else
+      false
+    end
+  end
+
 
 end
