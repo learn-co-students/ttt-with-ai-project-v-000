@@ -38,21 +38,22 @@ class Board
     puts "Please enter a number 1 - 9"
     input = STDIN.gets.strip
     @index = input_to_index(input)
+    # if valid_move(index)
+    #   position(index)
+    # end
   end
 
-  def move(index, token)
-    @cells[index] = token
-    token
+  def position(space)
+    board_space = input_to_index(space)
+    cells[board_space]
   end
 
   def taken?(cells = @cells, index)
     position(index) == "X" || position(index) == "O"
-  #!(cells[index].nil? || cells[index] == " ")
   end
 
   def valid_move?(index)
-    binding.pry
-    @index.between?(0, 8) && taken?(current_move)
+    (index.to_i - 1).between?(0, 8) && !taken?(cells = @cells, index)
   end
 
   def turn_count
@@ -63,63 +64,17 @@ class Board
     turn_count % 2 == 0 ? "X" : "O"
   end
 
-
-  def position(space)
-    board_space = input_to_index(space)
-    cells[board_space]
-  end
-
   def full?
     @cells.all? do|space|
     space == "X" || space == "O"
     end
   end
 
-  def turn
-    position(user_input)
-      if valid_move?(index, cells = @cells)
-        move(index, current_player)
+  def update(index, player)
+    current_player == player
+    @cells[(index.to_i - 1)].strip << current_player
 
-      else
-        puts "try again."
-      end
   end
 
-  # def won?
-  #  WIN_COMBINATIONS.detect do |win_index|
-  #
-  #  position_1 = @board [win_index[0]]
-  #  position_2 = @board [win_index[1]]
-  #  position_3 = @board [win_index[2]]
-  #
-  #
-  #  position_1 == "X" && position_2 == "X" && position_3 == "X" ||
-  #  position_1 == "O" && position_2 == "O" && position_3 == "O"
-  #
-  #  end
-  # end
-  #
-  # def draw?
-  #  !won? && full?
-  # end
-  #
-  # def over?
-  #   draw? || won?
-  # end
-  #
-  # def winner
-  #     won? && @cells[won?[0]]
-  # end
 
-  # def play
-  #   until over?
-  #     position
-  #   end
-  #     if won?
-  #       puts "Congratulations #{winner}!"
-  #     end
-  #     if draw?
-  #       puts "Cat's Game!"
-  #     end
-  # end
 end
