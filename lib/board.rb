@@ -36,10 +36,11 @@ class Board
     @cells.count {|e| e == "X" or e == "O"}
   end
   
-  def taken?(position) 
-    i = position.to_i - 1
-    !(@cells[i] ==  " " || @cells[i] == "" || @cells[i] == nil) ?
-    true : false
+  def taken?(input) 
+    # binding.pry
+    i = input.to_i - 1
+    
+    !(@cells[i] ==  " " || @cells[i] == "" || @cells[i] == nil) ? true : false
   end 
   
   def valid_move?(position)
