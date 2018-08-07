@@ -23,11 +23,9 @@ class Game
 
   def current_player
     if board.turn_count.odd?
-      player_2
-    elsif board.turn_count.even?
       player_1
-    else
-      nil
+    elsif board.turn_count.even?
+      player_2
     end
   end
 
@@ -49,6 +47,21 @@ class Game
 
   def draw?
     !self.won? && board.full?
+  end
+
+  def over?
+    self.won? || self.draw?
+  end
+
+  def winner
+    result = self.won?(board)
+    if result
+      if board.cells[result[0]] == "X"
+        return "X"
+      else
+        return "O"
+      end
+    end
   end
 
 
