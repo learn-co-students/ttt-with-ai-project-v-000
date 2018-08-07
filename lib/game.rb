@@ -66,8 +66,7 @@ class Game
 
   def turn
     puts "Please enter 1-9:"
-    position = (gets.to_i)
-    if board.valid_move?(position)
+    if board.valid_move?(gets)
       board.update(position, current_player)
     else
       nil
