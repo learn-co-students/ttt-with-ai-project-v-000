@@ -41,6 +41,14 @@ class Board
     position_number = position_number.to_i - 1
     if @cells[position_number] == "X" || @cells[position_number] == "O"
       true
+    elsif @cells[position_number] == " " || @cells[position_number] == ""
+      false
+    end
+  end
+
+  def valid_move?(position_number)
+    if position_number.to_i.between?(1, 9) && !self.taken?(position_number)
+      true
     else
       false
     end
