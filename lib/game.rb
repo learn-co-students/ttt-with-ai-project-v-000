@@ -21,4 +21,12 @@ class Game
     @board = board
   end
 
+  def current_player
+    if board.turn_count.odd?
+      X
+    else
+      O
+    end
+  end
+
 end
