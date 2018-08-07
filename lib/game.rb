@@ -47,5 +47,9 @@ class Game
     return false
   end
 
+  def draw?
+    !self.won? && board.full?
+  end
+
 
 end
