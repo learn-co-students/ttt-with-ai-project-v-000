@@ -54,5 +54,10 @@ class Board
     end
   end
 
+  def update(position_number, player)
+    position_number = (position_number.to_i) -1
+    self.cells[position_number] = player.token
+  end
+
 
 end
