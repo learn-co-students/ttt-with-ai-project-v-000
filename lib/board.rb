@@ -33,5 +33,9 @@ class Board
     end
   end
 
+  def turn_count
+    @cells.count("X") + @cells.count("O")
+  end
+
 
 end
