@@ -37,5 +37,14 @@ class Board
     @cells.count("X") + @cells.count("O")
   end
 
+  def taken?(position_number)
+    position_number = position_number.to_i - 1
+    if @cells[position_number] == "X" || @cells[position_number] == "O"
+      true
+    else
+      false
+    end
+  end
+
 
 end
