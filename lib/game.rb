@@ -71,11 +71,11 @@ class Game
   
   def turn 
     player = current_player
-    num = player.move(@board)
-    if @board.valid_move?(num)
-        @board.cells[num.to_i - 1] = player.token
+    position = player.move(@board)
+    if @board.valid_move?(position)
+        @board.update(position, player)
         @board.display
-    binding.pry    
+        
     else
         puts "That is not a valid move!"
         player.move(@board)
