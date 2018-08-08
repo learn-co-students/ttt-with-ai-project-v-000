@@ -1,6 +1,6 @@
 class Game
 
-  include Countable
+  #include Countable
 
   WIN_COMBINATIONS = [
    [0, 1, 2],
@@ -33,6 +33,10 @@ class Game
 
   def board=(board)
     @board = board
+  end
+
+  def current_player
+    board.cells.count % 2 == 0 ? "X" : "O"
   end
 
 end
