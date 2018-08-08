@@ -66,11 +66,14 @@ class Game
   end
 
   def turn
-    position_number = self.current_player.move(self.board) #=> Returns a position number to be entered into the board
-    if self.board.valid_move?(position_number) #=> Checks to see if the position is valid in the current board
-      self.board.update(position_number, self.current_player) #=> If ^ is true, updates the board with the player's token ("X", "O")
-    else
-      puts "Invalid" #=> If ^ is not true, puts out "Invalid"
+    loop do
+      position_number = self.current_player.move(self.board) #=> Returns a position number to be entered into the board
+      if !self.board.valid_move?(position_number) #=> Checks to see if the position is valid in the current board
+        puts "Invalid" #=> If ^ is not true, puts out "Invalid"
+      else
+        self.board.update(position_number, self.current_player) #=> If ^ is true, updates the board with the player's   token ("X", "O")
+        break
+      end
     end
   end
 
