@@ -8,8 +8,6 @@ module Players
     def move(board)
       valid = []
       good_move = []
-      
-      best_line = []
       best_move = []
       @token = "X" ? o_token = "O" : o_token = "X"
       
@@ -18,37 +16,37 @@ module Players
       good_line_3rd = WIN_COMBINATIONS.detect {|line| board.cells[line[0]] == board.cells[line[1]] && board.cells[line[1]] == @token && board.taken?(line[2] + 1) == false}
   
       if good_line_3rd != nil 
-         good_move << (goodline_3rd[2] + 1).to_s
+         good_move << (good_line_3rd[2] + 1).to_s
       end 
         
       good_line_2nd = WIN_COMBINATIONS.detect {|line| board.cells[line[0]] == board.cells[line[2]] && board.cells[line[2]] == @token && board.taken?(line[1] + 1) == false}
   
       if good_line_2nd != nil 
-         good_move << (goodline_2nd[1] + 1).to_s
+         good_move << (good_line_2nd[1] + 1).to_s
       end 
       
        good_line_1st = WIN_COMBINATIONS.detect {|line| board.cells[line[1]] == board.cells[line[2]] && board.cells[line[2]] == @token && board.taken?(line[0] + 1) == false}
   
       if good_line_1st != nil 
-         good_move << (goodline_1st[0] + 1).to_s
+         good_move << (good_line_1st[0] + 1).to_s
       end 
       
       best_line_3rd = WIN_COMBINATIONS.detect {|line| board.cells[line[0]] == board.cells[line[1]] && board.cells[line[1]] == o_token && board.taken?(line[2] + 1) == false}
   
       if best_line_3rd != nil 
-         best_move << (bestline_3rd[2] + 1).to_s
+         best_move << (best_line_3rd[2] + 1).to_s
       end 
         
       best_line_2nd = WIN_COMBINATIONS.detect {|line| board.cells[line[0]] == board.cells[line[2]] && board.cells[line[2]] == o_token && board.taken?(line[1] + 1) == false}
   
       if best_line_2nd != nil 
-         best_move << (bestline_2nd[1] + 1).to_s
+         best_move << (best_line_2nd[1] + 1).to_s
       end 
       
        best_line_1st = WIN_COMBINATIONS.detect {|line| board.cells[line[1]] == board.cells[line[2]] && board.cells[line[2]] == o_token && board.taken?(line[0] + 1) == false}
   
       if best_line_1st != nil 
-         best_move << (bestline_1st[0] + 1).to_s
+         best_move << (best_line_1st[0] + 1).to_s
       end 
       
       if best_move.length != 0 

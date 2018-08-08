@@ -51,28 +51,8 @@ class Game
   end 
   
   def start 
-    # puts "Welcoem to the Tic Tac Toe with AI Game!"
-    # puts "A 0-player game has two computer players playing against each other. "
-    # puts 'A 1-player game has a human playing against a computer.'
-    # puts "A 2-player game has two human players."
-    # puts "What kind of game do you want to play? 0-player enter 0, 1-player enter 1, or 2-player enter 2:"
-    # n = gets.chomp.to_i 
-    # case n 
-    #   when 0 
-    #     @player_1 = Players::Computer.new("X")
-    #     @player_2 = Players::Computer.new("O")
-    #   when 1 
-    #     @player_1 = Players::Human.new("X")
-    #     @player_2 = Players::Computer.new("O")
-    #   when 2 
-    #     @player_1 = Players::Human.new("X")
-    #     @player_2 = Players::Human.new("O")
-    #   else 
-    #     puts "Invalid choice"
-    # end
-    
     play
-  end 
+  end
   
   def play
     while !over?   
