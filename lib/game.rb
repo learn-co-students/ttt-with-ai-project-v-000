@@ -22,9 +22,10 @@ class Game
   end
 
   def current_player
-    if board.turn_count.odd?
+    pcount = board.turn_count + 1
+    if pcount.odd?
       player_1
-    elsif board.turn_count.even?
+    elsif pcount.even?
       player_2
     end
   end

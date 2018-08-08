@@ -34,7 +34,7 @@ class Board
   end
 
   def turn_count
-    (@cells.count("X") + @cells.count("O")) + 1
+    @cells.count("X") + @cells.count("O")
   end
 
   def taken?(position_number)
