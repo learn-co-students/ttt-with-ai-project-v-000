@@ -66,9 +66,24 @@ class Game
   end
 
   def turn
-    puts "Please enter 1-9:"
-
+    position_number = self.current_player.move(self.board) #=> Returns a position number to be entered into the board
+    if self.board.valid_move?(position_number) #=> Checks to see if the position is valid in the current board
+      self.board.update(position_number, self.current_player) #=> If ^ is true, updates the board with the player's token ("X", "O")
+    else
+      puts "Invalid" #=> If ^ is not true, puts out "Invalid"
+    end
   end
+
+  #def turn
+  #  loop do
+  #  puts "Please enter 1-9:"
+  #  position_number = self.current_player.move(self.board)
+  #  if self.board.valid_move?(position_number)
+  #    self.current_player.move(self.board)
+  #    break
+  #  end
+  #  end
+  #end
 
 
 end
