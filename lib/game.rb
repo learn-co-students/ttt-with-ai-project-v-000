@@ -69,38 +69,55 @@ def turn
     end
   end
 
-def play
-    until over? == true
-      turn
+  def play
+      until over? == true
+        turn
+      end
+      if draw? == true
+        puts "Cat's Game!"
+      elsif won? != nil
+          puts "Congratulations #{winner}!"
+      end
     end
-    if draw? == true
-      puts "Cat's Game!"
-    elsif won? != nil
-        puts "Congratulations #{winner}!"
-    end
-  end
 
-  def start
-    puts "Welcome to Tic-Tac-Toe!"
-    puts "To play against the computer, enter 'computer'."
-    puts "To play against your friend, enter 'friend'."
-    puts "To watch the computer play each other, enter 'break the computer'."
-    puts "To quit, type 'exit'."
-    puts "What would you like to do?"
-    input = gets.strip
-    if input == 'computer'
-      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-      game.play
-    elsif input == 'friend'
-      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-      game.play
-    elsif input == 'break the computer'
-      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-      game.play
-    elsif input != 'exit'
-      self.call
-    else input == 'exit'
+    def start
+      puts "To play against the computer, enter 1."
+      puts "To play against your friend, enter 2."
+      puts "To watch the computer play itself, enter 3."
+      puts "To quit, type 'exit'."
+      puts "What would you like to do?"
+      input = gets.strip
+      if input == '1'
+        puts "Would you like to go first and be X? YES or NO"
+        answer = gets.strip
+        if answer.upcase == "YES"
+          game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+        elsif  answer.upcase == "NO"
+          game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+        end
+        game.play
+        puts "Would you like to play again?"
+        start
+      elsif input == '2'
+        puts "Player 1, would you like to be X or O?"
+        answer = gets.strip
+        if answer.upcase == "X"
+          game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+        elsif answer.upcase == "O"
+          game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+        end
+        game.play
+        puts "Would you like to play again?"
+        start
+      elsif input == '3'
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+        game.play
+        puts "Would you like to play again?"
+        start
+      elsif input != 'exit'
+        start
+      else input == 'exit'
+      end
     end
-  end
 
 end

@@ -37,8 +37,9 @@ class Board
     @cells.count{|token| token == "X" || token == "O"}
   end
 
-  def taken?(index)
-    !(position(index).nil? || position(index) == " ")
+  def taken?(input)
+    position = @cells[index(input)]
+    !(position.nil? || position == " ")
   end
 
   def valid_move?(input)
