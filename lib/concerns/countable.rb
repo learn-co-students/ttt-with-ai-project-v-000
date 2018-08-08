@@ -1,7 +1,7 @@
 module Countable
 
   def turn_count
-    cells.count {|position| position != " "}
+  cells.count {|position| position != " "}
   end
 
   def current_player
