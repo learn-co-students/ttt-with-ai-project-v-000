@@ -23,6 +23,7 @@ class Game
 
   def player_1=(player_1)
     @player_1 = player_1
+    player_1 = Players::Human
   end
 
   def player_2=(player_2)
