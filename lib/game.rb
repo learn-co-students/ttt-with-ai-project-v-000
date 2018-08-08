@@ -75,7 +75,7 @@ class Game
     if @board.valid_move?(num)
         @board.cells[num.to_i - 1] = player.token
         @board.display
-        
+    binding.pry    
     else
         puts "That is not a valid move!"
         player.move(@board)
