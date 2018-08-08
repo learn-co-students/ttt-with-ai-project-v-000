@@ -10,7 +10,7 @@ human_2 = Players::Human.new("O")
 
 b = Board.new
 
-puts "Welcoem to the Tic Tac Toe with AI Game!"
+puts "Welcome to the Tic Tac Toe Game!"
 puts "A 0-player game has two computer players playing against each other. "
 puts 'A 1-player game has a human playing against a computer.'
 puts "A 2-player game has two human players."

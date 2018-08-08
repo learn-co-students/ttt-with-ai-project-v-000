@@ -78,7 +78,7 @@ class Game
         
     else
         puts "That is not a valid move!"
-        player.move(@board)
+        turn
     end
   end  
 end 
