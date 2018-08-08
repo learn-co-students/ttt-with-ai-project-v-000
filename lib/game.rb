@@ -37,7 +37,7 @@ class Game
 
   def current_player
     binding.pry
-    board.cells.count % 2 == 0 ? "X" : "O"
+    board.cells.count % 2 == 0 ? player_1.token : player_2.token
   end
 
 end
