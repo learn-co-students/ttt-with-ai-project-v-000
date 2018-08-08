@@ -36,6 +36,7 @@ class Game
   end
 
   def current_player
+    binding.pry
     board.cells.count % 2 == 0 ? "X" : "O"
   end
 
