@@ -3,8 +3,9 @@ class Board
 
   attr_accessor :cells
 
-  def initialize(cells = Array.new(9, " "))
+  def initialize#(cells = Array.new(9, " "))
     @cells = cells
+    reset!
   end
 
   def reset!
@@ -27,9 +28,6 @@ class Board
     puts "Please enter a number 1 - 9"
     input = STDIN.gets.strip
     @index = input_to_index(input)
-    # if valid_move(index)
-    #   position(index)
-    # end
   end
 
   def position(space)
@@ -37,12 +35,12 @@ class Board
     cells[board_space]
   end
 
-  def taken?(cells = @cells, index)
+  def taken?(index)
     position(index) == "X" || position(index) == "O"
   end
 
   def valid_move?(index)
-    (index.to_i - 1).between?(0, 8) && !taken?(cells = @cells, index)
+  input_to_index(index).between?(0, 8) && !taken?(index)
   end
 
   def turn_count
@@ -62,7 +60,6 @@ class Board
   def update(index, player)
     current_player == player
     @cells[(index.to_i - 1)] = current_player
-
   end
 
 

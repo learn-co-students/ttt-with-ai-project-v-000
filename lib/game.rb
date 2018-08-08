@@ -13,27 +13,24 @@ class Game
 
 
   # attr_accessor :board
-  attr_accessor :player_1, :player_2, :board
+  attr_reader :player_1, :player_2, :board
 
-  def initialize
-    # @player_1 = Player.new("X")
-    # @player_2 = Player.new("O")
-    @board = []
-
-    # player_1 = Player.new("X")
-    # player_2 = Player.new{"O"}
+   def initialize(player_1 = Player.new("X"), player_2 = Player.new("O"), board = Board.new)
+     @player_1 = player_1
+     @player_2 = player_2
+     @board = board
   end
 
   def player_1=(player_1)
-    @player_1 = Player.new("X")
+    @player_1 = player_1
   end
 
   def player_2=(player_2)
-    @player_2 = Player.new("O")
+    @player_2 = player_2
   end
 
   def board=(board)
-    @board
+    @board = board
   end
 
 
