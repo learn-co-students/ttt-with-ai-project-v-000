@@ -74,7 +74,7 @@ class Game
   end
 
   def turn
-
+    current_player.move
     if  board.valid_move?(user_input)
        board.update(index, current_player)
    display
