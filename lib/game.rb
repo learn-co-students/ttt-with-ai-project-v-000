@@ -74,7 +74,8 @@ class Game
   end
 
   def turn
-    current_player.move
+    moving = current_player.token
+    human::player.move(moving)
     if  board.valid_move?(user_input)
        board.update(index, current_player)
    display
