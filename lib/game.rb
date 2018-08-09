@@ -40,6 +40,7 @@ class Game
   end
 
   def current_player
+    binding.pry
     turn_count % 2 == 0 ? @player_1.token : @player_2.token
   end
 
