@@ -26,12 +26,6 @@ class Board
       input.to_i - 1
   end
 
-  def user_input
-    puts "Please enter a number 1 - 9"
-    input = STDIN.gets.strip
-    @index = input_to_index(input)
-  end
-
   def position(space)
     board_space = input_to_index(space)
     cells[board_space]
@@ -42,7 +36,7 @@ class Board
   end
 
   def valid_move?(index)
-  input_to_index(index).between?(0, 8) && position(index) == " " #!taken?(index)
+  input_to_index(index).between?(0, 8) && position(index) == " "
   end
 
   def turn_count
