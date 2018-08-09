@@ -94,6 +94,8 @@ def turn
           game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
         elsif  answer.upcase == "NO"
           game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+        elsif answer.upcase != "NO" && answer.upcase != "YES"
+          start
         end
         game.play
         puts "Would you like to play again?"
@@ -105,6 +107,8 @@ def turn
           game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
         elsif answer.upcase == "O"
           game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+        elsif answer.upcase != "NO" && answer.upcase != "YES"
+          start
         end
         game.play
         puts "Would you like to play again?"
