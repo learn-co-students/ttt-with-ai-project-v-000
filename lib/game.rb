@@ -35,9 +35,12 @@ class Game
     @board = board
   end
 
+  def turn_count
+    board.cells.count {|space| space != " "}
+  end
+
   def current_player
-    binding.pry
-    board.cells.count % 2 == 0 ? player_1.token : player_2.token
+    turn_count % 2 == 0 ? @player_1.token : @player_2.token
   end
 
 end
