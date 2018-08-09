@@ -40,8 +40,48 @@ class Game
   end
 
   def current_player
-    binding.pry
-    turn_count % 2 == 0 ? @player_1.token : @player_2.token
+    turn_count % 2 == 0 ? @player_1 : @player_2
+  end
+
+  def full?
+    board.cells.all? do|space|
+     space == "X" || space == "O"
+   end
+  end
+
+  def won?
+    WIN_COMBINATIONS.detect do |win_index|
+
+     position_1 = board.cells[win_index[0]]
+     position_2 = board.cells[win_index[1]]
+     position_3 = board.cells[win_index[2]]
+
+     position_1 == "X" && position_2 == "X" && position_3 == "X" ||
+     position_1 == "O" && position_2 == "O" && position_3 == "O"
+   end
+  end
+
+  def draw?
+    !won?  &&  full?
+  end
+
+  def over?
+    draw? || won?
+  end
+
+  def winner
+    won? && board.cells[won?[0]]
+  end
+
+  def turn
+
+    if  board.valid_move?(user_input)
+       board.update(index, current_player)
+   display
+  else
+   puts "Try again."
+   turn
+  end
   end
 
 end

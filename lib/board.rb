@@ -1,11 +1,11 @@
 require 'pry'
 class Board
 
-  include Countable
+  #include Countable
 
   attr_accessor :cells
 
-  def initialize#(cells = Array.new(9, " "))
+  def initialize
     @cells = cells
     reset!
   end
@@ -42,16 +42,16 @@ class Board
   end
 
   def valid_move?(index)
-  input_to_index(index).between?(0, 8) && !taken?(index)
+  input_to_index(index).between?(0, 8) && position(index) == " " #!taken?(index)
   end
 
-  # def turn_count
-  #   @cells.count {|position| position != " "}
-  # end
-  #
-  # def current_player
-  #   turn_count % 2 == 0 ? "X" : "O"
-  # end
+  def turn_count
+    @cells.count {|position| position != " "}
+  end
+
+  def current_player
+    turn_count % 2 == 0 ? "X" : "O"
+  end
 
   def full?
     @cells.all? do|space|
@@ -63,10 +63,5 @@ class Board
     current_player == player
     @cells[(index.to_i - 1)] = current_player
   end
-
-  def self.cells
-    @cells
-  end
-
 
 end
