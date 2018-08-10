@@ -9,7 +9,7 @@ require_relative '../config/environment'
 
 
     game = Game.new
-      until game.won?
+      until game.over?
         game.play
       end
 
