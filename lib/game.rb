@@ -23,6 +23,14 @@ class Game
      @board = board
   end
 
+  def one_player_game
+    one_player = Game.new(player_1 = Players:: Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  end
+
+  def no_player_game
+    no_players = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  end
+
   def player_1=(player_1)
     @player_1 = player_1
   end
@@ -85,6 +93,7 @@ class Game
   end
 
   def play
+    game_type
     turn until over?
     if winner
       puts "Congratulations #{winner}!"
@@ -94,5 +103,17 @@ class Game
     end
   end
 
+  def game_type
+    selection = STDIN.gets.strip
+
+      case selection
+      when "1"
+        one_player_game
+      when "2"
+        game_1 = Game.new
+      when "3"
+        no_player_game
+    end
+  end
 
 end
