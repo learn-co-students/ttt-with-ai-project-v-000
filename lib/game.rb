@@ -100,37 +100,41 @@ class Game
 
   def self.start
 
+    puts ""
     puts "Welcome to Tic-Tac-Toe!"
     puts ""
     puts "Would you like to play against a friend, a computer, or do you want to watch a robot battle?"
     puts ""
-    puts "If you want to play with a friend, enter 'friend'."
-    puts "If you want to play against a computer, enter 'computer'."
-    puts "If you want to want to watch a robot battle, enter 'skynet'."
-    puts ""
-
-    game_type = gets.chomp
-
-    if game_type == "friend"
-      game = self.new
+    loop do
+      puts "If you want to play with a friend, enter 'friend'."
+      puts "If you want to play against a computer, enter 'computer'."
+      puts "If you want to want to watch a robot battle, enter 'skynet'."
       puts ""
-      puts "The first player will be 'X'"
-    elsif game_type == "computer"
-      game = self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    elsif game_type == "skynet"
-      game = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-    else
-      puts ""
-      puts "That is not a valid game type!"
+
+      game_type = gets.chomp
+      if game_type == "friend"
+        game = self.new
+        puts ""
+        puts "The first player will be 'X'"
+        game.board.display
+        game.play
+        break
+      elsif game_type == "computer"
+        game = self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+        game.board.display
+        game.play
+        break
+      elsif game_type == "skynet"
+        game = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+        game.board.display
+        game.play
+        break
+      else
+        puts ""
+        puts "***That is not a valid game type!***"
+        puts ""
+      end
     end
-    game.board.display
-    game.play
-    #puts "Would you like to play again? Enter 'yes' or 'no'"
-    #puts ""
-    #play_again = gets
-    #if play_again == "yes"
-    #  self.start
-    #end
   end
 
 
