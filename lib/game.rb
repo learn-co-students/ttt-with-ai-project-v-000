@@ -110,6 +110,7 @@ class Game
     elsif game_type == "skynet"
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     end
+    self.board.display
     game.play
   end
 
