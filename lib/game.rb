@@ -21,7 +21,6 @@ class Game
      @player_1 = player_1
      @player_2 = player_2
      @board = board
-    puts "Welcome to Tic Tac Toe!"
   end
 
   def player_1=(player_1)
@@ -94,5 +93,14 @@ class Game
         puts "Cat's Game!"
     end
   end
+
+  # def again?
+  #   puts "Would you like to play again? y/n"
+  #   response = STDIN.gets.strip
+  #   if "y"
+  #     play
+  #   end
+  # end
+
 
 end
