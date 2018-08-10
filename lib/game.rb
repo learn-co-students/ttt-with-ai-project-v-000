@@ -105,12 +105,17 @@ class Game
 
     if game_type == "friend"
       game = Game.new
+      puts ""
+      puts "The first player will be 'X'"
     elsif game_type == "computer"
       game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
     elsif game_type == "skynet"
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    else
+      puts ""
+      puts "That is not a valid game type!"
     end
-    self.board.display
+    game.board.display
     game.play
   end
 
