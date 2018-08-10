@@ -2,7 +2,7 @@
 
 class Game
 
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :avail_moves
 
   WIN_COMBINATIONS = [
   [0, 1, 2],
@@ -19,6 +19,10 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    @avail_moves = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    player_1.game = self
+    player_2.game = self
+
   end
 
   def current_player
@@ -72,6 +76,7 @@ class Game
         puts "Invalid" #=> If ^ is not true, puts out "Invalid"
       else
         self.board.update(position_number, self.current_player) #=> If ^ is true, updates the board with the player's   token ("X", "O")
+        self.avail_moves.delete(position_number)
         break
       end
     end

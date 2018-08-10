@@ -2,9 +2,12 @@
 module Players
   class Computer < Player
 
+    attr_accessor :game
+
     def move(board)
       sleep(1.5)
-      rand(1...9).to_s
+      position = self.game.avail_moves.sample
+      position
     end
 
   end
