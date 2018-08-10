@@ -2,9 +2,7 @@
 
 require_relative '../config/environment'
 
-"Welcome to Tic Tac Toe!"
 
-
-game_1 = Board.new
+game_1 = Game.new
 
 game_1.play

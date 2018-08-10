@@ -21,6 +21,7 @@ class Game
      @player_1 = player_1
      @player_2 = player_2
      @board = board
+    puts "Welcome to Tic Tac Toe!"
   end
 
   def player_1=(player_1)
@@ -74,14 +75,24 @@ class Game
   end
 
   def turn
-      current_player.move(current_player.token)
-    if  board.valid_move?()
-       board.update(index, current_player)
-   display
-  else
-   puts "Try again."
-   turn
+    this_move = current_player.move(current_player.token)
+    if  board.valid_move?(this_move)
+         board.update(this_move, current_player)
+     board.display
+      else
+       puts "Try again."
+       turn
+    end
   end
+
+  def play
+    turn until over?
+    if winner
+      puts "Congratulations #{winner}!"
+    elsif
+      draw?
+        puts "Cat's Game!"
+    end
   end
 
 end
