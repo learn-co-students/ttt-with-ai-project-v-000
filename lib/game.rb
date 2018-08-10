@@ -89,5 +89,10 @@ class Game
     end
   end
 
+  def start
+    puts "Welcome to Tic-Tac-Toe!"
+    self.play
+  end
+
 
 end
