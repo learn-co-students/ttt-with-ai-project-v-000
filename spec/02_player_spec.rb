@@ -1,10 +1,12 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Player' do
 
   describe '#initialize' do
     it 'accepts a token to assign' do
       player = Player.new("X")
+    #  binding.pry
       expect(player.token).to eq("X")
     end
   end
