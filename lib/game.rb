@@ -72,11 +72,12 @@ class Game
   def turn
     loop do
       position_number = self.current_player.move(self.board) #=> Returns a position number to be entered into the board
+      self.avail_moves.delete(position_number)
       if !self.board.valid_move?(position_number) #=> Checks to see if the position is valid in the current board
+        self.avail_moves.delete(position_number)
         puts "Invalid" #=> If ^ is not true, puts out "Invalid"
       else
         self.board.update(position_number, self.current_player) #=> If ^ is true, updates the board with the player's   token ("X", "O")
-        self.avail_moves.delete(position_number)
         break
       end
     end
@@ -90,12 +91,14 @@ class Game
 
     if self.won?
       puts "Congratulations #{winner}!"
+      puts ""
     else
       puts "Cat's Game!"
+      puts ""
     end
   end
 
-  def start
+  def self.start
 
     puts "Welcome to Tic-Tac-Toe!"
     puts ""
@@ -109,19 +112,25 @@ class Game
     game_type = gets.chomp
 
     if game_type == "friend"
-      game = Game.new
+      game = self.new
       puts ""
       puts "The first player will be 'X'"
     elsif game_type == "computer"
-      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+      game = self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
     elsif game_type == "skynet"
-      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+      game = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     else
       puts ""
       puts "That is not a valid game type!"
     end
     game.board.display
     game.play
+    #puts "Would you like to play again? Enter 'yes' or 'no'"
+    #puts ""
+    #play_again = gets
+    #if play_again == "yes"
+    #  self.start
+    #end
   end
 
 
