@@ -91,8 +91,26 @@ class Game
   end
 
   def start
+
     puts "Welcome to Tic-Tac-Toe!"
-    self.play
+    puts ""
+    puts "Would you like to play against a friend, a computer, or do you want to watch a robot battle?"
+    puts ""
+    puts "If you want to play with a friend, enter 'friend'."
+    puts "If you want to play against a computer, enter 'computer'."
+    puts "If you want to want to watch a robot battle, enter 'skynet'."
+    puts ""
+
+    game_type = gets.chomp
+
+    if game_type == "friend"
+      game = Game.new
+    elsif game_type == "computer"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    elsif game_type == "skynet"
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    end
+    game.play
   end
 
 
