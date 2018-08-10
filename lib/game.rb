@@ -94,13 +94,5 @@ class Game
     end
   end
 
-  # def again?
-  #   puts "Would you like to play again? y/n"
-  #   response = STDIN.gets.strip
-  #   if "y"
-  #     play
-  #   end
-  # end
-
 
 end

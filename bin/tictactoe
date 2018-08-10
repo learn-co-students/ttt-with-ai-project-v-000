@@ -3,9 +3,9 @@
 require_relative '../config/environment'
 
   puts "Welcome to Tic Tac Toe!"
-  puts "Press "1" to play against a computer."
-  puts "Press "2" to play against another person."
-  puts "Press "3" to watch the computer play against itself."
+  puts "Press 1 to play against a computer."
+  puts "Press 2 to play against another person."
+  puts "Press 3 to watch the computer play against itself."
 
   def game_type
     user_input = gets.strip
@@ -13,5 +13,4 @@ require_relative '../config/environment'
 
 
     game_1 = Game.new
-
-  game_1.play
+    game_1.play
