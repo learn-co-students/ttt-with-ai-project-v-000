@@ -77,16 +77,17 @@ class Game
     end
   end
 
-  #def turn
-  #  loop do
-  #  puts "Please enter 1-9:"
-  #  position_number = self.current_player.move(self.board)
-  #  if self.board.valid_move?(position_number)
-  #    self.current_player.move(self.board)
-  #    break
-  #  end
-  #  end
-  #end
+  def play
+    until self.over?
+      self.turn
+    end
+
+    if self.won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end
 
 
 end
