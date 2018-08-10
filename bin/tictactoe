@@ -8,10 +8,12 @@ require_relative '../config/environment'
    puts "Press 3 to watch the computer play against itself."
 
 
-    game = Game.new
-      until game.over?
-        game.play
-      end
+   game.game_type
+
+    # game = Game.new
+    #   until game.over?
+    #     game.play
+    #   end
 
       play_again = ""
         until play_again.downcase == "n"

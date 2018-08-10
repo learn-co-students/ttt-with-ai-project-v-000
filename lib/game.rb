@@ -25,10 +25,12 @@ class Game
 
   def one_player_game
     one_player = Game.new(player_1 = Players:: Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    one_player.play
   end
 
   def no_player_game
     no_players = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    no_plyers.play
   end
 
   def player_1=(player_1)
@@ -93,7 +95,6 @@ class Game
   end
 
   def play
-    game_type
     turn until over?
     if winner
       puts "Congratulations #{winner}!"
@@ -113,6 +114,7 @@ class Game
         one_player_game
       when "2"
         game_1 = Game.new
+        game_1.play
       when "3"
         no_player_game
     end
