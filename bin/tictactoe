@@ -7,10 +7,19 @@ require_relative '../config/environment'
    puts "Press 2 to play against another person."
    puts "Press 3 to watch the computer play against itself."
 
-  def game_type
-    user_input = gets.strip
-  end
 
+    game = Game.new
+      until game.won?
+        game.play
+      end
 
-    game_1 = Game.new
-    game_1.play
+      play_again = ""
+        until play_again.downcase == "n"
+        puts "Would you like to play again? y/n"
+        play_again = STDIN.gets.strip
+        play_again.downcase == "y"
+        next_game = Game.new
+          until next_game.over?
+            next_game.play
+          end
+        end

@@ -113,6 +113,9 @@ class Game
         game_1 = Game.new
       when "3"
         no_player_game
+        if selection != "1" || "2" || "3"
+          puts "Please enter 1, 2 or 3."
+        end
     end
   end
 
