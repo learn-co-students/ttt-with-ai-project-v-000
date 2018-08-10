@@ -80,6 +80,7 @@ class Game
   def play
     until self.over?
       self.turn
+      board.display
     end
 
     if self.won?
