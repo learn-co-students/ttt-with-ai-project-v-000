@@ -104,12 +104,13 @@ class Game
     puts "Welcome to Tic-Tac-Toe!"
     puts ""
     puts "Would you like to play against a friend, a computer, or do you want to watch a robot battle?"
-    puts ""
+
     loop do
       puts "If you want to play with a friend, enter 'friend'."
       puts "If you want to play against a computer, enter 'computer'."
       puts "If you want to want to watch a robot battle, enter 'skynet'."
       puts ""
+
 
       game_type = gets.chomp
       if game_type == "friend"
