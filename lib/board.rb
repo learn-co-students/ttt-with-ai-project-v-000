@@ -22,6 +22,16 @@ class Board
     puts "                                              "
   end
 
+  def example_display
+    puts "                                              "
+    puts "   1 | 2 | 3 "
+    puts "  -----------"
+    puts "   4 | 5 | 6 "
+    puts "  -----------"
+    puts "   7 | 8 | 9 "
+    puts "                                              "
+  end
+
   def position(position_number)
     position_number = position_number.to_i - 1
     @cells[position_number]

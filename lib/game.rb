@@ -117,17 +117,17 @@ class Game
         game = self.new
         puts ""
         puts "The first player will be 'X'"
-        game.board.display
+        game.board.example_display
         game.play
         break
       elsif game_type == "computer"
         game = self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-        game.board.display
+        game.board.example_display
         game.play
         break
       elsif game_type == "skynet"
         game = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-        game.board.display
+        game.board.example_display
         game.play
         break
       else
