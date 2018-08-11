@@ -127,7 +127,7 @@ class Game
         break
       elsif game_type == "skynet"
         game = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-        game.board.example_display
+        game.board.display
         game.play
         break
       else
