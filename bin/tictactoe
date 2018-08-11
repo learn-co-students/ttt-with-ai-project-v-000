@@ -2,26 +2,48 @@
 
 require_relative '../config/environment'
 
-  puts "Welcome to Tic Tac Toe!"
-   puts "Press 1 to play against a computer."
-   puts "Press 2 to play against another person."
-   puts "Press 3 to watch the computer play against itself."
+
+   puts "Welcome to Tic Tac Toe!"
 
 
-   game.game_type
+    def start
+      puts "Press 1 to play against a computer."
+      puts "Press 2 to play against another person."
+      puts "Press 3 to watch the computer play against itself."
 
-    # game = Game.new
-    #   until game.over?
-    #     game.play
-    #   end
+      selection = STDIN.gets.strip
 
-      play_again = ""
-        until play_again.downcase == "n"
+      case selection
+
+      when "1"
+        game = Game.new(player_1 = Players:: Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        game.play
+        #game.play_again?
+      when "2"
+        game = Game.new
+        game.play
+        #game.play_again?
+      when "3"
+        game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+        game.play
+        #game.play_again?
+      else
+        puts "Please enter 1, 2, or 3"
+    end
+
+
+      if game.over?
         puts "Would you like to play again? y/n"
-        play_again = STDIN.gets.strip
-        play_again.downcase == "y"
-        next_game = Game.new
-          until next_game.over?
-            next_game.play
-          end
+        again = STDIN.gets.strip
+
+        case again
+        when "y"
+          start
+        when "n"
+          puts "Goodbye."
+          exit
         end
+      end
+
+  end
+start
