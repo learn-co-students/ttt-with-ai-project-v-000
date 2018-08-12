@@ -38,10 +38,10 @@ module Players
         (self.game.board.cells[combination[0]] == self.token && self.game.board.cells[combination[1]] == self.token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.token &&     self.game.board.cells[combination[2]] == self.token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.token && self.game.board.cells[combination[2]] == self.token &&    self.game.board.cells[combination[0]] == " ")
       end
 
-      win_position = winning_combination.find do |position|
+      win_index = winning_combination.find do |position|
         self.game.board.cells[position] == " "
       end
-      win_position = win_position + 1
+      win_position = win_index + 1
       win_position
     end
 
