@@ -17,13 +17,28 @@ module Players
 
     def move(board)
       sleep(1.5)
-      position = self.game.avail_moves.sample
-      position
+      if self.win_move_available?
+        self.win_move
+      else
+        position = self.game.avail_moves.sample
+        position
+      end
     end
 
-    def win_move?
-      this_win_comb = WINNING_COMBINATIONS.find do |comb|
-        (self.game.board.cells[comb[0]] = self.token && if self.game.board.cells[comb[2]] = self.token  && self.game.board.cells[comb[2]] = "") ||
+    def win_move_available?
+      WIN_COMBINATIONS.find do |combination|
+        (self.game.board.cells[combination[0]] == self.token && self.game.board.cells[combination[1]] == self.token &&    self.game.board.valid_move?(combination[2])) || (self.game.board.cells[combination[0]] == self.token &&     self.game.board.cells[combination[2]] == self.token && self.game.board.valid_move?(combination[1])) ||    (self.game.board.cells[combination[1]] == self.token && self.game.board.cells[combination[2]] == self.token &&    self.game.board.valid_move?(combination[0]))
+      end
+    end
+
+    def win_move
+      winning_combination = WIN_COMBINATIONS.find do |combination|
+        (self.game.board.cells[combination[0]] == self.token && self.game.board.cells[combination[1]] == self.token &&    self.game.board.valid_move?(combination[2])) || (self.game.board.cells[combination[0]] == self.token &&     self.game.board.cells[combination[2]] == self.token && self.game.board.valid_move?(combination[1])) ||    (self.game.board.cells[combination[1]] == self.token && self.game.board.cells[combination[2]] == self.token &&    self.game.board.valid_move?(combination[0]))
+      end
+      winning_position = winning_combination.find do |position|
+        self.game.board.valid_move?(position)
+      end
+      winning_position
     end
 
   end
