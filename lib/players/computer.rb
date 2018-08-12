@@ -52,7 +52,7 @@ module Players
     def block_move_available?
       WIN_COMBINATIONS.find do |combination|
         (self.game.board.cells[combination[0]] == self.other_player_token && self.game.board.cells[combination[1]] == self.other_player_token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.other_player_token &&     self.game.board.cells[combination[2]] == self.other_player_token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.other_player_token && self.game.board.cells[combination[2]] == self.other_player_token &&    self.game.board.cells[combination[0]] == " ")
-        binding.pry
+        #binding.pry
       end
     end
 
@@ -60,7 +60,7 @@ module Players
       blocking_combination = WIN_COMBINATIONS.find do |combination|
         (self.game.board.cells[combination[0]] == self.other_player_token && self.game.board.cells[combination[1]] == self.other_player_token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.other_player_token &&     self.game.board.cells[combination[2]] == self.other_player_token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.other_player_token && self.game.board.cells[combination[2]] == self.other_player_token &&    self.game.board.cells[combination[0]] == " ")
       end
-      block_index = block_combination.find do |position|
+      block_index = blocking_combination.find do |position|
         self.game.board.cells[position] == " "
       end
       block_position = block_index + 1
