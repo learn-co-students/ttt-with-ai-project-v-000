@@ -18,7 +18,7 @@ module Players
     def move(board)
       sleep(1.5)
       if self.win_move_available?
-        binding.pry
+        #binding.pry
         self.win_move
       else
         position = self.game.avail_moves.sample
@@ -37,9 +37,15 @@ module Players
       winning_combination = WIN_COMBINATIONS.find do |combination|
         (self.game.board.cells[combination[0]] == self.token && self.game.board.cells[combination[1]] == self.token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.token &&     self.game.board.cells[combination[2]] == self.token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.token && self.game.board.cells[combination[2]] == self.token &&    self.game.board.cells[combination[0]] == " ")
       end
-      winning_combination.find do |position|
-        position == " "
+      #binding.pry
+      if winning_combination != nil
+        win_position = winning_combination.find do |position|
+          self.game.board.cells[position] == " "
+        end
+        #binding.pry
+      win_position + 1
       end
+      win_position
     end
 
   end
