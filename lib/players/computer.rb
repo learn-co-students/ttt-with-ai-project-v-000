@@ -21,6 +21,8 @@ module Players
         self.win_move
       elsif self.block_move_available?
         self.block_move
+      elsif self.middle_move_available?
+        self.middle_move
       else
         position = self.game.avail_moves.sample
         position
@@ -65,6 +67,18 @@ module Players
       end
       block_position = block_index + 1
       block_position
+    end
+
+    def middle_move_available?
+      if self.game.board.cells[4] == " "
+        true
+      else
+        false
+      end
+    end
+
+    def middle_move
+      5
     end
 
   end
