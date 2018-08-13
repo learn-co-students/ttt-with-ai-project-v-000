@@ -90,7 +90,8 @@ module Players
     end
 
     def corner_move
-      corner_index = CORNERS.find do |corner|
+      random_corners = CORNERS.shuffle
+      corner_index = random_corners.find do |corner|
         self.game.board.cells[corner] == " "
       end
       corner_move = corner_index + 1
