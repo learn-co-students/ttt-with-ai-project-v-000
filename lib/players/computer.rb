@@ -26,8 +26,7 @@ module Players
       elsif self.best_corner_move_available?
         self.corner_move
       else
-        position = self.game.avail_moves.sample
-        position
+        self.random_move
       end
     end
 
@@ -110,6 +109,11 @@ module Players
      end
       corner_move = corner_index + 1
       corner_move
+    end
+
+    def random_move
+      position = self.game.avail_moves.sample
+      position
     end
 
   end
