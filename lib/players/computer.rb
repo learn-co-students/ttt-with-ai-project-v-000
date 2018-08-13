@@ -81,5 +81,18 @@ module Players
       5
     end
 
+    def corner_move_available?
+      CORNERS.find do |corner|
+        self.game.board.cells[corner] == " "
+      end
+    end
+
+    def corner_move
+      corner_move = CORNERS.find do |corner|
+        self.game.board.cells[corner] == " "
+      end
+      corner_move
+    end
+
   end
 end
