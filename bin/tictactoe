@@ -1,4 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-require_relative "../lib/concerns/playable"
+
+def start
+
+  puts "Lets Play Tic-Tac-Toe!"
+  puts "Choose how many players:
+
+  0 - Computer Plays Itself
+  1 - Computer v. Player
+  2 - Player 1 v. Player 2"
+
+  play_style = gets.strip
+
+  if play_style == "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+  elsif play_style == "1"
+    puts "Choose your token: X or O"
+    if gets.strip = "X" || gets.strip = "x"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), board.new).play
+    elsif  gets.strip = "O" || gets.strip = "o"
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), board.new).play
+    elsif gets.strip != "X" && gets.strip != "x" && gets.strip = "O" && gets.strip = "o"
+      puts "Please choose your token: X or O"
+      until gets.strip = "X" || gets.strip = "x" || gets.strip = "O" || gets.strip = "o"
+    end
+
+  elsif  play_style == "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  end
+
+  puts "Having fun? Put 'Yes' to play again! Put 'No' to exit."
+end
+
+start until gets.strip = "No" || gets.strip = "no"
+end
