@@ -99,43 +99,70 @@ class Game
   end
 
   def self.start
-
-    puts ""
-    puts "Welcome to Tic-Tac-Toe!"
-    puts ""
-    puts "Would you like to play against a friend, a computer, or do you want to watch a robot battle?"
-
-    loop do
-      puts "If you want to play with a friend, enter 'friend'."
-      puts "If you want to play against a computer, enter 'computer'."
-      puts "If you want to want to watch a robot battle, enter 'skynet'."
+    loop do #start of game loop
       puts ""
+      puts "Welcome to Tic-Tac-Toe!"
+      puts ""
+      puts "Would you like to play against a friend, a computer, or do you want to watch a robot battle?"
 
-
-      game_type = gets.chomp
-      if game_type == "friend"
-        game = self.new
+      loop do # beginning of choose-game-type loop
+        puts "If you want to play with a friend, enter 'friend'."
+        puts "If you want to play against a computer, enter 'computer'."
+        puts "If you want to want to watch a robot battle, enter 'skynet'."
         puts ""
-        puts "The first player will be 'X'"
-        game.board.example_display
-        game.play
+
+
+        game_type = gets.chomp
+        if game_type == "friend"
+          game = self.new
+          puts ""
+          puts "The first player will be 'X'"
+          game.board.example_display
+          game.play
+          break
+        elsif game_type == "computer"
+          game = self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+          game.board.example_display
+          game.play
+          break
+        elsif game_type == "skynet"
+          game = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+          game.board.display
+          game.play
+          break
+        else
+          puts ""
+          puts "***That is not a valid game type!***"
+          puts ""
+        end # end of 'if'statement
+      end # end of choose-game-type loop
+      choice = self.play_again?
+      if choice == false
         break
-      elsif game_type == "computer"
-        game = self.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-        game.board.example_display
-        game.play
+      end
+    end # end game loop
+    puts ""
+    puts "Goodbye!"
+    puts ""
+  end
+
+  def self.play_again?
+    loop do # beginning of play again? loop
+      puts "Play again? Enter 'yes' or 'no'."
+      puts ""
+      choice = gets.chomp
+      if choice == "yes"
+        return true
         break
-      elsif game_type == "skynet"
-        game = self.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-        game.board.display
-        game.play
+      elsif choice == "no"
+        return false
         break
       else
         puts ""
-        puts "***That is not a valid game type!***"
+        puts "Sorry, I didn't understand that!"
         puts ""
       end
-    end
+    end # end of play again? loop
   end
 
 

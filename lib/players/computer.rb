@@ -16,7 +16,7 @@ module Players
     CORNERS = [0, 2, 8, 6]
 
     def move(board)
-      sleep(1.5)
+      #sleep(1.5)
       if self.win_move_available?
         self.win_move
       elsif self.block_move_available?
