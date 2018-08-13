@@ -23,7 +23,7 @@ module Players
         self.block_move
       elsif self.middle_move_available?
         self.middle_move
-      elsif self.corner_move_available?
+      elsif self.best_corner_move_available?
         self.corner_move
       else
         position = self.game.avail_moves.sample
@@ -83,17 +83,31 @@ module Players
       5
     end
 
-    def corner_move_available?
-      CORNERS.find do |corner|
-        self.game.board.cells[corner] == " "
+    def opposite_corner(corner)
+      if corner == 0
+        8
+      elsif corner == 8
+        0
+      elsif corner == 2
+        6
+      elsif corner == 6
+        2
       end
+    end
+
+    def best_corner_move_available?
+      CORNERS.find {|corner| self.game.board.cells[corner] == " "}
     end
 
     def corner_move
       random_corners = CORNERS.shuffle
-      corner_index = random_corners.find do |corner|
-        self.game.board.cells[corner] == " "
-      end
+     if random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.other_player_token)}
+       corner_index = random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.other_player_token)}
+     elsif random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.token)}
+       corner_index = random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.token)}
+     else
+       corner_index = random_corners.sample
+     end
       corner_move = corner_index + 1
       corner_move
     end
