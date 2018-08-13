@@ -23,6 +23,8 @@ module Players
         self.block_move
       elsif self.middle_move_available?
         self.middle_move
+      elsif self.corner_move_available?
+        self.corner_move
       else
         position = self.game.avail_moves.sample
         position
@@ -88,9 +90,10 @@ module Players
     end
 
     def corner_move
-      corner_move = CORNERS.find do |corner|
+      corner_index = CORNERS.find do |corner|
         self.game.board.cells[corner] == " "
       end
+      corner_move = corner_index + 1
       corner_move
     end
 
