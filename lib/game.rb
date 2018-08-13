@@ -36,9 +36,11 @@ def won?
     board.cells[won?[0]] if won?
   end
   
+
 def turn
 input=current_player.move(board).to_i
-if board.valid_move?(input.to_s)
+if board.valid_move?(input)
+
 board.update(input, current_player)
 board.display
 else turn
@@ -56,4 +58,6 @@ def play
     end
   end
 end
+
+
   
