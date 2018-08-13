@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+puts " Welcome to Tic-tac-toe. Please enter 1 for 1 player; 2 for 2 player game. To watch the Computer play, enter 0"
+
+input = gets.strip.to_i
+
+input = Game.new(Players::Human.new("X"), Players::Computer.new("O"), board = Board.new) if input == 1
+input = Game.new(Players::Human.new("X"), PLayers::Human.new("O"), board = Board.new) if input == 2
+input = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new) if input == 0
+
+game.play
