@@ -1,3 +1,4 @@
+require 'pry'
 class Game
 
   attr_accessor :board, :player_1, :player_2, :winner, :user_input
@@ -54,6 +55,8 @@ class Game
     @user_input = current_player.move(@board)
     if @board.valid_move?(@user_input)
       @board.update(@user_input, current_player)
+    elsif @user_input.capitalize == "Exit"
+    #   return true
     else puts "Please enter a number 1-9:"
       @board.display
       turn
@@ -61,8 +64,13 @@ class Game
     @board.display
   end
 
+  def opening_board
+    board.display
+  end
+
   def play
-    turn until over?
+    opening_board
+    turn until (over? || @user_input == "Exit" || @user_input == "exit")
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
