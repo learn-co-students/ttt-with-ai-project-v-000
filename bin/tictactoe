@@ -2,24 +2,26 @@
 
 require_relative '../config/environment'
 
-def start(user_input)
+def start
   puts "Welcome to Tic Tac Toe!"
   puts "Would you like 0, 1, or 2 player?"
     user_input = " "
     user_input = gets.chomp
     case user_input
-      when == 0
+      when user_input == 0
         Players::Computer
-      when == 1
+      when user_input == 1
         Players::Computer && Players::Human
-      when == 2
+      when user_input== 2
         Players::Human
     end
 
-puts "Who is going to be player 1"
-  input = gets.chomp
-  game.initialize(input)
 
-display_board(board)
+  puts "Who is going to be player 1"
+    input = gets.chomp
+    game.initialize(input)
+ end
 
-play(board)
+Board.display
+
+Game.play
