@@ -7,12 +7,13 @@ puts "Wanna play Tic-Tac-Toe? Type 'Yes' to play or 'Exit' to leave!"
 def start
 
   puts "Lets Play Tic-Tac-Toe!"
-  puts "Type 'Exit' to leave game at any time."
   puts "Choose how many players:
 
   0 - Computer Plays Itself
   1 - Computer v. Player
-  2 - Player 1 v. Player 2"
+  2 - Player 1 v. Player 2
+
+  Type 'Exit' to leave game at any time."
 
   play_style = gets.strip
 #binding.pry
