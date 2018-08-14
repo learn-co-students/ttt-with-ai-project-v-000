@@ -345,7 +345,33 @@ describe 'Game' do
       game.play
     end
   end
-
-  describe 'start' do
-  end
 end
+  # describe 'start' do
+  #
+  #   let(:game){Game.new}
+  #
+  #   it 'greets a user with an opening message' do
+  #
+  #     puts ("Welcome to Tic Tac Toe!")
+  #   end
+
+    # it 'asks player if they want one player, two player, or computer only.' do
+    #
+    #   allow($stdout).to receive(:puts)
+    #
+    #   expect(Player).to ()
+    #
+    #
+    # end
+    #
+    # it 'asks who is going first' do
+    #
+    #   allow($stdout).to receive(:puts)
+    #
+    #   expect($stdout).to receive(:puts).with("Who is Going First?")
+    # end
+    #   expect($stdout).to be receive(:gets).and return(player_1).or return(player_2)
+    #
+    # end
+# end
+# end
