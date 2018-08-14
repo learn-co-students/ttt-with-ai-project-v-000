@@ -13,7 +13,7 @@ def start
   1 - Computer v. Player
   2 - Player 1 v. Player 2
 
-  Type 'Exit' to leave game at any time."
+Type 'Exit' to leave game at any time."
 
   play_style = gets.strip
 #binding.pry
