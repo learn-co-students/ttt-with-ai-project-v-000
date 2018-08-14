@@ -112,8 +112,9 @@ module Players
     end
 
     def random_move
-      position = self.game.avail_moves.sample
-      position
+      positions = self.game.board.cells.select {|cell| cell == " "}
+      binding.pry
+      positions.sample
     end
 
   end
