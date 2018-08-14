@@ -22,7 +22,6 @@ class Game
     @avail_moves = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     player_1.game = self
     player_2.game = self
-
   end
 
   def current_player
@@ -114,7 +113,7 @@ class Game
 
         game_type = gets.chomp
         if game_type == "friend"
-          game = self.new
+          game = self.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
           puts ""
           puts "The first player will be 'X'"
           game.board.example_display

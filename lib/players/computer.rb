@@ -2,6 +2,8 @@
 module Players
   class Computer < Player
 
+    attr_accessor :board
+
     WIN_COMBINATIONS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -17,31 +19,31 @@ module Players
 
     def move(board)
       sleep(1.5)
-      if self.win_move_available?
-        self.win_move
-      elsif self.block_move_available?
-        self.block_move
-      elsif self.middle_move_available?
-        self.middle_move
-      elsif self.best_corner_move_available?
-        self.corner_move
+      if self.win_move_available?(board)
+        self.win_move(board).to_s
+      elsif self.block_move_available?(board)
+        self.block_move(board).to_s
+      elsif self.middle_move_available?(board)
+        self.middle_move.to_s
+      elsif self.best_corner_move_available?(board)
+        self.corner_move(board).to_s
       else
-        self.random_move
+        self.random_move.to_s
       end
     end
 
-    def win_move_available?
+    def win_move_available?(board)
       WIN_COMBINATIONS.find do |combination|
-        (self.game.board.cells[combination[0]] == self.token && self.game.board.cells[combination[1]] == self.token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.token &&     self.game.board.cells[combination[2]] == self.token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.token && self.game.board.cells[combination[2]] == self.token &&    self.game.board.cells[combination[0]] == " ")
+        (board.cells[combination[0]] == self.token && board.cells[combination[1]] == self.token &&    board.cells[combination[2]] == " ") || (board.cells[combination[0]] == self.token &&     board.cells[combination[2]] == self.token && board.cells[combination[1]] == " ") ||    (board.cells[combination[1]] == self.token && board.cells[combination[2]] == self.token &&    board.cells[combination[0]] == " ")
       end
     end
 
-    def win_move
+    def win_move(board)
       winning_combination = WIN_COMBINATIONS.find do |combination|
-        (self.game.board.cells[combination[0]] == self.token && self.game.board.cells[combination[1]] == self.token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.token &&     self.game.board.cells[combination[2]] == self.token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.token && self.game.board.cells[combination[2]] == self.token &&    self.game.board.cells[combination[0]] == " ")
+        (board.cells[combination[0]] == self.token && board.cells[combination[1]] == self.token &&    board.cells[combination[2]] == " ") || (board.cells[combination[0]] == self.token &&     board.cells[combination[2]] == self.token && board.cells[combination[1]] == " ") ||    (board.cells[combination[1]] == self.token && board.cells[combination[2]] == self.token &&    board.cells[combination[0]] == " ")
       end
       win_index = winning_combination.find do |position|
-        self.game.board.cells[position] == " "
+        board.cells[position] == " "
       end
       win_position = win_index + 1
       win_position
@@ -51,26 +53,25 @@ module Players
       other_player_token = (self.token == "X") ? "O" : "X"
     end
 
-    def block_move_available?
+    def block_move_available?(board)
       WIN_COMBINATIONS.find do |combination|
-        (self.game.board.cells[combination[0]] == self.other_player_token && self.game.board.cells[combination[1]] == self.other_player_token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.other_player_token &&     self.game.board.cells[combination[2]] == self.other_player_token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.other_player_token && self.game.board.cells[combination[2]] == self.other_player_token &&    self.game.board.cells[combination[0]] == " ")
-        #binding.pry
+        (board.cells[combination[0]] == self.other_player_token && board.cells[combination[1]] == self.other_player_token &&    board.cells[combination[2]] == " ") || (board.cells[combination[0]] == self.other_player_token &&     board.cells[combination[2]] == self.other_player_token && board.cells[combination[1]] == " ") ||    (board.cells[combination[1]] == self.other_player_token && board.cells[combination[2]] == self.other_player_token &&    board.cells[combination[0]] == " ")
       end
     end
 
-    def block_move
+    def block_move(board)
       blocking_combination = WIN_COMBINATIONS.find do |combination|
-        (self.game.board.cells[combination[0]] == self.other_player_token && self.game.board.cells[combination[1]] == self.other_player_token &&    self.game.board.cells[combination[2]] == " ") || (self.game.board.cells[combination[0]] == self.other_player_token &&     self.game.board.cells[combination[2]] == self.other_player_token && self.game.board.cells[combination[1]] == " ") ||    (self.game.board.cells[combination[1]] == self.other_player_token && self.game.board.cells[combination[2]] == self.other_player_token &&    self.game.board.cells[combination[0]] == " ")
+        (board.cells[combination[0]] == self.other_player_token && board.cells[combination[1]] == self.other_player_token &&    board.cells[combination[2]] == " ") || (board.cells[combination[0]] == self.other_player_token &&     board.cells[combination[2]] == self.other_player_token && board.cells[combination[1]] == " ") ||    (board.cells[combination[1]] == self.other_player_token && board.cells[combination[2]] == self.other_player_token &&    board.cells[combination[0]] == " ")
       end
       block_index = blocking_combination.find do |position|
-        self.game.board.cells[position] == " "
+        board.cells[position] == " "
       end
       block_position = block_index + 1
       block_position
     end
 
-    def middle_move_available?
-      if self.game.board.cells[4] == " "
+    def middle_move_available?(board)
+      if board.cells[4] == " "
         true
       else
         false
@@ -93,16 +94,16 @@ module Players
       end
     end
 
-    def best_corner_move_available?
-      CORNERS.find {|corner| self.game.board.cells[corner] == " "}
+    def best_corner_move_available?(board)
+      CORNERS.find {|corner| board.cells[corner] == " "}
     end
 
-    def corner_move
+    def corner_move(board)
       random_corners = CORNERS.shuffle
-     if random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.other_player_token)}
-       corner_index = random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.other_player_token)}
-     elsif random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.token)}
-       corner_index = random_corners.find {|corner| (self.game.board.cells[corner] == " ") && (self.opposite_corner(corner) == self.token)}
+     if random_corners.find {|corner| (board.cells[corner] == " ") && (self.opposite_corner(corner) == self.other_player_token)}
+       corner_index = random_corners.find {|corner| (board.cells[corner] == " ") && (self.opposite_corner(corner) == self.other_player_token)}
+     elsif random_corners.find {|corner| (board.cells[corner] == " ") && (self.opposite_corner(corner) == self.token)}
+       corner_index = random_corners.find {|corner| (board.cells[corner] == " ") && (self.opposite_corner(corner) == self.token)}
      else
        corner_index = random_corners.sample
      end
