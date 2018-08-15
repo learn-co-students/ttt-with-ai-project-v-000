@@ -14,48 +14,46 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-  end
+   end
    def current_player
     board.turn_count.even? ? player_1 : player_2
-  end
+   end
    def won?
     WIN_COMBINATIONS.detect do |combo|
-      if @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.cells[combo[2]] == player_1.token
-        return combo
-      elsif @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.cells[combo[2]] == player_2.token
-        return combo
-      end
+      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && (@board.cells[combo[1]] == "X" || @board.cells[combo[1]] == "O")
     end
-  end
+   end
    def draw?
     true if !won? && board.full?
-  end
+   end
    def over?
     true if won? || draw? || board.full?
-  end
+   end
+   
    def winner
-    if winning = won?
-      return @board.cells[winning[0]]
-    end
-  end
+      return board.cells[won?[0]]
+   end
+  
+   
    def turn
     board.display
-    move = current_player.move(board)
+    move = current_player.move(self)
     if board.valid_move?(move)
       board.update(move, current_player)
     else
       turn
     end
   end
-   def play
-    turn until over?
+  def play
+    turn 
      if won?
-      winning = winner
       board.display
-      puts "Congratulations #{winning}!"
+      puts "Congratulations #{winner}!"
     elsif draw?
       board.display
       puts "Cat's Game!"
+    else 
+      turn 
     end
   end
- end
+end

@@ -1,12 +1,16 @@
 class Board
   attr_accessor :cells, :player
    def initialize
-    @player = player
     @cells = Array.new(9, " ")
   end
    def reset!
     @cells = Array.new(9, " ")
   end
+  
+  def reset_space(space)
+    @cells[space.to_i - 1] = " "
+  end
+
   def display
     output = ""
     0.upto(8) do |position| 
@@ -44,6 +48,10 @@ class Board
     input = input.to_i
     true if taken?(input) == false && input.between?(1, 9)
   end
+  def all_available_spaces
+    ("1".."9").to_a.select{|i| !taken?(i)}
+  end
+
    def update(input, player)
     index = input.to_i - 1
     @cells[index] = player.token

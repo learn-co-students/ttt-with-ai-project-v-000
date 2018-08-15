@@ -14,6 +14,9 @@ def start
                                            
 ]
   puts "Welcome to Tic Tac Toe!"
+  puts
+  puts "PLEASE NOTE: SPACES are labeled #1-9"
+  puts
   puts "Please select type of game:"
   puts "Enter 0   Computer vs Computer Game"
   puts "Enter 1   Player vs Computer Game"

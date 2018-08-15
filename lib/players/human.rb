@@ -1,8 +1,8 @@
 module Players
   class Human < Player
-    attr_accessor :board
-     def move(board)
-      board = gets.chomp
-    end
+     
+     def move(game)
+      position = gets.chomp
+     end
    end
 end
