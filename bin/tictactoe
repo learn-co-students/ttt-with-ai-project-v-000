@@ -9,12 +9,26 @@ require_relative '../config/environment'
   puts "(2) 1 player - Human vs. Computer"
   puts "(3) 2 player - Human vs. Human"
   mode = gets.strip
-  until mode == 1 || mode == 2 || mode == 3
+  mode = mode.to_i
+  until mode == 1 ||mode == 2 || mode == 3
     puts "Sorry, please enter 1 2 or 3 to pick a proper game mode."
     mode = gets.strip
+    mode = mode.to_i
   end
+
   case mode
   when 1
+    current_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"),Board.new)
   when 2
+    puts "Who goes first, you or the computer? ('me' or 'computer')"
+    first = gets.strip
+    if first == "computer"
+      current_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"),Board.new)
+    elsif first == "me"
+      current_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"),Board.new)
+    end
   when 3
+    current_game = Game.new(Players::Human.new("X"), Players::Human.new("O"),Board.new)
   end
+
+  current_game.play

@@ -14,7 +14,7 @@ module Players
         corners.sample
       else
         possibilities = make_two_in_a_row(board)
-        if possibilities == nil
+        if possibilities == []
           random = []
           board.cells.each_with_index do |value, index|
             if value == " "
@@ -37,7 +37,7 @@ module Players
         pos_2 = combo[1]
         pos_3 = combo[2]
         array = [board.cells[pos_1], board.cells[pos_2], board.cells[pos_3]]
-        empty_count = 2
+        empty_count = 0
         same_token = nil
         array.each do |element|
           if element == " "
@@ -48,7 +48,7 @@ module Players
             same_token = false
           end
         end
-        if same_token == true || empty_count == 2
+        if same_token && empty_count == 2
           true
         else
           false

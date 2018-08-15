@@ -59,11 +59,25 @@ class Game
   end
 
   def play
+    puts ""
+    puts ""
+    puts "The game will now begin..."
+    @board.display
     until over?
-      @board.display
       turn
+      token = current_player.token
+      sleep(2)
+      puts ""
+      puts ""
+      if token == "X"
+        puts "Player 2 (O) has played here:"
+      else
+        puts "Player 1 (X) has played here:"
+      end
+      @board.display
     end
     the_winner = self.winner
+    puts ""
     if the_winner == nil
       puts "Cat's Game!"
     else
