@@ -1,7 +1,11 @@
-class Human
+class Player 
   
-  def move(board)
-    
+  attr_reader :token
+  
+  def initialize(token)
+    @token = token
   end
   
 end
+
+#I managed this one on my own actually!!!
