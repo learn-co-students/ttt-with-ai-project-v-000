@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
 
 def start
@@ -7,21 +7,21 @@ def start
   puts "Would you like 0, 1, or 2 player?"
     user_input = " "
     user_input = gets.chomp
+    player_1 = nil
+    player_2 = nil
     case user_input
-      when user_input == 0
-        Players::Computer
-      when user_input == 1
-        Players::Computer && Players::Human
-      when user_input== 2
-        Players::Human
+      when "0"
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+      when "1"
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Human.new("O")
+      when "2"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
     end
-
-
-  puts "Who is going to be player 1"
-    input = gets.chomp
-    game.initialize(input)
+    game = Game.new(player_1, player_2)
+    game.play
  end
 
-Board.display
-
-Game.play
+ start

@@ -72,6 +72,8 @@ class Game
       @board.update(input, current_player)  #It updates the board.
     else
       turn  #else, it takes another turn
+      binding.pry
+      @board
     end
   end
 
