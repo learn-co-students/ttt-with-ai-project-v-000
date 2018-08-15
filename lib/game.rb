@@ -31,29 +31,26 @@ class Game
    end
    
    def winner
-      return board.cells[won?[0]]
+      return board.cells[won?[1]]
    end
   
    
-   def turn
+  def play
     board.display
     move = current_player.move(self)
+    
     if board.valid_move?(move)
       board.update(move, current_player)
-    else
-      turn
-    end
-  end
-  def play
-    turn 
-     if won?
-      board.display
-      puts "Congratulations #{winner}!"
-    elsif draw?
-      board.display
-      puts "Cat's Game!"
-    else 
-      turn 
+      
+      if won?
+        board.display
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        board.display
+        puts "Cat's Game!"
+      else 
+      play 
+      end
     end
   end
 end
