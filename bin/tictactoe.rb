@@ -15,8 +15,6 @@ def start
 ]
   puts "Welcome to Tic Tac Toe!"
   puts
-  puts "PLEASE NOTE: SPACES are labeled #1-9"
-  puts
   puts "Please select type of game:"
   puts "Enter 0   Computer vs Computer Game"
   puts "Enter 1   Player vs Computer Game"
@@ -29,14 +27,17 @@ def start
         puts "Do you want to be 'X' and Go First? (y/n)"
         first_move = gets.chomp.downcase
         if first_move == "y"
+          puts "PLEASE ENTER 1-9 For Your Move:"
           Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
         elsif first_move == "n"
+          puts "PLEASE ENTER 1-9 For Your Move:"
           Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
         else
           puts "Please enter y or n..."
           start
         end
       when '2'
+        puts "PLEASE ENTER 1-9 For Your Move:"
         Game.new.play
       else
         puts "Invalid input"

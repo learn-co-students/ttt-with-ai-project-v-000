@@ -36,6 +36,9 @@ class Game
   
    
   def play
+    puts 
+    puts "************"
+    puts
     board.display
     move = current_player.move(self)
     
@@ -43,13 +46,22 @@ class Game
       board.update(move, current_player)
       
       if won?
+        puts "!winner---winner!"
+        puts
         board.display
         puts "Congratulations #{winner}!"
+        puts
+        puts "!winner---winner!"
+        
       elsif draw?
+        puts "!stalemate---stalemate!"
+        puts
         board.display
-        puts "Cat's Game!"
+        puts "NO WINNER!"
+        puts
+        puts "!stalemate---stalemate!"
       else 
-      play 
+        play 
       end
     end
   end

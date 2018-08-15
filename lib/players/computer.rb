@@ -14,10 +14,10 @@ module Players
     
     def minimax(game, depth = 0, best_score = {})
       
-      if game.won? && (game.current_player != @original_player)
-        return (10 - depth) 
-      elsif game.won? && (game.current_player == @original_player)
-        return (-10 + depth)
+      if game.won? && (game.current_player == @original_player)
+        return (-100 + depth) 
+      elsif game.won? && (game.current_player != @original_player)
+        return (100 - depth)
       elsif game.draw?
         return 0
       end
