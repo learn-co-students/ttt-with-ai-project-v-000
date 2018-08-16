@@ -2,13 +2,10 @@
 require 'pry'
 require_relative '../config/environment'
 
-def start
   puts "Welcome to Tic Tac Toe!"
-  puts "Would you like 0, 1, or 2 player?"
-    user_input = " "
+  puts "Would you like 0, 1, or 2 players?"
     user_input = gets.chomp
-    player_1 = nil
-    player_2 = nil
+
     case user_input
       when "0"
         player_1 = Players::Computer.new("X")
@@ -21,7 +18,6 @@ def start
         player_2 = Players::Human.new("O")
     end
     game = Game.new(player_1, player_2)
-    game.play
- end
-
- start
+    until game.over?
+      game.play
+    end

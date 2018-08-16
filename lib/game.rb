@@ -67,9 +67,11 @@ class Game
   end
 
   def turn
+    @board.display
     input = current_player.move(@board) #move takes care of getting the input from the players.  input = gets.strip
     if @board.valid_move?(input)  #if the input is a valid move.
       @board.update(input, current_player)  #It updates the board.
+      #binding.pry
     else
       turn  #else, it takes another turn
     end
@@ -81,8 +83,10 @@ class Game
     end
     if won?
       puts "Congratulations #{winner}!"
+      @board.display
     else
       puts "Cat's Game!"
+      @board.display
     end
   end
 end
