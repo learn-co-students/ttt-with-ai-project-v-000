@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board 
   attr_accessor :cells
   
@@ -18,15 +20,15 @@ class Board
   end 
     
   def position(x)
-    index = x.to_i 
-    index -= 1
-    @cells[index]
+    # index = x.to_i 
+    # index -= 1
+    @cells[x.to_i - 1]
   end 
   
   def update(x, player)
-    index = x.to_i 
-    index -= 1
-    @cells[index] = player.token
+    # index = x.to_i 
+    # index -= 1
+    @cells[x.to_i - 1] = player.token
   end 
   
   def full?
@@ -35,7 +37,11 @@ class Board
  
  def turn_count
     count = 0 
-    @cells.each {|c| count += 1 if c == "X" || c == "O"}
+    @cells.each do |c| 
+      if c != " "
+        count += 1 
+      end 
+    end
     count
   end
  
