@@ -23,6 +23,7 @@ require_relative '../config/environment'
         player_1 = Players::Human.new("X")
         player_2 = Players::Human.new("O")
       end
+    
     end
     game = Game.new(player_1, player_2)
     until game.over?
