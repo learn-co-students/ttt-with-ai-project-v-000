@@ -5,17 +5,24 @@ require_relative '../config/environment'
   puts "Welcome to Tic Tac Toe!"
   puts "Would you like 0, 1, or 2 players?"
     user_input = gets.chomp
+      if user_input == "1"
+        puts "Would the player(human) like to go first: yes or no."
+          yes_or_no = gets.chomp
 
-    case user_input
+    case user_input && yes_or_no
       when "0"
         player_1 = Players::Computer.new("X")
         player_2 = Players::Computer.new("O")
-      when "1"
+      when "1" && "no"
         player_1 = Players::Computer.new("X")
         player_2 = Players::Human.new("O")
+      when "1" && "yes"
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
       when "2"
         player_1 = Players::Human.new("X")
         player_2 = Players::Human.new("O")
+      end
     end
     game = Game.new(player_1, player_2)
     until game.over?
