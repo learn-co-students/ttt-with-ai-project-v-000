@@ -8,24 +8,39 @@ require_relative '../config/environment'
       if user_input == "1"
         puts "Would the player(human) like to go first: yes or no."
           yes_or_no = gets.chomp
-
-    case user_input && yes_or_no
-      when "0"
-        player_1 = Players::Computer.new("X")
-        player_2 = Players::Computer.new("O")
-      when "1" && "no"
-        player_1 = Players::Computer.new("X")
-        player_2 = Players::Human.new("O")
-      when "1" && "yes"
-        player_1 = Players::Human.new("X")
-        player_2 = Players::Computer.new("O")
-      when "2"
-        player_1 = Players::Human.new("X")
-        player_2 = Players::Human.new("O")
-      end
-    
+            case user_input && yes_or_no
+              when "1" && "yes"
+                player_1 = Players::Human.new("X")
+                player_2 = Players::Computer.new("O")
+              when "1" && "no"
+                player_1 = Players::Computer.new("X")
+                player_2 = Players::Human.new("O")
+            end
+      elsif user_input == "0" || user_input == "2"
+            case user_input
+              when "0"
+                player_1 = Players::Computer.new("X")
+                player_2 = Players::Computer.new("O")
+              when "2"
+                player_1 = Players::Human.new("X")
+                player_2 = Players::Human.new("O")
+            end
     end
+
     game = Game.new(player_1, player_2)
+
     until game.over?
       game.play
+    end
+
+    if game.over?
+      puts "Would user like to play again, yes or no?"
+        play_again = gets.chomp
+        case play_again
+          when "yes"
+            game = Game.new(player_1, player_2)
+            game.play
+          when "no"
+            puts "Goodbye!"
+        end
     end
