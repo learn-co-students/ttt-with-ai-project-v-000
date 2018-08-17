@@ -29,19 +29,21 @@ require_relative '../config/environment'
 
     game = Game.new(player_1, player_2)
 
-    # until game.over?
-    #   game.play
-    # end
-
-    if game.!over?
+    until game.over?
       game.play
-    elsif game.over?
+    end
+
+
+    if game.over?
       puts "Would user like to play again, yes or no?"
         play_again = gets.chomp
         case play_again
           when "yes"
+            game = Game.new
             game.play
           when "no"
             puts "Goodbye!"
         end
+    else
+      game.play
     end
