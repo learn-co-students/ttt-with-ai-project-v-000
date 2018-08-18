@@ -49,6 +49,13 @@ class Game
     end
   end
 
-
+  def turn
+    trn = @board.turn_count
+    until trn < @board.turn_count
+      @board.update(current_player.move(@board), current_player)
+    end
+  end
 
 end
+
+#     @board.update(current_player.move(@board), current_player)
