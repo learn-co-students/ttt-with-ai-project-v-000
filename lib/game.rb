@@ -57,11 +57,11 @@ class Game
   end
 
   def play
-    until self.over?
+    until self.over? == true
       turn
-      if self.won?
+      if self.won? == true
         puts "Congratulations #{self.winner}!"
-      elsif self.draw?
+      elsif self.draw? == true
         puts "Cat's Game!"
       end
     end
