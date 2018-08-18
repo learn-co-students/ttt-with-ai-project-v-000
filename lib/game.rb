@@ -56,6 +56,17 @@ class Game
     end
   end
 
+  def play
+    until self.over?
+      turn
+      if self.won?
+        puts "Congratulations #{self.winner}!"
+      elsif self.draw?
+        puts "Cat's Game!"
+      end
+    end
+  end
+
 end
 
 #     @board.update(current_player.move(@board), current_player)
