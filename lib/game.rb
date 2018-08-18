@@ -32,6 +32,10 @@ class Game
     return false
   end
 
+  def draw?
+    self.won? == false && @board.full? == true ? true : false
+  end
+
 
 
 
