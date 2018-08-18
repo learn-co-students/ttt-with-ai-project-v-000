@@ -36,7 +36,18 @@ class Game
     self.won? == false && @board.full? == true ? true : false
   end
 
+  def over?
+    self.won? || self.draw? ? true : false
+  end
 
+  def winner
+    win = @board.cells[self.won?[0]]
+    if win == "X" || win == "O"
+      return win
+    else
+      return nil
+    end
+  end
 
 
 
