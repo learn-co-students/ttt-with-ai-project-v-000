@@ -18,10 +18,39 @@ class Board
   end
 
   def position(pos)
-    return (@cells[pos + 1])
+    return @cells[pos.to_i - 1]
   end
 
   def full?
-    
+    if @cells.include?(" ")
+      return false
+    else return true
+    end
   end
+
+  def turn_count
+    return 9 - @cells.count(" ")
+  end
+
+  def taken?(pos)
+    if position(pos) == " "
+      return false
+    else return true
+    end
+  end
+
+  def valid_move?(inp)
+    input = inp.to_i
+    if input >= 1 && input <=9 && taken?(input) == false
+      return true
+    else return false
+    end
+  end
+
+  def update(input, player)
+    if valid_move?(input)
+      @cells[input.to_i - 1] = player.token
+    end
+  end
+
 end
