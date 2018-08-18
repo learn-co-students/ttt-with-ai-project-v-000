@@ -24,6 +24,14 @@ class Game
     end
   end
 
+  def won?
+    WIN_COMBINATIONS.each do |wc|
+      ar = [@board.cells[wc[0]], @board.cells[wc[1]], @board.cells[wc[2]]]
+      return wc if ar.uniq.length == 1
+    end
+    return false
+  end
+
 
 
 
