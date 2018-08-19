@@ -36,7 +36,6 @@ class Board
 
   def taken?(input)
     position = input.to_i-1
-    # binding.pry
     if @cells[position].include? ("X")
       true
     elsif @cells[position].include? ("O")
@@ -46,15 +45,14 @@ class Board
     end
   end
 
-  def valid_move?(input) #Also needs to check if is taken
-    position = input.to_i-1
-    # binding.pry
-    (0..8).include? (position)
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input)
+
   end
 
   def update(input, player)
     position = input.to_i-1
-    @cells[position] << player
+    @cells[position] = player.token
 
   end
 
