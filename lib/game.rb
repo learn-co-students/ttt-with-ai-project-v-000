@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2
+  attr_accessor :board, :player_1, :player_2, :playercount,
   WIN_COMBINATIONS = [
   [0, 1, 2],
   [3, 4, 5],
@@ -67,5 +67,8 @@ class Game
     elsif self.draw? == true
       puts "Cat's Game!"
     end
+  end
+
+  def start
   end
 end
