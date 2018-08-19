@@ -27,7 +27,7 @@ class Game
   def won?
     WIN_COMBINATIONS.each do |wc|
       ar = [@board.cells[wc[0]], @board.cells[wc[1]], @board.cells[wc[2]]]
-      return wc if ar.uniq.length == 1
+      return wc if ar.uniq.length == 1 && ar.include?(" ") != true
     end
     return false
   end
@@ -41,11 +41,13 @@ class Game
   end
 
   def winner
-    win = @board.cells[self.won?[0]]
-    if win == "X" || win == "O"
-      return win
-    else
-      return nil
+    if self.won?
+      win = @board.cells[self.won?[0]]
+      if win == "X" || win == "O"
+        return win
+      else
+       return nil
+      end
     end
   end
 
@@ -58,9 +60,9 @@ class Game
 
   def play
     until self.over? == true
-      turn
+      self.turn
     end
-    if self.won? == true
+    if self.won?
       puts "Congratulations #{self.winner}!"
     elsif self.draw? == true
       puts "Cat's Game!"
