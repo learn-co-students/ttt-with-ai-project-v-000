@@ -1,6 +1,29 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+title = <<'HEREDOC'
+ _____ _        _____            _____
+|_   _(_) ___  |_   _|_ _  ___  |_   _|__   ___
+  | | | |/ __|   | |/ _` |/ __|   | |/ _ \ / _ \
+  | | | | (__    | | (_| | (__    | | (_) |  __/
+  |_| |_|\___|   |_|\__,_|\___|   |_|\___/ \___|
+
+HEREDOC
+
+puts title
+play_again = "q"
+until play_again == "n"
+  play_again = "q"
+  current_game = Game.new()
+  current_game.start
+  puts "Alright!"
+  current_game.play
+  puts "Play Again? (y/n)"
+  until play_again == "y" || play_again == "n"
+    play_again = gets.strip
+  end
+end
+
 # playercount = "3"
 # first_player = "3"
 # complayer = nil
