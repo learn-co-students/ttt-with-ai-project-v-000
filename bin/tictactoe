@@ -1,3 +1,85 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+title = <<'HEREDOC'
+ _____ _        _____            _____
+|_   _(_) ___  |_   _|_ _  ___  |_   _|__   ___
+  | | | |/ __|   | |/ _` |/ __|   | |/ _ \ / _ \
+  | | | | (__    | | (_| | (__    | | (_) |  __/
+  |_| |_|\___|   |_|\__,_|\___|   |_|\___/ \___|
+
+HEREDOC
+
+puts title
+play_again = "q"
+until play_again == "n"
+  play_again = "q"
+  current_game = Game.new()
+  current_game.start
+  puts "Alright!"
+  current_game.play
+  puts "Play Again? (y/n)"
+  until play_again == "y" || play_again == "n"
+    play_again = gets.strip
+  end
+end
+
+# playercount = "3"
+# first_player = "3"
+# complayer = nil
+# complayer_2 = nil
+# def valid_playercount?(playercount = playercount)
+#   until playercount == "0" || playercount == "1" || playercount == "2"
+#     playercount = gets.strip
+#   end
+# end
+#
+# def valid_first?(first_player = first_player)
+#   until first_player == "1" || first_player == "2"
+#      first_player = gets.strip
+#   end
+# end
+#
+# def make_ai(playercount = playercount, complayer = complayer, complayer_2 = complayer_2)
+#   case playercount
+#   when "2"
+#     complayer = Players::Human.new("X")
+#     complayer_2 = Players::Human.new("O")
+#   when "1"
+#     set_first_player
+#   when "0"
+#     complayer = Players::Computer.new("X")
+#     complayer_2 = Players::Computer.new("O")
+#   end
+# end
+#
+# def set_first_player
+#   if first_player == "1"
+#     complayer = Players::Human.new("X")
+#     complayer_2 = Players::Computer.new("O")
+#   else
+#     complayer = Players::Human.new("X")
+#     complayer_2 = Players::Computer.new("O")
+#   end
+# end
+#
+# # title = <<'HEREDOC'
+# #  _____ _        _____            _____
+# # |_   _(_) ___  |_   _|_ _  ___  |_   _|__   ___
+# #   | | | |/ __|   | |/ _` |/ __|   | |/ _ \ / _ \
+# #   | | | | (__    | | (_| | (__    | | (_) |  __/
+# #   |_| |_|\___|   |_|\__,_|\___|   |_|\___/ \___|
+# #
+# # HEREDOC
+# #
+# # puts title
+# puts ""
+# puts "How many players? (0, 1, or 2)"
+# valid_playercount?
+# puts "Who should go first and be X? Player (1 or 2)?"
+# puts "(If it's a 1 player game, player 2 is the AI)"
+# valid_first?
+# puts "Alright!!!"
+# make_ai
+# current_game = Game.new(complayer, complayer_2)
+# current_game.play
