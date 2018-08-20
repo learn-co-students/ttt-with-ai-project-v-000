@@ -28,7 +28,7 @@ def welcome
   elsif input == "1"
     computer_first?
   else
-    game = Game.new(Players::Computer.new("X"), Players::Computer("O"), Board.new)
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
     game.play
   end
 end

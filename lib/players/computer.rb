@@ -5,17 +5,41 @@ module Players
 
   class Computer < Player
 
-    def move(board)
-      WIN_COMBINATIONS.each do |combo|
-        if board.cells[combo[0]] == self.token && board.cells[combo[2]] == self.token
-          return combo[1].to_s + 2
-        end
-      end
-      ORDER.each do |cell|
-        if !board.taken?(cell)
-          return cell.to_s
-        end
+    def test_opp_gap(board)
+      test = WIN_COMBINATIONS.find {|combo| !board.cells[combo[0]] == self.token && !board.cells[combo[2]] == self.token && board.taken?(combo[0]) && board.taken?(combo[2]) && !board.taken?(combo[1])}
+      test ? test[1].to_s : false
+    end
+
+    def test_own_gap(board)
+      test = WIN_COMBINATIONS.find {|combo| board.cells[combo[0]] == self.token && board.cells[combo[2]] == self.token && !board.taken?(combo[1])}
+      test ? test[1].to_s : false
+    end
+
+    def apply_counter(board)
+      test = ORDER.find {|cell| !board.taken?(cell)}
+      test ? test.to_s : false
+    end
+
+    def empty?(board)
+      if board.cells.any? {|x| x != " "}
+        return false
+      else
+        return true
       end
     end
+
+    def move(board)
+      if empty?(board)
+        return rand(1..9).to_s
+      elsif test_opp_gap(board)
+        return test_opp_gap(board)
+      elsif test_own_gap(board)
+        return test_own_gap(board)
+      else
+        return apply_counter(board)
+      end
+    end
+
   end
+
 end
