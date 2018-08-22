@@ -26,5 +26,39 @@ class Board
       end
       
     def full? 
+      if !@cells.include?(" ")
+        true
+      end
+    end 
   
+    def turn_count 
+      count = 0 
+      @cells.each do |cell|
+        if cell == "X" || cell == "O" 
+          count += 1 
+        end
+      end
+      count
+    end
+    
+    def taken?(input) 
+      new_input = input.to_i - 1
+      if @cells[new_input] == "X" || @cells[new_input] == "O"
+        true
+      else
+        false
+      end
+    end
+    
+    def valid_move?(input)
+      new_input = input.to_i 
+      if (1...9).include?(new_input) && taken?(input) == false
+        true 
+      end
+    end
+    
+    def update 
+      
+    end
+      
 end
