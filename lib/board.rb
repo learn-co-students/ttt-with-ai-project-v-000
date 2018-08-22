@@ -1,3 +1,4 @@
+require 'pry'
 class Board 
   
   attr_accessor :cells
@@ -57,8 +58,12 @@ class Board
       end
     end
     
-    def update 
-      
+    def update(input, player)
+      new_input = input.to_i - 1 
+      if new_input.even? 
+        @cells[new_input] = "X"
+      else @cells[new_input] = "O"
+      end
     end
       
 end
