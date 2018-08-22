@@ -20,5 +20,11 @@ class Board
       puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
     
+    def position(input) 
+      new_input = input.to_i - 1
+      @cells[new_input]
+      end
+      
+    def full? 
   
 end
