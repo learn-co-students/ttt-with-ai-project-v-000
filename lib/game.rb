@@ -1,3 +1,4 @@
+require 'pry'
 class Game 
   
   attr_accessor :board, :player_1, :player_2
@@ -13,5 +14,49 @@ class Game
    def current_player 
      @board.turn_count%2 == 0 ? player_1 : player_2
    end
+   
+   def draw?
+     !won? && @board.full?
+   end
+   
+   def over?
+     won? || draw? 
+   end
+   
+   def won? 
+     WIN_COMBINATIONS.detect do |win|
+      @board.cells[win[0]] == @board.cells[win[1]] && @board.cells[win[1]] == @board.cells[win[2]] && (@board.cells[win[0]] == "X" || @board.cells[win[0]] == "O")
+     end
+   end
+   
+   def winner
+    if winning_combo = won? 
+      @board.cells[winning_combo[0]]
+    else
+      nil
+    end
+   end
+   
+   def turn
+    player = current_player
+    @board.display
+    move = player.move(board)
+      if @board.valid_move?(move)
+        @board.update(move, current_player)
+        @board.display
+      else turn
+      end
+   end
+   
+   def play
+     turn
+     if won? 
+       puts "Congratulations #{player}!"
+     elsif draw?
+       puts "Cat\'s Game!"
+     else 
+       turn
+      end
+    end
   
 end
