@@ -78,7 +78,9 @@ describe 'Game' do
   describe '#won?' do
     it 'returns false for a draw' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+      game.board.cells = ["X", "O", "X",
+                          "O", "X", "X",
+                          "O", "X", "O"]
 
       expect(game.won?).to be_falsey
     end
