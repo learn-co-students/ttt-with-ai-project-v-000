@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
   attr_accessor :cells
 
