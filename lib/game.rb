@@ -15,7 +15,7 @@ class Game
     [2, 4, 6] # r-to-l diagonal
   ]
 
-  def initialize(p1=Player.new("X"), p2=Player.new("O"), b=Board.new)
+  def initialize(p1=Players::Human.new("X"), p2=Player.new("O"), b=Board.new)
     @player_1 = p1
     @player_2 = p2
     @board = b
