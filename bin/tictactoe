@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-tac-toe!"
+puts "How many Players? (0-2)"
+puts "0 - Computer vs Computer"
+puts "1 - Player vs Computer"
+puts "2 - Player vs Player"
+
+input = gets.strip
+
+puts "Who is player 'X'?"
+puts "0 - Computer"
+puts "1 - 1 Player"
+puts "2 - 2 Player"
+
+token = gets.strip.upcase
+
+until.token == "X" || token == "O" # must have a token
+  puts "Please choose 'X' or 'O'."
+  token = gets.strip
+end
+
+#once token 1 is taken we can auto assign token 2
+token_2 = "O" if token == "X"
+token_2 = "X" if token == "O"
+
+newgame =  Game.new(1 Player, 2 Player)
+newgame.play
