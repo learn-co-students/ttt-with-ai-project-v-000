@@ -3,32 +3,36 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic-tac-toe!"
-def start
-  puts "How many Players? (0-2)"
-  puts "0 - Computer vs Computer"
-  puts "1 - Player vs Computer"
-  puts "2 - Player vs Player"
+puts "Choose game mode"
+puts "1 - Computer Vs Computer"
+puts "2 - Human Vs Computer"
+puts "3 - Human Vs Human"
 
-  input = gets.strip
+mode = gets.strip
+mode = mode.to_i
 
-  puts "Who is player 'X'?"
-  puts "0 - Computer"
-  puts "1 - 1 Player"
-  puts "2 - 2 Player"
+until mode  == 1 || mode == 2 || mode == 3
+  puts "Please enter 1 2 or 3 to start"
+  mode = gets.strip
+  mode
+end
 
-  token = gets.strip.upcase
+case mode
+  when 1
+    current_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"),Board.new)
+    
+  when 2
+    puts "Who will go first?('me' or 'comp')"
+    first = gets.strip
 
-  until.token == "X" || token == "O" # must have a token
-    puts "Please choose 'X' or 'O'."
-    token = gets.strip
+    if first == "comp"
+      current_game = Game.new(Players::Computer.new("X"), Players::Human.new("O"),Board.new)
+    elsif first == "me"
+      current_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"),Board.new)
+    end
+
+  when 3
+    current_game = Game.new(Players::Human.new("X"), Players::Human.new("O"),Board.new)
   end
 
-#once token 1 is taken we can auto assign token 2
-  token_2 = "O" if token == "X"
-  token_2 = "X" if token == "O"
-
-  newgame = Game.new(1 Player, 2 Player)
-  newgame.play
-
-end
-start
+  current_game.play
