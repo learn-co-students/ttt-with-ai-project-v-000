@@ -60,10 +60,8 @@ class Board
     
     def update(input, player)
       new_input = input.to_i - 1 
-      if new_input.even? 
-        @cells[new_input] = "X"
-      else @cells[new_input] = "O"
-      end
+      @cells[new_input] = player.token
+     
     end
       
 end

@@ -12,7 +12,7 @@ class Game
    end
    
    def current_player 
-     @board.turn_count%2 == 0 ? player_1 : player_2
+     @board.turn_count%2 == 0 ? @player_1 : @player_2
    end
    
    def draw?
@@ -40,23 +40,33 @@ class Game
    def turn
     player = current_player
     @board.display
-    move = player.move(board)
+    move = player.move(@board)
       if @board.valid_move?(move)
-        @board.update(move, current_player)
+        @board.update(move, player)
         @board.display
       else turn
       end
    end
    
    def play
-     turn
-     if won? 
-       puts "Congratulations #{player}!"
-     elsif draw?
-       puts "Cat\'s Game!"
-     else 
-       turn
-      end
+     #binding.pry
+    while !over?
+      turn
     end
+      if won?
+      puts "Congratulations #{winner}!"
+      else
+      puts "Cat's Game!"
+      end
+   end
+   
+   def start
+    puts "Welcome to Tic Tac Toe!"
+    play
+    @board.display
+  end
+    
+    
+    
   
 end

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -242,6 +243,7 @@ describe 'Game' do
 
       allow($stdout).to receive(:puts)
       allow(game.player_1).to receive(:gets).and_return("1", "2")
+      #binding.pry
       allow(game.player_2).to receive(:gets).and_return("4")
 
       allow(game).to receive(:over?).and_return(false, false, false, true)
