@@ -38,23 +38,23 @@ class Game
    end
    
    def turn
-    player = current_player
+    player = self.current_player
     @board.display
-    move = player.move(@board)
-      if @board.valid_move?(move)
-        @board.update(move, player)
+    input = player.move(board)
+      if @board.valid_move?(input)
+        @board.update(input, player)
         @board.display
       else turn
       end
    end
    
    def play
-    while !over?
+    while !self.over?
       turn
     end
       if won?
       puts "Congratulations #{winner}!"
-      else
+      else 
       puts "Cat's Game!"
       end
    end
@@ -80,7 +80,7 @@ class Game
         Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
         else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
         end
-      end
+    end
     puts "Would like to play again? [y/ n]"
     input = gets.strip
     if input == "n"

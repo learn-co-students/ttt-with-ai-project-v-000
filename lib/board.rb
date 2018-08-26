@@ -53,15 +53,16 @@ class Board
     
     def valid_move?(input)
       new_input = input.to_i 
-      if (1...9).include?(new_input) && taken?(input) == false
+      if (1..9).include?(new_input) && taken?(input) == false
         true 
+      else 
+        puts "That is not a valid move."
       end
     end
     
     def update(input, player)
       new_input = input.to_i - 1 
       @cells[new_input] = player.token
-     
     end
       
 end
