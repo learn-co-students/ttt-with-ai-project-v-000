@@ -49,7 +49,6 @@ class Game
    end
    
    def play
-     #binding.pry
     while !over?
       turn
     end
@@ -61,12 +60,33 @@ class Game
    end
    
    def start
-    puts "Welcome to Tic Tac Toe!"
-    play
-    @board.display
+    puts "Welcome to Tic Tac Toe!
+    What kind of game will you like to play? Please choose player mode:
+ 
+   0 : Computer VS Computer
+   1 : You VS Computer
+   2 : You VS a friend"
+ 
+   player_mode = gets.strip
+
+    if player_mode == "0"
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    elsif player_mode == "2"
+      Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+    elsif player_mode == 1
+        puts "Do you want to go first? [y/ n]"
+       user_answer = gets.strip
+        if user_answer == "y"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+        else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+        end
+      end
+    puts "Would like to play again? [y/ n]"
+    input = gets.strip
+    if input == "n"
+      puts "Thank you for playing."
+    else 
+       start
+    end
   end
-    
-    
-    
-  
 end
