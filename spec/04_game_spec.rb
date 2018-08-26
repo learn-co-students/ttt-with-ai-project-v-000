@@ -88,8 +88,9 @@ describe 'Game' do
       game.board.cells = ["X", "O", "X",
                           "O", "O", "X",
                           "O", "X", "X"]
-
+      # binding.pry          
       expect(game.won?).to contain_exactly(2, 5, 8)
+      
     end
 
     it "isn't hard-coded" do
