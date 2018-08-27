@@ -8,17 +8,23 @@ require_relative '../config/environment'
 # Use the input to correctly initialize a Game with the appropriate player types and token values.
 # When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
 
-puts "Welcome to TicTacToe"
-puts "0, 1, or 2?"
+def start
+  puts "Welcome to TicTacToe"
+  puts "0, 1, or 2?"
 
-case gets.strip 
-when "0"
-  Game.new(Players::Computer.new('X'), Players::Computer.new('O')).play
-when "1"
-  Game.new(Players::Human.new('X'), Players::Computer.new('X')).play
-when "2"
-  Game.new(Players::Human.new('X'), Players::Human.new('X')).play
-end 
+  case gets.strip 
+  when "0"
+    Game.new(Players::Computer.new('X'), Players::Computer.new('O')).play
+  when "1"
+    Game.new(Players::Human.new('X'), Players::Computer.new('X')).play
+  when "2"
+    Game.new(Players::Human.new('X'), Players::Human.new('X')).play
+  end 
+end
 
+start
+
+puts "Replay? (y/n)"
+  gets == "y" ? start : 
 
   
