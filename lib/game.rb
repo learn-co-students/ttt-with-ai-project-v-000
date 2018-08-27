@@ -51,14 +51,12 @@ class Game
   end
   
   def turn
-    puts "Please enter 1-9:"
-    user_input = gets.strip
+    # move(board)
+    # super
     user_input_index = board.user_input_to_index(user_input)
-    binding.pry
-    # if board.valid_move?(user_input_index)
-    #   update(user_input_index, player) && board.display
+    if board.valid_move?(user_input_index)
+      update(user_input_index, player) && board.display
       
-    # end 
+    end 
   end
-    
 end
