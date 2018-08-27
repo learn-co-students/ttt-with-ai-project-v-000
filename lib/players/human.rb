@@ -2,7 +2,10 @@ module Players
   class Human < Player
     def move(board)
       puts "Which position do you want to mark?"
-      input = gets.strip
+      gets.strip
+    end
+    
+    def awe
     end
   end
 end

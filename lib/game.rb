@@ -28,7 +28,6 @@ class Game
       combo.each do |position| 
         @accumulator += board.cells[position] 
       end    
-      #  binding.pry
       @accumulator == 'XXX' || @accumulator == 'OOO'
     end
   end
@@ -48,7 +47,22 @@ class Game
   end
   
   def turn
-    current_player.move(board)
-    
+    input = current_player.move(board)
+    if !board.valid_move?(input) 
+      turn
+    end
+    board.update(input, current_player)
+    board.display
+  end
+  
+  def play
+    while !over?
+      turn
+    end
+    if draw?
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{winner}!"
+    end
   end
 end       
