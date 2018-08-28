@@ -3,7 +3,7 @@ module Players
     
     def move(board)
       puts "Please enter 1-9:"
-      user_input = gets.strip
+      gets.strip
     end
     
   end
