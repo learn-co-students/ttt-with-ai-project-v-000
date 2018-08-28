@@ -1,4 +1,7 @@
+# require 'players'
+
 class Game
+  # extend Players
   attr_accessor :board, :player_1, :player_2
   
   WIN_COMBINATIONS = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
@@ -10,12 +13,11 @@ class Game
   end
   
   def current_player
-    if board.cells.count("X") == 1 && board.cells.count("O") == 1
-      return player_1
-    elsif board.cells.count("X").even?
-      return player_2
-    else board.cells.count("O").odd?
-      return player_1
+    if @board.turn_count % 2 == 0 
+      @player_1
+    else
+      @board.turn_count % 2 == 1
+        @player_2
     end
   end
   
@@ -26,6 +28,10 @@ class Game
       end
     end
     return false
+  end
+  
+  def self.start
+    Game.new
   end
   
   def draw?
@@ -51,12 +57,31 @@ class Game
   end
   
   def turn
-    puts "Please enter 1-9:"
-    user_input = gets.strip
-    # user_input_index = board.user_input_to_index(user_input)
-    binding.pry
-    # if board.valid_move?(user_input_index)
-    #   update(user_input_index, player) && board.display
-    # end 
+    # binding.pry
+    current_move = current_player.move(board)
+    if board.valid_move?(current_move)
+      board.update(current_move, current_player)
+      board.display
+    else
+      puts "invalid move"
+      turn
+    end
   end
+  
+  def play
+    until over?
+      turn
+    end
+    
+    if draw?
+        puts "Cat's Game!"
+    else
+        puts "Congratulations #{winner}!"
+    end
+  end
+  
+  
+  
 end
+
+Game.start

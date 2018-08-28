@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+1#!/usr/bin/env ruby
 
 require_relative '../config/environment'
 
@@ -8,8 +8,8 @@ input = gets.strip
 puts "Who will go first and be 'X'?"
 input2 = gets.strip
 Game.start
-end
+
 
 puts "Would you like to play again?"
 input3 = gets.strip
-Game.start if input3 == "Y" || "y" || "yes" || "Yes"
+Game.start if input3 == "Y" || input3 == "y" || input3 == "yes" || input3 == "Yes"
