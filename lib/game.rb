@@ -28,10 +28,6 @@ class Game
     return false
   end
   
-  def self.start
-    Game.new
-  end
-  
   def draw?
     if board.full? && !won?
       return true
@@ -76,6 +72,9 @@ class Game
     end
   end
   
+   def self.start
+    Game.new
+  end
   
   
 end
