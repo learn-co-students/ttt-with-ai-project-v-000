@@ -9,6 +9,10 @@ puts "Who will go first and be 'X'?"
 input2 = gets.strip
 Game.start
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 570a840cb778ad3aa193be58153e48716196cf67
 
 puts "Would you like to play again?"
 input3 = gets.strip
