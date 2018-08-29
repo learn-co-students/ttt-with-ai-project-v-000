@@ -1,5 +1,3 @@
-# require 'players'
-require 'pry'
 class Game
 
   attr_accessor :board, :player_1, :player_2
@@ -58,7 +56,7 @@ class Game
       board.update(current_move, current_player)
       board.display
     else
-      puts "invalid move"
+      puts "Invalid Move"
       turn
     end
   end
@@ -82,8 +80,6 @@ class Game
     input2 = gets.strip
     if input2 == "Y"
       Game.start
-    else
-      return
     end
   end
   
@@ -95,8 +91,6 @@ class Game
     input2 = gets.strip
     if input2 == "Y"
       Game.start
-    else
-      return
     end
   end
   
@@ -108,8 +102,6 @@ class Game
     input2 = gets.strip
     if input2 == "Y"
       Game.start
-    else
-      return
     end
   end
   
