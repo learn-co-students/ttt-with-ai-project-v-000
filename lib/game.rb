@@ -98,7 +98,6 @@ class Game
     else
       return
     end
->>>>>>> ce9c7b75a971767c3a11066ead7956e89adb8ff6
   end
   
   def self.choice_two
@@ -119,16 +118,15 @@ class Game
     puts " "
     puts "Would you like to play, 0, 1, or 2 player game? Please enter 0, 1, or 2:"
     input = gets.strip
-    while input != "exit"
-      if input == "0"
-        choice_zero
-      elsif input == "1"
-        choice_one
-      elsif input == "2"
-        choice_two
-      else
-        puts "Invalid input, please enter 0, 1, or 2:"
-      end
+    if input == "0"
+      choice_zero
+    elsif input == "1"
+      choice_one
+    elsif input == "2"
+      choice_two
+    else
+      puts "Invalid input, please enter 0, 1, or 2:"
+    end
   end
     # Game.new
     # puts "Welcome to Tic Tac Toe!"
