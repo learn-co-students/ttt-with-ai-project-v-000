@@ -68,9 +68,9 @@ class Game
       turn
     end
     if draw?
-        puts "Cat's Game!"
+      puts "Cat's Game!"
     else
-        puts "Congratulations #{winner}!"
+      puts "Congratulations #{winner}!"
     end
   end
   
@@ -128,51 +128,5 @@ class Game
       puts "Invalid input, please enter 0, 1, or 2:"
     end
   end
-    # Game.new
-    # puts "Welcome to Tic Tac Toe!"
-    # puts "Would you like to play, 0, 1, or 2 player game? Please enter 0, 1, or 2:"
-    # input = gets.strip
-    # # binding.pry
-    # while input != "exit"
-    #   if input == "0" 
-    #     computer_1 = Players::Computer.new("X") && computer_2 = Players::Computer.new("O")
-    #     game = Game.new(computer_1, computer_2)
-    #     break
-    #   elsif input == "1" 
-    #     human_1 = Players::Human.new("X") && computer_2 || computer_1 && human_2 = Players::Human.new("O")
-    #     break
-    #   elsif input == "2" 
-    #     human_1 && human_2
-    #     break
-    #   else 
-    #     puts "Invalid input, please enter 0, 1 or 2 to continue:"
-    #   end
-      
-    #   input = gets.strip
-    # end
-    
-    # puts "'X' will go first and be Player 1." 
-    
-    # game.play
-    # puts "Would you like to play again? (Y/N)"
-    # input2 = gets.strip
-    # until input2 == "N"
-    #   Game.start
-    # end
-    
-    
-  end
 
 end
-#Game.start
-# puts "Welcome to Tic Tac Toe!"
-# puts "Would you like to play, 0, 1, or 2 player game?"
-# input = gets.strip
-# puts "Who will go first and be 'X'?"
-# input2 = gets.strip
-# Game.start
-
-
-# puts "Would you like to play again?"
-# input3 = gets.strip
-# Game.start if input3 == "Y" || input3 == "y" || input3 == "yes" || input3 == "Yes"
