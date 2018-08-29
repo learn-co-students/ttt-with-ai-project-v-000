@@ -65,7 +65,34 @@ class Game
     if draw?
       nil
     elsif won?
-      @board.cells[won?[0]]
+      if @board.cells[won?[0]] == " "
+        nil
+      else
+        @board.cells[won?[0]]
+      end
+    end
+  end
+
+  def turn
+    #binding.pry
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+      @board.display
+    else
+      puts "invalid"
+      turn
+    end
+  end
+
+  def play
+    while over? == false && draw? == false
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
 

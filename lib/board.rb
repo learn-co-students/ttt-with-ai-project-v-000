@@ -32,8 +32,12 @@ class Board
     @cells.count {|cell| cell != " "}
   end
 
+  def input_to_index(input)
+    input.to_i - 1
+  end
+
   def taken?(input)
-    index = input.to_i - 1
+    index = input_to_index(input)
     if @cells[index] == " " || @cells[index] == "" || @cells[index] == nil
       false
     else
@@ -42,7 +46,7 @@ class Board
   end
 
   def valid_move?(input)
-    index = input.to_i - 1
+    index = input_to_index(input)
     if index.between?(0, 8)
       if taken?(index + 1)
         false
@@ -53,8 +57,8 @@ class Board
   end
 
   def update(input, player)
-    index = input.to_i - 1
-    @cells[index] = "X"
+    index = input_to_index(input)
+    @cells[index] = player.token
   end
 
 end
