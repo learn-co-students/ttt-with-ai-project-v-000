@@ -74,38 +74,92 @@ class Game
     end
   end
   
-  def self.start
-    Game.new
-    puts "Welcome to Tic Tac Toe!"
-    puts "Would you like to play, 0, 1, or 2 player game? Please enter 0, 1, or 2:"
-    input = gets.strip
-    # binding.pry
-    while input != "exit"
-      if input == "0" 
-        computer_1 = Players::Computer.new("X") && computer_2 = Players::Computer.new("O")
-        game = Game.new(computer_1, computer_2)
-        break
-      elsif input == "1" 
-        human_1 = Players::Human.new("X") && computer_2 || computer_1 && human_2 = Players::Human.new("O")
-        break
-      elsif input == "2" 
-        human_1 && human_2
-        break
-      else 
-        puts "Invalid input, please enter 0, 1 or 2 to continue:"
-      end
-      
-      input = gets.strip
-    end
-    
-    puts "'X' will go first and be Player 1." 
-    
-    game.play
+  def self.choice_zero
+    computer_1 = Players::Computer.new("X")
+    computer_2 = Players::Computer.new("O")
+    Game.new(computer_1, computer_2).play
     puts "Would you like to play again? (Y/N)"
     input2 = gets.strip
-    until input2 == "N"
+    if input2 == "Y"
       Game.start
+    else
+      return
     end
+  end
+  
+  def self.choice_one
+    human_1 = Players::Human.new("X")
+    computer_2 = Players::Computer.new("O")
+    Game.new(human_1, computer_2).play
+    puts "Would you like to play again? (Y/N)"
+    input2 = gets.strip
+    if input2 == "Y"
+      Game.start
+    else
+      return
+    end
+  end
+  
+  def self.choice_two
+    human_1 = Players::Human.new("X")
+    human_2 = Players::Human.new("O")
+    Game.new(human_1, human_2).play
+    puts "Would you like to play again? (Y/N)"
+    input2 = gets.strip
+    if input2 == "Y"
+      Game.start
+    else
+      return
+    end
+  end
+  
+  def self.start
+    puts "Welcome to Tic Tac Toe!"
+    puts " "
+    puts "Would you like to play, 0, 1, or 2 player game? Please enter 0, 1, or 2:"
+    input = gets.strip
+    while input != "exit"
+      if input == "0"
+        choice_zero
+      elsif input == "1"
+        choice_one
+      elsif input == "2"
+        choice_two
+      else
+        puts "Invalid input, please enter 0, 1, or 2:"
+      end
+  end
+    # Game.new
+    # puts "Welcome to Tic Tac Toe!"
+    # puts "Would you like to play, 0, 1, or 2 player game? Please enter 0, 1, or 2:"
+    # input = gets.strip
+    # # binding.pry
+    # while input != "exit"
+    #   if input == "0" 
+    #     computer_1 = Players::Computer.new("X") && computer_2 = Players::Computer.new("O")
+    #     game = Game.new(computer_1, computer_2)
+    #     break
+    #   elsif input == "1" 
+    #     human_1 = Players::Human.new("X") && computer_2 || computer_1 && human_2 = Players::Human.new("O")
+    #     break
+    #   elsif input == "2" 
+    #     human_1 && human_2
+    #     break
+    #   else 
+    #     puts "Invalid input, please enter 0, 1 or 2 to continue:"
+    #   end
+      
+    #   input = gets.strip
+    # end
+    
+    # puts "'X' will go first and be Player 1." 
+    
+    # game.play
+    # puts "Would you like to play again? (Y/N)"
+    # input2 = gets.strip
+    # until input2 == "N"
+    #   Game.start
+    # end
     
     
   end
