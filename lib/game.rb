@@ -76,6 +76,7 @@ class Game
     computer_1 = Players::Computer.new("X")
     computer_2 = Players::Computer.new("O")
     Game.new(computer_1, computer_2).play
+# <<<<<<< HEAD
     puts "Would you like to play again? (Y/N)"
     input2 = gets.strip
     if input2 == "Y"
@@ -103,6 +104,21 @@ class Game
     if input2 == "Y"
       Game.start
     end
+# =======
+    
+#   end
+  
+#   def choice_one
+#     human_1 = Players::Human.new("X")
+#     computer_2 = Players::Computer.new("O")
+#     Game.new(human_1, computer_2)
+#   end
+  
+#   def choice_two
+#     human_1 = Players::Human.new("X")
+#     human_2 = Players::Human.new("O")
+#     Game.new(human_1, human_2)
+# >>>>>>> b2cf359a34f2880d2a933274564330542a8148e3
   end
   
   def self.start
