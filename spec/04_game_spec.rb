@@ -88,8 +88,9 @@ describe 'Game' do
       game.board.cells = ["X", "O", "X",
                           "O", "O", "X",
                           "O", "X", "X"]
-
+      # binding.pry          
       expect(game.won?).to contain_exactly(2, 5, 8)
+      
     end
 
     it "isn't hard-coded" do
@@ -184,9 +185,10 @@ describe 'Game' do
     it 'asks for input again after a failed validation' do
       game = Game.new
       allow($stdout).to receive(:puts)
-
-      expect(game.player_1).to receive(:gets).and_return("invalid")
+      
+      expect(game.player_1).to receive(:gets).and_return("ingfvallid")
       expect(game.player_1).to receive(:gets).and_return("1")
+      
 
       game.turn
     end
