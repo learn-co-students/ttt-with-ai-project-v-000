@@ -15,8 +15,6 @@ module Players
       moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       corners = ["1", "3", "7", "9"]
 
-      board.cells
-
       if !board.taken?(5)
         "5"
       elsif board.turn_count == 1
@@ -28,17 +26,17 @@ module Players
           "3"
         end
       else
-        if win_combinations.detect {|combo| board.cells.values_at(combo[0], combo[1], combo[2]).count {|cell| cell == self.token} == 2 && board.cells.values_at(combo[0], combo[1], combo[2]).include?(" ")}
+        if Game::WIN_COMBINATIONS.detect {|combo| board.cells.values_at(combo[0], combo[1], combo[2]).count {|cell| cell == self.token} == 2 && board.cells.values_at(combo[0], combo[1], combo[2]).include?(" ")}
 
-          win_combinations.detect {|combo|
+          Game::WIN_COMBINATIONS.detect {|combo|
             board.cells.values_at(combo[0], combo[1], combo[2]).count {|cell| cell == self.token} == 2 && board.cells.values_at(combo[0], combo[1], combo[2]).include?(" ")
           }.detect {|i|
             board.position(i+1) == " "
           } + 1
 
-        elsif win_combinations.detect {|combo| board.cells.values_at(combo[0], combo[1], combo[2]).count {|cell| cell != self.token && cell != " "} == 2 && board.cells.values_at(combo[0], combo[1], combo[2]).include?(" ")}
+        elsif Game::WIN_COMBINATIONS.detect {|combo| board.cells.values_at(combo[0], combo[1], combo[2]).count {|cell| cell != self.token && cell != " "} == 2 && board.cells.values_at(combo[0], combo[1], combo[2]).include?(" ")}
 
-          win_combinations.detect {|combo|
+          Game::WIN_COMBINATIONS.detect {|combo|
             board.cells.values_at(combo[0], combo[1], combo[2]).count {|cell| cell != self.token && cell != " "} == 2 && board.cells.values_at(combo[0], combo[1], combo[2]).include?(" ")
           }.detect {|i|
             board.position(i+1) == " "
