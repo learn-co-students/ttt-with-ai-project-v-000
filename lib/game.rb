@@ -45,10 +45,10 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |win_combo|
-      if @board.cells[win_combo[0]] == @board.cells[win_combo[1]] && @board.cells[win_combo[0]] == @board.cells[win_combo[2]]
-        if @board.taken?(win_combo[0]) == true
-          return win_combo
-        end
+      if @board.taken?(win_combo[0]+1) == true && @board.cells[win_combo[0]] == @board.cells[win_combo[1]] && @board.cells[win_combo[0]] == @board.cells[win_combo[2]]
+        return win_combo
+      else
+        nil
       end
     end
   end
@@ -62,19 +62,14 @@ class Game
   end
 
   def winner
-    if draw?
+    if set = won?
+      @board.cells[set[0]]
+    else
       nil
-    elsif won?
-      if @board.cells[won?[0]] == " "
-        nil
-      else
-        @board.cells[won?[0]]
-      end
     end
   end
 
   def turn
-    #binding.pry
     input = current_player.move(@board)
     if @board.valid_move?(input)
       @board.update(input, current_player)
