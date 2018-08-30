@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
     it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
@@ -174,6 +174,7 @@ describe 'Game' do
   describe 'turn' do
     it 'makes valid moves' do
       game = Game.new
+
       allow($stdout).to receive(:puts)
 
       expect(game.player_1).to receive(:gets).and_return("1")
@@ -182,6 +183,7 @@ describe 'Game' do
     end
 
     it 'asks for input again after a failed validation' do
+
       game = Game.new
       allow($stdout).to receive(:puts)
 
@@ -197,7 +199,6 @@ describe 'Game' do
 
       expect(game.player_1).to receive(:gets).and_return("1")
       expect(game.player_2).to receive(:gets).and_return("2")
-
       game.turn
       game.turn
     end

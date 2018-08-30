@@ -11,8 +11,8 @@ describe 'Players::Human' do
       allow($stdout).to receive(:puts)
 
       expect(human).to receive(:gets).and_return("1")
-
       expect(human.move(Board.new)).to eq("1")
+
     end
   end
 end
