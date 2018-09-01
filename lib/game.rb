@@ -57,6 +57,16 @@ class Game
   end
 
   def turn
+    puts "It's your turn! Please pick an empty spot:"
+    input = gets.strip
+    if valid_move?(input)
+      self.booard.update(input, self)
+    else
+      "Invalid input received."
+      turn
+    end
+  end
+
     # binding.pry
   #   # input = gets.input
   #   player = self.current_player
