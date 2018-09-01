@@ -19,7 +19,7 @@ class Game
   end
 
   def current_player
-    self.board.turn_count % 2 == 0 ? player_1 : player_2
+    self.board.turn_count % 2 == 0 ? self.player_1 : self.player_2
   end
 
   def won?
@@ -37,21 +37,16 @@ class Game
   end
 
   def draw?
-    return true if !!won? == false && self.board.full?
+    return true if !!self.won? == false && self.board.full?
   end
 
   def over?
-    won? || draw?
+    self.won? || self.draw?
   end
 
   def winner
-    # over? ? self.board.cells[won?[0]] : nil
-    # binding.pry
-    if combo = won?
-      self.board.cells[combo[0]]
-    else
-      nil
-    end
+    win_combo = self.won?
+    self.won? ? self.board.cells[win_combo[0]] : nil
   end
 
   def start
@@ -59,16 +54,8 @@ class Game
   end
 
   def play
-    # if !self.over?
-    #   self.turn
-    #   self.over?
-    #   play
-    # else
-    #   # self.winner
-    #   puts "Congratulations #{winner.token}!"
-    # end
     self.turn until self.over?
-    self.winner ? "Congratulations #{self.current_player.token}" : "Cats game!"
+    self.winner ? (puts "Congratulations #{self.winner}!") : (puts "Cat's Game!")
   end
 
   def turn
@@ -80,6 +67,5 @@ class Game
       puts "Invalid entry received."
       turn
     end
-    # self.over?
   end
 end
