@@ -37,7 +37,7 @@ class Game
   end
 
   def draw?
-    return true if won? == false && self.board.full?
+    return true if !!won? == false && self.board.full?
   end
 
   def over?
@@ -45,7 +45,13 @@ class Game
   end
 
   def winner
-    !!over? ? self.board.cells[won?[0]] : nil
+    # over? ? self.board.cells[won?[0]] : nil
+    # binding.pry
+    if combo = won?
+      self.board.cells[combo[0]]
+    else
+      nil
+    end
   end
 
   def start
@@ -53,30 +59,27 @@ class Game
   end
 
   def play
-
+    # if !self.over?
+    #   self.turn
+    #   self.over?
+    #   play
+    # else
+    #   # self.winner
+    #   puts "Congratulations #{winner.token}!"
+    # end
+    self.turn until self.over?
+    self.winner ? "Congratulations #{self.current_player.token}" : "Cats game!"
   end
 
   def turn
-    puts "It's your turn! Please pick an empty spot:"
-    input = gets.strip
-    if valid_move?(input)
-      self.booard.update(input, self)
+    player = self.current_player
+    move = self.current_player.move(board)
+    if self.board.valid_move?(move)
+      self.board.update(move, player)
     else
-      "Invalid input received."
+      puts "Invalid entry received."
       turn
     end
-  end
-
-    # binding.pry
-  #   # input = gets.input
-  #   player = self.current_player
-  #
-  #   if !over? && valid_move?(input)
-  #     self.board.update(input, player)
-  #   else
-  #     "Please choose a valid space"
-  #     turn
-  #   end
-  #   self.board.display
+    # self.over?
   end
 end
