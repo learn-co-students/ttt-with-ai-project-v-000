@@ -21,7 +21,7 @@ class Board
   end
   
   #takes in user input and returns the value of the board cell
-  #Cells (positions) are named "1" - "9"
+  #Cells (positions) are named "1" - "9".  The array is indexed by ints 0-8 
   def position(pos)
     @cells[to_index(pos)]
   end
