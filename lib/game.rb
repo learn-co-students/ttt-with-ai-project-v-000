@@ -14,16 +14,16 @@ class Game
   
   def initialize(player_1 = Players::Human.new("X"), 
     player_2 = Players::Human.new("O"), board = Board.new )
+    @board = board
     @player_1 = player_1 
     @player_2 = player_2
-    @board = board
   end
   
   def current_player
     if @board.turn_count.even? 
         player_1 
       else 
-        player_2
+        player_2 
     end
   end
     
@@ -48,12 +48,8 @@ class Game
       @board.display	
       puts "\n\n"	
     end
-   
-    
   end
-      
-   
-      
+    
   def draw?
    if @board.full? && !won?
       TRUE
@@ -77,16 +73,17 @@ class Game
       nil 
     end
   end
-      
-  def play 
+     
+  
+  def play
     until over?
     turn 
   end
-     if won? 
+     if won?
      puts "Congratulations #{winner}!"
    elsif draw?
     puts "Cat's Game!"
-   end
+  end
   end
 end
 
