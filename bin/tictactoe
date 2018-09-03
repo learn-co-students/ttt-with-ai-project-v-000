@@ -1,3 +1,62 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# puts "Welcome to Tic-Tac-Toe!"
+# puts "Please select the number of players (0, 1, or 2):"
+
+def start_game
+puts "Welcome to Tic-Tac-Toe!"
+puts "Please select the number of players (0, 1, or 2):"
+a = gets.strip
+    if a == "0" || a == "1" || a == "2"
+      a
+    else
+      puts "Invalid entry, please select the number of players (0, 1, or 2)."
+      start_game
+    end
+
+puts "Will Player 1 or Player 2 be X? Please enter either 1 or 2:"
+b = gets.strip
+  if b == "1" || b == "2"
+    b
+  else
+    puts "Invalid entry."
+    start_game
+  end
+puts "Alright, let's do this! Starting new game..."
+      if a == "0"
+        if b == "2"
+          new_game = Game.new(Players::Computer.new("O"), Players::Computer.new("X"), Board.new)
+        else
+          new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+        end
+        new_game
+      elsif a == "1"
+        if b == "2"
+          new_game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new)
+        else
+          new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+        end
+        new_game
+      else
+        if b == "2"
+          new_game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+        else
+          new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+        end
+        new_game
+      end
+      new_game
+    new_game.board.display
+    new_game.play
+    puts "Would you like to play again? (y/n)"
+    c = gets.strip
+    if c == "y" || c == "Y" || c == "yes"
+        start_game
+    else
+        puts "Thank you for playing Tic-Tac-Toe!"
+        exit
+    end
+  end
+  start_game
