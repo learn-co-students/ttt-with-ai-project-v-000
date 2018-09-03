@@ -57,5 +57,3 @@ class Board
   end
  
 end
-
-Board.new.display
