@@ -1,3 +1,4 @@
+require 'pry'
 class Board
   
   BLANK_CELLS = [" ", " ", " ", " ", " ", " ", " ", " "," "]
@@ -5,11 +6,16 @@ class Board
   attr_accessor :cells
   
   def initialize
-    reset!
+    puts "RESET!!"
+    self.reset!
+    self.display
   end
   
+  #Had a very strange error where it seemed that my BLANK_CELLS 'constant'
+  #was being changed underneath me resulting in a failed test.  Setting to this 
+  #array literal solved it
   def reset!
-    @cells = BLANK_CELLS
+    @cells = [" ", " ", " ", " ", " ", " ", " ", " "," "]#BLANK_CELLS
   end
   
   def display
