@@ -1,0 +1,31 @@
+
+[1mFrom:[0m /home/sebgertz-27543/code/ttt-with-ai-project-v-000/lib/players/computer.rb @ line 20 Players::Computer#move:
+
+    [1;34m16[0m:     [32mdef[0m [1;34mmove[0m(board)
+    [1;34m17[0m:         position = [1;36mnil[0m
+    [1;34m18[0m:  			   [1;34;4mWIN_COMBINATIONS[0m.detect [32mdo[0m |win_combination|
+    [1;34m19[0m:            win_combination.detect [32mdo[0m |cell|
+ => [1;34m20[0m:              binding.pry
+    [1;34m21[0m:              [1;34m#prioritizes winning[0m
+    [1;34m22[0m:              [32mif[0m board.cells[cell.to_i] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m && board.cells[cell.to_i + [1;34m1[0m] == [1;36mself[0m.token && board.cells[cell.to_i + [1;34m2[0m] == [1;36mself[0m.token
+    [1;34m23[0m:                position = cell.to_i + [1;34m1[0m
+    [1;34m24[0m:              [32melsif[0m board.cells[cell.to_i - [1;34m1[0m ] == [1;36mself[0m.token && board.cells[win_combination[cell.to_i]] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m && board.cells[win_combination[cell.to_i + [1;34m1[0m]] == [1;36mself[0m.token
+    [1;34m25[0m:                position = cell.to_i + [1;34m1[0m
+    [1;34m26[0m:              [32melsif[0m board.cells[cell.to_i - [1;34m2[0m] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m && board.cells[cell.to_i - [1;34m1[0m] == [1;36mself[0m.token && board.cells[cell.to_i] == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m
+    [1;34m27[0m:                position = cell.to_i + [1;34m1[0m
+    [1;34m28[0m:              [1;34m#prevents losses[0m
+    [1;34m29[0m:            [32melsif[0m !board.taken?(win_combination[cell.to_i] + [1;34m1[0m) && board.taken?(win_combination[cell.to_i + [1;34m1[0m] + [1;34m1[0m) && board.taken?(win_combination[cell.to_i + [1;34m2[0m] + [1;34m1[0m)
+    [1;34m30[0m:               position = win_combination[cell.to_i] + [1;34m1[0m
+    [1;34m31[0m:            [32melsif[0m board.taken?(win_combination[cell.to_i - [1;34m1[0m] + [1;34m1[0m) && !board.taken?(win_combination[cell.to_i] + [1;34m1[0m) && board.taken?(win_combination[cell.to_i + [1;34m1[0m] + [1;34m1[0m)
+    [1;34m32[0m:              position = win_combination[cell.to_i] + [1;34m1[0m
+    [1;34m33[0m:            [32melsif[0m board.taken?(win_combination[cell.to_i - [1;34m2[0m] + [1;34m1[0m) && board.taken?(win_combination[cell.to_i - [1;34m1[0m] + [1;34m1[0m) && !board.taken?(win_combination[cell.to_i] + [1;34m1[0m)
+    [1;34m34[0m:              position = win_combination[cell.to_i] + [1;34m1[0m
+    [1;34m35[0m:               [1;34m#places second token in winning combination only if there is a chance of winning[0m
+    [1;34m36[0m:             [32melse[0m
+    [1;34m37[0m:               position = rand([1;34m1[0m..[1;34m9[0m)
+    [1;34m38[0m: 					   [32mend[0m
+    [1;34m39[0m:            [32mend[0m
+    [1;34m40[0m:         [32mend[0m
+    [1;34m41[0m:       position
+    [1;34m42[0m:     [32mend[0m
+
