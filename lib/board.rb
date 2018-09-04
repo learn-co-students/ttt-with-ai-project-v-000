@@ -52,6 +52,18 @@ class Board
     @cells[to_index(pos)] = player.token
   end
   
+  def all_x?(indexes)
+    indexes.all? { |i| @cells[i] == "X" }
+  end
+  
+  def all_o?(indexes)
+    indexes.all? { |i| @cells[i] == "O" }
+  end
+  
+  def all_taken?
+    @cells.all? { |cell| cell == 'X' || cell == 'O' }
+  end
+  
   private
   
   def to_index(pos)
