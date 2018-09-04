@@ -1,0 +1,28 @@
+
+[1mFrom:[0m /home/vitivey/ttt-with-ai-project-v-000/lib/players/computer.rb @ line 10 Players::Computer#move:
+
+     [1;34m7[0m: [32mdef[0m [1;34mmove[0m(board)
+     [1;34m8[0m:   opponent_token=[31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m
+     [1;34m9[0m:   opponent_token=[31m[1;31m"[0m[31mO[1;31m"[0m[31m[0m [32mif[0m [1;36mself[0m.token==[31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m
+ => [1;34m10[0m:   binding.pry
+    [1;34m11[0m:   [1;34;4mGame[0m.WIN_COMBINATIONS.select [32mdo[0m |win_option|
+    [1;34m12[0m:     match_check=board.cells.values_at(win_option[[1;34m0[0m],win_option[[1;34m1[0m],win_option[[1;34m2[0m])
+    [1;34m13[0m:     combo=win_option [32mif[0m match_check.all?{|token| token==[31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m}
+    [1;34m14[0m:     combo=win_option [32mif[0m match_check.all?{|token| token==[31m[1;31m"[0m[31mO[1;31m"[0m[31m[0m}
+    [1;34m15[0m:   [32mend[0m
+    [1;34m16[0m: 
+    [1;34m17[0m: 
+    [1;34m18[0m:     array = []
+    [1;34m19[0m:     array_corners=[]
+    [1;34m20[0m:     board.cells.each_with_index {|position, index| array << [31m[1;31m"[0m[31m#{index+1}[0m[31m[1;31m"[0m[31m[0m [32mif[0m position == [31m[1;31m"[0m[31m [1;31m"[0m[31m[0m }
+    [1;34m21[0m:     array.each{|position| array_corners << position [32mif[0m position==[31m[1;31m"[0m[31m1[1;31m"[0m[31m[0m || position==[31m[1;31m"[0m[31m3[1;31m"[0m[31m[0m || position==[31m[1;31m"[0m[31m7[1;31m"[0m[31m[0m || position==[31m[1;31m"[0m[31m9[1;31m"[0m[31m[0m}
+    [1;34m22[0m: 
+    [1;34m23[0m:     [32mif[0m array.include?([31m[1;31m"[0m[31m5[1;31m"[0m[31m[0m)
+    [1;34m24[0m:       [31m[1;31m"[0m[31m5[1;31m"[0m[31m[0m
+    [1;34m25[0m:     [32melsif[0m !array_corners.empty?
+    [1;34m26[0m:       array_corners.sample
+    [1;34m27[0m:     [32melse[0m
+    [1;34m28[0m:       array.sample
+    [1;34m29[0m:     [32mend[0m
+    [1;34m30[0m: [32mend[0m
+
