@@ -1,62 +1,75 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
 
-# puts "Welcome to Tic-Tac-Toe!"
-# puts "Please select the number of players (0, 1, or 2):"
-
 def start_game
-puts "Welcome to Tic-Tac-Toe!"
-puts "Please select the number of players (0, 1, or 2):"
-a = gets.strip
-    if a == "0" || a == "1" || a == "2"
-      a
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "Please select the number of players (0, 1, or 2):"
+  a = gets.strip
+      if a == "0" || a == "1" || a == "2"
+        a
+      elsif a == "wargames"
+        p1wins = 0
+        p2wins = 0
+        cats_game = 0
+        100.times do
+          new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+          new_game.play
+          if new_game.winner == "X"
+            p1wins += 1
+          elsif new_game.winner == "O"
+            p2wins += 1
+          else
+            cats_game += 1
+          end
+        end
+          puts "Player 1 won #{p1wins} times, Player 2 won #{p2wins} times, and #{cats_game} games ended in a draw."
+          start_game
+      else
+        puts "Invalid entry, please select the number of players (0, 1, or 2)."
+        start_game
+      end
+
+  puts "Will Player 1 or Player 2 be X? Please enter either 1 or 2:"
+  b = gets.strip
+    if b == "1" || b == "2"
+      b
     else
-      puts "Invalid entry, please select the number of players (0, 1, or 2)."
+      puts "Invalid entry."
       start_game
     end
-
-puts "Will Player 1 or Player 2 be X? Please enter either 1 or 2:"
-b = gets.strip
-  if b == "1" || b == "2"
-    b
-  else
-    puts "Invalid entry."
-    start_game
-  end
-puts "Alright, let's do this! Starting new game..."
-      if a == "0"
-        if b == "2"
-          new_game = Game.new(Players::Computer.new("O"), Players::Computer.new("X"), Board.new)
+  puts "Alright, let's do this! Starting new game..."
+        if a == "0"
+          if b == "2"
+            new_game = Game.new(Players::Computer.new("O"), Players::Computer.new("X"), Board.new)
+          else
+            new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+          end
+          new_game
+        elsif a == "1"
+          if b == "2"
+            new_game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new)
+          else
+            new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+          end
+          new_game
         else
-          new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+          if b == "2"
+            new_game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+          else
+            new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+          end
+          new_game
         end
         new_game
-      elsif a == "1"
-        if b == "2"
-          new_game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new)
-        else
-          new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-        end
-        new_game
+      new_game.board.display
+      new_game.play
+      puts "Would you like to play again? (y/n)"
+      c = gets.strip
+      if c == "y" || c == "Y" || c == "yes"
+          start_game
       else
-        if b == "2"
-          new_game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
-        else
-          new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-        end
-        new_game
+          puts "Thank you for playing Tic-Tac-Toe!"
+          exit
       end
-      new_game
-    new_game.board.display
-    new_game.play
-    puts "Would you like to play again? (y/n)"
-    c = gets.strip
-    if c == "y" || c == "Y" || c == "yes"
-        start_game
-    else
-        puts "Thank you for playing Tic-Tac-Toe!"
-        exit
-    end
-  end
+end
   start_game

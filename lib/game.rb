@@ -61,6 +61,7 @@ class Game
     puts "#{current_player.token}, you are up."
     player = self.current_player
     move = self.current_player.move(board)
+
     if self.board.valid_move?(move)
       self.board.update(move, player)
     else

@@ -27,7 +27,16 @@ class Players::Computer < Player
 
         scombo = [combo[0] + 1, combo[1] + 1, combo[2] + 1]
 
-        if !board.taken?(combo[0] + 1) || !board.taken?(combo[1] + 1) || !board.taken?(combo[2] + 1)
+      if (board.taken?(combo[0] + 1) && a != self.token) && (board.taken?(combo[1] + 1) && b != self.token) && !board.taken?((combo[2] + 1))
+          input = ((combo[2] + 1)).to_s
+          return input
+      elsif (board.taken?(combo[0] + 1) && a != self.token) && (board.taken?(combo[2] + 1) && c != self.token) && (!board.taken?(combo[1] + 1))
+          input = ((combo[1] + 1)).to_s
+          return input
+      elsif (board.taken?(combo[1] + 1) && b != self.token) && (board.taken?(combo[2] + 1) && c != self.token) && (!board.taken?(combo[0] + 1))
+          input = ((combo[0] + 1)).to_s
+          return input
+      elsif !board.taken?(combo[0] + 1) || !board.taken?(combo[1] + 1) || !board.taken?(combo[2] + 1)
           scombo.each_with_index do |x, index|
 
             if !board.taken?(x)
