@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Welcome to Tic Tac Toe with AI."
+puts "What kind of game would you like to play?"
+puts "To see the computer play against itself, enter 0. \n To play against the computer, enter 1. \n To play another person, enter 2.\n To exit, press 3."
+
+input = gets.strip
+
+if input == "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+elsif input == "1"
+  puts "The letter X is assigned to the first player. Who would you like to go first? \n Press Y if you want to go first. \n Press N if you want the computer to go first."
+  user_input = gets.downcase.strip
+  if user_input == "y"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+    game.board.display
+    game.play
+  elsif user_input == "n"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+    game.board.display
+    game.play
+  end
+elsif input == "2"
+  puts "If the first player wants to be X, enter 1. If the second player wants to be X, enter 2."
+  user_input = gets.strip
+  if user_input == "1"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+    game.board.display
+    game.play
+  elsif user_input == "2"
+    game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"))
+    game.board.display
+    game.play
+  end
+elsif input == "3"
+  puts "Thanks for stopping by."
+  exit
+end
