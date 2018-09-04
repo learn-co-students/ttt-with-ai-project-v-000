@@ -1,3 +1,27 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/players/computer.rb'
+require_relative '../lib/players/human.rb'
+require_relative '../lib/board.rb'
+require_relative '../lib/game.rb'
+require_relative '../lib/player.rb'
+
+puts "Welcome to Tic Tac Toe"
+puts "Would you like to play 0, 1, or 2 player?"
+number = gets.strip
+
+numplayers = number.to_i
+if numplayers == 0
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+elsif numplayers == 1
+  puts "Would you like to go first? (y/n)"
+  answer = gets.strip
+  if answer == "y"
+    Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+  elsif answer == "n"
+    Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+  end
+elsif numplayers == 2
+  Game.new.play
+end
