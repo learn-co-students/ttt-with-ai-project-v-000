@@ -1,4 +1,3 @@
-require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
   WIN_COMBINATIONS = [
@@ -53,11 +52,13 @@ class Game
 
     if !@board.valid_move?(action)
       puts "invalid"
-      puts "The number selected must be between 1 and 9."
+      puts "The number selected must be between 1 and 9 and not in a position that is currently filled."
       turn
     else
       @board.update(action, current_player)
+      @board.display
     end
+  end
 
     def play
       until over?
@@ -70,11 +71,5 @@ class Game
        puts "Cat's Game!"
       end
     end
-
-  end
-
-
-
-
 
 end
