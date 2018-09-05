@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  puts "Welcome to Tic-Tac-Toe"
+  ticka_mee_toes = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    ticka_mee_toes.board.display
+
+    puts "X goes first. Please enter value between 1-9."
+
+  while !ticka_mee_toes.over?
+    ticka_mee_toes.play
+   else
+    puts "Would you like to play again?"
+    inputs = gets
+      if inputs.to_s == "yes" || "Y" || "y"
+        ticka_mee_toes.play
+      else
+        puts "Game over, thanks for playing!"
+      end
+    end 
