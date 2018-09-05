@@ -46,9 +46,10 @@ class Game
   end
   
   def play
-    
+    @board.display
     while !over?
       self.turn
+      @board.display
     end
     
     if won?

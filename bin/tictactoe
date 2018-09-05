@@ -17,9 +17,9 @@ end
 
 if num == "2"
   game = Game.new
-elsif num == 1 
-  if h_or_c == h
-    game = Game.new(nil, Players::Computer.new("X"), nil)
+elsif num == "1" 
+  if h_or_c == "h"
+    game = Game.new(nil, Players::Computer.new("O"), nil)
   else
     game = Game.new(Players::Computer.new("X"), nil, nil)
   end
@@ -27,6 +27,4 @@ else
   game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), nil)
 end    
 
-game.board.display
-
-game.turn
+game.play
