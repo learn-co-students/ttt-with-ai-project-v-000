@@ -9,5 +9,22 @@ num = gets
 
 puts "Cool!  I'll set up a game for #{num} humans"
 
-game = Game.new
+h_or_c = nil
+if num == 1
+  puts "Since you've chosen one human and one computer ... which shall be 'X'? and go first? (h or c)"
+  h_or_c = gets
+end
+
+if num == 2
+  game = Game.new
+elsif num == 1 
+  if h_or_c == h
+    game = Game.new(nil, Players::Computer.new("X"), nil)
+  else
+    game = Game.new(Players::Computer.new("X"), nil, nil)
+  end
+else
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), nil)
+end    
+
 game.board.display
