@@ -5,17 +5,17 @@ require_relative '../config/environment'
 puts "Hello and welcome to tic-tac-toe!!"
 
 puts "How many human players will participate: 0,1 or 2?"
-num = gets
+num = gets.strip
 
-puts "Cool!  I'll set up a game for #{num} humans"
+puts "Cool!  Starting a game for #{num} humans:"
 
 h_or_c = nil
-if num == 1
+if num == "1"
   puts "Since you've chosen one human and one computer ... which shall be 'X'? and go first? (h or c)"
-  h_or_c = gets
+  h_or_c = gets.strip
 end
 
-if num == 2
+if num == "2"
   game = Game.new
 elsif num == 1 
   if h_or_c == h
@@ -28,3 +28,5 @@ else
 end    
 
 game.board.display
+
+game.turn

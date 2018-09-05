@@ -40,7 +40,7 @@ class Game
   def turn
     move_position = nil
     while !@board.valid_move?(move_position)
-      move_position = current_player.move
+      move_position = current_player.move(@board)
     end
     @board.update(move_position, current_player)
   end
