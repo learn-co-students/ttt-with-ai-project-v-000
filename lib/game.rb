@@ -33,6 +33,32 @@ class Game
     won? || draw?
   end
   
+  def winner
+    won? ? @board.cells[won?[0]] : nil
+  end
+  
+  def turn
+    move_position = nil
+    while !@board.valid_move?(move_position)
+      move_position = current_player.move
+    end
+    @board.update(move_position, current_player)
+  end
+  
+  def play
+    
+    while !over?
+      self.turn
+    end
+    
+    if won?
+      puts "Congratulations #{winner}!"
+    else # must be a draw?
+      puts "Cat's Game!"
+    end
+    
+  end
+  
 private
 
   def winner?(combo)

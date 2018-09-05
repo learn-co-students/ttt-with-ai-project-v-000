@@ -6,9 +6,7 @@ class Board
   attr_accessor :cells
   
   def initialize
-    puts "RESET!!"
     self.reset!
-    self.display
   end
   
   #Had a very strange error where it seemed that my BLANK_CELLS 'constant'
