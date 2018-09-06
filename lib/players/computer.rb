@@ -25,11 +25,12 @@ module Players
       max =  1000
       min = -1000
       counter = []
+      #it still breaks whenever computer is forced to play nr 4? but why?
 
       if board.valid_move?("5")
         attack = "5"
       else
-        sampi_one = [2,4,8].sample
+        sampi_one = [2,4,6,8].sample
         if board.valid_move?(sampi_one)
           attack = sampi_one
         else
