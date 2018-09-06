@@ -7,7 +7,9 @@ module Players
     
     def move(board)
       #find_first_valid_move(board)
-      avoid_loss_move(board)
+      #avoid_loss_move(board)
+      brain = ComputerBrain.new
+      brain.move(board)
     end
     
   private

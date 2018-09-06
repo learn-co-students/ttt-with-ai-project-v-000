@@ -102,6 +102,13 @@ describe "ComputerBrain" do
 
   end
   
+  describe 'move' do
+
+    it 'returns a valid move' do
+      expect(["1", "2", "3", "4", "5", "6", "7", "8", "9"]).to include(brain.move(board))
+    end
+    
+  end
   
   
   #utilities
