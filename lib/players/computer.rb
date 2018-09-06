@@ -25,7 +25,7 @@ module Players
       max =  1000
       min = -1000
       counter = []
-      #for some reason, computer cannot play nr 4?
+
       if board.valid_move?("5")
         attack = "5"
       else
