@@ -10,6 +10,7 @@ module Players
       minmax(board)
     end
 
+    #Pretty dumb player still xD
     #minmax theory. We play a max whenever possible against a min
     #max would aim for center row if available. That gets a +100 score on a counter
     #min always tries to block max
@@ -25,7 +26,6 @@ module Players
       max =  1000
       min = -1000
       counter = []
-      #it still breaks whenever computer is forced to play nr 4? but why?
 
       if board.valid_move?("5")
         attack = "5"
