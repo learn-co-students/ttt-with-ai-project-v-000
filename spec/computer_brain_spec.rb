@@ -70,8 +70,39 @@ describe "ComputerBrain" do
       board.cells = ["X", " ", "O", " ", "X", " ", " ", " ", "O"]
       expect(brain.find_blocking_move(board)).to eq("6")
     end
+    
+    it 'finds returns nil if no blocking move exist' do
+      board.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      expect(brain.find_blocking_move(board)).to eq(nil)
+    end
 
   end
+  
+  describe '#find_winning_move' do
+    
+    it 'finds winning move if such exists' do
+      board.cells = ["X", " ", " ", " ", "O", "X", " ", "O", "X"]
+      expect(brain.find_winning_move(board)).to eq("2")
+    end
+    
+    it 'finds winning move if such exists' do
+      board.cells = ["X", "O", "X", "X", "O", "O", " ", " ", " "]
+      expect(brain.find_winning_move(board)).to eq("7")
+    end
+    
+    it 'finds winning move if such exists' do
+      board.cells = ["X", " ", " ", " ", "O", "O", "X", " ", "O"]
+      expect(brain.find_winning_move(board)).to eq("4")
+    end
+    
+    it 'finds returns nil if no blocking move exist' do
+      board.cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      expect(brain.find_winning_move(board)).to eq(nil)
+    end
+
+  end
+  
+  
   
   #utilities
   describe '#foe_token' do

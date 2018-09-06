@@ -8,7 +8,7 @@ class ComputerBrain
   
   def move (board)
     
-    if (m = find_winning_move)
+    if (m = find_winning_move(board))
       return m
     end
     
@@ -32,12 +32,16 @@ class ComputerBrain
   
   #private
   
-  def find_winning_move
-    nil
+  def find_winning_move(board)
+    combo = WINS.find { |e| near_win?(board, e, my_token(board)) }
+    if combo.nil?
+      return nil
+    end
+    to_pos(combo.find { |e| board.cells[e] == " " })
   end
   
   def find_blocking_move(board)
-    combo = WINS.find { |e| near_win?(board, e) }
+    combo = WINS.find { |e| near_win?(board, e, foe_token(board)) }
     if combo.nil?
       return nil
     end
@@ -58,8 +62,8 @@ class ComputerBrain
 
   #utilities
   
-  def near_win?(board, combo)
-    combo.find_all { |i| board.cells[i] == foe_token(board) }.size == 2 &&
+  def near_win?(board, combo, token)
+    combo.find_all { |i| board.cells[i] == token }.size == 2 &&
     combo.find_all { |i| board.cells[i] == " " }.size == 1
   end
   
@@ -75,5 +79,8 @@ class ComputerBrain
     board.cells.find_all {|t| t == "X" || t == "O"}.size.even? ? "O" : "X"
   end
   
+  def my_token(board)
+    foe_token(board) == "X" ? "O" : "X"
+  end
   
 end
