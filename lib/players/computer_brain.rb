@@ -6,7 +6,9 @@ class ComputerBrain
   CORNERS = [0,2,6,8]
   SIDES = [1,3,5,7]  
   
-  def move (board)
+  def move (board = nil)
+    
+    return "1"
     
     if (m = find_winning_move)
       return m
@@ -24,10 +26,45 @@ class ComputerBrain
       return m
     end
     
-    if (m = find_side_move)
+    if (m = find_side_move(board))
       return m
     end
     
   end
+  
+  #private
+  
+  def find_winning_move
+    nil
+  end
+  
+  def find_blocking_move
+    nil
+  end
+  
+  def find_center_move
+    nil
+  end
+  
+  def find_corner_move
+    nil
+  end
+  
+  def find_side_move(board)
+    to_pos([1, 3, 5, 7].find { |i| board.cells[i] == " " })
+  end
+
+  
+  
+  def to_pos(index)
+    if index.between?(0,8)
+      return (index + 1).to_s
+    else
+      return nil
+    end
+  end
+  
+  
+  
   
 end
