@@ -37,9 +37,7 @@ module Players
     end
     
     def blank_cell_index(near_win_combo, board)
-      x = near_win_combo.find { |index| board.cells[index] == " "} 
-      print ">>>Blank index = #{x}"
-      x
+      near_win_combo.find { |index| board.cells[index] == " "} 
     end
     
   end
