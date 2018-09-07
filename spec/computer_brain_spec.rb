@@ -5,6 +5,20 @@ describe "ComputerBrain" do
   let(:board){Board.new}
   
 
+  describe '#find_second_move_move' do
+
+    it 'always moves to a corner on second move' do
+      board.cells = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
+      expect(["1", "3", "7", "9"]).to include(brain.find_second_move_move(board))
+    end
+    
+    it 'returns nil if not the second move' do
+      board.cells = [" ", "X", " ", "X", "O", "X", "O", "X", "O"]
+      expect(brain.find_side_move(board)).to eq(nil)
+    end
+
+  end
+
   describe '#find_side_move' do
 
     it 'finds an open "side" cell on an empty board' do
