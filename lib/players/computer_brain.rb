@@ -57,42 +57,39 @@ class ComputerBrain
   #private
   
   def find_winning_move(board)
-    combo = WINS.find { |e| near_win?(board, e, my_token(board)) }
-    if combo.nil?
-      return nil
-    end
-    to_pos(combo.find { |e| board.cells[e] == " " })
+    find_two_of_three_taken_move(board, my_token(board))
   end
   
   def find_blocking_move(board)
-    combo = WINS.find { |e| near_win?(board, e, foe_token(board)) }
-    if combo.nil?
-      return nil
-    end
-    to_pos(combo.find { |e| board.cells[e] == " " })
+    find_two_of_three_taken_move(board, foe_token(board))
   end
   
   def find_second_move_move(board)
-    if second_move?(board)
-      find_corner_move(board)
-    else
-      nil
-    end
+    second_move?(board) ? find_corner_move(board) : nil
   end
   
   def find_center_move(board)
-    to_pos(CENTERS.find { |i| board.cells[i] == " " })
+    find_move(board, CENTERS)
   end
   
   def find_corner_move(board)
-    to_pos(CORNERS.find { |i| board.cells[i] == " " })
+    find_move(board, CORNERS)
   end
   
   def find_side_move(board)
-    to_pos(SIDES.find { |i| board.cells[i] == " " })
+    find_move(board, SIDES)
   end
 
   #utilities
+  
+  def find_move(board, category)
+    to_pos(category.find { |i| board.cells[i] == " " })
+  end
+  
+  def find_two_of_three_taken_move(board, token)
+    combo = WINS.find { |e| near_win?(board, e, token) }
+    combo.nil? ? nil : to_pos(combo.find { |e| board.cells[e] == " " })
+  end
   
   def near_win?(board, combo, token)
     combo.find_all { |i| board.cells[i] == token }.size == 2 &&
@@ -100,11 +97,7 @@ class ComputerBrain
   end
   
   def to_pos(index)
-    if index.nil?
-      return nil
-    else
-      return (index + 1).to_s
-    end
+    index.nil? ? nil : (index + 1).to_s
   end
   
   def foe_token(board)
