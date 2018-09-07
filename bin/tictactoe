@@ -4,27 +4,35 @@ require_relative '../config/environment'
 
 puts "Hello and welcome to tic-tac-toe!!"
 
-puts "How many human players will participate: 0,1 or 2?"
-num = gets.strip
+continue = 'y'
+while continue == 'y'
 
-puts "Cool!  Starting a game for #{num} humans:"
+  puts "How many human players will participate: 0,1 or 2?"
+  num = gets.strip
 
-h_or_c = nil
-if num == "1"
-  puts "Since you've chosen one human and one computer ... which shall be 'X'? and go first? (h or c)"
-  h_or_c = gets.strip
-end
+  puts "Cool!  Starting a game for #{num} humans:"
 
-if num == "2"
-  game = Game.new
-elsif num == "1" 
-  if h_or_c == "h"
-    game = Game.new(nil, Players::Computer.new("O"), nil)
-  else
-    game = Game.new(Players::Computer.new("X"), nil, nil)
+  h_or_c = nil
+  if num == "1"
+    puts "Since you've chosen one human and one computer ... which shall be 'X'? and go first? (h or c)"
+    h_or_c = gets.strip
   end
-else
-  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), nil)
-end    
 
-game.play
+  if num == "2"
+    game = Game.new
+  elsif num == "1" 
+    if h_or_c == "h"
+      game = Game.new(nil, Players::Computer.new("O"), nil)
+    else
+      game = Game.new(Players::Computer.new("X"), nil, nil)
+    end
+  else
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), nil)
+  end    
+
+  game.play
+  
+  puts "Would you like to play again? (y/n)"
+  continue = gets.strip
+  
+end
