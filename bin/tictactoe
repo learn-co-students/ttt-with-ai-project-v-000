@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to Tic Tac Toe!
+puts "What kind of game would you like to play? Type '0' for computer-players, '1' for single-player, or '2' for two-player."
+game = Game.new
+game.play
+
+
