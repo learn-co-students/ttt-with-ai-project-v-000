@@ -2,8 +2,34 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!
-puts "What kind of game would you like to play? Type '0' for computer-players, '1' for single-player, or '2' for two-player."
-game = Game.new
-game.play
+puts "Welcome to Tic Tac Toe!"
+puts "Please choose player mode:
+0 - Computer AI
+1 - One-Player
+2 - Two-Player"
+
+player_mode = gets.strip
+
+if player_mode == "1"
+  puts "Great! To be polite, Humans will go first!" 
+  Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+
+elsif player_mode == "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+elsif player_mode == "2"
+  Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+end
+
+puts "Would you like to play again? (y/n)"
+continue = gets.strip
+  if continue == "y" || "Y"
+    Game.new.play
+  else
+    puts "Thank for playing!"
+  end
+    
+    
+
+
 
