@@ -33,11 +33,12 @@ def taken?(input)
   @cells[input.to_i - 1] != " "
 end
 
-def valid_move
-  if input > 0 && input < 10
-
-  end
+def valid_move?(input)
+  input.to_i > 0 && input.to_i < 10 && @cells[input.to_i - 1] == " "
 end
 
+def update(input, player)
+  @cells[input.to_i - 1] = Player.new.token
+end
 
 end
