@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+include Players
+
+zero_player_game = Game.new(Computer.new("X"),Computer.new("O"))
+single_player_game_plays_first = Game.new(Human.new("X"),Computer.new("O"))
+single_player_game_plays_second = Game.new(Computer.new("X"),Human.new("O"))
+two_player_game = Game.new(Human.new("X"),Human.new("O"))
+
+#zero_player_game.play
+single_player_game_plays_first.play
+#single_player_game_plays_second.play
+#two_player_game.play
