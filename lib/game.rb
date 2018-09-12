@@ -51,7 +51,11 @@ def turn
    if !board.valid_move?(input)
      turn
     else
-      board.update(input, current_player)
+      puts "#{current_player} moving."
+      @board.display
+      @board.update(input, current_player)
+      @board.display
+      puts "\n\n\n"
   end
 
 end  

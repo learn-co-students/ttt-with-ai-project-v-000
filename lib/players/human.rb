@@ -4,7 +4,7 @@ class Human < Player
 
   attr_accessor :input
   def move(input)
-    puts "give me a move"
+    puts "Choose your destiny"
     @input = gets.strip
 
 end
