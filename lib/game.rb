@@ -48,14 +48,18 @@ def winner
   
 def turn
   input = current_player.move(board)
+  
    if !board.valid_move?(input)
+     puts "Invalid move...try again"
      turn
     else
-      puts "#{current_player} moving."
       @board.display
+      puts "\n"
       @board.update(input, current_player)
+      puts "#{current_player} moving."
+      puts "\n"
       @board.display
-      puts "\n\n\n"
+      puts "\n\n"
   end
 
 end  
