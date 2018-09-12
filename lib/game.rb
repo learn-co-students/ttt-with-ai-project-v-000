@@ -40,7 +40,7 @@ def over?
     won? || draw?
   end
   
-  def winner
+def winner
     if winning_combo = won?
       @winner = @board.cells[winning_combo.first]
     end
@@ -56,4 +56,17 @@ def turn
 
 end  
   
+
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
+  
 end
+end
+
