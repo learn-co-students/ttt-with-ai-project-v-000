@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+include Players
 
-game = Game.new
-game.start 
+Game.new.start
 
   
   

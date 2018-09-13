@@ -84,33 +84,48 @@ class Game
     else
       puts "Cat's Game!"
     end
+    
   end
   
-  # NEEDS WORK
-  # def start 
-  #   puts "Welcome to Tic Tac Toe!"
-  #   input = ''
-  #   # until input == "N"
+  
+  def start 
+    puts "Welcome to Tic Tac Toe!"
+    input = ''
 
-  #   puts "What kind of game would you like to play?"
-  #   puts "Press 0 for a computer vs computer game"
-  #   puts "Press 1 for a player vs computer game where player moves first"
-  #   puts "Press 2 for a compter vs player game where computer moves first"
-  #   puts "Press 3 for a player vs player game"
+    puts "What kind of game would you like to play?"
+    puts "Press 0 for a computer vs computer game"
+    puts "Press 1 for a player vs computer game where player moves first"
+    puts "Press 2 for a compter vs player game where computer moves first"
+    puts "Press 3 for a player vs player game"
 
-  #   input = gets.strip.to_i 
+    input = gets.strip
 
-  #   case input 
-  #   when input == 0 
-  #   Game.new(player_1 = Computer.new("X"), player_2 = Computer.new("O"))
-  #   when input == 1
-  #   Game.new(player_1 = Human.new("X"), player_2 = Computer.new("O"))
-  #   when input == 2 
-  #   Game.new(player_1 = Computer.new("X"), player_2 = Human.new("O"))
-  #   when input == 3
-  #     Game.new(player_1 = Human.new("X"), player_2 = Human.new("O"))
-  #   end
-  # end
-
+    case input 
+    when '0' 
+      game_1 = Game.new(Computer.new("X"), Computer.new("O"))
+      game_1.play
+    when '1'
+      game_2 = Game.new(Human.new("X"), Computer.new("O"))
+      game_2.play
+    when '2' 
+      game_3 = Game.new(Computer.new("X"), Human.new("O"))
+      game_3.play
+    when '3'
+      game_4 = Game.new(Human.new("X"), Human.new("O"))
+      game_4.play
+    end
+    start_again
+  end
+  
+  def start_again 
+    puts "Would you like to play again?(Y/N)"
+    input = gets.upcase.strip
+    case input 
+    when 'Y'
+      start
+    when 'N'
+      exit!
+    end
+  end 
 
 end 
