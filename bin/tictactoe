@@ -2,13 +2,64 @@
 
 require_relative '../config/environment'
 include Players
+require 'pry'
+puts "Welcome to Tic Tac Toe!"
 
-zero_player_game = Game.new(Computer.new("X"),Computer.new("O"))
-single_player_game_plays_first = Game.new(Human.new("X"),Computer.new("O"))
-single_player_game_plays_second = Game.new(Computer.new("X"),Human.new("O"))
-two_player_game = Game.new(Human.new("X"),Human.new("O"))
+puts "Enter the number of the version you would like to play:"
+puts "0 - The computer plays itself!"
+puts "1 - You versus the computer!"
+puts "2 - Two player game!"
+puts "Type 'exit' if you'd like to exit the game"
 
-#zero_player_game.play
-single_player_game_plays_first.play
-#single_player_game_plays_second.play
-#two_player_game.play
+number_of_players = gets.chomp
+
+if number_of_players == "1"
+  puts "Do you want to be 'X' or 'O'?"
+  token1 = gets.chomp
+  token1 == "X" ? token2 = "O" : token2 = "X"
+
+  puts "Who should go first? Type 'me' or 'them'."
+  first_player = gets.chomp
+  if first_player == "me"
+    player_1 = Human.new(token1)
+    player_2 = Computer.new(token2)
+  else
+    player_1 = Computer.new(token2)
+    player_2 = Human.new(token1)
+  end
+elsif number_of_players == "2"
+  puts "Do you want to be 'X' or 'O'?"
+  token1 = gets.chomp
+  token1 == "X" ? token2 = "O" : token2 = "X"
+
+  puts "Who should go first? Type 'me' or 'them'."
+  first_player = gets.chomp
+  if first_player == "me"
+    player_1 = Human.new(token1)
+    player_2 = Human.new(token2)
+  elsif first_player == "them"
+    player_1 = Human.new(token2)
+    player_2 = Human.new(token1)
+  end
+
+elsif number_of_players == "0"
+  puts "Who should go first, 'X' or 'O'?"
+  token1 = gets.chomp
+  token1 == "X" ? token2 = "O" : token2 = "X"
+
+  player_1 = Computer.new(token1)
+  player_2 = Computer.new(token2)
+
+elsif number_of_players == "exit"
+  abort
+else
+  load './bin/tictactoe'
+end
+
+new_game = Game.new(player_1,player_2)
+new_game.play
+
+puts "Would you like to play again? Type 'yes' or 'no'"
+answer = gets.chomp
+
+load './bin/tictactoe' if answer == "yes"

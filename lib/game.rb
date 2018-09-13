@@ -22,18 +22,8 @@ class Game
 
   #Defines the current player
   def current_player
-    x_plays = 0
-    o_plays = 0
-
-    @board.cells.each do |spot_on_board|
-      x_plays += 1 if spot_on_board == "X"
-      o_plays += 1 if spot_on_board == "O"
-    end
-
-    player = x_plays == o_plays ? "X" : "O"
-    player == player_1.token ? @player_1 : @player_2
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
-
 
     #determines if win is true or false
     def won?
@@ -74,6 +64,7 @@ class Game
 
     #user takes a turn
     def turn
+      puts "Round #{@board.turn_count}"
       input = current_player.move(@board)
       if @board.valid_move?(input)
         @board.cells[input.to_i - 1] = current_player.token
