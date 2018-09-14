@@ -27,10 +27,21 @@ class Board
   end
   
   def turn_count
-    cells.select {|cell| cell != " "}.length
+    # cells.select {|cell| cell != " "}.length
     # alt solution
-    # cells.count {|char| char == "X" || char == "O" }
+    cells.count {|char| char == "X" || char == "O" }
   end
+  
+  # def turn_count
+  #   count = 0
+  
+  #   @cells.each do |char|
+  #     if char == "X" || char =="O"
+  #       count += 1
+  #     end 
+  #   end 
+  #   return count
+  # end
   
   def taken?(input)
     position(input) == " " ? false : true
