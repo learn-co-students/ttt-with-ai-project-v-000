@@ -1,7 +1,8 @@
 module Players
   class Human < Player
     def move(board)
-      input = gets.strip
+      puts "Please choose a space between 1 and 9:"
+      gets.strip
     end
   end
 end

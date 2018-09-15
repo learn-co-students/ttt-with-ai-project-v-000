@@ -18,66 +18,60 @@ class Game
   [2,4,6],
 ]
   def current_player
-    if Board.new.turn_count % 2 == 0
+    if board.turn_count % 2 == 0
       player_1
     else
       player_2
     end
   end
+
   
   def won?
     WIN_COMBINATIONS.find do |win_combination|
       if board.cells[win_combination[0]] == board.cells[win_combination[1]] &&
         board.cells[win_combination[1]] == board.cells[win_combination[2]] &&
-        board.taken?(win_combination[0])
-          TRUE
+        board.taken?(win_combination[0]+ 1)
         win_combination
       end
     end
   end
 
   def draw?
-    if board.full? && !won?
-      TRUE
-    else
-      FALSE
-    end
+    board.full? && !won?
   end
   
   def over?
-    if draw? || won? || board.full?
-      TRUE
-    else
-      FALSE
-    end
+    draw? || won? || board.full?
   end
   
   def winner
     if token = won?
-      @winner = board.cells[token.first]
+      winner = board.cells[token.first]
     end
   end
   
   def turn
-    puts "Please enter 1-9:"
-    input = gets.strip
-    board.position(input)
-    if board.valid_move?(index)
-      update(index, current_player)
-      display
-    else 
+    index = current_player.move(board)
+    if !board.valid_move?(index)
+      puts "Not a valid move."
       turn
+    else
+   
+      board.update(index, current_player)
+      board.display
     end
   end
   
   def play
+    puts "Ready Player 1? Go!"
     until over?
       turn
     end
-      if won?
-        puts "Congratulations #{@winner}!"
-      elsif draw?
-        puts "Cat's Game!"
-      end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
+
 end
