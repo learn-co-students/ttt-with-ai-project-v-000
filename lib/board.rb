@@ -48,7 +48,17 @@ def taken?(index)
  end
 end
 
+def valid_move?(index)
+  if index.to_i - 1 < 0  || index.to_i - 1 > 8
+    return false
+  elsif position(index) == "X" || position(index) == "O"
+    return false
+  else
+    true
+  end
+end
 
+# for valid_move this also works --> input.to_i.between?(1,9) && !taken?(input)
 
 
 
