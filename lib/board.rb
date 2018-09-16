@@ -24,4 +24,30 @@ def position(input)
  @cells[input.to_i - 1] 
 end
 
+def full?
+  @cells.all? do |full|
+    full == "X" || full == "O"
+  end
+end
+
+def turn_count
+  counter = 0
+  @cells.each do |board_var|
+    if board_var == "X" || board_var == "O"
+    counter += 1
+  end
+  end
+  counter
+end
+
+def taken?(index)
+    if @cells[index.to_i] == "X" || @cells[index.to_i] == "O"
+    true
+    elsif @cells[index.to_i] == " " 
+    false
+ end
+end
+
+
+
 end
