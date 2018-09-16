@@ -11,23 +11,11 @@ module Players
       @token = token
     end
 
-    def move(board)
+    def move(board = [])
       puts "Please enter 1-9:"
       gets.strip
     end
 
   end
-
-  # class Computer < Player
-  #
-  #   def initialize(token)
-  #     @token = token
-  #   end
-  #
-  #   def move(board)
-  #     input = gets
-  #     input
-  #   end
-  # end
 
 end
