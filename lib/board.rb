@@ -41,12 +41,14 @@ def turn_count
 end
 
 def taken?(index)
-    if @cells[index.to_i] == "X" || @cells[index.to_i] == "O"
+    if position(index) == "X" || position(index) == "O"
     true
-    elsif @cells[index.to_i] == " " 
+    elsif position(index) == " " 
     false
  end
 end
+
+
 
 
 
