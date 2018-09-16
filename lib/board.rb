@@ -61,7 +61,8 @@ end
 # for valid_move this also works --> input.to_i.between?(1,9) && !taken?(input)
 
 def update(user_position, player)
-  user_position.to_i - 1 
+  
+  @cells[position(user_position) ] = player.token
 end
 
 
