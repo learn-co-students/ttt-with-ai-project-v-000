@@ -1,16 +1,13 @@
 class Board 
   
   attr_accessor :cells
-  @@all = []
+
   
   def initialize
-    @board = Array.new(9, " ")
-    @@all << @board
+    @cells = Array.new(9, " ")
   end
   
-  # def cells
-  
-  # end
+
   
   
 end
