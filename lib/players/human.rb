@@ -1,8 +1,8 @@
-# module Players
-# class Human
-  
-  
-# end
-# end
+module Players
+  module Human
+    
+    
+  end
+end
 
 
