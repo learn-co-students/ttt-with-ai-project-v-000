@@ -62,7 +62,7 @@ end
 
 def update(user_position, player)
   
-  @cells[position(user_position) ] = player.token
+  @cells[user_position.to_i - 1]  = player.token
 end
 
 
