@@ -1,3 +1,4 @@
+require "pry"
 class Board
 
 attr_accessor :cells
@@ -35,13 +36,14 @@ attr_accessor :cells
   end
 
   def full?
-    check = true
-    cells.each do |cell|
-      if cell == " "
-        check = false
-      end
-    end
-    check
+    cells.all?{|token| token == "X" || token == "O"}
+    #check = true
+    #cells.each do |cell|
+    #  if cell == " "
+    #    check = false
+    #  end
+    #end
+    #check
   end
 
   def turn_count
