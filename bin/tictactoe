@@ -1,3 +1,48 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+system("clear")
+
+puts "Welcome to Tic Tac Toe!"
+puts "\n"
+
+def mode
+puts "Please select:"
+puts "'0' for Computer vs Computer"
+puts "'1' for Human vs Computer"
+puts "'2' for Human vs Human"
+game_mode = gets.strip
+
+system("clear")
+
+case game_mode
+when "0"
+  puts "You have selected Computer vs Computer"
+  Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+when "1"
+  puts "You have selected Human vs Computer"
+  puts "Who goes first? Enter 'Player1' (for Human) or 'Player2' (for Computer):"
+  starts = gets.strip
+  system("clear")
+  puts "You have selected '#{starts}' to start the game as 'Player X'"
+  if starts.downcase == "player1"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+  else
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  end
+when "2"
+  puts "You have selected Human vs Human"
+  puts "Who goes first? Enter 'Player1' or 'Player2':"
+  starts = gets.strip
+  system("clear")
+  puts "You have selected '#{starts}' to start the game as 'Player X'"
+  if starts.downcase == "player1"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  else
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  end
+end
+
+end
+
+mode
