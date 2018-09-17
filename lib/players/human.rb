@@ -1,5 +1,5 @@
 module Players
-  module Human
+  class Human < Player
     
     
   end
