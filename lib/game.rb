@@ -43,8 +43,30 @@ def won?
   end
 end
 
+  def draw?
+   if won?
+    return false
+   else
+      return true
+  end
+end
 
-
-
+def over?
+    won? || draw?
+end
+  
+def winner
+  won = won?
+  if won == nil 
+    return nil
+  end
+  
+  position = won[0]
+    if board.cells[position] == "X"
+      return "X"
+    elsif board.cells[position] == "O"
+      return "O"
+  end 
+end
   
 end
