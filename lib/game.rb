@@ -30,7 +30,9 @@ end
   
   def current_player
   if turn_count % 2 == 0 
-    return player_1
+    return @player_1
+  else 
+    return @player_2
   end
 end
 
