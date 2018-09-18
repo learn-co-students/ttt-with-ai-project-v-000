@@ -1,3 +1,4 @@
+require "pry"
 class Game
   WIN_COMBINATIONS = [
   [0,1,2],
@@ -35,6 +36,15 @@ end
     return @player_2
   end
 end
+
+def won?
+  WIN_COMBINATIONS.detect do |winner|
+  board.cells[winner[0]] == board.cells[winner[1]] && board.cells[winner[2]] == board.cells[winner[0]] && board.taken?(winner[0])
+  end
+end
+
+
+
 
   
 end
