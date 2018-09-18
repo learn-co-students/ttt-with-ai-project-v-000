@@ -17,6 +17,22 @@ class Game
     @player_2 = player_2
     @board = board
   end
+  
+  def turn_count
+  counter = 0
+  board.cells.each do |cells_var|
+    if cells_var == "X" || cells_var == "O"
+    counter += 1
+  end
+  end
+  counter
+end
+  
+  def current_player
+  if turn_count % 2 == 0 
+    return player_1
+  end
+end
 
   
 end
