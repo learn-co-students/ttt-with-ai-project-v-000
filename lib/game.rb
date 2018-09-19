@@ -53,12 +53,14 @@ def over?
 end
   
 def winner
+  
   won = won?
   if won == nil 
     return nil
   end
   
   position = won[0]
+  # binding.pry
     if board.cells[position] == "X"
       return "X"
     elsif board.cells[position] == "O"
