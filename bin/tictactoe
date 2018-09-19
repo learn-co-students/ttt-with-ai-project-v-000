@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def computer_first?
+  puts "Would you like the computer to move first? y/n"
+  input2 = gets.strip
+  if input2 == "y" || input2 == "Y"
+    game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new)
+    game.play
+  elsif input2 == "n" || input2 == "N"
+    game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    game.play
+  else
+    computer_first?
+  end
+end
+
+
+def welcome
+  puts "Welcome to AI Tic-tac-toe!"
+  puts "How many players will be playing? (0, 1, or 2)"
+  input = gets.strip
+
+  if input == "2"
+    game = Game.new
+    game.play
+  elsif input == "1"
+    computer_first?
+  else
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    game.play
+  end
+end
+
+welcome
