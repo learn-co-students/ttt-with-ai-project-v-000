@@ -38,9 +38,8 @@ end
 end
 
 def won?
-  WIN_COMBINATIONS.detect do |winner|
-  (board.cells[winner[0]] == board.cells[winner[1]] && board.cells[winner[2]] == board.cells[winner[0]] && board.cells[winner[2]] == board.cells[winner[1]]) && board.taken?(winner[0])
-  # binding.pry
+  WIN_COMBINATIONS.detect do |win|
+  (board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == board.cells[win[0]] && board.cells[win[2]] == board.cells[win[1]]) && board.taken?(win[0]) 
   end
 end
 
@@ -90,7 +89,6 @@ def turn
       if draw?
         puts "Cat's Game!"
     elsif won?
-    # binding.pry
         puts "Congratulations #{winner}!"
     end
   end
