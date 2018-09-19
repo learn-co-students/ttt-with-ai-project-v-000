@@ -38,17 +38,18 @@ end
 end
 
 def won?
+
   WIN_COMBINATIONS.detect do |winner|
-  board.cells[winner[0]] == board.cells[winner[1]] && board.cells[winner[2]] == board.cells[winner[0]] && board.taken?(winner[0])
+  (board.cells[winner[0]] == board.cells[winner[1]] && board.cells[winner[2]] == board.cells[winner[0]] && board.cells[winner[2]] == board.cells[winner[1]]) && board.taken?(winner[0])
   end
 end
 
  def draw?
-    !won? && @board.full? ? true : false
+    !won? && @board.full? 
   end
 
 def over?
-    won? || draw?
+    draw? || won?
 end
   
 def winner
@@ -64,6 +65,7 @@ def winner
       return "O"
   end 
 end
+
 
 def turn
     puts "Player #{current_player.token}'s turn!"
@@ -81,7 +83,7 @@ def turn
   end
    
   def play
-    while !over? 
+    until over? 
       turn
     end
       if draw?
@@ -91,6 +93,4 @@ def turn
     end
   end
 
-
-  
 end
