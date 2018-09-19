@@ -43,13 +43,9 @@ def won?
   end
 end
 
-  def draw?
-   if won?
-    return false
-   else
-      return true
+ def draw?
+    !won? && @board.full? ? true : false
   end
-end
 
 def over?
     won? || draw?
