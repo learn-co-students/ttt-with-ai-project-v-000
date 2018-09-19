@@ -37,11 +37,24 @@ end
   end
 end
 
-def won?
-  WIN_COMBINATIONS.detect do |win|
-  (board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == board.cells[win[0]] && board.cells[win[2]] == board.cells[win[1]]) && board.taken?(win[0]) 
+# def won?
+#   WIN_COMBINATIONS.detect do |win|
+#   (board.cells[win[0]] == board.cells[win[1]] && board.cells[win[2]] == board.cells[win[0]] && board.cells[win[2]] == board.cells[win[1]]) && board.taken?(win[0]) 
+#   end
+# end
+
+  def won?
+    WIN_COMBINATIONS.each {|win_combo|
+      position_1 = @board.cells[win_combo[0]]
+      position_2 = @board.cells[win_combo[1]]
+      position_3 = @board.cells[win_combo[2]]
+       return win_combo if ((position_1 == "X" && position_2 == "X" && position_3 == "X") ||
+      (position_1 == "O" && position_2 == "O" && position_3 == "O"))
+    }
+    return false
   end
-end
+
+
 
  def draw?
     !won? && @board.full? 
@@ -51,20 +64,31 @@ def over?
     draw? || won?
 end
   
-def winner
-  won = won?
-  if won == nil 
-    return nil
-  end
+# def winner
+#   won = won?
+#   if won == nil 
+#     return nil
+#   end
   
-  position = won[0]
-   #binding.pry
-    if board.cells[position] == "X"
+#   position = won[0]
+#   #binding.pry
+#     if board.cells[position] == "X"
+#       return "X"
+#     elsif board.cells[position] == "O"
+#       return "O"
+#   end 
+# end
+
+  def winner
+    index = won?
+    if index && @board.cells[index[0]] == "X"
       return "X"
-    elsif board.cells[position] == "O"
+    elsif index && @board.cells[index[0]] == "O"
       return "O"
-  end 
-end
+    else
+      return nil
+    end
+  end
 
 
 def turn
