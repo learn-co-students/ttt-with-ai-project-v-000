@@ -1,3 +1,4 @@
+require 'pry'
 class Game
 
 attr_accessor :board, :player_1, :player_2
@@ -8,6 +9,46 @@ def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new
   @player_2 = player_2
   @board = board
 end
+
+def self.start
+  input = ""
+  puts "Welcome to Tic Tac Toe!"
+  puts "How many people are playing today? Please type '0, 1, or 2'."
+  input = gets.strip
+  #if token is X, player 1 would be X and player 2 would be O
+  case input
+  when "0"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+
+  when "1"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+
+  when "2"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+  end
+
+    game = Game.new(player_1, player_2)
+    until game.over?
+    game.play
+    end
+
+    play_again = ""
+      puts "Would you like to play again?"
+      play_again = gets.strip
+      until play_again.downcase == "n" || play_again.downcase == "no"
+        game = Game.new
+        until game.over?
+        game.play
+        end
+        puts "One more time! C'mon!"
+        play_again = gets.strip
+      end
+      puts "Thanks for playin! See you soon!"
+end
+
 
 def current_player
     if @board.turn_count % 2 == 0
@@ -65,12 +106,12 @@ def play
         puts "Congratulations X!"
       elsif winner == "O"
         puts "Congratulations O!"
-      elsif draw? == true
-         puts "Cat's Game!"
-    end
-end
-
-
-
+      elsif draw? && over?
+          puts "Cat's Game!"
+      end
+  end
 ####class end below####
 end
+
+
+"here's a draw game so you don't have to keep figuring it out: 519328647"

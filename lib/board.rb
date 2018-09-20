@@ -23,6 +23,7 @@ def position(input)
 end
 
 
+
 def full?
   @cells.all?{|space| space == "X" || space == "O"}
 end
