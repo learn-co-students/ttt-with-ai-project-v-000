@@ -21,7 +21,7 @@ def display
 def position(input)
   cells[input.to_i-1]
 end
-binding.pry
+
 
 
 def full?

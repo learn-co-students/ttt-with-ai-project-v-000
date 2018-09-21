@@ -22,8 +22,16 @@ def self.start
     player_2 = Players::Computer.new("O")
 
   when "1"
-    player_1 = Players::Human.new("X")
-    player_2 = Players::Computer.new("O")
+    first_or_second = ""
+    puts "Would you like to go first?"
+    first_or_second = gets.strip
+    if first_or_second.downcase == "yes" || first_or_second.downcase == "y"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Computer.new("O")
+    else
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Human.new("O")
+    end
 
   when "2"
     player_1 = Players::Human.new("X")
