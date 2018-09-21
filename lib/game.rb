@@ -45,13 +45,35 @@ class Game
     @board.cells[won?[0]] if won?
   end
   
-  def self.turn
-    if @board.current_player.move(board) == valid_move?(current_player)
+  def turn
+    player = current_player
+    current_move = player.move(@board)
+    if !@board.valid_move?(current_move)
+      turn
+    else
+      puts "Turn: #{@board.turn_count+1}\n"
       @board.display
-    end 
+      puts "Choose a number between 1-9"
+      @board.update(current_move, player)
+      puts "#{player.token} moved to position #{current_move}"
+      @board.display
+    end
+    
+    def play
+      while !over?
+        turn
+      end
+      if won?
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Cat's Game!"
+      end
+    end
+    
+  end
+  
     #makes valid moves
     #asks for input again after a failed validation
     #changes to player 2 after the first turn
-  end
   
 end
