@@ -7,23 +7,23 @@ class Board
   end
 
   def display
-    puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
-    puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
-    puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
   end
 
   def position(cell_number)
-    self.cells[cell_number.to_i - 1]
+    cells[cell_number.to_i - 1]
   end
 
   def full?
-    self.cells.all?{|c| c != " "}
+    cells.all?{|c| c != " "}
   end
 
   def taken?(position)
-    self.cells[position.to_i - 1] != " "
+    cells[position.to_i - 1] != " "
   end
 
   def valid_move?(position)
@@ -31,7 +31,11 @@ class Board
   end
 
   def turn_count
-    self.cells.reject{|c| c == " "}.size
+    cells.reject{|c| c == " "}.size
+  end
+
+  def update(cell, player)
+    self.cells[cell.to_i - 1] = player.token
   end
 
   def reset!
