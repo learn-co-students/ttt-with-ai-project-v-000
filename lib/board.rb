@@ -27,7 +27,7 @@ class Board
   end
 
   def valid_move?(position)
-    position.scan(/([A-Z]*[a-z])/) != [] || position.to_i > 9 ? false : (position.to_i - 1) < 9 && taken?(position) == false
+    position.to_i.between?(1, 9) && !taken?(position)
   end
 
   def turn_count
