@@ -38,7 +38,7 @@ Remember! The goal at The Flatiron School is not to do, it is to *learn*. Make s
 ├── Gemfile
 ├── Gemfile.lock
 ├── README.md
-├── Rakefile
+├── RUBRIC.MD
 ├── bin
 │   └── tictactoe
 ├── config
