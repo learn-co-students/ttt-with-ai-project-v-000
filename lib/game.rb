@@ -48,8 +48,8 @@ class Game
 
   def turn
     player = current_player
-    if !board.valid_move?(input)
-      turn
+    if board.valid_move?(input)
+      board.update
     end
 
   end
