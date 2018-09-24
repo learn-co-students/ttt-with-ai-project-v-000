@@ -47,6 +47,7 @@ class Game
   end
 
   def turn
+    player = current_player
     if !board.valid_move?(input)
       turn
     end
