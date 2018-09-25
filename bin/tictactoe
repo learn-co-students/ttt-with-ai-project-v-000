@@ -2,8 +2,5 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-game = Game.new
-until game.won?
-  game.play
-end
+puts "Hello, welcome to Tic Tac Toe!"
+Cli.new.start
