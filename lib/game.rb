@@ -47,11 +47,11 @@ class Game
   end
 
   def turn
-    binding.pry
     player = current_player
     current_move = player.move(board)
     if board.valid_move?(current_move)
       board.update(current_move, player)
+      board.display
     else
       turn
     end

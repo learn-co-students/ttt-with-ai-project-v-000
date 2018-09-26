@@ -4,8 +4,8 @@ module Players
   class Players::Computer < Player
     def move(board)
       move = nil
-      if !board.taken?(1)
-        move = "1"
+      if !board.taken?('1')
+        move = '1'
       elsif board.turn_count == 1
         move = "5"
       elsif board.turn_count == 2
