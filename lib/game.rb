@@ -47,11 +47,22 @@ class Game
     board.valid_move?(input) ? board.update(input, current_player) : turn
   end
 
-  def play
-    until over?
-      turn
-    end
-    puts won? ? "Congratulations #{winner}!" : "Cat's Game!"
+  def start
+    puts "Ohhh, sounds like an interesting match..."
+    puts "Here's the board:"
+    board.display
   end
 
+  def play
+    start
+    until over?
+      puts "Player #{current_player.token}, it's your turn!"
+      turn
+      puts "A move was made!"
+      board.display
+    end
+    puts "The game is over..."
+    board.display
+    puts won? ? "Congratulations #{winner}!" : "Cat's Game!"
+  end
 end
