@@ -3,24 +3,6 @@ require 'pry'
 module Players
   class Players::Computer < Player
     def move(board)
-      possible_win_pairs = [
-        [1, 2],
-        [2, 3],
-        [4, 5],
-        [5, 6],
-        [7, 8],
-        [8, 9],
-        [1, 4],
-        [4, 7],
-        [2, 5],
-        [5, 8],
-        [3, 6],
-        [6, 9],
-        [1, 5],
-        [5, 9],
-        [3, 5],
-        [5, 7]
-      ]
       move = nil
       if !board.taken?('5')
         move = '5'
