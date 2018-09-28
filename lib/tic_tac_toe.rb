@@ -26,15 +26,30 @@ class TicTacToe
   end
 
   def two_computer_game
-    player1 = Players::Computer.new('X')
-    player2 = Players::Computer.new('O')
-    Game.new(player1, player2).play
+    #player1 = Players::Computer.new('X')
+    #player2 = Players::Computer.new('O')
+    #Game.new(player1, player2).play
+    Game.new(Players::Computer.new('X'), Players::Computer.new('O')).play
   end
 
   def computer_vs_player_game
-    player1 = Players::Computer.new('X')
-    player2 = Players::Human.new('O')
-    Game.new(player1, player2).play
+  #  player1 = Players::Computer.new('X')
+  #  player2 = Players::Human.new('O')
+  #  Game.new(player1, player2).play
+    choice = []
+    puts 'Choose your Token (Enter X or O)'
+    choice[0] = gets.strip
+    until %w(X x O o).include?(choice[0])
+      puts 'Invalid Input!'
+      puts 'Choose your Token (Enter X or O)'
+      choice[0] = gets.strip
+    end
+
+
+    player2_token = choice[0].upcase == 'X' ? 'O' : 'X'
+
+    player_1 = Players::Human.new(choice[0].upcase)
+    player_2 = Players::Computer.new(player2_token)
 
   end
 
@@ -46,11 +61,13 @@ class TicTacToe
       puts 'Who should go first X or O (Enter X or O)'
       choice = gets.strip
     end
-    choice2 = choice.upcase == 'X' ? 'O' : 'X'
-    player1 = Players::Human.new(choice.upcase)
-    player2 = Players::Human.new(choice2)
-    Game.new(player1, player2).play
+    #choice2 = choice.upcase == 'X' ? 'O' : 'X'
+    player2 = choice.upcase == 'X' ? 'O' : 'X'
+    #player1 = Players::Human.new(choice.upcase)
+    #player2 = Players::Human.new(choice2)
+    #Game.new(player1, player2).play
 
+    Game.new(Players::Human.new(choice.upcase), Players::Human.new(player2)).play
     puts 'Do you want to play again? (Enter Y OR N)'
     choice = gets.strip
     if choice.upcase == "Y"

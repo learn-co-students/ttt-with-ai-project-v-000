@@ -10,8 +10,8 @@ class Game
 	      [0,4,8],
 	      [6,4,2]
 	  ]
-  def initialize(player_1, player_2 , board = Board.new)
-  #def initializ.new('X'),n.new('O'), board = Board.new)
+  #def initialize(player_1, player_2 , board = Board.new)
+  def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
 	  self.player_1 = player_1
 	  self.player_2 = player_2
 	  self.board = board
@@ -23,11 +23,14 @@ class Game
 
 	def over?
 	  self.won? || self.draw?
+
 	end
 
 	def won?
 	  WIN_COMBINATIONS.detect do |combination|
-	    combination.all? {|index| self.board.cells[index] == self.board.cells[combination[0]] && self.board.taken?(index+1)}
+	    combination.all? {|index| self.board.cells[index] == self.board.cells[combination[0]] && self.board.taken?(index+1)
+      binding.pry}
+
 	  end
   end
 
