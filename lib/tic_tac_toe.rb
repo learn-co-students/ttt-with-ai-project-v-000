@@ -32,6 +32,9 @@ class TicTacToe
   end
 
   def computer_vs_player_game
+    player1 = Players::Computer.new('X')
+    player2 = Players::Human.new('O')
+    Game.new(player1, player2).play
 
   end
 
