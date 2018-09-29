@@ -28,9 +28,7 @@ class Game
 
 	def won?
 	  WIN_COMBINATIONS.detect do |combination|
-	    combination.all? {|index| self.board.cells[index] == self.board.cells[combination[0]] && self.board.taken?(index+1)
-      binding.pry}
-
+	    combination.all? {|index| self.board.cells[index] == self.board.cells[combination[0]] && self.board.taken?(index+1)}
 	  end
   end
 

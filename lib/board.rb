@@ -4,32 +4,32 @@ class Board
   attr_accessor :cells
 
 	def initialize
-	  self.reset! # set cells
+	  reset! # set cells
 	end
 
 	def reset!
-	  self.cells = Array.new(9, ' ')
+	  @cells = Array.new(9, " ")
   end
 
 	def display
 
-	  puts " #{self.cells[0]} | #{self.cells[1]} | #{self.cells[2]} "
+	  puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
 	  puts '-----------'
-	  puts " #{self.cells[3]} | #{self.cells[4]} | #{self.cells[5]} "
+	  puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
 	  puts '-----------'
-	  puts " #{self.cells[6]} | #{self.cells[7]} | #{self.cells[8]} "
+	  puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
 	end
 
 	def position(input)
-    self.cells[input_to_index(input)]
+    cells[input.to_i - 1]
 	end
 
 	def full?
-    self.cells.all? {|cell| cell == 'X' || cell == 'O'}
+    cells.all? {|cell| cell == 'X' || cell == 'O'}
 	end
 
 	def turn_count
-    self.cells.inject(0) {|result, cell| cell == 'X' || cell == 'O' ? result + 1 : result}
+    cell.count{|char| char == "X"  || char =="O"}
 	end
 
 	def taken?(input)
@@ -37,7 +37,7 @@ class Board
 	end
 
 	 def valid_move?(input)
-	   !input_to_index(input).between?(0, 8) || taken?(input) ? false : true
+	   input.to_i.between(1, 9)
 	 end
 
 	 def update(input, player)
