@@ -37,16 +37,15 @@ class Board
 	end
 
 	 def valid_move?(input)
-	   input.to_i.between(1, 9)
+	   input.to_i.between(1, 9)  && taken?(inputs)
 	 end
+
+   def input_to_index(input)
+	   input = input.to_i   - 1
+   end
 
 	 def update(input, player)
-	   self.cells[input_to_index(input)] = player.token
+	   cells[input.to_i -1 ] = player.token  # stands for either X OR O
 	 end
 
-	private
-
-    def input_to_index(input)
-	    input = input.to_i   - 1
-    end
-end
+   end
