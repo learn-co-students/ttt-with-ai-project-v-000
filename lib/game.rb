@@ -12,28 +12,32 @@ class Game
 	  ]
   #def initialize(player_1, player_2 , board = Board.new)
   def initialize(player_1 = Players::Human.new('X'), player_2 = Players::Human.new('O'), board = Board.new)
-	  self.player_1 = player_1
-	  self.player_2 = player_2
-	  self.board = board
+	  @player_1 = player_1
+	  @player_2 = player_2
+	  @board = board
 	end
 
 	def current_player
-	  self.board.turn_count.even? ? self.player_1 : self.player_2
+	  @board.turn_count.even? ? player_1 : player_2
+    #board.turn_count % 2 == 0 ? player_1 : player_2  same as above code
 	end
 
 	def over?
-	  self.won? || self.draw?
-
+	  won? || draw?
 	end
 
 	def won?
-	  WIN_COMBINATIONS.detect do |combination|
-	    combination.all? {|index| self.board.cells[index] == self.board.cells[combination[0]] && self.board.taken?(index+1)}
+	  WIN_COMBINATIONS.detect do |winner|
+      # winner 0 means first postion we are checking in our winner array
+      # winner 1 means second postion we are checking in our winner array
+      # winner 2 means third postion we are checking in our winner array
+      @board.cells[winner[0]]  ==  @board.cells[winner[1]]  &&
+      @board.cells[winner[1]]  ==  @board.cells[winner[2]]
 	  end
   end
 
 	def draw?
-	  !self.won? && self.board.full?
+	  board.full? && !won?
 	end
 
 	def winner
