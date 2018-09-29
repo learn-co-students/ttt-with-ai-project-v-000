@@ -22,18 +22,20 @@ class Game
     #board.turn_count % 2 == 0 ? player_1 : player_2  same as above code
 	end
 
-	def over?
+  def over?
 	  won? || draw?
 	end
 
 	def won?
-	  WIN_COMBINATIONS.detect do |winner|
+	  WIN_COMBINATIONS.find do |winner|
       # winner 0 means first postion we are checking in our winner array
       # winner 1 means second postion we are checking in our winner array
       # winner 2 means third postion we are checking in our winner array
       @board.cells[winner[0]]  ==  @board.cells[winner[1]]  &&
-      @board.cells[winner[1]]  ==  @board.cells[winner[2]]
-	  end
+      @board.cells[winner[1]]  ==  @board.cells[winner[2]]  &&
+      (@board.cells[winner[0]]  == "X"  ||  @board.cells[winner[0]]  == "O")
+
+ 	  end
   end
 
 	def draw?
@@ -41,32 +43,36 @@ class Game
 	end
 
 	def winner
-    self.board.cells[won?.first] if won?
+
+    if winning_combo = won?
+      @winner = @board.cells[winning_combo.first]
+    end
 	end
 
 
-	def turn
-	  self.board.display
-	  puts "Please enter 1-9, player #{self.current_player.token}"
+  def turn
+	  @board.display
+	  puts "Please enter 1-9, player #{current_player.token}"
 
-	  input = self.current_player.move(self.board)
-	  if self.board.valid_move?(input)
-	    self.board.update(input, self.current_player)
+	  input = current_player.move(board)
+	  if @board.valid_move?(input)
+	    @board.update(input, current_player)
 	   else
 	      puts 'Invalid Input or spot taken! Enter again!'
-	      self.turn
+	      turn
 	   end
 	end
 
   def play
-	   until self.over?
-	     self.turn
+	   until over?
+	     turn
 	   end
-	   self.board.display
+	   @board.display
 	   if winner
 	     puts "Congratulations #{winner}!"
 	   elsif draw?
 	     puts "Cat's Game!"
 	   end
 	 end
-end
+
+  end
