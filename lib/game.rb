@@ -60,6 +60,7 @@ class Game
       input = current_player.move(board)
     else
       board.update(input, current_player)
+      current_player
     end
   end
 
