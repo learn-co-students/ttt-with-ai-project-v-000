@@ -7,7 +7,4 @@ module Players
     end
   end
 
-  class Computer < Player
-
-  end
 end
