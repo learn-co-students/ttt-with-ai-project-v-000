@@ -41,7 +41,7 @@ class Game
   end
 
   def draw?
-    board.full? && !self.won?
+    board.full? && !won?
   end
 
   def over?
@@ -49,16 +49,14 @@ class Game
   end
 
   def winner
-    board.cells[self.won?&.first] if won?
+    board.cells[won?&.first] if won?
   end
   
   def turn
-    puts "Make your move."
+    puts "To make your move, enter a number 1-9:"
     input = current_player.move(board)
-    #binding.pry
     if !board.valid_move?(input)
-      puts "Choose a different move."
-      #input = current_player.move(board)
+      puts "Invalid move."
       turn
     else
       board.update(input, current_player)
@@ -69,11 +67,7 @@ class Game
     while !over?
       turn
     end
-    if won?
-      puts "Congratulations #{winner}!"
-    else
-      puts "Cat's Game!"
-    end
+    won? ? (puts "Congratulations #{winner}!") : (puts "Cat's Game!")
   end
 
 end
