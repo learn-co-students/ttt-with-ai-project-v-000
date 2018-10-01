@@ -45,7 +45,7 @@ class Game
   end
 
   def over?
-    board.full?
+    board.full? || draw? || won?
   end
 
   def winner
@@ -55,20 +55,25 @@ class Game
   def turn
     puts "Make your move."
     input = current_player.move(board)
+    #binding.pry
     if !board.valid_move?(input)
       puts "Choose a different move."
-      input = current_player.move(board)
+      #input = current_player.move(board)
+      turn
     else
       board.update(input, current_player)
     end
   end
 
   def play
-    turn
-
-    
-
-
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
   end
 
 end
