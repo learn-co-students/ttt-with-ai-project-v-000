@@ -18,21 +18,19 @@ class Board
   end
 
   def position(input)
-    position = input.to_i - 1
-    cells[position]
+    cells[input.to_i - 1]
   end
 
   def full?
-    !self.cells.include?(" ")
+    !cells.include?(" ")
   end
 
   def turn_count
-    9 - self.cells.count(" ").to_i
+    9 - cells.count(" ").to_i
   end
 
   def taken?(input)
-    input_position = self.position(input)
-    input_position == "X" || input_position == "O"
+    position(input) == "X" || position(input) == "O"
   end
 
   def valid_move?(move)
