@@ -19,6 +19,25 @@ class Game
     @player_2 = player_2
   end
 
+  def self.start
+    puts "Welcome to Tic Tac Toe!"
+    puts "\n"
+    puts "Would you like to:"
+    puts "\t1. play with a friend,"
+    puts "\t2. play against the computer, or"
+    puts "\t3. watch two AIs play?"
+    puts "\n"
+    print "Enter you preferred option number: "
+    num_players = gets.strip.to_i
+# binding.pry
+    puts "Who should go first? (They'll be X.)"
+    first_player = gets.strip
+
+    puts "Would you like to play again?"
+    replay = gets.strip
+    
+  end
+
   def current_player
     board.turn_count.odd? ? player_2 : player_1
   end
