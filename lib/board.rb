@@ -34,7 +34,7 @@ class Board
     cells.count {|cell| cell == "X" || cell == "O"}
   end
 
-  def taken?(num) #Returns false if the position is empty
+  def taken?(num) 
     num = num.to_i - 1 if num.class == String
     !(cells[num].nil? || cells[num] == " ")
   end
