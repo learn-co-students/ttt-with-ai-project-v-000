@@ -1,3 +1,35 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+# the function that runs the game
+def play
+    puts "Welcome to TicTacToe!"
+    print "Please enter the number of players: (0/1/2): "
+    players = gets.strip.to_i
+    puts "There are #{players} real players and #{2 - players} bots"
+
+    if players == 1
+        print "Who should go first (1 = human, 2 = machine)? "
+        first = gets.strip.to_i
+        first == 1 ? game = Game.new(Players::Human.new("X"), Players::Computer.new("O")) : game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        game.play
+    elsif players == 0
+        puts "X goes first..."
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        game.play
+    else players == 2
+        puts "Ready, Set, Go..."
+        puts "X goes first..."
+        game = Game.new
+        game.play
+    end
+end
+
+# this loop allows you to play forever
+keep_going = 'y'
+while keep_going == 'y' do
+    play()
+    print "\nAnother Game (yes/no)? "
+    keep_going = gets.strip.downcase[0]
+end
+puts "\nGood bye!"
