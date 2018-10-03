@@ -24,4 +24,6 @@ class Board
   def position(input)
     input.to_i - 1
   end
+  
+  def update
 end
