@@ -53,7 +53,7 @@ class Game
   end
 
   def turn
-    puts "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    
     puts "Player #{current_player.token}'s turn!\n"
     puts "Where would you like to move? (1-9):\n"
     board.display
