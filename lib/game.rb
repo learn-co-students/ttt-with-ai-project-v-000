@@ -24,12 +24,14 @@ class Game
     puts "\n"
     print "Enter you preferred option number: "
     num_players = gets.strip.to_i
-    number_players?(num_players)
+    players?(num_players)
 
 # binding.pry
     puts "\n"
     puts "Who should go first? (They'll be X.)"
     first_player = gets.strip
+
+    # plug in info from Game.players? to initialize a new game
 
     puts "Would you like to play again?"
     replay = gets.strip
@@ -37,16 +39,23 @@ class Game
   end
 
   # Game.start input methods
-  def self.number_players?(num_players)
+  # TODO: Will need to change this according to who's taking the first turn.
+  def self.players?(num_players)
     if num_players == 1
       # initialize with two human players
       puts "The competition begins. The prize: bragging rights!"
+      player_a = Players::Human.new(token)
+      player_b = Players::Human.new(token)
     elsif num_players == 2
       # initialize with one human player and one computer player
       puts "Man vs. machine: the eternal battle!"
+      player_a = Players::Human.new(token)
+      player_b = Players::Computer.new(token)
     elsif num_players == 3
       # initialize with two computer players
       puts "You know they'll always tie, right?"
+      player_a = Players::Computer.new(token)
+      player_b = Players::Computer.new(token)
     else
       puts "Invalid input"
       puts "\n"
