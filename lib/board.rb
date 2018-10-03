@@ -1,29 +1,40 @@
 class Board
+  attr_accessor :cells
   
-  attr_accessor
-  
-  @@cells = Array.new(9, " ")
+  def initialize(cells = nil)
+    reset!
+  end
   
   def reset!
-    @@cells.clear
+    @cells = Array.new(9, " ")
   end
   
-  def initialize(@@cells = nil)
-    @display = display || Array.new(9, " ")
-    self.reset!
-  end
-  
-  def display_board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
+  def display
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
-    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
-    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
   def position(input)
-    input.to_i - 1
+    cells[input.to_i - 1]
   end
   
-  def update
+  def full?
+     @cells.all?{|token| token != " " }
+  end
+  
+  def turn_count
+    @cells.count{|token| token == "X" || token == "O"}
+  end
+  
+  def taken?(input)
+    position(input) != " "
+  end
+  
+  def valid_move?(input)
+    input.to_i.between?(1,9) && !taken?(input)
+  end  
+    
 end
