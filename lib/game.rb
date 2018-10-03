@@ -26,18 +26,14 @@ class Game
   def won?
     winner = nil
     # step through win combinations
-    WIN_COMBINATIONS.each_with_index do |x, i|
-
-      if board.cells[x[0]] == "X" && board.cells[x[1]] == "X" && board.cells[x[2]] == "X"
-        winner = x.join(",")
-      elsif board.cells[x[0]] == "O" && board.cells[x[1]] == "O" && board.cells[x[2]] == "O"
-        winner = x.join(",")
-      else
-        if i == WIN_COMBINATIONS.size
-          winner = false
+    WIN_COMBINATIONS.each_with_index do |x|
+        if board.cells[x[0]] == "X" && board.cells[x[1]] == "X" && board.cells[x[2]] == "X"
+          winner = x
+        elsif board.cells[x[0]] == "O" && board.cells[x[1]] == "O" && board.cells[x[2]] == "O"
+          winner = x
         end
-      end
     end
+    winner = false if winner == nil
     winner
   end
 
