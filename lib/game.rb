@@ -13,12 +13,7 @@ class Game
     [2, 4, 6]  # Right Diagonal
   ]
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-    @board = board
-    @player_1 = player_1
-    @player_2 = player_2
-  end
-
+  # start game CLI sequence
   def self.start
     puts "Welcome to Tic Tac Toe!"
     puts "\n"
@@ -29,13 +24,41 @@ class Game
     puts "\n"
     print "Enter you preferred option number: "
     num_players = gets.strip.to_i
+    number_players?(num_players)
+
 # binding.pry
+    puts "\n"
     puts "Who should go first? (They'll be X.)"
     first_player = gets.strip
 
     puts "Would you like to play again?"
     replay = gets.strip
     
+  end
+
+  # Game.start input methods
+  def self.number_players?(num_players)
+    if num_players == 1
+      # initialize with two human players
+      puts "The competition begins. The prize: bragging rights!"
+    elsif num_players == 2
+      # initialize with one human player and one computer player
+      puts "Man vs. machine: the eternal battle!"
+    elsif num_players == 3
+      # initialize with two computer players
+      puts "You know they'll always tie, right?"
+    else
+      puts "Invalid input"
+      puts "\n"
+      Game.start
+    end
+
+  end
+
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
   end
 
   def current_player
@@ -51,6 +74,7 @@ class Game
     win
   end
 
+  # #won? helper method
   def check_combo(combo)
     win = false
     poss_win = []
