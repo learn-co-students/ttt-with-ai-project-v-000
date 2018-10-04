@@ -71,7 +71,7 @@ class Game
       player_2 = Players::Computer.new("O", "Megatron")
     end
     game = Game.new(player_1, player_2)
-    # binding.pry
+    binding.pry
   end
 
   def self.replay
@@ -120,8 +120,9 @@ class Game
   end
   
   def turn
-    puts "#{current_player.name}, enter a number 1-9:"
+    print "\n#{current_player.name}, enter a number 1-9: "
     input = current_player.move(board)
+    puts "#{input}"
     if !board.valid_move?(input)
       puts "Invalid move."
       turn
@@ -134,7 +135,7 @@ class Game
     while !over?
       turn
     end
-    won? ? (puts "Congratulations #{winner}!") : (puts "Cat's Game!")
+    won? ? (puts "\nCongratulations #{winner}!") : (puts "\nCat's Game!")
   end
 
 end
