@@ -31,7 +31,6 @@ class Game
     end
   end
   
-  
   def draw?
     !won? && @board.full?
   end
@@ -51,7 +50,8 @@ class Game
     move = current_player.move(@board)
     if @board.valid_move?(move)
       @board.update(move, current_player)
-    else puts "Please enter 1-9:"
+    else 
+      puts "Please enter 1-9:"
       @board.display
       turn
     end
