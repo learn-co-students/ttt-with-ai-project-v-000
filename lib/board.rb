@@ -30,7 +30,7 @@ class Board
     cells.all? {|index| index == "X" || index == "O"}
   end
 
-  def turn_count #Returns the amount of turns
+  def turn_count
     cells.count {|cell| cell == "X" || cell == "O"}
   end
 
