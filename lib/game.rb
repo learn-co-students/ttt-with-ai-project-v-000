@@ -25,7 +25,6 @@ class Game
 
   def won?
     winner = nil
-    # step through win combinations
     WIN_COMBINATIONS.each_with_index do |x|
         if board.cells[x[0]] == "X" && board.cells[x[1]] == "X" && board.cells[x[2]] == "X"
           winner = x
@@ -35,6 +34,39 @@ class Game
     end
     winner = false if winner == nil
     winner
+  end
+
+  def draw?
+    # return true if no one won the game
+    !won?
+  end
+
+  def over?
+    # return true if it's a draw or the board is full or someone won the game
+    draw? && board.full? || won?
+  end
+
+  def winner
+    # return winning token by using the winning cells index if a player won
+    board.cells[won?[0]] unless !won?
+  end
+
+  def turn
+    player = current_player
+    current_move = player.move(board)
+
+    if !board.valid_move?(current_move)
+      turn
+    else
+      board.update(current_move, player)
+      player = current_player
+    end
+  end
+
+  def play
+    while !over?
+      turn
+    end
   end
 
 end
