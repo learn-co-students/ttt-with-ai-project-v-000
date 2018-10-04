@@ -82,6 +82,9 @@ class Game
     replay = gets.strip
     if replay.match(/y/i) || replay.match(/yes/i)
       play
+    else
+      puts "\nGood game!"
+      exit
     end
   end
 
@@ -152,7 +155,8 @@ class Game
       turn
       board.display
     end
-    won? ? (puts "\nCongratulations #{current_player.name}! You win!") : (puts "\nCat's Game!")
+    won? ? (puts "\nCongratulations #{winner}! You win!") : (puts "\nCat's Game!")
+    
   end
 
 end
