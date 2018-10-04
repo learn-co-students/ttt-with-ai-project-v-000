@@ -77,7 +77,7 @@ class Game
     replay = gets.strip
   end
 
-  def initialize(player_1 = Players::Human.new("X", @name), player_2 = Players::Human.new("O", @name), board = Board.new)
+  def initialize(player_1 = Players::Human.new("X", name), player_2 = Players::Human.new("O", name), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2

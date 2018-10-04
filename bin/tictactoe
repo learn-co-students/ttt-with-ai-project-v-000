@@ -6,8 +6,7 @@ def play
   Game.greeting
   Game.game_type?
   Game.player_order?
-  binding.pry
-  Game.new.play
+  Game.new(player_1, player_2)
 end
 
 play
