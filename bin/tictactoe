@@ -6,6 +6,7 @@ def play
   GameCLI.greeting
   GameCLI.game_type?
   GameCLI.player_order?
+  Game.new.play
 end
 
 play

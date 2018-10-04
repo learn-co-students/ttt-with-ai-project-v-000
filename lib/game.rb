@@ -13,7 +13,7 @@ class Game
     [2, 4, 6]  # Right Diagonal
   ]
 
-  def initialize(player_1 = Players::Human.new("X", @name), player_2 = Players::Human.new("O", @name), board = Board.new)
+  def initialize(player_1 = GameCLI.player_order?.player_1, player_2 = GameCLI.player_order?.player_2, board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
@@ -54,7 +54,7 @@ class Game
   end
   
   def turn
-    puts "To make your move, enter a number 1-9:"
+    puts "#{current_player.name}, enter a number 1-9:"
     input = current_player.move(board)
     if !board.valid_move?(input)
       puts "Invalid move."

@@ -15,6 +15,14 @@ class GameCLI
     puts "\n"
     print "Enter you preferred option number: "
     @@num_players = gets.strip.to_i
+    num_players_valid?(@@num_players)
+  end
+
+  def self.num_players_valid?(num_players)
+    if !num_players.between?(1, 3)
+      puts "\nInvalid input. Please enter 1, 2, or 3."
+      GameCLI.game_type?
+    end
   end
 
   def self.player_order?
@@ -25,15 +33,14 @@ class GameCLI
       first_player = gets.strip
       print "Player 2: "
       second_player = gets.strip
-      puts "The competition begins. The prize: bragging rights!"
-      # TODO: Add name attribute
+      puts "\nThe competition begins. The prize: bragging rights!"
       player_1 = Players::Human.new("X", first_player)
       player_2 = Players::Human.new("O", second_player)
     elsif @@num_players == 2
       # initialize with one human player and one computer player
       puts "\nWill you go first (X) or second (O)?"
       option = gets.strip
-      puts "Man vs. machine: the eternal battle!"
+      puts "\nMan vs. machine: the eternal battle!"
       # Conditional for response to initialize game
       if option == "first"
         player_1 = Players::Human.new("X", "Me")
@@ -42,19 +49,14 @@ class GameCLI
         player_1 = Players::Computer.new("X", "Watson")
         player_2 = Players::Human.new("O", "Me")
       else
-        puts "Invalid input. Please write first or second."
-        puts "\n"
-        player_order
+        puts "\nInvalid input. Please enter first or second."
+        player_order?
       end
     elsif @@num_players == 3
       # initialize with two computer players
-      puts "You know they'll always tie, right?"
+      puts "\nYou know they'll always tie, right?"
       player_1 = Players::Computer.new("X", "Optimus Prime")
       player_2 = Players::Computer.new("O", "Megatron")
-    else
-      puts "Invalid input"
-      puts "\n"
-      Game.start
     end
   end
 
