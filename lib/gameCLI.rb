@@ -1,5 +1,6 @@
 class GameCLI
-  attr_writer :num_players
+  attr_accessor :num_players
+  @@num_players = 0
 
   # CLI methods
   def self.greeting
@@ -13,11 +14,11 @@ class GameCLI
     puts "\t3. watch two AIs play?"
     puts "\n"
     print "Enter you preferred option number: "
-    num_players = gets.strip.to_i
+    @@num_players = gets.strip.to_i
   end
 
-  def self.player_order(num_players)
-    if num_players == 1
+  def self.player_order?
+    if @@num_players == 1
       # initialize with two human players
       puts "\nName your players. Player 1 will be X, player 2 will be O."
       print "Player 1: "
@@ -28,8 +29,7 @@ class GameCLI
       # TODO: Add name attribute
       player_1 = Players::Human.new("X", first_player)
       player_2 = Players::Human.new("O", second_player)
-      Game.new
-    elsif num_players == 2
+    elsif @@num_players == 2
       # initialize with one human player and one computer player
       puts "\nWill you go first (X) or second (O)?"
       option = gets.strip
@@ -46,8 +46,7 @@ class GameCLI
         puts "\n"
         player_order
       end
-      Game.new
-    elsif num_players == 3
+    elsif @@num_players == 3
       # initialize with two computer players
       puts "You know they'll always tie, right?"
       player_1 = Players::Computer.new("X", "Optimus Prime")

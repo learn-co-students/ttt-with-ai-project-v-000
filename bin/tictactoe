@@ -2,3 +2,10 @@
 
 require_relative '../config/environment'
 
+def play
+  GameCLI.greeting
+  GameCLI.game_type?
+  GameCLI.player_order?
+end
+
+play
