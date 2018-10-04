@@ -12,6 +12,38 @@ class Game
 
   attr_accessor :board, :player_1, :player_2
 
+  def self.set_up
+    puts "How many players are playing this time? 0, 1, or 2?"
+    num_players = gets.strip.to_i
+    case num_players
+    when 0
+      game = new(Players::Computer.new("X"), Players::Computer.new("O"))
+    when 1
+      puts "Do you want to be player X and start the match? Y/N"
+      input = gets.strip
+      if input == "Y"
+        game = new(Players::Human.new("X"), Players::Computer.new("O"))
+      elsif input == "N"
+        game = new(Players::Computer.new("X"), Players::Human.new("O"))
+      end
+    when 2
+      game = new
+    end
+  end
+
+  def self.play_again
+    puts "Want to play again? Y/N"
+    input = gets.strip
+    if input == "Y"
+      puts "That's the spirit. Here we go again!"
+      set_up.play
+      play_again
+    elsif input == "N"
+      puts "Alrighty, see you next time!"
+      exit
+    end
+  end
+
   def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -51,6 +83,7 @@ class Game
     puts "Ohhh, sounds like an interesting match..."
     puts "Here's the board:"
     board.display
+    puts "\n\n"
   end
 
   def play
@@ -60,6 +93,7 @@ class Game
       turn
       puts "A move was made!"
       board.display
+      puts "\n\n"
     end
     puts "The game is over..."
     board.display
