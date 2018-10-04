@@ -50,16 +50,18 @@ class Game
       player_2 = Players::Human.new("O", second_player)
     elsif @@num_players == 2
       # initialize with one human player and one computer player
-      puts "\nWill you go first (X) or second (O)?"
-      option = gets.strip
+      puts "\nWhat is your name?"
+      player_name = gets.strip
+      print "\nWould you like to go first (X) or second (O)? "
+      order = gets.strip
       puts "\nMan vs. machine: the eternal battle!"
       # Conditional for response to initialize game
-      if option == "first"
-        player_1 = Players::Human.new("X", "Me")
+      if order == "first"
+        player_1 = Players::Human.new("X", player_name)
         player_2 = Players::Computer.new("O", "Watson")
-      elsif option == "second"
+      elsif order == "second"
         player_1 = Players::Computer.new("X", "Watson")
-        player_2 = Players::Human.new("O", "Me")
+        player_2 = Players::Human.new("O", player_name)
       else
         puts "\nInvalid input. Please enter first or second."
         player_order?
@@ -120,9 +122,11 @@ class Game
   end
   
   def turn
-    print "\n#{current_player.name}, enter a number 1-9: "
+    print "\nYour turn, #{current_player.name}! To make your move, enter a number 1-9: "
     input = current_player.move(board)
-    puts "#{input}"
+    if current_player.name == "Optimus Prime" || current_player.name == "Megatron" || current_player.name == "Watson"
+      puts "#{input}"
+    end
     if !board.valid_move?(input)
       puts "Invalid move."
       turn
@@ -134,8 +138,9 @@ class Game
   def play
     while !over?
       turn
+      board.display
     end
-    won? ? (puts "\nCongratulations #{winner}!") : (puts "\nCat's Game!")
+    won? ? (puts "\nCongratulations #{current_player.name}!") : (puts "\nCat's Game!")
   end
 
 end

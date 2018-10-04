@@ -10,6 +10,7 @@ class Board
   end
 
   def display
+    puts ""
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
