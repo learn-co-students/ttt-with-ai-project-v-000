@@ -13,30 +13,58 @@ class Game
     [2, 4, 6]  # Right Diagonal
   ]
 
-  # start game CLI sequence
-  def self.start
+  # CLI methods
+  def self.greeting
     puts "Welcome to Tic Tac Toe!"
-    puts "\n"
-    puts "Would you like to:"
+  end
+
+  def self.game_type?
+    puts "\nWould you like to:"
     puts "\t1. play with a friend,"
     puts "\t2. play against the computer, or"
     puts "\t3. watch two AIs play?"
     puts "\n"
     print "Enter you preferred option number: "
     num_players = gets.strip.to_i
-    players?(num_players)
+  end
 
-# binding.pry
-    puts "\n"
-    puts "Who should go first? (They'll be X.)"
-    first_player = gets.strip
+  def self.player_order
+    if num_players == 1
+      # initialize with two human players
+      puts "\nName your players. Player 1 will be X, player 2 will be O."
+      print "Player 1: "
+      first_player = gets.strip
+      print "Player 2: "
+      second_player = gets.strip
+      puts "The competition begins. The prize: bragging rights!"
+      # TODO: Add name attribute
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Human.new("O")
+    elsif num_players == 2
+      # initialize with one human player and one computer player
+      puts "Man vs. machine: the eternal battle!"
+      player_a = Players::Human.new(token)
+      player_b = Players::Computer.new(token)
+    elsif num_players == 3
+      # initialize with two computer players
+      puts "You know they'll always tie, right?"
+      player_a = Players::Computer.new(token)
+      player_b = Players::Computer.new(token)
+    else
+      puts "Invalid input"
+      puts "\n"
+      Game.start
+    end
 
-    # plug in info from Game.players? to initialize a new game
 
+  end
+
+  def self.replay
     puts "Would you like to play again?"
     replay = gets.strip
-    
   end
+
+
 
   # Game.start input methods
   # TODO: Will need to change this according to who's taking the first turn.

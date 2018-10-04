@@ -2,4 +2,9 @@
 
 require_relative '../config/environment'
 
-Game.start
+def start
+  Game.greeting
+  Game.game_type?
+end
+
+start
