@@ -3,9 +3,10 @@
 require_relative '../config/environment'
 
 def play
-  GameCLI.greeting
-  GameCLI.game_type?
-  GameCLI.player_order?
+  Game.greeting
+  Game.game_type?
+  Game.player_order?
+  binding.pry
   Game.new.play
 end
 
