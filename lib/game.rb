@@ -1,6 +1,7 @@
 class Game
-  attr_accessor :board, :player_1, :player_2, :num_players, :name
+  attr_accessor :board, :player_1, :player_2, :name
   @@num_players = 0
+  @@game = ""
 
   # Win combinations constant
   WIN_COMBINATIONS = [
@@ -17,6 +18,7 @@ class Game
   # CLI methods
   def self.greeting
     puts "\nWelcome to Tic Tac Toe!"
+    @@game = Game.new
   end
 
   def self.game_type?
@@ -46,8 +48,8 @@ class Game
       print "Player 2: "
       second_player = gets.strip
       puts "\nThe competition begins. The prize: bragging rights!"
-      player_1 = Players::Human.new("X", first_player)
-      player_2 = Players::Human.new("O", second_player)
+      @@game.player_1 = Players::Human.new("X", first_player)
+      @@game.player_2 = Players::Human.new("O", second_player)
     elsif @@num_players == 2
       # initialize with one human player and one computer player
       puts "\nWhat is your name?"
@@ -57,11 +59,11 @@ class Game
       puts "\nMan vs. machine: the eternal battle!"
       # Conditional for response to initialize game
       if order == "first"
-        player_1 = Players::Human.new("X", player_name)
-        player_2 = Players::Computer.new("O", "Watson")
+        @@game.player_1 = Players::Human.new("X", player_name)
+        @@game.player_2 = Players::Computer.new("O", "Watson")
       elsif order == "second"
-        player_1 = Players::Computer.new("X", "Watson")
-        player_2 = Players::Human.new("O", player_name)
+        @@game.player_1 = Players::Computer.new("X", "Watson")
+        @@game.player_2 = Players::Human.new("O", player_name)
       else
         puts "\nInvalid input. Please enter first or second."
         player_order?
@@ -69,11 +71,11 @@ class Game
     elsif @@num_players == 3
       # initialize with two computer players
       puts "\nYou know they'll always tie, right?"
-      player_1 = Players::Computer.new("X", "Optimus Prime")
-      player_2 = Players::Computer.new("O", "Megatron")
+      @@game.player_1 = Players::Computer.new("X", "Optimus Prime")
+      @@game.player_2 = Players::Computer.new("O", "Megatron")
     end
-    game = Game.new(player_1, player_2)
-    game.play
+    # game = Game.new(player_1, player_2)
+    # game.play
     # binding.pry
   end
 
@@ -92,6 +94,7 @@ class Game
     Game.greeting
     Game.game_type?
     Game.player_order?
+    @@game.play
     Game.replay?
   end
   
@@ -156,7 +159,6 @@ class Game
       board.display
     end
     won? ? (puts "\nCongratulations #{winner}! You win!") : (puts "\nCat's Game!")
-    
   end
 
 end
