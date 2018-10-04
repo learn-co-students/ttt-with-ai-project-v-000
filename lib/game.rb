@@ -22,15 +22,12 @@ class Game
   def current_player
    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
- 
-  def over?
-    won? || draw?
-  end
   
   def won?
     WIN_COMBINATIONS.detect do |winner|
       @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[1]] == @board.cells[winner[2]]
+      @board.cells[winner[1]] == @board.cells[winner[2]] &&
+      (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
     end
   end
   
@@ -38,5 +35,37 @@ class Game
   def draw?
     !won? && @board.full?
   end
+  
+   def over?
+    won? || draw?
+  end
+  
+  def winner
+    if winning_comb = won? 
+    @winner = @board.cells[winning_comb.first]
+  end
+ end
  
+ def turn
+    puts "Please enter 1-9:"
+    move = current_player.move(@board)
+    if @board.valid_move?(move)
+      @board.update(move, current_player)
+    else puts "Please enter 1-9:"
+      @board.display
+      turn
+    end
+    @board.display
+  end
+  
+  def play 
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
+  end 
 end
