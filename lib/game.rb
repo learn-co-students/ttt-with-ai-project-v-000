@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :board, :player_1, :player_2, :num_players
+  attr_accessor :board, :player_1, :player_2, :num_players, :name
   @@num_players = 0
 
   # Win combinations constant
@@ -70,6 +70,8 @@ class Game
       player_1 = Players::Computer.new("X", "Optimus Prime")
       player_2 = Players::Computer.new("O", "Megatron")
     end
+    game = Game.new(player_1, player_2)
+    # binding.pry
   end
 
   def self.replay

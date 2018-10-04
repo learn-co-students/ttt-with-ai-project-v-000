@@ -6,7 +6,6 @@ def play
   Game.greeting
   Game.game_type?
   Game.player_order?
-  Game.new(player_1, player_2)
 end
 
 play
