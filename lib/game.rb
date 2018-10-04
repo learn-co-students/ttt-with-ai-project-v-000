@@ -16,7 +16,7 @@ class Game
 
   # CLI methods
   def self.greeting
-    puts "Welcome to Tic Tac Toe!"
+    puts "\nWelcome to Tic Tac Toe!"
   end
 
   def self.game_type?
@@ -52,7 +52,7 @@ class Game
       # initialize with one human player and one computer player
       puts "\nWhat is your name?"
       player_name = gets.strip
-      print "\nWould you like to go first (X) or second (O)? "
+      puts "\nWould you like to go first (X) or second (O)? "
       order = gets.strip
       puts "\nMan vs. machine: the eternal battle!"
       # Conditional for response to initialize game
@@ -73,14 +73,26 @@ class Game
       player_2 = Players::Computer.new("O", "Megatron")
     end
     game = Game.new(player_1, player_2)
-    binding.pry
+    game.play
+    # binding.pry
   end
 
-  def self.replay
-    puts "Would you like to play again?"
+  def self.replay?
+    puts "\nWould you like to play again?"
     replay = gets.strip
+    if replay.match(/y/i) || replay.match(/yes/i)
+      play
+    end
   end
 
+  def self.play
+    Game.greeting
+    Game.game_type?
+    Game.player_order?
+    Game.replay?
+  end
+  
+  # Game methods
   def initialize(player_1 = Players::Human.new("X", name), player_2 = Players::Human.new("O", name), board = Board.new)
     @board = board
     @player_1 = player_1
@@ -140,7 +152,7 @@ class Game
       turn
       board.display
     end
-    won? ? (puts "\nCongratulations #{current_player.name}!") : (puts "\nCat's Game!")
+    won? ? (puts "\nCongratulations #{current_player.name}! You win!") : (puts "\nCat's Game!")
   end
 
 end

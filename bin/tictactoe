@@ -2,10 +2,4 @@
 
 require_relative '../config/environment'
 
-def play
-  Game.greeting
-  Game.game_type?
-  Game.player_order?
-end
-
-play
+Game.play
