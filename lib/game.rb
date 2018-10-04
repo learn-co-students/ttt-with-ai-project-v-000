@@ -74,9 +74,6 @@ class Game
       @@game.player_1 = Players::Computer.new("X", "Optimus Prime")
       @@game.player_2 = Players::Computer.new("O", "Megatron")
     end
-    # game = Game.new(player_1, player_2)
-    # game.play
-    # binding.pry
   end
 
   def self.replay?
@@ -95,6 +92,7 @@ class Game
     Game.game_type?
     Game.player_order?
     @@game.play
+    # binding.pry
     Game.replay?
   end
   
@@ -153,12 +151,16 @@ class Game
     end
   end
 
+  def winner_name
+    board.turn_count.even? ? player_2.name : player_1.name
+  end
+
   def play
     while !over?
       turn
       board.display
     end
-    won? ? (puts "\nCongratulations #{winner}! You win!") : (puts "\nCat's Game!")
+    won? ? (puts "\nCongratulations #{winner_name}! You win!") : (puts "\nCat's Game!")
   end
 
 end
