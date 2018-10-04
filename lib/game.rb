@@ -38,18 +38,18 @@ class Game
       second_player = gets.strip
       puts "The competition begins. The prize: bragging rights!"
       # TODO: Add name attribute
-      player_1 = Players::Human.new("X")
-      player_2 = Players::Human.new("O")
+      player_1 = Players::Human.new("X", first_player)
+      player_2 = Players::Human.new("O", second_player)
     elsif num_players == 2
       # initialize with one human player and one computer player
       puts "Man vs. machine: the eternal battle!"
-      player_a = Players::Human.new(token)
-      player_b = Players::Computer.new(token)
+      player_a = Players::Human.new(token, name)
+      player_b = Players::Computer.new(token, name)
     elsif num_players == 3
       # initialize with two computer players
       puts "You know they'll always tie, right?"
-      player_a = Players::Computer.new(token)
-      player_b = Players::Computer.new(token)
+      player_a = Players::Computer.new(token, name)
+      player_b = Players::Computer.new(token, name)
     else
       puts "Invalid input"
       puts "\n"
@@ -68,31 +68,30 @@ class Game
 
   # Game.start input methods
   # TODO: Will need to change this according to who's taking the first turn.
-  def self.players?(num_players)
-    if num_players == 1
-      # initialize with two human players
-      puts "The competition begins. The prize: bragging rights!"
-      player_a = Players::Human.new(token)
-      player_b = Players::Human.new(token)
-    elsif num_players == 2
-      # initialize with one human player and one computer player
-      puts "Man vs. machine: the eternal battle!"
-      player_a = Players::Human.new(token)
-      player_b = Players::Computer.new(token)
-    elsif num_players == 3
-      # initialize with two computer players
-      puts "You know they'll always tie, right?"
-      player_a = Players::Computer.new(token)
-      player_b = Players::Computer.new(token)
-    else
-      puts "Invalid input"
-      puts "\n"
-      Game.start
-    end
+  # def self.players?(num_players)
+  #   if num_players == 1
+  #     # initialize with two human players
+  #     puts "The competition begins. The prize: bragging rights!"
+  #     player_a = Players::Human.new(token)
+  #     player_b = Players::Human.new(token)
+  #   elsif num_players == 2
+  #     # initialize with one human player and one computer player
+  #     puts "Man vs. machine: the eternal battle!"
+  #     player_a = Players::Human.new(token)
+  #     player_b = Players::Computer.new(token)
+  #   elsif num_players == 3
+  #     # initialize with two computer players
+  #     puts "You know they'll always tie, right?"
+  #     player_a = Players::Computer.new(token)
+  #     player_b = Players::Computer.new(token)
+  #   else
+  #     puts "Invalid input"
+  #     puts "\n"
+  #     Game.start
+  #   end
+  # end
 
-  end
-
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  def initialize(player_1 = Players::Human.new("X", @name), player_2 = Players::Human.new("O", @name), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2

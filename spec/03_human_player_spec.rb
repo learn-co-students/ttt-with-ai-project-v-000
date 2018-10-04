@@ -7,7 +7,7 @@ describe 'Players::Human' do
 
   describe '#move' do
     it 'asks the user for input and returns it' do
-      human = Players::Human.new("X")
+      human = Players::Human.new("X", @name)
       allow($stdout).to receive(:puts)
 
       expect(human).to receive(:gets).and_return("1")

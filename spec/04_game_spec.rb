@@ -25,7 +25,7 @@ describe 'Game' do
   describe '#player_1' do
     it 'provides access to player_1' do
       game = Game.new
-      player_1 = Player.new("X")
+      player_1 = Player.new("X", @name)
       game.player_1 = player_1
       expect(game.player_1).to eq(player_1)
     end
@@ -34,7 +34,7 @@ describe 'Game' do
   describe '#player_2' do
     it 'provides access to player_2' do
       game = Game.new
-      player_2 = Player.new("X")
+      player_2 = Player.new("X", @name)
       game.player_2 = player_2
       expect(game.player_2).to eq(player_2)
     end
@@ -43,8 +43,8 @@ describe 'Game' do
   describe 'initialize' do
     it 'accepts 2 players and a board' do
       board = Board.new
-      player_1 = Player.new("X")
-      player_2 = Player.new("O")
+      player_1 = Player.new("X", @name)
+      player_2 = Player.new("O", @name)
 
       game = Game.new(player_1, player_2, board)
 

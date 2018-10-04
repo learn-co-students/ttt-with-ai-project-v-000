@@ -4,14 +4,14 @@ describe 'Player' do
 
   describe '#initialize' do
     it 'accepts a token to assign' do
-      player = Player.new("X")
+      player = Player.new("X", @name)
       expect(player.token).to eq("X")
     end
   end
 
   describe '#token' do
     it 'cannot be changed once assigned in initialize' do
-      player = Player.new("O")
+      player = Player.new("O", @name)
       expect(player.token).to eq("O")
 
       expect{player.token = "O"}.to raise_error(NoMethodError)
