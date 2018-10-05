@@ -220,7 +220,7 @@ describe 'Game' do
       allow(game.player_2).to receive(:gets).and_return("4", "5")
 
       expect(game).to receive(:over?).at_least(:twice).and_return(false, false, true)
-      
+
       game.play
     end
 
@@ -269,7 +269,7 @@ describe 'Game' do
       allow(game.player_2).to receive(:gets).and_return("3", "4")
 
       expect(game).to receive(:draw?).at_least(:twice).and_return(false, false, true)
-
+      # binding.pry
       game.play
     end
 

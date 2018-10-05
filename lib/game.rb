@@ -38,12 +38,12 @@ class Game
 
   def draw?
     # return true if no one won the game
-    !won?
+    !won? && board.full?
   end
 
   def over?
     # return true if it's a draw or the board is full or someone won the game
-    draw? && board.full? || won?
+    draw? || won?
   end
 
   def winner
@@ -52,10 +52,11 @@ class Game
   end
 
   def turn
+    puts "#{current_player.token} enter your next move(positions 1 to 9)"
     player = current_player
     current_move = player.move(board)
-
     if !board.valid_move?(current_move)
+      puts "Please enter a valid move"
       turn
     else
       board.update(current_move, player)
@@ -65,7 +66,16 @@ class Game
 
   def play
     while !over?
+      board.display
       turn
+    end
+
+    if won?
+        board.display
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        board.display
+        puts "Cat's Game!"
     end
   end
 

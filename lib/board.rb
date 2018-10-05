@@ -6,7 +6,7 @@ class Board
     @cells = Array.new(9, " ")
   end
 
-  def display
+  def display 
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
