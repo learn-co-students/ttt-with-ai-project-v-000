@@ -104,7 +104,7 @@ class Game
   end
 
   def current_player
-    board.turn_count.odd? ? player_2 : player_1
+    board.turn_count.even? ? player_1 : player_2
   end
 
   def won?
@@ -130,7 +130,7 @@ class Game
   end
 
   def over?
-    board.full? || draw? || won?
+    draw? || won?
   end
 
   def winner
