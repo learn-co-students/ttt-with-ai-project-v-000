@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+ TicTacToe.new
+ puts "Would you like to play a game of Tic Tac Toe? 'Y' or 'W'?"
+ g = gets.strip
+ if g == 'Y'
+   TicTacToe.new.play_tic_tac_toe
+ elsif g == 'W'
+   TicTacToe.new.wargames
+ else
+   puts "Invalid input"
+   g = gets.strip
+ end 

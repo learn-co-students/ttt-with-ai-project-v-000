@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -202,6 +203,7 @@ describe 'Game' do
       game.turn
     end
   end
+
 
   describe 'play' do
     it 'asks for players input on a turn of the game' do
