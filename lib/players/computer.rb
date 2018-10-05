@@ -9,7 +9,17 @@ module Players
 
 
     def move(board)
-      @@random_move
+      # computer strategy
+      move = "5"
+      if !board.taken?(5)
+        move = "5"
+      elsif board.turn_count == 1
+        move = "1"
+      elsif board.turn_count == 2
+        move = @@corner_move
+      end
+      move
+      # @@random_move
     end
     
     
