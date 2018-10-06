@@ -4,54 +4,41 @@ module Players
   class Computer < Player
     @@corner_move = [1, 3, 7, 9].sample.to_s
     @@edge_move = [2, 4, 6, 8].sample.to_s
-    @@center_move = "5"
     @@random_move = (1..9).to_a.sample.to_s
 
 
     def move(board)
       # computer strategy
-      move = "5"
+      move = nil
       if !board.taken?(5)
+        # take center
         move = "5"
       elsif board.turn_count == 1
+        # if center is taken, take upper left corner
         move = "1"
       elsif board.turn_count == 2
+        # take corner to position yourself for a win
         move = @@corner_move
+      elsif board.turn_count == 3 && board.position(1) == board.position(9) || board.position(3) == board.position(7)
+        # block other player's possible win
+        move = "2"
+      else
+        Game::WIN_COMBINATIONS.find do |combo|
+          # try to win the game
+          if combo.select{|i| board.position(i+1) == token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
+            move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+          # If you can't win, block other player's possible win
+          elsif combo.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
+            move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+          end
+        end
+        if move == nil
+          move = @@random_move
+        end
       end
       move
-      # @@random_move
     end
+
     
-    
-    # def first_move_x(board)
-    #   "5"
-    # end
-
-    # def first_move_y(board)
-    #   board.cells[4] == "X" ? first_move_y = @@corner_move : first_move_y = "5"
-    # end
-
-    # def second_move_x(board)
-    #   if board.cells[1] == "O"
-    #     second_move_x = [7, 9].sample.to_s
-    #   elsif board.cells[3] == "O"
-    #     second_move_x = [3, 9].sample.to_s
-    #   elsif board.cells[5] == "O"
-    #     second_move_x = [1, 7].sample.to_s
-    #   elsif board.cells[9] == "O"
-    #     second_move_x = [1, 3].sample.to_s
-    #   elsif board.cells[0] == "O"
-    #     second_move_x = "9"
-    #   elsif board.cells[2] == "O"
-    #     second_move_x = "7"
-    #   elsif board.cells[6] == "O"
-    #     second_move_x = "3"
-    #   elsif board.cells[8] == "O"
-    #     second_move_x = "1"
-    #   end
-    #   second_move_x
-    # end
-
-
   end
 end
