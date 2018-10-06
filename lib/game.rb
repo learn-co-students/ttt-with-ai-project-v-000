@@ -61,6 +61,7 @@ class Game
       @board.display
       play
     end
+    @board.display
   end
     
 end
