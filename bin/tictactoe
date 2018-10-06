@@ -2,6 +2,48 @@
 
 require_relative '../config/environment'
 
+# Method to get game started, will loop until valid arguments are entered.
+
+def game_setup
+  puts "Select number of players (0, 1, or 2)"
+  player_count = gets.strip
+  case player_count
+  when "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  when "1"
+    if Players.select_token == "X"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    else
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    end
+  when "2"
+    game = Game.new()
+  else
+    puts "Please enter either '0', '1', or '2' players..."
+    game_setup
+  end
+  puts "This is the Game Board:"
+#Displays the game board with selector numbers
+    puts " 1 | 2 | 3 "
+    puts "-----------"
+    puts " 4 | 5 | 6 "
+    puts "-----------"
+    puts " 7 | 8 | 9 "
+  puts
+  puts "Let's get started!"
+  puts
+  puts
+  @board.display
+  game.play
+end
+
+# Loop to allow 'play again' feature
+
+answer = ""
+until answer == "N" || answer == "n" do
+
 puts "Hello, welcome to Tic Tac Toe!"
-puts "Select number of players (0, 1, or 2)"
-player_count = gets.strip
+game_setup
+puts "Would you like to play again? (y/n)"
+answer = gets.strip
+end
