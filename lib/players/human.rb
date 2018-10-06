@@ -12,10 +12,16 @@ module Players
     puts "Do you want to be 'X' or 'O'?"
     selection = gets.strip
     case selection
-    when "X" || "x"
+    when "X"
       puts "You are Player 'X'!"
       "X"
-    when "O" || "o"
+    when "x"
+      puts "You are Player 'X'!"
+      "X"
+    when "O"
+      puts "You are Player 'O'!"
+      "O"
+    when "o"
       puts "You are Player 'O'!"
       "O"
     else
