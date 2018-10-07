@@ -15,8 +15,11 @@ module Players
       move = nil
       first_move(board, game)
       second_move(board, game)
+
+      # check two methods below before moving forward for each additional turn
       block_win(board, game)
       secure_win(board, game)
+
       third_move(board, game)
 
       # failsafe conditional
@@ -33,15 +36,22 @@ module Players
     end
 
     def second_move(board, game)
-      if board.cells[4] == "O"
-
-      else
-        move = "7" || move = "9"
+      if board.cells[1] == "O"
+        move = "7"
+      elsif board.cells[2] == "O"
+        move = "4"
+      elsif board.cells[3] == "O" || board.cells[8] == "O"
+        move = "3"
+      elsif board.cells[5] == "O" || board.cells[7] == "O"
+        move = "5"
+      elsif board.cells[6] == "O"
+        move = "2"
       end
     end
 
     def third_move(board, game)
-
+      # "O" center move scenario is handled by win methods
+      #
     end
 
 
