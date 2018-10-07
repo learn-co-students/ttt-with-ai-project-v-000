@@ -11,7 +11,7 @@ module Players
     # include game as a move argument so you know which token you are
     # build moves if X or if O
 
-    def move(board, game = Game.new)
+    def move(board, game)
       move = nil
       if board.turn_count == 0
         first_move(board, game)
@@ -32,7 +32,7 @@ module Players
         move = @@random_move
       end
       move
-      # binding.pry
+      binding.pry
     end
 
     # method to block other player's possible win

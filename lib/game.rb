@@ -18,7 +18,7 @@ class Game
   # CLI methods
   def self.greeting
     puts "\nWelcome to Tic Tac Toe!"
-    @@game = Game.new
+    # @@game = Game.new
   end
 
   def self.game_type?
@@ -48,8 +48,9 @@ class Game
       print "Player 2: "
       second_player = gets.strip
       puts "\nThe competition begins. The prize: bragging rights!"
-      @@game.player_1 = Players::Human.new("X", first_player)
-      @@game.player_2 = Players::Human.new("O", second_player)
+      @@game = Game.new(Players::Human.new("X", first_player), Players::Human.new("O", second_player), Board.new)
+      # @@game.player_1 = Players::Human.new("X", first_player)
+      # @@game.player_2 = Players::Human.new("O", second_player)
     elsif @@num_players == 2
       # initialize with one human player and one computer player
       puts "\nWhat is your name?"
@@ -59,11 +60,13 @@ class Game
       puts "\nMan vs. machine: the eternal battle!"
       # Conditional for response to initialize game
       if order == "first"
-        @@game.player_1 = Players::Human.new("X", player_name)
-        @@game.player_2 = Players::Computer.new("O", "Watson")
+        @@game = Game.new(Players::Human.new("X", player_name), Players::Computer.new("O", "Watson"), Board.new)
+        # @@game.player_1 = Players::Human.new("X", player_name)
+        # @@game.player_2 = Players::Computer.new("O", "Watson")
       elsif order == "second"
-        @@game.player_1 = Players::Computer.new("X", "Watson")
-        @@game.player_2 = Players::Human.new("O", player_name)
+        @@game = Game.new(Players::Computer.new("X", "Watson"), Players::Human.new("O", player_name), Board.new)
+        # @@game.player_1 = Players::Computer.new("X", "Watson")
+        # @@game.player_2 = Players::Human.new("O", player_name)
       else
         puts "\nInvalid input. Please enter first or second."
         player_order?
@@ -71,8 +74,9 @@ class Game
     elsif @@num_players == 3
       # initialize with two computer players
       puts "\nYou know they'll always tie, right?"
-      @@game.player_1 = Players::Computer.new("X", "Optimus Prime")
-      @@game.player_2 = Players::Computer.new("O", "Megatron")
+      @@game = Game.new(Players::Computer.new("X", "Optimus Prime"), Players::Computer.new("O", "Megatron"), Board.new)
+      # @@game.player_1 = Players::Computer.new("X", "Optimus Prime")
+      # @@game.player_2 = Players::Computer.new("O", "Megatron")
     end
   end
 
@@ -139,7 +143,7 @@ class Game
   
   def turn
     print "\nYour turn, #{current_player.name}! To make your move, enter a number 1-9: "
-    input = current_player.move(board)
+    input = current_player.move(board, @@game)
     if current_player.name == "Optimus Prime" || current_player.name == "Megatron" || current_player.name == "Watson"
       puts "#{input}"
     end
