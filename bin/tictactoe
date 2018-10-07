@@ -1,28 +1,39 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-puts "Welcome to Tic-Tac_Toe"
 
-puts "How many players will be playing?"
+def start_game
+  puts "Welcome to Tic-Tac_Toe"
+  puts "How many players will be playing?"
 
-game = nil
-case gets.chomp
-when "0"
-  game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
-
-when "1"
-  # puts "Which player will go first?("X")?"
-  #   if gets.chomp == "1"
-  #     game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-  #   else
-  #     game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-  # end
-when "2"
-  game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  # game = nil
+  input = gets.chomp
+    case input
+      when "0"
+        game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"))
+      when "1"
+        puts "Which player will go first?('X')?"
+          i = gets.chomp
+          if  i == "1"
+            game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+          else
+            game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        end
+      when "2"
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    end
+  # Play game!
+  game.play
+  # On end, play again?
+  puts "Would you like to play again(Press 'Y' for yes or any key to exit)?"
+  input = gets.chomp
+  # On any other key
+  if input == "Y"
+    start_game
+  else
+    puts "Thanks for playing!"
+  end
 end
 
-game.play
-
-
-# Intialize new game with user pref
-# On game over as the user if they would like to play again else exit
+# Start new game
+start_game

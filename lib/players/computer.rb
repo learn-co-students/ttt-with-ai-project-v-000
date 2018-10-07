@@ -2,19 +2,26 @@ module Players
   class Computer < Player
 
     def move(board)
+      corners = ["1","3","7","9"]
+      middles = ["2","4","6","8"]
+      new_move = nil
 
-      if board.turn_count = 0
-          new_move = ["1","3","7","9"].sample
-        elsif [0,3,6,8].detect{|x| board.cells[x] == self.token}
-
-        else
-          new_move = (1..9).to_a.sample.to_s
-          
+        case board.turn_count
+          when 0
+              new_move = corners.sample
+          when 1
+              if board.cells[4] == " "
+                new_move = "5"
+              else
+                new_move = corners.sample
+              end
+          else
+            new_move = corners.sample
+            new_move = middles.sample unless corners.any?{|x| board.cells[x.to_i - 1] == " " }
         end
-
+        # binding.pry
       board = new_move
     end
-
 
   end
 end

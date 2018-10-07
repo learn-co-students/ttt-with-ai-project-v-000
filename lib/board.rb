@@ -4,9 +4,9 @@ class Board
 
   def initialize
     @cells = Array.new(9, " ")
-  end
+  end 
 
-  def display 
+  def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
     puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
