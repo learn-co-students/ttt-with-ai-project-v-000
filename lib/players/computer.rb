@@ -12,13 +12,6 @@ module Players
     # build moves if X or if O
 
     def move(board, game = Game.new)
-      if game.current_player.token == "X"
-        # X token move logic
-      elsif game.current_player.token == "O"
-        # O token move logic
-      end
-
-
       move = nil
       first_move(board, game)
 
@@ -35,6 +28,20 @@ module Players
       end
       move
       # binding.pry
+    end
+
+    # method to block other player's possible win
+    def block_win(board, game)
+      Game::WIN_COMBINATIONS.find do |combo|
+        
+      end
+    end
+
+    # method to execute game-winning move
+    def secure_win(board, game)
+      Game::WIN_COMBINATIONS.find do |combo|
+
+      end
     end
 
     # move methods by turn
@@ -70,14 +77,12 @@ module Players
     end
 
     def third_move(board, game)
-      if !block_win(board, game) && !secure_win(board, game)
-        if [1, 2, 3, 6].find {|i| board.cells[i] == "X"}
-          move = "5"
-        elsif board.cells[4] == "X" && board.cells[5] == "O"
-          move = "3"
-        elsif board.cells[4] == "X" && board.cells[7] == "O"
-          move = "7"
-        end
+      if [1, 2, 3, 6].find {|i| board.cells[i] == "X"}
+        move = "5"
+      elsif board.cells[4] == "X" && board.cells[5] == "O"
+        move = "3"
+      elsif board.cells[4] == "X" && board.cells[7] == "O"
+        move = "7"
       end
       move
     end
@@ -127,56 +132,6 @@ module Players
     #     move = @@edge_move
     #   end
     # end
-
-
-
-    # method to block other player's possible win
-    def block_win(board, game)
-      Game::WIN_COMBINATIONS.find do |combo|
-        
-      end
-    end
-
-    # method to execute game-winning move
-    def secure_win(board, game)
-      Game::WIN_COMBINATIONS.find do |combo|
-
-      end
-    end
-
-
-    # def move(board)
-    #   # computer strategy
-    #   move = nil
-    #   if !board.taken?(5)
-    #     # take center
-    #     move = "5"
-    #   elsif board.turn_count == 1
-    #     # if center is taken, take upper left corner
-    #     move = "1"
-    #   elsif board.turn_count == 2
-    #     # take corner to position yourself for a win
-    #     move = @@corner_move
-    #   elsif board.turn_count == 3 && board.position(1) == board.position(9) || board.position(3) == board.position(7)
-    #     # block other player's possible win
-    #     move = "2"
-    #   else
-    #     Game::WIN_COMBINATIONS.find do |combo|
-    #       # try to win the game
-    #       if combo.select{|i| board.position(i+1) == token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
-    #         move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-    #       # If you can't win, block other player's possible win
-    #       elsif combo.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && combo.any?{|i| board.position(i+1) == " "}
-    #         move = combo.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
-    #       end
-    #     end
-    #     if move == nil
-    #       move = @@random_move
-    #     end
-    #   end
-    #   move
-    # end
-
     
   end
 end
