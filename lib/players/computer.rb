@@ -13,17 +13,22 @@ module Players
 
     def move(board, game = Game.new)
       move = nil
-      first_move(board, game)
-
-      # check two methods below before moving forward for each additional turn
-      block_win(board, game)
-      secure_win(board, game)
-
-      second_move(board, game)
-      third_move(board, game)
+      if board.turn_count == 0
+        first_move(board, game)
+      elsif board.turn_count == 1
+        block_win(board, game)
+        secure_win(board, game)
+        second_move(board, game)
+      elsif board.turn_count == 2
+        block_win(board, game)
+        secure_win(board, game)
+        third_move(board, game)
+      end
 
       # failsafe conditional
       until board.valid_move?(move)
+        block_win(board, game)
+        secure_win(board, game)
         move = @@random_move
       end
       move
