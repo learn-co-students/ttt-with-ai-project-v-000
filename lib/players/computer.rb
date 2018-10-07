@@ -47,11 +47,19 @@ module Players
       elsif board.cells[6] == "O"
         move = "2"
       end
+      move
     end
 
     def third_move(board, game)
       # "O" center move scenario is handled by win methods
-      #
+      if board.cells[1] == "X" || board.cells[2] == "X" || board.cells[3] == "X" || board.cells[6] == "X"
+        move = "5"
+      elsif board.cells[4] == "X" && board.cells[5] == "O"
+        move = "3"
+      elsif board.cells[4] == "X" && board.cells[7] == "O"
+        move = "7"
+      end
+      move
     end
 
 
