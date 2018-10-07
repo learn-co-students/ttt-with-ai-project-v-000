@@ -14,12 +14,12 @@ module Players
     def move(board, game = Game.new)
       move = nil
       first_move(board, game)
-      second_move(board, game)
 
       # check two methods below before moving forward for each additional turn
       block_win(board, game)
       secure_win(board, game)
 
+      second_move(board, game)
       third_move(board, game)
 
       # failsafe conditional
@@ -66,7 +66,7 @@ module Players
 
     # if you're token O
     def first_move(board, game)
-      
+      board.cells[4] == "X" ? move = "1" : move = "5"
     end
 
 
