@@ -12,6 +12,13 @@ module Players
     # build moves if X or if O
 
     def move(board, game = Game.new)
+      if game.current_player.token == "X"
+        # X token move logic
+      else
+        # O token move logic
+      end
+
+
       move = nil
       first_move(board, game)
 
@@ -52,7 +59,7 @@ module Players
 
     def third_move(board, game)
       # "O" center move scenario is handled by win methods
-      if board.cells[1] == "X" || board.cells[2] == "X" || board.cells[3] == "X" || board.cells[6] == "X"
+      if [1, 2, 3, 6].find {|i| board.cells[i] == "X"}
         move = "5"
       elsif board.cells[4] == "X" && board.cells[5] == "O"
         move = "3"
@@ -67,6 +74,14 @@ module Players
     # if you're token O
     def first_move(board, game)
       board.cells[4] == "X" ? move = "1" : move = "5"
+    end
+
+    def second_move(board, game)
+      if board.cells[4] == "O" || [2, 4, 6, 8].find {|i| board.cells[i] == "O"}
+        move = @@corner_move
+      elsif [1, 3, 7, 9].find {|i| board.cells[i] == "O"}
+        move = @@edge_move
+      end
     end
 
 
