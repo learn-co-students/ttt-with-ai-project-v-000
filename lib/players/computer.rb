@@ -11,27 +11,31 @@ module Players
     # include game as a move argument so you know which token you are
     # build moves if X or if O
 
-    def move(board, game)
+    def move(board, game = Game.game)
       move = nil
-      if board.turn_count == 0
+      if board.turn_count == 0 || board.turn_count == 1
         first_move(board, game)
-      elsif board.turn_count == 1
+        move
+      elsif board.turn_count == 2 || board.turn_count == 3
         block_win(board, game)
         secure_win(board, game)
         second_move(board, game)
-      elsif board.turn_count == 2
+        move
+      elsif board.turn_count == 4
         block_win(board, game)
         secure_win(board, game)
         third_move(board, game)
+        move
       else
         until board.valid_move?(move)
           block_win(board, game)
           secure_win(board, game)
           move = @@random_move
         end
+        move
       end
-
       move
+      
       # binding.pry
     end
 
@@ -45,7 +49,9 @@ module Players
         elsif poss_win.count("X") == 2 && poss_win.count(" ") == 1 && game.current_player.token == "O"
           move = poss_win.find_index(" ") + 1
         end
+        move
       end
+      move
     end
 
     # method to execute game-winning move
@@ -58,7 +64,9 @@ module Players
         elsif poss_win.count("O") == 2 && poss_win.count(" ") == 1 && game.current_player.token == "O"
           move = poss_win.find_index(" ") + 1
         end
+        move
       end
+      move
     end
 
     # move methods by turn
@@ -68,6 +76,8 @@ module Players
       elsif game.current_player.token == "O"
         board.cells[4] == "X" ? move = "1" : move = "5"
       end
+      move
+      # binding.pry
     end
 
     def second_move(board, game)
@@ -83,12 +93,14 @@ module Players
         elsif board.cells[6] == "O"
           move = "2"
         end
+        move
       elsif game.current_player.token == "O"
         if board.cells[4] == "O" || [2, 4, 6, 8].find {|i| board.cells[i] == "O"}
           move = @@corner_move
         elsif [1, 3, 7, 9].find {|i| board.cells[i] == "O"}
           move = @@edge_move
         end
+        move
       end
       move
     end
