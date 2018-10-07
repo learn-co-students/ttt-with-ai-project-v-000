@@ -23,16 +23,16 @@ module Players
         block_win(board, game)
         secure_win(board, game)
         third_move(board, game)
+      else
+        until board.valid_move?(move)
+          block_win(board, game)
+          secure_win(board, game)
+          move = @@random_move
+        end
       end
 
-      # failsafe conditional
-      until board.valid_move?(move)
-        block_win(board, game)
-        secure_win(board, game)
-        move = @@random_move
-      end
       move
-      binding.pry
+      # binding.pry
     end
 
     # method to block other player's possible win
