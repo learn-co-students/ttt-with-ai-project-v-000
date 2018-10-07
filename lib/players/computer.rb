@@ -9,13 +9,17 @@ module Players
     # check for move validity in this class to add additional computer intelligence
     # possibly initialize game in player class as well
     # include game as a move argument so you know which token you are
-    # make a block win method
+    # build moves if X or if O
 
     def move(board, game = Game.new)
       move = nil
-      if board.turn_count == 0
-        return @@corner_move
-      end
+      first_move(board, game)
+      second_move(board, game)
+      block_win(board, game)
+      secure_win(board, game)
+      third_move(board, game)
+
+      # failsafe conditional
       until board.valid_move?(move)
         move = @@random_move
       end
@@ -23,6 +27,45 @@ module Players
       # binding.pry
     end
     
+    # if you're token X
+    def first_move(board, game)
+      move = "1"
+    end
+
+    def second_move(board, game)
+      if board.cells[4] == "O"
+
+      else
+        move = "7" || move = "9"
+      end
+    end
+
+    def third_move(board, game)
+
+    end
+
+
+
+    # if you're token O
+    def first_move(board, game)
+      
+    end
+
+
+
+    # method to block other player's possible win
+    def block_win(board, game)
+      Game::WIN_COMBINATIONS.find do |combo|
+        
+      end
+    end
+
+    # method to execute game-winning move
+    def secure_win(board, game)
+      Game::WIN_COMBINATIONS.find do |combo|
+
+      end
+    end
 
 
     # def move(board)
