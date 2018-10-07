@@ -33,14 +33,26 @@ module Players
     # method to block other player's possible win
     def block_win(board, game)
       Game::WIN_COMBINATIONS.find do |combo|
-        
+        poss_win = []
+        combo.each {|i| poss_win << board.cells[i]}
+        if poss_win.count("O") == 2 && poss_win.count(" ") == 1 && game.current_player.token == "X"
+          move = poss_win.find_index(" ") + 1
+        elsif poss_win.count("X") == 2 && poss_win.count(" ") == 1 && game.current_player.token == "O"
+          move = poss_win.find_index(" ") + 1
+        end
       end
     end
 
     # method to execute game-winning move
     def secure_win(board, game)
       Game::WIN_COMBINATIONS.find do |combo|
-
+        poss_win = []
+        combo.each {|i| poss_win << board.cells[i]}
+        if poss_win.count("X") == 2 && poss_win.count(" ") == 1 && game.current_player.token == "X"
+          move = poss_win.find_index(" ") + 1
+        elsif poss_win.count("O") == 2 && poss_win.count(" ") == 1 && game.current_player.token == "O"
+          move = poss_win.find_index(" ") + 1
+        end
       end
     end
 
