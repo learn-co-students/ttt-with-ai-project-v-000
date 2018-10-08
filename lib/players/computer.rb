@@ -6,11 +6,11 @@ module Players
     def move(board)
       (1..9).to_a.sample.to_s
     end
+    # binding.pry
 
-    
-    # @@corner_move = [1, 3, 7, 9].sample.to_s
-    # @@edge_move = [2, 4, 6, 8].sample.to_s
-    # @@random_move = (1..9).to_a.sample.to_s
+    @@corner_move = [1, 3, 7, 9].sample.to_s
+    @@edge_move = [2, 4, 6, 8].sample.to_s
+    @@random_move = (1..9).to_a.sample.to_s
 
     # check for move validity in this class to add additional computer intelligence
     # possibly initialize game in player class as well
@@ -76,41 +76,41 @@ module Players
     #   @player_move
     # end
 
-    # # move methods by turn
-    # def first_move(board, game)
-    #   if game.current_player.token == "X"
-    #     @player_move = "1"
-    #   elsif game.current_player.token == "O"
-    #     board.cells[4] == "X" ? @player_move = "1" : @player_move = "5"
-    #   end
-    #   @player_move
-    #   # binding.pry
-    # end
+    # move methods by turn
+    def first_move(board)
+      if self.token == "X"
+        @player_move = "1"
+      elsif self.token == "O"
+        board.cells[4] == "X" ? @player_move = "1" : @player_move = "5"
+      end
+      @player_move
+      # binding.pry
+    end
 
-    # def second_move(board, game)
-    #   if game.current_player.token == "X"
-    #     if board.cells[1] == "O"
-    #       @player_move = "7"
-    #     elsif board.cells[2] == "O"
-    #       @player_move = "4"
-    #     elsif board.cells[3] == "O" || board.cells[8] == "O"
-    #       @player_move = "3"
-    #     elsif board.cells[5] == "O" || board.cells[7] == "O"
-    #       @player_move = "5"
-    #     elsif board.cells[6] == "O"
-    #       @player_move = "2"
-    #     end
-    #     @player_move
-    #   elsif game.current_player.token == "O"
-    #     if board.cells[4] == "O" || [2, 4, 6, 8].find {|i| board.cells[i] == "O"}
-    #       @player_move = @@corner_move
-    #     elsif [1, 3, 7, 9].find {|i| board.cells[i] == "O"}
-    #       @player_move = @@edge_move
-    #     end
-    #     @player_move
-    #   end
-    #   @player_move
-    # end
+    def second_move(board)
+      if self.token == "X"
+        if board.cells[1] == "O"
+          @player_move = "7"
+        elsif board.cells[2] == "O"
+          @player_move = "4"
+        elsif board.cells[3] == "O" || board.cells[8] == "O"
+          @player_move = "3"
+        elsif board.cells[5] == "O" || board.cells[7] == "O"
+          @player_move = "5"
+        elsif board.cells[6] == "O"
+          @player_move = "2"
+        end
+        @player_move
+      elsif self.token == "O"
+        if board.cells[4] == "O" || [2, 4, 6, 8].find {|i| board.cells[i] == "O"}
+          @player_move = @@corner_move
+        elsif [1, 3, 7, 9].find {|i| board.cells[i] == "O"}
+          @player_move = @@edge_move
+        end
+        @player_move
+      end
+      @player_move
+    end
 
     # def third_move(board, game)
     #   if [1, 2, 3, 6].find {|i| board.cells[i] == "X"}

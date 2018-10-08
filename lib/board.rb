@@ -34,8 +34,8 @@ class Board
     position(input) == "X" || position(input) == "O"
   end
 
-  def valid_move?(move)
-    move.to_i.between?(1, 9) && !taken?(move)
+  def valid_move?(input)
+    input.to_i.between?(1, 9) && !taken?(input)
   end
 
   def update(input, player)
