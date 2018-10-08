@@ -118,52 +118,6 @@ module Players
     #   end
     #   @player_move
     # end
-
-    
-    # # if you're token X
-    # def first_move(board, game)
-    #   move = "1"
-    # end
-
-    # def second_move(board, game)
-    #   if board.cells[1] == "O"
-    #     move = "7"
-    #   elsif board.cells[2] == "O"
-    #     move = "4"
-    #   elsif board.cells[3] == "O" || board.cells[8] == "O"
-    #     move = "3"
-    #   elsif board.cells[5] == "O" || board.cells[7] == "O"
-    #     move = "5"
-    #   elsif board.cells[6] == "O"
-    #     move = "2"
-    #   end
-    #   move
-    # end
-
-    # def third_move(board, game)
-    #   # "O" center move scenario is handled by win methods
-    #   if [1, 2, 3, 6].find {|i| board.cells[i] == "X"}
-    #     move = "5"
-    #   elsif board.cells[4] == "X" && board.cells[5] == "O"
-    #     move = "3"
-    #   elsif board.cells[4] == "X" && board.cells[7] == "O"
-    #     move = "7"
-    #   end
-    #   move
-    # end
-
-    # # if you're token O
-    # def first_move(board, game)
-    #   board.cells[4] == "X" ? move = "1" : move = "5"
-    # end
-
-    # def second_move(board, game)
-    #   if board.cells[4] == "O" || [2, 4, 6, 8].find {|i| board.cells[i] == "O"}
-    #     move = @@corner_move
-    #   elsif [1, 3, 7, 9].find {|i| board.cells[i] == "O"}
-    #     move = @@edge_move
-    #   end
-    # end
     
   end
 end
