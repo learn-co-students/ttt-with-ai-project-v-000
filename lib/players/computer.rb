@@ -10,7 +10,11 @@ module Players
         end
           count += 1
       end
+      if valid.include?("5")
+        "5"
+      else
       valid.sample
+      end
     end
   end
 end
