@@ -43,6 +43,47 @@ class Board
     turns
   end
 
+  def taken?(index)
+    character = @cells[index.to_i - 1]
+    if character == "X" || character == "O"
+      return true
+    else
+      return false
+    end
+  end
+
+  def valid_move?(index)
+
+    int_index = index.to_i - 1
+
+    if 0 <= int_index && int_index <= 8
+      within_index = true
+    else
+      within_index = false
+    end
+
+    if taken?(index) == true
+      occupied = true
+    else
+      occupied = false
+    end
+
+    if within_index == true && occupied == false
+      true
+    else
+      false
+    end
+
+  end
+
+  def update(index, player)
+    
+    @cells[index.to_i - 1] = player.token
+  end
+
+
+
+
 
 
 end
