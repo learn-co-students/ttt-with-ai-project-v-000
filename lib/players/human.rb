@@ -7,12 +7,8 @@ module Players
 
     def move(board)
 
-      puts "What position would you like to make?"
+      puts "Which cell would you like to pick (1-9)?"
       position = gets
-
-      #board.cells[position.to_i - 1] = @token
-
-      position
 
     end
 

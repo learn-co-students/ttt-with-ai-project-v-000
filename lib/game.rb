@@ -1,4 +1,5 @@
 require 'pry'
+require 'spec_helper'
 
 class Game
 
@@ -78,26 +79,21 @@ class Game
 
   def turn
 
-    
-    puts "Please enter 1-9:"
-    input = gets
+    @board.display
+    input1 = @player_1.move(@board)
 
-    if @board.valid_move?(input) == false
-      self.turn
+    while @board.valid_move?(input1) == false
+      input1 = @player_1.move(@board)
     end
 
-    if self.current_player == @player_1
+    @board.display
+    input2 = @player_2.move(@board)
 
-      position = @player_1.move(@board)
-
+    while @board.valid_move?(input2) == false
+      input2 = @player_2.move(@board)
     end
 
   end
-
-
-
-
-
 
 
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
