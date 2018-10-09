@@ -79,19 +79,11 @@ class Game
 
   def turn
 
-    @board.display
-    input1 = @player_1.move(@board)
-
-    while @board.valid_move?(input1) == false
-      input1 = @player_1.move(@board)
+    input = current_player.move(@board)
+    if @board.valid_move?(input) == false
+      input = current_player.move(@board)
     end
-
-    @board.display
-    input2 = @player_2.move(@board)
-
-    while @board.valid_move?(input2) == false
-      input2 = @player_2.move(@board)
-    end
+    @board.update(input, current_player)
 
   end
 
