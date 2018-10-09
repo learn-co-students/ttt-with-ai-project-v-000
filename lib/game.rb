@@ -8,8 +8,95 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+  end
+
+  def current_player
+    turns = @board.turn_count
+    if turns % 2 == 0
+      @player_1
+    else
+      @player_2
+    end
+  end
+
+  def won?
+
+    WIN_COMBINATIONS.each do |win_combo|
+      win_index_1 = win_combo[0]
+      win_index_2 = win_combo[1]
+      win_index_3 = win_combo[2]
+
+      position_1 = @board.cells[win_index_1]
+      position_2 = @board.cells[win_index_2]
+      position_3 = @board.cells[win_index_3]
+
+
+        if position_1 == "X" && position_2 == "X" && position_3 == "X"
+          return win_combo
+        elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+          return win_combo
+        end
+      end
+      return false
+    end
+
+  def draw?
+    if @board.full? == true && self.won? == false
+      return true
+    else
+      return false
+    end
+  end
+
+  def over?
+    if self.draw? == true
+      return true
+    elsif self.won? != false
+      return true
+    elsif @board.full? == true
+      return true
+    elsif self.won? == true && @board.full? == false
+      return true
+    else
+      return false
+    end
+  end
+
+  def winner
+    if self.won? == false
+      return nil
+    else
+      winning_array = self.won?
+      index = winning_array[0]
+      if @board.cells[winning_array[0]] == "X"
+        return "X"
+      else
+        return "O"
+      end
+    end
+  end
+
+  def turn
+
+    
+    puts "Please enter 1-9:"
+    input = gets
+
+    if @board.valid_move?(input) == false
+      self.turn
+    end
+
+    if self.current_player == @player_1
+
+      position = @player_1.move(@board)
+
+    end
 
   end
+
+
+
+
 
 
 

@@ -79,10 +79,4 @@ class Board
   def update(index, player)
     @cells[index.to_i - 1] = player.token
   end
-
-
-
-
-
-
 end
