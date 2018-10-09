@@ -9,20 +9,14 @@ module Players
     end
 
     def move_to_make
-
-      
-
-      @board.taken?(index) == true
-
-
-
+      decision = Random.new.rand(9)
+      while @board.valid_move?(decision) == false
+        decision = Random.new.rand(9)
       end
-
+      decision.to_s
     end
 
 
   end
-
-
 
 end
