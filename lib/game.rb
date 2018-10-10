@@ -79,36 +79,13 @@ class Game
   end
   
   def play
-    while !over?
-      turn
-     
-    end
-    # binding.pry
-    #   it 'plays the first turn of the game' do
-    #   game = Game.new
-    #   allow($stdout).to receive(:puts)
-    #   allow(game.player_1).to receive(:gets).and_return("1")
-
-    #   allow(game).to receive(:over?).and_return(false, true)
-
-    #   game.play
-
-    #   expect(game.board.cells).to eq(["X", " ", " ", " ", " ", " ", " ", " ", " "])
-    # end
-    
-    
-    # if won?
-    #   puts "Congratulations #{winner}!"
-    # elsif draw?
-    #   puts "Cat's game!"  
-    # end
+    turn until over?
     
   end
   
   def turn
-    n = self.current_player.move(self.board)
-    self.board.update(n, current_player)
-    # binding.pry
+    n = self.current_player.move(@board)
+    @board.update(n, current_player)
   end
 
   def board

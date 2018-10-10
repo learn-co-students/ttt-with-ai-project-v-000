@@ -21,7 +21,6 @@ class Board
   
   def update(position, player)
     @cells[position.to_i - 1] = player.token
-    # @cells
   end
 
   
