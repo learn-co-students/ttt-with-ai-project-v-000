@@ -1,18 +1,6 @@
 require 'spec_helper'
 
-describe 'Game' do
-  describe '::WIN_COMBINATIONS' do
-    it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
-      expect(Game::WIN_COMBINATIONS).to include_array([0,1,2])
-      expect(Game::WIN_COMBINATIONS).to include_array([3,4,5])
-      expect(Game::WIN_COMBINATIONS).to include_array([6,7,8])
-      expect(Game::WIN_COMBINATIONS).to include_array([0,3,6])
-      expect(Game::WIN_COMBINATIONS).to include_array([1,4,7])
-      expect(Game::WIN_COMBINATIONS).to include_array([2,5,8])
-      expect(Game::WIN_COMBINATIONS).to include_array([0,4,8])
-      expect(Game::WIN_COMBINATIONS).to include_array([6,4,2])
-    end
-  end
+
 
   describe '#board' do
     it 'provides access to the board' do
@@ -76,12 +64,7 @@ describe 'Game' do
   end
 
   describe '#won?' do
-    it 'returns false for a draw' do
-      game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
-      expect(game.won?).to be_falsey
-    end
+    
 
     it 'returns the correct winning combination in the case of a win' do
       game = Game.new
@@ -90,6 +73,12 @@ describe 'Game' do
                           "O", "X", "X"]
 
       expect(game.won?).to contain_exactly(2, 5, 8)
+    end
+    it 'returns false for a draw' do
+      game = Game.new
+      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
+
+      expect(game.won?).to be_falsey
     end
 
     it "isn't hard-coded" do
@@ -348,4 +337,4 @@ describe 'Game' do
 
   describe 'start' do
   end
-end
+# end
