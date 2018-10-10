@@ -11,6 +11,27 @@ class Game
     @board = board
   end
 
+  def self.start
+    puts "Welcome to Tic-Tac-Toe!!"
+    puts "What kind of game would you like to play (0, 1, or 2)?"
+    type_of_game = gets
+    puts "Who would like to go first and be 'X', Human or Computer?"
+    first_player = gets
+
+    board = Board.new
+
+    if type_of_game == "0"
+      game = self.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
+    elsif type_of_game == "1" && first_player == "Computer"
+      game = self.new(Players::Computer.new('X'), Players::Human.new('O'), board)
+    elsif  type_of_game == "1" && first_player == "Human"
+      game = self.new(Players::Human.new('X'), Players::Computer.new('O'), board)
+    else type_of_game == "2"
+      game = self.new(Players::Human.new('X'), Players::Human.new('O'), board)
+    end
+  end
+
+
   def current_player
     turns = @board.turn_count
     if turns % 2 == 0
@@ -103,9 +124,7 @@ class Game
     else
       puts "Thanks for playing"
     end
-
   end
-
 
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6],[0,3,6],[1,4,7],[2,5,8]]
 
