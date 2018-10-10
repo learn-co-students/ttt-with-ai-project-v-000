@@ -1,5 +1,5 @@
 require 'pry'
-require 'spec_helper'
+#require 'spec_helper'
 
 class Game
 
@@ -11,33 +11,42 @@ class Game
     @board = board
   end
 
+=begin
   def self.start
+
     puts "Welcome to Tic-Tac-Toe!!"
     puts "What kind of game would you like to play (0, 1, or 2)?"
-    type_of_game = gets
-    puts "Who would like to go first and be 'X', Human or Computer?"
-    first_player = gets
+    type_of_game = gets.chomp.to_i
+    if type_of_game != 0
+      puts "Who would like to go first and be 'X', Human or Computer?"
+      first_player = gets
+    end
 
     board = Board.new
 
-    if type_of_game == "0"
+    if type_of_game == 0
       game = self.new(Players::Computer.new('X'), Players::Computer.new('O'), board)
-    elsif type_of_game == "1" && first_player == "Computer"
+    elsif type_of_game == 1 && first_player == "Computer"
       game = self.new(Players::Computer.new('X'), Players::Human.new('O'), board)
-    elsif  type_of_game == "1" && first_player == "Human"
+    elsif  type_of_game == 1 && first_player == "Human"
       game = self.new(Players::Human.new('X'), Players::Computer.new('O'), board)
-    else type_of_game == "2"
+    else type_of_game == 2
       game = self.new(Players::Human.new('X'), Players::Human.new('O'), board)
     end
-  end
+    game
 
+  end
+=end
 
   def current_player
     turns = @board.turn_count
-    if turns % 2 == 0
+    #binding.pry
+    if turns == 0
       @player_1
-    else
+    elsif turns % 2 == 1 && turns != 0
       @player_2
+    else
+      @player_1
     end
   end
 
@@ -63,7 +72,7 @@ class Game
     end
 
   def draw?
-    if @board.full? == true && self.won? == false
+    if @board.full? == true && won? == false
       return true
     else
       return false
@@ -112,16 +121,23 @@ class Game
   def play
 
     until over? == true
+      if @board.turn_count != 0
+        @board.display
+      end
       turn
     end
 
     if draw? == true
+      @board.display
       puts "Cat's Game!"
     elsif winner == "X"
+      @board.display
       puts "Congratulations X!"
     elsif winner == "O"
+      @board.display
       puts "Congratulations O!"
     else
+      @board.display
       puts "Thanks for playing"
     end
   end
