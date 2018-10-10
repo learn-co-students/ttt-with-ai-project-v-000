@@ -47,5 +47,18 @@ class Board
   def index(input)
     input = input.to_i - 1
   end
+  
+  def full?
+    cells.all?  {|index| index == "X" || index == "O"}
+  end
+
+ def turn_count
+  cells.count {|cell| cell == "X" || cell == "O"}
+ end
+
+  def taken?(input)
+   input = index(input)
+   cells[input].include?("X") || cells[input].include?("O")
+ end
 
 end
