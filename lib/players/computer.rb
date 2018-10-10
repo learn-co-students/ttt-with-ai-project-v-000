@@ -19,9 +19,9 @@ module Players
         while @board.valid_move?(decision) == false
           decision = Random.new.rand(10)
         end
-        decision.to_s
+        decision
       end
-      decision
+      decision.to_s
     end
 
 
