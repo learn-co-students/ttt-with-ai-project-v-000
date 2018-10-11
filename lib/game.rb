@@ -29,7 +29,11 @@ class Game
   end 
   
   def won?
-    
+    valid_token = "X" || "O"
+    WIN_COMBINATIONS.detect do |combo|
+      combo[0] == combo[1] && combo[1] == combo[2] && combo[0] == valid_token
+    end 
+    end 
   end 
   
 end 
