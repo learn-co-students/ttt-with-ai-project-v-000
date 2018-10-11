@@ -37,7 +37,7 @@ class Game
     if combination.class == NilClass 
       false 
     else 
-      combination 
+      combination[0], combination[1], combination[2] 
     end 
    end 
 end 
