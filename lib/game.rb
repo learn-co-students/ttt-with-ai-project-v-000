@@ -36,8 +36,11 @@ class Game
     end 
     if combination.class == NilClass 
       false 
-    else 
-      combination[0], combination[1], combination[2] 
+    else
+      combination
     end 
+   end 
+   
+   def draw?
    end 
 end 
