@@ -1,0 +1,29 @@
+
+[1mFrom:[0m /home/great-divide/ttt-with-ai-project-v-000/lib/game.rb @ line 85 Game#play:
+
+     [1;34m81[0m: [32mdef[0m [1;34mplay[0m
+     [1;34m82[0m:   [32mwhile[0m !over?
+     [1;34m83[0m:     turn
+     [1;34m84[0m:   [32mend[0m
+ =>  [1;34m85[0m:   binding.pry
+     [1;34m86[0m:   [1;34m#   it 'plays the first turn of the game' do[0m
+     [1;34m87[0m:   [1;34m#   game = Game.new[0m
+     [1;34m88[0m:   [1;34m#   allow($stdout).to receive(:puts)[0m
+     [1;34m89[0m:   [1;34m#   allow(game.player_1).to receive(:gets).and_return("1")[0m
+     [1;34m90[0m: 
+     [1;34m91[0m:   [1;34m#   allow(game).to receive(:over?).and_return(false, true)[0m
+     [1;34m92[0m: 
+     [1;34m93[0m:   [1;34m#   game.play[0m
+     [1;34m94[0m: 
+     [1;34m95[0m:   [1;34m#   expect(game.board.cells).to eq(["X", " ", " ", " ", " ", " ", " ", " ", " "])[0m
+     [1;34m96[0m:   [1;34m# end[0m
+     [1;34m97[0m: 
+     [1;34m98[0m:   
+     [1;34m99[0m:   [1;34m# if won?[0m
+    [1;34m100[0m:   [1;34m#   puts "Congratulations #{winner}!"[0m
+    [1;34m101[0m:   [1;34m# elsif draw?[0m
+    [1;34m102[0m:   [1;34m#   puts "Cat's game!"  [0m
+    [1;34m103[0m:   [1;34m# end[0m
+    [1;34m104[0m:   
+    [1;34m105[0m: [32mend[0m
+
