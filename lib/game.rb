@@ -30,10 +30,14 @@ class Game
   
   def won?
     valid_token = "X" || "O"
-    WIN_COMBINATIONS.detect do |combo|
-      combo[0] == combo[1] && combo[1] == combo[2] && combo[0] == valid_token
+    combination = WIN_COMBINATIONS.detect do |combo|
+     
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == valid_token
     end 
+    if combination.class == NilClass 
+      false 
+    else 
+      combination 
     end 
-  end 
-  
+   end 
 end 
