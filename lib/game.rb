@@ -43,4 +43,10 @@ WIN_COMBINATIONS = [
     nil
   end
   end
+  
+  def turn
+    
+  end 
+  
+  
 end
