@@ -2,7 +2,10 @@
 
 require_relative '../config/environment'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> fee4289d3bae1818b46fd32ed61a05f9d56ee4d6
 def start_game
   puts "Welcome to Tic-Tac-Toe!"
   puts "What kind of game would you like to play?
@@ -14,6 +17,7 @@ def start_game
   
   if game_mode == "1"
     puts "Would you like to go first? Y/N"
+<<<<<<< HEAD
       if gets.strip == "Y" || gets.strip == "y"
         Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
       else Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
@@ -21,11 +25,32 @@ def start_game
   elsif game_mode == "2"
     Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
   elsif game_mode == "0"
+=======
+      if gets.strip == "Y" || gets.strip = "y"
+        Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+      else (player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+      end
+  elsif game_mode == "2"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  elseif game_mode == "0"
+>>>>>>> fee4289d3bae1818b46fd32ed61a05f9d56ee4d6
     Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
   end
   
   puts "Would you like to play again? Y/N"
+<<<<<<< HEAD
   start_game until gets.strip == "n" || gets.strip == "N"
 end
   
 start_game
+=======
+  get.strip
+end
+  
+start_game until gets.strip == "n" || gets.strip == "N"
+  
+  
+    
+      
+      
+>>>>>>> fee4289d3bae1818b46fd32ed61a05f9d56ee4d6
