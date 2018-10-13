@@ -27,7 +27,8 @@ class Board
   end
 
   def turn_count
-    9 - cells.count(" ").to_i
+    # 9 - cells.count(" ")
+    cells.count { |cell| cell == "X" || cell == "O" }
   end
 
   def taken?(input)
