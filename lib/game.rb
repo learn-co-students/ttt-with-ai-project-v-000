@@ -53,6 +53,10 @@ class Game
 
   def winner
     board.cells[won?&.first] if won?
+    # Can assign result of #won? to a variable instead
+    # if won = won?
+    #   board.cells[won.first]
+    # end
   end
   
   def turn
