@@ -32,7 +32,7 @@ class Game
     valid_token = "X" || "O"
     combination = WIN_COMBINATIONS.detect do |combo|
      
-      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == valid_token
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] != " " 
     end 
     if combination.class == NilClass 
       false 
@@ -41,6 +41,63 @@ class Game
     end 
    end 
    
+   
+  
+   
    def draw?
-   end 
+    if board.full? && self.won? == false 
+      true 
+    else 
+      false 
+    end 
+   end
+  
+  
+  def over?
+    if self.won?
+      true 
+    elsif self.draw? 
+      true 
+    else 
+      false
+    end 
+  end 
+  
+  def winner
+    if self.won?
+      winning_combo = self.won?
+      self.board.cells[winning_combo[0]]
+    else
+      nil 
+    end 
+  end 
+  
+  
+  def turn
+    player = current_player
+    current_move = player.move(@board)
+     if !@board.valid_move?(current_move)
+      turn
+     else
+      puts "Turn: #{@board.turn_count+1}\n"
+      @board.display
+      @board.update(current_move, player)
+      puts "#{player.token} moved #{current_move}"
+      @board.display
+      puts "\n\n"
+     end
+  end
+  
+  def play 
+    while !over? 
+     turn 
+    end
+    if won?
+      puts "Congratulations #{self.winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end 
+  
+  end 
+  
 end 
