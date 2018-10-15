@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+input = nil
+while input != "exit" do
+puts "Ready to play Tic-Tac-Toe?"
+puts "Press 1 for multiple players, 2 for VS. computer play or anything else for comp vs. comp play"
+input = gets.strip
+if input == "1"
+game = Game.new
+elsif input == "2"
+  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+else
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+end
+
+game.play
+puts "Would you like to play again? Press y for yes."
+input = gets.strip
+if input == "y"
+input = "y"
+else
+input = "exit"
+end
+end
