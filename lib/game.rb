@@ -65,24 +65,21 @@ class Game
     end
   end
   
- 
- 
-
-  
   def play
-    board.reset!
+    
     system('clear')
     puts "Game #{@counter}" if @wargame
+    
+    turn until over?
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
     board.display
-    until over?
-      turn
-    end
-    if draw?
-      puts "WINNER: NONE"
-    elsif won?
-      puts "WINNER: #{winner}"
-    end
   end
+  
+  
   def wargames
     @counter = 0
     x = 0
