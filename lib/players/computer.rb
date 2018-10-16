@@ -1,80 +1,92 @@
 module Players
   class Computer < Player
-    attr_accessor :board
+    attr_reader :board
     WIN_COMBINATIONS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [6, 4, 2]
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [6, 4, 2]
     ]
-    CORNERS = [0, 2, 8, 6]
-  
+
     def move(board)
       @board = board
-      timer <= 0 ? @timer = 0.01 : @timer = timer
-      case
-        when winning_move != nil
-          input = winning_move + 1
-        when blocking_move != nil
-          input = blocking_move + 1
-        when center?
-          input = 5
-        when opposite_corner != nil && board.taken?(opposite_corner) == false
-          input = opposite_corner
-        when corner
-          input = corner + 1
-        else
-          until !board.taken?(input)
-            input = (1..9).to_a.sample
+
+      opponent_token
+
+      if check_for_winning_move != nil
+        number = check_for_winning_move
+      elsif block_opponent != nil
+        number = block_opponent
+      else
+        number = free_move
+      end
+      number += 1
+      return number.to_s #is returning the non-indexed number
+    end
+
+    def opponent_token
+      if self.token == "X"
+        opponent_token = "O"
+      else
+        opponent_token = "X"
+      end
+    end
+
+    def check_for_winning_move
+      winning_move = nil
+      WIN_COMBINATIONS.detect do |win_combo|
+        position_1 = board.cells[win_combo[0]]
+        position_2 = board.cells[win_combo[1]]
+        position_3 = board.cells[win_combo[2]]
+
+        if (position_1 == self.token && position_2 == self.token && position_3 == " ")
+          winning_move = win_combo[2]
+        elsif (position_1 == self.token && position_2 == " " && position_3 == self.token)
+          winning_move = win_combo[1]
+        elsif (position_1 == " " && position_2 == self.token && position_3 == self.token)
+          winning_move = win_combo[0]
+        end
+      end
+      winning_move
+    end
+
+    def block_opponent
+      blocking_move = nil
+      WIN_COMBINATIONS.detect do |win_combo|
+        position_1 = board.cells[win_combo[0]]
+        position_2 = board.cells[win_combo[1]]
+        position_3 = board.cells[win_combo[2]]
+
+        if (position_1 == opponent_token && position_2 == opponent_token && position_3 == " ")
+          blocking_move = win_combo[2]
+        elsif (position_1 == opponent_token && position_2 == " " && position_3 == opponent_token)
+          blocking_move = win_combo[1]
+        elsif (position_1 == " " && position_2 == opponent_token && position_3 == opponent_token)
+          blocking_move = win_combo[0]
+        end
+      end
+      blocking_move
+    end
+
+    def free_move
+      corners = [0, 2, 6, 8]
+      corner_move = corners.detect {|i| board.cells[i] == " "}
+      if board.cells[4] == " "
+        return 4
+      elsif corner_move
+        return corner_move
+      else
+        empty = []
+        board.cells.each_with_index do |space, index|
+          if space == " "
+            empty << index
           end
-      end
-      sleep(@timer)
-      input.to_s
-    end
-    def other
-      token == "X" ? "O" : "X"
-    end
-    def winning_move
-      winning_row = WIN_COMBINATIONS.find do |combo|
-        (board.cells[combo[0]] == token && board.cells[combo[1]] == token && board.cells[combo[2]] == " ") || (board.cells[combo[2]] == token && board.cells[combo[1]] == token && board.cells[combo[0]] == " ") || (board.cells[combo[0]] == token && board.cells[combo[2]] == token && board.cells[combo[1]] == " ")
-      end
-      if winning_row != nil
-        winning_cell = winning_row.find {|cell| board.cells[cell] == " "}
-      end
-    end
-    def blocking_move
-      winning_row = WIN_COMBINATIONS.find do |combo|
-        (board.cells[combo[0]] == other && board.cells[combo[1]] == other && board.cells[combo[2]] == " ") || (board.cells[combo[1]] == other && board.cells[combo[2]] == other && board.cells[combo[0]] == " ") || (board.cells[combo[2]] == other && board.cells[combo[0]] == other && board.cells[combo[1]] == " ")
-      end
-      if winning_row != nil
-        winning_cell = winning_row.find {|cell| board.cells[cell] == " "}
-      end
-    end
-    def center?
-      board.cells[4] == " "
-    end
-    def corners
-      CORNERS.shuffle!
-    end
-    def corner
-      corners.find {|corner| board.cells[corner] == " "}
-    end
-    def opposite_corner
-      case
-        when board.taken?(1) && !board.taken?(9)
-          9
-        when board.taken?(9) && !board.taken?(1)
-          1
-        when board.taken?(3) && !board.taken?(7)
-          7
-        when board.taken?(7) && !board.taken?(3)
-          3
-        else
-          nil
+        end
+        return empty.sample
       end
     end
   end
