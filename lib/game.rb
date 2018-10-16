@@ -18,11 +18,11 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    @wargame = wargame
+    @ticto = ticto
     @timer = 1.5
   end
 
-  def current_player
+  def player
     board.turn_count.even?  ? player_1 : player_2
   end
   def won?
@@ -40,10 +40,10 @@ class Game
     board.cells[won?[0]] if won?
   end
   def turn
-    puts "It's now #{current_player.token}'s turn."
-    input = current_player.move(board, timer).to_i
+    puts "It's now #{player.token}'s turn."
+    input = player .move(board, timer).to_i
     if board.valid_move?(input.to_s)
-      board.update(input, current_player)
+      board.update(input, player)
       system('clear')
       puts "Game #{@counter}" if @wargame
       board.display
@@ -51,14 +51,14 @@ class Game
       puts "That is an invalid move"
       turn
     else
-      puts "your position is taken"
+      puts "your position is taken by the enemy"
       turn
     end
   end
   def play
     board.reset!
     system('clear')
-    puts "Game #{@counter}" if @wargame
+    puts "Game #{@counter}" if @ticto
     board.display
     until over?
       turn
@@ -69,7 +69,7 @@ class Game
       puts "WINNER: #{winner}"
     end
   end
-  def wargames
+  def ticto 
     @counter = 0
     x = 0
     o = 0
