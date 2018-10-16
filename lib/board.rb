@@ -22,6 +22,17 @@ class Board
    input = user_input.to_i - 1
     @cells[input]
   end
+  
+  def full?
+    @cells.any? do |cell|
+      if cell == " "
+        return false
+      end
+    end
+      true
+  end
+
+
     
   
 end
