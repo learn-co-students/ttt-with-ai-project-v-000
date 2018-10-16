@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Players::Human' do
   it 'inherits from Player' do
-    expect(Players::Human.ancestors).to include(Player)
+    expect(Human.ancestors).to include(Player)
   end
 
   describe '#move' do
