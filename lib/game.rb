@@ -26,15 +26,15 @@ class Game
   end
   
   def won?
-    WIN_COMBINATIONS.each do |winner|
-      if board.cells[winner[0]] == board.cells[winner[1]] &&
-        board.cells[winner[1]] == board.cells[winner[2]] && 
-        board.taken?(winner[0])
-        return winner
+    WIN_COMBINATIONS.each do |win_combo|
+      if board.cells[win_combo[0]] == board.cells[win_combo[1]] &&
+        board.cells[win_combo[1]] == board.cells[win_combo[2]] && 
+        board.taken?(win_combo[0]) 
+        return win_combo
       end
     end
     false
   end 
-
+#if the passed in board.cell array matches any of the WIN_COMBINATIONS during iteration, #won? will return the win_combo, else false
   
 end
