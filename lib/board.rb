@@ -45,6 +45,8 @@ class Board
       false
     end 
   end
-    
+  
+  def valid_move?
+  end 
   
 end
