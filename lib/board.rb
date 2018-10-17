@@ -46,7 +46,11 @@ class Board
     end 
   end
   
-  def valid_move?
-  end 
+  def valid_move?(user_input)
+    input = user_input.to_i - 1
+  if input.between?(0,8) && !taken?(user_input)
+    true
+end
+end
   
 end
