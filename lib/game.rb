@@ -27,17 +27,11 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each { |combo|
-      unique = combo.map {|cell| board.cells[cell]}.uniq
-      # binding.pry
-      return combo if unique.count == 1 && unique != " "
-      # if combo.map {|cell| board.cells[cell]}.uniq.count == 1 && board.taken?(combo[0])
-      #   return combo
-      # end
-    }
-    false
+    WIN_COMBINATIONS.find { |combo|
+      winner = combo.map {|cell| board.cells[cell]}.uniq  # are all 3 cells in the combo identical?
+      winner.count == 1 && winner[0] != " "   # and is their [identical] value not blank?
+    }   # #find returns the combo, and if we don't find a combo, #find returns nil, as does our function
   end
-#if the passed in board.cell array matches any of the WIN_COMBINATIONS during iteration, #won? will return the win_combo, else false
 
   def draw?
     board.full? && !won?
@@ -48,11 +42,7 @@ class Game
   end
 
   def winner
-    if won?
-      winner = board.cells[won?[0]]
-      return winner if winner != " "  # this is cheating! refactor this!
-    end
-    # nil
+    board.cells[won?[0]] if won?
   end
 
 end
