@@ -28,6 +28,7 @@ index = input.to_i - 1
 end
   
   def position(string_number)
+   
     return "#{@cells[string_number.to_i - 1]}"
   end 
   
