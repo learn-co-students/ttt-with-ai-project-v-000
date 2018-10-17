@@ -2,6 +2,7 @@ require 'pry'
 class Board
   attr_accessor :cells
   # comment
+  #new comment
   def initialize
     reset!
   end
