@@ -87,9 +87,7 @@ def valid_move?(index)
   index.between?(0,8) && !position_taken?(index)
 end
 
-def move(index, current_player = player_1)
-   @board.cells[index] = current_player
-end
+
   
 def input_to_index(input)
   index = input.to_i - 1
@@ -99,21 +97,37 @@ def position_taken?(index)
   !(@board.cells[index].nil? || @board.cells[index] == " ")
 end
 
+def record_move(index, player)
+   @board.cells[index] = player.token
+  end
+
 def turn 
   puts "Please enter 1-9:"
+  player = current_player
+ input = player.move(@board)
+
+  index = input_to_index(input)
+ 
+  if valid_move?(index)
+    record_move(index, player)
+    display
+  else 
+    turn 
+  end 
+  
+    
 end 
 
-# def turn
-#   puts "Please enter 1-9:"
-#   input = gets.strip
-#   index = input_to_index(input)
+def play
+  while !over?
+  turn
+end 
+if won?
+  puts "Congratulations " + winner + "!"
   
-#   if valid_move?(index)
-#     move(index, current_player)
-#     display_board
-#   else
-#     turn
-#   end
-# end
+else 
+  puts "Cat's Game!"
+end
+end
 
 end 
