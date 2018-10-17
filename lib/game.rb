@@ -38,9 +38,7 @@ class Game
 #if the passed in board.cell array matches any of the WIN_COMBINATIONS during iteration, #won? will return the win_combo, else false
   
   def draw?
-    if won? == false && board.full? == true
-    true
-    end
+    !won? && board.full?
   end
   
 end

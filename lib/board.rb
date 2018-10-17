@@ -27,25 +27,17 @@ class Board
 
 
   def full?
-    @cells.any? do |cell|
-      if cell == " "
-        return false
-      end
-    end
-      true
+    @cells.all? {|cell| cell != " "}
   end
 
   def turn_count
     @cells.count{|token| token == "X" || token == "O"}
   end
 
-  def taken?(position)
-    index = position.to_i - 1
-    if @cells[index] != "" && @cells[index] != " "
-      true
-    else
-      false
-    end
+  def taken?(spot)
+    index = spot.to_i - 1
+    @cells[index] != "" && @cells[index] != " "
+    # if statement reduced to one line since return value is a simple boolean
   end
 
   def valid_move?(user_input)
