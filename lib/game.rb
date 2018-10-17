@@ -19,7 +19,11 @@ def initialize (player_1 = Players::Human.new("X"), player_2 = Players::Human.ne
 end 
 
 def current_player
-  
+  if turn_count.even? 
+    return "O"
+  else 
+    return "X"
+  end 
 end 
 
 end 
