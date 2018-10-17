@@ -23,14 +23,15 @@ class Game
 
   def current_player
     board.turn_count.odd? ? player_2 : player_1
-    #in order to get this to work I had to make player_2 the truthy for odd...maybe we can go over this later
   end
 
   def won?
-    WIN_COMBINATIONS.find { |combo|
-      winner = combo.map {|cell| board.cells[cell]}.uniq  # are all 3 cells in the combo identical?
-      winner.count == 1 && winner[0] != " "   # and is their [identical] value not blank?
-    }   # #find returns the combo, and if we don't find a combo, #find returns nil, as does our function
+    WIN_COMBINATIONS.find { |combo| winner = combo.map {|cell| board.cells[cell]}.uniq 
+    # are all 3 cells in the combo identical?
+      winner.count == 1 && winner[0] != " "
+    }
+      # and is their [identical] value not blank?
+    #find returns the combo, and if we don't find a combo, #find returns nil, as does our function
   end
 
   def draw?
@@ -43,6 +44,17 @@ class Game
 
   def winner
     board.cells[won?[0]] if won?
+  end
+  
+  def turn
+    puts "Please enter move with 1-9"
+    input = current_player.move(@board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      turn
+    end
+      display
   end
 
 end
