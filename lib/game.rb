@@ -25,4 +25,16 @@ class Game
     #in order to get this to work I had to make player_2 the truthy for odd...maybe we can go over this later
   end
   
+  def won?
+    WIN_COMBINATIONS.each do |winner|
+      if board.cells[winner[0]] == board.cells[winner[1]] &&
+        board.cells[winner[1]] == board.cells[winner[2]] && 
+        board.taken?(winner[0])
+        return winner
+      end
+    end
+    false
+  end 
+
+  
 end
