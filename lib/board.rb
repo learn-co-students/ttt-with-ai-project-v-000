@@ -53,4 +53,6 @@ class Board
 end
 end
   
+  def update(user_input, player)
+  end
 end
