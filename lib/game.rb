@@ -1,5 +1,5 @@
 class Game 
-  attr_accessor :board, :player_1, :player_2, :token 
+  attr_accessor :board, :player_1, :player_2
   
    WIN_COMBINATIONS = 
 [[0, 1, 2],
@@ -18,12 +18,12 @@ def initialize (player_1 = Players::Human.new("X"), player_2 = Players::Human.ne
   @board = board 
 end
 
-  def turn_count
+def turn_count
     counter = 0
   @board.cells.each do |tok|
-  if tok == "X" || tok == "O"
+    if tok == "X" || tok == "O"
     counter += 1 
-  end
+    end
   end 
   return counter
 end
@@ -91,9 +91,13 @@ def move(index, current_player = player_1)
    @board.cells[index] = current_player
 end
   
-  def input_to_index(input)
-index = input.to_i - 1
+def input_to_index(input)
+  index = input.to_i - 1
 end 
+
+def position_taken?(index)
+  !(@board.cells[index].nil? || @board.cells[index] == " ")
+end
 
 def turn
   puts "Please enter 1-9:"
