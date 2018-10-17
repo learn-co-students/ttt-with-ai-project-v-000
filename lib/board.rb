@@ -1,8 +1,7 @@
 require 'pry'
 class Board
   attr_accessor :cells
-  # comment
-  #new comment
+ 
   def initialize
     reset!
   end
@@ -49,15 +48,13 @@ class Board
   
   def valid_move?(user_input)
     input = user_input.to_i - 1
-  if input.between?(0,8) && !taken?(user_input)
+    if input.between?(0,8) && !taken?(user_input)
     true
-end
-end
+    end
+  end
   
   def update(user_input, player)
     input = user_input.to_i - 1
     @cells[input] = player.token
-    
   end
-  
 end
