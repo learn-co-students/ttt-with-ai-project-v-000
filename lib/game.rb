@@ -71,7 +71,6 @@ def over?
 end
 
 def winner
-   
   if won?
   exes = @board.cells.select {|number| number == "X"}
   ohs = @board.cells.select {|number| number == "O"}
@@ -84,13 +83,13 @@ end
 return nil 
   end
   
-  def valid_move?(index)
+def valid_move?(index)
   index.between?(0,8) && !position_taken?(index)
 end
 
-def move(index, current_player = "X")
+def move(index, current_player = player_1)
    @board.cells[index] = current_player
-  end
+end
   
   def input_to_index(input)
 index = input.to_i - 1
