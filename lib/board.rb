@@ -1,4 +1,4 @@
-
+require 'pry'
 class Board
   attr_accessor :cells
   
@@ -23,6 +23,7 @@ class Board
     @cells[input]
   end
   
+  
   def full?
     @cells.any? do |cell|
       if cell == " "
@@ -33,6 +34,17 @@ class Board
   end
   
   def turn_count
+    @cells.count{|token| token == "X" || token == "O"}
   end
-
+  
+  def taken?(position)
+    index = position.to_i - 1
+    if @cells[index] != "" && @cells[index] != " "
+      true
+    else
+      false
+    end 
+  end
+    
+  
 end
