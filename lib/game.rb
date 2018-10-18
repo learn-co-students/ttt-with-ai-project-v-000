@@ -62,6 +62,6 @@ class Game
   end
 
   def turn
-
+    board.update(current_player.move(board), current_player)
   end
 end
