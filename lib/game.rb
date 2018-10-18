@@ -24,7 +24,8 @@ class Game
   end
 
   def won?
-    # binding.pry
+    WIN_COMBINATIONS.each do |combo|
+      binding.pry
     board.cells
 
   end
