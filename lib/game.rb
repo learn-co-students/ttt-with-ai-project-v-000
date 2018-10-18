@@ -8,7 +8,37 @@ class Game
   attr_accessor :player_1, :player_2, :board
 
 
-  def initialize
+  def initialize(player_1=Players::Human.new("X"),
+    player_2=Players::Human.new("O"), board=Board.new)
+
+    self.player_1 = player_1
+    self.player_2 = player_2
+    self.board = board
+  end
+
+  def current_player
+    if board.turn_count.even?
+      self.player_1
+    else self.player_2
+    end
+  end
+
+  def won?
+    # binding.pry
+    board.cells
+
+  end
+
+  def draw?
+
+
+  end
+
+  def over?
+
+  end
+
+  def winner
 
   end
 
