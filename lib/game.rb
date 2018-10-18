@@ -60,4 +60,8 @@ class Game
     else nil
     end
   end
+
+  def turn
+
+  end
 end
