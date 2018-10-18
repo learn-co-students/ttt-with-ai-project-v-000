@@ -24,14 +24,15 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combo|
-      binding.pry
-    board.cells
-
+    WIN_COMBINATIONS.each {|combo|
+      if combo.each {|i| board.cells[i] == "X"} ||
+      combo.each {|i| board.cells[i] == "O"}
+      }
+      combo
+    end
   end
 
   def draw?
-
 
   end
 
