@@ -113,9 +113,7 @@ def turn
     display
   else 
     turn 
-  end 
-  
-    
+  end
 end 
 
 def play

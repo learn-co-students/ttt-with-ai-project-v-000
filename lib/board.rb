@@ -28,7 +28,6 @@ index = input.to_i - 1
 end
   
   def position(string_number)
-   
     return "#{@cells[string_number.to_i - 1]}"
   end 
   
@@ -59,6 +58,5 @@ end
 def update(position, player)
   index = position.to_i 
    @cells[position.to_i - 1] = player.token
- 
 end 
 end 
