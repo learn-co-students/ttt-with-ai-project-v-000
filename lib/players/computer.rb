@@ -1,6 +1,6 @@
 module Players
   class Computer < Player
-    attr_reader :board
+    attr_accessor :board
     WIN_COMBINATIONS = [
       [0, 1, 2],
       [3, 4, 5],
