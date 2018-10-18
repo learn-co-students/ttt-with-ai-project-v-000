@@ -24,24 +24,36 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each {|combo|
-      if combo.each {|i| board.cells[i] == "X"} ||
-      combo.each {|i| board.cells[i] == "O"}
-      }
-      combo
-    end
+    xa = []
+    oa = []
+    board.cells.each_with_index{|v,i|
+      v == "X" ? xa << i : oa << i}
+
+    WIN_COMBINATIONS.detect {|combo|
+      combo & xa == combo || oa & combo == combo}
   end
 
   def draw?
-
+    self.won? == nil ? true : false
   end
 
   def over?
+    if draw? == true
+      true
+    elsif won? != nil
+      true
+    end
 
   end
 
   def winner
+    if won? && current_player.token == "O"
+      "O"
+    elsif won? && current_player.token == "X"
+      "X"
+    else nil
 
+    end
   end
 
 end
