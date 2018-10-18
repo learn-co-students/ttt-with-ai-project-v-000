@@ -17,42 +17,47 @@ class Game
   end
 
   def current_player
-    if board.turn_count.even?
-      self.player_1
-    else self.player_2
-    end
+    board.turn_count.even? ? self.player_1 : self.player_2
   end
 
   def won?
     xa = []
     oa = []
     board.cells.each_with_index{|v,i|
-      v == "X" ? xa << i : oa << i}
+      if v == "X"
+        xa << i
+      elsif v == "O"
+        oa << i
+      end}
 
     WIN_COMBINATIONS.detect {|combo|
       combo & xa == combo || oa & combo == combo}
   end
 
   def draw?
-    self.won? == nil ? true : false
+    self.won? == nil && board.full? == true ? true : false
   end
 
   def over?
-    if draw? == true
-      true
-    elsif won? != nil
-      true
-    end
-
+    won? || draw?
   end
 
   def winner
-    if won? && current_player.token == "O"
-      "O"
-    elsif won? && current_player.token == "X"
+    xa = []
+    oa = []
+    board.cells.each_with_index{|v,i|
+      if v == "X"
+        xa << i
+      elsif v == "O"
+        oa << i
+      end}
+    if WIN_COMBINATIONS.detect {|combo|
+      combo & xa == combo}
       "X"
+    elsif WIN_COMBINATIONS.detect {|combo|
+      oa & combo == combo}
+      "O"
     else nil
-
     end
   end
 end
