@@ -18,7 +18,20 @@ def start
     when "2"
       Game.new.play
     when "wargames"
-      Game.new(computer_one, computer_two, Board.new, true).wargames
+      wins = 0
+      draws = 0
+
+      100.times do
+        wargame = Game.new(computer_one, computer_two)
+        wargame.play
+
+        if wargame.won?
+          wins += 1
+        elsif wargame.draw?
+          draws +=1
+        end
+      end
+      puts "\n#{wins} wins!\n#{draws} ties!"
     else
       puts "Invalid entry, please try again."
       start
