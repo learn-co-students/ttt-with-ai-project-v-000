@@ -26,7 +26,7 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.find { |combo| winner = combo.map {|cell| board.cells[cell]}.uniq 
+    WIN_COMBINATIONS.find { |combo| winner = combo.map {|cell| board.cells[cell]}.uniq
     # are all 3 cells in the combo identical?
       winner.count == 1 && winner[0] != " "
     }
@@ -45,7 +45,7 @@ class Game
   def winner
     board.cells[won?[0]] if won?
   end
-  
+
   def turn
     puts "Please enter move with 1-9"
     input = current_player.move(@board)
@@ -56,16 +56,16 @@ class Game
     end
       display
   end
-  
+
   def play
-  until over?
-  turn
+    until over?
+    turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else
+      puts "Cat's Game!"
+    end
   end
-  if won?
-    puts "Congratulations #{winner}!"
-  else
-    puts "Cat's Game!"
-end
-end
 
 end
