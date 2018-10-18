@@ -49,8 +49,7 @@ class Board
   def update(input, player)
     if taken?(input) == true
       false
-    else cells[input.to_i-1] = player
+    else cells[input.to_i-1] = player.token
     end
-    binding.pry
   end
 end
