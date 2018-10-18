@@ -1,6 +1,4 @@
 class Board
-
-
   attr_accessor :cells
 
   def reset!
@@ -48,7 +46,11 @@ class Board
     end
   end
 
-  def update(input, player="X")
-    cells[input.to_i-1] = player
+  def update(input, player)
+    if taken?(input) == true
+      false
+    else cells[input.to_i-1] = player
+    end
+    binding.pry
   end
 end

@@ -1,8 +1,8 @@
-class Human < Player
+module Players
+  class Human < Player
 
-  def move
-    input = gets
-
+    def move(input)
+      input = gets
+    end
   end
-
 end
