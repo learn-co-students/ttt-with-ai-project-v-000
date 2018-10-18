@@ -1,3 +1,29 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+  def start
+    puts "Welcome!"
+    puts "What kind of game would you like to play?"
+
+    input = gets.strip
+
+    if input == "0"
+      Game.new(Players::Computer.new("X"),Players::Computer.new("O")).play
+
+    elsif input == "1"
+      puts "Whould you like to go first?"
+        order = gets.strip
+        if order == "yes"
+          Game.new(Players::Human.new("X"),Players::Computer.new("O")).play
+        else
+          Game.new(Players::Computer.new("X"),Players::Human.new("O")).play
+        end
+    elsif input == "2"
+      Game.new(Players::Human.new("X"),Players::Human.new("O")).play
+    end
+    puts "Would you like to play again? Yes/No"
+  end
+
+  start until gets.strip == "No"
