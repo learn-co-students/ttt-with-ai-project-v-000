@@ -35,11 +35,11 @@ class Game
   end
 
   def draw?
-    self.won? == nil && board.full? == true ? true : false
+    won? == nil && board.full? == true ? true : false
   end
 
   def over?
-    won? || draw?
+    won? != nil || draw? == true ? true : false
   end
 
   def winner
@@ -63,5 +63,9 @@ class Game
 
   def turn
     board.update(current_player.move(board), current_player)
+  end
+
+  def play
+
   end
 end
