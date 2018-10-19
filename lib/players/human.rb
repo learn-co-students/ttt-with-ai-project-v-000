@@ -1,12 +1,11 @@
 
 module Players
 
-class Human < Player
+  class Human < Player
 
-  def move(board)
-    input = gets.strip#.to_i - 1
-  end
+    def move(board) # => 1-based number
+      input = gets.strip
+    end
 
-end
-
-end
+  end # end class
+end # end module
