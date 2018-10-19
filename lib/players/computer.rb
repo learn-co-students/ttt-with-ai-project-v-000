@@ -27,19 +27,37 @@ module Players
       CORNERS.find { |corner| !taken?(corner) }
     end
 
-    def can_win # => index for winning spot
+    def open_spot(combo)
+      combo.find { |spot| !taken?(spot) }
+    end
 
+    def possible_win # => winning combo
+      Game.win_combos.find { |c|
+        could_win = c.select {|spot| board(spot) == token}.count == 2
+        spots_free = !c.all? { |spot| taken?(spot) }
+        could_win && spots_free
+      }
+    end
+
+    def possible_opponent_win # => endangering combo
+      opponent_token = self.token == "X" ? "O" : "X"
+      Game.win_combos.find { |c|
+        opp_2_spaces = c.select {|spot| board(spot) == opponent_token}.count == 2
+        spots_free = !c.all? { |spot| taken?(spot) }
+        opp_2_spaces && spots_free
+      }
+    end
+
+    def about_to_win # => index for winning spot
+      if possible_win
+        open_spot(possible_win)
+      end
     end
 
     def about_to_lose # => index for spot to block
-
-      opponent_token = "O" # NOTE: figure out how to get opponent token
-      if losing_combo = Game.win_combos.find { |combo|
-        combo.select {|spot| board(spot) == opponent_token}.count == 2 # if opponent has two of this combo
-      }
-        puts "about to lose at #{losing_combo}"
+      if possible_opponent_win
+        open_spot(possible_opponent_win)
       end
-      # binding.pry
     end
 
     # exec methods
@@ -48,17 +66,15 @@ module Players
     end # end #move(board)
 
     def integer_move(board) # => 0-based board index
-
       @board = board
-
-      if !taken?(MIDDLE) # move in the middle if middle is free
+      if !taken?(MIDDLE)
         MIDDLE
-      elsif free_corner
-        free_corner
-      elsif can_win
-        can_win
+      elsif about_to_win
+        about_to_win
       elsif about_to_lose
         about_to_lose
+      elsif free_corner
+        free_corner
       else
         first_empty_spot
       end # end if
