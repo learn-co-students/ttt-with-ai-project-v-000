@@ -73,13 +73,15 @@ class Game
   def play
     until over?
       puts "Please enter 1-9"
-      turn
       puts "#{board.display}"
+      turn
     end
     if won?
       puts "Congratulations #{winner}!"
-    else puts "Cat's Game!"
+      puts "#{board.display}"
+    else
+      puts "Cat's Game!"
+      puts "#{board.display}"
     end
   end
-
 end

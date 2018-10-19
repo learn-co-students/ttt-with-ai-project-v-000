@@ -2,35 +2,38 @@
 
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe"
-puts "Would you like to play? [Y/n]"
-input = gets
-if input.chomp.upcase == "N"
-  puts "Goodbye!"
-elsif input.chomp.upcase == "Y"
-  puts "How many players? 0,1,2"
+
+input = ""
+until input.chomp.upcase == "N"
+  puts "Welcome to Tic Tac Toe"
+  puts "Would you like to play? [Y/n]"
   input = gets
-  if input.chomp == "2"
-    puts "Two players!, I wish I had friends."
-    puts "Who wants to go first and be X?"
-    player1 = gets
-    puts "#{player1} is X!.... Lucky!"
-    puts "Who is getting stuck with O?"
-    player2 = gets
-    puts "#{player2} is O.  Good Luck! We all know #{player1} always wins... cheater"
-
-    game = Game.new.play
-
-    "Ready for a nother round?"
+  if input.chomp.upcase == "Y"
+    puts "How many players? 0,1,2"
     input = gets
-    if input.chomp.upcase == "Y"
-
-    elsif input.chomp.upcase == "N"
-      puts "Till next time!"
+    if input.chomp == "2"
+      puts "Two players!, I wish I had friends."
+      puts "Who wants to go first and be X?"
+      player1 = gets
+      puts "#{player1} is X!.... Lucky!"
+      puts "Who is getting stuck with O?"
+      player2 = gets
+      puts "#{player2} is O.  Good Luck! We all know #{player1} always wins... cheater"
+      Game.new.play
+    elsif input.chomp == "1"
+      puts "Man vs Machine!"
+      puts "Who wants to go first and be X"
+      input = gets
+      if input.chomp.upcase == "MAN"
+        puts "Man as X vs Machine as O"
+        Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O")).play
+      elsif input.chomp.upcase == "MACHINE"
+        puts "Machine as X vs Man as O"
+        Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O")).play
+      end
+    elsif input.chomp == "0"
+      "You're just gonna let me battle myself... Wierd"
+      Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O")).play
     end
-
-
   end
-else puts "Please read to directions"
-  ./bin/tictactoe
 end
