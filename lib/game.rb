@@ -35,11 +35,17 @@ class Game
   end
 
   def draw?
-    won? == nil && board.full? == true ? true : false
+    if won?
+      false
+    elsif board.full? == false
+      false
+    else
+      true
+    end
   end
 
   def over?
-    won? != nil || draw? == true ? true : false
+    won? || draw?
   end
 
   def winner
@@ -57,7 +63,6 @@ class Game
     elsif WIN_COMBINATIONS.detect {|combo|
       oa & combo == combo}
       "O"
-    else nil
     end
   end
 
@@ -66,6 +71,15 @@ class Game
   end
 
   def play
-
+    until over?
+      puts "Please enter 1-9"
+      turn
+      puts "#{board.display}"
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else puts "Cat's Game!"
+    end
   end
+
 end

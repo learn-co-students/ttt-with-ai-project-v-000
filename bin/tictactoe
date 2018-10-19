@@ -1,3 +1,36 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe"
+puts "Would you like to play? [Y/n]"
+input = gets
+if input.chomp.upcase == "N"
+  puts "Goodbye!"
+elsif input.chomp.upcase == "Y"
+  puts "How many players? 0,1,2"
+  input = gets
+  if input.chomp == "2"
+    puts "Two players!, I wish I had friends."
+    puts "Who wants to go first and be X?"
+    player1 = gets
+    puts "#{player1} is X!.... Lucky!"
+    puts "Who is getting stuck with O?"
+    player2 = gets
+    puts "#{player2} is O.  Good Luck! We all know #{player1} always wins... cheater"
+
+    game = Game.new.play
+
+    "Ready for a nother round?"
+    input = gets
+    if input.chomp.upcase == "Y"
+
+    elsif input.chomp.upcase == "N"
+      puts "Till next time!"
+    end
+
+
+  end
+else puts "Please read to directions"
+  ./bin/tictactoe
+end
