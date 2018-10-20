@@ -1,3 +1,4 @@
+
 module Players 
 class Computer < Player
   attr_accessor :board, :cells  
@@ -14,7 +15,8 @@ class Computer < Player
  WINNING_PRIORITIES = [[0, 1, 2], [0, 2, 1], [1, 2, 0]]
 
 def move(board)
-        winning_move(board) ||  random_move(board)
+        # winning_move(board) || 
+         random_move(board)
          
 end
  
@@ -37,12 +39,12 @@ def winning_move(board)
  end 
       
       def random_move(board)
-        while true do
+       
           random_space = rand(8)
           if board.cells[random_space] == " "
             return random_space.to_s 
           end
-        end
+        
       end
 end 
 end 

@@ -102,24 +102,26 @@ def record_move(index, player)
   end
 
 def turn 
-  puts "Please enter 1-9:"
   player = current_player
- input = player.move(@board)
+  input = player.move(board)
+   
+  
 
   index = input_to_index(input)
- 
+
   if valid_move?(index)
     record_move(index, player)
-    display
+    
   else 
     turn 
   end
+display
 end 
 
+
+
 def play
-  while !over?
-  turn
-end 
+  turn until over?
 if won?
   puts "Congratulations " + winner + "!"
   
