@@ -1,21 +1,16 @@
-#!/usr/bin/env ruby
-
-require_relative '../config/environment'
-puts "Welcome to Tic Tac Toe!"
-
-TicTacToeAI.new.start
-
-=begin
+class TicTacToeAI
+  def initialize 
+  end
+  
   def start
-    computer_one = Players::Computer.new("X")
-    computer_two = Players::Computer.new("O")
-    human_one = Players::Human.new("X")
-    
+    @computer_one = Players::Computer.new("X")
+    @computer_two = Players::Computer.new("O")
+    @human_one = Players::Human.new("X")
     puts "How many players? (0, 1 or 2)"
     input = gets.chomp
     case input
       when "0"
-        Game.new(computer_one, computer_two).play
+        Game.new(@computer_one, @computer_two).play
       when "1"
         go_first
       when "2"
@@ -26,7 +21,7 @@ TicTacToeAI.new.start
         draw = 0
   
         100.times do
-          wargame = Game.new(computer_one, computer_two)
+          wargame = Game.new(@computer_one, @computer_two)
           wargame.play
   
           if wargame.winner == "X"
@@ -48,17 +43,13 @@ TicTacToeAI.new.start
   end
   
   def go_first
-    computer_one = Players::Computer.new("X")
-    computer_two = Players::Computer.new("O")
-    human_one = Players::Human.new("X")
-    
     puts "Would you like to take the first turn? Please input Y or N."
     answer = gets.chomp
     case answer
       when "Y"
-        Game.new(human_one, computer_two).play
+        Game.new(@human_one, @computer_two).play
       when "N"
-        Game.new(computer_one).play
+        Game.new(@computer_one).play
       else
         puts "Invalid entry, please try again."
         start
@@ -79,6 +70,4 @@ TicTacToeAI.new.start
     end
   end
   
-  start
-=end
-
+end
