@@ -28,10 +28,10 @@ def start
 
         if wargame.winner == "X"
           x = 1
-        elsif wargame.winner == "X"
-          x = 1
+        elsif wargame.winner == "0"
+          o = 1
         elsif wargame.draw?
-          draws +=1
+          draw +=1
         end
       end
       puts "This round had #{x} wins for X, #{o} wins for O, and #{draw} draws."
@@ -45,6 +45,10 @@ def start
 end
 
 def go_first
+  computer_one = Players::Computer.new("X")
+  computer_two = Players::Computer.new("O")
+  human_one = Players::Human.new("X")
+  
   puts "Would you like to take the first turn? Please input Y or N."
   answer = gets.chomp
   case answer
@@ -66,6 +70,7 @@ def replay?
       start
     when "N"
       puts "Goodbye!"
+      return false
     else
       replay?
   end
