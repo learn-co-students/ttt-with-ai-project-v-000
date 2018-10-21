@@ -1,20 +1,20 @@
 require "pry"
 
 
-class Board 
-  attr_accessor :cells 
+ class Board 
+   attr_accessor :cells 
   
-  cells = []
+#   cells = []
   
-  def initialize
-    reset!
-  end 
+   def initialize
+     reset!
+   end 
   
-  def reset!
-    @cells = Array.new(9, " ")
-  end 
+   def reset!
+     @cells = Array.new(9, " ")
+   end 
   
-  def display 
+   def display 
    
     puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
@@ -23,11 +23,12 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end 
   
-  def input_to_index(input)
-index = input.to_i - 1
-end
+#   def input_to_index(input)
+# index = input.to_i - 1
+# end
   
   def position(string_number)
+   
     return "#{@cells[string_number.to_i - 1]}"
   end 
   
@@ -46,17 +47,17 @@ end
   return counter
 end
 
-def taken?(index)
-  !(@cells[index.to_i - 1].nil? || @cells[index.to_i - 1] == " ")
+def taken?(input)
+  !(@cells[input.to_i - 1].nil? || @cells[input.to_i - 1] == " ")
 end
 
 def valid_move?(string_number)
-  index = string_number.to_i - 1 
-  index.between?(0, 8) && !taken?(string_number)
+  string_number.to_i.between?(1,9) && !taken?(string_number)
 end
 
-def update(position, player)
-  index = position.to_i 
-   @cells[position.to_i - 1] = player.token
+def update(input, player)
+ 
+  index = input.to_i - 1 
+  @cells[index] = player.token
 end 
 end 
