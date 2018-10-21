@@ -14,6 +14,9 @@ class Game
   [2,4,6]  # top right diag
   ]
 
+  def self.win_combos
+    WIN_COMBINATIONS
+  end
 
   def initialize(player_1 = Players::Human.new("X"), player_2=Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
@@ -54,7 +57,7 @@ class Game
     else
       turn
     end
-      display
+      board.display
   end
 
   def play

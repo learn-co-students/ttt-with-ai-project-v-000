@@ -9,12 +9,13 @@ input = gets.strip.to_i
 game = Game.new
 case input
   when 0
-  game = Game.new(Players::Computer("X"), Players::Computer("O"))
+ game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
   when 1
   puts "Do you want to go first? (y/n)"
   first_player_input = gets.strip
-  game = Game.new(first_player_input == "y" ? Players::Human("X") : Players::Computer("X"), Players::Computer("O"))
+  game = Game.new(first_player_input == "y" ? Players::Human.new("X") : Players::Computer.new("X"), Players::Computer.new("O"))
   when 2
   puts "X is first"
-end 
+end
+
 game.play
