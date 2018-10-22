@@ -24,6 +24,26 @@ class Board
   end
   
   def full?
+    @cells.all? do |cell|
+      cell == "X" || cell == "O"
+    end
+  end
+  
+  def turn_count
+    counter = 0
+    @cells.each do |count|
+      if count == "O" || count == "X"
+      counter += 1
+      end
+    end
+    counter
+  end
+  
+  def taken?(index)
+    !(@cells[index.to_i-1] == " " || @cells[index.to_i-1] == "")
+  end
+  
+  def valid_move?
     
   end
 
