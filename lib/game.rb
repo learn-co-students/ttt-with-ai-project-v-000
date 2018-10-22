@@ -69,16 +69,12 @@ def winner
  return nil 
 end
 
-# def input_to_index(input)
-#   index = input.to_i - 1
-# end 
-
-
  def turn 
+   player = current_player
    puts "Please enter 1-9:"
-   user_input = current_player.move(board)
+   user_input = player.move(board)
    if @board.valid_move?(user_input)
-     @board.update(user_input, current_player)
+     @board.update(user_input, player)
    else 
      turn 
    end
