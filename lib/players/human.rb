@@ -1,5 +1,9 @@
-require '../player.rb'
+require_relative '../player.rb'
 
 class Human
+  
+  def initialize
+    
+  end
   
 end
