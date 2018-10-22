@@ -43,8 +43,8 @@ class Board
     !(@cells[index.to_i-1] == " " || @cells[index.to_i-1] == "")
   end
   
-  def valid_move?
-    
+  def valid_move?(index)
+    !taken?(index)
   end
 
 end
