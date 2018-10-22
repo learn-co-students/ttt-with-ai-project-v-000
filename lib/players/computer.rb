@@ -1,6 +1,6 @@
 
-# module Players 
-# class Computer < Player
+module Players 
+class Computer < Player
 #   attr_accessor :board, :cells  
 #   WIN_COMBINATIONS = 
 # [[0, 1, 2],
@@ -38,16 +38,18 @@
 #         end
 # end 
       
-#       def random_move(board)
+      def move(board)
        
-#           random_space = rand(1...9)
-#           if board.cells[random_space] == " "
-#             return random_space.to_s 
-#           end
+        answer = rand(1...9)
         
-#       end
-# end 
-# end 
+        until board.valid_move?(answer)
+            answer  = rand(1...9)
+         end 
+         answer.to_s 
+      end
+
+end 
+end 
 
 
 
