@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
   
   attr_accessor :cells
@@ -44,7 +46,15 @@ class Board
   end
   
   def valid_move?(index)
-    !taken?(index)
+   index.to_i.to_s == index && index.to_i.between?(0,8) && !taken?(index)
   end
 
+  def update(index, player)
+      # binding.pry
+    if (player.token == "X" || player.token == "O") && taken?(index) == false
+      @cells[index.to_i-1] = player.token
+    end
+    @cells
+  end
+  
 end
