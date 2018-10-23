@@ -56,7 +56,10 @@ class Game
   end
   
   def winner
-    
+    if won?
+      w = won?.first
+      @board.cells[w]
+    end
   end
   
 end
