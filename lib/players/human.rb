@@ -4,9 +4,7 @@ module Players
   class Human < Player
   
     def move(board)
-      if board == Board.new
-        return "1"
-      end
+      puts board
     end
   
   end
