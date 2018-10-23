@@ -85,5 +85,23 @@ class Game
             puts "Cat's Game!"
         end
     end
+    
+    def start 
+      puts "Welcome to Tic Tac Toe!"
+      puts "Are you playing with 0, 1, or 2 players?"
+
+      @player_count = gets.strip 
+      ##add options for each choice in initialize? 
+
+      if over?
+        puts "Would you like to play again? Yes or Exit"
+        input = gets.strip
+      end 
+      
+      if input == "Yes"
+        start 
+      elsif input == "Exit"
+      end 
+    end 
 
 end
