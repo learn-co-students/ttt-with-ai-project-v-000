@@ -3,5 +3,12 @@
 require_relative '../config/environment'
 
 puts "Welcome to Tic Tac Toe!"
+puts "Enter 0 for a game between AI's"
+puts "Enter 1 for a game between you and AI"
+puts "Enter 2 for a game between you and your real life friend sitting next to you"
+
+input = gets.strip
+
+
 board.reset!
 game.play
