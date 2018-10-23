@@ -1,9 +1,13 @@
 require_relative '../player.rb'
 
-class Human
+module Players
+  class Human < Player
   
-  def initialize
-    
+    def move(board)
+      if board == Board.new
+        return "1"
+      end
+    end
+  
   end
-  
 end
