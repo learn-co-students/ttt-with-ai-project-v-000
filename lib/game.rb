@@ -62,4 +62,15 @@ class Game
     end
   end
   
+  def turn
+    plyer = current_player
+    index = plyer.move(@board).to_i
+    if @board.cells[index] == " " && index.between?(0, 8)
+      @board.cells[index] = current_player.token
+      @board
+    else
+      turn
+    end
+  end
+  
 end
