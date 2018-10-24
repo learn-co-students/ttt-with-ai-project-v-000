@@ -6,10 +6,51 @@ class Game
     # INITIALIZE
     # Every new game gets a new board and 2 human players (players 1 and 2 which have default values of "X" and "O".
     #Players::Human.new("X") calls on the Players module and asks player to make a move and then returns it as a string (chomp)
+    # def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    #     @player_1 = player_1
+    #     @player_2 = player_2
+    #     @board = board
+    # end
+
     def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
         @player_1 = player_1
         @player_2 = player_2
         @board = board
+    end
+
+
+    def start
+        puts "Welcome to Tic Tac Toe!"
+        puts "How many players?"
+        # 1 is a human playing against a computer.
+        # 2 is two human players.
+        # 0  is computer against another computer
+        input = gets.strip.to_i
+        # Use the input to initialize a Game with the appropriate player types and token values.
+        
+        if input == 1
+          puts "Who wants to go first human or computer?"
+          input2 = gets.strip
+          if input2 == "human"
+            new_game = Game.new(@player_1 = Players::Human.new("X"), @player_2 = Players::Computer.new("O"), @board)
+            new_game.play
+          else
+            input2 == "computer"
+            new_game = Game.new(@player_1 = Player::Computer.new("X"), @player_2 = Players::Human.new("O"), @board)
+            new_game.play
+          end
+
+        elsif input == 2
+           new_game = Game.new(@player_1 = Players::Human.new("X"), @player_2 = Players::Human.new("O"), @board)
+           new_game.play
+
+        else 
+            input == 0
+            new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+            new_game.play
+        end
+    
+        
     end
 
     WIN_COMBINATIONS = [
