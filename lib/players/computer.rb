@@ -3,10 +3,13 @@ require_relative '../player.rb'
 module Players
   class Computer < Player
     
-     def move(position)
-      position = rand(1..9)
-      if valid_move?(position)
-        position
+     def move(board)
+       position = rand(0..8)
+      binding.pry
+      if board.valid_move?(position)
+        position.to_s
+      else
+        move
       end
     end
     
