@@ -28,27 +28,15 @@ class Game
   end
   
   def won?
-    WIN_COMBINATIONS.each do |win_combination|
-    win_index_1 = win_combination[0]
-    win_index_2 = win_combination[1]
-    win_index_3 = win_combination[2]
-    
-    position_1 = @board.cells[win_index_1]
-    position_2 = @board.cells[win_index_2]
-    position_3 = @board.cells[win_index_3]
-    
-      if  (position_1 == "X" || position_1 == "O") && position_1 == position_2 && position_1 == position_3
-         return win_combination
-      end     
+   WIN_COMBINATIONS.find do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
     end
-    return false
   end
   
   def draw?
-    ongoing_game = @board.cells.any? {|cell| cell == " "}
-    if !ongoing_game && !won?
-      return "Cat's game!"
-    end
+    @board.full? && !won?
   end
   
   def over?
@@ -63,14 +51,30 @@ class Game
   end
   
   def turn
-    plyer = current_player
-    index = plyer.move(@board).to_i
-    if @board.cells[index] == " " && index.between?(0, 8)
-      @board.cells[index] = current_player.token
-      @board
-    else
+    current_move = current_player.move(board)
+      if !board.valid_move?(current_move)
+        turn
+      else
+        puts "Turn: #{board.turn_count+1}"
+          board.display
+         board.update(current_move, current_player)
+        puts "#{current_player.token} moved #{current_move}"
+         board.display
+      end
+  end
+  
+  def play
+    until over?
       turn
     end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end
+    
+    
+    
   
 end

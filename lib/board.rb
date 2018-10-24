@@ -50,7 +50,6 @@ class Board
   end
 
   def update(index, player)
-      # binding.pry
     if (player.token == "X" || player.token == "O") && taken?(index) == false
       @cells[index.to_i-1] = player.token
     end
