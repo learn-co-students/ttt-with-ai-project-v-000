@@ -53,6 +53,7 @@ class Game
         draw? || won?
     end
 
+    # TURN
     def turn
         # assign current_player.move(@board) to variable 'current_move'
         # #current_player's choice of move gets validated through #valid_move
@@ -73,8 +74,7 @@ class Game
     end
 
     # PLAY
-    # continue to play by executing #turn until game is #over
-    # if someone has won, puts a "congratulations". Or if #draw, puts "Cat's game"
+    # continue to play by executing #turn until game is #over and if someone has won, puts a "congratulations". Or if #draw, puts "Cat's game"
     def play 
         until over?
         turn
