@@ -2,7 +2,5 @@
 
 require_relative '../config/environment'
 
-# CLI.new.start
-
 new_game = Game.new
 new_game.start
