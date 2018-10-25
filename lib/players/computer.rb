@@ -5,13 +5,12 @@ module Players
     
      def move(board)
        position = rand(0..8)
-      binding.pry
       if board.valid_move?(position)
         position.to_s
       else
-        move
+        move(board)
       end
     end
     
   end
-end
+endubm

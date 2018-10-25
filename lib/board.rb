@@ -46,7 +46,7 @@ class Board
   end
   
   def valid_move?(index)
-   index.to_i.to_s == index && index.to_i.between?(0,8) && !taken?(index)
+     index.to_i.between?(1,9) && !taken?(index)
   end
 
   def update(index, player)
