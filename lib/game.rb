@@ -19,9 +19,9 @@ class Game
     #-----START---------------
     def start
         puts "Welcome to Tic Tac Toe!"
-        
         puts "How many players?"
         input = gets.strip.to_i
+        
         # 1 == HUMAN  against a COMPUTER.
         if input == 1
           puts "Who wants to go first, human or computer?"
