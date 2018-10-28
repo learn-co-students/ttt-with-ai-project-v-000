@@ -37,7 +37,7 @@ class Game
       WIN_COMBINATIONS.detect do |winc|
         self.board.cells[winc[0]] == self.board.cells[winc[1]] &&
         self.board.cells[winc[1]] == self.board.cells[winc[2]] &&
-        (self.board.cells[winc[0]]  == "X" || self.board.cells[winc[0]] == "O")
+        self.board.taken?(winc[0] + 1)
       end
     end
 

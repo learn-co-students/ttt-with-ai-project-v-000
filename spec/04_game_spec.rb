@@ -106,6 +106,13 @@ describe 'Game' do
       expect(game.won?).to be_falsey
     end
 
+    it 'returns false for a combination of empty squares' do
+      game = Game.new
+      game.board.cells = [" ", " ", " ", "X", "O", "X", "O", "X", "O"]
+
+      expect(game.won?).to be_falsey
+    end
+
     it 'returns the correct winning combination in the case of a win' do
       game = Game.new
       game.board.cells = ["X", "O", "X",

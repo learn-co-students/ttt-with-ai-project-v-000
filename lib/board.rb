@@ -38,8 +38,8 @@ class Board
     i
   end
 
-  def taken?(index)
-    index = index.to_i - 1
+  def taken?(input)
+    index = input.to_i - 1
     self.cells[index] == "X" || self.cells[index] == "O"
   end
 
