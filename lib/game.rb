@@ -24,18 +24,6 @@ class Game
       end
     end
     
-    def valid_move?(input) 
-      input.to_i.between?(1,9) && !taken?(input)
-    end 
-    
-    def taken?(input)
-    !(position(input) == " " || position(input) == " ")
-  end
-    
-    def position(input) 
-    cells[input.to_i-1]
-  end 
-    
     
     def draw?
       @board.full? && !won?
@@ -53,15 +41,14 @@ class Game
 
     def turn 
       player = current_player
-      cells = ["","","","","","","","",""]
-      input = player.move(board)
-      #binding.pry
-          #puts "Please enter 1-9."
-      if valid_move?(input) 
-        @board.update(input, player)
-        #@board.update(player.move(board),current_player)
+      input = player.move(@board)
+          puts "Please enter 1-9."
+      
+      if @board.valid_move?(input)
+       @board.update(input, player)
         @board.display
-       
+      else 
+        turn
+          end
         end 
-    end
 end
