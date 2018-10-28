@@ -3,7 +3,7 @@ module Players
     
    def move(board) 
      puts" Welcome to TicTacToe."
-     puts "Please make your first move." 
+     puts "Please make your move." 
      move = gets.strip
    end 
    #gets.strip
