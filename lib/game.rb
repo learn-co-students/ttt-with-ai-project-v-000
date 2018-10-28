@@ -54,8 +54,8 @@ class Game
     def turn 
       player = current_player
       cells = ["","","","","","","","",""]
-        binding.pry
       input = player.move(board)
+      #binding.pry
           #puts "Please enter 1-9."
       if valid_move?(input) 
         @board.update(input, player)
