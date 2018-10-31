@@ -1,31 +1,77 @@
-module Players
-    class Computer < Player
-        
-        # #move
-        #selects a random number between 1 - 9, not 0 - 8.
-        def move(position)
-            position = rand(1..9).to_s
-            until valid_move?(input)
+require 'pry'
 
-            end
+module Players
+
+    class Computer < Player
+        # BEST MOVE (center square)
+        # computer == [4], human position == "5" 
+
+        # SECOND_BEST_MOVES (corner squares)
+        # computer == [0, 2, 6, 8], humman == "1", "3", "7" , "9"
+      
+        # LEAST_FAVORABLE_MOVES
+        # computer == [1, 3, 5, 7], humman == "2", "4", "6" , "8"
+
+          #---VALID_MOVE?-------
+        # def valid_move?(input)
+        #     input.to_i.between?(1,9) && !taken?(board)
+        # end
+        
+        def move(board)
+            squares = [[5],[1, 3, 7, 9], [2, 4, 6, 8]]
+           
+            best_move = "#{squares[0][0]}" 
             
+            second_best_moves = "#{squares[1].sample}" 
+            least_favorable_moves = "#{squares[2].sample}"
+       
+            if !board.taken?(best_move)
+                best_move
+            elsif !board.taken?(second_best_moves)
+                second_best_moves
+            else 
+                "#{rand(1..9)}" 
+            end
         end
-    end   
+
+  
+      #   def move(board)
+      #       squares = [[5],[1, 3, 7, 9], [2, 4, 6, 8]]
+            
+      #       #center square
+      #       best_move = "#{squares[0][0]}" #using interpolation here is 
+      #       #the same as converting to_s
+      #       # corners
+      #       second_best_moves = "#{squares[1].sample}" 
+      #       least_favorable_moves = "#{squares[2].sample}"
+       
+      #       if !board.taken?(best_move)
+      #           best_move
+      #       elsif !board.taken?(second_best_moves)
+      #           second_best_moves
+      #       else 
+      #           #----Third _MOVE----------
+               
+      #           def third_move(board)
+      #               almost_winning_array = WIN_COMBINATIONS.detect do |win_combo|
+      #               ((board.cells[win_combo[0]] == board.cells[win_combo[1]]) ||
+      #               (board.cells[win_combo[1]] == board.cells[win_combo[2]]) ||
+      #               (board.cells[win_combo[0]] == board.cells[win_combo[2]])) && 
+      #               board.taken?(win_combo[0] + 1)
+      #               end
+              
+      #           almost_winning_array.each do |position|
+      #             binding.pry
+      #               if !board.taken?(position)
+      #                 return "#{position + 1}"
+      #               end
+      #             end 
+      #           end
+      #       third_move(board)
+      #       end
+      #   end
+
+    end
 end
 
-# def move(board)
-      
-      #def empty?
-        #cells.all?{|token| token != "X" && token != "O"}
-     # end
 
-# if empty?
-#    position = "5" (takes middle position if the board is empty)
-# elsif board.valid_move?(1, 3, 7, 9) 
-#    position = "1" || position = "3" || position = "7" || position = "9" (checks corners)
-
-#Somehow check to see if the WIN_COMBINATIONS has two of the same token and choose the third space as the next move? 
-#WIN_COMBINATIONS.detect do |combo|
-#    @board[combo[0]] == @board[combo[1]] &&
-#    @board[combo[1]] == @board[combo[2]] &&
-#    position_taken?(combo[0])
