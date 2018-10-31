@@ -1,3 +1,5 @@
+require_relative '../../config/environment.rb'
+
 module Players
 
   class Human < Player
@@ -6,8 +8,5 @@ module Players
       gets.chomp
     end
 
-
   end
-
-
 end
