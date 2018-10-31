@@ -1,0 +1,39 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Board	lib/board.rb	/^class Board$/;"	c
+Computer	lib/players/computer.rb	/^    class Computer < Player$/;"	c	class:Players
+Game	lib/game.rb	/^class Game $/;"	c
+Human	lib/players/human.rb	/^    class Human < Player$/;"	c	class:Players
+Player	lib/player.rb	/^class Player $/;"	c
+Players	lib/players/computer.rb	/^module Players$/;"	m
+Players	lib/players/human.rb	/^module Players$/;"	m
+cSpell.words	.vscode/settings.json	/^    "cSpell.words": [$/;"	f
+capture_puts	spec/spec_helper.rb	/^def capture_puts$/;"	f
+current_player	lib/game.rb	/^    def current_player$/;"	f
+display	lib/board.rb	/^    def display$/;"	f	class:Board
+draw?	lib/game.rb	/^    def draw?$/;"	f
+full?	lib/board.rb	/^    def full?$/;"	f	class:Board
+get_variable_from_file	spec/spec_helper.rb	/^def get_variable_from_file(file, variable)$/;"	f
+initialize	lib/board.rb	/^    def initialize$/;"	f	class:Board
+initialize	lib/game.rb	/^    def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)$/;"	f	class:Game
+initialize	lib/player.rb	/^    def initialize(token)$/;"	f	class:Player
+move	lib/players/computer.rb	/^        def move(board)$/;"	f	class:Players.Computer
+move	lib/players/human.rb	/^      def move(position)$/;"	f	class:Players.Human
+over?	lib/game.rb	/^    def over?$/;"	f
+play	lib/game.rb	/^    def play $/;"	f	class:Game
+position	lib/board.rb	/^    def position(input)$/;"	f	class:Board
+reset!	lib/board.rb	/^    def reset!$/;"	f	class:Board
+run_file	spec/spec_helper.rb	/^def run_file(file)$/;"	f
+start	lib/game.rb	/^    def start$/;"	f	class:Game
+taken?	lib/board.rb	/^    def taken?(input)$/;"	f	class:Board
+turn	lib/game.rb	/^    def turn$/;"	f
+turn_count	lib/board.rb	/^    def turn_count$/;"	f	class:Board
+update	lib/board.rb	/^    def update(input, player)$/;"	f	class:Board
+valid_move?	lib/board.rb	/^    def valid_move?(input)$/;"	f	class:Board
+valid_move?	lib/players/computer.rb	/^        def valid_move?(input)$/;"	f	class:Players.Computer
+winner	lib/game.rb	/^    def winner$/;"	f
+won?	lib/game.rb	/^    def won?$/;"	f
