@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+new_game = Game.new
+new_game.start
+new_game.play_again? 
+
+
