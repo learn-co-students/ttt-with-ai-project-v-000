@@ -1,3 +1,5 @@
+require 'pry'
+
 class Board
   attr_accessor :cells
 
@@ -27,6 +29,18 @@ class Board
 
   def turn_count
     cells.count { |cell| cell != " " }
+  end
+
+  def position(input)
+    @cells[input.to_i - 1]
+  end
+
+  def full?
+    !@cells.include?(" ") ? true : false
+  end
+
+  def turn_count
+    @cells.count { |cell| cell != " " }
   end
 
   def taken?(input)
