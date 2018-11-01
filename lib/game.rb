@@ -25,12 +25,9 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |combo|
-      if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0] + 1)
-        return combo
-      end
+    WIN_COMBINATIONS.detect do |combo|
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0] + 1)
     end
-    return false
   end
 
   def draw?
@@ -42,20 +39,28 @@ class Game
   end
 
   def winner
-    if !won?
-      return nil
-    else
-      if board.cells[won?[0]].include?(player_1.token)
-        return player_1.token
-      else
-        return player_2.token
-      end
-    end
+    won? ? board.cells[won?[0]] : nil
   end
 
   def turn
-    puts "Enter a number (1-9):"
-    input = gets.strip
+    input = current_player.move(board)
+    if !board.valid_move?(input)
+      turn
+    else
+      board.update(input, current_player)
+      board.display
+    end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"      
+    end
   end
 end
 
