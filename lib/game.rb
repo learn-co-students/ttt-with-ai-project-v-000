@@ -26,7 +26,7 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |combo|
-      if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0])
+      if board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0] + 1)
         return combo
       end
     end
@@ -42,12 +42,21 @@ class Game
   end
 
   def winner
-    if board.cells[won?[0]].include?(player_1.token)
-      return player_1.token
+    if !won?
+      return nil
     else
-      return player_2.token
+      if board.cells[won?[0]].include?(player_1.token)
+        return player_1.token
+      else
+        return player_2.token
+      end
     end
-    binding.pry
+  end
+
+  def turn
+    puts "Enter a number (1-9):"
+    input = gets.strip
+  end
 end
 
 #LOSE               WIN
