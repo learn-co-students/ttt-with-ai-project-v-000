@@ -97,6 +97,45 @@ module Players
           when [5, 8] then board.cells[1] == "O" ? "7" : "2"
           when [7, 6] then board.cells[5] == "O" ? "7" : "6"
           #CORNER CASES
+          when [0, 1] then board.cells[5] == "O" ? "7" : "6"
+          when [0, 3] then board.cells[7] == "O" ? "3" : "8"
+          when [0, 5] then board.cells[7] == "O" ? "3" : "8"
+          when [0, 7] then board.cells[5] == "O" ? "7" : "6"
+          #If player_2 DEFENDs then take tighter EDGE else WIN
+          when [0, 2] then board.cells[7] == "O" ? o_third = 7; "6" : "8"
+          when [0, 6] then board.cells[5] == "O" ? o_third = 5; "8" : "6"
+
+          when [2, 1] then board.cells[3] == "O" ? "9" : "4"
+          when [2, 5] then board.cells[7] == "O" ? "1" : "8"
+          when [2, 3] then board.cells[7] == "O" ? "1" : "8"
+          when [2, 7] then board.cells[3] == "O" ? "9" : "4"
+
+          when [2, 0] then board.cells[7] == "O" ? o_third = 7; "4" : "8"
+          when [2, 8] then board.cells[3] == "O" ? o_third = 3; "8" : "4"
+
+          when [6, 3] then board.cells[1] == "O" ? "9" : "2"
+          when [6, 7] then board.cells[5] == "O" ? "1" : "6"
+
+          when [6, 1] then board.cells[5] == "O" ? "1" : "6"
+          when [6, 5] then board.cells[1] == "O" ? "9" : "2"
+
+          when [6, 0] then board.cells[5] == "O" ? o_third = 5; "2" : "6"
+          when [6, 8] then board.cells[1] == "O" ? o_third = 1; "6" : "2"
+
+          when [] then board.cells[] == "O" ? "" : ""
+          when [] then board.cells[] == "O" ? "" : ""
+
+          when [] then board.cells[] == "O" ? "" : ""
+          when [] then board.cells[] == "O" ? "" : ""
+
+          when [] then board.cells[] == "O" ? "" : ""
+          when [] then board.cells[] == "O" ? "" : ""
+
+          when [] then board.cells[] == "O" ? "" : ""
+          when [] then board.cells[] == "O" ? "" : ""
+
+          when [] then board.cells[] == "O" ? "" : ""
+          when [] then board.cells[] == "O" ? "" : ""
 
           end
         end
