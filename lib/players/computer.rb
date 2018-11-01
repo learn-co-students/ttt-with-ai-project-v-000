@@ -37,26 +37,70 @@ module Players
 
         if board.turn_count == 4
           case o_first
-          #EDGE CASES (if player_2 DEFENDs then COUNTER-ATK else WIN)
-          when 1 then board.cells[2] == "O" ? "1" : "3"
-          when 3 then board.cells[0] == "O" ? "7" : "1"
-          when 5 then board.cells[8] == "O" ? "3" : "9"
-          when 7 then board.cells[6] == "O" ? "9" : "7"
+          #EDGE CASES
+          #If player_2 DEFENDs then TRAP else WIN)
+          when 1 then board.cells[2] == "O" ? o_second = 2; "1" : "3"
+          when 3 then board.cells[0] == "O" ? o_second = 0; "7" : "1"
+          when 5 then board.cells[8] == "O" ? o_second = 8; "3" : "9"
+          when 7 then board.cells[6] == "O" ? o_second = 6; "9" : "7"
           #CORNER CASES
-          #CORNER-TO-CLOSE-EDGE CASE
-          #If player_2 takes close EDGE then COUNTER-ATK)
           when 0
+            #If player_2 takes close EDGE then COUNTER and TRAP
             if    board.cells[1] == "O"; o_second = 1; "3"
-            elsif board.cells[3] == "O"; o_second = 3; "7"; end
+            elsif board.cells[3] == "O"; o_second = 3; "7"
+            #If player_2 takes far EDGE then TRAP
+            elsif board.cells[5] == "O"; o_second = 5; "7"
+            elsif board.cells[7] == "O"; o_second = 7; "3"
+            #If player_2 takes CORNER then DEFEND
+            elsif board.cells[2] == "O"; o_second = 2; "2"
+            elsif board.cells[6] == "O"; o_second = 6; "4"
+            end
           when 2
             if    board.cells[1] == "O"; o_second = 1; "1"
-            elsif board.cells[5] == "O"; o_second = 5; "9"; end
+            elsif board.cells[5] == "O"; o_second = 5; "9"
+
+            elsif board.cells[3] == "O"; o_second = 3; "9"
+            elsif board.cells[7] == "O"; o_second = 7; "1"
+
+            elsif board.cells[0] == "O"; o_second = 0; "2"
+            elsif board.cells[8] == "O"; o_second = 8; "6"
+            end
           when 6
+            if    board.cells[3] == "O"; o_second = 3; "1"
+            elsif board.cells[7] == "O"; o_second = 7; "9"
+
+            elsif board.cells[1] == "O"; o_second = 1; "9"
+            elsif board.cells[5] == "O"; o_second = 5; "1"
+
+            elsif board.cells[0] == "O"; o_second = 0; "4"
+            elsif board.cells[8] == "O"; o_second = 8; "8"
+            end
           when 8
+            if    board.cells[5] == "O"; o_second = 5; "3"
+            elsif board.cells[7] == "O"; o_second = 7; "7"
+
+            elsif board.cells[1] == "O"; o_second = 1; "7"
+            elsif board.cells[3] == "O"; o_second = 3; "3"
+
+            elsif board.cells[2] == "O"; o_second = 2; "6"
+            elsif board.cells[6] == "O"; o_second = 6; "8"
+            end
           end
-
-
         end
+
+        if board.turn_count == 6
+          case [o_first, o_second]
+          #EDGE CASES
+          #If player_2 DEFENDs horizontally/vertically then WIN diagonally
+          when [1, 2] then board.cells[3] == "O" ? "9" : "4"
+          when [3, 0] then board.cells[7] == "O" ? "3" : "8"
+          when [5, 8] then board.cells[1] == "O" ? "7" : "2"
+          when [7, 6] then board.cells[5] == "O" ? "7" : "6"
+          #CORNER CASES
+
+          end
+        end
+
       end
     end
   end
