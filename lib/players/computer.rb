@@ -1,6 +1,8 @@
 module Players
   class Computer < Player
     def move(board)
+
+      #Random AI
       if board.cells[4] == " "
         "5"
       else
@@ -8,8 +10,8 @@ module Players
         (board.cells.size.times.select { |cell| cell = " " }.sample + 1).to_s
       end
 
-      # #If player_1 (X)
-      # if self.token == "X"
+      #Expert AI (X)
+      # if board.player.token == "X"
       #   #Save player_2's moves
       #   o_first = nil
       #   o_second = nil
