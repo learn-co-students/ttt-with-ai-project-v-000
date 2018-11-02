@@ -18,7 +18,7 @@ class Game
     @board = Board.new
     @player_1 = Players::Human.new("X")
     @player_2 = Players::Human.new("O")
-    @cells = [" "," "," "," "," "," "," "," "," "]
+    #@cells = [" "," "," "," "," "," "," "," "," "]
   end
 
   def current_player
@@ -66,6 +66,6 @@ class Game
       "invalid"
       turn
     end
-      
+
   end
 end
