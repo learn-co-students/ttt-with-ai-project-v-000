@@ -14,16 +14,20 @@ class Game
   attr_accessor :board, :player_1, :player_2, :cells, :token
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
-  def initialize(player_1 =@player_1, player_2 = @player_2, board = @board)
-    @board = Board.new
-    @player_1 = Players::Human.new("X")
-    @player_2 = Players::Human.new("O")
+  def initialize(player_1 =Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    @board = board
+    @player_1 = player_1
+    @player_2 = player_2
     #@cells = [" "," "," "," "," "," "," "," "," "]
   end
 
   def current_player
     @token = board.turn_count.even? ? "X" : "O"
-    @token
+    if @player_1.token == "X"
+      @player_1
+    else
+      @player_2
+    end
   end
 
   def won?
@@ -58,14 +62,14 @@ class Game
   end
 
   def turn
-    puts "Please enter a number (1-9):"
-    user_input = gets.strip
+    #puts "Please enter a number (1-9):"
+    user_input = current_player.move(board)
     if board.valid_move?(user_input)
       board.update(user_input, current_player)
     else
       "invalid"
       turn
     end
-
+    current_player
   end
 end
