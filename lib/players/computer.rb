@@ -1,7 +1,13 @@
 module Players
   class Computer < Player
     def move(board)
-      "5"
+      if board.cells[4] == " "
+        "5"
+      else
+        #Pick a random number that has not been taken yet
+        (board.cells.size.times.select { |cell| cell = " " }.sample + 1).to_s
+      end
+
       # #If player_1 (X)
       # if self.token == "X"
       #   #Save player_2's moves

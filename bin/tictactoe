@@ -1,3 +1,56 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe!"
+puts "Please select number of players (0, 1, 2, wargames):"
+puts "Type '0' to start a game between two (2) computers"
+puts "Type '1' to start a game versus the computer"
+puts "Type '2' to start a game with two (2) players"
+puts "Type 'wargames' to simulate 100 games of Tic-Tac-Toe between two (2) computer AI"
+mode = gets.strip
+
+until mode == "0" || mode == "1" || mode == "2" || mode == "wargames"
+  puts "Please select number of players (0, 1, 2, wargames):"
+  mode = gets.strip
+end
+
+case mode
+when "0"
+  Game.new(Players::Computer.new("X"), Players::Computer("O"), Board.new)
+when "1"
+  puts "Who will go first (X)? Type '1' for PLAYER or '2' for COMPUTER:"
+  first_player = gets.input
+
+  until first_player == "1" || first_player == "2"
+    puts "Who will go first (X)? Type '1' for PLAYER or '2' for COMPUTER:"
+    first_player = gets.input
+  end
+
+  case first_player
+  when "1"
+    Game.new(Players::Human.new("X"), Players::Computer("O"), Board.new)
+  when "2"
+    Game.new(Players::Computer.new("X"), Players::Human("O"), Board.new)
+  end
+when "2"
+  puts "Who will go first (X)? Type '1' for PLAYER#1 or '2' for PLAYER#2:"
+  first_player = gets.input
+
+  until first_player == "1" || first_player == "2"
+    puts "Who will go first (X)? Type '1' for PLAYER#1 or '2' for PLAYER#2:"
+    first_player = gets.input
+  end
+
+  case first_player
+  when "1"
+    Game.new(Players::Human.new("X"), Players::Human("O"), Board.new)
+  when "2"
+    Game.new(Players::Human.new("O"), Players::Human("X"), Board.new)
+  end
+when "wargames"
+end
+
+puts "Select first player "
+
+input = gets.strip
