@@ -11,18 +11,17 @@
 #methods relate to managing a game, like `#start`, `#play`, and `#turn`. The test suite describes the method requirements.
 require 'pry'
 class Game
-  attr_accessor :board, :player_1, :player_2, :cells, :token
+  attr_accessor :board, :player_1, :player_2, :token
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
   def initialize(player_1 =Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @board = board
     @player_1 = player_1
     @player_2 = player_2
-    #@cells = [" "," "," "," "," "," "," "," "," "]
   end
 
   def current_player
-    @token = board.turn_count.even? ? "X" : "O"
+    @token = @board.turn_count.even? ? "X" : "O"
     if @player_1.token == "X"
       @player_1
     else
@@ -32,27 +31,27 @@ class Game
 
   def won?
     WIN_COMBINATIONS.any? do |combo|
-      if board.cells[combo[0]] != " " && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+      if @board.cells[combo[0]] != " " && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
         return combo
       end
     end
   end
 
   def draw?
-    board.full? && !won?
+    @board.full? && !won?
   end
 
   def over?
     if draw? || won?
       true
-    elsif !board.full?
+    elsif !@board.full?
       false
     end
   end
 
   def winner
     if combo = won?
-      board.cells[combo[0]]
+      @board.cells[combo[0]]
     end
   end
 
@@ -62,14 +61,14 @@ class Game
   end
 
   def turn
-    #puts "Please enter a number (1-9):"
-    user_input = current_player.move(board)
-    if board.valid_move?(user_input)
-      board.update(user_input, current_player)
+    puts "Please enter 1-9"
+    user_input = current_player.move(@board)
+    if @board.valid_move?(user_input)
+      @board.update(user_input, current_player)
+      @board.display
     else
       "invalid"
       turn
     end
-    current_player
   end
 end
