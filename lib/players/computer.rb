@@ -10,7 +10,7 @@ module Players
         (board.cells.size.times.select { |cell| cell = " " }.sample + 1).to_s
       end
 
-      #Expert AI (X)
+      #Expert AI (X) WORK IN PROGRESS
       # if board.player.token == "X"
       #   #Save player_2's moves
       #   o_first = nil
