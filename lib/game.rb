@@ -21,12 +21,12 @@ class Game
   end
 
   def current_player
-    @token = @board.turn_count.even? ? "X" : "O"
-    if @player_1.token == "X"
-      @player_1
-    else
-      @player_2
-    end
+    @board.turn_count.even? ? @player_1 : @player_2
+    #if @player_1.token == "X"
+    #  @player_1
+    #else
+    #  @player_2
+    #end
   end
 
   def won?
