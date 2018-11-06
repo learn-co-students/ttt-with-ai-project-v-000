@@ -56,8 +56,8 @@ class Board
   end
 
   def valid_move?(user_input)
-    index = user_input.to_i - 1
-    index > 1 && index < 9 && taken?(user_input) == false
+    index = user_input.to_i
+    index >= 1 && index <= 9 && taken?(user_input) == false
   end
 
   def update(user_input, player)
