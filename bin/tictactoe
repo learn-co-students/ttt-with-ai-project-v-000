@@ -17,12 +17,13 @@ puts "How many players?"
 player_num = gets.strip
 if player_num == "0"
   game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-else player_num == "1"
+elsif player_num == "1"
   game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-else player_num == "2"
+elsif player_num == "2"
   game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-elsif
+else
   puts "Please enter a number from 0-2"
+  #tictactoe
 end
 while game.over? == false
   game.play
@@ -30,7 +31,7 @@ end
 puts "Game over. Would you like to play again?"
 play_again = gets.strip
 if play_again == "y" || play_again == "Y" || play_again == "yes" || play_again == "Yes"
-  bin.tictactoe
+  #tictactoe
 else
   exit
 end
