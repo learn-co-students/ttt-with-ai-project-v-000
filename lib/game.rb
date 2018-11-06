@@ -56,6 +56,7 @@ class Game
 
   def play
     turn until over?
+    board.display
     puts winner ? "Congratulations #{winner}!" : "Cat's Game!"
   end
 
