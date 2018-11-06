@@ -12,7 +12,7 @@
 require_relative '../config/environment'
 
 play_again = "yes"
-while play_again == "yes"
+while play_again == "yes" || play_again == "y"
 
 puts "Welcome to Tic-tac-toe!"
 puts "Let's play!"
@@ -21,9 +21,21 @@ player_num = gets.strip
 if player_num == "0"
   new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
 elsif player_num == "1"
-  new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+  puts "Do you want to be X?"
+  player_choice = gets.strip
+  if player_choice == "yes" || player_choice == "y"
+    new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+  else
+    new_game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new)
+  end
 elsif player_num == "2"
-  new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+  puts "Will player 1 be X?"
+  player_choice = gets.strip
+  if player_choice == "yes" || player_choice == "y"
+    new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+  else
+    new_game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+  end
 else
   puts "Please enter a number from 0-2"
   #tictactoe
