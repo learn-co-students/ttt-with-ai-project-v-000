@@ -11,6 +11,7 @@
 #methods relate to managing a game, like `#start`, `#play`, and `#turn`. The test suite describes the method requirements.
 require 'pry'
 class Game
+<<<<<<< HEAD
   attr_accessor :board, :player_1, :player_2, :token
   WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
@@ -27,31 +28,62 @@ class Game
     #else
     #  @player_2
     #end
+=======
+  attr_accessor :board, :player_1, :player_2, :cells, :token
+  WIN_COMBINATIONS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+
+  def initialize(player_1 =@player_1, player_2 = @player_2, board = @board)
+    @board = Board.new
+    @player_1 = Players::Human.new("X")
+    @player_2 = Players::Human.new("O")
+    @cells = [" "," "," "," "," "," "," "," "," "]
+  end
+
+  def current_player
+    @token = board.turn_count.even? ? "X" : "O"
+    @token
+>>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
   end
 
   def won?
     WIN_COMBINATIONS.any? do |combo|
+<<<<<<< HEAD
       if @board.cells[combo[0]] != " " && @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]]
+=======
+      if board.cells[combo[0]] != " " && board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+>>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
         return combo
       end
     end
   end
 
   def draw?
+<<<<<<< HEAD
     @board.full? && !won?
+=======
+    board.full? && !won?
+>>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
   end
 
   def over?
     if draw? || won?
       true
+<<<<<<< HEAD
     elsif !@board.full?
+=======
+    elsif !board.full?
+>>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
       false
     end
   end
 
   def winner
     if combo = won?
+<<<<<<< HEAD
       @board.cells[combo[0]]
+=======
+      board.cells[combo[0]]
+>>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
     end
   end
 
@@ -61,14 +93,25 @@ class Game
   end
 
   def turn
+<<<<<<< HEAD
     puts "Please enter 1-9"
     user_input = current_player.move(@board)
     if @board.valid_move?(user_input)
       @board.update(user_input, current_player)
       @board.display
+=======
+    puts "Please enter a number (1-9):"
+    user_input = gets.strip
+    if board.valid_move?(user_input)
+      board.update(user_input, current_player)
+>>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
     else
       "invalid"
       turn
     end
+<<<<<<< HEAD
+=======
+      
+>>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
   end
 end
