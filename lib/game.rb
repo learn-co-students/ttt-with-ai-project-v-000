@@ -60,6 +60,7 @@ class Game
   end
 
   def turn
+    board.display
     puts "Please enter a number (1-9):"
     user_input = current_player.move(board)
     if board.valid_move?(user_input)
