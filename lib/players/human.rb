@@ -21,13 +21,9 @@ module Players
   class Human < Player
 
     def move(board)
-<<<<<<< HEAD
-      user_move = gets.strip
-=======
       puts "Where would you like to move?"
       user_move = gets.strip
       user_move
->>>>>>> e91e1fb12b6f0bffca8b0d1c8efff6270f66f28b
     end
   end
 end
