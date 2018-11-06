@@ -101,8 +101,14 @@ class Game
     end
   end
 
-  def turn(move)
-    @player_1.move(@board) until board.valid_move?(user_input) == true
-    board.update(user_input)
+  def turn
+    input = current_player.move(board)
+#binding.pry
+    if self.board.valid_move?(input) == false
+      turn
+    else
+      self.board.update(input, current_player)
+    end
+
   end
 end
