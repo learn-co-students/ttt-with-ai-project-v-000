@@ -119,5 +119,31 @@ class Game
     end
   end
 
+  def start
+    puts "Welcome to Tic-Tac-Toe!"
+    puts "Would you like to play a 0, 1, or 2 player game?"
+    game_type = gets.strip
 
+    if game_type == "0"
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+    elsif game_type == "1"
+      puts "Who should go first? You or Al?"
+      first_player = gets.strip
+        if first_player == "Al"
+          Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+        else
+          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        end
+    elsif game_type == "2"
+      Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+    else
+    end
+
+    puts "Would you like to play again?"
+    user_input = gets.strip
+    if user_input == "yes"
+      start
+    else
+    end
+  end
 end
