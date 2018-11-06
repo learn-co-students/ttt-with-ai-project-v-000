@@ -27,15 +27,16 @@ module Players
 
     def move(board)
       #first turn - try to get the middle
-      if board.taken?("5")
-        if board.taken?("1")
-          "9"
-        else
-          "1"
-        end
-      else
+      if !board.taken?("5")
         "5"
-      end
+      elsif !board.taken?("1")
+        "1"
+      elsif !board.taken?("3")
+        "3"
+      elsif condition
+
+
+
     end
   end
 end
