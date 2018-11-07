@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
+#The requirements of your CLI are as follows...
 
+#Greet the user with a message.
+#Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+#Ask the user for who should go first and be "X".
+#Use the input to correctly initialize a Game with the appropriate player types and token values.
+#When the game is over, the CLI should prompt the user if they would like to play again and allow them to
+#choose a new configuration for the game as described above. If the user doesn't want to play again, exit the program.
+#You can implement this logic within the bin/tictactoe directly or encapsulate it within Game via a method
+#like #start and simply evoke that method in the CLI. There is no wrong way to implement code that works
 require_relative '../config/environment'
+
+play_again = "yes"
+while play_again == "yes" || play_again == "y"
+
+puts "Welcome to Tic-tac-toe!"
+puts "Let's play!"
+puts "How many players?"
+player_num = gets.strip
+if player_num == "0"
+  new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+elsif player_num == "1"
+  puts "Do you want to be X?"
+  player_choice = gets.strip
+  if player_choice == "yes" || player_choice == "y"
+    new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+  else
+    new_game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new)
+  end
+elsif player_num == "2"
+  puts "Will player 1 be X?"
+  player_choice = gets.strip
+  if player_choice == "yes" || player_choice == "y"
+    new_game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+  else
+    new_game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new)
+  end
+else
+  puts "Please enter a number from 0-2"
+  #tictactoe
+end
+while new_game.over? == false
+  new_game.play
+end
+puts "Game over. Would you like to play again?"
+play_again = gets.strip
+#if play_again == "y" || play_again == "Y" || play_again == "yes" || play_again == "Yes"
+  #tictactoe
+#else
+#  exit
+#end
+end
