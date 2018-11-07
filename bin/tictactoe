@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def select_game
+  input = gets.strip
+  if input == "0"
+    computer_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    computer_game.play
+  elsif input == "1"
+    one_player_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    one_player_game.play
+  elsif input == "2"
+    two_player_game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+    two_player_game.play
+  elsif input == "wargames"
+    win_count = 0
+    100.times {
+      wopr_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      wopr_game.play
+      win_count += 1 if wopr_game.won?
+    }
+    puts "#{win_count}"
+  else
+    puts "Please enter 0, 1, 2, or wargames"
+    select_game
+  end
+end
+
+puts "Welcome to Tic-tac-toe!"
+puts "Would you like to play a 0, 1, or 2 player game?"
+puts "At risk of the world, enter wargames!"
+select_game
