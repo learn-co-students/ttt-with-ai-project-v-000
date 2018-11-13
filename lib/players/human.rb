@@ -1,8 +1,11 @@
-class Players
+module Players
+class Human < Player
   #inherits from Player
 
-  def move
+  def move(board)
     #asks the user for input and returns it.
-    player = gets.chomp
+    puts "Please enter 1-9:"
+    gets.chomp
   end
+end
 end

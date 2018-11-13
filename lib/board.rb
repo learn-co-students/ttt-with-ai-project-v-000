@@ -40,21 +40,19 @@ class Board
     self.cells.count {|c| c == "X" || c == "O"}
   end
 
-  def taken?(index)
+  def taken?(position)
     #returns true if the position is X or O
     #returns false if the position is empty or blank
-    self.cells[index.to_i] == "X" || self.cells[index.to_i] == "O" ? true : false
+    self.cells[position.to_i - 1] == "X" || self.cells[position.to_i - 1] == "O"
   end
 
-  def valid_move?
+  def valid_move?(position)
     #returns true for user input between 1-9 that is not taken
-    if index.between?(0, 8) && !taken?(board, index)
-      return true
-    else false
-    end
+    (position.to_i - 1).between?(0, 8) && !taken?(position)
   end
 
-  def update
+  def update(position, player)
     #updates the cells in the board with the player token according to the input
+    self.cells[position.to_i - 1] = player.token
   end
 end
