@@ -1,6 +1,6 @@
 class Board
 
-  attr_accessor :cells
+  attr_accessor :cells, :token
 
   def initialize
     reset!
@@ -57,7 +57,7 @@ end
   end
 
     def update(user_input, player)
-      @cells[user_input.to_i - 1] = player 
+      @cells[user_input.to_i - 1] = player.token 
     end
   #def valid_move?(position) # returns true for 1-9 that is not taken
   #new_position = input_to_index(position)
