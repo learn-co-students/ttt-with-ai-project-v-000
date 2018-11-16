@@ -1,9 +1,13 @@
 class Board
   attr_accessor :cells
-  @@cells=[]
+  @@board=[]
 
   def initialize
-    @@cells=[" "," "," "," "," "," "," "," "," ",]
+    @@board=[" "," "," "," "," "," "," "," "," ",]
+  end
+
+  def cells
+
   end
 
   def reset!
@@ -18,4 +22,29 @@ class Board
     puts "-----------"
     puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
   end
+
+  def position
+
+  end
+
+  def full?
+
+  end
+
+  def turn_count
+
+  end
+
+  def taken?
+
+  end
+
+  def valid_move?
+
+  end
+
+  def update
+
+  end
+
 end
