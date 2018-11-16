@@ -1,50 +1,51 @@
+require "pry"
 class Board
   attr_accessor :cells
-  @@board=[]
 
   def initialize
-    @@board=[" "," "," "," "," "," "," "," "," ",]
+    reset!
   end
 
   def cells
-
+    @cells
   end
 
   def reset!
-    @@cells.clear
-    @@cells=[" "," "," "," "," "," "," "," "," ",]
+    @cells=[" "," "," "," "," "," "," "," "," ",]
   end
 
   def display
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} "
+    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
     puts "-----------"
-    puts " #{@board[3]} | #{@board[4]} | #{@board[5]} "
+    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
-    puts " #{@board[6]} | #{@board[7]} | #{@board[8]} "
+    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
-  def position
-
+  def position(input)
+    @cells[input.to_i-1]
   end
 
   def full?
-
+     @cells.all? {|square| square!=" "}
   end
 
   def turn_count
-
+    cells.count {|cell| cell=="X" || cell=="O"}
   end
 
-  def taken?
-
+  def taken?(input)
+    position(input)=="X" || position(input)=="O"
   end
 
-  def valid_move?
-
+  def valid_move?(input)
+    num_input=input.to_i
+    !taken?(num_input) && num_input.between?(1,9)
   end
 
-  def update
-
+  def update(input, player)
+    num_input=input.to_i
+    @cells[num_input-1]=player.token
   end
 
 end
