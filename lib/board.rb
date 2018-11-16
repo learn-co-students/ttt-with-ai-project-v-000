@@ -53,22 +53,23 @@ end
   end
 
   def valid_move?(user_input)
-    user_input.to_i.between?(0, 8) && !taken?(user_input)
+    user_input.to_i.between?(1, 9) && !taken?(user_input)
   end
 
+    def update(user_input, player)
+      @cells[user_input.to_i - 1] = player 
+    end
   #def valid_move?(position) # returns true for 1-9 that is not taken
   #new_position = input_to_index(position)
   #new_position.between?(0,8) && !taken?(new_position)
 #end
-
 #def input_to_index(user_input)
 #   user_input.to_i - 1
 # end
 
 
 
-#  def update
-#  end
+
 
 #  def full?
 #    if @@board.include?(" ")
