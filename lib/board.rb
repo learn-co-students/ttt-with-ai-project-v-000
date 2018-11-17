@@ -59,13 +59,6 @@ end
     def update(user_input, player)
       @cells[user_input.to_i - 1] = player.token
     end
-  #def valid_move?(position) # returns true for 1-9 that is not taken
-  #new_position = input_to_index(position)
-  #new_position.between?(0,8) && !taken?(new_position)
-#end
-#def input_to_index(user_input)
-#   user_input.to_i - 1
-# end
 
 def input_to_index
   user_input.to_i - 1
