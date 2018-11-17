@@ -24,6 +24,11 @@ WIN_COMBINATIONS = [
  end
 
  def current_player
+   if self.board.turn_count % 2 == 0
+     player_1
+   else
+     player_2
+   end
  end
 
 
