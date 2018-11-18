@@ -4,8 +4,10 @@ class Computer < Player
   def move(board, game=Game.new)
     my_answer = ("1".."9").to_a.sample
       until board.valid_move?(my_answer)
+        my_answer = ("1".."9").to_a.sample
     end
-  end 
+    my_answer
+  end
 #    CORNERS = ["1", "3", "7", "9"]
 
 #    if board.turn_count == 0
