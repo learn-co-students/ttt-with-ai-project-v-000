@@ -112,8 +112,7 @@ end
 
 def play
   puts "Please enter 1-9:"
-  #user_input = gets.strip
-  #index = user_input.to_i - 1
+
   until over?
     turn
   end #ends until loop
