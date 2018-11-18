@@ -37,16 +37,77 @@ WIN_COMBINATIONS = [
     win_index_2 = win_combination[1]
     win_index_3 = win_combination[2]
 
-    position_1 = @board[win_index_1]
-    position_2 = @board[win_index_2]
-    position_3 = @board[win_index_3]
+    position_1 = board.cells[win_index_1]
+    position_2 = board.cells[win_index_2]
+    position_3 = board.cells[win_index_3]
       if position_1 == "X" && position_2 == "X" && position_3 == "X"
          return win_combination
       elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
          return win_combination
+      else
    	  end # end if
       end # end each
-    false
- end
+      return false
 
+ end #end method
+
+ def full?
+   if @board.cells.include?(" ")
+     false
+   else
+     true
+   end
+ end #ends full
+
+
+ def draw?
+  if full? && !won?
+    true
+  end
+end #ends draw?
+
+  def over?
+    if won?
+    true
+  elsif draw?
+    true
+  end #ends if
+  end
+
+  def winner
+  if won?
+    true
+    WIN_COMBINATIONS.each do |win_combination|
+     win_index_1 = win_combination[0]
+     win_index_2 = win_combination[1]
+     win_index_3 = win_combination[2]
+
+     position_1 = board.cells[win_index_1]
+     position_2 = board.cells[win_index_2]
+     position_3 = board.cells[win_index_3]
+
+      if position_1 == "X" && position_2 == "X" && position_3 == "X"
+      return "X"
+      elsif position_1 == "O"  && position_2 == "O" && position_3 == "O"
+      return "O"
+      end #end if
+    end #end each/do block
+  end #end if statement
+end #end win_combinations
+
+def turn(user_input)
+  puts "Please enter 1-9:"
+    user_input = gets.strip
+    index = board.input_to_index(user_input)
+    if board.cells.valid_move?(user_input) == true
+      move(index, character = current_player(board))
+      board.display
+    else turn
+  end
 end
+
+def move(index, current_player)
+  board.cells[index] = current_player
+end
+
+end #ends class
