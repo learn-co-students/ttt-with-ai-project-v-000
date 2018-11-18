@@ -1,6 +1,6 @@
 class Game
 
-attr_accessor :board, :player_1, :token, :player_2
+attr_accessor :board, :player_1, :player_2
 
 WIN_COMBINATIONS = [
   [0,1,2], # Top row
@@ -19,9 +19,9 @@ WIN_COMBINATIONS = [
       @board  = board
  end
 
- def board
-   @board
- end
+ #def board
+  # @board
+ #end
 
  def current_player
    if self.board.turn_count % 2 == 0
@@ -95,19 +95,35 @@ end #ends draw?
   end #end if statement
 end #end win_combinations
 
-def turn(user_input)
-  puts "Please enter 1-9:"
-    user_input = gets.strip
-    index = board.input_to_index(user_input)
-    if board.cells.valid_move?(user_input) == true
-      move(index, character = current_player(board))
+def turn
+  #store our current player's move
+  player = current_player.move(board)
+    if board.valid_move?(player)
+      board.update(player, current_player)
       board.display
-    else turn
+    else
+      turn
   end
 end
 
 def move(index, current_player)
   board.cells[index] = current_player
 end
+
+def play
+  puts "Please enter 1-9:"
+  #user_input = gets.strip
+  #index = user_input.to_i - 1
+  until over?
+    turn
+  end #ends until loop
+  if winner == "X"
+    puts "Congratulations X!"
+  elsif winner == "O"
+    puts "Congratulations O!"
+  else draw?
+    puts "Cat's Game!"
+  end #ends if statement
+end #ends def
 
 end #ends class
