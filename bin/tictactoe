@@ -1,3 +1,29 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+computer_one = Players::Computer.new("X")
+computer_two = Players::Computer.new("O")
+human_one = Players::Human.new("X")
+
+puts "Welcome to Tic-Tac-Toe!"
+puts "What kind of game would you like to play?"
+puts "1. Human v Human, 2. Computer v Human, 3. Computer v Computer"
+game_number = gets.chomp
+
+if game_number == "1"
+  Game.new.play
+elsif game_number == "2"
+  puts "Do you want to go first? [Y/N]"
+      input = gets.chomp
+      if input == "Y" || input == "y" || input == "yes" || input == "YES" || input == "Yes"
+            Game.new(human_one, computer_two).play
+          elsif input == "N" || input == "n" || input == "NO" || input == "No" || input == "no"
+            Game.new(computer_one).play
+          else
+            puts "Invalid entry, please try again."
+            start
+          end
+else game_number == "3"
+  Game.new(computer_one, computer_two)
+end
