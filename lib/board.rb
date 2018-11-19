@@ -18,13 +18,6 @@ class Board
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
-    
-    # line_one = Array.new(3, " ")
-    # line_two = Array.new(3, " ")
-    # line_three = Array.new(3, " ")
-    # line_break = "-----------"
-    # board = []
-    # board.push(line_one, line_break, line_two, line_break, line_three)
   end 
   
   def position(input)
@@ -59,7 +52,11 @@ class Board
     selection.between?(0, 8) && !taken?(input) 
   end
   
-  def update
+  def update(input, player)
+    selection = input.to_i-1 
+    if valid_move?(input)
+      cells[selection] = player.token
+    end
   end 
   
 end 
