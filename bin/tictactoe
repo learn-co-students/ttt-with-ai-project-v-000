@@ -1,3 +1,42 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "How many players?"
+puts "If you select 0, I will challenge my own Tic Tac Toe skills for your amusement."
+puts "If you dare select 1, you shall test your Tic Tac Toe prowess against mine."
+puts "If you select 2, you'll play against another human."
+puts "Sounds a bit dull to me."
+puts "But what do I know, I'm just a cold-hearted machine."
+puts "So what will it be? Please enter a number between 0-2."
+input = gets.strip
+  while !input.between?(0,2)
+    puts "Hey, come on, a number between 0-2. I have all day, but you don't."
+  end
+
+  if input == 0
+    puts "Me versus me. This ought to be an even match."
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  elsif input == 1
+    puts "The first player will play as X. Would you like to play as X or play as O?"
+    puts "Enter X to play first, or O to play second. Your response is case sensitive."
+      first_player = gets.strip
+      while first_player != "X" || first_player != "O"
+        puts "Enter X to play first, or O to play second. Your response is case sensitive."
+
+      if first_player == "X"
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      elsif first_player == "O"
+        Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      end
+    elsif input == 2
+      puts "I would say you hurt my feelings,"
+      puts "but I have none."
+      puts "Maybe this is how the Tin Man felt."
+      puts "The first player will play as X. May the best human win."
+      Game.new(Players::Human.new("X"), Players::Human.new("O"))
+
+  else
+    puts "Which player should play first and play as 'X'? Please enter 1 or 2."
+first_player =

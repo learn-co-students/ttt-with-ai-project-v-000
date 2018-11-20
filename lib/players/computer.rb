@@ -17,12 +17,12 @@ module Players
         while board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
           move = "5"
 
-          if board.cells[combo[0]] == board.cells[combo[1]] && board.taken?(combo[0] + 1)
-            move = board.cells[combo[2]]
-          elsif board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0] + 1)
-            move = board.cells[combo[1]]
-          elsif board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[1] + 1)
-            move = board.cells[combo[0]]
+          if board[combo[0]] == board[combo[1]] && board.taken?(combo[0] + 1)
+            move = board[combo[2]]
+          elsif board[combo[0]] == board[combo[2]] && board.taken?(combo[0] + 1)
+            move = board[combo[1]]
+          elsif board[combo[1]] == board[combo[2]] && board.taken?(combo[1] + 1)
+            move = board[combo[0]]
           else
             move = "1-9".sample
           end
@@ -37,3 +37,13 @@ end
       #else
         #{}"1-9".sample
       #end
+
+
+        #if board.cells[combo[0]] == board.cells[combo[1]] && board.taken?(combo[0] + 1)
+          #move = board.cells[combo[2]]
+        #elsif board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0] + 1)
+        #  move = board.cells[combo[1]]
+        #elsif board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[1] + 1)
+        #  move = board.cells[combo[0]]
+        #else
+        #  move = "1-9".sample
