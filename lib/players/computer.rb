@@ -15,20 +15,19 @@ module Players
     def move(board)
       WIN_COMBINATIONS.detect do |combo|
         while board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-          "5"
-          binding.pry
+          move = "5"
 
           if board.cells[combo[0]] == board.cells[combo[1]] && board.taken?(combo[0] + 1)
-            board.cells[combo[2]]
-
+            move = board.cells[combo[2]]
           elsif board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0] + 1)
-            board.cells[combo[1]]
+            move = board.cells[combo[1]]
           elsif board.cells[combo[1]] == board.cells[combo[2]] && board.taken?(combo[1] + 1)
-            board.cells[combo[0]]
+            move = board.cells[combo[0]]
           else
-            "1-9".sample
+            move = "1-9".sample
           end
         end
+        move
       end
     end
   end
