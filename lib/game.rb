@@ -25,12 +25,26 @@ class Game
   
   def won? 
     if WIN_COMBINATIONS.any?{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] }
-      winner = WIN_COMBINATIONS.select{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] }
-      w = winner.join(", ")
-      # binding.pry
+      winner = WIN_COMBINATIONS.find{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] }
     else 
       false
     end
+  end 
+    
+  def draw?
+    @board.full? && !won?
+  end
+  
+  def over?
+    draw? || won?
+  end 
+  
+  def winner 
+    if won? 
+      @board.cells[won?.first]
+    else 
+      nil 
+    end 
   end 
     
 end 
