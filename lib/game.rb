@@ -24,8 +24,9 @@ class Game
   end
   
   def won? 
-    if WIN_COMBINATIONS.any?{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] } && @board.cells[index] == "X" || @board[index] == "O"
+    if WIN_COMBINATIONS.any?{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && !(@board.cells[combo[1]] == " ") }
       winner = WIN_COMBINATIONS.find{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] }
+      winner
     else 
       false
     end
@@ -45,6 +46,27 @@ class Game
     else 
       nil 
     end 
+  end 
+  
+  def turn
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.valid_move?(input)
+      @board.update(input, current_player)
+    else
+      turn
+    end
+  end 
+  
+  def play 
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end 
     
 end 
