@@ -39,7 +39,6 @@ class Game
     def winner
       if won?
         combo = won?
-        #binding.pry
         board.cells[combo.first]
       else
         nil
