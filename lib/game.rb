@@ -16,6 +16,7 @@ class Game
       @player_1 = player_1
       @player_2 = player_2
       @board = board
+      play
     end
 
     def current_player
@@ -65,56 +66,6 @@ class Game
         puts "Congratulations #{winner}!"
       elsif draw?
         puts "Cat's Game!"
-      end
-    end
-    def game_cycle
-    puts "Welcome to Tic Tac Toe!"
-    puts "How many players?"
-    puts "Please enter a number between 0-2."
-
-    input = gets.strip
-
-      while !input.between?(0,2)
-        puts "Please enter a number between 0-2."
-      end
-
-      if input == 0
-        Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-      elsif input == 1
-        puts "The first player will play as X. Would you like to play as X or play as O?"
-        puts "Enter X to play first, or O to play second."
-
-        first_player = gets.strip
-
-          while first_player != "X" || first_player != "O"
-            puts "Enter X to play first, or O to play second."
-          end
-
-          if first_player == "X"
-            Game.new(Players::Human.new("X"), Players::Computer.new("O"))
-          elsif first_player == "O"
-            Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-          end
-
-      elsif input == 2
-        puts "The first player will play as X."
-        Game.new(Players::Human.new("X"), Players::Human.new("O"))
-      end
-
-      play
-
-      puts "Would you like to play another game?"
-      puts "Please enter 'Yes' for another game, or 'No' to exit."
-      yn_input = gets.strip
-
-      while yn_input != "Yes" || yn_input != "No"
-        puts "Please enter 'Yes' for another game, or 'No' to exit."
-      end
-
-      if yn_input == "Yes"
-        game_cycle
-      elsif yn_input == "No"
-        exit
       end
     end
   end

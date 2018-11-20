@@ -1,11 +1,12 @@
 module Players
   class Computer < Player
     def move(board)
-      if turn_count == 1
-        "5"
-      else
-        "#{1 + Random.rand(9)}"
-      end
+      "#{1 + Random.rand(9)}"
+      #if turn_count == 1
+        #{}"5"
+      #else
+        #{}"#{1 + Random.rand(9)}"
+      #end
     end
   end
 end

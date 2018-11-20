@@ -2,4 +2,4 @@
 
 require_relative '../config/environment'
 
-game_cycle
+Game_Cycle.new
