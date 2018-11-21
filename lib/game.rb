@@ -70,35 +70,50 @@ class Game
   end 
   
   def start 
-    puts "Welcome to Tic Tac Toe!"
-    puts "Would you like to have 0, 1 or 2 players?" 
-    number_players = gets.strip
-      if number_players == "0"
-        player_1 = Players::Computer.new("X")
-        player_2 = Players::Computer.new("O")
-      elsif 
-        number_players == "1"
-          player_1 = Players::Human.new("X")
+    input = ""
+    while input != "exit"
+      puts "Welcome to Tic Tac Toe!"
+      puts "Would you like to have 0, 1 or 2 players?"
+      input = gets.strip 
+      
+      case input 
+        when "0"
+          player_1 = Players::Computer.new("X")
           player_2 = Players::Computer.new("O")
-      elsif 
-        number_players == "2"
-          player_1 = Players::Human.new("X")
-          player_2 = Players::Human.new("O")
-      else 
-        puts "Would you like to have 0, 1 or 2 players?"
-        number_players = gets.strip 
-    puts "Player X will go first, would you like Player 1 or Player 2 to start the game? Please enter 1 or 2"
-    first_player = gets.strip
-      if first_player == 1 
-        new_game = Game.new(player_1, player_2, board = Board.new)
-        new_game.play
-      elsif 
-        first_player == 2 
-        new_game = Game.new(player_2, player_1, board = Board.new)
-        new_game.play
-      else 
-        puts "Player X will go first, would you like Player 1 or Player 2 to start the game? Please enter 1 or 2"
-        first_player = gets.strip
+          new_game = Game.new(player_1, player_2, board = Board.new)
+          new_game.play
+        when "1"
+          puts "Player X will go first, would you like to be X? If so, please enter yes or no." 
+          response = gets.strip 
+          if response == "yes"
+            puts "Great! You will go first."
+            player_1 = Players::Human.new("X")
+            player_2 = Players::Computer.new("O")
+            new_game = Game.new(player_1, player_2, board = Board.new)
+            new_game.play
+          else 
+            input == "no"
+            puts "Great! You will go second."
+            player_1 = Players::Human.new("O")
+            player_2 = Players::Computer.new("X")
+            new_game = Game.new(player_1, player_2, board = Board.new)
+            new_game.play
+          end
+        when "2"
+          puts "Player X will go first, would you like to be X? If so, please enter yes or no."
+          if input == "yes"
+            player_1 = Players::Human.new("X")
+            player_2 = Players::Human.new("O")
+            new_game = Game.new(player_1, player_2, board = Board.new)
+            new_game.play
+          else 
+            input == "no" 
+            player_1 = Players::Human.new("O")
+            player_2 = Players::Human.new("X")
+            new_game = Game.new(player_1, player_2, board = Board.new)
+            new_game.play
+          end 
+        
       end
     end
   end 
