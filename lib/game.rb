@@ -49,9 +49,9 @@ class Game
   end 
   
   def turn
+    @board.display
     input = current_player.move(@board)
     if @board.valid_move?(input)
-      @board.valid_move?(input)
       @board.update(input, current_player)
     else
       turn
@@ -68,5 +68,44 @@ class Game
       puts "Cat's Game!"
     end
   end 
+  
+  def start 
+    puts "Welcome to Tic Tac Toe!"
+    puts "Would you like to have 0, 1 or 2 players?" 
+    number_players = gets.strip
+      if number_players == "0"
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+      elsif 
+        number_players == "1"
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Computer.new("O")
+      elsif 
+        number_players == "2"
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Human.new("O")
+      else 
+        puts "Would you like to have 0, 1 or 2 players?"
+        number_players = gets.strip 
+    puts "Player X will go first, would you like Player 1 or Player 2 to start the game? Please enter 1 or 2"
+    first_player = gets.strip
+      if first_player == 1 
+        new_game = Game.new(player_1, player_2, board = Board.new)
+        new_game.play
+      elsif 
+        first_player == 2 
+        new_game = Game.new(player_2, player_1, board = Board.new)
+        new_game.play
+      else 
+        puts "Player X will go first, would you like Player 1 or Player 2 to start the game? Please enter 1 or 2"
+        first_player = gets.strip
+      end
+      
+    end
+  end 
     
 end 
+
+# puts "Player X will make the first move, which player should be X?"
+    # first = gets.strip 
+    # if first == 

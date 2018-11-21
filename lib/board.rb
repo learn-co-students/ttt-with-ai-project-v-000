@@ -4,17 +4,17 @@ class Board
   attr_accessor :cells
   
   def initialize 
-    self.cells = Array.new(9, " ")
+    self.cells = Array.new(9, ' ')
   end 
 
   def reset!
     cells.clear
-    self.cells = Array.new(9, " ")
+    self.cells = Array.new(9, ' ')
   end 
 
   def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
-    puts  "-----------"
+    puts "-----------"
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
@@ -26,7 +26,7 @@ class Board
   end 
   
   def full?
-    if cells.any?{ |cell| cell == " " }
+    if cells.any?{ |cell| cell == ' ' }
       false 
     else 
       true
@@ -34,13 +34,13 @@ class Board
   end 
   
   def turn_count 
-    turns = cells.find_all{ |cell| cell != " " }
+    turns = cells.find_all{ |cell| cell != ' ' }
     turns.count
   end 
   
   def taken?(input)
     selection = input.to_i-1
-    if cells[selection] != " "
+    if cells[selection] != ' '
       true
     else 
       false
