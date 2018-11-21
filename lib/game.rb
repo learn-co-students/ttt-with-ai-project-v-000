@@ -119,3 +119,7 @@ class Game
   end 
     
 end 
+
+# plays differently the second time around 
+# if "no" i become O but X issn't going first. instructions are confusing. 
+# how do i pass the checklist? 
