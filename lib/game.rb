@@ -113,8 +113,7 @@ class Game
             new_game = Game.new(player_1, player_2, board = Board.new)
             new_game.play
           end 
-        
-      end
+        end
     end
   end 
     
