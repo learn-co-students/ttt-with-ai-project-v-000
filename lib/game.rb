@@ -25,7 +25,7 @@ class Game
   
   def won? 
     if WIN_COMBINATIONS.any?{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && !(@board.cells[combo[1]] == " ") }
-      winner = WIN_COMBINATIONS.find{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] }
+      winner = WIN_COMBINATIONS.find{ |combo| @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && !(@board.cells[combo[1]] == " ") }
       winner
     else 
       false
