@@ -1,5 +1,4 @@
 class Game 
-  
   attr_accessor :player_1, :player_2, :board, :token
   
   WIN_COMBINATIONS = [
@@ -116,9 +115,4 @@ class Game
         end
     end
   end 
-    
 end 
-
-# plays differently the second time around 
-# if "no" i become O but X issn't going first. instructions are confusing. 
-# how do i pass the checklist? 
