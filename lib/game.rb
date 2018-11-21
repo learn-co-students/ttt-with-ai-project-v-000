@@ -20,9 +20,39 @@ attr_accessor :board, :player_1, :player_2, :cells, :token
   @board = board
   end
 
-  def current_player(token)
-    binding.pry
-    @token = token
+  def current_player
+    #binding.pry
+    #@board.cells[4]
+
+    # @board.turn_count.cells[3] = player_1.token
+
+    if @board.turn_count.even?
+      player_1
+    else
+      player_2
+    end
+    # binding.pry
+  end
+
+  def won?
+
+    winning = WIN_COMBINATIONS.find do |combo|
+      combo.all?{|cell| board.cells[cell] == player_1.token } || combo.all?{ |cell| board.cells[cell] ==  player_2.token}
+      #binding.pry
+    end
+  end
+
+  def draw?
+   !won?
+  end
+
+  def over?
+  if  won? || draw? == true
+      return true
+    else
+      return false
+    end
+
   end
 
 end

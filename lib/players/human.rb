@@ -4,7 +4,7 @@ module Players
   class Human < Player
     # your code here
     def move(board)
-      binding.pry
+      #binding.pry
       a = gets.chomp
 
       #binding.pry

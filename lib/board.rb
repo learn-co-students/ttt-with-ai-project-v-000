@@ -68,14 +68,16 @@ class Board
   end
 
 
-  def update(user_input, player = :token)
-    #binding.pry
-    # a user enters a number between 1-9
-    # player - the player that is making the move
-    #
-    position_on_board = position(user_input) # X or O
-    token = @cells[player]
-    #binding.pry
+  # def update(user_input, player)
+  #   @cells[user_input.to_i] # @cells - the board in array form
+  #   @cells[user_input.to_i] = player.token # getting the player's token and put that into the specific
+  #   # spot on the board.
+  #   @cells
+  # end
+  def update(user_input, player)
+
+    @cells[user_input.to_i - 1] = player.token # getting the player's token and put that into the specific
+
   end
 
 end
