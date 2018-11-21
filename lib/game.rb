@@ -43,7 +43,8 @@ attr_accessor :board, :player_1, :player_2, :cells, :token
   end
 
   def draw?
-   !won?
+   !won? || board.full?
+
   end
 
   def over?
