@@ -100,12 +100,7 @@ class Game
         puts "Player X will go first, would you like Player 1 or Player 2 to start the game? Please enter 1 or 2"
         first_player = gets.strip
       end
-      
     end
   end 
     
 end 
-
-# puts "Player X will make the first move, which player should be X?"
-    # first = gets.strip 
-    # if first == 
