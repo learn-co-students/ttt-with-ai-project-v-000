@@ -96,7 +96,7 @@ class Game
             puts "Great! You will go second."
             player_1 = Players::Human.new("O")
             player_2 = Players::Computer.new("X")
-            new_game = Game.new(player_1, player_2, board = Board.new)
+            new_game = Game.new(player_2, player_1,  board = Board.new)
             new_game.play
           end
         when "2"
@@ -110,7 +110,7 @@ class Game
             input == "no" 
             player_1 = Players::Human.new("O")
             player_2 = Players::Human.new("X")
-            new_game = Game.new(player_1, player_2, board = Board.new)
+            new_game = Game.new(player_2, player_1, board = Board.new)
             new_game.play
           end 
         end
