@@ -43,17 +43,20 @@ attr_accessor :board, :player_1, :player_2, :cells, :token
   end
 
   def draw?
-   !won? || board.full?
+   !won? && board.full?
 
   end
 
   def over?
-  if  won? || draw? == true
-      return true
-    else
-      return false
-    end
-
+    won? || draw?
   end
+
+  def winner
+    binding.pry
+    # @cells[won?[0]]
+    # current_player.token
+    won?
+
+  end # => the token, "X" or "O" - from the winning board
 
 end
