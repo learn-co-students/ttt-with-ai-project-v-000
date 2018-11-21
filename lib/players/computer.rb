@@ -8,7 +8,7 @@ module Players
           valid_moves << (index+1).to_s
         end
       end
-      valid_moves.first
+      valid_moves.sample
     end  
   end 
 end
