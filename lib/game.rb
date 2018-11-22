@@ -56,6 +56,12 @@ class Game
       end
     end
 
+    def invalid_move
+      if !valid.move?(player_input)
+        turn
+      end
+    end
+
     def play
       while !over?
         turn
