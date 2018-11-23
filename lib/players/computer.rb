@@ -16,6 +16,8 @@ WIN_COMBINATIONS = [
 
 CORNERS = ["1", "3", "7", "9"]
 
+SIDES = ["2", "4", "6", "8"]
+
 def move(board, game=Game.new)
 
 #  opponent_token
@@ -115,10 +117,20 @@ end #ends method
   end
 
   def empty_corner
-    return CORNERS.sample
+    my_answer = CORNERS.sample
+    until board.valid_move?(my_answer)
+      my_answer = CORNERS.sample
+    end
+    my_answer
   end
 
+
   def side
+    my_answer = SIDES.sample
+    until board.valid_move?(my_answer)
+      my_answer = SIDES.sample
+    end
+    my_answer
   end
 
 
@@ -142,22 +154,14 @@ end #ends method
 
 
 
-  def other_stuff
-
-
-
-      if board.turn_count == 2 && !board[5] == "O"
-        return corners.sample
-      end #ends if board.turn_count
-
-    end
+  def random_move
 
     my_answer = ("1".."9").to_a.sample
       until board.valid_move?(my_answer)
         my_answer = ("1".."9").to_a.sample
     end
     my_answer
-  end
+  end #ends random_move
 
 
 
