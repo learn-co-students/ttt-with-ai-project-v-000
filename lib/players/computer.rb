@@ -25,8 +25,8 @@ def move(board, game=Game.new)
     my_answer = check_for_winning_move
   elsif check_for_block != nil
     my_answer = check_for_block
-  elsif forky != nil
-    my_answer = forky
+#  elsif forky != nil
+#    my_answer = forky
   elsif center != nil
     my_answer = center
   elsif opposite_corner != nil
@@ -91,8 +91,8 @@ end #ends method
        block_move
   end #ends method
 
-  def forky
-  end
+#  def forky
+#  end
 
   def center
     if board[5] =! nil
