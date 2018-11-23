@@ -19,7 +19,7 @@ CORNERS = ["1", "3", "7", "9"]
 SIDES = ["2", "4", "6", "8"]
 
 def move(board, game=Game.new)
-
+my answer = []
 #  opponent_token
   if check_for_winning_move != nil
     my_answer = check_for_winning_move
@@ -36,7 +36,8 @@ def move(board, game=Game.new)
   else side
     my_answer = side
   end #ends if
-
+  my_answer += 1
+  return my_answer.to_s
 end #ends method
 
 def opponent_token
