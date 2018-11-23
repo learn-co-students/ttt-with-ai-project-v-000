@@ -21,27 +21,23 @@ SIDES = ["2", "4", "6", "8"]
 def move(board, game=Game.new)
 
 #  opponent_token
-
   if check_for_winning_move != nil
-    number = check_for_winning_move
+    my_answer = check_for_winning_move
   elsif check_for_block != nil
-    number = check_for_block
+    my_answer = check_for_block
   elsif forky != nil
-    number = forky
-  elsif center
-    number = center
-  elsif opposite_corner
-    number = opposite_corner
-  elsif empty_corner
-    number = empty_corner
+    my_answer = forky
+  elsif center != nil
+    my_answer = center
+  elsif opposite_corner != nil
+    my_answer = opposite_corner
+  elsif empty_corner != nil
+    my_answer = empty_corner
   else side
-    number = side
+    my_answer = side
   end #ends if
 
-  number += 1
-  number.to_s
-
-end
+end #ends method
 
 def opponent_token
   if self.token == "X"
@@ -71,7 +67,7 @@ end #ends method
        end # end if
        end # end each
        winning_move
-  end
+  end #ends method
 
   def check_for_block
     block_move = nil
@@ -93,7 +89,7 @@ end #ends method
        end # end if
        end # end each
        block_move
-  end
+  end #ends method
 
   def forky
   end
@@ -105,23 +101,25 @@ end #ends method
   end #ends method
 
   def opposite_corner
+    my_answer = []
     if board[1] == self.token
-      return 9
+      my_answer = board[9]
     elsif board[3] == self.token
-      return 7
+      my_answer = board[7]
     elsif board[7] == self.token
-      return 3
+      my_answer = board[3]
     elsif board[9] == self.token
-       return 1
+      my_answer = board[1]
     end #ends boardifs
+    my_answer
   end
 
   def empty_corner
     my_answer = CORNERS.sample
     until board.valid_move?(my_answer)
       my_answer = CORNERS.sample
-    end
-    my_answer
+    end #ends until
+    board[my_answer]
   end
 
 
@@ -129,10 +127,18 @@ end #ends method
     my_answer = SIDES.sample
     until board.valid_move?(my_answer)
       my_answer = SIDES.sample
-    end
-    my_answer
+    end #ends until
+    board[my_answer]
   end
 
+
+    def random_move
+      my_answer = ("1".."9").to_a.sample
+        until board.valid_move?(my_answer)
+          my_answer = ("1".."9").to_a.sample
+      end
+      board[my_answer]
+    end #ends random_move
 
 # Win: If you have two in a row, play the third to get three in a row.
 #Block: If the opponent has two in a row, play the third to block them.
@@ -154,14 +160,6 @@ end #ends method
 
 
 
-  def random_move
-
-    my_answer = ("1".."9").to_a.sample
-      until board.valid_move?(my_answer)
-        my_answer = ("1".."9").to_a.sample
-    end
-    my_answer
-  end #ends random_move
 
 
 

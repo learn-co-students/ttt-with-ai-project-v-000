@@ -111,9 +111,9 @@ def move(index, current_player)
 end
 
 def play
-  puts "Please enter 1-9:"
 
   until over?
+    puts "Please enter 1-9:"
     turn
   end #ends until loop
   if winner == "X"

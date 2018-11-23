@@ -20,6 +20,7 @@ class Board
     puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
     puts "-----------"
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+    puts "\n"
  end
 
   def position(user_input) #takes uers input inform of 1-9
