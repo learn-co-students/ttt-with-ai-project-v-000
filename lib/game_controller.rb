@@ -1,11 +1,25 @@
-require './config/environment.rb'
-########################################
-
 require 'pry'
 
 class GameController
+  def initialize
+    puts "Testing"
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"),board = Board.new)
+    #start_game
+    #start_game_human_to_human
+    wargames
+  end
+
+  def start_game_human_to_human(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"),board = Board.new)
+    game = Game.new(player_1, player_2, board)
+    game.play
+  end
+
+  def start_game(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"),board = Board.new)
+    game = Game.new(player_1, player_2, board)
+    game.play
+  end
+
+  def wargames(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"),board = Board.new)
     game = Game.new(player_1, player_2, board)
     game.play
   end

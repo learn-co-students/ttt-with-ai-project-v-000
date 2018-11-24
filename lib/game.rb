@@ -13,11 +13,12 @@ attr_accessor :board, :player_1, :player_2, :cells, :token
   [2,4,6], # right diagonal
   [0,4,8] # left diagonal
 ]
-
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"),board = Board.new)
+  def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"),board = Board.new)
+  # def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"),board = Board.new)
   @player_1 = player_1
   @player_2 = player_2
   @board = board
+  #binding.pry
   end
 
   def current_player
@@ -52,11 +53,42 @@ attr_accessor :board, :player_1, :player_2, :cells, :token
   end
 
   def winner
-    binding.pry
-    # @cells[won?[0]]
-    # current_player.token
-    won?
+    if won?
+       board.cells[won?[0]]
+     else
+       return nil
+     end
+  end
 
-  end # => the token, "X" or "O" - from the winning board
+  def turn
+    puts "Please enter 1-9:"
+    player = current_player
+    player_move = player.move(board)
+    if board.valid_move?(player_move)
+      board.update(player_move, player)
+      board.display
+    else
+       turn
+   end
+  end
+
+  def play
+    until over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts 'Cat\'s Game!'
+    end
+  end
+
+  # def start
+  #   puts "Welcome to TicTacToe CLI!"
+  #   puts "Please enter 1-9:"
+  #
+  #
+  #   puts "Play Again? y/n"
+  # end
 
 end
