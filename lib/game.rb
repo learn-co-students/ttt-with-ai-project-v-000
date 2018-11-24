@@ -2,6 +2,32 @@ class Game
   
   attr_accessor :board, :player_1, :player_2, :combo
   
+  def self.start 
+    puts "Hi! Welcome to Tic Tac Toe!"
+    puts "Would you like to play a 1 player game, a 2 player game or a 0 player game(wathcing the computers play against one another)?"
+    a = gets.strip
+      board = Board.new
+    if a == "1" 
+     puts "Who would you like to go first and be 'X's, you or the computer? Please enter 'me' or 'computer'."
+      b = gets.strip
+        if b == 'me'
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Computer.new("O")
+        elsif b == 'computer' 
+          player_1 = Players::Computer.new("X")
+          player_2 = Players::Human.new("O")
+        end 
+    elsif a == "2" 
+      player_1 = Players::Human.new("X") 
+      player_2 = Players::Human.new("O") 
+    else 
+      player_1 = Players::Computer.new("X") 
+      player_2 = Players::Computer.new("O") 
+    end 
+    x = Game.new(player_1, player_2, board)
+    x.play 
+  end
+  
   def play 
     if draw? 
       puts "Cat's Game!"
