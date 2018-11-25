@@ -39,11 +39,11 @@ module Players
             @g += 1
           end
           if cc == 2 and dd != "taken"
-            return xx
+            return "#{xx}"
           elsif cc == 2 and ee != "taken"
-            return yy
+            return "#{yy}"
           elsif cc == 2 and ff != "taken"
-            return zz
+            return "#{zz}"
           end
         end
       end
@@ -70,11 +70,11 @@ module Players
                 @g += 1
               end
               if c == 2 and d != "taken"
-                return x
+                return "#{x}"
               elsif c == 2 and e != "taken"
-                return y
+                return "#{y}"
               elsif c == 2 and f != "taken"
-                return z
+                return "#{z}"
               end
             end
           end
