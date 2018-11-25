@@ -15,6 +15,7 @@ module Players
       c = 0
       cc = 0
       @g = board.turn_count
+      h = board.turn_count
 
       if board.turn_count == 0
         return "1"
@@ -32,21 +33,21 @@ module Players
           if board.cells[zz] == a
             cc += 1
           end
-          if cc == 2
-            @g += 1
-          end
           if cc == 2 && board.cells[xx] == " "
             return "#{xx}"
+            @g += 1
           elsif cc == 2 && board.cells[yy] == " "
             return "#{yy}"
+            @g += 1
           elsif cc == 2 && board.cells[zz] == " "
             return "#{zz}"
+            @g += 1
           end
         end
       end
 
 
-          if @g = board.turn_count
+          if @g = h
             WIN_COMBINATIONS.each do |combo|
               x = combo[0]
               y = combo[1]
@@ -60,20 +61,20 @@ module Players
               if board.cells[z] == b
                 c += 1
               end
-              if c == 2
-                @g += 1
-              end
               if c == 2 && board.cells[x] == " "
                 return "#{x}"
+                @g += 1
               elsif c == 2 && board.cells[y] == " "
                 return "#{y}"
+                @g += 1
               elsif c == 2 && board.cells[z] == " "
                 return "#{z}"
+                @g += 1
               end
             end
           end
 
-          if @g == board.turn_count
+          if @g == h
             if board.cells[4] == " "
               return "5"
             elsif board.cells[0] == " "
