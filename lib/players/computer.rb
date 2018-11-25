@@ -25,24 +25,21 @@ module Players
           zz = combo[2]
           if board.cells[xx] == a
             cc += 1
-            dd = "taken"
           end
           if board.cells[yy] == a
             cc += 1
-            ee = "taken"
           end
           if board.cells[zz] == a
             cc += 1
-            ff = "taken"
           end
           if cc == 2
             @g += 1
           end
-          if cc == 2 and dd != "taken"
+          if cc == 2 && board.cells[xx] == " "
             return "#{xx}"
-          elsif cc == 2 and ee != "taken"
+          elsif cc == 2 && board.cells[yy] == " "
             return "#{yy}"
-          elsif cc == 2 and ff != "taken"
+          elsif cc == 2 && board.cells[zz] == " "
             return "#{zz}"
           end
         end
@@ -56,24 +53,21 @@ module Players
               z = combo[2]
               if board.cells[x] == b
                 c += 1
-                d = "taken"
               end
               if board.cells[y] == b
                 c += 1
-                e = "taken"
               end
               if board.cells[z] == b
                 c += 1
-                f = "taken"
               end
               if c == 2
                 @g += 1
               end
-              if c == 2 and d != "taken"
+              if c == 2 && board.cells[x] == " "
                 return "#{x}"
-              elsif c == 2 and e != "taken"
+              elsif c == 2 && board.cells[y] == " "
                 return "#{y}"
-              elsif c == 2 and f != "taken"
+              elsif c == 2 && board.cells[z] == " "
                 return "#{z}"
               end
             end
