@@ -97,6 +97,8 @@ class Game
     end
   end
 
+
+
   def turn
     board.display
     if current_player.class == Players::Human
