@@ -4,20 +4,22 @@ module Players
     attr_accessor :g
 
     def move(board)
-      a = current_player.token
-      if a == "X"
+      if board.turn_count % 2 == 0
+        a = "X"
         b = "O"
-      elsif a == "O"
+      elsif board.turn_count % 2 == 1
+        a = "O"
         b = "X"
       end
 
       c = 0
       cc = 0
+      @g = board.turn_count
 
       if board.turn_count == 0
         return "1"
       else
-        Game.WIN_COMBINATIONS.each do |combo|
+        WIN_COMBINATIONS.each do |combo|
           xx = combo[0]
           yy = combo[1]
           zz = combo[2]
@@ -48,7 +50,7 @@ module Players
 
 
           if @g = board.turn_count
-            Game.WIN_COMBINATIONS.each do |combo|
+            WIN_COMBINATIONS.each do |combo|
               x = combo[0]
               y = combo[1]
               z = combo[2]
@@ -100,4 +102,14 @@ module Players
           end
       end
     end
+    WIN_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6],
+    ]
   end
