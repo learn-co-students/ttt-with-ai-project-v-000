@@ -1,7 +1,7 @@
 module Players
   class Computer < Player
 
-    attr_accessor :g
+    
 
     def move(board)
       if board.turn_count % 2 == 0
@@ -12,18 +12,19 @@ module Players
         b = "X"
       end
 
-      c = 0
-      cc = 0
-      @g = board.turn_count
+      
+      
+      g = board.turn_count
       h = board.turn_count
-
-      if board.turn_count == 0
+# binding.pry 
+      if h == 0
         return "1"
       else
         WIN_COMBINATIONS.each do |combo|
           xx = combo[0]
           yy = combo[1]
           zz = combo[2]
+          cc = 0
           if board.cells[xx] == a
             cc += 1
           end
@@ -34,24 +35,26 @@ module Players
             cc += 1
           end
           if cc == 2 && board.cells[xx] == " "
-            return "#{xx}"
-            @g += 1
+            g += 1
+            return "#{(xx + 1)}"
           elsif cc == 2 && board.cells[yy] == " "
-            return "#{yy}"
-            @g += 1
+               g += 1
+            return "#{(yy + 1)}"
           elsif cc == 2 && board.cells[zz] == " "
-            return "#{zz}"
-            @g += 1
+             g += 1
+            return "#{(zz + 1)}"
           end
         end
       end
 
 
-          if @g = h
+
+          if g == h
             WIN_COMBINATIONS.each do |combo|
               x = combo[0]
               y = combo[1]
               z = combo[2]
+              c = 0
               if board.cells[x] == b
                 c += 1
               end
@@ -62,19 +65,19 @@ module Players
                 c += 1
               end
               if c == 2 && board.cells[x] == " "
-                return "#{x}"
-                @g += 1
+                g += 1
+                return "#{(x + 1)}"
               elsif c == 2 && board.cells[y] == " "
-                return "#{y}"
-                @g += 1
+                g += 1
+                return "#{(y + 1)}"
               elsif c == 2 && board.cells[z] == " "
-                return "#{z}"
-                @g += 1
+                g += 1
+                return "#{(z + 1)}"
               end
             end
           end
-
-          if @g == h
+ 
+          if g == h
             if board.cells[4] == " "
               return "5"
             elsif board.cells[0] == " "
@@ -97,6 +100,7 @@ module Players
           end
       end
     end
+    
     WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -107,4 +111,5 @@ module Players
     [0,4,8],
     [2,4,6],
     ]
+    
   end
