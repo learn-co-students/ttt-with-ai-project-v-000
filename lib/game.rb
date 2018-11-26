@@ -13,8 +13,8 @@ attr_accessor :board, :player_1, :player_2, :cells, :token
   [2,4,6], # right diagonal
   [0,4,8] # left diagonal
 ]
-  def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"),board = Board.new)
-  # def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"),board = Board.new)
+  # def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"),board = Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"),board = Board.new)
   @player_1 = player_1
   @player_2 = player_2
   @board = board
@@ -61,7 +61,7 @@ attr_accessor :board, :player_1, :player_2, :cells, :token
   end
 
   def turn
-    puts "Please enter 1-9:"
+    puts "Please Player #{current_player.token} enter 1-9:"
     player = current_player
     player_move = player.move(board)
     if board.valid_move?(player_move)
