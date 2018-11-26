@@ -1,0 +1,57 @@
+Method 1:
+Winning or Drawing when Playing First
+
+1. Play your first X in a corner.
+-   a corner when they get to play first.
+- If your opponent responds by putting an O anywhere besides the center, you can guarantee a win
+(1. x in corner)
+(2. opponent NEEDS/MUST to put o in center -  If your opponent plays her first O in the center,
+you have to wait for her to make a mistake before you can )
+
+2. Try to win if your opponent plays the first O in the center.
+- Place your second X in the opposite corner from your first, so there's a line going "X O X"
+  - if
+    user responds with o in one of the other corners you can win!!!
+  - place your x in the last empty corner
+  - then
+    your opponent won't win!!!
+   - or -
+- Place your second X on an edge square (not a corner), not touching your first X.
+  - if [ your opponent puts down an O in
+    the corner that's not next to your X,
+    - you can use your third X
+    to block her move and automatically
+    win with your fourth X.  ]
+
+3. Win automatically if your opponent plays his first O in any square besides the center.
+(- if opponent puts his first o in any square besides
+the center you can win!!!)
+- Respond by putting your second x in any other corner, with
+an empty spa_____ce in between the two X's
+
+4. Place your third X so you have two possible winning moves.
+- ex. x o _
+      o _ _
+      x _ (x)
+    - If their is empty square in line with both your first and Second
+    x with no enemy blocking that line. PUT YOUR X IN THIS SQURE!!
+
+5. Win with your fourth X.
+  s into one of them.
+  Since your opponent can only make one move,
+  he can only block one of those squares.
+  Write your fourth X into the square he didn't block,
+  and you've won the game!
+
+
+
+
+
+
+  
+Method 2:
+Never Losing when Playing Second
+
+1. Force a draw if the opponent starts in the corner.
+2. Force a draw when the opponent starts in the center.
+3. Try to win if the opponent starts at the edge.
