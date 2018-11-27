@@ -19,23 +19,25 @@ CORNERS = ["1", "3", "7", "9"]
 SIDES = ["2", "4", "6", "8"]
 
 def move(board, game=Game.new)
-my answer = []
+my_answer = []
 #  opponent_token
-  if check_for_winning_move != nil
-    my_answer = check_for_winning_move
-  elsif check_for_block != nil
-    my_answer = check_for_block
+#  if check_for_winning_move != nil
+#    my_answer = check_for_winning_move
+#  elsif check_for_block != nil
+#    my_answer = check_for_block
 #  elsif forky != nil
 #    my_answer = forky
-  elsif center != nil
-    my_answer = center
-  elsif opposite_corner != nil
-    my_answer = opposite_corner
-  elsif empty_corner != nil
-    my_answer = empty_corner
-  else side
-    my_answer = side
-  end #ends if
+#  elsif center != nil
+#    my_answer = center
+#  elsif opposite_corner != nil
+#    my_answer = opposite_corner
+#  elsif empty_corner != nil
+#    my_answer = empty_corner
+#  else side
+#    my_answer = side
+#  end #ends if
+  side
+  my_answer = side
   my_answer += 1
   return my_answer.to_s
 end #ends method
@@ -129,7 +131,7 @@ end #ends method
     until board.valid_move?(my_answer)
       my_answer = SIDES.sample
     end #ends until
-    board[my_answer]
+    my_answer
   end
 
 
