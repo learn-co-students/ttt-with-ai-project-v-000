@@ -34,8 +34,10 @@ def move(board, game=Game.new)
     my_answer = opposite_corner
   elsif empty_corner != nil
     my_answer = empty_corner
-  else side
+  elsif side != nil
     my_answer = side
+  else
+    my_answer = random_move
   end #ends if
   return my_answer
 
@@ -53,13 +55,9 @@ end #ends method
     winning_move = nil
 
     WIN_COMBINATIONS.detect do |win_combination|
-     win_index_1 = win_combination[0]
-     win_index_2 = win_combination[1]
-     win_index_3 = win_combination[2]
-
-     position_1 = board.cells[win_index_1]
-     position_2 = board.cells[win_index_2]
-     position_3 = board.cells[win_index_3]
+      position_1 = board.cells[win_combination[0]]
+      position_2 = board.cells[win_combination[1]]
+      position_3 = board.cells[win_combination[2]]
        if position_1 == self.token && position_2 == self.token && position_3 == " "
          winning_move = win_index_3
        elsif position_1 == self.token && position_2 == " " && position_3 == self.token
@@ -75,13 +73,10 @@ end #ends method
     block_move = nil
 
     WIN_COMBINATIONS.detect do |win_combination|
-     win_index_1 = win_combination[0]
-     win_index_2 = win_combination[1]
-     win_index_3 = win_combination[2]
+      position_1 = board.cells[win_combination[0]]
+      position_2 = board.cells[win_combination[1]]
+      position_3 = board.cells[win_combination[2]]
 
-     position_1 = board.cells[win_index_1]
-     position_2 = board.cells[win_index_2]
-     position_3 = board.cells[win_index_3]
        if position_1 == opponent_token && position_2 == opponent_token && position_3 == " "
          block_move = win_index_3
        elsif position_1 == opponent_token && position_2 == " " && position_3 == opponent_token
