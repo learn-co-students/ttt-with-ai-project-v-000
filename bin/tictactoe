@@ -4,5 +4,8 @@ require_relative '../config/environment'
 
 require 'pry'
 
-game = Game.new
-game.won?
+game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+#game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+#game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+
+game.play

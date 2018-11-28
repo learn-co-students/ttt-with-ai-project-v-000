@@ -18,20 +18,21 @@ class Game
   end
   
   def won?
-    WIN_COMBINATIONS.detect{|c|
-      (board.cells[c[0]] == "X" && board.cells[c[1]] == "X" && board.cells[c[2]] == "X") || (board.cells[c[0]] == "O" && board.cells[c[1]] == "O" && board.cells[c[2]] == "O")}
-  end
-  
-  def draw?
-    if board.full? && won? == nil
-      true
-    else
+    if WIN_COMBINATIONS.detect{|c|
+      (board.cells[c[0]] == "X" && board.cells[c[1]] == "X" && board.cells[c[2]] == "X") || (board.cells[c[0]] == "O" && board.cells[c[1]] == "O" && board.cells[c[2]] == "O")}.nil?
       false
+    else
+      WIN_COMBINATIONS.detect{|c|
+      (board.cells[c[0]] == "X" && board.cells[c[1]] == "X" && board.cells[c[2]] == "X") || (board.cells[c[0]] == "O" && board.cells[c[1]] == "O" && board.cells[c[2]] == "O")}
     end
   end
   
+  def draw?
+    board.full? && !won?
+  end
+  
   def over?
-    (draw? == true && board.full?) || won? != nil
+    draw? || board.full? || won?
   end
   
   def winner
@@ -57,14 +58,40 @@ class Game
   end
   
   def play
-    if over?
-      if won?
-        winner
-      end
-    else
+    board.display
+    while !over?
       turn
-      play
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
     end
   end
+  
+  
+########Computer Methods##########
+
+  def almost_won?
+    if over?
+      false
+    else
+      WIN_COMBINATIONS.detect do |c|
+        (board.cells[c[0]] == "X" && board.cells[c[1]] == "X") || (board.cells[c[1]] == "X" && board.cells[c[2]] == "X") || (board.cells[c[0]] == "X" && board.cells[c[2]] == "X") ||
+        (board.cells[c[0]] == "O" && board.cells[c[1]] == "O") || (board.cells[c[1]] == "O" && board.cells[c[2]] == "X") || (board.cells[c[0]] == "O" && board.cells[c[2]] == "O")
+      end
+    end
+  end
+  
+  def early?
+    if over? || almost_won?
+      false
+    else
+      WIN_COMBINATIONS.detect do |c|
+        board.cells[c[0]] == current_player.token || board.cells[c[1]] == current_player.token || board.cells[c[2]] == current_player.token
+      end
+    end
+  end
+
   
 end

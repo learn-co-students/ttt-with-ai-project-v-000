@@ -3,7 +3,7 @@ module Players
     
     
     def move(board)
-      puts "Where would you like to go?"
+      puts "Your turn, #{token}. Where would you like to go?"
       input = gets.strip
       input
     end
