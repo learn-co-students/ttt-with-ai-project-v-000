@@ -92,9 +92,10 @@ class Game
     if over?
       false
     else
+      binding.pry
       WIN_COMBINATIONS.shuffle.detect do |c|
         t = current_player.token
-        (board.cells[c[0]] == t && board.cells[c[1]] == t) || (board.cells[c[1]] == t && board.cells[c[2]] == t) || (board.cells[c[0]] == t && board.cells[c[2]] == t)
+        ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")
       end
     end
   end
@@ -105,15 +106,17 @@ class Game
     else
       WIN_COMBINATIONS.shuffle.detect do |c|
         t = opposing_player.token
-        (board.cells[c[0]] == t && board.cells[c[1]] == t) || (board.cells[c[1]] == t && board.cells[c[2]] == t) || (board.cells[c[0]] == t && board.cells[c[2]] == t)
+        binding.pry
+        ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")
       end
     end
   end
   
   def early?
-    if over? || almost_won?
+    if over? || almost_won? || almost_lost?
       false
     else
+      binding.pry      
       WIN_COMBINATIONS.shuffle.detect do |c|
         board.cells[c[0]] == current_player.token || board.cells[c[1]] == current_player.token || board.cells[c[2]] == current_player.token
       end
