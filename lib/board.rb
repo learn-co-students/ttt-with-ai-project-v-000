@@ -58,8 +58,9 @@ end
   end
 
   def update(user_input, player)
-    @cells[user_input.to_i - 1] = player.token
+    cells[user_input.to_i - 1] = player.token
   end
+
 
 def input_to_index(user_input)
   user_input.to_i - 1

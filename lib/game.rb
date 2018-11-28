@@ -32,24 +32,19 @@ WIN_COMBINATIONS = [
  end
 
  def won?
-   WIN_COMBINATIONS.each do |win_combination|
-    win_index_1 = win_combination[0]
-    win_index_2 = win_combination[1]
-    win_index_3 = win_combination[2]
+  WIN_COMBINATIONS.each {|win_combo|
+    position_1 = board.cells[win_combo[0]]
+    position_2 = board.cells[win_combo[1]]
+    position_3 = board.cells[win_combo[2]]
 
-    position_1 = board.cells[win_index_1]
-    position_2 = board.cells[win_index_2]
-    position_3 = board.cells[win_index_3]
-      if position_1 == "X" && position_2 == "X" && position_3 == "X"
-         return win_combination
-      elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
-         return win_combination
-      else
-   	  end # end if
-      end # end each
-      return false
+    return win_combo if ((position_1 == "X" && position_2 == "X" && position_3 == "X") ||
+                        (position_1 == "O" && position_2 == "O" && position_3 == "O"))
+  }
+  return false
+end
 
- end #end method
+
+
 
  def full?
    if @board.cells.include?(" ")
@@ -75,27 +70,24 @@ end #ends draw?
   end
 
   def winner
-    if won = won?
-      board.cells[won.first]
-    end
-  #if won?
-  #  true
-  #  WIN_COMBINATIONS.each do |win_combination|
-  #   win_index_1 = win_combination[0]
-  #   win_index_2 = win_combination[1]
-  #   win_index_3 = win_combination[2]
+  if won?
+    true
+    WIN_COMBINATIONS.each do |win_combination|
+     win_index_1 = win_combination[0]
+     win_index_2 = win_combination[1]
+     win_index_3 = win_combination[2]
 
-  #   position_1 = board.cells[win_index_1]
-  #   position_2 = board.cells[win_index_2]
-  #   position_3 = board.cells[win_index_3]
+     position_1 = board.cells[win_index_1]
+     position_2 = board.cells[win_index_2]
+     position_3 = board.cells[win_index_3]
 
-  #    if position_1 == "X" && position_2 == "X" && position_3 == "X"
-  #    return "X"
-  #    elsif position_1 == "O"  && position_2 == "O" && position_3 == "O"
-  #    return "O"
-  #    end #end if
-  #  end #end each/do block
-#  end #end if statement
+      if position_1 == "X" && position_2 == "X" && position_3 == "X"
+        return "X"
+      elsif position_1 == "O"  && position_2 == "O" && position_3 == "O"
+        return "O"
+        end #end if
+    end #end each/do block
+  end #end if statement
 end #end win_combinations
 
 def turn
@@ -104,14 +96,15 @@ def turn
   puts "Where would you like to move? Choose 1-9:\n"
   board.display
   #store our current player's move
-  player = current_player.move(board)
-    if board.valid_move?(player)
-      board.update(player, current_player)
+  user_input = current_player.move(board)
+
+    if board.valid_move?(user_input)
+      board.update(user_input, current_player)
     else
       puts "That number is invalid."
       turn
     end
-end
+  end
 
 
 
