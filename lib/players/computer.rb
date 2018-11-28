@@ -18,9 +18,9 @@ CORNERS = ["1", "3", "7", "9"]
 
 SIDES = ["2", "4", "6", "8"]
 
-def move(board, game=Game.new)
-  my_answer = nil
+def move(board)
   @board = board
+  opponent_token
 
  if check_for_winning_move != nil
     my_answer = check_for_winning_move
