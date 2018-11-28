@@ -1,19 +1,25 @@
 module Players
-  class Computer < Player 
-
+  class Computer < Player
+    attr_reader :game
+    
     def corner_move(board)
       corners = ["1", "3", "7", "9"]
       corners.shuffle.detect {|corner| !board.taken?(corner)}
     end
 
-    def winning_move
+    def winning_move(board)
       winning_combination = game.almost_won?
-      #need to return final position here
+      winning_combination.detect {|position| !board.taken?(position)}
     end
     
-    def early_move
+    def defensive_move(board)
+      defensive_combination = game.almost_lost?
+      defensive_combination.detect {|position| !board.taken?(position)}
+    end    
+    
+    def early_move(board)
       potential_winning_combination = game.early?
-      # need to return _one_ of the two potential positions
+      potential_winning_combination.shuffle.detect {|position| !board.taken?(position)}
     end
     
     def move(board)
@@ -27,9 +33,12 @@ module Players
           "5"
         end
       elsif game.almost_won?
-        winning_move
+        winning_move(board)
+      elsif game.almost_lost?
+        defensive_move(board)
+      #binding.pry
       else 
-        early_move
+        early_move(board)
       end
     end
     

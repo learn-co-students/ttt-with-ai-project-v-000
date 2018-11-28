@@ -7,6 +7,13 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    if player_1.instance_of? Players::Computer
+      player_1.instance_variable_set(:@game, self)
+      #player_1.instance_variable_set(:@board, board)
+    elsif player_2.instance_of? Players::Computer
+      player_2.instance_variable_set(:@game, self)
+      #player_2.instance_variable_set(:@board, board)
+    end
   end
   
   def current_player
@@ -72,13 +79,33 @@ class Game
   
 ########Computer Methods##########
 
+  def opposing_player
+    if current_player == player_1
+      player_2
+    else
+      player_1
+    end
+  end
+
+
   def almost_won?
     if over?
       false
     else
-      WIN_COMBINATIONS.detect do |c|
-        (board.cells[c[0]] == "X" && board.cells[c[1]] == "X") || (board.cells[c[1]] == "X" && board.cells[c[2]] == "X") || (board.cells[c[0]] == "X" && board.cells[c[2]] == "X") ||
-        (board.cells[c[0]] == "O" && board.cells[c[1]] == "O") || (board.cells[c[1]] == "O" && board.cells[c[2]] == "X") || (board.cells[c[0]] == "O" && board.cells[c[2]] == "O")
+      WIN_COMBINATIONS.shuffle.detect do |c|
+        t = current_player.token
+        (board.cells[c[0]] == t && board.cells[c[1]] == t) || (board.cells[c[1]] == t && board.cells[c[2]] == t) || (board.cells[c[0]] == t && board.cells[c[2]] == t)
+      end
+    end
+  end
+  
+  def almost_lost?
+    if over?
+      false
+    else
+      WIN_COMBINATIONS.shuffle.detect do |c|
+        t = opposing_player.token
+        (board.cells[c[0]] == t && board.cells[c[1]] == t) || (board.cells[c[1]] == t && board.cells[c[2]] == t) || (board.cells[c[0]] == t && board.cells[c[2]] == t)
       end
     end
   end
@@ -87,7 +114,7 @@ class Game
     if over? || almost_won?
       false
     else
-      WIN_COMBINATIONS.detect do |c|
+      WIN_COMBINATIONS.shuffle.detect do |c|
         board.cells[c[0]] == current_player.token || board.cells[c[1]] == current_player.token || board.cells[c[2]] == current_player.token
       end
     end
