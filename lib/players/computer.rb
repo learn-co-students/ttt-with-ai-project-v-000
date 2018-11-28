@@ -54,38 +54,37 @@ end #ends method
   def check_for_winning_move
     winning_move = nil
 
-    WIN_COMBINATIONS.detect do |win_combination|
+    WIN_COMBINATIONS.each do |win_combination|
       position_1 = board.cells[win_combination[0]]
       position_2 = board.cells[win_combination[1]]
       position_3 = board.cells[win_combination[2]]
-       if position_1 == self.token && position_2 == self.token && position_3 == " "
-         winning_move = win_index_3
-       elsif position_1 == self.token && position_2 == " " && position_3 == self.token
-         winning_move = win_index_2
-       elsif position_1 == " " && position_2 == self.token && position_3 == self.token
-         winning_move = win_index_1
-       end # end if
-       end # end each
-       winning_move
+      if position_1 == self.token && position_2 == self.token && position_3 == " "
+        winning_move = position_3
+      elsif position_1 == self.token && position_2 == " " && position_3 == self.token
+        winning_move = position_2
+      elsif position_1 == " " && position_2 == self.token && position_3 == self.token
+        winning_move = position_1
+      end # end if
+    end # end each
+    winning_move
   end #ends method
 
   def check_for_block
     block_move = nil
 
-    WIN_COMBINATIONS.detect do |win_combination|
+    WIN_COMBINATIONS.each do |win_combination|
       position_1 = board.cells[win_combination[0]]
       position_2 = board.cells[win_combination[1]]
       position_3 = board.cells[win_combination[2]]
-
-       if position_1 == opponent_token && position_2 == opponent_token && position_3 == " "
-         block_move = win_index_3
-       elsif position_1 == opponent_token && position_2 == " " && position_3 == opponent_token
-         block_move = win_index_2
-       elsif position_1 == " " && position_2 == opponent_token && position_3 == opponent_token
-         block_move = win_index_1
-       end # end if
-       end # end each
-       block_move
+      if position_1 == opponent_token && position_2 == opponent_token && position_3 == " "
+        block_move = position_3
+      elsif position_1 == opponent_token && position_2 == " " && position_3 == opponent_token
+        block_move = position_2
+      elsif position_1 == " " && position_2 == opponent_token && position_3 == opponent_token
+        block_move = position_1
+      end # end if
+    end # end each
+    block_move
   end #ends method
 
 #  def forky

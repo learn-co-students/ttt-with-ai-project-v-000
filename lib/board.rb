@@ -16,11 +16,11 @@ class Board
 
  def display #shows current state
    puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]} "
-    puts "-----------"
-    puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
-    puts "-----------"
-    puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
-    puts "\n"
+   puts "-----------"
+   puts " #{@cells[3]} | #{@cells[4]} | #{@cells[5]} "
+   puts "-----------"
+   puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
+   puts "\n"
  end
 
   def position(user_input) #takes uers input inform of 1-9
@@ -61,7 +61,7 @@ end
     @cells[user_input.to_i - 1] = player.token
   end
 
-def input_to_index
+def input_to_index(user_input)
   user_input.to_i - 1
 end
 
