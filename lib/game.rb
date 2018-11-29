@@ -10,7 +10,8 @@ class Game
     if player_1.instance_of? Players::Computer
       player_1.instance_variable_set(:@game, self)
       #player_1.instance_variable_set(:@board, board)
-    elsif player_2.instance_of? Players::Computer
+    end
+    if player_2.instance_of? Players::Computer
       player_2.instance_variable_set(:@game, self)
       #player_2.instance_variable_set(:@board, board)
     end
@@ -87,6 +88,17 @@ class Game
     end
   end
 
+  def multiple_losing_combos
+    #need a method for computer to take the position on the board where there is > 1 losing combination if the opposing player were to take that position
+  end
+  
+  def multiple_winning_combos
+    
+  end
+  
+  
+
+
 
   def almost_won?
     if over?
@@ -127,6 +139,16 @@ class Game
       unless combinations.nil?
         combinations.collect {|p| p + 1}
       end
+    end
+  end
+  
+  def unwinnable?
+    if early?
+      false
+    else
+      #binding.pry
+      position = board.cells.index {|c| c == " "}
+      position + 1
     end
   end
 

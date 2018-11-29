@@ -22,6 +22,10 @@ module Players
       potential_winning_combination.shuffle.detect {|position| !board.taken?(position)}
     end
     
+    def cat_move(board)
+      game.unwinnable?
+    end
+    
     def move(board)
       puts "Your turn, #{token}. Where would you like to go?"
       if board.turn_count == 0
@@ -37,8 +41,10 @@ module Players
       elsif game.almost_lost?
         defensive_move(board)
       #binding.pry
-      else 
+      elsif game.early? 
         early_move(board)
+      else
+        cat_move(board)
       end
     end
     
