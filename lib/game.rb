@@ -92,10 +92,12 @@ class Game
     if over?
       false
     else
-      binding.pry
-      WIN_COMBINATIONS.shuffle.detect do |c|
+      #binding.pry
+      combinations = WIN_COMBINATIONS.shuffle.detect {|c|
         t = current_player.token
-        ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")
+        ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")}
+      unless combinations.nil?
+        combinations.collect {|p| p + 1}
       end
     end
   end
@@ -104,10 +106,12 @@ class Game
     if over?
       false
     else
-      WIN_COMBINATIONS.shuffle.detect do |c|
+      #binding.pry
+      combinations = WIN_COMBINATIONS.shuffle.detect {|c|
         t = opposing_player.token
-        binding.pry
-        ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")
+        ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")}
+      unless combinations.nil?
+        combinations.collect {|p| p + 1}
       end
     end
   end
@@ -116,9 +120,12 @@ class Game
     if over? || almost_won? || almost_lost?
       false
     else
-      binding.pry      
-      WIN_COMBINATIONS.shuffle.detect do |c|
-        board.cells[c[0]] == current_player.token || board.cells[c[1]] == current_player.token || board.cells[c[2]] == current_player.token
+      #binding.pry      
+      combinations = WIN_COMBINATIONS.shuffle.detect {|c|
+        t = current_player.token
+        (board.cells[c[0]] == t && board.cells[c[1]] == " " && board.cells[c[2]] == " ") || (board.cells[c[0]] == " " && board.cells[c[1]] == t && board.cells[c[2]] == " ") || (board.cells[c[0]] == " " && board.cells[c[1]] == " " && board.cells[c[2]] == t)}
+      unless combinations.nil?
+        combinations.collect {|p| p + 1}
       end
     end
   end
