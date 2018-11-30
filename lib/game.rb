@@ -61,14 +61,14 @@ class Game
     end
   end
   
-  def start
+  def self.start_game
     puts "Welcome to Tic Tac Toe!"
     puts "Which game would you like to play?"
-    puts "Enter 0 for the computer to play itself."
-    puts "Enter 1 for you to play the computer."
-    puts "Enter 2 for a two-player game."
+    puts "Enter '0' for the computer to play itself."
+    puts "Enter '1' for you to play the computer."
+    puts "Enter '2' for a two-player game."
     game_type = gets.strip
-    while game_type != "1" && game_type != "2" && game_type != "3"
+    while game_type != "0" && game_type != "1" && game_type != "2"
       puts "Invalid input."
       game_type = gets.strip
     end
@@ -103,6 +103,18 @@ class Game
         game = self.new(player_1 = Players::Human.new(first_token), player_2 = Players::Human.new(second_token), board = Board.new)
     end
     game.play
+    self.end_game
+  end
+  
+  def self.end_game
+    puts "Would you like to play again?"
+    puts "Enter '1' to play again. Hit any other key to exit."
+    input = gets.strip
+    if input == "1"
+      self.start_game
+    else
+      exit
+    end
   end
   
   def play

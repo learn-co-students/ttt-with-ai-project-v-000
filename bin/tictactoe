@@ -4,7 +4,8 @@ require_relative '../config/environment'
 
 require 'pry'
 
-game.start
+Game.start_game
+#Game.end_game
 
 
 
