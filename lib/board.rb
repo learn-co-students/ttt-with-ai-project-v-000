@@ -56,5 +56,4 @@ class Board
       cells[selection] = player.token
     end
   end 
-  
 end 
