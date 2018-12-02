@@ -54,11 +54,11 @@ end
   end
 
   def valid_move?(user_input)
-    user_input.to_i.between?(1, 9) && !taken?(user_input)
+   user_input.to_i.between?(1, 9) && !taken?(user_input)
   end
 
   def update(user_input, player)
-    cells[user_input.to_i - 1] = player.token
+    cells[user_input.to_i - 1] = player.token 
   end
 
 

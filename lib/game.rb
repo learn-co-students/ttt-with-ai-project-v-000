@@ -91,9 +91,9 @@ end #ends draw?
 end #end win_combinations
 
 def turn
-#  puts "\n---------------------------------------------------------------"
-#  puts "Player #{current_player.token}'s turn!\n"
-#  puts "Where would you like to move? Choose 1-9:\n"
+  puts "\n---------------------------------------------------------------"
+  puts "Player #{current_player.token}'s turn!\n"
+  puts "Where would you like to move? Choose 1-9:\n"
   board.display
   #store our current player's move
   user_input = current_player.move(board)

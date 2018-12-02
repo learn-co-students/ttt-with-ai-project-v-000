@@ -23,20 +23,27 @@ def move(board)
 
  if check_for_winning_move != nil
     my_answer = check_for_winning_move
+#    binding.pry
  elsif check_for_block != nil
     my_answer = check_for_block
+#    binding.pry
 #  elsif forky != nil
 #    my_answer = forky
   elsif center != nil
     my_answer = center
+#    binding.pry
   elsif opposite_corner != nil
     my_answer = opposite_corner
+#    binding.pry
   elsif empty_corner != nil
     my_answer = empty_corner
+#    binding.pry
   elsif side != nil
     my_answer = side
+#    binding.pry
   else
     my_answer = random_move
+#    binding.pry
   end #ends if
   return my_answer
 end #ends method
@@ -57,11 +64,11 @@ end #ends method
       position_2 = board.cells[win_combination[1]]
       position_3 = board.cells[win_combination[2]]
       if position_1 == self.token && position_2 == self.token && position_3 == " "
-        winning_move = position_3
+        winning_move = win_combination[2]+ 1
       elsif position_1 == self.token && position_2 == " " && position_3 == self.token
-        winning_move = position_2
+        winning_move = win_combination[1] + 1
       elsif position_1 == " " && position_2 == self.token && position_3 == self.token
-        winning_move = position_1
+        winning_move = win_combination[0] + 1
       end # end if
     end # end each
     winning_move
