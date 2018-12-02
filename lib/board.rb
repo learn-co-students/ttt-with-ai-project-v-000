@@ -19,10 +19,15 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
   
-  def position
-    input = gets.strip.to_i
-    input -= 1
-    @cells[input]
+  def position(position)
+   pos=position.to_i
+   pos -=1
+    @cells[pos]
   end
-  
+
+  def full?
+   # binding.pry
+     @cells.none? { |square| square ==" " }
+  end
+
 end
