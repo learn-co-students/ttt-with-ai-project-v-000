@@ -25,5 +25,5 @@ elsif game_number == "2"
             start
           end
 else game_number == "3"
-  Game.new(computer_one, computer_two)
+  Game.new(computer_one, computer_two).play 
 end

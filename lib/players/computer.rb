@@ -20,6 +20,7 @@ SIDES = ["2", "4", "6", "8"]
 
 def move(board)
   @board = board
+  opponent_token
 
  if check_for_winning_move != nil
     my_answer = check_for_winning_move
@@ -82,11 +83,11 @@ end #ends method
       position_2 = board.cells[win_combination[1]]
       position_3 = board.cells[win_combination[2]]
       if position_1 == opponent_token && position_2 == opponent_token && position_3 == " "
-        block_move = position_3
+        block_move = win_combination[2] + 1
       elsif position_1 == opponent_token && position_2 == " " && position_3 == opponent_token
-        block_move = position_2
+        block_move = win_combination[1] + 1
       elsif position_1 == " " && position_2 == opponent_token && position_3 == opponent_token
-        block_move = position_1
+        block_move = win_combination[0] + 1
       end # end if
     end # end each
     block_move
