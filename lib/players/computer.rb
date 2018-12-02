@@ -20,7 +20,6 @@ SIDES = ["2", "4", "6", "8"]
 
 def move(board)
   @board = board
-  opponent_token
 
  if check_for_winning_move != nil
     my_answer = check_for_winning_move
@@ -40,7 +39,6 @@ def move(board)
     my_answer = random_move
   end #ends if
   return my_answer
-
 end #ends method
 
 def opponent_token

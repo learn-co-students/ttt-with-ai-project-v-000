@@ -32,16 +32,16 @@ WIN_COMBINATIONS = [
  end
 
  def won?
-  WIN_COMBINATIONS.each {|win_combo|
-    position_1 = board.cells[win_combo[0]]
-    position_2 = board.cells[win_combo[1]]
-    position_3 = board.cells[win_combo[2]]
+   WIN_COMBINATIONS.each {|win_combo|
+     position_1 = board.cells[win_combo[0]]
+     position_2 = board.cells[win_combo[1]]
+     position_3 = board.cells[win_combo[2]]
 
-    return win_combo if ((position_1 == "X" && position_2 == "X" && position_3 == "X") ||
-                        (position_1 == "O" && position_2 == "O" && position_3 == "O"))
-  }
-  return false
-end
+     return win_combo if ((position_1 == "X" && position_2 == "X" && position_3 == "X") ||
+                         (position_1 == "O" && position_2 == "O" && position_3 == "O"))
+   }
+   return false
+ end
 
 
 
@@ -91,9 +91,9 @@ end #ends draw?
 end #end win_combinations
 
 def turn
-  puts "\n---------------------------------------------------------------"
-  puts "Player #{current_player.token}'s turn!\n"
-  puts "Where would you like to move? Choose 1-9:\n"
+#  puts "\n---------------------------------------------------------------"
+#  puts "Player #{current_player.token}'s turn!\n"
+#  puts "Where would you like to move? Choose 1-9:\n"
   board.display
   #store our current player's move
   user_input = current_player.move(board)
