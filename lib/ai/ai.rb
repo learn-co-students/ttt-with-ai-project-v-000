@@ -1,8 +1,12 @@
-class AI
-  attr_reader :token
-  attr_accessor :game
+require "./lib/player"
 
-  def initialize(token)
-    @token = token
+class AI < Player
+  attr_accessor :token
+  attr_accessor :skill, :game, :scenarios
+
+  def initialize(token, game)
+    super
+    @scenarios = {} #=> will contain scenario { id(n): { position: a, score: 0 }}
+
   end
 end
