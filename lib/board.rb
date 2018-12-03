@@ -34,7 +34,9 @@ class Board
   end
   
   def taken?(pos)
-    self.position.include?("X" || "O")
+   # binding.pry
+    self.position(pos) == "X" || "O"
+   # binding.pry
   end
   
 end
