@@ -36,7 +36,7 @@ class Board
   def taken?(pos)
    # binding.pry
     self.position(pos) == "X" || "O"
-   # binding.pry
+    binding.pry
   end
   
 end
