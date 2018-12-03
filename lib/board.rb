@@ -34,9 +34,20 @@ class Board
   end
   
   def taken?(pos)
-   # binding.pry
-    self.position(pos) == "X" || "O"
-    binding.pry
+    self.position(pos) == "X" || self.position(pos) == "O"
   end
+  
+  def valid_move?(user_move)
+     user_move=user_move.to_i
+     (1..9)===user_move && !self.taken?(user_move)
+  end
+  
+  def update(pos,player)
+    position(pos)
+    pos=pos.to_i
+    pos-=1
+    @cells[pos] = player.token
+  end
+
   
 end
