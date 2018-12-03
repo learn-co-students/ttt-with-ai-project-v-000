@@ -26,8 +26,15 @@ class Board
   end
 
   def full?
-   # binding.pry
      @cells.none? { |square| square ==" " }
   end
 
+  def turn_count
+    @cells.count { |t| t == "X" or t =="O" }
+  end
+  
+  def taken?(pos)
+    self.position.include?("X" || "O")
+  end
+  
 end
