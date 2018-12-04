@@ -9,11 +9,9 @@ class Game
     @board = board
     if player_1.instance_of? Players::Computer
       player_1.instance_variable_set(:@game, self)
-      #player_1.instance_variable_set(:@board, board)
     end
     if player_2.instance_of? Players::Computer
       player_2.instance_variable_set(:@game, self)
-      #player_2.instance_variable_set(:@board, board)
     end
   end
   
@@ -128,11 +126,7 @@ class Game
       puts "Cat's Game!"
     end
   end
-  
-  def start
-    
-  end
-  
+
   
 ########Computer Methods##########
 
@@ -144,24 +138,10 @@ class Game
     end
   end
 
-  def multiple_losing_combos
-    #need a method for computer to take the position on the board where there is > 1 losing combination if the opposing player were to take that position
-    #maybe refactor the #almost_lost method to #collect all losing combos and use this method to #detect which one to use and which position to take
-  end
-  
-  def multiple_winning_combos
-    
-  end
-  
-  
-
-
-
   def almost_won?
     if over?
       false
     else
-      #binding.pry
       combinations = WIN_COMBINATIONS.shuffle.detect {|c|
         t = current_player.token
         ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")}
@@ -175,7 +155,6 @@ class Game
     if over?
       false
     else
-      #binding.pry
       combinations = WIN_COMBINATIONS.shuffle.detect {|c|
         t = opposing_player.token
         ((board.cells[c[0]] == t && board.cells[c[1]] == t) && board.cells[c[2]] == " ") || ((board.cells[c[1]] == t && board.cells[c[2]] == t) && board.cells[c[0]] == " ") || ((board.cells[c[0]] == t && board.cells[c[2]] == t) && board.cells[c[1]] == " ")}
@@ -189,7 +168,6 @@ class Game
     if over? || almost_won? || almost_lost?
       false
     else
-      #binding.pry      
       combinations = WIN_COMBINATIONS.shuffle.detect {|c|
         t = current_player.token
         (board.cells[c[0]] == t && board.cells[c[1]] == " " && board.cells[c[2]] == " ") || (board.cells[c[0]] == " " && board.cells[c[1]] == t && board.cells[c[2]] == " ") || (board.cells[c[0]] == " " && board.cells[c[1]] == " " && board.cells[c[2]] == t)}
@@ -203,11 +181,18 @@ class Game
     if early?
       false
     else
-      #binding.pry
       position = board.cells.index {|c| c == " "}
       position + 1
     end
   end
-
+  
+  #def multiple_losing_combos
+    #need a method for computer to take the position on the board where there is > 1 losing combination if the opposing player were to take that position
+    #maybe refactor the #almost_lost method to #collect all losing combos and use this method to #detect which one to use and which position to take
+  #end
+  
+  #def multiple_winning_combos
+    
+  #end
   
 end
