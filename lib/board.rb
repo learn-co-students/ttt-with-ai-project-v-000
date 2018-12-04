@@ -49,5 +49,12 @@ class Board
     @cells[pos] = player.token
   end
 
+   def taken?(pos)
+     # binding.pry
+    self.position(pos) == "X" || self.position(pos) == "O"
+   # binding.pry
+  end
   
+ 
+
 end
