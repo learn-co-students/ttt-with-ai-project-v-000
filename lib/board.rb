@@ -8,7 +8,7 @@ class Board
   end
   
   def initialize
-    self.reset!
+    reset!
   end
   
   def display
