@@ -48,11 +48,15 @@ class Game
     
     def turn
     # binding.pry
-      current_player.move(move)
-     # binding.pry
-    #  if board.valid_move?(move)
-     #   board.update(input, current_player) 
-    #  else self.turn
-     # end
+      x = current_player.move(board)
+  
+     if board.valid_move?(x)
+       board.update(x, current_player) 
+     else turn
+     end
+    end
+    
+    def play
+      
     end
 end
