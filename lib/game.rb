@@ -57,7 +57,8 @@ class Game
     
     def play
       current_player.move(board)
+      turn
      # binding.pry
-      turn if over? == false  
+      play if over? == false
     end
 end
