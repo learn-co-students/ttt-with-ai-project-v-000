@@ -23,13 +23,10 @@ class Game
   end 
   
   def won?
-    WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
+    WIN_COMBINATIONS.detect do |combination|
+          @board.cells[combination[0]] == @board.cells[combination[1]] && @board.cells[combination[1]] == @board.cells[combination[2]] && @board.cells[combination[1]] != " "
     end
   end
-    
 
     
     def draw?
