@@ -24,8 +24,10 @@ def game_start
   elsif player_mode == "2"
     Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
   end
-  puts "Would like to play again? [y/ n]"
 
+  puts "Would you like to play again? [y/ n]"
+  replay = gets.strip
+    game_start if replay == "y"
 end
 
-game_start
+game_start 
