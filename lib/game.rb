@@ -23,17 +23,13 @@ class Game
   end 
   
   def won?
-    WIN_COMBINATIONS.detect do |combination|
-         if @board.cells[combination[0]] == @board.cells[combination[1]] && @board.cells[combination[1]] == @board.cells[combination[2]] 
-              if @board.cells[combination[2]] != " "
-              #    binding.pry
-                  return combination
-                else
-                  return nil
-                end
-              end
-          end
+    WIN_COMBINATIONS.detect do |combo|
+      @board.cells[combo[0]] == @board.cells[combo[1]] &&
+      @board.cells[combo[1]] == @board.cells[combo[2]] &&
+      @board.taken?(combo[0]+1)
     end
+  end
+    
 
     
     def draw?
@@ -46,7 +42,7 @@ class Game
     
     def winner
     #  binding.pry
-          @winner = @board.cells[won?.first] if won?
+         @board.cells[won?.first] if won?
     #  binding.pry
     end
     
