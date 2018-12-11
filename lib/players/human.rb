@@ -3,10 +3,8 @@ module Players
   
     def move(board)
       puts "What is your move? (1-9)"
-      player_move=gets.chomp.to_i
-    binding.pry
+      gets.strip
+   # binding.pry
     end
-  
-  
   end
 end

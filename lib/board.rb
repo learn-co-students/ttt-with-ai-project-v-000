@@ -19,10 +19,8 @@ class Board
     puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
   
-  def position(position)
-   pos=position.to_i
-   pos -=1
-    @cells[pos]
+  def position(input)
+   @cells[input.to_i-1]
   end
 
   def full?
@@ -30,23 +28,19 @@ class Board
   end
 
   def turn_count
-    @cells.count { |t| t == "X" or t =="O" }
+    @cells.count { |t| t == "X" || t =="O" }
   end
   
-  def taken?(pos)
-    self.position(pos) == "X" || self.position(pos) == "O"
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
   end
   
   def valid_move?(user_move)
-     user_move=user_move.to_i
-     (1..9)===user_move && !self.taken?(user_move)
+     user_move.to_i.between?(1,9) && !taken?(user_move.to_i)
   end
   
-  def update(pos,player)
-    position(pos)
-    pos=pos.to_i
-    pos-=1
-    @cells[pos] = player.token
+  def update(input,player)
+    cells[input.to_i-1] = player.token
   end
   
  

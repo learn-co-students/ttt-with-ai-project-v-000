@@ -6,6 +6,7 @@ class Game
     [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
     ]
   
+  
   def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
@@ -13,52 +14,61 @@ class Game
   end
 
   def current_player
-    if board.turn_count.even? 
-        current_player = player_1
+    if @board.turn_count.even? 
+        curr_player = player_1
       else
-        current_player = player_2
+        curr_player = player_2
       end
+      curr_player
   end 
   
   def won?
-    WIN_COMBINATIONS.each do |combination|
-         if board.cells[combination[0]] == board.cells[combination[1]] && board.cells[combination[1]] == board.cells[combination[2]] 
-              if board.cells[combination[2]] != " "
+    WIN_COMBINATIONS.detect do |combination|
+         if @board.cells[combination[0]] == @board.cells[combination[1]] && @board.cells[combination[1]] == @board.cells[combination[2]] 
+              if @board.cells[combination[2]] != " "
+              #    binding.pry
                   return combination
                 else
                   return nil
-         end
-       end
+                end
+              end
+          end
     end
-     !board.full?
-    end
+
     
     def draw?
-      won? == false && board.full? 
+      !won? && @board.full? 
     end
     
     def over?
-      draw? == true || won?.kind_of?(Array) == true
+      draw? || won? 
     end
     
     def winner
-      win_combo = won?
-      board.cells[win_combo[0]] if win_combo != nil
+    #  binding.pry
+          @winner = @board.cells[won?.first] if won?
+    #  binding.pry
     end
     
     def turn
-     # binding.pry
-      x = current_player.move(board)
-      if board.valid_move?(x)
-        board.update(x, current_player) 
-      else turn
+      player = current_player
+      moves = player.move(@board)
+      if !@board.valid_move?(moves)
+        turn
+      else 
+        @board.update(moves, player) 
       end
     end
     
     def play
-      current_player.move(board)
-      turn
-     # binding.pry
-      play if over? == false
+      while !over? 
+        turn
+      end
+      if won? 
+    #    binding.pry
+        puts "Congratulations #{winner}!"
+      elsif draw?
+        puts "Tie"
+      end
     end
 end
