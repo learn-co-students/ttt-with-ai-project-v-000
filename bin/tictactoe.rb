@@ -4,10 +4,10 @@ require_relative '../config/environment'
 
 def game_start
   puts "Welcome to Command Line Tic Tac Toe!"
-  puts "Please choose player mode:
-  0 - Computer VS Computer
-  1 - You VS Computer
-  2 - You VS a friend"
+  puts "Please choose player mode:"
+  puts "0 - Computer VS Computer"
+  puts "1 - You VS Computer"
+  puts "2 - You VS a friend"
 
   player_mode = gets.strip
 
@@ -25,13 +25,7 @@ def game_start
     Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
   end
   puts "Would like to play again? [y/ n]"
-  gets.strip
-  replay = gets.strip
-    if replay == "y"
-    game_start
-    elsif replay == "n"
-      puts "Thanks for playing! Come again soon!"
-    end
+
 end
 
 game_start
