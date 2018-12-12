@@ -66,11 +66,11 @@ class Game
   end
   
   def turn
-    if (1..9).to_a.include?(@current_player.move(self.board).to_i)
-    else
-      "invalid"
-      @current_player.move(self.board).to_i
-    end
+    # if (1..9).to_a.include?(@current_player.move(self.board).to_i)
+    # else
+    #   "invalid"
+    #   @current_player.move(self.board).to_i
+    # end
     self.board.cells[@current_player.user_input.to_i - 1] = @current_player.token
     if @current_player === @player_1
       @current_player = @player_2
@@ -84,7 +84,11 @@ class Game
       puts "Please enter a number between 1 and 9 that corresponds to an open space on the board."
       @current_player.move(self.board)
       turn
-      puts "#{@board.cells}"
+      puts "#{@board.cells[0]} | #{@board.cells[1]} | #{@board.cells[2]}"
+      puts "-----------"
+      puts "#{@board.cells[3]} | #{@board.cells[4]} | #{@board.cells[5]}"
+      puts "-----------"
+      puts "#{@board.cells[6]} | #{@board.cells[7]} | #{@board.cells[8]}"
       if winner == "X"
         puts "Congratulations X!"
       elsif winner == "O"
@@ -93,29 +97,22 @@ class Game
         puts "Cat's Game!"
       end
     end
-    if winner == "X"
-      puts "Congratulations X!"
-    elsif winner == "O"
-      puts "Congratulations O!"
-    elsif draw? == TRUE
-      puts "Cat's Game!"
-    end
   end
   
-  def self.start(input1, input2)
-    if input1 === "2" && input2 === '1'
-      Game.new(player_1,player_2,board)
-    elsif input1 === "2" && input2 === '2'
-      Game.new(Players::Human.new("O"),Players::Human.new("X"),Board.new)
-    elsif input1 === "1" && input2 === "1"
-      Game.new(player_1,Players::Computer.new("O"),board)
-    elsif input1 === "1" && input2 === "2"
-      Game.new(Players::Computer.new("X"),player_2,board)
-    elsif input1 === "0" && input2 === "1"
-      Game.new(Players::Computer.new("X"),Players::Computer.new("O"),board)
-    else
-      Game.new(Players::Computer.new("O"),Players::Computer.new("X"),board)
-    end
-  end
+  # def self.start(input1, input2)
+  #   if input1 === "2" && input2 === '1'
+  #     Game.new(player_1,player_2,board)
+  #   elsif input1 === "2" && input2 === '2'
+  #     Game.new(Players::Human.new("O"),Players::Human.new("X"),Board.new)
+  #   elsif input1 === "1" && input2 === "1"
+  #     Game.new(player_1,Players::Computer.new("O"),board)
+  #   elsif input1 === "1" && input2 === "2"
+  #     Game.new(Players::Computer.new("X"),player_2,board)
+  #   elsif input1 === "0" && input2 === "1"
+  #     Game.new(Players::Computer.new("X"),Players::Computer.new("O"),board)
+  #   else
+  #     Game.new(Players::Computer.new("O"),Players::Computer.new("X"),board)
+  #   end
+  # end
   
 end
