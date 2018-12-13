@@ -95,20 +95,20 @@ class Game
     end
   end
   
-  # def self.start(input1, input2)
-  #   if input1 === "2" && input2 === '1'
-  #     Game.new(player_1,player_2,board)
-  #   elsif input1 === "2" && input2 === '2'
-  #     Game.new(Players::Human.new("O"),Players::Human.new("X"),Board.new)
-  #   elsif input1 === "1" && input2 === "1"
-  #     Game.new(player_1,Players::Computer.new("O"),board)
-  #   elsif input1 === "1" && input2 === "2"
-  #     Game.new(Players::Computer.new("X"),player_2,board)
-  #   elsif input1 === "0" && input2 === "1"
-  #     Game.new(Players::Computer.new("X"),Players::Computer.new("O"),board)
-  #   else
-  #     Game.new(Players::Computer.new("O"),Players::Computer.new("X"),board)
-  #   end
-  # end
+  def self.start(number_of_players, first_player)
+    if number_of_players === "2" && first_player === '1'
+      Game.new(Players::Human.new("X"),Players::Human.new("O"),Board.new)
+    elsif number_of_players === "2" && first_player === '2'
+      Game.new(Players::Human.new("O"),Players::Human.new("X"),Board.new)
+    elsif number_of_players === "1" && first_player === "1"
+      Game.new(Players::Human.new("X"),Players::Computer.new("O"),Board.new)
+    elsif number_of_players === "1" && first_player === "2"
+      Game.new(Players::Human.new("O"),Players::Computer.new("X"),Board.new)
+    elsif number_of_players === "0" && first_player === "1"
+      Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new)
+    else
+      Game.new(Players::Computer.new("O"),Players::Computer.new("X"),Board.new)
+    end
+  end
   
 end

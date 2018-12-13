@@ -3,9 +3,9 @@
 require_relative '../config/environment'
 
 puts "Hello.  Welcome to Tic Tac Toe (patent pending).  Would you like to play a 0, 1, or 2 player game? Enter '0', '1', or '2'."
-input1 = gets.chomp
+number_of_players = gets.chomp
 puts "Who should go first and be 'X'? Enter '1' for player 1 or '2' for player 2."
-input2 = gets.chomp
+first_player = gets.chomp
 
-game = Game.new
+game = Game.start(number_of_players,first_player)
 game.play

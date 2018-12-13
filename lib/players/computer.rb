@@ -9,8 +9,8 @@ module Players
           available_moves.push(cell)
         end
       end
-      random_integer = 1 + rand(available_moves.length - 1)
-      random_integer.to_s
+      @user_input = 1 + rand(available_moves.length - 1)
+      @user_input.to_s
     end
     
   end
