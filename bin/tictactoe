@@ -9,3 +9,22 @@ first_player = gets.chomp
 
 game = Game.start(number_of_players,first_player)
 game.play
+
+loop do
+  puts "Would you like to play again?"
+  play_again = gets.chomp
+  
+  case (play_again)
+    when 'No'
+      puts "Thank you for playing!"
+    when 'Yes'
+      puts "Would you like to play a 0, 1, or 2 player game? Enter '0', '1', or '2'."
+      number_of_players = gets.chomp
+      puts "Who should go first and be 'X'? Enter '1' for player 1 or '2' for player 2."
+      first_player = gets.chomp
+      game = Game.start(number_of_players,first_player)
+      game.play
+    else
+      puts "Huh? I don't know what that means."
+  end
+end

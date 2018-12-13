@@ -4,12 +4,12 @@ module Players
     
     def move(board)
       available_moves = []
-      board.cells.each do |cell|
-        if cell === " "
-          available_moves.push(cell)
+      board.cells.each_index do |index|
+        if board.cells[index] === " "
+          available_moves.push(index)
         end
       end
-      @user_input = 1 + rand(available_moves.length - 1)
+      @user_input = available_moves[rand(available_moves.length - 1)]
       @user_input.to_s
     end
     
