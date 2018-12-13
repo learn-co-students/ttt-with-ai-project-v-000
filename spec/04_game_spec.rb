@@ -248,7 +248,7 @@ describe 'Game' do
 
       game.play
 
-      expect(game.board.cells).to eq([" ", "X", " ", "O", " ", " ", " ", " ", " "])
+      expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
     end
 
     it 'checks if the game is won after every turn' do
