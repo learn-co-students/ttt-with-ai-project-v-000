@@ -17,6 +17,7 @@ loop do
   case (play_again)
     when 'No'
       puts "Thank you for playing!"
+      break
     when 'Yes'
       puts "Would you like to play a 0, 1, or 2 player game? Enter '0', '1', or '2'."
       number_of_players = gets.chomp
