@@ -61,7 +61,7 @@ class Game
     #    binding.pry
         puts "Congratulations #{winner}!"
       elsif draw?
-        puts "Tie"
+        puts "Cat's Game!"
       end
     end
 end
