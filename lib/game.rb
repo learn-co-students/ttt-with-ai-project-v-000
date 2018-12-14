@@ -64,4 +64,30 @@ class Game
         puts "Cat's Game!"
       end
     end
+    
+    def start
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      puts "Welcome to Tic Tac Toe!"
+      puts "How many human players will be playing? (0-2)"
+      num_of_players = gets.strip
+      if num_of_players == 1
+        puts "Which player should go first (H or C)?"
+        first_player = gets.strip.downcase
+          if first_player == "c"
+            player_2 = Players::Human.new("O")
+          else
+            player_1 = Players::Human.new("O")
+          end
+      end
+      if num_of_players == 2
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      end  
+      player_1
+      player_2
+      binding.pry
+    end
+    
+    
 end
