@@ -15,11 +15,12 @@ class Game
 
   def current_player
     if @board.turn_count.even? 
-        curr_player = player_1
+        @curr_player = @player_1
       else
-        curr_player = player_2
+        @curr_player = @player_2
       end
-      curr_player
+    #  binding.pry
+      @curr_player
   end 
   
   def won?
@@ -44,12 +45,20 @@ class Game
     end
     
     def turn
+      @board.display
+      puts " "
       player = current_player
+   #   binding.pry
       moves = player.move(@board)
       if !@board.valid_move?(moves)
+        puts "That's not a valid move! Try again.\n"
         turn
       else 
+        puts "Turn: #{@board.turn_count+1}\n"
         @board.update(moves, player) 
+        @board.display
+        puts "#{player.token} moved to #{moves}.\n\n"
+        
       end
     end
     
@@ -63,31 +72,39 @@ class Game
       elsif draw?
         puts "Cat's Game!"
       end
+      play_again?
     end
     
     def start
-      player_1 = Players::Computer.new("X")
-      player_2 = Players::Computer.new("O")
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
       puts "Welcome to Tic Tac Toe!"
       puts "How many human players will be playing? (0-2)"
-      num_of_players = gets.strip
+      num_of_players = gets.strip.to_i
       if num_of_players == 1
         puts "Which player should go first (H or C)?"
         first_player = gets.strip.downcase
-          if first_player == "c"
-            player_2 = Players::Human.new("O")
+          if first_player.downcase == "c"
+            @player_2 = Players::Human.new("O")
           else
-            player_1 = Players::Human.new("O")
+            @player_1 = Players::Human.new("X")
           end
       end
       if num_of_players == 2
-        player_1 = Players::Human.new("X")
-        player_2 = Players::Human.new("O")
+        @player_1 = Players::Human.new("X")
+        @player_2 = Players::Human.new("O")
       end  
-      player_1
-      player_2
-      binding.pry
+  #  binding.pry
+      play
     end
     
-    
+    def play_again?
+      puts "Would you like to play again? (Y or N)"
+      another_game = gets.strip.downcase
+      if another_game == "y"
+        Game.new.start
+      else
+        exit
+      end
+    end
 end
