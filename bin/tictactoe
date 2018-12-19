@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def start
+
+
+puts "Welcome!"
+
+puts "To move, enter a number between 1 and 9."
+
+puts "Select the amount of players."
+
+  input = gets.strip
+  
+  #0 players
+  
+  if input == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+  
+  #1 player
+  
+  elsif input == "1"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+   
+  
+  #2 players
+  
+  else input == "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  end
+end
+
+start
+  
+
+
+
+
