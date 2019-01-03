@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-puts "Welcome! How many humans are play (0,1,2)?"
+puts "Welcome! How many humans are playing (0,1,2)?"
 index = gets.strip
 
 if index == "0"
