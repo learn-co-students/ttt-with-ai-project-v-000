@@ -1,3 +1,27 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+game = Game.new
+board = Board.new
+puts "Welcome to CLI Tic-Tac-Toe!"
+puts "How many human players are playing? (0/1/2)"
+players = gets.strip
+if players == "0"
+  game.player_1 = Players::Computer.new("X")
+  game.player_2 = Players::Computer.new("O")
+end
+if players == "1"
+  puts "Do you want to go first(X) or second(O)? (1/2)"
+  input = gets.strip
+  if input == "2"
+    game.player_1 = Players::Computer.new("X")
+    game.player_2
+  else
+    game.player_1
+    game.player_2 = Players::Computer.new("O")
+  end
+end
+board.instruction_board
+game.play
