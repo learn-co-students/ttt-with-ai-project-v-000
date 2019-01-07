@@ -31,22 +31,20 @@ def program
     sleep(1)
     puts "TIC TAC TOE"
     sleep(1.5)
-    iter = 0.55
       x_count = 0
       o_count = 0
       d_count = 0
 
       100.times do
-        iter -= 0.005
         puts "\n"
-        g = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O", (2 - iter)))
+        g = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
         g.play
 
         x_count += 1 if g.result == "X"
         o_count += 1 if g.result == "O"
         d_count += 1 if g.result == "d"
 
-        sleep(Random.rand(iter))
+        sleep(0.1)
 
       end
 
@@ -61,11 +59,9 @@ def program
     puts "                                                 ...NOT TO PLAY.\n\n"
     sleep(2.5)
 
-    iter = 0
     100.times do
       iter += 0.005
       Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
-      sleep(iter)
     end
     sleep(1)
     puts "A STRANGE GAME."

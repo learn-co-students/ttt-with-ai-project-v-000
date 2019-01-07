@@ -40,7 +40,7 @@ module Players
     end
 
     def move(board)
-      sleep(Random.rand(0.5))
+      sleep(Random.rand(0.2))
       valid_moves = (1..9).to_a.select {|m| m if board.valid_move?(m) == true}
       side_moves = valid_moves.select {|m| m if m % 2 == 0}
       odd_moves = valid_moves.select {|m| m if m.to_i % 2 != 0 unless m == 5}
@@ -59,7 +59,6 @@ module Players
         odd_moves.sample.to_s
       else
         side_moves.sample.to_s
-        moves_arr[0]
       end
 
     end
