@@ -71,17 +71,7 @@ def program
     puts "                                                 ...NOT TO PLAY.\n\n"
     sleep(2.5)
 
-    100.times do
-      iter += 0.005
-      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
-    end
-    sleep(1)
-    puts "A STRANGE GAME."
-    sleep(0.5)
-    puts"THE ONLY WAY TO WIN IS"
-    sleep(0.75)
-    puts "NOT TO PLAY\n\n"
-    sleep(2)
+
   elsif type_choice == 5
     puts "Bye!"
   else
