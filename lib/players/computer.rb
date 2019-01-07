@@ -9,20 +9,20 @@ module Players
       side_moves = valid_moves.select {|m| m if m % 2 == 0}
       odd_moves = valid_moves.select {|m| m if m.to_i % 2 != 0}
 
-      if almost_won?(board)
+      if valid_moves.include?(5)
+        "5"
+      elsif almost_won?(board)
         moves_arr = almost_won?(board).select do |ind|
           m = ind + 1
           if board.valid_move?(m)
             m
           end
         end
-        moves_arr.sample + 1
-      elsif valid_moves.include?(5)
-        5
+        (moves_arr.sample + 1).to_s
       elsif odd_moves.length > 0
-        odd_moves.sample
+        odd_moves.sample.to_s
       else
-        side_moves.sample
+        side_moves.sample.to_s
       end
 
     end
@@ -34,7 +34,6 @@ module Players
       two_row = []
 
       WIN_COMBINATIONS.each do |comb|
-        # pass tests for "X" and "O" to #all?
         if (comb.select {|space| board.cells[space] == "X"}).length == 2 || (comb.select {|space| board.cells[space] == "O"}).length == 2
           two_row << comb
         end
