@@ -4,7 +4,7 @@ require_relative '../config/environment'
 
 def program
   puts "Welcome to Tic Tac Toe! Please enter a number to choose a game type. \n
-  1. Human vs. Human Local \n
+  1. Human vs. Human, Local \n
   2. Human vs. AI \n
   3. AI vs. AI, single game \n
   4. AI vs. AI, Wargames \n
@@ -21,6 +21,7 @@ def program
   elsif type_choice == 3
     puts "Okay, let's play\n"
     Game.new(player_1 = Players::Computer.new("X", 6), player_2 = Players::Computer.new("O", 6)).play
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
   elsif type_choice == 4
     puts "Okay, let's play"
     sleep(0.5)
@@ -60,10 +61,24 @@ def program
     puts "                                                 ...NOT TO PLAY.\n\n"
     sleep(2.5)
 
+    iter = 0
+    100.times do
+      iter += 0.005
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+      sleep(iter)
+    end
+    sleep(1)
+    puts "A STRANGE GAME."
+    sleep(0.5)
+    puts"THE ONLY WAY TO WIN IS"
+    sleep(0.75)
+    puts "NOT TO PLAY\n\n"
+    sleep(2)
   elsif type_choice == 5
     puts "Bye!"
   else
     puts "Invalid selection!"
+
   end
 
 

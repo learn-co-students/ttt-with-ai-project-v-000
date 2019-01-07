@@ -3,6 +3,9 @@ class Player
   def initialize(token, speed = 1)
     @token = token.freeze
     @speed = speed
+
+  def initialize(token)
+    @token = token.freeze
   end
 
   def token
