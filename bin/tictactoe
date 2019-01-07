@@ -1,3 +1,87 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def program
+  puts "Welcome to Tic Tac Toe! Please enter a number to choose a game type. \n
+  1. Human vs. Human Local \n
+  2. Human vs. AI \n
+  3. AI vs. AI, single game \n
+  4. AI vs. AI, Wargames \n
+  5. Quit"
+
+  type_choice = gets.strip.to_i
+
+  if type_choice == 1
+    puts "Okay, let's play\n"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+  elsif type_choice == 2
+    puts "Okay, let's play\n"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+  elsif type_choice == 3
+    puts "Okay, let's play\n"
+    Game.new(player_1 = Players::Computer.new("X", 6), player_2 = Players::Computer.new("O", 6)).play
+  elsif type_choice == 4
+    puts "Okay, let's play"
+    sleep(0.5)
+    puts "GLOBAL THERMONUCLEAR WAR\n"
+    sleep(2)
+    puts "I mean"
+    sleep(1)
+    puts "TIC TAC TOE"
+    sleep(1.5)
+    iter = 0.55
+      x_count = 0
+      o_count = 0
+      d_count = 0
+
+      100.times do
+        iter -= 0.005
+        puts "\n"
+        g = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O", (2 - iter)))
+        g.play
+
+        x_count += 1 if g.result == "X"
+        o_count += 1 if g.result == "O"
+        d_count += 1 if g.result == "d"
+
+        sleep(Random.rand(iter))
+
+      end
+
+      puts "X wins: #{x_count}  O wins: #{o_count} Draw: #{d_count}"
+
+    sleep(1)
+    puts "\n \n "
+    puts "A STRANGE GAME."
+    sleep(1)
+    puts"                    THE ONLY WAY TO WIN IS..."
+    sleep(0.75)
+    puts "                                                 ...NOT TO PLAY.\n\n"
+    sleep(2.5)
+
+  elsif type_choice == 5
+    puts "Bye!"
+  else
+    puts "Invalid selection!"
+  end
+
+
+  def replay_prompt
+    puts "Would you like to play again?"
+    puts "1. Yes"
+    puts "2. No"
+    selection = gets
+    if selection.strip.to_i == 1
+      program
+    elsif selection.strip.to_i == 2
+    else
+      puts "Yes or no! Choose!"
+      replay_prompt
+    end
+  end
+
+  replay_prompt
+end
+
+program
