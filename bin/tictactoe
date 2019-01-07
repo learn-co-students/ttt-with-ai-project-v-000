@@ -17,10 +17,22 @@ def program
     Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
   elsif type_choice == 2
     puts "Okay, let's play\n"
-    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+    puts "Will you play X? Or O?"
+    puts "1. X"
+    puts "2. O"
+
+    human_token = gets.strip.to_i
+    if human_token == 1
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+    elsif human_token == 2
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+    else
+      puts "Invalid selection!"
+    end
+
+
   elsif type_choice == 3
     puts "Okay, let's play\n"
-    Game.new(player_1 = Players::Computer.new("X", 6), player_2 = Players::Computer.new("O", 6)).play
     Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
   elsif type_choice == 4
     puts "Okay, let's play"
@@ -79,7 +91,7 @@ def program
 
 
   def replay_prompt
-    puts "Would you like to play again?"
+    puts "Would you like to try again?"
     puts "1. Yes"
     puts "2. No"
     selection = gets
