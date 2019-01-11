@@ -66,13 +66,34 @@ class Game
   end 
   
   def turn 
-    x = current_player 
-    index = x.move(@board)
+    player = current_player 
+    index = player.move(@board)
     if board.valid_move?(index)
-      update(input, player)
+      board.update(index, player)
       board.display
     else 
       turn
     end
   end
+  
+  def play 
+    while !over?
+      turn 
+    end
+    if won?
+      puts "Congratulations #{winner}!"
+    else 
+      puts "Cat's Game!"
+    end
+  end 
 end 
+
+
+
+
+
+
+
+
+
+
