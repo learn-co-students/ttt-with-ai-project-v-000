@@ -42,15 +42,32 @@ class Game
   def start 
   end
   
+  def turn
+    puts "Here is the current board: \n "
+    board.display
+    puts "Where would you like to play?"
+    input = current_player.move(board) 
+    if board.valid_move?(input)
+      board.update(input, current_player)
+      board.display
+    else
+      puts "invalid"
+      turn
+    end
+  end
+  
   def play 
+    if !over?
+      turn
+      won?
+      play
+    elsif winner
+      puts "Congratulations #{winner}!"
+    elsif draw?
+      puts "Cat's Game!"
+    end
   end 
   
-  def turn
-      board.update(player_1.move(board), player_1)
-      board.display
-      board.update(player_2.move(board), player_2)
-      board.display
-  end
 end
   
   
