@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def number_of_players
+  player_number = gets.strip
+  if player_number == "2"
+    Game.new.play
+  elsif player_number == "1"
+    go_first?
+  elsif player_number == "0"
+    game = Game.new(Player::Computer.new("X"), Player::Computer.new("O"))
+    game.play
+  else
+    puts "Please enter 0, 1, or 2"
+    number_of_players
+  end
+end
+
+def go_first?
+  puts "Would you like to go first? (y/n)"
+  going_first = gets.strip.downcase
+  if going_first == "y"
+    game = Game.new(Player::Human.new("X"), Player::Computer.new("O"))
+    game.play
+  elsif going_first == "n"
+    game = Game.new(Player::Computer.new("X"), Player::Human.new("O"))
+    game.play
+  else
+    puts "Please enter y or n"
+    go_first?
+  end
+end
+
+
+puts "Welcome to Tic-Tac-Toe"
+puts "How many players?"
+number_of_players
+# The extra lines of code are written in to give the player a second chance if they entered in something wrong
+
+
+
+
+
+
