@@ -12,3 +12,5 @@ Need to iterate over the board.cells and collect an array of self.token.
 If one move made then check for win combos that include my position. Then choose next position based on open cells in win combos.
 One idea: when checking win combos also check block combos even if the game has not reached the point of looking for blocking.
 Take a middle cell if empty, after 1st move take another cell based on empty cells, once everyone has 2 positions on the board check for win combo or block combo.
+
+[Resource Link](http://help.learn.co/online-immersive-bootcamps/resource-guide-for-most-asked-about-labs/tic-tac-toe-with-ai-resource-guide)
