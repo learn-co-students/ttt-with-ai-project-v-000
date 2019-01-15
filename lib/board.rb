@@ -23,8 +23,9 @@ class Board
   def position(input)
     index = input.to_i - 1
     self.cells[index]
-  end
-#
+  end 
+  
+
   def full?
     !self.cells.include?(" ")
   end

@@ -26,3 +26,4 @@ if play_mode == "p"
   end
 
 ng.play
+
