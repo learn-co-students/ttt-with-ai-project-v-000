@@ -29,7 +29,7 @@ def won?
     position_1 = board.cells[combo[0]]
     position_2 = board.cells[combo[1]]
     position_3 = board.cells[combo[2]]
-    return combo if position_1 == position_2 && position_2 == position_3
+    return combo if position_1 == position_2 && position_2 == position_3 && position_1 != " "
     end
 end
 
@@ -43,9 +43,19 @@ end
 
 def winner
   board.cells[self.won?[0]] if self.won?
-  #current returns " "
 end
-    
+
+def turn    
+  if board.turn_count.even?
+    # input = STDIN.gets.strip.to_i
+    board.update(input, player_1) if board.valid_move?(input)
+  elsif board.turn_count.odd?
+    # input = STDIN.gets.strip.to_i
+    board.update(input, player_1) if board.valid_move?(input) 
+  end
+
+  
+end
   
   
   
