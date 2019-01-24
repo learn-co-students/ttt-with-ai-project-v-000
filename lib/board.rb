@@ -1,6 +1,6 @@
 require "pry"
 class Board 
-  attr_accessor :cells, :token, :player
+  attr_accessor :cells, :token, :player, :game
   
   def initialize
     reset!
@@ -45,6 +45,6 @@ class Board
   end
   
   def update(user_input, player)
-   cells[user_input.to_i - 1]
+    cells[user_input.to_i - 1] = player.token
   end
  end
