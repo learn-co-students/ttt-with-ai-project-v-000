@@ -21,10 +21,12 @@ class Game
  ]
  
   def current_player
-   if player_1(token) == "X"
-     puts "hi"
-   end
-  end
+   if board.turn_count == 0 
+     player_1
+   elsif board.turn_count == 1 
+   player_2
+ end
+end
    
  
 end
