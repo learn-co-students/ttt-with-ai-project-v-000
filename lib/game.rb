@@ -20,8 +20,10 @@ class Game
   [2,4,6]
  ]
  
- def current_player 
-   
+  def current_player
+   if player_1(token) == "X"
+     puts "hi"
+   end
   end
    
  
