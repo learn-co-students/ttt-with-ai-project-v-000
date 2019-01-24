@@ -21,12 +21,10 @@ class Game
  ]
  
   def current_player
-   if board.turn_count == 0 
-     player_1
-   elsif board.turn_count == 1 
-   player_2
- end
-end
-   
+   board.turn_count % 2 ? player_1 : player_2
+  end
+  
+  def won?
+  end 
  
 end
