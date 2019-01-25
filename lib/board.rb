@@ -19,7 +19,7 @@ class Board
   end
   
   def position(user_input)
-   cells[user_input.to_i - 1] 
+   cells[(user_input).to_i - 1] 
   end
   
   def full?
@@ -37,8 +37,7 @@ class Board
   end
   
    def taken?(user_input)
-    # position(user_input.to_i - 1) != " " || position(user_input.to_i - 1) != ""
-    cells[user_input.to_i - 1] == "X" || cells[user_input.to_i - 1] == "O"
+    position(user_input) == "X" || position(user_input) == "O"
    end
    
    def valid_move?(user_input)
@@ -46,6 +45,7 @@ class Board
   end
   
   def update(user_input, player)
-    cells[user_input.to_i - 1] = player.token
+    position(user_input) = player.token
   end
+  
  end
