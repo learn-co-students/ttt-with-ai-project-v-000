@@ -28,7 +28,7 @@ class Game
     WIN_COMBINATIONS.detect do |win_combo|
     board.cells[win_combo[0]] == board.cells[win_combo[1]] &&
     board.cells[win_combo[1]] == board.cells[win_combo[2]] &&
-    board.taken?(win_combo[0])
+    board.taken?(win_combo[0]+ 1)
    end
   end
   
@@ -41,12 +41,19 @@ class Game
  end
  
  def winner 
-   if win_combo = won?
-     board.cells[win_combo.first]
-  else
-    nil
-   end
+    win_combo = won?
+    win_combo ? board.cells[win_combo.first] : nil
  end 
+ 
+ def turn
+   user_input = gets.strip
+  if board.valid_move?(user_input.to_i - 1)
+    board.update(user_input.to_i - 1, current_player)
+    board.display
+  else
+    turn
+  end
+ end
  
  
 end

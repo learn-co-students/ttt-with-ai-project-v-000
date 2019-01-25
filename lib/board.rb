@@ -37,6 +37,7 @@ class Board
   end
   
    def taken?(user_input)
+    # position(user_input.to_i - 1) != " " || position(user_input.to_i - 1) != ""
     cells[user_input.to_i - 1] == "X" || cells[user_input.to_i - 1] == "O"
    end
    
