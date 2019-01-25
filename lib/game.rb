@@ -41,6 +41,12 @@ class Game
  end
  
  def winner 
-   
+   if win_combo = won?
+     board.cells[win_combo.first]
+  else
+    nil
+   end
  end 
+ 
+ 
 end
