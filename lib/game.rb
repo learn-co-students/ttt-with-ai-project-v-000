@@ -21,7 +21,7 @@ class Game
  ]
  
   def current_player
-   board.turn_count % 2 ? player_1 : player_2
+   board.turn_count % 2 == 0 ? player_1 : player_2
   end
   
   def won?
@@ -45,15 +45,24 @@ class Game
     win_combo ? board.cells[win_combo.first] : nil
  end 
  
+ 
  def turn
-   user_input = gets.strip
-  if board.valid_move?(user_input.to_i - 1)
-    board.update(user_input.to_i - 1, current_player)
-    board.display
-  else
-    turn
+    choice = current_player.move(board)
+    if board.valid_move?(choice)
+      board.update(choice, current_player)
+      board.display
+    else 
+      turn
+    end
+  end
+
+ def play 
+   turn until over?
+    if draw?
+      puts "Cat's Game!"
+    elsif won?
+      puts "Congratulations #{winner}!"
   end
  end
- 
  
 end

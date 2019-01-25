@@ -27,13 +27,13 @@ class Board
   end
   
   def turn_count
-   turns = 0
-   cells.each do |cell|
-    if cell == "X" || cell == "O"
-      turns += 1
-    end
-   end
-   turns
+     turns = 0
+     cells.each do |cell|
+      if cell == "X" || cell == "O"
+        turns += 1
+      end
+     end
+    turns
   end
   
    def taken?(user_input)
@@ -45,7 +45,7 @@ class Board
   end
   
   def update(user_input, player)
-    position(user_input) = player.token
+    cells[user_input.to_i - 1] = player.token
   end
   
  end
