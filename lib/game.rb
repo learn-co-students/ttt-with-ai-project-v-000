@@ -45,16 +45,17 @@ def winner
   board.cells[self.won?[0]] if self.won?
 end
 
-def turn    
-  if board.turn_count.even?
-    # input = STDIN.gets.strip.to_i
-    board.update(input, player_1) if board.valid_move?(input)
-  elsif board.turn_count.odd?
-    # input = STDIN.gets.strip.to_i
-    board.update(input, player_1) if board.valid_move?(input) 
+def turn
+  puts "Please enter 1-9:"
+  input = self.player_1.gets.strip
+  index = board.position(input)
+  if board.valid_move?(index)
+    board.update(index, player_1) if board.turn_count.even?
+    board.update(index, player_2) if board.turn_count.odd?
+    board.display
+  # else
+  #   turn
   end
-
-  
 end
   
   
