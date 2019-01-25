@@ -47,6 +47,7 @@ class Game
  
  
  def turn
+   puts "Select 1-9"
     choice = current_player.move(board)
     if board.valid_move?(choice)
       board.update(choice, current_player)
@@ -63,6 +64,26 @@ class Game
     elsif won?
       puts "Congratulations #{winner}!"
   end
+ end
+ 
+ def self.start 
+   puts "Welcome to Tic Tac Toe!"
+   puts "Would you like to play '0', '1', or '2' players?"
+   input = gets.strip
+   
+   if input == '0'
+    game = Game.new(Players::Computer.new("X"),Players::Computer.new("O"), Board.new)
+     elsif input == '1'
+     game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+     elsif input == '2'
+     game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+     end
+     puts "Who would like to go first?"
+    until game.won?
+     game.play
+    end
+    
+    
  end
  
 end
