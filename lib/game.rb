@@ -71,6 +71,9 @@ end
 
 def play
   self.turn until self.over?
+  #plays 3rd turn as 1st turn - returns "O" in cell "1"
+  #expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
+
 end
   
 end
