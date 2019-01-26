@@ -1,3 +1,6 @@
+require_relative './players/human'
+require_relative './players/computer'
+
 class Game
   
   attr_accessor :board, :player_1, :player_2
@@ -47,17 +50,27 @@ end
 
 def turn
   puts "Please enter 1-9:"
-  input = self.player_1.gets.strip
-  index = board.position(input)
-  if board.valid_move?(index)
-    board.update(index, player_1) if board.turn_count.even?
-    board.update(index, player_2) if board.turn_count.odd?
-    board.display
-  # else
-  #   turn
+  if board.turn_count.even?
+    move1 = player_1.move(board)
+    move1
+    if board.valid_move?(move1)
+      board.update(move1, player_1)
+    else
+      turn
+    end
+  elsif board.turn_count.odd?
+    move2 = player_2.move(board)
+    move2
+    if board.valid_move?(move2)
+      board.update(move2, player_2)
+    else
+      turn
+    end
   end
 end
-  
-  
+
+def play
+  self.turn until self.over?
+end
   
 end
