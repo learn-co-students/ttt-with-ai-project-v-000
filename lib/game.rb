@@ -62,9 +62,6 @@ def play
   elsif self.draw?
     puts "Cat's Game!"
   end
-  
 end
 
-
-  
 end
