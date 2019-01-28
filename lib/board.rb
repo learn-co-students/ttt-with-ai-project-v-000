@@ -44,7 +44,8 @@ attr_accessor :cells
   end
   
   def update(value, player)
-    cells[position(value).to_i] = player.token
+    value = value.to_i - 1
+    cells[value] = player.token
   end
     
 end

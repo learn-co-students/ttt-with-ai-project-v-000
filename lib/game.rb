@@ -50,30 +50,21 @@ end
 
 def turn
   puts "Please enter 1-9:"
-  if board.turn_count.even?
-    move1 = player_1.move(board)
-    move1
-    if board.valid_move?(move1)
-      board.update(move1, player_1)
-    else
-      turn
-    end
-  elsif board.turn_count.odd?
-    move2 = player_2.move(board)
-    move2
-    if board.valid_move?(move2)
-      board.update(move2, player_2)
-    else
-      turn
-    end
-  end
+  move = current_player.move(board)
+  board.valid_move?(move) ? board.update(move, current_player) : self.turn
 end
 
 def play
   self.turn until self.over?
-  #plays 3rd turn as 1st turn - returns "O" in cell "1"
-  #expect(game.board.cells).to eq(["X", "X", " ", "O", " ", " ", " ", " ", " "])
-
+  
+  if self.won?
+    puts "Congratulations #{winner}!"
+  elsif self.draw?
+    puts "Cat's Game!"
+  end
+  
 end
+
+
   
 end
