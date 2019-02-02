@@ -15,14 +15,16 @@ puts  "For no players, type '0'. " \
 numofplayers = gets.strip.to_i
 
 if numofplayers === 0
-  # Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-  # binding.pry
-  # board.display
-  # play
-  # board.display
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+  game.board.display
 elsif numofplayers === 1
-  Game.new()
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+  game.board.display
 elsif numofplayers === 2
-  Game.new()
+  game = Game.new()
+  game.play
+  game.board.display
 end
 

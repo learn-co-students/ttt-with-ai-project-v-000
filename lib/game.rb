@@ -55,7 +55,10 @@ def turn
 end
 
 def play
-  self.turn until self.over?
+  until self.over? do
+    self.turn
+    board.display
+  end
   
   if self.won?
     puts "Congratulations #{winner}!"
