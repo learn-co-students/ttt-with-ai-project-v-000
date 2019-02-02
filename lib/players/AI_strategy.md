@@ -1,20 +1,69 @@
 # AI Tic Tac Toe Strategy
 
-First move choose middle if available. If position 5 is not taken then take corners or sides to block them.
-Example strategy: Play first turn in corner and 2nd turn in center if available
-samples from avaible positions.
+## PSEUDOCODE
+**Before every move:** Check to see if current player can block other player's win or secure their own win.
+The logic below plays out to the point where the "block a win" and "secure a win" methods take over the game.
 
-If center is not available for 2nd turn, computer sample from available positions.
-Need to check if there is a position to win and if it is not taken. Take the winning position.
+### Player 1 ("X")
+**First move:** Take the center spot.
+#### Option 1:
+  **Second move:** If "O" took an edge spot, take one of two opposite corners from edge.
+  **Third move:** Take the corner that leaves two possible win combinations.
+#### Option 2:
+  **Second move:** If "O" took a corner spot, take the opposite corner spot.
+  **Third move:** If "O" took an edge spot, take the corner that leaves two possible wins.
 
-If no winning position avaialable, check to see if the the other player is going to win and block them if necessary.
-If win combo includes your first move, look to see if any of the combos that include your first move are available.
-Win combo versus block combo. Win combo is your own taken position and block is the opponents taken positions.
-Need to iterate over the board.cells and collect an array of self.token.
+### Player 2 ("O")
+#### Option 1:
+**First move:** Take the center spot.
+**Second move:** Take an edge spot.
+#### Option 2:
+**First move:** Take a corner spot.
+**Second move:** Take a corner spot.
 
-If one move made then check for win combos that include my position. Then choose next position based on open cells in win combos.
+### Block A Win
+Iterate through win combinations array.
+For each combination array, push the value of the index of the current board into `poss_win`.
+If `poss_win` contains two of the opposite player's token and one empty space, set `player_move` as the index of that empty space plus one.
 
-One idea: when checking win combos also check block combos even if the game has not reached the point of looking for blocking.
-Take a middle cell if empty, after 1st move take another cell based on empty cells, once everyone has 2 positions on the board check for win combo or block combo.
+### Secure A Win
+Iterate through win combinations array.
+For each combination array, push the value of the index of the current board into `poss_win`.
+If `poss_win` contains two of the current player's token and one empty space, set `player_move` as the index of that empty space plus one.
 
-[Resource Link](http://help.learn.co/online-immersive-bootcamps/resource-guide-for-most-asked-about-labs/tic-tac-toe-with-ai-resource-guide)
+## Notes
+- Possibly code out each player's moves separately
+- Should add more cases for when computers are playing against _unpredictable_ humans.
+- [Tic Tac Toe Logic Source](https://www.quora.com/Is-there-a-way-to-never-lose-at-Tic-Tac-Toe)
+
+---
+## Code
+
+###Player 1 Logic
+```def move(board)
+if self.token == "X"
+player_move = "5" if board.turn_count == 0
+if board.turn_count == 2
+if corner_taken(board) != nil
+player_move = corner_taken(board)
+else
+end
+end
+end
+player_move
+end
+```
+
+###Helper Method
+```def corner_taken(board)
+if board.cells[1] == "O"
+return 9
+elsif board.cells[3] == "O"
+return 7
+elsif board.cells[7] == "O"
+return 3
+elsif board.cells[9] == "O"
+return 1
+end
+end
+```
