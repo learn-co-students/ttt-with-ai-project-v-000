@@ -2,8 +2,8 @@
 
 ## PSEUDOCODE
 
-- **Before every move:** Check to see if current player can block other player's win or secure their own win.
-- The logic below plays out to the point where the "block a win" and "secure a win" methods take over the game.
+**Before every move:** Check to see if current player can block other player's win or secure their own win.
+The logic below plays out to the point where the "block a win" and "secure a win" methods take over the game.
 
 ---
 
@@ -19,12 +19,15 @@
 
 ### Player 2 ("O")
 
-- **Option 1:**
-  - **First move:** Take the center spot.
-  - **Second move:** Take an edge spot.
-- **Option 2:**
-  - **First move:** Take a corner spot.
-  - **Second move:** Take a corner spot.
+#### Option 1
+
+  **First move:** Take the center spot.
+  **Second move:** Take an edge spot.
+
+#### Option 2
+
+**First move:** Take a corner spot.
+**Second move:** Take a corner spot.
 
 ### Block A Win
 
@@ -34,9 +37,9 @@
 
 ### Secure A Win
 
-- Iterate through win combinations array.
-- For each combination array, push the value of the index of the current board into `poss_win`.
-- If `poss_win` contains two of the current player's token and one empty space, set `player_move` as the index of that empty space plus one.
+Iterate through win combinations array.
+For each combination array, push the value of the index of the current board into `poss_win`.
+If `poss_win` contains two of the current player's token and one empty space, set `player_move` as the index of that empty space plus one.
 
 ---
 
@@ -54,16 +57,17 @@
 
 ```ruby
 def move(board)
-if self.token == "X"
-player_move = "5" if board.turn_count == 0
-if board.turn_count == 2
-if corner_taken(board) != nil
-player_move = corner_taken(board)
-else
-end
-end
-end
-player_move
+  if self.token == "X"
+    player_move = "5" if board.turn_count == 0
+    if board.turn_count == 2
+      if corner_taken(board) != nil
+        player_move = corner_taken(board)
+      else
+        #
+      end
+    end
+  end
+  player_move
 end
 ```
 
@@ -71,14 +75,14 @@ end
 
 ```ruby
 def corner_taken(board)
-if board.cells[1] == "O"
-return 9
-elsif board.cells[3] == "O"
-return 7
-elsif board.cells[7] == "O"
-return 3
-elsif board.cells[9] == "O"
-return 1
-end
+  if board.cells[1] == "O"
+    return 9
+  elsif board.cells[3] == "O"
+    return 7
+  elsif board.cells[7] == "O"
+    return 3
+  elsif board.cells[9] == "O"
+    return 1
+  end
 end
 ```
