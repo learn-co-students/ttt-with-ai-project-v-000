@@ -26,21 +26,16 @@ class Game
   end
 
   def won?
-    # THIS FUCKING SUCKEDDDD
-    win = false
-    WIN_COMBINATIONS.each do |combo|
-      win = combo if check_combo(combo)
+    WIN_COMBINATIONS.find do |combo|
+      poss_win = []
+      combo.each {|i| poss_win << board.cells[i]}
+      if poss_win.count("O") == 3 || poss_win.count("X") == 3
+        win = combo
+      else
+        win = false
+      end
+      win
     end
-    win
-  end
-
-  # #won? helper method
-  def check_combo(combo)
-    win = false
-    poss_win = []
-    combo.each {|i| poss_win << board.cells[i]}
-    win = combo if poss_win == ["X", "X", "X"] || poss_win == ["O", "O", "O"]
-    win
   end
 
   def draw?
