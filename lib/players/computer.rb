@@ -4,11 +4,5 @@ module Players
     def move(board)
        (1 + rand(9)).to_s
      end
-end
-
-
-
-
-
-
+  end
 end
