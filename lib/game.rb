@@ -25,9 +25,59 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |win_combo|
-      board.cells[win_combo[0]] == board.cells[win_combo[1]] && board.cells[win_combo[1]] == board.cells[win_combo[2]]
+      board.cells[win_combo[0]] == board.cells[win_combo[1]] && board.cells[win_combo[1]] == board.cells[win_combo[2]] && board.taken?(win_combo[0]+ 1)
+
     end
   end
 
-  
+  def draw?
+    board.full? && !won?
+  end
+
+  def over?
+    draw? || won?
+  end
+
+  def winner
+    win_combo = won?
+    win_combo ? board.cells[win_combo[0]] : nil
+  end
+
+  def turn
+    puts "Please select a number between 1-9"
+    user_input = current_player.move(board)
+    if board.valid_move?(user_input)
+      board.update(user_input, current_player)
+      board.display
+    else
+      turn
+    end
+  end
+
+  def play
+    turn until over?
+    if draw?
+      puts "Cat's Game!"
+    elsif won?
+      puts "Congratulations #{winner}!"
+    end
+  end
+
+  def self.start
+    puts "Welcome to Tic Tac Toe!"
+    puts "Select either '0', '1', or '2 players."
+    input = gets.strip
+    input
+
+    if input == '0'
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+    elsif input == '1'
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+    elsif input == '2'
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
+    end
+    until game.won?
+      game.play
+    end
+  end
 end

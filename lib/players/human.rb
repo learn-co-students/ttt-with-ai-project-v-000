@@ -6,7 +6,7 @@ module Players
       user_input = gets.strip
       user_input
     end
-    
+
   end
 
 end
