@@ -62,28 +62,4 @@ class Game
       puts "Congratulations #{winner}!"
     end
   end
-
-  def self.start
-    puts "Welcome to Tic Tac Toe!"
-    puts "Would you like to play '0', '1', or '2' player?"
-    input = gets.strip
-
-    if input == '0'
-      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
-    elsif input == '1'
-      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
-    elsif input == '2'
-      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new)
-    end
-    until game.won?
-      game.play
-    end
-      puts "Would you like to play again? [Y / N]"
-      input = gets.strip
-    if input == "Y"
-      start
-    else
-      nil
-    end
-  end
 end
