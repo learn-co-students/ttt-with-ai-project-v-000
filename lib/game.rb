@@ -65,9 +65,8 @@ class Game
 
   def self.start
     puts "Welcome to Tic Tac Toe!"
-    puts "Select either '0', '1', or '2 players."
+    puts "Would you like to play '0', '1', or '2' player?"
     input = gets.strip
-    input
 
     if input == '0'
       game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
@@ -78,6 +77,13 @@ class Game
     end
     until game.won?
       game.play
+    end
+      puts "Would you like to play again? [Y / N]"
+      input = gets.strip
+    if input == "Y"
+      start
+    else
+      nil
     end
   end
 end
