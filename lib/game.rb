@@ -84,6 +84,7 @@ WIN_COMBINATIONS = [
   end
 
   def play
+    puts "GAME STARTED"
     until over?
       turn
     end
