@@ -19,7 +19,7 @@ class Board
   end 
   
   def position(input)
-    
+    cells[input.to_i-1]
   end 
   
   
