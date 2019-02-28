@@ -32,6 +32,20 @@ class Board
     end 
   end 
 end 
+
+  def turn_count
+  cells.count{ |char| char == "X" || char == "O"}
+ 
+  end 
+  
+  def taken?(input)
+    
+    position(input) == "X" ||  position(input) == "O"
+    
+    # !(position(input)==" " ||  position(input)=="")   #Also passes
+  end 
+
+
   
   
   
