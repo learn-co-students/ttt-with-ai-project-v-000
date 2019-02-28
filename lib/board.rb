@@ -1,5 +1,6 @@
 require 'pry'
 class Board
+  #Hi Emily 
   
   attr_accessor :cells  
   
