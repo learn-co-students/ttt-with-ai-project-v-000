@@ -39,14 +39,17 @@ end
   end 
   
   def taken?(input)
-    
-    position(input) == "X" ||  position(input) == "O"
-    
-    # !(position(input)==" " ||  position(input)=="")   #Also passes
+     position(input) == "X" ||  position(input) == "O"
+     # !(position(input)==" " ||  position(input)=="")   #Also passes
   end 
 
-
+  def valid_move?(input)
+    input.to_i.between?(1, 9) && !taken?(input)
+  end 
   
+  def update(input, player)
+    cells[input.to_i-1] = player.token #Stands for X or O  
+  end 
   
   
   
