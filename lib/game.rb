@@ -21,6 +21,27 @@ class Game
     
   end 
   
+  
+  def current_player
+    @board.turn_count % 2 == 0 ? player_1 : player_2 
+  end 
+  
+  def over?
+    won? || draw?
+  end 
+  
+  def  won?
+    WIN_COMBINATIONS.detect do |winner| 
+      @board.cells[winner[0]]
+    end 
+  end 
+  
+  def draw?
+   @board.full? && !won? 
+  end 
+  
+  
+  
 
 end 
 
