@@ -1,4 +1,8 @@
+
+ require 'pry'
 class Game 
+
+  
   attr_accessor :board, :player_1, :player_2
   
   WIN_COMBINATIONS = [
@@ -48,9 +52,13 @@ class Game
     end 
   end 
   
+  def turn(board)
   
 
-end 
+  end 
+  
+
+  end 
 
 
 
