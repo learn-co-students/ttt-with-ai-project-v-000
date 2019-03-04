@@ -26,20 +26,27 @@ class Game
     @board.turn_count % 2 == 0 ? player_1 : player_2 
   end 
   
-  def over?
+  def  won?
+    WIN_COMBINATIONS.detect do |winner| 
+      @board.cells[winner[0]] == @board.cells[winner[1]] && 
+       @board.cells[winner[1]] == @board.cells[winner[2]] &&
+       (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
+    end 
+  end 
+
+  def draw?
+   @board.full? && !won? #If board is full/ && noone has won 
+  end 
+  
+   def over?
     won? || draw?
   end 
   
-  def  won?
-    WIN_COMBINATIONS.detect do |winner| 
-      @board.cells[winner[0]]
+  def winner 
+    if winning_combo = won? 
+      @winner = @board.cells[winning_combo.first]
     end 
   end 
-  
-  def draw?
-   @board.full? && !won? 
-  end 
-  
   
   
 
