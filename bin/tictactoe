@@ -2,16 +2,8 @@
 
 require_relative '../config/environment'
 
-  puts "Welcome to Tic Tac Toe! Would you like to play the game with 0, 1, or 2 players? Enter 0, 1, or 2."
-game_type = gets
-
-=begin
-first_player = nil 
-until first_player == 1 || first_player == 2 
-  puts "Would you like Player 1 or Player 2 to go first and be X? Enter 1 or 2."
-end 
-first_player = gets
-=end 
+puts "Welcome to Tic Tac Toe! Would you like to play the game with 0, 1, or 2 players? Enter 0, 1, or 2."
+game_type = gets.to_i
 
 if game_type == 0 
   Game.new(Players::Computer.new("X"), Players::Computer.new("O")) 
