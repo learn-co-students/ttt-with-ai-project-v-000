@@ -1,17 +1,22 @@
 require 'pry'
+#require_relative "../config/environment"
+
+
 class Game 
+  #extend Players::Human
   
-  attr_accessor :board, :player_1, :player_2 
+  attr_accessor :board, :player_1, :player_2, :input  
   
-  def initialize(board=nil, player_1=nil, player_2=nil)
-    @board = board.display
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
+    @board = board
+    @board.display
   end
  
   def current_player
    board.turn_count % 2 == 0 ? player_1 : player_2
-   binding.pry 
+   #binding.pry 
   end
  
   
@@ -27,39 +32,18 @@ class Game
   
   ]
 
-#input to index 
-def input_to_index(input)
-  index = "#{input}".to_i - 1
-end
-
-#move
-def move(index, char="X")
-  @board[index] = char
-end
-
-#turn
-def turn
-  puts "Please enter 1-9:"
-  input = gets.strip
-  index = input_to_index(input)
-  char = "#{current_player}"
-  if valid_move?(index) == true
-    move(index, char)
-    puts display_board
-  else
-    puts "Your entry is not valid"
-    puts turn
-  end
-end
 
 #won?
   
 def won?
-  WIN_COMBINATIONS.detect do |combo|
-    @board[combo[0]] == @board[combo[1]] &&
-        @board[combo[1]] == @board[combo[2]] &&
-        position_taken?(combo[1])
+  WIN_COMBINATIONS.each do |combo|
+    if @board.cells[combo[0]] == @board.cells[combo[1]] &&
+        @board.cells[combo[1]] == @board.cells[combo[2]] &&
+        @board.taken?(combo[0]+1)
+        return combo
+    end
   end
+  return false 
 end
     
 #full?
@@ -71,33 +55,47 @@ end
 #draw?
 
 def draw?
-  full? && !won?
+  board.full? && !won?
 end 
 
 #over?
 
 def over?
-  won? || draw? || full?
+  won? || draw? || board.full?
 end
 
 #winner
 
 def winner
   if winner_array = won?
-      @board[winner_array[0]]
+      @board.cells[winner_array[0]]
   end
 end
 
-#play
-def play
-  while over? == false
-  turn
+#turn 
+
+def turn
+    puts "Please enter a number 1-9:"
+    @input = current_player.move(@board)
+    if @board.valid_move?(@input)
+      @board.update(@input, current_player)
+    else puts "Please enter a number 1-9:"
+      @board.display
+      turn
+    end
+    @board.display
   end
-  if won?
+
+#play 
+
+  def play
+    turn until over?
+    if won?
       puts "Congratulations #{winner}!"
-  else draw?
+    elsif draw?
       puts "Cat's Game!"
     end
-end
+  end
+  
 
 end

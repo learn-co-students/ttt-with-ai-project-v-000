@@ -1,7 +1,7 @@
 require 'pry'
 class Board
   
-  attr_accessor :cells, :player_1, :player_2  
+  attr_accessor :cells
 
 
   def initialize
