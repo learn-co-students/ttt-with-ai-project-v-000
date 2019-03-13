@@ -1,26 +1,15 @@
 require 'pry'
-#require_relative "../config/environment"
+#require_relative "./players/computer.rb"
+#require_relative "./players/human.rb"
+#require_relative "./lib/player.rb"
 
 
-class Game 
+class Game
   #extend Players::Human
-  
-  attr_accessor :board, :player_1, :player_2, :input  
-  
-  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-    @player_1 = player_1
-    @player_2 = player_2
-    @board = board
-    @board.display
-  end
- 
-  def current_player
-   board.turn_count % 2 == 0 ? player_1 : player_2
-   #binding.pry 
-  end
- 
+  #extend Players::Computer
   
   WIN_COMBINATIONS = [
+    
   [0,1,2], #top row 
   [3,4,5], #middle row 
   [0,4,8], #top left to lower right diagonal 
@@ -31,6 +20,25 @@ class Game
   [6,7,8] #bottom row 
   
   ]
+  
+  game_type = 4
+
+  while game_type != 3
+  
+  attr_accessor :board, :player_1, :player_2, :input  
+  
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
+    @board.display
+    play 
+  end
+ 
+  def current_player
+   board.turn_count % 2 == 0 ? player_1 : player_2
+   #binding.pry 
+  end
 
 
 #won?
@@ -75,11 +83,10 @@ end
 #turn 
 
 def turn
-    puts "Please enter a number 1-9:"
     @input = current_player.move(@board)
     if @board.valid_move?(@input)
       @board.update(@input, current_player)
-    else puts "Please enter a number 1-9:"
+    else puts "Please try again. This position is taken. Enter a number 1-9:"
       @board.display
       turn
     end
@@ -96,6 +103,28 @@ def turn
       puts "Cat's Game!"
     end
   end
-  
+   
+  def self.start 
+    game_type = nil 
+    until game_type == 0 || game_type == 1 || game_type == 2   
+      puts "Would you like to play the game with 0, 1, or 2 players? Enter 0, 1, or 2."
+      game_type = gets.to_i
 
+      if game_type == 0 
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O")) 
+      elsif game_type == 1
+        Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      elsif game_type == 2  
+        Game.new(Players::Human.new("X"), Players::Human.new("O"))
+      else 
+      end
+    end 
+  end
+    game_type = 3
+  end
 end
+
+
+
+
+
