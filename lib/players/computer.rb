@@ -1,5 +1,9 @@
 require 'pry'
 
+#complete as of 3/18/2019
+#needs to have ai updated so not be so random and stupid
+
+
 module Players
   class Computer < Player
 
