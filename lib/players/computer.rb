@@ -24,6 +24,7 @@ module Players
       #must check turn count. first turn dictates a different strategy than second turn
       #if going second always take center if open
 
+      #passing but not great ai
       corners = [1, 3, 7, 9]
       sides = [2, 4, 6, 8]
 
@@ -34,7 +35,7 @@ module Players
       elsif board.turn_count == 1 && board.taken(5)
         corners[rand(corners.length)].to_s
       else
-        emptyIndices = board.cells.select { |square| square.taken? != true }
+        emptyIndices = board.cells.select { |square| square == " " }
         emptySquares = emptyIndices.map { |i| i.to_i + 1}
         emptySquares[rand(emptySquares.length)].to_s
       end
