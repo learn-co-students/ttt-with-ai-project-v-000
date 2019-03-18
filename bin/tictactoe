@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Would you like to play a game?"
+sleep(0.5)
+puts "Select your desired game mode:"
+sleep(0.5)
+puts "Type [1] to play against the computer, [2] to play against a friend, or [3] for the computer to play against itself:"
+gameType = gets.strip
+
+if gameType == "1"
+  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  elsif gameType == "2"
+    game == Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  elsif gameType == "3"
+    game == Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  elsif gameType == "wargames"
+    game == Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    100.times game.play
+  else
+    puts "Please enter a valid selection."
+end
+
+game.play
