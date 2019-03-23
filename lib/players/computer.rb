@@ -6,7 +6,7 @@ module Players
       if !board.taken?(5)
         move = "5"
       else
-        move = "5" += 1
+        move = "5 += 1"
       end
     end
     
