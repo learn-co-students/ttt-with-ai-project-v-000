@@ -1,71 +1,22 @@
 module Players
   class Computer < Player
-
-    SIDES = [2, 4, 6, 8]
-    CORNERS = [1, 3, 7, 9]
-
     def move(board)
-      message
-      offense(board)
-      return @done if @done
-      defense(board)
-      return @done if @done
-      passive(board)
-      return @done if @done
-    end
-
-    def win_game?(token, board)
-      combos = Game::WIN_COMBINATIONS
-      combos.each do |c|
-        return true if c.all? { |cell| board.cells[cell] == token }
-      end
-      false
-    end
-
-    def offense(board)
-      @done = false
-      1.upto(9) do |i|
-        origin = board.cells[i - 1]
-        board.cells[i - 1] = self.token if origin.is_a? Fixnum
-        return @done = i if win_game?(self.token, board)
-        board.cells[i - 1] = origin
-      end
-    end
-
-    def defense(board)
-      @done = false
-      1.upto(9) do |i|
-        origin = board.cells[i - 1]
-        board.cells[i - 1] = @opponent if origin.is_a? Fixnum
-        return @done = i if win_game?(@opponent, board)
-        board.cells[i - 1] = origin
-      end
-    end
-
-    def passive(board)
-      @done = false
-      if board.cells[4].is_a? Fixnum
-        @done = 5
+      move = nil
+      if !board.taken?(5)
+        move = "5"
+      elsif !board.taken?(1)
+        move = [1, 3, 7, 9].detect{|i| !board.taken?(i)}
       else
-        rand < 0.51 ? sides(board) : corners(board)
+        Game::WIN_COMBINATIONS.detect do |com|
+          if com.select{|i| board.position(i+1) == token}.size == 2 && com.any?{|i| board.position(i+1) == " "}
+            move = com.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+          elsif com.select{|i| board.position(i+1) != " " && board.position(i+1) != token}.size == 2 && com.any?{|i| board.position(i+1) == " "}
+            move = com.select{|i| !board.taken?(i+1)}.first.to_i.+(1).to_s
+          end
+        end
+        move = [1, 3, 7, 9, 2, 4, 6, 8].detect{|i| !board.taken?(i)}.to_s if move == nil
       end
-    end
-
-    def sides(board)
-      SIDES.each do |i|
-        return @done = i if board.cells[i - 1].is_a? Fixnum
-      end
-    end
-
-    def corners(board)
-      CORNERS.each do |i|
-        return @done = i if board.cells[i - 1].is_a? Fixnum
-      end
-    end
-
-    def message
-      puts "AI Player - '#{self.token}' is thinking...."
-      sleep(2)
+      move
     end
   end
 end

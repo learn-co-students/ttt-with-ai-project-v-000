@@ -1,51 +1,45 @@
 class Board
   attr_accessor :cells
 
-	def initialize
-		@cells = [" ", " ", " ", " ", " ", " ", " ", " ", " ",]
-	end
-
   def reset!
-    @cells.clear
-    initialize
+    @cells = Array.new(9, " ")
+  end
+
+  def initialize
+    reset!
   end
 
   def display
-    puts <<~EOF
-
-     #{@cells[0]} | #{@cells[1]} | #{@cells[2]}       1 | 2 | 3
-    -----------     -----------
-     #{@cells[3]} | #{@cells[4]} | #{@cells[5]}       4 | 5 | 6
-    -----------     -----------
-     #{@cells[6]} | #{@cells[7]} | #{@cells[8]}       7 | 8 | 9
-
-    EOF
+    puts ""
+  	puts "    #{@cells[0]} | #{@cells[1]} | #{@cells[2]}        1 | 2 | 3" 
+    puts "   -----------      -----------"
+    puts "    #{@cells[3]} | #{@cells[4]} | #{@cells[5]}        4 | 5 | 6"
+    puts "   -----------      -----------"
+    puts "    #{@cells[6]} | #{@cells[7]} | #{@cells[8]}        7 | 8 | 9"
+    puts ""
   end
 
   def position(input)
-    match = input.to_i-1
-    @cells[match]
+    cells[input.to_i - 1]
   end
 
   def full?
-    !@cells[0..8].any? {|i| i == "" || i == " "}
+    cells.none?{|token| token == " "}
   end
 
   def turn_count
-    @cells.count {|i| i == "X" || i == "O"}
+    cells.count{|token| token == "X" || token == "O"}
   end
 
   def taken?(input)
-    cell = input.to_i-1
-    @cells[cell] != "" && @cells[cell] != " "
+    (position(input) == "X") || (position(input) == "O")
   end
 
   def valid_move?(input)
     input.to_i.between?(1,9) && !taken?(input)
   end
 
-  def update(input, user)
-    cell = input.to_i-1
-    @cells[cell] = user.token
+  def update(input, player)
+    cells[input.to_i-1] = player.token
   end
 end

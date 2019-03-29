@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
 
-start = Ui.new
-start.menu
+CLI.new.start
