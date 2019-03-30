@@ -23,11 +23,11 @@ class Board
   end
 
   def full?
-    cells.all? {|marker| marker == "X" || marker == "O"}
+    cells.all? { |token| token == "X" || token == "O"}
   end
 
   def turn_count
-    cells.count {|cell| cell != " "}
+    cells.count { |token| token == "X" || token == "O"}
   end
 
   def taken?(input)
@@ -35,12 +35,11 @@ class Board
   end
 
   def valid_move?(input)
-    taken?(input) == false && input.to_i.between?(1,9)
+    input.to_i.between?(1, 9) && !taken?(input)
   end
 
   def update(input, player)
-    cells[input.to_i.-1] = player.token
+    cells[input.to_i-1] = player.token
   end
-
 
 end
