@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+first_load=true 
+play_again = ''
+game_mode = 2
+until play_again.downcase == "n" || play_again.downcase == "no"
+  if first_load
+    puts "Welcome to Tic Tac Toe!\n"
+    puts "Please indicate the game mode you would like"
+    puts "Enter the number of human players"
+    puts "Press any other key for player v. player"
+    game_mode = gets.strip.to_i
+    first_load=false 
+  end 
+  case game_mode
+  when 0
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+  when 1
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+  when 2
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+  end 
+  Game.new(player_1, player_2).play 
+  puts "Would you like to play again?"
+  play_again = gets.strip
+end
