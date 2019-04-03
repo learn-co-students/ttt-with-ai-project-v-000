@@ -21,7 +21,7 @@ class Board
         puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
     end
 
-    #takes input, turns into an integr and subtrats one, uses input as index to return the cell 
+    #takes input, turns into an integr and subtracts one, uses input as index to return the cell 
     def position(input)
         cells[input.to_i - 1]
     end
