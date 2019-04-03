@@ -83,16 +83,18 @@ Similarly, you're going to build an `#update` method that represents updating th
 Finally, a board can return values based on its state such as `#full?` when entirely occupied with "X" and "O"s and a `#turn_count` based on how many positions in the cells array are filled. `#taken?` will return true or false for an individual position. `#valid_move?` will ensure that moves are between 1-9 and not taken.
 
 ##### `player.rb` - `Player`
-The `Player` class is not actually a valid player of Tic-tac-toe but rather a root class that will act as an inheritance point for actual player classes such as `Human < Player` and `Computer < Player`. The `Player` root class will define only the most basic properties of a player, that they have a `token` property that can be set upon initialization.
 
-Every player subclass will implement a `#move` method that represents how that type of player makes a move in Tic-tac-toe.
+The `Player` class is not actually a valid player of Tic Tac Toe but rather a root class that will act as an inheritance point for actual player classes such as `Human < Player` and `Computer < Player`. The `Player` root class will define only the most basic properties of a player, that they have a `token` property that can be set upon initialization.
+
+Every player subclass will implement a `#move` method that represents how that type of player makes a move in Tic Tac Toe.
 
 ##### 'players/human.rb' - `Players::Human`
+
 Define a class `Human` that inherits from `Player`. This class should be namespaced inside the module `Players` because the `human.rb` file is inside the `players/` directory. This keeps our code nice and tidy.
 
 The human player must implement a `#move` method that takes in a `board` argument and allows a human player to enter a move via the CLI. The method should return the value the user enters. Even though the method accepts a `board` argument, it does not need to use it.
 
->Note on namespacing: You'll notice here that if we do `Players::Human < Player` our inheritance won't function properly. This is because the `Players` module is not yet defined. So to do this, we'll need to do:
+>Note on name spacing: You'll notice here that we do `Players::Human < Player` does not work because the `Players` module is not yet defined. So to do this, we'll need to do:
 ```ruby
 module Players
   class Human < Player
@@ -100,7 +102,7 @@ module Players
   end
 end
 ```
-Now when you call your Human class, you'll have to call it inside its name space with `Players::Human`.
+Now you when you call your Human class, you'll have to call it inside it's name space with `Players::Human`.
 
 ##### `game.rb` - `Game`
 The `Game` class is the main model of the application and represents a singular instance of a Tic-tac-toe session.

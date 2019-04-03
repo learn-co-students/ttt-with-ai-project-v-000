@@ -112,7 +112,18 @@ describe 'Game' do
 
     it 'returns false for a won game' do
       game = Game.new
-      game.board.cells = ["X", "O", "X", "O", "X", "X", "O", "O", "X"]
+      game.board.cells = ["X", "O", "X",
+                          "O", "O", "X",
+                          "O", "X", "X"]
+
+      expect(game.won?).to contain_exactly(2, 5, 8)
+    end
+
+    it "isn't hard-coded" do
+      game = Game.new
+      game.board.cells = ["O", "O", "O",
+                          "X", "X", " ",
+                          " ", " ", "X"]
 
       expect(game.draw?).to be_falsey
     end
