@@ -34,16 +34,12 @@ class Board
   end
   
   def valid_move?(input)
-   if input.to_i.between?(1,9)
-      taken?(input) ? false : true
-    else
-      false
+   input.to_i.between?(1, 9) && !taken?(input)
+
     end
-    end
-def update(input, player)
-      unless valid_move?(input) == false
-       @cells[input.to_i - 1] = player.token
-    end
-end
+  def update(input, player)
+      cells[input.to_i - 1] = player.token
+  
+  end
   
 end
