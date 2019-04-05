@@ -12,9 +12,15 @@ class Game
 
   #accepts 2 players and a board
   #defaults to two human players, X and O, with an empty board
-  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=[])
+  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+  end
+
+  #returns the correct player, X, for the third move
+  def current_player
+    #turns_played = @board.turn_count
+    #turns_played.even? ? "X" : "O"
   end
 end
