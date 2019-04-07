@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :board, :player_1, :player_2
 
@@ -12,10 +13,34 @@ class Game
     [ 6, 4, 2 ],
   ]
 
-  def initialize(player_1, player_2, board)
-    self.board = board
-    game_object = Game.new(player_1, player_2, board)
+  def initialize(p1 = Players::Human.new("X") , p2 = Players::Human.new("O"), bd = Board.new)
+    @player_1 = p1
+    @player_2 = p2
+    @board = bd
+  end
 
+  def current_player
+    count = board.turn_count
+    count.even? ? player_1 : player_2
+  end
+
+  def won?
+      WIN_COMBINATIONS.detect do |combo|
+        board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+      end
+  end
+
+  def draw?
+    board.full? && !won?
+  end
+
+  def over?
+    draw? || won?
+  end
+
+  def winner #this is broken - if there's no winner - it'll return "" instead of nil
+      winning_combo = won?
+      winner = board.cells[winning_combo[0]]
   end
 
 end #<---CLASSend
