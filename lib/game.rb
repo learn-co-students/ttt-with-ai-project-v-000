@@ -26,16 +26,16 @@ class Game
 
   def won?
       WIN_COMBINATIONS.detect do |combo|
-        board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]]
+        board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[1]] == board.cells[combo[2]] # this is just pulling whatever matches each other - " " etc. XXXXXXFIX
       end
   end
 
   def draw?
-    board.full? && !won?
+    board.full?
   end
 
   def over?
-    draw? || won?
+    draw?
   end
 
   def winner #this is broken - if there's no winner - it'll return "" instead of nil
