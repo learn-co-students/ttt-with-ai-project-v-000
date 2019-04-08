@@ -10,6 +10,7 @@ class Game
       @board = board
     end
     
+  
     def current_player
       @board.turn_count.odd? ? @player_2 : @player_1
     end
@@ -52,7 +53,101 @@ def play
    if won?
      puts "Congratulations #{winner}!"
      elsif draw?
-         puts "Cat's Game!"
+         puts "Its a Draw!"
    end
-   end
+     
+    ## CLI Method below ##
+   def start
+    puts "Welcome to Tic Tac Toe -AI versions"
+    puts "Enter number of players: (0, 1, 2)"
+    answer = gets.chomp
+    case answer
+    when "0"
+      puts "Enjoy the game between 2 Computers"
+      @player_1 = Computer.new("X")
+      @player_1.board = self.board
+      @player_2 = Computer.new("O")
+      @player_2.board = self.board
+      self.play
+    when "1"
+      puts "Choose your side: X or O"
+      side = gets.chomp
+      if side == "X"||"x"
+        @player_2 = Computer.new("O")
+        @player_2.board = self.board
+      elsif side == "O"||"o"
+        @player_1 = Computer.new("X")
+        @player_1.board = self.board
+      else
+        puts "Invalid entry. Game restarting..."
+        self.start
+      end
+      puts "Game starting..."
+      @board.display
+      self.play
+    when "2"
+      puts "Let's begin"
+      self.play
+    else
+      puts "Invalid entry. Game restarting..."
+      self.start
+    end
+  end
+
 end
+     
+  ### Checking for winner ###
+  
+  
+  def winchecker
+
+    grid = []
+    holder = []
+
+    WIN_COMBINATIONS.each do |x|
+
+    win_index_1 = x[0]
+    win_index_2 = x[1]
+    win_index_3 = x[2]
+
+    holder << @board.cells[win_index_1]
+    holder << @board.cells[win_index_2]
+    holder << @board.cells[win_index_3]
+
+
+      grid << holder
+      holder = []
+    end
+
+    counter = 0
+    combo = []
+    grid.each do |xxx|
+      y = xxx.detect{ |e| xxx.count(e) > 1 }
+      if y == "X" && xxx.count(" ") == 1
+        combo = xxx
+        break
+      elsif y == "O" && xxx.count(" ") == 1
+        combo = xxx
+        break
+      else
+        counter+=1
+      end
+    end
+
+    if counter > 7
+      target_index = @board.cells.rindex(" ")
+      else
+      blank_index = combo.index(" ")
+      target_index = WIN_COMBINATIONS[counter][blank_index]
+    end
+
+    target_index+=1
+
+    end
+  end
+
+
+
+
+
+   
