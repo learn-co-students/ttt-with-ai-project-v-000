@@ -7,14 +7,10 @@
 #Every player subclass will implement a #move method that represents
 #how that type of player makes a move in Tic-tac-toe.
 class Player
-
+  #cannot be changed once assigned in initialize
+  attr_reader :token
   #accepts a token to assign
   def initialize(token)
     @token = token
-  end
-
-  #cannot be changed once assigned in initialize
-  def token
-    @token
   end
 end

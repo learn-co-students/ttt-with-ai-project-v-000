@@ -48,13 +48,7 @@ class Board
 
   #returns the amount of turns based on cell value
   def turn_count
-    counter = 0
-    @cells.each do |space|
-      if space == "X" || space == "O"
-        counter +=1
-      end
-    end
-    return counter
+    cells.count{|char| char=="X" || char=="O"}
   end
 
   #returns true if the position is X or O

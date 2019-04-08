@@ -12,15 +12,91 @@ class Game
 
   #accepts 2 players and a board
   #defaults to two human players, X and O, with an empty board
-  def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
   end
 
   #returns the correct player, X, for the third move
+    #expect(game.current_player.token).to eq("X")
   def current_player
-    #turns_played = @board.turn_count
-    #turns_played.even? ? "X" : "O"
+    @board.turn_count % 2 == 0 ? @player_1 : @player_2
   end
+
+  #returns false for a draw
+  #returns the correct winning combination in the case of a win
+  #isn't hard-coded
+  def won?
+    WIN_COMBINATIONS.detect do |winner|
+      (@board.cells[winner[0]] == @board.cells[winner[1]] &&
+      @board.cells[winner[1]] == @board.cells[winner[2]]) &&
+      (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
+    end
+=begin
+    WIN_COMBINATIONS.each do |win_combination|
+      # grab each index from the win_combination that composes a win.
+      win_index_1 = win_combination[0]
+      win_index_2 = win_combination[1]
+      win_index_3 = win_combination[2]
+
+      position_1 = @board.cells[win_index_1] # load the value of the board at win_index_1
+      position_2 = @board.cells[win_index_2] # load the value of the board at win_index_2
+      position_3 = @board.cells[win_index_3] # load the value of the board at win_index_3
+
+      if position_1 == "X" && position_2 == "X" && position_3 == "X"
+        return win_combination # return the win_combination indexes that won.
+      elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+        return win_combination # return the win_combination indexes that won.
+      else
+        false
+      end
+    end
+    return false
+=end
+  end
+
+  #returns true for a draw
+  #returns false for a won game
+  #returns false for an in-progress game
+  def draw?
+    @board.full? && !won?
+  end
+
+  #returns true for a draw
+  #returns true for a won game
+  #returns false for an in-progress game
+  def over?
+    won? || draw?
+  end
+
+  #returns X when X won
+  #returns O when O won
+  #returns nil when no winner
+  def winner
+    if winning_combination = won?
+      @winner = @board.cells[winning_combination[0]]
+    end
+  end
+
+  #makes valid moves
+  #asks for input again after a failed validation
+  #changes to player 2 after the first turn
+  def turn
+    #binding.pry
+    input = current_player.move(@board)
+    if !@board.valid_move?(input)
+      current_player.move(@board)
+    end
+    @board.update(input, current_player)
+    #binding.pry
+    #@board.turn_count
+  end
+
+  #asks for players input on a turn of the game
+  def play
+
+  end
+
+
 end
