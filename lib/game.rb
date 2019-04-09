@@ -28,12 +28,13 @@ class Game
   #returns the correct winning combination in the case of a win
   #isn't hard-coded
   def won?
+=begin
     WIN_COMBINATIONS.detect do |winner|
       (@board.cells[winner[0]] == @board.cells[winner[1]] &&
       @board.cells[winner[1]] == @board.cells[winner[2]]) &&
       (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
     end
-=begin
+=end
     WIN_COMBINATIONS.each do |win_combination|
       # grab each index from the win_combination that composes a win.
       win_index_1 = win_combination[0]
@@ -53,7 +54,6 @@ class Game
       end
     end
     return false
-=end
   end
 
   #returns true for a draw
@@ -67,8 +67,13 @@ class Game
   #returns true for a won game
   #returns false for an in-progress game
   def over?
-    won? || draw?
+    won? || draw? || @board.full?
   end
+
+  #returns true for a full board
+  #returns false for an in-progress game
+  #@board.full?
+
 
   #returns X when X won
   #returns O when O won
@@ -93,8 +98,22 @@ class Game
   end
 
   #asks for players input on a turn of the game
+  #checks if the game is over after every turn
+  #plays the first few turns of the game
+  #checks if the game is won after every turn
+  #checks if the game is a draw after every turn
   def play
+    binding.pry
+    current_player.move(@board)
+    turn
+    over?
 
+=begin
+    until over?
+      current_player.move(@board)
+      turn
+    end
+=end
   end
 
 
