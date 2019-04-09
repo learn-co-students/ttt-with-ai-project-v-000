@@ -83,14 +83,13 @@ class Game
   #asks for input again after a failed validation
   #changes to player 2 after the first turn
   def turn
-    #binding.pry
-    input = current_player.move(@board)
+    player = current_player
+    input = player.move(@board)
     if !@board.valid_move?(input)
-      current_player.move(@board)
+      player.move(@board)
     end
-    @board.update(input, current_player)
-    #binding.pry
-    #@board.turn_count
+
+    @board.update(input, player)
   end
 
   #asks for players input on a turn of the game

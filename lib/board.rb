@@ -62,7 +62,7 @@ class Board
         #to the board cells' array index, along with the player object making the move.
   def update(input, player)
     #When you update the appropriate index in the cells, you will set it equal to the token of the player object by calling the #token method on the player
-    position(input).clear << player.token
+    @cells[input.to_i - 1] = player.token
   end
 
 end
