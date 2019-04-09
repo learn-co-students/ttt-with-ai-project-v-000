@@ -37,41 +37,23 @@ class Board
   #returns true for a full board
   #returns false for an in-progress game
   def full?
-    @cells.all? do |space|
-      if space == "X" || space == "O"
-        true
-      else space == " "
-        false
-      end
-    end
+    @cells.all? { |space| space == "X" || space == "O" }
   end
 
   #returns the amount of turns based on cell value
   def turn_count
-    cells.count{|char| char=="X" || char=="O"}
+    cells.count{ |space| space =="X" || space =="O" }
   end
 
   #returns true if the position is X or O
   #returns false if the position is empty or blank
   def taken?(input)
-    if position(input) == "X" || position(input) == "O"
-      true
-    elsif position(input).nil? || position(input) == " "
-      false
-    end
+    position(input) == "X" || position(input) == "O"
   end
 
   #returns true for user input between 1-9 that is not taken
   def valid_move?(input)
-    if input.to_i.between?(1, 9)
-      if taken?(input) == false
-        true
-      elsif taken?(input) == true
-        false
-      end
-    else !input.to_i.between?(1, 9)
-      false
-    end
+    input.to_i.between?(1, 9) && !taken?(input)
   end
 
     #updates the cells in the board with the player token according to the input
