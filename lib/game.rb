@@ -103,17 +103,14 @@ class Game
   #checks if the game is won after every turn
   #checks if the game is a draw after every turn
   def play
-    binding.pry
-    current_player.move(@board)
-    turn
-    over?
-
-=begin
+    #binding.pry
+    #turn
     until over?
-      current_player.move(@board)
       turn
     end
-=end
+
+
+
   end
 
 
