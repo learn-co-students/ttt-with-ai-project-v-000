@@ -6,8 +6,11 @@ module Players
       #binding.pry
       if board.cells == [" ", " ", " ", " ", " ", " ", " ", " ", " "]
         '5'
-      #elsif board.cells == [" ", " ", " ", " ", "X", " ", " ", " ", " "] || [" ", " ", " ", " ", "O", " ", " ", " ", " "]
-      #  '1'
+      elsif board.cells == [" ", " ", " ", " ", "X", " ", " ", " ", " "] || [" ", " ", " ", " ", "O", " ", " ", " ", " "]
+        computer_move = '1'
+        if board.valid_move?(computer_move)
+          computer_move
+        end
       else
         computer_move = rand(1..9).to_s
         if board.valid_move?(computer_move)
