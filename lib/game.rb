@@ -121,4 +121,49 @@ class Game
       puts "Cat's Game!"
     end
   end
+
+  #Use the input to correctly initialize a Game with the appropriate player types and token values.
+  def self.start
+    #Greet the user with a message.
+    #puts "Hello!"
+    
+    #Prompt the user for what kind of game they want to play, 0,1, or 2 player.
+    puts "What kind of game do you want to play?"
+    puts "Enter '0 player', '1 player', or '2 player'"
+    game_type = gets.strip
+
+    if game_type == '0 player'
+      self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+    end
+
+    #Ask the user for who should go first and be "X"
+    if game_type == '1 player'
+      puts "Who should go first and be 'X'?"
+      puts "Enter 'Computer' or 'Human'"
+      first_player = gets.strip
+      if first_player == 'Human'
+        self.new(player_2 = Players::Computer.new("O")).play
+      elsif first_player == 'Computer'
+        self.new(player_1 = Players::Computer.new("X")).play
+      end
+    end
+
+    if game_type == '2 player'
+      self.new.play
+    end
+
+    #When the game is over, the CLI should prompt the user if they would like to play again
+    #and allow them to choose a new configuration for the game as described above.
+    #If the user doesn't want to play again, exit the program.
+    puts "Would you like to play again? Enter 'Y' or 'N'"
+    answer = gets.strip
+    if answer == 'N'
+      exit!
+    elsif answer == 'Y'
+      self.start
+    end
+  end
+  #end of start
+
+
 end
