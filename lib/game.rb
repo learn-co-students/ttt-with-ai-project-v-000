@@ -99,18 +99,27 @@ class Game
 
   #asks for players input on a turn of the game
   #checks if the game is over after every turn
+  #plays the first turn of the game
   #plays the first few turns of the game
   #checks if the game is won after every turn
   #checks if the game is a draw after every turn
+  #stops playing if someone has won
+  #congratulates the winner X
+  #congratulates the winner O
+  #stops playing in a draw
+  #prints "Cat's Game!" on a draw
   def play
-    #binding.pry
-    #turn
     until over?
       turn
     end
 
+    if won?
+      puts "Congratulations #{winner}!"
+    end
 
-
+    if draw?
+      puts "Cat's Game!"
+    end
   end
 
 
