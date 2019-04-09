@@ -4,13 +4,10 @@ module Players
     def move(board)
       puts "My turn! I'm #{token}"
       #binding.pry
-      if board.cells == [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      if board.cells[4] == " "
         '5'
-      elsif board.cells == [" ", " ", " ", " ", "X", " ", " ", " ", " "] || [" ", " ", " ", " ", "O", " ", " ", " ", " "]
-        computer_move = '1'
-        if board.valid_move?(computer_move)
-          computer_move
-        end
+      elsif board.cells[4] != " " && board.cells[0] == " "
+        '1'
       else
         computer_move = rand(1..9).to_s
         if board.valid_move?(computer_move)
