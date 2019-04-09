@@ -93,8 +93,8 @@ class Game
     if !@board.valid_move?(input)
       player.move(@board)
     end
-
     @board.update(input, player)
+    @board.display
   end
 
   #asks for players input on a turn of the game
@@ -121,6 +121,4 @@ class Game
       puts "Cat's Game!"
     end
   end
-
-
 end
