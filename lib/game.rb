@@ -70,11 +70,6 @@ class Game
     won? || draw? || @board.full?
   end
 
-  #returns true for a full board
-  #returns false for an in-progress game
-  #@board.full?
-
-
   #returns X when X won
   #returns O when O won
   #returns nil when no winner
@@ -90,11 +85,15 @@ class Game
   def turn
     player = current_player
     input = player.move(@board)
-    if !@board.valid_move?(input)
-      player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, player)
+      @board.display
+    else
+      puts "Not a valid move! Try again #{player.token}."
+      turn
     end
-    @board.update(input, player)
-    @board.display
+    #@board.update(input, player)
+    #@board.display
   end
 
   #asks for players input on a turn of the game
@@ -160,7 +159,4 @@ class Game
       self.start
     end
   end
-  #end of start
-
-
 end

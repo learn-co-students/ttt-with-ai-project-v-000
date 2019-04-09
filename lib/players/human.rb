@@ -6,7 +6,8 @@ module Players
     #The method should return the value the user enters.
     #Even though the method accepts a board argument, it does not need to use it.
    def move(board)
-     puts "Make your move"
+     #binding.pry
+     puts "Your move, #{token}!"
      gets.strip
    end
 
