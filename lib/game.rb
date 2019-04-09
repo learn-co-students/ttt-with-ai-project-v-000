@@ -125,27 +125,27 @@ class Game
   #Use the input to correctly initialize a Game with the appropriate player types and token values.
   def self.start
     #Prompt the user for what kind of game they want to play, 0,1, or 2 player.
-    puts "What kind of game do you want to play?"
-    puts "Enter '0 player', '1 player', or '2 player'"
+    puts "What kind of game do you want to play? 0 player, 1 player, or 2 player?"
+    puts "Enter the number of players: '0', '1', or '2':"
     game_type = gets.strip
 
-    if game_type == '0 player'
+    if game_type == '0'
       self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
     end
 
     #Ask the user for who should go first and be "X"
-    if game_type == '1 player'
+    if game_type == '1'
       puts "Who should go first and be 'X'?"
-      puts "Enter 'Computer' or 'Human'"
-      first_player = gets.strip
-      if first_player == 'Human'
-        self.new(player_2 = Players::Computer.new("O")).play
-      elsif first_player == 'Computer'
-        self.new(player_1 = Players::Computer.new("X")).play
+      puts "Enter 'C' for the computer or 'H' for the human"
+      first_player = gets.strip.upcase
+      if first_player == 'H'
+        self.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+      elsif first_player == 'C'
+        self.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
       end
     end
 
-    if game_type == '2 player'
+    if game_type == '2'
       self.new.play
     end
 
@@ -153,7 +153,7 @@ class Game
     #and allow them to choose a new configuration for the game as described above.
     #If the user doesn't want to play again, exit the program.
     puts "Would you like to play again? Enter 'Y' or 'N'"
-    answer = gets.strip
+    answer = gets.strip.upcase
     if answer == 'N'
       exit!
     elsif answer == 'Y'
