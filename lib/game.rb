@@ -124,9 +124,6 @@ class Game
 
   #Use the input to correctly initialize a Game with the appropriate player types and token values.
   def self.start
-    #Greet the user with a message.
-    #puts "Hello!"
-    
     #Prompt the user for what kind of game they want to play, 0,1, or 2 player.
     puts "What kind of game do you want to play?"
     puts "Enter '0 player', '1 player', or '2 player'"
