@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'irb'
 require_relative '../config/environment'
 
-#Greet the user with a message.
-puts "Hello!"
-Game.start
+IRB.start
