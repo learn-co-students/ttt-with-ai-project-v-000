@@ -19,7 +19,7 @@ describe 'Game' do
       game = Game.new
       game.board = []
       expect(game.board).to eq([])
-    end
+    end 
   end
 
   describe '#player_1' do
@@ -147,18 +147,18 @@ describe 'Game' do
       expect(game.over?).to be_falsey
     end
   end
-
+#Updated test - No win possible below turn 5
   describe '#winner' do
     it 'returns X when X won' do
       game = Game.new
-      game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
+      game.board.cells = ["X", " ", " ", " ", "X", "0", "0", " ", "X"]
 
       expect(game.winner).to eq("X")
     end
-
+#Updated test to fix turn count.  
     it 'returns O when O won' do
       game = Game.new
-      game.board.cells = ["X", "O", " ", " ", "O", " ", " ", "O", "X"]
+      game.board.cells = ["X", "O", " ", " ", "O", " ", "X", "O", "X"]
 
       expect(game.winner).to eq("O")
     end
