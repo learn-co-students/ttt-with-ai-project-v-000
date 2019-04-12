@@ -1,3 +1,61 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+game_type = ""
+puts "Welcome to Tic Tac Toe!"
+puts "What kind of game would you like to play?"
+puts "Enter 0 for computer-on-computer"
+puts "Enter 1 for human-vs-computer"
+puts "Enter 2 for human-vs-human"
+game_type = gets.strip
+
+if game_type == "0"
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+  until game.won?
+    game.play
+  end
+
+  play_again = ""
+  until play_again.downcase == "n" || play_again.downcase == "no"
+    puts "Would you like to play again?"
+    play_again = gets.strip
+    play_again.downcase == "y" || play_again.downcase == "yes"
+    game = Game.new
+    until game.won?
+      game.play
+    end
+  end
+elsif game_type == "1"
+  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+  until game.won?
+    game.play
+  end
+
+  play_again = ""
+  until play_again.downcase == "n" || play_again.downcase == "no"
+    puts "Would you like to play again?"
+    play_again = gets.strip
+    play_again.downcase == "y" || play_again.downcase == "yes"
+    game = Game.new
+    until game.won?
+      game.play
+    end
+  end
+elsif game_type == "2"
+  game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+  until game.won?
+    game.play
+  end
+
+  play_again = ""
+  until play_again.downcase == "n" || play_again.downcase == "no"
+    puts "Would you like to play again?"
+    play_again = gets.strip
+    play_again.downcase == "y" || play_again.downcase == "yes"
+    game = Game.new
+    until game.won?
+      game.play
+    end
+  end
+end
