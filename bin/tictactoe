@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+#require_relative '../lib/*'
+
+puts "Welcome to Tic Tac Toe!" 
+
+
+new_game = Game.start
