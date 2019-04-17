@@ -38,11 +38,19 @@ class Game
     draw? || won?
   end
 
-  def winner #this is broken - if there's no winner - it'll return "" instead of nil
+  def winner # REFACTOR AND MAKE MORE ELEGANT PLZZZZZ
     if won?
       winning_combo = won?
       winner = board.cells[winning_combo[0]]
+    else
+      nil
     end
+  end
+
+  def turn
+    # cp = self.current_player
+     m = self.current_player.move
+    self.current_player.move unless !board.valid_move?
   end
 
 end #<---CLASSend
