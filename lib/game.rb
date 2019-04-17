@@ -39,8 +39,10 @@ class Game
   end
 
   def winner #this is broken - if there's no winner - it'll return "" instead of nil
+    if won?
       winning_combo = won?
       winner = board.cells[winning_combo[0]]
+    end
   end
 
 end #<---CLASSend
