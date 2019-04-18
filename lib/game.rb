@@ -58,10 +58,20 @@ class Game
   end
 
   def play
-    self.turn
-    self.over?
+    turn
+    if over?
+      if draw?
+        puts "Cat's Game!"
+      else won?
+        puts winner
+      end
+    else
+      play
+    end
 
-    self.play
+
+
+
   end
 
 end #<---CLASSend
