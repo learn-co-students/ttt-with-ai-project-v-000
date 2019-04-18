@@ -58,20 +58,12 @@ class Game
   end
 
   def play
-    turn
-    if over?
-      if draw?
-        puts "Cat's Game!"
-      else won?
-        puts winner
-      end
-    else
-      play
+    turn until over?
+    if draw?
+      puts "Cat's Game!"
+    else won?
+      puts "Congratulations #{winner}!"
     end
-
-
-
-
   end
 
 end #<---CLASSend
