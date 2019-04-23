@@ -1,3 +1,78 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Welcome to Tic-tac-toe!"
+puts "Enter the number of human players:"
+input = gets.strip
+
+
+if input == "2"
+  new_game = Game.new
+  new_game.play
+elsif input == "1"
+  puts "Would you like to play as X or O?"
+     input_2 = gets.strip
+     if input_2 == "O"
+       new_game = Game.new(Players::Computer.new("X"))
+       new_game.play
+     elsif input_2 == "X"
+       new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+       new_game.play
+     end
+elsif input == "0"
+   new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+   new_game.play
+end
+
+puts "Play again? (y/n)"
+again = gets.strip
+
+if again == "y"
+  puts "Welcome to Tic-tac-toe!"
+  puts "Enter the number of human players:"
+  input = gets.strip
+
+
+  if input == "2"
+    new_game = Game.new
+    new_game.play
+  elsif input.eql? "1"
+    puts "Would you like to play as X or O?"
+       input_2 = gets.strip
+       if input_2.eql? "O"
+         new_game = Game.new(Players::Computer.new("X"))
+         new_game.play
+       elsif input_2.eql? "X"
+         new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+         new_game.play
+       end
+  elsif input.eql? "0"
+     new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+     new_game.play
+  end
+
+else
+  nil
+
+end
+# elsif user_input == 1
+#   puts "Would you like to play as X or O?"
+#   input = gets
+#   if input == "O"
+#   new_game = Game.new(Players::Computer.new("X"))
+#   new_game.play
+#   elsif input =="X"
+#   new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+#   new_game.play
+#   end
+# elsif user_input == 2
+#   new_game = Game.new
+#   new_game.play
+# end
+#
+#
+#
+# puts "Play again or Exit"
+#   inputs = gets
+#   if inputs == "Play again"
+# end
