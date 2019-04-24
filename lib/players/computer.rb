@@ -7,14 +7,13 @@ module Players
     end
 
     def move(board)
-      #this is where AI would change input
-
       #move returns a valid position for the computer to move
       open_cells(board).sample + 1
+      #this is where AI would change input
     end
 
     def open_cells(board)
-      # board.cells.collect.with_index {|i, index| index if i == " "}
+      #weird nil behavior from map
       arr = []
       board.cells.each_with_index do |i, index|
         arr << index if i == " "

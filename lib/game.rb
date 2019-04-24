@@ -68,7 +68,6 @@ class Game
     board.display
     board_move = player.move(board)
 
-
     if board.valid_move?(board_move)
       board.update(board_move, player)
     elsif !board.valid_move?(board_move)

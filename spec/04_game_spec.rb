@@ -346,6 +346,4 @@ describe 'Game' do
     end
   end
 
-  describe 'start' do
-  end
 end
