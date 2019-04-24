@@ -12,6 +12,11 @@ class Game
     board.cells.select {|cell| cell == " "}.count.even? ? player_2 : player_1
   end
 
+  def select_move(player)
+    puts "Player #{player.token} please select your move"
+    puts ""
+  end
+
   def won?
     WIN_COMBINATIONS.detect do |i|
       cell = board.cells
@@ -21,6 +26,13 @@ class Game
 
   def draw?
     !won? && board.full?
+  end
+
+  def cats_game
+    puts ""
+    puts "\u001b[33mCAT'S GAME! \u001b[37m"
+    puts ""
+    sleep(3)
   end
 
   def over?
@@ -34,24 +46,44 @@ class Game
     end
   end
 
+  def congratulate_winner
+    puts ""
+    puts "\u001b[31mCONGRATULATIONS #{winner}! YOU'VE WON!"
+    puts ""
+    puts "#{board.display} \u001b[37m"
+    sleep(3)
+  end
+
+  def invalid_move
+    puts ""
+    puts "\u001b[33m Invalid Move \u001b[37m"
+    puts ""
+    sleep(1)
+  end
+
   def turn
     player = current_player
-    user_input = player.move(board)
-    puts "#{player} please select your move"
-    if board.valid_move?(user_input)
-      return board.update(user_input, player)
-    else
-      puts "invalid"
+    select_move(player)
+    board.display
+    board_move = player.move(board)
+
+
+    if board.valid_move?(board_move)
+      board.update(board_move, player)
+    elsif !board.valid_move?(board_move)
+      invalid_move
       turn
     end
   end
 
   def play
-    turn until over?
+    while !over?
+      turn
+    end
     if draw?
-      puts "Cat's Game!"
+      cats_game
     else
-      puts "Congratulations #{winner}!"
+      congratulate_winner
     end
   end
 end

@@ -1,5 +1,6 @@
 class Board
   attr_accessor :cells
+  
   def initialize
     @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
@@ -14,6 +15,7 @@ class Board
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
     puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+    puts ""
   end
 
   def position(user_input)
@@ -35,12 +37,8 @@ class Board
   end
 
   def valid_move?(user_input)
-    if ("1".."9").cover?(user_input)
-      index = user_input.to_i - 1
-      cells[index] == " "
-    else
-      return false
-    end
+    input = user_input.to_i
+    (1..9).include?(input) && !taken?(input) ? true : false
   end
 
   def update(user_input, player)

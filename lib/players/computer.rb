@@ -7,15 +7,19 @@ module Players
     end
 
     def move(board)
-      cells = open_cells(board)
       #this is where AI would change input
-      random = cells.sample
-      board.cells[random] = self.token
+
+      #move returns a valid position for the computer to move
+      open_cells(board).sample + 1
     end
 
     def open_cells(board)
-      board.cells.map.with_index {|i, index| index if i == " "}
+      board.cells.collect.with_index {|i, index| index if i == " "}
+      # arr = []
+      # board.cells.each_with_index do |i, index|
+      #   arr << index if i == " "
+      # end
+      # arr
     end
-
   end
 end
