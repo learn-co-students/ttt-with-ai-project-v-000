@@ -12,37 +12,30 @@ module Players
       #take center if open
       if board.cells[4] == " "
         5
+      elsif corner_open(board) != nil
+        #take corner if open
+        corner_open(board) + 1
       else
         #pick sample of remaing open cells
         open_cells(board).sample + 1
       end
-      # until corner_cells(board) == nil
-      #   #check for winning combo
-      #      check_for_win
-      #   #take corner if open
-      #      corner_cells(board)
-      # end
     end
 
-    # def open_cells(board)
-    #   #weird nil behavior from map
-    #   arr = []
-    #   board.cells.each_with_index do |i, index|
-    #     arr << index if i == " "
-    #   end
-    #   arr
-    # end
-    #
-    # def corner_cells(board)
-    #   corners = [0,2,5,7]
-    #     corners.detect do |corner|
-    #       open_cells(board)[corner] == corner
-    #     end
-    #   end
-    # end
+    def open_cells(board)
+      #weird nil behavior from map
+      arr = []
+      board.cells.each_with_index do |i, index|
+        arr << index if i == " "
+      end
+      arr
+    end
 
-    # def check_for_win
-    #
-    # end
+    def corner_open(board)
+      corners = [0,2,6,8].shuffle
+      corners.detect do |corner|
+        board.cells[corner] == " "
+      end
+    end
+
   end
 end
