@@ -13,7 +13,7 @@ class Game
   end
 
   def select_move(player)
-    puts "Player #{player.token} please select your move"
+    puts "Player \u001b[31m#{player.token}\u001b[37;1m please select your move"
     puts ""
   end
 
@@ -30,8 +30,9 @@ class Game
 
   def cats_game
     puts ""
-    puts "\u001b[33mCAT'S GAME! \u001b[37m"
+    puts "\u001b[33mCAT'S GAME!"
     puts ""
+    puts "#{board.display} \u001b[37m"
     sleep(3)
   end
 

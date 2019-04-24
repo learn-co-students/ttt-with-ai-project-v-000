@@ -323,7 +323,7 @@ describe 'Game' do
 
       allow($stdout).to receive(:puts)
 
-      expect($stdout).to receive(:puts).with("\u001b[33mCAT'S GAME! \u001b[37m")
+      expect($stdout).to receive(:puts).with("\u001b[33mCAT'S GAME!")
 
       game.play
     end

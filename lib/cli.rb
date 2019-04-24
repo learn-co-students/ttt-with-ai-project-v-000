@@ -20,14 +20,9 @@ class Cli
 
   def first_player
     puts ""
-    puts "Player \u001b[31mX \u001b[37mgoes first. Would you like to be \u001b[31mX\u001b[37m?  \u001b[32myes \u001b[37m/ \u001b[31mno \u001b[37m"
+    puts "Would you like to be \u001b[31mX\u001b[37m?  \u001b[32myes \u001b[37m/ \u001b[31mno \u001b[37m"
     puts ""
-    input = gets.strip.downcase
-    case input
-    when 'yes' then true
-    when 'no' then false
-    else nil
-    end
+    gets.strip.downcase
   end
 
   def play_x_starts
@@ -44,13 +39,14 @@ class Cli
   end
 
   def turn
-    if first_player == true
+    token_x = first_player
+    if token_x == 'yes'
        Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
-    elsif first_player == false
-       Game.new.play
-    elsif first_player == nil
+    elsif token_x == 'no'
+       Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+    else
        invalid_input
-       first_player
+       turn
     end
   end
 

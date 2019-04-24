@@ -14,12 +14,12 @@ module Players
     end
 
     def open_cells(board)
-      board.cells.collect.with_index {|i, index| index if i == " "}
-      # arr = []
-      # board.cells.each_with_index do |i, index|
-      #   arr << index if i == " "
-      # end
-      # arr
+      # board.cells.collect.with_index {|i, index| index if i == " "}
+      arr = []
+      board.cells.each_with_index do |i, index|
+        arr << index if i == " "
+      end
+      arr
     end
   end
 end

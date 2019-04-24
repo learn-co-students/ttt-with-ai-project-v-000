@@ -18,7 +18,8 @@ while ttt.play == "yes"
      ttt.another_round
   elsif user_input == "1"
     # Ask the user for who should go first and be "X"
-     turn
+     ttt.play_x_starts
+     ttt.turn
      ttt.another_round
   elsif user_input == "2"
      ttt.play_x_starts
