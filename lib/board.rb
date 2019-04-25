@@ -29,7 +29,7 @@ class Board
     
     #player object of who's making the move
     
-    #update the token method of the player
+    #update the token method of the player - call it with name space Players::Human or Players::Computer
     
   end 
 
