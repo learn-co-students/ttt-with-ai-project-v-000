@@ -1,3 +1,52 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+  def ttt_game
+  puts " "
+  puts "Welcome to Tic Tac Toe!"
+  puts " "
+  puts "Please choose player mode:"
+  puts "1 -> Computer Vs Player"
+  puts "2 -> Player Vs. Player"
+  puts "3 -> Computer Vs. Computer"
+
+  player_mode = gets.strip
+
+  if player_mode == "1"
+    puts "Would you like to go first? [y/n]"
+    choice = gets.strip
+    if choice == "y"
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+    else
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+    end
+
+  # elsif player_mode == "wargames"
+  #   def war_games
+  #   x_wins = 0
+  #   o_wins = 0
+  #   count = 9
+  #   while count < 10
+  #     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  #     game.play
+  #     count =+ 1
+  #       if game.winner == "O"
+  #         o_wins =+ 1
+  #       if game.winner == "X"
+  #         x_wins =+ 1
+  #       end
+  #     end
+  #   end
+  #
+  # end
+
+  elsif player_mode == "2"
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  else
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+  end
+    puts "Would you like to play again? [y/n]"
+end
+
+  ttt_game until gets.strip == "n"
