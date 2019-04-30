@@ -11,4 +11,25 @@ def reset
 end
 
 def display
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end
