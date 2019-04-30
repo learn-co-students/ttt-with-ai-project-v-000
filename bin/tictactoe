@@ -1,3 +1,17 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greet user with message
+puts "Hello, User."
+
+# Prompt user for 0, 1, or 2-player game
+puts "0, 1, or 2-player mode?"
+
+# Ask user who should go first and be "X"
+puts "Who will be player 1 (X)?"
+
+#user inputs to correctly initialize a game
+
+#When game is over, prompt user if they would ike to play again and initiate questions OR EXIT
+puts "Would you like to play again?"
