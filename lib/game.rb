@@ -48,7 +48,22 @@ class Game
   end
 
   def turn
-    self.current_player.move unless !board.valid_move?
+    cpm = self.current_player.move # stores the user's inputted desired move <--- calls GETS
+      if board.valid_move?(cpm) # checks if the user's desired position is available
+        board.update(cpm, current_player) # changes the board's space to the user's playertoken if valid
+      else
+        puts "invalid"
+        self.turn # if the inputted desired position is not available, go back to TURN's 1st line and try for a different input
+      end
+  end
+
+  def play
+    turn until over?
+    if draw?
+      puts "Cat's Game!"
+    else won?
+      puts "Congratulations #{winner}!"
+    end
   end
 
 end #<---CLASSend
