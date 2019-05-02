@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello and Welcome to Tic Tac Toe!"
+
+def start
+  puts "What type of game would you like to play?"
+  puts "Enter number of players: 0, 1, or 2?"
+  user_input = gets.strip
+  #make case statements instead of if statements
+  case user_input
+  when "2"
+    puts "Would you like to go first? (y/n)"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    if gets.strip == "y"
+      Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+  when ""
+    end
+    puts "Thanks for playing, would you like to play again? (y/n)"
+  start until gets.strip == "n"
