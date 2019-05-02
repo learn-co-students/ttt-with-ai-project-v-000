@@ -10,12 +10,20 @@ def start
   user_input = gets.strip
   #make case statements instead of if statements
   case user_input
-  when "2"
-    puts "Would you like to go first? (y/n)"
-    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    if gets.strip == "y"
-      Game.new(Players::Human.new("X"), Players::Human.new("O")).play
-  when ""
-    end
-    puts "Thanks for playing, would you like to play again? (y/n)"
+when "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+  puts "Thanks for playing, would you like to play again? (y/n)"
   start until gets.strip == "n"
+when "1"
+  Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+  puts "Thanks for playing, would you like to play again? (y/n)"
+  start until gets.strip == "n"
+when "2"
+  Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+  puts "Thanks for playing, would you like to play again? (y/n)"
+  start until gets.strip == "n"
+else
+  puts "Please enter a valid entry"
+  start
+  end
+end
