@@ -5,7 +5,7 @@ module Players
   
     def move
       #represents how this type of player makes a TTT move
-  
+      
     end
   
   

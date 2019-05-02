@@ -1,15 +1,13 @@
 class Board
+  attr_accessor :cells
 
-
-
-  def cells
-    #stores data of the state of the board in an Array
-    board_data = []
-  end
 
   def reset!
-    #reset the state of the cells to what a board should look like at game start with 9 " " elements
-    new_board = 
+    @cells = Array.new(9, " ")
+  end
+
+  def initialize
+    reset!
   end
 
   def display
