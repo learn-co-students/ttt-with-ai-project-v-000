@@ -1,3 +1,6 @@
+require 'pry'
+
+
 class Board
   attr_accessor :cells
 
@@ -13,16 +16,28 @@ class Board
 
   def display
     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
-    puts "---------"
+    puts "-----------" 
     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
-    puts "---------"
+    puts "-----------"
     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
-    puts "---------"
+    puts "-----------"
   end
   
-  def position
+  def position(input)
     #look up the value according to the cells' array index
-    
+    cells[input.to_i-1]
+  end
+  
+  def full?
+    cells.each { |character| 
+  
+  binding.pry
+      if character == "X" || character == "O"
+        true
+      else
+        false
+      end
+    }
   end
   
   def update(position, player)
