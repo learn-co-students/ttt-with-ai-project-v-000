@@ -11,8 +11,7 @@ class Board
   end
 
   def display
-    #print current state of board
-    print board + board_data
+    print board.cells
   end
   
   def position
