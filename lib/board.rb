@@ -1,0 +1,61 @@
+require 'pry'
+
+class Board
+  attr_accessor :cells
+
+  def initialize
+    reset!
+  end
+
+  def reset!
+    @cells = Array.new(9, " ")
+  end
+
+  def display
+    puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+    puts "-----------"
+    puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+    puts "-----------"
+    puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+  end
+
+  def position(input)
+    #binding.pry
+    index = input.to_i - 1 #user input minus 1 to get index value of array
+    cells[index] #returns whatever value (X, O, or blank) is in that cell
+  end
+
+  def full?
+    @cells.all? do |token|
+      token == "X" || token == "O"
+    end
+  end
+
+  def turn_count
+    counter = 0
+    @cells.each do |token|
+      if (token == "X" || token == "O")
+        counter += 1
+      end
+    end
+    counter
+  end
+
+  def taken?(input)
+    position(input) == "X" || position(input) == "O"
+    #if !(self.cells[input.to_i - 1].nil? || self.cells[input.to_i - 1] == " ")
+    #  true
+      #binding.pry
+    #else
+    #  false
+    #end
+  end
+
+  def valid_move?(input) #input is actual number, not array index
+    input.to_i >= 1 && input.to_i <= 9 && !taken?(input)
+  end
+
+  def update(input, player)
+    @cells[input.to_i - 1] = player.token
+  end
+end
