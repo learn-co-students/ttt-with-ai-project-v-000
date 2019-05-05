@@ -1,3 +1,148 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+def coin_flip
+  sleep 1.5
+  puts "Would you like me to flip a coin? (Y or N)"
+  input = gets.strip
+  if input.downcase == "y" || input.downcase == "yes"
+    sleep 1.5
+    puts "Flipping...call it in the air!"
+    sleep 1.5
+    puts "(I promise there's actually a coin)"
+    sleep 1.5
+    coin_flip = rand(1..2)
+    if coin_flip == 1
+      puts "Heads!"
+    elsif coin_flip == 2
+      puts "Tails!"
+    end
+  elsif input.downcase == "n" || input.downcase == "no"
+    sleep 0.5
+    puts "Alright...but no fighting, you two!"
+  else
+    invalid_input
+    sleep 1.5
+    puts "Oh well...on to the game!"
+  end
+end
+
+def sample_board
+  sleep 1
+  puts "Here's a sample board:"
+  sleep 1.5
+  puts
+  puts "| 1 | 2 | 3 |"
+  puts " ----------- "
+  puts "| 4 | 5 | 6 |"
+  puts " ----------- "
+  puts "| 7 | 8 | 9 |"
+  puts
+  sleep 1.5
+  puts "All you have to do is enter the number to move to the corresponding space!"
+  sleep 2
+end
+
+def invalid_input
+  puts "Sorry, that's not a valid command!"
+end
+
+def new_game
+  sleep 1.5
+  puts "How many human players do we have for this round: 0, 1, or 2?"
+
+  setup_1 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+  setup_2 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+  setup_3 = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+  setup_4 = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+
+  input = gets.strip
+
+  if input == 0.to_s
+    sleep 0.5
+    puts "OK, I'll play against myself!"
+    puts
+    sleep 1
+    until setup_1.over?
+      setup_1.play
+      play_again?
+    end
+
+  elsif input == 1.to_s
+    sleep 0.5
+    puts "OK, you'll be playing against me!"
+    sleep 1.5
+    puts "Would you like to go first and play as X ? (Y or N)"
+
+    input = gets.strip
+    if input.downcase == "y" || input.downcase == "yes"
+      sleep 0.5
+      puts "Excellent! Game on!"
+      sample_board
+      until setup_2.over?
+        setup_2.play
+        play_again?
+      end
+
+    elsif input.downcase == "n" || input.downcase == "no"
+      sleep 0.5
+      puts "Sounds good! I'll go first."
+      sleep 1
+      puts "...but before we begin..."
+      sample_board
+      puts "Ready when you are!"
+      puts
+      until setup_3.over?
+        setup_3.play
+        play_again?
+      end
+
+    else
+      invalid_input
+      new_game
+    end
+
+  elsif input == 2.to_s
+    sleep 0.5
+    puts "Great, I'm so glad you found a real friend to play against!"
+    sleep 1.5
+    puts "I was starting to worry that you might not have any...."
+    sleep 1.5
+    puts "Whoever goes first will play as X...I'll leave it up to you two to decide whom that will be."
+    sleep 1.5
+    puts "...".each_char { |c| putc c ; sleep 0.25 ; $stdout.flush }
+    puts "...or I could flip a coin for you!"
+    coin_flip
+    sample_board
+    until setup_4.over?
+      setup_4.play
+      play_again?
+    end
+
+  elsif input == "wargames".downcase
+    setup_1.wargames
+    play_again?
+
+  else
+    invalid_input
+    new_game
+  end
+end
+
+def play_again?
+  sleep 1.5
+  puts "Would you like to play again? (Y or N)"
+  input = gets.strip
+  if input.downcase == "y" || input.downcase == "yes"
+    new_game
+  elsif input.downcase == "n" || input.downcase == "no"
+    sleep 1
+    puts "Alright, until next time!"
+  else
+    invalid_input
+    play_again?
+  end
+end
+
+puts "Welcome to Tic Tac Toe!"
+new_game
