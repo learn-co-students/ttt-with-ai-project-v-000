@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+game = Game.new
+puts "Please enter a number 1-9 for where you would like to place your X."
+input = gets.strip
+if input == 1..9
+  puts board
+elsif input != 1..9
+  puts "That is not a valid entry."
+end
+until game.won? || game.over?
+  game.play
+end
+
+puts "Would you like to play again?"
+input = gets.strip
+if input == "Y" || input == "y"
+  game = Game.new
+  until game.won? || game.over?
+    game.play
+  end
+end
