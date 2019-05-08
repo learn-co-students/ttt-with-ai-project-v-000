@@ -1,3 +1,75 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello and welcome to Tic Tac Toe!"
+puts "What version of TTO would you like to play?"
+
+def new_game
+  puts "Type: '0', '1', or '2' to indicate the number of human players."
+  selection = gets.strip
+  if selection == "1"
+    puts "You chose 1 Player vs Computer"
+    puts "You will be player X."
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+    puts "Make your first move on the board by typing a number 1 through 9."
+    game_on(player_1, player_2)
+    game_again?
+  elsif selection == "2"
+    puts "You chose 2 Players!"
+    puts "The first player to move will be 'X'. Second player will be 'O'!"
+    puts "testing option: x or o"
+    choice = gets.strip
+    if choice.downcase == "x"
+      puts "Hello Xulu!"
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Human.new("O")
+      puts "Where will Player 1 move first? Alternate your selections. Choose a slot, 1 through 9"
+      game_on(player_1, player_2)
+      game_again?
+    elsif
+      choice.downcase == "o"
+      puts "Welcome Omega!"
+      player_1 = Players::Human.new("O")
+      player_2 = Players::Human.new("X")
+      puts "p1 = #{player_1.token}"
+      puts "p2 = #{player_2.token}"
+      puts "Where will Player 1 move first? Alternate your selections."
+      game_on(player_1, player_2)
+      game_again?
+    else
+      puts "Invalid selection...restarting"
+      new_game
+    end
+  elsif selection == "0"
+    puts "You chose Computer Simulation!"
+    player_1 = Players::Computer.new("O")
+    player_2 = Players::Computer.new("X")
+    game_on(player_1, player_2)
+    game_again?
+  else
+    puts "Not a valid selection"
+    new_game
+  end
+end
+
+
+def game_on(player_1, player_2)
+  game = Game.new(player_1, player_2, board = Board.new )
+  game.play
+end
+
+def game_again?
+  puts "Would you like to play again? 'y' for yes, 'n' for no."
+  replay = gets.strip
+  if replay == "y"
+    new_game
+  elsif replay == "n"
+    exit
+  else
+    game_again?
+  end
+end
+
+new_game
