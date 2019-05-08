@@ -1,3 +1,134 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greetings and Number of Players
+puts "Welcome to Tic-Tac-Toe!"
+puts "Enter '0' for Computer vs Computer"
+puts "Enter '1' for Player vs Computer"
+puts "Enter '2' for Player vs Player"
+puts "Enter '3' for Wargames (Computer vs Computer 'X' number of times)"
+number_of_players = gets.chomp.to_i
+valid_number_of_players = [0, 1, 2, 3]
+while !valid_number_of_players.include?(number_of_players) || nil do
+  puts "Invalid entry. Please enter a number from 0 to 3."
+  number_of_players = gets.chomp.to_i
+end
+
+# Who will go first?
+if number_of_players == 0
+  first_player = "computer"
+elsif number_of_players == 1
+  puts "Who should go first? Player or Computer?"
+  first_player = gets.strip.downcase
+  while !["player", "computer"].include?(first_player) || nil do
+    puts "Invalid entry. Who should go first? Player or Computer?"
+    first_player = gets.strip
+  end
+elsif number_of_players == 3
+  puts "How many times would you like the Computer to play itself (up to 100)?"
+  number_of_games = gets.chomp.to_i
+  valid_number_of_games = (1..100).to_a
+  until valid_number_of_games.include?(number_of_games) do
+    puts "Invalid entry. Please enter a number from 0 to 100."
+    number_of_games = gets.chomp.to_i
+  end
+end
+
+# Start game with assigned first player
+if number_of_players ==
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  puts "The game will be Computer 'X' vs Computer 'O'."
+elsif number_of_players == 2
+  game = Game.new
+  puts "The game will be Player 1 'X' vs Player 2 'O'."
+elsif number_of_players == 1 && first_player == "computer"
+  game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  puts "The game will be Computer 'X' vs Player 'O'."
+elsif number_of_players == 1 && first_player == "player"
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  puts "The game will be Player 'X' vs Computer 'O'."
+end
+
+# Play game until over
+if number_of_players == 3
+  puts "The Computer will be playing itself '#{number_of_games}' times."
+  x_count = 0
+  o_count = 0
+  draw_count = 0
+  number_of_games.times {
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play until game.over?
+    if game.winner == "X"
+      x_count += 1
+    elsif game.winner == "O"
+      o_count += 1
+    elsif game.winner == nil
+      draw_count += 1
+    end
+  }
+  puts "'X' won #{x_count} times and 'O' won #{o_count} times."
+  puts "The game ended in a draw #{draw_count} times."
+else
+  until game.over?
+    game.play
+  end
+end
+
+# Play again
+play_again_valid_responses = ["n", "N", "y", "Y"]
+play_again = ""
+until play_again == "n" do
+  play_again = ""
+  until play_again_valid_responses.include?(play_again) do
+    puts " "
+    puts "Would you like to play again (y/n)?"
+    play_again = gets.strip.downcase
+  end
+  if play_again == "y"
+    puts " "
+    if number_of_players ==
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+      puts "The game will be Computer 'X' vs Computer 'O'."
+    elsif number_of_players == 2
+      game = Game.new
+      puts "The game will be Player 1 'X' vs Player 2 'O'."
+    elsif number_of_players == 1 && first_player == "computer"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      puts "The game will be Computer 'X' vs Player 'O'."
+    elsif number_of_players == 1 && first_player == "player"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      puts "The game will be Player 'X' vs Computer 'O'."
+    end
+    if number_of_players == 3
+      puts "How many times would you like the Computer to play itself (up to 100)?"
+      number_of_games = gets.chomp.to_i
+      valid_number_of_games = (1..100).to_a
+      until valid_number_of_games.include?(number_of_games) do
+        puts "Invalid entry. Please enter a number from 0 to 100."
+        number_of_games = gets.chomp.to_i
+      end
+      puts "The Computer will be playing itself '#{number_of_games}' times."
+      x_count = 0
+      o_count = 0
+      draw_count = 0
+      number_of_games.times {
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        game.play until game.over?
+        if game.winner == "X"
+          x_count += 1
+        elsif game.winner == "O"
+          o_count += 1
+        elsif game.winner == nil
+          draw_count += 1
+        end
+      }
+      puts "'X' won #{x_count} times and 'O' won #{o_count} times."
+      puts "The game ended in a draw #{draw_count} times."
+    else
+      until game.over?
+        game.play
+      end
+    end
+  end
+end
