@@ -67,6 +67,6 @@ class Board
   
   # def token
   #   #invoked when saving the update method
-    
+    # update.save
   # end
 end
