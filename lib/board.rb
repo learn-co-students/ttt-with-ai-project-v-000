@@ -55,15 +55,13 @@ class Board
     input.to_i.between?(1,9) && taken?(input) == false
   end
 
-  def update(position, player)
-    #represents updating the board when player makes a move
-    
+  def update(input, player)
+    # represents updating the board when player makes a move
     #position user wants to occupy in the form of 1-9 strings that you will need to convert to the board cells' array index
-    
     #player object of who's making the move
-    
     #update the token method of the player - call it with name space Players::Human or Players::Computer
-    
+
+    cells[input.to_i-1] = player.token
   end 
   
   
