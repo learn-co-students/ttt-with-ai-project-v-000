@@ -61,8 +61,7 @@ class Board
     #player object of who's making the move
     #update the token method of the player - call it with name space Players::Human or Players::Computer
 
-    # cells[input.to_i-1] = player.token
-    position(input) = player.token
+    cells[input.to_i-1] = player.token
   end 
   
   

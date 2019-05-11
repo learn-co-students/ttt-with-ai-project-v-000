@@ -5,9 +5,9 @@ module Players
     def move(board)
       #represents how this type of player makes a TTT move
       #takes board argument and allows a human player to enter a move via the CLI -- and returns the value the user enters
-  
+      
+      puts "Please enter 1-9:"
+      gets.strip
     end
-  
-  
   end
 end
