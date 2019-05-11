@@ -29,17 +29,18 @@ class Board
   end
   
   def full?
-    cells.each { |character| 
-  
-  binding.pry
-      if character == "X" || character == "O"
-        true
-      else
-        false
-      end
-    }
+    if cells.all?{|character| character == "X" || character == "O"}
+      true
+    else
+      false
+    end
   end
   
+  def turn_count
+    #how many positions in cells array are filled
+    cells.count { |character| character == "X" || character == "O"}
+  end
+
   def update(position, player)
     #represents updating the board when player makes a move
     
@@ -51,27 +52,18 @@ class Board
     
   end 
 
-  def token
-    #invoked when saving the update method
+  # def token
+  #   #invoked when saving the update method
     
-  end
-  
-  def full?
-    #when entirely occupied by "X"" and "O"s
-    
-  end
-  
-  def turn_count
-    #how many positions in cells array are filled
-    
-  end
-  
+  # end
+
   def taken?
     #returns true or false for a position
+    cells.count { |character| character == "X" || character == "O"}
   end
 
-  def valid_move?
-    #ensures that moves are between 1-9 and not taken(i.e. available)
+  # def valid_move?
+  #   #ensures that moves are between 1-9 and not taken(i.e. available)
     
-  end
+  # end
 end
