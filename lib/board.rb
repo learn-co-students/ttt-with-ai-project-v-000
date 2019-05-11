@@ -59,7 +59,7 @@ class Board
 
   def taken?
     #returns true or false for a position
-    cells.count { |character| character == "X" || character == "O"}
+    cells.any? { |character| character == "X" || character == "O"}
   end
 
   # def valid_move?
