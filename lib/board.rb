@@ -41,13 +41,18 @@ class Board
     cells.count { |character| character == "X" || character == "O"}
   end
 
-  def taken?
+  def taken?(input)
     #returns true or false for a position
-    if cells.each { |character| character == "X" || character == "O"}
+    if position(input) == "X"|| position(input) == "O"
       true
-    else
+    else !(position(input) == "X"|| position(input) == "O")
       false
-    end 
+    end
+  end
+
+  def valid_move?(input)
+    #ensures that moves are between 1-9 and not taken(i.e. available)
+    taken? == false && input.between?(1,9)
   end
 
 
@@ -63,11 +68,6 @@ class Board
   # end 
   # def token
   #   #invoked when saving the update method
-    
-  # end
-
-  # def valid_move?
-  #   #ensures that moves are between 1-9 and not taken(i.e. available)
     
   # end
 end
