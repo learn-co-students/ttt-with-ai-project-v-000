@@ -1,6 +1,3 @@
-require 'pry'
-
-
 class Board
   attr_accessor :cells
 
@@ -63,10 +60,4 @@ class Board
 
     cells[input.to_i-1] = player.token
   end 
-  
-  
-  # def token
-  #   #invoked when saving the update method
-    # update.save
-  # end
 end

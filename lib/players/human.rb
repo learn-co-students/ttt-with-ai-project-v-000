@@ -8,6 +8,14 @@ module Players
       
       puts "Please enter 1-9:"
       gets.strip
+      
+        #  Test if gets a number between 1 and 1-9 or "exit" to exit the game
+        #    obj = obj.to_s unless obj.is_a? String
+        #    /\A[+-]?\d+(\.[\d]+)?\z/.match(obj)
+      
+        #      if gets == "exit"
+        #        game.draw?
+        #      end
     end
   end
 end

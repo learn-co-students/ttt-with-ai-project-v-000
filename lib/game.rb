@@ -73,8 +73,38 @@ class Game
     end
   end
   
-  def start 
+  def start
+    # mode = ["0 player", "1 player", "2 player"]
+    #   0 = mode[0]
+    #   1 = mode[1]
+    #   2 = mode[2]
     
+    print "Please choose the mode of game which you would like to play:
+              0 = Computer against itself,
+              1 = You against the computer,
+              2 = You and another human.
+              
+              "
+    gets.strip.to_i
+    
+    print "Which token would you like to play?
+             X or O"
+     if gets.chomp.include?("X") then player_1 = "X"
+     else player_1 = "O"
+     end 
+    
+   
+    self.play until over?
+      self.replay
   end
- 
-end 
+
+  def replay
+    print "Would you like to play again?"
+      if "Y" || "yes" || "Yes" || "YES"
+        then game.new.start
+      elsif "exit"
+        puts "Hope you had fun playing!!"
+      end
+  end
+
+end
