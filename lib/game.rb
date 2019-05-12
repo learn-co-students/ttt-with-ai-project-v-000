@@ -100,7 +100,7 @@ class Game
     #   1 = mode[1]
     #   2 = mode[2]
 
-    # if code here about mode choice and @player_1 = Players:Computer or Players:Human
+    # if code here about mode choice and @player_1 = Players:Computer || @player_1 = Players:Human && @player_2 = Players:Computer || @player_2 = Players:Human
     
     print "Which token would you like to play?
              X or O
