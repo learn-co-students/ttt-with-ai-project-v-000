@@ -73,12 +73,20 @@ class Game
     end
   end
   
-  def start
-    # mode = ["0 player", "1 player", "2 player"]
-    #   0 = mode[0]
-    #   1 = mode[1]
-    #   2 = mode[2]
+  def replay
+    print "Would you like to play again?"
+    gets.strip
     
+      if "Y" || "yes" || "Yes" || "YES"
+        then game.new.start
+      elsif "N" || "no" || "No" || "NO"
+        puts "Hope you had fun playing!!"
+      else "exit"
+        puts "Hope you had fun playing!!"
+      end
+  end
+  
+  def start
     print "Please choose the mode of game which you would like to play:
               0 = Computer against itself,
               1 = You against the computer,
@@ -86,25 +94,27 @@ class Game
               
               "
     gets.strip.to_i
+
+    # mode = ["0 player", "1 player", "2 player"]
+    #   0 = mode[0]
+    #   1 = mode[1]
+    #   2 = mode[2]
+
+    # if code here about mode choice and @player_1 = Players:Computer or Players:Human
     
     print "Which token would you like to play?
-             X or O"
-     if gets.chomp.include?("X") then player_1 = "X"
-     else player_1 = "O"
+             X or O
+             
+             "
+     token_choice = "X" or "O"
+     gets.to_s
+     if token_choice = "X" then @player_1.token = "X"
+     else @player_1.token = "O"
      end 
     
    
     self.play until over?
-      self.replay
-  end
-
-  def replay
-    print "Would you like to play again?"
-      if "Y" || "yes" || "Yes" || "YES"
-        then game.new.start
-      elsif "exit"
-        puts "Hope you had fun playing!!"
-      end
+    self.replay
   end
 
 end
