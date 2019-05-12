@@ -102,14 +102,15 @@ class Game
 
     # if code here about mode choice and @player_1 = Players:Computer || @player_1 = Players:Human && @player_2 = Players:Computer || @player_2 = Players:Human
     
-    print "Which token would you like to play?
+    if get.strip.to_i == "1" || "2" print "Which token would you like to play?
              X or O
              
              "
      token_choice = "X" or "O"
-     gets.to_s
-     if token_choice = "X" then @player_1.token = "X"
-     else @player_1.token = "O"
+     
+     gets.chomp
+     if gets.chomp.match == "X" then @player_1.token = "X"
+       else @player_1.token = "O"
      end 
     
    
