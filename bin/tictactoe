@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+computer = Players::Computer.new("X")
+computer_1 = Players::Computer.new("O")
+player_2 = Players::Human.new("X")
+game = Game.new(computer_1, computer)
+
+game.play
