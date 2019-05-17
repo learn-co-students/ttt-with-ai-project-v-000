@@ -1,3 +1,78 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+  puts "Do you want to play? Enter Y or N"
+  play = ""
+  play = gets.chomp
+
+while play == "Y"
+
+  # if play == "Y"
+    puts "Hello, welcome to Samson and Sabrina's tic tac toe game!" 
+    puts "What kind of game do you want to play? 2 = H v H, 1 = H v C, 0 = C v C"
+    num_of_players = gets.chomp.to_s
+    if num_of_players == "2"
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Human.new("O")
+    elsif num_of_players == "2"
+          player_1 = Players::Human.new("O")
+          player_2 = Players::Human.new("X")
+        end
+    if num_of_players == "1"
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Computer.new("O")
+    elsif num_of_players == "1"
+          player_1 = Players::Human.new("O")
+          player_2 = Players::Computer.new("X")
+    elsif num_of_players == "0"
+          player_1= Players::Computer.new("X")
+          player_2 = Players::Computer.new("O")
+    end
+          #play game
+          game = Game.new(player_1, player_2, board = Board.new)
+          game.board.display
+          game.play
+          puts "Would you like to play again? (Type in Y or N)"
+          play = gets.chomp # redefining Yes or No!
+       break if play == "N"
+   end
+
+puts "Thanks for checking in. We hope to see you again!"
+
+# def start_game
+# puts "Hello, welcome to tic tac toe!" #Greeting - done
+# # if user_input = play then output
+# puts "What kind of game do you want to play?(Q for Quit) 2 = H v H, 1 = H v C, 0 = C v C"
+# num_of_players = gets.chomp.to_s
+# #if num_of_players == 0 then player_1 = "X", player_2= "O"
+# if num_of_players == "2"
+#       # puts "Whoever goes first, please type X."
+#       player_1 = Players::Human.new("X")
+#       player_2 = Players::Human.new("O")
+# elsif num_of_players == "1"
+#       player_1 = Players::Human.new("X")
+#       player_2 = Players::Computer.new("O")
+# elsif num_of_players == "0"
+#       player_1= Players::Computer.new("X")
+#       player_2 = Players::Computer.new("O")
+# # elsif num_ofplayers == "Q"
+# #       puts "Thanks for playing Tic Tac Toe! Please come again!"
+# end
+
+
+# def exit_game
+#
+#   puts "Thanks for playing Tic Tac Toe. Please come again!"
+#
+# end
+
+# Prompt the user for what kind of game they want to play, 0,1, or 2 player. C V C, H V C, H VH
+# Ask the user for who should go first and be "X".
+# Use the input to correctly initialize a Game with the appropriate player types
+#  and token values.
+
+# When the game is over, the CLI should prompt the user if they would like to  play again and allow
+# them to choose a new configuration for the game as described above.
+# If the user doesn't want to play again, exit the program.
