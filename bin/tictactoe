@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "Would you like to play against the computer, another player or watch the computer play against itself?"
+puts "Enter 1 to play against the computer."
+puts "Enter 2 to play against another person."
+puts "Enter 3 to watch the computer play against itself."
+puts "Enter 4 to exit the game."
+
+selection = gets.chomp
+
+if selection == "1"
+  puts "Would you like to go first and be X or go second and be O?"
+  puts "Enter 'X' to go first or 'O' to get second:"
+  user_choice = gets.chomp.upcase
+  if user_choice == "X"
+    game_you_vs_computer_x = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+    game_you_vs_computer_x.play
+  elsif user_choice == "O"
+    game_you_vs_computer_x = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    game_you_vs_computer_x.play
+  end
+elsif selection == "2"
+  puts "Would you like to go first and be X or go second and be O?"
+  puts "Enter 'X' to go first or 'O' to get second:"
+  user_choice = gets.chomp.upcase
+  if user_choice == "X"
+    game_you_vs_person_x = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+    game_you_vs_person_x.play
+  elsif user_choice == "O"
+    game_you_vs_person_o = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new)
+    game_you_vs_person_o.play
+  end
+elsif selection == "3"
+  puts "Enjoy the show!"
+  game_computer_solo = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+  game_computer_solo.play
+elsif selection == "4"
+  puts "Thanks for playing!"
+  exit!
+else puts "Please choose again."
+end
