@@ -88,7 +88,7 @@ The `Player` class is not actually a valid player of Tic-tac-toe but rather a ro
 Every player subclass will implement a `#move` method that represents how that type of player makes a move in Tic-tac-toe.
 
 ##### 'players/human.rb' - `Players::Human`
-Define a class `Human` that inherits from `Player`. This class should be namespaced inside the module `Players` because the `human.rb` file is inside the `players/` directory. This keeps our code nice and tidy.
+Define a class `Human` that inherits from `Player`.  `Players` because the `human.rb` file is inside the `players/` directory. This keeps our code nice and tidy.
 
 The human player must implement a `#move` method that takes in a `board` argument and allows a human player to enter a move via the CLI. The method should return the value the user enters. Even though the method accepts a `board` argument, it does not need to use it.
 
