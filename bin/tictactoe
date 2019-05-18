@@ -1,3 +1,35 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to Tic Tac Toe!"
+puts
+
+game = Game.new.start
+
+game.play
+
+# def set_player_with_computer(input)
+#   puts "enter 'computer' or 'me'."
+#   if input == 'computer'
+#     game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+#   elsif input == 'me'
+#     game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+#   else
+#     puts "invalid input"
+#     set_player_with_computer(input)
+#   end
+# end
+#
+# def set_players_just_humans(input)
+#   puts "enter 'player 1' or 'player 2'."
+#   if input == 'player 1'
+#     game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+#   elsif input == 'player 2'
+#     game = Game.new(Players::Human.new("O"), Players::Human.new("X"))
+#   else
+#     puts "invalid input"
+#     set_players_just_humans(input)
+#   end
+# end

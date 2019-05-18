@@ -72,8 +72,9 @@ describe "Board" do
   describe '#full?' do
     it 'returns true for a full board' do
       board.cells = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-
+      
       expect(board.full?).to be_truthy
+
     end
 
     it 'returns false for an in-progress game' do
