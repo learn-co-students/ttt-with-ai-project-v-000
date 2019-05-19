@@ -1,3 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+Game.start
+
+play_again = "Y"
+
+until play_again == "N"
+  puts "Would you like to play again? (Y/N)"
+  play_again = gets.strip
+  if play_again == "Y"
+    Game.start
+  end
+end
