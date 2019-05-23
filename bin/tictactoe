@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello player. What is your name?"
+name = gets
+puts "Welcome to Tic-Tac-Toe, #{name}."
+
+
+def start
+  puts "Who would you like to play the game? Please select:
+
+  0 - computer v computer
+  1 - player   v computer
+  2 - player   v player"
+
+  mode = gets.strip
+
+  if mode == "1"
+    puts "Would you like to go first? (y/n)"
+    if gets.strip == "y"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+  elsif mode == "2"
+     Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  elsif mode == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+  end
+  puts "Would you like to play again? (y/n)"
+  if gets.strip == "n"
+    puts "Good bye"
+  else
+    start
+  end
+end
+
+start
