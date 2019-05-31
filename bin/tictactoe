@@ -2,16 +2,39 @@
 
 require_relative '../config/environment'
 
-# Greet user with message
+  # Greet user with message
 puts "Hello, User."
 
-# Prompt user for 0, 1, or 2-player game
+
+
+  # Prompt user for 0, 1, or 2-player game
 puts "0, 1, or 2-player mode?"
+players_wanted = gets.strip
 
-# Ask user who should go first and be "X"
+case players_wanted
+when "0"
+  #start a game with 2 computer players
+when "1"
+  #start a game with 1 computer player & 1 human player
+when "2"
+  #start a game with 2 human players
+end
+
+  # Ask user who should go first and be "X"
 puts "Who will be player 1 (X)?"
+who_player_one_x = gets.strip
 
-#user inputs to correctly initialize a game
 
-#When game is over, prompt user if they would ike to play again and initiate questions OR EXIT
+
+  #use inputs to correctly initialize a game
+
+  #When game is over, prompt user if they would ike to play again and initiate questions OR EXIT
 puts "Would you like to play again?"
+play_again = gets.strip
+
+case play_again
+when "yes"
+  #start this bin file all over again
+when "no"
+  puts "Thanks for playing! Goodbye, User!"
+end
