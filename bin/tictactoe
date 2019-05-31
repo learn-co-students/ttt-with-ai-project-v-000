@@ -3,26 +3,65 @@
 require_relative '../config/environment'
 
   # Greet user with message
-puts "Hello, User."
+puts "Welcome to Tic-Tac-Toe"
+puts "Please, choose a game type"
+puts "[0] Computer versus Computer"
+puts "[1] Human verus Computer"
+puts "[2] Human versus Human"
+
+users_player_mode = gets.strip
+
+if users_player_mode == "0"
+  newgame = Game.new(Players::Computer.new("X"), Players::Computer.new("X"))
+elsif users_player_mode == "1"
+
+  puts "Please, choose Player 1 (X)"
+  puts "[0] Computer"
+  puts "[1] Human"
+
+  users_player_one = gets.strip
+
+  if users_player_one == "0"
+    newgame = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  elsif users_player_one == "1"
+    newgame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  else
+    puts "Please, select from the following options:"
+  end
+
+end
+
+
 
 
 
   # Prompt user for 0, 1, or 2-player game
 puts "0, 1, or 2-player mode?"
 players_wanted = gets.strip
+puts "Who will be player 1 (X)?"
+who_player_one_x = gets.strip
+
+
+
 
 case players_wanted
 when "0"
   #start a game with 2 computer players
+
 when "1"
   #start a game with 1 computer player & 1 human player
+
 when "2"
   #start a game with 2 human players
+  player_one = Players::Human.new
+  player_two = Players::Human.new
 end
 
   # Ask user who should go first and be "X"
-puts "Who will be player 1 (X)?"
-who_player_one_x = gets.strip
+
+case who_player_one_x
+when
+end
 
 
 
