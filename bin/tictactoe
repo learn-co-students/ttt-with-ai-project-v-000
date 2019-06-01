@@ -1,79 +1,73 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
 
+
+
+def tttgame
+  user_greeting
+
+  desired_player_mode = gets.strip
+
+    if desired_player_mode == "0"
+      newgame = Game.new(Players::Computer.new("X"), Players::Computer.new("X"))
+
+    elsif desired_player_mode == "2"
+      newgame = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+
+    elsif desired_player_mode == "1"
+      user_player_choice
+
+    else
+      puts "INVALID USER RESPONSE"
+      tttgame
+
+    end
+
+    newgame.play
+    user_play_again
+
+end #----TTTend
+
+
   # Greet user with message
-puts "Welcome to Tic-Tac-Toe"
-puts "Please, choose a game type"
-puts "[0] Computer versus Computer"
-puts "[1] Human verus Computer"
-puts "[2] Human versus Human"
+def user_greeting
+  puts "Welcome to Tic-Tac-Toe"
+  puts "Please, choose a game type"
+  puts "[0] Computer versus Computer"
+  puts "[1] Human verus Computer"
+  puts "[2] Human versus Human"
+end
 
-users_player_mode = gets.strip
 
-if users_player_mode == "0"
-  newgame = Game.new(Players::Computer.new("X"), Players::Computer.new("X"))
-elsif users_player_mode == "1"
-
+def user_player_choice
   puts "Please, choose Player 1 (X)"
   puts "[0] Computer"
   puts "[1] Human"
+  response = gets.strip
 
-  users_player_one = gets.strip
-
-  if users_player_one == "0"
+  if response == "0"
     newgame = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
-  elsif users_player_one == "1"
+  elsif response == "1"
     newgame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
   else
-    puts "Please, select from the following options:"
+    puts "INVALID USER RESPONSE"
+    user_player_choice
   end
-
 end
 
 
+def user_play_again
+  puts "Would you like to play again?"
+  puts "[0] No"
+  puts "[1] Yes"
+  response = gets.strip
 
-
-
-  # Prompt user for 0, 1, or 2-player game
-puts "0, 1, or 2-player mode?"
-players_wanted = gets.strip
-puts "Who will be player 1 (X)?"
-who_player_one_x = gets.strip
-
-
-
-
-case players_wanted
-when "0"
-  #start a game with 2 computer players
-
-when "1"
-  #start a game with 1 computer player & 1 human player
-
-when "2"
-  #start a game with 2 human players
-  player_one = Players::Human.new
-  player_two = Players::Human.new
-end
-
-  # Ask user who should go first and be "X"
-
-case who_player_one_x
-when
-end
-
-
-
-  #use inputs to correctly initialize a game
-
-  #When game is over, prompt user if they would ike to play again and initiate questions OR EXIT
-puts "Would you like to play again?"
-play_again = gets.strip
-
-case play_again
-when "yes"
-  #start this bin file all over again
-when "no"
-  puts "Thanks for playing! Goodbye, User!"
+  if response == "1"
+    tttgame
+  elsif response == "0"
+    puts "Thank you for playing!"
+  else
+    puts "INVALID USER RESPONSE"
+    user_play_again
+  end
 end
