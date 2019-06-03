@@ -1,5 +1,23 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
+# require 'pry'
+
+# ###########################################test broken
+#   def step_one
+#     puts "Choose stuff 1 2 3"
+#     grab = gets.strip
+#
+#     if grab == "2"
+#       newgame = Game.new #default value goes to 2 human players
+#       puts "you made it here at least"
+#       binding.pry
+#     end
+#
+#   end
+#
+# step_one
+#
+# ######################################test broken
 
 
 
@@ -38,7 +56,7 @@ def user_greeting
   puts "[2] Human versus Human"
 end
 
-
+ # Ask user who should go first
 def user_player_choice
   puts "Please, choose Player 1 (X)"
   puts "[0] Computer"
@@ -55,7 +73,7 @@ def user_player_choice
   end
 end
 
-
+  # Prompt user - if they want to play another game
 def user_play_again
   puts "Would you like to play again?"
   puts "[0] No"
