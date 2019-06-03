@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require_relative '../config/environment'
-# require 'pry'
+ require 'pry'
 
 # ###########################################test broken
 #   def step_one
@@ -23,16 +23,16 @@ require_relative '../config/environment'
 
 def tttgame
   user_greeting
+binding.pry
+  desired_player_mode = gets.strip.to_i
 
-  desired_player_mode = gets.strip
+    if desired_player_mode == 0
+      newgame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
 
-    if desired_player_mode == "0"
-      newgame = Game.new(Players::Computer.new("X"), Players::Computer.new("X"))
-
-    elsif desired_player_mode == "2"
+    elsif desired_player_mode == 2
       newgame = Game.new(Players::Human.new("X"), Players::Human.new("O"))
 
-    elsif desired_player_mode == "1"
+    elsif desired_player_mode == 1
       user_player_choice
 
     else
@@ -56,7 +56,7 @@ def user_greeting
   puts "[2] Human versus Human"
 end
 
- # Ask user who should go first
+ # Prompt user who should go first
 def user_player_choice
   puts "Please, choose Player 1 (X)"
   puts "[0] Computer"
