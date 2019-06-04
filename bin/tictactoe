@@ -23,7 +23,7 @@ require_relative '../config/environment'
 
 def tttgame
   user_greeting
-binding.pry
+
   desired_player_mode = gets.strip.to_i
 
     if desired_player_mode == 0

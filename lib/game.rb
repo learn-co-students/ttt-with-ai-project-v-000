@@ -49,10 +49,12 @@ class Game
 
   def turn
     cpm = current_player.move(board) # stores the user's inputted desired move <--- calls GETS
-
+    cpm = cpm.to_i
       if board.valid_move?(cpm) # checks if the user's desired position is available
         board.update(cpm, current_player) # changes the board's space to the user's playertoken if valid
+        board.display
       else
+        puts "invalid XXXX"
         turn # if the inputted desired position is not available, go back to TURN's 1st line and try for a different input
       end
   end
