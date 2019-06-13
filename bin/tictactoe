@@ -1,3 +1,51 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def play
+  game = " "
+  puts "Welcome to Tic Tac Toe!"
+  puts "Would you like to play a 0, 1, or 2 player game, or would you like to play wargames?(Enter 0, 1, 2, or 'W':)"
+  input = gets.chomp
+  if input == "0"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2  = Players::Computer.new("O"), board = Board.new)
+    game.play
+  elsif input == "1"
+    puts "Would you like to go first and be X, or go second and be O?(enter 'X' or 'O':)"
+    player_input = gets.chomp
+    if player_input == "X"
+      game = Game.new(player_1 = Players::Human.new("X"), player_2  = Players::Computer.new("O"), board = Board.new)
+      game.play
+    elsif player_input == "O"
+      game = Game.new(player_1 = Players::Computer.new("X"), player_2  = Players::Human.new("O"), board = Board.new)
+      game.play
+    end
+  elsif  input == "2"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2  = Players::Human.new("O"), board = Board.new)
+    game.play
+  elsif input.capitalize == "W"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2  = Players::Computer.new("O"), board = Board.new)
+    x_win_count = 0
+    o_win_count = 0
+    draw_count = 0
+    games_played = 0
+    while games_played < 100
+      game.play
+      games_played += 1
+      if game.winner == "X"
+        x_win_count += 1
+      elsif game.winner == "O"
+        o_win_count += 1
+      elsif game.draw?
+        draw_count += 1
+      end
+    end
+    puts "X won #{x_win_count} times! O won #{o_win_count} times! It was a draw #{draw_count} times!"
+  end
+  puts "Would you like to play again?(Enter 'yes' or 'exit')"
+  input = gets.chomp
+  if input == "yes"
+    play
+  end
+end
+play
