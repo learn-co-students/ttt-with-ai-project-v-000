@@ -1,3 +1,95 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# 1 - Greet the user with a message
+
+# 2 - Prompt the user for what kind of game they want to play: 0, 1, or 2 player
+
+# 3 - Ask the user for who should go first and be "X"
+
+# 4 - Use the input to correctly initialize a Game with the appropriate player types and token values
+
+# 5 - When the game is over, the CLI should prompt the user if they would like to play again and allow them to choose a new
+#     configuration for the game as described above.  If the user doesn't want to play again, exit the program.
+
+play_again = "y"
+
+while play_again == "y"
+  puts "Hello! Welcome to Tic-Tac-Toe!"
+
+  puts "What type of game do you want to play - 0, 1, or 2 player? (Type 0, 1, or 2): "
+  game_type = gets.strip
+  if game_type != "0" || game_type != "1" || game_type != "2"
+    until game_type == "0" || game_type == "1" || game_type == "2"
+      puts "Invalid input"
+      puts "What type of game do you want to play - 0, 1, or 2 player? (Type 0, 1, or 2): "
+      game_type = gets.strip
+    end
+  end
+
+  if game_type == "0"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+    game.play
+    puts "Would you like to play again? (Type y for yes, n for no): "
+    play_again = gets.strip
+    if play_again != "y" || play_again != "n"
+      until play_again == "y" || play_again == "n"
+        puts "Invalid input"
+        puts "Would you like to play again? (Type y for yes, n for no): "
+        play_again = gets.strip
+      end
+    end
+  elsif game_type == "1"
+    puts "Which player should go first and be X? (Type h for human, c for computer): "
+    first_player = gets.strip
+    if first_player != "h" || first_player != "c"
+      until first_player == "h" || first_player == "c"
+        puts "Invalid input"
+        puts "Which player should go first and be X? (Type h for human, c for computer): "
+        first_player = gets.strip
+      end
+    end
+
+    if first_player == "h"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+      game.play
+      puts "Would you like to play again? (Type y for yes, n for no): "
+      play_again = gets.strip
+      if play_again != "y" || play_again != "n"
+        until play_again == "y" || play_again == "n"
+          puts "Invalid input"
+          puts "Would you like to play again? (Type y for yes, n for no): "
+          play_again = gets.strip
+        end
+      end
+    elsif first_player == "c"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+      game.play
+      puts "Would you like to play again? (Type y for yes, n for no): "
+      play_again = gets.strip
+      if play_again != "y" || play_again != "n"
+        until play_again == "y" || play_again == "n"
+          puts "Invalid input"
+          puts "Would you like to play again? (Type y for yes, n for no): "
+          play_again = gets.strip
+        end
+      end
+    end
+  elsif game_type == "2"
+    game = Game.new
+    game.play
+    puts "Would you like to play again? (Type y for yes, n for no): "
+    play_again = gets.strip
+    if play_again != "y" || play_again != "n"
+      until play_again == "y" || play_again == "n"
+        puts "Invalid input"
+        puts "Would you like to play again? (Type y for yes, n for no): "
+        play_again = gets.strip
+      end
+    end
+  end
+  play_again
+end
+
+puts "Thanks for playing Tic-Tac-Toe!"
