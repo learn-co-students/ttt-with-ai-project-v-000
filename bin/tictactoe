@@ -1,3 +1,81 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greet the user with a message.
+puts "Welcome to Tic-Tac-Toe!"
+
+game = Game.new
+
+game.start
+
+# Adding the logic here because the lab instructions say I can, but need to research why I can do both
+# Prompt the user for what kind of game they want to play, 0, 1 or 2 player.
+def start
+  input = nil
+  while input != 5
+    puts "How would you like to play? Please select a number:"
+    puts "1. computer vs. computer"
+    puts "2. human vs. computer"
+    puts "3. human vs. human"
+    puts "4. wargame mode"
+    puts "5. quit"
+
+    puts " "
+    puts "Make a selection:"
+    input = gets.strip.to_i
+    case input
+      when 1
+        game = Game.new(Computer.new("X"), Computer.new("O"), board = Board.new)
+        game.play
+        play_again?
+
+      when 2
+        human_vs_computer
+
+      when 3
+        game = Game.new(Human.new("X"), Human.new("O"), board = Board.new)
+        puts "Player 1 will be 'X'."
+        puts "Player 2 will be 'O'."
+        game.play
+        play_again?
+
+      when 5
+        puts "Thanks for playing!"
+
+      when 4
+        puts "How many wargames would you like to simulate? Choose a number."
+        number = gets.strip.to_i
+        number.times { wargame }
+        puts "**Games played: #{number} ** Games drawn: #{@@draws} ** Games won: #{number-@@draws} **"
+        puts " "
+      else
+        puts "That's an invalid choice."
+    end
+  end
+end
+
+def human_vs_computer
+  response = ""
+  until response == 'human' || response == 'computer'
+  puts "Who goes first? 'Human' or 'Computer'?"
+  response = gets.strip.downcase
+    case response
+    when "human"
+      game = Game.new(Human.new("X"), Computer.new("O"), board = Board.new)
+      puts "You will be 'X'."
+    when "computer"
+      game = Game.new(Computer.new("X"), Human.new("O"), board = Board.new)
+      puts "The computer will be 'X'."
+    else
+      puts "Please choose 'human' or 'computer'."
+    end
+  end
+  game.play
+  play_again?
+end
+
+def wargame
+  game = Game.new(Computer.new("X"), Computer.new("O"), board = Board.new)
+  game.play
+end
