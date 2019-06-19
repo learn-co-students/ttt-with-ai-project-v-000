@@ -1,3 +1,49 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Greet the player
+puts "Welcome to Tic Tac Toe!"
+
+# Ask for number of (human) players
+loop do
+  players = ""
+  loop do
+    print "How many players (0-2)? "
+    players = gets.to_i
+    if (0..2).include?(players)
+      break
+    end
+  end
+
+  if players == 0
+    Game.new(Players::Computer.new("X"),Players::Computer.new("O")).play
+  elsif players == 1
+    loop do
+      print "Would you like to be player 1 (X) or player 2 (O)? "
+      human_player = gets.chomp
+      if ["1", "2", "X", "O"].include?(human_player.upcase)
+        if human_player == "1" || human_player.upcase == "X"
+          Game.new(Players::Human.new("X"),Players::Computer.new("O")).play
+          break
+        else
+          Game.new(Players::Computer.new("X"),Players::Human.new("O")).play
+          break
+        end
+      end
+    end
+  else
+    Game.new(Players::Human.new("X"),Players::Human.new("O")).play
+  end
+
+  loop do
+    puts "Would you like to play again (Y/n)?"
+    play_again = gets.chomp
+    if play_again.upcase == "Y"
+      break
+    elsif play_again.upcase == "N"
+      exit
+    end
+  end
+end
+      
