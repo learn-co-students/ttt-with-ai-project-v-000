@@ -1,3 +1,17 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+ceeli = CLI.new
+
+  if ceeli.game.over? #going into instance of game via CLI...calling here so that you're checking constantly whether game is over
+    puts "Would you like to play again? Y/n"
+    answer = gets.strip
+  end
+
+  if answer == "Y"
+    ceeli = CLI.new
+  else
+    puts "Later!"
+    exit
+  end
