@@ -1,3 +1,50 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+
+def call
+  puts "What kind of game do you want to play? 0, 1 or 2 players or wargames? (enter 0, 1, 2 or wargames)"
+  players = gets.strip
+
+  if players == "1"
+    puts "Who would you like to go first and be 'X', you (1) or the computer (2)?"
+    player_x = gets.to_i
+      if player_x == 1
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+      else
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Human.new("O")
+      end
+
+      Game.new(player_1, player_2, Board.new).play
+  elsif players == "2"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+
+    Game.new(player_1, player_2, Board.new).play
+  elsif players == "0"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+
+    Game.new(player_1, player_2, Board.new).play
+  else
+      results=[]
+        100.times do
+        results<<Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+        puts "Wins: #{results.uniq}"
+        puts "Times played: #{results.length}"
+        end
+      end
+
+end
+
+puts "Welcome to Tic-Tac-Toe!"
+  call
+puts "Would you like to play again? (y/N)"
+  input= gets.strip.downcase
+  if input == "y"
+    call
+  end
