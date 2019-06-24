@@ -1,3 +1,62 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require_relative '../lib/game.rb'
+
+
+def greetings
+  puts "Welcome to Tic-Tac-Toe!"
+end
+
+def list_game_modes
+  puts "Pick a game mode."
+  puts "1. Computer vs Computer"
+  puts "2. Human vs Computer"
+  puts "3. Human vs Human"
+end
+
+def play_ttt
+  list_game_modes
+  input = gets.strip
+  
+  if input == "1"
+    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+  elsif input == "2"
+    puts "Would you like to go first? Y/N"
+    player_x = gets.strip
+  
+    if player_x == "Y" || player_x == "y" || player_x == "Yes" || player_x == "yes"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    else
+      game = Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new).play
+    end
+
+  elsif input == "3"
+    puts "Would you like to go first? Y/N"
+    player_x = gets.strip
+    if player_x == "Y" || player_x == "y" || player_x == "Yes" || player_x == "yes"
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+    else
+      game = Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new).play
+    end
+  end
+end
+
+def play_again?
+  puts "Woud you like to play again? y/n"
+end
+
+def ttt_loop
+  greetings
+  play_again = true
+  while play_again == true
+    play_ttt
+    play_again?
+    continue = gets.strip
+    play_again = false if continue == "n"
+  end
+end
+
+ttt_loop
+
