@@ -42,6 +42,7 @@ class Game
     if won?
       winning_combo = won?
       winner = board.cells[winning_combo[0]]
+      board.display
     else
       nil
     end
@@ -52,7 +53,7 @@ class Game
     cpm = cpm.to_i
       if board.valid_move?(cpm) # checks if the user's desired position is available
         board.update(cpm, current_player) # changes the board's space to the user's playertoken if valid
-        board.display
+        # board.display # too much DISPLAYING!!!! STEVEN FIXED THIS
       else
         puts "invalid XXXX"
         turn # if the inputted desired position is not available, go back to TURN's 1st line and try for a different input

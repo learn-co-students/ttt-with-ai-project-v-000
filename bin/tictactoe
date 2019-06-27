@@ -33,7 +33,7 @@ def tttgame
       newgame = Game.new(Players::Human.new("X"), Players::Human.new("O"))
 
     elsif desired_player_mode == 1
-      user_player_choice
+      newgame = user_player_choice
 
     else
       puts "INVALID USER RESPONSE"
@@ -52,7 +52,7 @@ def user_greeting
   puts "Welcome to Tic-Tac-Toe"
   puts "Please, choose a game type"
   puts "[0] Computer versus Computer"
-  puts "[1] Human verus Computer"
+  puts "[1] Human versus Computer"
   puts "[2] Human versus Human"
 end
 
