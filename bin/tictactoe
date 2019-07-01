@@ -11,17 +11,21 @@ def start
 
   input = gets.strip
 
-  case input
-
-  when input == "1"
+  if input == "1"
+    if 
       Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
-  when input = "0"
+    else
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+    end
+
+  elsif input == "0"
     Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
 
-  when  input == "2"
+  elsif input == "2"
     Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
-  puts "Would like to play again? [y/ n]"
   end
+
+  puts "Would like to play again? [y/ n]"
 end
 
 start until gets.strip == "n"
