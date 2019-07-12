@@ -1,11 +1,12 @@
-class Player::Computer < Player
+module Players
+class Computer < Player
   def move(board)
     if !board.taken?('5')
       '5'
     else
       best_move(board) + 1
     end
-  end
+  end 
 
   def best_move(board)
     win(board) || block(board) || corner(board) || random
@@ -30,7 +31,7 @@ class Player::Computer < Player
         !board.taken?(combo[1]+1)
       )
     end
-  end
+  end 
 
   def win(board)
     # puts "...checking for win for #{token} on #{board.cells}"
@@ -59,4 +60,5 @@ class Player::Computer < Player
   def random
     (0..8).to_a.sample
   end
+end
 end

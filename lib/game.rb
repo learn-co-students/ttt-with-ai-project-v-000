@@ -15,7 +15,7 @@ class Game
 
 # A game has two Players stored in a player_1 and player_2 property.
 
-  def initialize(player_1, player_2, board)
+  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board 
@@ -26,7 +26,7 @@ class Game
   end
 
   def current_player
-    @board.turn_count % 2 == 0 ? "O" : "X"
+    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def winner
