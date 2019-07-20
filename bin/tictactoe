@@ -1,3 +1,93 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+ require 'pry'
+
+# ###########################################test broken
+#   def step_one
+#     puts "Choose stuff 1 2 3"
+#     grab = gets.strip
+#
+#     if grab == "2"
+#       newgame = Game.new #default value goes to 2 human players
+#       puts "you made it here at least"
+#       binding.pry
+#     end
+#
+#   end
+#
+# step_one
+#
+# ######################################test broken
+
+
+
+def tttgame
+  user_greeting
+
+  desired_player_mode = gets.strip.to_i
+
+    if desired_player_mode == 0
+      newgame = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+
+    elsif desired_player_mode == 2
+      newgame = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+
+    elsif desired_player_mode == 1
+      newgame = user_player_choice
+
+    else
+      puts "INVALID USER RESPONSE"
+      tttgame
+
+    end
+
+    newgame.play
+    user_play_again
+
+end #----TTTend
+
+
+  # Greet user with message
+def user_greeting
+  puts "Welcome to Tic-Tac-Toe"
+  puts "Please, choose a game type"
+  puts "[0] Computer versus Computer"
+  puts "[1] Human versus Computer"
+  puts "[2] Human versus Human"
+end
+
+ # Prompt user who should go first
+def user_player_choice
+  puts "Please, choose Player 1 (X)"
+  puts "[0] Computer"
+  puts "[1] Human"
+  response = gets.strip
+
+  if response == "0"
+    newgame = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+  elsif response == "1"
+    newgame = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+  else
+    puts "INVALID USER RESPONSE"
+    user_player_choice
+  end
+end
+
+  # Prompt user - if they want to play another game
+def user_play_again
+  puts "Would you like to play again?"
+  puts "[0] No"
+  puts "[1] Yes"
+  response = gets.strip
+
+  if response == "1"
+    tttgame
+  elsif response == "0"
+    puts "Thank you for playing!"
+  else
+    puts "INVALID USER RESPONSE"
+    user_play_again
+  end
+end
+
+tttgame
