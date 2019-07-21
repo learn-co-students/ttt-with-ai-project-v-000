@@ -42,7 +42,8 @@ class Run_controller
     puts "Welcome! Please select what game version you would like to play." 
     puts "If you would like to play computer vs. computer, please enter 0" 
     puts "If you would like to play human vs. computer, please enter 1" 
-    puts "If you would like to play human vs. human, please enter 2" 
+    puts "If you would like to play human vs. human, please enter 2"
+    puts "If you would like to exit the program, please enter 4"
     @game_choice = gets.strip #user input for 0,1,2 
     game_type(@game_choice)
   end 
@@ -51,25 +52,47 @@ class Run_controller
     case var 
       when "0" 
         Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+        ending 
         #binding.pry 
       when "1" 
-        puts "Who should go first? Please enter 'h' for human or 'c' for computer"
-        first_player = gets.strip
-          if first_player == "h"
+        puts "Player vs. Computer Mode. Who should go first? Please enter 'h' for human or 'c' for computer"
+        first_player = gets.strip.downcase
+          if first_player == "h".downcase
             Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
-          else first_player == "c"
+            ending 
+          elsif first_player == "c".downcase
             Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
-          end #need to consider downcase/ case sensitive
-          #needs to either exit or repeat puts line 
-          
-            
+            ending 
+          else 
+            puts "You entered an error.Returning to main menu."
+            greeting
+          end  
       when "2" 
-        Game.new.play 
+        puts "Player 1 will be 'X' and Player 2 will be 'O'."
+        Game.new.play
+        ending
+      when "4"
+        puts "You have exited the game."
       else 
         puts "You entered an error. Please put in a valid response." 
         greeting 
     end 
   end
   
+  
+  def ending
+    puts "Would you like to play again?"
+    puts "Sure! - please enter 'Y'"
+    puts "No, thanks! - please enter 'N'"
+    answer = gets.strip.downcase
+      if answer == "y"
+        greeting
+      else
+        puts "You have exited the game."
+      end 
+  end 
+      
+       
+
   
 end 
