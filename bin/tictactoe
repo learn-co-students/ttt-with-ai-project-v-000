@@ -2,7 +2,7 @@
 
 require_relative '../config/environment'
 
-Greeting.new
+Run_controller.new
 
 
 
