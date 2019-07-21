@@ -63,8 +63,10 @@ class Game
   end 
   
   def play 
+    @board.display
     until over? do 
       turn
+      @board.display
     end 
       if draw?
         puts "Cat's Game!"
