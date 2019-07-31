@@ -1,5 +1,4 @@
 class Board
-
   attr_accessor :cells
 
   def reset!
@@ -31,7 +30,7 @@ class Board
   end
 
   def taken?(input)
-    position(input) == "X" || position(input) == "O"
+    position(input) == "O" || position(input) == "X"
   end
 
   def valid_move?(input)
