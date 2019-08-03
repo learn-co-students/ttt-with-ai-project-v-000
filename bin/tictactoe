@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "How many people would like to play? (0, 1, or 2) P.S. 0 players will start 100 games with the computer as both players"
+puts "In order to initialize the computer death match, input 'wargames',"
+puts "otherwise input the number of desired players(1 or 2)"
+
+Game.game_choice
