@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to Tic Tac Toe!"
+puts Board.new.display
+puts "How many players will there be?"
+puts "Enter 0 to watch the computer play itself."
+puts "Enter 1 if you wish to play the computer."
+puts "Enter 2 if you wish to play another human."
+puts "Enter 'exit' to leave the game. We'll miss you!"
+
+player_count = gets.strip.to_i
+puts "Thank you!"
+puts " "
+
+unless player_count == "exit"
+  if player_count == 0
+    new_game = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+    new_game.play
+  elsif player_count == 1
+    puts "Would you like to be player 1 or 2?"
+    player_assign = gets.strip.to_i
+    puts "Thanks! Let's get this party started!"
+  end
+
+  if player_count == 1 && player_assign == 1
+    new_game = Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+    new_game.play
+  elsif player_count == 1 && player_assign == 2
+    new_game = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+    new_game.play
+  elsif player_count == 2
+    puts "Please decide who is going to play first and be X."
+    sleep(1)
+    puts "Five..."
+    sleep(1)
+    puts "Four..."
+    sleep(1)
+    puts "Three..."
+    sleep(1)
+    puts "Two..."
+    sleep(1)
+    puts "One..."
+    sleep(1)
+    puts "And done. Here we go!"
+    puts "~-*~-*~-*~-*~-*~-*~-*~-*~-*~-*~-*~-*"
+    puts "~-*~-*~-*~-*~-*~-*~-*~-*~-*~-*~-*~-*"
+    new_game = Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+    new_game.play
+  end
+end
