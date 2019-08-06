@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+TicTacToeCLI.new.call
+
+
+# <<<<<<< HEAD
+# play_tictactoe
+# =======
+# play_tictactoe
+# >>>>>>> c4e2ea89d5abb3c512b95b3d1663fc348bdcf7e1
