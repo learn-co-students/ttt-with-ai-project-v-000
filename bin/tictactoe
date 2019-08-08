@@ -1,3 +1,38 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe!"
+
+
+
+    def new_game
+
+game = Game.new
+
+
+puts "Press 0 to watch AI VS AI."
+puts "Press 1 to play against AI."
+puts "Press 2 to play with a friend!"
+
+game_choice = gets.strip
+
+while game_choice == "0"
+game.start_0(player_1= Players::Computer.new("X"), player_2= Players::Computer.new("O"))
+game.play_again?
+end #game_choice 0
+
+while game_choice == "1"
+game.start_1(player_1, player_2)
+game.play_again?
+end #game_choice 1
+
+
+while game_choice == "2"
+game.start_2(player_1= Players::Human.new("X"),player_2= Players::Human.new("O"))
+game.play_again?
+end #game_choice 2
+
+end #new_game
+
+new_game
