@@ -1,3 +1,78 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#Greet the user with a message
+def start
+  puts "Welcome to Tic Tac Toe! Where are you from? (Spain, France, The Old West)"
+  regional_fun =  gets.strip.downcase
+  dbl_space
+  if regional_fun == "spain"
+    puts "Hola! Welcome to Tic Tac Toe! Would you like to play? (Y/n)"
+    input =  gets.strip.downcase
+    dbl_space
+    start_game(input)
+  elsif regional_fun == "france"
+    puts "Bonjour! Welcome to Tic Tac Toe! Would you like to play? (Y/n)"
+    input =  gets.strip.downcase
+    dbl_space
+    start_game(input)
+  else regional_fun == "the old west"
+    puts "Howdy partner! Welcome to Tic Tac Toe! Would you like to play? (Y/n)"
+    input =  gets.strip.downcase
+    dbl_space
+    start_game(input)
+  end
+end
+
+def start_game(input)
+  if input == "y"
+    puts "How many players will there be?: (0/1/2)"
+    number_of_players = gets.strip.to_i
+    dbl_space
+      if number_of_players == 0
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+        puts "Great! Starting your new game..."
+        dbl_space
+        @game = Game.new(player_1, player_2).play
+        @game
+        play_again?
+      elsif number_of_players == 1
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+        puts "Great! Starting your new game..."
+        dbl_space
+        @game = Game.new(player_1, player_2).play
+        @game
+        play_again?
+      elsif number_of_players == 2
+        puts "Great! Starting your new game..."
+        dbl_space
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+        @game = Game.new(player_1, player_2).play
+        @game
+        play_again?
+      end
+  else puts "Ok nice to meet you, hope it's a good day!"
+  end
+end
+
+def play_again?
+  puts "Would you like to play again? (Y/n)"
+  input = gets.strip.downcase
+    if input == "y" || input == "yes"
+      start_game(input)
+    else
+      dbl_space
+      puts "Fantastic, have a great day!"
+    end
+end
+
+def dbl_space
+  puts ""
+  puts ""
+end
+
+start
