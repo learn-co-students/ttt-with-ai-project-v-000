@@ -1,3 +1,51 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+  puts "Type your name to begin"
+  name_input = gets.strip
+  puts "Hi there #{name_input}! Welcome to Tic Tac Toe!"
+  puts "Which Game would you like to play?"
+  puts "Enter 0 for No Players, 1 for One Player or 2 for Two Players."
+  input = gets.strip
+  puts "You've selected a #{input} Player Game."
+
+  # Zero Player Game:  Computer v. Computer
+if input == "0"
+    puts "Select S to start the Game?"
+    start_input = gets.strip
+    while start_input == "S" || start_input == "s"
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+    end
+#One Player Game: Human v. Computer
+elsif input == "1"
+    puts "Who should go first and be X?"
+    puts "Enter 1 for You or 2 for the Computer."
+    playfirst_input = gets.strip
+    if input == "1"
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+      puts "Make your move?"
+    else
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+      puts "Your turn."
+    end
+# Two Player Game:  Human v. Human
+elsif input == "2"
+    puts "Who should go first and be X?"
+    puts "Enter 1 for Player 1 or 2 for Player 2."
+    playfirst_input = gets.strip
+    if input == "2"
+      puts "Make your move Player #{playfirst_input}"
+      Game.new.play
+    else puts "Try a 2 Player Game!"
+    end
+end
+
+#End of Game
+    puts "Would you like to play another game? Y = Yes, N = No"
+    newgame_input = gets.strip
+
+    if newgame_input == "Y" || newgame_input == "y"
+      Game.new.play
+    else puts "Thanks for Playing Tic Tac Toe!"
+    end
