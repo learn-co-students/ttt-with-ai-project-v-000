@@ -1,3 +1,54 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def greet_player
+    system "clear" or system "cls"
+    puts ""
+    puts "******************************"
+    puts "~ Welcome to AI Tic Tac Toe! ~"
+    puts "******************************"
+    puts ""
+end
+
+def ask_for_selection
+    print "Would you like to match ~Tac~tics against another HUMAN or the AI, watch WARGAMES, or QUIT?: "
+    gets.chomp
+end
+
+def program_should_quit(input)
+    input.upcase.eql?("QUIT")
+end
+
+greet_player
+selection = ask_for_selection
+
+while (!program_should_quit(selection))
+    if (selection.upcase.eql?("HUMAN"))
+        Game.new.start
+        system "clear" or system "cls"
+    elsif (selection.upcase.eql?("AI"))
+        Game.new(
+            Players::Human.new("X"),
+            Players::Computer.new("O")
+        ).start
+        system "clear" or system "cls"
+    elsif (selection.upcase.eql?("WARGAMES"))
+        Wargame.new().start
+        system "clear" or system "cls"
+    else
+        puts ""
+        puts "...That is not a valid selection :("
+        puts "Please try again - "
+    end
+
+    puts ""
+    selection = ask_for_selection
+end
+
+puts ""
+puts "GOOD BYE!"
+puts ""
+
+
+
