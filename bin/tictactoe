@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "Welcome to Tic Tac Toe"
+puts "How many players?"
+
+def game_type
+  players = gets.chomp.to_i
+
+  if players != 0 && players != 1  && players != 2
+    puts "Invalid choice. Enter the number of players. Valid choices are 0, 1, or 2."
+    game_type
+    
+  elsif players == 0
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+  
+  elsif players == 1
+    puts "Who goes first? Enter 1 for computer and 2 for human"
+    first_player = gets.chomp.to_i
+    
+    if first_player == 1
+      puts "The computer will be 'X' and you are 'O' \n  "
+      Game.new(Players::Computer.new("X"), Players::Human.new("O")).play
+    else
+      puts "You are 'X' and the computer is 'O'. You will play first. \n  "
+      Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+    end
+    
+  elsif players == 2
+    puts "Whoever goes first will be X"
+    Game.new.play
+  end
+end
+
+game_type
+
+    
+    
