@@ -2,16 +2,6 @@ class Board
 
   attr_accessor :cells
 
-  WIN_COMBINATIONS = [
-  [0,1,2], # Top row
-  [3,4,5],  # Middle row
-  [6,7,8], #lower row
-  [0,4,8], #horizontal row_a
-  [2,4,6], #horizontal_row_b
-  [1,4,7], #vertical_row_a
-  [0,3,6], #vertical_row_b
-  [2,5,8], #vertical_row_c
-  ]
 
   def initialize
     @cells = Array.new(9, " ")
@@ -46,19 +36,15 @@ end
 
 def valid_move?(input)
 
-  if input.to_i.between?(0,9) && taken?(input) == false
+  if input.to_i.between?(1,9) == true && taken?(input) == false
     true
   else
     false
   end
 end
 
-def update(input)
-  index = input.to_i-1
-if valid_move?(input)
-  position(input)
-  display_board
-end
+def update(input, player)
+@cells[input.to_i-1] = player.token
 end
   # def move(index, value)
   #    @board[index] = value
