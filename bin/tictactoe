@@ -1,3 +1,79 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "WELCOME TO TIC-TAC-TOE!"
+puts "\nPLEASE SELECT MODE:"
+puts "0 player:   '0'"
+puts "1 player:   '1'"
+puts "2 players:  '2'"
+puts "Wargames:   'wargames'"
+puts "Exit:       'exit'"
+user_input = gets.strip
+while user_input != "0" && user_input != "1" && user_input != "2" && user_input != "wargames" && user_input != "exit"
+  puts "\nINVALID INPUT. PLEASE SELECT MODE:"
+  puts "0 player:   '0'"
+  puts "1 player:   '1'"
+  puts "2 players:  '2'"
+  puts "Wargames:   'wargames'"
+  puts "Exit:       'exit'"
+  user_input = gets.strip
+end
+
+if user_input == "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O")).start
+elsif user_input == "1"
+  puts "\nPLEASE CHOOSE TOKEN:"
+  puts "X:     'X'"
+  puts "O:     'O'"
+  puts "Exit:  'exit'"
+  user_token = gets.strip
+  while user_token != "X" && user_token != "O" && user_token != "exit"
+    puts "\nINVALID INPUT. PLEASE CHOOSE TOKEN:"
+    puts "X:    'X'"
+    puts "O:    'O'"
+    puts "Exit:  'exit'"
+    user_token = gets.strip
+  end
+  if user_token != "exit"
+    if user_token == "X"
+      enemy_token = "O"
+    else
+      enemy_token = "X"
+    end
+    puts "\nPLEASE CHOOSE PLAYER:"
+    puts "Player 1:  '1'"
+    puts "Player 2:  '2'"
+    puts "Exit:      'exit'"
+    user_player = gets.strip
+    while user_player != "1" && user_player != "2" && user_player != "exit"
+      puts "\nINVALID INPUT. PLEASE CHOOSE PLAYER:"
+      puts "Player 1:  '1'"
+      puts "Player 2:  '2'"
+      puts "Exit:      'exit'"
+      user_player = gets.strip
+    end
+    if user_player != "exit"
+      if user_player == "1"
+        Game.new(Players::Human.new(user_token), Players::Computer.new(enemy_token)).start
+      else
+        Game.new(Players::Computer.new(enemy_token), Players::Human.new(user_token)).start
+      end
+    end
+  end
+elsif user_input == "2"
+  Game.new.start
+elsif user_input == "wargames"
+  results = []
+  100.times do
+    result = Game.new(Players::Computer.new("X"), Players::Computer.new("O")).start
+    results << result
+  end
+  wins = 0
+  draws = 0
+  results.each do |result|
+    wins += 1 if result == "win"
+    draws += 1 if result == "draw"
+  end
+  puts "\n#{wins} wins & #{draws} draws!"
+end
