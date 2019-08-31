@@ -217,9 +217,10 @@ describe 'Game' do
     it 'checks if the game is over after every turn' do
       game = Game.new
       allow($stdout).to receive(:puts)
+
       allow(game.player_1).to receive(:gets).and_return("1", "2")
       allow(game.player_2).to receive(:gets).and_return("4", "5")
-
+        # binding.pry
       expect(game).to receive(:over?).at_least(:twice).and_return(false, false, true)
 
       game.play
