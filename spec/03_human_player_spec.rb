@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../lib/players/human.rb'
 
 describe 'Players::Human' do
   it 'inherits from Player' do

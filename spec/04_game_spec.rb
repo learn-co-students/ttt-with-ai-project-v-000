@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../lib/game.rb'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do

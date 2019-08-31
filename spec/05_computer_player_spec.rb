@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative '../lib/players/computer.rb'
 
 describe 'Players::Computer' do
   it 'inherits from Player' do

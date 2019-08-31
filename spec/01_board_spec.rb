@@ -1,4 +1,5 @@
 require 'spec_helper'
+require_relative "../lib/board.rb"
 
 describe "Board" do
   let(:board){Board.new}
