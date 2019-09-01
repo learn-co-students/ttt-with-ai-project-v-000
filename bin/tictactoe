@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts 'Welcome to the best game on the planet made with Unity3D*'
+puts 'TIC TAC TOE!'
+puts '*Note: Not actually made with Unity3D'
+sleep(2)
+
+puts 'So, what would you like to do?'
+puts  "For no players, type '0'. " \
+      "For one player, type '1'. " \
+      "For two players, type '2'."
+
+numofplayers = gets.strip.to_i
+
+if numofplayers === 0
+  game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+  game.board.display
+elsif numofplayers === 1
+  game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new)
+  game.play
+  game.board.display
+elsif numofplayers === 2
+  game = Game.new()
+  game.play
+  game.board.display
+end
+
