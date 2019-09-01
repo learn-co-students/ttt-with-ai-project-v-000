@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hi! Welcome to Tic Tac Toe!"
+puts "Would you like to play with"
+puts "0, AI vs AI"
+puts "1, you vs AI"
+puts "2, you vs friend"
+
+players_num = gets.strip.to_i
+
+if players_num == 2
+  new_game = Game.new
+elsif players_num == 1
+  new_game = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+else
+  new_game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+end
+
+new_game.play
