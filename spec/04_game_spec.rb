@@ -1,8 +1,10 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
     it 'defines a constant WIN_COMBINATIONS with arrays for each win combination' do
+      # binding.pry
       expect(Game::WIN_COMBINATIONS).to include_array([0,1,2])
       expect(Game::WIN_COMBINATIONS).to include_array([3,4,5])
       expect(Game::WIN_COMBINATIONS).to include_array([6,7,8])
@@ -175,7 +177,7 @@ describe 'Game' do
     it 'makes valid moves' do
       game = Game.new
       allow($stdout).to receive(:puts)
-
+      # binding.pry
       expect(game.player_1).to receive(:gets).and_return("1")
 
       game.turn
