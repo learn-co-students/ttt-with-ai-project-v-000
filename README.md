@@ -23,7 +23,7 @@ Working on a software project with another person is not something to be taken l
     - Person A codes the board and the human player class
     - Person B creates the game engine, expecting a working board and player with stubs
     - Person A creates the computer player
-    - Work together on the AI (It's hard)
+    - Work together on the AI (It's hard)s
 
 Remember! The goal at The Flatiron School is not to do, it is to *learn*. Make sure you have worked in all three styles of collaboration. We want you to learn how the different styles work. The most important part is that together you and your partner understand every piece of the code.
 

@@ -1,3 +1,48 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+require 'pry'
+
+puts "Welcome to Tic Tac Toe."
+puts "What kind of game do you want to play?"
+puts "0, 1, or 2 player(s)?"
+number_of_players = gets.strip
+
+
+    if number_of_players == "0"
+      new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+      new_game.start
+      new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+      puts "Welcome to Tic Tac Toe!"
+      new_game.board.display
+      new_game.play
+
+    elsif number_of_players == "1"
+      puts "Who should go first and use the X token? Human, computer, or random?"
+      first_player = gets.strip.downcase
+        if first_player == "human"
+          new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+          new_game.start
+
+        elsif first_player == "computer"
+          new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+          new_game.start
+
+        elsif first_player == "random"
+          random_selection = ["human","computer"].sample.downcase
+          if random_selection == "human"
+            new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+            puts "You go first this time."
+            new_game.start
+          elsif random_selection == "computer"
+            new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"))
+            puts "Computer goes first this time."
+            new_game.start
+          end
+        else
+          puts "Invalid selection. Try again."
+        end
+
+      elsif number_of_players == "2"
+          new_game = Game.new
+          new_game.start
+      end
