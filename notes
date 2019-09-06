@@ -1,0 +1,273 @@
+# strategy bstorm:
+
+  # if two next to each other, block/put adjecent to
+    # H [[1, 2]*, [4, 5]*, [7, 8]*, [2, 3], [5, 6], [8, 9]] (* place to right, else left) (rt = index[1] + 1, lft = index[0] - 1)
+    # V [[1, 4]*, [2, 5]*, [3, 6]*, [4, 7], [5, 8], [6, 9]] (* place beneath, else above) (blw = index[1] + 3, abv = index[0] - 3)
+
+  # if sandwich, place between
+    # H [[1, 3], [4, 6], [7, 9]] (index[1] + or - 1)
+    # V [[1, 7], [2, 8], [3, 9]] (index[1] - 3)
+    # D [[1, 9], [3, 7]] (position 5)
+
+  # if corner, put in center (5)
+    # 1 || 3 || 7 || 9
+
+  # if center, put in corner (1 || 3 || 7 || 9)
+    # 5
+
+  # else adjacent to own or corner...
+
+  ########
+
+  #check for adjacent
+  # horizontal_block_right = [[1, 2], [4, 5], [7, 8]]
+  # horizontal_block_left = [[2, 3], [5, 6], [8, 9]]
+  # vertical_block_below = [[1, 4], [2, 5], [3, 6]]
+  # vertical_block_above = [[4, 7], [5, 8], [6, 9]]
+  # diagonal_block_up_rt = [[7, 5]] (3)
+  # diagonal_block_up_lft = [[9, 5]] (1)
+  # diagonal_block_low_rt = [[1, 5]] (9)
+  # diagonal_block_low_lft = [[3, 5]] (7)
+
+  #check for sandwich
+  # horizontal_block_center = [[1, 3], [4, 6], [7, 9]]
+  # vertical_block_center = [[1, 7], [2, 8], [3, 9]]
+  # diagonal_block_center = [[1, 9], [3, 7]]
+
+  ########
+
+
+        #horizontal_block_right.find do |combo|
+          #if each index in the combo is taken by same token
+            #player_move = horizontal_block_right[1] + 1
+
+          #elsif each index in the combo is taken by same token
+            #player_move = horizontal_block_left[0] - 3
+
+          #elsif
+          ########
+
+          # IF FIRST MOVE #
+
+        #check for first move corner
+          #if 1 || 3 || 7 || 9
+            #update in position 5
+
+
+        #check for first move center
+          #if 5
+            #update in positions 1 || 3 || 7 || 9
+
+        # ELSE #
+          #place adjacent to own first
+          #or corner if first move
+
+
+          ####################
+
+          block_combos = {
+
+            :block_rt => [[cells[0], cells[1]], [cells[3], cells[4]], [cells[6], cells[7]]],
+            :block_lft => [[cells[1], cells[2]], [cells[4], cells[5]], [cells[7], cells[8]]],
+            :block_blw => [[cells[0], cells[3]], [cells[1], cells[4]], [cells[2], cells[5]]],
+            :block_abv => [[cells[3], cells[6]], [cells[4], cells[7]], [cells[5], cells[8]]],
+            :hor_block_cntr => [[cells[0], cells[2]], [cells[3], cells[5]], [cells[6], cells[8]]],
+            :ver_block_cntr => [[cells[0], cells[6]], [cells[1], cells[7]], [cells[2], cells[8]]],
+            :diag_block_cntr => [[cells[0], cells[8]], [cells[2], cells[6]]]
+
+          }
+
+          diag_block_combos = {
+
+            :block_up_rt => [cells[6], cells[4]],
+            :block_up_lft => [cells[8], cells[4]],
+            :block_low_rt => [cells[0], cells[4]],
+            :block_low_lft => [cells[2], cells[4]]
+
+          }
+
+          #####################
+
+
+
+
+
+          #############################
+
+          # ORIGINAL MOVE SOLUTION
+
+          # @valid_moves.collect! do |value|
+          #   @board.valid_move?(value)
+          #   @value = value
+          # end
+          # #returns an array @valid_moves
+          #
+          # player_move = @valid_moves.sample
+          # @valid_moves[player_move.to_i - 1] = player_move
+          # player_move # => string digit
+
+          ##############################
+          ### To iterate down to individual cell values
+            # block_combos.each do |key, value|
+            #   value.each do |position|
+            #     puts position[0] "O"
+            #     puts position[1]"O"
+            #   end
+            # end
+
+
+            ################ 1/12
+
+
+
+            ####### Breaks after player 1 goes for the 2nd time ##############
+
+
+
+
+            #
+            # @valid_moves.collect! do |value|
+            #  +        @board.valid_move?(value)
+            #  +        @value = value
+            #  +      end
+            #  +
+            #  +      input = @valid_moves.sample
+            #  +      @board.update(input, self)
+            #  +      @board.cells
+            #  +      @valid_moves[@value.to_i - 1] = @value
+            #  +      #expect(valid_moves).to include(computer_move)
+
+
+
+
+            #########################
+
+            # value.detect do |combo|
+            #
+            #   if cells[combo[0]] == "X" && cells[combo[1]] == "X" || cells[combo[0]] == "O" && cells[combo[1]] == "O"
+            #
+            #     if key == :block_rt
+            #       @play_move = (combo[1] + 1) + 1
+            #     elsif key == :block_lft
+            #       @play_move = (combo[0] + 1) - 1
+            #     elsif key == :block_blw
+            #       @play_move = (combo[1] + 1) + 3
+            #     elsif key == :block_abv
+            #       @play_move = (combo[0] + 1) - 3
+            #     elsif key == :hor_block_cntr
+            #       @play_move = (combo[0] + 1) + 1
+            #     elsif key == :ver_block_cntr
+            #       @play_move = (combo[1] + 1) - 3
+            #     elsif key == :diag_block_cntr
+            #       @play_move = 5
+            #     end
+            #
+            #   end
+            #
+            # end
+
+
+
+            #   else
+            #     choice = @valid_moves.sample
+            #     # @play_move = @valid_moves[choice.to_i]
+            #     # @play_move
+            #   end
+            #
+            # end
+
+            #end
+
+            # if @board.valid_move?(@play_move)
+            #   @play_move.to_s
+            # end
+
+
+
+
+            # @diag_block_combos.detect do |combo|
+            #   if @cells[value[0]] == "X" && @cells[value[1]] == "X" || @cells[value[0]] == "O" && @cells[value[1]] == "O"
+            #     if key == :block_up_rt
+            #       @play_move = 3
+            #     elsif key == :block_up_lft
+            #       @play_move = 1
+            #     elsif key == :block_low_rt
+            #       @play_move = 9
+            #     elsif key == :block_low_lft
+            #   #       @play_move = 7
+            #       else
+            #         nil
+            #       end # close key check
+            #     end # close if statement
+            #   end # close iteration
+            # end
+
+
+
+            # def first_moves
+            #   ideal_moves = ["1", "3", "5", "7", "9"]
+            #   ideal_moves.collect! do |value|
+            #     self.valid_move?(value)
+            #     @play_move = ideal_moves.sample
+            #   end
+            #   @play_move
+            # end
+
+
+
+                  # if @board.turn_count == 0 || @board.turn_count == 1
+                  #   @play_move = @valid_moves.sample
+                  # end
+                  #
+                  # if @board.check_block_combos != nil
+                  #   @play_move = @board.check_block_combos
+                  # elsif @board.check_diag_combos != nil
+                  #   @play_move = @board.check_diag_combos
+                  # end
+
+
+            ########
+
+            # Error
+            #
+            # Welcome to Tic Tac Toe!
+            # ---
+            # Would you like to play a 0, 1, or 2-player game?
+            # 1
+            # The first player will be 'X'. Good luck!
+            # ---
+            # ---
+            # Your turn, X.
+            # ---
+            # Please enter your move, 1-9
+            # 5
+            #    |   |
+            # -----------
+            #    | X |
+            # -----------
+            #    |   |
+            # ---
+            # Your turn, O.
+            # ---
+            # Please enter a valid move, 1-9.
+            # ---
+            # Your turn, O.
+            # ---
+            # Please enter a valid move, 1-9.
+            # ---
+            # Your turn, O.
+            # ---
+            # Please enter a valid move, 1-9.
+            # ---
+            # Your turn, O.
+            # ---
+            # Please enter a valid move, 1-9
+
+            ###
+
+            # if @board.check_block_combos == nil && @board.check_diag_combos == nil
+            #   ideal_moves = ["1", "3", "5", "7", "9"]
+            #   sampled = ideal_moves.sample
+            #   @play_move = sampled
+            #   ideal_moves = ideal_moves.delete("#{sampled}")
+            #   @play_move
