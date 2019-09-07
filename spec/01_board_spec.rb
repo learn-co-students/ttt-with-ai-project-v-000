@@ -87,6 +87,8 @@ describe "Board" do
     it 'returns the amount of turns based on cell value' do
       board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
 
+
+
       expect(board.turn_count).to eq(3)
     end
   end
