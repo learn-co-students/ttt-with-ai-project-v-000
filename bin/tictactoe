@@ -1,3 +1,44 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+
+	input = ""
+	puts "Welcome to AI Tic-Tac-Toe!"
+	puts "To play a 0 player game, enter '0 players'."
+	puts "To play a 1 player game, enter '1 player'."
+	puts "To play a 2 player game, enter '2 player'."
+	input = gets.strip
+
+	case input
+	  when "0 players"
+	    game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+	    game.play
+	  when "1 player"
+	  	first_player = rand(1..2)
+	    if first_player == 1 
+	    	player_a = Players::Computer.new("X")
+	    	player_b = Players::Human.new("O")
+	    else 
+	    	player_b = Players::Computer.new("X")
+	    	player_a = Players::Human.new("O")
+	    end
+	    game = Game.new(player_a, player_b)
+	    game.play
+	  when "2 player"
+	    game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+	    game.play
+	end 
+
+end
+
+start
+
+play_again = ""
+until play_again.downcase == "n" || play_again.downcase == "no"
+	puts "Would you like to play again? (y/n)"
+	play_again = gets.strip
+	play_again.downcase == "y" || play_again.downcase == "yes"
+	start
+end 
