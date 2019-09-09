@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+class CLI
+    def self.start
+        puts "It's Tic-Tac-Toe! Ready to play?"
+        puts "Want to play against me? Enter 1!" 
+        puts "Want to play with your human friend instead? Fine. Enter 2!"
+        puts "Want to watch me battle to the death against myself? You barbarian. Enter 0. "
+        select_game
+    end
+
+    def self.select_game
+        input = gets.strip
+        if input == "1"
+            puts "Your move!"
+            Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+        elsif input == "2"
+            puts "Good Luck!"
+            Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+        elsif input == "0"
+            Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+        elsif input == ''
+            puts "What? Now you won't talk to me? It was the barbarian comment, wasn't it?"
+        else
+            puts "Um... Yeah that wasn't an option. Why don't you try again? This time choose 1, 2, or 0."
+            self.start
+        end
+    end
+    CLI.start
+end
