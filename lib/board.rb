@@ -49,7 +49,7 @@ class Board
     @cells.each do |a|
       # a = "X"
         # a[b].replace(@cells[0..9])
-      puts a[0][1] 
+      puts a[0]  
       puts "-----------"
       end
 
