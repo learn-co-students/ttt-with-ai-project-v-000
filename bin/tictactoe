@@ -1,3 +1,6 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+game = Game.new #do I always have to do this?
+game.start

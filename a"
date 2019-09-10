@@ -1,0 +1,26 @@
+
+[1mFrom:[0m /home/arianaberger/ttt-with-ai-project-v-000/lib/game.rb @ line 128 Game#one_player:
+
+    [1;34m121[0m: [32mdef[0m [1;34mone_player[0m [1;34m#plays like normal game![0m
+    [1;34m122[0m:   input = [31m[1;31m"[0m[31m[1;31m"[0m[31m[0m
+    [1;34m123[0m:   puts [31m[1;31m"[0m[31m~~~~~~[1;31m"[0m[31m[0m
+    [1;34m124[0m:   [32mwhile[0m input != [31m[1;31m"[0m[31mhuman[1;31m"[0m[31m[0m || [31m[1;31m"[0m[31mcomputer[1;31m"[0m[31m[0m
+    [1;34m125[0m:   puts [31m[1;31m"[0m[31mChoose who will go first and be X. Please enter 'human' or 'computer':[1;31m"[0m[31m[0m
+    [1;34m126[0m: 
+    [1;34m127[0m:     input = gets.strip
+ => [1;34m128[0m:     binding.pry
+    [1;34m129[0m: 
+    [1;34m130[0m:     [32mcase[0m input
+    [1;34m131[0m:     [32mwhen[0m [31m[1;31m"[0m[31mhuman[1;31m"[0m[31m[0m
+    [1;34m132[0m:       game = [1;34;4mGame[0m.new(player_1 = [1;34;4mPlayers[0m::[1;34;4mHuman[0m.new([31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m), player_2 = [1;34;4mPlayers[0m::[1;34;4mComputer[0m.new([31m[1;31m"[0m[31mO[1;31m"[0m[31m[0m))
+    [1;34m133[0m:       play
+    [1;34m134[0m:       new_game?
+    [1;34m135[0m:     [32mwhen[0m [31m[1;31m"[0m[31mcomputer[1;31m"[0m[31m[0m
+    [1;34m136[0m:       game = [1;34;4mGame[0m.new(player_1 = [1;34;4mPlayers[0m::[1;34;4mComputer[0m.new([31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m), player_2 = [1;34;4mPlayers[0m::[1;34;4mHuman[0m.new([31m[1;31m"[0m[31mO[1;31m"[0m[31m[0m))
+    [1;34m137[0m:       play
+    [1;34m138[0m:       new_game?
+    [1;34m139[0m:     [32mend[0m
+    [1;34m140[0m:   [32mend[0m
+    [1;34m141[0m: 
+    [1;34m142[0m: [32mend[0m
+
