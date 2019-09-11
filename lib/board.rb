@@ -22,8 +22,9 @@ class Board
   end
 
   def position(input)
-    cells = input.to_s
-    cells
+    if input
+      gets
+    end
   end
 
 end
