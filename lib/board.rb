@@ -21,4 +21,9 @@ class Board
       puts " #{@cells[6]} | #{@cells[7]} | #{@cells[8]} "
   end
 
+  def position(input)
+    cells = input.to_s
+    cells
+  end
+
 end
