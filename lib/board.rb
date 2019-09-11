@@ -29,4 +29,7 @@ class Board
     @cells.all? { |cell| cell != " "  }
   end
 
+  def turn_count
+
+  end
 end
