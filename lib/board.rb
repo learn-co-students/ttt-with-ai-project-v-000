@@ -30,6 +30,10 @@ class Board
   end
 
   def turn_count
-
+    count = 0
+    if position(input)
+      count = count + 1
+    end
   end
+  
 end
