@@ -25,4 +25,8 @@ class Board
       input = @cells[input.to_i - 1]
   end
 
+  def full?
+    @cells.all? { |cell| cell != " "  }
+  end
+
 end
