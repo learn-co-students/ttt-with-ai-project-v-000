@@ -22,11 +22,7 @@ class Board
   end
 
   def position(input)
-      @cells.select do |a|
-        if a == input
-          input
-        end
-      end
+      input = @cells[input.to_i - 1]
   end
 
 end
