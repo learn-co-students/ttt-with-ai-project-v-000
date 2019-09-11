@@ -1,3 +1,17 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe! Please type 1 for a one player game, 2 for a two player game, or 0 for no players. To exit the game type exit."
+
+input = gets.strip
+
+if input == "1"
+  then Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+elsif input == "2"
+  then Game.new.play
+elsif input == "0"
+  then Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+else input == "exit"
+  exit
+end
