@@ -31,9 +31,12 @@ class Board
 
   def turn_count
     count = 0
-    if position(input)
-      count = count + 1
+    @cells.each do |cell|
+      if cell != " "
+        count += 1
+      end
     end
+    count
   end
-  
+
 end
