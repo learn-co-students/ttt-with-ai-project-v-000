@@ -47,6 +47,10 @@ class Board
   end
 
   def valid_move?(input)
-
+    # if position(input) == (1..9) && taken?(input) == " " 
+    if position(input) && taken?(input)
+    end
+    true
   end
+
 end
