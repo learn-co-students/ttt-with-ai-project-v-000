@@ -52,4 +52,8 @@ class Board
     # input.to_i.between?(1, 9) && position(input) == " "
   end
 
+  def update(input, player)
+
+  end
+
 end
