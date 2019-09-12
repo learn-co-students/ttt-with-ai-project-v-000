@@ -39,4 +39,13 @@ class Board
     count
   end
 
+  def taken?(input)
+    if position(input) 
+      true
+    elsif position(input) == " "
+      binding.pry
+      false
+    end
+  end
+
 end
