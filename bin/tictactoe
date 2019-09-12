@@ -1,3 +1,14 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+include Players
+
+playagain = "y"
+while playagain == "y"
+  puts "Hi there! Let's play Tic-Tac-Toe."
+  puts "How many players do you want to play with? Choose a number 0, 1, or 2"
+  Game.start
+  puts "Would you like to play another game? Enter (y/n)"
+  playagain = gets.strip
+  break if playagain == "n"
+end
