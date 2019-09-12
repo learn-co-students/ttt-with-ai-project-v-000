@@ -40,12 +40,15 @@ class Board
   end
 
   def taken?(input)
-    if position(input) 
-      true
-    elsif position(input) == " "
-      binding.pry
-      false
-    end
+    @cells[input.to_i] != " "
+    # if position(input)
+    #   true
+    # elsif position(input) == " "
+    #   binding.pry
+    #   false
+    # end
   end
+
+  
 
 end
