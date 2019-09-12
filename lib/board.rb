@@ -53,7 +53,7 @@ class Board
   end
 
   def update(input, player)
-
+    position(input)
   end
 
 end
