@@ -47,10 +47,9 @@ class Board
   end
 
   def valid_move?(input)
-    # if position(input) == (1..9) && taken?(input) == " " 
-    if position(input) && taken?(input)
-    end
-    true
+    input.to_i.between?(1, 9) && !taken?(input)
+      # binding.pry
+    # input.to_i.between?(1, 9) && position(input) == " "
   end
 
 end
