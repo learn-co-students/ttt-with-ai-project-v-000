@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe"
+puts "how many human player?"
+players = gets.strip
+
+while ![ "2", "1", "0", "wargames"].include?(players)
+  puts "invalid answer try 0, 1, or 2: *cough wargames cough*"
+  players = gets.strip
+end
+if players == "2"
+  Game.new.play
+elsif players == "1"
+  Game.new(one = Players::Human.new("X"), two = Players::Computer.new("O"), board = Board.new).play
+elsif players == "0"
+  Game.new(one = Players::Computer.new("X"), two = Players::Computer.new("O"), board = Board.new).play
+elsif players == "wargames"
+  i = 0
+  xwin = 0
+  owin = 0
+  ties = 0
+  while i < 100
+    puts "***game #{i}***"
+    a = Game.new(one = Players::Computer.new("X"), two = Players::Computer.new("O"), board = Board.new).play
+    if a == "X"
+      xwin += 1
+    elsif a == "O"
+      owin += 1
+    elsif a == "Cat"
+      ties += 1
+    end
+    i += 1
+  end
+  return puts "X wins: #{xwin} || O wins: #{owin} || Ties : #{ties}"
+end
