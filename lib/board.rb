@@ -1,6 +1,6 @@
 require 'pry'
 class Board
-  attr_accessor :cells
+  attr_accessor :cells, :player
 
   def initialize
     @cells = Array.new(9, " ")
@@ -22,7 +22,8 @@ class Board
   end
 
   def position(input)
-      input = @cells[input.to_i - 1]
+      @input = @cells[input.to_i - 1]
+      # binding.pry
   end
 
   def full?
@@ -52,8 +53,28 @@ class Board
     # input.to_i.between?(1, 9) && position(input) == " "
   end
 
-  def update(input, player)
-    position(input)
+  def update(pos, player)
+    # binding.pry
+    # pos = position(pos)
+    pos = player.token
+    @cells = pos
+    # @cells[pos]
+    # @cells[pos.to_i]
+    # binding.pry
+
+    # @input = @cells[input.to_i - 1]
+    # pos = position(pos)
+    # binding.pry
+    # pos = player.token
+    # binding.pry
+    # display
   end
+
+
+# Similarly, you're going to build an #update method that represents updating the board when a player makes a move.
+# This method will take two arguments, the first will be the position the user wants
+# to occupy in the form of 1-9 strings that you will need to convert to the board cells' array index,
+# along with the player object making the move. When you update the appropriate index in the cells,
+# you will set it equal to the token of the player object by calling the #token method on the player.
 
 end
