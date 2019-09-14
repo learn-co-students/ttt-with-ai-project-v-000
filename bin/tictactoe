@@ -1,3 +1,84 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+def main_menu
+    puts ""
+    puts ""
+    puts "Welcome Gamer!  Welcome to the world of Tic Tac Toe!"
+    puts ""
+    puts ""
+    puts "To play, choose an option below."
+    puts ""
+    puts "\n1.  Player versus Player"
+    puts "\n2.  Player versus Computer"
+    puts "\n3.  Computer versus Computer"
+    puts ""
+    puts ""
+    puts "To leave, just type exit and we will get you out of here"
+    puts ""
+    puts ""
+    
+    input = nil
+    input = gets.strip.downcase.
+    
+    case input
+    
+    when "Player versus Player"
+        puts ""
+        puts "So, you two ARE afraid of computers?  Ok, have fun... cowards!"
+        puts ""
+        player_versus_player
+        
+    when "Player versus Computer"
+        puts ""
+        puts "It's about time you stepped up!  Welcome to the big leagues!"
+        puts ""
+        player_versus_computer
+        
+    when "Computer versus Computer"
+        puts ""
+        puts "Here is your chance to see true genius!"
+        puts ""
+        computer_versus_computer
+        
+    when "exit"
+        quit
+        
+    else
+        wrong_option
+    end
+end 
+
+def wrong_option
+    puts ""
+    puts ""
+    puts "Sorry, that is not an option!  Here is the menu again!"
+    puts ""
+    puts ""
+    menu
+end 
+
+def quit
+    puts ""
+    puts ""
+    puts "Thanks for checking out our game!"
+    puts ""
+    puts ""
+end 
+
+
+def player_versus_player
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+end
+
+def player_versus_computer
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+end 
+
+def computer_versus_computer
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+end
+
+end
+    
+
