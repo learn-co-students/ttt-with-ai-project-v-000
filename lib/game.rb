@@ -10,8 +10,10 @@ class Game
   #   @board = board
   # end
 
-  def initialize
-
+  def initialize(player_1, player_2, board)
+    player_1
+    player_2
+    board
   end
 
   WIN_COMBINATIONS = [
