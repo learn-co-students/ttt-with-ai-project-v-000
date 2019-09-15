@@ -1,5 +1,12 @@
 class Game
-  attr_accessor :board, :player_1
+  attr_accessor :board, :player_1, :player_2
+  # attr_reader :board, :player_1, :player_2
+
+  # def initialize(board, player_1, player_2)
+  #   @board = board
+  #   @player_1 = player_1
+  #   @player_2 = player_2
+  # end
 
   WIN_COMBINATIONS = [
     [0,1,2],
