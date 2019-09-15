@@ -88,7 +88,7 @@ describe "Board" do
       board.cells = ["O", " ", " ", " ", "X", " ", " ", " ", "X"]
 
       expect(board.turn_count).to eq(3)
-    end
+    end 
   end
 
   describe '#taken?' do
