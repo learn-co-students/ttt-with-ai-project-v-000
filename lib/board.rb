@@ -54,23 +54,9 @@ class Board
   end
 
   def update(pos, player)
-    # binding.pry
-    # pos = position(pos)
     pos = player.token
     @cells = pos
-    # @cells[pos]
-    # @cells[pos.to_i]
-    # binding.pry
-
-    # @input = @cells[input.to_i - 1]
-    # pos = position(pos)
-    # binding.pry
-    # pos = player.token
-    # binding.pry
-    # display
   end
-
-
 # Similarly, you're going to build an #update method that represents updating the board when a player makes a move.
 # This method will take two arguments, the first will be the position the user wants
 # to occupy in the form of 1-9 strings that you will need to convert to the board cells' array index,
