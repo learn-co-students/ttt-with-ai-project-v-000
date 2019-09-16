@@ -1,3 +1,45 @@
 #!/usr/bin/env ruby
+require 'pry'
 
 require_relative '../config/environment'
+
+def start
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "Would you like to play 0, 1, or 2 player?"
+  puts "Enter 0 for computer vs computer"
+  puts "Enter 1 for 1 player."
+  puts "Enter 2 for 2 players."
+  game_start
+end
+
+def game_start
+  input gets.strip
+
+  case input
+  when "1"
+    puts "Your move, good luck!"
+    Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+  when "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+  when "0"
+    Game.new(Computer::Computer.new("X"), Commputer::Computer.new("O")).play
+  else
+    puts "Invalid! Please restart and enter 0, 1, or 2!"
+    restart
+  end
+
+  def restart
+    puts "Do you want to play again? Please enter yes or no."
+    input gets.strip
+    case input
+    when "yes"
+      start
+    when "no"
+      puts "Goodbye, thanks for playing!"
+    else
+      "Sorry, didn't get that. Please restart!"
+      start
+    end
+  end
+
+end
