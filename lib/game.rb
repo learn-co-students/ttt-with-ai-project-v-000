@@ -3,17 +3,9 @@ class Game
   attr_accessor :player_1, :player_2, :board
   # attr_reader :board
 
-  # def initialize(player_1, player_2, board)
-  #   @player_1 = player_1
-  #   @player_2 = player_2
-  #   @board = board
-  # end
+  def initialize
 
-  # def initialize(player_1, player_2, board)
-  #   player_1 = Player.new(token)
-  #   player_2 = Player.new(token)
-  #   board = Board.new
-  # end
+  end
 
   WIN_COMBINATIONS = [
     [0,1,2],
