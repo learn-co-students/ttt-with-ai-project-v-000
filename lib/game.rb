@@ -32,7 +32,7 @@ class Game
   # end
 
   def board=(board)
-    @board = []
+    self.board = []
   end
 
   # def player_1=(player)
