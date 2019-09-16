@@ -1,6 +1,5 @@
 class Game
   attr_accessor :player_1, :player_2, :board
-  # attr_reader :board
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -14,7 +13,7 @@ class Game
   ]
 
   def initialize
-    
+
   end
 
 end
