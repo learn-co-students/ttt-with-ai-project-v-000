@@ -1,11 +1,6 @@
 class Game
-
   attr_accessor :player_1, :player_2, :board
   # attr_reader :board
-
-  def initialize
-    @board = board
-  end
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -18,8 +13,8 @@ class Game
     [6,4,2],
   ]
 
-  # def board=(board)
-  #   @board = []
-  # end
+  def initialize
+    
+  end
 
 end
