@@ -1,8 +1,7 @@
 class Game
-  # attr_accessor :board, :player_1, :player_2
-  # attr_reader :board, :player_1, :player_2
-  attr_accessor :player_1, :player_2
-  attr_reader :board
+
+  attr_accessor :player_1, :player_2, :board
+  # attr_reader :board
 
   # def initialize(player_1, player_2, board)
   #   @player_1 = player_1
@@ -10,11 +9,11 @@ class Game
   #   @board = board
   # end
 
-  def initialize(player_1, player_2, board)
-    player_1
-    player_2
-    board
-  end
+  # def initialize(player_1, player_2, board)
+  #   player_1 = Player.new(token)
+  #   player_2 = Player.new(token)
+  #   board = Board.new
+  # end
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -27,15 +26,8 @@ class Game
     [6,4,2],
   ]
 
-  # def board
-  #   @board
+  # def board=(board)
+  #   @board = []
   # end
 
-  def board=(board)
-    self.board = []
-  end
-
-  # def player_1=(player)
-  #   @player = Player.new(token)
-  # end
 end
