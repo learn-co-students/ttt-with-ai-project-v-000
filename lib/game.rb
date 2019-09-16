@@ -12,7 +12,10 @@ class Game
     [6,4,2],
   ]
 
-  def initialize
+  def initialize(player_1 = nil, player_2 = nil, board = nil)
+    @player_1 = player_1
+    @player_2 = player_2
+    @board = board
 
   end
 
