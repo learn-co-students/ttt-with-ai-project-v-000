@@ -1,3 +1,68 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+ def menu
+   puts "Welcome to Tic Tac Toe!"
+   puts "Select which game you want to play"
+   puts "1. Human vs AI"
+   puts "2. Human vs Human"
+   puts "3. AI vs AI"
+   puts "4. War Games!"
+   puts "5. Exit game"
+   input = gets.strip
+
+   if input == "1"
+     puts "Who should go first and be X?"
+     puts "1. Human"
+     puts "2. Computer"
+     input = gets.strip
+     if input == "1"
+       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+       game.play
+       elsif input == "2"
+       game = Game.new(player_2 = Players::Computer.new("X"), player_1 = Players::Human.new("O"), board = Board.new)
+       game.play
+     end
+
+    elsif input == "2"
+      puts "Who should go first and be X?"
+      puts "1. Player 1"
+      puts "2. Player 2"
+      input = gets.strip
+      if input == "1"
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
+        game.play
+      elsif input == "2"
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"), board = Board.new)
+        game.play
+      end
+
+    elsif input == "3"
+     game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board = Board.new)
+     game.play
+
+    elsif input == "4"
+     count = 0
+     wins = 0
+     draws = 0
+     until count == 1000
+       sleep 0.3
+       game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+       game.play
+       count+=1
+       if game.draw?
+         draws+=1
+       elsif game.won?
+         wins+=1
+       end
+       board.display
+       puts "Wins = #{wins}"
+       puts "Draws = #{draws}"
+      end
+    elsif input == "5"
+    end
+  end
+
+  menu
