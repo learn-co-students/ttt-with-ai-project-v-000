@@ -1,4 +1,5 @@
 require 'pry'
+require_relative "../lib/players/human.rb"
 class Game
   attr_accessor :player_1, :player_2, :board
 
