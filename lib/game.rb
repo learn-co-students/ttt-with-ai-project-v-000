@@ -1,3 +1,4 @@
+require 'pry'
 class Game
   attr_accessor :player_1, :player_2, :board
 
@@ -16,6 +17,7 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+    # binding.pry
   end
 
 end
