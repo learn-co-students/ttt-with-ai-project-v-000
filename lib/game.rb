@@ -29,6 +29,8 @@ class Game
     end
   end
 
+  def won?
 
+  end
 
 end
