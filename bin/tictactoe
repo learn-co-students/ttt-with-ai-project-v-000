@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "TicTacToe For Bored People"
+puts "If you'd like to play against yourself press 1"
+puts "If you'd like to play against the computer press 2"
+puts "If you want to watch the computer play itself you should probably find something better to do with your time (or press 3)"
+input = gets.strip
+if input == "1"
+  Game.new.play
+elsif input == "2"
+  Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O")).play
+elsif input == "3"
+  game_1 = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O")).play
+  game_1
+  end 
