@@ -1,3 +1,91 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello! Welcome to Tic-Tac-Toe!"
+puts "What kind of game would you like to play? Enter 0 for a computer-run game. Enter 1 for 1 player. Enter 2 for 2 players."
+input = gets.strip
+if input.to_i == 0
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
+  new_game = Game.new(player_1, player_2)
+  new_game.play
+elsif input.to_i == 1
+  puts "Which player should go first and be X? Enter 1 for player 1, enter 2 for player 2"
+  input_2 = gets.strip
+  if input_2.to_i == 1
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+    new_game = Game.new(player_1, player_2)
+    new_game.play
+  elsif input_2.to_i == 2
+    player_2 = Players::Human.new("X")
+    player_1 = Players::Computer.new("O")
+    new_game = Game.new(player_1, player_2)
+    new_game.play
+  end
+elsif input.to_i == 2
+  puts "Which player should go first and be X? Enter 1 for player 1, enter 2 for player 2"
+  input_3 = gets.strip
+    if input_3.to_i == 1
+      player_1 = Players::Human.new("X")
+      player_2 = Players::Human.new("O")
+      new_game = Game.new(player_1, player_2)
+      new_game.play
+
+    elsif input_3.to_i == 2
+      player_2 = Players::Human.new("X")
+      player_1 = Players::Human.new("O")
+      new_game = Game.new(player_1, player_2)
+      new_game.play
+    end
+  end
+
+if new_game.over?
+  loop do
+  puts "Would you like to play again? Press 1 for yes. Press 2 for no"
+  input = gets.strip
+  if input.to_i == 2
+    break
+  elsif input.to_i == 1
+    puts "Hello! Welcome to Tic-Tac-Toe!"
+    puts "What kind of game would you like to play? Enter 0 for a computer-run game. Enter 1 for 1 player. Enter 2 for 2 players."
+    input = gets.strip
+    if input.to_i == 0
+      player_1 = Players::Computer.new("X")
+      player_2 = Players::Computer.new("O")
+      new_game = Game.new(player_1, player_2)
+      new_game.play
+    elsif input.to_i == 1
+      puts "Which player should go first and be X? Enter 1 for player 1, enter 2 for player 2"
+      input_2 = gets.strip
+      if input_2.to_i == 1
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Computer.new("O")
+        new_game = Game.new(player_1, player_2)
+        new_game.play
+      elsif input_2.to_i == 2
+        player_2 = Players::Human.new("X")
+        player_1 = Players::Computer.new("O")
+        new_game = Game.new(player_1, player_2)
+        new_game.play
+      end
+    elsif input.to_i == 2
+      puts "Which player should go first and be X? Enter 1 for player 1, enter 2 for player 2"
+      input_3 = gets.strip
+        if input_3.to_i == 1
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Human.new("O")
+          new_game = Game.new(player_1, player_2)
+          new_game.play
+
+        elsif input_3.to_i == 2
+          player_2 = Players::Human.new("X")
+          player_1 = Players::Human.new("O")
+          new_game = Game.new(player_1, player_2)
+          new_game.play
+        end
+      end
+    end
+  end
+end
