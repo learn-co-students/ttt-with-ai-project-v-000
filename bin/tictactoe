@@ -1,3 +1,23 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#Use the input to correctly initialize a Game with the appropriate player types and token values
+
+
+puts "Hello, this is a game of Tic-tac-toe."
+play_again = true
+#game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"))
+game = Game.new
+#game = Game.new(player_1=Players::Computer.new("X"),player_2=Players::Computer.new("O"),board=Board.new)
+game.start
+while (play_again == true)
+  puts "Would you like to play another game?(y/n)?"
+  input = gets.strip.downcase
+  if input == "y"
+    game=Game.new
+    game.start
+  else
+    play_again = false
+  end
+end
