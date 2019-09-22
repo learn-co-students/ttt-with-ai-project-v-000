@@ -39,4 +39,35 @@ class Game
     end 
   end 
     
+  def winner
+    if won? == false 
+      return nil 
+    else 
+      player = won?
+      winner_player = player[0]
+      winner_player_1 = @board.cells[winner_player]
+    end 
+  end 
+  
+  def turn 
+    input = current_player.move(board)
+    if board.valid_move?(input) == true 
+      board.update(input, current_player)
+      board.display
+    else
+      turn 
+    end 
+    
+  end 
+  
+  def play 
+    while !over?
+      turn 
+    end 
+    if won? !=false
+      puts "Congratulations #{winner}!"
+  elsif draw? == true 
+    puts "Cat's Game!"
+  end 
+end 
 end 
