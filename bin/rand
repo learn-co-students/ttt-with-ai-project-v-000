@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+puts "Welcome to tic-tac-toe!"
+puts "The computer plays itself 100 times."
+
+winners = []
+100.times do
+  game = Game.new(player_1=Players::Computer.new('X'), player_2=Players::Computer.new('O'))
+  game.play
+  winners << game.winner
+end
+
+x=0
+o=0
+d=0
+winners.each do |w|
+  x+=1 if w == "X"
+  o+=1 if w == "O"
+  d+=1 if (w != "X" && w != "O")
+end
+
+puts "X's won #{x} times and O's won #{o} times. There were #{d} draws."
