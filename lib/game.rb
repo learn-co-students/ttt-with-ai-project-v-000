@@ -44,7 +44,8 @@ class Game
            if win_index_1 == "X" && win_index_2 == "X" && win_index_3 == "X"
             #  win_combination.each {|a| a.to_i }
             # win_combination.join("")
-             win_combination.join("").to_i(10)
+            #  win_combination.join("").to_i(10)
+             win_combination
            elsif win_index_1 == "O" && win_index_2 == "O" && win_index_3 == "O"
             #  win_combination.to_s
              win_combination.join("").to_i(10)
@@ -52,7 +53,7 @@ class Game
           #  Integer(win_combination.join(", "), 10)
           #  win_combination.join(", ")
           #  Integer("0461990540002606", 10)
-          #  binding.pry
+           binding.pry
          end
       false
   end
