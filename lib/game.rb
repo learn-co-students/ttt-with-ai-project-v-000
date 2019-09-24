@@ -43,10 +43,10 @@ class Game
         win_index_2 = win_combination[1]
         win_index_3 = win_combination[2]
 
-        position_1 = @board[win_index_1]
-        position_2 = @board[win_index_2]
-        position_3 = @board[win_index_3]
-
+        position_1 = board.cells[win_index_1]
+        position_2 = board.cells[win_index_2]
+        position_3 = board.cells[win_index_3]
+        # binding.pry
         # win_combo = win_index_1 && win_index_2 && win_index_3
         # binding.pry
         #    if WIN_COMBINATIONS.include?(win_index_1 == "X" && win_index_2 == "X" && win_index_3 == "X")
