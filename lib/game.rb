@@ -49,4 +49,12 @@ class Game
       false
   end
 
+  def draw?
+    if won?
+      binding.pry
+      false
+    else true
+    end
+  end
+
 end
