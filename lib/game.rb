@@ -51,7 +51,6 @@ class Game
 
   def draw?
     if won?
-      binding.pry
       false
     else true
     end
