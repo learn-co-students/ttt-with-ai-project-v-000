@@ -37,7 +37,6 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |win_combination|
-      # binding.pry
 
         win_index_1 = win_combination[0]
         win_index_2 = win_combination[1]
@@ -46,34 +45,14 @@ class Game
         position_1 = board.cells[win_index_1]
         position_2 = board.cells[win_index_2]
         position_3 = board.cells[win_index_3]
-        # binding.pry
-        # win_combo = win_index_1 && win_index_2 && win_index_3
-        # binding.pry
-        #    if WIN_COMBINATIONS.include?(win_index_1 == "X" && win_index_2 == "X" && win_index_3 == "X")
-        #      win_combination
-        #   #    binding.pry
-        #    elsif WIN_COMBINATIONS.include?(win_index_1 == "O" && win_index_2 == "O" && win_index_3 == "O")
-        #      win_combination
-        #   #    binding.pry
-        #    end
-         #
-        #   # WIN_COMBINATIONS.include?(win_combination)
-        #   #   win_combination
-        #     # binding.pry
-         #
-        #  end
-        #  false
 
-          if position_1 == "X" && position_2 == "X" && position_3 == "X"
-             return win_combination
-           elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
-             return win_combination
-          #  else
-          #    false
-          end
-          false
-      end
-      # false
+        if position_1 == "X" && position_2 == "X" && position_3 == "X"
+          win_combination
+        elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+          win_combination
+        end
+    end
+      false
   end
 
 end
