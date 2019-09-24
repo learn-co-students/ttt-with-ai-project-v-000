@@ -56,4 +56,15 @@ class Game
     end
   end
 
+  def over?
+    if draw?
+      true
+    elsif won?
+      true
+    elsif board.cells == " "
+      false
+    end
+    # binding.pry
+  end
+
 end
