@@ -56,4 +56,3 @@ class Game
   end
 
 end
-# Or convert it to a string and add the base: $> "0023".to_i(10) # 23 $> "0023.to_i(8) # 8
