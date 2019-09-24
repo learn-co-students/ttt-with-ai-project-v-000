@@ -37,25 +37,43 @@ class Game
 
   def won?
     WIN_COMBINATIONS.each do |win_combination|
+      # binding.pry
+
         win_index_1 = win_combination[0]
         win_index_2 = win_combination[1]
         win_index_3 = win_combination[2]
 
-           if win_index_1 == "X" && win_index_2 == "X" && win_index_3 == "X"
-            #  win_combination.each {|a| a.to_i }
-            # win_combination.join("")
-            #  win_combination.join("").to_i(10)
-             win_combination
-           elsif win_index_1 == "O" && win_index_2 == "O" && win_index_3 == "O"
-            #  win_combination.to_s
-             win_combination.join("").to_i(10)
-           end
-          #  Integer(win_combination.join(", "), 10)
-          #  win_combination.join(", ")
-          #  Integer("0461990540002606", 10)
-           binding.pry
-         end
-      false
+        position_1 = @board[win_index_1]
+        position_2 = @board[win_index_2]
+        position_3 = @board[win_index_3]
+
+        # win_combo = win_index_1 && win_index_2 && win_index_3
+        # binding.pry
+        #    if WIN_COMBINATIONS.include?(win_index_1 == "X" && win_index_2 == "X" && win_index_3 == "X")
+        #      win_combination
+        #   #    binding.pry
+        #    elsif WIN_COMBINATIONS.include?(win_index_1 == "O" && win_index_2 == "O" && win_index_3 == "O")
+        #      win_combination
+        #   #    binding.pry
+        #    end
+         #
+        #   # WIN_COMBINATIONS.include?(win_combination)
+        #   #   win_combination
+        #     # binding.pry
+         #
+        #  end
+        #  false
+
+          if position_1 == "X" && position_2 == "X" && position_3 == "X"
+             return win_combination
+           elsif position_1 == "O" && position_2 == "O" && position_3 == "O"
+             return win_combination
+          #  else
+          #    false
+          end
+          false
+      end
+      # false
   end
 
 end
