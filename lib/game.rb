@@ -29,12 +29,6 @@ class Game
     end
   end
 
-  # def won?
-  #   WIN_COMBINATIONS[[5]]
-  #   binding.pry
-  #
-  # end
-
   def won?
     WIN_COMBINATIONS.each do |win_combination|
 
