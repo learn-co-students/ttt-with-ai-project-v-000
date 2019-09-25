@@ -1,3 +1,53 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+puts "Would you like to play a 0 person game, 1 person game, or 2 person game?"
+puts "Type: 0 for Computer-Computer, 1 for Human-Computer, 2 for Human-Human."
+
+game_type = gets.strip
+
+def start_game(game_type)
+if game_type == "0"
+  Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O")).play
+elsif
+  game_type == "1"
+  choose_token
+elsif
+  game_type == "2"
+  Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O")).play
+else
+  puts "Please enter 0, 1, or 2 to start game:"
+  game_type = gets.strip
+  start_game(game_type)
+end
+end
+
+def play_again?
+  puts "Would you like to play again? (y) or (n)"
+  input = gets.strip
+  if input == "y"
+    puts "Perhaps try another game type?"
+    game_type = gets.strip
+    start_game(game_type)
+  else
+    puts "Thanks for playing!"
+  end
+end
+
+def choose_token
+  puts "Would you like to be X and go first? (y) or (n)"
+  input = gets.strip
+  if input == "y"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O")).play
+  elsif input == "n"
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O")).play
+  else
+    choose_token
+  end
+end
+
+
+start_game(game_type)
+play_again?
