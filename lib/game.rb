@@ -50,32 +50,43 @@ class Game
   end
 
   def draw?
-    # if won?
-    #   false
-    # else true
-    # end
-    if !won?
-      true
+      if board.full? == false
+        false
+      elsif won? == false
+        true
+      else
+        false
+      end
     end
-    # binding.pry
-  end
+
+  # def draw?
+  #   # if won?
+  #   #   false
+  #   # else true
+  #   # end
+  #   if !won?
+  #     true
+  #   end
+  #   # binding.pry
+  # end
 
   def over?
-    # if draw?
-    #   true
-    # elsif won?
-    #   true
-    # # else false
-    # # elsif board.cells.any? { |n| n == " " }
-    # #   false
-    # end
-    # binding.pry
-    if !won?
+    if draw?
       true
     elsif won?
       true
     else false
+    # elsif board.full? == false
+    #   false
     end
+    # binding.pry
+    # if !won?
+    #   true
+    # elsif won?
+    #   true
+    #   elsif board.full? == false
+    #     false
+    # end
   end
 
 end
