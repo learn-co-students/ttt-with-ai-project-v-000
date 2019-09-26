@@ -67,12 +67,6 @@ class Game
   end
 
   def winner
-  #  if won?.win_combination = board.cells[won?.win_combination[0]] == "X" && board.cells[won?.win_combination[1]] == "X" && board.cells[won?.win_combination[2]] == "X"
-  #   # if won?
-  #    return "X"
-  #  elsif won?
-  #    return "O"
-  #  end
     WIN_COMBINATIONS.each do |win_combination|
 
       win_index_1 = win_combination[0]
