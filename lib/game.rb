@@ -54,21 +54,10 @@ class Game
         false
       elsif won? == false
         true
-      else
-        false
+      # else
+      #   false
       end
     end
-
-  # def draw?
-  #   # if won?
-  #   #   false
-  #   # else true
-  #   # end
-  #   if !won?
-  #     true
-  #   end
-  #   # binding.pry
-  # end
 
   def over?
     if draw?
@@ -76,17 +65,7 @@ class Game
     elsif won?
       true
     else false
-    # elsif board.full? == false
-    #   false
     end
-    # binding.pry
-    # if !won?
-    #   true
-    # elsif won?
-    #   true
-    #   elsif board.full? == false
-    #     false
-    # end
   end
 
 end
