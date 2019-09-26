@@ -54,10 +54,8 @@ class Game
         false
       elsif won? == false
         true
-      # else
-      #   false
       end
-    end
+  end
 
   def over?
     if draw?
