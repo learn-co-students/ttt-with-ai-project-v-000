@@ -86,4 +86,8 @@ class Game
     return nil
   end
 
+  def turn
+
+  end
+
 end
