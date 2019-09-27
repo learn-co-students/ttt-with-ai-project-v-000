@@ -1,3 +1,118 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+reload = '2'
+
+until reload == '1' do
+
+  game = ""
+  game_type_input = ""
+
+
+until game_type_input == '1' || game_type_input == '2' || game_type_input == '3' || game_type_input == '4' do
+
+
+
+  puts "Welcome to Tic Tac Toe!"
+
+  puts "What type of game would you like to play?"
+  puts "  Enter '1' to play against the Computer"
+  puts "  Enter '2' for a 2 Player game"
+  puts "  Enter '3' for the Computer to play itself"
+  puts "  Enter '4' for Wargames, Computer vs. Computer to best of 100 games"
+
+  game_type_input = gets.strip.to_s
+end
+
+  player_1_token = ""
+  player_2_token = ""
+
+  if game_type_input == '1'
+
+    while player_1_token != 'X' && player_1_token != 'O' do
+     puts "Player 1, choose 'X' or 'O'?"
+     player_1_token = gets.strip.to_s.upcase
+    end
+
+    case player_1_token
+      when 'X'
+        player_2_token = 'O'
+      when 'O'
+        player_2_token = 'X'
+    end
+
+    game = Game.new(player_1 = Players::Human.new(player_1_token), player_2 = Players::Computer.new(player_2_token), board = Board.new)
+    game.play
+
+  elsif game_type_input == '2'
+
+   while player_1_token != 'X' && player_1_token != 'O' do
+     puts "Player 1, choose 'X' or 'O'?"
+     player_1_token = gets.strip.to_s.upcase
+    end
+
+    case player_1_token
+      when 'X'
+        player_2_token = 'O'
+      when 'O'
+        player_2_token = 'X'
+    end
+
+    game = Game.new(player_1 = Players::Human.new(player_1_token), player_2 = Players::Human.new(player_2_token), board = Board.new)
+    game.play
+
+  elsif game_type_input == '3'
+
+    game = Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Computer.new("O"), board = Board.new)
+    game.play
+
+
+  elsif game_type_input == '4'
+    x_record = 0
+    o_record = 0
+    draw = 0
+    counter = 0
+
+    100.times do
+      if counter.even?
+        game = Game.new(player_1 = Players::Computer.new('X'), player_2 = Players::Computer.new("O"), board = Board.new)
+      else
+        game = Game.new(player_1 = Players::Computer.new('O'), player_2 = Players::Computer.new("X"), board = Board.new)
+      end
+        game.play
+
+
+      if game.draw?
+        draw += 1
+      elsif game.won?
+        if game.winner == 'X'
+          x_record += 1
+        elsif game.winner == 'O'
+          o_record += 1
+        end
+      end
+
+      counter += 1
+    end
+
+    puts "Out of #{counter} games:"
+    puts "  'X' won #{x_record} time(s)!"
+    puts "  'O' won #{o_record} time(s)!"
+    puts "  There were #{draw} draws!"
+
+  end
+
+  
+    puts "Would you like to play again?"
+    puts "Enter '1' to quit, press any other key to play again"
+
+    reload = gets.strip.to_s
+
+    if reload == '2'
+      puts "Goodbye!"
+    end
+
+
+end
