@@ -89,13 +89,26 @@ class Game
   end
 
   def turn
-    gets = self.player_1
+    input = gets
+    # if self.player_1 = self.board.valid_move?(input)
+    self.board.position(input)
+    gets
+    # self.board.valid_move?(gets = "1")
+    # return input
+    #  if self.board.position(input) == "1"
+      #  return input
 
-    # binding.pry
-    # self.player_1.gets.chomp
+    binding.pry
 
   end
   # binding.pry
   #valid_move? will ensure that moves are between 1-9 and not taken.
+
+  # ) Game turn makes valid moves
+  #    Failure/Error: expect(game.player_1).to receive(:gets).and_return("1")
+  #      (#<Players::Human:0x0000000003522df0 @token="X">).gets(*(any args))
+  #          expected: 1 time with any arguments
+  #          received: 0 times with any arguments
+  #    # ./spec/04_game_spec.rb:179:in `block (3 levels) in <top (required)>'
 
 end
