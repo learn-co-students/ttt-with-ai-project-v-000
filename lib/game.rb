@@ -1,7 +1,9 @@
 require 'pry'
 # require_relative "../lib/players/human.rb"
 class Game
-  attr_accessor :player_1, :player_2, :board
+  attr_accessor :player_1, :player_2, :board, :gets
+
+    # puts "Please enter 1-9:"
 
   WIN_COMBINATIONS = [
     [0,1,2],
@@ -87,7 +89,13 @@ class Game
   end
 
   def turn
+    gets = self.player_1
+
+    # binding.pry
+    # self.player_1.gets.chomp
 
   end
+  # binding.pry
+  #valid_move? will ensure that moves are between 1-9 and not taken.
 
 end
