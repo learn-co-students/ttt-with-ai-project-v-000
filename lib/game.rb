@@ -93,7 +93,9 @@ class Game
     input = gets
     # if self.player_1 = self.board.valid_move?(input)
     # self.board.position(input = gets)
-    self.player_1.move(input)
+    if self.player_1.move(input)
+      input
+    else turn
     # self.board.update(pos, player_1)
     # gets
     # self.board.valid_move?(gets = "1")
@@ -102,7 +104,7 @@ class Game
       #  return input
 
     # binding.pry
-
+  end
   end
   # binding.pry
   #valid_move? will ensure that moves are between 1-9 and not taken.
