@@ -96,7 +96,7 @@ class Game
     if self.player_1.move(input) != "1"
       turn
     # elsif self.player_2.move(input)
-    else turn
+    # else turn
 
     # self.board.update(pos, player_1)
     # gets
