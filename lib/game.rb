@@ -91,15 +91,21 @@ class Game
   def turn
     input = gets
     if self.player_1.move(input) != "1"
-      # self.player_1.move(input)
-      turn
+      self.player_1.move(input)
+    end
+      # turn
+    # until self.player_1.move(input) == "2"
+    # # if self.player_2.move(input) != "2"
+    #   self.player_2.move(input)
+    # end
+      # turn
     # else
     #   self.player_2.move(input) == "2"
     #   input
 
       # turn
       # binding.pry
-    end
+    # end
 
     # if self.board.valid_move?(input) != "1"
     #   self.player_1.move(input)
