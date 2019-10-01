@@ -112,10 +112,17 @@ class Game
     # end
 
     if self.player_1.move(gets) != "1"
-      #  self.player_1.move(input)
-       turn
+      turn
+    end
+    
 
-      end
+
+    # binding.pry
+    # if self.player_1.move(gets) != "1"
+    #   #  self.player_1.move(input)
+    #    turn
+    #
+    #   end
       # binding.pry
     # else self.player_2.move(input)
     #   binding.pry
