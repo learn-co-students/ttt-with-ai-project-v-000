@@ -105,16 +105,22 @@ class Game
     # end
 
   def turn
-    # input = gets
+    input = gets
     # case input
     # when self.player_1.move(input)
     #   self.player_1.move(input)
     # end
 
-    if self.player_1.move(gets) != "1"
-      turn
+    if self.player_1.move(input) != "1"
+      return self.player_1.move(input)
+
+    #  self.player_2.move(gets) == "2"
+    #      self.player_2.move(gets)
+    #    else turn
+
+      # binding.pry
     end
-    
+
 
 
     # binding.pry
