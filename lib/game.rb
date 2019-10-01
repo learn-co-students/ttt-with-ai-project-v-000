@@ -118,7 +118,7 @@ class Game
     #      self.player_2.move(gets)
     #    else turn
 
-      # binding.pry
+      binding.pry
     end
 
 
