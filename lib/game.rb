@@ -88,11 +88,38 @@ class Game
     return nil
   end
 
+    # user = gets.chomp
+    # case user
+    # when "list songs"
+    #   list_songs
+    # when "list artists"
+    #   list_artists
+    # when "list genres"
+    #   list_genres
+    # when "list artist"
+    #   list_songs_by_artist
+    # when "list genre"
+    #   list_songs_by_genre
+    # when "play song"
+    #   play_song
+    # end
+
   def turn
-    input = gets
-    if self.player_1.move(input) != "1"
-      self.player_1.move(input)
-    end
+    # input = gets
+    # case input
+    # when self.player_1.move(input)
+    #   self.player_1.move(input)
+    # end
+
+    if self.player_1.move(gets) != "1"
+      #  self.player_1.move(input)
+       turn
+
+      end
+      # binding.pry
+    # else self.player_2.move(input)
+    #   binding.pry
+    # end
       # turn
     # until self.player_1.move(input) == "2"
     # # if self.player_2.move(input) != "2"
