@@ -88,22 +88,6 @@ class Game
     return nil
   end
 
-    # user = gets.chomp
-    # case user
-    # when "list songs"
-    #   list_songs
-    # when "list artists"
-    #   list_artists
-    # when "list genres"
-    #   list_genres
-    # when "list artist"
-    #   list_songs_by_artist
-    # when "list genre"
-    #   list_songs_by_genre
-    # when "play song"
-    #   play_song
-    # end
-
   def turn
     input = gets
     # case input
@@ -112,15 +96,15 @@ class Game
     # end
 
     if self.player_1.move(input) != "1"
-      return self.player_1.move(input)
+
+       self.player_1.move(input)
 
     #  self.player_2.move(gets) == "2"
     #      self.player_2.move(gets)
     #    else turn
 
-      binding.pry
     end
-
+    # binding.pry
 
 
     # binding.pry
