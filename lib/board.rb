@@ -45,6 +45,7 @@ class Board
       true
     else false
     end
+    # binding.pry
   end
 
   def valid_move?(input)
@@ -56,6 +57,7 @@ class Board
   def update(pos, player)
     pos = player.token
     @cells = pos
+    # binding.pry
   end
 # Similarly, you're going to build an #update method that represents updating the board when a player makes a move.
 # This method will take two arguments, the first will be the position the user wants

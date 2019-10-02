@@ -90,66 +90,48 @@ class Game
 
   def turn
     input = gets
-    # case input
-    # when self.player_1.move(input)
-    #   self.player_1.move(input)
+    # player = @player_1 || @player_2
+    #
+    #   # self.@player_1.move(@input)
+    #   if !self.board.valid_move?(@input)
+    #   self.board.update(@input, @player)
+    # else
+    #   turn
     # end
 
-    if self.player_1.move(input) != "1"
+      if self.board.valid_move?(input)
+        binding.pry
+      end
 
-       self.player_1.move(input)
+      # this is good up to line 39
+      # if self.player_1.move(input) != "1"
+      #   self.player_1.move(input)
+      # # else self.board.update(input, player)
+      # end
 
-    #  self.player_2.move(gets) == "2"
-    #      self.player_2.move(gets)
-    #    else turn
-
-    end
-    # binding.pry
-
+    # if self.board.valid_move?(input) != "1"
+    #   self.board.valid_move?(input)
+    # # self.board.update(input, player)
+    # # else
+    # #   turn
+    # end
 
     # binding.pry
     # if self.player_1.move(gets) != "1"
     #   #  self.player_1.move(input)
     #    turn
-    #
-    #   end
-      # binding.pry
     # else self.player_2.move(input)
     #   binding.pry
     # end
-      # turn
-    # until self.player_1.move(input) == "2"
-    # # if self.player_2.move(input) != "2"
-    #   self.player_2.move(input)
-    # end
-      # turn
-    # else
-    #   self.player_2.move(input) == "2"
-    #   input
-
-      # turn
-      # binding.pry
-    # end
 
     # if self.board.valid_move?(input) != "1"
-    #   self.player_1.move(input)
+    #   # self.player_1.move(input)
     #   # turn
     # end
-    # return input
-    #  if self.board.position(input) == "1"
-      #  return input
 
-    # binding.pry
-
+    #  if self.board.position(input) != "1"
+    # end
   end
-
-  # if valid_move?(input)
-  #     move(input, current_player)
-  #
-  #     display_board
-  #   else
-  #     turn
-  #   end
 
   # binding.pry
   #valid_move? will ensure that moves are between 1-9 and not taken.
