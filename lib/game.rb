@@ -88,8 +88,7 @@ class Game
     return nil
   end
 
-  def turn
-    input = gets
+  # def turn
     # player = @player_1 || @player_2
     #
     #   # self.@player_1.move(@input)
@@ -99,16 +98,35 @@ class Game
     #   turn
     # end
 
-      if self.board.valid_move?(input)
-        binding.pry
+    def turn
+    # puts "Please enter 1-9:"
+      input = gets
+      # index = input_to_index(input)
+
+        if current_player == player_1
+          # board.valid_move?(input)
+          if self.player_1.move(input) != "1"
+             self.player_1.move(input)
+          end
+          # move(input)
+        # else turn
+          # board.update(input, current_player)
+        else current_player == player_2
+            if self.player_2.move(input) != "2"
+             self.player_2.move(input)
+            end
+          end
+        # end
+        # binding.pry
       end
 
       # this is good up to line 39
+      # input = gets
       # if self.player_1.move(input) != "1"
       #   self.player_1.move(input)
       # # else self.board.update(input, player)
       # end
-
+      # binding.pry
     # if self.board.valid_move?(input) != "1"
     #   self.board.valid_move?(input)
     # # self.board.update(input, player)
@@ -131,7 +149,7 @@ class Game
 
     #  if self.board.position(input) != "1"
     # end
-  end
+  # end
 
   # binding.pry
   #valid_move? will ensure that moves are between 1-9 and not taken.
