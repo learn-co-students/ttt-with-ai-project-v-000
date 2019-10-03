@@ -104,7 +104,8 @@ class Game
       # board.position(input)
       if board.turn_count % 2 == 0
         player_1
-       if player_1.move(input) != "1"
+      #  if player_1.move(input) != "1"
+        if valid_move?(input)
           player_1.move(input)
        end
      elsif board.turn_count % 2 != 0
