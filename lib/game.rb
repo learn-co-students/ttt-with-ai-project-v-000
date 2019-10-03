@@ -105,14 +105,14 @@ class Game
       if board.turn_count % 2 == 0
         player_1
       #  if player_1.move(input) != "1"
-        if valid_move?(input)
+        if !board.valid_move?(input)
           player_1.move(input)
        end
      elsif board.turn_count % 2 != 0
-       player_2
-       board.update(input, player_2)
-
-       if player_2.move(input) != "2"
+        player_2
+        # board.update(input, player_2)
+      #  if player_2.move(input) != "2"
+        if !board.valid_move?(input)
         #  !board.position(input)
           player_2.move(input)
        end
@@ -120,7 +120,7 @@ class Game
       # else
       #   turn
       end
-      binding.pry
+      # binding.pry
     end
 
 
