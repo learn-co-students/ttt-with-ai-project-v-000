@@ -104,18 +104,22 @@ class Game
       # board.position(input)
       if board.turn_count % 2 == 0
         player_1
-      #  if player_1.move(input) != "1"
-        if !board.valid_move?(input)
-          player_1.move(input)
+        # player_1.move(input)
+       if player_1.move(input) != "#{input}"
+      #   if !board.valid_move?(input)
+          player_1.move("#{input}")
        end
-     elsif board.turn_count % 2 != 0
-        player_2
+    #  else turn
+      # else board.turn_count % 2 != 0
+        else player_2
         # board.update(input, player_2)
       #  if player_2.move(input) != "2"
-        if !board.valid_move?(input)
-        #  !board.position(input)
+        if player_2.move(input) != input
           player_2.move(input)
-       end
+        end
+          # !board.valid_move?(input)
+        #  !board.position(input)
+      #  end
         # display_board
       # else
       #   turn
