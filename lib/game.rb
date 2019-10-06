@@ -98,35 +98,35 @@ class Game
     #   turn
     # end
 
-    def turn
-    # puts "Please enter 1-9:"
-      input = gets
-      # board.position(input)
-      if board.turn_count % 2 == 0
-        player_1
-        # player_1.move(input)
-       if player_1.move(input) != "#{input}"
-      #   if !board.valid_move?(input)
-          player_1.move("#{input}")
-       end
-    #  else turn
-      # else board.turn_count % 2 != 0
-        else player_2
-        # board.update(input, player_2)
-      #  if player_2.move(input) != "2"
-        if player_2.move(input) != input
-          player_2.move(input)
-        end
-          # !board.valid_move?(input)
-        #  !board.position(input)
-      #  end
-        # display_board
-      # else
-      #   turn
-      end
-      # binding.pry
-    end
-
+    # def turn
+    # # puts "Please enter 1-9:"
+    #   input = gets
+    #   # board.position(input)
+    #   if board.turn_count % 2 == 0
+    #     player_1
+    #     # player_1.move(input)
+    #    if player_1.move(input) != input
+    #   #   if !board.valid_move?(input)
+    #       player_1.move(input)
+    #    end
+    # #  else turn
+    #   # else board.turn_count % 2 != 0
+    #     else player_2
+    #     # board.update(input, player_2)
+    #   #  if player_2.move(input) != "2"
+    #     if player_2.move(input) != input
+    #       player_2.move(input)
+    #     end
+    #       # !board.valid_move?(input)
+    #     #  !board.position(input)
+    #   #  end
+    #     # display_board
+    #   # else
+    #   #   turn
+    #   end
+    #   # binding.pry
+    # end
+    #
 
 
     # def turn
@@ -153,19 +153,21 @@ class Game
     #     # binding.pry
     #   end
 
-      # this is good up to line 39
+      # # this is good up to line 39
+      # def turn
       # input = gets
       # if self.player_1.move(input) != "1"
       #   self.player_1.move(input)
       # # else self.board.update(input, player)
       # end
-      # binding.pry
+    # end
+    #   binding.pry
     # if self.board.valid_move?(input) != "1"
     #   self.board.valid_move?(input)
     # # self.board.update(input, player)
-    # # else
-    # #   turn
-    # end
+    # else
+    #   turn
+    end
 
     # binding.pry
     # if self.player_1.move(gets) != "1"
