@@ -92,25 +92,33 @@ class Game
   def turn
     input = gets
     # if self.player_1.move(input) != "1"
-    if self.board.valid_move?(input)
-       self.player_1.move(input)
-    # else self.board.update(input, player)
-      end
-  end
+    if self.current_player.move(input) !="1"
+      self.move(input)
+      binding.pry
 
-  def turn
-    puts "Please enter 1-9:"
-    input = gets.strip
-    index = input_to_index(input)
+    # else turn
+    # if board.valid_move?(input)
 
-    if valid_move?(input)
-      move(input, current_player)
-
-      display_board
-    else
-        turn
+    # if self.board.valid_move?(input)
+    #    self.current_player.move(input)
+    # # else
+    # #   turn
     end
   end
+
+  # def turn
+  #   puts "Please enter 1-9:"
+  #   input = gets.strip
+  #   index = input_to_index(input)
+  #
+  #   if valid_move?(input)
+  #     move(input, current_player)
+  #
+  #     display_board
+  #   else
+  #       turn
+  #   end
+  # end
 
   # binding.pry
   #valid_move? will ensure that moves are between 1-9 and not taken.
