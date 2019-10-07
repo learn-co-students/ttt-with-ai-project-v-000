@@ -154,13 +154,13 @@ class Game
     #   end
 
       # # this is good up to line 39
-      # def turn
-      # input = gets
-      # if self.player_1.move(input) != "1"
-      #   self.player_1.move(input)
-      # # else self.board.update(input, player)
-      # end
-    # end
+      def turn
+      input = gets
+      if self.player_1.move(input) != "1"
+        self.player_1.move(input)
+      # else self.board.update(input, player)
+      end
+    end
     #   binding.pry
     # if self.board.valid_move?(input) != "1"
     #   self.board.valid_move?(input)
