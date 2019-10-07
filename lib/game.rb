@@ -92,9 +92,9 @@ class Game
   def turn
     input = gets
     # if self.player_1.move(input) != "1"
-    if self.current_player.move(input) !="1"
-      self.move(input)
-      binding.pry
+    if self.current_player.move(input) != board.position(input)
+      self.current_player.move(input)
+      # binding.pry
 
     # else turn
     # if board.valid_move?(input)
@@ -104,6 +104,7 @@ class Game
     # # else
     # #   turn
     end
+    # binding.pry
   end
 
   # def turn
