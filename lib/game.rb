@@ -88,103 +88,29 @@ class Game
     return nil
   end
 
-  # def turn
-    # player = @player_1 || @player_2
-    #
-    #   # self.@player_1.move(@input)
-    #   if !self.board.valid_move?(@input)
-    #   self.board.update(@input, @player)
-    # else
-    #   turn
-    # end
-
-    # def turn
-    # # puts "Please enter 1-9:"
-    #   input = gets
-    #   # board.position(input)
-    #   if board.turn_count % 2 == 0
-    #     player_1
-    #     # player_1.move(input)
-    #    if player_1.move(input) != input
-    #   #   if !board.valid_move?(input)
-    #       player_1.move(input)
-    #    end
-    # #  else turn
-    #   # else board.turn_count % 2 != 0
-    #     else player_2
-    #     # board.update(input, player_2)
-    #   #  if player_2.move(input) != "2"
-    #     if player_2.move(input) != input
-    #       player_2.move(input)
-    #     end
-    #       # !board.valid_move?(input)
-    #     #  !board.position(input)
-    #   #  end
-    #     # display_board
-    #   # else
-    #   #   turn
-    #   end
-    #   # binding.pry
-    # end
-    #
-
-
-    # def turn
-    # # puts "Please enter 1-9:"
-    #   input = gets
-    #   # index = input_to_index(input)
-    #       # current_player == " "
-    #       # if self.board.update(input, current_player)
-    #     if current_player == player_1
-    #       # board.valid_move?(input)
-    #       if self.player_1.move(input) != "1"
-    #          self.player_1.move(input)
-    #       end
-    #       # move(input)
-    #     else turn
-    #       self.board.update(input, current_player)
-    #     # else self.board.update(input, current_player)
-    #     # else current_player == player_2
-    #         if self.player_2.move(input) != "2"
-    #          self.player_2.move(input)
-    #         end
-    #       end
-    #     # end
-    #     # binding.pry
-    #   end
-
       # # this is good up to line 39
-      def turn
-      input = gets
-      if self.player_1.move(input) != "1"
-        self.player_1.move(input)
-      # else self.board.update(input, player)
+  def turn
+    input = gets
+    # if self.player_1.move(input) != "1"
+    if self.board.valid_move?(input)
+       self.player_1.move(input)
+    # else self.board.update(input, player)
       end
+  end
+
+  def turn
+    puts "Please enter 1-9:"
+    input = gets.strip
+    index = input_to_index(input)
+
+    if valid_move?(input)
+      move(input, current_player)
+
+      display_board
+    else
+        turn
     end
-    #   binding.pry
-    # if self.board.valid_move?(input) != "1"
-    #   self.board.valid_move?(input)
-    # # self.board.update(input, player)
-    # else
-    #   turn
-    end
-
-    # binding.pry
-    # if self.player_1.move(gets) != "1"
-    #   #  self.player_1.move(input)
-    #    turn
-    # else self.player_2.move(input)
-    #   binding.pry
-    # end
-
-    # if self.board.valid_move?(input) != "1"
-    #   # self.player_1.move(input)
-    #   # turn
-    # end
-
-    #  if self.board.position(input) != "1"
-    # end
-  # end
+  end
 
   # binding.pry
   #valid_move? will ensure that moves are between 1-9 and not taken.
