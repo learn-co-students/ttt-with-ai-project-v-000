@@ -51,22 +51,21 @@ class Board
     cells.count { |char| char == "X" || char == "O" }
   end
 
-  def taken?(input)
-    if position(input) != " "
-      true
-    else
-      false
-    end
-    # binding.pry
-  end
-
   # def taken?(input)
-  #   if cells[input.to_i] == "X" || "O"
+  #   if position(input) != " "
   #     true
-  #   elsif cells[input.to_i] == " "
+  #   else
   #     false
   #   end
+  #   # binding.pry
   # end
+
+  def taken?(input)
+    if position(input) == "X" || position(input) == "O"
+      true
+    else false
+    end
+  end
 
   def valid_move?(input)
     input.to_i.between?(1, 9) && !taken?(input)
