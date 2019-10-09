@@ -3,14 +3,11 @@ class Board
   attr_accessor :cells, :player
 
   def initialize
-    @cells = Array.new(9, " ")
-    # @cells = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    reset!
   end
 
   def reset!
-    @cells.clear
-    # cells = [" "]
-    @cells.fill(" ", 0, 9)
+    @cells = Array.new(9, " ")
   end
 
   def display
@@ -44,20 +41,22 @@ class Board
     cells.count { |char| char == "X" || char == "O" }
   end
 
+  def taken?(input)
+    if position(input) != " "
+      true
+    else
+      false
+    end
+    # binding.pry
+  end
+
   # def taken?(input)
-  #   if position(input) != " "
+  #   if cells[input.to_i] == "X" || "O"
   #     true
-  #   else false
+  #   elsif cells[input.to_i] == " "
+  #     false
   #   end
   # end
-
-  def taken?(input)
-    if position(input) == "X" || "O"
-      true
-    elsif position(input) != "X" || "O"
-       false
-    end
-  end
 
   def valid_move?(input)
     input.to_i.between?(1, 9) && !taken?(input)
