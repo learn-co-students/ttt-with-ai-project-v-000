@@ -61,10 +61,7 @@ class Board
   # end
 
   def taken?(input)
-    if position(input) == "X" || position(input) == "O"
-      true
-    else false
-    end
+    position(input) == "X" || position(input) == "O"
   end
 
   def valid_move?(input)
