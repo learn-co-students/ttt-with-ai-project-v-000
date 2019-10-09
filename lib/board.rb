@@ -44,12 +44,19 @@ class Board
     cells.count { |char| char == "X" || char == "O" }
   end
 
+  # def taken?(input)
+  #   if position(input) != " "
+  #     true
+  #   else false
+  #   end
+  # end
+
   def taken?(input)
-    if position(input) != " "
+    if position(input) == "X" || "O"
       true
-    else false
+    elsif position(input) != "X" || "O"
+       false
     end
-    # binding.pry
   end
 
   def valid_move?(input)
