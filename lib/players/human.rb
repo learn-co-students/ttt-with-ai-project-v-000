@@ -1,9 +1,10 @@
 module Players
   class Human < Player
     # your code here
-    def move(input)
+    def move(board)
       # binding.pry
-      gets
+      puts "Please enter 1-9:"
+      gets.strip
     end
   end
 end
