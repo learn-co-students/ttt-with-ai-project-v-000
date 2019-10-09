@@ -22,22 +22,26 @@ class Board
   end
 
   def position(input)
-      @input = @cells[input.to_i - 1]
+      @input = cells[input.to_i - 1]
       # binding.pry
   end
 
   def full?
-    @cells.all? { |cell| cell != " "  }
+    cells.all? { |cell| cell != " "  }
   end
 
+  # def turn_count
+  #   count = 0
+  #   @cells.each do |cell|
+  #     if cell != " "
+  #       count += 1
+  #     end
+  #   end
+  #   count
+  # end
+
   def turn_count
-    count = 0
-    @cells.each do |cell|
-      if cell != " "
-        count += 1
-      end
-    end
-    count
+    cells.count { |char| char == "X" || char == "O" }
   end
 
   def taken?(input)
