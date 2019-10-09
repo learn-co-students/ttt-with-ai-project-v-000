@@ -90,7 +90,7 @@ class Game
 
   def turn
     # input = gets
-    if self.current_player.move(@board) != "1"
+    if !self.current_player.move(@board)
       self.current_player.move(@board)
       # binding.pry
     end
