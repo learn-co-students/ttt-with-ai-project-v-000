@@ -19,7 +19,7 @@ class Board
   end
 
   def position(input)
-      input = cells[input.to_i - 1]
+      cells[input.to_i - 1]
       # binding.pry
   end
 
