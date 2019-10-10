@@ -65,10 +65,14 @@ class Board
     # input.to_i.between?(1, 9) && position(input) == " "
   end
 
-  def update(pos, player)
-    pos = player.token
-    @cells = pos
-    # binding.pry
+  # def update(input, player)
+  #   input = player.token
+  #   @cells = input
+  #   # binding.pry
+  # end
+
+  def update(input, player)
+    cells[input.to_i - 1] = player.token
   end
 # Similarly, you're going to build an #update method that represents updating the board when a player makes a move.
 # This method will take two arguments, the first will be the position the user wants
