@@ -114,6 +114,7 @@ class Game
       return "O"
     else
       return nil
+    end
   end
 
   def turn
