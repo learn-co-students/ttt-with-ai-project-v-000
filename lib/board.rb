@@ -68,11 +68,12 @@ class Board
   # def update(input, player)
   #   input = player.token
   #   @cells = input
-  #   # binding.pry
+  #   binding.pry
   # end
 
   def update(input, player)
     cells[input.to_i - 1] = player.token
+    # binding.pry
   end
 # Similarly, you're going to build an #update method that represents updating the board when a player makes a move.
 # This method will take two arguments, the first will be the position the user wants
