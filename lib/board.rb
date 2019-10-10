@@ -69,6 +69,7 @@ class Board
   #   input = player.token
   #   @cells = input
   #   binding.pry
+  # this code is a bit off
   # end
 
   def update(input, player)
