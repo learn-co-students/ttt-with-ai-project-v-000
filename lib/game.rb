@@ -23,12 +23,16 @@ class Game
     # binding.pry
   end
 
+  # def current_player
+  #   if @board.turn_count % 2 == 0
+  #     player_1
+  #   else
+  #     player_2
+  #   end
+  # end
+
   def current_player
-    if @board.turn_count % 2 == 0
-      player_1
-    else
-      player_2
-    end
+    @board.turn_count % 2 == 0 ? player_1 : player_2
   end
 
   def won?
@@ -90,10 +94,20 @@ class Game
 
   def turn
     # input = gets
-    if !self.current_player.move(@board)
+    if self.current_player.move(@board) != "1"
       self.current_player.move(@board)
+    # else
+    #   turn
       # binding.pry
     end
   end
+
+  # def turn
+  #   if board.valid_move?(@board)
+  #     board.update(input, player)
+  #   else
+  #     turn
+  #   end
+  # end
 
 end
