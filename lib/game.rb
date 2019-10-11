@@ -56,9 +56,9 @@ class Game
   # end
 
   def won?
-    WIN_COMBINATIONS.find do |wincombo|
-      @board.cells[wincombo[0]] == @board.cells[wincombo[1]] &&
-      @board.cells[wincombo[1]] == @board.cells[wincombo[2]]
+    WIN_COMBINATIONS.find do |winner|
+      @board.cells[winner[0]] == @board.cells[winner[1]] &&
+      @board.cells[winner[1]] == @board.cells[winner[2]]
     end
   end
 
@@ -108,24 +108,27 @@ class Game
   # end
 
   def winner
-    if won? && player_1
-      return "X"
-    elsif won? && player_2
-      return "O"
+    if wincombo = won?
+      @board.cells[wincombo.first]
     else
-      return nil
+      !won?
+
+
+    # elsif wincombo == !won?
+    #   nil
+
     end
   end
 
-  def turn
-    # input = gets
-    if self.current_player.move(@board) != "1"
-      self.current_player.move(@board)
-    # else
-    #   turn
-      # binding.pry
-    end
-  end
+  # def turn
+  #   # input = gets
+  #   if self.current_player.move(@board) != "1"
+  #     self.current_player.move(@board)
+  #   # else
+  #   #   turn
+  #     # binding.pry
+  #   end
+  # end
 
   # def turn
   #   if board.valid_move?(@board)
