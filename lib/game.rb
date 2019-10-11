@@ -115,26 +115,45 @@ class Game
     # binding.pry
   end
 
+  # def turn
+  #     # self.current_player.move(@board)
+  #     if self.current_player.move(@board) != "1"
+  #       turn
+  #       # self.current_player.move(@board)
+  #       # binding.pry
+  #       # turn
+  #     end
+  # end
+
+  # def turn
+  #     puts "Please enter 1-9:"
+  #       @input = gets.strip
+  #     #   index = input_to_index(input)
+  #
+  #     if @board.valid_move?(@input)
+  #       @board.update(@input, current_player)
+  #
+  #       # display_board
+  #     else
+  #       turn
+  #     end
+  #   end
+
   def turn
-    # if self.current_player != player_1
-      if self.current_player.move(@board) != "1"
-        self.current_player.move(@board)
+    # input = gets
+    # if self.current_player.move(@board) != "1"
+    #   self.current_player.move(@board)
+      if @player_1.move(@board)
+        binding.pry
+    # else
+    #   turn
+      # binding.pry
     end
   end
 
   # def turn
-  #   # input = gets
-  #   if self.current_player.move(@board) != "1"
-  #     self.current_player.move(@board)
-  #   # else
-  #   #   turn
-  #     # binding.pry
-  #   end
-  # end
-
-  # def turn
-  #   if board.valid_move?(@board)
-  #     board.update(input, player)
+  #   if @board.valid_move?(input)
+  #     @board.update(input, player)
   #   else
   #     turn
   #   end
