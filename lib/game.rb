@@ -58,7 +58,8 @@ class Game
   def won?
     WIN_COMBINATIONS.find do |winner|
       @board.cells[winner[0]] == @board.cells[winner[1]] &&
-      @board.cells[winner[1]] == @board.cells[winner[2]]
+      @board.cells[winner[1]] == @board.cells[winner[2]] &&
+      (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
     end
   end
 
@@ -110,14 +111,8 @@ class Game
   def winner
     if wincombo = won?
       @board.cells[wincombo.first]
-    else
-
-
-
-    # elsif wincombo == !won?
-    #   nil
-
     end
+    # binding.pry
   end
 
   # def turn
