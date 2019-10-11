@@ -111,7 +111,7 @@ class Game
     if wincombo = won?
       @board.cells[wincombo.first]
     else
-      !won?
+
 
 
     # elsif wincombo == !won?
