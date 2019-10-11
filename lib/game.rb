@@ -115,6 +115,13 @@ class Game
     # binding.pry
   end
 
+  def turn
+
+    if @board.valid_move?(current_player.move(@board))
+      binding.pry
+    end
+  end
+
   # def turn
   #     # self.current_player.move(@board)
   #     if self.current_player.move(@board) != "1"
@@ -139,17 +146,20 @@ class Game
   #     end
   #   end
 
-  def turn
-    # input = gets
-    # if self.current_player.move(@board) != "1"
-    #   self.current_player.move(@board)
-      if @player_1.move(@board)
-        binding.pry
-    # else
-    #   turn
-      # binding.pry
-    end
-  end
+  # def turn
+  #   # input = gets
+  #   if self.current_player.move(@board) != "1"
+  #     self.current_player.move(@board)
+  #
+  #   else
+  #     self.current_player.move(@board) != "2"
+  #     self.current_player.move(@board)
+  #       # binding.pry
+  #   # else
+  #   #   turn
+  #     # binding.pry
+  #   end
+  # end
 
   # def turn
   #   if @board.valid_move?(input)
