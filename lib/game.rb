@@ -122,7 +122,6 @@ class Game
     else
       turn
     end
-    # binding.pry
   end
 
   # def turn
