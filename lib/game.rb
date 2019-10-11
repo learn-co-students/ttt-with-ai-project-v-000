@@ -110,12 +110,17 @@ class Game
 
   def winner
     if wincombo = won?
-      @board.cells[wincombo[0]]
+      @winner = @board.cells[wincombo[0]]
     end
     # binding.pry
   end
 
-
+  def turn
+    # if self.current_player != player_1
+      if self.current_player.move(@board) != "1"
+        self.current_player.move(@board)
+    end
+  end
 
   # def turn
   #   # input = gets
