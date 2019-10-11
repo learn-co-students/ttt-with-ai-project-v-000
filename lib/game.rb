@@ -117,27 +117,13 @@ class Game
 
   def turn
     input = current_player.move(@board)
-    if board.valid_move?(input)
-      board.update(input, current_player)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
     else
       turn
     end
-    binding.pry
+    # binding.pry
   end
-
-  # def turn
-  #     puts "Please enter 1-9:"
-  #       @input = gets.strip
-  #     #   index = input_to_index(input)
-  #
-  #     if valid_move?(@input)
-  #       update(@input, current_player)
-  #
-  #       # display_board
-  #     else
-  #       turn
-  #     end
-  #   end
 
   # def turn
   #     # self.current_player.move(@board)
