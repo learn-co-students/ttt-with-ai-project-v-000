@@ -115,6 +115,8 @@ class Game
     # binding.pry
   end
 
+  
+
   # def turn
   #   # input = gets
   #   if self.current_player.move(@board) != "1"
