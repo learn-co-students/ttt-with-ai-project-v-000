@@ -116,10 +116,13 @@ class Game
   end
 
   def turn
-
-    if @board.valid_move?(current_player.move(@board))
-      binding.pry
+    input = current_player.move(@board)
+    if board.valid_move?(input)
+      board.update(input, current_player)
+    else
+      turn
     end
+    # binding.pry
   end
 
   # def turn
@@ -137,8 +140,8 @@ class Game
   #       @input = gets.strip
   #     #   index = input_to_index(input)
   #
-  #     if @board.valid_move?(@input)
-  #       @board.update(@input, current_player)
+  #     if valid_move?(@input)
+  #       update(@input, current_player)
   #
   #       # display_board
   #     else
