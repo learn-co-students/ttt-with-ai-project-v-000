@@ -126,16 +126,6 @@ class Game
   end
 
   # def turn
-  #     # self.current_player.move(@board)
-  #     if self.current_player.move(@board) != "1"
-  #       turn
-  #       # self.current_player.move(@board)
-  #       # binding.pry
-  #       # turn
-  #     end
-  # end
-
-  # def turn
   #     puts "Please enter 1-9:"
   #       @input = gets.strip
   #     #   index = input_to_index(input)
@@ -148,6 +138,16 @@ class Game
   #       turn
   #     end
   #   end
+
+  # def turn
+  #     # self.current_player.move(@board)
+  #     if self.current_player.move(@board) != "1"
+  #       turn
+  #       # self.current_player.move(@board)
+  #       # binding.pry
+  #       # turn
+  #     end
+  # end
 
   # def turn
   #   # input = gets
