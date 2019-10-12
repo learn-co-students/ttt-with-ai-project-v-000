@@ -112,51 +112,15 @@ class Game
     if wincombo = won?
       @winner = @board.cells[wincombo[0]]
     end
-    # binding.pry
   end
-
-  # def turn
-  #   input = current_player.move(@board)
-  #   if @board.valid_move?(input)
-  #     @board.update(input, current_player)
-  #   else
-  #     turn
-  #   end
-  #   binding.pry
-  # end
-
-  # def turn
-  #     if !current_player.move(@board)
-  #       current_player.move(@board)
-  #     end
-  #     binding.pry
-  # end
 
   def turn
-    if current_player.move(@board) 
-      current_player.move(@board)
-      binding.pry
-    # else
-    #   turn
+    input = current_player.move(@board)
+    if @board.valid_move?(input)
+      @board.update(input, current_player)
+    else
+      turn
     end
   end
-
-  # def turn
-  #   if @board.valid_move?(input)
-  #     @board.update(input, player)
-  #   # else
-  #   #   turn
-  #   end
-  # end
-
-  # def turn
-  #     # self.current_player.move(@board)
-  #     if self.current_player.move(@board) != "1"
-  #       turn
-  #       # self.current_player.move(@board)
-  #       # binding.pry
-  #       # turn
-  #     end
-  # end
 
 end
