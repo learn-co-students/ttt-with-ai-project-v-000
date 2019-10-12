@@ -30,13 +30,37 @@ class Board
   end
   
   def turn_count
-    #binding.pry 
     counter = [ ]
-    self.board.each do |item|
-      if item == "X" || "O"
+    @cells.each do |item|
+      if item == " "
         counter << item 
       end
     end
-    counter.length
+    9 - counter.length
+  end
+  
+  def taken?(x)
+    y = x.to_i
+    if @cells[y - 1] == " "
+      false
+    else
+      true
+    end
+  end
+  
+  def valid_move?(x)
+    if x.to_i.between?(1, 9) && taken?(x) == false 
+      true
+    else 
+      false
+    end
+  end
+  
+  def update(x, player)
+    #if (player.token == "X" || "O") && valid_move?(x)
+    if valid_move?(x)
+      y = x.to_i - 1
+      @cells[y] = "#{player.token}"
+    end
   end
 end
