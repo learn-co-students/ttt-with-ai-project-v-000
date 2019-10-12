@@ -60,7 +60,6 @@ class Game
       @board.cells[winner[0]] == @board.cells[winner[1]] &&
       @board.cells[winner[1]] == @board.cells[winner[2]] &&
       (@board.cells[winner[0]] == "X" || @board.cells[winner[0]] == "O")
-      puts "Congratulations #{winner}"
     end
   end
 
@@ -74,7 +73,6 @@ class Game
 
   def draw?
     board.full? && !won?
-    puts "Cats Game!"
   end
 
   # def over?
@@ -128,22 +126,15 @@ class Game
   def play
 
   end
-
-  # def play
-  #   until over?
-  #     turn
-  #     if won?
-  #       puts "Congratulations!"
-  #     end
-  #   end
-  # end
-
+  
   def play
     until over?
       turn
     end
     if won?
+      puts "Congratulations #{winner}!"
     elsif draw?
+      puts "Cat's Game!"
     end
   end
 
