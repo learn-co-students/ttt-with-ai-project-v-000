@@ -123,4 +123,8 @@ class Game
     end
   end
 
+  def play
+
+  end
+
 end
