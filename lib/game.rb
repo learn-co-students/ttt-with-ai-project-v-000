@@ -125,6 +125,14 @@ class Game
   end
 
   # def turn
+  #   if @board.valid_move?(input)
+  #     @board.update(input, player)
+  #   else
+  #     turn
+  #   end
+  # end
+
+  # def turn
   #     # self.current_player.move(@board)
   #     if self.current_player.move(@board) != "1"
   #       turn
@@ -146,14 +154,6 @@ class Game
   #   # else
   #   #   turn
   #     # binding.pry
-  #   end
-  # end
-
-  # def turn
-  #   if @board.valid_move?(input)
-  #     @board.update(input, player)
-  #   else
-  #     turn
   #   end
   # end
 
