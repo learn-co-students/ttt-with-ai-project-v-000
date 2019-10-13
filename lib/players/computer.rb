@@ -1,13 +1,15 @@
 module Players
   class Computer < Player
+    # attr_accessor :game, :board
+
     def move(board)
       # puts "Please enter 1-9:"
       # move(@board)
       # computer_move = computer.move(board)
       # board.valid_move?
-      "1"
+      # computer_move = game.current_player.move(@board)
     end
-    # binding.pry
+    binding.pry
   end
 end
 
