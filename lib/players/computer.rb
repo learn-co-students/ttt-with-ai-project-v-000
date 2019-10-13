@@ -3,7 +3,7 @@ module Players
     def move(board)
       # puts "Please enter 1-9:"
       # move(@board)
-      valid_move?
+      board.valid_move?
 
     end
     binding.pry
