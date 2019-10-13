@@ -7,7 +7,7 @@ module Players
       # game.current_player.move(@board)
       # move(@board)
       # computer_move = board.position(input)
-      # board.valid_move?(computer_move)
+      board.valid_move?(computer_move)
       # board.valid_move?
       # computer_move = game.current_player.move(@board)
     end
