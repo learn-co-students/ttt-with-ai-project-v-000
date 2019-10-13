@@ -20,7 +20,7 @@ class Board
 
   def position(input)
       cells[input.to_i - 1]
-      # binding.pry
+      binding.pry
   end
 
   # def full?

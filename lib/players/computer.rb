@@ -4,12 +4,14 @@ module Players
 
     def move(board)
       # puts "Please enter 1-9:"
+      # game.current_player.move(@board)
       # move(@board)
-      # computer_move = computer.move(board)
+      computer_move = board.position(input)
+      board.valid_move?(computer_move)
       # board.valid_move?
       # computer_move = game.current_player.move(@board)
     end
-    binding.pry
+    # binding.pry
   end
 end
 
