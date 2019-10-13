@@ -5,9 +5,9 @@ module Players
       # move(@board)
       # computer_move = computer.move(board)
       # board.valid_move?
-
+      "1"
     end
-    binding.pry
+    # binding.pry
   end
 end
 
