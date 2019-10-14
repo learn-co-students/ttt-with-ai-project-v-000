@@ -10,7 +10,7 @@ module Players
       # board.valid_move?(computer_move)
       # @board
       @board
-      # binding.pry
+      binding.pry
       # board.valid_move?
       # computer_move = game.current_player.move(@board)
     end
