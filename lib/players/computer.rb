@@ -10,9 +10,9 @@ module Players
 
       # @board
       computer_move = @board
-      if board.valid_move?(computer_move)
+      if board.valid_move?(computer_move = nil)
         # board.update(computer_move, current_player)
-        nil
+
       end
       # binding.pry
       # board.valid_move?
