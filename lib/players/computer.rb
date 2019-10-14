@@ -5,14 +5,17 @@ module Players
       # puts "Please enter 1-9:"
       # game.current_player.move(@board)
       # move(@board)
-      computer_move = board.position(input)
+      # computer_move = board.position(input)
+
       # board.valid_move?(computer_move)
       # @board
+      @board
+      # binding.pry
       # board.valid_move?
       # computer_move = game.current_player.move(@board)
     end
-    binding.pry
   end
+
 end
 
 # attr_accessor :game, :board
