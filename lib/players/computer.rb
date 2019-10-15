@@ -7,13 +7,24 @@ module Players
       # move(@board)
       # computer_move = board.position(input)
 
-
-      # @board
-      computer_move = @board
-      if board.valid_move?(computer_move = nil)
-        # board.update(computer_move, current_player)
+      computer_move = board.position(@board)
+      if board.valid_move?(computer_move)
+          
 
       end
+      # binding.pry
+      # # @board
+      # computer_move = @board
+      # game = Game.new()
+      # game.turn
+
+      # turn
+      # if board.valid_move?(computer_move = nil)
+
+      # if board.valid_move?(computer_move)
+      #   # board.update(computer_move, current_player)
+      #
+      # end
       # binding.pry
       # board.valid_move?
       # computer_move = game.current_player.move(@board)
