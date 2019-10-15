@@ -8,10 +8,13 @@ module Players
       # computer_move = board.position(input)
 
       computer_move = board.position(@board)
-      if board.valid_move?(computer_move)
-          
+      # board.update(computer_move, current_player)
+       if board.valid_move?(computer_move)
 
-      end
+       end
+
+
+
       # binding.pry
       # # @board
       # computer_move = @board
