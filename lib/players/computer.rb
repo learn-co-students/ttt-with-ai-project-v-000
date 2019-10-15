@@ -15,7 +15,7 @@ module Players
 
 
 
-      # binding.pry
+      binding.pry
       # # @board
       # computer_move = @board
       # game = Game.new()
