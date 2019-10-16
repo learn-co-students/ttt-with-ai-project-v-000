@@ -1,46 +1,19 @@
 module Players
+
   class Computer < Player
-
     def move(board)
-      # puts "Please enter 1-9:"
-      # game.current_player.move(@board)
-      # move(@board)
-      # computer_move = board.position(input)
-
-      computer_move = board.position(@board)
-
-      # board.position(@board)
-        #
-         board.valid_move?(computer_move)
-          # board.valid_move?(board.position(@board))
-
-
-        #  @board.update(computer_move, current_player)
-
-
+      computer_move = self.move(@board)
+      # computer_move = board.position(@board)
+        if board.valid_move?(computer_move)
+          # @board.update(computer_move, self)
+        # else
+        #   board.valid_move?(computer_move)
+        end
       # binding.pry
-
-      # # @board
-      # computer_move = @board
-      # game = Game.new()
-      # game.turn
-
-      # turn
-      # if board.valid_move?(computer_move = nil)
-
-      # if board.valid_move?(computer_move)
-      #   # board.update(computer_move, current_player)
-      #
-      # end
-      # binding.pry
-      # board.valid_move?
-      # computer_move = game.current_player.move(@board)
     end
   end
 
 end
-
-# attr_accessor :game, :board
 
 # def turn
 #   input = current_player.move(@board)
