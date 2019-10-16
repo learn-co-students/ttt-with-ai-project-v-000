@@ -37,32 +37,49 @@ class Game
   end
   
   def won?
-    x_array = []
-    o_array = []
-    z = 8
     y = []
-    umm = false
-    final_array = []
-    while z >= 0
-    if board.cells[z] == "X"
-      x_array << z 
-      z -= 1 
-      elsif board.cells[z] == "O"
-      o_array << z
-      z -= 1
-      end
-    end
     WIN_COMBINATIONS.each do |combo|
-      if x_array.include?(combo[0]) && x_array.include?(combo[1]) && x_array.include?(combo[2])
-        y << combo
-        elsif o_array.include?(combo[0]) && o_array.include?(combo[1]) && o_array.include?(combo[2])
+      if combo[0] == combo[1] && combo[1] == combo[2]
         y << combo
       end
     end
-    if y.length > 0
-      y[0]
-    else
-      false
+      if y.length == 0 
+        false
+      else 
+        y
     end
   end
 end
+  
+  
+  
+  #def won?
+    #x_array = []
+    #o_array = []
+    #z = 8
+    #y = []
+    #umm = false
+    #final_array = []
+    #while z >= 0
+    #if board.cells[z] == "X"
+      #x_array << z 
+      #z -= 1 
+      #elsif board.cells[z] == "O"
+      #o_array << z
+      #z -= 1
+      #end
+    #end
+    #WIN_COMBINATIONS.each do |combo|
+      #if x_array.include?(combo[0]) && x_array.include?(combo[1]) && x_array.include?(combo[2])
+        #y << combo
+        #elsif o_array.include?(combo[0]) && o_array.include?(combo[1]) && o_array.include?(combo[2])
+        #y << combo
+      #end
+    #end
+    #if y.length > 0
+      #y[0]
+    #else
+      #false
+    #end
+  #end
+#end
