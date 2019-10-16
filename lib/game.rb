@@ -38,69 +38,31 @@ class Game
   
   def won?
     x_array = []
-    y_array = []
+    o_array = []
     z = 8
+    y = []
+    umm = false
+    final_array = []
     while z >= 0
-      if board.cells[z] = "X"
-        x_array << z 
-        z -= 1 
-        elsif board.cells[z] = "Y"
-        y_array << z 
-        z -= 1
+    if board.cells[z] == "X"
+      x_array << z 
+      z -= 1 
+      elsif board.cells[z] == "O"
+      o_array << z
+      z -= 1
       end
     end
-    while z >= 0 
-    WIN_COMBINATIONS[z - 1].each do |index|
-      
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    #player_one_index_array = []
-    #player_two_index_array = []
-    #temp_winning_combo = []
-    #final_winning_combo = []
-    #x = player_1.token
-    #y = player_2.token
-    #z = 9
-    #binding.pry
-    #while z > 0
-      #if board.cells[z - 1] == x
-        #player_one_index_array << z 
-        #z -= 1 
-        #elsif board.cells[z - 1] == y 
-        #player_two_index_array << z 
-        #z -= 1
-      #end
-    #end
-    #while z >= 0 
-    #WIN_COMBINATIONS[z - 1].each do |item|
-      #if player_one_index_array.include?(item)
-        #temp_winning_combo << item 
-      #end
-      #if temp_winning_combo.length == 3
-        #final_winning_combo << temp_winning_combo
-        #z = 0
-        #elsif temp_winning_combo.length < 3 
-        #z -= 1
-      #end
-    #end
-  #end
-  final_winning_combo[0]
-  #end
-#end
+    WIN_COMBINATIONS.each do |combo|
+      if x_array.include?(combo[0]) && x_array.include?(combo[1]) && x_array.include?(combo[2])
+        y << combo
+        elsif o_array.include?(combo[0]) && o_array.include?(combo[1]) && o_array.include?(combo[2])
+        y << combo
+      end
+    end
+    if y.length > 0
+      y[0]
+    else
+      false
+    end
+  end
+end
