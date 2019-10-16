@@ -38,48 +38,54 @@ class Game
   
   def won?
     y = []
+    #binding.pry
     WIN_COMBINATIONS.each do |combo|
-      if combo[0] == combo[1] && combo[1] == combo[2]
+      if (board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X")
+        y << combo
+        elsif (board.cells[combo[0]] == "O" && board.cells[combo[1]] == "O" && board.cells[combo[2]] == "O")
         y << combo
       end
     end
-      if y.length == 0 
-        false
+      if y.length > 0 
+        y[0]
       else 
-        y
+        false
     end
   end
+  
+  def draw?
+    if self.won? == false 
+      true 
+    end
+  end
+  
+  def over?
+    if board.cells.include?(" ")
+      false
+      elsif self.won? || self.draw?
+      true
+    end
+  end
+  
+  def winner
+    #binding.pry
+    x = self.won?
+    if x == false
+      nil
+    else
+      board.cells[x[0]]
+    end
+  end
+  
+  def turn
+    count = 0
+    a = player_1.move(board.cells)
+    if (a.to_i < 10) || (a.to_i > 0)
+      count += 1
+      elsif (a.to_i > 9) || (a.to_i < 1)
+      a = player_1.move(board.cells)
+      count += 1
+    end
+    b = player_2.move(board.cells)
+  end
 end
-  
-  
-  
-  #def won?
-    #x_array = []
-    #o_array = []
-    #z = 8
-    #y = []
-    #umm = false
-    #final_array = []
-    #while z >= 0
-    #if board.cells[z] == "X"
-      #x_array << z 
-      #z -= 1 
-      #elsif board.cells[z] == "O"
-      #o_array << z
-      #z -= 1
-      #end
-    #end
-    #WIN_COMBINATIONS.each do |combo|
-      #if x_array.include?(combo[0]) && x_array.include?(combo[1]) && x_array.include?(combo[2])
-        #y << combo
-        #elsif o_array.include?(combo[0]) && o_array.include?(combo[1]) && o_array.include?(combo[2])
-        #y << combo
-      #end
-    #end
-    #if y.length > 0
-      #y[0]
-    #else
-      #false
-    #end
-  #end
-#end
