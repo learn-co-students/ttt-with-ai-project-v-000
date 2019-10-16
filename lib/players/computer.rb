@@ -11,9 +11,11 @@ module Players
 
       # board.position(@board)
         #
-        # board.valid_move?(computer_move)
-         board.update(computer_move, "X")
-        #  @board.update(input, current_player)
+         board.valid_move?(computer_move)
+          # board.valid_move?(board.position(@board))
+
+
+        #  @board.update(computer_move, current_player)
 
 
       # binding.pry
