@@ -8,14 +8,16 @@ module Players
       # computer_move = board.position(input)
 
       computer_move = board.position(@board)
-      # board.update(computer_move, current_player)
-       if board.valid_move?(computer_move)
 
-       end
+      # board.position(@board)
+        #
+        # board.valid_move?(computer_move)
+         board.update(computer_move, "X")
+        #  @board.update(input, current_player)
 
 
+      # binding.pry
 
-      binding.pry
       # # @board
       # computer_move = @board
       # game = Game.new()
