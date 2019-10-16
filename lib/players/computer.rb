@@ -4,11 +4,11 @@ module Players
     def move(board)
       computer_move = self.move(@board)
       # computer_move = board.position(@board)
-        if board.valid_move?(computer_move)
-          # @board.update(computer_move, self)
-        # else
-        #   board.valid_move?(computer_move)
-        end
+        # if board.valid_move?(computer_move)
+        #   # @board.update(computer_move, self)
+        # # else
+        # #   board.valid_move?(computer_move)
+        # end
       # binding.pry
     end
   end
