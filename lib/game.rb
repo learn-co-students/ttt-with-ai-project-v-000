@@ -60,11 +60,7 @@ class Game
   end
   
   def over?
-    if board.cells.include?(" ")
-      false
-      elsif self.won? || self.draw?
-      true
-    end
+    self.won? || self.draw?
   end
   
   def winner
@@ -93,7 +89,7 @@ class Game
     if self.won?
       puts "Congratulations #{self.winner}!"
     elsif self.draw? 
-      puts "It was a draw."
+      puts "Cat's Game!"
     end
   end
 end
