@@ -78,38 +78,22 @@ class Game
   end
   
   def turn
-    #binding.pry
-    until board.turn_count == 9  
     a = current_player.move(board)
     if board.valid_move?(a) 
       board.update(a, current_player)
+    else 
+      self.turn
+    end
+  end
+  
+  def play
+    while !self.over?
+      turn
+    end
+    if self.won?
+      puts "Congratulations #{self.winner}!"
+    elsif self.draw? 
+      puts "It was a draw."
     end
   end
 end
-end
-    
-    
-    #1. current player
-    #2. valid_move
-    #3. method inside method
-    
-    
-    
-    #count = 0
-    #until count.odd? && count > 0 
-    #a = player_1.move(board.cells)
-    #if (a.to_i < 10) || (a.to_i > 0)
-      #count += 1
-      #end
-    #end
-  #end
-#end
-    #end
-    #while count.odd?
-    #b = self.player_2.move(board.cells)
-    #if (b.to_i < 10) || (b.to_i > 0)
-      #count += 1
-    #end
-    #end
-  #end
-#end
