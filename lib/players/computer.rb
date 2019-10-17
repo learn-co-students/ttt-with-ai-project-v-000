@@ -2,14 +2,15 @@ module Players
 
   class Computer < Player
     def move(board)
+      valid_moves = @board
       # computer_move = self
-      computer_move = board.position(@board)
-        if board.valid_move?(computer_move)
-          @board.update(computer_move, self)
-        # else
-        #   board.valid_move?(computer_move)
-        end
-      # binding.pry
+      # computer_move = board.position(@board)
+      #   if board.valid_move?(computer_move)
+      #     @board.update(computer_move, self)
+      #   # else
+      #   #   board.valid_move?(computer_move)
+      #   end
+      # # binding.pry
     end
   end
 
