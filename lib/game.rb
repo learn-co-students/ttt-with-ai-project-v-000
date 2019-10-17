@@ -78,17 +78,20 @@ class Game
   end
   
   def turn
-    a = player_1.move(board.cells)
-    if (a.to_i > 10) || (a.to_i < 1)
-       a = player_1.move(board.cells)
-     end
-     b = player_2.move(board.cells)
-     if (b.to_i > 10) || (b.to_i < 1)
-       b = player_2.move(board.cells)
-     end
-   end
- end
+    #binding.pry
+    until board.turn_count == 9  
+    a = current_player.move(board)
+    if board.valid_move?(a) 
+      board.update(a, current_player)
+    end
+  end
+end
+end
     
+    
+    #1. current player
+    #2. valid_move
+    #3. method inside method
     
     
     

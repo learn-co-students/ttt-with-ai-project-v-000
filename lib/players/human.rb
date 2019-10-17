@@ -3,7 +3,7 @@ module Players
     def move(board)
       puts "Enter a move:"
       input = gets.strip
-      input
+      input 
     end
   end
 end
