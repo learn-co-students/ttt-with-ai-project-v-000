@@ -79,13 +79,17 @@ class Game
   
   def turn
     count = 0
-    a = player_1.move(board.cells)
+    while count == 0 || count.even?
+    a = self.player_1.move(board.cells)
     if (a.to_i < 10) || (a.to_i > 0)
       count += 1
-      elsif (a.to_i > 9) || (a.to_i < 1)
-      a = player_1.move(board.cells)
+      end
+    end
+    while count.odd?
+    b = self.player_2.move(board.cells)
+    if (b.to_i < 10) || (b.to_i > 0)
       count += 1
     end
-    b = player_2.move(board.cells)
+    end
   end
 end
