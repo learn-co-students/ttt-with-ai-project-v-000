@@ -78,18 +78,35 @@ class Game
   end
   
   def turn
-    count = 0
-    while count == 0 || count.even?
-    a = self.player_1.move(board.cells)
-    if (a.to_i < 10) || (a.to_i > 0)
-      count += 1
-      end
-    end
-    while count.odd?
-    b = self.player_2.move(board.cells)
-    if (b.to_i < 10) || (b.to_i > 0)
-      count += 1
-    end
-    end
-  end
-end
+    a = player_1.move(board.cells)
+    if (a.to_i > 10) || (a.to_i < 1)
+       a = player_1.move(board.cells)
+     end
+     b = player_2.move(board.cells)
+     if (b.to_i > 10) || (b.to_i < 1)
+       b = player_2.move(board.cells)
+     end
+   end
+ end
+    
+    
+    
+    
+    #count = 0
+    #until count.odd? && count > 0 
+    #a = player_1.move(board.cells)
+    #if (a.to_i < 10) || (a.to_i > 0)
+      #count += 1
+      #end
+    #end
+  #end
+#end
+    #end
+    #while count.odd?
+    #b = self.player_2.move(board.cells)
+    #if (b.to_i < 10) || (b.to_i > 0)
+      #count += 1
+    #end
+    #end
+  #end
+#end
