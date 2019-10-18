@@ -54,8 +54,8 @@ class Game
   end
   
   def draw?
-    if self.won? == false 
-      true 
+    if self.won? == false  && board.cells.include?(" ") == false
+      true
     end
   end
   
@@ -64,7 +64,6 @@ class Game
   end
   
   def winner
-    #binding.pry
     x = self.won?
     if x == false
       nil
