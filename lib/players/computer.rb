@@ -11,7 +11,7 @@ module Players
       #       computer_move.to_s
       #       # board.valid_move?(computer_move)
             board.display
-            binding.pry
+            # binding.pry
         # else
           end
           # binding.pry
