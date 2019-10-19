@@ -4,21 +4,21 @@ module Players
     def move(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       # computer_move = valid_moves.select do |move|
-        valid_moves.select do |move|
-          if board.valid_move?(move[5])
+        valid_moves.select do |move, index|
+          if board.valid_move?(move[index])
             board.update(move, self)
           #  computer_move = board.position(@input)
       #       computer_move.to_s
       #       # board.valid_move?(computer_move)
             board.display
+            binding.pry
         # else
           end
-
+          # binding.pry
       #   #   # move(board)
       #   #   # board.valid_move?(computer_move)
       #   #   @input.to_s
         end
-      binding.pry
     end
   end
 
