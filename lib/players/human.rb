@@ -4,7 +4,7 @@ module Players
     def move(board)
       # binding.pry
       puts "Please enter 1-9:"
-      gets.strip
+      # gets.strip
       # binding.pry
     end
   end
