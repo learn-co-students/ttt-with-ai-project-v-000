@@ -3,11 +3,16 @@ module Players
   class Computer < Player
     def move(board)
 
+      # def position(input)
+      #     cells[input.to_i - 1]
+      #     binding.pry
+      # end
+
       # @board == nil
       # board.cells[0] == " "
       # board.position(@board) == " "
 
-      # computer_move = board.position(@input)
+      computer_move = board.position(@cells[input])
       #   if board.valid_move?(computer_move)
       # #       computer_move.to_s
       # #       # board.valid_move?(computer_move)
