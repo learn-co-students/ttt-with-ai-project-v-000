@@ -2,28 +2,21 @@ module Players
 
   class Computer < Player
     def move(board)
+      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      computer_move = valid_moves.each { |move| move.to_s }
+          #  computer_move = board.position(@input)
+        if board.valid_move?(computer_move)
+      #       computer_move.to_s
+      #       # board.valid_move?(computer_move)
+          board.update(computer_move, self)
+          board.display
+        # else
 
-      # def position(input)
-      #     cells[input.to_i - 1]
-      #     binding.pry
-      # end
-
-      # @board == nil
-      # board.cells[0] == " "
-      # board.position(@board) == " "
-
-      computer_move = board.position(@cells[input])
-      #   if board.valid_move?(computer_move)
-      # #       computer_move.to_s
-      # #       # board.valid_move?(computer_move)
-      #     board.update(computer_move, self)
-      #     computer_move.to_s
-      # #   # else
-      # #   #   # move(board)
-      # #   #   # board.valid_move?(computer_move)
-      # #   #   @input.to_s
-      #   end
-      # binding.pry
+      #   #   # move(board)
+      #   #   # board.valid_move?(computer_move)
+      #   #   @input.to_s
+        end
+      binding.pry
     end
   end
 
