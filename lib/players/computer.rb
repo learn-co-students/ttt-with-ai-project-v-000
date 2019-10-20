@@ -3,7 +3,7 @@ module Players
   class Computer < Player
     def move(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      game.current_player
+      current_player
       # computer_move = valid_moves.select do |move|
         # if valid_moves[4] == " "
 
