@@ -7,7 +7,7 @@ module Players
         # if valid_moves[4] == " "
         board.cells.select do |move|
       #       # if board.position(move[4]) == " "
-            if board.valid_move?(move[4])
+            # if board.valid_move?(move[4])
       #     # if board.valid_move?(move[index])
             board.update(move[4], self)
       #     #  computer_move = board.position(@input)
@@ -15,7 +15,7 @@ module Players
       # #       # board.valid_move?(computer_move)
             board.display
       #   # else
-          end
+          # end
             binding.pry
         end
     end
