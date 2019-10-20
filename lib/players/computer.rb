@@ -2,6 +2,8 @@ module Players
 
   class Computer < Player
     def move(board)
+      game = Game.new()
+      binding.pry
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       # current_player = board.turn_count % 2 == 0 ? player_1 : player_2
       # computer_move = valid_moves.select do |move|
@@ -9,7 +11,7 @@ module Players
         # valid_moves.select {rand(0..10)}
         board.cells.select do |comp_move|
           comp_move = rand(1..9)
-          if board.full?
+          if board.full? == false
              if board.valid_move?(comp_move)
               board.update(comp_move, self)
       #     #  computer_move = board.position(@input)
