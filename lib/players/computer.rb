@@ -18,6 +18,7 @@ module Players
       # #       computer_move.to_s
       # #       # board.valid_move?(computer_move)
               board.display
+              move.to_s
             # else
             end
           end
