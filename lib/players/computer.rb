@@ -3,6 +3,7 @@ module Players
   class Computer < Player
     def move(board)
       game = Game.new()
+      game.current_player
       binding.pry
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       # current_player = board.turn_count % 2 == 0 ? player_1 : player_2
