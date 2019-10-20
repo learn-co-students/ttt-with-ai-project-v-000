@@ -14,7 +14,7 @@ module Players
           comp_move = rand(1..9)
           if board.full? == false
              if board.valid_move?(comp_move)
-              board.update(comp_move, self)
+              board.update(comp_move, game.current_player)
       #     #  computer_move = board.position(@input)
       # #       computer_move.to_s
       # #       # board.valid_move?(computer_move)
@@ -24,7 +24,7 @@ module Players
               move(board)
             end
           end
-          # binding.pry
+          binding.pry
         end
       end
   end
