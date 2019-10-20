@@ -18,7 +18,7 @@ module Players
       # #       # board.valid_move?(computer_move)
             board.display
       #   # else
-          # end
+          end
             binding.pry
         end
     end
