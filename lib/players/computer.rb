@@ -9,17 +9,18 @@ module Players
         # if valid_moves[4] == " "
 
         # valid_moves.select {rand(0..10)}
-        board.cells.select do |move|
-          move = rand(1..9)
+        board.cells.select do |comp_move|
+          comp_move = rand(1..9)
           if board.full?
-             if board.valid_move?(move)
-              board.update(move, self)
+             if board.valid_move?(comp_move)
+              board.update(comp_move, self)
       #     #  computer_move = board.position(@input)
       # #       computer_move.to_s
       # #       # board.valid_move?(computer_move)
               board.display
-              move.to_s
-            # else
+              comp_move.to_s
+            else
+              move(board)
             end
           end
           binding.pry
