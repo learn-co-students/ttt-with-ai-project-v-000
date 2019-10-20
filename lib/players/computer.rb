@@ -11,20 +11,19 @@ module Players
         # valid_moves.select {rand(0..10)}
         board.cells.select do |move|
           move = rand(1..9)
-          while board.full?
-            if board.valid_move?(move)
+          if board.full?
+             board.valid_move?(move)
               board.update(move, self)
       #     #  computer_move = board.position(@input)
       # #       computer_move.to_s
       # #       # board.valid_move?(computer_move)
               board.display
             # else
-
-            end
+            
           end
+          binding.pry
         end
-        binding.pry
-    end
+      end
   end
 
 end
