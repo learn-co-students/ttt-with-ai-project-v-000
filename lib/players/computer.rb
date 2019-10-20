@@ -10,8 +10,8 @@ module Players
 
         # valid_moves.select {rand(0..10)}
         board.cells.select do |move|
+          move = rand(1..9)
           if board.full?
-            move = rand(1..9)
              if board.valid_move?(move)
               board.update(move, self)
       #     #  computer_move = board.position(@input)
