@@ -4,10 +4,7 @@ module Players
     def move(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-
-      current_player = @board.turn_count % 2 == 0 ? player_1 : player_2
-
-
+      # current_player = board.turn_count % 2 == 0 ? player_1 : player_2
       # computer_move = valid_moves.select do |move|
         # if valid_moves[4] == " "
 
@@ -17,7 +14,7 @@ module Players
             move = rand(1..9)
             # board.valid_move?(move[4])
           if board.valid_move?(move)
-            board.update(move, current_player)
+            board.update(move, self)
       #     #  computer_move = board.position(@input)
       # #       computer_move.to_s
       # #       # board.valid_move?(computer_move)
