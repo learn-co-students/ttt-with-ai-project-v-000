@@ -21,7 +21,7 @@ module Players
               move(board)
             end
           end
-          binding.pry
+          # binding.pry
         end
       end
   end
