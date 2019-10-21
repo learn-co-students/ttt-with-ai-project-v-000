@@ -4,7 +4,7 @@ module Players
     def move(board)
       game = Game.new()
       game.current_player
-      binding.pry
+      # binding.pry
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       # current_player = board.turn_count % 2 == 0 ? player_1 : player_2
       # computer_move = valid_moves.select do |move|
@@ -24,11 +24,10 @@ module Players
               move(board)
             end
           end
-          binding.pry
+          # binding.pry
         end
       end
   end
-
 end
 
 # def turn
