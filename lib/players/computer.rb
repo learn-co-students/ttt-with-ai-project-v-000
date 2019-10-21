@@ -11,7 +11,8 @@ module Players
       # computer_move = valid_moves.select do |move|
         board.cells.select do |comp_move|
           binding.pry
-          comp_move = rand(1..9)
+          # comp_move = rand(1..9)
+          comp_move = game.current_player.move(@board)
           if board.full? == false
              if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
