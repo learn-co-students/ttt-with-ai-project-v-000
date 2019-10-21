@@ -10,7 +10,7 @@ module Players
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       # computer_move = valid_moves.select do |move|
         board.cells.select do |comp_move|
-          binding.pry
+          # binding.pry
           # comp_move = rand(1..9)
           comp_move = game.current_player.move(@board)
           if board.full? == false
@@ -22,7 +22,7 @@ module Players
               move(board)
             end
           end
-          # binding.pry
+          binding.pry
         end
       end
   end
