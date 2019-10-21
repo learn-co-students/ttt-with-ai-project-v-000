@@ -23,7 +23,6 @@ module Players
       end
   end
 end
-
 # def turn
 #   input = current_player.move(@board)
 #   if @board.valid_move?(input)
