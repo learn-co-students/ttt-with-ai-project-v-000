@@ -2,10 +2,10 @@ module Players
 
   class Computer < Player
     def move(board)
-      computer_move = game.current_player.move(@board)
-      binding.pry
       game = Game.new()
       game.current_player
+      computer_move = game.current_player.move(@board)
+        binding.pry
 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       # computer_move = valid_moves.select do |move|
