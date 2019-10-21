@@ -2,43 +2,50 @@
 
 require_relative '../config/environment'
 
-puts "Hello! Welcome to Tic Tac Toe."
+input_d = nil
 
-puts "What kind of game would you like to play?"
-puts "1. 0 Player"
-puts "2. 1 Player"
-puts "3. 2 Player"
-input_a = gets.strip
-
-if (a == 2) || (a == 3)
-  puts "Would you like to be "X" (Player #1) or "O" ("Player #2")?"
-  puts "Enter your selection("X" or "O"):"
-  input_b = gets.strip
+def universal_welcome
+  puts "What kind of game would you like to play?"
+  puts "1. 0 Player"
+  puts "2. 1 Player"
+  puts "3. 2 Player"
+  input_a = gets.strip
+  if input_a == "2" || input_a == "3"
+    puts "Would you like to be X (Player 1), or O (Player 2)?"
+    puts "Enter your selection(X or O):"
+    input_b = gets.strip
+  end
+  
+  if (input_a == "1")
+    Game.new(player_1 = Players::Computer.new, player_2 = Players::Computer.new("O"), board = Board.new).play(board = @board)
+    elsif (input_a == "2") && (input_b == "X")
+    Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play(board = @board)
+    elsif (input_a == "2") && (input_b == "O")
+    Game.new(player_1 = Players::Computer.new, player_2 = Players::Human.new("O"), board = Board.new).play(board = @board)
+    elsif (input_a == "3") && (input_b == "X")
+    Game.new(player_1 = Players::Human.new, player_2 = Players::Human.new, board = Board.new).play(board = @board)
+    elsif (input_a == "2") && (input_b == "O") 
+    Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play(board = @board)
+  end
 end
-
-if (input_a == 1)
-  Game.new(player_1 = Players::Computer.new, player_2 = Players::Computer.new("O"), board = Board.new).play(board = @board)
   
-  elsif (input_a == 2) && (input_b == "X")
-  Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play(board = @board)
-  
-  elsif (input_a == 2) && (input_b == "O")
-  Game.new(player_1 = Players::Computer.new, player_2 = Players::Human.new("O"), board = Board.new).play(board = @board)
-  
-  elsif (input_a == 3) && (input_b == "X")
-  Game.new(player_1 = Players::Human.new, player_2 = Players::Human.new, board = Board.new).play(board = @board)
-  
-  elsif (input_a == 2) && (input_b == "O") 
-  Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play(board = @board)
-end
-
-if game.over?
+if input_d != nil
   puts "Would you like to play again?"
   puts "1. Yes"
   puts "2. No"
   input_c = gets.strip
+  if input_c == "Yes" || input_c == "1"
+  self.universal_welcome
+  elsif input_c == "No" || input_c ==  "2"
+  puts "Thanks for playing!"
+  end
 end
 
-if input_c = "Yes"
-
-
+if input_d == nil 
+  puts "Hello! Welcome to Tic Tac Toe."
+  puts "Please enter your name:"
+  input_d = gets.strip
+  if input_d != nil
+    universal_welcome
+  end
+end
