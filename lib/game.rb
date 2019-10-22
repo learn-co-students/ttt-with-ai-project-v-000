@@ -70,6 +70,29 @@ class Game
     end
   end
   
+  def turn
+    a = current_player.move(board)
+    if board.valid_move?(a)
+      board.update(a, current_player)
+      else
+        self.turn
+      end
+    end
+  
+  def play
+    while !over?
+      turn
+    end
+    if won?
+      puts "Congratulations #{self.winner}!"
+      elsif draw?
+      puts "Cat's Game!"
+    end
+  end
+end
+
+  
+  
   #def turn
     #a = current_player.move(board)
     #if board.valid_move?(a)
@@ -85,14 +108,17 @@ class Game
       #end
     #end
   
-    def turn
-    a = current_player.move(board)
-    if board.valid_move?(a)
-      board.update(a, current_player)
-    else
-      self.turn
-    end
-  end
+    #def turn
+    #a = current_player.move(board)
+    #if board.valid_move?(a)
+      #board.update(a, current_player)
+#<<<<<<< HEAD
+    #else
+      #self.turn
+
+    #else
+      #turn
+
   
   #def play
     #while !over?
@@ -106,35 +132,35 @@ class Game
   #end
 #end
   
-  def play
-    while !over?
-    turn
-    end
-    if won?
-      puts "Congratulations #{self.winner}!"
-      elsif draw?
-      puts "Cat's Game!"
-      end
-    end
+  #def play
+    #while !over?
+    #turn
+    #end
+    #if won?
+      #puts "Congratulations #{self.winner}!"
+      #elsif draw?
+      #puts "Cat's Game!"
+      #end
+    #end
     
-  def game_chooser(input)
-    input_b = " "
-    if (input == "2") || (input == "3")
-      puts "Would you like to be X (Player 1), or O (Player 2)?"
-      puts "Enter your selection(X or O):"
-      input_b = gets.strip
-      end
+  #def game_chooser(input)
+    #input_b = " "
+    #if (input == "2") || (input == "3")
+      #puts "Would you like to be X (Player 1), or O (Player 2)?"
+      #puts "Enter your selection(X or O):"
+      #input_b = gets.strip
+      #end
       
-    if (input == "1")
-      Game.new(player_1 = Players::Computer.new, player_2 = Players::Computer.new("O"), board = Board.new).play
-      elsif (input == "2") && (input_b== "X")
-      Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play
-      elsif (input == "2") && (input_b == "O")
-      Game.new(player_1 = Players::Computer.new, player_2 = Players::Human.new("O"), board = Board.new).play
-      elsif (input == "3") && (input_b == "X")
-      Game.new(player_1 = Players::Human.new, player_2 = Players::Human.new, board = Board.new).play
-      elsif (input == "2") && (input_b == "O") 
-      Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play
-    end
-  end
-end
+    #if (input == "1")
+      #Game.new(player_1 = Players::Computer.new, player_2 = Players::Computer.new("O"), board = Board.new).play
+      #elsif (input == "2") && (input_b== "X")
+      #Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play
+      #elsif (input == "2") && (input_b == "O")
+      #Game.new(player_1 = Players::Computer.new, player_2 = Players::Human.new("O"), board = Board.new).play
+      #elsif (input == "3") && (input_b == "X")
+      #Game.new(player_1 = Players::Human.new, player_2 = Players::Human.new, board = Board.new).play
+      #elsif (input == "2") && (input_b == "O") 
+      #Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play
+    #end
+  #end
+#end
