@@ -70,11 +70,26 @@ class Game
     end
   end
   
-  def turn
+  #def turn
+    #a = current_player.move(board)
+    #if board.valid_move?(a)
+      #board.update(input, current_player)
+      #elsif !board.valid_move?(a)
+        #until board.valid_move?(input)
+          #puts "Enter input again:"
+          #input = gets.strip
+          #if board.valid_move?(input)
+            #board.update(input, current_player)
+          #end
+        #end
+      #end
+    #end
+  
+    def turn
     a = current_player.move(board)
     if board.valid_move?(a)
       board.update(a, current_player)
-    else 
+    else
       self.turn
     end
   end
@@ -92,12 +107,12 @@ class Game
 #end
   
   def play
-    while !self.over?
-    self.turn
+    while !over?
+    turn
     end
-    if self.won?
+    if won?
       puts "Congratulations #{self.winner}!"
-      elsif self.draw?
+      elsif draw?
       puts "Cat's Game!"
       end
     end

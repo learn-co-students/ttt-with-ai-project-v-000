@@ -1,7 +1,6 @@
 module Players
   class Computer < Player
     def move(board)
-      binding.pry
       
       index_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
       options_array = []
@@ -12,25 +11,25 @@ module Players
         end
       end
       
-      if !board.taken?(5)
+      if !board.taken?("5")
         options_array.delete(5)
         "5"
-        elsif !board.taken?(2)
+        elsif !board.taken?("2")
         options_array.delete(2)
         "2"
-        elsif !board.taken?(4)
+        elsif !board.taken?("4")
         options_array.delete(4)
-        "2"
-        elsif !board.taken?(6)
+        "4"
+        elsif !board.taken?("6")
         options_array.delete(6)
-        "2"
-        elsif !board.taken?(8)
+        "6"
+        elsif !board.taken?("8")
         options_array.delete(8)
-        "2"
+        "8"
       end
 
-      a = options_array.sample 
-      
+      a = options_array.sample
+      options_array.delete(a)
       "#{a}"
     end
   end
