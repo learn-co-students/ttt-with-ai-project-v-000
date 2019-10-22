@@ -29,8 +29,11 @@ module Players
             # game.turn
              if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
+              #   if game.won?
               board.display
-              comp_move.to_s
+              #
+              #   end
+                comp_move.to_s
                 # if
 
             else
