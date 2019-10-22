@@ -24,12 +24,14 @@ module Players
           # binding.pry
           comp_move = rand(1..9)
           # game.play
-          comp_move = game.current_player.move(rand(1..9))
-          if board.full?
+          # comp_move = game.current_player.move(rand(1..9))
+          if board.full? == false
+            # game.turn
              if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
               board.display
               comp_move.to_s
+                # if
 
             else
               move(board)
