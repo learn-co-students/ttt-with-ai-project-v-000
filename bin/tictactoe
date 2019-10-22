@@ -3,7 +3,7 @@ require_relative '../config/environment'
 
 def game_chooser(input_a, input_b)
   if (input_a == "1") && (input_b != nil)
-    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+    Game.new(player_1 = Players::Computer.new, player_2 = Players::Computer.new("O"), board = Board.new).play
   elsif (input_a == "2") && (input_b== "X")
     Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play
   elsif (input_a == "2") && (input_b == "O")
@@ -26,7 +26,7 @@ puts "2. 1 Player"
 puts "3. 2 Player"
 input_a = gets.strip
 puts "Would you like to be X or O?"
-input_b = gets.strip
+input_b = gets.strip.upcase
 game_chooser(input_a, input_b)
   
 

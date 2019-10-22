@@ -40,20 +40,11 @@ class Board
   end
   
   def taken?(x)
-    y = x.to_i
-    if @cells[y - 1] == " "
-      false
-    else
-      true
-    end
+    !@cells[x.to_i- 1] == " " || @cells[x.to_i - 1] == ""
   end
   
   def valid_move?(x)
-    if x.to_i.between?(1, 9) && taken?(x) == false 
-      true
-    else 
-      false
-    end
+    x.to_i.between?(1, 9) && !taken?(x)
   end
   
   def update(x, player)

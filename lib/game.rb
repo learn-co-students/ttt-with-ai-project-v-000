@@ -74,6 +74,7 @@ class Game
     a = current_player.move(board)
     if board.valid_move?(a)
       board.update(a, current_player)
+      board.display
       else
         self.turn
       end
