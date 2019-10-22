@@ -1,5 +1,4 @@
 class Game
-  
   attr_accessor :board, :player_1, :player_2, :cells
   
   WIN_COMBINATIONS  = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -16,29 +15,28 @@ class Game
   end
   
   def current_player
-    player_one_array = []
-    player_two_array = []
-    x = player_1.token
-    y = player_2.token
+    #arr_1 = board.cells.select{|x| x.match(/X/)}
+    #arr_2 = board.cells.select{|x| x.match(/O/)}
+    arr_1 = []
+    arr_2 = []
     board.cells.each do |item|
-      if item == x 
-        player_one_array << x 
-        elsif item == y 
-        player_two_array << y 
+      if item == "X"
+        arr_1 << item
+        elsif item == "O"
+        arr_2 << item
       end
     end
-    if player_one_array.length > player_two_array.length
-      player_2
-      elsif player_two_array.length > player_one_array.length
-      player_1
-      elsif player_one_array.length == player_two_array.length
-      player_1
+    if arr_1.length > arr_2.length
+      self.player_2
+      elsif arr_1.length < arr_2.length
+      self.player_1
+      elsif arr_1.length == arr_2.length
+      self.player_1
     end
   end
   
   def won?
     y = []
-    #binding.pry
     WIN_COMBINATIONS.each do |combo|
       if (board.cells[combo[0]] == "X" && board.cells[combo[1]] == "X" && board.cells[combo[2]] == "X")
         y << combo
@@ -74,21 +72,54 @@ class Game
   
   def turn
     a = current_player.move(board)
-    if board.valid_move?(a) 
+    if board.valid_move?(a)
       board.update(a, current_player)
     else 
       self.turn
     end
   end
   
+  #def play
+    #while !over?
+    #turn
+    #end
+    #if won?
+      #puts "Congratulations #{self.winner}!"
+      #elsif draw?
+      #puts "Cat's Game!"
+    #end
+  #end
+#end
+  
   def play
     while !self.over?
-      turn
+    self.turn
     end
     if self.won?
       puts "Congratulations #{self.winner}!"
-    elsif self.draw? 
+      elsif self.draw?
       puts "Cat's Game!"
+      end
+    end
+    
+  def game_chooser(input)
+    input_b = " "
+    if (input == "2") || (input == "3")
+      puts "Would you like to be X (Player 1), or O (Player 2)?"
+      puts "Enter your selection(X or O):"
+      input_b = gets.strip
+      end
+      
+    if (input == "1")
+      Game.new(player_1 = Players::Computer.new, player_2 = Players::Computer.new("O"), board = Board.new).play
+      elsif (input == "2") && (input_b== "X")
+      Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play
+      elsif (input == "2") && (input_b == "O")
+      Game.new(player_1 = Players::Computer.new, player_2 = Players::Human.new("O"), board = Board.new).play
+      elsif (input == "3") && (input_b == "X")
+      Game.new(player_1 = Players::Human.new, player_2 = Players::Human.new, board = Board.new).play
+      elsif (input == "2") && (input_b == "O") 
+      Game.new(player_1 = Players::Human.new, player_2 = Players::Computer.new("O"), board = Board.new).play
     end
   end
 end
