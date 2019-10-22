@@ -3,21 +3,35 @@ module Players
     def move(board)
       binding.pry
       
+      index_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      options_array = []
       
-      
-      
-      
-      
-      if !board.taken?(5)
-        "5"
-        elsif board.taken?(5)
-        a = [2, 4, 6, 8].sample
-        "#{a}"
-        elsif 
+      index_array.each do |item|
+        if !board.taken?(item)
+          options_array << item 
+        end
       end
       
-      if 
+      if !board.taken?(5)
+        options_array.delete(5)
+        "5"
+        elsif !board.taken?(2)
+        options_array.delete(2)
+        "2"
+        elsif !board.taken?(4)
+        options_array.delete(4)
+        "2"
+        elsif !board.taken?(6)
+        options_array.delete(6)
+        "2"
+        elsif !board.taken?(8)
+        options_array.delete(8)
+        "2"
+      end
+
+      a = options_array.sample 
       
+      "#{a}"
     end
   end
 end
