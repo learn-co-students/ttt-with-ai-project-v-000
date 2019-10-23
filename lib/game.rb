@@ -70,17 +70,13 @@ class Game
   
   def turn
     a = current_player.move(board)
-    if board.valid_move(a)
+    b = " "
+    while !board.valid_move?(a)
+    a = current_player.move(board)
+    end
+    if board.valid_move?(a)
       board.update(a, current_player)
       board.display
-    end
-    while !board.valid_move?(a)
-      puts "Please enter a valid position:"
-      b = gets.strip
-      if board.valid_move?(b)
-        board.update(b, current_player)
-        board.display
-      end
     end
   end
   
