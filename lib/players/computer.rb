@@ -18,27 +18,22 @@ module Players
       #     puts "Cat's Game!"
       #   end
       # end
-
         board.cells.select do |comp_move|
-          # game = Game.new()
           # binding.pry
           comp_move = rand(1..9)
-          # game.play
           # comp_move = game.current_player.move(rand(1..9))
-          if board.full? == false
+          if board.full?
             # game.turn
              if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
               #   if game.won?
               board.display
-              #
               #   end
                 comp_move.to_s
                 # if
-
-            else
+             else
               move(board)
-            end
+             end
           end
           binding.pry
         end
