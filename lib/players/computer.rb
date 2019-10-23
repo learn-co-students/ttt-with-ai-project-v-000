@@ -25,7 +25,8 @@ module Players
           # if board.full?
             # game.turn
           else
-            move(board)
+            # move(board)
+            game.over?
           end
           binding.pry
         end
