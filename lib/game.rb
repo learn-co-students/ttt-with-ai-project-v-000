@@ -15,8 +15,6 @@ class Game
   end
   
   def current_player
-    #arr_1 = board.cells.select{|x| x.match(/X/)}
-    #arr_2 = board.cells.select{|x| x.match(/O/)}
     arr_1 = []
     arr_2 = []
     board.cells.each do |item|
@@ -72,13 +70,19 @@ class Game
   
   def turn
     a = current_player.move(board)
-    if board.valid_move?(a)
+    if board.valid_move(a)
       board.update(a, current_player)
       board.display
-      else
-        self.turn
+    end
+    while !board.valid_move?(a)
+      puts "Please enter a valid position:"
+      b = gets.strip
+      if board.valid_move?(b)
+        board.update(b, current_player)
+        board.display
       end
     end
+  end
   
   def play
     while !over?
