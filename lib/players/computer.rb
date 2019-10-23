@@ -30,7 +30,7 @@ module Players
                 comp_move.to_s
                 if game.won?
                   puts "Congratulations #{winner}!"
-                elsif draw?
+                elsif game.draw?
                   puts "Cat's Game!"
                 end
              else
