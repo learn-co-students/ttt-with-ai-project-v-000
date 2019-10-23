@@ -26,11 +26,13 @@ module Players
             # game.turn
              if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
-              #   if game.won?
               board.display
-              #   end
                 comp_move.to_s
-                # if
+                if game.won?
+                  puts "Congratulations #{winner}!"
+                elsif draw?
+                  puts "Cat's Game!"
+                end
              else
               move(board)
              end
