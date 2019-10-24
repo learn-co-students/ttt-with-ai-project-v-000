@@ -11,12 +11,12 @@ module Players
         board.cells.select do |comp_move|
           # binding.pry
           comp_move = rand(1..9)
-          if board.full?
-           board.valid_move?(comp_move)
+          # if board.full?
+           if board.valid_move?(comp_move) == true
             board.update(comp_move, game.current_player)
             board.display
             comp_move.to_s
-            game.over?
+            # game.over?
           # if game.won?
           #   puts "Congratulations #{winner}!"
           # elsif game.draw?
@@ -25,8 +25,8 @@ module Players
           # comp_move = game.current_player.move(rand(1..9))
           # if board.full?
             # game.turn
-          # else
-          #   # move(board)
+          else
+            move(board)
           #   game.over?
           end
           binding.pry
