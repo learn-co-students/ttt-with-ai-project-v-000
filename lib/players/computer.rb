@@ -13,7 +13,7 @@ module Players
           comp_move = rand(1..9)
           # if board.full?
            if board.valid_move?(comp_move) == true
-             binding.pry
+            #  binding.pry
             board.update(comp_move, game.current_player)
             board.display
             comp_move.to_s
@@ -30,7 +30,7 @@ module Players
             move(board)
           #   game.over?
           end
-          binding.pry
+          # binding.pry
         end
       end
   end
