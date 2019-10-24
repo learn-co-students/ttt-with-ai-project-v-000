@@ -6,13 +6,13 @@ module Players
       # game.current_player
       # computer_move = game.current_player
         # binding.pry
-      valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      # valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       # computer_move = valid_moves.select do |move|
         board.cells.select do |comp_move|
           # binding.pry
           comp_move = rand(1..9)
           while board.full? == false
-            binding.pry
+            # binding.pry
            if board.valid_move?(comp_move) == true
             #  binding.pry
             board.update(comp_move, game.current_player)
