@@ -89,7 +89,7 @@ describe 'Game' do
                           "O", "O", "X",
                           "O", "X", "X"]
 
-      expect(game.won?).to contain_exactly(2, 5, 8)
+      expect(game.won?).to contain_exactly(0, 4, 8)
     end
 
     it "isn't hard-coded" do
