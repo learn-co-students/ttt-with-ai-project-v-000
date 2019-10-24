@@ -1,3 +1,21 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe with AI!"
+puts "Choose '0', '1', or '2' for number of players:"
+input = gets.strip.to_i
+  if input == 0
+    new_game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"))
+  elsif input == 1
+    new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"))
+  elsif input == 2
+    new_game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"))
+  end
+  new_game.play
+
+
+  # all tests passing
+  # players 0, 1, and 2 work
+  # computer does not play with good strategy.
+  # Will get help to figure out better plan for "move"
