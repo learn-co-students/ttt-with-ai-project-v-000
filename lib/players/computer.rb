@@ -6,17 +6,18 @@ module Players
         board.cells.select do |comp_move|
           comp_move = rand(1..9)
           while board.full? == false
-           if board.valid_move?(comp_move) == true
-            board.update(comp_move, game.current_player)
-            comp_move.to_s
-           else
-            move(board)
-           end
+            # binding.pry
+            if board.valid_move?(comp_move) == true
+              board.update(comp_move, game.current_player)
+              comp_move.to_s
+            else
+              move(board)
+            end
           end
           # comp_move.to_s
           #   board.cells
-            binding.pry
-      end
+            # binding.pry
+        end
     end
   end
 end
