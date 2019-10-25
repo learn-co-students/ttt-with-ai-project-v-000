@@ -8,7 +8,7 @@ def reset!
 end
 
 def initialize
- ##cells = Array.new(9, " ")
+ @cells = Array.new(9, " ")
 end
 
 
