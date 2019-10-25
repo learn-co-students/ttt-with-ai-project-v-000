@@ -16,7 +16,7 @@ module Players
            if board.valid_move?(comp_move) == true
             #  binding.pry
             board.update(comp_move, game.current_player)
-            board.display
+            # board.display
             comp_move.to_s
             # game.over?
           # if game.won?
