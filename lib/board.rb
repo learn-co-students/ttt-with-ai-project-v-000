@@ -12,7 +12,7 @@ def initialize
 end
 
 def  display
-  puts @cells
+  puts " #{@cells[0]} | #{@cells[1]} | #{@cells[2]}"
 end
 
 
