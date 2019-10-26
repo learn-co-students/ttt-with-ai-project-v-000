@@ -1,5 +1,4 @@
 module Players
-
   class Computer < Player
     def move(board)
       game = Game.new()
