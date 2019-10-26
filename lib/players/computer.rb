@@ -10,6 +10,7 @@ module Players
             if board.valid_move?(comp_move)
             # if board.valid_move?(comp_move) == true
               board.update(comp_move, game.current_player)
+              board.cells
               # board.cells
             else
               move(board)
