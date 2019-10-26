@@ -17,7 +17,7 @@ module Players
           end
           comp_move.to_s
             # board.cells
-            # binding.pry
+            binding.pry
         end
     end
   end
