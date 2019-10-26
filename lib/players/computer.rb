@@ -14,7 +14,7 @@ module Players
               # board.cells
             else
               move(board)
-            end
+            end    
           end
           comp_move.to_s
             # binding.pry
