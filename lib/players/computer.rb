@@ -4,8 +4,9 @@ module Players
     def move(board)
       game = Game.new()
         board.cells.map do |comp_move|
-          comp_move = rand(1..9)
+
           while board.full?
+            comp_move = rand(1..9)
             # binding.pry
             if board.valid_move?(comp_move)
             # if board.valid_move?(comp_move) == true
@@ -14,7 +15,7 @@ module Players
               # board.cells
             else
               move(board)
-            end    
+            end
           end
           comp_move.to_s
             # binding.pry
