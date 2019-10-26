@@ -3,10 +3,14 @@ module Players
   class Computer < Player
     def move(board)
       game = Game.new()
-        board.cells.map do |comp_move|
-
-          while board.full?
+      # array.map { |comp_move| rand(1..9) }
+        # board.cells.map do |comp_move|
+        #   comp_move = rand(1..9)
+          board.cells.map do |comp_move|
             comp_move = rand(1..9)
+            
+          while board.full?
+
             # binding.pry
             if board.valid_move?(comp_move)
             # if board.valid_move?(comp_move) == true
