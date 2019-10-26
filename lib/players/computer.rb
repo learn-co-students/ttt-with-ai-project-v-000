@@ -16,6 +16,7 @@ module Players
             else
               move(board)
             end
+            comp_move
           end
           # comp_move.to_s
           # board.cells
