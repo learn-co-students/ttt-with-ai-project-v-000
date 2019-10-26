@@ -4,7 +4,7 @@ module Players
     def move(board)
       game = Game.new()
       # array.map { |comp_move| rand(1..9) }
-          board.cells.select do |comp_move|
+          board.cells.each do |comp_move|
             comp_move = rand(1..9)
             while board.full?
             # binding.pry
