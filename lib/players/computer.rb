@@ -7,10 +7,9 @@ module Players
         # myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
         # item = myArray[rand(myarray.length)]
         computer_move = board.cells[rand(board.cells.length)]
-        
-        binding.pry
         board.cells.map do |comp_move|
           comp_move = rand(1..9)
+          computer_move = comp_move
           while board.full?
             if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
@@ -23,7 +22,7 @@ module Players
           # board.cells.sort
           # board.reset!
           # comp_move.to_s
-          # binding.pry
+          binding.pry
         end
     end
   end
