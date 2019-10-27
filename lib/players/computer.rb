@@ -10,12 +10,12 @@ module Players
         # board.cells[rand(board.cells.length)].select do |comp_move|
 
         board.cells.select do |computer_move|
-          # computer_move = board.cells[rand(board.cells.length)]
-          board.cells[rand(board.cells.length)]
+          computer_move = board.cells[rand(board.cells.length)]
+          
           # comp_move = rand(1..9)
 
           board.cells[computer_move] = rand(1..9)
-          
+
           # board.cells[computer_move] = comp_move
 
           while board.full?
