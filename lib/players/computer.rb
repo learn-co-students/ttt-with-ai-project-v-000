@@ -2,16 +2,28 @@ module Players
   class Computer < Player
     def move(board)
       game = Game.new()
-        board.cells.select do |comp_move|
+        # comp_move = board.cells.sort
+        # binding.pry
+        # myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
+        # item = myArray[rand(myarray.length)]
+        computer_move = board.cells[rand(board.cells.length)]
+        
+        binding.pry
+        board.cells.map do |comp_move|
           comp_move = rand(1..9)
           while board.full?
             if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
+              # board.cells.sort
               comp_move.to_s
             else
               move(board)
             end
           end
+          # board.cells.sort
+          # board.reset!
+          # comp_move.to_s
+          # binding.pry
         end
     end
   end
