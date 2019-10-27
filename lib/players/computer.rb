@@ -2,14 +2,16 @@ module Players
   class Computer < Player
     def move(board)
       game = Game.new()
+      comp_move = rand(1..9)
+      binding.pry
         board.cells.each do |comp_move|
           # board.cells.sort
-          comp_move = rand(1..9)
-          binding.pry
+          # comp_move = rand(1..9)
+          # binding.pry
           while board.full?
             if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
-              # comp_move.to_s
+              comp_move.to_s
             else
               move(board)
             end
