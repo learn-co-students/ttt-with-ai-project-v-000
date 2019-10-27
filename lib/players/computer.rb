@@ -8,11 +8,13 @@ module Players
         # item = myArray[rand(myarray.length)]
         # comp_move = board.cells[rand(board.cells.length)]
         # board.cells[rand(board.cells.length)].select do |comp_move|
-        computer_move = board.cells[rand(board.cells.length)]
+
         # board.cells.select do |comp_move|
-          comp_move = rand(1..9)
-          computer_move = comp_move
           while board.full?
+            computer_move = board.cells[rand(board.cells.length)]
+            comp_move = rand(1..9)
+            computer_move = comp_move
+            
             if board.valid_move?(computer_move)
               board.update(computer_move, game.current_player)
               # board.cells.sort
@@ -24,7 +26,7 @@ module Players
           # board.cells.sort
           # board.reset!
           # comp_move.to_s
-          # binding.pry
+          binding.pry
         # end
     end
   end
