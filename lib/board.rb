@@ -42,5 +42,10 @@ def taken?(input)
   position(input) == "X" || position(input) == "O" ? true : false
 end
 
+def valid_move?(input)
+  input.to_i.between?(1, 9) && !taken?(input) ? true : false
+end
+
+
 
 end
