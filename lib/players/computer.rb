@@ -16,10 +16,10 @@ module Players
           binding.pry
           # computer_move = comp_move
           while board.full?
-            if board.valid_move?(comp_move)
-              board.update(comp_move, game.current_player)
+            if board.valid_move?(computer_move)
+              board.update(computer_move, game.current_player)
               # board.cells.sort
-              comp_move.to_s
+              computer_move.to_s
             else
               move(board)
             end
