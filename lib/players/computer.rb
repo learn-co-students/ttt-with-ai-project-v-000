@@ -2,7 +2,8 @@ module Players
   class Computer < Player
     def move(board)
       game = Game.new()
-        board.cells.each do |comp_move|
+        # board.cells.each do |comp_move|
+          board.cells.sort
           binding.pry
           rand(comp_move)
           while board.full?
@@ -13,11 +14,12 @@ module Players
               move(board)
             end
           end
-        end
+        # end
     end
   end
 end
 
+a.combination(n)
 # computer_move = computer.move(board)
 # Implement a `#move` method that accepts a board and returns the move the computer
 # wants to make in the form of a 1-9 string. How the computer decides to make that
