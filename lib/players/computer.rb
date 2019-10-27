@@ -3,8 +3,9 @@ module Players
     def move(board)
       game = Game.new()
       comp_move = rand(1..9)
+      board.cells.combination(comp_move)
       binding.pry
-        board.cells.each do |comp_move|
+        # board.cells.each do |comp_move|
           # board.cells.sort
           # comp_move = rand(1..9)
           # binding.pry
@@ -16,7 +17,7 @@ module Players
               move(board)
             end
           end
-        end
+        # end
     end
   end
 end
