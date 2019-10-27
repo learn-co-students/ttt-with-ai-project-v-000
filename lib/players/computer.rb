@@ -11,11 +11,10 @@ module Players
 
         # board.cells.select do |comp_move|
           while board.full?
-            computer_move = board.cells[rand(board.cells.length)]
             comp_move = rand(1..9)
-            computer_move = comp_move
-            
-            if board.valid_move?(computer_move)
+            if board.valid_move?(comp_move)
+              computer_move = board.cells[rand(board.cells.length)]
+              computer_move = comp_move
               board.update(computer_move, game.current_player)
               # board.cells.sort
               computer_move.to_s
@@ -26,7 +25,7 @@ module Players
           # board.cells.sort
           # board.reset!
           # comp_move.to_s
-          binding.pry
+          # binding.pry
         # end
     end
   end
