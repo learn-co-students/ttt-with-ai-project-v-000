@@ -4,7 +4,7 @@ module Players
       game = Game.new()
         board.cells.each do |comp_move|
           # board.cells.sort
-          rand(1..9)
+          comp_move = rand(1..9)
           binding.pry
           while board.full?
             if board.valid_move?(comp_move)
