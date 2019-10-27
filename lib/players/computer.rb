@@ -13,7 +13,7 @@ module Players
           computer_move = board.cells[rand(board.cells.length)]
           comp_move = rand(1..9)
           binding.pry
-          comp_move = board.cells[computer_move]
+          board.cells[computer_move] = comp_move 
 
           while board.full?
 
