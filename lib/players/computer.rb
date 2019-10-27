@@ -9,9 +9,10 @@ module Players
         # comp_move = board.cells[rand(board.cells.length)]
         # board.cells[rand(board.cells.length)].select do |comp_move|
 
-        # board.cells.select do |comp_move|
+        board.cells.select do |comp_move|
+          comp_move = rand(1..9)
           while board.full?
-            comp_move = rand(1..9)
+
             if board.valid_move?(comp_move)
               computer_move = board.cells[rand(board.cells.length)]
               computer_move = comp_move
