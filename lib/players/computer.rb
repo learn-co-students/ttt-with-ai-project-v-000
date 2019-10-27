@@ -5,7 +5,7 @@ module Players
         # comp_move = board.cells.sort
         # binding.pry
         # myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
-        # item = myArray[rand(myarray.length)]
+        # item = myArray[rand(myArray.length)]
         # comp_move = board.cells[rand(board.cells.length)]
         # board.cells[rand(board.cells.length)].select do |comp_move|
 
