@@ -2,9 +2,9 @@ module Players
   class Computer < Player
     def move(board)
       game = Game.new()
-        board.cells.map do |comp_move|
-          while board.full?
+        board.cells.select do |comp_move|
           comp_move = rand(1..9)
+          while board.full?
             if board.valid_move?(comp_move)
               board.update(comp_move, game.current_player)
               comp_move.to_s
