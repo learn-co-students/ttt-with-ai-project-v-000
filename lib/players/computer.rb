@@ -15,7 +15,7 @@ module Players
 
             if board.valid_move?(comp_move)
               computer_move = board.cells[rand(board.cells.length)]
-              computer_move = comp_move
+              comp_move = computer_move
               board.update(computer_move, game.current_player)
               # board.cells.sort
               computer_move.to_s
