@@ -1,7 +1,7 @@
 module Players
   class Computer < Player
     def move(board)
-      game = Game.new()
+      # game = Game.new()
         # comp_move = board.cells.sort
         # binding.pry
         # myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
@@ -26,8 +26,8 @@ module Players
           # board.cells.sort
           # board.reset!
           # comp_move.to_s
-          # binding.pry
-        # end
+          binding.pry
+        end
     end
   end
 end
