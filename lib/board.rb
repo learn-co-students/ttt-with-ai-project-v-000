@@ -43,9 +43,12 @@ def taken?(input)
 end
 
 def valid_move?(input)
-  input.to_i.between?(1, 9) && !taken?(input) ? true : false
+  input.to_i.between?(1, 9) && !taken?(input)
 end
 
+# def update(input, player)
+#   position(input)
+# end
 
 
 end
