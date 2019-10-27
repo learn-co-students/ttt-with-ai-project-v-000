@@ -27,4 +27,20 @@ def position(input)
    @cells.all?{ |char| char == "X" || char == "O"}
  end
 
+ def turn_count
+  counter = 0
+  @cells.each do |cell|
+    if cell == "X" || cell == "O"
+      counter += 1
+    end
+  end
+  counter
+ end
+
+
+def taken?(input)
+  position(input) == "X" || position(input) == "O" ? true : false
+end
+
+
 end
