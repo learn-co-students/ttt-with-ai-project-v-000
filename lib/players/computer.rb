@@ -18,21 +18,15 @@ module Players
         # end
         # binding.pry
 
-        board.cells.select do |computer_move|
+        board.cells.map do |computer_move|
           # computer_move = board.cells[rand(board.cells.length)]
           # board.cells[rand(board.cells.length)]
-
-
           computer_move = rand(1..9)
-
           # board.cells[computer_move] = rand(1..9)
-
           # board.cells[computer_move] = comp_move
-
           while board.full?
             # board.cells << computer_move
             # if board.valid_move?(computer_move)
-
               board.update(computer_move, game.current_player)
               # board.cells.sort
               computer_move.to_s
