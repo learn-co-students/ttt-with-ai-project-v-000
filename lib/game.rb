@@ -24,6 +24,19 @@ def current_player
   @board.turn_count % 2 == 0 ? player_1 : player_2
 end
 
+def won?
+ @board.full? && @cells.include?(WIN_COMBINATIONS) ? true : false
+ #if board full?
+ #do the cells of the board = WIN_COMBINATIONS
+ #if != WIN_COMBINATIONS return false
+ #else return WIN_COMBINATIONS that applies
+
+end
+
+def over?
+  @board.full?
+end
+
 
 
 end
