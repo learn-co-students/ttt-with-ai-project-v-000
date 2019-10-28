@@ -9,9 +9,9 @@ module Players
         # comp_move = board.cells[rand(board.cells.length)]
         # board.cells[rand(board.cells.length)].select do |comp_move|
           while board.full?
-        board.cells.map do |cell|
-          cell = rand(1..9)
-          board.cells
+        board.cells.map do |comp_move|
+          comp_move = rand(1..9)
+          
           end
         end
         binding.pry
