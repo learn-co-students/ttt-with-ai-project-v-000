@@ -45,4 +45,12 @@ def winner
   end
 end
 
+#currently working on turn method below
+# def turn
+#   Players::Human.move(board)
+#   index = position(input)
+#   valid_move?(index) ? update(index, player) : turn
+#
+# end
+
 end
