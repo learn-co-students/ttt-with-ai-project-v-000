@@ -53,8 +53,18 @@ def turn
 end
 
 def play
+#   if !draw? && !won?
+#   turn
+# elsif draw?
+#
+
+while !over?
   turn
-  over?
+if draw?
+  puts "Cat's game!"
+elsif won?
+  puts "Congratulations #{winner}!"
+end
 end
 
 end
