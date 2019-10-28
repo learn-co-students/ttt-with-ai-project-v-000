@@ -3,6 +3,7 @@ module Players
     def move(board)
       game = Game.new()
         board.cells.map do |computer_move|
+          computer_move = board.cells[rand(board.cells.length)]
           computer_move = rand(1..9)
             while board.full?
             if board.valid_move?(computer_move)
