@@ -4,12 +4,13 @@ module Players
       game = Game.new()
         # comp_move = board.cells.sort
         # binding.pry
-        myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
-        item = myArray[rand(myArray.length)]
+        # myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
+        # item = myArray[rand(myArray.length)]
         # comp_move = board.cells[rand(board.cells.length)]
         # board.cells[rand(board.cells.length)].select do |comp_move|
-          while board.full?
+
         board.cells.map do |comp_move|
+          while board.full?
           comp_move = rand(1..9)
           board.cells << comp_move
           end
