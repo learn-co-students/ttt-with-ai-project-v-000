@@ -2,7 +2,7 @@ module Players
   class Computer < Player
     def move(board)
       game = Game.new()
-        board.cells.map do |computer_move|
+        board.cells.each do |computer_move|
           computer_move = rand(1..9)
             while board.full?
             if board.valid_move?(computer_move)
