@@ -29,15 +29,15 @@ module Players
 
           # board.cells[computer_move] = comp_move
 
-          if board.full?
-            board.cells << computer_move
+          while board.full?
+            # board.cells << computer_move
             # if board.valid_move?(computer_move)
 
               board.update(computer_move, game.current_player)
               # board.cells.sort
               computer_move.to_s
-            else
-              move(board)
+            # else
+            #   move(board)
             end
           end
           # board.cells.sort
