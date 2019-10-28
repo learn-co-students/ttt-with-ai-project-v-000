@@ -10,10 +10,8 @@ module Players
             else
               move(board)
             end
-            computer_move.to_s
           end
-          board.cells
-          binding.pry
+          computer_move.to_s
         end
     end
   end
