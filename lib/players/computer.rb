@@ -16,6 +16,3 @@ module Players
     end
   end
 end
-        # computer_move = board.cells[rand(board.cells.length)]
-        # myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
-        # item = myArray[rand(myArray.length)]
