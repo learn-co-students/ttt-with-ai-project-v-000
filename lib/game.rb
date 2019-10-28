@@ -52,4 +52,9 @@ def turn
   @board.valid_move?(current) ? @board.update(current, player) : turn
 end
 
+def play
+  turn
+  over?
+end
+
 end
