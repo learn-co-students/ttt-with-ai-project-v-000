@@ -25,16 +25,17 @@ def current_player
 end
 
 def won?
- @board.full? && @cells.include?(WIN_COMBINATIONS) ? true : false
- #if board full?
- #do the cells of the board = WIN_COMBINATIONS
- #if != WIN_COMBINATIONS return false
- #else return WIN_COMBINATIONS that applies
-
+ WIN_COMBINATIONS.detect do |win|
+   @board.cells[win[0]] == @board.cells[win[1]] && @board.cells[win[1]] == @board.cells[win[2]]
+ end
 end
 
 def over?
   @board.full?
+end
+
+def draw?
+  @board.full? && !won?
 end
 
 
