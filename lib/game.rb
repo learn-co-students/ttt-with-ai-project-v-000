@@ -50,7 +50,6 @@ def turn
   player = current_player
   current = player.move(@board)
   @board.valid_move?(current) ? @board.update(current, player) : turn
-
 end
 
 end
