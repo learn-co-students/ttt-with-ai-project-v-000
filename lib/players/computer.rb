@@ -10,12 +10,14 @@ module Players
             else
               move(board)
             end
+            computer_move.to_s
           end
-          computer_move.to_s
+          board.cells
+          binding.pry
         end
     end
   end
 end
-        computer_move = board.cells[rand(board.cells.length)]
-        myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
-        item = myArray[rand(myArray.length)]
+        # computer_move = board.cells[rand(board.cells.length)]
+        # myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
+        # item = myArray[rand(myArray.length)]
