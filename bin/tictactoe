@@ -10,16 +10,16 @@ require_relative '../config/environment'
 # again and allow them to choose a new configuration for the game as described above.
 # If the user doesn't want to play again, exit the program.
 
-puts "Ahoy There!, Welcome to Tic-Tac-Toe!"
-puts "Please enter '0', '1', or '2' player for your game:"
+puts "Welcome to Tic-Tac-Toe!"
+puts "Please enter '0', '1', or '2' player for the type of game you would like to play."
 puts "Please enter '1' or '2' to choose which player will go first as X."
 puts input = gets.strip
 if input == "0"
-  Game.new.play(board = @board)
+  Game.new().initialize(board = Board.new())
 elsif input == "1"
-  Game.new.play(board = @board)
+  Game.new().initialize(player_1 = Players::Human.new("X"), board = Board.new())
 elsif input == "2"
-  Game.new.play(board = @board)
+  Game.new().initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
 
 puts "To quit, type 'exit'."
 
