@@ -3,7 +3,7 @@ module Players
     def move(board)
       num = rand(1..9)
       num.to_s
-      binding.pry
+      # binding.pry
     end
   end
 end
