@@ -7,7 +7,7 @@ module Players
       valid_moves.each do |space|
         if board.valid_move?(space[5])
           space
-        elsif space = rand(board.valid_move?(space[0]) || board.valid_move?(space[2]) ||
+        elsif rand(board.valid_move?(space[0]) || board.valid_move?(space[2]) ||
           board.valid_move?(space[6]) || board.valid_move?(space[8]))
           space
         end
