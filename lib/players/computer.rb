@@ -10,11 +10,9 @@ module Players
         elsif board.valid_move?(space[0]) == "1" || board.valid_move?(space[0]) == "3" ||
           board.valid_move?(space[0]) == "7" || board.valid_move?(space[0]) == "9"
           space[0]
-
-        #   move(board)
-        #   rand(board.valid_move?(space[0]) || board.valid_move?(space[2]) ||
-        #   board.valid_move?(space[6]) || board.valid_move?(space[8]))
-
+        elsif board.valid_move?(space[0]) == "2" || board.valid_move?(space[0]) == "4" ||
+          board.valid_move?(space[0]) == "6" || board.valid_move?(space[0]) == "8"
+          space[0]
         end
         binding.pry
       end
