@@ -14,11 +14,21 @@ module Players
           board.valid_move?(space[0]) == "6" || board.valid_move?(space[0]) == "8"
           space[0]
         end
-        binding.pry
+        # binding.pry
       end
     end
   end
 end
+
+# module Players
+#   class Computer < Player
+#     def move(board)
+#       # num = rand(1..9)
+#       # num.to_s
+#     end
+#   end
+# end
+# This code right above passes all the tests
 
 # module Players
 #   class Computer < Player
