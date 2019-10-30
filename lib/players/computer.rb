@@ -1,8 +1,21 @@
+# module Players
+#   class Computer < Player
+#     def move(board)
+#       num = rand(1..9)
+#       num.to_s
+#     end
+#   end
+# end
+
 module Players
   class Computer < Player
     def move(board)
-      num = rand(1..9)
-      num.to_s
+      if board.valid_move?(board.cells[4])
+        "1"
+      else 
+        move(board)
+      end
+      binding.pry
     end
   end
 end
