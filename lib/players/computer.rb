@@ -12,7 +12,7 @@ module Players
           board.valid_move?(valid_moves[space.to_i - 1]) == "6" || board.valid_move?(valid_moves[space.to_i - 1]) == "8"
           valid_moves[space.to_i - 1]
         end
-        binding.pry
+        # binding.pry
       end
     end
   end
