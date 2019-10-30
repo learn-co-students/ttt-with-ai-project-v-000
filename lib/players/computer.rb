@@ -1,36 +1,28 @@
-# module Players
-#   class Computer < Player
-#     def move(board)
-#       num = rand(1..9)
-#       num.to_s
-#     end
-#   end
-# end
-
 module Players
   class Computer < Player
     def move(board)
-      if board.valid_move?(board.cells[4])
-        "1"
-      else 
-        move(board)
-      end
-      binding.pry
+      num = rand(1..9)
+      num.to_s
     end
   end
 end
 
-# game = Game.new()
-#   board.cells.each do |space|
-#     num = rand(1..9)
-#       while board.full?
-#       if board.valid_move?(space)
+# module Players
+#   class Computer < Player
+#     def move(board)
+#       board.cells.each do |space|
+#
+#           if board.valid_move?(space)
 #         # board.update(space, game.current_player)
-#       # else
-#       #   move(board)
+#           num = rand(1..9)
+#             board.cells[num].to_s
+#           # else
+#           #   move(board)
+#           end
+#         end
 #       end
 #     end
-#     space.to_s
+#     # space.to_s
 #   end
 
 # human move method
