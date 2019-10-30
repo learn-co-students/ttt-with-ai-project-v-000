@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Weclome to Tic Tac Toe!"
+g = Game.new
+g.board.display
+g.play
