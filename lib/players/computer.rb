@@ -5,11 +5,12 @@ module Players
       # num.to_s
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       valid_moves.each do |space|
-        if board.valid_move?(space[4])
-          space
+        if board.valid_move?(space[0] == "4")
+          space[0]
         else
-          rand(board.valid_move?(space[0]) || board.valid_move?(space[2]) ||
-          board.valid_move?(space[6]) || board.valid_move?(space[8]))
+          move(board)
+        #   rand(board.valid_move?(space[0]) || board.valid_move?(space[2]) ||
+        #   board.valid_move?(space[6]) || board.valid_move?(space[8]))
 
         end
         binding.pry
