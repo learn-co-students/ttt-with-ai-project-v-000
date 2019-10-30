@@ -3,14 +3,14 @@ module Players
     def move(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       valid_moves.each do |space|
-        if board.valid_move?(space[0]) == "5"
-          space[0]
-        elsif board.valid_move?(space[0]) == "1" || board.valid_move?(space[0]) == "3" ||
-          board.valid_move?(space[0]) == "7" || board.valid_move?(space[0]) == "9"
-          space[0]
-        elsif board.valid_move?(space[0]) == "2" || board.valid_move?(space[0]) == "4" ||
-          board.valid_move?(space[0]) == "6" || board.valid_move?(space[0]) == "8"
-          space[0]
+        if board.valid_move?(valid_moves[space]) == "5"
+          valid_moves[space]
+        elsif board.valid_move?(valid_moves[space]) == "1" || board.valid_move?(valid_moves[space]) == "3" ||
+          board.valid_move?(valid_moves[space]) == "7" || board.valid_move?(valid_moves[space]) == "9"
+          valid_moves[space]
+        elsif board.valid_move?(valid_moves[space]) == "2" || board.valid_move?(valid_moves[space]) == "4" ||
+          board.valid_move?(valid_moves[space]) == "6" || board.valid_move?(valid_moves[space]) == "8"
+          valid_moves[space]
         end
         binding.pry
       end
