@@ -1,8 +1,6 @@
 module Players
   class Computer < Player
     def move(board)
-      # num = rand(1..9)
-      # num.to_s
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       valid_moves.each do |space|
         if board.valid_move?(space[0]) == "5"
@@ -29,6 +27,8 @@ end
 #   end
 # end
 # This code right above passes all the tests
+
+
 
 # module Players
 #   class Computer < Player
