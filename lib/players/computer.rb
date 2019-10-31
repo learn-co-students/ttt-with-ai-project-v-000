@@ -14,11 +14,14 @@ module Players
         #     space
         # elsif valid_moves[0] == "1"
 
-        if board.valid_move?("5")
-          valid_moves[space.to_i - 1]
-        # elsif board.valid_move?(valid_moves[space.to_i - 1])
-        #   valid_moves[space.to_i - 1] = "1" || valid_moves[space.to_i - 1] = "3" ||
-        #   valid_moves[space.to_i - 1] = "7" || valid_moves[space.to_i - 1] = "9"
+        if board.valid_move?(space)
+          valid_moves[4]
+        elsif board.valid_move?(space)
+          valid_moves[0] || valid_moves[2] ||
+          valid_moves[6] || valid_moves[8]
+        elsif board.valid_move?(space)
+          valid_moves[1] || valid_moves[3] ||
+          valid_moves[5] || valid_moves[7]
         # elsif board.valid_move?(valid_moves[space.to_i - 1]) == "2" || board.valid_move?(valid_moves[space.to_i - 1]) == "4" ||
         #   board.valid_move?(valid_moves[space.to_i - 1]) == "6" || board.valid_move?(valid_moves[space.to_i - 1]) == "8"
         #   valid_moves[space.to_i - 1]
