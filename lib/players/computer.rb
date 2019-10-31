@@ -11,6 +11,7 @@ module Players
         # elsif board.valid_move?(valid_moves[space.to_i - 1]) == "2" || board.valid_move?(valid_moves[space.to_i - 1]) == "4" ||
         #   board.valid_move?(valid_moves[space.to_i - 1]) == "6" || board.valid_move?(valid_moves[space.to_i - 1]) == "8"
         #   valid_moves[space.to_i - 1]
+        end
         binding.pry
       end
     end
