@@ -5,12 +5,12 @@ module Players
       valid_moves.each do |space|
         if board.valid_move?(valid_moves[0]) == "1"
           valid_moves[0]
-        elsif board.valid_move?(valid_moves[space.to_i - 1]) == "1" || board.valid_move?(valid_moves[space.to_i - 1]) == "3" ||
-          board.valid_move?(valid_moves[space.to_i - 1]) == "7" || board.valid_move?(valid_moves[space.to_i - 1]) == "9"
-          valid_moves[space.to_i - 1]
-        elsif board.valid_move?(valid_moves[space.to_i - 1]) == "2" || board.valid_move?(valid_moves[space.to_i - 1]) == "4" ||
-          board.valid_move?(valid_moves[space.to_i - 1]) == "6" || board.valid_move?(valid_moves[space.to_i - 1]) == "8"
-          valid_moves[space.to_i - 1]
+        # elsif board.valid_move?(valid_moves[space.to_i - 1]) == "1" || board.valid_move?(valid_moves[space.to_i - 1]) == "3" ||
+        #   board.valid_move?(valid_moves[space.to_i - 1]) == "7" || board.valid_move?(valid_moves[space.to_i - 1]) == "9"
+        #   valid_moves[space.to_i - 1]
+        # elsif board.valid_move?(valid_moves[space.to_i - 1]) == "2" || board.valid_move?(valid_moves[space.to_i - 1]) == "4" ||
+        #   board.valid_move?(valid_moves[space.to_i - 1]) == "6" || board.valid_move?(valid_moves[space.to_i - 1]) == "8"
+        #   valid_moves[space.to_i - 1]
         binding.pry
       end
     end
