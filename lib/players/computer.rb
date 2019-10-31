@@ -3,10 +3,16 @@ module Players
     def move(board)
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       valid_moves.each do |space|
-        if valid_moves[0] == "1"
-          if board.valid_move?(valid_moves[0])
-            valid_moves[0]
-        # if board.valid_move?(valid_moves[0]) == "1"
+        # if valid_moves[0] == "1"
+        #   if board.valid_move?(valid_moves[0])
+        #     valid_moves[0]
+
+        if valid_moves[space] == "5"
+          if board.valid_move?(valid_moves[space])
+            space
+        # elsif valid_moves[0] == "1"
+
+        # if board.valid_move?(valid_moves[space) == "5"
         #   valid_moves[0]
         # elsif board.valid_move?(valid_moves[space.to_i - 1]) == "1" || board.valid_move?(valid_moves[space.to_i - 1]) == "3" ||
         #   board.valid_move?(valid_moves[space.to_i - 1]) == "7" || board.valid_move?(valid_moves[space.to_i - 1]) == "9"
