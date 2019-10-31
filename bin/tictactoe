@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome to Tic Tac Toe!"
+Game.game_intro
+game_input = gets.strip
+Game.start(game_input)
+Game.replay?
