@@ -12,7 +12,7 @@ module Players
           valid_moves[1] || valid_moves[3] ||
           valid_moves[5] || valid_moves[7]
         end
-        binding.pry
+        # binding.pry
       end
     end
   end
