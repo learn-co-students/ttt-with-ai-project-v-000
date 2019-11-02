@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Hello there! Welcome to Tic Tac Toe!"
+game = Game.new
+
+puts "Would you like to play a 0, 1 or 2 player game?"
+
+input = gets.strip
+
+while input == "0"
+  game.start_0("X", "O")
+  game.play_again?
+end
+
+while input == "1"
+  puts "Would you like to be 'X' and go first?"
+  input_2 = gets.strip
+  if input_2.downcase == "y" || input_2.downcase == "yes"
+    game.start_1("X", "O")
+    game.play_again?
+  elsif input_2.downcase == "n" || input_2.downcase == "no"
+    game.start_1("O", "X")
+    game.play_again?
+  end
+end
+
+while input == "2"
+  puts "Would you like to be 'X' and go first?"
+  input_2 = gets.strip
+  if input_2.downcase == "y" || input_2.downcase == "yes"
+    game.start_2("X", "O")
+    game.play_again?
+  elsif input_2.downcase == "n" || input_2.downcase == "no"
+    game.start_2("O", "X")
+    game.play_again?
+  end
+end
