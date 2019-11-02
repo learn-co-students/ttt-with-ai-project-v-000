@@ -23,12 +23,8 @@ module Players
     def move(board)
       # valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       board.cells.each do |space|
-        # if board.valid_move?(board.cells.index(space))
-        #   space + 1
-        board.valid_move?(space.to_i + 1)
-
-        # if board.valid_move?(space.to_i + 1)
-        #   space.to_i + 1
+        if board.valid_move?(space.to_i + 1)
+          space.to_i + 1
         #
         # # elsif board.valid_move?(valid_moves[space.to_i - 1])
         # #   valid_moves[0] || valid_moves[2] ||
