@@ -12,17 +12,19 @@ def start
       case input
 
       when input == "0 player"
-        do
+        Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
       when input == "1 player"
         puts "Would you like to go first? Enter 'yes' or 'no'."
         if input == "yes"
-          do
-          else
-            do
+          Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+        else Game.new(Players::Computer.new("O"), Players::Human.new("X"), Board.new).play
             end
+
       when input == "2 player"
-        do
+        Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
         end
+
         puts "Would you like to play again? If not enter 'exit'."
 
     game_start until input == "exit"
