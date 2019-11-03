@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+# Genesis.new.activate
+Genesis.new.just_ai
+# Genesis.new.ai_fail
