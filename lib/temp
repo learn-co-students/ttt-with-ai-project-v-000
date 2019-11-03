@@ -1,0 +1,33 @@
+#storage for stuff being trashed/reworked
+
+puts "Please select an empty space in which to move, player #{current_player}, 1-9."
+@board.display
+
+move = current_player.move(@board) #can't call repeatedly, need one instance
+until @board.valid_move?(move)
+  puts "invalid #{move}"
+  turn #'til Human gets it right
+end
+@board.update(move, current_player)
+puts "Updated Board:"
+@board.display
+
+module Players
+  class Computer < Player
+    # https://neverstopbuilding-dropblog.herokuapp.com/minimax is a bit too extensive for this.  Kids give up on TTT becuase it's a zero-sum game, with ties achieving 100%.
+    def move(board) #no decision logic, but plays the game for the purposes of the assignment.  Ideally, I'd do 3 difficulty levels with level 3 unbeatable, level 1 being random valid_moves, level 2 blocking
+      counter = 1
+      output = nil
+        while counter <= 9
+          if !board.taken?(counter)
+            output = counter.to_s
+          end
+          counter +=1
+        end
+        sleep(1) #gives illusion of computer thinking, makes board presentation sensible
+        output
+      end
+
+
+  end #END OF computer
+end #END OF PLAYERS
