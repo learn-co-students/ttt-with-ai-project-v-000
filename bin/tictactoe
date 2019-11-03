@@ -1,3 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "What's Crack-a-lackin?"
+sleep(1)
+puts "So 0, 1, or 2 players? P.S. 0 players starts 100 matches between two computer sims."
+puts "In order to initialize the computer death match, input 'wargames',"
+puts "otherwise input the number of desired players(1 or 2)"
+
+Game.game_choice

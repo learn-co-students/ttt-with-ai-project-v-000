@@ -1,0 +1,23 @@
+if WIN_COMBINATIONS.select do |win_combination|
+(board.position[win_combination[0] + 1] == board.position[win_combination[1] + 1] ||
+ (board.postion[win_combination[1] + 1] == board.postion[win_combination[2] + 1] ||
+  board.position[win_combination[0] + 1] == board.position[win_combination[2] + 1])
+    && ((board.taken?(win_combination[0] + 1) && board.taken?(win_combination[1] + 1)) ||
+     (board.taken?(win_combination[0] + 1) && board.taken?(win_combination[2] + 1)) ||
+     (board.taken?(win_combination[1] + 1) && board.taken?(win_combination[2] + 1)))
+   end
+
+     WIN_COMBINATIONS.select{|win_combination|
+     (board.position[win_combination[0] + 1] == board.position[win_combination[1] + 1] ||
+      (board.postion[win_combination[1] + 1] == board.postion[win_combination[2] + 1] ||
+       board.position[win_combination[0] + 1] == board.position[win_combination[2] + 1])
+       && ((board.taken?(win_combination[0] + 1) && board.taken?(win_combination[1] + 1)) ||
+        (board.taken?(win_combination[0] + 1) && board.taken?(win_combination[2] + 1)) ||
+        (board.taken?(win_combination[1] + 1) && board.taken?(win_combination[2] + 1)))}.collect do |winning_row|
+            if !board.taken?(winning_row + 1)
+              move = "#{winning_row + 1}"
+            end
+          end
+
+
+doesn't work but has an idea
