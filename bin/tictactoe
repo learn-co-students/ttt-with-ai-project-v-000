@@ -1,3 +1,68 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+class Cli
+  attr_reader :player_1, :player_2
+
+def order
+  puts "Who should go first (Xs) you or the computer?"
+  puts "Enter me, computer, or go back"
+  who_first = gets.chomp
+  if who_first == "me"
+    @player_1 = Players::Human.new("X")
+    @player_2 = Players::Computer.new("O")
+  elsif who_first == "computer"
+    @player_1 = Players::Computer.new("X")
+    @player_2 = Players::Human.new("O")
+  elsif who_first == "go back"
+    self.run
+  else
+    order
+  end
+end
+
+  def play_again?
+    puts "Do you want to play again?"
+    puts "Enter yes or no"
+    play_again = gets.chomp
+    if play_again == "yes"
+      self.run
+    elsif play_again == "no"
+      puts "Ok, thanks for playing. Bye!"
+    else
+      self.play_again?
+    end
+  end
+
+
+  def run
+    puts "Welcome to Elle's Tic Tac Totally Awesome Game"
+    puts "Do you want to play 0, 1, or 2 players?"
+    puts "Enter 0, 1, or 2"
+    player_number = gets.chomp
+
+    if player_number == "0"
+      puts "Computer 1 will play as Xs"
+      puts "Computer 2 will plays as Os"
+      @player_1 = Players::Computer.new("X")
+      @player_2 = Players::Computer.new("O")
+      Game.new(@player_1, @player_2).play
+      self.play_again?
+    elsif player_number == "1"
+      self.order
+      Game.new(@player_1, @player_2).play
+      self.play_again?
+    elsif player_number == "2"
+      puts "Player 1 will play as Xs"
+      puts "Player 2 will play as Os"
+      @player_1 = Players::Human.new("X")
+      @player_2 = Players::Human.new("O")
+      Game.new(@player_1, @player_2).play
+      self.play_again?
+    else
+      self.run
+    end
+  end
+end
+
+Cli.new.run
