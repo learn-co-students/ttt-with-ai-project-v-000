@@ -24,10 +24,14 @@ module Players
       # valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
       board.cells.each do |space|
       # space = rand(1..9)
-        if board.taken?(space.to_i)
+        # if board.taken?(space)
+        # if board.valid_move?(space.to_i + 1)
+        if board.valid_move?(board.cells.index(space) + 1)
+          (board.cells.index(space) + 1).to_s
         # board.cells.include?(board.position(space))
-          space.to_s
-        else move(board)
+          # board.cells[space.to_i + 1]
+          # (space.to_i + 1).to_s
+        # else move(board)
         # board.position(space)
         # binding.pry
         # if board.valid_move?(space.to_i + 1)
@@ -41,7 +45,8 @@ module Players
         # # #   valid_moves[1] || valid_moves[3] ||
         # # #   valid_moves[5] || valid_moves[7]
         end
-        binding.pry
+        # (space.to_i + 1).to_s
+        # binding.pry
       end
     end
   end
