@@ -22,11 +22,13 @@ module Players
   class Computer < Player
     def move(board)
       # valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+      while board.cells.length > 0
       board.cells.each do |space|
       # space = rand(1..9)
         # if board.taken?(space)
         # if board.valid_move?(space.to_i + 1)
-        if board.valid_move?(board.cells.index(space) + 1)
+
+          if board.taken?(board.cells.index(space) + 1)
           (board.cells.index(space) + 1).to_s
         # board.cells.include?(board.position(space))
           # board.cells[space.to_i + 1]
@@ -45,9 +47,13 @@ module Players
         # # #   valid_moves[1] || valid_moves[3] ||
         # # #   valid_moves[5] || valid_moves[7]
         end
+
         # (space.to_i + 1).to_s
-        # binding.pry
+
       end
+        board.cells.length - 1
+      end
+      binding.pry
     end
   end
 end
