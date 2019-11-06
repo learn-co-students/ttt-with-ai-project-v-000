@@ -22,38 +22,40 @@ module Players
   class Computer < Player
     def move(board)
       # valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-      while board.cells.length > 0
-      board.cells.each do |space|
-      # space = rand(1..9)
-        # if board.taken?(space)
-        # if board.valid_move?(space.to_i + 1)
+      # while board.cells.length > 0
 
-          if board.taken?(board.cells.index(space) + 1)
-          (board.cells.index(space) + 1).to_s
-        # board.cells.include?(board.position(space))
-          # board.cells[space.to_i + 1]
-          # (space.to_i + 1).to_s
-        # else move(board)
-        # board.position(space)
-        # binding.pry
-        # if board.valid_move?(space.to_i + 1)
-        #   space.to_i + 1
-        # else
-        #   move(board)
-        # # # elsif board.valid_move?(valid_moves[space.to_i - 1])
-        # # #   valid_moves[0] || valid_moves[2] ||
-        # # #   valid_moves[6] || valid_moves[8]
-        # # # elsif board.valid_move?(valid_moves[space.to_i - 1])
-        # # #   valid_moves[1] || valid_moves[3] ||
-        # # #   valid_moves[5] || valid_moves[7]
+      if board.cells.include?(board.cells[0]).to_s
+        (board.cells[0]).to_s
+      #  board.cells.each do |space|
+      # # space = rand(1..9)
+      #   # if board.taken?(space)
+      #   # if board.valid_move?(space.to_i + 1)
+      #
+      #     # if board.taken?(board.cells.index(space) + 1)
+      #     if board.cells.include?((board.cells.index(space) + 1).to_s)
+      #       (board.cells.index(space) + 1).to_s
+      #   # board.cells.include?(board.position(space))
+      #     # board.cells[space.to_i + 1]
+      #     # (space.to_i + 1).to_s
+      #   # else move(board)
+      #   # board.position(space)
+      #   # binding.pry
+      #   # if board.valid_move?(space.to_i + 1)
+      #   #   space.to_i + 1
+      #   # else
+      #   #   move(board)
+      #   # # # elsif board.valid_move?(valid_moves[space.to_i - 1])
+      #   # # #   valid_moves[0] || valid_moves[2] ||
+      #   # # #   valid_moves[6] || valid_moves[8]
+      #   # # # elsif board.valid_move?(valid_moves[space.to_i - 1])
+      #   # # #   valid_moves[1] || valid_moves[3] ||
+      #   # # #   valid_moves[5] || valid_moves[7]
         end
+        binding.pry
+      #   # (space.to_i + 1).to_s
+      #   # board.cells.length - 1
+      # end
 
-        # (space.to_i + 1).to_s
-
-      end
-        board.cells.length - 1
-      end
-      binding.pry
     end
   end
 end
