@@ -4,9 +4,9 @@ module Players
        board.cells.each do |space|
        computer_move = board.cells.index(space) + 1
         if board.valid_move?(computer_move)
-          computer_move.to_s
+          return computer_move.to_s
         end
-        binding.pry
+        # binding.pry
       end
     end
   end
