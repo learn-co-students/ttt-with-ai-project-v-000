@@ -23,7 +23,7 @@ input = gets.strip
 #   Game.new().initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
 if input == "2"
    game = Game.new()
-  #  game.initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
+   game.initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
    puts "Please enter '1' or '2' to choose which player will go first as X."
    input = gets.strip
     if input == "1"
