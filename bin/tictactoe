@@ -43,7 +43,7 @@ elsif input == "2"
       game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new())
       game.play()
     end
-  elsif game.over? == true
+  elsif game.over? 
     puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
     puts "To quit, type 'exit'."
     until input == ("exit")
