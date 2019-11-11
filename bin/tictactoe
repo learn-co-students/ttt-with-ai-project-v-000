@@ -20,26 +20,26 @@ if input == "0"
   game.play()
 
 elsif input == "1"
-  # puts "Please enter '1' or '2' to choose which player will go first as X."
-  # input = gets.strip
-  # if input == "1"
-  #   game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
-  #   game.play()
-  # elsif input == "2"
-  #   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
-  #   game.play()
-  # end
+  puts "Please enter '1' or '2' to choose which player will go first as X."
+  input = gets.strip
+  if input == "1"
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
+    game.play()
+  elsif input == "2"
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
+    game.play()
+  end
 
 elsif input == "2"
-  #  puts "Please enter '1' or '2' to choose which player will go first as X."
-  #  input = gets.strip
-  #   if input == "1"
-  #     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
-  #     game.play()
-  #   elsif input == "2"
-  #     game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new())
-  #     game.play()
-  #   end
+   puts "Please enter '1' or '2' to choose which player will go first as X."
+   input = gets.strip
+    if input == "1"
+      game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
+      game.play()
+    elsif input == "2"
+      game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new())
+      game.play()
+    end
 
   if game.over?
     puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
