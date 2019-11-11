@@ -18,12 +18,7 @@ input = gets.strip
 if input == "0"
   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
   game.play()
-  if game.over?
-    puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
-    puts "To quit, type 'exit'."
-    input = gets.strip
-    ruby bin/tictactoe
-  end
+
 
 # elsif input == "1"
 #   puts "Please enter '1' or '2' to choose which player will go first as X."
@@ -62,9 +57,17 @@ if input == "0"
 #   # if game.over?
 #   #   puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
 #   # end
-# 
+#
 #   if input == ("exit")
 #   end
+
+if game.over?
+  puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
+  puts "To quit, type 'exit'."
+  input
+  # input = gets.strip
+  # ruby bin/tictactoe
+end
 end
 
 
