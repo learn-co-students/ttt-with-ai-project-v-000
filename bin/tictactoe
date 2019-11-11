@@ -14,8 +14,8 @@ puts "Welcome to Tic-Tac-Toe!"
 puts "Please enter '0', '1', or '2' player for the type of game you would like to play."
 input = gets.strip
 if input == "0"
-  computer = Computer.new()
-  computer.move(board)
+  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
+  game.play()
 # elsif input == 1
 #   Game.new().initialize(player_1 = Players::Human.new("X"), board = Board.new())
 # elsif input == 2
