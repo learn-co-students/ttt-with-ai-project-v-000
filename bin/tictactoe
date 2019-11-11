@@ -12,7 +12,7 @@ require_relative '../config/environment'
 
 puts "Welcome to Tic-Tac-Toe!"
 puts "Please enter '0', '1', or '2' player for the type of game you would like to play."
-puts "Please enter '1' or '2' to choose which player will go first as X."
+
 puts input = gets.strip
 if input == "0"
   Game.new().initialize(board = Board.new())
@@ -21,6 +21,8 @@ elsif input == "1"
 elsif input == "2"
   Game.new().initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
 end
+
+puts "Please enter '1' or '2' to choose which player will go first as X."
 
 if game.over? == true
   puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
