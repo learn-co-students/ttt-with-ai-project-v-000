@@ -13,18 +13,24 @@ require_relative '../config/environment'
 puts "Welcome to Tic-Tac-Toe!"
 puts "Please enter '0', '1', or '2' player for the type of game you would like to play."
 input = gets.strip
+
 if input == "0"
   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
   game.play()
+
 elsif input == "1"
   puts "Please enter '1' or '2' to choose which player will go first as X."
   input = gets.strip
   if input == "1"
     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
+    game.play()
   elsif input == "2"
-    game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new())
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
+    game.play()
   end
-  game.play()
+  elsif game.over? == true
+    puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
+
 elsif input == "2"
   #  game = Game.new()
   #  game.initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
@@ -32,19 +38,22 @@ elsif input == "2"
    input = gets.strip
     if input == "1"
       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
+      game.play()
     elsif input == "2"
       game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new())
+      game.play()
     end
-    game.play()
-
+  elsif game.over? == true
+    puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
+    puts "To quit, type 'exit'."
+    until input == ("exit")
+    end
 end
 
 
 
-if game.over? == true
-  puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
+# if game.over? == true
+#   puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
 
-puts "To quit, type 'exit'."
-end
-until input == ("exit")
-end
+# puts "To quit, type 'exit'."
+# end
