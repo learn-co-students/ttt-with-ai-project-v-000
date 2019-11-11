@@ -28,7 +28,8 @@ if input == "2"
    input = gets.strip
     if input == "1"
       game.player_1 = Players::Human.new("X")
-    else game.player_2 = Players::Human.new("X")
+    elsif input == "2"
+       game.player_2 = Players::Human.new("X")
     end
     game.play()
     # board.display()
