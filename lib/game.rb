@@ -122,6 +122,7 @@ class Game
       turn
     end
     # binding.pry
+    board.display()
   end
 
   # def play
