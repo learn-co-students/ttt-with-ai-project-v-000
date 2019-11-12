@@ -19,7 +19,7 @@ input = gets.strip
 if input == "0"
   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
   game.play()
-
+  
 elsif input == "1"
   puts "Enter '1' or '2' to choose which player will go first as X."
   input = gets.strip
