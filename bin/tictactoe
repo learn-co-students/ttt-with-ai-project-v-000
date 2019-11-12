@@ -11,12 +11,9 @@ require_relative '../config/environment'
 # If the user doesn't want to play again, exit the program.
 
 puts "Welcome to Tic-Tac-Toe!"
-puts "Please enter '0', '1', or '2' player for the type of game you would like to play."
+puts "Enter '0', '1', or '2' player for the type of game you would like to play."
 puts "To quit, type 'exit'."
 
-# def start(input)
-# input = gets.strip
-# end
 input = gets.strip
 
 if input == "0"
@@ -24,7 +21,7 @@ if input == "0"
   game.play()
 
 elsif input == "1"
-  puts "Please enter '1' or '2' to choose which player will go first as X."
+  puts "Enter '1' or '2' to choose which player will go first as X."
   input = gets.strip
   if input == "1"
     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
@@ -35,7 +32,7 @@ elsif input == "1"
   end
 
 elsif input == "2"
-   puts "Please enter '1' or '2' to choose which player will go first as X."
+   puts "Enter '1' or '2' to choose which player will go first as X."
    input = gets.strip
     if input == "1"
       game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
@@ -44,18 +41,10 @@ elsif input == "2"
       game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new())
       game.play()
     end
-
-  if game.over?
-    puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
-     input = gets.strip
-  end
-
 end
 
+if game.over? == true
+  puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
 
-
-# if game.over? == true
-#   puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
-
-# puts "To quit, type 'exit'."
-# end
+puts "To quit, type 'exit'."
+end
