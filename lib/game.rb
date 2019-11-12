@@ -140,4 +140,10 @@ class Game
     end
   end
 
+  # def start(input)
+  #   puts "Enter '0', '1', or '2' player for the type of game you would like to play."
+  #   puts "To quit, type 'exit'."
+  #   @input = gets.strip
+  # end
+
 end
