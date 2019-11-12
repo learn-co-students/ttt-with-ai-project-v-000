@@ -30,16 +30,16 @@ elsif input == "1"
   if input == "1"
     game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
     game.play()
-    if game.over? == true
-      puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
-      input
-    end
+    # if game.over? == true
+    #   puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
+    #   input
+    # end
   elsif input == "2"
     game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
     game.play()
-    if game.over?
-      puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
-    end
+    # if game.over?
+    #   puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
+    # end
   end
 #
 # elsif input == "2"
@@ -59,9 +59,10 @@ elsif input == "1"
 #       end
 #     end
 #
-#   # if game.over?
-#   #   puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
-#   # end
+  if game.over?
+    puts "If you would like to play again, please enter '0', '1', or '2' player for the type of game you would like to play."
+     input = gets.strip
+  end
 #
 #   if input == ("exit")
 #   end
