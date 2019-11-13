@@ -5,7 +5,8 @@ puts "Enter '0', '1', or '2' player for the type of game you would like to play.
 puts "To quit, type 'exit'."
 
 input = gets.strip
-# while gets != "exit"
+until gets != "exit"
+
 if input == "0"
   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
   game.play()
@@ -45,4 +46,4 @@ elsif input == "2"
       puts "To quit, type 'exit'."
     end
 end
-# end
+end
