@@ -1,7 +1,6 @@
 require 'pry'
 
 class Game
-
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -22,19 +21,19 @@ class Game
   end
 
   def current_player
-    @board.turn_count.even? ? @player_1 : @player_2
+    board.turn_count.even? ? @player_1 : @player_2
   end
 
   def won?
-    WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] &&
-      @board.cells[combo[1]] == @board.cells[combo[2]] &&
-      @board.taken?(combo[0]+1)
+    WIN_COMBINATIONS.detect do |win_combo|
+      board.cells[win_combo[0]] == board.cells[win_combo[1]] &&
+      board.cells[win_combo[1]] == board.cells[win_combo[2]] &&
+      board.taken?(win_combo[0]+1)
     end
   end
 
   def draw?
-    board.full? && !won?
+    !won? && board.full?
   end
 
   def over?
@@ -43,7 +42,7 @@ class Game
 
   def winner
     if winning_combo = won?
-      @winner = @board.cells[winning_combo.first]
+      winner = @board.cells[winning_combo.first]
     end
   end
 
@@ -66,11 +65,25 @@ class Game
     while !over?
       turn
     end
+
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
       puts "Cat's Game!"
     end
   end
-  
+
+  def play_again
+    play_again = ""
+    puts "Would you like to play again?"
+    play_again = gets.strip
+      while play_again.downcase == "y" || play_again.downcase == "Yes"
+        game = Game.new
+        until game.won?
+          game.play
+        end
+      puts "Would you like to play again?"
+      play_again = gets.strip
+    end
+  end
 end
