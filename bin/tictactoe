@@ -24,7 +24,7 @@ elsif input == "1"
       puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
       puts "To quit, type 'exit'."
   elsif input == "2"
-    game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Computer.new("X"), board = Board.new())
+    game = Game.new(player_2 = Players::Computer.new("X"), player_1 = Players::Human.new("O"), board = Board.new())
     game.play()
       puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
       puts "To quit, type 'exit'."
