@@ -4,17 +4,17 @@ puts "Welcome to Tic-Tac-Toe!"
 puts "Enter '0', '1', or '2' player for the type of game you would like to play."
 puts "To quit, type 'exit'."
 
-input = gets.strip
-until gets.strip == "exit"
+
+input = gets.chomp
+# until gets.strip == "exit"
+until gets == "exit"
 
 if input == "0"
   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
   game.play()
-    # if game.over?
       puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
       puts "To quit, type 'exit'."
       input = gets.chomp
-    # end
 
 elsif input == "1"
   puts "Enter '1' or '2' to choose which player will go first as X."
@@ -49,5 +49,6 @@ elsif input == "2"
       puts "To quit, type 'exit'."
       input = gets.chomp
     end
-end
+  end
+
 end
