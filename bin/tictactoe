@@ -4,8 +4,8 @@ puts "Welcome to Tic-Tac-Toe!"
 puts "Enter '0', '1', or '2' player for the type of game you would like to play."
 puts "To quit, type 'exit'."
 
-input = gets.chomp
-until gets == "exit"
+input = gets.strip
+until gets.strip == "exit"
 
 if input == "0"
   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
@@ -24,11 +24,13 @@ elsif input == "1"
     game.play()
       puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
       puts "To quit, type 'exit'."
+      input = gets.chomp
   elsif input == "2"
     game = Game.new(player_2 = Players::Computer.new("X"), player_1 = Players::Human.new("O"), board = Board.new())
     game.play()
       puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
       puts "To quit, type 'exit'."
+      input = gets.chomp
   end
 
 elsif input == "2"
@@ -39,11 +41,13 @@ elsif input == "2"
     game.play()
       puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
       puts "To quit, type 'exit'."
+      input = gets.chomp
   elsif input == "2"
     game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new())
     game.play()
       puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
       puts "To quit, type 'exit'."
+      input = gets.chomp
     end
 end
 end
