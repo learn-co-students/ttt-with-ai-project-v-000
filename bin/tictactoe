@@ -23,7 +23,7 @@ if input == '0'
   #     puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
   #     puts "To quit, type 'exit'."
   #     input = gets.chomp
-  end
+  # end
 
 elsif input == '1'
   puts "Enter '1' or '2' to choose which player will go first as X."
