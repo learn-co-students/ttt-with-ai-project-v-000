@@ -3,8 +3,6 @@ require 'pry'
 class Game
   attr_accessor :player_1, :player_2, :board
 
-    # puts "Please enter 1-9:"
-
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -20,7 +18,6 @@ class Game
     @player_1 = player_1
     @player_2 = player_2
     @board = board
-    # binding.pry
   end
 
   # def current_player
