@@ -23,19 +23,19 @@ class Board
       # binding.pry
   end
 
-  # def full?
-  #   cells.all? { |cell| cell != " "  }
-  # end
-
   def full?
-    cells.all? do |cell|
-      if cell == "X" || cell == "O"
-        true
-      else
-        false
-      end
-    end
+    cells.all? { |cell| cell != " "  }
   end
+
+  # def full?
+  #   cells.all? do |cell|
+  #     if cell == "X" || cell == "O"
+  #       true
+  #     else
+  #       false
+  #     end
+  #   end
+  # end
 
   # def turn_count
   #   count = 0
