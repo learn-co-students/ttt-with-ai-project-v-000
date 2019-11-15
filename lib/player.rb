@@ -5,4 +5,3 @@ class Player
     @token = token
   end
 end
-# binding.pry
