@@ -51,27 +51,20 @@ class Board
     cells.count { |char| char == "X" || char == "O" }
   end
 
-  # def taken?(input)
-  #   position(input) != " "
-  # end
-
   def taken?(input)
-    position(input) == "X" || position(input) == "O"
-    # binding.pry
+    position(input) != " "
   end
+
+  # def taken?(input)
+  #   position(input) == "X" || position(input) == "O"
+  #   # binding.pry
+  # end
 
   def valid_move?(input)
     input.to_i.between?(1, 9) && !taken?(input)
       # binding.pry
     # input.to_i.between?(1, 9) && position(input) == " "
   end
-
-  # def update(input, player)
-  #   input = player.token
-  #   @cells = input
-  #   binding.pry
-  # this code is a bit off
-  # end
 
   def update(input, player)
     cells[input.to_i - 1] = player.token
