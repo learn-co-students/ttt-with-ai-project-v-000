@@ -120,9 +120,10 @@ describe "Board" do
   describe '#update' do
     it 'updates the cells in the board with the player token according to the input' do
       player = double("player", :token => "X")
-
+          #  binding.pry
       board.update("1", player)
       expect(board.position("1")).to eq("X")
+
     end
   end
 end
