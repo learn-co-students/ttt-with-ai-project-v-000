@@ -5,6 +5,7 @@ module Players
         # computer_move1 = board.cells.index(space) + 5
         #   if board.valid_move?(computer_move1)
         #     return computer_move1.to_s
+        computer_move2 = []
           computer_move2 = board.cells.index(space) + 1 || board.cells.index(space) + 2 ||
           board.cells.index(space) + 3 || board.cells.index(space) + 4 || board.cells.index(space) + 5 ||
           board.cells.index(space) + 6 || board.cells.index(space) + 7 || board.cells.index(space) + 8 ||
