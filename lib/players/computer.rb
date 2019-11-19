@@ -1,20 +1,31 @@
 module Players
   class Computer < Player
     def move(board)
-      #  board.cells.each_index do |space|
-      board.cells.map do |space|
-        # computer_move1 = board.cells.index(space) + 5
-        computer_move1 = board.cells.index(space) + 1
-        # if computer_move1 = space + 5
-          if board.valid_move?(computer_move1)
-            return computer_move1.to_s
-          end
+       board.cells.each_index do |space|
+          @computer_move1 = []
+          @computer_move1 << space
+          binding.pry
+        #  if board.valid_move?(computer_move1)
+        #    return computer_move1.to_s
+        #  end
 
-      # if computer_move2 = space
-      #   # rand(computer_move2)
-      #     if board.valid_move?(computer_move2)
-      #       return computer_move2.to_s
-      #     end
+        #  myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
+        #  item = myArray[rand(myArray.length)]
+      # board.cells.find do |space|
+      #   # computer_move1 = board.cells.index(space) + 5
+      #   computer_move1 = board.cells.index(space) + 1
+        # if computer_move1 = space + 5
+          # if board.valid_move?(computer_move1)
+          #   return computer_move1.to_s
+          # end
+
+        # computer_move2.select do |mov|
+        #   if mov == "5"
+        # # rand(computer_move2)
+        #   # if board.valid_move?(computer_move2)
+        #     if board.valid_move?(mov)
+        #     return mov.to_s
+        #   end
 
         # binding.pry
           # computer_move2 << board.cells.index(space) + 1 || board.cells.index(space) + 2 ||
