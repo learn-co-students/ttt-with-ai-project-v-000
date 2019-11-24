@@ -2,7 +2,7 @@ module Players
   class Computer < Player
     def move(board)
 
-      board.cells.each do |space|
+      board.cells.each_index do |space|
         if board.valid_move?(space)
           return space.to_s
         end
