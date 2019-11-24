@@ -3,16 +3,17 @@ module Players
     def move(board)
 
        board.cells.each_index do |space|
-        #  computer_move1 = board.position(space)
-        #  binding.pry
+      #  board.cells.each do |space|
+      #    computer_move1 = board.position(space)
+      #    binding.pry
         #  if board.position("5")
         #    board.cells[0] = position("5")
         #  end
         #  binding.pry
-          # computer_move1 = space
+          computer_move1 = space
           # computer_move1 << space
           # binding.pry
-          if board.valid_move?(board.position(space))
+          if board.valid_move?(computer_move1)
             return space.to_s
           # if board.position(space)
           #   return space.to_s
