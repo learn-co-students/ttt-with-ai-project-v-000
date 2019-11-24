@@ -6,15 +6,16 @@ module Players
       #  board.cells.each do |space|
       #    computer_move1 = board.position(space)
       #    binding.pry
-        #  if board.position("5")
-        #    board.cells[0] = position("5")
-        #  end
+         if computer_move1 = board.position(space)
+           board.valid_move?(computer_move1)
+           return computer_move1.to_s
+         end
         #  binding.pry
-          computer_move1 = space
+          # computer_move1 = space
           # computer_move1 << space
           # binding.pry
-          if board.valid_move?(computer_move1)
-            return space.to_s
+          # if board.valid_move?(computer_move1)
+          #   return space.to_s
           # if board.position(space)
           #   return space.to_s
         #  if board.valid_move?(computer_move1)
