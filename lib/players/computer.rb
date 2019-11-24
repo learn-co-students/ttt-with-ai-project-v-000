@@ -2,11 +2,11 @@ module Players
   class Computer < Player
     def move(board)
 
-      board.cells.each_index do |space|
+      board.cells.each do |space|
         if board.valid_move?(space)
           return space.to_s
         end
-        
+
       # def position(input)
       #     cells[input.to_i - 1]
       #     # binding.pry
