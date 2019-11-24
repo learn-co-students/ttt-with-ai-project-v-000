@@ -3,7 +3,8 @@ module Players
     def move(board)
 
        board.cells.each_index do |space|
-         computer_move1 = board.position(space)
+        #  computer_move1 = board.position(space)
+        #  binding.pry
         #  if board.position("5")
         #    board.cells[0] = position("5")
         #  end
@@ -11,8 +12,13 @@ module Players
           # computer_move1 = space
           # computer_move1 << space
           # binding.pry
-         if board.valid_move?(computer_move1)
-           return computer_move1.to_s
+          if board.valid_move?(board.position(space))
+            return space.to_s
+          # if board.position(space)
+          #   return space.to_s
+        #  if board.valid_move?(computer_move1)
+        #    return computer_move1.to_s
+
          end
 
         #  myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
