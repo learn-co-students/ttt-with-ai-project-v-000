@@ -1,13 +1,19 @@
 module Players
   class Computer < Player
     def move(board)
+
        board.cells.each_index do |space|
-          @computer_move1 = []
-          @computer_move1 << space
-          binding.pry
-        #  if board.valid_move?(computer_move1)
-        #    return computer_move1.to_s
+         computer_move1 = board.position(space)
+        #  if board.position("5")
+        #    board.cells[0] = position("5")
         #  end
+        #  binding.pry
+          # computer_move1 = space
+          # computer_move1 << space
+          # binding.pry
+         if board.valid_move?(computer_move1)
+           return computer_move1.to_s
+         end
 
         #  myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
         #  item = myArray[rand(myArray.length)]
