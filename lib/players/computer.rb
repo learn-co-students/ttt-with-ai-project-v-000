@@ -5,18 +5,12 @@ module Players
        board.cells.each_index do |space|
       #  board.cells.each do |space|
         #  computer_move1 = board.position(space)
-
-        #   if board.valid_move?(computer_move1)
-        #    return computer_move1.to_s
-        #  end
           computer_move1 = space
-            binding.pry
+          binding.pry
           if board.valid_move?(computer_move1)
-            return computer_move1.to_s
-
-          # if board.valid_move?(computer_move1)
-          #   return space.to_s
-
+           return computer_move1.to_s
+         end
+          
           # if board.position(space)
           #   return space.to_s
         #  if board.valid_move?(computer_move1)
