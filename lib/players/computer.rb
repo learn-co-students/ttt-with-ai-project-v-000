@@ -4,7 +4,7 @@ module Players
       computer_move = rand(0..9)
       until board.valid_move?(computer_move)
            computer_move = rand(0..9)
-       end
+      end
        return computer_move.to_s
       # board.cells.each_index do |space|
       # board.cells.each_index do |space|
