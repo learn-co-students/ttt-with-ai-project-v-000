@@ -1,12 +1,15 @@
 module Players
   class Computer < Player
     def move(board)
-
+      computer_move = rand(0..9)
+      until board.valid_move?(computer_move)
+           computer_move = rand(0..9)
+       end
+       return computer_move.to_s
       # board.cells.each_index do |space|
-      #   if board.valid_move?(space)
-      #     return space.to_s
-      #   end
-      # #  this works
+      # board.cells.each_index do |space|
+
+      #  this works
 
       # board.cells.each do |space|
       #   computer_move = board.cells.index(space) + 1
@@ -38,23 +41,19 @@ module Players
         #  myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
         #  item = myArray[rand(myArray.length)]
 
-      board.cells.each do |space|
-        # if computer_move1 = rand(board.cells.index(space))
-        if computer_move1 = board.cells.index(space) + 5
-          if board.valid_move?(computer_move1)
-            return computer_move1.to_s
-          end
-        elsif computer_move2 = [board.cells.index(space) + 1, board.cells.index(space) + 3,
-          board.cells.index(space) + 7, board.cells.index(space) + 9]
-          rand(computer_move2.length)
-          binding.pry
-
-      #     # computer_move2 = computer_move2[rand(computer_move2.length)]
-      # # elsif computer_move2 = board.cells[rand(board.cells.length)]
-          if board.valid_move?(computer_move2)
-            return computer_move2.to_s
-          end
-        end
+      # board.cells.each do |space|
+      #   # if computer_move1 = rand(board.cells.index(space))
+      #   if computer_move1 = board.cells.index(space) + 5
+      #     if board.valid_move?(computer_move1)
+      #       return computer_move1.to_s
+      #     end
+      #   elsif computer_move2 = [board.cells.index(space) + 1, board.cells.index(space) + 3,
+      #     board.cells.index(space) + 7, board.cells.index(space) + 9]
+      #     rand(computer_move2.length)
+      #     if board.valid_move?(computer_move2)
+      #       return computer_move2.to_s
+      #     end
+      #   end
 
         # computer_move2.select do |mov|
         #   if mov == "5"
@@ -83,7 +82,7 @@ module Players
           #     return computer_move3.to_s
           #   end
           # end
-      end
+      # end
     end
   end
 end
