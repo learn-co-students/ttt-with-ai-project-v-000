@@ -38,16 +38,20 @@ module Players
         #  myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
         #  item = myArray[rand(myArray.length)]
 
-      board.cells.find do |space|
-        if computer_move1 = board.cells.index(space) + 5
+      board.cells.select do |space|
+        if computer_move1 = rand(board.cells.index(space) + 1)
+        #  computer_move1 = board.cells[rand(board.cells.length)]
+        #  binding.pry
           if board.valid_move?(computer_move1)
             return computer_move1.to_s
           end
-        # elsif computer_move2 = board.cells.index(space) + 1 && board.cells.index(space) + 3
-        elsif computer_move2 = board[rand(board.cells[1], board.cells[3])]
-          if board.valid_move?(computer_move2)
-            return computer_move2.to_s
-          end
+      #   elsif computer_move2 = rand(board.cells.index(space) + 1 || board.cells.index(space) + 3 ||
+      #     board.cells.index(space) + 7 || board.cells.index(space) + 9)
+      #     # computer_move2 = computer_move2[rand(computer_move2.length)]
+      # # elsif computer_move2 = board.cells[rand(board.cells.length)]
+      #     if board.valid_move?(computer_move2)
+      #       return computer_move2.to_s
+      #     end
         end
 
         # computer_move2.select do |mov|
