@@ -44,7 +44,7 @@ module Players
           if board.valid_move?(computer_move1)
             return computer_move1.to_s
           end
-        elsif rand(computer_move2) = board.cells.index(space) + 1 || board.cells.index(space) + 3 ||
+        elsif computer_move2 = board.cells.index(space) + 1 || board.cells.index(space) + 3 ||
           board.cells.index(space) + 7 || board.cells.index(space) + 9
       #     # computer_move2 = computer_move2[rand(computer_move2.length)]
       # # elsif computer_move2 = board.cells[rand(board.cells.length)]
