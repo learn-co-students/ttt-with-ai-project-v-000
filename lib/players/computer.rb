@@ -2,9 +2,16 @@ module Players
   class Computer < Player
     def move(board)
 
-      board.cells.each_index do |space|
-        if board.valid_move?(space)
-          return space.to_s
+      # board.cells.each_index do |space|
+      #   if board.valid_move?(space)
+      #     return space.to_s
+      #   end
+      # #  this works
+
+      board.cells.each do |space|
+        computer_move = space.to_i + 1
+        if board.valid_move?(computer_move)
+          return computer_move.to_s
         end
 
       # def position(input)
