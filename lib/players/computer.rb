@@ -1,15 +1,18 @@
 module Players
   class Computer < Player
     def move(board)
-      computer_move = rand(0..9)
-      until board.valid_move?(computer_move)
-           computer_move = rand(0..9)
-      end
-       return computer_move.to_s
-      # board.cells.each_index do |space|
-      # board.cells.each_index do |space|
+      # computer_move = rand(0..9)
+      # until board.valid_move?(computer_move)
+      #      computer_move = rand(0..9)
+      # end
+      #  return computer_move.to_s
+       ##this works perfectly
 
-      #  this works
+      # board.cells.each_index do |space|
+      #   if board.valid_move?(space)
+      #     return space.to_s
+      #   end
+      # #  this works
 
       # board.cells.each do |space|
       #   computer_move = board.cells.index(space) + 1
