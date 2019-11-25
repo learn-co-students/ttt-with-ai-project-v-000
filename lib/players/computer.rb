@@ -39,15 +39,15 @@ module Players
         #  item = myArray[rand(myArray.length)]
 
       board.cells.find do |space|
-        if computer_move1 = board.cells.index(space) + 1 || board.cells.index(space) + 3
-          rand(computer_move1)
+        if computer_move1 = board.cells.index(space) + 5
           if board.valid_move?(computer_move1)
             return computer_move1.to_s
           end
-        # elsif computer_move2 = board.cells.index(space) + 1 || board.cells.index(space) + 3
-        #   if board.valid_move?(computer_move2)
-        #     return rand(computer_move2)
-        #   end
+        # elsif computer_move2 = board.cells.index(space) + 1 && board.cells.index(space) + 3
+        elsif computer_move2 = board[rand(board.cells[1], board.cells[3])]
+          if board.valid_move?(computer_move2)
+            return computer_move2.to_s
+          end
         end
 
         # computer_move2.select do |mov|
