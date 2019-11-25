@@ -8,44 +8,42 @@ module Players
       #   end
       # #  this works
 
-      board.cells.each do |space|
-        computer_move = space.to_i + 1
-        if board.valid_move?(computer_move)
-          return computer_move.to_s
-        end
+      # board.cells.each do |space|
+      #   computer_move = board.cells.index(space) + 1
+      #   if board.valid_move?(computer_move)
+      #     return computer_move.to_s
+      #   end
+      ## this passes
+
+      # board.cells.find do |space|
+      #   computer_move1 = board.cells.index(space) + 1
+      #     if board.valid_move?(computer_move1)
+      #       return computer_move1.to_s
+      #     end
+          ## this passes
 
       # def position(input)
       #     cells[input.to_i - 1]
       #     # binding.pry
       # end
+      ## position method - think have to use this method
 
-
-      #  board.cells.each do |space|
         #  computer_move1 = board.position(space)
         #  computer_move1 = board.cells[space.to_i - 1]
-
-        #  binding.pry
-          # computer_move1 = space.to_i + 1
-          # if board.position(computer_move1)
           # binding.pry
-
+          # if board.position(computer_move1)
+            # return computer_move1.to_s
           # end
-        #  binding.pry
-          # if board.position(space)
-          #   return space.to_s
-        #  if board.valid_move?(computer_move1)
-        #    return computer_move1.to_s
-        #  end
 
         #  myArray = ["stuff", "widget", "ruby", "goodies", "java", "emerald", "etc" ]
         #  item = myArray[rand(myArray.length)]
-      # board.cells.find do |space|
-      #   # computer_move1 = board.cells.index(space) + 5
-      #   computer_move1 = board.cells.index(space) + 1
-        # if computer_move1 = space + 5
-          # if board.valid_move?(computer_move1)
-          #   return computer_move1.to_s
-          # end
+
+      board.cells.find do |space|
+        if computer_move1 = board.cells.index(space) + 5
+          if board.valid_move?(computer_move1)
+            return computer_move1.to_s
+          end
+        end
 
         # computer_move2.select do |mov|
         #   if mov == "5"
