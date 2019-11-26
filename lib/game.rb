@@ -60,6 +60,36 @@ class Game
     end
   end
 
+  # def draw_move?
+  #   WIN_COMBINATIONS.find do |drawer|
+  #     @board.cells[drawer[0]] == @board.cells[drawer[1]] ||
+  #     @board.cells[drawer[3]] == @board.cells[drawer[4]] ||
+  #     @board.cells[drawer[6]] == @board.cells[drawer[7]] ||
+  #     @board.cells[drawer[1]] == @board.cells[drawer[2]] ||
+  #     @board.cells[drawer[4]] == @board.cells[drawer[5]] ||
+  #     @board.cells[drawer[7]] == @board.cells[drawer[8]] ||
+  #     @board.cells[drawer[0]] == @board.cells[drawer[3]] ||
+  #     @board.cells[drawer[1]] == @board.cells[drawer[4]] ||
+  #     @board.cells[drawer[3]] == @board.cells[drawer[5]] ||
+  #     @board.cells[drawer[3]] == @board.cells[drawer[6]] ||
+  #     @board.cells[drawer[4]] == @board.cells[drawer[7]] ||
+  #     @board.cells[drawer[5]] == @board.cells[drawer[8]] ||
+  #     @board.cells[drawer[2]] == @board.cells[drawer[4]] ||
+  #     @board.cells[drawer[4]] == @board.cells[drawer[6]] ||
+  #     @board.cells[drawer[0]] == @board.cells[drawer[4]] ||
+  #     @board.cells[drawer[4]] == @board.cells[drawer[8]] ||
+  #     @board.cells[drawer[0]] == @board.cells[drawer[2]] ||
+  #     @board.cells[drawer[2]] == @board.cells[drawer[8]] ||
+  #     @board.cells[drawer[2]] == @board.cells[drawer[6]] ||
+  #     @board.cells[drawer[3]] == @board.cells[drawer[5]] ||
+  #     @board.cells[drawer[1]] == @board.cells[drawer[7]] ||
+  #     @board.cells[drawer[0]] == @board.cells[drawer[8]] ||
+  #     @board.cells[drawer[6]] == @board.cells[drawer[8]] ||
+  #     @board.cells[drawer[0]] == @board.cells[drawer[6]] ||
+  #     (@board.cells[drawer[0]] == "X" || @board.cells[drawer[0]] == "O")
+  #   end
+  # end
+
   # def draw?
   #     if board.full? == false
   #       false
