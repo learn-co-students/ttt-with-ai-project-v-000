@@ -15,36 +15,67 @@ module Players
 
     def draw_move?
       WIN_COMBINATIONS.find do |drawer|
-        @board.cells[drawer[0]] == @board.cells[drawer[1]] ||
-        @board.cells[drawer[3]] == @board.cells[drawer[4]] ||
-        @board.cells[drawer[6]] == @board.cells[drawer[7]] ||
-        @board.cells[drawer[1]] == @board.cells[drawer[2]] ||
-        @board.cells[drawer[4]] == @board.cells[drawer[5]] ||
-        @board.cells[drawer[7]] == @board.cells[drawer[8]] ||
-        @board.cells[drawer[0]] == @board.cells[drawer[3]] ||
-        @board.cells[drawer[1]] == @board.cells[drawer[4]] ||
-        @board.cells[drawer[3]] == @board.cells[drawer[5]] ||
-        @board.cells[drawer[3]] == @board.cells[drawer[6]] ||
-        @board.cells[drawer[4]] == @board.cells[drawer[7]] ||
-        @board.cells[drawer[5]] == @board.cells[drawer[8]] ||
-        @board.cells[drawer[2]] == @board.cells[drawer[4]] ||
-        @board.cells[drawer[4]] == @board.cells[drawer[6]] ||
-        @board.cells[drawer[0]] == @board.cells[drawer[4]] ||
-        @board.cells[drawer[4]] == @board.cells[drawer[8]] ||
-        @board.cells[drawer[0]] == @board.cells[drawer[2]] ||
-        @board.cells[drawer[2]] == @board.cells[drawer[8]] ||
-        @board.cells[drawer[2]] == @board.cells[drawer[6]] ||
-        @board.cells[drawer[3]] == @board.cells[drawer[5]] ||
-        @board.cells[drawer[1]] == @board.cells[drawer[7]] ||
-        @board.cells[drawer[0]] == @board.cells[drawer[8]] ||
-        @board.cells[drawer[6]] == @board.cells[drawer[8]] ||
-        @board.cells[drawer[0]] == @board.cells[drawer[6]] ||
+        if @board.cells[drawer[0]] == @board.cells[drawer[1]]
+          computer_move = @board.cells[drawer[2]] ||
+        if @board.cells[drawer[3]] == @board.cells[drawer[4]]
+          computer_move = @board.cells[drawer[5]] ||
+        if @board.cells[drawer[6]] == @board.cells[drawer[7]]
+          computer_move = @board.cells[drawer[8]] ||
+        if @board.cells[drawer[1]] == @board.cells[drawer[2]]
+          computer_move = @board.cells[drawer[0]] ||
+        if @board.cells[drawer[4]] == @board.cells[drawer[5]]
+          computer_move = @board.cells[drawer[3]] ||
+        if @board.cells[drawer[7]] == @board.cells[drawer[8]]
+          computer_move = @board.cells[drawer[6]] ||
+        if @board.cells[drawer[0]] == @board.cells[drawer[3]]
+          computer_move = @board.cells[drawer[6]] ||
+        if @board.cells[drawer[1]] == @board.cells[drawer[4]]
+          computer_move = @board.cells[drawer[7]] ||
+        if @board.cells[drawer[2]] == @board.cells[drawer[5]]
+          computer_move = @board.cells[drawer[8]] ||
+        if @board.cells[drawer[3]] == @board.cells[drawer[6]]
+          computer_move = @board.cells[drawer[0]] ||
+        if @board.cells[drawer[4]] == @board.cells[drawer[7]]
+          computer_move = @board.cells[drawer[]] ||
+        if @board.cells[drawer[5]] == @board.cells[drawer[8]]
+          computer_move = @board.cells[drawer[1]] ||
+        if @board.cells[drawer[2]] == @board.cells[drawer[4]]
+          computer_move = @board.cells[drawer[8]] ||
+        if @board.cells[drawer[3]] == @board.cells[drawer[6]]
+          computer_move = @board.cells[drawer[0]] ||
+        if @board.cells[drawer[4]] == @board.cells[drawer[7]]
+          computer_move = @board.cells[drawer[1]] ||
+        if @board.cells[drawer[5]] == @board.cells[drawer[8]]
+          computer_move = @board.cells[drawer[2]] ||
+
+
+        if @board.cells[drawer[2]] == @board.cells[drawer[4]]
+          computer_move = @board.cells[drawer[6]] ||
+        if @board.cells[drawer[4]] == @board.cells[drawer[6]]
+          computer_move = @board.cells[drawer[2]] ||
+        if @board.cells[drawer[0]] == @board.cells[drawer[4]]
+          computer_move = @board.cells[drawer[8]] ||
+        if @board.cells[drawer[4]] == @board.cells[drawer[8]]
+          computer_move = @board.cells[drawer[0]] ||
+        if @board.cells[drawer[0]] == @board.cells[drawer[2]]
+          computer_move = @board.cells[drawer[1]] ||
+        if @board.cells[drawer[2]] == @board.cells[drawer[8]]
+          computer_move = @board.cells[drawer[5]] ||
+        if @board.cells[drawer[2]] == @board.cells[drawer[6]]
+          computer_move = @board.cells[drawer[4]] ||
+        if @board.cells[drawer[3]] == @board.cells[drawer[5]]
+          computer_move = @board.cells[drawer[4]] ||
+        if @board.cells[drawer[1]] == @board.cells[drawer[7]]
+          computer_move = @board.cells[drawer[4]] ||
+        if @board.cells[drawer[0]] == @board.cells[drawer[8]]
+          computer_move = @board.cells[drawer[4]] ||
         (@board.cells[drawer[0]] == "X" || @board.cells[drawer[0]] == "O")
       end
     end
 
     def move(board)
      if draw_move?
+       @board.cells[wincombo[0]
      else computer_move = rand(0..9)
        board.valid_move?(computer_move)
        return computer_move.to_s
