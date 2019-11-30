@@ -47,8 +47,6 @@ module Players
           computer_move = @board.cells[drawer[8]] ||
         if @board.cells[drawer[4]] == @board.cells[drawer[8]]
           computer_move = @board.cells[drawer[0]] ||
-
-
         if @board.cells[drawer[0]] == @board.cells[drawer[2]]
           computer_move = @board.cells[drawer[1]] ||
         if @board.cells[drawer[3]] == @board.cells[drawer[5]]
@@ -65,7 +63,7 @@ module Players
           computer_move = @board.cells[drawer[4]] ||
         if @board.cells[drawer[0]] == @board.cells[drawer[8]]
           computer_move = @board.cells[drawer[4]] ||
-        
+
         (@board.cells[drawer[0]] == "X" || @board.cells[drawer[0]] == "O")
       end
     end
