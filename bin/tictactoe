@@ -1,3 +1,63 @@
-#!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+puts "Welcome to Tic-Tac-Toe!"
+puts "Enter '0', '1', or '2' player for the type of game you would like to play."
+puts "To quit, type 'exit'."
+
+input = gets.chomp
+# until gets.strip == "exit"
+until input == 'exit'
+
+if input == '0'
+  puts "Enter '1' or '2' to choose which player will go first as X."
+  input = gets.chomp
+  if input == '1'
+    game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
+    game.play()
+      puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
+      puts "To quit, type 'exit'."
+      input = gets.chomp
+  elsif input == '2'
+    game = Game.new(player_1 = Players::Computer.new("O"), player_2 = Players::Computer.new("X"), board = Board.new())
+    game.play()
+      puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
+      puts "To quit, type 'exit'."
+      input = gets.chomp
+  end
+
+elsif input == '1'
+  puts "Enter '1' or '2' to choose which player will go first as X."
+  input = gets.chomp
+  if input == '1'
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new())
+    game.play()
+      puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
+      puts "To quit, type 'exit'."
+      input = gets.chomp
+  elsif input == '2'
+    game = Game.new(player_2 = Players::Computer.new("X"), player_1 = Players::Human.new("O"), board = Board.new())
+    game.play()
+      puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
+      puts "To quit, type 'exit'."
+      input = gets.chomp
+  end
+
+elsif input == '2'
+  puts "Enter '1' or '2' to choose which player will go first as X."
+  input = gets.chomp
+  if input == '1'
+    game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new())
+    game.play()
+      puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
+      puts "To quit, type 'exit'."
+      input = gets.chomp
+  elsif input == '2'
+    game = Game.new(player_1 = Players::Human.new("O"), player_2 = Players::Human.new("X"), board = Board.new())
+    game.play()
+      puts "To play again enter '0', '1', or '2' player for the type of game you would like to play."
+      puts "To quit, type 'exit'."
+      input = gets.chomp
+    end
+  end
+
+end

@@ -15,6 +15,7 @@ describe 'Players::Computer' do
       computer_move = computer.move(board)
 
       expect(valid_moves).to include(computer_move)
+      
     end
   end
 end
