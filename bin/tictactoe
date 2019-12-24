@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+user_choice = "y"
+while user_choice == "y"
+  game = Game.new
+  game.start
+  puts "Do you want to play again, input y or n: "
+  user_choice = gets.strip
+end
