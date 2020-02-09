@@ -7,7 +7,7 @@ describe 'Players::Computer' do
 
   describe '#move' do
     it 'returns a valid position for the computer to move' do
-      computer = Players::Computer.new("X")
+      computer = Game.new.player_1 
       board = Board.new
 
       valid_moves = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
