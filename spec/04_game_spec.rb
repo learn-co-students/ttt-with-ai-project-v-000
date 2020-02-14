@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Game' do
   describe '::WIN_COMBINATIONS' do
@@ -149,6 +150,7 @@ describe 'Game' do
   end
 
   describe '#winner' do
+
     it 'returns X when X won' do
       game = Game.new
       game.board.cells = ["X", " ", " ", " ", "X", " ", " ", " ", "X"]
@@ -166,7 +168,6 @@ describe 'Game' do
     it 'returns nil when no winner' do
       game = Game.new
       game.board.cells = ["X", "O", " ", " ", " ", " ", " ", "O", "X"]
-
       expect(game.winner).to be_nil
     end
   end
