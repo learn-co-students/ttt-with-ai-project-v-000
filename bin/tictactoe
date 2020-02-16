@@ -1,3 +1,16 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+
+puts "Greetings!"
+
+cli = Cli.new
+
+cli.setup_game
+
+play = true
+while play
+  cli.play_game
+  play = cli.play_again?
+end

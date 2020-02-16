@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ rspec spec/01_board_spec.rb --f-f
+ rspec spec/02_player_spec.rb --f-f
+ rspec spec/03_human_player_spec.rb
+ rspec spec/04_game_spec.rb
+ rspec spec/05_computer_player_spec.rb
