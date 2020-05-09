@@ -1,3 +1,40 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Welcome to Tic Tac Toe with AI!"
+
+  def start
+      puts "How many players? (0, 1 or 2)"
+      input = gets.strip
+      case input
+        when "0"
+          Game.new(Players::Computer.new("X"), Players::Computer.new("O")).play
+          puts "Would you like to play again?"
+          play_again
+        when "1"
+          Game.new(Players::Human.new("X"), Players::Computer.new("O")).play
+          puts "Would you like to play again?"
+          play_again
+        when "2"
+          Game.new(Players::Human.new("X"), Players::Human.new("O")).play
+          puts "Would you like to play again?"
+          play_again
+        else
+          puts "That is an invalid entry"
+          start
+        end
+     end
+
+    def play_again
+      puts "Please enter yes or no:"
+      answer = gets.strip
+      case answer
+        when "yes"
+          start
+        when "no"
+          puts "Goodbye!"
+        else
+          play_again
+      end
+    end
+    start
