@@ -26,7 +26,7 @@ token_2 = "O" if token == "X"
 token_2 = "X" if token == "O"
 
 
-Game.new(Players::Human.new(token),Players::Computer.new(token_2),Board.new).start if response == "1"
+Game.new(Players::Computer.new(token_2),Players::Human.new(token),Board.new).start if response == "1"
 Game.new(Players::Human.new(token),Players::Human.new(token_2),Board.new).start if response == "2"
 
 Game.new(Players::Computer.new(token),Players::Computer.new(token_2),Board.new).start if response == "3"
