@@ -15,18 +15,18 @@ class Node
         @data = data
         @children = []
         @tree = tree
-        generate_children
+        generate_children  if !won?
         if @children.length == 0
             case winner
-            when 'O'
+            when opponent
                 @data[:score] = -10
-            when 'X'
+            when me
                 @data[:score] = 10
             else
                 @data[:score] = 0
             end
         else
-            if @data[:turn] == 'X'
+            if @data[:turn] == me
                 #get maximum scores b/c this is us
                 @data[:score] = @children.map{|c| c.data[:score]}.max
             else
@@ -35,6 +35,14 @@ class Node
         end
 
         @tree.add_node(self)
+    end
+
+    def me
+        @tree.me
+    end
+
+    def opponent
+       me == 'X' ? 'O' : 'X'
     end
 
     def add_child(child)

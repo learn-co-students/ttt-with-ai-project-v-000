@@ -1,9 +1,14 @@
 module Players
   class Computer < Player
-    def initialize(token)
+    def initialize(token, first)
       super(token)
-      data = {board: Array.new(9,' '), turn:'X', score:nil }
-      @tree = Tree.new(data)
+      if first
+        d_token = token
+      else
+        d_token = token == 'X' ? 'O' : 'X'
+      end
+      data = {board: Array.new(9,' '), turn:d_token, score:nil }
+      @tree = Tree.new(data, token)
       # binding.pry
     end
 
