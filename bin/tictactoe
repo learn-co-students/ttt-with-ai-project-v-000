@@ -1,3 +1,13 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+puts "This is Tic Tac Toe! Welcome!!"
+puts "What kind of game would you like to play?"
+puts "Enter 0 for CPU vs. CPU"
+puts "Enter 1 if you dare challenge Artificial Intelligence"
+puts "Enter 2 to prove to your mate you're far superior: "
+
+new_game = Game.new
+new_game.start
