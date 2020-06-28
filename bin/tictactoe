@@ -1,30 +1,30 @@
-#!/usr/bin/env ruby
-
-require_relative '../config/environment'
-again = " "
-while again != "no"
-puts "Let's play Tic-Tac-Toe!"
-puts "Please select how many players out of 0, 1 or 2:"
-inp = gets.strip
-if inp == "0"
-  game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  game.play
-else puts "Who should go first and be X? You can choose 'me', 'friend' or 'computer':"
-  first = gets.strip
-  if inp== "1" && first == "me"
-    game= Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
-  elsif inp== "1" && first == "computer"
-    game= Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  elsif inp == "2" && first == "me"
-    puts "You are token X!"
-    game= Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  elsif inp == "2" && first == "friend"
-    puts "Your friend is token X!"
-    game= Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
-  end
-  game.play
-end
-puts "Would you like to play again? (yes/no)"
-again = gets.strip
-
-end
+# #!/usr/bin/env ruby
+#
+# require_relative '../config/environment'
+# again = " "
+# while again != "no"
+# puts "Let's play Tic-Tac-Toe!"
+# puts "Please select how many players out of 0, 1 or 2:"
+# inp = gets.strip
+# if inp == "0"
+#   game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+#   game.play
+# else puts "Who should go first and be X? You can choose 'me', 'friend' or 'computer':"
+#   first = gets.strip
+#   if inp== "1" && first == "me"
+#     game= Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
+#   elsif inp== "1" && first == "computer"
+#     game= Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+#   elsif inp == "2" && first == "me"
+#     puts "You are token X!"
+#     game= Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+#   elsif inp == "2" && first == "friend"
+#     puts "Your friend is token X!"
+#     game= Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+#   end
+#   game.play
+# end
+# puts "Would you like to play again? (yes/no)"
+# again = gets.strip
+#
+# end
