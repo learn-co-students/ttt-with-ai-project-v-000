@@ -53,9 +53,11 @@ module Players
           end
           next_move = all_options[rand(all_options.length)]
         end
+        binding.pry
         next_move
+      when 4
+
       end
     end
-
   end
 end
