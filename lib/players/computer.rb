@@ -32,16 +32,17 @@ module Players
         current = turn_three[rand(2)]
         current
       when 3..8
-        all_options = []
-        board.cells.each_with_index do |cell, index|
-          all_options << (index + 1) if cell == " "
-        end
+        #all_options = []
+        #board.cells.each_with_index do |cell, index|
+          #all_options << (index + 1) if cell == " "
+        #end
         close_to_winning = WIN_COMBINATIONS.detect do |combo|
-          (board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " " && board.cells[combo[0]] != board.cells[combo[2]]) ||
-          (board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " " && board.cells[combo[0]] != board.cells[combo[1]]) ||
-          (board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " " && board.cells[combo[1]] != board.cells[combo[0]])
+          ((board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " ") ||
+          (board.cells[combo[0]] == board.cells[combo[2]] && board.cells[combo[1]] == " ") ||
+          (board.cells[combo[1]] == board.cells[combo[2]] && board.cells[combo[0]] == " ")) &&
+          !(board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]])
         end
-        binding.pry
+
         if close_to_winning
           win_blocker = close_to_winning.detect{|cell| board.cells[cell] = " "}
           win_blocker + 1
