@@ -45,14 +45,15 @@ module Players
 
         if close_to_winning
           win_blocker = close_to_winning.detect{|cell| board.cells[cell] = " "}
-          win_blocker + 1
-        elsif close_to_winning == nil
+          next_move = win_blocker + 1
+        elsif !close_to_winning
           all_options = []
           board.cells.each_with_index do |cell, index|
             all_options << (index + 1) if cell == " "
           end
-          all_options[rand(all_options.length)]
+          next_move = all_options[rand(all_options.length)]
         end
+        next_move
       end
     end
 
