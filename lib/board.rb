@@ -36,7 +36,7 @@ class Board
   end
 
   def valid_move?(input)
-    input.to_i >= 1 && input.to_i <= 9 && cells[input.to_i - 1] == " "
+    input.to_i >= 1 && input.to_i <= 9 && !taken?(input)
   end
 
   def update(input, player)

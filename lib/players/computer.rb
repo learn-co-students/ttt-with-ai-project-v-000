@@ -20,17 +20,17 @@ module Players
       all_options = [1,2,3,4,5,6,7,8,9]
       case board.turn_count
       when 0
-        5
+        "5"
       when 1
         current = turn_two[rand(4)]
-        current
+        current.to_s
       when 2
         current = board.cells.index("O") + 1
         turn_three = turn_two
         turn_three.delete(current)
         turn_three.delete(10 - current)
         current = turn_three[rand(2)]
-        current
+        current.to_s
       when 3..8
         close_to_winning = WIN_COMBINATIONS.detect do |combo|
           ((board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[2]] == " ") ||
@@ -50,7 +50,7 @@ module Players
 
           next_move = all_options[rand(all_options.length)]
         end
-        next_move
+        next_move.to_s
       end
     end
   end
