@@ -2,13 +2,7 @@
 require 'pry'
 require_relative '../config/environment'
 
-puts "Welcome to Tic Tac Toe!"
-puts "Please select game mode:"
-puts "1. Human vs. Human"
-puts "2. Human vs. Computer"
-puts "3. Computer vs. Computer"
-puts "4. War Games Mode"
-game_mode = gets.strip.to_i
+game_mode = 0
 until game_mode >= 1 && game_mode <= 4
   puts "Please select game mode:"
   puts "1. Human vs. Human"
@@ -18,17 +12,17 @@ until game_mode >= 1 && game_mode <= 4
   game_mode = gets.strip.to_i
 end
 
-if game_mode == 1
+case game_mode
+when 1
   new_game = Game.new
   new_game.play
-elsif game_mode == 2
-  new_game = Game.new
+when 2
+  new_game = Mixed_Game.new
   new_game.play
-elsif game_mode == 3
+when 3
   new_game = Computer_Game.new
   new_game.play
-elsif game_mode == 4
-  new_game = Computer_Game.new
+when 4
   counter = 0
   until counter == 100
     new_game = War_Game.new

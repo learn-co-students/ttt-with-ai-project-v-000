@@ -17,7 +17,7 @@ module Players
     def move(board)
       current = nil
       turn_two = [1,3,7,9]
-      all_options = [1,2,3,4,6,7,8,9]
+      all_options = [1,2,3,4,5,6,7,8,9]
       case board.turn_count
       when 0
         5
@@ -40,9 +40,8 @@ module Players
         end
 
         if close_to_winning
-          win_blocker = close_to_winning.detect{|cell| board.cells[cell] = " "}
+          win_blocker = close_to_winning.detect{|cell| board.cells[cell] == " "}
           next_move = win_blocker + 1
-          binding.pry
         elsif !close_to_winning
           all_options = []
           board.cells.each_with_index do |cell, index|
