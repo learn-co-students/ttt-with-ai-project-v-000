@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+   puts "How many players? 0? 1? or 2?"
+   input = gets.strip
+   puts " "
+   if input.to_i == 0
+     player1 = Players::Computer.new("X")
+     player2 = Players::Computer.new("O")
+   elsif input.to_i == 1
+     puts "Enter '1' if you would like to go first and be X,\nor enter '2' if you'd like to go second and be 'O'?"
+     selection = gets.strip
+       if selection.to_i == 1
+         player1 = Players::Human.new("X")
+         player2 = Players::Computer.new("O")
+       elsif selection.to_i == 2
+         player1 = Players::Computer.new("X")
+         player2 = Players::Human.new("O")
+       end
+     elsif input.to_i == 2
+       player1 = Players::Human.new("X")
+       player2 = Players::Human.new("O")
+     else
+       puts "Please enter a valid selection"
+
+
+
+   end
+
+   game1 = Game.new(player1, player2, board = Board.new)
+   game1.play

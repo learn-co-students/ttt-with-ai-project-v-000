@@ -89,6 +89,7 @@ describe 'Game' do
                           "O", "O", "X",
                           "O", "X", "X"]
 
+
       expect(game.won?).to contain_exactly(2, 5, 8)
     end
 

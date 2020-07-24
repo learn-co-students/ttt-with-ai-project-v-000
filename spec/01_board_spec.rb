@@ -113,6 +113,7 @@ describe "Board" do
 
       expect(board.valid_move?("1")).to be_truthy
       expect(board.valid_move?("5")).to be_falsey
+
       expect(board.valid_move?("invalid")).to be_falsey
     end
   end
