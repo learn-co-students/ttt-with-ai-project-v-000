@@ -1,3 +1,33 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative '../config/environment'
+
+game_mode = 0
+until game_mode >= 1 && game_mode <= 4
+  puts "Please select game mode:"
+  puts "1. Human vs. Human"
+  puts "2. Human vs. Computer"
+  puts "3. Computer vs. Computer"
+  puts "4. War Games Mode"
+  game_mode = gets.strip.to_i
+end
+
+case game_mode
+when 1
+  new_game = Game.new
+  new_game.play
+when 2
+  new_game = Mixed_Game.new
+  new_game.play
+when 3
+  new_game = Computer_Game.new
+  new_game.play
+when 4
+  counter = 0
+  until counter == 100
+    new_game = War_Game.new
+    new_game.play
+    counter += 1
+  end
+  puts War_Game.all
+end

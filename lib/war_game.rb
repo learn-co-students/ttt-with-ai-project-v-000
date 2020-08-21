@@ -1,6 +1,6 @@
 require 'pry'
 
-class Game
+class War_Game
   attr_accessor :board, :player_1, :player_2
 
   WIN_COMBINATIONS = [
@@ -14,10 +14,13 @@ class Game
     [2,4,6]
   ]
 
-  def initialize(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new)
+  @@all_winners = {"X": 0, "O": 0, "Draw": 0}
+
+  def initialize(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new)
     @player_1 = player_1
     @player_2 = player_2
     @board = board
+
   end
 
   def current_player
@@ -48,23 +51,38 @@ class Game
 
   def turn
     input = current_player.move(board).to_i
+    remember_player = current_player.token
     if @board.valid_move?(input)
       @board.cells[input - 1] = current_player.token
       @board.display
+      puts "Computer player #{remember_player} has selected position #{input}."
     else
       turn
     end
   end
 
   def play
+
     until over?
       turn
     end
+
     if won?
       puts "Congratulations #{winner}!"
+      if winner == "X"
+        @@all_winners[:X] += 1
+      elsif winner == "O"
+        @@all_winners[:O] += 1
+      end
     elsif draw?
       puts "Cat's Game!"
+      @@all_winners[:Draw] += 1
     end
+
+  end
+
+  def self.all
+    @@all_winners
   end
 
 end
