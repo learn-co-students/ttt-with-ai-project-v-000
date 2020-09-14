@@ -1,3 +1,123 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+
+def display
+    puts ""
+    puts "Position values shown:"
+    [1,2,3,4,5,6,7,8,9].each.with_index(1){|value, index|
+            if index % 3 == 0 
+                puts " #{value} "
+                puts "-----------" unless index == 9
+            else
+                print " #{value} |"
+            end
+        }  
+end
+
+def start_instructions
+    repeat = false
+    input = ""
+    while (!repeat)
+        puts ""
+        puts "#######################"
+        puts "Welcome to Tic Tac Toe!"
+        puts "Choose one of the following (1-3):"
+        puts "  1. 1 player game (vs. computer)"
+        puts "  2. 2 player game"
+        puts "  3. computer vs computer"
+        print ":"
+        input = gets.strip
+        repeat = validated?(input.to_i, 3)
+    end 
+    input
+end
+
+
+def validated?(input, number)
+    num_check = 1
+    found = false
+    while (num_check <= number && !found)
+        if input == num_check
+            found = true
+        else
+            found = false
+        end
+        num_check += 1
+    end
+    found
+end
+
+def setup(input)
+    if input.to_i == 1
+       
+        repeat = false
+        input1 = ""
+        while !repeat
+            puts ""
+            puts "Human or Computer first?"
+            puts "1. Human"
+            puts "2. Computer"
+            print ":"
+            input1 = gets.strip
+            repeat = validated?(input1.to_i, 2)
+        end
+
+        if input1.to_i == 1
+             player_h = Players::Human.new("X")
+             player_c = Players::Computer.new("O")
+            game = Game.new(player_h, player_c)
+            display
+        else
+            player_h = Players::Human.new("O")
+            player_c = Players::Computer.new("X")
+            game = Game.new(player_c, player_h)
+            display
+        end
+
+    elsif input.to_i == 2
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+        game = Game.new(player_1, player_2)
+        display
+    elsif input.to_i == 3
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+        game = Game.new(player_1, player_2)
+        display
+    end
+    game
+end
+
+def again?
+    repeat = false
+    input1 = ""
+    while !repeat
+        puts ""
+        puts "Do you want to play again?"
+        puts "  1. yes"
+        puts "  2. no"
+        print ":"
+        input1 = gets.strip
+        repeat = validated?(input1.to_i, 2)
+    end
+    if input1.to_i == 1
+        true
+    else
+        false
+        sleep(0.5)
+        puts ""
+        puts "Goodbye!!"
+        puts ""
+    end
+end
+
+replay = true
+while (replay)
+    input = start_instructions
+    game = setup(input)
+    game.play
+    replay = again?
+end
+
