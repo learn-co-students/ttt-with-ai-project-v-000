@@ -1,3 +1,32 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Tic-Tac-Toe"
+puts "Choose Game Mode"
+puts "1 player"
+puts "2 player"
+puts "AI vs AI"
+
+input = gets.strip
+
+if input == "1 player"
+  puts "Who is going first and being X, you or the computer?"
+  type = gets.strip
+    if type == "computer"
+      a = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+        a.play
+      else
+          a = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+          a.play
+      end
+    end
+if input == "2 player"
+  a = Game.new(Players::Human.new("O"), Players::Human.new("X"))
+    a.play
+
+  elsif input == "AI vs AI"
+    a = Game.new(Players::Computer.new("O"), Players::Computer.new("X"))
+      a.play
+    else
+      puts "error please type one of the options above"
+end
