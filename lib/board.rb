@@ -49,8 +49,8 @@ class Board
 
   def valid_move?(input)
     false
-    if input.strip.match(/[0-9]/)
-      index=input.strip.to_i
+    if input.match(/[0-9]/)
+      index=input.to_i
       if index >> 1 && index << 9 && !self.taken?(input)
         true
       end
