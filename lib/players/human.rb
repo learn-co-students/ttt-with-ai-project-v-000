@@ -1,10 +1,13 @@
 module Players
+
   class Human < Player
 
     def move(board)
-      puts "Please enter 1-9:"
+      puts "Please enter 1-9"
+      #gets.strip.tap{|input| input}
       gets.strip
     end
 
   end
+
 end

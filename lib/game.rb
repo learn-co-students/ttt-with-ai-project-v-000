@@ -24,12 +24,12 @@ class Game
 
   def won?
     WIN_COMBINATIONS.detect do |combo|
-      @board.cells[combo[0]] == @board.cells[combo[1]] && @board.cells[combo[1]] == @board.cells[combo[2]] && @board.taken?(combo[0] + 1)
+      board.cells[combo[0]] == board.cells[combo[1]] && board.cells[combo[0]] == board.cells[combo[2]] && board.taken?(combo[0] + 1)
     end
   end
 
   def draw?
-    @board.full? && !won?
+    board.full? && !won?
   end
 
   def over?
@@ -37,43 +37,22 @@ class Game
   end
 
   def winner
-    xcount = 0
-    ocount = 0
     if won?
-      @board.cells.collect do |token|
-        if token == "X"
-          xcount += 1
-        elsif token == "O"
-          ocount += 1
-        end
-      end
-      if xcount > ocount
-        "X"
-      else
-        "O"
-      end
+      @board.cells[won?[0]]
     end
   end
 
   def turn
-    player = current_player
-    current_move = player.move(@board)
-    if !@board.valid_move?(current_move)
+    input = current_player.move(board)
+    if !board.valid_move?(input)
       turn
     else
-      puts "Turn: #{@board.turn_count + 1}\n"
-      @board.display
-      @board.update(current_move, player)
-      puts "#{player.token} moved #{current_move}"
-      @board.display
-      puts "\n\n"
+      board.update(input, current_player)
     end
   end
 
   def play
-    while !over?
-      turn
-    end
+    turn until over?
     if won?
       puts "Congratulations #{winner}!"
     elsif draw?
