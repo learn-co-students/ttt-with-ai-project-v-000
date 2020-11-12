@@ -1,3 +1,30 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+require 'pry'
+answer = "yes"
+while answer != "no"
+  puts "Welcome to Tic Tac Toe"
+  puts " are you looking for 0,1, or 2 players game?"
+  input =gets.strip.to_i
+  if input == 0
+    Game.new(Players::Computer.new("X"),Players::Computer.new("O"),Board.new).play
+  elsif input == 1
+      puts "please enter your token"
+      token=gets.strip
+      if token == "X"
+          Game.new(Players::Human.new("X"),Players::Computer.new("O"),Board.new).play
+      elsif token == "O"
+          Game.new(Players::Computer.new("X"),Players::Human.new("O"),Board.new).play
+      else
+          puts "invalid"
+      end
+  elsif input == 2
+    puts "X goes first"
+    Game.new(Players::Human.new("X"),Players::Human.new("O"),Board.new).play
+  else
+    puts "invalid"
+  end
+  puts "would you like to play again?"
+  answer=gets.strip
+end
