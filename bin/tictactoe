@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+puts "Welcome! How many humans are playing (0,1,2)?"
+index = gets.strip
+
+if index == "0"
+  x = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+  x.play
+
+elsif index == "1"
+  puts "Who is going first and being X, the human (you) or the computer?"
+  type = gets.strip
+  if type == "computer"
+    x = Game.new(Players::Computer.new("X"), Players::Human.new("O"))
+    x.play
+  elsif type == "human"
+    x = Game.new(Players::Human.new("X"), Players::Computer.new("O"))
+    x.play
+  else
+    puts "Incorrect response. Try again."
+  end
+
+elsif index == "2"
+  x = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+  x.play
+
+else
+  puts "Incorrect response. Try again."
+end
