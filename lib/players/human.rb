@@ -5,6 +5,5 @@ module Players #overwriting module that wraps the Computer class
       puts "Please enter your selection: [X or O]"
       gets.strip
     end
-
   end
 end
