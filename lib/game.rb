@@ -19,11 +19,15 @@ class Game
     end
   end
 
-#  def won?
-#   if board = ["X", "O", "X", "O", "X", "X", "O", "X", "O"]
-#   false
-#   else
-#  end
+ def won?
+   WIN_COMBINATIONS.each do |wins|
+    tokens = @board.cells.values_at(*wins).uniq
+     if tokens.count == 1 && tokens[0] != " "
+       return wins
+     end
+   end
+   false
+ end
 
 #def draw?
 
