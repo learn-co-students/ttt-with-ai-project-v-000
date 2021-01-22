@@ -11,11 +11,11 @@ class Game
     @board = brd
   end
 
-  def current_player(board)
-    if turn_count(board).even?
-      return "X"
+  def current_player
+    if @board.turn_count.even?
+      return @player_1
     else
-      return "O"
+      return @player_2
     end
   end
 
