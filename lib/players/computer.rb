@@ -1,5 +1,5 @@
 module Players #overwriting module that wraps the Computer class
-  class Computer < Player # Computer class inherits all functionality from Player module
+  class Computer < Player # Computer class inherits all functionality from Player class
 
   end
 end
