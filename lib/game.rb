@@ -20,18 +20,20 @@ class Game
   end
 
  def won?
-   WIN_COMBINATIONS.each do |wins|
-    tokens = @board.cells.values_at(*wins).uniq
-     if tokens.count == 1 && tokens[0] != " "
-       return wins
+   WIN_COMBINATIONS.each do |wins|              #values_at method accepts a variable number of arguments
+    tokens = @board.cells.values_at(*wins).uniq # splat(*) take the array and take each element in the array
+     if tokens.count == 1 && tokens[0] != " "   # and feed it's individual to the values_at method as if we had
+       return wins                              # a comma seperated list or fed them as individual parameters.
      end
    end
    false
  end
 
-#def draw?
-
-#end
+ def draw?
+   WIN_COMBINATIONS.each do |wins|
+     tokens = @board.cells.values_at(*wins).uniq
+     if tokens.count
+  end
 
 #def over?
 
