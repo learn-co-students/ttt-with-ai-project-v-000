@@ -22,15 +22,15 @@ class Game
   def won?
     WIN_COMBINATIONS.each do |wins|              #values_at method accepts a variable number of arguments
       tokens = @board.cells.values_at(*wins).uniq # splat(*) take the array and take each element in the array
-      if tokens.count == 1 && tokens[0] != " "   # and feed it's individual to the values_at method as if we had
+      if tokens.count == 1 && tokens[0] != " "   # and feed it's individually to the values_at method as if we had
         return wins                              # a comma seperated list or fed them as individual parameters.
       end                                        #wins is the variable representing win combinations at index level
-    end
+    end                                   #line 25 rets. token.count returns 1 unique element = x or o. and that one unique element is not a space.
     false
   end
 
   def draw?
-    true unless won? or @board.cells.include?(" ")
+    !(won? or @board.cells.include?(" "))
     #  return false if won? or @board.cells.include?(" ") # modifier version of the if. ?unique to Ruby. code before if will not run if false.
     #  return true #rework logic - into one line ## true unless won? or @board.cells.include?(" ")
   end
@@ -40,11 +40,14 @@ class Game
   end
 
   def winner
-     if there is a winner won? is true
-       returns winning token x or o
-     else there is no winner
-        (a draw) returns nil
+    win_indexes = won? #false if no win, returns array of indexes if there is win
+    if win_indexes      # there's a win, take the win index array
+      @board.cells[win_indexes.first] #getting the token(x/o)at the 1st index position of the index array.Looking up the first index position in the @boardcells array
+    else
+      nil
+    end
   end
+
   #def turn
 
   #end

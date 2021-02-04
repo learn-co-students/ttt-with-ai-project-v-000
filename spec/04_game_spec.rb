@@ -171,14 +171,14 @@ describe 'Game' do
     end
   end
 
-  describe 'turn' do
+  describe 'turn' do #expected to use puts to comm w user
     it 'makes valid moves' do
       game = Game.new
-      allow($stdout).to receive(:puts)
+      allow($stdout).to receive(:puts) #stdout has to receive a puts,giving permission
 
-      expect(game.player_1).to receive(:gets).and_return("1")
+      expect(game.player_1).to receive(:gets).and_return("1") #player object to receive a gets, and ret 1
 
-      game.turn
+      game.turn #
     end
 
     it 'asks for input again after a failed validation' do
