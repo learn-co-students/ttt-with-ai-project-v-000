@@ -20,18 +20,19 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.each do |wins|              #values_at method accepts a variable number of arguments
+    WIN_COMBINATIONS.each do |wins|               # values_at method accepts a variable number of arguments
       tokens = @board.cells.values_at(*wins).uniq # splat(*) take the array and take each element in the array
-      if tokens.count == 1 && tokens[0] != " "   # and feed it's individually to the values_at method as if we had
-        return wins                              # a comma seperated list or fed them as individual parameters.
-      end                                        #wins is the variable representing win combinations at index level
+      if tokens.count == 1 && tokens[0] != " "    # and feed it's individually to the values_at method as if we had
+        return wins                               # a comma seperated list or fed them as individual parameters.
+      end                                         # wins is the variable representing win combinations at index level
     end                                   #line 25 rets. token.count returns 1 unique element = x or o. and that one unique element is not a space.
     false
   end
 
   def draw?
     !(won? or @board.cells.include?(" "))
-    #  return false if won? or @board.cells.include?(" ") # modifier version of the if. ?unique to Ruby. code before if will not run if false.
+    #  return false if won? or @board.cells.include?(" ") # modifier version of the if. ?unique to Ruby.
+    #  code before if will not run if false.
     #  return true #rework logic - into one line ## true unless won? or @board.cells.include?(" ")
   end
 
@@ -47,10 +48,53 @@ class Game
       nil
     end
   end
+########################
+  def turn(@board.cells)
+    @board.cells = gets.strip
 
-  #def turn
 
-  #end
+  end
+
+#######################
+#def display_board(board)
+#puts " #{board[0]} | #{board[1]} | #{board[2]} "
+#puts "-----------"
+#puts " #{board[3]} | #{board[4]} | #{board[5]} "
+#puts "-----------"
+#puts " #{board[6]} | #{board[7]} | #{board[8]} "
+#end
+
+#def valid_move?(board, index)
+#  if index.between?(0, 8) && !position_taken?(board, index)
+#    true
+#  else
+#    false
+#  end
+#end
+
+#def position_taken?(board, position)
+#  board[position] == "X" || board[position] == "O"
+#end
+
+#def input_to_index(move)
+#  index = move.to_i - 1
+#end
+
+#def move(board, index, value = "X")
+#  board[index] = value
+#end
+#
+#  def turn(board)
+#    input = gets.strip
+#    if valid_move?(board, index)
+#       move(board, index)
+#       display_board(board)
+#    else
+#      turn(board)
+#  end
+#  end
+
+#################
 
   #def play
 

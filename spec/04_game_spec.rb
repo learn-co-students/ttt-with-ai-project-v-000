@@ -178,7 +178,7 @@ describe 'Game' do
 
       expect(game.player_1).to receive(:gets).and_return("1") #player object to receive a gets, and ret 1
 
-      game.turn #
+      game.turn
     end
 
     it 'asks for input again after a failed validation' do
