@@ -1,6 +1,9 @@
 module Players #overwriting module that wraps the Computer class
   class Computer < Player # Computer class inherits all functionality from Player class
 
+    def move(input)
+
+    end
   end
 end
 

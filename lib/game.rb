@@ -49,8 +49,13 @@ class Game
     end
   end
 ########################
-  def turn(@board.cells)
-    @board.cells = gets.strip
+  def turn
+    begin
+    move = @player_1.move(@board).to_i
+  end until move >= 1 and move <= 9
+#    if move.valid?
+#    @boardcells = puts ("Enter a number on the board (1-9): ")
+#
 
 
   end
