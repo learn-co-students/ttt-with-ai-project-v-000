@@ -48,66 +48,17 @@ class Game
       nil
     end
   end
-########################
+
   def turn
-    begin
-    move = @player_1.move(@board).to_i
-  end until move >= 1 and move <= 9
-#    if move.valid?
-#    @boardcells = puts ("Enter a number on the board (1-9): ")
-#
-
-
+    begin #Executes code while conditional is false.
+      input = current_player.move(@board)#string
+    end until @board.valid_move?(input)  #This is the conditional/input validation
+    @board.update(input, current_player)# switching
   end
 
-#######################
-#def display_board(board)
-#puts " #{board[0]} | #{board[1]} | #{board[2]} "
-#puts "-----------"
-#puts " #{board[3]} | #{board[4]} | #{board[5]} "
-#puts "-----------"
-#puts " #{board[6]} | #{board[7]} | #{board[8]} "
-#end
-
-#def valid_move?(board, index)
-#  if index.between?(0, 8) && !position_taken?(board, index)
-#    true
-#  else
-#    false
-#  end
-#end
-
-#def position_taken?(board, position)
-#  board[position] == "X" || board[position] == "O"
-#end
-
-#def input_to_index(move)
-#  index = move.to_i - 1
-#end
-
-#def move(board, index, value = "X")
-#  board[index] = value
-#end
-#
-#  def turn(board)
-#    input = gets.strip
-#    if valid_move?(board, index)
-#       move(board, index)
-#       display_board(board)
-#    else
-#      turn(board)
-#  end
-#  end
-
-#################
-
-  #def play
-
-  #end
-
-  #def start
-
-  #end
+  def play
+    turn until over?
+  end
 
 
 end

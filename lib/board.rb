@@ -47,5 +47,5 @@ class Board
   def update(input, player) # updates the cells in the board with the move the player has made
     cells[input.to_i-1] = player.token #represents X or O
   end
-#?? token comes from the tests
+
 end
