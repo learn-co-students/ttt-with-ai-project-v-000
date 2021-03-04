@@ -43,8 +43,8 @@ class Game
   def winner
     win_indexes = won? #false if no win, returns array of indexes if there is win
     if win_indexes      # there's a win, take the win index array
-      @board.cells[win_indexes.first] #getting the token(x/o)at the 1st index position of the index array.Looking up the first index position in the @boardcells array
-    else
+      @board.cells[win_indexes.first] #getting the token(x/o)at the 1st index position of the index array.
+    else                              #Looking up the first index position in the @boardcells array
       nil
     end
   end
@@ -58,7 +58,11 @@ class Game
 
   def play
     turn until over?
+    if draw?
+      puts "Cat's Game!"
+    else
+      puts "Congratulations #{winner}!" #calling the winner method on Game object same as self.winner
+    end
   end
-
 
 end

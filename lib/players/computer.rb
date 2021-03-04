@@ -1,8 +1,9 @@
 module Players #overwriting module that wraps the Computer class
   class Computer < Player # Computer class inherits all functionality from Player class
 
-    def move(input)
-
+    def move(board)
+      srand Time.now.to_i #srand starts with random seed for different sequence each time
+      (rand(9)+1).to_s
     end
   end
 end
