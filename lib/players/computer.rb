@@ -2,6 +2,13 @@ module Players #overwriting module that wraps the Computer class
   class Computer < Player # Computer class inherits all functionality from Player class
 
     def move(board)
+      Game::WIN_COMBINATIONS.each do |wins|
+        tokens = board.cells.values_at(*wins) #array of things on the board
+        if tokens.count(@token) == 2 && tokens.count(' ') == 1
+          return wins[tokens.index(" ")]+1
+
+        end
+      end
       srand Time.now.to_i #srand starts with random seed for different sequence each time
       (rand(9)+1).to_s
     end

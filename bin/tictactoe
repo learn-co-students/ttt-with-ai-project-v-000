@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+#^^hashbang/shebang that command line script that invokes the interpreter directive/unix os
 require_relative '../config/environment'
-g = Game.new
+#interactions with user go here
+g = Game.new(Players::Human.new("X"),Players::Computer.new("O")) #this code runs when file is run from CMD line, depends on what user has requested
 g.play
