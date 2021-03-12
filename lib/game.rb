@@ -3,7 +3,6 @@ class Game
 attr_accessor :board, :player_1, :player_2
 
 def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-  # binding.pry
   @player_1 = player_1
   @player_2 = player_2
   @board = board
@@ -12,9 +11,7 @@ def initialize(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"
  def current_player
    #   # return the player whose turn it is
    #   #if move is odd return player_1 token
-
    if self.board.turn_count.even? #if count is even then player 2 jsut moved
-    #  binding.pry
       player_1
    else
      player_2
