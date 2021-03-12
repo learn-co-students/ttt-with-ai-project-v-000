@@ -49,10 +49,7 @@ class Board
   end
 
   def update(position,player) #gets the users input "X" or "O"
-    # self.position(user_input.to_i-1) == "#{player.token}"# put in token in correct position
     self.cells[position.to_i-1] = player.token
-    # binding.pry
-    # self.position(user_input) = "#{player.token}" end
   end
 
 
