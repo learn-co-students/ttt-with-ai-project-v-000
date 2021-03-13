@@ -20,12 +20,11 @@ class Board
   end
 
   def position(user_input)
-    self.cells[user_input.to_i-1]
+    @cells[user_input.to_i-1]
   end
 
   def full?
-    # cells.each(&.include?("X"||"O"):true))
-    self.cells.all? do |char|
+    @cells.all? do |char|
       if char == "X" || char == "O"
           true
       else
@@ -37,11 +36,11 @@ class Board
 
 
   def turn_count # count all of the cells that have X or O
-    self.cells.count("X") + self.cells.count("O")# cells.count("X") + cells.count("O")# cells.all.count(cells) # if its not full => the number of X or O
+    @cells.count("X") + @cells.count("O")# cells.count("X") + cells.count("O")# cells.all.count(cells) # if its not full => the number of X or O
   end
 
   def taken?(position) #returns true if the positon is "X" or "O"
-    self.cells[position.to_i-1] == "X" ||self.cells[position.to_i-1] == "O"
+    @cells[position.to_i-1] == "X" ||@cells[position.to_i-1] == "O"
   end
 
   def valid_move?(position) #returns true for user input 1-9 that is NOT take
@@ -49,7 +48,7 @@ class Board
   end
 
   def update(position,player) #gets the users input "X" or "O"
-    self.cells[position.to_i-1] = player.token
+    @cells[position.to_i-1] = player.token
   end
 
 
