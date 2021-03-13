@@ -82,7 +82,9 @@ class Game
 
     end
 
-    def play
+    def play #keeps playing until its over
+      #congratulates winner
+      #calls cat's game
       until over?
         turn
       end
