@@ -3,13 +3,10 @@
 #^^hashbang/shebang that command line script that invokes the interpreter directive/unix os
 require_relative '../config/environment'
 #interactions with user go here
-
 # g = Game.new(Players::Human.new("X"),Players::Computer.new("O")) #this code runs when file is run from CMD line, depends on what user has requested
 # g.play
 
-
 def game_start
-
  puts "\nPlease choose player mode:
  0 - Computer vs Computer
  1 - You vs Computer
