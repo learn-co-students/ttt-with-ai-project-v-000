@@ -3,5 +3,35 @@
 #^^hashbang/shebang that command line script that invokes the interpreter directive/unix os
 require_relative '../config/environment'
 #interactions with user go here
-g = Game.new(Players::Human.new("X"),Players::Computer.new("O")) #this code runs when file is run from CMD line, depends on what user has requested
-g.play
+
+# g = Game.new(Players::Human.new("X"),Players::Computer.new("O")) #this code runs when file is run from CMD line, depends on what user has requested
+# g.play
+
+
+def game_start
+
+ puts "\nPlease choose player mode:
+ 0 - Computer vs Computer
+ 1 - You vs Computer
+ 2 - You vs Your Friend"
+
+ player_mode = gets.strip
+
+ if player_mode == "1"
+   puts "Do you want to go first? [y/ n]"
+   if gets.strip == "y" #need to rule out: just enter, symbols, integers or  other letters
+     Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+   else   Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+   end
+
+  elsif player_mode == "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+  elsif player_mode == "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  end
+  puts "Would like to play again? [y/ n]"
+
+end
+
+game_start until gets.strip == "n"
