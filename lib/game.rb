@@ -58,28 +58,6 @@ class Game
         turn
         end
 
-      # @user_input = current_player.move(@board)
-      #   if @board.valid_move?(@user_input)
-      #     @board.update(@user_input, current_player)
-      #   else puts "Please enter a number 1-9:"
-      #     @board.display
-      #   turn
-      #   end
-      # binding.pry
-      # move = @board.valid_move?(user_input)
-      # if move == true
-      #   @board.update(move,current_player)
-      #   _pla
-      #   self.current_player
-      # else
-      #   false
-      # end
-
-      # if @board.valid_move?(@board.position,self.current_player) == true
-      #
-      #   @board.update(self.current_player)
-      # end
-
     end
 
     def play #keeps playing until its over
