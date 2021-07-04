@@ -1,5 +1,13 @@
 # Tic-tac-toe with AI
-
+<<<<<<< HEAD
+test test test
+=======
+<<<<<<< HEAD
+test test test TEST 
+=======
+test test test
+>>>>>>> b2bec38ed761f2e59b273b50055c92028b568cfa
+>>>>>>> 6d6238ddc706f7ca81ae5d546c2418be4c8d5c91
 ## Objectives
 1. Build a command-line interface (CLI).
 2. Create a domain model with multiple relating and collaborating objects.
