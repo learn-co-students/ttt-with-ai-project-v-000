@@ -1,3 +1,43 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+puts "Hello Player. How many players are there today? (0-2)"
+numplayers = gets.strip.to_i
+puts "Very well, who should go first? Player1 (X) or Player2 (O)?"
+player_first = gets.strip
+puts "Have a... blast!"
+
+player_1 = nil
+player_2 = nil
+
+if numplayers == 0
+  if player_first == "Player1" || "X"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Computer.new("O")
+  else
+    player_2 = Players::Computer.new("X")
+    player_1 = Players::Computer.new("O")
+  end
+elsif numplayers == 1 
+  if player_first == "Player1" || "X"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+  else
+    player_2 = Players::Computer.new("X")
+    player_1 = Players::Human.new("O")
+  end
+else
+  if player_first == "Player1" || "X"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Human.new("O")
+  else
+    player_2 = Players::Human.new("X")
+    player_1 = Players::Human.new("O")
+  end
+end
+
+game = Game.new(player_1, player_2, board = Board.new)
+
+until game.over?
+  game.play
+end
