@@ -16,3 +16,4 @@ describe 'Players::Human' do
     end
   end
 end
+
