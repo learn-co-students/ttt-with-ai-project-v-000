@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+#require_relative '../lib/game.rb'
+
+
+#game = Game.start
+#game.play
+
+
+    puts "Welcome to Tic-Tac-Toe!!"
+    puts "What kind of game would you like to play (0, 1, or 2)?"
+    type_of_game = gets.chomp.to_i
+
+    if type_of_game == 1
+      puts "Who would like to go first and be 'X', Human or Computer?"
+      first_player = gets.chomp
+    end
+
+    board = Board.new
+
+
+    if type_of_game == 0
+      game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"), board)
+
+    elsif type_of_game == 1 && first_player == "Computer"
+      game = Game.new(Players::Computer.new("X"), Players::Human.new("O"), board)
+
+    elsif  type_of_game == 1 && first_player == "Human"
+      game = Game.new(Players::Human.new("X"), Players::Computer.new("O"), board)
+
+    else type_of_game == 2
+      game = Game.new(Players::Human.new("X"), Players::Human.new("O"), board)
+
+    end
+
+    game.play
