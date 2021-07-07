@@ -1,3 +1,39 @@
 #!/usr/bin/env ruby
-
+#require "pry"
 require_relative '../config/environment'
+
+puts "Wanna play Tic-Tac-Toe? Type 'Yes' to play or 'Exit' to leave!"
+
+def start
+
+  puts "Lets Play Tic-Tac-Toe!"
+  puts "Choose how many players:
+
+  0 - Computer Plays Itself
+  1 - Computer v. Player
+  2 - Player 1 v. Player 2
+
+Type 'Exit' to leave game at any time."
+
+  play_style = gets.strip
+#binding.pry
+  if play_style == "0"
+  Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+
+  elsif play_style == "1"
+    puts "Choose your token: X or O. X goes first!"
+    player_token = gets.strip
+    if player_token.upcase == ("X")
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+    elsif  player_token.upcase == "O"
+      Game.new(Players::Human.new("O"), Players::Computer.new("X"), Board.new).play
+    end
+
+  elsif  play_style == "2"
+    Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+  end
+
+  puts "Having fun? Put 'Yes' to play again! Put 'Exit' to exit the game."
+end
+
+start until gets.strip.capitalize == "Exit"
