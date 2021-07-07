@@ -263,6 +263,7 @@ describe 'Game' do
       game.play
     end
 
+
     it 'checks if the game is a draw after every turn' do
       game = Game.new
       allow($stdout).to receive(:puts)
