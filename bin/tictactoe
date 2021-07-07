@@ -1,3 +1,37 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def play_game
+  puts "Choose which game mode you would like to play. Enter '1' for 0 player mode, enter '2' for 1 player mode, and enter '3' for 2 player mode."
+  game_mode = gets.strip
+  if game_mode == "1"
+    Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+  elsif game_mode == "2"
+    puts "Who should go first? Enter '1' for computer and enter '2' for the user."
+    player_input = gets.strip
+    if player_input == "1"
+      Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+    elsif player_input == "2"
+      Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new).play
+    end
+  elsif game_mode == "3"
+    Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new).play
+  end
+  play_again?
+end
+
+def play_again?
+  puts "Would you like to play again? Y or N"
+  input = gets.strip
+  if input == "Y" || input == "y"
+    play_game
+  elsif input == "N" || input == "n"
+    puts "Ok goodbye"
+  else
+    play_again?
+  end
+end
+
+puts "Welcome to Tic Tac Toe!"
+play_game
