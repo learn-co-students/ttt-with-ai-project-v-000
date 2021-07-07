@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
-
 require_relative '../config/environment'
+require 'pry'
+
+class TCli
+
+  def start
+    puts "Welcome to TIC TAC TOE!"
+    puts "     "
+    puts "Would you like to play a 0 ,1, or 2 player game?"
+        input = gets.strip.to_i 
+    
+        if input == 2
+          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Human.new("O"), board = Board.new) 
+         game.play 
+         end 
+         if input == 1
+          game = Game.new(player_1 = Players::Human.new("X"), player_2 = Players::Computer.new("O"), board = Board.new) 
+         game.play 
+         end 
+          if input == 0
+          game = Game.new(player_1 = Players::Computer.new("X"), player_2 = Players::Computer.new("O"), board = Board.new) 
+          game.play
+         end 
+          
+     
+  end 
+    
+end 
+
+TCli.new.start
