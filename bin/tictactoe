@@ -1,3 +1,86 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+def start
+  puts "======================="
+  puts "Welcome to Tic-Tac-Toe!"
+  puts "======================="
+  puts " "
+  puts "Please select number of players (0 | 1 | 2 | wargames):"
+  puts "    Type '0' to start a game between two (2) computers"
+  puts "    Type '1' to start a game versus the computer"
+  puts "    Type '2' to start a game with two (2) players"
+  puts "    Type 'wargames' to simulate 100 games of Tic-Tac-Toe between two (2) computer AI"
+  puts " "
+  mode = gets.strip.downcase
+
+  until mode == "0" || mode == "1" || mode == "2" || mode == "wargames"
+    puts "Please select number of players (0 | 1 | 2 | wargames):"
+    mode = gets.strip.downcase
+  end
+
+  case mode
+  when "0"
+    Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    restart
+  when "1"
+    puts "Who will go first (X)? (1 for PLAYER | 2 for COMPUTER):"
+    first_player = gets.strip
+
+    until first_player == "1" || first_player == "2"
+      puts "Who will go first (X)? (1 for PLAYER | 2 for COMPUTER):"
+      first_player = gets.strip
+    end
+
+    case first_player
+    when "1"
+      Game.new(Players::Human.new("X"), Players::Computer.new("O"), Board.new).play
+      restart
+    when "2"
+      Game.new(Players::Computer.new("X"), Players::Human.new("O"), Board.new).play
+      restart
+    end
+  when "2"
+    puts "Who will go first (X)? (1 for PLAYER#1 | 2 for PLAYER#2):"
+    first_player = gets.strip
+
+    until first_player == "1" || first_player == "2"
+      puts "Who will go first (X)? (1 for PLAYER#1 | 2 for PLAYER#2):"
+      first_player = gets.strip
+    end
+
+    case first_player
+    when "1"
+      Game.new(Players::Human.new("X"), Players::Human.new("O"), Board.new).play
+      restart
+    when "2"
+      Game.new(Players::Human.new("O"), Players::Human.new("X"), Board.new).play
+      restart
+    end
+  when "wargames"
+    100.times do
+      Game.new(Players::Computer.new("X"), Players::Computer.new("O"), Board.new).play
+    end
+    Game.games_won
+    restart
+  end
+end
+
+def restart
+  puts " "
+  puts "========="
+  puts "Game Over"
+  puts "========="
+  puts "Play again? (y | n)"
+  puts " "
+  response = gets.strip.downcase
+
+  case response
+  when "y" then start
+  when "n" then puts "Thank you for playing. See you next time!"
+  else restart
+  end
+end
+
+start
