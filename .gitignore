@@ -1,1 +1,8 @@
 .bundle/
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/ttt-with-ai-project-v-000.iml
+/.idea/vcs.xml
+/.idea/git_toolbox_prj.xml
