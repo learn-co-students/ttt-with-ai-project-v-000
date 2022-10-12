@@ -25,7 +25,7 @@ class Board
   def full?
     # !cells.include?(" ")
     # Line 28 is more efficient
-    cells.all? {|cell| cell != " "}
+    cells.all? { |cell| cell != " " }
   end
 
   def turn_count

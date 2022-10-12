@@ -79,5 +79,5 @@ class CLI
       exit
     end
   end
-  
+
 end

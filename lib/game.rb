@@ -10,9 +10,9 @@ class Game
     [1, 4, 7], # Middle column
     [2, 5, 8], # Right column
     [0, 4, 8], # Left Diagonal
-    [2, 4, 6]  # Right Diagonal
+    [2, 4, 6] # Right Diagonal
   ]
-  
+
   # Game methods
   def initialize(player_1 = Players::Human.new("X", name), player_2 = Players::Human.new("O", name), board = Board.new)
     @board = board
@@ -28,7 +28,7 @@ class Game
   def won?
     WIN_COMBINATIONS.find do |combo|
       poss_win = []
-      combo.each {|i| poss_win << board.cells[i]}
+      combo.each { |i| poss_win << board.cells[i] }
       if poss_win.count("O") == 3 || poss_win.count("X") == 3
         win = combo
       else
@@ -53,7 +53,7 @@ class Game
     #   board.cells[won.first]
     # end
   end
-  
+
   def turn
     print "\nYour turn, #{current_player.name}! To make your move, enter a number 1-9: "
     input = current_player.move(board)
