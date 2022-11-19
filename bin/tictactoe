@@ -1,3 +1,42 @@
-#!/usr/bin/env ruby
-
 require_relative '../config/environment'
+
+puts "Let's play Tic Tac Toe!"
+input = ""
+while input != "n"
+puts "Pick a number to choose a player mode:"
+puts "Enter 0 to let the computer play itself."
+puts "Enter 1 to play the computer."
+puts "Enter 2 for two players."
+
+input = gets.strip.to_i
+
+case input
+when 0 
+  player_1 = Players::Computer.new("X")
+  player_2 = Players::Computer.new("O")
+when 1
+  puts "Who should go first? (type 'human' or 'AI')"
+  pick = gets.strip
+  if pick == "human"
+    player_1 = Players::Human.new("X")
+    player_2 = Players::Computer.new("O")
+      puts "You are player X!"
+  elsif pick == "AI" || pick == "ai"
+    player_1 = Players::Computer.new("X")
+    player_2 = Players::Human.new("O")
+      puts "You are player O"
+  end
+when 2
+  player_1 = Players::Human.new("X")
+  player_2 = Players::Human.new("O")
+    puts "Player 1 is X and Player 2 is O"
+end
+
+
+game = Game.new(player_1, player_2)
+game.play
+
+puts "Play again? (type 'y' or 'n')"
+input = gets.strip
+end
+puts "Goodbye!"
