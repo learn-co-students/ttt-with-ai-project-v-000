@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
+
+#greet user with a fancy message
+
+puts "     
+
+##################################################################################
+*******   *     *****     *******     *       ******    *******   ******  ******
+   *      *     *            *       * *      *            *      *    *  *
+   *      *     *            *      *****     *            *      *    *  *****
+   *      *     *            *     *     *    *            *      *    *  *
+   *      *     *****        *    *       *   ******       *      ******  ******
+##################################################################################
+   
+
+"
+
+#prompt user on what type of game they want to play 1 player, 2player, or have the computer play itself
+
+game = Cli.new.start
+game
+
+
