@@ -17,4 +17,5 @@ describe 'Players::Computer' do
       expect(valid_moves).to include(computer_move)
     end
   end
+
 end
