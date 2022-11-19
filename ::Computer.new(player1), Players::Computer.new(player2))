@@ -1,0 +1,26 @@
+
+[1mFrom:[0m /home/peacestone/code/labs/ttt-with-ai-project-v-000/bin/tictactoe @ line 16 Object#call:
+
+     [1;34m7[0m: [32mdef[0m [1;34mcall[0m
+     [1;34m8[0m:   puts [31m[1;31m"[0m[31mWelcome to Tic-Tac-Toe![1;31m"[0m[31m[0m
+     [1;34m9[0m:   puts [31m[1;31m"[0m[31mPlease input 0, 1, or 2 players.[1;31m"[0m[31m[0m
+    [1;34m10[0m:   how_many = gets.strip
+    [1;34m11[0m:   puts [31m[1;31m"[0m[31mWould the first player like to play X or O?[1;31m"[0m[31m[0m
+    [1;34m12[0m:   puts [31m[1;31m"[0m[31mInput X or O[1;31m"[0m[31m[0m
+    [1;34m13[0m: 
+    [1;34m14[0m:   player1 = gets.chomp
+    [1;34m15[0m:   player1 == [31m[1;31m"[0m[31mO[1;31m"[0m[31m[0m ? player2 = [31m[1;31m"[0m[31mX[1;31m"[0m[31m[0m : player2 = [31m[1;31m"[0m[31mO[1;31m"[0m[31m[0m
+ => [1;34m16[0m:   binding.pry
+    [1;34m17[0m:   [32mcase[0m how_many
+    [1;34m18[0m:   [32mwhen[0m [1;34m0[0m
+    [1;34m19[0m:     game = [1;34;4mGame[0m.new([1;34;4mPlayers[0m::[1;34;4mComputer[0m.new(player1), [1;34;4mPlayers[0m::[1;34;4mComputer[0m.new(player2))
+    [1;34m20[0m:     game.play
+    [1;34m21[0m:   [32mwhen[0m [1;34m1[0m
+    [1;34m22[0m:     game = [1;34;4mGame[0m.new([1;34;4mPlayers[0m::[1;34;4mHuman[0m.new(player1), [1;34;4mPlayers[0m::[1;34;4mComputer[0m.new(player2))
+    [1;34m23[0m:     game.play
+    [1;34m24[0m:   [32mwhen[0m [1;34m2[0m
+    [1;34m25[0m:       game = [1;34;4mGame[0m.new([1;34;4mPlayers[0m::[1;34;4mHuman[0m.new(player1), [1;34;4mPlayers[0m::[1;34;4mHuman[0m.new(player2))
+    [1;34m26[0m:       game.play
+    [1;34m27[0m:     [32mend[0m
+    [1;34m28[0m:   [32mend[0m
+
